@@ -73,7 +73,6 @@ private:
 // Intuition:
 // -> Scan characters in pattern from right to left
 // -> Can skip as many as M text chars when finding one not in the pattern
-
 // How much to skip?
 // Case 1: Mismatch character not in the pattern
 // -> increment starting index with one character beyond the mismatch (move past the mismatch)
@@ -99,19 +98,15 @@ private:
 // ---> After (just add one to guarantee forward progress):
 // .......ELE.......
 // .....NEEDLE......
-
 // Property
 // -> Substring search with the Boyer-Moore mismatch character heuristic takes about
 // ~N/M (sublinear) character compares to search for a pattern of length M in a test of length N.
 // The longer the pattern gets the faster the search gets.
 // Sublinear? Amazing! Sedgewick: "Thats kind of amazing."
-
 // However worst case can be as bad as ~M*N.
 // -> For example, "ABBBB" as the pattern to match with would search on "BBBBBBBBBB"
-
 // Improvement:
 // -> Boyer-Moore variant: Can improve worst case to ~3N by adding a KMP-like rule to guard against repetitive patterns.
-
 // Other Discussions:
 // Bad Character Heuristic
 // -> The idea of bad character heuristic is simple (like the algorithm above).

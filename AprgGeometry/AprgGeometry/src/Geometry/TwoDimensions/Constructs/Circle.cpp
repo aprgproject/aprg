@@ -6,8 +6,8 @@
 
 #include <cmath>
 
-using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
+using namespace alba::mathHelper;
 using namespace std;
 
 namespace alba::TwoDimensions {
@@ -33,7 +33,6 @@ bool Circle::operator<(Circle const& circle) const {
     return m_center < circle.m_center;
 }
 
-double Circle::getEccentricity() { return 0; }
 Point Circle::getCenter() const { return m_center; }
 
 Points Circle::getLocus(double const interval) const {
@@ -131,6 +130,8 @@ Point Circle::getPointAtAngle(double const angleInRadians) {
     double const deltaY = sin(angleInRadians) * m_radius;
     return {m_center.getX() + deltaX, m_center.getY() + deltaY};
 }
+
+double Circle::getEccentricity() { return 0; }
 
 Points Circle::getPointsInTraversingXAndY(double const signOfX, double const signOfY, double const interval) const {
     Points result;

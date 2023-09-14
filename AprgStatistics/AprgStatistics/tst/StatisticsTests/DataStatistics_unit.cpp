@@ -8,6 +8,45 @@ using namespace std;
 
 namespace alba {
 
+TEST(DataStatisticsTest, StatisticsCanBeClearedAfterCalculation) {
+    using LocalStatistics = DataStatistics<3>;
+    using LocalSamples = LocalStatistics::Samples;
+    using LocalSample = LocalStatistics::Sample;
+    LocalSample const expectedSum{0, 0, 0};
+    LocalSample const expectedMean{0, 0, 0};
+    LocalSample const expectedSampleVariance{0, 0, 0};
+    LocalSample const expectedSampleStandardDeviation{0, 0, 0};
+    LocalSample const expectedPopulationVariance{0, 0, 0};
+    LocalSample const expectedPopulationStandardDeviation{0, 0, 0};
+    double const expectedDispersion(0);
+
+    LocalSamples samples{LocalSample{1, 10, 100}, LocalSample{2, 20, 200}, LocalSample{3, 30, 300}};
+    LocalStatistics localStatistics(samples);
+    LocalSample sum(localStatistics.getSum());
+    LocalSample mean(localStatistics.getMean());
+    LocalSample sampleVariance(localStatistics.getSampleVariance());
+    LocalSample sampleStandardDeviation(localStatistics.getSampleStandardDeviation());
+    LocalSample populationVariance(localStatistics.getPopulationVariance());
+    LocalSample populationStandardDeviation(localStatistics.getPopulationStandardDeviation());
+    samples.clear();
+    localStatistics.clearPreviousCalculations();
+    sum = localStatistics.getSum();
+    mean = localStatistics.getMean();
+    sampleVariance = localStatistics.getSampleVariance();
+    sampleStandardDeviation = localStatistics.getSampleStandardDeviation();
+    populationVariance = localStatistics.getPopulationVariance();
+    populationStandardDeviation = localStatistics.getPopulationStandardDeviation();
+    double const dispersion = localStatistics.getDispersionAroundTheCentroid();
+
+    EXPECT_EQ(expectedSum, sum);
+    EXPECT_EQ(expectedMean, mean);
+    EXPECT_EQ(expectedSampleVariance, sampleVariance);
+    EXPECT_EQ(expectedSampleStandardDeviation, sampleStandardDeviation);
+    EXPECT_EQ(expectedPopulationVariance, populationVariance);
+    EXPECT_EQ(expectedPopulationStandardDeviation, populationStandardDeviation);
+    EXPECT_DOUBLE_EQ(expectedDispersion, dispersion);
+}
+
 TEST(DataStatisticsTest, StatisticsAreCorrectWhenSamplesAreEmpty) {
     using LocalStatistics = DataStatistics<3>;
     using LocalSamples = LocalStatistics::Samples;
@@ -61,45 +100,6 @@ TEST(DataStatisticsTest, StatisticsAreCorrect) {
     LocalSample const populationVariance(localStatistics.getPopulationVariance());
     LocalSample const populationStandardDeviation(localStatistics.getPopulationStandardDeviation());
     double const dispersion(localStatistics.getDispersionAroundTheCentroid());
-
-    EXPECT_EQ(expectedSum, sum);
-    EXPECT_EQ(expectedMean, mean);
-    EXPECT_EQ(expectedSampleVariance, sampleVariance);
-    EXPECT_EQ(expectedSampleStandardDeviation, sampleStandardDeviation);
-    EXPECT_EQ(expectedPopulationVariance, populationVariance);
-    EXPECT_EQ(expectedPopulationStandardDeviation, populationStandardDeviation);
-    EXPECT_DOUBLE_EQ(expectedDispersion, dispersion);
-}
-
-TEST(DataStatisticsTest, StatisticsCanBeClearedAfterCalculation) {
-    using LocalStatistics = DataStatistics<3>;
-    using LocalSamples = LocalStatistics::Samples;
-    using LocalSample = LocalStatistics::Sample;
-    LocalSample const expectedSum{0, 0, 0};
-    LocalSample const expectedMean{0, 0, 0};
-    LocalSample const expectedSampleVariance{0, 0, 0};
-    LocalSample const expectedSampleStandardDeviation{0, 0, 0};
-    LocalSample const expectedPopulationVariance{0, 0, 0};
-    LocalSample const expectedPopulationStandardDeviation{0, 0, 0};
-    double const expectedDispersion(0);
-
-    LocalSamples samples{LocalSample{1, 10, 100}, LocalSample{2, 20, 200}, LocalSample{3, 30, 300}};
-    LocalStatistics localStatistics(samples);
-    LocalSample sum(localStatistics.getSum());
-    LocalSample mean(localStatistics.getMean());
-    LocalSample sampleVariance(localStatistics.getSampleVariance());
-    LocalSample sampleStandardDeviation(localStatistics.getSampleStandardDeviation());
-    LocalSample populationVariance(localStatistics.getPopulationVariance());
-    LocalSample populationStandardDeviation(localStatistics.getPopulationStandardDeviation());
-    samples.clear();
-    localStatistics.clearPreviousCalculations();
-    sum = localStatistics.getSum();
-    mean = localStatistics.getMean();
-    sampleVariance = localStatistics.getSampleVariance();
-    sampleStandardDeviation = localStatistics.getSampleStandardDeviation();
-    populationVariance = localStatistics.getPopulationVariance();
-    populationStandardDeviation = localStatistics.getPopulationStandardDeviation();
-    double const dispersion = localStatistics.getDispersionAroundTheCentroid();
 
     EXPECT_EQ(expectedSum, sum);
     EXPECT_EQ(expectedMean, mean);

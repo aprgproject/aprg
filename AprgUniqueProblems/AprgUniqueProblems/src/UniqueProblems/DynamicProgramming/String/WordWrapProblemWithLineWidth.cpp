@@ -82,13 +82,6 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
     return result;
 }
 
-// inline optimization can work here because the usage belongs to same translation unit
-inline WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getCostFromExtraSpaces(
-    Index const numberOfExtraSpaces) {
-    return numberOfExtraSpaces * numberOfExtraSpaces *
-           numberOfExtraSpaces;  // sum of cubes is used for cost to avoid single long lengths
-}
-
 WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCostUsingNaiveRecursion(
     RecursionDetails const& recursionDetails, Index const wordIndex) const {
     Cost result(0);
@@ -135,6 +128,13 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getTotalCostOfA
         result += getCostFromExtraSpaces(m_maxLineLength - lineLength);
     }
     return result;
+}
+
+// inline optimization can work here because the usage belongs to same translation unit
+inline WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getCostFromExtraSpaces(
+    Index const numberOfExtraSpaces) {
+    return numberOfExtraSpaces * numberOfExtraSpaces *
+           numberOfExtraSpaces;  // sum of cubes is used for cost to avoid single long lengths
 }
 
 }  // namespace alba

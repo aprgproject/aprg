@@ -22,18 +22,6 @@ TEST(BinaryHeapAdapterTest, GetObjectConstReferenceOnTreeWorks) {
     EXPECT_EQ('S', adapter.getObjectOnTree(objects.size()));
 }
 
-TEST(BinaryHeapAdapterTest, GetObjectReferenceOnTreeWorks) {
-    ContainerForTest objects{'H', 'E', 'A', 'P', 'O', 'B', 'J', 'E', 'C', 'T', 'S'};
-    AdapterForTest adapter(objects);
-
-    char& characterAtTopOfTree(adapter.getObjectReferenceOnTree(1));
-
-    characterAtTopOfTree = 'Z';
-
-    ContainerForTest const objectsToExpect{'Z', 'E', 'A', 'P', 'O', 'B', 'J', 'E', 'C', 'T', 'S'};
-    EXPECT_EQ(objectsToExpect, objects);
-}
-
 TEST(BinaryHeapAdapterTest, SwimWorks) {
     ContainerForTest objects{'H', 'E', 'A', 'P', 'O', 'B', 'J', 'E', 'C', 'T', 'S'};
     AdapterForTest adapter(objects);
@@ -61,6 +49,18 @@ TEST(BinaryHeapAdapterTest, SinkWorksOnExample2) {
     adapter.sink(1);
 
     ContainerForTest const objectsToExpect{'B', 'A'};
+    EXPECT_EQ(objectsToExpect, objects);
+}
+
+TEST(BinaryHeapAdapterTest, GetObjectReferenceOnTreeWorks) {
+    ContainerForTest objects{'H', 'E', 'A', 'P', 'O', 'B', 'J', 'E', 'C', 'T', 'S'};
+    AdapterForTest adapter(objects);
+
+    char& characterAtTopOfTree(adapter.getObjectReferenceOnTree(1));
+
+    characterAtTopOfTree = 'Z';
+
+    ContainerForTest const objectsToExpect{'Z', 'E', 'A', 'P', 'O', 'B', 'J', 'E', 'C', 'T', 'S'};
     EXPECT_EQ(objectsToExpect, objects);
 }
 

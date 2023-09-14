@@ -44,55 +44,6 @@ void TopLogAnalyzer::processTopLog(std::string const& pathOfTopLog) {
     generateMemReport(pathOfTopLog);
 }
 
-void TopLogAnalyzer::putHeadersInCpuReport(
-    stringHelper::strings const& processNamesInReport, ofstream& cpuReportFileStream) {
-    cpuReportFileStream << "Time,TotalCpuFromTop,TotalCpuCalculated,";
-    for (string const& processName : processNamesInReport) {
-        cpuReportFileStream << processName << ",";
-    }
-    cpuReportFileStream << "\n";
-}
-
-void TopLogAnalyzer::putHeadersInMemReport(
-    stringHelper::strings const& processNamesInReport, ofstream& memReportFileStream) {
-    memReportFileStream << "Time,";
-    for (string const& processName : processNamesInReport) {
-        memReportFileStream << processName << ",";
-    }
-    memReportFileStream << "\n";
-}
-
-void TopLogAnalyzer::saveTimeFromTop(string const& lineInLogs, DataEntry& currentEntry) {
-    string const timeString(stringHelper::getStringInBetweenTwoStrings(lineInLogs, "top - ", " "));
-    stringHelper::strings timeValues;
-    stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters>(timeValues, timeString, ":");
-    if (timeValues.size() == 3) {
-        currentEntry.timeInTop.setTime(
-            0, 0, 0, stringHelper::convertStringToNumber<unsigned int>(timeValues[0]),
-            stringHelper::convertStringToNumber<unsigned int>(timeValues[1]),
-            stringHelper::convertStringToNumber<unsigned int>(timeValues[2]), 0);
-    }
-}
-
-void TopLogAnalyzer::saveOverallCpuData(string const& lineInLogs, DataEntry& currentEntry) {
-    unsigned int const bracketCpuIndexInLine(lineInLogs.find('['));
-    if (bracketCpuIndexInLine > 3) {
-        currentEntry.totalCpuFromTop =
-            stringHelper::convertStringToNumber<double>(lineInLogs.substr(bracketCpuIndexInLine - 3, 3));
-    }
-}
-
-bool TopLogAnalyzer::isTopCommandFirstLine(string const& lineInLogs) {
-    return stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "top - ");
-}
-
-bool TopLogAnalyzer::isTopCommandHeaderLine(string const& lineInLogs) {
-    return stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "PID") &&
-           stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "%CPU") &&
-           stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "%MEM") &&
-           stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "COMMAND");
-}
-
 void TopLogAnalyzer::putEntriesInCpuReport(
     stringHelper::strings const& processNamesInReport, ofstream& cpuReportFileStream) const {
     cpuReportFileStream.precision(3);
@@ -297,6 +248,55 @@ stringHelper::strings TopLogAnalyzer::getProcessNamesForMemReport() {
             return result;
         });
     return processNamesInReport;
+}
+
+void TopLogAnalyzer::putHeadersInCpuReport(
+    stringHelper::strings const& processNamesInReport, ofstream& cpuReportFileStream) {
+    cpuReportFileStream << "Time,TotalCpuFromTop,TotalCpuCalculated,";
+    for (string const& processName : processNamesInReport) {
+        cpuReportFileStream << processName << ",";
+    }
+    cpuReportFileStream << "\n";
+}
+
+void TopLogAnalyzer::putHeadersInMemReport(
+    stringHelper::strings const& processNamesInReport, ofstream& memReportFileStream) {
+    memReportFileStream << "Time,";
+    for (string const& processName : processNamesInReport) {
+        memReportFileStream << processName << ",";
+    }
+    memReportFileStream << "\n";
+}
+
+void TopLogAnalyzer::saveTimeFromTop(string const& lineInLogs, DataEntry& currentEntry) {
+    string const timeString(stringHelper::getStringInBetweenTwoStrings(lineInLogs, "top - ", " "));
+    stringHelper::strings timeValues;
+    stringHelper::splitToStrings<stringHelper::SplitStringType::WithoutDelimeters>(timeValues, timeString, ":");
+    if (timeValues.size() == 3) {
+        currentEntry.timeInTop.setTime(
+            0, 0, 0, stringHelper::convertStringToNumber<unsigned int>(timeValues[0]),
+            stringHelper::convertStringToNumber<unsigned int>(timeValues[1]),
+            stringHelper::convertStringToNumber<unsigned int>(timeValues[2]), 0);
+    }
+}
+
+void TopLogAnalyzer::saveOverallCpuData(string const& lineInLogs, DataEntry& currentEntry) {
+    unsigned int const bracketCpuIndexInLine(lineInLogs.find('['));
+    if (bracketCpuIndexInLine > 3) {
+        currentEntry.totalCpuFromTop =
+            stringHelper::convertStringToNumber<double>(lineInLogs.substr(bracketCpuIndexInLine - 3, 3));
+    }
+}
+
+bool TopLogAnalyzer::isTopCommandFirstLine(string const& lineInLogs) {
+    return stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "top - ");
+}
+
+bool TopLogAnalyzer::isTopCommandHeaderLine(string const& lineInLogs) {
+    return stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "PID") &&
+           stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "%CPU") &&
+           stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "%MEM") &&
+           stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "COMMAND");
 }
 
 TopLogAnalyzer::TopLogAnalyzer() = default;

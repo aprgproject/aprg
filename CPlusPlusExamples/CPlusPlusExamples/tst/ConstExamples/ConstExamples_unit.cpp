@@ -6,7 +6,6 @@ using namespace std;
 
 // Taken from Richard Powell's lecture ("The importance of being const")
 // Taken from Dan Saks lecture ("Back to Basics- Const as a Promise")
-
 namespace alba {
 
 TEST(ConstExamplesTest, MutationWithConstInPrimitiveTypesDoesNotWork) {
@@ -97,7 +96,7 @@ TEST(ConstExamplesTest, MutationWithConstInPrimitiveTypesInStructsDoesNotWork) {
     // c_ptr_f->a++; // Error because "c_ptr_f" is const*
     // c_ptr_f->b++; // Error because "c_ptr_f" is const*
     ++c_ptr_f;  // No error because c_ptr_f can be moved
-    // Note: You can't modify the "const members of structures" and "members of const structures".
+                // Note: You can't modify the "const members of structures" and "members of const structures".
 }
 
 TEST(ConstExamplesTest, MutationWithConstInPointersInStructsSometimesWorks) {
@@ -210,7 +209,7 @@ TEST(ConstExamplesTest, FunctionMatchingWithoutConstInFunctionSignatureOfAClassW
     Foo const a;
     // Foo const b(a);
     Foo::myFunction();  // goes to "non-const"
-    // b.myFunction(); // Error because b is const
+                        // b.myFunction(); // Error because b is const
     // Note: If the member function is non-const, then you cannot use it in const structures.
 }
 
@@ -221,8 +220,8 @@ TEST(ConstExamplesTest, MutabilityOfStructInsideAFunctionWorks) {
             // value++; // Error because myFunction is const
             // a++; // Error because myFunction is const
             // b++; // Error because myFunction is const
-            *a = 20;  // No error because only deferenced value is changed, not the actual pointer
-            //*b=20; // Error because b is const*
+            *a = 20;       // No error because only deferenced value is changed, not the actual pointer
+                           //*b=20; // Error because b is const*
             refData = 20;  // No error because only deferenced value is changed, not the actual reference
         }
         int value = 0;
@@ -346,7 +345,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // ---> "T const t"
 // -> const member runctions should be observably const and thread-safe
 // -> const doesn't necessarily make faster code, but it makes more correct code
-
 // -> Uses for const
 // ---> To define symbolic constants:
 // -----> Yes but constexpr is better
@@ -356,7 +354,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // -----> Yes!
 // -----> We see this mostly when passing arguments and returning values by pointer or reference.
 // -----> This is the primary use for const in Modern C++.
-
 // -> Using const is Good Hygiene
 // ---> Using const turn potential runtime bugs into compile time errors
 // -----> As compile-time errors, the bugs are impossible to ignore
@@ -364,7 +361,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // -----> easier to use correctly
 // -----> harder to use inforrectly
 // ---> Using constexpr helps turn runtime computations into compile computations
-
 // -> Be Proactive
 // ---> Unfortunately, too many programmers use const reactively
 // -----> only in response to compiler complaints
@@ -372,20 +368,17 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // -----> as they design and code.
 // ---> Be conscientious
 // ---> Use const proactively
-
 // -> What const sorta means?
 // ---> You can use const to define objects of built-in or user-defined types:
 // -----> int const number = 8675309; // const int
 // -----> char const msg[] = "Hello"; // array of const char
 // ---> A const object is non modifiable... sorta.
 // -----> That is you can read from it but not write to it
-
 // -> Mandated initialization
 // ---> You can't write to an existing const object.
 // ---> Your only chance to give it a value is when you create it.
 // ---> Thus, C++ insists that you must initializa every const object.
 // -----> "extern" still works because its only a declaration not a definition
-
 // -> Constant expressions
 // ---> In C++, the dimension in an array object definition must be an integer constant expression.
 // ---> Field width in a struct must be constant
@@ -400,7 +393,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // ---> A constexpr object must be initialize with a constant expression.
 // -----> "constepxr is conster that const" - Steve Dewhurst
 // ---> Prefer constexpr to const for defining symbolic constants.
-
 // -> CV-Qualifiers
 // ---> Anywhere you can use const, you can use either:
 // -----> const
@@ -411,14 +403,12 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // ---> constexpr is not a cv-qualifier
 // -----> you can't use constexpr everywhere that you can use const
 // -----> and vice versa
-
 // -> Key insights
 // ---> Const objects of arithmetic type are pretty straight forward
 // ---> "const" is more useful when you combine it with pointers or references
 // -----> It also gets more complicated.
 // ---> As with much of C+, understanding const is difficult if you can't get past the syntax
 // ---> Here are key insights to help you understand the syntax...
-
 // -> The Structure of Declarations
 // ---> Insight: Every object and function declaration has two main parts:
 // -----> a sequence of one or more declaration specifiers
@@ -428,7 +418,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // -----> "static unsigned long int" -> [declaration specifiers]
 // -----> "*x[N]" -> [declarator]
 // ---> The name declared in declarator is the declarator-id.
-
 // -> Declaration specifiers and declarators
 // ---> A declaration specifier can be:
 // -----> A type specifier:
@@ -436,7 +425,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // -------> a user-defined type, such a string or vector<int>
 // -----> A non type specifier:
 // -------> a keyword such as extern, static, inline or typedef.
-
 // -> Declarator operators
 // ---> A declarator is a declarator-id, possibly surrounded by operators
 // -----> Insight: In a declarator, the operators group according
@@ -459,7 +447,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // -----> [] has higher precedence that unary *
 // -------> x is "array of pointers"
 // -------> More precisely, x is an "array with N elements of type pointer"
-
 // -> Parentheses in Declarators
 // ---> Parentheses serve two roles in declarators:
 // ---> As the function call operator:
@@ -468,7 +455,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // ---> As grouping:
 // -----> These ()s "enclose" the declarator-id
 // -----> They have the highest precedence of all.
-
 // -> Type vs Non-type specifiers
 // ---> Insight: Type specifiers modify other type specifiers
 // ---> Insight: Non-type specifiers apply directly to the declarator-id.
@@ -476,7 +462,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // ---> Here unsigned long, and int are type specifiers
 // -----> They form the type to which the pointers in array x point
 // ---> static is a non-type specifiers that applies directly to x.
-
 // -> const is a type-specifier
 // ---> The order of declaration specifiers doesn;t matter to the compiler.
 // ---> These two declaration mean the same thing:
@@ -488,7 +473,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // -----> unsigned const long cul;
 // ---> const is atype specifier much like long or unsigned
 // ---> const modfies the other type specifiers in the same declaration
-
 // -> const in Declarators
 // ---> Insight: const and volatile are the only symbols (in C++)
 // -----> that can appear either as declaration specifiers or in declarators.
@@ -504,7 +488,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // ---> However, * followed by const is effectively a single operator
 // -----> the "const pointer" operator
 // ---> "*const" has the same operator precedence as just *.
-
 // -> Declarations that mean what you intend
 // ---> There's a simple way to ensure that you're placing const (or volatile) where you want it in a declaration
 // -----> First, write the declaration as it would be without const (or volativle)
@@ -520,7 +503,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // -------> Finally, add volatile to the immediate right of the uint32_t:
 // --------->  uint32_t volatile * const x[N]
 // -------> Were done!
-
 // -> So what about constexpr
 // ---> Syntactically, constexpr is not a type-specifier
 // ---> It behaves more like a non-type specifier.
@@ -529,14 +511,12 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // ---> x's type is as if it were declared as
 // -----> unsigned long int * const x[N];
 // ---> But the initializer must be constant expression.
-
 // -> Address-of
 // ---> The address-of operator (&) preserves constness.
 // -----> int i;
 // -----> int const ci = 42;
 // -----> &i  // yields "pointer to [non-const] int"
 // -----> &ci // yields "pointer to const int"
-
 // -> Array-to Pointer Conversions
 // ---> In various contexts, arrays implicitly convert to pointers.
 // ---> The array-to-pointer conversion preserves constness:
@@ -544,7 +524,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // -----> "array of const T" converts to "pointer to const T"
 // ---> String literals such as "xyzzy", have type "array of const char"
 // -----> They convert to "pointer to const char"
-
 // -> const as a promise
 // ---> Think of const as a promise
 // ---> You can apply ethical reasoning to the sematics of const.
@@ -557,7 +536,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // -----> B: "Yes, my promise not to change X doesn't necessarily mean no one else can change X."
 // -----> K: "You also understand that you can't weasel out by asking others to break the promise for you"
 // -----> B: "Yes, I do. I won't ask others to break my promise."
-
 // -> Qualification conversion
 // ---> A qualification conversion adds cv-qualifiers to the type to which the converted pointer points
 // ---> More precisely, a qualification conversion converts.
@@ -567,12 +545,10 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // -----> CV1 is either empty, const, volatile or const volatile and
 // -----> CV2 is more cv-qualified that CV1
 // -------> That is, CV2 has every qualfiier in CV1, plus at least one more.
-
 // -> Reference initialization
 // ---> Reference initialization behaves similarly to qualification conversions for pointers
 // ---> A reference initialization can increase the constness of the reference object
 // ---> A reference initialization can't decrease the constness of the reference object
-
 // -> Using const in parameter declarations
 // ---> function(T const* t) // makes sense
 // -----> This is meaningful constraint on foo's behavior.
@@ -582,7 +558,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 // -----> This const is pretty useless, if not deceptive:
 // -------> Its reasonable to expect that const in a parameter list affects the function's outward behavior.
 // ---> function(T const*const t) // overkill
-
 // -> Top-Level CV qualifiers
 // ---> Types in C++ can have one or more levels of composition
 // ---> For example, type "pointer to char" has two levels:

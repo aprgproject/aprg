@@ -4,133 +4,6 @@
 
 namespace alba::algebra {
 
-TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForTermsWorks) {
-    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(73), Term(84)));
-    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Variable("x")), Term(Variable("x"))));
-    EXPECT_TRUE(
-        canBeMergedInAMonomialByAdditionOrSubtraction(Term(Monomial(96, {{"x", 1}})), Term(Monomial(96, {{"x", 1}}))));
-    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Monomial(96, {{"x", 1}})), Term(Variable("x"))));
-    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Variable("x")), Term(Monomial(96, {{"x", 1}}))));
-    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Variable("x")), Term(Variable("y"))));
-    EXPECT_FALSE(
-        canBeMergedInAMonomialByAdditionOrSubtraction(Term(Monomial(96, {{"x", 1}})), Term(Monomial(96, {{"x", 5}}))));
-    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Monomial(96, {{"a", 1}})), Term(Variable("x"))));
-    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Variable("x")), Term(Monomial(96, {{"a", 1}}))));
-    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Expression()), Term(Expression())));
-}
-
-TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForBothMonomialsWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial3(100, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial4(100, {{"x", 5}, {"y", -1}});
-    Monomial monomial5(645, {{"i", 20}, {"y", 30}});
-
-    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial1, monomial1));
-    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial2, monomial2));
-    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial3, monomial3));
-    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial4, monomial4));
-    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial5, monomial5));
-    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial1, monomial2));
-    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial2, monomial3));
-    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial2, monomial4));
-    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial2, monomial5));
-}
-
-TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForMonomialAndVariableWorks) {
-    Monomial monomial1;
-    Monomial monomial2(12, {{"x", 1}});
-    Monomial monomial3(34, {{"x", 1.25}});
-    Monomial monomial4(56, {{"x", 1}, {"y", 1}});
-    Variable variable("x");
-
-    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial1, variable));
-    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial2, variable));
-    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial3, variable));
-    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial4, variable));
-}
-
-TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForBothVariablesWorks) {
-    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(Variable("x"), Variable("x")));
-    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(Variable("x"), Variable("w")));
-    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(Variable("w"), Variable("x")));
-}
-
-TEST(MonomialHelpersTest, DoesCoefficientsHaveSameSignWorks) {
-    EXPECT_TRUE(doesCoefficientsHaveSameSign(Monomial(23, {}), Monomial(23, {})));
-    EXPECT_FALSE(doesCoefficientsHaveSameSign(Monomial(-23, {}), Monomial(23, {})));
-    EXPECT_FALSE(doesCoefficientsHaveSameSign(Monomial(23, {}), Monomial(-23, {})));
-    EXPECT_TRUE(doesCoefficientsHaveSameSign(Monomial(-23, {}), Monomial(-23, {})));
-}
-
-TEST(MonomialHelpersTest, HasNegativeExponentsWorks) {
-    EXPECT_FALSE(hasNegativeExponents(Monomial()));
-    EXPECT_FALSE(hasNegativeExponents(Monomial(23, {})));
-    EXPECT_FALSE(hasNegativeExponents(Monomial(-23, {})));
-    EXPECT_FALSE(hasNegativeExponents(Monomial(-54, {{"x", 6}})));
-    EXPECT_TRUE(hasNegativeExponents(Monomial(-54, {{"x", -6}})));
-    EXPECT_FALSE(hasNegativeExponents(Monomial(-54, {{"x", 6}, {"y", 1.25}})));
-    EXPECT_TRUE(hasNegativeExponents(Monomial(-54, {{"x", 6}, {"y", -1.25}})));
-    EXPECT_TRUE(hasNegativeExponents(Monomial(-54, {{"x", -6}, {"y", 1.25}})));
-    EXPECT_TRUE(hasNegativeExponents(Monomial(-54, {{"x", -6}, {"y", -1.25}})));
-}
-
-TEST(MonomialHelpersTest, IsConstantOnlyFunctionWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial3(23, {});
-
-    EXPECT_TRUE(isConstantOnly(monomial1));
-    EXPECT_FALSE(isConstantOnly(monomial2));
-    EXPECT_TRUE(isConstantOnly(monomial3));
-}
-
-TEST(MonomialHelpersTest, IsVariableOnlyFunctionWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial3(-54, {{"x", 6}});
-    Monomial monomial4(-54, {{"x", 1}});
-    Monomial monomial5(0, {{"x", 1}});
-    Monomial monomial6(1, {{"x", 1}, {"y", 1}});
-    Monomial monomial7(1, {{"x", 1}});
-
-    EXPECT_FALSE(isVariableOnly(monomial1));
-    EXPECT_FALSE(isVariableOnly(monomial2));
-    EXPECT_FALSE(isVariableOnly(monomial3));
-    EXPECT_FALSE(isVariableOnly(monomial4));
-    EXPECT_FALSE(isVariableOnly(monomial5));
-    EXPECT_FALSE(isVariableOnly(monomial6));
-    EXPECT_TRUE(isVariableOnly(monomial7));
-}
-
-TEST(MonomialHelpersTest, HasASingleVariableWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial3(-54, {{"x", 6}});
-
-    EXPECT_FALSE(hasASingleVariable(monomial1));
-    EXPECT_FALSE(hasASingleVariable(monomial2));
-    EXPECT_TRUE(hasASingleVariable(monomial3));
-}
-
-TEST(MonomialHelpersTest, GetFirstVariableNameFunctionWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x1", 6}, {"y1", -1.25}});
-    Monomial monomial3(-54, {{"x2", 6}});
-    Monomial monomial4(-54, {{"x3", 1}});
-    Monomial monomial5(0, {{"x4", 1}});
-    Monomial monomial6(1, {{"x5", 1}});
-    Monomial monomial7(1, {});
-
-    EXPECT_TRUE(getFirstVariableName(monomial1).empty());
-    EXPECT_EQ("x1", getFirstVariableName(monomial2));
-    EXPECT_EQ("x2", getFirstVariableName(monomial3));
-    EXPECT_EQ("x3", getFirstVariableName(monomial4));
-    EXPECT_EQ("x4", getFirstVariableName(monomial5));
-    EXPECT_EQ("x5", getFirstVariableName(monomial6));
-    EXPECT_TRUE(getFirstVariableName(monomial7).empty());
-}
-
 TEST(MonomialHelpersTest, GetDegreeWorks) {
     Monomial monomial1;
     Monomial monomial2(-54, {{"x", 6}, {"y1", -1.25}});
@@ -353,6 +226,133 @@ TEST(MonomialHelpersTest, GetMonomialWithMaximumExponentsInMonomialsWorks) {
     EXPECT_EQ(monomialToExpect4, monomialToVerify4);
     EXPECT_EQ(monomialToExpect5, monomialToVerify5);
     EXPECT_EQ(monomialToExpect6, monomialToVerify6);
+}
+
+TEST(MonomialHelpersTest, GetFirstVariableNameFunctionWorks) {
+    Monomial monomial1;
+    Monomial monomial2(-54, {{"x1", 6}, {"y1", -1.25}});
+    Monomial monomial3(-54, {{"x2", 6}});
+    Monomial monomial4(-54, {{"x3", 1}});
+    Monomial monomial5(0, {{"x4", 1}});
+    Monomial monomial6(1, {{"x5", 1}});
+    Monomial monomial7(1, {});
+
+    EXPECT_TRUE(getFirstVariableName(monomial1).empty());
+    EXPECT_EQ("x1", getFirstVariableName(monomial2));
+    EXPECT_EQ("x2", getFirstVariableName(monomial3));
+    EXPECT_EQ("x3", getFirstVariableName(monomial4));
+    EXPECT_EQ("x4", getFirstVariableName(monomial5));
+    EXPECT_EQ("x5", getFirstVariableName(monomial6));
+    EXPECT_TRUE(getFirstVariableName(monomial7).empty());
+}
+
+TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForTermsWorks) {
+    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(73), Term(84)));
+    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Variable("x")), Term(Variable("x"))));
+    EXPECT_TRUE(
+        canBeMergedInAMonomialByAdditionOrSubtraction(Term(Monomial(96, {{"x", 1}})), Term(Monomial(96, {{"x", 1}}))));
+    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Monomial(96, {{"x", 1}})), Term(Variable("x"))));
+    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Variable("x")), Term(Monomial(96, {{"x", 1}}))));
+    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Variable("x")), Term(Variable("y"))));
+    EXPECT_FALSE(
+        canBeMergedInAMonomialByAdditionOrSubtraction(Term(Monomial(96, {{"x", 1}})), Term(Monomial(96, {{"x", 5}}))));
+    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Monomial(96, {{"a", 1}})), Term(Variable("x"))));
+    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Variable("x")), Term(Monomial(96, {{"a", 1}}))));
+    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(Term(Expression()), Term(Expression())));
+}
+
+TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForBothMonomialsWorks) {
+    Monomial monomial1;
+    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial monomial3(100, {{"x", 6}, {"y", -1.25}});
+    Monomial monomial4(100, {{"x", 5}, {"y", -1}});
+    Monomial monomial5(645, {{"i", 20}, {"y", 30}});
+
+    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial1, monomial1));
+    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial2, monomial2));
+    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial3, monomial3));
+    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial4, monomial4));
+    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial5, monomial5));
+    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial1, monomial2));
+    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial2, monomial3));
+    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial2, monomial4));
+    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial2, monomial5));
+}
+
+TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForMonomialAndVariableWorks) {
+    Monomial monomial1;
+    Monomial monomial2(12, {{"x", 1}});
+    Monomial monomial3(34, {{"x", 1.25}});
+    Monomial monomial4(56, {{"x", 1}, {"y", 1}});
+    Variable variable("x");
+
+    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial1, variable));
+    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial2, variable));
+    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial3, variable));
+    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial4, variable));
+}
+
+TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForBothVariablesWorks) {
+    EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(Variable("x"), Variable("x")));
+    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(Variable("x"), Variable("w")));
+    EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(Variable("w"), Variable("x")));
+}
+
+TEST(MonomialHelpersTest, DoesCoefficientsHaveSameSignWorks) {
+    EXPECT_TRUE(doesCoefficientsHaveSameSign(Monomial(23, {}), Monomial(23, {})));
+    EXPECT_FALSE(doesCoefficientsHaveSameSign(Monomial(-23, {}), Monomial(23, {})));
+    EXPECT_FALSE(doesCoefficientsHaveSameSign(Monomial(23, {}), Monomial(-23, {})));
+    EXPECT_TRUE(doesCoefficientsHaveSameSign(Monomial(-23, {}), Monomial(-23, {})));
+}
+
+TEST(MonomialHelpersTest, HasNegativeExponentsWorks) {
+    EXPECT_FALSE(hasNegativeExponents(Monomial()));
+    EXPECT_FALSE(hasNegativeExponents(Monomial(23, {})));
+    EXPECT_FALSE(hasNegativeExponents(Monomial(-23, {})));
+    EXPECT_FALSE(hasNegativeExponents(Monomial(-54, {{"x", 6}})));
+    EXPECT_TRUE(hasNegativeExponents(Monomial(-54, {{"x", -6}})));
+    EXPECT_FALSE(hasNegativeExponents(Monomial(-54, {{"x", 6}, {"y", 1.25}})));
+    EXPECT_TRUE(hasNegativeExponents(Monomial(-54, {{"x", 6}, {"y", -1.25}})));
+    EXPECT_TRUE(hasNegativeExponents(Monomial(-54, {{"x", -6}, {"y", 1.25}})));
+    EXPECT_TRUE(hasNegativeExponents(Monomial(-54, {{"x", -6}, {"y", -1.25}})));
+}
+
+TEST(MonomialHelpersTest, IsConstantOnlyFunctionWorks) {
+    Monomial monomial1;
+    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial monomial3(23, {});
+
+    EXPECT_TRUE(isConstantOnly(monomial1));
+    EXPECT_FALSE(isConstantOnly(monomial2));
+    EXPECT_TRUE(isConstantOnly(monomial3));
+}
+
+TEST(MonomialHelpersTest, IsVariableOnlyFunctionWorks) {
+    Monomial monomial1;
+    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial monomial3(-54, {{"x", 6}});
+    Monomial monomial4(-54, {{"x", 1}});
+    Monomial monomial5(0, {{"x", 1}});
+    Monomial monomial6(1, {{"x", 1}, {"y", 1}});
+    Monomial monomial7(1, {{"x", 1}});
+
+    EXPECT_FALSE(isVariableOnly(monomial1));
+    EXPECT_FALSE(isVariableOnly(monomial2));
+    EXPECT_FALSE(isVariableOnly(monomial3));
+    EXPECT_FALSE(isVariableOnly(monomial4));
+    EXPECT_FALSE(isVariableOnly(monomial5));
+    EXPECT_FALSE(isVariableOnly(monomial6));
+    EXPECT_TRUE(isVariableOnly(monomial7));
+}
+
+TEST(MonomialHelpersTest, HasASingleVariableWorks) {
+    Monomial monomial1;
+    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial monomial3(-54, {{"x", 6}});
+
+    EXPECT_FALSE(hasASingleVariable(monomial1));
+    EXPECT_FALSE(hasASingleVariable(monomial2));
+    EXPECT_TRUE(hasASingleVariable(monomial3));
 }
 
 }  // namespace alba::algebra

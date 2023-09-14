@@ -35,12 +35,10 @@ private:
 // the diagonals never intersect. The problem is to find the cost of triangulation with the minimum cost. The cost of a
 // triangulation is sum of the weights of its component triangles. Weight of each triangle is its perimeter (sum of
 // lengths of all sides)
-
 // This problem has recursive substructure.
 // The idea is to divide the polygon into three parts: a single triangle, the sub-polygon to the left, and the
 // sub-polygon to the right. We try all possible divisions like this and find the one that minimizes the cost of the
 // triangle plus the cost of the triangulation of the two sub-polygons.
-
 // Let Minimum Cost of triangulation of vertices from i to j be minCost(i, j)
 // -> If j < i + 2 Then
 // ---> minCost(i, j) = 0

@@ -77,22 +77,18 @@ private:
 // -> Suppose we match 5 chars in pattern, with mismatch on 6th char (suppose BAAAAB).
 // -> We know previous 6 chars in text are BAAAAB
 // -> Dont need to back up text pointer!
-
 // Knuth-Morris-Pratt algorithm: Clever method to always avoid backup.
 // DFA is abstract string searching machine
 // -> Finite number of states (including start and halt)
 // -> Exactly one transition for each char in alphabet
 // -> Accept if sequence of transition leads to halt state.
-
 // What is the interpretation of DFA state?
 // -> State = number of characters in pattern that have been matched
-
 // Key difference from brute-force implementation
 // -> Need to precompute dfa[][] from pattern
 // -> Text pointer i never decrements
 // -> Could use input stream
 // -> Running time: Simulate DFA on text: at most N character accesses.
-
 // Transitions:
 // -> Match transition is easy
 // ---> If in state j and next char c == pattern.charAt(j), go to j+1
@@ -103,23 +99,18 @@ private:
 // -> Running time: Construction of DFA: seems to require j steps. No! It would only take constant time if we maintain
 // state X (delayedState).
 // -> Final running time: M character access (but space/time proportional to R M)
-
 // Proposition:
 // -> KMP search accesses no more than M+N characters to search for a pattern of length M in a test of length N.
 // -> Proof: Each pattern char accessed once when constructin the DFA each text char accessed once (in the worst case),
 // when simulating the DFA.
-
 // Proposition KMP constructs dfa[][] in time and space proportional to R*M
-
 // Improvements:
 // -> Larger alphabets. Improved version of KMP constructs nfa[] in time and space proportional to M.
-
 // History:
 // -> Independently discovered by two thoereticians and a practitioner.
 // ---> Knuth: inspired by esoteric theorem, discovered linear algorithm.
 // ---> Pratt: made running time independent of alphabet size
 // ---> Morris: built a text editor for the CDC 6400 computer (typewriters were used stil)
-
 // Other Discussions:
 // The KMP matching algorithm uses degenerating property (pattern having same sub-patterns appearing more than once in
 // the pattern) of the pattern and improves the worst case complexity to O(n).

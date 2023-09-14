@@ -27,16 +27,16 @@ TEST(AlbaReplaceStringInFileTest, ReplaceCStylePrintWithCPlusPlusStylePrintWithN
     EXPECT_EQ("debug() << \"TLH::reset()\" << flush();", result);
 }
 
-TEST(AlbaReplaceStringInFileTest, DISABLED_ReplaceCStylePrintWithCPlusPlusStyleInFile) {
-    alba::ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnFile(
-        R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\CP_TLH\srcLegacy\TLHMasterState.cpp)",
-        R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\NewTLH\srcLegacy\TLHMasterState.cpp)");
-}
-
 TEST(AlbaReplaceStringInFileTest, DISABLED_ReplaceCStylePrintWithCPlusPlusStyleInDirectories) {
     alba::ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnDirectories(
         R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\CP_TLH\)",
         R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\NewTLH\)");
+}
+
+TEST(AlbaReplaceStringInFileTest, DISABLED_ReplaceCStylePrintWithCPlusPlusStyleInFile) {
+    alba::ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnFile(
+        R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\CP_TLH\srcLegacy\TLHMasterState.cpp)",
+        R"(D:\Branches\MODERNIZATION\TLH\C_Application\SC_TCOM\NewTLH\srcLegacy\TLHMasterState.cpp)");
 }
 
 }  // namespace alba

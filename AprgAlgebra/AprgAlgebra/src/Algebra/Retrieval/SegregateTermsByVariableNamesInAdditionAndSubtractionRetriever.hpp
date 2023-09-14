@@ -12,14 +12,14 @@ class SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever : public Ba
 public:
     using VariableNameToTermMap = std::unordered_map<std::string, Term>;
     explicit SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever(stringHelper::strings const& variableNames);
-    [[nodiscard]] Term const& getTermWithMultipleVariableNames() const;
-    [[nodiscard]] Term const& getRemainingTerm() const;
-    [[nodiscard]] VariableNameToTermMap const& getVariableNameToTermMap() const;
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;
     void retrieveFromMonomial(Monomial const& monomial) override;
     void retrieveFromExpression(Expression const& expression) override;
     void retrieveFromFunction(Function const& functionObject) override;
+    [[nodiscard]] Term const& getTermWithMultipleVariableNames() const;
+    [[nodiscard]] Term const& getRemainingTerm() const;
+    [[nodiscard]] VariableNameToTermMap const& getVariableNameToTermMap() const;
 
 private:
     void initializeWithVariableNames(stringHelper::strings const& namesInOrder);

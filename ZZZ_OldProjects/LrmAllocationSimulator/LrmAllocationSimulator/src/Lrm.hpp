@@ -61,24 +61,6 @@ public:
     SelectionDspResultForCcdAndMcd allocateCcdNbicMcdForLcgIdAccordingToMark(unsigned int const lcgId);
 
 private:
-    static void setSelectionDspResult(SelectionDspResult& selectionDspResultReference, unsigned int const fspAddress);
-    static void incrementNAndTnCountBasedOnNyquistType(
-        NyquistAndTurboNyquistCount& countReference, NyquistType const nyquistType);
-    static void sortFspPairsBasedOnCondition(
-        FspPairsDetails& fspPairsDetails, FspPairDetailsComparisonCondition const& condition);
-    static void removeFspPairsBasedOnCondition(
-        FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition);
-    static void changeMode(Dsp& dspToChange, DspMode const dspMode);
-    static void setDliIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic, unsigned int const dliPool);
-    static void setAsNbicIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic);
-    // Common
-    // void saveNeededFspsForCcdOrMcdBasedOnNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int&
-    // numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const; void
-    // saveNeededFspsForCcdOrMcdBasedOnTurboNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int&
-    // numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const;
-    static unsigned int getPriorityBasedOnLessUsersAndHsupaCfsForDsp(Dsp const& dsp);
-    static unsigned int getConflictingDliPoolForThisDli(unsigned int const dliPool);
-    static unsigned int getLeastConflictingDliPoolForThisDli(unsigned int const dliPool);
     // CCD+MCD
     [[nodiscard]] FspAddresses selectFspsForCcdMcd(unsigned int const lcgId) const;
     [[nodiscard]] FspAddresses selectFspsForCcdMcd2(unsigned int const lcgId) const;
@@ -180,6 +162,24 @@ private:
     void changeModeForCcdAndUpdateDspDetails(SelectionDspResultForCcdAndMcd const& selectionDspResultForCcdAndMcd);
     void changeModeForMcdAndUpdateDspDetails(SelectionDspResultForCcdAndMcd const& selectionDspResultForCcdAndMcd);
     void changeModeAndUpdateDspDetails(SelectionDspResult const& selectionDspResult, DspMode const dspMode);
+    static void setSelectionDspResult(SelectionDspResult& selectionDspResultReference, unsigned int const fspAddress);
+    static void incrementNAndTnCountBasedOnNyquistType(
+        NyquistAndTurboNyquistCount& countReference, NyquistType const nyquistType);
+    static void sortFspPairsBasedOnCondition(
+        FspPairsDetails& fspPairsDetails, FspPairDetailsComparisonCondition const& condition);
+    static void removeFspPairsBasedOnCondition(
+        FspPairsDetails& fspPairsDetails, FspPairDetailsCondition const& condition);
+    static void changeMode(Dsp& dspToChange, DspMode const dspMode);
+    static void setDliIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic, unsigned int const dliPool);
+    static void setAsNbicIfNeeded(Dsp& dspToChange, DspMode const dspMode, bool const isNbic);
+    // Common
+    // void saveNeededFspsForCcdOrMcdBasedOnNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int&
+    // numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const; void
+    // saveNeededFspsForCcdOrMcdBasedOnTurboNyquist(UniqueFspAddresses & neededUniqueFspAddresses, unsigned int&
+    // numberOfDspToAllocate, FspAddresses const& fspAddresses, unsigned int const lcgId) const;
+    static unsigned int getPriorityBasedOnLessUsersAndHsupaCfsForDsp(Dsp const& dsp);
+    static unsigned int getConflictingDliPoolForThisDli(unsigned int const dliPool);
+    static unsigned int getLeastConflictingDliPoolForThisDli(unsigned int const dliPool);
     bool m_isHibernationCommissioned{false};
     unsigned int m_maxAmountOfNonDcdsPerFsp{6};
     std::map<unsigned int, bool> m_lcgToUnallocatedPicPools;

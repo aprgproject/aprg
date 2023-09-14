@@ -31,7 +31,6 @@ private:
 
 // Given a string, find the longest substring which is palindrome.
 // For example,
-
 // -> Input: Given string :"forgeeksskeegfor",
 // ---> Output: "geeksskeeg"
 // -> Input: Given string :"Geeks",

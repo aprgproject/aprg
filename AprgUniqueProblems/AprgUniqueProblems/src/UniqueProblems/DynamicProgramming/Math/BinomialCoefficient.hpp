@@ -42,7 +42,6 @@ private:
 // -------> Recursively call "n"-1 and "k"
 // -------> Recursively call "n"-1 and "k"-1
 // -----> Result is the sum
-
 // 2) Dynamic Programming by Iterative method:
 // -> Create an matrix of counts with size of columns as "input n"+1 and size of rows as "input k"+1
 // -> At the start, initialize matrix with 0 (for invalid cases is 0)
@@ -59,7 +58,6 @@ private:
 // -------> Get the value of matrix at "n"-1 and "k"-1
 // -----> Result is the sum
 // -> The last entry in the matrix (with indices "input n" and "input k") contains the total value.
-
 // 3) Dynamic Programming by Iterative method and space efficient:
 // -> Create an array of counts with size as "input k"+1.
 // -> At the start, initialize array with 0 (for invalid cases is 0)
@@ -73,21 +71,17 @@ private:
 // ----->  Get the value of array at "k"-1
 // -> The last entry in the array (with index "targetSumOfDigits") contains the total count.
 // NOTE: Check comments at the code for demonstration on how it works
-
 // The following are the common definitions of Binomial Coefficients.
 // A binomial coefficient C(n, k) can be defined as the coefficient of x^k in the expansion of (1 + x)^n.
 // A binomial coefficient C(n, k) also gives the number of ways, disregarding order,
 // that k objects can be chosen from among n objects more formally,
 // the number of k-element subsets (or k-combinations) of a n-element set.
-
 // Write a function that takes two parameters n and k and returns the value of Binomial Coefficient C(n, k).
 // For example, your function should return 6 for n = 4 and k = 2, and it should return 10 for n = 5 and k = 2.
-
 // 1) Optimal Substructure
 // The value of C(n, k) can be recursively calculated using the following standard formula for Binomial Coefficients.
 // -> C(n, k) = C(n-1, k-1) + C(n-1, k)
 // -> C(n, 0) = C(n, n) = 1
-
 // 2) Overlapping Subproblems
 // It should be noted that the above function computes the same subproblems again and again.
 // For large values of n, there will be many common subproblems.

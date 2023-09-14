@@ -4,8 +4,8 @@
 #include <Common/Time/AlbaLocalTimeHelper.hpp>
 
 using namespace alba::stringHelper;
-using namespace std;
 using namespace std::chrono;
+using namespace std;
 
 namespace alba {
 

@@ -1,4 +1,4 @@
-#include "FactorAndMulitplesHelpers.hpp"
+#include "FactorAndMultiplesHelpers.hpp"
 
 using namespace std;
 

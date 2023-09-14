@@ -42,11 +42,9 @@ public:
 // Given two sorted arrays and a number x, find the pair whose sum is closest to x and the pair has an element from each
 // array. We are given two arrays ar1[0…m-1] and ar2[0..n-1] and a number x, we need to find the pair ar1[i] + ar2[j]
 // such that absolute value of (ar1[i] + ar2[j] – x) is minimum.
-
 // Can we do it in a single pass and O(1) extra space?
 // The idea is to start from left side of one array and right side of another array,
 // and use the algorithm same as step 2 of above approach.
-
 // Following is detailed algorithm:
 // 1) Initialize a variable diff as infinite (Diff is used to store the difference between pair and x).
 // -> We need to find the minimum diff.

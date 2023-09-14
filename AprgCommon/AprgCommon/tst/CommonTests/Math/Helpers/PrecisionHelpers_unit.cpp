@@ -14,6 +14,15 @@ TEST(PrecisionHelpersTest, IntegerTypesCanBeConsideredEqual) {
     EXPECT_TRUE(isAlmostEqual(static_cast<int>(100), static_cast<int>(100)));
 }
 
+TEST(PrecisionHelpersTest, IsAlmostEqualWorksWithDifferenceTolerance) {
+    EXPECT_TRUE(isAlmostEqual(2.54, 2.55, 1E-1));
+    EXPECT_TRUE(isAlmostEqual(2.54, 2.55, 1E-2));
+    EXPECT_FALSE(isAlmostEqual(2.54, 2.55, 1E-3));
+    EXPECT_FALSE(isAlmostEqual(2, INFINITY, 1E-3));
+    EXPECT_TRUE(isAlmostEqual(INFINITY, INFINITY, 1E-3));
+    EXPECT_FALSE(isAlmostEqual(INFINITY, -INFINITY, 1E-3));
+}
+
 TEST(PrecisionHelpersTest, DoubleTypesCanBeConsideredEqual) {
     EXPECT_TRUE(isAlmostEqual(static_cast<double>(1) / 3, static_cast<double>(1) / 3));
     EXPECT_FALSE(isAlmostEqual(static_cast<double>(1) / 3, static_cast<double>(1) / 3 + 0.1));
@@ -28,6 +37,13 @@ TEST(PrecisionHelpersTest, DoubleTypesCanBeConsideredEqual) {
     EXPECT_FALSE(isAlmostEqual<double>(2.0, INFINITY));
     EXPECT_TRUE(isAlmostEqual(INFINITY, INFINITY));
     EXPECT_FALSE(isAlmostEqual(INFINITY, -INFINITY));
+}
+
+TEST(PrecisionHelpersTest, IsAlmostAnIntegerWithDifferenceToleranceWorks) {
+    EXPECT_TRUE(isAlmostAnInteger(3.01, 1E-1));
+    EXPECT_TRUE(isAlmostAnInteger(3.01, 1E-2));
+    EXPECT_FALSE(isAlmostAnInteger(3.01, 1E-3));
+    EXPECT_TRUE(isAlmostAnInteger(1524157877611644672, 1E-3));
 }
 
 TEST(PrecisionHelpersTest, IsAlmostAnIntegerWorks) {
@@ -207,22 +223,6 @@ TEST(PrecisionHelpersTest, GetIntegerPartOfDoubleValueWorks) {
     EXPECT_EQ(-1, getIntegerPartOfDoubleValue<int>(-1.5));
     EXPECT_EQ(652, getIntegerPartOfDoubleValue<int>(652.426542));
     EXPECT_EQ(-347, getIntegerPartOfDoubleValue<int>(-347.51514));
-}
-
-TEST(PrecisionHelpersTest, IsAlmostEqualWorksWithDifferenceTolerance) {
-    EXPECT_TRUE(isAlmostEqual(2.54, 2.55, 1E-1));
-    EXPECT_TRUE(isAlmostEqual(2.54, 2.55, 1E-2));
-    EXPECT_FALSE(isAlmostEqual(2.54, 2.55, 1E-3));
-    EXPECT_FALSE(isAlmostEqual(2, INFINITY, 1E-3));
-    EXPECT_TRUE(isAlmostEqual(INFINITY, INFINITY, 1E-3));
-    EXPECT_FALSE(isAlmostEqual(INFINITY, -INFINITY, 1E-3));
-}
-
-TEST(PrecisionHelpersTest, IsAlmostAnIntegerWithDifferenceToleranceWorks) {
-    EXPECT_TRUE(isAlmostAnInteger(3.01, 1E-1));
-    EXPECT_TRUE(isAlmostAnInteger(3.01, 1E-2));
-    EXPECT_FALSE(isAlmostAnInteger(3.01, 1E-3));
-    EXPECT_TRUE(isAlmostAnInteger(1524157877611644672, 1E-3));
 }
 
 TEST(PrecisionHelpersTest, FractionalPartInDoubleWorks) {

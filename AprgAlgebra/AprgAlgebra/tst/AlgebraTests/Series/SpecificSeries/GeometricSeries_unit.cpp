@@ -37,29 +37,11 @@ TEST(GeometricSeriesTest, GetSumWorks) {
     EXPECT_EQ(Term(21840), series.getSum(2, 7));
 }
 
-TEST(GeometricSeriesTest, GetInfiniteSumWorks) {
-    GeometricSeries series(AlbaNumber::createFraction(1, 2), AlbaNumber::createFraction(1, 2));
-
-    EXPECT_EQ(Term(1), series.getInfiniteSumStartingFrom(0));
-    EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), series.getInfiniteSumStartingFrom(1));
-    EXPECT_EQ(Term(AlbaNumber::createFraction(1, 4)), series.getInfiniteSumStartingFrom(2));
-}
-
 TEST(GeometricSeriesTest, GetSumIsEqualToFormulaInUtilities) {
     GeometricSeries series(1, 4);
 
     Term sumFromSeries(series.getSum(0, 7));
     Term sumFromFormula(getSumOfGeometricSeriesUsingFirstValueAndCommonMultiplier(1, 4, 8));
-
-    EXPECT_EQ(sumFromSeries, sumFromFormula);
-}
-
-TEST(GeometricSeriesTest, GetInfiniteSumIsEqualToFormulaInUtilities) {
-    GeometricSeries series(AlbaNumber::createFraction(1, 2), AlbaNumber::createFraction(1, 2));
-
-    Term sumFromSeries(series.getInfiniteSumStartingFrom(2));
-    Term sumFromFormula(getInfiniteSumOfGeometricSeriesIfCommonMultiplierIsFractional(
-        AlbaNumber::createFraction(1, 8), AlbaNumber::createFraction(1, 2)));
 
     EXPECT_EQ(sumFromSeries, sumFromFormula);
 }
@@ -73,6 +55,24 @@ TEST(GeometricSeriesTest, IsConvergentWorks) {
     EXPECT_TRUE(seriesWithMultiplierLessThanOne.isConvergent());
     EXPECT_TRUE(seriesWithMultiplierEqualsToOne.isConvergent());
     EXPECT_FALSE(seriesWithMultiplierMoreThanOne.isConvergent());
+}
+
+TEST(GeometricSeriesTest, GetInfiniteSumWorks) {
+    GeometricSeries series(AlbaNumber::createFraction(1, 2), AlbaNumber::createFraction(1, 2));
+
+    EXPECT_EQ(Term(1), series.getInfiniteSumStartingFrom(0));
+    EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), series.getInfiniteSumStartingFrom(1));
+    EXPECT_EQ(Term(AlbaNumber::createFraction(1, 4)), series.getInfiniteSumStartingFrom(2));
+}
+
+TEST(GeometricSeriesTest, GetInfiniteSumIsEqualToFormulaInUtilities) {
+    GeometricSeries series(AlbaNumber::createFraction(1, 2), AlbaNumber::createFraction(1, 2));
+
+    Term sumFromSeries(series.getInfiniteSumStartingFrom(2));
+    Term sumFromFormula(getInfiniteSumOfGeometricSeriesIfCommonMultiplierIsFractional(
+        AlbaNumber::createFraction(1, 8), AlbaNumber::createFraction(1, 2)));
+
+    EXPECT_EQ(sumFromSeries, sumFromFormula);
 }
 
 TEST(GeometricSeriesTest, ExperimentalTest) {

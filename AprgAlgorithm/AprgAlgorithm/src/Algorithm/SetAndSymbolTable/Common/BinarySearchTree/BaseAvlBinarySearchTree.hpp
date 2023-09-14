@@ -18,22 +18,6 @@ public:
     ~BaseAvlBinarySearchTree() override = default;
 
 protected:
-    [[nodiscard]] int getHeightOfSubTree(NodeUniquePointer const& nodePointer) const {
-        int size(0);
-        if (nodePointer) {
-            size = nodePointer->heightOfThisSubTree;
-        }
-        return size;
-    }
-
-    [[nodiscard]] int calculateHeightOfSubTree(Node const& node) const {
-        return std::max(getHeightOfSubTree(node.left), getHeightOfSubTree(node.right)) + 1;
-    }
-
-    [[nodiscard]] int calculateBalanceFactor(Node const& node) const {
-        return getHeightOfSubTree(node.left) - getHeightOfSubTree(node.right);
-    }
-
     void updateTreeNodeDetails(Node& node) const override {
         node.sizeOfThisSubTree = this->calculateSizeOfThisSubTree(node);
         node.heightOfThisSubTree = calculateHeightOfSubTree(node);
@@ -52,6 +36,22 @@ protected:
     void deleteMaximumStartingOnThisNode(NodeUniquePointer& nodePointer) override {
         BaseClass::deleteMaximumStartingOnThisNode(nodePointer);
         reBalanceTreeOnDeleteAction(nodePointer);
+    }
+
+    [[nodiscard]] int getHeightOfSubTree(NodeUniquePointer const& nodePointer) const {
+        int size(0);
+        if (nodePointer) {
+            size = nodePointer->heightOfThisSubTree;
+        }
+        return size;
+    }
+
+    [[nodiscard]] int calculateHeightOfSubTree(Node const& node) const {
+        return std::max(getHeightOfSubTree(node.left), getHeightOfSubTree(node.right)) + 1;
+    }
+
+    [[nodiscard]] int calculateBalanceFactor(Node const& node) const {
+        return getHeightOfSubTree(node.left) - getHeightOfSubTree(node.right);
     }
 
     void rotateLeft(NodeUniquePointer& nodePointer) {

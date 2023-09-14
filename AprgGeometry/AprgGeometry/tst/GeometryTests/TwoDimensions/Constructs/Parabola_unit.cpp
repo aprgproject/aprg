@@ -67,6 +67,46 @@ TEST(ParabolaTest, GetSlopeIsCorrectForParabolaOrientatedInY) {
     EXPECT_DOUBLE_EQ(0.045454545454545456, parabola.getSlopeAt(10));
 }
 
+TEST(ParabolaTest, GetDirectrixWorksForParabolaOrientatedInX) {
+    Parabola<ParabolaOrientation::PolynomialX> const parabola{-0.2, -2, -4};
+
+    EXPECT_EQ(Line(Point(0, 2.25), Point(1, 2.25)), parabola.getDirectrix());
+}
+
+TEST(ParabolaTest, GetDirectrixWorksForParabolaOrientatedInY) {
+    Parabola<ParabolaOrientation::PolynomialY> const parabola{-0.2, -2, -4};
+
+    EXPECT_EQ(Line(Point(-3.75, 0), Point(-3.75, 1)), parabola.getDirectrix());
+}
+
+TEST(ParabolaTest, GetVertexWorksForParabolaOrientatedInX) {
+    Parabola<ParabolaOrientation::PolynomialX> const parabola1{1, 2, 4};
+    Parabola<ParabolaOrientation::PolynomialX> const parabola2{1, -1, -6};
+
+    EXPECT_EQ(Point(-1, 3), parabola1.getVertex());
+    EXPECT_EQ(Point(0.5, -6.25), parabola2.getVertex());
+}
+
+TEST(ParabolaTest, GetVertexWorksForParabolaOrientatedInY) {
+    Parabola<ParabolaOrientation::PolynomialY> const parabola1{1, 2, 4};
+    Parabola<ParabolaOrientation::PolynomialY> const parabola2{1, -1, -6};
+
+    EXPECT_EQ(Point(3, -1), parabola1.getVertex());
+    EXPECT_EQ(Point(-6.25, 0.5), parabola2.getVertex());
+}
+
+TEST(ParabolaTest, GetFocusWorksForParabolaOrientatedInX) {
+    Parabola<ParabolaOrientation::PolynomialX> const parabola{-0.2, -2, -4};
+
+    EXPECT_EQ(Point(-5, -0.25), parabola.getFocus());
+}
+
+TEST(ParabolaTest, GetFocusWorksForParabolaOrientatedInY) {
+    Parabola<ParabolaOrientation::PolynomialY> const parabola{-0.2, -2, -4};
+
+    EXPECT_EQ(Point(-6.25, 1), parabola.getFocus());
+}
+
 TEST(ParabolaTest, GetCoefficientsWorksForParabolaOrientatedInX) {
     Parabola<ParabolaOrientation::PolynomialX> const parabola{1, 2, 3};
 
@@ -127,46 +167,6 @@ TEST(ParabolaTest, GetLengthOfLatusRectumWorksForParabolaOrientatedInY) {
     Parabola<ParabolaOrientation::PolynomialY> const parabola{-0.2, -2, -4};
 
     EXPECT_DOUBLE_EQ(5, parabola.getLengthOfLatusRectum());
-}
-
-TEST(ParabolaTest, GetVertexWorksForParabolaOrientatedInX) {
-    Parabola<ParabolaOrientation::PolynomialX> const parabola1{1, 2, 4};
-    Parabola<ParabolaOrientation::PolynomialX> const parabola2{1, -1, -6};
-
-    EXPECT_EQ(Point(-1, 3), parabola1.getVertex());
-    EXPECT_EQ(Point(0.5, -6.25), parabola2.getVertex());
-}
-
-TEST(ParabolaTest, GetFocusWorksForParabolaOrientatedInX) {
-    Parabola<ParabolaOrientation::PolynomialX> const parabola{-0.2, -2, -4};
-
-    EXPECT_EQ(Point(-5, -0.25), parabola.getFocus());
-}
-
-TEST(ParabolaTest, GetFocusWorksForParabolaOrientatedInY) {
-    Parabola<ParabolaOrientation::PolynomialY> const parabola{-0.2, -2, -4};
-
-    EXPECT_EQ(Point(-6.25, 1), parabola.getFocus());
-}
-
-TEST(ParabolaTest, GetDirectrixWorksForParabolaOrientatedInX) {
-    Parabola<ParabolaOrientation::PolynomialX> const parabola{-0.2, -2, -4};
-
-    EXPECT_EQ(Line(Point(0, 2.25), Point(1, 2.25)), parabola.getDirectrix());
-}
-
-TEST(ParabolaTest, GetDirectrixWorksForParabolaOrientatedInY) {
-    Parabola<ParabolaOrientation::PolynomialY> const parabola{-0.2, -2, -4};
-
-    EXPECT_EQ(Line(Point(-3.75, 0), Point(-3.75, 1)), parabola.getDirectrix());
-}
-
-TEST(ParabolaTest, GetVertexWorksForParabolaOrientatedInY) {
-    Parabola<ParabolaOrientation::PolynomialY> const parabola1{1, 2, 4};
-    Parabola<ParabolaOrientation::PolynomialY> const parabola2{1, -1, -6};
-
-    EXPECT_EQ(Point(3, -1), parabola1.getVertex());
-    EXPECT_EQ(Point(-6.25, 0.5), parabola2.getVertex());
 }
 
 }  // namespace alba::TwoDimensions

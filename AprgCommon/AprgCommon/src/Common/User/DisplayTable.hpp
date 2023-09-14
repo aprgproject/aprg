@@ -112,16 +112,17 @@ public:
     void print(std::ostream& out) const;
 
 private:
-    [[nodiscard]] static std::string getTextBasedOnVerticalAlignment(
-        VerticalAlignment const alignment, int const lineIndexAtRow, int const numberOfLinesAtRow,
-        Lines const& linesAtCell);
-
     [[nodiscard]] std::string getHorizontalBorderLine() const;
     [[nodiscard]] std::string getVerticalBorderPoint() const;
     [[nodiscard]] int getVerticalBorderLength() const;
     [[nodiscard]] int getHorizontalBorderLength() const;
     [[nodiscard]] bool shouldBePrintedAtThisRow() const;
     void saveTableInformation(DisplayTable const& displayTable);
+
+    [[nodiscard]] static std::string getTextBasedOnVerticalAlignment(
+        VerticalAlignment const alignment, int const lineIndexAtRow, int const numberOfLinesAtRow,
+        Lines const& linesAtCell);
+
     Rows m_rows{};
     std::vector<int> m_maxLengthAtColumn;
     std::vector<int> m_maxWidthAtRow;

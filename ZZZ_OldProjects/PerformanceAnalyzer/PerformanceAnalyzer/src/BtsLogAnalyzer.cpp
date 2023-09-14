@@ -66,44 +66,6 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
     }
 }
 
-void BtsLogAnalyzer::setFirstLogTimeInPair(
-    string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) {
-    LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
-    setLogTimeIfNeeded(lineInLogs, logTimePairOfTheUser.first);
-}
-
-void BtsLogAnalyzer::setSecondLogTimeInPair(
-    string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) {
-    LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
-    setLogTimeIfNeeded(lineInLogs, logTimePairOfTheUser.second);
-}
-
-void BtsLogAnalyzer::saveUserIndentifierAndLatencyToCsvFile(
-    UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, ofstream& csvFileStream) {
-    csvFileStream << userIdentifiers.getCrnccId() << "," << userIdentifiers.getNbccId() << ","
-                  << userIdentifiers.getTransactionId() << "," << latencyInMicroseconds << ",";
-}
-
-void BtsLogAnalyzer::setLogTimeIfNeeded(string const& lineInLogs, LogTime& logTime) {
-    BtsLogPrint const logPrint(lineInLogs);
-    // if(!logPrint.getBtsTime().isStartup())
-    //{
-    logTime = logPrint.getBtsTime();
-    //}
-}
-
-double BtsLogAnalyzer::getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) {
-    BtsLogTime const latency = logTimePairOfTheUser.second.value() - logTimePairOfTheUser.first.value();
-    return getTotalMicroseconds(latency);
-}
-
-double BtsLogAnalyzer::getTotalMicroseconds(BtsLogTime const& btsLogTime) {
-    double const result(
-        static_cast<double>(btsLogTime.getMinutes()) * 1000000 * 60 +
-        static_cast<double>(btsLogTime.getSeconds()) * 1000000 + static_cast<double>(btsLogTime.getMicroSeconds()));
-    return result;
-}
-
 void BtsLogAnalyzer::initializeMessageQueueingTimeFileStream() {
     AlbaLocalPathHandler const messageQueueingTimeFilePathHandler(
         m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_MessageQueueingTime.csv");
@@ -590,6 +552,44 @@ void BtsLogAnalyzer::savePrintsAvailableToCsvFile(UserIdentifiers const& userIde
     csvFileStream << printsAvailable.hasBB_2_RL_SETUP_REQ_MSG << "," << printsAvailable.hasBB_2_RL_SETUP_ACK_MSG << ","
                   << printsAvailable.hasTC_TRANSPORT_BEARER_REGISTER_MSG << ","
                   << printsAvailable.hasTC_TRANSPORT_BEARER_REGISTER_RESP_MSG << ",";
+}
+
+void BtsLogAnalyzer::setFirstLogTimeInPair(
+    string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) {
+    LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
+    setLogTimeIfNeeded(lineInLogs, logTimePairOfTheUser.first);
+}
+
+void BtsLogAnalyzer::setSecondLogTimeInPair(
+    string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs) {
+    LogTimePair& logTimePairOfTheUser(logTimePairs[userIdentifiers]);
+    setLogTimeIfNeeded(lineInLogs, logTimePairOfTheUser.second);
+}
+
+void BtsLogAnalyzer::saveUserIndentifierAndLatencyToCsvFile(
+    UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, ofstream& csvFileStream) {
+    csvFileStream << userIdentifiers.getCrnccId() << "," << userIdentifiers.getNbccId() << ","
+                  << userIdentifiers.getTransactionId() << "," << latencyInMicroseconds << ",";
+}
+
+void BtsLogAnalyzer::setLogTimeIfNeeded(string const& lineInLogs, LogTime& logTime) {
+    BtsLogPrint const logPrint(lineInLogs);
+    // if(!logPrint.getBtsTime().isStartup())
+    //{
+    logTime = logPrint.getBtsTime();
+    //}
+}
+
+double BtsLogAnalyzer::getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser) {
+    BtsLogTime const latency = logTimePairOfTheUser.second.value() - logTimePairOfTheUser.first.value();
+    return getTotalMicroseconds(latency);
+}
+
+double BtsLogAnalyzer::getTotalMicroseconds(BtsLogTime const& btsLogTime) {
+    double const result(
+        static_cast<double>(btsLogTime.getMinutes()) * 1000000 * 60 +
+        static_cast<double>(btsLogTime.getSeconds()) * 1000000 + static_cast<double>(btsLogTime.getMicroSeconds()));
+    return result;
 }
 
 BtsLogAnalyzer::PrintsAvailable::PrintsAvailable()

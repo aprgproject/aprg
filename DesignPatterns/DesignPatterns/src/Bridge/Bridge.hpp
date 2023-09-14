@@ -53,12 +53,10 @@ private:
 
 // ONE LINE NOTE:
 // -> BRIDGE several IMPLEMENTATIONS (or responsibilities) into one class
-
 // Intent:
 // Decouple an abstraction from its implementation so that the two can vary independently.
 // Bridge pattern has structural purpose and applies to objects, so it deals with the composition of objects.
 // NOTE: This is related to "Dependency Inversion Principle".
-
 // When to use (applicability):
 // -> you want to avoid a permanent binding between an abstraction and its implementation
 // -> both the abstractions and their implementations should be extensible by subclassing
@@ -66,7 +64,6 @@ private:
 // -> you want to hide the implementation of an abstraction completely from clients
 // -> you have a proliferation of classes (class explosion), and responsibilities needs to extracted
 // -> you want to share an implementation among multiple objects (and it needs to be hidden from the client)
-
 // Consequences:
 // -> Decoupling interface and implementation.
 // ---> An implementation is not bound permanently to an interface.
@@ -81,7 +78,6 @@ private:
 // -> Hiding implementation details from clients
 // ---> You can shield clients from implementation details, like the sharing of implementor objects and accompanying
 // reference count mechanism.
-
 // Implementation:
 // -> Only one implementor
 // ---> If there is one implementation, using an abstract Implementor class isn't necessary.
@@ -97,7 +93,6 @@ private:
 // -----> But because this approach relies on static inhertiance, it binds an implementation permanently to its
 // interface.
 // -----> Hence, you can't implement a true Bridge with multiple inheritance (at least not in C++).
-
 // Related Patterns
 // -> An [AbstractFactory] can create and configure a particular Bridge.
 // -> The [Adapter] pattern is geared toward making unrelated classes work together.

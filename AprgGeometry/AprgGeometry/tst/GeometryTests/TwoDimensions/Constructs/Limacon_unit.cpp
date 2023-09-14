@@ -32,16 +32,12 @@ TEST(LimaconTest, NonEqualityOperatorWorks) {
         Limacon(1, 1, LimaconTrigonometricFunctionType::Cosine));
 }
 
-TEST(LimaconTest, GetAValueWorks) {
+TEST(LimaconTest, CalculateThetaFromRadiusWorks) {
     Limacon const limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
 
-    EXPECT_DOUBLE_EQ(10, limacon.getAValue());
-}
-
-TEST(LimaconTest, GetBValueWorks) {
-    Limacon const limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
-
-    EXPECT_DOUBLE_EQ(13, limacon.getBValue());
+    EXPECT_DOUBLE_EQ(90, limacon.calculateThetaFromRadius(10).getDegrees());
+    EXPECT_DOUBLE_EQ(57.421029607195877, limacon.calculateThetaFromRadius(17).getDegrees());
+    EXPECT_DOUBLE_EQ(0, limacon.calculateThetaFromRadius(23).getDegrees());
 }
 
 TEST(LimaconTest, GetTrigonometricFunctionTypeWorks) {
@@ -73,6 +69,18 @@ TEST(LimaconTest, GetPointsForShapeWorks) {
     EXPECT_EQ(Point(0, -10), points[3]);
 }
 
+TEST(LimaconTest, GetAValueWorks) {
+    Limacon const limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
+
+    EXPECT_DOUBLE_EQ(10, limacon.getAValue());
+}
+
+TEST(LimaconTest, GetBValueWorks) {
+    Limacon const limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
+
+    EXPECT_DOUBLE_EQ(13, limacon.getBValue());
+}
+
 TEST(LimaconTest, CalculateRadiusFromThetaWorks) {
     Limacon const limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
 
@@ -80,14 +88,6 @@ TEST(LimaconTest, CalculateRadiusFromThetaWorks) {
     EXPECT_DOUBLE_EQ(-3, limacon.calculateRadiusFromTheta(AlbaAngle(AngleUnitType::Degrees, 180)));
     EXPECT_DOUBLE_EQ(10, limacon.calculateRadiusFromTheta(AlbaAngle(AngleUnitType::Degrees, 270)));
     EXPECT_DOUBLE_EQ(23, limacon.calculateRadiusFromTheta(AlbaAngle(AngleUnitType::Degrees, 360)));
-}
-
-TEST(LimaconTest, CalculateThetaFromRadiusWorks) {
-    Limacon const limacon(10, 13, LimaconTrigonometricFunctionType::Cosine);
-
-    EXPECT_DOUBLE_EQ(90, limacon.calculateThetaFromRadius(10).getDegrees());
-    EXPECT_DOUBLE_EQ(57.421029607195877, limacon.calculateThetaFromRadius(17).getDegrees());
-    EXPECT_DOUBLE_EQ(0, limacon.calculateThetaFromRadius(23).getDegrees());
 }
 
 }  // namespace alba::TwoDimensions

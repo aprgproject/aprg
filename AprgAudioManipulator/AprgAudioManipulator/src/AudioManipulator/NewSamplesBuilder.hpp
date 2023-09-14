@@ -23,12 +23,13 @@ public:
         bool const alwaysPutNewValue);
 
 private:
+    void saveToNewSamples(
+        Samples& newSamples, SamplesMergingDetails const& samplesMergingDetails, bool const alwaysPutNewValue);
+
     static void retrieveSampleMergingDetails(
         SamplesMergingDetails& samplesMergingDetails, SearchResultsDetails const& details,
         Samples const& searchSamples);
 
-    void saveToNewSamples(
-        Samples& newSamples, SamplesMergingDetails const& samplesMergingDetails, bool const alwaysPutNewValue);
     Samples const& m_oldSamples;
 };
 

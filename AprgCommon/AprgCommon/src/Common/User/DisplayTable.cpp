@@ -143,6 +143,47 @@ void DisplayTablePrinter::print(std::ostream& out) const {
     }
 }
 
+string DisplayTablePrinter::getHorizontalBorderLine() const {
+    string result;
+    if (!m_horizontalBorder.empty()) {
+        result = getStringByRepeatingUntilDesiredLength(m_horizontalBorder, getHorizontalBorderLength()) + "\n";
+    }
+    return result;
+}
+
+string DisplayTablePrinter::getVerticalBorderPoint() const { return m_verticalBorder; }
+int DisplayTablePrinter::getVerticalBorderLength() const { return m_verticalBorder.length(); }
+
+int DisplayTablePrinter::getHorizontalBorderLength() const {
+    return ((m_maxLengthAtColumn.size() + 1) * getVerticalBorderLength()) + m_totalColumnLength;
+}
+
+void DisplayTablePrinter::saveTableInformation(DisplayTable const& displayTable) {
+    int rowIndex = 0;
+    for (DisplayTableRow const& displayTableRow : displayTable.getRows()) {
+        m_rows.emplace_back();
+        int columnIndex = 0;
+        for (DisplayTableCell const& displayTableCell : displayTableRow.getCells()) {
+            m_rows.back().cells.emplace_back(
+                Cell{displayTableCell.getHorizontalAlignment(), displayTableCell.getVerticalAlignment(), {}});
+            strings cellTextLines;
+            splitToStrings<SplitStringType::WithoutDelimeters>(cellTextLines, displayTableCell.getText(), "\r\n");
+            for (string const& cellTextLine : cellTextLines) {
+                m_rows.back().cells.back().lines.emplace_back(cellTextLine);
+                m_maxLengthAtColumn[columnIndex] =
+                    max(m_maxLengthAtColumn[columnIndex], static_cast<int>(cellTextLine.size()));
+            }
+            m_maxWidthAtRow[rowIndex] = max(m_maxWidthAtRow[rowIndex], static_cast<int>(cellTextLines.size()));
+            ++columnIndex;
+        }
+        ++rowIndex;
+    }
+
+    m_totalColumnLength = accumulate(
+        m_maxLengthAtColumn.cbegin(), m_maxLengthAtColumn.cend(), 0,
+        [](int const partialSum, int const lengthPerColumn) { return partialSum + lengthPerColumn; });
+}
+
 string DisplayTablePrinter::getTextBasedOnVerticalAlignment(
     VerticalAlignment const alignment, int const lineIndexAtRow, int const numberOfLinesAtRow,
     Lines const& linesAtCell) {
@@ -191,47 +232,6 @@ string DisplayTablePrinter::getTextBasedOnVerticalAlignment(
         }
     }
     return {};
-}
-
-string DisplayTablePrinter::getHorizontalBorderLine() const {
-    string result;
-    if (!m_horizontalBorder.empty()) {
-        result = getStringByRepeatingUntilDesiredLength(m_horizontalBorder, getHorizontalBorderLength()) + "\n";
-    }
-    return result;
-}
-
-string DisplayTablePrinter::getVerticalBorderPoint() const { return m_verticalBorder; }
-int DisplayTablePrinter::getVerticalBorderLength() const { return m_verticalBorder.length(); }
-
-int DisplayTablePrinter::getHorizontalBorderLength() const {
-    return ((m_maxLengthAtColumn.size() + 1) * getVerticalBorderLength()) + m_totalColumnLength;
-}
-
-void DisplayTablePrinter::saveTableInformation(DisplayTable const& displayTable) {
-    int rowIndex = 0;
-    for (DisplayTableRow const& displayTableRow : displayTable.getRows()) {
-        m_rows.emplace_back();
-        int columnIndex = 0;
-        for (DisplayTableCell const& displayTableCell : displayTableRow.getCells()) {
-            m_rows.back().cells.emplace_back(
-                Cell{displayTableCell.getHorizontalAlignment(), displayTableCell.getVerticalAlignment(), {}});
-            strings cellTextLines;
-            splitToStrings<SplitStringType::WithoutDelimeters>(cellTextLines, displayTableCell.getText(), "\r\n");
-            for (string const& cellTextLine : cellTextLines) {
-                m_rows.back().cells.back().lines.emplace_back(cellTextLine);
-                m_maxLengthAtColumn[columnIndex] =
-                    max(m_maxLengthAtColumn[columnIndex], static_cast<int>(cellTextLine.size()));
-            }
-            m_maxWidthAtRow[rowIndex] = max(m_maxWidthAtRow[rowIndex], static_cast<int>(cellTextLines.size()));
-            ++columnIndex;
-        }
-        ++rowIndex;
-    }
-
-    m_totalColumnLength = accumulate(
-        m_maxLengthAtColumn.cbegin(), m_maxLengthAtColumn.cend(), 0,
-        [](int const partialSum, int const lengthPerColumn) { return partialSum + lengthPerColumn; });
 }
 
 }  // namespace alba

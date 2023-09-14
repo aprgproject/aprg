@@ -4,18 +4,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-std::string const& SingleVariableNameRetriever::getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty() const {
-    return m_singleVariableName;
-}
-
-bool SingleVariableNameRetriever::hasNoVariables() const { return !m_hasEncounteredAVariable; }
-
-bool SingleVariableNameRetriever::hasOnlyASingleVariable() const {
-    return m_hasEncounteredAVariable && !m_hasMultipleVariables;
-}
-
-bool SingleVariableNameRetriever::hasMultipleVariables() const { return m_hasMultipleVariables; }
-
 void SingleVariableNameRetriever::retrieveFromEquations(Equations const& equations) {
     if (!m_hasMultipleVariables) {
         BaseRetriever::retrieveFromEquations(equations);
@@ -71,6 +59,18 @@ void SingleVariableNameRetriever::retrieveFromPolynomials(Polynomials const& pol
         BaseRetriever::retrieveFromPolynomials(polynomials);
     }
 }
+
+std::string const& SingleVariableNameRetriever::getSingleVariableNameIfItExistsAsTheOnlyOneOtherwiseItsEmpty() const {
+    return m_singleVariableName;
+}
+
+bool SingleVariableNameRetriever::hasNoVariables() const { return !m_hasEncounteredAVariable; }
+
+bool SingleVariableNameRetriever::hasOnlyASingleVariable() const {
+    return m_hasEncounteredAVariable && !m_hasMultipleVariables;
+}
+
+bool SingleVariableNameRetriever::hasMultipleVariables() const { return m_hasMultipleVariables; }
 
 void SingleVariableNameRetriever::putVariableIfPossible(string const& variableName) {
     if (!m_hasEncounteredAVariable) {

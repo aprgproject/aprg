@@ -62,11 +62,6 @@ NearestEqualCells::CoordinatePair NearestEqualCells::getNearestEqualPairUsingBfs
     return {firstCoordinate, getSecondCoordinateUsingBfs(value, firstCoordinate)};
 }
 
-int NearestEqualCells::getDistance(Coordinate const& coordinate1, Coordinate const& coordinate2) {
-    return getPositiveDelta(coordinate1.first, coordinate2.first) +
-           getPositiveDelta(coordinate1.second, coordinate2.second);
-}
-
 NearestEqualCells::Coordinate NearestEqualCells::getFirstCoordinateUsingBfs(Value const value) const {
     Coordinates const coordinates(getCoordinatesWithThisValue(value));
     Bfs bfs(m_coordinateGraph, coordinates);
@@ -119,6 +114,11 @@ void NearestEqualCells::initializeGraph() {
             m_coordinateGraph.connect(Coordinate(x, y), Coordinate(x, y + 1));
         }
     });
+}
+
+int NearestEqualCells::getDistance(Coordinate const& coordinate1, Coordinate const& coordinate2) {
+    return getPositiveDelta(coordinate1.first, coordinate2.first) +
+           getPositiveDelta(coordinate1.second, coordinate2.second);
 }
 
 }  // namespace alba

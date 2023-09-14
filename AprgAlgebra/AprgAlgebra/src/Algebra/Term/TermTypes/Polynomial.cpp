@@ -159,10 +159,6 @@ Monomials& Polynomial::getMonomialsReference() {
     return m_monomials;
 }
 
-bool Polynomial::isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify) {
-    return beforeSimplify != afterSimplify && !hasNan(afterSimplify);
-}
-
 void Polynomial::setNan() {
     m_monomials.clear();
     addMonomial(Monomial(ALBA_NUMBER_NOT_A_NUMBER, {}));
@@ -188,6 +184,10 @@ void Polynomial::simplifyMonomialsAndReAdd() {
             addMonomial(monomial);
         }
     }
+}
+
+bool Polynomial::isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify) {
+    return beforeSimplify != afterSimplify && !hasNan(afterSimplify);
 }
 
 ostream& operator<<(ostream& out, Polynomial const& polynomial) {

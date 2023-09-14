@@ -26,10 +26,6 @@ namespace alba::algebra {
 IntegrationForFiniteCalculus::IntegrationForFiniteCalculus(string const& nameOfVariableToIntegrate)
     : m_nameOfVariableToIntegrate(nameOfVariableToIntegrate) {}
 
-Term IntegrationForFiniteCalculus::integrate(Function const& functionObject) {
-    return integrateFunction(functionObject);
-}
-
 Monomial IntegrationForFiniteCalculus::integrateConstant(Constant const& constant) const {
     return {constant.getNumber(), {{m_nameOfVariableToIntegrate, 1}}};
 }
@@ -162,10 +158,8 @@ Term IntegrationForFiniteCalculus::integrateExpression(Expression const& express
     return integrateAsTermOrExpressionIfNeeded(expression);
 }
 
-void IntegrationForFiniteCalculus::integrateChangingTermsInMultiplicationOrDivision(
-    Term& result, TermsWithDetails const&) {
-    // no impl
-    result = ALBA_NUMBER_NOT_A_NUMBER;
+Term IntegrationForFiniteCalculus::integrate(Function const& functionObject) {
+    return integrateFunction(functionObject);
 }
 
 Monomial IntegrationForFiniteCalculus::integrateMonomialInFallingPower(Monomial const& monomial) const {
@@ -389,6 +383,12 @@ void IntegrationForFiniteCalculus::segregateNonChangingAndChangingTerms(
             nonChangingTerms.emplace_back(termToSegregate);
         }
     }
+}
+
+void IntegrationForFiniteCalculus::integrateChangingTermsInMultiplicationOrDivision(
+    Term& result, TermsWithDetails const&) {
+    // no impl
+    result = ALBA_NUMBER_NOT_A_NUMBER;
 }
 
 Term IntegrationForFiniteCalculus::integrateFunction(Function const&) { return ALBA_NUMBER_NOT_A_NUMBER; }

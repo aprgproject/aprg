@@ -9,10 +9,10 @@ class SeriesBasedOnSummation : public SeriesBasedOnFormula {
 public:
     SeriesBasedOnSummation(Term const& formulaForEachTermInSummation, std::string const& variableName);
     [[nodiscard]] Term getValueAtIndex(int const index) const override;
+    [[nodiscard]] bool isConvergent() const override;
     [[nodiscard]] Term getTermValueAtIndex(int const index) const;
     [[nodiscard]] Term getFormulaForEachTermInSummation() const;
     [[nodiscard]] bool isSummationModelValid() const;
-    [[nodiscard]] bool isConvergent() const override;
     [[nodiscard]] bool isAbsolutelyConvergent() const;
     [[nodiscard]] bool isConditionallyConvergent() const;
 

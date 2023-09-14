@@ -22,5 +22,4 @@ protected:
 };
 
 // This different from the "State" design pattern.
-
 }  // namespace alba

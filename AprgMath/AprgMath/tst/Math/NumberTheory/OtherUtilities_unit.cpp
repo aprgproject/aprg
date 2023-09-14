@@ -6,43 +6,6 @@ using namespace std;
 
 namespace alba::math {
 
-TEST(OtherUtilitiesTest, IsFibonacciNumberWorks) {
-    // Is zero really a fibonacci number? Yes! the definitions says so.
-    EXPECT_TRUE(isAFibonacciNumber(0U));
-    EXPECT_TRUE(isAFibonacciNumber(1U));
-    EXPECT_TRUE(isAFibonacciNumber(2U));
-    EXPECT_TRUE(isAFibonacciNumber(3U));
-    EXPECT_FALSE(isAFibonacciNumber(4U));
-    EXPECT_TRUE(isAFibonacciNumber(21U));
-    EXPECT_TRUE(isAFibonacciNumber(34U));
-    EXPECT_FALSE(isAFibonacciNumber(35U));
-}
-
-TEST(OtherUtilitiesTest, IsALuckyNumberWorks) {
-    EXPECT_FALSE(isALuckyNumber(0U));
-    EXPECT_TRUE(isALuckyNumber(1U));
-    EXPECT_FALSE(isALuckyNumber(2U));
-    EXPECT_TRUE(isALuckyNumber(3U));
-    EXPECT_FALSE(isALuckyNumber(4U));
-    EXPECT_FALSE(isALuckyNumber(12U));
-    EXPECT_TRUE(isALuckyNumber(13U));
-    EXPECT_FALSE(isALuckyNumber(14U));
-}
-
-TEST(OtherUtilitiesTest, IsLagrangeTheoremTrueWorks) {
-    EXPECT_TRUE(isLagrangeTheoremTrue(13U));
-    EXPECT_TRUE(isLagrangeTheoremTrue(64U));
-    EXPECT_TRUE(isLagrangeTheoremTrue(65U));
-    EXPECT_TRUE(isLagrangeTheoremTrue(84U));
-}
-
-TEST(OtherUtilitiesTest, IsZeckendorfTheoremTrueWorks) {
-    EXPECT_TRUE(isZeckendorfTheoremTrue(13U));
-    EXPECT_TRUE(isZeckendorfTheoremTrue(64U));
-    EXPECT_TRUE(isZeckendorfTheoremTrue(65U));
-    EXPECT_TRUE(isZeckendorfTheoremTrue(84U));
-}
-
 TEST(OtherUtilitiesTest, GetNthFibonacciNumberWorks) {
     EXPECT_EQ(0U, getNthFibonacciNumber(0U));
     EXPECT_EQ(1U, getNthFibonacciNumber(1U));
@@ -95,6 +58,43 @@ TEST(OtherUtilitiesTest, GetFibonacciNumbersBelowThisNumberWorks) {
     EXPECT_EQ((UnsignedIntegers{0U, 1U, 1U, 2U}), getFibonacciNumbersBelowThisNumber(3U));
     EXPECT_EQ((UnsignedIntegers{0U, 1U, 1U, 2U, 3U, 5U}), getFibonacciNumbersBelowThisNumber(8U));
     EXPECT_EQ((UnsignedIntegers{0U, 1U, 1U, 2U, 3U, 5U, 8U}), getFibonacciNumbersBelowThisNumber(9U));
+}
+
+TEST(OtherUtilitiesTest, IsFibonacciNumberWorks) {
+    // Is zero really a fibonacci number? Yes! the definitions says so.
+    EXPECT_TRUE(isAFibonacciNumber(0U));
+    EXPECT_TRUE(isAFibonacciNumber(1U));
+    EXPECT_TRUE(isAFibonacciNumber(2U));
+    EXPECT_TRUE(isAFibonacciNumber(3U));
+    EXPECT_FALSE(isAFibonacciNumber(4U));
+    EXPECT_TRUE(isAFibonacciNumber(21U));
+    EXPECT_TRUE(isAFibonacciNumber(34U));
+    EXPECT_FALSE(isAFibonacciNumber(35U));
+}
+
+TEST(OtherUtilitiesTest, IsALuckyNumberWorks) {
+    EXPECT_FALSE(isALuckyNumber(0U));
+    EXPECT_TRUE(isALuckyNumber(1U));
+    EXPECT_FALSE(isALuckyNumber(2U));
+    EXPECT_TRUE(isALuckyNumber(3U));
+    EXPECT_FALSE(isALuckyNumber(4U));
+    EXPECT_FALSE(isALuckyNumber(12U));
+    EXPECT_TRUE(isALuckyNumber(13U));
+    EXPECT_FALSE(isALuckyNumber(14U));
+}
+
+TEST(OtherUtilitiesTest, IsLagrangeTheoremTrueWorks) {
+    EXPECT_TRUE(isLagrangeTheoremTrue(13U));
+    EXPECT_TRUE(isLagrangeTheoremTrue(64U));
+    EXPECT_TRUE(isLagrangeTheoremTrue(65U));
+    EXPECT_TRUE(isLagrangeTheoremTrue(84U));
+}
+
+TEST(OtherUtilitiesTest, IsZeckendorfTheoremTrueWorks) {
+    EXPECT_TRUE(isZeckendorfTheoremTrue(13U));
+    EXPECT_TRUE(isZeckendorfTheoremTrue(64U));
+    EXPECT_TRUE(isZeckendorfTheoremTrue(65U));
+    EXPECT_TRUE(isZeckendorfTheoremTrue(84U));
 }
 
 }  // namespace alba::math

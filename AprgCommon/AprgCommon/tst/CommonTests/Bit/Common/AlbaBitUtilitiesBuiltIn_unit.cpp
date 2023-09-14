@@ -6,6 +6,21 @@ using namespace std;
 
 namespace alba {
 
+TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfOnesWorks) {
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::getNumberOfOnes<uint8_t>(0xA1U));
+    EXPECT_EQ(8U, bitUtilitiesBuiltIn::getNumberOfOnes<uint16_t>(0xA1BAU));
+    EXPECT_EQ(16U, bitUtilitiesBuiltIn::getNumberOfOnes<uint32_t>(0xA1BA'A1BAU));
+    EXPECT_EQ(32U, bitUtilitiesBuiltIn::getNumberOfOnes<uint64_t>(0xA1BA'A1BA'A1BA'A1BAULL));
+}
+
+TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfOnesWorksUsingWithoutBuiltIn) {
+    EXPECT_EQ(3U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint8_t>(0xA1U));
+    EXPECT_EQ(8U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint16_t>(0xA1BAU));
+    EXPECT_EQ(16U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint32_t>(0xA1BA'A1BAU));
+    EXPECT_EQ(
+        32U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint64_t>(0xA1BA'A1BA'A1BA'A1BAULL));
+}
+
 TEST(AlbaBitUtilitiesBuiltInTest, IsEvenParityWorks) {
     EXPECT_TRUE(bitUtilitiesBuiltIn::isEvenParity(0U));
     EXPECT_FALSE(bitUtilitiesBuiltIn::isEvenParity(1U));
@@ -20,21 +35,6 @@ TEST(AlbaBitUtilitiesBuiltInTest, IsEvenParityWorksUsingWithoutBuiltIn) {
     EXPECT_FALSE(bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::isEvenParity(2U));
     EXPECT_TRUE(bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::isEvenParity(3U));
     EXPECT_FALSE(bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::isEvenParity(4U));
-}
-
-TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfOnesWorks) {
-    EXPECT_EQ(3U, bitUtilitiesBuiltIn::getNumberOfOnes<uint8_t>(0xA1U));
-    EXPECT_EQ(8U, bitUtilitiesBuiltIn::getNumberOfOnes<uint16_t>(0xA1BAU));
-    EXPECT_EQ(16U, bitUtilitiesBuiltIn::getNumberOfOnes<uint32_t>(0xA1BA'A1BAU));
-    EXPECT_EQ(32U, bitUtilitiesBuiltIn::getNumberOfOnes<uint64_t>(0xA1BA'A1BA'A1BA'A1BAULL));
-}
-
-TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfOnesWorksUsingWithoutBuiltIn) {
-    EXPECT_EQ(3U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint8_t>(0xA1U));
-    EXPECT_EQ(8U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint16_t>(0xA1BAU));
-    EXPECT_EQ(16U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint32_t>(0xA1BA'A1BAU));
-    EXPECT_EQ(
-        32U, bitUtilitiesBuiltIn::bitUtilitiesWithoutBuiltIn::getNumberOfOnes<uint64_t>(0xA1BA'A1BA'A1BA'A1BAULL));
 }
 
 TEST(AlbaBitUtilitiesBuiltInTest, GetNumberOfConsecutiveZerosFromMsbWorks) {

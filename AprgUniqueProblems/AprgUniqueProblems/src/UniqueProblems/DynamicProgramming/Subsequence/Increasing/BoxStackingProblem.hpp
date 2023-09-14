@@ -36,7 +36,6 @@ private:
 // are each strictly larger than those of the 2-D base of the higher box.
 // Of course, you can rotate a box so that any side functions as its base.
 // It is also allowable to use multiple instances of the same type of box.
-
 // The Box Stacking problem is a variation of LIS problem.
 // We need to build a maximum height stack.
 // Following are the key points to note in the problem statement:

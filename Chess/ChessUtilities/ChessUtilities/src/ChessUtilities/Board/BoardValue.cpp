@@ -64,17 +64,6 @@ bool operator==(BoardValue const& bv1, BoardValue const& bv2) {
     return true;
 }
 
-Coordinate BoardValue::getCorrectCoordinate(
-    Board const& board, CoordinateDataType const x, CoordinateDataType const y) {
-    if (BoardOrientation::BlackUpWhiteDown == board.getOrientation()) {
-        return {x, y};
-    }
-    if (BoardOrientation::WhiteUpBlackDown == board.getOrientation()) {
-        return {7 - x, 7 - y};
-    }
-    return {};
-}
-
 void BoardValue::saveBoardToData(Board const& board) {
     using BitManip = AlbaBitManipulation<uint64_t>;
     for (int i = 0; i < SIZE_OF_COORDINATES; i += 16) {
@@ -114,6 +103,17 @@ void BoardValue::saveBoardToData(Board const& board) {
             nibble01, nibble02, nibble03, nibble04, nibble05, nibble06, nibble07, nibble08, nibble09, nibble10,
             nibble11, nibble12, nibble13, nibble14, nibble15, nibble16);
     }
+}
+
+Coordinate BoardValue::getCorrectCoordinate(
+    Board const& board, CoordinateDataType const x, CoordinateDataType const y) {
+    if (BoardOrientation::BlackUpWhiteDown == board.getOrientation()) {
+        return {x, y};
+    }
+    if (BoardOrientation::WhiteUpBlackDown == board.getOrientation()) {
+        return {7 - x, 7 - y};
+    }
+    return {};
 }
 
 }  // namespace alba::chess

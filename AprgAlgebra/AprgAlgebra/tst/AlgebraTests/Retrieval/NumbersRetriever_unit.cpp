@@ -5,6 +5,41 @@
 
 namespace alba::algebra {
 
+TEST(NumbersRetrieverTest, RetrieveFromConstantWorks) {
+    NumbersRetriever retriever;
+
+    retriever.retrieveFromConstant(Constant(1.234));
+
+    AlbaNumbersSet const& numbersSet(retriever.getNumbers());
+    ASSERT_EQ(1U, numbersSet.size());
+    auto it = numbersSet.cbegin();
+    EXPECT_EQ(AlbaNumber(1.234), *(it++));
+}
+
+TEST(NumbersRetrieverTest, RetrieveFromVariableWorks) {
+    NumbersRetriever retriever;
+
+    retriever.retrieveFromVariable(Variable("x"));
+
+    AlbaNumbersSet const& numbersSet(retriever.getNumbers());
+    ASSERT_EQ(1U, numbersSet.size());
+    auto it = numbersSet.cbegin();
+    EXPECT_EQ(AlbaNumber(1), *(it++));
+}
+
+TEST(NumbersRetrieverTest, RetrieveFromMonomialWorks) {
+    NumbersRetriever retriever;
+
+    retriever.retrieveFromMonomial(Monomial(34, {{"x", 5}, {"y", 6}}));
+
+    AlbaNumbersSet const& numbersSet(retriever.getNumbers());
+    ASSERT_EQ(3U, numbersSet.size());
+    auto it = numbersSet.cbegin();
+    EXPECT_EQ(AlbaNumber(5), *(it++));
+    EXPECT_EQ(AlbaNumber(6), *(it++));
+    EXPECT_EQ(AlbaNumber(34), *(it++));
+}
+
 TEST(NumbersRetrieverTest, RetrieveFromEquationsWorks) {
     NumbersRetriever retriever;
     Equation equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
@@ -71,41 +106,6 @@ TEST(NumbersRetrieverTest, RetrieveFromTermWorks) {
     EXPECT_EQ(AlbaNumber(576), *(it++));
     EXPECT_EQ(AlbaNumber(643), *(it++));
     EXPECT_EQ(AlbaNumber(678), *(it++));
-}
-
-TEST(NumbersRetrieverTest, RetrieveFromConstantWorks) {
-    NumbersRetriever retriever;
-
-    retriever.retrieveFromConstant(Constant(1.234));
-
-    AlbaNumbersSet const& numbersSet(retriever.getNumbers());
-    ASSERT_EQ(1U, numbersSet.size());
-    auto it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(1.234), *(it++));
-}
-
-TEST(NumbersRetrieverTest, RetrieveFromVariableWorks) {
-    NumbersRetriever retriever;
-
-    retriever.retrieveFromVariable(Variable("x"));
-
-    AlbaNumbersSet const& numbersSet(retriever.getNumbers());
-    ASSERT_EQ(1U, numbersSet.size());
-    auto it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(1), *(it++));
-}
-
-TEST(NumbersRetrieverTest, RetrieveFromMonomialWorks) {
-    NumbersRetriever retriever;
-
-    retriever.retrieveFromMonomial(Monomial(34, {{"x", 5}, {"y", 6}}));
-
-    AlbaNumbersSet const& numbersSet(retriever.getNumbers());
-    ASSERT_EQ(3U, numbersSet.size());
-    auto it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(5), *(it++));
-    EXPECT_EQ(AlbaNumber(6), *(it++));
-    EXPECT_EQ(AlbaNumber(34), *(it++));
 }
 
 TEST(NumbersRetrieverTest, RetrieveFromPolynomialWorks) {

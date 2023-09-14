@@ -108,7 +108,7 @@ bool isASimpleGraph(BaseGraph<Vertex> const& graph) {
     // A graph is simple if no edge starts and ends at the same node, and there are no multiple edges between two nodes.
     // Often we assume that graphs are simple.
     return getNumberOfSelfLoops(graph) == 0;  // "no edge starts and ends at the same node"
-    // How to check "multiple edges between two nodes"?
+                                              // How to check "multiple edges between two nodes"?
 }
 
 template <typename Vertex>

@@ -8,20 +8,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-string IntegrationHistory::getEnumShortString(IntegrationPurpose const purpose) {
-    switch (purpose) {
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::NotSet, "NotSet")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::IntegrationByParts, "IntegrationByParts")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::Trigonometric, "Trigonometric")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::TrigonometricSubstitution, "TrigonometricSubstitution")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::Substitution, "Substitution")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::PartialFraction, "PartialFraction")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::NoChange, "NoChange")
-        default:
-            return "default";
-    }
-}
-
 IntegrationPurpose IntegrationHistory::getLastIntegrationPurpose() const {
     IntegrationPurpose result(IntegrationPurpose::NotSet);
     if (!m_recordOfIntegrationPurposes.empty()) {
@@ -51,6 +37,20 @@ void IntegrationHistory::performStepsAfterIntegration(
 }
 
 void IntegrationHistory::clear() { m_recordOfIntegrationPurposes.clear(); }
+
+string IntegrationHistory::getEnumShortString(IntegrationPurpose const purpose) {
+    switch (purpose) {
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::NotSet, "NotSet")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::IntegrationByParts, "IntegrationByParts")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::Trigonometric, "Trigonometric")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::TrigonometricSubstitution, "TrigonometricSubstitution")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::Substitution, "Substitution")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::PartialFraction, "PartialFraction")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(IntegrationPurpose::NoChange, "NoChange")
+        default:
+            return "default";
+    }
+}
 
 void IntegrationHistory::addIntegrationPurpose(IntegrationPurpose const purpose) {
     if (IntegrationPurpose::NoChange != purpose) {

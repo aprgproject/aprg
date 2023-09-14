@@ -2,8 +2,8 @@
 
 #include <algorithm>
 
-using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
+using namespace alba::mathHelper;
 using namespace std;
 
 namespace alba::TwoDimensions {

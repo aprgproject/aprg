@@ -33,11 +33,11 @@ public:
     int getNumberOfOptimalRides();
 
 private:
+    [[nodiscard]] PeopleBits getNumberOfPeopleSubsets() const;
+    [[nodiscard]] Person getNumberOfPeople() const;
     [[nodiscard]] static bool isPersonIncluded(PeopleBits const peopleBits, Person const person);
     static PeopleBits getProductBits(Person const person);
     static PeopleBits removePerson(PeopleBits const peopleBits, Person const person);
-    [[nodiscard]] PeopleBits getNumberOfPeopleSubsets() const;
-    [[nodiscard]] Person getNumberOfPeople() const;
     Weight m_maximumElevatorWeight;
     Weights m_peopleWeights;
     NumberOfRidesAndWeights m_numberOfRidesAndLastWeights;

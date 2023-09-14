@@ -4,9 +4,9 @@
 #include <thread>
 
 using namespace alba::AlbaDateTimeConstants;
-using namespace std;
 using namespace std::chrono;
 using namespace std::this_thread;
+using namespace std;
 
 namespace alba {
 

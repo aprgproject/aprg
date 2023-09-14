@@ -11,12 +11,11 @@
 #include <algorithm>
 #include <cmath>
 
-using namespace std;
-
-using namespace alba::algebra;
 using namespace alba::AprgBitmap;
-using namespace alba::TwoDimensions;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
+using namespace alba::TwoDimensions;
+using namespace alba::algebra;
+using namespace std;
 
 namespace alba {
 
@@ -184,33 +183,6 @@ void AprgGraph::drawCharacter(BitmapXY const& upLeftPoint, char const character,
 
 void AprgGraph::saveChangesToBitmapFile() { m_bitmap.setSnippetWriteToFile(m_bitmapSnippet); }
 
-string AprgGraph::getBitmapFilePathOfCharacter(char const character) {
-    string filename("NotAValidFilename");
-    if (stringHelper::isNumber(character)) {
-        filename = string(1, character);
-    } else if ('-' == character) {
-        filename = "Dash";
-    } else if ('.' == character) {
-        filename = "Period";
-    } else if ('E' == character || 'e' == character) {
-        filename = "E";
-    }
-    filename += ".bmp";
-
-#ifndef APRG_RELEASE
-    // This is based on detectedPath (for release builds), there should be a common file for this (on pathhandlers
-    // maybe?)
-    AlbaLocalPathHandler const detectedPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
-    AlbaLocalPathHandler const bitmapCharacterFile(detectedPath.getDirectory() + R"(BitmapCharacters/)" + filename);
-    return bitmapCharacterFile.getFullPath();
-#endif
-
-#ifdef APRG_DEBUG
-    // This is based on APRG (for debug builds), there should be a common for this (on pathhandlers maybe?)
-    return AlbaLocalPathHandler(string(APRG_DIR) + "/AprgGraph/BitmapCharacters/" + filename).getFullPath();
-#endif
-}
-
 Point AprgGraph::convertBitmapXYToRealPoint(BitmapXY const& bitmapPosition) const {
     double const xPosition = convertBitmapXCoordinateToRealXCoordinate(bitmapPosition.getX());
     double const yPosition = convertBitmapYCoordinateToRealYCoordinate(bitmapPosition.getY());
@@ -322,6 +294,33 @@ bool AprgGraph::isBitmapPointInTheBitmap(Point const& bitmapPoint) {
     int const bitmapPointInX = static_cast<int>(round(bitmapPoint.getX()));
     int const bitmapPointInY = static_cast<int>(round(bitmapPoint.getY()));
     return m_bitmap.getConfiguration().isPositionWithinTheBitmap(bitmapPointInX, bitmapPointInY);
+}
+
+string AprgGraph::getBitmapFilePathOfCharacter(char const character) {
+    string filename("NotAValidFilename");
+    if (stringHelper::isNumber(character)) {
+        filename = string(1, character);
+    } else if ('-' == character) {
+        filename = "Dash";
+    } else if ('.' == character) {
+        filename = "Period";
+    } else if ('E' == character || 'e' == character) {
+        filename = "E";
+    }
+    filename += ".bmp";
+
+#ifndef APRG_RELEASE
+    // This is based on detectedPath (for release builds), there should be a common file for this (on pathhandlers
+    // maybe?)
+    AlbaLocalPathHandler const detectedPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
+    AlbaLocalPathHandler const bitmapCharacterFile(detectedPath.getDirectory() + R"(BitmapCharacters/)" + filename);
+    return bitmapCharacterFile.getFullPath();
+#endif
+
+#ifdef APRG_DEBUG
+    // This is based on APRG (for debug builds), there should be a common for this (on pathhandlers maybe?)
+    return AlbaLocalPathHandler(string(APRG_DIR) + "/AprgGraph/BitmapCharacters/" + filename).getFullPath();
+#endif
 }
 
 }  // namespace alba

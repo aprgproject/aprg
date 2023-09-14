@@ -11,8 +11,56 @@ template <typename Key, typename BaseDataStructure>
 class BaseOrderedArray : public BaseDataStructure {
 public:
     using Keys = std::vector<Key>;
-    BaseOrderedArray() = default;
     ~BaseOrderedArray() override = default;  // no need for virtual destructor because base destructor is virtual
+    BaseOrderedArray() = default;
+
+    [[nodiscard]] Key getMinimum() const override {
+        Key result{};
+        if (!isEmpty()) {
+            result = m_keys[0];
+        }
+        return result;
+    }
+
+    [[nodiscard]] Key getMaximum() const override {
+        Key result{};
+        if (!isEmpty()) {
+            result = m_keys[m_size - 1];
+        }
+        return result;
+    }
+
+    [[nodiscard]] Key selectAt(int const index) const override { return selectAt(index, m_keys); }
+    [[nodiscard]] Key getFloor(Key const& key) const override { return getFloor(key, m_keys); }
+    [[nodiscard]] Key getCeiling(Key const& key) const override { return getCeiling(key, m_keys); }
+    [[nodiscard]] Keys getKeys() const override { return m_keys; }
+
+    [[nodiscard]] Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
+        Keys result;
+        for (Key const& currentKey : m_keys) {
+            if (currentKey >= low && currentKey <= high) {
+                result.emplace_back(currentKey);
+            }
+        }
+        return result;
+    }
+
+    [[nodiscard]] int getSize() const override { return m_size; }
+    [[nodiscard]] int getRank(Key const& key) const override { return getRank(key, m_keys); }
+    // (similar to other virtual functions)
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
+
+    [[nodiscard]] bool doesContain(Key const& key) const override {
+        bool result(false);
+        if (!isEmpty()) {
+            int const rank(getRank(key));
+            if (rank < m_size && m_keys[rank] == key) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
     static Key selectAt(int const index, Keys const& keys) {
         Key result{};
         if (index < static_cast<int>(keys.size())) {
@@ -60,53 +108,6 @@ public:
         }
         if (result == 0) {
             result = lowIndex;
-        }
-        return result;
-    }
-
-    [[nodiscard]] Key getMinimum() const override {
-        Key result{};
-        if (!isEmpty()) {
-            result = m_keys[0];
-        }
-        return result;
-    }
-
-    [[nodiscard]] Key getMaximum() const override {
-        Key result{};
-        if (!isEmpty()) {
-            result = m_keys[m_size - 1];
-        }
-        return result;
-    }
-
-    [[nodiscard]] Key selectAt(int const index) const override { return selectAt(index, m_keys); }
-    [[nodiscard]] Key getFloor(Key const& key) const override { return getFloor(key, m_keys); }
-    [[nodiscard]] Key getCeiling(Key const& key) const override { return getCeiling(key, m_keys); }
-    [[nodiscard]] Keys getKeys() const override { return m_keys; }
-
-    [[nodiscard]] Keys getKeysInRangeInclusive(Key const& low, Key const& high) const override {
-        Keys result;
-        for (Key const& currentKey : m_keys) {
-            if (currentKey >= low && currentKey <= high) {
-                result.emplace_back(currentKey);
-            }
-        }
-        return result;
-    }
-
-    [[nodiscard]] int getSize() const override { return m_size; }
-    [[nodiscard]] int getRank(Key const& key) const override { return getRank(key, m_keys); }
-    // (similar to other virtual functions)
-    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
-
-    [[nodiscard]] bool doesContain(Key const& key) const override {
-        bool result(false);
-        if (!isEmpty()) {
-            int const rank(getRank(key));
-            if (rank < m_size && m_keys[rank] == key) {
-                result = true;
-            }
         }
         return result;
     }

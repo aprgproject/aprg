@@ -10,15 +10,6 @@ namespace {
 using BagForTest = LinkedListBag<int>;
 }  // namespace
 
-TEST(LinkedListBagTest, IsEmptyWorks) {
-    BagForTest const bag1;
-    BagForTest bag2;
-    bag2.add(10);
-
-    EXPECT_TRUE(bag1.isEmpty());
-    EXPECT_FALSE(bag2.isEmpty());
-}
-
 TEST(LinkedListBagTest, GetSizeWorks) {
     BagForTest const bag1;
     BagForTest bag2;
@@ -30,12 +21,14 @@ TEST(LinkedListBagTest, GetSizeWorks) {
     EXPECT_EQ(3, bag2.getSize());
 }
 
-TEST(LinkedListBagTest, TraverseWorks) {
+TEST(LinkedListBagTest, AddWorks) {
     BagForTest bag;
+
     bag.add(1);
     bag.add(2);
     bag.add(3);
 
+    EXPECT_EQ(3, bag.getSize());
     int i = 0;
     bag.traverse([&](int const& object) {
         if (i == 0) {
@@ -49,14 +42,21 @@ TEST(LinkedListBagTest, TraverseWorks) {
     });
 }
 
-TEST(LinkedListBagTest, AddWorks) {
-    BagForTest bag;
+TEST(LinkedListBagTest, IsEmptyWorks) {
+    BagForTest const bag1;
+    BagForTest bag2;
+    bag2.add(10);
 
+    EXPECT_TRUE(bag1.isEmpty());
+    EXPECT_FALSE(bag2.isEmpty());
+}
+
+TEST(LinkedListBagTest, TraverseWorks) {
+    BagForTest bag;
     bag.add(1);
     bag.add(2);
     bag.add(3);
 
-    EXPECT_EQ(3, bag.getSize());
     int i = 0;
     bag.traverse([&](int const& object) {
         if (i == 0) {

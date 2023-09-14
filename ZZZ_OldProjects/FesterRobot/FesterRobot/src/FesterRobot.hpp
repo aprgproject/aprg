@@ -16,7 +16,6 @@ public:
     void run();
 
 private:
-    static bool isRunningInClipboardData(std::string const& clipboardData);
     [[nodiscard]] std::string getClipboardFormattedData() const;
     [[nodiscard]] std::string getFrequenciesStringForExcel() const;
     [[nodiscard]] bool isRunningFinishedInClipboardData(std::string const& clipboardData) const;
@@ -27,6 +26,7 @@ private:
     void runFesterFunctionInMatlab();
     void saveDataToOutputFile(std::string const& clipboardData);
     void updateFrequenciesBasedFreqUsageBits(unsigned int const freqUsageBits);
+    static bool isRunningInClipboardData(std::string const& clipboardData);
     std::ofstream m_outputStream;
     Frequencies m_frequencies;
     AlbaWindowsUserAutomation m_userAutomation;

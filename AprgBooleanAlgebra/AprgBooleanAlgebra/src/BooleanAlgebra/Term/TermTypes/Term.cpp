@@ -254,6 +254,21 @@ VariableTerm& Term::getVariableTermReference() {
     return *static_cast<VariableTerm*>(m_baseTermDataPointer.get());
 }
 
+void Term::initializeBasedOnString(string const& stringAsParameter) {
+    if (stringAsParameter.empty()) {
+        // do nothing
+    } else if (booleanAlgebra::isConstant(stringAsParameter)) {
+        m_type = TermType::Constant;
+        m_baseTermDataPointer = make_unique<Constant>(convertStringToBool(stringAsParameter));
+    } else if (booleanAlgebra::isOperator(stringAsParameter)) {
+        m_type = TermType::Operator;
+        m_baseTermDataPointer = make_unique<Operator>(stringAsParameter);
+    } else {
+        m_type = TermType::VariableTerm;
+        m_baseTermDataPointer = make_unique<VariableTerm>(stringAsParameter);
+    }
+}
+
 Term::BaseTermDataPointer Term::createANewPointerFrom(Term const& term) {
     BaseTermDataPointer result;
     switch (term.getTermType()) {
@@ -273,21 +288,6 @@ Term::BaseTermDataPointer Term::createANewPointerFrom(Term const& term) {
             break;
     }
     return result;
-}
-
-void Term::initializeBasedOnString(string const& stringAsParameter) {
-    if (stringAsParameter.empty()) {
-        // do nothing
-    } else if (booleanAlgebra::isConstant(stringAsParameter)) {
-        m_type = TermType::Constant;
-        m_baseTermDataPointer = make_unique<Constant>(convertStringToBool(stringAsParameter));
-    } else if (booleanAlgebra::isOperator(stringAsParameter)) {
-        m_type = TermType::Operator;
-        m_baseTermDataPointer = make_unique<Operator>(stringAsParameter);
-    } else {
-        m_type = TermType::VariableTerm;
-        m_baseTermDataPointer = make_unique<VariableTerm>(stringAsParameter);
-    }
 }
 
 ostream& operator<<(ostream& out, Term const& term) {

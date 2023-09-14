@@ -25,11 +25,11 @@ public:
     [[nodiscard]] Cost getOptimizedCostByTryingAllLengths() const;
 
 private:
-    static Cost getCost(Index const maxLength, Indices const& lengths);
-    static Cost getCostFromExtraSpaces(Index const numberOfExtraSpaces);
     [[nodiscard]] Cost getOptimizedCostUsingNaiveRecursion(
         RecursionDetails const& recursionDetails, Index const wordIndex) const;
     [[nodiscard]] Cost getTotalLength() const;
+    static Cost getCost(Index const maxLength, Indices const& lengths);
+    static Cost getCostFromExtraSpaces(Index const numberOfExtraSpaces);
     stringHelper::strings m_words;
 };
 

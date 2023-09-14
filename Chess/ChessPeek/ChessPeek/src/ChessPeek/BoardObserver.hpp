@@ -35,21 +35,21 @@ public:
     BoardObserver() = delete;
     BoardObserver(Configuration const& configuration, AlbaLocalScreenMonitoring const& screenMonitoring);
     BoardObserver(Configuration const& configuration, AprgBitmap::BitmapSnippet const& bitmapSnippet);
-    void retrieveWhiteOffsetPoints(XYs& coordinates, int const xIndex, int const yIndex) const;
-    void retrieveBlackOffsetPoints(XYs& coordinates, int const xIndex, int const yIndex) const;
     [[nodiscard]] BitSet64 getBitValueFromCell(int const xIndex, int const yIndex) const;
     [[nodiscard]] Piece getPieceFromCell(int const xIndex, int const yIndex) const;
+    void retrieveWhiteOffsetPoints(XYs& coordinates, int const xIndex, int const yIndex) const;
+    void retrieveBlackOffsetPoints(XYs& coordinates, int const xIndex, int const yIndex) const;
 
 private:
-    void retrieveChessCellTopLeftAndBottomRight(
-        XY& chessCellTopLeft, XY& chessCellBottomRight, int const xIndex, int const yIndex) const;
-    void retrieveOffsetPointsWithCondition(
-        XYs& coordinates, int const xIndex, int const yIndex, BoolFunction const& condition) const;
     [[nodiscard]] PieceColorAndType getBestPieceFromChessCellBitValue(uint64_t const chessCellBitValue) const;
     [[nodiscard]] PieceColorAndTypes getBestFitPiecesFromChessCellBitValue(uint64_t const chessCellBitValue) const;
     [[nodiscard]] uint32_t getColorAt(int const x, int const y) const;
     [[nodiscard]] bool isBitValueAsserted(
         CheckDetail const& checkDetail, XY const& chessCellTopLeft, XY const& chessCellBottomRight) const;
+    void retrieveChessCellTopLeftAndBottomRight(
+        XY& chessCellTopLeft, XY& chessCellBottomRight, int const xIndex, int const yIndex) const;
+    void retrieveOffsetPointsWithCondition(
+        XYs& coordinates, int const xIndex, int const yIndex, BoolFunction const& condition) const;
     void initialize(Configuration::Type const type);
     void initializeConverterToChessDotCom();
     void initializeConverterToLichessVersus();

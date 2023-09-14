@@ -25,8 +25,6 @@ enum class CompressedMethodType {
 class BitmapConfiguration {
 public:
     BitmapConfiguration();
-    static BitmapXY getUpLeftCornerPoint();
-    static int getCoordinateWithinRange(int const coordinate, int const maxLength);
     [[nodiscard]] BitmapXY getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const;
     [[nodiscard]] BitmapXY getDownRightCornerPoint() const;
     [[nodiscard]] Colors getColorTable() const;
@@ -59,13 +57,15 @@ public:
     [[nodiscard]] bool isPositionWithinTheBitmap(BitmapXY const position) const;
     [[nodiscard]] bool isPositionWithinTheBitmap(int const x, int const y) const;
     void readBitmap(std::string const& path);
+    static BitmapXY getUpLeftCornerPoint();
+    static int getCoordinateWithinRange(int const coordinate, int const maxLength);
 
 private:
-    static CompressedMethodType determineCompressedMethodType(uint32_t const compressedMethodValue);
     void readBitmapFileHeader(AlbaFileReader& fileReader);
     void readDibHeader(AlbaFileReader& fileReader);
     void readColors(AlbaFileReader& fileReader);
     void calculateOtherValuesAfterReading();
+    static CompressedMethodType determineCompressedMethodType(uint32_t const compressedMethodValue);
     uint32_t m_fileSize{0};
     uint32_t m_pixelArrayAddress{0};
     uint32_t m_sizeOfHeader{0};

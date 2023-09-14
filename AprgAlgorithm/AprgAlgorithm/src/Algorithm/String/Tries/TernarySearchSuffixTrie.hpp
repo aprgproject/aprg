@@ -26,13 +26,6 @@ protected:
         return result;
     }
 
-    void initialize(Key const& searchSpace) {
-        int const length = searchSpace.length();
-        for (int i = 0; i < length; ++i) {
-            TernarySearchSuffixTrie::put(searchSpace.substr(i), i);
-        }
-    }
-
     void put(Key const& key, Value const& value) override {
         if (!key.empty()) {
             TernarySearchSuffixTrie::putStartingOnThisNode(b_root, key, value, 0);
@@ -54,6 +47,13 @@ protected:
         }
         if (!currentNodePointer->valueUniquePointer) {
             currentNodePointer->valueUniquePointer = std::make_unique<Value>(value);
+        }
+    }
+
+    void initialize(Key const& searchSpace) {
+        int const length = searchSpace.length();
+        for (int i = 0; i < length; ++i) {
+            TernarySearchSuffixTrie::put(searchSpace.substr(i), i);
         }
     }
 };

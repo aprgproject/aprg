@@ -6,32 +6,6 @@ using namespace std;
 
 namespace alba::algebra::Factorization {
 
-TEST(
-    FactorizationOfIncreasingAndDecreasingExponentFormTest,
-    FactorizeIncreasingAndDecreasingExponentsFormWorksWhenItCannotBeFactored) {
-    Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
-
-    Polynomials polynomialsToVerify(factorizeIncreasingAndDecreasingExponentsForm(polynomialToTest));
-
-    ASSERT_EQ(1U, polynomialsToVerify.size());
-    Polynomial const& polynomialToExpect1(polynomialToTest);
-    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
-}
-
-TEST(
-    FactorizationOfIncreasingAndDecreasingExponentFormTest,
-    FactorizeIncreasingAndDecreasingExponentsFormWorksWhenItCanBeFactored) {
-    Polynomial polynomialToTest{Monomial(9, {{"x", 2}}), Monomial(-30, {{"x", 1}}), Monomial(25, {})};
-
-    Polynomials polynomialsToVerify(factorizeIncreasingAndDecreasingExponentsForm(polynomialToTest));
-
-    ASSERT_EQ(2U, polynomialsToVerify.size());
-    Polynomial polynomialToExpect1{Monomial(3, {{"x", 1}}), Monomial(-5, {})};
-    Polynomial polynomialToExpect2{Monomial(3, {{"x", 1}}), Monomial(-5, {})};
-    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
-    EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
-}
-
 TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, FactorizeIfPossibleIsEmptyWhenItCannotBeFactored) {
     Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
 
@@ -237,23 +211,12 @@ TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, FixCoefficientsOfFa
     EXPECT_DOUBLE_EQ(1, secondRoot2.getDouble());
 }
 
-TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, AreAllMonomialsFoundInMonomialsWithExponentsInOrderWorks) {
-    Monomials monomials1{Monomial(2, {{"x", 2}}), Monomial(3, {{"x", 1}}), Monomial(4, {})};
-    Monomials monomials2{Monomial(6, {{"y", 2}}), Monomial(7, {{"y", 1}}), Monomial(8, {})};
-    Monomials monomials3{Monomial(1, {{"x", 2}}), Monomial(1, {{"x", 1}}), Monomial(1, {})};
-    Monomials monomials4{Monomial(1, {{"x", 3}}), Monomial(1, {{"x", 1}}), Monomial(1, {})};
+TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, GetMaxAbsoluteValueForRootFindingWorks) {
+    AlbaNumbers coefficients1{1, 2, 3, 4};
+    AlbaNumbers coefficients2{4, 3, 2, 1};
 
-    EXPECT_TRUE(areAllMonomialsFoundInMonomialsWithExponentsInOrder(monomials1, monomials1));
-    EXPECT_FALSE(areAllMonomialsFoundInMonomialsWithExponentsInOrder(monomials1, monomials2));
-    EXPECT_TRUE(areAllMonomialsFoundInMonomialsWithExponentsInOrder(monomials1, monomials3));
-    EXPECT_FALSE(areAllMonomialsFoundInMonomialsWithExponentsInOrder(monomials1, monomials4));
-}
-
-TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, CalculateMaxExponentDivisorWorks) {
-    EXPECT_EQ(0, calculateMaxExponentDivisor(Monomial(1, {}), Monomial(1, {})));
-    EXPECT_EQ(7, calculateMaxExponentDivisor(Monomial(1, {{"x", 7}}), Monomial(1, {{"y", 7}})));
-    EXPECT_EQ(7, calculateMaxExponentDivisor(Monomial(1, {{"x", 3}}), Monomial(1, {{"y", 7}})));
-    EXPECT_EQ(9, calculateMaxExponentDivisor(Monomial(1, {{"x", 9}}), Monomial(1, {{"y", 7}})));
+    EXPECT_DOUBLE_EQ(4, getMaxAbsoluteValueForRootFinding(coefficients1).getDouble());
+    EXPECT_DOUBLE_EQ(4, getMaxAbsoluteValueForRootFinding(coefficients2).getDouble());
 }
 
 TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, GetCoefficientsInMonomialsWithExponentsInOrderWorks) {
@@ -305,14 +268,6 @@ TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, CalculatePolynomial
     EXPECT_DOUBLE_EQ(-1, roots[0].getDouble());
 }
 
-TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, GetMaxAbsoluteValueForRootFindingWorks) {
-    AlbaNumbers coefficients1{1, 2, 3, 4};
-    AlbaNumbers coefficients2{4, 3, 2, 1};
-
-    EXPECT_DOUBLE_EQ(4, getMaxAbsoluteValueForRootFinding(coefficients1).getDouble());
-    EXPECT_DOUBLE_EQ(4, getMaxAbsoluteValueForRootFinding(coefficients2).getDouble());
-}
-
 TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, GetDerivativeCoefficientsWorks) {
     AlbaNumbers cubicCoefficients{1, 3, 3, 1};
 
@@ -332,6 +287,51 @@ TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, GetMonomialsWithExp
     EXPECT_EQ(Monomial(1, {{"x", 2}, {"y", 1}}), monomialsToVerify[1]);
     EXPECT_EQ(Monomial(1, {{"x", 1}, {"y", 2}}), monomialsToVerify[2]);
     EXPECT_EQ(Monomial(1, {{"y", 3}}), monomialsToVerify[3]);
+}
+
+TEST(
+    FactorizationOfIncreasingAndDecreasingExponentFormTest,
+    FactorizeIncreasingAndDecreasingExponentsFormWorksWhenItCannotBeFactored) {
+    Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
+
+    Polynomials polynomialsToVerify(factorizeIncreasingAndDecreasingExponentsForm(polynomialToTest));
+
+    ASSERT_EQ(1U, polynomialsToVerify.size());
+    Polynomial const& polynomialToExpect1(polynomialToTest);
+    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
+}
+
+TEST(
+    FactorizationOfIncreasingAndDecreasingExponentFormTest,
+    FactorizeIncreasingAndDecreasingExponentsFormWorksWhenItCanBeFactored) {
+    Polynomial polynomialToTest{Monomial(9, {{"x", 2}}), Monomial(-30, {{"x", 1}}), Monomial(25, {})};
+
+    Polynomials polynomialsToVerify(factorizeIncreasingAndDecreasingExponentsForm(polynomialToTest));
+
+    ASSERT_EQ(2U, polynomialsToVerify.size());
+    Polynomial polynomialToExpect1{Monomial(3, {{"x", 1}}), Monomial(-5, {})};
+    Polynomial polynomialToExpect2{Monomial(3, {{"x", 1}}), Monomial(-5, {})};
+    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
+    EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
+}
+
+TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, CalculateMaxExponentDivisorWorks) {
+    EXPECT_EQ(0, calculateMaxExponentDivisor(Monomial(1, {}), Monomial(1, {})));
+    EXPECT_EQ(7, calculateMaxExponentDivisor(Monomial(1, {{"x", 7}}), Monomial(1, {{"y", 7}})));
+    EXPECT_EQ(7, calculateMaxExponentDivisor(Monomial(1, {{"x", 3}}), Monomial(1, {{"y", 7}})));
+    EXPECT_EQ(9, calculateMaxExponentDivisor(Monomial(1, {{"x", 9}}), Monomial(1, {{"y", 7}})));
+}
+
+TEST(FactorizationOfIncreasingAndDecreasingExponentFormTest, AreAllMonomialsFoundInMonomialsWithExponentsInOrderWorks) {
+    Monomials monomials1{Monomial(2, {{"x", 2}}), Monomial(3, {{"x", 1}}), Monomial(4, {})};
+    Monomials monomials2{Monomial(6, {{"y", 2}}), Monomial(7, {{"y", 1}}), Monomial(8, {})};
+    Monomials monomials3{Monomial(1, {{"x", 2}}), Monomial(1, {{"x", 1}}), Monomial(1, {})};
+    Monomials monomials4{Monomial(1, {{"x", 3}}), Monomial(1, {{"x", 1}}), Monomial(1, {})};
+
+    EXPECT_TRUE(areAllMonomialsFoundInMonomialsWithExponentsInOrder(monomials1, monomials1));
+    EXPECT_FALSE(areAllMonomialsFoundInMonomialsWithExponentsInOrder(monomials1, monomials2));
+    EXPECT_TRUE(areAllMonomialsFoundInMonomialsWithExponentsInOrder(monomials1, monomials3));
+    EXPECT_FALSE(areAllMonomialsFoundInMonomialsWithExponentsInOrder(monomials1, monomials4));
 }
 
 }  // namespace alba::algebra::Factorization

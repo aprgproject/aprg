@@ -34,7 +34,6 @@ inline int inlineIntegerWithDefinition = 200;  // explicitly inline (external li
 inline int inlineIntegerWithDeclaration;       // explicitly inline (external linkage)
 extern inline int externInlineInteger;         // extern so declaration only (incomplete type)
 inline std::string inlineString{"600"};        // explicitly inline (external linkage)
-inline int inlineFreeFunction();               // explicitly inline (external linkage)
 
 // same goes for functions (but there are no free const functions)
 constexpr int freeFunction() {
@@ -42,6 +41,7 @@ constexpr int freeFunction() {
     return 1;
 }
 
+inline int inlineFreeFunction();  // explicitly inline (external linkage)
 void restoreInitialValuesForTranslationUnit1();
 void restoreInitialValuesForTranslationUnit2();
 TranslationUnitValues getValuesInTranslationUnit1();
@@ -52,28 +52,20 @@ TranslationUnitValues getValuesInTranslationUnit2();
 // Notes:
 
 // From cppreference:
-
 // -> The inline specifier, when used in a function's decl-specifier-seq, declares the function to be an inline
 // function.
-
 // -> A function defined entirely inside a class/struct/union definition,
 // ---> whether it's a member function or a non-member friend function,
 // ---> is implicitly an inline function if it is attached to the global module (since C++20).
-
 // -> A function declared constexpr is implicitly an inline function.
-
 // -> A deleted function is implicitly an inline function: its (deleted) definition can appear in more than one
 // translation unit. (since C++11)
-
 // -> The inline specifier, when used in a decl-specifier-seq of a variable with static storage duration (static class
 // member or namespace-scope variable),
 // ---> declares the variable to be an inline variable.
-
 // -> A static member variable (but not a namespace-scope variable) declared constexpr is implicitly an inline variable.
 // (since C++17)
-
 // Explanation
-
 // -> An inline function or inline variable (since C++17) has the following properties:
 // ---> The definition of an inline function or variable (since C++17)
 // -----> must be reachable in the translation unit where it is accessed
@@ -87,32 +79,26 @@ TranslationUnitValues getValuesInTranslationUnit2();
 // #include'd in multiple source files.
 // -----> It must be declared inline in every translation unit. (It will be ILL FORMED other wise)
 // -----> It has the same address in every translation unit.
-
 // -> In an inline function,
 // ---> Function-local static objects in all function definitions are shared across all translation units
 // -----> (they all refer to the same object defined in one translation unit)
 // ---> Types defined in all function definitions are also the same in all translation units.
-
 // -> Inline const variables at namespace scope have external linkage by default (unlike the non-inline non-volatile
 // const-qualified variables) (since C++17)
-
 // -> The original intent of the inline keyword was to serve as an indicator to the optimizer
 // ---> that inline substitution of a function is preferred over function call, that is,
 // ---> instead of executing the function call CPU instruction to transfer control to the function body,
 // ---> a copy of the function body is executed without generating the call.
 // -----> This avoids overhead created by the function call (passing the arguments and retrieving the result)
 // -------> but it may result in a larger executable as the code for the function has to be repeated multiple times.
-
 // -> Since this meaning of the keyword inline is non-binding,
 // ---> compilers are free to use inline substitution for any function that's not marked inline,
 // ---> and are free to generate function calls to any function marked inline.
 // -----> Those optimization choices do not change the rules regarding multiple definitions and shared statics listed
 // above.
-
 // -> Because the meaning of the keyword inline for functions came to mean "multiple definitions are permitted" rather
 // than "inlining is preferred",
 // ---> that meaning was extended to variables. (since C++17)
-
 // Notes
 // -> If an inline function or variable (since C++17) with external linkage is defined differently in different
 // translation units, the behavior is undefined.
@@ -133,7 +119,6 @@ TranslationUnitValues getValuesInTranslationUnit2();
 // -> See static data members for additional rules about inline static members (on cppreference)
 // -> Inline variables eliminate the main obstacle to packaging C++ code as header-only libraries. (since C++17)
 // ---> Inlining are Header-only Library Developers Best Friend
-
 // Other discussions:
 // -> Inline expansion might be performed regardless of the inline declaration of a function.
 // -> Inline functions and variables (with external linkage) may be defined multiple times in the same program,

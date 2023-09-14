@@ -45,13 +45,6 @@ TEST(BinaryNearestValueSearchWithRecursionTest, GetIndexOfNearestValueWorksWhenT
     testGetIndexOfNearestValueWithOneUnsignedInt<SearchForTest, ValuesForTest>();
 }
 
-TEST(BinaryNearestValueSearchWithRecursionTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
-    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
-    SearchForTest const search(duplicateValues);
-
-    EXPECT_EQ(3, search.getIndexOfNearestValue(33));
-}
-
 TEST(BinaryNearestValueSearchWithRecursionTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues) {
     testGetIndexOfNearestValueWithMultipleSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
@@ -62,6 +55,13 @@ TEST(BinaryNearestValueSearchWithRecursionTest, GetIndexOfNearestValueWorksWhenN
 
 TEST(BinaryNearestValueSearchWithRecursionTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher) {
     testGetIndexOfNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
+TEST(BinaryNearestValueSearchWithRecursionTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
+    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
+    SearchForTest const search(duplicateValues);
+
+    EXPECT_EQ(3, search.getIndexOfNearestValue(33));
 }
 
 TEST(

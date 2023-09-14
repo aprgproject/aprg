@@ -14,8 +14,7 @@ namespace alba {
 class AlbaLinuxPathHandler : public AlbaPathHandler {
 public:
     explicit AlbaLinuxPathHandler(std::string_view const path);
-    // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
-    static AlbaLinuxPathHandler createPathHandlerForDetectedPath();
+    void clear() override;
     [[nodiscard]] AlbaDateTime getFileCreationTime() const;
     [[nodiscard]] double getFileSizeEstimate() const;
     [[nodiscard]] bool isFoundInLocalSystem() const;
@@ -30,7 +29,6 @@ public:
 
     void findFilesAndDirectoriesUnlimitedDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
-    void clear() override;
     void deleteFilesInDirectory();                  // do tests
     void deleteInnerFilesAndDirectories();          // do tests
     void deleteDirectoryWithFilesAndDirectories();  // do tests
@@ -39,10 +37,11 @@ public:
     bool copyToNewFile(std::string_view const newFilePath);
     bool renameFile(std::string_view const newFileName);
     bool renameImmediateDirectory(std::string_view const newDirectoryName);
+    // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
+    static AlbaLinuxPathHandler createPathHandlerForDetectedPath();
 
 private:
-    static std::string getCurrentDetectedPath();
-    static bool canBeLocated(std::string_view const fullPath);
+    void save(std::string_view const path) override;
     [[nodiscard]] bool isPathADirectory(std::string_view const fileOrDirectoryName) const;
     [[nodiscard]] bool isSlashNeededAtTheEnd(
         std::string_view const correctedPath, std::string_view const originalPath) const;
@@ -55,8 +54,9 @@ private:
         DIR* directoryStream, std::string_view const currentDirectory, std::string_view const wildCardSearch,
         std::set<std::string>& listOfFiles, std::set<std::string>& listOfDirectories, int const depth) const;
 
-    void save(std::string_view const path) override;
     void setPath(std::string_view const path);
+    static std::string getCurrentDetectedPath();
+    static bool canBeLocated(std::string_view const fullPath);
     bool m_foundInLocalSystem{false};
     bool m_relativePath{false};
 };

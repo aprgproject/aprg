@@ -39,16 +39,16 @@ bool VariableTerm::operator<(VariableTerm const& second) const {
     return result;
 }
 
+string VariableTerm::getVariableTermName() const { return m_variableName; }
+bool VariableTerm::isNegated() const { return m_isNegated; }
+void VariableTerm::setVariableTermName(string const& variableName) { m_variableName = variableName; }
+void VariableTerm::negate() { m_isNegated = !m_isNegated; }
+
 VariableTerm VariableTerm::createNegatedVariableTerm(string const& variableName) {
     VariableTerm result(variableName);
     result.negate();
     return result;
 }
-
-string VariableTerm::getVariableTermName() const { return m_variableName; }
-bool VariableTerm::isNegated() const { return m_isNegated; }
-void VariableTerm::setVariableTermName(string const& variableName) { m_variableName = variableName; }
-void VariableTerm::negate() { m_isNegated = !m_isNegated; }
 
 void VariableTerm::initializeIfNotEmpty() {
     int lastIndex = m_variableName.length() - 1;

@@ -54,6 +54,14 @@ TEST(TermWithDetailsTest, LessThanOperatorWorks) {
     EXPECT_TRUE(termWithDetails1 < termWithDetails4);
 }
 
+TEST(TermWithDetailsTest, GetAssociationPriorityWorks) {
+    TermWithDetails termWithDetails1(Term(10), TermAssociationType::Positive);
+    TermWithDetails termWithDetails2(Term(10), TermAssociationType::Negative);
+
+    EXPECT_EQ(1, termWithDetails1.getAssociationPriority());
+    EXPECT_EQ(2, termWithDetails2.getAssociationPriority());
+}
+
 TEST(TermWithDetailsTest, HasPositiveAssociationWorks) {
     TermWithDetails termWithDetails1(Term(10), TermAssociationType::Positive);
     TermWithDetails termWithDetails2(Term(10), TermAssociationType::Negative);
@@ -68,14 +76,6 @@ TEST(TermWithDetailsTest, HasNegativeAssociationWorks) {
 
     EXPECT_FALSE(termWithDetails1.hasNegativeAssociation());
     EXPECT_TRUE(termWithDetails2.hasNegativeAssociation());
-}
-
-TEST(TermWithDetailsTest, GetAssociationPriorityWorks) {
-    TermWithDetails termWithDetails1(Term(10), TermAssociationType::Positive);
-    TermWithDetails termWithDetails2(Term(10), TermAssociationType::Negative);
-
-    EXPECT_EQ(1, termWithDetails1.getAssociationPriority());
-    EXPECT_EQ(2, termWithDetails2.getAssociationPriority());
 }
 
 TEST(TermWithDetailsTest, ClearWorks) {

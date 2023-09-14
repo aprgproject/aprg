@@ -106,6 +106,8 @@ string AlbaFileReader::getLineAndIgnoreWhiteSpaces() {
     return result;
 }
 
+char* AlbaFileReader::getCharacterBufferPointer() { return &(m_characterBuffer.front()); }
+
 size_t AlbaFileReader::getFileSize(ifstream& inputStream) {
     inputStream.seekg(0, ifstream::end);
     auto tellgOutput = inputStream.tellg();
@@ -113,7 +115,5 @@ size_t AlbaFileReader::getFileSize(ifstream& inputStream) {
     inputStream.seekg(0, ifstream::beg);
     return fileSize;
 }
-
-char* AlbaFileReader::getCharacterBufferPointer() { return &(m_characterBuffer.front()); }
 
 }  // namespace alba

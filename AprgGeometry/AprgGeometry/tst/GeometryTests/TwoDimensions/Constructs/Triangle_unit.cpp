@@ -59,24 +59,6 @@ TEST(TriangleTest, IsRegularWorksCorrect) {
     EXPECT_FALSE(nonRegularTriangle.isRegular());
 }
 
-TEST(TriangleTest, IsIsocelesWorksCorrect) {
-    Triangle const regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
-    Triangle const isocelesTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
-    Triangle const nonIsocelesTriangle(Point(0, 0), Point(0, 4), Point(5, 0));
-
-    EXPECT_TRUE(regularTriangle.isIsoceles());
-    EXPECT_TRUE(isocelesTriangle.isIsoceles());
-    EXPECT_FALSE(nonIsocelesTriangle.isIsoceles());
-}
-
-TEST(TriangleTest, IsRightTriangleWorksCorrect) {
-    Triangle const regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
-    Triangle const rightTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
-
-    EXPECT_FALSE(regularTriangle.isRightTriangle());
-    EXPECT_TRUE(rightTriangle.isRightTriangle());
-}
-
 TEST(TriangleTest, GetPointsWorks) {
     Triangle const triangle(Point(0, 0), Point(3, 3), Point(0, 6));
     Points points(triangle.getPoints(1));
@@ -94,6 +76,24 @@ TEST(TriangleTest, GetPointsWorks) {
     EXPECT_EQ(Point(0, 3), points[9]);
     EXPECT_EQ(Point(0, 2), points[10]);
     EXPECT_EQ(Point(0, 1), points[11]);
+}
+
+TEST(TriangleTest, IsIsocelesWorksCorrect) {
+    Triangle const regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
+    Triangle const isocelesTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
+    Triangle const nonIsocelesTriangle(Point(0, 0), Point(0, 4), Point(5, 0));
+
+    EXPECT_TRUE(regularTriangle.isIsoceles());
+    EXPECT_TRUE(isocelesTriangle.isIsoceles());
+    EXPECT_FALSE(nonIsocelesTriangle.isIsoceles());
+}
+
+TEST(TriangleTest, IsRightTriangleWorksCorrect) {
+    Triangle const regularTriangle(Point(1, 0), Point(-1, 0), Point(0, sqrt(3)));
+    Triangle const rightTriangle(Point(0, 0), Point(0, 4), Point(4, 0));
+
+    EXPECT_FALSE(regularTriangle.isRightTriangle());
+    EXPECT_TRUE(rightTriangle.isRightTriangle());
 }
 
 }  // namespace alba::TwoDimensions

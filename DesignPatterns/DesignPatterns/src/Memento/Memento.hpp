@@ -76,16 +76,13 @@ private:
 
 // ONE LINE NOTE:
 // -> Provide a "memento object" that SAVES the STATE of an "originator object" so that it can be RESTORED later.
-
 // Intent:
 // Memento without violating encapsulation, captures snd externalizes an object's internal state
 // so that the object can be restored to this state later.
 // The pattern has behavioral purpose and applies to the objects.
-
 // When to use (applicability):
 // -> a snapshot of an object's state must be saved so that it can be restored to that state later
 // -> a direct interface to obtaining the state would expose implementation details and break the object's encapsulation
-
 // Consequences:
 // -> Preserving encapsulation boundaries.
 // ---> Memento avoids exposing information that only an originator should manage but that must be store nevertheless
@@ -110,7 +107,6 @@ private:
 // ---> A caretaker is responsible for deleting the mementos it cares for.
 // -----> However, the caretaker has no idea how much state is in the memento.
 // -----> Hence, an otherwise lightweight caretaker might incur large storage costs when it store mementos.
-
 // Implementation:
 // -> Language support
 // ---> Mementos have two interface: a wide one for originators and a narrow one for other objects.
@@ -124,7 +120,6 @@ private:
 // -----> The history list defines a specific order in which commands can be undone and redone.
 // -----> That means mementos can store just the incremental change that a command makes rather than the full state of
 // every object they affect.
-
 // Related Patterns
 // -> [Command]: [Commands] can use mementos maintain state for undoable operations.
 // -> [Iterator]: Mementos can be used for iteration.

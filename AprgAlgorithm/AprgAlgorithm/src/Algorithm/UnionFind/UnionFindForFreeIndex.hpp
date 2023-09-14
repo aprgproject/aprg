@@ -22,8 +22,6 @@ public:
         return currentRoot;
     }
 
-    [[nodiscard]] RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
-
     [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
         return getRoot(object1) == getRoot(object2);
     }
@@ -35,6 +33,8 @@ public:
         Object mainRoot = getRootAndRelativeRoots(destination, relativeRoots);
         saveNewRootOnRelativeRoots(mainRoot, relativeRoots);
     }
+
+    [[nodiscard]] RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
 
     Object getRootWithPathCompression(Object const& object) {
         RootVector relativeRoots;

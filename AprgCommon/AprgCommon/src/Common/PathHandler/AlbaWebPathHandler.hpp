@@ -11,10 +11,10 @@ public:
     explicit AlbaWebPathHandler(std::string_view const path);
     [[nodiscard]] std::string getFullPath() const override;
     [[nodiscard]] std::string getDirectory() const override;
-    [[nodiscard]] std::string getProtocol() const;
-    [[nodiscard]] bool hasProtocol() const;
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     void clear() override;
+    [[nodiscard]] std::string getProtocol() const;
+    [[nodiscard]] bool hasProtocol() const;
     void gotoLink(std::string_view const newPath);
     void setProtocolWithSymbols(std::string_view const protocolWithSymbols);
 

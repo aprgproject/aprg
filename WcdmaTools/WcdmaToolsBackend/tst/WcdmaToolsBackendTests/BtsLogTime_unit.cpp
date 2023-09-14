@@ -10,78 +10,6 @@ using namespace std;
 
 namespace wcdmaToolsBackend {
 
-TEST(BtsLogTimeTest, DefaultConstructorIsEmpty) {
-    BtsLogTime const logTime;
-    EXPECT_TRUE(logTime.isEmpty());
-}
-
-TEST(BtsLogTimeTest, ClearingMakesItEmpty) {
-    BtsLogTime logTime(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
-    EXPECT_FALSE(logTime.isEmpty());
-    logTime.clear();
-    EXPECT_TRUE(logTime.isEmpty());
-}
-
-TEST(BtsLogTimeTest, BtsTimeStampWithSevenNumbersIsUsed) {
-    BtsLogTime const logTime(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
-
-    EXPECT_EQ(2015U, logTime.getYears());
-    EXPECT_EQ(8U, logTime.getMonths());
-    EXPECT_EQ(20U, logTime.getDays());
-    EXPECT_EQ(18U, logTime.getHours());
-    EXPECT_EQ(14U, logTime.getMinutes());
-    EXPECT_EQ(51U, logTime.getSeconds());
-    EXPECT_EQ(565172U, logTime.getMicroSeconds());
-    EXPECT_EQ(" 1 * 2015-08-20 18:14:51.565172", logTime.getPrintableString());
-    EXPECT_EQ("20.08 18:14:51.565172", logTime.getEquivalentStringPcTimeFormat());
-    EXPECT_EQ("<2015-08-20T18:14:51.565172Z>", logTime.getEquivalentStringBtsTimeFormat());
-}
-
-TEST(BtsLogTimeTest, BtsTimeStampWithSpacesAreStartAndEnd) {
-    BtsLogTime const logTime(BtsLogTimeType::BtsTimeStamp, " <2015-08-20T18:14:51.565172Z> ");
-
-    EXPECT_EQ(2015U, logTime.getYears());
-    EXPECT_EQ(8U, logTime.getMonths());
-    EXPECT_EQ(20U, logTime.getDays());
-    EXPECT_EQ(18U, logTime.getHours());
-    EXPECT_EQ(14U, logTime.getMinutes());
-    EXPECT_EQ(51U, logTime.getSeconds());
-    EXPECT_EQ(565172U, logTime.getMicroSeconds());
-    EXPECT_EQ(" 1 * 2015-08-20 18:14:51.565172", logTime.getPrintableString());
-    EXPECT_EQ("20.08 18:14:51.565172", logTime.getEquivalentStringPcTimeFormat());
-    EXPECT_EQ("<2015-08-20T18:14:51.565172Z>", logTime.getEquivalentStringBtsTimeFormat());
-}
-
-TEST(BtsLogTimeTest, PcTimeStampWithSixNumbersIsUsed) {
-    BtsLogTime const logTime(BtsLogTimeType::BtsTimeStamp, "13.09 05:24:24.772449");
-
-    EXPECT_EQ(0U, logTime.getYears());
-    EXPECT_EQ(9U, logTime.getMonths());
-    EXPECT_EQ(13U, logTime.getDays());
-    EXPECT_EQ(5U, logTime.getHours());
-    EXPECT_EQ(24U, logTime.getMinutes());
-    EXPECT_EQ(24U, logTime.getSeconds());
-    EXPECT_EQ(772449U, logTime.getMicroSeconds());
-    EXPECT_EQ(" 1 * 0000-09-13 05:24:24.772449", logTime.getPrintableString());
-    EXPECT_EQ("13.09 05:24:24.772449", logTime.getEquivalentStringPcTimeFormat());
-    EXPECT_EQ("<0000-09-13T05:24:24.772449Z>", logTime.getEquivalentStringBtsTimeFormat());
-}
-
-TEST(BtsLogTimeTest, PcTimeStampIsUsed) {
-    BtsLogTime const logTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:02.982");
-
-    EXPECT_EQ(0U, logTime.getYears());
-    EXPECT_EQ(9U, logTime.getMonths());
-    EXPECT_EQ(23U, logTime.getDays());
-    EXPECT_EQ(12U, logTime.getHours());
-    EXPECT_EQ(6U, logTime.getMinutes());
-    EXPECT_EQ(2U, logTime.getSeconds());
-    EXPECT_EQ(982000U, logTime.getMicroSeconds());
-    EXPECT_EQ(" 1 * 0000-09-23 12:06:02.982000", logTime.getPrintableString());
-    EXPECT_EQ("23.09 12:06:02.982000", logTime.getEquivalentStringPcTimeFormat());
-    EXPECT_EQ("<0000-09-23T12:06:02.982000Z>", logTime.getEquivalentStringBtsTimeFormat());
-}
-
 TEST(BtsLogTimeTest, LessThanOperatorWorksAsIntended) {
     BtsLogTime const logTime1(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
     BtsLogTime const logTime2(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565173Z");
@@ -207,6 +135,71 @@ TEST(BtsLogTimeTest, SubtractionOperatorWithUnderflowValues) {
     EXPECT_EQ(expectedAnswer, actualAnswer);
 }
 
+TEST(BtsLogTimeTest, BtsTimeStampWithSevenNumbersIsUsed) {
+    BtsLogTime const logTime(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
+
+    EXPECT_EQ(2015U, logTime.getYears());
+    EXPECT_EQ(8U, logTime.getMonths());
+    EXPECT_EQ(20U, logTime.getDays());
+    EXPECT_EQ(18U, logTime.getHours());
+    EXPECT_EQ(14U, logTime.getMinutes());
+    EXPECT_EQ(51U, logTime.getSeconds());
+    EXPECT_EQ(565172U, logTime.getMicroSeconds());
+    EXPECT_EQ(" 1 * 2015-08-20 18:14:51.565172", logTime.getPrintableString());
+    EXPECT_EQ("20.08 18:14:51.565172", logTime.getEquivalentStringPcTimeFormat());
+    EXPECT_EQ("<2015-08-20T18:14:51.565172Z>", logTime.getEquivalentStringBtsTimeFormat());
+}
+
+TEST(BtsLogTimeTest, BtsTimeStampWithSpacesAreStartAndEnd) {
+    BtsLogTime const logTime(BtsLogTimeType::BtsTimeStamp, " <2015-08-20T18:14:51.565172Z> ");
+
+    EXPECT_EQ(2015U, logTime.getYears());
+    EXPECT_EQ(8U, logTime.getMonths());
+    EXPECT_EQ(20U, logTime.getDays());
+    EXPECT_EQ(18U, logTime.getHours());
+    EXPECT_EQ(14U, logTime.getMinutes());
+    EXPECT_EQ(51U, logTime.getSeconds());
+    EXPECT_EQ(565172U, logTime.getMicroSeconds());
+    EXPECT_EQ(" 1 * 2015-08-20 18:14:51.565172", logTime.getPrintableString());
+    EXPECT_EQ("20.08 18:14:51.565172", logTime.getEquivalentStringPcTimeFormat());
+    EXPECT_EQ("<2015-08-20T18:14:51.565172Z>", logTime.getEquivalentStringBtsTimeFormat());
+}
+
+TEST(BtsLogTimeTest, PcTimeStampWithSixNumbersIsUsed) {
+    BtsLogTime const logTime(BtsLogTimeType::BtsTimeStamp, "13.09 05:24:24.772449");
+
+    EXPECT_EQ(0U, logTime.getYears());
+    EXPECT_EQ(9U, logTime.getMonths());
+    EXPECT_EQ(13U, logTime.getDays());
+    EXPECT_EQ(5U, logTime.getHours());
+    EXPECT_EQ(24U, logTime.getMinutes());
+    EXPECT_EQ(24U, logTime.getSeconds());
+    EXPECT_EQ(772449U, logTime.getMicroSeconds());
+    EXPECT_EQ(" 1 * 0000-09-13 05:24:24.772449", logTime.getPrintableString());
+    EXPECT_EQ("13.09 05:24:24.772449", logTime.getEquivalentStringPcTimeFormat());
+    EXPECT_EQ("<0000-09-13T05:24:24.772449Z>", logTime.getEquivalentStringBtsTimeFormat());
+}
+
+TEST(BtsLogTimeTest, PcTimeStampIsUsed) {
+    BtsLogTime const logTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:02.982");
+
+    EXPECT_EQ(0U, logTime.getYears());
+    EXPECT_EQ(9U, logTime.getMonths());
+    EXPECT_EQ(23U, logTime.getDays());
+    EXPECT_EQ(12U, logTime.getHours());
+    EXPECT_EQ(6U, logTime.getMinutes());
+    EXPECT_EQ(2U, logTime.getSeconds());
+    EXPECT_EQ(982000U, logTime.getMicroSeconds());
+    EXPECT_EQ(" 1 * 0000-09-23 12:06:02.982000", logTime.getPrintableString());
+    EXPECT_EQ("23.09 12:06:02.982000", logTime.getEquivalentStringPcTimeFormat());
+    EXPECT_EQ("<0000-09-23T12:06:02.982000Z>", logTime.getEquivalentStringBtsTimeFormat());
+}
+
+TEST(BtsLogTimeTest, DefaultConstructorIsEmpty) {
+    BtsLogTime const logTime;
+    EXPECT_TRUE(logTime.isEmpty());
+}
+
 TEST(BtsLogTimeTest, TheDataCanBeSavedToAndRetrieveFromFile) {
     BtsLogTime const sampleLogTime(BtsLogTimeType::BtsTimeStamp, "2000-01-01T23:59:59.999999");
     BtsLogTime testLogTime;
@@ -224,6 +217,13 @@ TEST(BtsLogTimeTest, TheDataCanBeSavedToAndRetrieveFromFile) {
         inputStream >> testLogTime;
     }
     EXPECT_EQ(sampleLogTime, testLogTime);
+}
+
+TEST(BtsLogTimeTest, ClearingMakesItEmpty) {
+    BtsLogTime logTime(BtsLogTimeType::BtsTimeStamp, "2015-08-20T18:14:51.565172Z");
+    EXPECT_FALSE(logTime.isEmpty());
+    logTime.clear();
+    EXPECT_TRUE(logTime.isEmpty());
 }
 
 }  // namespace wcdmaToolsBackend

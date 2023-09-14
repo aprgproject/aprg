@@ -43,15 +43,6 @@ TEST(IntegrationGeometryUtilitiesTest, GetVolumeBasedOnSolidOfRevolutionWorksOnU
     EXPECT_EQ(termToExpect, termToVerify);
 }
 
-TEST(IntegrationGeometryUtilitiesTest, GetSurfaceAreaBasedOnSolidOfRevolutionWorksOnUpsideDownCone) {
-    Term edgeOfTheConeInY(Monomial(1, {{"radius", 1}, {"height", -1}, {"y", 1}}));
-
-    Term termToVerify(getSurfaceAreaUsingOnSolidOfRevolution(edgeOfTheConeInY, {"y", 0, "height"}));
-
-    string stringToExpect("((pi)[radius]*((1[height^2] + 1[radius^2])^(1/2)))");
-    EXPECT_EQ(stringToExpect, convertToString(termToVerify));
-}
-
 TEST(IntegrationGeometryUtilitiesTest, GetVolumeAndSurfaceAreaBasedOnSolidOfRevolutionWorksOnGabrielsHorn) {
     // The painters paradox (volume is definite, but surface are is infinite).
     // Computation of the volume:
@@ -78,6 +69,15 @@ TEST(IntegrationGeometryUtilitiesTest, GetVolumeBasedOnSolidOfRevolutionWorksOnU
 
     Term termToExpect(Monomial(getPi(), {{"edgeDistance", 2}, {"height", 1}}));
     EXPECT_EQ(termToExpect, termToVerify);
+}
+
+TEST(IntegrationGeometryUtilitiesTest, GetSurfaceAreaBasedOnSolidOfRevolutionWorksOnUpsideDownCone) {
+    Term edgeOfTheConeInY(Monomial(1, {{"radius", 1}, {"height", -1}, {"y", 1}}));
+
+    Term termToVerify(getSurfaceAreaUsingOnSolidOfRevolution(edgeOfTheConeInY, {"y", 0, "height"}));
+
+    string stringToExpect("((pi)[radius]*((1[height^2] + 1[radius^2])^(1/2)))");
+    EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
 TEST(IntegrationGeometryUtilitiesTest, GetVolumeUsingCylindricalShellsWorksOnParabolaCupHole) {
@@ -143,37 +143,28 @@ TEST(IntegrationGeometryUtilitiesTest, GetTotalMassOfALaminaWorks) {
     EXPECT_EQ(termToExpect, termToVerify);
 }
 
-TEST(IntegrationGeometryUtilitiesTest, GetMomentOfMassOfALaminaWorks) {
-    Term termToTest(Monomial(1, {{"x", 2}}));
+TEST(IntegrationGeometryUtilitiesTest, GetTotalMassOfALaminaWorksWithXDetailsAndYDetails) {
+    Term termToTest(Polynomial{Monomial(3, {{"y", 1}}), Monomial(-2, {{"x", 2}})});
+    DetailsForDefiniteIntegralWithTerms xDetails{"x", -1, 2};
+    DetailsForDefiniteIntegralWithTerms yDetails{"y", 1, 3};
 
-    TermPair termPairToVerify(getMomentOfMassOfALamina(termToTest, {"x", 0, "x"}));
+    Term termToVerify(getTotalMassOfALamina(termToTest, xDetails, yDetails));
 
-    Term termToExpectInX(Monomial(AlbaNumber::createFraction(1, 10), {{"x", 5}}));
-    Term termToExpectInY(Monomial(AlbaNumber::createFraction(1, 4), {{"x", 4}}));
-    EXPECT_EQ(termToExpectInX, termPairToVerify.first);
-    EXPECT_EQ(termToExpectInY, termPairToVerify.second);
+    Term termToExpect(24);
+    EXPECT_EQ(termToExpect, termToVerify);
 }
 
-TEST(IntegrationGeometryUtilitiesTest, GetCenterOfMassOfALaminaWorks) {
-    Term termToTest(Monomial(1, {{"x", 2}}));
+TEST(IntegrationGeometryUtilitiesTest, GetRadiusOfGyrationWorksWithXDetailsAndYDetails) {
+    Term termToTest(Polynomial{Monomial(3, {{"y", 1}}), Monomial(-2, {{"x", 2}})});
+    DetailsForDefiniteIntegralWithTerms xDetails{"x", -1, 2};
+    DetailsForDefiniteIntegralWithTerms yDetails{"y", 1, 3};
+    Term momentOfInertiaAboutTheYAxis(getMomentOfInertiaAboutTheYAxis(termToTest, xDetails, yDetails));
+    Term totalMassOfALamina(getTotalMassOfALamina(termToTest, xDetails, yDetails));
 
-    TermPair termPairToVerify(getCenterOfMassOfALamina(termToTest, {"x", 0, "x"}));
+    Term termToVerify(getRadiusOfGyration(momentOfInertiaAboutTheYAxis, totalMassOfALamina));
 
-    Term termToExpectInX(Monomial(AlbaNumber::createFraction(3, 10), {{"x", 2}}));
-    Term termToExpectInY(Monomial(AlbaNumber::createFraction(3, 4), {{"x", 1}}));
-    EXPECT_EQ(termToExpectInX, termPairToVerify.first);
-    EXPECT_EQ(termToExpectInY, termPairToVerify.second);
-}
-
-TEST(IntegrationGeometryUtilitiesTest, GetCentroidWorks) {
-    Term termToTest(Monomial(1, {{"x", 2}}));
-
-    TermPair termPairToVerify(getCentroid(termToTest, {"x", 0, "x"}));
-
-    Term termToExpectInX(Monomial(AlbaNumber::createFraction(3, 10), {{"x", 2}}));
-    Term termToExpectInY(Monomial(AlbaNumber::createFraction(3, 4), {{"x", 1}}));
-    EXPECT_EQ(termToExpectInX, termPairToVerify.first);
-    EXPECT_EQ(termToExpectInY, termPairToVerify.second);
+    Term termToExpect(0.6324555320336759);
+    EXPECT_EQ(termToExpect, termToVerify);
 }
 
 TEST(IntegrationGeometryUtilitiesTest, GetWorkWorks) {
@@ -231,17 +222,6 @@ TEST(IntegrationGeometryUtilitiesTest, GetDoubleIntegralInCartesianCoordinatesWo
     EXPECT_EQ(termToExpect, termToVerify);
 }
 
-TEST(IntegrationGeometryUtilitiesTest, GetTotalMassOfALaminaWorksWithXDetailsAndYDetails) {
-    Term termToTest(Polynomial{Monomial(3, {{"y", 1}}), Monomial(-2, {{"x", 2}})});
-    DetailsForDefiniteIntegralWithTerms xDetails{"x", -1, 2};
-    DetailsForDefiniteIntegralWithTerms yDetails{"y", 1, 3};
-
-    Term termToVerify(getTotalMassOfALamina(termToTest, xDetails, yDetails));
-
-    Term termToExpect(24);
-    EXPECT_EQ(termToExpect, termToVerify);
-}
-
 TEST(IntegrationGeometryUtilitiesTest, GetMomentOfMassOfALaminaWithRespectToXAxisWorksWithXDetailsAndYDetails) {
     Term termToTest(Polynomial{Monomial(3, {{"y", 1}}), Monomial(-2, {{"x", 2}})});
     DetailsForDefiniteIntegralWithTerms xDetails{"x", -1, 2};
@@ -262,19 +242,6 @@ TEST(IntegrationGeometryUtilitiesTest, GetMomentOfMassOfALaminaWithRespectToYAxi
 
     Term termToExpect(3);
     EXPECT_EQ(termToExpect, termToVerify);
-}
-
-TEST(IntegrationGeometryUtilitiesTest, GetCenterOfMassOfALaminaWorksWithXDetailsAndYDetails) {
-    Term termToTest(Polynomial{Monomial(3, {{"y", 1}}), Monomial(-2, {{"x", 2}})});
-    DetailsForDefiniteIntegralWithTerms xDetails{"x", -1, 2};
-    DetailsForDefiniteIntegralWithTerms yDetails{"y", 1, 3};
-
-    TermPair termPairToVerify(getCenterOfMassOfALamina(termToTest, xDetails, yDetails));
-
-    Term termToExpect1(AlbaNumber::createFraction(1, 8));
-    Term termToExpect2(AlbaNumber::createFraction(9, 4));
-    EXPECT_EQ(termToExpect1, termPairToVerify.first);
-    EXPECT_EQ(termToExpect2, termPairToVerify.second);
 }
 
 TEST(IntegrationGeometryUtilitiesTest, GetMomentOfInertiaAboutTheXAxisWorksWithXDetailsAndYDetails) {
@@ -307,19 +274,6 @@ TEST(IntegrationGeometryUtilitiesTest, GetMomentOfInertiaAboutTheOriginWorksWith
     Term termToVerify(getMomentOfInertiaAboutTheOrigin(termToTest, xDetails, yDetails));
 
     Term termToExpect(AlbaNumber::createFraction(688, 5));
-    EXPECT_EQ(termToExpect, termToVerify);
-}
-
-TEST(IntegrationGeometryUtilitiesTest, GetRadiusOfGyrationWorksWithXDetailsAndYDetails) {
-    Term termToTest(Polynomial{Monomial(3, {{"y", 1}}), Monomial(-2, {{"x", 2}})});
-    DetailsForDefiniteIntegralWithTerms xDetails{"x", -1, 2};
-    DetailsForDefiniteIntegralWithTerms yDetails{"y", 1, 3};
-    Term momentOfInertiaAboutTheYAxis(getMomentOfInertiaAboutTheYAxis(termToTest, xDetails, yDetails));
-    Term totalMassOfALamina(getTotalMassOfALamina(termToTest, xDetails, yDetails));
-
-    Term termToVerify(getRadiusOfGyration(momentOfInertiaAboutTheYAxis, totalMassOfALamina));
-
-    Term termToExpect(0.6324555320336759);
     EXPECT_EQ(termToExpect, termToVerify);
 }
 
@@ -412,6 +366,52 @@ TEST(IntegrationGeometryUtilitiesTest, GetTripleIntegralInSphericalCoordinatesWo
 
     Term termToExpect(33.51032163829112);
     EXPECT_EQ(termToExpect, termToVerify);
+}
+
+TEST(IntegrationGeometryUtilitiesTest, GetMomentOfMassOfALaminaWorks) {
+    Term termToTest(Monomial(1, {{"x", 2}}));
+
+    TermPair termPairToVerify(getMomentOfMassOfALamina(termToTest, {"x", 0, "x"}));
+
+    Term termToExpectInX(Monomial(AlbaNumber::createFraction(1, 10), {{"x", 5}}));
+    Term termToExpectInY(Monomial(AlbaNumber::createFraction(1, 4), {{"x", 4}}));
+    EXPECT_EQ(termToExpectInX, termPairToVerify.first);
+    EXPECT_EQ(termToExpectInY, termPairToVerify.second);
+}
+
+TEST(IntegrationGeometryUtilitiesTest, GetCenterOfMassOfALaminaWorks) {
+    Term termToTest(Monomial(1, {{"x", 2}}));
+
+    TermPair termPairToVerify(getCenterOfMassOfALamina(termToTest, {"x", 0, "x"}));
+
+    Term termToExpectInX(Monomial(AlbaNumber::createFraction(3, 10), {{"x", 2}}));
+    Term termToExpectInY(Monomial(AlbaNumber::createFraction(3, 4), {{"x", 1}}));
+    EXPECT_EQ(termToExpectInX, termPairToVerify.first);
+    EXPECT_EQ(termToExpectInY, termPairToVerify.second);
+}
+
+TEST(IntegrationGeometryUtilitiesTest, GetCenterOfMassOfALaminaWorksWithXDetailsAndYDetails) {
+    Term termToTest(Polynomial{Monomial(3, {{"y", 1}}), Monomial(-2, {{"x", 2}})});
+    DetailsForDefiniteIntegralWithTerms xDetails{"x", -1, 2};
+    DetailsForDefiniteIntegralWithTerms yDetails{"y", 1, 3};
+
+    TermPair termPairToVerify(getCenterOfMassOfALamina(termToTest, xDetails, yDetails));
+
+    Term termToExpect1(AlbaNumber::createFraction(1, 8));
+    Term termToExpect2(AlbaNumber::createFraction(9, 4));
+    EXPECT_EQ(termToExpect1, termPairToVerify.first);
+    EXPECT_EQ(termToExpect2, termPairToVerify.second);
+}
+
+TEST(IntegrationGeometryUtilitiesTest, GetCentroidWorks) {
+    Term termToTest(Monomial(1, {{"x", 2}}));
+
+    TermPair termPairToVerify(getCentroid(termToTest, {"x", 0, "x"}));
+
+    Term termToExpectInX(Monomial(AlbaNumber::createFraction(3, 10), {{"x", 2}}));
+    Term termToExpectInY(Monomial(AlbaNumber::createFraction(3, 4), {{"x", 1}}));
+    EXPECT_EQ(termToExpectInX, termPairToVerify.first);
+    EXPECT_EQ(termToExpectInY, termPairToVerify.second);
 }
 
 }  // namespace alba::algebra

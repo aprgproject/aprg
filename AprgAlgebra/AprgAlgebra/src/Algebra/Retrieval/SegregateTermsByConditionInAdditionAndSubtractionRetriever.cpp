@@ -11,14 +11,6 @@ SegregateTermsByConditionInAdditionAndSubtractionRetriever::SegregateTermsByCond
     ConditionFunction const& condition)
     : m_condition(condition) {}
 
-Term const& SegregateTermsByConditionInAdditionAndSubtractionRetriever::getTermWithCondition() const {
-    return m_termWithCondition;
-}
-
-Term const& SegregateTermsByConditionInAdditionAndSubtractionRetriever::getTermWithoutCondition() const {
-    return m_termWithoutCondition;
-}
-
 void SegregateTermsByConditionInAdditionAndSubtractionRetriever::retrieveFromConstant(Constant const& constant) {
     saveTerm(Term(constant));
 }
@@ -47,6 +39,14 @@ void SegregateTermsByConditionInAdditionAndSubtractionRetriever::retrieveFromExp
 
 void SegregateTermsByConditionInAdditionAndSubtractionRetriever::retrieveFromFunction(Function const& functionObject) {
     saveTerm(Term(functionObject));
+}
+
+Term const& SegregateTermsByConditionInAdditionAndSubtractionRetriever::getTermWithCondition() const {
+    return m_termWithCondition;
+}
+
+Term const& SegregateTermsByConditionInAdditionAndSubtractionRetriever::getTermWithoutCondition() const {
+    return m_termWithoutCondition;
 }
 
 void SegregateTermsByConditionInAdditionAndSubtractionRetriever::saveTerm(Term const& term) {

@@ -14,6 +14,12 @@ TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForMsgQueueingTime) {
         R"(C:\Users\malba\Desktop\FrameworkLogs\SctStabiTest\0006_RealTestingBaseline3Times\allLogs_base.log)");
 }
 
+TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForMsgQueueingTime2) {
+    PerformanceAnalyzer analyzer;
+    analyzer.setFileForRawDataDump(R"(C:\ZZZ_Logs\PR407148\RAN3451_ON\ALL\MsgQueueingTimeRawData_2.txt)");
+    analyzer.processFileForMsgQueueingTime(R"(C:\ZZZ_Logs\PR407148\RAN3451_ON\ALL\sortedTCOM.log)");
+}
+
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInRlh) {
     PerformanceAnalyzer analyzer;
     analyzer.setFileForRawDataDump(
@@ -22,12 +28,39 @@ TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInRlh) {
         R"(C:\Users\malba\Desktop\FrameworkLogs\SctStabiTest\0006_RealTestingBaseline3Times\allLogs_base.log)");
 }
 
+TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInRlh2) {
+    PerformanceAnalyzer analyzer;
+    analyzer.setFileForRawDataDump(R"(C:\ZZZ_Logs\PR407148\RAN3451_ON\ALL\RlSetupRlhDelayRawData_2.csv)");
+    analyzer.processFileForRlSetupDelayInRlh(R"(C:\ZZZ_Logs\PR407148\RAN3451_ON\ALL\sortedTCOM.log)");
+}
+
+TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInRlh3) {
+    PerformanceAnalyzer analyzer;
+    analyzer.setFileForRawDataDump(
+        R"(D:\ZZZ_Logs\RAN3321Degradation\REL2\WBTS17_0000_0242_06\RlSetupRlhDelayRawData_1.csv)");
+    analyzer.processFileForRlSetupDelayInRlh(R"(D:\ZZZ_Logs\RAN3321Degradation\REL2\WBTS17_0000_0242_06\TcomTupc.log)");
+}
+
+TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInRlh4) {
+    PerformanceAnalyzer analyzer;
+    analyzer.setFileForRawDataDump(
+        R"(D:\ZZZ_Logs\RAN3321Degradation\REL2\WBTS17_0000_0242_06_overload\RlSetupRlhDelayRawData_2.csv)");
+    analyzer.processFileForRlSetupDelayInRlh(
+        R"(D:\ZZZ_Logs\RAN3321Degradation\REL2\WBTS17_0000_0242_06_overload\TcomTupc.log)");
+}
+
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlDeletionDelayInRlh) {
     PerformanceAnalyzer analyzer;
     analyzer.setFileForRawDataDump(
         R"(C:\Users\malba\Desktop\FrameworkLogs\SctStabiTest\0006_RealTestingBaseline3Times\RlDeletionRlhDelayRawData_base.csv)");
     analyzer.processFileForRlDeletionDelayInRlh(
         R"(C:\Users\malba\Desktop\FrameworkLogs\SctStabiTest\0006_RealTestingBaseline3Times\allLogs_base.log)");
+}
+
+TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlDeletionDelayInRlh2) {
+    PerformanceAnalyzer analyzer;
+    analyzer.setFileForRawDataDump(R"(C:\ZZZ_Logs\PR407148\RAN3451_ON\ALL\RlDeletionRlhDelayRawData_2.csv)");
+    analyzer.processFileForRlDeletionDelayInRlh(R"(C:\ZZZ_Logs\PR407148\RAN3451_ON\ALL\sortedTCOM.log)");
 }
 
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForPeriodicCpuLogging) {
@@ -42,24 +75,6 @@ TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInTupc) {
     PerformanceAnalyzer analyzer;
     analyzer.setFileForRawDataDump(R"(C:\ZZZ_Logs\PR407148\RAN3451_OFF\TupcRawDataComplete_1.csv)");
     analyzer.processFileForRlSetupDelayInTupcWithSymonKnife(R"(C:\ZZZ_Logs\PR407148\RAN3451_OFF\sortedTCOM.log)");
-}
-
-TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForMsgQueueingTime2) {
-    PerformanceAnalyzer analyzer;
-    analyzer.setFileForRawDataDump(R"(C:\ZZZ_Logs\PR407148\RAN3451_ON\ALL\MsgQueueingTimeRawData_2.txt)");
-    analyzer.processFileForMsgQueueingTime(R"(C:\ZZZ_Logs\PR407148\RAN3451_ON\ALL\sortedTCOM.log)");
-}
-
-TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInRlh2) {
-    PerformanceAnalyzer analyzer;
-    analyzer.setFileForRawDataDump(R"(C:\ZZZ_Logs\PR407148\RAN3451_ON\ALL\RlSetupRlhDelayRawData_2.csv)");
-    analyzer.processFileForRlSetupDelayInRlh(R"(C:\ZZZ_Logs\PR407148\RAN3451_ON\ALL\sortedTCOM.log)");
-}
-
-TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlDeletionDelayInRlh2) {
-    PerformanceAnalyzer analyzer;
-    analyzer.setFileForRawDataDump(R"(C:\ZZZ_Logs\PR407148\RAN3451_ON\ALL\RlDeletionRlhDelayRawData_2.csv)");
-    analyzer.processFileForRlDeletionDelayInRlh(R"(C:\ZZZ_Logs\PR407148\RAN3451_ON\ALL\sortedTCOM.log)");
 }
 
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInTupc2) {
@@ -117,21 +132,6 @@ TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForTopLogsMem) {
     PerformanceAnalyzer analyzer;
     analyzer.setFileForRawDataDump(R"(D:\ZZZ_Logs\PR224369_NEWEST\WBTS17vsWBTS18\WBTS18\TOPlogs\ALL\MSM_FSP3Mem.csv)");
     analyzer.processFileForTopLogsMem(R"(D:\ZZZ_Logs\PR224369_NEWEST\WBTS17vsWBTS18\WBTS18\TOPlogs\ALL\MSM_FSP3.log)");
-}
-
-TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInRlh3) {
-    PerformanceAnalyzer analyzer;
-    analyzer.setFileForRawDataDump(
-        R"(D:\ZZZ_Logs\RAN3321Degradation\REL2\WBTS17_0000_0242_06\RlSetupRlhDelayRawData_1.csv)");
-    analyzer.processFileForRlSetupDelayInRlh(R"(D:\ZZZ_Logs\RAN3321Degradation\REL2\WBTS17_0000_0242_06\TcomTupc.log)");
-}
-
-TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupDelayInRlh4) {
-    PerformanceAnalyzer analyzer;
-    analyzer.setFileForRawDataDump(
-        R"(D:\ZZZ_Logs\RAN3321Degradation\REL2\WBTS17_0000_0242_06_overload\RlSetupRlhDelayRawData_2.csv)");
-    analyzer.processFileForRlSetupDelayInRlh(
-        R"(D:\ZZZ_Logs\RAN3321Degradation\REL2\WBTS17_0000_0242_06_overload\TcomTupc.log)");
 }
 
 TEST(PerformanceAnalyzerTest, DISABLED_ProcessFileForRlSetupPerSecond) {

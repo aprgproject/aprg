@@ -10,20 +10,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-TEST(HyperbolicEquationsTest, GetEToTheXWorks) { EXPECT_EQ("((e)^x)", convertToString(getEToTheX("x"))); }
-
-TEST(HyperbolicEquationsTest, GetEToTheNegativeXWorks) {
-    EXPECT_EQ("((e)^-1[x])", convertToString(getEToTheNegativeX("x")));
-}
-
-TEST(HyperbolicEquationsTest, GetEToTheXPlusEToTheNegativeXWorks) {
-    EXPECT_EQ("(((e)^x)+((e)^-1[x]))", convertToString(getEToTheXPlusEToTheNegativeX("x")));
-}
-
-TEST(HyperbolicEquationsTest, GetEToTheXMinusEToTheNegativeXWorks) {
-    EXPECT_EQ("(((e)^x)-((e)^-1[x]))", convertToString(getEToTheXMinusEToTheNegativeX("x")));
-}
-
 TEST(HyperbolicEquationsTest, GetHyperbolicSineDefinitionWorks) {
     EXPECT_EQ("sinh(x) = ((((e)^x)-((e)^-1[x]))/2)", convertToString(getHyperbolicSineDefinition("x")));
 }
@@ -65,6 +51,36 @@ TEST(HyperbolicEquationsTest, GetEToTheNegativeXFromHyperbolicFunctionsEquationW
         "((e)^-1[x]) = (cosh(x)-sinh(x))", convertToString(getEToTheNegativeXFromHyperbolicFunctionsEquation("x")));
 }
 
+TEST(HyperbolicEquationsTest, GetHyperbolicArcSineDefinitionWorks) {
+    EXPECT_EQ("arcsinh(x) = ln((x+(((x^2)+1)^(1/2))))", convertToString(getHyperbolicArcSineDefinition("x")));
+}
+
+TEST(HyperbolicEquationsTest, GetHyperbolicArcCosineDefinitionWorks) {
+    EXPECT_EQ("arccosh(x) = ln((x+(((x^2)-1)^(1/2))))", convertToString(getHyperbolicArcCosineDefinition("x")));
+}
+
+TEST(HyperbolicEquationsTest, GetHyperbolicArcTangentDefinitionWorks) {
+    EXPECT_EQ("arctanh(x) = ((1/2)*ln(((1-x)/(1+x))))", convertToString(getHyperbolicArcTangentDefinition("x")));
+}
+
+TEST(HyperbolicEquationsTest, GetHyperbolicArcCotangentDefinitionWorks) {
+    EXPECT_EQ("arccoth(x) = ((1/2)*ln(((x+1)/(x-1))))", convertToString(getHyperbolicArcCotangentDefinition("x")));
+}
+
+TEST(HyperbolicEquationsTest, GetEToTheXWorks) { EXPECT_EQ("((e)^x)", convertToString(getEToTheX("x"))); }
+
+TEST(HyperbolicEquationsTest, GetEToTheNegativeXWorks) {
+    EXPECT_EQ("((e)^-1[x])", convertToString(getEToTheNegativeX("x")));
+}
+
+TEST(HyperbolicEquationsTest, GetEToTheXPlusEToTheNegativeXWorks) {
+    EXPECT_EQ("(((e)^x)+((e)^-1[x]))", convertToString(getEToTheXPlusEToTheNegativeX("x")));
+}
+
+TEST(HyperbolicEquationsTest, GetEToTheXMinusEToTheNegativeXWorks) {
+    EXPECT_EQ("(((e)^x)-((e)^-1[x]))", convertToString(getEToTheXMinusEToTheNegativeX("x")));
+}
+
 TEST(HyperbolicEquationsTest, GetHyperbolicSineOfSumOfTwoTermsWorks) {
     EXPECT_EQ("((sinh(x)*cosh(y))+(cosh(x)*sinh(y)))", convertToString(getHyperbolicSineOfSumOfTwoTerms("x", "y")));
 }
@@ -88,22 +104,6 @@ TEST(HyperbolicEquationsTest, GetHyperbolicSineOfHalvedValueWorks) {
 
 TEST(HyperbolicEquationsTest, GetHyperbolicCosineOfHalvedValueWorks) {
     EXPECT_EQ("(((cosh(x)+1)/2)^(1/2))", convertToString(getHyperbolicCosineOfHalvedValue("x")));
-}
-
-TEST(HyperbolicEquationsTest, GetHyperbolicArcSineDefinitionWorks) {
-    EXPECT_EQ("arcsinh(x) = ln((x+(((x^2)+1)^(1/2))))", convertToString(getHyperbolicArcSineDefinition("x")));
-}
-
-TEST(HyperbolicEquationsTest, GetHyperbolicArcCosineDefinitionWorks) {
-    EXPECT_EQ("arccosh(x) = ln((x+(((x^2)-1)^(1/2))))", convertToString(getHyperbolicArcCosineDefinition("x")));
-}
-
-TEST(HyperbolicEquationsTest, GetHyperbolicArcTangentDefinitionWorks) {
-    EXPECT_EQ("arctanh(x) = ((1/2)*ln(((1-x)/(1+x))))", convertToString(getHyperbolicArcTangentDefinition("x")));
-}
-
-TEST(HyperbolicEquationsTest, GetHyperbolicArcCotangentDefinitionWorks) {
-    EXPECT_EQ("arccoth(x) = ((1/2)*ln(((x+1)/(x-1))))", convertToString(getHyperbolicArcCotangentDefinition("x")));
 }
 
 }  // namespace alba::algebra

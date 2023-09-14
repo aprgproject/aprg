@@ -8,13 +8,20 @@ using namespace std;
 
 namespace alba {
 
-TEST(DisplayTableTest, ConvertingToStringWorks) {
-    DisplayTable table;
+TEST(DisplayTableTest, TableCanBeConstructedWithNumberOfColumnsAndRows) {
+    DisplayTable table(2U, 3U);
 
-    table.addRow();
-    table.getLastRow().addCell("Test");
+    table.setBorders("-", "|");
+    table.getCellReferenceAt(0U, 0U).setText("(0,0)");
+    table.getCellReferenceAt(0U, 1U).setText("(0,1)");
+    table.getCellReferenceAt(0U, 2U).setText("(0,2)");
+    table.getCellReferenceAt(1U, 0U).setText("(1,0)");
+    table.getCellReferenceAt(1U, 1U).setText("(1,1)");
+    table.getCellReferenceAt(1U, 2U).setText("(1,2)");
 
-    EXPECT_EQ("Test\n", convertToString(table));
+    EXPECT_EQ(
+        "-------------\n|(0,0)|(1,0)|\n-------------\n|(0,1)|(1,1)|\n-------------\n|(0,2)|(1,2)|\n-------------\n",
+        convertToString(table));
 }
 
 TEST(DisplayTableTest, TableWorksWithBorders) {
@@ -47,39 +54,6 @@ TEST(DisplayTableTest, TableWorksFor3by3Table) {
     EXPECT_EQ(
         "----------------\n|1000|2|   3   |\n----------------\n|4.1 |5| 6.55  |\n----------------\n| 7  "
         "|8|9000000|\n----------------\n",
-        convertToString(table));
-}
-
-TEST(DisplayTableTest, TableCellWithAlignmentCanBeAdded) {
-    DisplayTable table;
-
-    table.addRow();
-    table.getLastRow().addCell("12345");
-    table.addRow();
-    table.getLastRow().addCell("C", HorizontalAlignment::Center);
-    table.addRow();
-    table.getLastRow().addCell("L", HorizontalAlignment::Left);
-    table.addRow();
-    table.getLastRow().addCell("R", HorizontalAlignment::Right);
-    table.addRow();
-    table.getLastRow().addCell("J", HorizontalAlignment::Justify);
-
-    EXPECT_EQ("12345\n  C  \nL    \n    R\n  J  \n", convertToString(table));
-}
-
-TEST(DisplayTableTest, TableCanBeConstructedWithNumberOfColumnsAndRows) {
-    DisplayTable table(2U, 3U);
-
-    table.setBorders("-", "|");
-    table.getCellReferenceAt(0U, 0U).setText("(0,0)");
-    table.getCellReferenceAt(0U, 1U).setText("(0,1)");
-    table.getCellReferenceAt(0U, 2U).setText("(0,2)");
-    table.getCellReferenceAt(1U, 0U).setText("(1,0)");
-    table.getCellReferenceAt(1U, 1U).setText("(1,1)");
-    table.getCellReferenceAt(1U, 2U).setText("(1,2)");
-
-    EXPECT_EQ(
-        "-------------\n|(0,0)|(1,0)|\n-------------\n|(0,1)|(1,1)|\n-------------\n|(0,2)|(1,2)|\n-------------\n",
         convertToString(table));
 }
 
@@ -141,6 +115,32 @@ TEST(DisplayTableTest, TableWorksForMultilineCellWithDifferentAlignments) {
         "    |       |\n|   7    |           |       |\n|   7    | 8 8 8 8 8 "
         "|9000000|\n------------------------------\n",
         convertToString(table));
+}
+
+TEST(DisplayTableTest, ConvertingToStringWorks) {
+    DisplayTable table;
+
+    table.addRow();
+    table.getLastRow().addCell("Test");
+
+    EXPECT_EQ("Test\n", convertToString(table));
+}
+
+TEST(DisplayTableTest, TableCellWithAlignmentCanBeAdded) {
+    DisplayTable table;
+
+    table.addRow();
+    table.getLastRow().addCell("12345");
+    table.addRow();
+    table.getLastRow().addCell("C", HorizontalAlignment::Center);
+    table.addRow();
+    table.getLastRow().addCell("L", HorizontalAlignment::Left);
+    table.addRow();
+    table.getLastRow().addCell("R", HorizontalAlignment::Right);
+    table.addRow();
+    table.getLastRow().addCell("J", HorizontalAlignment::Justify);
+
+    EXPECT_EQ("12345\n  C  \nL    \n    R\n  J  \n", convertToString(table));
 }
 
 }  // namespace alba

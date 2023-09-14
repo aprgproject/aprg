@@ -26,6 +26,16 @@ TEST(AlbaStreamBitWriterTest, WriteBoolDataWorks) {
     EXPECT_EQ(R"(3)", testStream.str());
 }
 
+TEST(AlbaStreamBitWriterTest, FlushWorks) {
+    stringstream testStream;
+    AlbaStreamBitWriter writer(testStream);
+    writer.writeBoolData(true);
+
+    writer.flush();
+
+    EXPECT_EQ(R"(80)", getHexEquivalentOfCharacters(testStream.str()));
+}
+
 TEST(AlbaStreamBitWriterTest, WriteCharDataWorks) {
     stringstream testStream;
     AlbaStreamBitWriter writer(testStream);
@@ -91,16 +101,6 @@ TEST(AlbaStreamBitWriterTest, WriteBitsetDataWorks) {
     writer.writeBitsetData<32U>(bitsetToWrite, 15U, 22U);
 
     EXPECT_EQ(R"(16)", getHexEquivalentOfCharacters(testStream.str()));
-}
-
-TEST(AlbaStreamBitWriterTest, FlushWorks) {
-    stringstream testStream;
-    AlbaStreamBitWriter writer(testStream);
-    writer.writeBoolData(true);
-
-    writer.flush();
-
-    EXPECT_EQ(R"(80)", getHexEquivalentOfCharacters(testStream.str()));
 }
 
 }  // namespace alba

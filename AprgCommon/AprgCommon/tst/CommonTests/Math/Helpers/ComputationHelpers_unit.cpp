@@ -16,6 +16,13 @@ TEST(ComputationHelpersTest, GetAverageOfThreeNumbersWorks) {
     EXPECT_EQ(370, getAverage(10, 100, 1000));
 }
 
+TEST(ComputationHelpersTest, GetAverageOfTwoNumbersForAlbaNumberWorks) {
+    EXPECT_EQ(AlbaNumber(0), getAverage(AlbaNumber::createFraction(1, 3), AlbaNumber::createFraction(-1, 3)));
+    EXPECT_EQ(
+        AlbaNumber::createFraction(1, 3),
+        getAverage(AlbaNumber::createFraction(1, 3), AlbaNumber::createFraction(1, 3)));
+}
+
 TEST(ComputationHelpersTest, GetXSquaredPlusYSquaredWorks) {
     EXPECT_EQ(25, getXSquaredPlusYSquared(3, 4));
     EXPECT_EQ(169, getXSquaredPlusYSquared(5, -12));
@@ -60,13 +67,6 @@ TEST(ComputationHelpersTest, ClampWithinWorks) {
     EXPECT_EQ(3, clampWithin(3, 2, 4));
     EXPECT_EQ(4, clampWithin(4, 2, 4));
     EXPECT_EQ(4, clampWithin(5, 2, 4));
-}
-
-TEST(ComputationHelpersTest, GetAverageOfTwoNumbersForAlbaNumberWorks) {
-    EXPECT_EQ(AlbaNumber(0), getAverage(AlbaNumber::createFraction(1, 3), AlbaNumber::createFraction(-1, 3)));
-    EXPECT_EQ(
-        AlbaNumber::createFraction(1, 3),
-        getAverage(AlbaNumber::createFraction(1, 3), AlbaNumber::createFraction(1, 3)));
 }
 
 TEST(ComputationHelpersTest, GetQuadraticWorksWithRealRootsOnlyWithInputHavingRealRoots) {

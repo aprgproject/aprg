@@ -61,7 +61,6 @@ enum DayOfTheWeek : uint32_t {
 //     November = 11,
 //     December = 12
 // };
-
 // enum class version:
 // enum class AlbaDateTimeConstants : std::size_t
 // {

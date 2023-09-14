@@ -308,7 +308,7 @@ TEST(InPlaceConstructionExamplesTest, VectorPushBackVsEmplaceBack) {
     // ---> "I like to use the least powerful thing that is available to me."
     // ---> "It helps the reader of my code, theres gonna be a copy here and I can't do anything better."
     string const& s2 = v.emplace_back();  // first default construct in the vector
-    // after emplace_back we can mutate s2
+                                          // after emplace_back we can mutate s2
     // emplace_back takes a parameter pack and parameter packs can be empty
     // emplace_back does perfect forwarding. It can call explicit constructors;
     // v.push_back(); // cannot default construct because a parameter needs to be passed
@@ -610,19 +610,15 @@ TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
 // -------> This results on copy and zeroing out (make the length 0) the "moved-from" string.
 // -----> http://quick-bench.com/eb54Wv8Bmvr08frpgtgFOIxQqa4
 // -----> https://quick-bench.com/q/NhgKqpmyRprciBpLnqAOocx7nII
-
 // -> Why is RVO so important?
 // ---> Because move aren't necessarily cheap
-
 // -> What is Copy Elision aka RVO?
 // ---> Perhaps the most important optimization the compiler does.
-
 // -> RVO in Pictures
 // ---> When a caller calls into a callee,
 // -----> there this hidden parameter on the stack which is the address of the return value.
 // ---> If the callee can return/construct directly in the caller stack frame
 // -----> there is no need to construct and then copy to the point of return
-
 // -> When can RVO not apply?
 // ---> How can we make RVO? And how can we accidentally inhibit RVO?
 // ---> Two things to consider:
@@ -642,13 +638,10 @@ TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
 // -----> If the callee doesn't know enough (see example above)
 // ---------> It has to be decidable at construction time.
 // ---------> Again, the compiler will still move it (Since C++11)
-
 // -> Beware of superfluous "std::move"s
 // ---> In some cases it removes NRVO.
-
 // -> Putting stuff into a vector
 // ---> Should you use push_back or should you use emplace_back? How should you use them?
-
 // -> Definitions
 // ---> push_back
 // -----> void push_back(T const& x);
@@ -657,19 +650,16 @@ TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
 // -----> template <class... Args> void emplace_back(Args&&... args);
 // ---> push_back is overloaded with lvalue and rvalue references
 // ---> emplace_back uses forwarding references
-
 // -> Some people: "Just always use emplace_back because its certain more powerful that push back"
 // ---> "I don't like that view, I don't login to my computer as root."
 // ---> "I like to use the least powerful thing that is available to me."
 // ---> "It helps the reader of my code, theres gonna be a copy here and I can't do anything better."
-
 // -> back_inserter
 // ---> Does push_back underneath
 // -----> Results to: Construction of temporary, move construction to vector, and destruction of temporary
 // ---> This is the best thing we can do right now.
 // ---> The library doesn't have back_emplacer.
 // -----> The back_emplacer guarantees that we will have in-place construction.
-
 // -> Creating a vector of pairs
 // ---> Sometimes, we use a sorted vector of pair as replacement for map.
 // ---> What do you do if part of your pair has a multi-argument constructor?
@@ -677,7 +667,6 @@ TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
 // -------> pair has a constructor that will handle your multi argument construtor
 // -------> piecewise_construct_t is a tag type
 // -------> forward tuples to emplace_back to ensure in-place construction
-
 // -> Recommendations (on push_back vs emplace_back)
 // ---> push_back is perfectly fine for rvalues
 // ---> use emplace_back only when you need its powers
@@ -685,7 +674,6 @@ TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
 // -----> a reference to what's added (C++17)
 // ---> never pass an explicit temporary to emplace_back
 // ---> use piecewise_construct/forward_as_tuple to forward args through pair.
-
 // -> What is an initializer_list
 // ---> When you write:
 // -----> std::vector<int> v{1, 2, 3};
@@ -693,20 +681,17 @@ TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
 // -----> const in a[] = {1, 2, 3};
 // -----> std::vector<int> v = std::initializer_list<int>(a, a+3);
 // -------> Note this is copying (not moving)
-
 // -> Initializer list are so convenient!
 // ---> But typically results to multiple constructs, copies (not moves), destructs
 // ---> Compared to in-place construction which are only constructs
 // ---> Initializer lists are broken!
 // -----> "Initializer lists are boken, lets fix them" - Jason Turner, C++ Now 2018
-
 // -> Caveat construction
 // ---> std::string is an interesting case here. We intuit/are taught:
 // -----> "Delay construction, allocation, etc, as late as possible"
 // -------> But that might hurt us with std::string.
 // -------> As soon as string/string_view get converted to const char*
 // ---------> somewhere down the line it will have to call strlen.
-
 // -> Recommendations (on initializer_list)
 // ---> use initializer_list only for literal types
 // ---> consider using array and manually moving?
@@ -714,24 +699,19 @@ TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
 // ---> wait for in_place_t constructor on vector
 // ---> wait for more work on std::initializer_list
 // ---> watch Jason Turner's talk
-
 // -> Putting stuff into a map (or other associative container)
 // ---> It's a bit complicated.
-
 // -> initializer_list with map
 // ---> Its perfectly possible to initialize a map with an initializer_list
 // -----> Use aggregate initialization with pair. Is this good?
-
 // -> Enough initializing, how about putting things into a map?
 // ---> The easy way: operator[]
 // ---> Use piecewise_construct with forward_as_tuple
 // -----> Tuples are allowed to be empty!
 // -----> Yes, we can also use this for more-than-one-arg constructors.
-
 // -> C++17: insert or assign
 // ---> Of course, insert/emplace and operatorp[ actually do different things.
 // ---> What do you do if you want to insert or assign if the element is already there
-
 // -> In case you're not keeping cout
 // ---> We now have at least (3-4-5) N (>5) different interface styles for putting things in a map...
 // ----->  insert takes a value_type (aka pair)
@@ -744,12 +724,10 @@ TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
 // -------> so does operator[] (without forwarding)
 // -----> marge takes another map...
 // ---> See also: "A Clean and Minimal Map API" - Chancler Carruth, C++ Now 2019
-
 // -> emplace & emplace_back epilogue
 // ---> What to do if mapped_type is an aggregate? You want the rule of zero
 // -----> C++20 P0960: Aggregate initialization with parentheses
 // -----> This means forward_as_tuple(...) will now work with aggregates.
-
 // -> Recommendations (for using a map)
 // ---> Initialization: consider for_each_n_args
 // ---> You can use insert with make_pair and implicit consturction
@@ -762,17 +740,14 @@ TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
 // ---> Consider with_result_of
 // ---> Aggregates will suck until C++20
 // -----> Or, use a non-standard map with a better API.
-
 // -> Putting stuff into other things (optional, variant, any)
 // ---> They have a tag type which takes can piecewise construct.
 // -----> They can have in-place construction
-
 // -> Recommendations (about variant)
 // ---> always be explicit about types
 // ---> use in_place_type or in_place_index construictor
 // ---> us emplace<T> or emplace <I>
 // ---> avoid operator= (except on actual variant-to-variant)
-
 // -> Recommendations (overall)
 // ---> Think about copies and moves
 // ---> Moves aren't free and may not be cheap.
@@ -781,35 +756,27 @@ TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
 // ---> Study the interfaces of the containers you're using
 // ---> Don't be afraid to use push_back
 // ---> Beware of initializer_list
-
 // Quotes:
-
 // -> What happens when we move something?
 // ---> "Mov'd! In good time! Let him that mov'd you hither remove you hence."
 // ----->  William Shakespeare, The Taming of the Shrew
-
 // -> Copy Elision aka RVO
 // ---> "If you will, lead these graces to the grave and leave the world no copy."
 // -----> William Shakespeare, Twelfth Night or What You Will
-
 // -> Putting stuff into a vector
 // ---> "Didst thou not say, when I did push thee back --
 // ---> Which was when I perceived thee -- that thou camest
 // ---> From good descending?"
 // -----> William Shakespeare, Pericles
-
 // -> initializer_list
 // ---> "I fear these stubborn lines lack power to move"
 // -----> William Shakespeare, Love's Labours Lost
-
 // -> Putting stuff into a map (or other associative container)
 // ---> "A plague upon it! I have forgot the map."
 // -----> William Shakespeare, Henry IV Part I
-
 // -> Putting stuff into other things (optional, variant, any)
 // ---> "There's more depends on this than on the value."
 // -----> William Shakespeare, The Merchant of Venice.
-
 // -> Final guidelines and recommendations
 // ---> "Share the advice betwixt you; if both gain all,
 // ---> The gift doth stretch itself as 'tis receiv'd

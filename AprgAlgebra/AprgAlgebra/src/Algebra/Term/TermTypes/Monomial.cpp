@@ -44,30 +44,6 @@ bool Monomial::operator<(Monomial const& second) const {
     return result;
 }
 
-Monomial::VariablesToExponentsMap Monomial::combineVariableExponentMapByMultiplication(
-    VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2) {
-    VariablesToExponentsMap newVariableMap;
-    for (auto const& [variableName, exponent] : variablesMap1) {
-        newVariableMap[variableName] += exponent;
-    }
-    for (auto const& [variableName, exponent] : variablesMap2) {
-        newVariableMap[variableName] += exponent;
-    }
-    return newVariableMap;
-}
-
-Monomial::VariablesToExponentsMap Monomial::combineVariableExponentMapByDivision(
-    VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2) {
-    VariablesToExponentsMap newVariableMap;
-    for (auto const& [variableName, exponent] : variablesMap1) {
-        newVariableMap[variableName] += exponent;
-    }
-    for (auto const& [variableName, exponent] : variablesMap2) {
-        newVariableMap[variableName] -= exponent;
-    }
-    return newVariableMap;
-}
-
 AlbaNumber const& Monomial::getCoefficient() const { return m_constant; }
 
 AlbaNumber Monomial::getExponentForVariable(string const& variableName) const {
@@ -159,6 +135,47 @@ void Monomial::putVariableWithExponent(string const& variable, AlbaNumber const&
 void Monomial::setAsSimplified() { m_isSimplified = true; }
 void Monomial::clearSimplifiedFlag() { m_isSimplified = false; }
 
+Monomial::VariablesToExponentsMap Monomial::combineVariableExponentMapByMultiplication(
+    VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2) {
+    VariablesToExponentsMap newVariableMap;
+    for (auto const& [variableName, exponent] : variablesMap1) {
+        newVariableMap[variableName] += exponent;
+    }
+    for (auto const& [variableName, exponent] : variablesMap2) {
+        newVariableMap[variableName] += exponent;
+    }
+    return newVariableMap;
+}
+
+Monomial::VariablesToExponentsMap Monomial::combineVariableExponentMapByDivision(
+    VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2) {
+    VariablesToExponentsMap newVariableMap;
+    for (auto const& [variableName, exponent] : variablesMap1) {
+        newVariableMap[variableName] += exponent;
+    }
+    for (auto const& [variableName, exponent] : variablesMap2) {
+        newVariableMap[variableName] -= exponent;
+    }
+    return newVariableMap;
+}
+
+void Monomial::setNanIfNeeded() {
+    if (hasNan(*this)) {
+        m_variablesToExponentsMap.clear();
+        setConstant(ALBA_NUMBER_NOT_A_NUMBER);
+    }
+}
+
+void Monomial::removeZeroExponents() {
+    VariablesToExponentsMap const oldVariableMap(m_variablesToExponentsMap);
+    m_variablesToExponentsMap.clear();
+    for (auto const& [variableName, exponent] : oldVariableMap) {
+        if (exponent != 0) {
+            m_variablesToExponentsMap.emplace(variableName, exponent);
+        }
+    }
+}
+
 bool Monomial::isLessThanByComparingVariableNameMaps(Monomial const& monomial1, Monomial const& monomial2) {
     set<string> variableNames;
     for (auto const& [variableName, exponent] : monomial1.getVariablesToExponentsMap()) {
@@ -177,23 +194,6 @@ bool Monomial::isLessThanByComparingVariableNameMaps(Monomial const& monomial1, 
         }
     }
     return result;
-}
-
-void Monomial::setNanIfNeeded() {
-    if (hasNan(*this)) {
-        m_variablesToExponentsMap.clear();
-        setConstant(ALBA_NUMBER_NOT_A_NUMBER);
-    }
-}
-
-void Monomial::removeZeroExponents() {
-    VariablesToExponentsMap const oldVariableMap(m_variablesToExponentsMap);
-    m_variablesToExponentsMap.clear();
-    for (auto const& [variableName, exponent] : oldVariableMap) {
-        if (exponent != 0) {
-            m_variablesToExponentsMap.emplace(variableName, exponent);
-        }
-    }
 }
 
 ostream& operator<<(ostream& out, Monomial const& monomial) {

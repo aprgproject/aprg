@@ -48,14 +48,12 @@ private:
 // -> Seedable (with more than 32 bits if you want)
 // -> Reproducible (standard-mandated algorithm)
 // -> Cannot be invoked with multiple threads (not thread safe)
-
 // On std::uniform_int_distribution:
 // -> "If the random number is not [0, 2^N), you are bad and you should feel bad." -> Stephan Lavavej
 // ---> But still the C++ standard requires perfect uniformity
 // -> Note: C++ standard does not allow char-types.
 // -> Deterministic, but not invariant
 // ---> Will vary across platforms, may vary across compilers/compiler versions
-
 // On std::mt19937 vs std::mt19937_64:
 // -> From: https://stackoverflow.com/questions/39154516/is-stdmt19937-64-faster-than-stdmt19937/39170215
 // ---> It clearly depends on your compiler and their implementation.

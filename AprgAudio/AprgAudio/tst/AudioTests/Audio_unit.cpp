@@ -61,6 +61,23 @@ bool writeTest(int const numberOfChannels, int const sampleRate, int const bitDe
     return false;
 }
 
+TEST(WritingTest, DISABLED_WriteSineToneToManyFormats) {
+    std::vector<int> const sampleRates = {22050, 44100, 48000, 96000};
+    std::vector<int> const bitDepths = {8, 16, 24};
+    std::vector<int> const numberOfChannels = {1, 2};
+    std::vector<AudioFormat> const audioFormats = {AudioFormat::Wave, AudioFormat::Aiff};
+
+    for (auto& sampleRate : sampleRates) {
+        for (auto& bitDepth : bitDepths) {
+            for (auto& channels : numberOfChannels) {
+                for (auto& format : audioFormats) {
+                    EXPECT_TRUE(writeTest(channels, sampleRate, bitDepth, format));
+                }
+            }
+        }
+    }
+}
+
 TEST(AiffLoadingTests, DISABLED_StereoWith8BitWithSampleRate44100) {
     Audio<double> audioFile;
     bool const isLoadingSuccessful =
@@ -185,18 +202,6 @@ TEST(AiffLoadingTests, DISABLED_StereoWith24BitWithSampleRate48000) {
                 aiff_stereo_24bit_48000::testBuffer[channelIndex][bufferIndex]));
         }
     }
-}
-
-TEST(WritingTest, DISABLED_WriteFromCopiedSampleBuffer) {
-    Audio<float> audioFile1;
-    Audio<float> audioFile2;
-
-    bool const isLoadingSuccessful =
-        audioFile1.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_16bit_44100.wav)");
-    ASSERT_TRUE(isLoadingSuccessful);
-
-    audioFile2.setAudioBuffer(audioFile1.samples);
-    audioFile2.save("audio-write-tests/copied_audio_file.aif", AudioFormat::Aiff);
 }
 
 TEST(WavLoadingTests, DISABLED_StereoWith8BitWithSampleRate44100) {
@@ -363,21 +368,16 @@ TEST(WavLoadingTests, DISABLED_MonoWith16BitWithSampleRate48000) {
     }
 }
 
-TEST(WritingTest, DISABLED_WriteSineToneToManyFormats) {
-    std::vector<int> const sampleRates = {22050, 44100, 48000, 96000};
-    std::vector<int> const bitDepths = {8, 16, 24};
-    std::vector<int> const numberOfChannels = {1, 2};
-    std::vector<AudioFormat> const audioFormats = {AudioFormat::Wave, AudioFormat::Aiff};
+TEST(WritingTest, DISABLED_WriteFromCopiedSampleBuffer) {
+    Audio<float> audioFile1;
+    Audio<float> audioFile2;
 
-    for (auto& sampleRate : sampleRates) {
-        for (auto& bitDepth : bitDepths) {
-            for (auto& channels : numberOfChannels) {
-                for (auto& format : audioFormats) {
-                    EXPECT_TRUE(writeTest(channels, sampleRate, bitDepth, format));
-                }
-            }
-        }
-    }
+    bool const isLoadingSuccessful =
+        audioFile1.load(APRG_DIR R"(\AprgAudio\FilesForTests\ActualAudioFiles\wav_stereo_16bit_44100.wav)");
+    ASSERT_TRUE(isLoadingSuccessful);
+
+    audioFile2.setAudioBuffer(audioFile1.samples);
+    audioFile2.save("audio-write-tests/copied_audio_file.aif", AudioFormat::Aiff);
 }
 
 }  // namespace alba::AprgAudio

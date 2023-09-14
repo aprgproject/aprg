@@ -31,9 +31,6 @@ public:
     bool evaluate(std::string const& stringToEvaluate);
 
 private:
-    static char convertTildeToExclamationPointIfNeeded(char const character);
-    static bool isOperator(char const character);
-    static bool isParenthesis(char const character);
     [[nodiscard]] bool isEvaluationPossible() const;
     void extractTokens(std::string const& condition);
     void extractTokensWhileOnString(bool& isOnString, std::string& stringToBuild, char const& currentCharacter);
@@ -42,6 +39,9 @@ private:
     void addOperator(char const characterOperator);
     void addParenthesis(char const currentCharacter, int& parenthesisCount);
     void setErrorMessage(std::string const& errorMessage);
+    static char convertTildeToExclamationPointIfNeeded(char const character);
+    static bool isOperator(char const character);
+    static bool isParenthesis(char const character);
     bool m_isEvaluatorInvalid{false};
     std::string m_errorMessage;
     VectorOfTokens m_tokens;

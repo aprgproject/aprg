@@ -10,6 +10,18 @@ using namespace std;
 
 namespace alba::algebra {
 
+TEST(SignMutatorTest, MutateTermWorksOnFunction) {
+    SignMutator mutator;
+    Term functionTerm1(abs("a"));
+    Term functionTerm2(sin("a"));
+
+    mutator.mutateTerm(functionTerm1);
+    mutator.mutateTerm(functionTerm2);
+
+    EXPECT_EQ(Term(1), functionTerm1);
+    EXPECT_TRUE(isNan(functionTerm2));
+}
+
 TEST(SignMutatorTest, MutateTermWorks) {
     SignMutator mutator;
     mutator.putVariableWithSign("a", TermAssociationType::Positive);
@@ -51,18 +63,6 @@ TEST(SignMutatorTest, MutateTermWorksOnVariable) {
     EXPECT_EQ(Term(1), variableTerm1);
     EXPECT_EQ(Term(-1), variableTerm2);
     EXPECT_TRUE(isNan(variableTerm3));
-}
-
-TEST(SignMutatorTest, MutateTermWorksOnFunction) {
-    SignMutator mutator;
-    Term functionTerm1(abs("a"));
-    Term functionTerm2(sin("a"));
-
-    mutator.mutateTerm(functionTerm1);
-    mutator.mutateTerm(functionTerm2);
-
-    EXPECT_EQ(Term(1), functionTerm1);
-    EXPECT_TRUE(isNan(functionTerm2));
 }
 
 TEST(SignMutatorTest, MutateConstantWorks) {

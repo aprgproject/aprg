@@ -11,8 +11,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-TEST(OneEquationOneVariableEqualitySolverTest, ConstructionWorks) { OneEquationOneVariableEqualitySolver(); }
-
 TEST(OneEquationOneVariableEqualitySolverTest, NonEqualityOperatorsAreNotSolved) {
     OneEquationOneVariableEqualitySolver solver;
 
@@ -172,5 +170,7 @@ TEST(OneEquationOneVariableEqualitySolverTest, RadicalOverRadicalInEquationAreSo
     EXPECT_EQ(AlbaNumbers{2}, solutionSet.getAcceptedValues());
     EXPECT_EQ(AlbaNumbers{3}, solutionSet.getRejectedValues());
 }
+
+TEST(OneEquationOneVariableEqualitySolverTest, ConstructionWorks) { OneEquationOneVariableEqualitySolver(); }
 
 }  // namespace alba::algebra

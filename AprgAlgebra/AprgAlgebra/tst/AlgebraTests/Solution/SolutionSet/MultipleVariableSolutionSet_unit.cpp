@@ -9,48 +9,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-TEST(MultipleVariableSolutionSetTest, ConstructorWorksAndEmpty) {
-    MultipleVariableSolutionSet solutionSet;
-
-    EXPECT_TRUE(solutionSet.getVariableNameToSolutionSetMap().empty());
-}
-
-TEST(MultipleVariableSolutionSetTest, IsValueAcceptedForVariableWorks) {
-    MultipleVariableSolutionSet solutionSet;
-    SolutionSet solutionSetForVariable;
-    solutionSetForVariable.addAcceptedValue(AlbaNumber(58));
-    solutionSet.addSolutionSetForVariable("a", solutionSetForVariable);
-    solutionSet.addSolutionSetForVariable("b", solutionSetForVariable);
-
-    EXPECT_TRUE(solutionSet.isValueAcceptedForVariable("a", 58));
-    EXPECT_FALSE(solutionSet.isValueAcceptedForVariable("a", 59));
-    EXPECT_TRUE(solutionSet.isValueAcceptedForVariable("b", 58));
-    EXPECT_FALSE(solutionSet.isValueAcceptedForVariable("b", 59));
-}
-
-TEST(MultipleVariableSolutionSetTest, GetNumberOfVariablesWithSolutionsWorks) {
-    MultipleVariableSolutionSet solutionSet;
-    SolutionSet solutionSetForVariable;
-    solutionSetForVariable.addAcceptedValue(AlbaNumber(58));
-    solutionSet.addSolutionSetForVariable("a", solutionSetForVariable);
-    solutionSet.addSolutionSetForVariable("b", solutionSetForVariable);
-
-    EXPECT_EQ(2, solutionSet.getNumberOfVariablesWithSolutions());
-}
-
-TEST(MultipleVariableSolutionSetTest, GetVariableNamesWorks) {
-    MultipleVariableSolutionSet solutionSet;
-    SolutionSet solutionSetForVariable;
-    solutionSetForVariable.addAcceptedValue(AlbaNumber(58));
-    solutionSet.addSolutionSetForVariable("a", solutionSetForVariable);
-    solutionSet.addSolutionSetForVariable("b", solutionSetForVariable);
-
-    VariableNamesSet variableNames(solutionSet.getVariableNames());
-    auto it = variableNames.cbegin();
-    EXPECT_EQ("a", *(it++));
-    EXPECT_EQ("b", *(it++));
-}
-
 TEST(MultipleVariableSolutionSetTest, GetSolutionSetForVariableWorks) {
     MultipleVariableSolutionSet solutionSet;
     SolutionSet solutionSetForA;
@@ -60,6 +18,12 @@ TEST(MultipleVariableSolutionSetTest, GetSolutionSetForVariableWorks) {
     SolutionSet solutionSetToVerify(solutionSet.getSolutionSetForVariable("a"));
 
     EXPECT_EQ(AlbaNumbers{58}, solutionSetToVerify.getAcceptedValues());
+}
+
+TEST(MultipleVariableSolutionSetTest, ConstructorWorksAndEmpty) {
+    MultipleVariableSolutionSet solutionSet;
+
+    EXPECT_TRUE(solutionSet.getVariableNameToSolutionSetMap().empty());
 }
 
 TEST(MultipleVariableSolutionSetTest, AddSolutionSetForVariableWorks) {
@@ -75,6 +39,42 @@ TEST(MultipleVariableSolutionSetTest, AddSolutionSetForVariableWorks) {
     auto const it = expectedMap.cbegin();
     EXPECT_EQ("a", it->first);
     EXPECT_EQ(AlbaNumbers{58}, it->second.getAcceptedValues());
+}
+
+TEST(MultipleVariableSolutionSetTest, GetVariableNamesWorks) {
+    MultipleVariableSolutionSet solutionSet;
+    SolutionSet solutionSetForVariable;
+    solutionSetForVariable.addAcceptedValue(AlbaNumber(58));
+    solutionSet.addSolutionSetForVariable("a", solutionSetForVariable);
+    solutionSet.addSolutionSetForVariable("b", solutionSetForVariable);
+
+    VariableNamesSet variableNames(solutionSet.getVariableNames());
+    auto it = variableNames.cbegin();
+    EXPECT_EQ("a", *(it++));
+    EXPECT_EQ("b", *(it++));
+}
+
+TEST(MultipleVariableSolutionSetTest, GetNumberOfVariablesWithSolutionsWorks) {
+    MultipleVariableSolutionSet solutionSet;
+    SolutionSet solutionSetForVariable;
+    solutionSetForVariable.addAcceptedValue(AlbaNumber(58));
+    solutionSet.addSolutionSetForVariable("a", solutionSetForVariable);
+    solutionSet.addSolutionSetForVariable("b", solutionSetForVariable);
+
+    EXPECT_EQ(2, solutionSet.getNumberOfVariablesWithSolutions());
+}
+
+TEST(MultipleVariableSolutionSetTest, IsValueAcceptedForVariableWorks) {
+    MultipleVariableSolutionSet solutionSet;
+    SolutionSet solutionSetForVariable;
+    solutionSetForVariable.addAcceptedValue(AlbaNumber(58));
+    solutionSet.addSolutionSetForVariable("a", solutionSetForVariable);
+    solutionSet.addSolutionSetForVariable("b", solutionSetForVariable);
+
+    EXPECT_TRUE(solutionSet.isValueAcceptedForVariable("a", 58));
+    EXPECT_FALSE(solutionSet.isValueAcceptedForVariable("a", 59));
+    EXPECT_TRUE(solutionSet.isValueAcceptedForVariable("b", 58));
+    EXPECT_FALSE(solutionSet.isValueAcceptedForVariable("b", 59));
 }
 
 TEST(MultipleVariableSolutionSetTest, OutputStreamOperatorWorks) {

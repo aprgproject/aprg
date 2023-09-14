@@ -26,38 +26,26 @@ TEST(RWayTrieUsingLinkedArraysTest, GetAllKeysWithPrefixWorks) { testGetAllKeysW
 TEST(RWayTrieUsingLinkedArraysTest, GetAllKeysThatMatchWorks) { testGetAllKeysThatMatchWithInt<TrieForTest>(); }
 TEST(RWayTrieUsingLinkedArraysTest, Example1Works) { testExample1WithInt<TrieForTest>(); }
 
-TEST(RWayTrieUsingLinkedArraysTest, GetWhenEmptyStringWorks) {
-    TrieForTest trie;
-
-    EXPECT_EQ(0, trie.get(""));
-
-    trie.put("", 17);
-    EXPECT_EQ(17, trie.get(""));
-}
-
-TEST(RWayTrieUsingLinkedArraysTest, GetNumberOfNodesWorksWhenEmpty) {
-    TrieForTest const trie;
-
-    EXPECT_EQ(0, trie.getNumberOfNodes());
-}
-
-TEST(RWayTrieUsingLinkedArraysTest, GetNumberOfNodesWorksWhenNotEmpty) {
+TEST(RWayTrieUsingLinkedArraysTest, DeleteBasedOnKeyWorksWithNumberOfNodes) {
     TrieForTest trie;
     trie.put("she", 0);
     trie.put("sells", 1);
     trie.put("sea", 2);
 
-    // 9 nodes:
-    // 1) s
-    // 2) eh (child of s)
-    // 3) e (child of h)
-    // 4) al (child of first e)
-    // 5) l (child of first l)
-    // 6) s (child of second l)
-    // 7) 0-value (child of "she" path)
-    // 8) 1-value (child of "sells" path)
-    // 9) 2-value (child of "sea" path)
-    EXPECT_EQ(9, trie.getNumberOfNodes());
+    trie.deleteBasedOnKey("she");
+    EXPECT_EQ(2, trie.getSize());
+    EXPECT_EQ(7, trie.getNumberOfNodes());
+    EXPECT_EQ(1, trie.get("sells"));
+    EXPECT_EQ(2, trie.get("sea"));
+
+    trie.deleteBasedOnKey("sells");
+    EXPECT_EQ(1, trie.getSize());
+    EXPECT_EQ(4, trie.getNumberOfNodes());
+    EXPECT_EQ(2, trie.get("sea"));
+
+    trie.deleteBasedOnKey("sea");
+    EXPECT_TRUE(trie.isEmpty());
+    EXPECT_EQ(0, trie.getNumberOfNodes());
 }
 
 TEST(RWayTrieUsingLinkedArraysTest, PutWorksWithNumberOfNodes) {
@@ -84,26 +72,13 @@ TEST(RWayTrieUsingLinkedArraysTest, PutWhenEmptyStringWorks) {
     EXPECT_EQ(17, trie.get(""));
 }
 
-TEST(RWayTrieUsingLinkedArraysTest, DeleteBasedOnKeyWorksWithNumberOfNodes) {
+TEST(RWayTrieUsingLinkedArraysTest, GetWhenEmptyStringWorks) {
     TrieForTest trie;
-    trie.put("she", 0);
-    trie.put("sells", 1);
-    trie.put("sea", 2);
 
-    trie.deleteBasedOnKey("she");
-    EXPECT_EQ(2, trie.getSize());
-    EXPECT_EQ(7, trie.getNumberOfNodes());
-    EXPECT_EQ(1, trie.get("sells"));
-    EXPECT_EQ(2, trie.get("sea"));
+    EXPECT_EQ(0, trie.get(""));
 
-    trie.deleteBasedOnKey("sells");
-    EXPECT_EQ(1, trie.getSize());
-    EXPECT_EQ(4, trie.getNumberOfNodes());
-    EXPECT_EQ(2, trie.get("sea"));
-
-    trie.deleteBasedOnKey("sea");
-    EXPECT_TRUE(trie.isEmpty());
-    EXPECT_EQ(0, trie.getNumberOfNodes());
+    trie.put("", 17);
+    EXPECT_EQ(17, trie.get(""));
 }
 
 TEST(RWayTrieUsingLinkedArraysTest, DeleteBasedOnKeyWhenEmptyStringWorks) {
@@ -116,6 +91,31 @@ TEST(RWayTrieUsingLinkedArraysTest, DeleteBasedOnKeyWhenEmptyStringWorks) {
 
     trie.deleteBasedOnKey("");
     EXPECT_TRUE(trie.isEmpty());
+    EXPECT_EQ(0, trie.getNumberOfNodes());
+}
+
+TEST(RWayTrieUsingLinkedArraysTest, GetNumberOfNodesWorksWhenNotEmpty) {
+    TrieForTest trie;
+    trie.put("she", 0);
+    trie.put("sells", 1);
+    trie.put("sea", 2);
+
+    // 9 nodes:
+    // 1) s
+    // 2) eh (child of s)
+    // 3) e (child of h)
+    // 4) al (child of first e)
+    // 5) l (child of first l)
+    // 6) s (child of second l)
+    // 7) 0-value (child of "she" path)
+    // 8) 1-value (child of "sells" path)
+    // 9) 2-value (child of "sea" path)
+    EXPECT_EQ(9, trie.getNumberOfNodes());
+}
+
+TEST(RWayTrieUsingLinkedArraysTest, GetNumberOfNodesWorksWhenEmpty) {
+    TrieForTest const trie;
+
     EXPECT_EQ(0, trie.getNumberOfNodes());
 }
 

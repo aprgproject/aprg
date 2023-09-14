@@ -52,6 +52,22 @@ TEST(UnionFindForFreeIndexTest, GetRootWorks) {
     EXPECT_EQ(8, unionFind.getRoot(9));
 }
 
+TEST(UnionFindForFreeIndexTest, GetRelativeRootVectorWorks) {
+    UnionFindForTest unionFind(13);
+
+    UnionFindForTest::RootVector const expectedInitialRelativeRootVector{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    EXPECT_EQ(expectedInitialRelativeRootVector, unionFind.getRelativeRootVector());
+
+    unionFind.connect(4, 3);
+    unionFind.connect(3, 8);
+    unionFind.connect(6, 5);
+    unionFind.connect(9, 4);
+    unionFind.connect(2, 1);
+
+    UnionFindForTest::RootVector const expectedRelativeRootVector{0, 1, 1, 8, 8, 5, 5, 7, 8, 8, 10, 11, 12};
+    EXPECT_EQ(expectedRelativeRootVector, unionFind.getRelativeRootVector());
+}
+
 TEST(UnionFindForFreeIndexTest, GetRootWithPathCompressionWorks) {
     UnionFindForTest unionFind(13);
     unionFind.connect(4, 3);
@@ -70,22 +86,6 @@ TEST(UnionFindForFreeIndexTest, GetRootWithPathCompressionWorks) {
     EXPECT_EQ(7, unionFind.getRootWithPathCompression(7));
     EXPECT_EQ(8, unionFind.getRootWithPathCompression(8));
     EXPECT_EQ(8, unionFind.getRootWithPathCompression(9));
-}
-
-TEST(UnionFindForFreeIndexTest, GetRelativeRootVectorWorks) {
-    UnionFindForTest unionFind(13);
-
-    UnionFindForTest::RootVector const expectedInitialRelativeRootVector{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-    EXPECT_EQ(expectedInitialRelativeRootVector, unionFind.getRelativeRootVector());
-
-    unionFind.connect(4, 3);
-    unionFind.connect(3, 8);
-    unionFind.connect(6, 5);
-    unionFind.connect(9, 4);
-    unionFind.connect(2, 1);
-
-    UnionFindForTest::RootVector const expectedRelativeRootVector{0, 1, 1, 8, 8, 5, 5, 7, 8, 8, 10, 11, 12};
-    EXPECT_EQ(expectedRelativeRootVector, unionFind.getRelativeRootVector());
 }
 
 }  // namespace alba::algorithm

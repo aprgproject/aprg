@@ -21,8 +21,6 @@ public:
     bool operator!=(AlbaYearMonthDay const& second) const;
     bool operator<=(AlbaYearMonthDay const& second) const;
     bool operator>=(AlbaYearMonthDay const& second) const;
-    // rule of zero
-    static AlbaYearMonthDay createFromTotalDays(uint32_t const totalDays);
     [[nodiscard]] AlbaDateTimeConstants::DayOfTheWeek getDayOfTheWeek() const;
     [[nodiscard]] uint32_t getYears() const;
     [[nodiscard]] uint32_t getMonths() const;
@@ -32,6 +30,8 @@ public:
     void clear();
     void setTime(uint32_t const totalDays);
     void setTime(uint16_t const years, uint8_t const month, uint8_t const days);
+    // rule of zero
+    static AlbaYearMonthDay createFromTotalDays(uint32_t const totalDays);
 
 private:
     static constexpr uint32_t convertToYearMonthDayFormat(
@@ -53,8 +53,6 @@ public:
     bool operator!=(AlbaHourMinuteSecond const& second) const;
     bool operator<=(AlbaHourMinuteSecond const& second) const;
     bool operator>=(AlbaHourMinuteSecond const& second) const;
-    // rule of zero
-    static AlbaHourMinuteSecond createFromTotalSeconds(uint32_t const totalSeconds);
     [[nodiscard]] uint32_t getHours() const;
     [[nodiscard]] uint32_t getMinutes() const;
     [[nodiscard]] uint32_t getSeconds() const;
@@ -63,6 +61,8 @@ public:
     void clear();
     void setTime(uint32_t const totalSeconds);
     void setTime(uint8_t const hours, uint8_t const minutes, uint8_t const seconds);
+    // rule of zero
+    static AlbaHourMinuteSecond createFromTotalSeconds(uint32_t const totalSeconds);
 
 private:
     static constexpr uint32_t convertToHourMinuteSecondFormat(
@@ -112,9 +112,6 @@ public:
     bool operator>(AlbaDateTime const& secondDateTime) const;
     bool operator==(AlbaDateTime const& secondDateTime) const;
     bool operator!=(AlbaDateTime const& secondDateTime) const;
-    // rule of zero
-    static AlbaDateTime createFromTotalDaysAndSecondsAndMicroSeconds(
-        uint32_t const totalDays, uint32_t const totalSeconds, uint32_t const totalMicroseconds);
     [[nodiscard]] AlbaHourMinuteSecond const& getHourMinutesSecond() const;
     [[nodiscard]] AlbaYearMonthDay const& getYearMonthDay() const;
     [[nodiscard]] uint32_t getYears() const;
@@ -136,6 +133,9 @@ public:
     AlbaHourMinuteSecond& getHourMinutesSecondReference();
     AlbaYearMonthDay& getYearMonthDayReference();
     uint32_t& getMicroSecondsReference();
+    // rule of zero
+    static AlbaDateTime createFromTotalDaysAndSecondsAndMicroSeconds(
+        uint32_t const totalDays, uint32_t const totalSeconds, uint32_t const totalMicroseconds);
 
     // constructor is constexpr.
     template <PrintFormat printFormat>

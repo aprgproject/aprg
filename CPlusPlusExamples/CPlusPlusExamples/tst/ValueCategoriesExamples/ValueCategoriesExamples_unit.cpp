@@ -54,7 +54,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> built-in and user defined operators
 // -----> reference types
 // -----> otherwise-cryptic compiler error messages
-
 // -> LValues and RValues have evolved
 // ---> In early C, there were two value categories: lvalues and rvalues
 // -----> The associated concepts were fairly simple.
@@ -64,7 +63,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // ---> Modern C++ added rvalue references
 // -----> C++ needed more value categories to specify the associated behaviors.
 // -----> This talk explains value vategories from this historical perspective.
-
 // -> LValues and RValues
 // ---> The term comes up in assignment expressions.
 // ---> In "The C Programming Language", Kernighan and Ritchie wrote
@@ -92,7 +90,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // ---------> It must refer to an object.
 // -------> The right operand can be either an lvalue or rvalue
 // ---------> It can be any expression
-
 // -> A look under the hood
 // ---> Why make this distinction between lvalues and rvalues?
 // ---> Why do language designers made this distinction?
@@ -100,7 +97,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> So that compilers can assume that rvalues don't neccessarily occupy storage.
 // -----> This offers considerable freedom in code generation.
 // -----> Lets the compiler generate code more efficiently compared to when rvalues are required to have storage
-
 // -> Data storage for rvalues
 // ---> For example:
 // -----> Code:
@@ -114,7 +110,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> In this case:
 // -------> The rvalue 1 never appears as an object in the data space.
 // -------> Rather, its part of an instruction in the code space.
-
 // -> Must be an lvalue == Can't be an rvalue
 // ---> Now, suppose you write:
 // -----> Code:
@@ -126,7 +121,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -------> An assignment assigns a value to an object
 // -------> Its left operand must be an lvalue.
 // -------> But 1 is not an lvalue its an rvalue.
-
 // -> Recap
 // ---> Every expression in C++ is either an lvalue or an rvalue
 // ---> In general:
@@ -135,7 +129,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // ---> Caveat:
 // -----> This is true for non-class types.
 // -----> Its not true for class types.
-
 // -> Literals
 // ---> Most literals are rvalues, including:
 // -----> numeric literals, suach as 3 and 3.141559
@@ -143,7 +136,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // ---> They dont necessarily occupy data storage.
 // ---> However character string literals such as "xyzzy", are levalues
 // -----> The occupy data storage.
-
 // -> lvalues Used as rvalues
 // ---> An lvalue can appear on either side of an assignment as in:
 // -----> int m, n;
@@ -151,7 +143,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // ---> Obviously you can assign the value in n to the object designated by m.
 // ---> This assignment uses the lvalue expression n as an rvalue
 // ---> Officially, C++ performs an lvalue to rvalue conversion.
-
 // -> Operands of other operators
 // ---> The concepts of lvalue and rvalue apply in all expressions.
 // -----> Not just assignment.
@@ -161,7 +152,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> int x;
 // -----> x+2 // OK lvalue + rvalue
 // -----> 2+x // OK rvalue + lvalue
-
 // -> What about the result?
 // ---> For built-in binary (non-assignment) operators such +:
 // -----> The operands may be lvalues or rvalues
@@ -175,7 +165,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> Code:
 // -------> m + 1 = n;  // error... but why?
 // -----> Its an error because m+1 yields an rvalue
-
 // -> Unary * operator
 // ---> Unary * yields an lvalue
 // ---> A pointer p can point to an object, so "*p" is an lvalue
@@ -189,7 +178,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // ---> Note: lvalue-ness is a compile-time property (evaluated at compile time)
 // -----> *s is an lvalue even if s is null
 // -----> If s is null, evaluating *s causes undefined behavior.
-
 // -> Data storage for expressions
 // ---> Conceptually, rvalues (of non-class type) don't occupy data storage in the object program
 // -----> In truth, some might.
@@ -199,7 +187,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> In truth, the optimizer might eliminate some of them.
 // -----> But only when you won't notice.
 // ---> C and C++ let you assume that lvalues always do occupy storage.
-
 // -> Rvalues of class type
 // ---> Conceptually rvalues of class type do occupy data storage
 // ---> Why the difference?
@@ -216,7 +203,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // ---> Therefore, the return value of foo() must have a base address.
 // -----> Conceptually, any object with an address occupies data storage
 // -----> This is why rvalues of class types must be treated differently.
-
 // -> Non-modifiable lvalues
 // ---> In fact, not all lvalues can appear on the left of an assignment.
 // ---> An lvalue is non-modifiable if it has a const qualified type.
@@ -226,7 +212,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> name[0] = 'D'; // error: name[0] is const
 // ---> name[0] is an lvalue, but its non-modifiable
 // -----> Each element of a const array is itself const.
-
 // -> Non-modifiable lvalues
 // ---> This is actually mentioned in the standard.
 // ---> lvalues and rvalues provide a vocabulary for desribing subtle behavioral differences.
@@ -248,7 +233,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -------> MAX += 3; // error: MAX is an rvalue
 // -----> You can't take its address either
 // -------> int const*p = &MAX; // OK: MAX is an lvalue
-
 // -> Recap
 // ---> This table summaries the behavior of lvalues and rvalues (of non-class type)
 // -------------------------------------------------------------------
@@ -258,7 +242,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // | non-modifiable lvalue | yes                     | no            |
 // | (non class) rvalue    | no                      | no            |
 // -------------------------------------------------------------------
-
 // -> Reference Types
 // ---> The concepts of lvalues and rvalues help explain C++ reference types
 // ---> Reference provide an alternative to pointers as a way fo associating names with objects
@@ -270,7 +253,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> defines ri with type "reference to int" and
 // -----> initializes ri to refer to i
 // ---> Hence, reference ri is an alias for i.
-
 // -> Reference Types
 // ---> Reference and pointers are DIFFERENT things but you can think of them similarly.
 // ---> A reference is essentially a pointer that's automatically dereference each time its used.
@@ -283,7 +265,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // | int j = ri + 2     | int j = *cpi + 2            |
 // ----------------------------------------------------
 // ---> A reference yields an lvalue.
-
 // -> References and overloaded operators
 // ---> What good are references?
 // ---> Why not just use pointers?
@@ -291,7 +272,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // ---> More specifically, C++ has references so that overloaded operators can look just like built-in operators...
 // -----> One of the design philosophies in C++:
 // -------> Built in types and class types should behave pretty much the same
-
 // -> "Reference to Const" Parameters
 // ---> A "reference to const" parameter will accpet an argument that either const or non-const
 // -----> R f(T const &t);
@@ -308,12 +288,10 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // ---> Either way, calling f can't alter the actual argument, x:
 // -----> By value: f has access only to a copy of x, not x itself.
 // -----> By "reference to const": f's parameter is declared to be non-modifiable.
-
 // -> Why use "Reference to Const"?
 // ---> Why pass by "reference to const" instead by value?
 // ---> Passing by "reference to const" might be much more efficient than passing by value.
 // ---> It depends on the cost to make a copy.
-
 // -> References and temporaries
 // ---> A "pointer to T" can point only to an lvalue of type T
 // ---> Similarly, a "reference to T" binds only to an lvalue of type T
@@ -329,7 +307,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> ... if there's a conversion from x's type to T.
 // ---> In this case, the compiler creates a temporary object to hold a copy of x converted to T.
 // -----> This is so the reference has something to bind to.
-
 // -> References and temporaries
 // ---> Given:
 // -----> double const &rd = 3;
@@ -350,7 +327,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> f(1) // passes a copy of 1 converted to long double
 // -----> g(x) // passes a reference of x
 // -----> g(1) // passes a reference to a temporary containing 1 converted to long double
-
 // -> Two kinds of rvalues
 // ---> Conceptually, rvalues of built-in types don't occupy data storage.
 // ---> However, the temporary object created in this way does.
@@ -362,20 +338,17 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> "Expiring values" or "xvalues" which do occupy data storage.
 // ---> The temporary object is created through a temporary materialization conversion.
 // -----> It converts a prvalue into an xvalue.
-
 // -> Mimicking built-in operators
 // ---> Recall the beahvior of the built-in + operator
 // -----> The operands may be lvalues or rvalues.
 // -----> The result is always an rvalue.
 // ---> How do you declare an overloaded operator with the same behavior?
 // ---> Consider a rudimentary (character) string class with + as a concatenation operator...
-
 // -> References
 // ---> C++11 introduced another kind of reference.
 // ---> What C++03 calls "references", C++11 calls "lvalue references".
 // ---> This distinguishes them from C++11's new "rvalue references".
 // ---> Except of the name change, lvalue references in C++1 behave just like references in C++03
-
 // -> Rvalue references
 // ---> Whereas an lvalue reference declaration uses the & operator, an rvalue reference uses the && operator
 // ---> For example, this declares fi to be an "rvalue reference to int""
@@ -392,7 +365,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> int const&&rj = n; // error: n is an lvalue
 // ---> Binding an "rvalue reference" to an rvalue triggers a temporary materialization conversion
 // -----> Just like binding an "lvalue reference to const" to an rvalue.
-
 // -> Move operations
 // ---> Modern C++ uses rvalue references to implement move operations that can avoid unnecessary copying:
 // ---> Copy operations:
@@ -401,7 +373,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // ---> Move operations:
 // -----> string (string &&) noexcept; // constructor
 // -----> string & operator=(string &&) noexcept; //assignment
-
 // -> Move operations
 // ---> Given the following objects:
 // -----> string s1, s2, s3;
@@ -411,21 +382,18 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // ---> Assigning from an rvalue results in move assignment.
 // ---> The value expires at the end of the statement so it can be safely moved.
 // -----> s1=s2+s3 // string::operator=(string &&)
-
 // -> Rvalue references as lvalues
 // ---> Binding an "rvalue reference" to an rvalue creates an xvalue.
 // ---> However, look inside the function
 // ---> Within the function, the variable exists for the durection of the function
 // -----> In this context, its an lvalue!
 // ---> In general: "if it has a name, its an lvalue"
-
 // -> lvalues as xvalues
 // ---> Sometimes it makes sense to move from a lvalue.
 // -----> The most common example is swap(...)
 // ---> The compiler copy constructs temp because a is not expiring.
 // ---> But we know that the next line overwrites a.
 // -----> There's no need to preserve the value of a.
-
 // -> lvalues as xvalues
 // ---> Its safe to move an lvalue only if its expiring.
 // -----> The compiler can't always recognize an expiring lvalue.
@@ -436,7 +404,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -------> Return values dont have names.
 // ---> As programmers, we dont think about xvalues.
 // -----> However, this needed by compiler implementors to distinguish this slightly inbetween state the objects can be.
-
 // -> Value Categories
 // ---> Modern C++ introduces a more complex categorization of expressions:
 // -------------------------
@@ -450,7 +417,6 @@ TEST(ValueCategoriesExamplesTest, LValuesAndRValuesBindToDifferentFunctions) {
 // -----> glvalue: a "generalized" lvalue
 // -----> prvalue: a "pure" rvalue
 // -----> xvalue: an "expiring" lvalue
-
 // -> When do lvalues implicitly convert to xvalues?
 // ---> In return statements.
 // -> Are string literals lvalues?

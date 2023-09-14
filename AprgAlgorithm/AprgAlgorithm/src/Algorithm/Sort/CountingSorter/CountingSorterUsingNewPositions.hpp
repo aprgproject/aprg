@@ -47,7 +47,6 @@ private:
 // It works by counting the number of objects having distinct key values (similar to hashing).
 // Then doing some arithmetic to calculate the position of each object in the output sequence.
 // Let us understand it with the help of an example.
-
 // Example:
 // For simplicity, consider the data in the range 0 to 9.
 // Input data: 1, 4, 1, 2, 7, 5, 2
@@ -62,14 +61,11 @@ private:
 // Process the input data: 1, 4, 1, 2, 7, 5, 2. Position of 1 is 2.
 // Put data 1 at index 2 in output.
 // Decrease count by 1 to place next data 1 at an index 1 smaller than this index
-
 // Time Complexity: O(n+k) where n is the number of elements in input array and k is the range of input.
 // Auxiliary Space: O(n+k)
-
 // The problem with the previous counting sort was that we could not sort the elements if we have negative numbers in
 // it. Because there are no negative array indices. So what we do is, we find the minimum element and we will store
 // count of that minimum element at zero index. Its better to have index compression (IMPLEMENTED ABOVE)
-
 // Points to be noted:
 // 1. Counting sort is efficient if the range of input data is not significantly greater than the number of objects to
 // be sorted.

@@ -18,10 +18,6 @@ public:
     BitmapXY getNextPoint();
 
 private:
-    static BitmapXY fixPoint(
-        BitmapXY const& point, int const lowestLeft, int const highestRight, int const lowestTop,
-        int const highestBottom);
-
     [[nodiscard]] bool isPointInCorner() const;
     [[nodiscard]] bool cannotTeleport() const;
     void gotoNextPoint();
@@ -36,6 +32,11 @@ private:
     void teleportToNextOfMostRightAndSwitchDirection();
     void teleportToNextOfMostTopAndSwitchDirection();
     void teleportToNextOfMostBottomAndSwitchDirection();
+
+    static BitmapXY fixPoint(
+        BitmapXY const& point, int const lowestLeft, int const highestRight, int const lowestTop,
+        int const highestBottom);
+
     BitmapXY m_currentPoint;
     Direction m_direction;
     std::optional<Direction> m_scheduledTeleportDirection;

@@ -10,23 +10,6 @@ namespace {
 using VectorTwoElements = AlbaMathVector<double, 2>;
 }  // anonymous namespace
 
-TEST(AlbaMathVectorTest, ConstructionWorks) {
-    VectorTwoElements const mathVector1;
-    VectorTwoElements::ValuesInArray const values{6, 7};
-    VectorTwoElements const mathVector2(values);
-    VectorTwoElements const mathVector3{3, 4};
-
-    ASSERT_EQ(2U, mathVector1.getSize());
-    EXPECT_DOUBLE_EQ(0, mathVector1.getValueAt(0));
-    EXPECT_DOUBLE_EQ(0, mathVector1.getValueAt(1));
-    ASSERT_EQ(2U, mathVector2.getSize());
-    EXPECT_DOUBLE_EQ(6, mathVector2.getValueAt(0));
-    EXPECT_DOUBLE_EQ(7, mathVector2.getValueAt(1));
-    ASSERT_EQ(2U, mathVector3.getSize());
-    EXPECT_DOUBLE_EQ(3, mathVector3.getValueAt(0));
-    EXPECT_DOUBLE_EQ(4, mathVector3.getValueAt(1));
-}
-
 TEST(AlbaMathVectorTest, OperatorEqualsWorks) {
     VectorTwoElements const mathVector1{3, 4};
     VectorTwoElements const mathVector2{3, 4};
@@ -154,10 +137,30 @@ TEST(AlbaMathVectorTest, OperatorSubtractionAssignmentWorks) {
     EXPECT_EQ(expectedMathVector, actualMathVector);
 }
 
-TEST(AlbaMathVectorTest, GetSizeWorks) {
+TEST(AlbaMathVectorTest, OutputStreamOperatorWorks) {
+    stringstream testStream;
     VectorTwoElements const mathVector{3.5, 4.5};
 
-    EXPECT_EQ(2U, mathVector.getSize());
+    testStream << mathVector;
+
+    EXPECT_EQ("{3.5, 4.5}", testStream.str());
+}
+
+TEST(AlbaMathVectorTest, ConstructionWorks) {
+    VectorTwoElements const mathVector1;
+    VectorTwoElements::ValuesInArray const values{6, 7};
+    VectorTwoElements const mathVector2(values);
+    VectorTwoElements const mathVector3{3, 4};
+
+    ASSERT_EQ(2U, mathVector1.getSize());
+    EXPECT_DOUBLE_EQ(0, mathVector1.getValueAt(0));
+    EXPECT_DOUBLE_EQ(0, mathVector1.getValueAt(1));
+    ASSERT_EQ(2U, mathVector2.getSize());
+    EXPECT_DOUBLE_EQ(6, mathVector2.getValueAt(0));
+    EXPECT_DOUBLE_EQ(7, mathVector2.getValueAt(1));
+    ASSERT_EQ(2U, mathVector3.getSize());
+    EXPECT_DOUBLE_EQ(3, mathVector3.getValueAt(0));
+    EXPECT_DOUBLE_EQ(4, mathVector3.getValueAt(1));
 }
 
 TEST(AlbaMathVectorTest, GetValueAtWorks) {
@@ -186,13 +189,10 @@ TEST(AlbaMathVectorTest, GetValuesWorks) {
     EXPECT_DOUBLE_EQ(4.5, values[1]);
 }
 
-TEST(AlbaMathVectorTest, OutputStreamOperatorWorks) {
-    stringstream testStream;
+TEST(AlbaMathVectorTest, GetSizeWorks) {
     VectorTwoElements const mathVector{3.5, 4.5};
 
-    testStream << mathVector;
-
-    EXPECT_EQ("{3.5, 4.5}", testStream.str());
+    EXPECT_EQ(2U, mathVector.getSize());
 }
 
 }  // namespace alba

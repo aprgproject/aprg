@@ -8,6 +8,11 @@ using namespace std;
 
 namespace alba::TwoDimensions {
 
+TEST(TwoDimensionsLineTest, LineCanBeComparedForEquality) {
+    EXPECT_EQ(Line(1, 2, 3), Line(10, 20, 30));
+    EXPECT_NE(Line(1, 2, 3), Line(2, 3, 4));
+}
+
 TEST(TwoDimensionsLineTest, EmptyLine) {
     Line const line;
 
@@ -224,22 +229,6 @@ TEST(TwoDimensionsLineTest, LineWithNegativeSlope) {
     EXPECT_EQ(Point(0, 2), points[2]);
 }
 
-TEST(TwoDimensionsLineTest, InvalidLineConstructedByCoefficients) {
-    Line const line(0, 0, 10);
-
-    EXPECT_EQ(LineType::Invalid, line.getType());
-    EXPECT_EQ(-INFINITY, line.getYIntercept());
-    EXPECT_EQ(-INFINITY, line.getXIntercept());
-    EXPECT_TRUE(isnan(line.getSlope()));
-    EXPECT_TRUE(isnan(line.getPerpendicularSlope()));
-    EXPECT_EQ(0, line.getACoefficient());
-    EXPECT_EQ(0, line.getBCoefficient());
-    EXPECT_EQ(10, line.getCCoefficient());
-    EXPECT_EQ(0, line.getAUnitIncreaseInX());
-    EXPECT_EQ(0, line.getAUnitIncreaseInY());
-    EXPECT_EQ(Point(0, 0), line.getAPoint());
-}
-
 TEST(TwoDimensionsLineTest, HorizontalLineConstructedByCoefficients) {
     Line const line(0, -1, 3);
 
@@ -361,9 +350,20 @@ TEST(TwoDimensionsLineTest, LineWithExtremeSlopeWithManyPoints) {
     ASSERT_EQ(4660U, points.size());
 }
 
-TEST(TwoDimensionsLineTest, LineCanBeComparedForEquality) {
-    EXPECT_EQ(Line(1, 2, 3), Line(10, 20, 30));
-    EXPECT_NE(Line(1, 2, 3), Line(2, 3, 4));
+TEST(TwoDimensionsLineTest, InvalidLineConstructedByCoefficients) {
+    Line const line(0, 0, 10);
+
+    EXPECT_EQ(LineType::Invalid, line.getType());
+    EXPECT_EQ(-INFINITY, line.getYIntercept());
+    EXPECT_EQ(-INFINITY, line.getXIntercept());
+    EXPECT_TRUE(isnan(line.getSlope()));
+    EXPECT_TRUE(isnan(line.getPerpendicularSlope()));
+    EXPECT_EQ(0, line.getACoefficient());
+    EXPECT_EQ(0, line.getBCoefficient());
+    EXPECT_EQ(10, line.getCCoefficient());
+    EXPECT_EQ(0, line.getAUnitIncreaseInX());
+    EXPECT_EQ(0, line.getAUnitIncreaseInY());
+    EXPECT_EQ(Point(0, 0), line.getAPoint());
 }
 
 }  // namespace alba::TwoDimensions

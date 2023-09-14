@@ -67,18 +67,15 @@ private:
 
 // ONE LINE NOTE:
 // -> Provide an object that CAN be an "individual object" or a "composite object", and they are treated UNIFORMLY
-
 // Intent:
 // Compose objects into tree structures to represent part-whole hierarchies.
 // Composite lets clients treat individual objects and compositions of objects uniformly.
 // The pattern has structural purpose and applies to objects.
 // NOTE: Please make sure that pattern actually fits the concepts that Leaves and Compositions
 // -> are treated uniformly to avoid violating the interface segregation principle.
-
 // When to use (applicability):
 // -> you want to represent part-whole hierarchies of objects
 // -> you want clients to be able to ignore the difference between compositions of objects and individual objects
-
 // Consequences:
 // -> The Composite pattern defines class hierarchies consisting of primitive objects and composite objects.
 // ---> Primitive objects can be composed into more complex objects, which in turn can be composed, and so on
@@ -98,7 +95,6 @@ private:
 // ---> Sometimes, you want a composite to have only certain components.
 // -----> You can't rely on the type system to enforce those constraints for you. Youll have to use run-time checks
 // instead.
-
 // Implementation:
 // -> Explicit parent references
 // ---> Maintaining parent reference from child components can simplify the traversal and management of a composite
@@ -174,7 +170,6 @@ private:
 // -----> Sometimes composites have variable for each child
 // -------> Although this requires each subclass of Composite to implement its own management interface (see
 // [Interpreter] pattern).
-
 // Related Patterns
 // -> The component parent link is used for a [Chain of responsibility]
 // -> [Decorator] is often used with Composite.

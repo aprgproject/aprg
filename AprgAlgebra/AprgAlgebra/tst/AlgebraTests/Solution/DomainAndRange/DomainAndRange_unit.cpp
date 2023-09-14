@@ -11,6 +11,24 @@ using namespace std;
 
 namespace alba::algebra::DomainAndRange {
 
+TEST(DomainAndRangeTest, AppendTransitionValuesWorks) {
+    AlbaNumbersSet collectedValues;
+    AlbaNumbersSet sortedValues{5, 9.25};
+
+    appendTransitionValues(collectedValues, sortedValues, [](AlbaNumber const& number) { return (number - 6) ^ 0.5; });
+
+    ASSERT_EQ(1U, collectedValues.size());
+    auto it = collectedValues.cbegin();
+    EXPECT_EQ(AlbaNumber(6), *(it++));
+}
+
+TEST(DomainAndRangeTest, GetTransitionValueWorks) {
+    AlbaNumber actualTransitionValue = getTransitionValue(
+        AlbaNumber(9.25), AlbaNumber(5), [](AlbaNumber const& number) { return (number - 6) ^ 0.5; });
+
+    EXPECT_EQ(AlbaNumber(6), actualTransitionValue);
+}
+
 TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunction) {
     AlbaNumbers values{5, 9.25};
 
@@ -192,24 +210,6 @@ TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWith2AbsoluteValues) {
     AlbaNumberIntervals acceptedIntervals(actualRange.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
     EXPECT_EQ(AlbaNumberInterval(createCloseEndpoint(-1), createCloseEndpoint(1)), acceptedIntervals[0]);
-}
-
-TEST(DomainAndRangeTest, AppendTransitionValuesWorks) {
-    AlbaNumbersSet collectedValues;
-    AlbaNumbersSet sortedValues{5, 9.25};
-
-    appendTransitionValues(collectedValues, sortedValues, [](AlbaNumber const& number) { return (number - 6) ^ 0.5; });
-
-    ASSERT_EQ(1U, collectedValues.size());
-    auto it = collectedValues.cbegin();
-    EXPECT_EQ(AlbaNumber(6), *(it++));
-}
-
-TEST(DomainAndRangeTest, GetTransitionValueWorks) {
-    AlbaNumber actualTransitionValue = getTransitionValue(
-        AlbaNumber(9.25), AlbaNumber(5), [](AlbaNumber const& number) { return (number - 6) ^ 0.5; });
-
-    EXPECT_EQ(AlbaNumber(6), actualTransitionValue);
 }
 
 TEST(DomainAndRangeTest, IsOneToOneWorks) {

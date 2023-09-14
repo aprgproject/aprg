@@ -10,57 +10,6 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-TEST(ExpressionTest, ConstructionWorks) {
-    WrappedTerm wrappedTerm1(Term(false));
-    WrappedTerm wrappedTerm2(Term(true));
-    Expression expression1;
-    Expression expression2(Term(false));
-    Expression expression3(OperatorLevel::And, {});
-    Expression expression4(OperatorLevel::And, {wrappedTerm1, wrappedTerm2});
-
-    EXPECT_EQ(OperatorLevel::Unknown, expression1.getCommonOperatorLevel());
-    WrappedTerms const& termsToVerify1(expression1.getWrappedTerms());
-    ASSERT_TRUE(termsToVerify1.empty());
-    EXPECT_EQ(OperatorLevel::Unknown, expression2.getCommonOperatorLevel());
-    WrappedTerms const& termsToVerify2(expression2.getWrappedTerms());
-    ASSERT_EQ(1U, termsToVerify2.size());
-    EXPECT_EQ(Term(false), getTermConstReferenceFromUniquePointer(termsToVerify2[0].baseTermPointer));
-    EXPECT_EQ(OperatorLevel::Unknown, expression3.getCommonOperatorLevel());
-    WrappedTerms const& termsToVerify3(expression3.getWrappedTerms());
-    EXPECT_TRUE(termsToVerify3.empty());
-    EXPECT_EQ(OperatorLevel::And, expression4.getCommonOperatorLevel());
-    WrappedTerms const& termsToVerify4(expression4.getWrappedTerms());
-    ASSERT_EQ(2U, termsToVerify4.size());
-    EXPECT_EQ(Term(false), getTermConstReferenceFromUniquePointer(termsToVerify4[0].baseTermPointer));
-    EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify4[1].baseTermPointer));
-}
-
-TEST(ExpressionTest, ExpressionThatIsDefaultConstructedHasIsSimplifiedFlagNotSet) {
-    Expression expression;
-
-    EXPECT_FALSE(expression.isSimplified());
-}
-
-TEST(ExpressionTest, ExpressionThatIsCopyConstructedHasIsSimplifiedFlagCopied) {
-    Expression expressionWithSimplifiedNotSet;
-    Expression expressionWithSimplifiedSet;
-    expressionWithSimplifiedSet.setAsSimplified();
-
-    Expression const& expression1(expressionWithSimplifiedNotSet);
-    Expression expression2(expressionWithSimplifiedSet);
-
-    EXPECT_FALSE(expression1.isSimplified());
-    EXPECT_TRUE(expression2.isSimplified());
-}
-
-TEST(ExpressionTest, ExpressionThatIsConstructedWithWrappedTermsHasIsSimplifiedFlagNotSet) {
-    WrappedTerm wrappedTerm1(Term(true));
-    WrappedTerm wrappedTerm2(Term(false));
-    Expression expression(OperatorLevel::And, {wrappedTerm1, wrappedTerm2});
-
-    EXPECT_FALSE(expression.isSimplified());
-}
-
 TEST(ExpressionTest, EqualityOperatorWorks) {
     Expression expression1;
     Expression expression2(createExpressionIfPossible({true, "&", createExpressionIfPossible({true, "&", "x"})}));
@@ -116,35 +65,28 @@ TEST(ExpressionTest, NotOperationWorks) {
     EXPECT_EQ(expressionToExpect, ~expressionToTest);
 }
 
-TEST(ExpressionTest, IsEmptyWorks) {
-    Expression expression1;
-    Expression expression2(createOrCopyExpressionFromATerm(false));
-    Expression expression3(createExpressionIfPossible({true, "&", "x"}));
+TEST(ExpressionTest, GetFirstTermConstReferenceWorks) {
+    Expression expression1(createOrCopyExpressionFromATerm(true));
+    Expression expression2(createExpressionIfPossible({true, "&", "x"}));
+    Expression expression3(createExpressionIfPossible({"~", false}));
 
-    EXPECT_TRUE(expression1.isEmpty());
-    EXPECT_FALSE(expression2.isEmpty());
-    EXPECT_FALSE(expression3.isEmpty());
+    EXPECT_EQ(Term(true), getTermConstReferenceFromBaseTerm(expression1.getFirstTermConstReference()));
+    EXPECT_EQ(Term("x"), getTermConstReferenceFromBaseTerm(expression2.getFirstTermConstReference()));
+    EXPECT_EQ(Term(true), getTermConstReferenceFromBaseTerm(expression3.getFirstTermConstReference()));
 }
 
-TEST(ExpressionTest, ContainsOnlyOneTermWorks) {
-    Expression expression1;
-    Expression expression2(createOrCopyExpressionFromATerm(false));
-    Expression expression3(createExpressionIfPossible({"~", "x"}));
-    Expression expression4(createExpressionIfPossible({"x", "&", "y"}));
+TEST(ExpressionTest, ClearAllInnerSimplifiedFlagsWorks) {
+    Term innerTerm;
+    innerTerm.setAsSimplified();
+    Expression expression(innerTerm);
+    expression.setAsSimplified();
+    EXPECT_TRUE(expression.isSimplified());
+    EXPECT_TRUE(getTermConstReferenceFromBaseTerm(expression.getFirstTermConstReference()).isSimplified());
 
-    EXPECT_FALSE(expression1.containsOnlyOneTerm());
-    EXPECT_TRUE(expression2.containsOnlyOneTerm());
-    EXPECT_TRUE(expression3.containsOnlyOneTerm());
-    EXPECT_FALSE(expression4.containsOnlyOneTerm());
-}
+    expression.clearAllInnerSimplifiedFlags();
 
-TEST(ExpressionTest, IsSimplifiedWorks) {
-    Expression expression1;
-    Expression expression2;
-    expression2.setAsSimplified();
-
-    EXPECT_FALSE(expression1.isSimplified());
-    EXPECT_TRUE(expression2.isSimplified());
+    EXPECT_FALSE(expression.isSimplified());
+    EXPECT_FALSE(getTermConstReferenceFromBaseTerm(expression.getFirstTermConstReference()).isSimplified());
 }
 
 TEST(ExpressionTest, GetCommonOperatorTypeWorks) {
@@ -159,14 +101,56 @@ TEST(ExpressionTest, GetCommonOperatorTypeWorks) {
     EXPECT_EQ(OperatorLevel::Or, expression4.getCommonOperatorLevel());
 }
 
-TEST(ExpressionTest, GetFirstTermConstReferenceWorks) {
-    Expression expression1(createOrCopyExpressionFromATerm(true));
-    Expression expression2(createExpressionIfPossible({true, "&", "x"}));
-    Expression expression3(createExpressionIfPossible({"~", false}));
+TEST(ExpressionTest, ConstructionWorks) {
+    WrappedTerm wrappedTerm1(Term(false));
+    WrappedTerm wrappedTerm2(Term(true));
+    Expression expression1;
+    Expression expression2(Term(false));
+    Expression expression3(OperatorLevel::And, {});
+    Expression expression4(OperatorLevel::And, {wrappedTerm1, wrappedTerm2});
 
-    EXPECT_EQ(Term(true), getTermConstReferenceFromBaseTerm(expression1.getFirstTermConstReference()));
-    EXPECT_EQ(Term("x"), getTermConstReferenceFromBaseTerm(expression2.getFirstTermConstReference()));
-    EXPECT_EQ(Term(true), getTermConstReferenceFromBaseTerm(expression3.getFirstTermConstReference()));
+    EXPECT_EQ(OperatorLevel::Unknown, expression1.getCommonOperatorLevel());
+    WrappedTerms const& termsToVerify1(expression1.getWrappedTerms());
+    ASSERT_TRUE(termsToVerify1.empty());
+    EXPECT_EQ(OperatorLevel::Unknown, expression2.getCommonOperatorLevel());
+    WrappedTerms const& termsToVerify2(expression2.getWrappedTerms());
+    ASSERT_EQ(1U, termsToVerify2.size());
+    EXPECT_EQ(Term(false), getTermConstReferenceFromUniquePointer(termsToVerify2[0].baseTermPointer));
+    EXPECT_EQ(OperatorLevel::Unknown, expression3.getCommonOperatorLevel());
+    WrappedTerms const& termsToVerify3(expression3.getWrappedTerms());
+    EXPECT_TRUE(termsToVerify3.empty());
+    EXPECT_EQ(OperatorLevel::And, expression4.getCommonOperatorLevel());
+    WrappedTerms const& termsToVerify4(expression4.getWrappedTerms());
+    ASSERT_EQ(2U, termsToVerify4.size());
+    EXPECT_EQ(Term(false), getTermConstReferenceFromUniquePointer(termsToVerify4[0].baseTermPointer));
+    EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify4[1].baseTermPointer));
+}
+
+TEST(ExpressionTest, SetCommonOperatorLevelWorks) {
+    Expression expression1;
+    Expression expression2;
+    Expression expression3;
+
+    expression1.setCommonOperatorLevel(OperatorLevel::Unknown);
+    expression2.setCommonOperatorLevel(OperatorLevel::And);
+    expression3.setCommonOperatorLevel(OperatorLevel::Or);
+
+    EXPECT_EQ(OperatorLevel::Unknown, expression1.getCommonOperatorLevel());
+    EXPECT_EQ(OperatorLevel::And, expression2.getCommonOperatorLevel());
+    EXPECT_EQ(OperatorLevel::Or, expression3.getCommonOperatorLevel());
+}
+
+TEST(ExpressionTest, SetCommonOperatorTypeIfStillUnknownWorks) {
+    Expression expression1;
+    Expression expression2;
+    expression1.setCommonOperatorLevel(OperatorLevel::Unknown);
+    expression2.setCommonOperatorLevel(OperatorLevel::And);
+
+    expression1.setCommonOperatorLevelIfStillUnknown(OperatorLevel::Or);
+    expression2.setCommonOperatorLevelIfStillUnknown(OperatorLevel::Or);
+
+    EXPECT_EQ(OperatorLevel::Or, expression1.getCommonOperatorLevel());
+    EXPECT_EQ(OperatorLevel::And, expression2.getCommonOperatorLevel());
 }
 
 TEST(ExpressionTest, GetWrappedTermsWorks) {
@@ -177,6 +161,55 @@ TEST(ExpressionTest, GetWrappedTermsWorks) {
     ASSERT_EQ(2U, wrappedTermsToVerify.size());
     EXPECT_EQ(Term("x"), getTermConstReferenceFromUniquePointer(wrappedTermsToVerify[0].baseTermPointer));
     EXPECT_EQ(Term("y"), getTermConstReferenceFromUniquePointer(wrappedTermsToVerify[1].baseTermPointer));
+}
+
+TEST(ExpressionTest, PutTermWorks) {
+    Expression expressionToTest;
+
+    expressionToTest.putTerm(Term("a"));
+    expressionToTest.putTerm(Term("b"));
+    expressionToTest.putTerm(Term("c"));
+    expressionToTest.putTerm(Term("d"));
+
+    WrappedTerms termsToVerify(expressionToTest.getWrappedTerms());
+    ASSERT_EQ(4U, termsToVerify.size());
+    EXPECT_EQ(Term("a"), getTermConstReferenceFromUniquePointer(termsToVerify[0].baseTermPointer));
+    EXPECT_EQ(Term("b"), getTermConstReferenceFromUniquePointer(termsToVerify[1].baseTermPointer));
+    EXPECT_EQ(Term("c"), getTermConstReferenceFromUniquePointer(termsToVerify[2].baseTermPointer));
+    EXPECT_EQ(Term("d"), getTermConstReferenceFromUniquePointer(termsToVerify[3].baseTermPointer));
+}
+
+TEST(ExpressionTest, PutWrappedTermWorks) {
+    Expression expressionToTest;
+    WrappedTerm wrappedTerm1(Term(true));
+    WrappedTerm wrappedTerm2(Term(false));
+    WrappedTerm wrappedTerm3(Term(true));
+
+    expressionToTest.putWrappedTerm(wrappedTerm1);
+    expressionToTest.putWrappedTerm(wrappedTerm2);
+    expressionToTest.putWrappedTerm(wrappedTerm3);
+
+    WrappedTerms termsToVerify(expressionToTest.getWrappedTerms());
+    ASSERT_EQ(3U, termsToVerify.size());
+    EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify[0].baseTermPointer));
+    EXPECT_EQ(Term(false), getTermConstReferenceFromUniquePointer(termsToVerify[1].baseTermPointer));
+    EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify[2].baseTermPointer));
+}
+
+TEST(ExpressionTest, PutWrappedTermsWorks) {
+    Expression expressionToTest;
+    WrappedTerms wrappedTerms;
+    wrappedTerms.emplace_back(Term(true));
+    wrappedTerms.emplace_back(Term(false));
+    wrappedTerms.emplace_back(Term(true));
+
+    expressionToTest.putWrappedTerms(wrappedTerms);
+
+    WrappedTerms termsToVerify(expressionToTest.getWrappedTerms());
+    ASSERT_EQ(3U, termsToVerify.size());
+    EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify[0].baseTermPointer));
+    EXPECT_EQ(Term(false), getTermConstReferenceFromUniquePointer(termsToVerify[1].baseTermPointer));
+    EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify[2].baseTermPointer));
 }
 
 TEST(ExpressionTest, GetDebugStringWorks) {
@@ -194,15 +227,14 @@ TEST(ExpressionTest, GetDebugStringWorks) {
         expression4.getDebugString());
 }
 
-TEST(ExpressionTest, GetWrappedTermsReferenceWorks) {
-    Expression expressionToTest(createExpressionIfPossible({"x", "&", "y"}));
+TEST(ExpressionTest, IsEmptyWorks) {
+    Expression expression1;
+    Expression expression2(createOrCopyExpressionFromATerm(false));
+    Expression expression3(createExpressionIfPossible({true, "&", "x"}));
 
-    WrappedTerms& wrappedTerms(expressionToTest.getWrappedTermsReference());
-    wrappedTerms.emplace_back(Term("a"));
-    wrappedTerms.emplace_back(Term("b"));
-
-    Expression expressionToExpect(createExpressionIfPossible({"x", "&", "y", "&", "a", "&", "b"}));
-    EXPECT_EQ(expressionToExpect, expressionToTest);
+    EXPECT_TRUE(expression1.isEmpty());
+    EXPECT_FALSE(expression2.isEmpty());
+    EXPECT_FALSE(expression3.isEmpty());
 }
 
 TEST(ExpressionTest, ClearWorks) {
@@ -216,6 +248,70 @@ TEST(ExpressionTest, ClearWorks) {
     EXPECT_TRUE(expression2.isEmpty());
 }
 
+TEST(ExpressionTest, ExpressionThatIsDefaultConstructedHasIsSimplifiedFlagNotSet) {
+    Expression expression;
+
+    EXPECT_FALSE(expression.isSimplified());
+}
+
+TEST(ExpressionTest, ExpressionThatIsConstructedWithWrappedTermsHasIsSimplifiedFlagNotSet) {
+    WrappedTerm wrappedTerm1(Term(true));
+    WrappedTerm wrappedTerm2(Term(false));
+    Expression expression(OperatorLevel::And, {wrappedTerm1, wrappedTerm2});
+
+    EXPECT_FALSE(expression.isSimplified());
+}
+
+TEST(ExpressionTest, ExpressionThatIsCopyConstructedHasIsSimplifiedFlagCopied) {
+    Expression expressionWithSimplifiedNotSet;
+    Expression expressionWithSimplifiedSet;
+    expressionWithSimplifiedSet.setAsSimplified();
+
+    Expression const& expression1(expressionWithSimplifiedNotSet);
+    Expression expression2(expressionWithSimplifiedSet);
+
+    EXPECT_FALSE(expression1.isSimplified());
+    EXPECT_TRUE(expression2.isSimplified());
+}
+
+TEST(ExpressionTest, IsSimplifiedWorks) {
+    Expression expression1;
+    Expression expression2;
+    expression2.setAsSimplified();
+
+    EXPECT_FALSE(expression1.isSimplified());
+    EXPECT_TRUE(expression2.isSimplified());
+}
+
+TEST(ExpressionTest, SetAsSimplifiedWorks) {
+    Expression expression;
+
+    expression.setAsSimplified();
+
+    EXPECT_TRUE(expression.isSimplified());
+}
+
+TEST(ExpressionTest, ClearSimplifiedFlagWorks) {
+    Expression expression;
+    expression.setAsSimplified();
+
+    expression.clearSimplifiedFlag();
+
+    EXPECT_FALSE(expression.isSimplified());
+}
+
+TEST(ExpressionTest, ContainsOnlyOneTermWorks) {
+    Expression expression1;
+    Expression expression2(createOrCopyExpressionFromATerm(false));
+    Expression expression3(createExpressionIfPossible({"~", "x"}));
+    Expression expression4(createExpressionIfPossible({"x", "&", "y"}));
+
+    EXPECT_FALSE(expression1.containsOnlyOneTerm());
+    EXPECT_TRUE(expression2.containsOnlyOneTerm());
+    EXPECT_TRUE(expression3.containsOnlyOneTerm());
+    EXPECT_FALSE(expression4.containsOnlyOneTerm());
+}
+
 TEST(ExpressionTest, ClearAndPutTermInWrappedTermsWorks) {
     Expression expression1;
     Expression expression2(createExpressionIfPossible({true, "&", "x", "|", "y"}));
@@ -225,22 +321,6 @@ TEST(ExpressionTest, ClearAndPutTermInWrappedTermsWorks) {
 
     EXPECT_EQ(createOrCopyExpressionFromATerm(true), expression1);
     EXPECT_EQ(createOrCopyExpressionFromATerm(true), expression2);
-}
-
-TEST(ExpressionTest, PutTermWorks) {
-    Expression expressionToTest;
-
-    expressionToTest.putTerm(Term("a"));
-    expressionToTest.putTerm(Term("b"));
-    expressionToTest.putTerm(Term("c"));
-    expressionToTest.putTerm(Term("d"));
-
-    WrappedTerms termsToVerify(expressionToTest.getWrappedTerms());
-    ASSERT_EQ(4U, termsToVerify.size());
-    EXPECT_EQ(Term("a"), getTermConstReferenceFromUniquePointer(termsToVerify[0].baseTermPointer));
-    EXPECT_EQ(Term("b"), getTermConstReferenceFromUniquePointer(termsToVerify[1].baseTermPointer));
-    EXPECT_EQ(Term("c"), getTermConstReferenceFromUniquePointer(termsToVerify[2].baseTermPointer));
-    EXPECT_EQ(Term("d"), getTermConstReferenceFromUniquePointer(termsToVerify[3].baseTermPointer));
 }
 
 TEST(ExpressionTest, PutTermWithOperationLevelWorks) {
@@ -384,6 +464,19 @@ TEST(ExpressionTest, PutTermWithAndOperationIfNeededUsingExpressionWithDifferent
     EXPECT_EQ(expressionToExpect5, expression5);
 }
 
+TEST(ExpressionTest, OutputStreamOperatorWorks) {
+    stringstream ss;
+    Expression expression1;
+    Expression expression2(createExpressionIfPossible({true, "&", "x", "|", "y"}));
+    Expression expression3;
+    expression3.putTermWithAndOperationIfNeeded(Term(true));
+    Expression expression4(createExpressionIfPossible({expression2, "&", "z"}));
+
+    ss << expression1 << "," << expression2 << "," << expression3 << "," << expression4;
+
+    EXPECT_EQ("(),(x|y),([true]),((x|y)&z)", ss.str());
+}
+
 TEST(ExpressionTest, PutTermWithOrOperationIfNeededUsingNullExpressionWorks) {
     Expression expression1;
     Expression expression2(createOrCopyExpressionFromATerm(false));
@@ -514,39 +607,6 @@ TEST(ExpressionTest, PutTermWithOrOperationIfNeededUsingExpressionWithDifferentO
     EXPECT_EQ(expressionToExpect5, expression5);
 }
 
-TEST(ExpressionTest, PutWrappedTermWorks) {
-    Expression expressionToTest;
-    WrappedTerm wrappedTerm1(Term(true));
-    WrappedTerm wrappedTerm2(Term(false));
-    WrappedTerm wrappedTerm3(Term(true));
-
-    expressionToTest.putWrappedTerm(wrappedTerm1);
-    expressionToTest.putWrappedTerm(wrappedTerm2);
-    expressionToTest.putWrappedTerm(wrappedTerm3);
-
-    WrappedTerms termsToVerify(expressionToTest.getWrappedTerms());
-    ASSERT_EQ(3U, termsToVerify.size());
-    EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify[0].baseTermPointer));
-    EXPECT_EQ(Term(false), getTermConstReferenceFromUniquePointer(termsToVerify[1].baseTermPointer));
-    EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify[2].baseTermPointer));
-}
-
-TEST(ExpressionTest, PutWrappedTermsWorks) {
-    Expression expressionToTest;
-    WrappedTerms wrappedTerms;
-    wrappedTerms.emplace_back(Term(true));
-    wrappedTerms.emplace_back(Term(false));
-    wrappedTerms.emplace_back(Term(true));
-
-    expressionToTest.putWrappedTerms(wrappedTerms);
-
-    WrappedTerms termsToVerify(expressionToTest.getWrappedTerms());
-    ASSERT_EQ(3U, termsToVerify.size());
-    EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify[0].baseTermPointer));
-    EXPECT_EQ(Term(false), getTermConstReferenceFromUniquePointer(termsToVerify[1].baseTermPointer));
-    EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(termsToVerify[2].baseTermPointer));
-}
-
 TEST(ExpressionTest, SetWorks) {
     Expression expression;
     WrappedTerms wrappedTerms{Term(true), Term(false)};
@@ -571,33 +631,6 @@ TEST(ExpressionTest, SetTermWorks) {
     EXPECT_EQ(expressionToExpect1, expression1);
     EXPECT_EQ(expressionToExpect2, expression2);
     EXPECT_EQ(expressionToExpect3, expression3);
-}
-
-TEST(ExpressionTest, SetCommonOperatorLevelWorks) {
-    Expression expression1;
-    Expression expression2;
-    Expression expression3;
-
-    expression1.setCommonOperatorLevel(OperatorLevel::Unknown);
-    expression2.setCommonOperatorLevel(OperatorLevel::And);
-    expression3.setCommonOperatorLevel(OperatorLevel::Or);
-
-    EXPECT_EQ(OperatorLevel::Unknown, expression1.getCommonOperatorLevel());
-    EXPECT_EQ(OperatorLevel::And, expression2.getCommonOperatorLevel());
-    EXPECT_EQ(OperatorLevel::Or, expression3.getCommonOperatorLevel());
-}
-
-TEST(ExpressionTest, SetCommonOperatorTypeIfStillUnknownWorks) {
-    Expression expression1;
-    Expression expression2;
-    expression1.setCommonOperatorLevel(OperatorLevel::Unknown);
-    expression2.setCommonOperatorLevel(OperatorLevel::And);
-
-    expression1.setCommonOperatorLevelIfStillUnknown(OperatorLevel::Or);
-    expression2.setCommonOperatorLevelIfStillUnknown(OperatorLevel::Or);
-
-    EXPECT_EQ(OperatorLevel::Or, expression1.getCommonOperatorLevel());
-    EXPECT_EQ(OperatorLevel::And, expression2.getCommonOperatorLevel());
 }
 
 TEST(ExpressionTest, SimplifyWorks) {
@@ -646,48 +679,15 @@ TEST(ExpressionTest, NegateWorks) {
     EXPECT_EQ(expressionToExpect, expression);
 }
 
-TEST(ExpressionTest, SetAsSimplifiedWorks) {
-    Expression expression;
+TEST(ExpressionTest, GetWrappedTermsReferenceWorks) {
+    Expression expressionToTest(createExpressionIfPossible({"x", "&", "y"}));
 
-    expression.setAsSimplified();
+    WrappedTerms& wrappedTerms(expressionToTest.getWrappedTermsReference());
+    wrappedTerms.emplace_back(Term("a"));
+    wrappedTerms.emplace_back(Term("b"));
 
-    EXPECT_TRUE(expression.isSimplified());
-}
-
-TEST(ExpressionTest, ClearSimplifiedFlagWorks) {
-    Expression expression;
-    expression.setAsSimplified();
-
-    expression.clearSimplifiedFlag();
-
-    EXPECT_FALSE(expression.isSimplified());
-}
-
-TEST(ExpressionTest, ClearAllInnerSimplifiedFlagsWorks) {
-    Term innerTerm;
-    innerTerm.setAsSimplified();
-    Expression expression(innerTerm);
-    expression.setAsSimplified();
-    EXPECT_TRUE(expression.isSimplified());
-    EXPECT_TRUE(getTermConstReferenceFromBaseTerm(expression.getFirstTermConstReference()).isSimplified());
-
-    expression.clearAllInnerSimplifiedFlags();
-
-    EXPECT_FALSE(expression.isSimplified());
-    EXPECT_FALSE(getTermConstReferenceFromBaseTerm(expression.getFirstTermConstReference()).isSimplified());
-}
-
-TEST(ExpressionTest, OutputStreamOperatorWorks) {
-    stringstream ss;
-    Expression expression1;
-    Expression expression2(createExpressionIfPossible({true, "&", "x", "|", "y"}));
-    Expression expression3;
-    expression3.putTermWithAndOperationIfNeeded(Term(true));
-    Expression expression4(createExpressionIfPossible({expression2, "&", "z"}));
-
-    ss << expression1 << "," << expression2 << "," << expression3 << "," << expression4;
-
-    EXPECT_EQ("(),(x|y),([true]),((x|y)&z)", ss.str());
+    Expression expressionToExpect(createExpressionIfPossible({"x", "&", "y", "&", "a", "&", "b"}));
+    EXPECT_EQ(expressionToExpect, expressionToTest);
 }
 
 }  // namespace alba::booleanAlgebra

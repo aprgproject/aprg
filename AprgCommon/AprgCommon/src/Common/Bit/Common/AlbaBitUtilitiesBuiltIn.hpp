@@ -62,6 +62,7 @@ INLINE_WITHOUT_BUILT_IN namespace bitUtilitiesWithoutBuiltIn {
     }
 
 }  // namespace bitUtilitiesWithoutBuiltIn
+
 INLINE_WITH_BUILT_IN namespace bitUtilitiesWithBuiltIn {
 #ifdef __has_builtin
 

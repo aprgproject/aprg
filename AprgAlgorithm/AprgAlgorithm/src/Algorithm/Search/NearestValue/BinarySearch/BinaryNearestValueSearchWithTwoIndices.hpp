@@ -21,9 +21,9 @@ public:
         setInitialIndexes(lowIndex, highIndex);
     }
 
+    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
     [[nodiscard]] inline Index getLowerIndex() const { return m_lowIndex; }
     [[nodiscard]] inline Index getHigherIndex() const { return m_highIndex; }
-    static constexpr Index INVALID_INDEX = getInvalidIndex<Index>();
 
     [[nodiscard]] Value getLowerValue() const {
         Value result{};

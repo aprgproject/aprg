@@ -61,17 +61,6 @@ protected:
     // Source: http://www.gotw.ca/publications/mill18.htm
     ~BasePathSearchWithRelax() = default;
 
-    static AdditionalRelaxationSteps getNoSteps() {
-        static AdditionalRelaxationSteps const noRelaxationSteps = []() {};
-        return noRelaxationSteps;
-    }
-
-    static AdditionalRelaxationStepsWithNewWeight getNoStepsWithNewWeight() {
-        static AdditionalRelaxationStepsWithNewWeight const noRelaxationSteps = [](Vertex const&, Vertex const&,
-                                                                                   Weight const&) {};
-        return noRelaxationSteps;
-    }
-
     [[nodiscard]] Weight getSavedWeightAt(Vertex const& vertex) const {
         Weight result{};
         auto it = m_vertexToEdgeWithBestWeightMap.find(vertex);
@@ -109,6 +98,17 @@ protected:
             }
         }
         additionalRelaxationSteps();
+    }
+
+    static AdditionalRelaxationSteps getNoSteps() {
+        static AdditionalRelaxationSteps const noRelaxationSteps = []() {};
+        return noRelaxationSteps;
+    }
+
+    static AdditionalRelaxationStepsWithNewWeight getNoStepsWithNewWeight() {
+        static AdditionalRelaxationStepsWithNewWeight const noRelaxationSteps = [](Vertex const&, Vertex const&,
+                                                                                   Weight const&) {};
+        return noRelaxationSteps;
     }
 
     Graph const& m_graph;

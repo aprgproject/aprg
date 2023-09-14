@@ -11,8 +11,8 @@ namespace alba::algorithm {
 template <typename Object>
 class DoublingSizeCircularQueue : public BaseQueue<Object> {
 public:
-    DoublingSizeCircularQueue() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
     ~DoublingSizeCircularQueue() override { deleteAllObjects(); }
+    DoublingSizeCircularQueue() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
 
     [[nodiscard]] int getSize() const override {
         if (m_firstIndex <= m_afterLastIndex) {
@@ -21,7 +21,6 @@ public:
         return m_containerSize - m_firstIndex + m_afterLastIndex;
     }
 
-    [[nodiscard]] int getContainerSize() const { return m_containerSize; }
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
     void enqueue(Object const& object) override {
@@ -39,6 +38,7 @@ public:
         return result;
     }
 
+    [[nodiscard]] int getContainerSize() const { return m_containerSize; }
     static constexpr int MINUMUM_CONTAINER_SIZE = 1;
 
 private:

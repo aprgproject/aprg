@@ -24,21 +24,6 @@ TEST(CheckableVerticesTest, IsFoundWorks) {
     EXPECT_FALSE(nonEmptyCheckableVertices.isFound(13));
 }
 
-TEST(CheckableVerticesTest, IsNotFoundWorks) {
-    CheckableVerticesForTest const emptyCheckableVertices;
-    CheckableVerticesForTest nonEmptyCheckableVertices;
-    nonEmptyCheckableVertices.putVertex(10);
-    nonEmptyCheckableVertices.putVertex(11);
-    nonEmptyCheckableVertices.putVertex(12);
-
-    EXPECT_TRUE(emptyCheckableVertices.isNotFound(1));
-    EXPECT_FALSE(nonEmptyCheckableVertices.isNotFound(10));
-    EXPECT_FALSE(nonEmptyCheckableVertices.isNotFound(11));
-    EXPECT_FALSE(nonEmptyCheckableVertices.isNotFound(12));
-    EXPECT_TRUE(nonEmptyCheckableVertices.isNotFound(9));
-    EXPECT_TRUE(nonEmptyCheckableVertices.isNotFound(13));
-}
-
 TEST(CheckableVerticesTest, PutVertexWorks) {
     CheckableVerticesForTest checkableVertices;
 
@@ -82,6 +67,21 @@ TEST(CheckableVerticesTest, ClearWorks) {
     EXPECT_FALSE(checkableVertices.isFound(12));
     EXPECT_FALSE(checkableVertices.isFound(9));
     EXPECT_FALSE(checkableVertices.isFound(13));
+}
+
+TEST(CheckableVerticesTest, IsNotFoundWorks) {
+    CheckableVerticesForTest const emptyCheckableVertices;
+    CheckableVerticesForTest nonEmptyCheckableVertices;
+    nonEmptyCheckableVertices.putVertex(10);
+    nonEmptyCheckableVertices.putVertex(11);
+    nonEmptyCheckableVertices.putVertex(12);
+
+    EXPECT_TRUE(emptyCheckableVertices.isNotFound(1));
+    EXPECT_FALSE(nonEmptyCheckableVertices.isNotFound(10));
+    EXPECT_FALSE(nonEmptyCheckableVertices.isNotFound(11));
+    EXPECT_FALSE(nonEmptyCheckableVertices.isNotFound(12));
+    EXPECT_TRUE(nonEmptyCheckableVertices.isNotFound(9));
+    EXPECT_TRUE(nonEmptyCheckableVertices.isNotFound(13));
 }
 
 }  // namespace alba::algorithm

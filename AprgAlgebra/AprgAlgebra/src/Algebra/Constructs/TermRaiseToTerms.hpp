@@ -25,6 +25,12 @@ public:
     Term& getBaseReference();
 
 private:
+    [[nodiscard]] Term getCombinedBaseAndExponents() const;
+    void simplifyByCheckingPolynomialRaiseToAnUnsignedIntIfNeeded();
+    void simplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBaseIfNeeded();
+    void simplifyBaseAndExponents();
+    void initializeUsingTermsInRaiseToPowerExpression(TermsWithDetails const& termsInRaiseToPowerExpression);
+    void initializeExponentsInTerms(Terms const& exponents);
     static void simplifyConstantRaiseToFunction(
         Term& base, TermsWithDetails& exponents, Term const& exponentCombinedTerm);
     static void simplifyMonomialRaiseToConstant(Term& base, Monomial const& monomialBase, AlbaNumber const& exponent);
@@ -34,12 +40,6 @@ private:
         Term& base, Expression const& expressionBase, int const exponent);
     static void simplifyConstantRaiseToMultiplicationAndDivisionExpression(
         Term& base, TermsWithDetails& exponents, Term const& exponentCombinedTerm);
-    [[nodiscard]] Term getCombinedBaseAndExponents() const;
-    void simplifyByCheckingPolynomialRaiseToAnUnsignedIntIfNeeded();
-    void simplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBaseIfNeeded();
-    void simplifyBaseAndExponents();
-    void initializeUsingTermsInRaiseToPowerExpression(TermsWithDetails const& termsInRaiseToPowerExpression);
-    void initializeExponentsInTerms(Terms const& exponents);
     Term m_base;
     TermsWithDetails m_exponents;
     bool m_shouldSimplifyToFactors;

@@ -9,6 +9,7 @@ namespace alba::algebra {
 class BaseRetriever {
 public:
     virtual ~BaseRetriever() = default;  // virtual destructor because of virtual functions (vtable exists)
+
     virtual void retrieveFromEquations(Equations const& equations) {
         for (Equation const& equation : equations) {
             retrieveFromEquation(equation);

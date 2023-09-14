@@ -23,16 +23,16 @@ public:
     static constexpr Price UNUSED_PRICE = INVALID_PRICE - 1;
 
 private:
-    [[nodiscard]] static bool isProductIncluded(ProductBits const productBits, Product const product);
-    static ProductBits getProductBits(Product const product);
-    static ProductBits addProduct(ProductBits const productBits, Product const product);
-    static ProductBits removeProduct(ProductBits const productBits, Product const product);
     [[nodiscard]] Day getNumberOfDays() const;
     [[nodiscard]] Product getNumberOfProducts() const;
     [[nodiscard]] ProductBits getNumberOfProductsSubsets() const;
     [[nodiscard]] ProductBits getProductBitsWithAllProducts() const;
     Price getMinimumPriceUsingMemoizationDP(
         PriceMatrix& minimumPrices, Day const day, ProductBits const productBits) const;
+    [[nodiscard]] static bool isProductIncluded(ProductBits const productBits, Product const product);
+    static ProductBits getProductBits(Product const product);
+    static ProductBits addProduct(ProductBits const productBits, Product const product);
+    static ProductBits removeProduct(ProductBits const productBits, Product const product);
     PriceMatrix m_pricesInDayByProduct;
 };
 
@@ -40,7 +40,6 @@ private:
 
 // We are given the prices of k products over n days, and we want to buy each product exactly once.
 // However, we are allowed to buy at most one product in a day. What is the minimum total price?
-
 // Recursive formulation:
 // -> Let price[x][d] denote the price of product x on day d.
 // -> Then, let total(S,d) denote the minimum total price for buying a subset S of products by day d.

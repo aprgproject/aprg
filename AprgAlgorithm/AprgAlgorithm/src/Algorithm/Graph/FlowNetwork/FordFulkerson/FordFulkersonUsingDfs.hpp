@@ -27,6 +27,13 @@ public:
     }
 
 protected:
+    bool findAnAugmentingPathAndReturnIfFound() override {
+        b_vertexToAugmentingPathEdgeMap.clear();
+        b_processedVertices.clear();
+        traverseUsingDfs(b_flowNetwork.getSourceVertex());
+        return b_processedVertices.isFound(b_flowNetwork.getSinkVertex());  // is sink vertex reached
+    }
+
     void traverseUsingDfs(Vertex const& vertex) {
         b_processedVertices.putVertex(vertex);
         for (FlowEdge const& flowEdge : b_flowNetwork.getFlowEdgesWithVertex(vertex)) {
@@ -36,13 +43,6 @@ protected:
                 traverseUsingDfs(otherVertex);
             }
         }
-    }
-
-    bool findAnAugmentingPathAndReturnIfFound() override {
-        b_vertexToAugmentingPathEdgeMap.clear();
-        b_processedVertices.clear();
-        traverseUsingDfs(b_flowNetwork.getSourceVertex());
-        return b_processedVertices.isFound(b_flowNetwork.getSinkVertex());  // is sink vertex reached
     }
 
     SinkSourceFlowNetworkType const& b_flowNetwork;

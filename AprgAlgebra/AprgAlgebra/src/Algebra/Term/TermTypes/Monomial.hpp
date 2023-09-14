@@ -24,11 +24,6 @@ public:
     bool operator==(Monomial const& second) const;
     bool operator!=(Monomial const& second) const;
     bool operator<(Monomial const& second) const;
-    // rule of zero
-    static VariablesToExponentsMap combineVariableExponentMapByMultiplication(
-        VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2);
-    static VariablesToExponentsMap combineVariableExponentMapByDivision(
-        VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2);
     [[nodiscard]] AlbaNumber const& getCoefficient() const;
     [[nodiscard]] AlbaNumber getExponentForVariable(std::string const& variableName) const;
     [[nodiscard]] VariablesToExponentsMap const& getVariablesToExponentsMap() const;
@@ -46,11 +41,16 @@ public:
     void putVariableWithExponent(std::string const& variable, AlbaNumber const& exponent);
     void setAsSimplified();
     void clearSimplifiedFlag();
+    // rule of zero
+    static VariablesToExponentsMap combineVariableExponentMapByMultiplication(
+        VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2);
+    static VariablesToExponentsMap combineVariableExponentMapByDivision(
+        VariablesToExponentsMap const& variablesMap1, VariablesToExponentsMap const& variablesMap2);
 
 private:
-    static bool isLessThanByComparingVariableNameMaps(Monomial const& monomial1, Monomial const& monomial2);
     void setNanIfNeeded();
     void removeZeroExponents();
+    static bool isLessThanByComparingVariableNameMaps(Monomial const& monomial1, Monomial const& monomial2);
     friend std::ostream& operator<<(std::ostream& out, Monomial const& monomial);
     AlbaNumber m_constant;
     VariablesToExponentsMap m_variablesToExponentsMap;

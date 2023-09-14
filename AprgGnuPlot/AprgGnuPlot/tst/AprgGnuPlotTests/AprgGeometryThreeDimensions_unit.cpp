@@ -6,8 +6,8 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba::ThreeDimensions;
 using namespace alba::ThreeDimensions::threeDimensionsUtilities;
+using namespace alba::ThreeDimensions;
 using namespace std;
 
 namespace alba {

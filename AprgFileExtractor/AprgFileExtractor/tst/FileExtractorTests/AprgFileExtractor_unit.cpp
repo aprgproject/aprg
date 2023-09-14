@@ -2,11 +2,9 @@
 #include <FileExtractor/AprgFileExtractor.hpp>
 
 #include <gtest/gtest.h>
-
 #ifndef PATH_OF_7Z_TEMP_FILE
 static_assert(false, "PATH_OF_7Z_TEMP_FILE is not set in cmake");
 #endif
-
 #define PATH_OF_SAMPLE_ZIP_1 APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest.zip)"
 #define PATH_OF_SAMPLE_ZIP_2 APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest2.zip)"
 
@@ -35,12 +33,6 @@ namespace ProgressCounters {
 int numberOfFilesToBeAnalyzedForExtraction;
 int numberOfFilesAnalyzedForExtraction;
 }  // namespace ProgressCounters
-
-TEST(AprgFileExtractorTest, DISABLED_ActualTest) {
-    AprgFileExtractor fileExtractor(
-        R"([LRM] || [alarm] || [UDP] || [CPU] || [syslog] || [ccns] || [tcom] || [startup] || [runtime] || [system] || [radparam] || ([bts]&&([.log]||[.zip]||[.tar])) || [snapshot] || ([tech]&&[report]) || [BTSLogFiles])");
-    fileExtractor.extractAllRelevantFiles(R"(D:\W\ZZZ_Useless_Logs\PR103380\New folder\)");
-}
 
 TEST(AprgFileExtractorTest, ListOfFilesFromZipFileAreCorrectlyRetrieved) {
     AprgFileExtractor const fileExtractor;
@@ -76,22 +68,6 @@ TEST(AprgFileExtractorTest, ListOfFilesFromZipFileAreCorrectlyRetrieved) {
 #endif
 }
 
-TEST(AprgFileExtractorTest, OneFileIsExtractedSuccessfully) {
-    AprgFileExtractor const fileExtractor;
-    AlbaLocalPathHandler const directoryPathHandler(APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\)");
-    AlbaLocalPathHandler const relativeFilePathHandler(R"(DirectoryTest\DIR1\File1.log)");
-    AlbaLocalPathHandler filePathHandler(
-        APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\DirectoryTest\DIR1\File1.log)");
-    deleteAllFilesOnDirectory(directoryPathHandler.getFullPath());
-
-    string const outputFilePath =
-        fileExtractor.extractOneFile(PATH_OF_SAMPLE_ZIP_1, relativeFilePathHandler.getFullPath());
-    EXPECT_EQ(filePathHandler.getFullPath(), outputFilePath);
-    filePathHandler.reInput();
-    EXPECT_TRUE(filePathHandler.isFoundInLocalSystem());
-    // deleteAllFilesOnDirectory(directoryPathHandler.getFullPath());
-}
-
 TEST(AprgFileExtractorTest, AllFilesAreExtractedSuccessfully) {
     AprgFileExtractor const fileExtractor;
     AlbaLocalPathHandler const directoryPathHandler(APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\)");
@@ -111,6 +87,28 @@ TEST(AprgFileExtractorTest, AllFilesAreExtractedSuccessfully) {
     outputFilePathHandler.input(APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\File5.avi)");
     EXPECT_TRUE(outputFilePathHandler.isFoundInLocalSystem());
     deleteAllFilesOnDirectory(directoryPathHandler.getFullPath());
+}
+
+TEST(AprgFileExtractorTest, OneFileIsExtractedSuccessfully) {
+    AprgFileExtractor const fileExtractor;
+    AlbaLocalPathHandler const directoryPathHandler(APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\)");
+    AlbaLocalPathHandler const relativeFilePathHandler(R"(DirectoryTest\DIR1\File1.log)");
+    AlbaLocalPathHandler filePathHandler(
+        APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\DirectoryTest\DIR1\File1.log)");
+    deleteAllFilesOnDirectory(directoryPathHandler.getFullPath());
+
+    string const outputFilePath =
+        fileExtractor.extractOneFile(PATH_OF_SAMPLE_ZIP_1, relativeFilePathHandler.getFullPath());
+    EXPECT_EQ(filePathHandler.getFullPath(), outputFilePath);
+    filePathHandler.reInput();
+    EXPECT_TRUE(filePathHandler.isFoundInLocalSystem());
+    // deleteAllFilesOnDirectory(directoryPathHandler.getFullPath());
+}
+
+TEST(AprgFileExtractorTest, DISABLED_ActualTest) {
+    AprgFileExtractor fileExtractor(
+        R"([LRM] || [alarm] || [UDP] || [CPU] || [syslog] || [ccns] || [tcom] || [startup] || [runtime] || [system] || [radparam] || ([bts]&&([.log]||[.zip]||[.tar])) || [snapshot] || ([tech]&&[report]) || [BTSLogFiles])");
+    fileExtractor.extractAllRelevantFiles(R"(D:\W\ZZZ_Useless_Logs\PR103380\New folder\)");
 }
 
 TEST(AprgFileExtractorTest, FilesAreExtractedSuccessfullyWithACondition) {

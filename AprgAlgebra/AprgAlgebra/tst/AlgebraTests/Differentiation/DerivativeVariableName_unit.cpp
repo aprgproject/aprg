@@ -55,18 +55,6 @@ TEST(
     EXPECT_EQ("distance", derivativeVariableName.getDependentVariable());
 }
 
-TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorksWithInvalidFormatResultsToInvalid) {
-    DerivativeVariableName derivativeVariableName("oisuadhfh");
-
-    EXPECT_FALSE(derivativeVariableName.isValid());
-}
-
-TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorksWithNotEqualNumbersResultsToInvalid) {
-    DerivativeVariableName derivativeVariableName("d175[distance]/d[time]471");
-
-    EXPECT_FALSE(derivativeVariableName.isValid());
-}
-
 TEST(DerivativeVariableNameTest, GetNameInLeibnizNotationWorksWhenDifferentiationLevelIsOne) {
     DerivativeVariableName derivativeVariableName(1, "time", "volume");
 
@@ -77,6 +65,18 @@ TEST(DerivativeVariableNameTest, GetNameInLeibnizNotationWorksWhenDifferentiatio
     DerivativeVariableName derivativeVariableName(46, "time", "volume");
 
     EXPECT_EQ("d46[volume]/d[time]46", derivativeVariableName.getNameInLeibnizNotation());
+}
+
+TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorksWithInvalidFormatResultsToInvalid) {
+    DerivativeVariableName derivativeVariableName("oisuadhfh");
+
+    EXPECT_FALSE(derivativeVariableName.isValid());
+}
+
+TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorksWithNotEqualNumbersResultsToInvalid) {
+    DerivativeVariableName derivativeVariableName("d175[distance]/d[time]471");
+
+    EXPECT_FALSE(derivativeVariableName.isValid());
 }
 
 }  // namespace alba::algebra

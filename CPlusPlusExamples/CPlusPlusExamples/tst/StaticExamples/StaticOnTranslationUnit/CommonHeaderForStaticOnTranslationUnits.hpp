@@ -13,8 +13,7 @@ struct TranslationUnitValues {
     int externConstInteger;
 };
 
-static int staticInteger = 200;   // explicitly static (internal linkage)
-static int staticFreeFunction();  // explicitly static
+static int staticInteger = 200;  // explicitly static (internal linkage)
 void restoreInitialValuesForTranslationUnit1();
 void restoreInitialValuesForTranslationUnit2();
 TranslationUnitValues getValuesInTranslationUnit1();
@@ -25,7 +24,8 @@ TranslationUnitValues getValuesInTranslationUnit2();
 // -> extern const int externConstInteger; // explicitly extern(external linkage)
 // ---> Linking error: undefined reference to `alba::externConstInteger'
 // same goes for functions (but there are no free const functions)
-int freeFunction();  // extern by default
+int freeFunction();               // extern by default
+static int staticFreeFunction();  // explicitly static
 
 }  // namespace alba::StaticOnTranslationUnits
 
@@ -37,20 +37,16 @@ int freeFunction();  // extern by default
 // -----> It consists of the contents of a single source file,
 // -------> plus the contents of any header files directly or indirectly included by it,
 // -------> minus those lines that were ignored using conditional preprocessing statements.
-
 // -> Linkage
 // ---> External linkage refers to things that exist beyond a particular translation unit. In other words, accessible
 // through the whole program.
 // ---> Internal linkage means everything in the scope of a translation unit.
-
 // -> By default, an object or variable that is defined in the global namespace has the static duration
 // -> and external linkage however when you declare a variable or function at file scope (global and/or namespace
 // scope),
 // -> the static keyword specifies that the variable or function has internal linkage (static=internal).
-
 // -> "const" keyword
 // ---> "const" variables goes by default internal linkage unless otherwise declared as extern.
-
 // -> "static" keyword
 // ---> A "static" variable or function means that when it comes time to link those actual functions or variables to
 // define symbols,
@@ -63,7 +59,6 @@ int freeFunction();  // extern by default
 // -----> When used in a declaration of an object, it specifies static storage duration (except if accompanied by
 // thread_local).
 // -----> When used in a declaration at namespace scope, it specifies internal linkage.
-
 // -> "extern" keyword
 // ---> "extern" means that its going to look for that variable in an external translation unit.
 // ---> From cppreference:
@@ -73,7 +68,6 @@ int freeFunction();  // extern by default
 // -----> but it cannot be used in a definition of an automatic storage duration object,
 // -----> so all extern objects have static or thread durations.
 // -----> In addition, a variable declaration that uses extern and has no initializer is not a definition.
-
 // -> static storage duration
 // ---> From cppreference:
 // -----> The storage for the object is allocated when the program begins and deallocated when the program ends.

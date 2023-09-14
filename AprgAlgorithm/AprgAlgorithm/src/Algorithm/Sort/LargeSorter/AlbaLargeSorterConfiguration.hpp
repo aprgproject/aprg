@@ -30,8 +30,6 @@ struct AlbaLargeSorterConfiguration {
         m_directoryForBlocks = getFixedPath(directoryForBlocks);
     }
 
-    static std::string getFixedPath(std::string const& path) { return AlbaLocalPathHandler(path).getFullPath(); }
-
     [[nodiscard]] std::string getFilePathWithBlockNumber(int const blockNumber) const {
         std::stringstream ss;
         ss << m_directoryForBlocks << R"(\BLOCK_)" << blockNumber << ".txt";
@@ -57,6 +55,7 @@ struct AlbaLargeSorterConfiguration {
         return true;
     }
 
+    static std::string getFixedPath(std::string const& path) { return AlbaLocalPathHandler(path).getFullPath(); }
     std::string m_directoryForBlocks;
     int m_minimumNumberOfObjectsPerBlock;
     int m_maximumNumberOfObjectsPerBlock;

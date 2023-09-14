@@ -4,11 +4,49 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Math/Matrix/Utilities/AlbaMatrixUtilities.hpp>
 
-using namespace alba::matrix;
 using namespace alba::mathHelper;
+using namespace alba::matrix;
 using namespace std;
 
 namespace alba {
+
+FibonacciExample::Number FibonacciExample::getNthFibonacciUsingNaiveRecursion(Number const number) const {
+    // Time Complexity: T(n) = T(n-1) + T(n-2) which is exponential.
+    // Extra Space: O(n) if we consider the function call stack size, otherwise O(1).
+    // We can observe that this implementation does a lot of repeated work, thus this is a bad implementation for nth
+    // Fibonacci number.
+    if (number <= 1) {
+        return number;
+    }
+    return getNthFibonacciUsingNaiveRecursion(number - 1) + getNthFibonacciUsingNaiveRecursion(number - 2);
+}
+
+FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(Number const number) {
+    // Time Complexity: O(n) // same as iterative DP
+    // Extra Space: O(n)
+    // a) Memoization (Top Down):
+    // The memoized program for a problem is similar to the recursive version
+    // with a small modification that it looks into a lookup table before computing solutions.
+    // We initialize a lookup array with all initial values as UNUSED_VALUE.
+    // Whenever we need the solution to a subproblem, we first look into the lookup table.
+    // If the precomputed value is there then we return that value,
+    // otherwise, we calculate the value and put the result in the lookup table so that it can be reused later.
+    Number const size = max(number + 1, 2);
+    Numbers memoizationData(size, static_cast<int>(UNUSED_VALUE));
+    memoizationData[0] = 0;
+    memoizationData[1] = 1;
+    return getNthFibonacciUsingMemoizationDP(memoizationData, number);
+}
+
+FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoizationDP(Number const number) {
+    // Time Complexity: O(log(n))
+    // Extra Space: O(n)
+    Number const size = max(number + 1, 2);
+    Numbers memoizationData(size, static_cast<int>(UNUSED_VALUE));
+    memoizationData[0] = 0;
+    memoizationData[1] = 1;
+    return getNthFibonacciUsingMemoizationDP(memoizationData, number);
+}
 
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingIterativeDP(Number const number) {
     // Time Complexity: O(n)
@@ -129,44 +167,6 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicIterat
     return result;
 }
 
-FibonacciExample::Number FibonacciExample::getNthFibonacciUsingNaiveRecursion(Number const number) const {
-    // Time Complexity: T(n) = T(n-1) + T(n-2) which is exponential.
-    // Extra Space: O(n) if we consider the function call stack size, otherwise O(1).
-    // We can observe that this implementation does a lot of repeated work, thus this is a bad implementation for nth
-    // Fibonacci number.
-    if (number <= 1) {
-        return number;
-    }
-    return getNthFibonacciUsingNaiveRecursion(number - 1) + getNthFibonacciUsingNaiveRecursion(number - 2);
-}
-
-FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(Number const number) {
-    // Time Complexity: O(n) // same as iterative DP
-    // Extra Space: O(n)
-    // a) Memoization (Top Down):
-    // The memoized program for a problem is similar to the recursive version
-    // with a small modification that it looks into a lookup table before computing solutions.
-    // We initialize a lookup array with all initial values as UNUSED_VALUE.
-    // Whenever we need the solution to a subproblem, we first look into the lookup table.
-    // If the precomputed value is there then we return that value,
-    // otherwise, we calculate the value and put the result in the lookup table so that it can be reused later.
-    Number const size = max(number + 1, 2);
-    Numbers memoizationData(size, static_cast<int>(UNUSED_VALUE));
-    memoizationData[0] = 0;
-    memoizationData[1] = 1;
-    return getNthFibonacciUsingMemoizationDP(memoizationData, number);
-}
-
-FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoizationDP(Number const number) {
-    // Time Complexity: O(log(n))
-    // Extra Space: O(n)
-    Number const size = max(number + 1, 2);
-    Numbers memoizationData(size, static_cast<int>(UNUSED_VALUE));
-    memoizationData[0] = 0;
-    memoizationData[1] = 1;
-    return getNthFibonacciUsingMemoizationDP(memoizationData, number);
-}
-
 FibonacciExample::Number FibonacciExample::getNthFibonacciUsingMemoizationDP(
     Numbers& memoizationData, Number const number) {
     Number& resultForNumber(memoizationData[number]);
@@ -206,7 +206,6 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoiz
 // no point storing the solutions if they are not needed again. For example, Binary Search doesn’t have common
 // subproblems. If we take an example of following recursive program for Fibonacci Numbers, there are many subproblems
 // which are solved again and again.
-
 // Recursion tree for execution of fib(5)
 //                             f(5)
 //                              ##
@@ -239,13 +238,11 @@ FibonacciExample::Number FibonacciExample::getNthFibonacciUsingLogarithmicMemoiz
 //      #  #
 //     #    #
 //   f(1)  f(0)
-
 // We can see that the function fib(3) is being called 2 times.
 // If we would have stored the value of fib(3), then instead of computing it again, we could have reused the old stored
 // value. There are following two different ways to store the values so that these values can be reused:
 // -> a) Memoization (Top Down)
 // -> b) Tabulation (Bottom Up)
-
 // Both Tabulated and Memoized store the solutions of subproblems.
 // In Memoized version, table is filled on demand while in Tabulated version,
 // starting from the first entry, all entries are filled one by one.

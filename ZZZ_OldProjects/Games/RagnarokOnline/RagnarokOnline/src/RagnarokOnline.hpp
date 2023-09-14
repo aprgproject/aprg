@@ -116,7 +116,6 @@ using ItemNameToShopItemDetailMap = std::map<std::string, ShopItemDetail>;
 class RagnarokOnline {
 public:
     RagnarokOnline();
-    static std::string getFixedItemName(Item const& item);
     [[nodiscard]] Item getItem(std::string const& fixedItemName) const;
     [[nodiscard]] ItemIdToItemMap const& getItemIdToItemMap() const;
     [[nodiscard]] ItemNameToShopItemDetailMap const& getBuyingItemShops() const;
@@ -152,6 +151,7 @@ public:
     void readSellingShopItems(std::string const& inputFilePath);
     void buildItemNameToItemId();
     void buildMonsterNameToMonsterId();
+    static std::string getFixedItemName(Item const& item);
 
 private:
     static std::string fixText(std::string const& text);

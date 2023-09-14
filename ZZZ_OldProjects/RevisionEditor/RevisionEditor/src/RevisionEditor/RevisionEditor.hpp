@@ -29,13 +29,6 @@ public:
     void editCommitMessages();
 
 private:
-    static AlbaDateTime getDateTime(std::string const& date);
-
-    static DaysInterval createDaysInterval(
-        uint32_t const year1, uint32_t const month1, uint32_t const day1, uint32_t const year2, uint32_t const month2,
-        uint32_t const day2);
-
-    static RevisionEntry getRevisionEntry(std::string const& line);
     void saveCommitsPerHourToFile() const;
     void saveCommitsInADayToFile() const;
     void saveCommitMessagesToFile() const;
@@ -43,6 +36,13 @@ private:
     void setDataOnCommitsPerDay();
     int getRandomCommitsOfADay(double const targetAverageCommitOfADay);
     int getRandomHour();
+    static AlbaDateTime getDateTime(std::string const& date);
+
+    static DaysInterval createDaysInterval(
+        uint32_t const year1, uint32_t const month1, uint32_t const day1, uint32_t const year2, uint32_t const month2,
+        uint32_t const day2);
+
+    static RevisionEntry getRevisionEntry(std::string const& line);
     static constexpr int MAX_NUMBER_COMMITS_PER_DAY = 20;
     double m_originalAverageCommitPerDay{};
     std::array<int, MAX_NUMBER_COMMITS_PER_DAY> m_numberInstancesOfEachDayCommitCount{};

@@ -6,14 +6,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-TEST(VariableTest, VariablesAreConstructedCorrectly) {
-    Variable variable1;
-    Variable variable2("time");
-
-    EXPECT_EQ("", variable1.getVariableName());
-    EXPECT_EQ("time", variable2.getVariableName());
-}
-
 TEST(VariableTest, EqualityOperatorWorks) {
     Variable variable1;
     Variable variable2("x");
@@ -40,21 +32,6 @@ TEST(VariableTest, InequalityOperatorWorks) {
     EXPECT_FALSE(variable2 != variable4);
 }
 
-TEST(VariableTest, LessThanOperatorWorks) {
-    EXPECT_FALSE(Variable() < Variable());
-    EXPECT_FALSE(Variable("x") < Variable("x"));
-    EXPECT_FALSE(Variable("x") < Variable("w"));
-    EXPECT_TRUE(Variable("x") < Variable("y"));
-}
-
-TEST(VariableTest, SettingANewVariableNameWorks) {
-    Variable variableForTest;
-    EXPECT_EQ("", variableForTest.getVariableName());
-
-    variableForTest.setVariableName("omega");
-    EXPECT_EQ("omega", variableForTest.getVariableName());
-}
-
 TEST(VariableTest, OutputStreamOperatorWorks) {
     stringstream ss;
     Variable variable1;
@@ -63,6 +40,29 @@ TEST(VariableTest, OutputStreamOperatorWorks) {
     ss << variable1 << "," << variable2;
 
     EXPECT_EQ(",time", ss.str());
+}
+
+TEST(VariableTest, LessThanOperatorWorks) {
+    EXPECT_FALSE(Variable() < Variable());
+    EXPECT_FALSE(Variable("x") < Variable("x"));
+    EXPECT_FALSE(Variable("x") < Variable("w"));
+    EXPECT_TRUE(Variable("x") < Variable("y"));
+}
+
+TEST(VariableTest, VariablesAreConstructedCorrectly) {
+    Variable variable1;
+    Variable variable2("time");
+
+    EXPECT_EQ("", variable1.getVariableName());
+    EXPECT_EQ("time", variable2.getVariableName());
+}
+
+TEST(VariableTest, SettingANewVariableNameWorks) {
+    Variable variableForTest;
+    EXPECT_EQ("", variableForTest.getVariableName());
+
+    variableForTest.setVariableName("omega");
+    EXPECT_EQ("omega", variableForTest.getVariableName());
 }
 
 }  // namespace alba::algebra

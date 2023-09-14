@@ -21,6 +21,7 @@ public:
     using UpdateDataFunction = std::function<void(Vertex const&, Vertex const&)>;
     ~PathSearchUsingBfs() =
         default;  // No need for virtual destructor because this class is not destroyed polymorphically.
+
     PathSearchUsingBfs(BaseGraphWithVertex const& graph, Vertex const& startVertex)
         : BaseClass(graph),
           b_graph(BaseClass::m_graph),
@@ -66,16 +67,6 @@ private:
     using BaseClass::clear;
     using BaseClass::initializeWithStartVertices;
 
-    static InitializeDataFunction getEmptyInitializeDataFunction() {
-        static InitializeDataFunction const emptyInitializeDataFunction = [](Vertices const&) {};
-        return emptyInitializeDataFunction;
-    }
-
-    static UpdateDataFunction getEmptyUpdateDataFunction() {
-        static UpdateDataFunction const emptyUpdateDataFunction = [](Vertex const&, Vertex const&) {};
-        return emptyUpdateDataFunction;
-    }
-
     void traverseUsingBfs(Vertices const& startVertices) {
         b_processedVertices.putVertices(startVertices);
 
@@ -95,6 +86,16 @@ private:
                 }
             }
         }
+    }
+
+    static InitializeDataFunction getEmptyInitializeDataFunction() {
+        static InitializeDataFunction const emptyInitializeDataFunction = [](Vertices const&) {};
+        return emptyInitializeDataFunction;
+    }
+
+    static UpdateDataFunction getEmptyUpdateDataFunction() {
+        static UpdateDataFunction const emptyUpdateDataFunction = [](Vertex const&, Vertex const&) {};
+        return emptyUpdateDataFunction;
     }
 
     BaseGraphWithVertex const& b_graph;
@@ -131,5 +132,4 @@ private:
 // -----> for example by backtracking from the destination node up to the starting node, once the BFS has been run,
 // -----> and the predecessors nodes have been set.
 // ---> Breadth-first search produces a so-called breadth first tree.
-
 }  // namespace alba::algorithm

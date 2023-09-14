@@ -24,6 +24,14 @@ namespace alba {
 namespace algebra::Simplification {
 
 SimplificationOfExpression::SimplificationOfExpression(Expression const& expression) : m_expression(expression) {}
+Expression SimplificationOfExpression::getExpression() const { return m_expression; }
+
+void SimplificationOfExpression::simplify() {
+    simplifyExpressionUntilNoChangeInitiallyIfNeeded();
+    simplifyBySubstitutingExpressionAndFunctionsToVariablesIfNeeded();
+    simplifyToACommonDenominatorIfNeeded();
+    simplifyExpressionUntilNoChange();
+}
 
 bool SimplificationOfExpression::shouldSimplifyToACommonDenominator() {
     return Configuration::getInstance().getConfigurationDetails().shouldSimplifyToACommonDenominator;
@@ -81,13 +89,90 @@ bool SimplificationOfExpression::shouldPerformDebug() {
     return Configuration::getInstance().getConfigurationDetails().shouldPerformDebug;
 }
 
-Expression SimplificationOfExpression::getExpression() const { return m_expression; }
+void SimplificationOfExpression::simplifyExpressionUntilNoChange() {
+    Expression beforeSimplify;
+    do {
+        beforeSimplify = m_expression;
+        simplifyExpression(m_expression);
+    } while (isChangeDetected(beforeSimplify, m_expression));
+}
 
-void SimplificationOfExpression::simplify() {
-    simplifyExpressionUntilNoChangeInitiallyIfNeeded();
-    simplifyBySubstitutingExpressionAndFunctionsToVariablesIfNeeded();
-    simplifyToACommonDenominatorIfNeeded();
-    simplifyExpressionUntilNoChange();
+void SimplificationOfExpression::simplifyExpressionUntilNoChangeInitiallyIfNeeded() {
+    if (shouldSimplifyToACommonDenominator() || shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables()) {
+        convertPolynomialOverPolynomialIfNeeded();
+        simplifyExpressionUntilNoChange();
+    }
+}
+
+void SimplificationOfExpression::simplifyToACommonDenominatorIfNeeded() {
+    if (shouldSimplifyToACommonDenominator()) {
+        simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(m_expression);
+    }
+}
+
+void SimplificationOfExpression::simplifyBySubstitutingExpressionAndFunctionsToVariablesIfNeeded() {
+    if (shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables()) {
+        SimplificationOfExpression::ConfigurationDetails substitutionSimplificationConfigurationDetails(
+            Configuration::getInstance().getConfigurationDetails());
+        substitutionSimplificationConfigurationDetails.shouldSimplifyToACommonDenominator = true;
+        substitutionSimplificationConfigurationDetails.shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables =
+            false;
+
+        SimplificationOfExpression::ScopeObject const scopeObject;
+        scopeObject.setInThisScopeThisConfiguration(substitutionSimplificationConfigurationDetails);
+
+        while (tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(m_expression)) {
+            ;
+        }
+    }
+}
+
+void SimplificationOfExpression::convertPolynomialOverPolynomialIfNeeded() {
+    if (shouldSimplifyToACommonDenominator()) {
+        convertPolynomialToPolynomialOverPolynomial(m_expression);
+    }
+}
+
+void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(Term& term) {
+    if (term.isPolynomial()) {
+        PolynomialOverPolynomial pop(term.getAsPolynomial(), createPolynomialFromNumber(1));
+        pop.simplify();
+        if (!isTheValue(pop.getDenominator(), 1)) {
+            term = createExpressionIfPossible({pop.getNumerator(), "/", pop.getDenominator()});
+        }
+    } else if (term.isExpression()) {
+        convertPolynomialToPolynomialOverPolynomial(term.getAsExpressionReference());
+    } else if (term.isFunction()) {
+        convertPolynomialToPolynomialOverPolynomial(
+            getTermReferenceFromBaseTerm(term.getAsFunctionReference().getInputTermReference()));
+    }
+}
+
+void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(Expression& expression) {
+    TermsWithDetails& termsWithDetails(expression.getTermsWithAssociationReference().getTermsWithDetailsReference());
+    for (TermWithDetails& termWithDetails : termsWithDetails) {
+        Term& term(getTermReferenceFromUniquePointer(termWithDetails.baseTermPointer));
+        convertPolynomialToPolynomialOverPolynomial(term);
+    }
+}
+
+bool SimplificationOfExpression::tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(
+    Expression const& expression) {
+    bool continueToTryToSubstitute = false;
+    int const oldNumberOfTerms = expression.getTermsWithAssociation().getTermsWithDetails().size();
+    Terms const expressionAndFunctionTerms(retrieveSubExpressionsAndSubFunctions(expression));
+    for (Term const& expressionOrFunctionTerm : expressionAndFunctionTerms) {
+        Expression const newExpression(
+            getNewExpressionWithSubstitutedVariableForTerm(m_expression, expressionOrFunctionTerm));
+        int const newNumberOfTerms = newExpression.getTermsWithAssociation().getTermsWithDetails().size();
+        if (expression.getCommonOperatorLevel() != newExpression.getCommonOperatorLevel() ||
+            oldNumberOfTerms != newNumberOfTerms) {
+            m_expression = newExpression;
+            continueToTryToSubstitute = true;
+            break;
+        }
+    }
+    return continueToTryToSubstitute;
 }
 
 void SimplificationOfExpression::simplifyExpression(Expression& expression) {
@@ -260,92 +345,6 @@ bool SimplificationOfExpression::isChangeDetected(Expression const& expression1,
 bool SimplificationOfExpression::shouldDistributeExponentConstantToEachBase() {
     return !shouldNotSimplifyByDistributingConstantExponentToEachBase() &&
            !shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision();
-}
-
-void SimplificationOfExpression::simplifyExpressionUntilNoChange() {
-    Expression beforeSimplify;
-    do {
-        beforeSimplify = m_expression;
-        simplifyExpression(m_expression);
-    } while (isChangeDetected(beforeSimplify, m_expression));
-}
-
-void SimplificationOfExpression::simplifyExpressionUntilNoChangeInitiallyIfNeeded() {
-    if (shouldSimplifyToACommonDenominator() || shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables()) {
-        convertPolynomialOverPolynomialIfNeeded();
-        simplifyExpressionUntilNoChange();
-    }
-}
-
-void SimplificationOfExpression::simplifyToACommonDenominatorIfNeeded() {
-    if (shouldSimplifyToACommonDenominator()) {
-        simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(m_expression);
-    }
-}
-
-void SimplificationOfExpression::simplifyBySubstitutingExpressionAndFunctionsToVariablesIfNeeded() {
-    if (shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables()) {
-        SimplificationOfExpression::ConfigurationDetails substitutionSimplificationConfigurationDetails(
-            Configuration::getInstance().getConfigurationDetails());
-        substitutionSimplificationConfigurationDetails.shouldSimplifyToACommonDenominator = true;
-        substitutionSimplificationConfigurationDetails.shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables =
-            false;
-
-        SimplificationOfExpression::ScopeObject const scopeObject;
-        scopeObject.setInThisScopeThisConfiguration(substitutionSimplificationConfigurationDetails);
-
-        while (tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(m_expression)) {
-            ;
-        }
-    }
-}
-
-void SimplificationOfExpression::convertPolynomialOverPolynomialIfNeeded() {
-    if (shouldSimplifyToACommonDenominator()) {
-        convertPolynomialToPolynomialOverPolynomial(m_expression);
-    }
-}
-
-void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(Term& term) {
-    if (term.isPolynomial()) {
-        PolynomialOverPolynomial pop(term.getAsPolynomial(), createPolynomialFromNumber(1));
-        pop.simplify();
-        if (!isTheValue(pop.getDenominator(), 1)) {
-            term = createExpressionIfPossible({pop.getNumerator(), "/", pop.getDenominator()});
-        }
-    } else if (term.isExpression()) {
-        convertPolynomialToPolynomialOverPolynomial(term.getAsExpressionReference());
-    } else if (term.isFunction()) {
-        convertPolynomialToPolynomialOverPolynomial(
-            getTermReferenceFromBaseTerm(term.getAsFunctionReference().getInputTermReference()));
-    }
-}
-
-void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(Expression& expression) {
-    TermsWithDetails& termsWithDetails(expression.getTermsWithAssociationReference().getTermsWithDetailsReference());
-    for (TermWithDetails& termWithDetails : termsWithDetails) {
-        Term& term(getTermReferenceFromUniquePointer(termWithDetails.baseTermPointer));
-        convertPolynomialToPolynomialOverPolynomial(term);
-    }
-}
-
-bool SimplificationOfExpression::tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(
-    Expression const& expression) {
-    bool continueToTryToSubstitute = false;
-    int const oldNumberOfTerms = expression.getTermsWithAssociation().getTermsWithDetails().size();
-    Terms const expressionAndFunctionTerms(retrieveSubExpressionsAndSubFunctions(expression));
-    for (Term const& expressionOrFunctionTerm : expressionAndFunctionTerms) {
-        Expression const newExpression(
-            getNewExpressionWithSubstitutedVariableForTerm(m_expression, expressionOrFunctionTerm));
-        int const newNumberOfTerms = newExpression.getTermsWithAssociation().getTermsWithDetails().size();
-        if (expression.getCommonOperatorLevel() != newExpression.getCommonOperatorLevel() ||
-            oldNumberOfTerms != newNumberOfTerms) {
-            m_expression = newExpression;
-            continueToTryToSubstitute = true;
-            break;
-        }
-    }
-    return continueToTryToSubstitute;
 }
 
 SimplificationOfExpression::SimplificationOfExpression() = default;

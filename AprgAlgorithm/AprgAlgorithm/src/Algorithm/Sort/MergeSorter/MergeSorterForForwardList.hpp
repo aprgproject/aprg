@@ -72,9 +72,7 @@ private:
 // Merge sort is often preferred for sorting a linked list.
 // The slow random-access performance of a linked list makes some other algorithms (such as quicksort) perform poorly,
 // and others (such as heapsort) completely impossible.
-
 // Approach 2: This approach is simpler and uses log n space.
-
 // mergeSort():
 // -> If the size of the linked list is 1 then return the head
 // -> Find mid using The Tortoise and The Hare Approach
@@ -85,7 +83,6 @@ private:
 // -> Call merge() given the arguments new heads of left and right sub-linked lists and store the final head returned
 // after merging.
 // -> Return the final head of the merged linkedlist.
-
 // merge(head1, head2):
 // -> Take a pointer say merged to store the merged list in it and store a dummy node in it.
 // -> Take a pointer temp and assign merge to it.
@@ -94,6 +91,5 @@ private:
 // -> Repeat steps 3, 4 and 5 until head1 is not equal to null and head2 is not equal to null.
 // -> Now add any remaining nodes of the first or the second linked list to the merged linked list.
 // -> Return the next of merged(that will ignore the dummy and return the head of the final merged linked list)
-
 // Time Complexity: O(n*log n)
 // Auxiliary Space Complexity: O(log n)

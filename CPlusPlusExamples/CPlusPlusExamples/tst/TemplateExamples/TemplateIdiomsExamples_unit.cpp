@@ -210,12 +210,10 @@ TEST(TemplateIdiomsExamplesTest, CrtpWorks) {
 
 // Collect all notes here:
 // General Notes:
-
 // -> Template parameters can be omitted on class templates:
 // ---> Inside the definition of a class template, the base template-name can be used a type-name,
 // -----> in which case its basically as if you <all the template-parameters> after it
 // ---> So this is fine, and helps cut down on repetition. I recommend it.
-
 // -> Dependent names
 // ---> Why typename or ".template" or "::template"?
 // -----> C++'s grammar is not context-free.

@@ -121,42 +121,6 @@ void RevisionEditor::editCommitMessages() {
     }
 }
 
-AlbaDateTime RevisionEditor::getDateTime(string const& date) {
-    int index = 0;
-    auto year = convertStringToNumber<uint16_t>(getStringBeforeThisString(date, "-", index));
-    index = date.find('-', index) + 1;
-    auto month = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "-", index));
-    index = date.find('-', index) + 1;
-    auto day = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "T", index));
-    index = date.find('T', index) + 1;
-    auto hour = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
-    index = date.find(':', index) + 1;
-    auto minute = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
-    index = date.find(':', index) + 1;
-    auto second = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "+", index));
-
-    return {year, month, day, hour, minute, second, 0U};
-}
-
-RevisionEditor::DaysInterval RevisionEditor::createDaysInterval(
-    uint32_t const year1, uint32_t const month1, uint32_t const day1, uint32_t const year2, uint32_t const month2,
-    uint32_t const day2) {
-    return {AlbaYearMonthDay(year1, month1, day1).getTotalDays(), AlbaYearMonthDay(year2, month2, day2).getTotalDays()};
-}
-
-RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& line) {
-    int index = 0;
-    string const revisionHash = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
-    index = line.find(END_ENTRY_PATTERN, index) + 3;
-    string const date = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
-    index = line.find(END_ENTRY_PATTERN, index) + 3;
-    string const author = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
-    index = line.find(END_ENTRY_PATTERN, index) + 3;
-    string const message = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
-    // ALBA_PRINT4(revisionHash, date, author, message);
-    return {revisionHash, getDateTime(date), author, message};
-}
-
 void RevisionEditor::saveCommitsPerHourToFile() const {
     ofstream commitsPerHourStream(R"(F:\Branches\GitMigration\git_old_repo\commitsPerHour.csv)");
     int hour = 0;
@@ -257,6 +221,42 @@ int RevisionEditor::getRandomHour() {
         ++hour;
     }
     return 0;
+}
+
+AlbaDateTime RevisionEditor::getDateTime(string const& date) {
+    int index = 0;
+    auto year = convertStringToNumber<uint16_t>(getStringBeforeThisString(date, "-", index));
+    index = date.find('-', index) + 1;
+    auto month = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "-", index));
+    index = date.find('-', index) + 1;
+    auto day = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "T", index));
+    index = date.find('T', index) + 1;
+    auto hour = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
+    index = date.find(':', index) + 1;
+    auto minute = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
+    index = date.find(':', index) + 1;
+    auto second = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "+", index));
+
+    return {year, month, day, hour, minute, second, 0U};
+}
+
+RevisionEditor::DaysInterval RevisionEditor::createDaysInterval(
+    uint32_t const year1, uint32_t const month1, uint32_t const day1, uint32_t const year2, uint32_t const month2,
+    uint32_t const day2) {
+    return {AlbaYearMonthDay(year1, month1, day1).getTotalDays(), AlbaYearMonthDay(year2, month2, day2).getTotalDays()};
+}
+
+RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& line) {
+    int index = 0;
+    string const revisionHash = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
+    index = line.find(END_ENTRY_PATTERN, index) + 3;
+    string const date = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
+    index = line.find(END_ENTRY_PATTERN, index) + 3;
+    string const author = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
+    index = line.find(END_ENTRY_PATTERN, index) + 3;
+    string const message = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
+    // ALBA_PRINT4(revisionHash, date, author, message);
+    return {revisionHash, getDateTime(date), author, message};
 }
 
 }  // namespace alba

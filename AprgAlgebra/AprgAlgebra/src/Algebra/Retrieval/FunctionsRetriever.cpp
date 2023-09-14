@@ -4,7 +4,6 @@ namespace alba::algebra {
 
 FunctionsRetriever::FunctionsRetriever(FunctionCondition const& isFunctionIncluded)
     : m_isFunctionIncluded(isFunctionIncluded) {}
-FunctionsSet const& FunctionsRetriever::getFunctions() const { return m_functions; }
 void FunctionsRetriever::retrieveFromPolynomial(Polynomial const&) {}
 
 void FunctionsRetriever::retrieveFromFunction(Function const& functionObject) {
@@ -12,5 +11,7 @@ void FunctionsRetriever::retrieveFromFunction(Function const& functionObject) {
         m_functions.emplace(functionObject);
     }
 }
+
+FunctionsSet const& FunctionsRetriever::getFunctions() const { return m_functions; }
 
 }  // namespace alba::algebra

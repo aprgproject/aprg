@@ -17,6 +17,15 @@ TEST(CPlusPlusUtilitiesTest, GetTermsFromStringWorks) {
     EXPECT_EQ(expectedTerms, actualTerms);
 }
 
+TEST(CPlusPlusUtilitiesTest, GetTextWithoutCommentsWithNewLineWorks) {
+    string const codeWithComments = "Code\n /*MultilineComment*/\n //SingleLineComment\n Code\n";
+    Terms const termsWithComments(getTermsFromString(codeWithComments));
+
+    string const codeWithoutComments(getTextWithoutCommentsWithNewLine(termsWithComments));
+
+    EXPECT_EQ("Code\n Code\n", codeWithoutComments);
+}
+
 TEST(CPlusPlusUtilitiesTest, GetFunctionSignatureWorks) {
     string const wholeFunction =
         "/*Comment*/ \t\t\n friend static name::AlbaOptional::AlbaOptional(AlbaOptional<ContentType&> const& optional) "
@@ -33,15 +42,6 @@ TEST(CPlusPlusUtilitiesTest, GetFunctionNameWorks) {
     string const functionName(getFunctionName(functionSignature));
 
     EXPECT_EQ("AlbaOptional", functionName);
-}
-
-TEST(CPlusPlusUtilitiesTest, GetTextWithoutCommentsWithNewLineWorks) {
-    string const codeWithComments = "Code\n /*MultilineComment*/\n //SingleLineComment\n Code\n";
-    Terms const termsWithComments(getTermsFromString(codeWithComments));
-
-    string const codeWithoutComments(getTextWithoutCommentsWithNewLine(termsWithComments));
-
-    EXPECT_EQ("Code\n Code\n", codeWithoutComments);
 }
 
 }  // namespace alba::CodeUtilities::CPlusPlusUtilities

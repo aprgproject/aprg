@@ -24,28 +24,6 @@ void putConnectionsForTest(GraphForTest& graph) {
 
 }  // namespace
 
-TEST(LongestPathsInTreeTest, GetEndPointPairsOfLongestPathsWorks) {
-    GraphForTest graph;
-    putConnectionsForTest(graph);
-    LongestPathsForTest longestPath(graph);
-    longestPath.searchForAllEndPointPairs();
-
-    EndPointPairsForTest const endPointPairsToVerify(longestPath.getEndPointPairsOfLongestPaths());
-
-    EndPointPairsForTest const endPointPairsToExpect{{5, 7}, {6, 7}, {7, 5}, {7, 6}};
-    EXPECT_EQ(endPointPairsToExpect, endPointPairsToVerify);
-}
-
-TEST(LongestPathsInTreeTest, GetLongestDistanceWorks) {
-    // This function is coupled with search function
-    GraphForTest graph;
-    putConnectionsForTest(graph);
-    LongestPathsForTest longestPath(graph);
-    longestPath.searchForAllEndPointPairs();
-
-    EXPECT_EQ(4, longestPath.getLongestDistance());
-}
-
 TEST(LongestPathsInTreeTest, SearchForAtLeastOneEndPointPairWorks) {
     GraphForTest graph;
     putConnectionsForTest(graph);
@@ -59,6 +37,18 @@ TEST(LongestPathsInTreeTest, SearchForAtLeastOneEndPointPairWorks) {
     EXPECT_EQ(endPointPairsToExpect, endPointPairsToVerify);
 }
 
+TEST(LongestPathsInTreeTest, GetEndPointPairsOfLongestPathsWorks) {
+    GraphForTest graph;
+    putConnectionsForTest(graph);
+    LongestPathsForTest longestPath(graph);
+    longestPath.searchForAllEndPointPairs();
+
+    EndPointPairsForTest const endPointPairsToVerify(longestPath.getEndPointPairsOfLongestPaths());
+
+    EndPointPairsForTest const endPointPairsToExpect{{5, 7}, {6, 7}, {7, 5}, {7, 6}};
+    EXPECT_EQ(endPointPairsToExpect, endPointPairsToVerify);
+}
+
 TEST(LongestPathsInTreeTest, SearchForAllEndPointPairsWorks) {
     GraphForTest graph;
     putConnectionsForTest(graph);
@@ -69,6 +59,16 @@ TEST(LongestPathsInTreeTest, SearchForAllEndPointPairsWorks) {
     EndPointPairsForTest const endPointPairsToVerify(longestPath.getEndPointPairsOfLongestPaths());
     EndPointPairsForTest const endPointPairsToExpect{{5, 7}, {6, 7}, {7, 5}, {7, 6}};
     EXPECT_EQ(endPointPairsToExpect, endPointPairsToVerify);
+}
+
+TEST(LongestPathsInTreeTest, GetLongestDistanceWorks) {
+    // This function is coupled with search function
+    GraphForTest graph;
+    putConnectionsForTest(graph);
+    LongestPathsForTest longestPath(graph);
+    longestPath.searchForAllEndPointPairs();
+
+    EXPECT_EQ(4, longestPath.getLongestDistance());
 }
 
 }  // namespace alba::algorithm

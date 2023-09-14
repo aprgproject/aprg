@@ -3,6 +3,7 @@
 using TCRNCCommunicationContextId = unsigned int;
 using TNbccId = unsigned int;
 using u32 = unsigned int;
+
 constexpr unsigned int MAX_USERS_IN_NODEB = 2500;
 
 #include <map>
@@ -15,6 +16,7 @@ constexpr unsigned int MAX_USERS_IN_NODEB = 2500;
 // #include <TNbccId.h>
 
 #ifdef __cplusplus
+
 // #include <DOpenIUBCommonDefs.h>
 
 #include <array>

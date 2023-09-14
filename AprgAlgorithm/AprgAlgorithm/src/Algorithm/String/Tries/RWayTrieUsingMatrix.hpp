@@ -37,8 +37,6 @@ public:
         return keyToCheck.substr(0, longestPrefixLength);
     }
 
-    [[nodiscard]] SetOfNodeIds const& getUnusedNodeIds() const { return m_unusedNodeIds; }
-
     [[nodiscard]] Strings getKeys() const override {
         Strings result;
         collectAllKeysAtNode(0, std::string(), result);
@@ -75,6 +73,17 @@ public:
         return result;
     }
 
+    [[nodiscard]] int getSize() const override { return m_size; }
+    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
+
+    [[nodiscard]] bool doesContain(Key const& key) const override {
+        return static_cast<bool>(getValuePointer(0, key, 0));
+    }
+
+    void put(Key const& key, Value const& value) override { put(0, key, value, 0); }
+    void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyAndReturnIfDeleted(0, key, 0); }
+    [[nodiscard]] SetOfNodeIds const& getUnusedNodeIds() const { return m_unusedNodeIds; }
+
     [[nodiscard]] std::string getMatrixString() const {
         DisplayTable table;
         table.setBorders("-", "|");
@@ -103,16 +112,6 @@ public:
         ss << "Next node matrix:\n" << table;
         return ss.str();
     }
-
-    [[nodiscard]] int getSize() const override { return m_size; }
-    [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
-
-    [[nodiscard]] bool doesContain(Key const& key) const override {
-        return static_cast<bool>(getValuePointer(0, key, 0));
-    }
-
-    void put(Key const& key, Value const& value) override { put(0, key, value, 0); }
-    void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyAndReturnIfDeleted(0, key, 0); }
 
 private:
     [[nodiscard]] Coordinate getCoordinate(NodeId const nodeId, Key const& key, int const startingIndex) const {
@@ -353,13 +352,11 @@ private:
 // A trie is a rooted tree that maintains a set of strings.
 // Each string in the set is stored as a chain of characters that starts at the root.
 // If two strings have a common prefix, they also have a common chain in the tree.
-
 // We can check in O(n) time whether a trie contains a string of length n, because we can follow the chain that starts
 // at the root node. We can also add a string of length n to the trie in O(n) time by first following the chain and then
 // adding new nodes to the trie if necessary. Using a trie, we can find the longest prefix of a given string such that
 // the prefix belongs to the set. Moreover, by storing additional information in each node, we can calculate the number
 // of strings that belong to the set and have a given string as a prefix.
-
 // A trie can be stored in an array "int trie[N][A];" where N is the maximum number of nodes
 // (the maximum total length of the strings in the set) and A is the size of the alphabet.
 // The nodes of a trie are numbered 0,1,2,... so that the number of the root is 0,

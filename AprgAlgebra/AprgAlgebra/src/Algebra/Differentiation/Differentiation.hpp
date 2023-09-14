@@ -12,8 +12,6 @@ public:
     explicit Differentiation(std::string const& nameOfVariableToDifferentiate);
     Differentiation(
         std::string const& nameOfVariableToDifferentiate, VariableNamesSet const& namesOfDependentVariables);
-    static AlbaNumber differentiateConstant(Constant const&);
-    static Term differentiate(Constant const& constant);
     [[nodiscard]] Equation differentiate(Equation const& equation) const;
     [[nodiscard]] Equation differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const;
     [[nodiscard]] Equation differentiateEquation(Equation const& equation) const;
@@ -32,10 +30,10 @@ public:
     [[nodiscard]] Term differentiateFunction(Function const& functionObject) const;
     [[nodiscard]] Term differentiateTwoMultipliedTerms(Term const& term1, Term const& term2) const;
     [[nodiscard]] Term differentiateTwoDividedTerms(Term const& numerator, Term const& denominator) const;
+    static AlbaNumber differentiateConstant(Constant const&);
+    static Term differentiate(Constant const& constant);
 
 private:
-    static Term differentiateChangingTermRaiseToChangingTerm(Term const& firstTerm, Term const& secondTerm);
-    static Term differentiateFunctionOnly(Function const& functionObject);
     [[nodiscard]] Polynomial differentiateMonomialWithChangingVariables(Monomial const& changingVariables) const;
     [[nodiscard]] Term differentiateAsTermOrExpressionIfNeeded(Expression const& expression) const;
     [[nodiscard]] Term differentiateSimplifiedExpressionOnly(Expression const& expression) const;
@@ -55,6 +53,8 @@ private:
     [[nodiscard]] bool isChangingTerm(Term const& term) const;
     void separateNonChangingAndChangingVariables(
         Monomial& nonChangingVariablesAndConstant, Monomial& changingVariables, Monomial const& monomial) const;
+    static Term differentiateChangingTermRaiseToChangingTerm(Term const& firstTerm, Term const& secondTerm);
+    static Term differentiateFunctionOnly(Function const& functionObject);
     std::string m_nameOfVariableToDifferentiate;
     VariableNamesSet m_namesOfDependentVariables;
 };

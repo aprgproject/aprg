@@ -36,6 +36,12 @@ int ElevatorWeightProblem::getNumberOfOptimalRides() {
     return result;
 }
 
+ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::getNumberOfPeopleSubsets() const {
+    return 1 << getNumberOfPeople();
+}
+
+ElevatorWeightProblem::Person ElevatorWeightProblem::getNumberOfPeople() const { return m_peopleWeights.size(); }
+
 bool ElevatorWeightProblem::isPersonIncluded(PeopleBits const peopleBits, Person const person) {
     return (peopleBits & getProductBits(person)) != 0;
 }
@@ -46,11 +52,5 @@ ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::removePerson(
     PeopleBits const peopleBits, Person const person) {
     return peopleBits & ~(1 << person);
 }
-
-ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::getNumberOfPeopleSubsets() const {
-    return 1 << getNumberOfPeople();
-}
-
-ElevatorWeightProblem::Person ElevatorWeightProblem::getNumberOfPeople() const { return m_peopleWeights.size(); }
 
 }  // namespace alba

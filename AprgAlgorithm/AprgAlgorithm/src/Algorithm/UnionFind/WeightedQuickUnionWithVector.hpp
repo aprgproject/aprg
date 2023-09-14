@@ -25,9 +25,6 @@ public:
         return currentRoot;
     }
 
-    [[nodiscard]] RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
-    [[nodiscard]] SizeVector const& getSizesOfRootsVector() const { return m_sizesOfRoots; }
-
     [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
         return getRoot(object1) == getRoot(object2);
     }
@@ -40,6 +37,9 @@ public:
             connectRootsBasedOnSize(root2, root1);
         }
     }
+
+    [[nodiscard]] RootVector const& getRelativeRootVector() const { return m_relativeRoots; }
+    [[nodiscard]] SizeVector const& getSizesOfRootsVector() const { return m_sizesOfRoots; }
 
     Object getRootWithPathCompressionOnePass(Object const& object) {
         // no longer const

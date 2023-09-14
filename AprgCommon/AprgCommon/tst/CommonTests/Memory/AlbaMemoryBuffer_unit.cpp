@@ -8,6 +8,49 @@ using namespace std;
 
 namespace alba {
 
+TEST(AlbaMemoryBufferTest, OperatorBoolWorks) {
+    int input = 11111111;
+    AlbaMemoryBuffer const buffer1(static_cast<void*>(&input), sizeof(input));
+    AlbaMemoryBuffer const buffer2;
+
+    EXPECT_TRUE(buffer1);
+    EXPECT_FALSE(buffer2);
+}
+
+TEST(AlbaMemoryBufferTest, OperatorSubscriptWorksForReading) {
+    int input = 0x12345678;
+    AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
+
+    EXPECT_TRUE(buffer);
+    EXPECT_EQ(0x78, buffer[0]);
+    EXPECT_EQ(0x56, buffer[1]);
+    EXPECT_EQ(0x34, buffer[2]);
+    EXPECT_EQ(0x12, buffer[3]);
+}
+
+TEST(AlbaMemoryBufferTest, OperatorSubscriptWorksForWriting) {
+    int input = 0x12345678;
+    AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
+
+    buffer[1] = 0xAA;
+
+    EXPECT_TRUE(buffer);
+    EXPECT_EQ(0x78, buffer[0]);
+    EXPECT_EQ(0xAA, buffer[1]);
+    EXPECT_EQ(0x34, buffer[2]);
+    EXPECT_EQ(0x12, buffer[3]);
+}
+
+TEST(AlbaMemoryBufferTest, OutputStreamOperatorWorks) {
+    int input = 0x12345678;
+    AlbaMemoryBuffer const buffer(static_cast<void*>(&input), sizeof(input));
+    stringstream testStream;
+
+    testStream << buffer;
+
+    EXPECT_EQ("Decimal values: {120, 86, 52, 18, }\nHexadecimal values: {78, 56, 34, 12, }\n", testStream.str());
+}
+
 TEST(AlbaMemoryBufferTest, DefaultConstructorWorks) {
     AlbaMemoryBuffer const buffer;
 
@@ -80,64 +123,6 @@ TEST(AlbaMemoryBufferTest, MoveAssignmentWorks) {
     EXPECT_EQ(input, output2);
 }
 
-TEST(AlbaMemoryBufferTest, OperatorBoolWorks) {
-    int input = 11111111;
-    AlbaMemoryBuffer const buffer1(static_cast<void*>(&input), sizeof(input));
-    AlbaMemoryBuffer const buffer2;
-
-    EXPECT_TRUE(buffer1);
-    EXPECT_FALSE(buffer2);
-}
-
-TEST(AlbaMemoryBufferTest, OperatorSubscriptWorksForReading) {
-    int input = 0x12345678;
-    AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
-
-    EXPECT_TRUE(buffer);
-    EXPECT_EQ(0x78, buffer[0]);
-    EXPECT_EQ(0x56, buffer[1]);
-    EXPECT_EQ(0x34, buffer[2]);
-    EXPECT_EQ(0x12, buffer[3]);
-}
-
-TEST(AlbaMemoryBufferTest, OperatorSubscriptWorksForWriting) {
-    int input = 0x12345678;
-    AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
-
-    buffer[1] = 0xAA;
-
-    EXPECT_TRUE(buffer);
-    EXPECT_EQ(0x78, buffer[0]);
-    EXPECT_EQ(0xAA, buffer[1]);
-    EXPECT_EQ(0x34, buffer[2]);
-    EXPECT_EQ(0x12, buffer[3]);
-}
-
-TEST(AlbaMemoryBufferTest, ResizeWorksOnMakingTheBufferLarger) {
-    int input = 11111111;
-    AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
-
-    buffer.resize(8);
-
-    int const output = *reinterpret_cast<int*>(buffer.getBufferPointer());
-    EXPECT_TRUE(buffer);
-    EXPECT_EQ(8U, buffer.getSize());
-    EXPECT_EQ(input, output);
-}
-
-TEST(AlbaMemoryBufferTest, ResizeWorksOnMakingTheBufferSmaller) {
-    int input = 0x12345678;
-    AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
-
-    buffer.resize(3);
-
-    EXPECT_TRUE(buffer);
-    EXPECT_EQ(3U, buffer.getSize());
-    EXPECT_EQ(0x78, buffer[0]);
-    EXPECT_EQ(0x56, buffer[1]);
-    EXPECT_EQ(0x34, buffer[2]);
-}
-
 TEST(AlbaMemoryBufferTest, ClearAndSetNewDataWorks) {
     int input = 11111111;
     int input2 = 22222222;
@@ -152,24 +137,16 @@ TEST(AlbaMemoryBufferTest, ClearAndSetNewDataWorks) {
     EXPECT_EQ(input2, output);
 }
 
-TEST(AlbaMemoryBufferTest, ResizeWithAdditionalSizeAndReturnBeginOfAdditionalDataWorks) {
-    AlbaMemoryBuffer buffer;
-    array<uint8_t, 4> inputBuffer1 = {0x12, 0x34, 0x56, 0x78};
-    array<uint8_t, 4> inputBuffer2 = {0x87, 0x65, 0x43, 0x21};
+TEST(AlbaMemoryBufferTest, ResizeWorksOnMakingTheBufferLarger) {
+    int input = 11111111;
+    AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
 
-    memcpy(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(4), inputBuffer1.data(), 4);
-    memcpy(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(4), inputBuffer2.data(), 4);
+    buffer.resize(8);
 
+    int const output = *reinterpret_cast<int*>(buffer.getBufferPointer());
     EXPECT_TRUE(buffer);
     EXPECT_EQ(8U, buffer.getSize());
-    EXPECT_EQ(0x12U, buffer[0]);
-    EXPECT_EQ(0x34U, buffer[1]);
-    EXPECT_EQ(0x56U, buffer[2]);
-    EXPECT_EQ(0x78U, buffer[3]);
-    EXPECT_EQ(0x87U, buffer[4]);
-    EXPECT_EQ(0x65U, buffer[5]);
-    EXPECT_EQ(0x43U, buffer[6]);
-    EXPECT_EQ(0x21U, buffer[7]);
+    EXPECT_EQ(input, output);
 }
 
 TEST(AlbaMemoryBufferTest, AddDataWorksOnPrimitiveTypes) {
@@ -206,6 +183,39 @@ TEST(AlbaMemoryBufferTest, AddDataWorksOnPodStructure) {
     EXPECT_EQ(input.param3, output.param3);
 }
 
+TEST(AlbaMemoryBufferTest, ResizeWorksOnMakingTheBufferSmaller) {
+    int input = 0x12345678;
+    AlbaMemoryBuffer buffer(static_cast<void*>(&input), sizeof(input));
+
+    buffer.resize(3);
+
+    EXPECT_TRUE(buffer);
+    EXPECT_EQ(3U, buffer.getSize());
+    EXPECT_EQ(0x78, buffer[0]);
+    EXPECT_EQ(0x56, buffer[1]);
+    EXPECT_EQ(0x34, buffer[2]);
+}
+
+TEST(AlbaMemoryBufferTest, ResizeWithAdditionalSizeAndReturnBeginOfAdditionalDataWorks) {
+    AlbaMemoryBuffer buffer;
+    array<uint8_t, 4> inputBuffer1 = {0x12, 0x34, 0x56, 0x78};
+    array<uint8_t, 4> inputBuffer2 = {0x87, 0x65, 0x43, 0x21};
+
+    memcpy(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(4), inputBuffer1.data(), 4);
+    memcpy(buffer.resizeWithAdditionalSizeAndReturnBeginOfAdditionalData(4), inputBuffer2.data(), 4);
+
+    EXPECT_TRUE(buffer);
+    EXPECT_EQ(8U, buffer.getSize());
+    EXPECT_EQ(0x12U, buffer[0]);
+    EXPECT_EQ(0x34U, buffer[1]);
+    EXPECT_EQ(0x56U, buffer[2]);
+    EXPECT_EQ(0x78U, buffer[3]);
+    EXPECT_EQ(0x87U, buffer[4]);
+    EXPECT_EQ(0x65U, buffer[5]);
+    EXPECT_EQ(0x43U, buffer[6]);
+    EXPECT_EQ(0x21U, buffer[7]);
+}
+
 TEST(AlbaMemoryBufferTest, SaveObjectWorksOnPrimitiveTypes) {
     AlbaMemoryBuffer buffer;
     int const input = 0x12345678;
@@ -235,16 +245,6 @@ TEST(AlbaMemoryBufferTest, SaveObjectWorksOnStandardLayoutTypes) {
     EXPECT_TRUE(output.field1);
     EXPECT_EQ('A', output.field2);
     EXPECT_EQ(0xA1BA, output.field3);
-}
-
-TEST(AlbaMemoryBufferTest, OutputStreamOperatorWorks) {
-    int input = 0x12345678;
-    AlbaMemoryBuffer const buffer(static_cast<void*>(&input), sizeof(input));
-    stringstream testStream;
-
-    testStream << buffer;
-
-    EXPECT_EQ("Decimal values: {120, 86, 52, 18, }\nHexadecimal values: {78, 56, 34, 12, }\n", testStream.str());
 }
 
 }  // namespace alba

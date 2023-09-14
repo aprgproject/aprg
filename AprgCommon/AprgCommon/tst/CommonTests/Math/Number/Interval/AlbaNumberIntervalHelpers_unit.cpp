@@ -6,6 +6,20 @@ using namespace std;
 
 namespace alba {
 
+TEST(AlbaNumberIntervalTest, CreateAllRealValuesIntervalWorks) {
+    AlbaNumberInterval const interval(createAllRealValuesInterval());
+
+    EXPECT_EQ(createNegativeInfinityOpenEndpoint(), interval.getLowerEndpoint());
+    EXPECT_EQ(createPositiveInfinityOpenEndpoint(), interval.getHigherEndpoint());
+}
+
+TEST(AlbaNumberIntervalHelpersTest, CreateOpenEndpointWorks) {
+    AlbaNumberIntervalEndpoint const endpoint(createOpenEndpoint(645));
+
+    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, endpoint.getType());
+    EXPECT_EQ(645, endpoint.getValue().getInteger());
+}
+
 TEST(AlbaNumberIntervalHelpersTest, IsValueInsideTheIntervalsWorks) {
     AlbaNumberIntervals const intervals{
         AlbaNumberInterval(createOpenEndpoint(3), createOpenEndpoint(5)),
@@ -58,23 +72,22 @@ TEST(AlbaNumberIntervalHelpersTest, AreTheIntervalsInsideTheIntervalWorks) {
         areTheIntervalsInsideTheInterval(intervals, AlbaNumberInterval(createOpenEndpoint(4), createOpenEndpoint(10))));
 }
 
-TEST(AlbaNumberIntervalHelpersTest, GetEndpointTypeWithCheckingIfItsClosedWorks) {
-    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Close, getEndpointTypeWithCheckingIfItsClosed(true));
-    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, getEndpointTypeWithCheckingIfItsClosed(false));
-}
-
-TEST(AlbaNumberIntervalHelpersTest, CreateOpenEndpointWorks) {
-    AlbaNumberIntervalEndpoint const endpoint(createOpenEndpoint(645));
-
-    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, endpoint.getType());
-    EXPECT_EQ(645, endpoint.getValue().getInteger());
-}
-
 TEST(AlbaNumberIntervalHelpersTest, CreateCloseEndpointWorks) {
     AlbaNumberIntervalEndpoint const endpoint(createCloseEndpoint(784));
 
     EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Close, endpoint.getType());
     EXPECT_EQ(784, endpoint.getValue().getInteger());
+}
+
+TEST(AlbaNumberIntervalTest, GetNumbersInsideTheIntervalWorks) {
+    AlbaNumbers const numbers{1, 2, 3, 4, 5};
+    AlbaNumberInterval const interval(createCloseEndpoint(2), createCloseEndpoint(4));
+
+    AlbaNumbers numbersToVerify(getNumbersInsideTheInterval(numbers, interval));
+    ASSERT_EQ(3U, numbersToVerify.size());
+    EXPECT_EQ(AlbaNumber(2), numbersToVerify[0]);
+    EXPECT_EQ(AlbaNumber(3), numbersToVerify[1]);
+    EXPECT_EQ(AlbaNumber(4), numbersToVerify[2]);
 }
 
 TEST(AlbaNumberIntervalHelpersTest, CreateEndpointWorks) {
@@ -101,22 +114,9 @@ TEST(AlbaNumberIntervalHelpersTest, CreateNegativeInfinityOpenEndpointWorks) {
     EXPECT_TRUE(endpoint.getValue().isNegativeInfinity());
 }
 
-TEST(AlbaNumberIntervalTest, CreateAllRealValuesIntervalWorks) {
-    AlbaNumberInterval const interval(createAllRealValuesInterval());
-
-    EXPECT_EQ(createNegativeInfinityOpenEndpoint(), interval.getLowerEndpoint());
-    EXPECT_EQ(createPositiveInfinityOpenEndpoint(), interval.getHigherEndpoint());
-}
-
-TEST(AlbaNumberIntervalTest, GetNumbersInsideTheIntervalWorks) {
-    AlbaNumbers const numbers{1, 2, 3, 4, 5};
-    AlbaNumberInterval const interval(createCloseEndpoint(2), createCloseEndpoint(4));
-
-    AlbaNumbers numbersToVerify(getNumbersInsideTheInterval(numbers, interval));
-    ASSERT_EQ(3U, numbersToVerify.size());
-    EXPECT_EQ(AlbaNumber(2), numbersToVerify[0]);
-    EXPECT_EQ(AlbaNumber(3), numbersToVerify[1]);
-    EXPECT_EQ(AlbaNumber(4), numbersToVerify[2]);
+TEST(AlbaNumberIntervalHelpersTest, GetEndpointTypeWithCheckingIfItsClosedWorks) {
+    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Close, getEndpointTypeWithCheckingIfItsClosed(true));
+    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, getEndpointTypeWithCheckingIfItsClosed(false));
 }
 
 }  // namespace alba

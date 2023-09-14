@@ -10,6 +10,13 @@ using namespace std;
 
 namespace alba {
 
+TEST(TwoDimensionsLineTest, ArithmeticOperationsWorks) {
+    EXPECT_DOUBLE_EQ(105, (AlbaAngle(AngleUnitType::Degrees, 90) + AlbaAngle(AngleUnitType::Degrees, 15)).getDegrees());
+    EXPECT_DOUBLE_EQ(75, (AlbaAngle(AngleUnitType::Degrees, 90) - AlbaAngle(AngleUnitType::Degrees, 15)).getDegrees());
+    EXPECT_DOUBLE_EQ(15, (+AlbaAngle(AngleUnitType::Degrees, 15)).getDegrees());
+    EXPECT_DOUBLE_EQ(-15, (-AlbaAngle(AngleUnitType::Degrees, 15)).getDegrees());
+}
+
 TEST(TwoDimensionsLineTest, EmptyAngle) {
     AlbaAngle const angle;
     EXPECT_EQ(0, angle.getDegrees());
@@ -34,13 +41,6 @@ TEST(TwoDimensionsLineTest, SettingNearZeroWithMoreThanOneRevolutionWorks) {
 
     EXPECT_DOUBLE_EQ(-45, angle.getDegrees());
     EXPECT_DOUBLE_EQ(-getPi() / 4, angle.getRadians());
-}
-
-TEST(TwoDimensionsLineTest, ArithmeticOperationsWorks) {
-    EXPECT_DOUBLE_EQ(105, (AlbaAngle(AngleUnitType::Degrees, 90) + AlbaAngle(AngleUnitType::Degrees, 15)).getDegrees());
-    EXPECT_DOUBLE_EQ(75, (AlbaAngle(AngleUnitType::Degrees, 90) - AlbaAngle(AngleUnitType::Degrees, 15)).getDegrees());
-    EXPECT_DOUBLE_EQ(15, (+AlbaAngle(AngleUnitType::Degrees, 15)).getDegrees());
-    EXPECT_DOUBLE_EQ(-15, (-AlbaAngle(AngleUnitType::Degrees, 15)).getDegrees());
 }
 
 }  // namespace alba

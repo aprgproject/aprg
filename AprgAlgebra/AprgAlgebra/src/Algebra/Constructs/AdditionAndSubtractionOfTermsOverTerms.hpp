@@ -18,6 +18,13 @@ public:
     void putAsAddOrSubtraction(TermsOverTerms const& item, TermAssociationType const association);
 
 private:
+    [[nodiscard]] Expression getCombinedNumeratorExpression(Terms const& lcmDenominatorTerms) const;
+    [[nodiscard]] Expression getCombinedExpressionForNumeratorOnIndex(
+        int const numeratorIndex, Terms const& lcmDenominatorTerms) const;
+    void updateMonomialAndNonMonomialMultipliersBasedOnDenominatorOnIndex(
+        int const itemIndex, Monomial& monomialMultiplier, Terms& nonMonomialMultiplierTerms) const;
+    void emplaceExistingNumeratorTerms(Terms& numeratorTerms, int const itemIndex) const;
+    void putItem(TermsOverTerms const& item, TermAssociationType const association);
     static void eraseCommonFactorOrAddDistinctFactor(
         Term const& termToCheck, Terms& commonFactors, Terms& outputFactors);
     static void emplaceMonomialMultiplierIfNeeded(Terms& numeratorTerms, Monomial const& monomialMultiplier);
@@ -27,13 +34,6 @@ private:
     static Expression getCombinedDenominatorExpression(Terms const& lcmDenominatorTerms);
     static Monomial getCombinedMonomialMultiplier(Terms const& monomialMultiplierTerms);
     static TermsOverTerms getSimplifiedTermsOverTerms(TermsOverTerms const& termsOverTerms);
-    [[nodiscard]] Expression getCombinedNumeratorExpression(Terms const& lcmDenominatorTerms) const;
-    [[nodiscard]] Expression getCombinedExpressionForNumeratorOnIndex(
-        int const numeratorIndex, Terms const& lcmDenominatorTerms) const;
-    void updateMonomialAndNonMonomialMultipliersBasedOnDenominatorOnIndex(
-        int const itemIndex, Monomial& monomialMultiplier, Terms& nonMonomialMultiplierTerms) const;
-    void emplaceExistingNumeratorTerms(Terms& numeratorTerms, int const itemIndex) const;
-    void putItem(TermsOverTerms const& item, TermAssociationType const association);
     VectorOfTermsOverTerms m_items;
     TermAssociationTypes m_associations;
 };

@@ -9,13 +9,6 @@ using namespace std;
 
 namespace alba::ThreeDimensions {
 
-TEST(SphereTest, EmptySphere) {
-    Sphere const sphere;
-
-    EXPECT_EQ(Point(0, 0, 0), sphere.getCenter());
-    EXPECT_DOUBLE_EQ(0, sphere.getRadius());
-}
-
 TEST(SphereTest, SphereAtOriginWithRadius) {
     Sphere const sphere(Point(0, 0, 0), 10);
 
@@ -34,6 +27,13 @@ TEST(SphereTest, SphereNotAtOriginWithRadius) {
     EXPECT_EQ(optional<double>(-8.8994949366116654), sphere.calculateXFromYAndZ(1, 2, -1));
     EXPECT_EQ(optional<double>(-7.7467943448089631), sphere.calculateYFromXAndZ(3, 4, -1));
     EXPECT_EQ(optional<double>(-5.2462112512353212), sphere.calculateZFromXAndY(5, 6, -1));
+}
+
+TEST(SphereTest, EmptySphere) {
+    Sphere const sphere;
+
+    EXPECT_EQ(Point(0, 0, 0), sphere.getCenter());
+    EXPECT_DOUBLE_EQ(0, sphere.getRadius());
 }
 
 TEST(SphereTest, IsInsideWorks) {

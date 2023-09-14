@@ -13,6 +13,27 @@ using namespace std;
 
 namespace alba::algebra {
 
+TEST(TermsOverTermsTest, GetCombinedTermWorks) {
+    TermsOverTerms termsOverTerms({"x", 56}, {7, "y"});
+
+    Term expectedTerm(Monomial(8, {{"x", 1}, {"y", -1}}));
+    EXPECT_EQ(expectedTerm, termsOverTerms.getCombinedTerm());
+}
+
+TEST(TermsOverTermsTest, GetCombinedNumeratorWorks) {
+    TermsOverTerms termsOverTerms({"x", 56}, {7, "y"});
+
+    Term expectedTerm(Monomial(56, {{"x", 1}}));
+    EXPECT_EQ(expectedTerm, termsOverTerms.getCombinedNumerator());
+}
+
+TEST(TermsOverTermsTest, GetCombinedDenominatorWorks) {
+    TermsOverTerms termsOverTerms({"x", 56}, {7, "y"});
+
+    Term expectedTerm(Monomial(7, {{"y", 1}}));
+    EXPECT_EQ(expectedTerm, termsOverTerms.getCombinedDenominator());
+}
+
 TEST(TermsOverTermsTest, ConstructionWorks) {
     TermWithDetails termWithDetails(Term(10), TermAssociationType::Positive);
     TermsOverTerms termsOverTerms1;
@@ -45,94 +66,6 @@ TEST(TermsOverTermsTest, GetNumeratorsAndGetDenominatorsWorks) {
     EXPECT_EQ(Term("x"), denominatorsToVerify[0]);
 }
 
-TEST(TermsOverTermsTest, GetNumeratorAndDenominatorAsTermWithDetailsWorks) {
-    TermsOverTerms termsOverTerms({5}, {"x"});
-
-    TermsWithDetails termsWithDetails(termsOverTerms.getNumeratorAndDenominatorAsTermWithDetails());
-    ASSERT_EQ(2U, termsWithDetails.size());
-    EXPECT_EQ(Term(5), getTermConstReferenceFromUniquePointer(termsWithDetails[0].baseTermPointer));
-    EXPECT_EQ(TermAssociationType::Positive, termsWithDetails[0].association);
-    EXPECT_EQ(Term("x"), getTermConstReferenceFromUniquePointer(termsWithDetails[1].baseTermPointer));
-    EXPECT_EQ(TermAssociationType::Negative, termsWithDetails[1].association);
-}
-
-TEST(TermsOverTermsTest, GetNumeratorAndDenominatorAsTermWithDetailsWorksWhenBothNumeratorsAndDenominatorsAreEmpty) {
-    TermsOverTerms termsOverTerms(Terms{}, Terms{});
-
-    TermsWithDetails termsWithDetails(termsOverTerms.getNumeratorAndDenominatorAsTermWithDetails());
-    EXPECT_TRUE(termsWithDetails.empty());
-}
-
-TEST(TermsOverTermsTest, GetCombinedTermWorks) {
-    TermsOverTerms termsOverTerms({"x", 56}, {7, "y"});
-
-    Term expectedTerm(Monomial(8, {{"x", 1}, {"y", -1}}));
-    EXPECT_EQ(expectedTerm, termsOverTerms.getCombinedTerm());
-}
-
-TEST(TermsOverTermsTest, GetCombinedNumeratorWorks) {
-    TermsOverTerms termsOverTerms({"x", 56}, {7, "y"});
-
-    Term expectedTerm(Monomial(56, {{"x", 1}}));
-    EXPECT_EQ(expectedTerm, termsOverTerms.getCombinedNumerator());
-}
-
-TEST(TermsOverTermsTest, GetCombinedDenominatorWorks) {
-    TermsOverTerms termsOverTerms({"x", 56}, {7, "y"});
-
-    Term expectedTerm(Monomial(7, {{"y", 1}}));
-    EXPECT_EQ(expectedTerm, termsOverTerms.getCombinedDenominator());
-}
-
-TEST(TermsOverTermsTest, RetrievePolynomialAndNonPolynomialNumeratorsWorks) {
-    Term nonPolynomialTerm(createExpressionIfPossible({"x", "^", "x"}));
-    TermsOverTerms termsOverTerms({5, "x", nonPolynomialTerm}, {6, "y", nonPolynomialTerm});
-
-    Polynomial retrievedPolynomial;
-    Terms retrievedTerms;
-    termsOverTerms.retrievePolynomialAndNonPolynomialNumerators(retrievedPolynomial, retrievedTerms);
-
-    Polynomial expectedPolynomial{Monomial(5, {{"x", 1}})};
-    EXPECT_EQ(expectedPolynomial, retrievedPolynomial);
-    ASSERT_EQ(1U, retrievedTerms.size());
-    EXPECT_EQ(nonPolynomialTerm, retrievedTerms[0]);
-}
-
-TEST(TermsOverTermsTest, RetrievePolynomialAndNonPolynomialDenominatorsWorks) {
-    Term nonPolynomialTerm(createExpressionIfPossible({"x", "^", "x"}));
-    TermsOverTerms termsOverTerms({5, "x", nonPolynomialTerm}, {6, "y", nonPolynomialTerm});
-
-    Polynomial retrievedPolynomial;
-    Terms retrievedTerms;
-    termsOverTerms.retrievePolynomialAndNonPolynomialsDenominators(retrievedPolynomial, retrievedTerms);
-
-    Polynomial expectedPolynomial{Monomial(6, {{"y", 1}})};
-    EXPECT_EQ(expectedPolynomial, retrievedPolynomial);
-    ASSERT_EQ(1U, retrievedTerms.size());
-    EXPECT_EQ(nonPolynomialTerm, retrievedTerms[0]);
-}
-
-TEST(TermsOverTermsTest, GetTermsRaiseToNumbersWorks) {
-    TermsOverTerms termsOverTerms({"a", "b"}, {"x", "y"});
-
-    TermsRaiseToNumbers termsRaiseToNumbers(termsOverTerms.getTermsRaiseToNumbers());
-
-    TermsRaiseToNumbers::BaseToExponentMap const& baseToExponentMap(termsRaiseToNumbers.getBaseToExponentMap());
-    ASSERT_EQ(4U, baseToExponentMap.size());
-    auto itVerify = baseToExponentMap.cbegin();
-    EXPECT_EQ(Term("a"), itVerify->first);
-    EXPECT_EQ(AlbaNumber(1), itVerify->second);
-    ++itVerify;
-    EXPECT_EQ(Term("b"), itVerify->first);
-    EXPECT_EQ(AlbaNumber(1), itVerify->second);
-    ++itVerify;
-    EXPECT_EQ(Term("x"), itVerify->first);
-    EXPECT_EQ(AlbaNumber(-1), itVerify->second);
-    ++itVerify;
-    EXPECT_EQ(Term("y"), itVerify->first);
-    EXPECT_EQ(AlbaNumber(-1), itVerify->second);
-}
-
 TEST(TermsOverTermsTest, FlipWorks) {
     TermsOverTerms termsOverTerms({"a", "b"}, {"x", "y"});
 
@@ -148,33 +81,54 @@ TEST(TermsOverTermsTest, FlipWorks) {
     EXPECT_EQ(Term("b"), denominatorsToVerify[1]);
 }
 
-TEST(TermsOverTermsTest, SimplifyWorksAndRemovesTermsThatHasNoEffect) {
-    TermsOverTerms numeratorHasTermsNoEffect({Term(), 1}, {});
-    TermsOverTerms denominatorHasTermsNoEffect({}, {Term(), 1});
-
-    numeratorHasTermsNoEffect.simplify();
-    denominatorHasTermsNoEffect.simplify();
-
-    Terms numeratorsToVerify1(numeratorHasTermsNoEffect.getNumerators());
-    Terms denominatorsToVerify1(numeratorHasTermsNoEffect.getDenominators());
-    EXPECT_TRUE(numeratorsToVerify1.empty());
-    EXPECT_TRUE(denominatorsToVerify1.empty());
-    Terms numeratorsToVerify2(denominatorHasTermsNoEffect.getNumerators());
-    Terms denominatorsToVerify2(denominatorHasTermsNoEffect.getDenominators());
-    EXPECT_TRUE(numeratorsToVerify2.empty());
-    EXPECT_TRUE(denominatorsToVerify2.empty());
-}
-
-TEST(TermsOverTermsTest, SimplifyWorksAndDoesNotCancelsZerosInNumeratorAndDenominator) {
-    TermsOverTerms termsOverTerms({0}, {0});
+TEST(TermsOverTermsTest, SimplifyWorksWhenShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValueIsTrue) {
+    Term numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-5, {})});
+    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-7, {})});
+    TermsOverTerms termsOverTerms({numerator}, {denominator});
+    termsOverTerms.setAsShouldSimplifyToFactors(true);
+    Factorization::ConfigurationDetails configurationDetails(
+        Factorization::Configuration::getInstance().getConfigurationDetails());
+    configurationDetails.shouldSimplifyExpressionsToFactors = true;
+    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
+    termsOverTerms.setFactorizationConfigurationDetails(configurationDetails);
 
     termsOverTerms.simplify();
 
+    Term expectedNumerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-5, {})});
     Terms numeratorsToVerify(termsOverTerms.getNumerators());
     ASSERT_EQ(1U, numeratorsToVerify.size());
-    EXPECT_TRUE(isNan(numeratorsToVerify[0]));
+    EXPECT_EQ(expectedNumerator, numeratorsToVerify[0]);
+    Term expectedDenominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-7, {})});
     Terms denominatorsToVerify(termsOverTerms.getDenominators());
-    ASSERT_TRUE(denominatorsToVerify.empty());
+    ASSERT_EQ(1U, denominatorsToVerify.size());
+    EXPECT_EQ(expectedDenominator, denominatorsToVerify[0]);
+}
+
+TEST(TermsOverTermsTest, SimplifyWorksAndFactorizeTrigonometricFunctions) {
+    Term numerator(createExpressionIfPossible({sec("x"), "*", tan("x")}));
+    Term denominatorPart1(createExpressionIfPossible({Monomial(1, {{"x", 2}}), "*", sec("x"), "*", tan("x")}));
+    Term denominatorPart2(createExpressionIfPossible({Monomial(2, {{"x", 1}}), "*", sec("x")}));
+    Term denominator(createExpressionIfPossible({denominatorPart1, "+", denominatorPart2}));
+    TermsOverTerms termsOverTerms({numerator}, {denominator});
+    termsOverTerms.setAsShouldSimplifyToFactors(true);
+    Factorization::ConfigurationDetails configurationDetails(
+        Factorization::Configuration::getInstance().getConfigurationDetails());
+    configurationDetails.shouldSimplifyExpressionsToFactors = true;
+    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
+    termsOverTerms.setFactorizationConfigurationDetails(configurationDetails);
+
+    termsOverTerms.simplify();
+
+    Term expectedNumerator(tan("x"));
+    Terms numeratorsToVerify(termsOverTerms.getNumerators());
+    ASSERT_EQ(1U, numeratorsToVerify.size());
+    EXPECT_EQ(expectedNumerator, numeratorsToVerify[0]);
+    Term expectedDenominator1("x");
+    Term expectedDenominator2(createExpressionIfPossible({2, "+", "x", "*", tan("x")}));
+    Terms denominatorsToVerify(termsOverTerms.getDenominators());
+    ASSERT_EQ(2U, denominatorsToVerify.size());
+    EXPECT_EQ(expectedDenominator1, denominatorsToVerify[0]);
+    EXPECT_EQ(expectedDenominator2, denominatorsToVerify[1]);
 }
 
 TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsWithZeroInNumerator) {
@@ -211,6 +165,168 @@ TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsWithZeroInDenomina
     Terms denominatorsToVerify(termsOverTerms.getDenominators());
     ASSERT_EQ(1U, denominatorsToVerify.size());
     EXPECT_EQ(Term(0), denominatorsToVerify[0]);
+}
+
+TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsAndDoesNotCombinePolynomials) {
+    Polynomial polynomial1{Monomial(1, {{"x", 1}}), Monomial(1, {})};
+    Polynomial polynomial2{Monomial(1, {{"x", 1}}), Monomial(2, {})};
+    Terms numerators{polynomial1, polynomial1};
+    Terms denominators{polynomial2, polynomial2};
+    TermsOverTerms termsOverTerms(numerators, denominators);
+    termsOverTerms.setAsShouldSimplifyToFactors(true);
+
+    termsOverTerms.simplify();
+
+    Term expectedNumerator(createExpressionIfPossible({polynomial1, "^", 2}));
+    Term expectedDenominator(createExpressionIfPossible({polynomial2, "^", 2}));
+    Terms numeratorsToVerify(termsOverTerms.getNumerators());
+    ASSERT_EQ(1U, numeratorsToVerify.size());
+    EXPECT_EQ(expectedNumerator, numeratorsToVerify[0]);
+    Terms denominatorsToVerify(termsOverTerms.getDenominators());
+    ASSERT_EQ(1U, denominatorsToVerify.size());
+    EXPECT_EQ(expectedDenominator, denominatorsToVerify[0]);
+}
+
+TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsWithPolynomialsWithNegativeExponents) {
+    Polynomial polynomial1{Monomial(1, {{"a", 1}, {"b", -1}}), Monomial(1, {{"c", 1}, {"b", -2}})};
+    Polynomial polynomial2{Monomial(1, {{"b", 1}})};
+    Polynomial polynomial3{Monomial(1, {{"a", 1}, {"b", 1}}), Monomial(1, {{"c", 1}})};
+    Terms numerators{polynomial1};
+    Terms denominators{polynomial2, polynomial3};
+    TermsOverTerms termsOverTerms(numerators, denominators);
+    termsOverTerms.setAsShouldSimplifyToFactors(true);
+
+    termsOverTerms.simplify();
+
+    Monomial monomialToExpect(1, {{"b", 3}});
+    Terms numeratorsToVerify(termsOverTerms.getNumerators());
+    EXPECT_TRUE(numeratorsToVerify.empty());
+    Terms denominatorsToVerify(termsOverTerms.getDenominators());
+    ASSERT_EQ(1U, denominatorsToVerify.size());
+    EXPECT_EQ(Term(monomialToExpect), denominatorsToVerify[0]);
+}
+
+TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsWithExample1) {
+    Polynomial polynomial1{Monomial(1, {{"a", 1}}), Monomial(-1, {{"a", -1}})};
+    Polynomial polynomial2{Monomial(1, {{"a", 1}}), Monomial(-1, {{"a", -2}})};
+    Terms numerators{polynomial1};
+    Terms denominators{polynomial2};
+    TermsOverTerms termsOverTerms(numerators, denominators);
+    termsOverTerms.setAsShouldSimplifyToFactors(true);
+
+    termsOverTerms.simplify();
+
+    Polynomial polynomialToExpect1{Monomial(1, {{"a", 1}}), Monomial(1, {})};
+    Polynomial polynomialToExpect2{Monomial(1, {{"a", 2}}), Monomial(1, {{"a", 1}}), Monomial(1, {})};
+    Terms numeratorsToVerify(termsOverTerms.getNumerators());
+    ASSERT_EQ(2U, numeratorsToVerify.size());
+    EXPECT_EQ(Term("a"), numeratorsToVerify[0]);
+    EXPECT_EQ(Term(polynomialToExpect1), numeratorsToVerify[1]);
+    Terms denominatorsToVerify(termsOverTerms.getDenominators());
+    ASSERT_EQ(1U, denominatorsToVerify.size());
+    EXPECT_EQ(Term(polynomialToExpect2), denominatorsToVerify[0]);
+}
+
+TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsAndPutNegativeExponentsOnTheOtherSide) {
+    Term polynomialTerm1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(5, {})});
+    Term polynomialTerm2(Polynomial{Monomial(1, {{"x", 1}}), Monomial(7, {})});
+    Term expressionTerm1(createExpressionIfPossible({polynomialTerm1, "^", -1}));
+    Term expressionTerm2(createExpressionIfPossible({polynomialTerm2, "^", -1}));
+    TermsOverTerms termsOverTerms({expressionTerm1}, {expressionTerm2});
+    termsOverTerms.setAsShouldSimplifyToFactors(true);
+
+    termsOverTerms.simplify();
+
+    Terms numeratorsToVerify(termsOverTerms.getNumerators());
+    ASSERT_EQ(1U, numeratorsToVerify.size());
+    EXPECT_EQ(polynomialTerm2, numeratorsToVerify[0]);
+    Terms denominatorsToVerify(termsOverTerms.getDenominators());
+    ASSERT_EQ(1U, denominatorsToVerify.size());
+    EXPECT_EQ(polynomialTerm1, denominatorsToVerify[0]);
+}
+
+TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsAndPutNegativeExponentsOnTheOtherSideAndCanCancelled) {
+    Term polynomialTerm1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(5, {})});
+    Term expressionTerm1(createExpressionIfPossible({polynomialTerm1, "^", -1}));
+    TermsOverTerms termsOverTerms({polynomialTerm1, expressionTerm1}, {1});
+    termsOverTerms.setAsShouldSimplifyToFactors(true);
+
+    termsOverTerms.simplify();
+
+    Terms numeratorsToVerify(termsOverTerms.getNumerators());
+    EXPECT_TRUE(numeratorsToVerify.empty());
+    Terms denominatorsToVerify(termsOverTerms.getDenominators());
+    EXPECT_TRUE(denominatorsToVerify.empty());
+}
+
+TEST(
+    TermsOverTermsTest,
+    SimplifyWorksWithSimplifyingToFactorsAndFactorsAreCancelledButExponentsFormIsRetainedAndFactorsAreNotPopulated) {
+    Term polynomialTerm(Polynomial{Monomial(7, {{"x", 3}}), Monomial(-1, {})});
+    Term numerator(createExpressionIfPossible({polynomialTerm, "^", 2}));
+    Term denominator(createExpressionIfPossible({polynomialTerm, "^", 8}));
+    TermsOverTerms termsOverTerms({numerator}, {denominator});
+    termsOverTerms.setAsShouldSimplifyToFactors(true);
+
+    termsOverTerms.simplify();
+
+    Terms numeratorsToVerify(termsOverTerms.getNumerators());
+    EXPECT_TRUE(numeratorsToVerify.empty());
+    Term expectedDenominator(createExpressionIfPossible({polynomialTerm, "^", 6}));
+    Terms denominatorsToVerify(termsOverTerms.getDenominators());
+    ASSERT_EQ(1U, denominatorsToVerify.size());
+    EXPECT_EQ(expectedDenominator, denominatorsToVerify[0]);
+}
+
+TEST(TermsOverTermsTest, SimplifyWorksWhenShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValueIsDefault) {
+    Term numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-5, {})});
+    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-7, {})});
+    TermsOverTerms termsOverTerms({numerator}, {denominator});
+    termsOverTerms.setAsShouldSimplifyToFactors(true);
+
+    termsOverTerms.simplify();
+
+    Term expectedNumerator1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2.23606797749979, {})});
+    Term expectedNumerator2(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2.23606797749979, {})});
+    Terms numeratorsToVerify(termsOverTerms.getNumerators());
+    ASSERT_EQ(2U, numeratorsToVerify.size());
+    EXPECT_EQ(expectedNumerator1, numeratorsToVerify[0]);
+    EXPECT_EQ(expectedNumerator2, numeratorsToVerify[1]);
+    Term expectedDenominator1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2.645751311064591, {})});
+    Term expectedDenominator2(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2.645751311064591, {})});
+    Terms denominatorsToVerify(termsOverTerms.getDenominators());
+    ASSERT_EQ(2U, denominatorsToVerify.size());
+    EXPECT_EQ(expectedDenominator1, denominatorsToVerify[0]);
+    EXPECT_EQ(expectedDenominator2, denominatorsToVerify[1]);
+}
+
+TEST(TermsOverTermsTest, SimplifyWorksAndRemovesTermsThatHasNoEffect) {
+    TermsOverTerms numeratorHasTermsNoEffect({Term(), 1}, {});
+    TermsOverTerms denominatorHasTermsNoEffect({}, {Term(), 1});
+
+    numeratorHasTermsNoEffect.simplify();
+    denominatorHasTermsNoEffect.simplify();
+
+    Terms numeratorsToVerify1(numeratorHasTermsNoEffect.getNumerators());
+    Terms denominatorsToVerify1(numeratorHasTermsNoEffect.getDenominators());
+    EXPECT_TRUE(numeratorsToVerify1.empty());
+    EXPECT_TRUE(denominatorsToVerify1.empty());
+    Terms numeratorsToVerify2(denominatorHasTermsNoEffect.getNumerators());
+    Terms denominatorsToVerify2(denominatorHasTermsNoEffect.getDenominators());
+    EXPECT_TRUE(numeratorsToVerify2.empty());
+    EXPECT_TRUE(denominatorsToVerify2.empty());
+}
+
+TEST(TermsOverTermsTest, SimplifyWorksAndDoesNotCancelsZerosInNumeratorAndDenominator) {
+    TermsOverTerms termsOverTerms({0}, {0});
+
+    termsOverTerms.simplify();
+
+    Terms numeratorsToVerify(termsOverTerms.getNumerators());
+    ASSERT_EQ(1U, numeratorsToVerify.size());
+    EXPECT_TRUE(isNan(numeratorsToVerify[0]));
+    Terms denominatorsToVerify(termsOverTerms.getDenominators());
+    ASSERT_TRUE(denominatorsToVerify.empty());
 }
 
 TEST(TermsOverTermsTest, SimplifyWorksAndRemovesOnSamePolynomialInNumeratorAndDenominator) {
@@ -366,189 +482,6 @@ TEST(TermsOverTermsTest, SimplifyWorksOnExample1) {
     EXPECT_EQ(Term(polynomialDenominator), denominatorsToVerify[0]);
 }
 
-TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsAndDoesNotCombinePolynomials) {
-    Polynomial polynomial1{Monomial(1, {{"x", 1}}), Monomial(1, {})};
-    Polynomial polynomial2{Monomial(1, {{"x", 1}}), Monomial(2, {})};
-    Terms numerators{polynomial1, polynomial1};
-    Terms denominators{polynomial2, polynomial2};
-    TermsOverTerms termsOverTerms(numerators, denominators);
-    termsOverTerms.setAsShouldSimplifyToFactors(true);
-
-    termsOverTerms.simplify();
-
-    Term expectedNumerator(createExpressionIfPossible({polynomial1, "^", 2}));
-    Term expectedDenominator(createExpressionIfPossible({polynomial2, "^", 2}));
-    Terms numeratorsToVerify(termsOverTerms.getNumerators());
-    ASSERT_EQ(1U, numeratorsToVerify.size());
-    EXPECT_EQ(expectedNumerator, numeratorsToVerify[0]);
-    Terms denominatorsToVerify(termsOverTerms.getDenominators());
-    ASSERT_EQ(1U, denominatorsToVerify.size());
-    EXPECT_EQ(expectedDenominator, denominatorsToVerify[0]);
-}
-
-TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsWithPolynomialsWithNegativeExponents) {
-    Polynomial polynomial1{Monomial(1, {{"a", 1}, {"b", -1}}), Monomial(1, {{"c", 1}, {"b", -2}})};
-    Polynomial polynomial2{Monomial(1, {{"b", 1}})};
-    Polynomial polynomial3{Monomial(1, {{"a", 1}, {"b", 1}}), Monomial(1, {{"c", 1}})};
-    Terms numerators{polynomial1};
-    Terms denominators{polynomial2, polynomial3};
-    TermsOverTerms termsOverTerms(numerators, denominators);
-    termsOverTerms.setAsShouldSimplifyToFactors(true);
-
-    termsOverTerms.simplify();
-
-    Monomial monomialToExpect(1, {{"b", 3}});
-    Terms numeratorsToVerify(termsOverTerms.getNumerators());
-    EXPECT_TRUE(numeratorsToVerify.empty());
-    Terms denominatorsToVerify(termsOverTerms.getDenominators());
-    ASSERT_EQ(1U, denominatorsToVerify.size());
-    EXPECT_EQ(Term(monomialToExpect), denominatorsToVerify[0]);
-}
-
-TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsWithExample1) {
-    Polynomial polynomial1{Monomial(1, {{"a", 1}}), Monomial(-1, {{"a", -1}})};
-    Polynomial polynomial2{Monomial(1, {{"a", 1}}), Monomial(-1, {{"a", -2}})};
-    Terms numerators{polynomial1};
-    Terms denominators{polynomial2};
-    TermsOverTerms termsOverTerms(numerators, denominators);
-    termsOverTerms.setAsShouldSimplifyToFactors(true);
-
-    termsOverTerms.simplify();
-
-    Polynomial polynomialToExpect1{Monomial(1, {{"a", 1}}), Monomial(1, {})};
-    Polynomial polynomialToExpect2{Monomial(1, {{"a", 2}}), Monomial(1, {{"a", 1}}), Monomial(1, {})};
-    Terms numeratorsToVerify(termsOverTerms.getNumerators());
-    ASSERT_EQ(2U, numeratorsToVerify.size());
-    EXPECT_EQ(Term("a"), numeratorsToVerify[0]);
-    EXPECT_EQ(Term(polynomialToExpect1), numeratorsToVerify[1]);
-    Terms denominatorsToVerify(termsOverTerms.getDenominators());
-    ASSERT_EQ(1U, denominatorsToVerify.size());
-    EXPECT_EQ(Term(polynomialToExpect2), denominatorsToVerify[0]);
-}
-
-TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsAndPutNegativeExponentsOnTheOtherSide) {
-    Term polynomialTerm1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(5, {})});
-    Term polynomialTerm2(Polynomial{Monomial(1, {{"x", 1}}), Monomial(7, {})});
-    Term expressionTerm1(createExpressionIfPossible({polynomialTerm1, "^", -1}));
-    Term expressionTerm2(createExpressionIfPossible({polynomialTerm2, "^", -1}));
-    TermsOverTerms termsOverTerms({expressionTerm1}, {expressionTerm2});
-    termsOverTerms.setAsShouldSimplifyToFactors(true);
-
-    termsOverTerms.simplify();
-
-    Terms numeratorsToVerify(termsOverTerms.getNumerators());
-    ASSERT_EQ(1U, numeratorsToVerify.size());
-    EXPECT_EQ(polynomialTerm2, numeratorsToVerify[0]);
-    Terms denominatorsToVerify(termsOverTerms.getDenominators());
-    ASSERT_EQ(1U, denominatorsToVerify.size());
-    EXPECT_EQ(polynomialTerm1, denominatorsToVerify[0]);
-}
-
-TEST(TermsOverTermsTest, SimplifyWorksWithSimplifyingToFactorsAndPutNegativeExponentsOnTheOtherSideAndCanCancelled) {
-    Term polynomialTerm1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(5, {})});
-    Term expressionTerm1(createExpressionIfPossible({polynomialTerm1, "^", -1}));
-    TermsOverTerms termsOverTerms({polynomialTerm1, expressionTerm1}, {1});
-    termsOverTerms.setAsShouldSimplifyToFactors(true);
-
-    termsOverTerms.simplify();
-
-    Terms numeratorsToVerify(termsOverTerms.getNumerators());
-    EXPECT_TRUE(numeratorsToVerify.empty());
-    Terms denominatorsToVerify(termsOverTerms.getDenominators());
-    EXPECT_TRUE(denominatorsToVerify.empty());
-}
-
-TEST(
-    TermsOverTermsTest,
-    SimplifyWorksWithSimplifyingToFactorsAndFactorsAreCancelledButExponentsFormIsRetainedAndFactorsAreNotPopulated) {
-    Term polynomialTerm(Polynomial{Monomial(7, {{"x", 3}}), Monomial(-1, {})});
-    Term numerator(createExpressionIfPossible({polynomialTerm, "^", 2}));
-    Term denominator(createExpressionIfPossible({polynomialTerm, "^", 8}));
-    TermsOverTerms termsOverTerms({numerator}, {denominator});
-    termsOverTerms.setAsShouldSimplifyToFactors(true);
-
-    termsOverTerms.simplify();
-
-    Terms numeratorsToVerify(termsOverTerms.getNumerators());
-    EXPECT_TRUE(numeratorsToVerify.empty());
-    Term expectedDenominator(createExpressionIfPossible({polynomialTerm, "^", 6}));
-    Terms denominatorsToVerify(termsOverTerms.getDenominators());
-    ASSERT_EQ(1U, denominatorsToVerify.size());
-    EXPECT_EQ(expectedDenominator, denominatorsToVerify[0]);
-}
-
-TEST(TermsOverTermsTest, SimplifyWorksWhenShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValueIsDefault) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-5, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-7, {})});
-    TermsOverTerms termsOverTerms({numerator}, {denominator});
-    termsOverTerms.setAsShouldSimplifyToFactors(true);
-
-    termsOverTerms.simplify();
-
-    Term expectedNumerator1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2.23606797749979, {})});
-    Term expectedNumerator2(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2.23606797749979, {})});
-    Terms numeratorsToVerify(termsOverTerms.getNumerators());
-    ASSERT_EQ(2U, numeratorsToVerify.size());
-    EXPECT_EQ(expectedNumerator1, numeratorsToVerify[0]);
-    EXPECT_EQ(expectedNumerator2, numeratorsToVerify[1]);
-    Term expectedDenominator1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2.645751311064591, {})});
-    Term expectedDenominator2(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2.645751311064591, {})});
-    Terms denominatorsToVerify(termsOverTerms.getDenominators());
-    ASSERT_EQ(2U, denominatorsToVerify.size());
-    EXPECT_EQ(expectedDenominator1, denominatorsToVerify[0]);
-    EXPECT_EQ(expectedDenominator2, denominatorsToVerify[1]);
-}
-
-TEST(TermsOverTermsTest, SimplifyWorksWhenShouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValueIsTrue) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-5, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-7, {})});
-    TermsOverTerms termsOverTerms({numerator}, {denominator});
-    termsOverTerms.setAsShouldSimplifyToFactors(true);
-    Factorization::ConfigurationDetails configurationDetails(
-        Factorization::Configuration::getInstance().getConfigurationDetails());
-    configurationDetails.shouldSimplifyExpressionsToFactors = true;
-    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
-    termsOverTerms.setFactorizationConfigurationDetails(configurationDetails);
-
-    termsOverTerms.simplify();
-
-    Term expectedNumerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-5, {})});
-    Terms numeratorsToVerify(termsOverTerms.getNumerators());
-    ASSERT_EQ(1U, numeratorsToVerify.size());
-    EXPECT_EQ(expectedNumerator, numeratorsToVerify[0]);
-    Term expectedDenominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-7, {})});
-    Terms denominatorsToVerify(termsOverTerms.getDenominators());
-    ASSERT_EQ(1U, denominatorsToVerify.size());
-    EXPECT_EQ(expectedDenominator, denominatorsToVerify[0]);
-}
-
-TEST(TermsOverTermsTest, SimplifyWorksAndFactorizeTrigonometricFunctions) {
-    Term numerator(createExpressionIfPossible({sec("x"), "*", tan("x")}));
-    Term denominatorPart1(createExpressionIfPossible({Monomial(1, {{"x", 2}}), "*", sec("x"), "*", tan("x")}));
-    Term denominatorPart2(createExpressionIfPossible({Monomial(2, {{"x", 1}}), "*", sec("x")}));
-    Term denominator(createExpressionIfPossible({denominatorPart1, "+", denominatorPart2}));
-    TermsOverTerms termsOverTerms({numerator}, {denominator});
-    termsOverTerms.setAsShouldSimplifyToFactors(true);
-    Factorization::ConfigurationDetails configurationDetails(
-        Factorization::Configuration::getInstance().getConfigurationDetails());
-    configurationDetails.shouldSimplifyExpressionsToFactors = true;
-    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
-    termsOverTerms.setFactorizationConfigurationDetails(configurationDetails);
-
-    termsOverTerms.simplify();
-
-    Term expectedNumerator(tan("x"));
-    Terms numeratorsToVerify(termsOverTerms.getNumerators());
-    ASSERT_EQ(1U, numeratorsToVerify.size());
-    EXPECT_EQ(expectedNumerator, numeratorsToVerify[0]);
-    Term expectedDenominator1("x");
-    Term expectedDenominator2(createExpressionIfPossible({2, "+", "x", "*", tan("x")}));
-    Terms denominatorsToVerify(termsOverTerms.getDenominators());
-    ASSERT_EQ(2U, denominatorsToVerify.size());
-    EXPECT_EQ(expectedDenominator1, denominatorsToVerify[0]);
-    EXPECT_EQ(expectedDenominator2, denominatorsToVerify[1]);
-}
-
 TEST(TermsOverTermsTest, SimplifyWorksOnDistributingTerms) {
     Term lnOfX(ln("x"));
     Term sinOfLnOfX(sin(lnOfX));
@@ -568,6 +501,73 @@ TEST(TermsOverTermsTest, SimplifyWorksOnDistributingTerms) {
     Terms denominatorsToVerify(termsOverTerms.getDenominators());
     ASSERT_EQ(1U, denominatorsToVerify.size());
     EXPECT_EQ(expectedDenominator1, denominatorsToVerify[0]);
+}
+
+TEST(TermsOverTermsTest, GetTermsRaiseToNumbersWorks) {
+    TermsOverTerms termsOverTerms({"a", "b"}, {"x", "y"});
+
+    TermsRaiseToNumbers termsRaiseToNumbers(termsOverTerms.getTermsRaiseToNumbers());
+
+    TermsRaiseToNumbers::BaseToExponentMap const& baseToExponentMap(termsRaiseToNumbers.getBaseToExponentMap());
+    ASSERT_EQ(4U, baseToExponentMap.size());
+    auto itVerify = baseToExponentMap.cbegin();
+    EXPECT_EQ(Term("a"), itVerify->first);
+    EXPECT_EQ(AlbaNumber(1), itVerify->second);
+    ++itVerify;
+    EXPECT_EQ(Term("b"), itVerify->first);
+    EXPECT_EQ(AlbaNumber(1), itVerify->second);
+    ++itVerify;
+    EXPECT_EQ(Term("x"), itVerify->first);
+    EXPECT_EQ(AlbaNumber(-1), itVerify->second);
+    ++itVerify;
+    EXPECT_EQ(Term("y"), itVerify->first);
+    EXPECT_EQ(AlbaNumber(-1), itVerify->second);
+}
+
+TEST(TermsOverTermsTest, GetNumeratorAndDenominatorAsTermWithDetailsWorks) {
+    TermsOverTerms termsOverTerms({5}, {"x"});
+
+    TermsWithDetails termsWithDetails(termsOverTerms.getNumeratorAndDenominatorAsTermWithDetails());
+    ASSERT_EQ(2U, termsWithDetails.size());
+    EXPECT_EQ(Term(5), getTermConstReferenceFromUniquePointer(termsWithDetails[0].baseTermPointer));
+    EXPECT_EQ(TermAssociationType::Positive, termsWithDetails[0].association);
+    EXPECT_EQ(Term("x"), getTermConstReferenceFromUniquePointer(termsWithDetails[1].baseTermPointer));
+    EXPECT_EQ(TermAssociationType::Negative, termsWithDetails[1].association);
+}
+
+TEST(TermsOverTermsTest, GetNumeratorAndDenominatorAsTermWithDetailsWorksWhenBothNumeratorsAndDenominatorsAreEmpty) {
+    TermsOverTerms termsOverTerms(Terms{}, Terms{});
+
+    TermsWithDetails termsWithDetails(termsOverTerms.getNumeratorAndDenominatorAsTermWithDetails());
+    EXPECT_TRUE(termsWithDetails.empty());
+}
+
+TEST(TermsOverTermsTest, RetrievePolynomialAndNonPolynomialNumeratorsWorks) {
+    Term nonPolynomialTerm(createExpressionIfPossible({"x", "^", "x"}));
+    TermsOverTerms termsOverTerms({5, "x", nonPolynomialTerm}, {6, "y", nonPolynomialTerm});
+
+    Polynomial retrievedPolynomial;
+    Terms retrievedTerms;
+    termsOverTerms.retrievePolynomialAndNonPolynomialNumerators(retrievedPolynomial, retrievedTerms);
+
+    Polynomial expectedPolynomial{Monomial(5, {{"x", 1}})};
+    EXPECT_EQ(expectedPolynomial, retrievedPolynomial);
+    ASSERT_EQ(1U, retrievedTerms.size());
+    EXPECT_EQ(nonPolynomialTerm, retrievedTerms[0]);
+}
+
+TEST(TermsOverTermsTest, RetrievePolynomialAndNonPolynomialDenominatorsWorks) {
+    Term nonPolynomialTerm(createExpressionIfPossible({"x", "^", "x"}));
+    TermsOverTerms termsOverTerms({5, "x", nonPolynomialTerm}, {6, "y", nonPolynomialTerm});
+
+    Polynomial retrievedPolynomial;
+    Terms retrievedTerms;
+    termsOverTerms.retrievePolynomialAndNonPolynomialsDenominators(retrievedPolynomial, retrievedTerms);
+
+    Polynomial expectedPolynomial{Monomial(6, {{"y", 1}})};
+    EXPECT_EQ(expectedPolynomial, retrievedPolynomial);
+    ASSERT_EQ(1U, retrievedTerms.size());
+    EXPECT_EQ(nonPolynomialTerm, retrievedTerms[0]);
 }
 
 }  // namespace alba::algebra

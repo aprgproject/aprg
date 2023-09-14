@@ -19,8 +19,9 @@ public:
     using Entry = EntryTemplateType;
     using Keys = std::vector<Key>;
     using HashTable = std::array<UnorderedLinkedList, HASH_TABLE_SIZE>;
-    BaseSeparateChainingHash() = default;
     ~BaseSeparateChainingHash() override = default;  // no need for virtual destructor because base destructor is
+    BaseSeparateChainingHash() = default;
+
     [[nodiscard]] Key getMinimum() const override {
         Key result{};
         bool isFirst(true);
@@ -127,5 +128,4 @@ protected:
 // Improved version: Two probe hashing (separate chaining variant)
 // -> Hash to two positions, insert key in shorter of the two chains
 // -> Reduces expected length of the longest chain to log log N
-
 }  // namespace alba::algorithm

@@ -70,16 +70,6 @@ private:
     using BaseClass::clear;
     using BaseClass::initializeWithStartVertices;
 
-    static InitializeDataFunction getEmptyInitializeDataFunction() {
-        static InitializeDataFunction const emptyInitializeDataFunction = [](Vertices const&) {};
-        return emptyInitializeDataFunction;
-    }
-
-    static UpdateDataFunction getEmptyUpdateDataFunction() {
-        static UpdateDataFunction const noUpdateDataFunction = [](Vertex const&, Vertex const&) {};
-        return noUpdateDataFunction;
-    }
-
     void traverseUsingDfs(Vertex const& vertex) {
         b_processedVertices.putVertex(vertex);
         for (Vertex const& adjacentVertex : b_graph.getAdjacentVerticesAt(vertex)) {
@@ -90,6 +80,16 @@ private:
                 traverseUsingDfs(adjacentVertex);
             }
         }
+    }
+
+    static InitializeDataFunction getEmptyInitializeDataFunction() {
+        static InitializeDataFunction const emptyInitializeDataFunction = [](Vertices const&) {};
+        return emptyInitializeDataFunction;
+    }
+
+    static UpdateDataFunction getEmptyUpdateDataFunction() {
+        static UpdateDataFunction const noUpdateDataFunction = [](Vertex const&, Vertex const&) {};
+        return noUpdateDataFunction;
     }
 
     BaseGraphWithVertex const& b_graph;
@@ -109,11 +109,9 @@ private:
 // --> If w is unmarked, then consider last edge on a path from s to w that goes from a marked vertex to an unmarked
 // one. Proof (running time):
 // -> Each vertex connected to s is visited once
-
 // Other analysis:
 // The time complexity of depth-first search is O(n+m) where n is the number of nodes and m is the number of edges,
 // because the algorithm processes each node and edge once.
-
 // -> Applications:
 // ---> Depth-first search (DFS) is an algorithm (or technique) for traversing a graph.
 // ---> DFS uses a stack data structure for the traversal.

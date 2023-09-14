@@ -33,6 +33,7 @@ public:
 
     static constexpr RadixType RADIX = 256;
     static constexpr HashValue A_LARGE_PRIME = 1229952067;  // hard coded for now (think of an implementation later)
+
 private:
     std::string const m_query;
     Index const m_queryLength;

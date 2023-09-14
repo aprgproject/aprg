@@ -17,9 +17,9 @@ public:
     std::string getNearestLowerSymbol(int const address, int const offset = 0);
 
 private:
-    static int getAddressFromLineInFile(std::string const& lineInFile, SymbolTableFileType const filetype);
     void saveSymbolTable(std::string const& symbolTableFilePath, SymbolTableFileType const filetype);
     void saveLineInSymbolMapIfValid(int const address, std::string const& lineInFile);
+    static int getAddressFromLineInFile(std::string const& lineInFile, SymbolTableFileType const filetype);
     SymbolMapType m_symbolMap;
 };
 

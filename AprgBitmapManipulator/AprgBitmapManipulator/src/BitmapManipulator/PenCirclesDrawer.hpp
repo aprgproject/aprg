@@ -31,8 +31,6 @@ public:
     void drawUsingConnectedCircles();
 
 private:
-    static bool isToBeConnected(
-        PenCircles::PointAndPenCircleDetailsPair const& pair1, PenCircles::PointAndPenCircleDetailsPair const& pair2);
     void writeDrawnPointsInSnippet();
     void writeCirclesWithoutOverlay();
     void writeCirclesWithOverlay();
@@ -40,6 +38,8 @@ private:
     void putCirclesWithoutOverlay();
     void putCirclesWithOverlay();
     void putCircleConnectionsAndRemoveProcessedCircles();
+    static bool isToBeConnected(
+        PenCircles::PointAndPenCircleDetailsPair const& pair1, PenCircles::PointAndPenCircleDetailsPair const& pair2);
     BitmapSnippet& m_snippet;
     BitmapSnippetTraversal m_snippetTraversal;
     PenCircles m_penCircles;

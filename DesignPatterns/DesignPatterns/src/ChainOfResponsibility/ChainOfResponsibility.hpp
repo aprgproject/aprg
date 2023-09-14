@@ -29,11 +29,6 @@ private:
 // handle requests they are responsible for
 class ConcreteHandler1 : public Handler {
 public:
-    static bool canHandle() {
-        // ...
-        return false;
-    }
-
     void handleRequest() override {
         if (canHandle()) {
             std::cout << "Handled by Concrete Handler 1\n";
@@ -44,16 +39,16 @@ public:
         // ...
     }
 
+    static bool canHandle() {
+        // ...
+        return false;
+    }
+
     // ...
 };
 
 class ConcreteHandler2 : public Handler {
 public:
-    static bool canHandle() {
-        // ...
-        return true;
-    }
-
     void handleRequest() override {
         if (canHandle()) {
             std::cout << "Handled by Handler 2\n";
@@ -62,6 +57,11 @@ public:
             Handler::handleRequest();
         }
         // ...
+    }
+
+    static bool canHandle() {
+        // ...
+        return true;
     }
 
     // ...
@@ -74,19 +74,16 @@ public:
 // ONE LINE NOTE:
 // -> Have a CHAIN of handlers (with subclassing) that can process a request and ANY handler is RESPONSIBLE on consuming
 // the request
-
 // Intent:
 // Chain of Responsibility pattern avoids coupling the sender of a request to its receiver
 // by giving more than one object a chance to handle the request.
 // The pattern chains the receiving objects and passes the request along the chain until an object handles it.
 // It has a behavioral purpose and deals with relationships between objects.
 // Note: It both uses the "has a" and "is a" approach.
-
 // When to use (applicability):
 // -> more than one object may handle a request, and the handler should be ascertained automatically
 // -> you want to issue a request to one of several objects without specifying the receiver explicitly
 // -> the set of objects that can handle a request should be specified dynamically
-
 // Consequences:
 // -> Reduced coupling
 // ---> The pattern frees an object from knowing which other object handles a request.
@@ -105,7 +102,6 @@ public:
 // ---> Since a request has not explicit receiver, there's no guarantee it will be handled. The request can fall off the
 // end of the chain.
 // ---> A request can also go unhandled when the chain is not configured properly.
-
 // Implementation:
 // -> Implementing the successor chain
 // ---> There are two possible ways to implement the successor chain.
@@ -140,7 +136,6 @@ public:
 // ---------> Obviously this is less safe than invoking an operation directly.
 // -> Automatic forwarding in small talk
 // ---> No need to know.
-
 // Related Patterns
 // -> Chain of Responsibility is often applied in conjunction with [Composite].
 // ---> This means that a component's parent can act as its successor.

@@ -126,5 +126,4 @@ public:
 //       // ...
 //   };
 // Note: counter<x> and counter<y> have different instances so they have set of different values.
-
 }  // namespace alba

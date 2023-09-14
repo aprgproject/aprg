@@ -45,13 +45,6 @@ TEST(BinaryNearestValueSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhen
     testGetIndexOfNearestValueWithOneUnsignedInt<SearchForTest, ValuesForTest>();
 }
 
-TEST(BinaryNearestValueSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
-    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
-    SearchForTest search(duplicateValues);
-
-    EXPECT_EQ(4, search.getIndexOfNearestValue(33));
-}
-
 TEST(BinaryNearestValueSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues) {
     testGetIndexOfNearestValueWithMultipleSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
@@ -62,6 +55,23 @@ TEST(BinaryNearestValueSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhen
 
 TEST(BinaryNearestValueSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher) {
     testGetIndexOfNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
+TEST(BinaryNearestValueSearchWithTwoIndicesTest, GetLowerIndexAndGetHigherIndexWorksWithoutGetNearestValue) {
+    ValuesForTest const sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
+    SearchForTest const search(sortedValues);
+
+    EXPECT_EQ(0, search.getLowerIndex());
+    EXPECT_EQ(14, search.getHigherIndex());
+}
+
+TEST(BinaryNearestValueSearchWithTwoIndicesTest, GetLowerIndexAndGetHigherIndexWorksAfterGetNearestValue) {
+    ValuesForTest const sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
+    SearchForTest search(sortedValues);
+    EXPECT_EQ(33, search.getNearestValue(34));
+
+    EXPECT_EQ(4, search.getLowerIndex());
+    EXPECT_EQ(5, search.getHigherIndex());
 }
 
 TEST(BinaryNearestValueSearchWithTwoIndicesTest, GetLowerValueAndGetHigherValueWorksWithOneItem) {
@@ -103,23 +113,6 @@ TEST(BinaryNearestValueSearchWithTwoIndicesTest, GetLowerValueAndGetHigherValueW
 
     EXPECT_EQ(33, search.getLowerValue());
     EXPECT_EQ(43, search.getHigherValue());
-}
-
-TEST(BinaryNearestValueSearchWithTwoIndicesTest, GetLowerIndexAndGetHigherIndexWorksWithoutGetNearestValue) {
-    ValuesForTest const sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
-    SearchForTest const search(sortedValues);
-
-    EXPECT_EQ(0, search.getLowerIndex());
-    EXPECT_EQ(14, search.getHigherIndex());
-}
-
-TEST(BinaryNearestValueSearchWithTwoIndicesTest, GetLowerIndexAndGetHigherIndexWorksAfterGetNearestValue) {
-    ValuesForTest const sortedValues{6, 13, 14, 25, 33, 43, 51, 53, 64, 72, 84, 93, 95, 96, 97};
-    SearchForTest search(sortedValues);
-    EXPECT_EQ(33, search.getNearestValue(34));
-
-    EXPECT_EQ(4, search.getLowerIndex());
-    EXPECT_EQ(5, search.getHigherIndex());
 }
 
 TEST(BinaryNearestValueSearchWithTwoIndicesTest, SearchWorksWithInitialIndexesWhenDistanceFromLowerToHigherIsOne) {
@@ -166,6 +159,13 @@ TEST(
     EXPECT_EQ(33, search.getNearestValue(34));
     EXPECT_EQ(33, search.getLowerValue());
     EXPECT_EQ(43, search.getHigherValue());
+}
+
+TEST(BinaryNearestValueSearchWithTwoIndicesTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
+    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
+    SearchForTest search(duplicateValues);
+
+    EXPECT_EQ(4, search.getIndexOfNearestValue(33));
 }
 
 }  // namespace alba::algorithm

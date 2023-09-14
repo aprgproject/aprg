@@ -4,8 +4,8 @@
 
 #include <string>
 
-using namespace std;
 using namespace alba::stringHelper;
+using namespace std;
 
 namespace alba {
 
@@ -237,65 +237,26 @@ TEST(BoolCharacterStringTest, IsDisplayableCharacterWorks) {
     EXPECT_TRUE(isDisplayableCharacter('0'));
 }
 
-TEST(IntegerStringTest, GetNumberOfNewLinesWorks) {
-    EXPECT_EQ(0, getNumberOfNewLines(""));
-    EXPECT_EQ(0, getNumberOfNewLines("ABCD"));
-    EXPECT_EQ(4, getNumberOfNewLines("This is a\nsample\nstring\nwith\nnewlines."));
+TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsFound) {
+    string const testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string const expectedBeforeString(R"("1234567890!@#$%^&*( ))");
+    string const expectedAfterString(R"(EFghIjKlMnopQRstUvWxYz")");
+    string actualBeforeString;
+    string actualAfterString;
+
+    copyBeforeStringAndAfterString(testString, "AbCD", actualBeforeString, actualAfterString);
+    EXPECT_EQ(expectedBeforeString, actualBeforeString);
+    EXPECT_EQ(expectedAfterString, actualAfterString);
 }
 
-TEST(IntegerStringTest, GenerateUniqueIdWorks) {
-    string const string1("Mark is the no#1 guy in the world. Mark is also the nicest guy.");
-    string const string2("MARK is the no#1 programmer in the world. MARK is also the nicest programmer.");
-    size_t const uniqueId1 = generateUniqueId(string1);
-    size_t const uniqueId2 = generateUniqueId(string2);
-    EXPECT_EQ(10144150177413483293ULL, uniqueId1);
-    EXPECT_EQ(14490909308098778163ULL, uniqueId2);
-}
+TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsNotFound) {
+    string const testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
+    string actualBeforeString;
+    string actualAfterString;
 
-TEST(IntegerStringTest, GetLevenshteinDistanceWorks) {
-    EXPECT_EQ(2U, getLevenshteinDistance("MOVIE", "LOVE"));
-    EXPECT_EQ(1U, getLevenshteinDistance("This is a statement", "This is  statement"));
-    EXPECT_EQ(1U, getLevenshteinDistance("This is a statement", "This is  statement"));
-    EXPECT_EQ(4U, getLevenshteinDistance("This is a statement", "This is not a statement"));
-    EXPECT_EQ(1U, getLevenshteinDistance("This is a statement", "This is b statement"));
-}
-
-TEST(IntegerStringTest, GetHammingDistanceWorks) {
-    EXPECT_EQ(2U, getHammingDistance("MOVIE", "LOVE"));
-    EXPECT_EQ(10U, getHammingDistance("This is a statement", "This is  statement"));
-    EXPECT_EQ(10U, getHammingDistance("This is a statement", "This is  statement"));
-    EXPECT_EQ(10U, getHammingDistance("This is a statement", "This is not a statement"));
-    EXPECT_EQ(1U, getHammingDistance("This is a statement", "This is b statement"));
-}
-
-TEST(IntegerStringTest, GetNumberOfSubStringsWorks) {
-    // For example, the substrings of ABCD are A, B, C, D, AB, BC, CD, ABC, BCD and ABCD.
-    EXPECT_EQ(10U, getNumberOfSubStrings("ABCD"));
-}
-
-TEST(IntegerStringTest, GetNumberOfSubsequencesWorks) {
-    // For example, the subsequences of ABCD are A, B, C, D, AB, AC, AD, BC, BD, CD, ABC, ABD, ACD, BCD and ABCD.
-    EXPECT_EQ(15U, getNumberOfSubsequences("ABCD"));
-}
-
-TEST(IntegerStringTest, GetRotationValueWorks) {
-    // For example, the rotations of ABCD are ABCD, BCDA, CDAB and DABC.
-    EXPECT_EQ(0, getRotationValue("ABCD", "ABCD"));
-    EXPECT_EQ(1, getRotationValue("ABCD", "BCDA"));
-    EXPECT_EQ(2, getRotationValue("ABCD", "CDAB"));
-    EXPECT_EQ(3, getRotationValue("ABCD", "DABC"));
-    EXPECT_EQ(static_cast<int>(string::npos), getRotationValue("ABCD", ""));
-    EXPECT_EQ(static_cast<int>(string::npos), getRotationValue("ABCD", "ABCDE"));
-    EXPECT_EQ(static_cast<int>(string::npos), getRotationValue("ABCD", "AAAA"));
-}
-
-TEST(IntegerStringTest, GetPeriodValueWorks) {
-    // For example, the shortest period of ABCABCA is ABC.
-    EXPECT_EQ(2, getPeriodValue("ABCABCA", "ABC"));
-    EXPECT_EQ(1, getPeriodValue("ABCABCA", "ABCABC"));
-    EXPECT_EQ(static_cast<int>(string::npos), getPeriodValue("ABCABCA", ""));
-    EXPECT_EQ(static_cast<int>(string::npos), getPeriodValue("ABCABCA", "ABCDE"));
-    EXPECT_EQ(static_cast<int>(string::npos), getPeriodValue("ABCD", "AAAA"));
+    copyBeforeStringAndAfterString(testString, "777", actualBeforeString, actualAfterString);
+    EXPECT_TRUE(actualBeforeString.empty());
+    EXPECT_TRUE(actualBeforeString.empty());
 }
 
 TEST(ConvertCaseFromStringTest, ConvertToCapitalLettersUsingAllLetters) {
@@ -403,6 +364,13 @@ TEST(GetPartialStringFromStringTest, GetStringWithoutQuotationsUsingAllLettersWi
     EXPECT_EQ(withoutQuotations, getStringWithoutQuotations(testString));
 }
 
+TEST(GetPartialStringFromStringTest, GetStringWithoutCharacterAtTheStartAndEndUsingAllLetters) {
+    string const testString("_AbCDEFghIjKlMnopQRstUvWxYz_");
+    string const withoutUnderscore("AbCDEFghIjKlMnopQRstUvWxYz");
+
+    EXPECT_EQ(withoutUnderscore, getStringWithoutCharAtTheStartAndEnd(testString, '_'));
+}
+
 TEST(GetPartialStringFromStringTest, GetStringWithoutCharacterAtTheStartUsingAllLetters) {
     string const testString("_AbCDEFghIjKlMnopQRstUvWxYz");
     string const withoutUnderscore("AbCDEFghIjKlMnopQRstUvWxYz");
@@ -417,40 +385,11 @@ TEST(GetPartialStringFromStringTest, GetStringWithoutCharacterAtTheEndUsingAllLe
     EXPECT_EQ(withoutUnderscore, getStringWithoutCharAtTheEnd(testString, '_'));
 }
 
-TEST(GetPartialStringFromStringTest, GetStringWithoutCharacterAtTheStartAndEndUsingAllLetters) {
-    string const testString("_AbCDEFghIjKlMnopQRstUvWxYz_");
-    string const withoutUnderscore("AbCDEFghIjKlMnopQRstUvWxYz");
-
-    EXPECT_EQ(withoutUnderscore, getStringWithoutCharAtTheStartAndEnd(testString, '_'));
-}
-
 TEST(GetPartialStringFromStringTest, GetLongestCommonPrefixWorks) {
     string const testString1("adjustedforever");
     string const testString2("adjustedforevah");
 
     EXPECT_EQ("adjustedforev", getLongestCommonPrefix(testString1, testString2));
-}
-
-TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsFound) {
-    string const testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
-    string const expectedBeforeString(R"("1234567890!@#$%^&*( ))");
-    string const expectedAfterString(R"(EFghIjKlMnopQRstUvWxYz")");
-    string actualBeforeString;
-    string actualAfterString;
-
-    copyBeforeStringAndAfterString(testString, "AbCD", actualBeforeString, actualAfterString);
-    EXPECT_EQ(expectedBeforeString, actualBeforeString);
-    EXPECT_EQ(expectedAfterString, actualAfterString);
-}
-
-TEST(GetPartialStringFromStringTest, CopyBeforeStringAndAfterStringWhenStringIsNotFound) {
-    string const testString(R"("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz")");
-    string actualBeforeString;
-    string actualAfterString;
-
-    copyBeforeStringAndAfterString(testString, "777", actualBeforeString, actualAfterString);
-    EXPECT_TRUE(actualBeforeString.empty());
-    EXPECT_TRUE(actualBeforeString.empty());
 }
 
 TEST(GetPartialStringFromStringTest, GetStringBeforeThisStringWithCharactersAfterQuestionMarkIsRemoved) {
@@ -500,18 +439,18 @@ TEST(GetNewStringFromStringTest, GetStringReplacingSpecialCharactersWithUndersco
     EXPECT_EQ(withoutSpecialCharacters, getStringAndReplaceNonAlphanumericCharactersToUnderScore(testString));
 }
 
-TEST(GetNewStringFromStringTest, GetStringByRepeatingUntilDesiredLength) {
-    EXPECT_TRUE(getStringByRepeatingUntilDesiredLength(string(), 50).empty());
-    EXPECT_TRUE(getStringByRepeatingUntilDesiredLength("MARK", 0).empty());
-    EXPECT_EQ("MARKMARK", getStringByRepeatingUntilDesiredLength("MARK", 8));
-    EXPECT_EQ("MARKMARKMA", getStringByRepeatingUntilDesiredLength("MARK", 10));
-}
-
 TEST(GetNewStringFromStringTest, GetStringReplacingSpacesWithUnderscore) {
     string const testString(R"( Mark Earvin Alba 1234567890 ")");
     string const withoutSpecialCharacters("_Mark_Earvin_Alba_1234567890_");
 
     EXPECT_EQ(withoutSpecialCharacters, getStringAndReplaceNonAlphanumericCharactersToUnderScore(testString));
+}
+
+TEST(GetNewStringFromStringTest, GetStringByRepeatingUntilDesiredLength) {
+    EXPECT_TRUE(getStringByRepeatingUntilDesiredLength(string(), 50).empty());
+    EXPECT_TRUE(getStringByRepeatingUntilDesiredLength("MARK", 0).empty());
+    EXPECT_EQ("MARKMARK", getStringByRepeatingUntilDesiredLength("MARK", 8));
+    EXPECT_EQ("MARKMARKMA", getStringByRepeatingUntilDesiredLength("MARK", 10));
 }
 
 TEST(GetStringNumberFromStringTest, GetStringNumberAfterThisString) {
@@ -531,6 +470,67 @@ TEST(GetStringNumberFromStringTest, GetHexEquivalentOfCharacters) {
     EXPECT_EQ("FF", getHexEquivalentOfCharacters("\xff"));
 }
 
+TEST(IntegerStringTest, GetNumberOfNewLinesWorks) {
+    EXPECT_EQ(0, getNumberOfNewLines(""));
+    EXPECT_EQ(0, getNumberOfNewLines("ABCD"));
+    EXPECT_EQ(4, getNumberOfNewLines("This is a\nsample\nstring\nwith\nnewlines."));
+}
+
+TEST(IntegerStringTest, GetRotationValueWorks) {
+    // For example, the rotations of ABCD are ABCD, BCDA, CDAB and DABC.
+    EXPECT_EQ(0, getRotationValue("ABCD", "ABCD"));
+    EXPECT_EQ(1, getRotationValue("ABCD", "BCDA"));
+    EXPECT_EQ(2, getRotationValue("ABCD", "CDAB"));
+    EXPECT_EQ(3, getRotationValue("ABCD", "DABC"));
+    EXPECT_EQ(static_cast<int>(string::npos), getRotationValue("ABCD", ""));
+    EXPECT_EQ(static_cast<int>(string::npos), getRotationValue("ABCD", "ABCDE"));
+    EXPECT_EQ(static_cast<int>(string::npos), getRotationValue("ABCD", "AAAA"));
+}
+
+TEST(IntegerStringTest, GetPeriodValueWorks) {
+    // For example, the shortest period of ABCABCA is ABC.
+    EXPECT_EQ(2, getPeriodValue("ABCABCA", "ABC"));
+    EXPECT_EQ(1, getPeriodValue("ABCABCA", "ABCABC"));
+    EXPECT_EQ(static_cast<int>(string::npos), getPeriodValue("ABCABCA", ""));
+    EXPECT_EQ(static_cast<int>(string::npos), getPeriodValue("ABCABCA", "ABCDE"));
+    EXPECT_EQ(static_cast<int>(string::npos), getPeriodValue("ABCD", "AAAA"));
+}
+
+TEST(IntegerStringTest, GenerateUniqueIdWorks) {
+    string const string1("Mark is the no#1 guy in the world. Mark is also the nicest guy.");
+    string const string2("MARK is the no#1 programmer in the world. MARK is also the nicest programmer.");
+    size_t const uniqueId1 = generateUniqueId(string1);
+    size_t const uniqueId2 = generateUniqueId(string2);
+    EXPECT_EQ(10144150177413483293ULL, uniqueId1);
+    EXPECT_EQ(14490909308098778163ULL, uniqueId2);
+}
+
+TEST(IntegerStringTest, GetLevenshteinDistanceWorks) {
+    EXPECT_EQ(2U, getLevenshteinDistance("MOVIE", "LOVE"));
+    EXPECT_EQ(1U, getLevenshteinDistance("This is a statement", "This is  statement"));
+    EXPECT_EQ(1U, getLevenshteinDistance("This is a statement", "This is  statement"));
+    EXPECT_EQ(4U, getLevenshteinDistance("This is a statement", "This is not a statement"));
+    EXPECT_EQ(1U, getLevenshteinDistance("This is a statement", "This is b statement"));
+}
+
+TEST(IntegerStringTest, GetHammingDistanceWorks) {
+    EXPECT_EQ(2U, getHammingDistance("MOVIE", "LOVE"));
+    EXPECT_EQ(10U, getHammingDistance("This is a statement", "This is  statement"));
+    EXPECT_EQ(10U, getHammingDistance("This is a statement", "This is  statement"));
+    EXPECT_EQ(10U, getHammingDistance("This is a statement", "This is not a statement"));
+    EXPECT_EQ(1U, getHammingDistance("This is a statement", "This is b statement"));
+}
+
+TEST(IntegerStringTest, GetNumberOfSubStringsWorks) {
+    // For example, the substrings of ABCD are A, B, C, D, AB, BC, CD, ABC, BCD and ABCD.
+    EXPECT_EQ(10U, getNumberOfSubStrings("ABCD"));
+}
+
+TEST(IntegerStringTest, GetNumberOfSubsequencesWorks) {
+    // For example, the subsequences of ABCD are A, B, C, D, AB, AC, AD, BC, BD, CD, ABC, ABD, ACD, BCD and ABCD.
+    EXPECT_EQ(15U, getNumberOfSubsequences("ABCD"));
+}
+
 #if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
 
 TEST(GetStringFromStringTest, GetQuotedString) {
@@ -540,6 +540,27 @@ TEST(GetStringFromStringTest, GetQuotedString) {
 }
 
 #endif
+
+TEST(BooleanStringTest, IsWhiteSpaceTest) {
+    string const testString1("   AbCDEFghIjKlMnopQRstUvWxYz  ");
+    string const testString2("       ");
+    string const testString3("   \n\n    \t\t\t\t");
+
+    EXPECT_FALSE(isWhiteSpace(testString1));
+    EXPECT_TRUE(isWhiteSpace(testString2));
+    EXPECT_TRUE(isWhiteSpace(testString3));
+}
+
+TEST(BooleanStringTest, IsNumberTest) {
+    string const testString1("AbCDEFghIjKlMnopQRstUvWxYz");
+    string const testString2("AbCD1234567890!@#$%^&*( )");
+    string const testString3("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
+
+    EXPECT_FALSE(isNumber(testString1));
+    EXPECT_TRUE(isNumber(testString2));
+    EXPECT_TRUE(isNumber(testString3));
+}
+
 TEST(UtilitiesStringTest, ConstructFileLocator) { EXPECT_FALSE(constructFileLocator(__FILE__, __LINE__).empty()); }
 
 TEST(UtilitiesStringTest, RandomString100Characters) {
@@ -554,279 +575,6 @@ TEST(UtilitiesStringTest, GetArgumentsToStringInMainWorks) {
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay)
     EXPECT_EQ((strings{"parameter0", "parameter1", "parameter2"}), getArgumentsToStringInMain(argc, argv));
-}
-
-TEST(GetNewStringFromStringTest, FindAndReplaceStringsWorks) {
-    string string1("Mark is the no#1 guy in the world. Mark is also the nicest guy.");
-
-    EXPECT_FALSE(replaceAllAndReturnIfFound(string1, "alba", "ALBA"));
-    EXPECT_TRUE(replaceAllAndReturnIfFound(string1, "Mark", "MARK"));
-    EXPECT_EQ("MARK is the no#1 guy in the world. MARK is also the nicest guy.", string1);
-    EXPECT_TRUE(replaceAllAndReturnIfFound(string1, "guy", "programmer"));
-    EXPECT_EQ("MARK is the no#1 programmer in the world. MARK is also the nicest programmer.", string1);
-}
-
-TEST(GetNewStringFromStringTest, FindAndReplaceStringsWithRedundantStrings) {
-    string string1("Mark is the no#1 guy in the world. Mark is also the nicest guy.");
-
-    EXPECT_TRUE(replaceAllAndReturnIfFound(string1, "M", "MMMMMMMMMMMM"));
-    EXPECT_EQ("MMMMMMMMMMMMark is the no#1 guy in the world. MMMMMMMMMMMMark is also the nicest guy.", string1);
-}
-
-TEST(SplitStringTest, SplitBySpaces) {
-    string const string1("   Mark is the no#1      guy in the  world.    Mark is also the nicest guy.    ");
-    strings expectedStrings{"Mark",   "is",   "the", "no#1", "guy", "in",     "the",
-                            "world.", "Mark", "is",  "also", "the", "nicest", "guy."};
-    strings actualStrings;
-    splitToStrings<SplitStringType::WithoutDelimeters>(actualStrings, string1, " ");
-
-    EXPECT_EQ(expectedStrings.size(), actualStrings.size());
-    size_t const size = min(expectedStrings.size(), actualStrings.size());
-    for (size_t i = 0; i < size; ++i) {
-        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
-    }
-}
-
-TEST(SplitStringTest, SplitBySpacesWithDelimeters) {
-    string const string1("   Mark is the no#1      guy in the  world.   ");
-    strings expectedStrings{" ", " ", " ",   "Mark", " ",  "is", " ",   "the", " ", "no#1",   " ", " ", " ", " ",
-                            " ", " ", "guy", " ",    "in", " ",  "the", " ",   " ", "world.", " ", " ", " "};
-    strings actualStrings;
-    splitToStrings<SplitStringType::WithDelimeters>(actualStrings, string1, " ");
-
-    EXPECT_EQ(expectedStrings.size(), actualStrings.size());
-    size_t const size = min(expectedStrings.size(), actualStrings.size());
-    for (size_t i = 0; i < size; ++i) {
-        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
-    }
-}
-
-TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksWithLargeTargetLength) {
-    string const string1("   Mark is the no#1      guy in the  world.   ThisIsALongString");
-    strings expectedStrings{"   Mark is", " the no#1 ", "     guy ", "in the  ", "world.   ", "ThisIsALongString"};
-    strings actualStrings;
-    const int targetLength = 10;
-
-    splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
-
-    EXPECT_EQ(expectedStrings.size(), actualStrings.size());
-    size_t const size = min(expectedStrings.size(), actualStrings.size());
-    for (size_t i = 0; i < size; ++i) {
-        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
-    }
-}
-
-TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksLastLineIsIncluded) {
-    string const string1("TupcIlm starts when its deployed on board 0x1011 (same with legacy Aalman)");
-    strings expectedStrings{"TupcIlm starts when its deployed", " on board 0x1011 (same with ", "legacy Aalman)"};
-    strings actualStrings;
-    const int targetLength = 30;
-
-    splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
-
-    EXPECT_EQ(expectedStrings.size(), actualStrings.size());
-    size_t const size = min(expectedStrings.size(), actualStrings.size());
-    for (size_t i = 0; i < size; ++i) {
-        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
-    }
-}
-
-TEST(SplitStringTest, SplitLinesToAchieveTargetLengthCanBeSplitPerCharacter) {
-    string const string1("   Mark is the no#1      ");
-    strings expectedStrings{" ", " ", " ", "Mark", " ", "is", " ", "the", " ", "no#1", " ", " ", " ", " ", " ", " "};
-    strings actualStrings;
-    const int targetLength = 1;
-
-    splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
-
-    EXPECT_EQ(expectedStrings.size(), actualStrings.size());
-    size_t const size = min(expectedStrings.size(), actualStrings.size());
-    for (size_t i = 0; i < size; ++i) {
-        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
-    }
-}
-
-TEST(SplitStringTest, SplitToStringsUsingASeriesOfDelimetersWorks) {
-    string const string1(R"(TLH_DEBUG_PRINT("Creating new licence entry in DB for featureCode: %d.", featureCode);)");
-    strings const delimeters{R"((")", R"(",)", ");"};
-    strings expectedStrings{
-        "TLH_DEBUG_PRINT", R"(Creating new licence entry in DB for featureCode: %d.)", " featureCode"};
-    strings actualStrings;
-    splitToStringsUsingASeriesOfDelimeters(actualStrings, string1, delimeters);
-
-    EXPECT_EQ(expectedStrings.size(), actualStrings.size());
-    size_t const size = min(expectedStrings.size(), actualStrings.size());
-    for (size_t i = 0; i < size; ++i) {
-        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
-    }
-}
-
-TEST(BasicStringVariantTest, IsBasicStringVariantWorks) {
-    EXPECT_TRUE(isBasicStringVariant<string>());
-    EXPECT_TRUE(isBasicStringVariant<wstring>());
-    EXPECT_TRUE(isBasicStringVariant<u16string>());
-    EXPECT_TRUE(isBasicStringVariant<u32string>());
-    EXPECT_FALSE(isBasicStringVariant<int>());
-}
-
-TEST(BasicStringVariantTest, ConvertToAnotherBasicStringVariantWorks) {
-    EXPECT_EQ(
-        "ThisABasicStringVariant",
-        (convertToAnotherBasicStringVariant<string, string>(R"delimeter(ThisABasicStringVariant)delimeter")));
-    EXPECT_EQ(
-        L"ThisABasicStringVariant"s, (convertToAnotherBasicStringVariant<string, wstring>("ThisABasicStringVariant"s)));
-    EXPECT_EQ(
-        u"ThisABasicStringVariant"s,
-        (convertToAnotherBasicStringVariant<string, u16string>("ThisABasicStringVariant"s)));
-    EXPECT_EQ(
-        U"ThisABasicStringVariant"s,
-        (convertToAnotherBasicStringVariant<string, u32string>("ThisABasicStringVariant"s)));
-    EXPECT_EQ(
-        "ThisABasicStringVariant"s, (convertToAnotherBasicStringVariant<wstring, string>(L"ThisABasicStringVariant"s)));
-    EXPECT_EQ(
-        "ThisABasicStringVariant"s,
-        (convertToAnotherBasicStringVariant<u16string, string>(u"ThisABasicStringVariant"s)));
-    EXPECT_EQ(
-        "ThisABasicStringVariant"s,
-        (convertToAnotherBasicStringVariant<u32string, string>(U"ThisABasicStringVariant"s)));
-    // UTF-8 encoded (UTF-8 is backwards compatible with ASCII)
-    EXPECT_EQ(
-        "ThisABasicStringVariant"s,
-        (convertToAnotherBasicStringVariant<u8string, string>(u8"ThisABasicStringVariant"s)));
-    // UTF-8 encoded (UTF-8 is backwards compatible with ASCII)
-    EXPECT_EQ(
-        u8"ThisABasicStringVariant"s,
-        (convertToAnotherBasicStringVariant<string, u8string>("ThisABasicStringVariant"s)));
-}
-
-TEST(CombineStringTest, CombinedStringsWithComma) {
-    strings const stringsToCombine{"Mark",   "is",   "the", "no#1", "guy", "in",     "the",
-                                   "world.", "Mark", "is",  "also", "the", "nicest", "guy."};
-    string const expectedString("Mark,is,the,no#1,guy,in,the,world.,Mark,is,also,the,nicest,guy.");
-    string const actualString(combineStrings(stringsToCombine, ","));
-
-    EXPECT_EQ(expectedString, actualString);
-}
-
-TEST(GetStringWithAlignmentFromStringTest, GetStringWithAlignment) {
-    EXPECT_EQ(
-        "                        M                         ", getStringWithAlignment("M", 50, AlignmentType::Justify));
-    EXPECT_EQ(
-        "         M         a         r         k          ",
-        getStringWithAlignment("Mark", 50, AlignmentType::Justify));
-    EXPECT_EQ(
-        "           Mark Earvin Alba 1234567890            ",
-        getStringWithAlignment("Mark Earvin Alba 1234567890", 50, AlignmentType::Center));
-    EXPECT_EQ(
-        "Mark Earvin Alba 1234567890", getStringWithAlignment("Mark Earvin Alba 1234567890", 1, AlignmentType::Center));
-    EXPECT_EQ(
-        "                                                  ",
-        getStringWithAlignment(string(), 50, AlignmentType::Right));
-    EXPECT_EQ("     555555", getStringWithAlignment("555555", 11, AlignmentType::Right));
-    EXPECT_EQ("555555    ", getStringWithAlignment("555555", 10, AlignmentType::Left));
-    EXPECT_EQ("8 8 8 8 8  ", getStringWithAlignment("8 8 8 8 8", 11, AlignmentType::Left));
-}
-
-TEST(GetStringWithAlignmentFromStringTest, GetStringWithJustifyAlignment) {
-    EXPECT_EQ("                        M                         ", getStringWithJustifyAlignment("M", 50));
-    EXPECT_EQ("         M         a         r         k          ", getStringWithJustifyAlignment("Mark", 50));
-    EXPECT_EQ(
-        "     Mark     Earvin     Alba     1234567890      ",
-        getStringWithJustifyAlignment("Mark Earvin Alba 1234567890", 50));
-    EXPECT_EQ("Mark Earvin Alba 1234567890", getStringWithJustifyAlignment("Mark Earvin Alba 1234567890", 1));
-    EXPECT_EQ("                                                  ", getStringWithJustifyAlignment(string(), 50));
-    EXPECT_EQ("5 5 5 5 5 5", getStringWithJustifyAlignment("555555", 11));
-    EXPECT_EQ("  555555  ", getStringWithJustifyAlignment("555555", 10));
-    EXPECT_EQ(" 8 8 8 8 8 ", getStringWithJustifyAlignment("8 8 8 8 8", 11));
-}
-
-TEST(GetStringWithAlignmentFromStringTest, GetStringWithCenterAlignment) {
-    EXPECT_EQ("                       Mark                       ", getStringWithCenterAlignment("Mark", 50));
-    EXPECT_EQ(
-        "           Mark Earvin Alba 1234567890            ",
-        getStringWithCenterAlignment("Mark Earvin Alba 1234567890", 50));
-    EXPECT_EQ("Mark Earvin Alba 1234567890", getStringWithCenterAlignment("Mark Earvin Alba 1234567890", 1));
-    EXPECT_EQ("                                                  ", getStringWithCenterAlignment(string(), 50));
-}
-
-TEST(GetStringWithAlignmentFromStringTest, GetStringWithRightAlignment) {
-    EXPECT_EQ("                                              Mark", getStringWithRightAlignment("Mark", 50));
-    EXPECT_EQ(
-        "                       Mark Earvin Alba 1234567890",
-        getStringWithRightAlignment("Mark Earvin Alba 1234567890", 50));
-    EXPECT_EQ("Mark Earvin Alba 1234567890", getStringWithRightAlignment("Mark Earvin Alba 1234567890", 1));
-    EXPECT_EQ("                                                  ", getStringWithRightAlignment(string(), 50));
-}
-
-TEST(GetStringWithAlignmentFromStringTest, GetStringWithLeftAlignment) {
-    EXPECT_EQ("Mark                                              ", getStringWithLeftAlignment("Mark", 50));
-    EXPECT_EQ(
-        "Mark Earvin Alba 1234567890                       ",
-        getStringWithLeftAlignment("Mark Earvin Alba 1234567890", 50));
-    EXPECT_EQ("Mark Earvin Alba 1234567890", getStringWithLeftAlignment("Mark Earvin Alba 1234567890", 1));
-    EXPECT_EQ("                                                  ", getStringWithLeftAlignment(string(), 50));
-}
-
-TEST(GetNewStringFromStringTest, GetStringWithoutRedundantSlashesUsingAllLettersWithSpecialCharacters) {
-    string const testString(R"(////DIR1\\/\\/\\/DIR2\\\\DIR3///DIR4\\\\//DIR5////\\\\)");
-    string const withoutRedundantSlashes(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
-
-    EXPECT_EQ(withoutRedundantSlashes, getCorrectPathWithReplacedSlashCharacters(testString, R"(\)"));
-}
-
-TEST(GetNewStringFromStringTest, GetStringWithoutRedundantPeriodInPathUsingAllLettersWithSpecialCharacters) {
-    string const testString(R"(\DIR1\DIR2\..\DIR3\DIR4\..\..\DIR5\)");
-    string const withoutRedundantPeriodInPath(R"(\DIR1\DIR5\)");
-
-    EXPECT_EQ(withoutRedundantPeriodInPath, getCorrectPathWithoutDoublePeriod(testString, R"(\)"));
-}
-
-TEST(GetNewStringFromStringTest, GetStringBeforeDoublePeriodInPathUsingAllLettersWithSpecialCharacters) {
-    string const testString(R"(\DIR1\DIR2\..\DIR3\DIR4\..\..\DIR5\)");
-    string const beforeDoublePeriod(R"(DIR5\)");
-
-    EXPECT_EQ(beforeDoublePeriod, getStringBeforeDoublePeriod(testString, R"(\)"));
-}
-
-TEST(GetNewStringFromStringTest, GetStringBeforeDoublePeriodInPathUsingNoDoublePeriodInput) {
-    string const testString(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
-    string const beforeDoublePeriod(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
-
-    EXPECT_EQ(beforeDoublePeriod, getStringBeforeDoublePeriod(testString, R"(\)"));
-}
-
-TEST(GetNewStringFromStringTest, GetImmediateDirectoryNameUsingLastCharacterIsSlash) {
-    string const testString(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
-    string const immediateDirectoryName("DIR5");
-
-    EXPECT_EQ(immediateDirectoryName, getImmediateDirectoryName(testString, R"(\)"));
-}
-
-TEST(GetNewStringFromStringTest, GetImmediateDirectoryNameUsingLastCharacterIsNotSlash) {
-    string const testString(R"(\DIR1\DIR2\DIR3\DIR4\DIR5)");
-    string const immediateDirectoryName("DIR5");
-
-    EXPECT_EQ(immediateDirectoryName, getImmediateDirectoryName(testString, R"(\)"));
-}
-
-TEST(BooleanStringTest, IsNumberTest) {
-    string const testString1("AbCDEFghIjKlMnopQRstUvWxYz");
-    string const testString2("AbCD1234567890!@#$%^&*( )");
-    string const testString3("1234567890!@#$%^&*( )AbCDEFghIjKlMnopQRstUvWxYz");
-
-    EXPECT_FALSE(isNumber(testString1));
-    EXPECT_TRUE(isNumber(testString2));
-    EXPECT_TRUE(isNumber(testString3));
-}
-
-TEST(BooleanStringTest, IsWhiteSpaceTest) {
-    string const testString1("   AbCDEFghIjKlMnopQRstUvWxYz  ");
-    string const testString2("       ");
-    string const testString3("   \n\n    \t\t\t\t");
-
-    EXPECT_FALSE(isWhiteSpace(testString1));
-    EXPECT_TRUE(isWhiteSpace(testString2));
-    EXPECT_TRUE(isWhiteSpace(testString3));
 }
 
 TEST(BooleanStringTest, IsIdentifierTest) {
@@ -1098,6 +846,259 @@ TEST(BooleanStringTest, IsScreamingSnakeCaseTest) {
     EXPECT_TRUE(isScreamingSnakeCase(testString5));
 }
 
+TEST(GetNewStringFromStringTest, FindAndReplaceStringsWorks) {
+    string string1("Mark is the no#1 guy in the world. Mark is also the nicest guy.");
+
+    EXPECT_FALSE(replaceAllAndReturnIfFound(string1, "alba", "ALBA"));
+    EXPECT_TRUE(replaceAllAndReturnIfFound(string1, "Mark", "MARK"));
+    EXPECT_EQ("MARK is the no#1 guy in the world. MARK is also the nicest guy.", string1);
+    EXPECT_TRUE(replaceAllAndReturnIfFound(string1, "guy", "programmer"));
+    EXPECT_EQ("MARK is the no#1 programmer in the world. MARK is also the nicest programmer.", string1);
+}
+
+TEST(GetNewStringFromStringTest, FindAndReplaceStringsWithRedundantStrings) {
+    string string1("Mark is the no#1 guy in the world. Mark is also the nicest guy.");
+
+    EXPECT_TRUE(replaceAllAndReturnIfFound(string1, "M", "MMMMMMMMMMMM"));
+    EXPECT_EQ("MMMMMMMMMMMMark is the no#1 guy in the world. MMMMMMMMMMMMark is also the nicest guy.", string1);
+}
+
+TEST(SplitStringTest, SplitBySpaces) {
+    string const string1("   Mark is the no#1      guy in the  world.    Mark is also the nicest guy.    ");
+    strings expectedStrings{"Mark",   "is",   "the", "no#1", "guy", "in",     "the",
+                            "world.", "Mark", "is",  "also", "the", "nicest", "guy."};
+    strings actualStrings;
+    splitToStrings<SplitStringType::WithoutDelimeters>(actualStrings, string1, " ");
+
+    EXPECT_EQ(expectedStrings.size(), actualStrings.size());
+    size_t const size = min(expectedStrings.size(), actualStrings.size());
+    for (size_t i = 0; i < size; ++i) {
+        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
+    }
+}
+
+TEST(SplitStringTest, SplitBySpacesWithDelimeters) {
+    string const string1("   Mark is the no#1      guy in the  world.   ");
+    strings expectedStrings{" ", " ", " ",   "Mark", " ",  "is", " ",   "the", " ", "no#1",   " ", " ", " ", " ",
+                            " ", " ", "guy", " ",    "in", " ",  "the", " ",   " ", "world.", " ", " ", " "};
+    strings actualStrings;
+    splitToStrings<SplitStringType::WithDelimeters>(actualStrings, string1, " ");
+
+    EXPECT_EQ(expectedStrings.size(), actualStrings.size());
+    size_t const size = min(expectedStrings.size(), actualStrings.size());
+    for (size_t i = 0; i < size; ++i) {
+        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
+    }
+}
+
+TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksWithLargeTargetLength) {
+    string const string1("   Mark is the no#1      guy in the  world.   ThisIsALongString");
+    strings expectedStrings{"   Mark is", " the no#1 ", "     guy ", "in the  ", "world.   ", "ThisIsALongString"};
+    strings actualStrings;
+    const int targetLength = 10;
+
+    splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
+
+    EXPECT_EQ(expectedStrings.size(), actualStrings.size());
+    size_t const size = min(expectedStrings.size(), actualStrings.size());
+    for (size_t i = 0; i < size; ++i) {
+        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
+    }
+}
+
+TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksLastLineIsIncluded) {
+    string const string1("TupcIlm starts when its deployed on board 0x1011 (same with legacy Aalman)");
+    strings expectedStrings{"TupcIlm starts when its deployed", " on board 0x1011 (same with ", "legacy Aalman)"};
+    strings actualStrings;
+    const int targetLength = 30;
+
+    splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
+
+    EXPECT_EQ(expectedStrings.size(), actualStrings.size());
+    size_t const size = min(expectedStrings.size(), actualStrings.size());
+    for (size_t i = 0; i < size; ++i) {
+        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
+    }
+}
+
+TEST(SplitStringTest, SplitLinesToAchieveTargetLengthCanBeSplitPerCharacter) {
+    string const string1("   Mark is the no#1      ");
+    strings expectedStrings{" ", " ", " ", "Mark", " ", "is", " ", "the", " ", "no#1", " ", " ", " ", " ", " ", " "};
+    strings actualStrings;
+    const int targetLength = 1;
+
+    splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
+
+    EXPECT_EQ(expectedStrings.size(), actualStrings.size());
+    size_t const size = min(expectedStrings.size(), actualStrings.size());
+    for (size_t i = 0; i < size; ++i) {
+        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
+    }
+}
+
+TEST(SplitStringTest, SplitToStringsUsingASeriesOfDelimetersWorks) {
+    string const string1(R"(TLH_DEBUG_PRINT("Creating new licence entry in DB for featureCode: %d.", featureCode);)");
+    strings const delimeters{R"((")", R"(",)", ");"};
+    strings expectedStrings{
+        "TLH_DEBUG_PRINT", R"(Creating new licence entry in DB for featureCode: %d.)", " featureCode"};
+    strings actualStrings;
+    splitToStringsUsingASeriesOfDelimeters(actualStrings, string1, delimeters);
+
+    EXPECT_EQ(expectedStrings.size(), actualStrings.size());
+    size_t const size = min(expectedStrings.size(), actualStrings.size());
+    for (size_t i = 0; i < size; ++i) {
+        EXPECT_EQ(expectedStrings[i], actualStrings[i]);
+    }
+}
+
+TEST(CombineStringTest, CombinedStringsWithComma) {
+    strings const stringsToCombine{"Mark",   "is",   "the", "no#1", "guy", "in",     "the",
+                                   "world.", "Mark", "is",  "also", "the", "nicest", "guy."};
+    string const expectedString("Mark,is,the,no#1,guy,in,the,world.,Mark,is,also,the,nicest,guy.");
+    string const actualString(combineStrings(stringsToCombine, ","));
+
+    EXPECT_EQ(expectedString, actualString);
+}
+
+TEST(BasicStringVariantTest, IsBasicStringVariantWorks) {
+    EXPECT_TRUE(isBasicStringVariant<string>());
+    EXPECT_TRUE(isBasicStringVariant<wstring>());
+    EXPECT_TRUE(isBasicStringVariant<u16string>());
+    EXPECT_TRUE(isBasicStringVariant<u32string>());
+    EXPECT_FALSE(isBasicStringVariant<int>());
+}
+
+TEST(BasicStringVariantTest, ConvertToAnotherBasicStringVariantWorks) {
+    EXPECT_EQ(
+        "ThisABasicStringVariant",
+        (convertToAnotherBasicStringVariant<string, string>(R"delimeter(ThisABasicStringVariant)delimeter")));
+    EXPECT_EQ(
+        L"ThisABasicStringVariant"s, (convertToAnotherBasicStringVariant<string, wstring>("ThisABasicStringVariant"s)));
+    EXPECT_EQ(
+        u"ThisABasicStringVariant"s,
+        (convertToAnotherBasicStringVariant<string, u16string>("ThisABasicStringVariant"s)));
+    EXPECT_EQ(
+        U"ThisABasicStringVariant"s,
+        (convertToAnotherBasicStringVariant<string, u32string>("ThisABasicStringVariant"s)));
+    EXPECT_EQ(
+        "ThisABasicStringVariant"s, (convertToAnotherBasicStringVariant<wstring, string>(L"ThisABasicStringVariant"s)));
+    EXPECT_EQ(
+        "ThisABasicStringVariant"s,
+        (convertToAnotherBasicStringVariant<u16string, string>(u"ThisABasicStringVariant"s)));
+    EXPECT_EQ(
+        "ThisABasicStringVariant"s,
+        (convertToAnotherBasicStringVariant<u32string, string>(U"ThisABasicStringVariant"s)));
+    // UTF-8 encoded (UTF-8 is backwards compatible with ASCII)
+    EXPECT_EQ(
+        "ThisABasicStringVariant"s,
+        (convertToAnotherBasicStringVariant<u8string, string>(u8"ThisABasicStringVariant"s)));
+    // UTF-8 encoded (UTF-8 is backwards compatible with ASCII)
+    EXPECT_EQ(
+        u8"ThisABasicStringVariant"s,
+        (convertToAnotherBasicStringVariant<string, u8string>("ThisABasicStringVariant"s)));
+}
+
+TEST(GetStringWithAlignmentFromStringTest, GetStringWithAlignment) {
+    EXPECT_EQ(
+        "                        M                         ", getStringWithAlignment("M", 50, AlignmentType::Justify));
+    EXPECT_EQ(
+        "         M         a         r         k          ",
+        getStringWithAlignment("Mark", 50, AlignmentType::Justify));
+    EXPECT_EQ(
+        "           Mark Earvin Alba 1234567890            ",
+        getStringWithAlignment("Mark Earvin Alba 1234567890", 50, AlignmentType::Center));
+    EXPECT_EQ(
+        "Mark Earvin Alba 1234567890", getStringWithAlignment("Mark Earvin Alba 1234567890", 1, AlignmentType::Center));
+    EXPECT_EQ(
+        "                                                  ",
+        getStringWithAlignment(string(), 50, AlignmentType::Right));
+    EXPECT_EQ("     555555", getStringWithAlignment("555555", 11, AlignmentType::Right));
+    EXPECT_EQ("555555    ", getStringWithAlignment("555555", 10, AlignmentType::Left));
+    EXPECT_EQ("8 8 8 8 8  ", getStringWithAlignment("8 8 8 8 8", 11, AlignmentType::Left));
+}
+
+TEST(GetStringWithAlignmentFromStringTest, GetStringWithJustifyAlignment) {
+    EXPECT_EQ("                        M                         ", getStringWithJustifyAlignment("M", 50));
+    EXPECT_EQ("         M         a         r         k          ", getStringWithJustifyAlignment("Mark", 50));
+    EXPECT_EQ(
+        "     Mark     Earvin     Alba     1234567890      ",
+        getStringWithJustifyAlignment("Mark Earvin Alba 1234567890", 50));
+    EXPECT_EQ("Mark Earvin Alba 1234567890", getStringWithJustifyAlignment("Mark Earvin Alba 1234567890", 1));
+    EXPECT_EQ("                                                  ", getStringWithJustifyAlignment(string(), 50));
+    EXPECT_EQ("5 5 5 5 5 5", getStringWithJustifyAlignment("555555", 11));
+    EXPECT_EQ("  555555  ", getStringWithJustifyAlignment("555555", 10));
+    EXPECT_EQ(" 8 8 8 8 8 ", getStringWithJustifyAlignment("8 8 8 8 8", 11));
+}
+
+TEST(GetStringWithAlignmentFromStringTest, GetStringWithCenterAlignment) {
+    EXPECT_EQ("                       Mark                       ", getStringWithCenterAlignment("Mark", 50));
+    EXPECT_EQ(
+        "           Mark Earvin Alba 1234567890            ",
+        getStringWithCenterAlignment("Mark Earvin Alba 1234567890", 50));
+    EXPECT_EQ("Mark Earvin Alba 1234567890", getStringWithCenterAlignment("Mark Earvin Alba 1234567890", 1));
+    EXPECT_EQ("                                                  ", getStringWithCenterAlignment(string(), 50));
+}
+
+TEST(GetStringWithAlignmentFromStringTest, GetStringWithRightAlignment) {
+    EXPECT_EQ("                                              Mark", getStringWithRightAlignment("Mark", 50));
+    EXPECT_EQ(
+        "                       Mark Earvin Alba 1234567890",
+        getStringWithRightAlignment("Mark Earvin Alba 1234567890", 50));
+    EXPECT_EQ("Mark Earvin Alba 1234567890", getStringWithRightAlignment("Mark Earvin Alba 1234567890", 1));
+    EXPECT_EQ("                                                  ", getStringWithRightAlignment(string(), 50));
+}
+
+TEST(GetStringWithAlignmentFromStringTest, GetStringWithLeftAlignment) {
+    EXPECT_EQ("Mark                                              ", getStringWithLeftAlignment("Mark", 50));
+    EXPECT_EQ(
+        "Mark Earvin Alba 1234567890                       ",
+        getStringWithLeftAlignment("Mark Earvin Alba 1234567890", 50));
+    EXPECT_EQ("Mark Earvin Alba 1234567890", getStringWithLeftAlignment("Mark Earvin Alba 1234567890", 1));
+    EXPECT_EQ("                                                  ", getStringWithLeftAlignment(string(), 50));
+}
+
+TEST(GetNewStringFromStringTest, GetStringWithoutRedundantSlashesUsingAllLettersWithSpecialCharacters) {
+    string const testString(R"(////DIR1\\/\\/\\/DIR2\\\\DIR3///DIR4\\\\//DIR5////\\\\)");
+    string const withoutRedundantSlashes(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
+
+    EXPECT_EQ(withoutRedundantSlashes, getCorrectPathWithReplacedSlashCharacters(testString, R"(\)"));
+}
+
+TEST(GetNewStringFromStringTest, GetStringWithoutRedundantPeriodInPathUsingAllLettersWithSpecialCharacters) {
+    string const testString(R"(\DIR1\DIR2\..\DIR3\DIR4\..\..\DIR5\)");
+    string const withoutRedundantPeriodInPath(R"(\DIR1\DIR5\)");
+
+    EXPECT_EQ(withoutRedundantPeriodInPath, getCorrectPathWithoutDoublePeriod(testString, R"(\)"));
+}
+
+TEST(GetNewStringFromStringTest, GetStringBeforeDoublePeriodInPathUsingAllLettersWithSpecialCharacters) {
+    string const testString(R"(\DIR1\DIR2\..\DIR3\DIR4\..\..\DIR5\)");
+    string const beforeDoublePeriod(R"(DIR5\)");
+
+    EXPECT_EQ(beforeDoublePeriod, getStringBeforeDoublePeriod(testString, R"(\)"));
+}
+
+TEST(GetNewStringFromStringTest, GetStringBeforeDoublePeriodInPathUsingNoDoublePeriodInput) {
+    string const testString(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
+    string const beforeDoublePeriod(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
+
+    EXPECT_EQ(beforeDoublePeriod, getStringBeforeDoublePeriod(testString, R"(\)"));
+}
+
+TEST(GetNewStringFromStringTest, GetImmediateDirectoryNameUsingLastCharacterIsSlash) {
+    string const testString(R"(\DIR1\DIR2\DIR3\DIR4\DIR5\)");
+    string const immediateDirectoryName("DIR5");
+
+    EXPECT_EQ(immediateDirectoryName, getImmediateDirectoryName(testString, R"(\)"));
+}
+
+TEST(GetNewStringFromStringTest, GetImmediateDirectoryNameUsingLastCharacterIsNotSlash) {
+    string const testString(R"(\DIR1\DIR2\DIR3\DIR4\DIR5)");
+    string const immediateDirectoryName("DIR5");
+
+    EXPECT_EQ(immediateDirectoryName, getImmediateDirectoryName(testString, R"(\)"));
+}
+
 TEST(ConvertFromStringTest, ConvertStringToBool) {
     EXPECT_TRUE(convertStringToBool("true"));
     EXPECT_FALSE(convertStringToBool("false"));
@@ -1202,35 +1203,6 @@ TEST(StringConverterWithFormattingTest, ConvertNumberToStringWithOverPrecision) 
     EXPECT_EQ("(8/3)", converter.convertToString(AlbaNumber::createFraction(8, 3)));
 }
 
-TEST(StringConverterWithFormattingTest, ConvertNumberToStringWithFloatOutputType) {
-    StringConverterWithFormatting converter;
-    converter.setPrecision(15);
-
-    converter.setFloatOutputType(StringConverterWithFormatting::FloatOutputType::Default);
-    EXPECT_EQ("12345", converter.convertToString(12345));
-    EXPECT_EQ("12345.6789", converter.convertToString(12345.6789));
-    EXPECT_EQ("-67890.1111", converter.convertToString(-67890.1111));
-    EXPECT_EQ("(8/3)", converter.convertToString(AlbaNumber::createFraction(8, 3)));
-
-    converter.setFloatOutputType(StringConverterWithFormatting::FloatOutputType::Fixed);
-    EXPECT_EQ("12345", converter.convertToString(12345));
-    EXPECT_EQ("12345.678900000000795", converter.convertToString(12345.6789));
-    EXPECT_EQ("-67890.111099999994622", converter.convertToString(-67890.1111));
-    EXPECT_EQ("(8/3)", converter.convertToString(AlbaNumber::createFraction(8, 3)));
-
-    converter.setFloatOutputType(StringConverterWithFormatting::FloatOutputType::HexFloat);
-    EXPECT_EQ("12345", converter.convertToString(12345));
-    // EXPECT_EQ("0xc.0e6b7318fc508p+10", converter.convertToString(12345.6789)); // varies across machines
-    // EXPECT_EQ("-0x8.4990e38865948p+13", converter.convertToString(-67890.1111)); // varies across machines
-    EXPECT_EQ("(8/3)", converter.convertToString(AlbaNumber::createFraction(8, 3)));
-
-    converter.setFloatOutputType(StringConverterWithFormatting::FloatOutputType::Scientific);
-    EXPECT_EQ("12345", converter.convertToString(12345));
-    EXPECT_EQ("1.234567890000000e+04", converter.convertToString(12345.6789));
-    EXPECT_EQ("-6.789011109999999e+04", converter.convertToString(-67890.1111));
-    EXPECT_EQ("(8/3)", converter.convertToString(AlbaNumber::createFraction(8, 3)));
-}
-
 TEST(StringConverterWithFormattingTest, ConvertNumberToStringWithLessFieldWidth) {
     StringConverterWithFormatting converter;
     converter.setPrecision(15);
@@ -1263,6 +1235,35 @@ TEST(StringConverterWithFormattingTest, ConvertNumberToStringWithFillCharacter) 
     EXPECT_EQ("0000012345.6789", converter.convertToString(12345.6789));
     EXPECT_EQ("0000-67890.1111", converter.convertToString(-67890.1111));
     EXPECT_EQ("00000000000000(8/3)", converter.convertToString(AlbaNumber::createFraction(8, 3)));
+}
+
+TEST(StringConverterWithFormattingTest, ConvertNumberToStringWithFloatOutputType) {
+    StringConverterWithFormatting converter;
+    converter.setPrecision(15);
+
+    converter.setFloatOutputType(StringConverterWithFormatting::FloatOutputType::Default);
+    EXPECT_EQ("12345", converter.convertToString(12345));
+    EXPECT_EQ("12345.6789", converter.convertToString(12345.6789));
+    EXPECT_EQ("-67890.1111", converter.convertToString(-67890.1111));
+    EXPECT_EQ("(8/3)", converter.convertToString(AlbaNumber::createFraction(8, 3)));
+
+    converter.setFloatOutputType(StringConverterWithFormatting::FloatOutputType::Fixed);
+    EXPECT_EQ("12345", converter.convertToString(12345));
+    EXPECT_EQ("12345.678900000000795", converter.convertToString(12345.6789));
+    EXPECT_EQ("-67890.111099999994622", converter.convertToString(-67890.1111));
+    EXPECT_EQ("(8/3)", converter.convertToString(AlbaNumber::createFraction(8, 3)));
+
+    converter.setFloatOutputType(StringConverterWithFormatting::FloatOutputType::HexFloat);
+    EXPECT_EQ("12345", converter.convertToString(12345));
+    // EXPECT_EQ("0xc.0e6b7318fc508p+10", converter.convertToString(12345.6789)); // varies across machines
+    // EXPECT_EQ("-0x8.4990e38865948p+13", converter.convertToString(-67890.1111)); // varies across machines
+    EXPECT_EQ("(8/3)", converter.convertToString(AlbaNumber::createFraction(8, 3)));
+
+    converter.setFloatOutputType(StringConverterWithFormatting::FloatOutputType::Scientific);
+    EXPECT_EQ("12345", converter.convertToString(12345));
+    EXPECT_EQ("1.234567890000000e+04", converter.convertToString(12345.6789));
+    EXPECT_EQ("-6.789011109999999e+04", converter.convertToString(-67890.1111));
+    EXPECT_EQ("(8/3)", converter.convertToString(AlbaNumber::createFraction(8, 3)));
 }
 
 TEST(StringConverterWithFormattingTest, ConvertNumberToStringWithMaximumLength) {

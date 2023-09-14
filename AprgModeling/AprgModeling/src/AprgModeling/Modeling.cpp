@@ -169,36 +169,6 @@ Modeling::ValidationResult Modeling::validate() {
     return result;
 }
 
-void Modeling::copyVectorToMatrix(
-    unsigned int const numberOfColumns, unsigned int const numberOfRows, VectorOfDoubles const& retrievedDataForX,
-    MatrixOfDoubles& matrixOfDoubles) {
-    matrixOfDoubles.clearAndResize(numberOfColumns, numberOfRows);
-    unsigned int x = 0;
-    unsigned int y = 0;
-    for (double const value : retrievedDataForX) {
-        matrixOfDoubles.setEntry(x, y, value);
-        ++x;
-        if (x >= numberOfColumns) {
-            x = 0;
-            ++y;
-        }
-    }
-}
-
-void Modeling::printData(MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY) {
-    for (unsigned int j = 0; j < matrixInY.getNumberOfRows(); ++j) {
-        cout << matrixInY.getEntry(0, j) << " <- ";
-        for (unsigned int i = 0; i < matrixInX.getNumberOfColumns(); ++i) {
-            cout << matrixInX.getEntry(i, j) << ", ";
-        }
-        cout << "\n";
-    }
-}
-
-unsigned int Modeling::getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns) {
-    return (j * numberOfColumns) + i;
-}
-
 void Modeling::saveRetrievedDataToMatrixRandomly(
     MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int const numberOfSamples) {
     matrixInX.clearAndResize(m_retrievedDataForX.getNumberOfColumns(), numberOfSamples);
@@ -269,6 +239,36 @@ void Modeling::calculateCoefficientsUsingLeastSquares() {
     gsl_vector_free(calculatedCoefficients);
     gsl_vector_free(yModelingData);
     gsl_matrix_free(xModelingData);
+}
+
+void Modeling::copyVectorToMatrix(
+    unsigned int const numberOfColumns, unsigned int const numberOfRows, VectorOfDoubles const& retrievedDataForX,
+    MatrixOfDoubles& matrixOfDoubles) {
+    matrixOfDoubles.clearAndResize(numberOfColumns, numberOfRows);
+    unsigned int x = 0;
+    unsigned int y = 0;
+    for (double const value : retrievedDataForX) {
+        matrixOfDoubles.setEntry(x, y, value);
+        ++x;
+        if (x >= numberOfColumns) {
+            x = 0;
+            ++y;
+        }
+    }
+}
+
+void Modeling::printData(MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY) {
+    for (unsigned int j = 0; j < matrixInY.getNumberOfRows(); ++j) {
+        cout << matrixInY.getEntry(0, j) << " <- ";
+        for (unsigned int i = 0; i < matrixInX.getNumberOfColumns(); ++i) {
+            cout << matrixInX.getEntry(i, j) << ", ";
+        }
+        cout << "\n";
+    }
+}
+
+unsigned int Modeling::getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns) {
+    return (j * numberOfColumns) + i;
 }
 
 Modeling::Modeling() = default;

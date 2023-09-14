@@ -175,5 +175,4 @@ protected:
 // Why is the flow produced by the algorithm maximum and why is the cut minimum?
 // The reason is that a graph cannot contain a flow whose size is larger than the weight of any cut of the graph.
 // Hence, always when a flow and a cut are equally large, they are a maximum flow and a minimum cut.
-
 }  // namespace alba::algorithm

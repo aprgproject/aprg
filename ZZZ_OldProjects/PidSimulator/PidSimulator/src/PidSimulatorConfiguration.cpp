@@ -14,21 +14,6 @@ PidSimulatorConfiguration::PidSimulatorConfiguration(stringHelper::strings const
     saveArgumentValues(argumentsToValuesMap);
 }
 
-void PidSimulatorConfiguration::processArgumentsWithEqualDelimeter(
-    StringToStringMap& argumentsToValuesMap, stringHelper::strings const& argumentsInMain) {
-    for (string const& argumentInMain : argumentsInMain) {
-        processOneArgumentWithEqualDelimeter(argumentsToValuesMap, argumentInMain);
-    }
-}
-
-void PidSimulatorConfiguration::processOneArgumentWithEqualDelimeter(
-    StringToStringMap& argumentsToValuesMap, string const& argument) {
-    string beforeEqual;
-    string afterEqual;
-    stringHelper::copyBeforeStringAndAfterString(argument, "=", beforeEqual, afterEqual);
-    argumentsToValuesMap.emplace(beforeEqual, afterEqual);
-}
-
 void PidSimulatorConfiguration::print() const {
     cout << "kp:[" << kp << "]\n";
     cout << "ki:[" << ki << "]\n";
@@ -61,6 +46,21 @@ void PidSimulatorConfiguration::saveArgumentValues(StringToStringMap& argumentsT
     inputType = argumentsToValuesMap["inputType"];
     machsModelType = argumentsToValuesMap["machsModelType"];
     print();
+}
+
+void PidSimulatorConfiguration::processArgumentsWithEqualDelimeter(
+    StringToStringMap& argumentsToValuesMap, stringHelper::strings const& argumentsInMain) {
+    for (string const& argumentInMain : argumentsInMain) {
+        processOneArgumentWithEqualDelimeter(argumentsToValuesMap, argumentInMain);
+    }
+}
+
+void PidSimulatorConfiguration::processOneArgumentWithEqualDelimeter(
+    StringToStringMap& argumentsToValuesMap, string const& argument) {
+    string beforeEqual;
+    string afterEqual;
+    stringHelper::copyBeforeStringAndAfterString(argument, "=", beforeEqual, afterEqual);
+    argumentsToValuesMap.emplace(beforeEqual, afterEqual);
 }
 
 }  // namespace alba

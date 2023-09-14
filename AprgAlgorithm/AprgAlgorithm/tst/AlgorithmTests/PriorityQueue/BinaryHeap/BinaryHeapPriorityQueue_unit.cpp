@@ -11,24 +11,13 @@ using MaxPriorityQueueForTest =
     BinaryHeapPriorityQueue<char, less>;  // less leads to Max Priority Queue same as in c++ standard
 }  // namespace
 
-TEST(BinaryHeapPriorityQueueTest, IsEmptyWorks) {
-    MaxPriorityQueueForTest const queue1;
-    MaxPriorityQueueForTest queue2;
-    queue2.insert('A');
+TEST(BinaryHeapPriorityQueueTest, GetTopWorks) {
+    MaxPriorityQueueForTest queue;
+    queue.insert('P');
+    queue.insert('Q');
+    queue.insert('E');
 
-    EXPECT_TRUE(queue1.isEmpty());
-    EXPECT_FALSE(queue2.isEmpty());
-}
-
-TEST(BinaryHeapPriorityQueueTest, GetSizeWorks) {
-    MaxPriorityQueueForTest const queue1;
-    MaxPriorityQueueForTest queue2;
-    queue2.insert('P');
-    queue2.insert('Q');
-    queue2.insert('E');
-
-    EXPECT_EQ(0, queue1.getSize());
-    EXPECT_EQ(3, queue2.getSize());
+    EXPECT_EQ('Q', queue.getTop());
 }
 
 TEST(BinaryHeapPriorityQueueTest, GetObjectsWorks) {
@@ -41,15 +30,6 @@ TEST(BinaryHeapPriorityQueueTest, GetObjectsWorks) {
 
     MaxPriorityQueueForTest::Objects const objectsToExpect{'Q', 'P', 'E'};
     EXPECT_EQ(objectsToExpect, objectsToVerify);
-}
-
-TEST(BinaryHeapPriorityQueueTest, GetTopWorks) {
-    MaxPriorityQueueForTest queue;
-    queue.insert('P');
-    queue.insert('Q');
-    queue.insert('E');
-
-    EXPECT_EQ('Q', queue.getTop());
 }
 
 TEST(BinaryHeapPriorityQueueTest, InsertWorksOnExample1) {
@@ -118,6 +98,26 @@ TEST(BinaryHeapPriorityQueueTest, DeleteAndGetTopObjectWorksOnExample2) {
     MaxPriorityQueueForTest::Objects const& objectsToVerify(queue.getObjects());
     MaxPriorityQueueForTest::Objects const objectsToExpect{'S', 'P', 'R', 'N', 'H', 'O', 'A', 'E', 'I', 'G'};
     EXPECT_EQ(objectsToExpect, objectsToVerify);
+}
+
+TEST(BinaryHeapPriorityQueueTest, GetSizeWorks) {
+    MaxPriorityQueueForTest const queue1;
+    MaxPriorityQueueForTest queue2;
+    queue2.insert('P');
+    queue2.insert('Q');
+    queue2.insert('E');
+
+    EXPECT_EQ(0, queue1.getSize());
+    EXPECT_EQ(3, queue2.getSize());
+}
+
+TEST(BinaryHeapPriorityQueueTest, IsEmptyWorks) {
+    MaxPriorityQueueForTest const queue1;
+    MaxPriorityQueueForTest queue2;
+    queue2.insert('A');
+
+    EXPECT_TRUE(queue1.isEmpty());
+    EXPECT_FALSE(queue2.isEmpty());
 }
 
 }  // namespace alba::algorithm

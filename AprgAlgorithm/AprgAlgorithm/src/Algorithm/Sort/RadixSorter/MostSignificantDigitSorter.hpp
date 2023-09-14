@@ -36,6 +36,7 @@ public:
     }
 
     static constexpr int CUTOFF_TO_SMALLER_SORT = 0;  // switch to different sort when size is small
+
 private:
     void sortStartingAtMostSignificantDigitInternal(
         Values& valuesToSort, int const lowContainerIndex, int const highContainerIndex, int const digitIndex) const {
@@ -130,7 +131,6 @@ private:
 // MSD string (radix) sort.
 // -> Partition the array into R pieces according to first character (use key-index counting).
 // -> Recursively sort all strings start with each character (Key-indexed counts delineate subarrays to sort)
-
 // MSD string sort: potential for disastrous performance
 // Observation 1: Mush too slow for small subarrays
 // -> Each function calls needs its own count[] array.
@@ -138,12 +138,10 @@ private:
 // -> ASCII (65536 counts): 32000x slower for N=2
 // Observation 2: Huge number of small subarrays because of recursion
 // Solution: Cutoff to insertion sort for small subarrays.
-
 // Peformance: Number of characters examined
 // -> MSD examines just enough characters to sort the keys
 // -> Number of characters examined depends on keys.
 // -> Can be sublinear in input size
-
 // MSD string sort vs quicksort for strings
 // -> Disadvantages of MSD string sort.
 // ---> Accesses memory "randomly" (cache inefficient)

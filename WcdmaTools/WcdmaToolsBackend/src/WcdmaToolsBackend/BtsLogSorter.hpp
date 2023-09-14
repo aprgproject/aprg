@@ -23,9 +23,6 @@ public:
     double getTotalSizeToBeRead(std::set<std::string> const& listOfFiles);
 
 private:
-    static void deleteFilesInDirectory(std::string const& directoryOfLogs);
-    static std::string getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
-        std::string const& directory, std::string const& hardwareAddress);
     void createTempDirectories() const;
     void deleteTempFilesAndDirectoriesOfOneDayOld() const;
     void deleteStartupLog() const;
@@ -42,6 +39,9 @@ private:
         BtsPrintReaderWithRollback& printReader, BtsLogPrint const& logPrint, std::ofstream& outputLogFileStream);
     void updateOrWriteCurrentPrint(BtsLogPrint const& logPrint, std::ofstream& outputLogFileStream);
     void writeLastPrint(std::ofstream& outputLogFileStream);
+    static void deleteFilesInDirectory(std::string const& directoryOfLogs);
+    static std::string getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
+        std::string const& directory, std::string const& hardwareAddress);
     bool m_isFilterOn;
     alba::AlbaGrepStringEvaluator m_acceptedFilesGrepEvaluator;
     alba::AlbaGrepStringEvaluator m_filterGrepEvaluator;

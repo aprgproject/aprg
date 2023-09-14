@@ -8,34 +8,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-TEST(PolynomialTest, PolynomialsAreConstructedCorrectly) {
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
-
-    Monomials const& monomials1(polynomial1.getMonomials());
-    ASSERT_TRUE(monomials1.empty());
-
-    Monomials const& monomials2(polynomial2.getMonomials());
-    ASSERT_EQ(2U, monomials2.size());
-    EXPECT_DOUBLE_EQ(6, monomials2[0].getCoefficient().getDouble());
-    Monomial::VariablesToExponentsMap const& variableMap1(monomials2[0].getVariablesToExponentsMap());
-    ASSERT_TRUE(variableMap1.empty());
-    EXPECT_DOUBLE_EQ(-7, monomials2[1].getCoefficient().getDouble());
-    Monomial::VariablesToExponentsMap const& variableMap2(monomials2[1].getVariablesToExponentsMap());
-    ASSERT_EQ(3U, variableMap2.size());
-    EXPECT_DOUBLE_EQ(2, variableMap2.at("x").getDouble());
-    EXPECT_DOUBLE_EQ(3, variableMap2.at("y").getDouble());
-    EXPECT_DOUBLE_EQ(4, variableMap2.at("z").getDouble());
-}
-
-TEST(PolynomialTest, ConstructedPolynomialsHaveIsSimplifiedFlagNotSet) {
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
-
-    EXPECT_FALSE(polynomial1.isSimplified());
-    EXPECT_FALSE(polynomial2.isSimplified());
-}
-
 TEST(PolynomialTest, EqualityOperatorWorks) {
     Polynomial polynomial1;
     Polynomial polynomial2{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
@@ -49,6 +21,17 @@ TEST(PolynomialTest, EqualityOperatorWorks) {
     EXPECT_FALSE(polynomial2 == polynomial3);
     EXPECT_FALSE(polynomial2 == polynomial4);
     EXPECT_TRUE(polynomial2 == polynomial5);
+}
+
+TEST(PolynomialTest, OutputStreamOperatorWorks) {
+    stringstream ss;
+    Polynomial polynomial1;
+    Polynomial polynomial2{Monomial(6, {})};
+    Polynomial polynomial3{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+
+    ss << polynomial1 << "," << polynomial2 << "," << polynomial3;
+
+    EXPECT_EQ("(EmptyPolynomial),(6),(6 + -7[x^2][y^3][z^4])", ss.str());
 }
 
 TEST(PolynomialTest, LessThanOperatorWorks) {
@@ -68,110 +51,6 @@ TEST(PolynomialTest, LessThanOperatorWorks) {
         Polynomial({Monomial(6, {}), Monomial(8, {{"x", 2}, {"y", 3}})}));
 }
 
-TEST(PolynomialTest, IsEmptyWorks) {
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(6, {})};
-
-    EXPECT_TRUE(polynomial1.isEmpty());
-    EXPECT_FALSE(polynomial2.isEmpty());
-}
-
-TEST(PolynomialTest, IsSimplifiedWorks) {
-    Polynomial polynomial1;
-    Polynomial polynomial2;
-    polynomial2.setAsSimplified();
-
-    EXPECT_FALSE(polynomial1.isSimplified());
-    EXPECT_TRUE(polynomial2.isSimplified());
-}
-
-TEST(PolynomialTest, GetMonomialsWorks) {
-    Polynomial polynomial{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
-
-    Monomials const& monomials(polynomial.getMonomials());
-
-    ASSERT_EQ(2U, monomials.size());
-    EXPECT_DOUBLE_EQ(6, monomials[0].getCoefficient().getDouble());
-    Monomial::VariablesToExponentsMap const& variableMap1(monomials[0].getVariablesToExponentsMap());
-    ASSERT_TRUE(variableMap1.empty());
-    EXPECT_DOUBLE_EQ(-7, monomials[1].getCoefficient().getDouble());
-    Monomial::VariablesToExponentsMap const& variableMap2(monomials[1].getVariablesToExponentsMap());
-    ASSERT_EQ(3U, variableMap2.size());
-    EXPECT_DOUBLE_EQ(2, variableMap2.at("x").getDouble());
-    EXPECT_DOUBLE_EQ(3, variableMap2.at("y").getDouble());
-    EXPECT_DOUBLE_EQ(4, variableMap2.at("z").getDouble());
-}
-
-TEST(PolynomialTest, GetMonomialsReferenceWorks) {
-    Polynomial polynomial{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
-
-    Monomials& monomialsToChange(polynomial.getMonomialsReference());
-    monomialsToChange[0].setConstant(22);
-    monomialsToChange[1].putVariableWithExponent("a", 5);
-
-    Monomials const& monomialsToCheck(polynomial.getMonomials());
-    ASSERT_EQ(2U, monomialsToCheck.size());
-    EXPECT_DOUBLE_EQ(22, monomialsToCheck[0].getCoefficient().getDouble());
-    Monomial::VariablesToExponentsMap const& variableMap1(monomialsToCheck[0].getVariablesToExponentsMap());
-    ASSERT_TRUE(variableMap1.empty());
-    EXPECT_DOUBLE_EQ(-7, monomialsToCheck[1].getCoefficient().getDouble());
-    Monomial::VariablesToExponentsMap const& variableMap2(monomialsToCheck[1].getVariablesToExponentsMap());
-    ASSERT_EQ(4U, variableMap2.size());
-    EXPECT_DOUBLE_EQ(2, variableMap2.at("x").getDouble());
-    EXPECT_DOUBLE_EQ(3, variableMap2.at("y").getDouble());
-    EXPECT_DOUBLE_EQ(4, variableMap2.at("z").getDouble());
-    EXPECT_DOUBLE_EQ(5, variableMap2.at("a").getDouble());
-}
-
-TEST(PolynomialTest, ClearWorks) {
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(6, {})};
-    Polynomial polynomial3{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
-
-    polynomial1.clear();
-    polynomial2.clear();
-    polynomial3.clear();
-
-    EXPECT_TRUE(polynomial1.isEmpty());
-    EXPECT_TRUE(polynomial2.isEmpty());
-    EXPECT_TRUE(polynomial3.isEmpty());
-}
-
-TEST(PolynomialTest, SimplifyWorks) {
-    Polynomial polynomial1{Monomial(0, {{"x", 1}}), Monomial(0, {{"x", 1}})};
-    Polynomial polynomial2{Monomial(6, {})};
-    Polynomial polynomial3{Monomial(6, {}), Monomial(-6, {})};
-    Polynomial polynomial4{Monomial(-6, {{"y", 0}, {"z", 0}})};
-    Polynomial polynomial5{Monomial(1, {{"x", 2}}), Monomial(3, {{"x", ALBA_NUMBER_NOT_A_NUMBER}})};
-
-    polynomial1.simplify();
-    polynomial2.simplify();
-    polynomial3.simplify();
-    polynomial4.simplify();
-    polynomial5.simplify();
-
-    Monomials const& monomials1(polynomial1.getMonomials());
-    ASSERT_TRUE(monomials1.empty());
-
-    Monomials const& monomials2(polynomial2.getMonomials());
-    ASSERT_EQ(1U, monomials2.size());
-    EXPECT_DOUBLE_EQ(6, monomials2[0].getCoefficient().getDouble());
-    ASSERT_TRUE(monomials2[0].getVariablesToExponentsMap().empty());
-
-    Monomials const& monomials3(polynomial3.getMonomials());
-    ASSERT_TRUE(monomials3.empty());
-
-    Monomials const& monomials4(polynomial4.getMonomials());
-    ASSERT_EQ(1U, monomials4.size());
-    EXPECT_DOUBLE_EQ(-6, monomials4[0].getCoefficient().getDouble());
-    ASSERT_TRUE(monomials4[0].getVariablesToExponentsMap().empty());
-
-    Monomials const& monomials5(polynomial5.getMonomials());
-    ASSERT_EQ(1U, monomials5.size());
-    EXPECT_TRUE(monomials5[0].getCoefficient().isNotANumber());
-    ASSERT_TRUE(monomials5[0].getVariablesToExponentsMap().empty());
-}
-
 TEST(PolynomialTest, SimplifyWorksAndItSortsMonomials) {
     Polynomial polynomial1;
     Polynomial polynomial2{
@@ -189,46 +68,6 @@ TEST(PolynomialTest, SimplifyWorksAndItSortsMonomials) {
         (Polynomial{Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}}), Monomial(9, {{"x", 8}}), Monomial(110, {})}),
         polynomial2);
     EXPECT_EQ((Polynomial{Monomial(6, {{"x", 3}}), Monomial(2, {{"x", 1}, {"y", 2}})}), polynomial3);
-}
-
-TEST(PolynomialTest, SimplifyWorksWhenIsSimplifiedIsNotSet) {
-    Polynomial polynomial{Monomial(-6, {{"y", 0}, {"z", 0}})};
-
-    polynomial.simplify();
-
-    Monomials const& monomials(polynomial.getMonomials());
-    ASSERT_EQ(1U, monomials.size());
-    EXPECT_DOUBLE_EQ(-6, monomials[0].getCoefficient().getDouble());
-    ASSERT_TRUE(monomials[0].getVariablesToExponentsMap().empty());
-}
-
-TEST(PolynomialTest, SimplifyWorksAsSkippedWhenIsSimplifiedIsSet) {
-    Polynomial polynomial{Monomial(-6, {{"y", 0}, {"z", 0}})};
-    polynomial.setAsSimplified();
-
-    polynomial.simplify();
-
-    Monomials const& monomials(polynomial.getMonomials());
-    ASSERT_EQ(1U, monomials.size());
-    EXPECT_DOUBLE_EQ(-6, monomials[0].getCoefficient().getDouble());
-    Monomial::VariablesToExponentsMap const& variableToExponentMap(monomials[0].getVariablesToExponentsMap());
-    EXPECT_EQ(2U, variableToExponentMap.size());
-    auto it = variableToExponentMap.cbegin();
-    EXPECT_EQ("y", it->first);
-    EXPECT_EQ(AlbaNumber(0), it->second);
-    ++it;
-    EXPECT_EQ("z", it->first);
-    EXPECT_EQ(AlbaNumber(0), it->second);
-}
-
-TEST(PolynomialTest, SimplifyWithNotANumberDoesNotCrash) {
-    Polynomial polynomial{Monomial(ALBA_NUMBER_NOT_A_NUMBER, {})};
-
-    polynomial.simplify();
-
-    Monomials const& monomials(polynomial.getMonomials());
-    ASSERT_EQ(1U, monomials.size());
-    EXPECT_TRUE(monomials[0].getCoefficient().isNotANumber());
 }
 
 TEST(PolynomialTest, SortWorks) {
@@ -253,34 +92,6 @@ TEST(PolynomialTest, SortWorks) {
             Monomial(5, {{"x", 3}}), Monomial(1, {{"x", 2}, {"y", 1}}), Monomial(1, {{"x", 1}, {"y", 2}}),
             Monomial(1, {{"y", 3}})}),
         polynomial3);
-}
-
-TEST(PolynomialTest, AddMonomialWorks) {
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(1, {})};
-    Polynomial polynomial3{Monomial(2, {}), Monomial(3, {{"x", 4}})};
-
-    polynomial1.addMonomial(Monomial(5, {{"x", 4}}));
-    polynomial2.addMonomial(Monomial(5, {{"x", 4}}));
-    polynomial3.addMonomial(Monomial(5, {{"x", 4}}));
-
-    EXPECT_EQ(Polynomial{Monomial(5, {{"x", 4}})}, polynomial1);
-    EXPECT_EQ((Polynomial{Monomial(1, {}), Monomial(5, {{"x", 4}})}), polynomial2);
-    EXPECT_EQ((Polynomial{Monomial(2, {}), Monomial(8, {{"x", 4}})}), polynomial3);
-}
-
-TEST(PolynomialTest, AddPolynomialWorks) {
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(1, {})};
-    Polynomial polynomial3{Monomial(2, {}), Monomial(3, {{"x", 4}})};
-
-    polynomial1.addPolynomial(Polynomial{Monomial(7, {{"x", 4}}), Monomial(9, {{"y", 8}})});
-    polynomial2.addPolynomial(Polynomial{Monomial(7, {{"x", 4}}), Monomial(9, {{"y", 8}})});
-    polynomial3.addPolynomial(Polynomial{Monomial(7, {{"x", 4}}), Monomial(9, {{"y", 8}})});
-
-    EXPECT_EQ((Polynomial{Monomial(7, {{"x", 4}}), Monomial(9, {{"y", 8}})}), polynomial1);
-    EXPECT_EQ((Polynomial{Monomial(1, {}), Monomial(7, {{"x", 4}}), Monomial(9, {{"y", 8}})}), polynomial2);
-    EXPECT_EQ((Polynomial{Monomial(2, {}), Monomial(10, {{"x", 4}}), Monomial(9, {{"y", 8}})}), polynomial3);
 }
 
 TEST(PolynomialTest, MultiplyNumberWorks) {
@@ -343,18 +154,6 @@ TEST(PolynomialTest, MultiplyPolynomialWorks) {
         polynomial3);
 }
 
-TEST(PolynomialTest, MultiplyPolynomialUsingExample1Works) {
-    Polynomial polynomial1{Monomial(3, {{"x", 2}}), Monomial(-12, {{"x", 1}}), Monomial(-2, {})};
-    Polynomial polynomial2{Monomial(1, {{"x", 2}}), Monomial(4, {{"x", 1}}), Monomial(6, {})};
-
-    polynomial1.multiplyPolynomial(polynomial2);
-
-    Polynomial polynomialToExpect{
-        Monomial(3, {{"x", 4}}), Monomial(0, {{"x", 3}}), Monomial(-32, {{"x", 2}}), Monomial(-80, {{"x", 1}}),
-        Monomial(-12, {})};
-    EXPECT_EQ(polynomialToExpect, polynomial1);
-}
-
 TEST(PolynomialTest, DivideMonomialWorks) {
     Polynomial polynomial1;
     Polynomial polynomial2{Monomial(10, {})};
@@ -383,6 +182,178 @@ TEST(PolynomialTest, RaiseToUnsignedIntegerWorks) {
     EXPECT_EQ((Polynomial{Monomial(400, {}), Monomial(1200, {{"x", 4}}), Monomial(900, {{"x", 8}})}), polynomial3);
 }
 
+TEST(PolynomialTest, PolynomialsAreConstructedCorrectly) {
+    Polynomial polynomial1;
+    Polynomial polynomial2{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+
+    Monomials const& monomials1(polynomial1.getMonomials());
+    ASSERT_TRUE(monomials1.empty());
+
+    Monomials const& monomials2(polynomial2.getMonomials());
+    ASSERT_EQ(2U, monomials2.size());
+    EXPECT_DOUBLE_EQ(6, monomials2[0].getCoefficient().getDouble());
+    Monomial::VariablesToExponentsMap const& variableMap1(monomials2[0].getVariablesToExponentsMap());
+    ASSERT_TRUE(variableMap1.empty());
+    EXPECT_DOUBLE_EQ(-7, monomials2[1].getCoefficient().getDouble());
+    Monomial::VariablesToExponentsMap const& variableMap2(monomials2[1].getVariablesToExponentsMap());
+    ASSERT_EQ(3U, variableMap2.size());
+    EXPECT_DOUBLE_EQ(2, variableMap2.at("x").getDouble());
+    EXPECT_DOUBLE_EQ(3, variableMap2.at("y").getDouble());
+    EXPECT_DOUBLE_EQ(4, variableMap2.at("z").getDouble());
+}
+
+TEST(PolynomialTest, GetMonomialsWorks) {
+    Polynomial polynomial{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+
+    Monomials const& monomials(polynomial.getMonomials());
+
+    ASSERT_EQ(2U, monomials.size());
+    EXPECT_DOUBLE_EQ(6, monomials[0].getCoefficient().getDouble());
+    Monomial::VariablesToExponentsMap const& variableMap1(monomials[0].getVariablesToExponentsMap());
+    ASSERT_TRUE(variableMap1.empty());
+    EXPECT_DOUBLE_EQ(-7, monomials[1].getCoefficient().getDouble());
+    Monomial::VariablesToExponentsMap const& variableMap2(monomials[1].getVariablesToExponentsMap());
+    ASSERT_EQ(3U, variableMap2.size());
+    EXPECT_DOUBLE_EQ(2, variableMap2.at("x").getDouble());
+    EXPECT_DOUBLE_EQ(3, variableMap2.at("y").getDouble());
+    EXPECT_DOUBLE_EQ(4, variableMap2.at("z").getDouble());
+}
+
+TEST(PolynomialTest, SimplifyWorks) {
+    Polynomial polynomial1{Monomial(0, {{"x", 1}}), Monomial(0, {{"x", 1}})};
+    Polynomial polynomial2{Monomial(6, {})};
+    Polynomial polynomial3{Monomial(6, {}), Monomial(-6, {})};
+    Polynomial polynomial4{Monomial(-6, {{"y", 0}, {"z", 0}})};
+    Polynomial polynomial5{Monomial(1, {{"x", 2}}), Monomial(3, {{"x", ALBA_NUMBER_NOT_A_NUMBER}})};
+
+    polynomial1.simplify();
+    polynomial2.simplify();
+    polynomial3.simplify();
+    polynomial4.simplify();
+    polynomial5.simplify();
+
+    Monomials const& monomials1(polynomial1.getMonomials());
+    ASSERT_TRUE(monomials1.empty());
+
+    Monomials const& monomials2(polynomial2.getMonomials());
+    ASSERT_EQ(1U, monomials2.size());
+    EXPECT_DOUBLE_EQ(6, monomials2[0].getCoefficient().getDouble());
+    ASSERT_TRUE(monomials2[0].getVariablesToExponentsMap().empty());
+
+    Monomials const& monomials3(polynomial3.getMonomials());
+    ASSERT_TRUE(monomials3.empty());
+
+    Monomials const& monomials4(polynomial4.getMonomials());
+    ASSERT_EQ(1U, monomials4.size());
+    EXPECT_DOUBLE_EQ(-6, monomials4[0].getCoefficient().getDouble());
+    ASSERT_TRUE(monomials4[0].getVariablesToExponentsMap().empty());
+
+    Monomials const& monomials5(polynomial5.getMonomials());
+    ASSERT_EQ(1U, monomials5.size());
+    EXPECT_TRUE(monomials5[0].getCoefficient().isNotANumber());
+    ASSERT_TRUE(monomials5[0].getVariablesToExponentsMap().empty());
+}
+
+TEST(PolynomialTest, SimplifyWorksWhenIsSimplifiedIsNotSet) {
+    Polynomial polynomial{Monomial(-6, {{"y", 0}, {"z", 0}})};
+
+    polynomial.simplify();
+
+    Monomials const& monomials(polynomial.getMonomials());
+    ASSERT_EQ(1U, monomials.size());
+    EXPECT_DOUBLE_EQ(-6, monomials[0].getCoefficient().getDouble());
+    ASSERT_TRUE(monomials[0].getVariablesToExponentsMap().empty());
+}
+
+TEST(PolynomialTest, SimplifyWithNotANumberDoesNotCrash) {
+    Polynomial polynomial{Monomial(ALBA_NUMBER_NOT_A_NUMBER, {})};
+
+    polynomial.simplify();
+
+    Monomials const& monomials(polynomial.getMonomials());
+    ASSERT_EQ(1U, monomials.size());
+    EXPECT_TRUE(monomials[0].getCoefficient().isNotANumber());
+}
+
+TEST(PolynomialTest, SimplifyWorksAsSkippedWhenIsSimplifiedIsSet) {
+    Polynomial polynomial{Monomial(-6, {{"y", 0}, {"z", 0}})};
+    polynomial.setAsSimplified();
+
+    polynomial.simplify();
+
+    Monomials const& monomials(polynomial.getMonomials());
+    ASSERT_EQ(1U, monomials.size());
+    EXPECT_DOUBLE_EQ(-6, monomials[0].getCoefficient().getDouble());
+    Monomial::VariablesToExponentsMap const& variableToExponentMap(monomials[0].getVariablesToExponentsMap());
+    EXPECT_EQ(2U, variableToExponentMap.size());
+    auto it = variableToExponentMap.cbegin();
+    EXPECT_EQ("y", it->first);
+    EXPECT_EQ(AlbaNumber(0), it->second);
+    ++it;
+    EXPECT_EQ("z", it->first);
+    EXPECT_EQ(AlbaNumber(0), it->second);
+}
+
+TEST(PolynomialTest, GetMonomialsReferenceWorks) {
+    Polynomial polynomial{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+
+    Monomials& monomialsToChange(polynomial.getMonomialsReference());
+    monomialsToChange[0].setConstant(22);
+    monomialsToChange[1].putVariableWithExponent("a", 5);
+
+    Monomials const& monomialsToCheck(polynomial.getMonomials());
+    ASSERT_EQ(2U, monomialsToCheck.size());
+    EXPECT_DOUBLE_EQ(22, monomialsToCheck[0].getCoefficient().getDouble());
+    Monomial::VariablesToExponentsMap const& variableMap1(monomialsToCheck[0].getVariablesToExponentsMap());
+    ASSERT_TRUE(variableMap1.empty());
+    EXPECT_DOUBLE_EQ(-7, monomialsToCheck[1].getCoefficient().getDouble());
+    Monomial::VariablesToExponentsMap const& variableMap2(monomialsToCheck[1].getVariablesToExponentsMap());
+    ASSERT_EQ(4U, variableMap2.size());
+    EXPECT_DOUBLE_EQ(2, variableMap2.at("x").getDouble());
+    EXPECT_DOUBLE_EQ(3, variableMap2.at("y").getDouble());
+    EXPECT_DOUBLE_EQ(4, variableMap2.at("z").getDouble());
+    EXPECT_DOUBLE_EQ(5, variableMap2.at("a").getDouble());
+}
+
+TEST(PolynomialTest, IsEmptyWorks) {
+    Polynomial polynomial1;
+    Polynomial polynomial2{Monomial(6, {})};
+
+    EXPECT_TRUE(polynomial1.isEmpty());
+    EXPECT_FALSE(polynomial2.isEmpty());
+}
+
+TEST(PolynomialTest, ClearWorks) {
+    Polynomial polynomial1;
+    Polynomial polynomial2{Monomial(6, {})};
+    Polynomial polynomial3{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+
+    polynomial1.clear();
+    polynomial2.clear();
+    polynomial3.clear();
+
+    EXPECT_TRUE(polynomial1.isEmpty());
+    EXPECT_TRUE(polynomial2.isEmpty());
+    EXPECT_TRUE(polynomial3.isEmpty());
+}
+
+TEST(PolynomialTest, ConstructedPolynomialsHaveIsSimplifiedFlagNotSet) {
+    Polynomial polynomial1;
+    Polynomial polynomial2{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+
+    EXPECT_FALSE(polynomial1.isSimplified());
+    EXPECT_FALSE(polynomial2.isSimplified());
+}
+
+TEST(PolynomialTest, IsSimplifiedWorks) {
+    Polynomial polynomial1;
+    Polynomial polynomial2;
+    polynomial2.setAsSimplified();
+
+    EXPECT_FALSE(polynomial1.isSimplified());
+    EXPECT_TRUE(polynomial2.isSimplified());
+}
+
 TEST(PolynomialTest, SetAsSimplifiedWorks) {
     Polynomial polynomial;
 
@@ -400,15 +371,44 @@ TEST(PolynomialTest, ClearSimplifiedFlagWorks) {
     EXPECT_FALSE(polynomial.isSimplified());
 }
 
-TEST(PolynomialTest, OutputStreamOperatorWorks) {
-    stringstream ss;
+TEST(PolynomialTest, AddMonomialWorks) {
     Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(6, {})};
-    Polynomial polynomial3{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+    Polynomial polynomial2{Monomial(1, {})};
+    Polynomial polynomial3{Monomial(2, {}), Monomial(3, {{"x", 4}})};
 
-    ss << polynomial1 << "," << polynomial2 << "," << polynomial3;
+    polynomial1.addMonomial(Monomial(5, {{"x", 4}}));
+    polynomial2.addMonomial(Monomial(5, {{"x", 4}}));
+    polynomial3.addMonomial(Monomial(5, {{"x", 4}}));
 
-    EXPECT_EQ("(EmptyPolynomial),(6),(6 + -7[x^2][y^3][z^4])", ss.str());
+    EXPECT_EQ(Polynomial{Monomial(5, {{"x", 4}})}, polynomial1);
+    EXPECT_EQ((Polynomial{Monomial(1, {}), Monomial(5, {{"x", 4}})}), polynomial2);
+    EXPECT_EQ((Polynomial{Monomial(2, {}), Monomial(8, {{"x", 4}})}), polynomial3);
+}
+
+TEST(PolynomialTest, AddPolynomialWorks) {
+    Polynomial polynomial1;
+    Polynomial polynomial2{Monomial(1, {})};
+    Polynomial polynomial3{Monomial(2, {}), Monomial(3, {{"x", 4}})};
+
+    polynomial1.addPolynomial(Polynomial{Monomial(7, {{"x", 4}}), Monomial(9, {{"y", 8}})});
+    polynomial2.addPolynomial(Polynomial{Monomial(7, {{"x", 4}}), Monomial(9, {{"y", 8}})});
+    polynomial3.addPolynomial(Polynomial{Monomial(7, {{"x", 4}}), Monomial(9, {{"y", 8}})});
+
+    EXPECT_EQ((Polynomial{Monomial(7, {{"x", 4}}), Monomial(9, {{"y", 8}})}), polynomial1);
+    EXPECT_EQ((Polynomial{Monomial(1, {}), Monomial(7, {{"x", 4}}), Monomial(9, {{"y", 8}})}), polynomial2);
+    EXPECT_EQ((Polynomial{Monomial(2, {}), Monomial(10, {{"x", 4}}), Monomial(9, {{"y", 8}})}), polynomial3);
+}
+
+TEST(PolynomialTest, MultiplyPolynomialUsingExample1Works) {
+    Polynomial polynomial1{Monomial(3, {{"x", 2}}), Monomial(-12, {{"x", 1}}), Monomial(-2, {})};
+    Polynomial polynomial2{Monomial(1, {{"x", 2}}), Monomial(4, {{"x", 1}}), Monomial(6, {})};
+
+    polynomial1.multiplyPolynomial(polynomial2);
+
+    Polynomial polynomialToExpect{
+        Monomial(3, {{"x", 4}}), Monomial(0, {{"x", 3}}), Monomial(-32, {{"x", 2}}), Monomial(-80, {{"x", 1}}),
+        Monomial(-12, {})};
+    EXPECT_EQ(polynomialToExpect, polynomial1);
 }
 
 }  // namespace alba::algebra

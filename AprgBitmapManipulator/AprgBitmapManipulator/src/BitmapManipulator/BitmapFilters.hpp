@@ -26,6 +26,29 @@ public:
     using PenPointToPenCircleMap = std::map<BitmapXY, TwoDimensions::Circle>;
     using PenPointAndPenCirclePair = std::pair<BitmapXY, TwoDimensions::Circle>;
     explicit BitmapFilters(std::string const& path);
+    [[nodiscard]] BitmapSnippet getWholeBitmapSnippet() const;
+    [[nodiscard]] BitmapSnippet getBlankSnippet(uint8_t const backgroundColorByte) const;
+    [[nodiscard]] BitmapSnippet getBlankSnippetWithBackground() const;
+    [[nodiscard]] BitmapSnippet getBlankSnippetWithColor(uint32_t const color) const;
+    [[nodiscard]] bool isBackgroundColor(uint32_t const color) const;
+    [[nodiscard]] bool isNotBackgroundColor(uint32_t const color) const;
+    void saveSnippetIntoCurrentBitmapFile(BitmapSnippet const& snippet) const;
+    void determineConnectedComponentsByOneComponentAtATime(BitmapSnippet const& inputSnippet);
+    void determineConnectedComponentsUsingTwoPass(BitmapSnippet const& inputSnippet);
+
+    void drawBlurredNonPenPoints(
+        PenPoints const& penPoints, BitmapSnippet const& inputSnippet, BitmapSnippet& outputSnippet,
+        double const blurRadius, uint32_t const similarityColorLimit);
+
+    void drawBlurredColorsUsingCircles(
+        BitmapSnippet& snippet, double const blurRadius, uint32_t const similarityColorLimit);
+    // other draw functions
+    void drawToFillGapsUsingBlur(BitmapSnippet& snippet, double const blurRadius);
+    void drawNewColorForLabels(BitmapSnippet& snippet);
+    void saveSnippetIntoFileInTheSameDirectory(BitmapSnippet const& snippet, std::string const& filename);
+    void saveSnippetIntoFileWithFullFilePath(BitmapSnippet const& snippet, std::string const& fullFilePath);
+    void setBackgroundColor(uint32_t const backgroundColor);
+    void gatherAndSaveColorDataAndStatistics();
 
     // determine functions
     static void determinePenPoints(
@@ -53,31 +76,27 @@ public:
         BitmapSnippet const& inputSnippet, BitmapXY const& centerPoint, uint32_t const similarityColorLimit,
         double const acceptablePenPercentage);
 
-    [[nodiscard]] BitmapSnippet getWholeBitmapSnippet() const;
-    [[nodiscard]] BitmapSnippet getBlankSnippet(uint8_t const backgroundColorByte) const;
-    [[nodiscard]] BitmapSnippet getBlankSnippetWithBackground() const;
-    [[nodiscard]] BitmapSnippet getBlankSnippetWithColor(uint32_t const color) const;
-    [[nodiscard]] bool isBackgroundColor(uint32_t const color) const;
-    [[nodiscard]] bool isNotBackgroundColor(uint32_t const color) const;
-    void saveSnippetIntoCurrentBitmapFile(BitmapSnippet const& snippet) const;
-    void determineConnectedComponentsByOneComponentAtATime(BitmapSnippet const& inputSnippet);
-    void determineConnectedComponentsUsingTwoPass(BitmapSnippet const& inputSnippet);
-
-    void drawBlurredNonPenPoints(
-        PenPoints const& penPoints, BitmapSnippet const& inputSnippet, BitmapSnippet& outputSnippet,
-        double const blurRadius, uint32_t const similarityColorLimit);
-
-    void drawBlurredColorsUsingCircles(
-        BitmapSnippet& snippet, double const blurRadius, uint32_t const similarityColorLimit);
-    // other draw functions
-    void drawToFillGapsUsingBlur(BitmapSnippet& snippet, double const blurRadius);
-    void drawNewColorForLabels(BitmapSnippet& snippet);
-    void saveSnippetIntoFileInTheSameDirectory(BitmapSnippet const& snippet, std::string const& filename);
-    void saveSnippetIntoFileWithFullFilePath(BitmapSnippet const& snippet, std::string const& fullFilePath);
-    void setBackgroundColor(uint32_t const backgroundColor);
-    void gatherAndSaveColorDataAndStatistics();
-
 private:
+    [[nodiscard]] uint32_t getBlurredColorUsingACircle(
+        BitmapSnippet const& snippet, BitmapXY const& centerXY, double const blurRadius,
+        BlurCondition const& isIncludedInBlur) const;
+
+    void analyzeFourConnectivityNeighborPointsForConnectedComponentsOneComponentAtATime(
+        BitmapSnippet const& inputSnippet, std::deque<BitmapXY>& pointsInDeque, BitmapXY const& poppedPoint,
+        int const currentLabel);
+
+    void analyzeNeighborPointForConnectedComponentsOneComponentAtATime(
+        BitmapSnippet const& inputSnippet, std::deque<BitmapXY>& pointsInDeque, BitmapXY const& neighborPoint,
+        int const currentLabel);
+
+    void determineConnectedComponentsUsingTwoPassInFirstPass(
+        BitmapSnippet const& inputSnippet, UnionFindForLabels& unionFindForLabels);
+    void determineConnectedComponentsUsingTwoPassInSecondPass(
+        BitmapSnippet const& inputSnippet, UnionFindForLabels const& unionFindForLabels);
+    int analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
+        BitmapSnippet const& inputSnippet, UnionFindForLabels& unionFindForLabels, BitmapXY const& neighborPoint);
+    int analyzeNeighborPointForConnectedComponentsTwoPassAneReturnLabel(
+        BitmapSnippet const& inputSnippet, BitmapXY const& neighborPoint);
     [[nodiscard]] static uint32_t getBlurredColor(
         uint32_t const centerColor, uint32_t const colorToCompare, uint32_t const similarityColorLimit);
 
@@ -108,26 +127,6 @@ private:
         BitmapXY const& penBitmapXY, TwoDimensions::Circle const& circleToCheck,
         TwoDimensions::Circle const& circleToCompare);
 
-    [[nodiscard]] uint32_t getBlurredColorUsingACircle(
-        BitmapSnippet const& snippet, BitmapXY const& centerXY, double const blurRadius,
-        BlurCondition const& isIncludedInBlur) const;
-
-    void analyzeFourConnectivityNeighborPointsForConnectedComponentsOneComponentAtATime(
-        BitmapSnippet const& inputSnippet, std::deque<BitmapXY>& pointsInDeque, BitmapXY const& poppedPoint,
-        int const currentLabel);
-
-    void analyzeNeighborPointForConnectedComponentsOneComponentAtATime(
-        BitmapSnippet const& inputSnippet, std::deque<BitmapXY>& pointsInDeque, BitmapXY const& neighborPoint,
-        int const currentLabel);
-
-    void determineConnectedComponentsUsingTwoPassInFirstPass(
-        BitmapSnippet const& inputSnippet, UnionFindForLabels& unionFindForLabels);
-    void determineConnectedComponentsUsingTwoPassInSecondPass(
-        BitmapSnippet const& inputSnippet, UnionFindForLabels const& unionFindForLabels);
-    int analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
-        BitmapSnippet const& inputSnippet, UnionFindForLabels& unionFindForLabels, BitmapXY const& neighborPoint);
-    int analyzeNeighborPointForConnectedComponentsTwoPassAneReturnLabel(
-        BitmapSnippet const& inputSnippet, BitmapXY const& neighborPoint);
     uint32_t m_backgroundColor{0xFFFFFF};
     Bitmap m_bitmap;
     LabelForPoints m_labelForPixels;

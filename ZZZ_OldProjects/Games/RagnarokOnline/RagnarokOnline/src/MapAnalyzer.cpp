@@ -12,15 +12,6 @@ using namespace std;
 
 namespace alba {
 
-double MapAnalyzer::getMultiplierForExperience(string const& mapName) {
-    double multiplier(1);
-    if (isStringFoundCaseSensitive(mapName, "xmas_") || isStringFoundCaseSensitive(mapName, "man_") ||
-        isStringFoundCaseSensitive(mapName, "dic_")) {
-        multiplier = 2;
-    }
-    return multiplier;
-}
-
 double MapAnalyzer::getPotentialZenyFromMonster(Monster const& monster) const {
     double potentialZeny = 0;
     for (NameAndRate const& dropWithRate : monster.dropsWithRates) {
@@ -69,12 +60,13 @@ void MapAnalyzer::analyze() {
     sortMaps();
 }
 
-double MapAnalyzer::getTalonRoDropRate(double const dropRate) {
-    double talonRoDropRate(dropRate * 3);
-    if (talonRoDropRate > 100) {
-        talonRoDropRate = 100;
+double MapAnalyzer::getMultiplierForExperience(string const& mapName) {
+    double multiplier(1);
+    if (isStringFoundCaseSensitive(mapName, "xmas_") || isStringFoundCaseSensitive(mapName, "man_") ||
+        isStringFoundCaseSensitive(mapName, "dic_")) {
+        multiplier = 2;
     }
-    return talonRoDropRate;
+    return multiplier;
 }
 
 double MapAnalyzer::getBestPrice(Item const& item) const {
@@ -289,6 +281,14 @@ void MapAnalyzer::sortMaps() {
             }
             return first.zenyPotential > second.zenyPotential;
         });
+}
+
+double MapAnalyzer::getTalonRoDropRate(double const dropRate) {
+    double talonRoDropRate(dropRate * 3);
+    if (talonRoDropRate > 100) {
+        talonRoDropRate = 100;
+    }
+    return talonRoDropRate;
 }
 
 MapAnalyzer::MapAnalyzer() = default;

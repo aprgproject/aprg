@@ -73,15 +73,6 @@ TEST(
     EXPECT_EQ(expectedWrappedTerms, outputWrappedTerms);
 }
 
-TEST(SimplificationUtilitiesTest, CreateUniqueTermsWorks) {
-    WrappedTerms wrappedTerms{Term("b"), Term("d"), Term("c"), Term("a"), Term("a"), Term("c"), Term("c")};
-
-    Terms termsToVerify(createUniqueTerms(wrappedTerms));
-
-    Terms termsToExpect{"a", "b", "c", "d"};
-    EXPECT_EQ(termsToExpect, termsToVerify);
-}
-
 TEST(SimplificationUtilitiesTest, CombineComplementaryTermsWorks) {
     Terms termsToTest1{"x", "x'"};
     Terms termsToTest2{"x", "x'"};
@@ -128,29 +119,6 @@ TEST(SimplificationUtilitiesTest, CombineTermsByCheckingCommonFactorWorks) {
     EXPECT_EQ((Terms{"a", "b'", "x", "c", "d'", "e", "f'"}), termsToTest6);
     EXPECT_EQ((Terms{"a", "b'", "x", "c", "d'", "e", "f'"}), termsToTest7);
     EXPECT_EQ((Terms{"a", "b'", xOrY, "c", "d'", "e", "f'"}), termsToTest8);
-}
-
-TEST(SimplificationUtilitiesTest, CombineTwoTermsByCheckingCommonFactorIfPossibleWorks) {
-    Term xAndY(createExpressionIfPossible({"x", "&", "y"}));
-    Term xOrY(createExpressionIfPossible({"x", "|", "y"}));
-
-    Term termToVerify1(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::And));
-    Term termToVerify2(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::Or));
-    Term termToVerify3(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::And));
-    Term termToVerify4(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::Or));
-    Term termToVerify5(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::And));
-    Term termToVerify6(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::Or));
-    Term termToVerify7(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::And));
-    Term termToVerify8(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::Or));
-
-    EXPECT_EQ("(x&y)", convertToString(termToVerify1));
-    EXPECT_EQ("x", convertToString(termToVerify2));
-    EXPECT_EQ("x", convertToString(termToVerify3));
-    EXPECT_EQ("(x|y)", convertToString(termToVerify4));
-    EXPECT_EQ("(x&y)", convertToString(termToVerify5));
-    EXPECT_EQ("x", convertToString(termToVerify6));
-    EXPECT_EQ("x", convertToString(termToVerify7));
-    EXPECT_EQ("(x|y)", convertToString(termToVerify8));
 }
 
 TEST(SimplificationUtilitiesTest, DistributeTermsIfNeededWorks) {
@@ -226,6 +194,38 @@ TEST(SimplificationUtilitiesTest, RetrieveTargetOperationsWorks) {
     retrieveTargetOperations(targetOuter, targetInner);
     EXPECT_EQ(OperatorLevel::Or, targetOuter);
     EXPECT_EQ(OperatorLevel::And, targetInner);
+}
+
+TEST(SimplificationUtilitiesTest, CombineTwoTermsByCheckingCommonFactorIfPossibleWorks) {
+    Term xAndY(createExpressionIfPossible({"x", "&", "y"}));
+    Term xOrY(createExpressionIfPossible({"x", "|", "y"}));
+
+    Term termToVerify1(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::And));
+    Term termToVerify2(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::Or));
+    Term termToVerify3(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::And));
+    Term termToVerify4(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::Or));
+    Term termToVerify5(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::And));
+    Term termToVerify6(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::Or));
+    Term termToVerify7(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::And));
+    Term termToVerify8(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::Or));
+
+    EXPECT_EQ("(x&y)", convertToString(termToVerify1));
+    EXPECT_EQ("x", convertToString(termToVerify2));
+    EXPECT_EQ("x", convertToString(termToVerify3));
+    EXPECT_EQ("(x|y)", convertToString(termToVerify4));
+    EXPECT_EQ("(x&y)", convertToString(termToVerify5));
+    EXPECT_EQ("x", convertToString(termToVerify6));
+    EXPECT_EQ("x", convertToString(termToVerify7));
+    EXPECT_EQ("(x|y)", convertToString(termToVerify8));
+}
+
+TEST(SimplificationUtilitiesTest, CreateUniqueTermsWorks) {
+    WrappedTerms wrappedTerms{Term("b"), Term("d"), Term("c"), Term("a"), Term("a"), Term("c"), Term("c")};
+
+    Terms termsToVerify(createUniqueTerms(wrappedTerms));
+
+    Terms termsToExpect{"a", "b", "c", "d"};
+    EXPECT_EQ(termsToExpect, termsToVerify);
 }
 
 }  // namespace alba::booleanAlgebra::Simplification

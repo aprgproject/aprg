@@ -16,7 +16,6 @@ public:
     bool operator==(Circle const& circle) const;
     bool operator!=(Circle const& circle) const;
     bool operator<(Circle const& circle) const;
-    static double getEccentricity();
     [[nodiscard]] Point getCenter() const;
     [[nodiscard]] Point getNearestPointInCircumference(Point const& pointNotCircumference) const;
     [[nodiscard]] Points getLocus(double const interval) const;
@@ -30,6 +29,7 @@ public:
     [[nodiscard]] bool isInside(Point const& point) const;
     void traverseArea(double const interval, TraverseOperation const& traverseOperation) const;
     Point getPointAtAngle(double const angleInRadians);
+    static double getEccentricity();
 
 private:
     [[nodiscard]] Points getPointsInTraversingXAndY(

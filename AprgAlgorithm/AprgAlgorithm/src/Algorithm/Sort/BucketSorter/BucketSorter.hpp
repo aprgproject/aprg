@@ -53,7 +53,6 @@ public:
 // lower bound for Comparison based sorting algorithm (Merge Sort, Heap Sort, Quick-Sort .. etc) is Ω(n Log n), i.e.,
 // they cannot do better than nLogn. Can we sort the array in linear time? Counting sort can not be applied here as we
 // use keys as index in counting sort. Here keys are floating point numbers. The idea is to use bucket sort.
-
 // Following is bucket algorithm:
 // bucketSort(arr[], n)
 // 1) Create n empty buckets (Or lists).
@@ -61,7 +60,6 @@ public:
 // -> a) Insert arr[i] into bucket[n*array[i]]
 // 3) Sort individual buckets using insertion sort.
 // 4) Concatenate all sorted buckets.
-
 // Bucket Sort for numbers having integer part:
 // Algorithm :
 // 1. Find maximum element and minimum of the array

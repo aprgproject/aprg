@@ -52,20 +52,17 @@ private:
 // ONE LINE NOTE:
 // -> Implement a common ABSTRACT STRATEGY INTERFACE and implement different strategies or FAMILIES OF ALGORITHMS by
 // subclassing so that it can be changed in runtime.
-
 // Intent:
 // Strategy defines a family of algorithms, encapsulates each one, and makes them interchangeable.
 // It lets the algorithm vary independently from clients that use it.
 // The pattern has behavioral purpose and applies to the objects.
 // NOTE: This is related to "Dependency Inversion Principle".
-
 // When to use (applicability):
 // -> many related classes differ only in their behavior
 // -> you need different variants of an algorithm
 // -> an algorithm uses data that clients shouldn't know about
 // -> a class defines many behaviors, and these appear as multiple conditional statements in its operations
 // ---> Instead of many conditionals, move related conditional branches into their own Strategy class.
-
 // Consequences:
 // -> Families of related algorithms
 // ---> Hierarchies fo Strategy classes define a family of algorihtms and behaviors for context to reuse.
@@ -87,7 +84,6 @@ private:
 // -> Increased number of objects
 // ---> Creating multiple strategies can increase the number of objects (especially if Strategies have state)
 // ---> This can be reduced by implementing strategies as stateless objects and the context can share
-
 // Implementation:
 // -> Defining the Strategy and Context interfaces
 // ---> The Strategy and Context interfaces must give a ConcreteStrategy
@@ -98,6 +94,5 @@ private:
 // ---> (2) It does not have to be changed at runtime.
 // -> Making Strategy objects optional
 // ---> When Strategy pointer can be null, it needs to be check when its null.
-
 // Related Patterns
 // -> [Flyweight]: Strategy objects often make good flyweights.

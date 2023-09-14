@@ -40,7 +40,6 @@ private:
 // -----> Result is the accumulated count
 // ---> Else (this means the most significant digit):
 // -----> Result is 1
-
 // 2) Dynamic Programming by Iterative method:
 // -> Create an matrix of counts with size of columns as 10 and size of rows as "numberOfDigits"
 // -> At the start, because its for the most significant digit, fill the first row with 1.
@@ -53,7 +52,6 @@ private:
 // -----> Iterating "beforeDigitValue" from 0 to "digit value":
 // -------> Get the previous count by checking the matrix with "beforeDigitValue" and "digit index"-1
 // ---> Get sum of counts of the last row for the total count
-
 // 3) Dynamic Programming by Iterative method and space efficient:
 // -> Create an array of counts with size as 10.
 // -> Initially, because its for the most significant digit, initialize with 1.
@@ -66,13 +64,10 @@ private:
 // -----> Iterating "beforeDigitValue" from 0 to "digit value":
 // -------> Get the previous count by checking the array with "beforeDigitValue"
 // ---> Get sum of array of counts for the total count
-
 // Total number of non-decreasing numbers with n digits
-
 // A number is non-decreasing if every digit (except the first one) is greater than or equal to previous digit.
 // For example, 223, 4455567, 899, are non-decreasing numbers.
 // So, given the number of digits n, you are required to find the count of total non-decreasing numbers with n digits.
-
 // Examples:
 // Input:  n = 1
 // -> Output: count  = 10

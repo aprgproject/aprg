@@ -6,45 +6,10 @@ using namespace std;
 
 namespace alba::math {
 
-TEST(PrimeAndFactorUtilitiesTest, IsCoPrimeWorks) {
-    EXPECT_TRUE(isCoPrime(5U, 7U));
-    EXPECT_FALSE(isCoPrime(4U, 8U));
-    EXPECT_TRUE(isCoPrime(1U, 13U));
-    EXPECT_FALSE(isCoPrime(0U, 13U));
-}
+TEST(PrimeAndFactorUtilitiesTest, GetPrimeFactorsToCountMapWorks) {
+    FactorsToCountMap const expectedMap{{2U, 2U}, {3U, 1U}, {7U, 1U}};
 
-TEST(PrimeAndFactorUtilitiesTest, IsNumberOfPrimesInfiniteWorks) {
-    // The factors are 1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42 and 84.
-    EXPECT_TRUE(isNumberOfPrimesInfinite());
-}
-
-TEST(PrimeAndFactorUtilitiesTest, IsGoldbachConjectureTrueWorks) {
-    EXPECT_FALSE(isGoldbachConjectureTrue(83));  // Wrong input so its false, input must be even!
-    EXPECT_TRUE(isGoldbachConjectureTrue(12));
-    EXPECT_TRUE(isGoldbachConjectureTrue(64));
-    EXPECT_TRUE(isGoldbachConjectureTrue(84));
-}
-
-TEST(PrimeAndFactorUtilitiesTest, IsTwinPrimeConjectureTrueWorks) {
-    EXPECT_TRUE(isTwinPrimeConjectureTrue(13));
-    EXPECT_TRUE(isTwinPrimeConjectureTrue(64));
-    EXPECT_TRUE(isTwinPrimeConjectureTrue(65));
-    EXPECT_TRUE(isTwinPrimeConjectureTrue(84));
-}
-
-TEST(PrimeAndFactorUtilitiesTest, IsLegendreConjectureTrueWorks) {
-    EXPECT_TRUE(isLegendreConjectureTrue(13));
-    EXPECT_TRUE(isLegendreConjectureTrue(64));
-    EXPECT_TRUE(isLegendreConjectureTrue(65));
-    EXPECT_TRUE(isLegendreConjectureTrue(84));
-}
-
-TEST(PrimeAndFactorUtilitiesTest, IsWilsonTheoremTrueWorks) {
-    EXPECT_FALSE(isWilsonTheoremTrue(1));  // Wrong input so its false, we know that 1 and 0 are not prime
-    EXPECT_TRUE(isWilsonTheoremTrue(13));
-    EXPECT_TRUE(isWilsonTheoremTrue(64));
-    EXPECT_TRUE(isWilsonTheoremTrue(65));
-    EXPECT_TRUE(isWilsonTheoremTrue(84));
+    EXPECT_EQ(expectedMap, getPrimeFactorsToCountMap(84U));
 }
 
 TEST(PrimeAndFactorUtilitiesTest, GetNumberOfFactorsWorks) {
@@ -84,10 +49,45 @@ TEST(PrimeAndFactorUtilitiesTest, GetPrimeFactorsOfNumberWorks) {
     EXPECT_EQ(expectedNumbers, getPrimeFactorsOfNumber(84U));
 }
 
-TEST(PrimeAndFactorUtilitiesTest, GetPrimeFactorsToCountMapWorks) {
-    FactorsToCountMap const expectedMap{{2U, 2U}, {3U, 1U}, {7U, 1U}};
+TEST(PrimeAndFactorUtilitiesTest, IsCoPrimeWorks) {
+    EXPECT_TRUE(isCoPrime(5U, 7U));
+    EXPECT_FALSE(isCoPrime(4U, 8U));
+    EXPECT_TRUE(isCoPrime(1U, 13U));
+    EXPECT_FALSE(isCoPrime(0U, 13U));
+}
 
-    EXPECT_EQ(expectedMap, getPrimeFactorsToCountMap(84U));
+TEST(PrimeAndFactorUtilitiesTest, IsNumberOfPrimesInfiniteWorks) {
+    // The factors are 1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42 and 84.
+    EXPECT_TRUE(isNumberOfPrimesInfinite());
+}
+
+TEST(PrimeAndFactorUtilitiesTest, IsGoldbachConjectureTrueWorks) {
+    EXPECT_FALSE(isGoldbachConjectureTrue(83));  // Wrong input so its false, input must be even!
+    EXPECT_TRUE(isGoldbachConjectureTrue(12));
+    EXPECT_TRUE(isGoldbachConjectureTrue(64));
+    EXPECT_TRUE(isGoldbachConjectureTrue(84));
+}
+
+TEST(PrimeAndFactorUtilitiesTest, IsTwinPrimeConjectureTrueWorks) {
+    EXPECT_TRUE(isTwinPrimeConjectureTrue(13));
+    EXPECT_TRUE(isTwinPrimeConjectureTrue(64));
+    EXPECT_TRUE(isTwinPrimeConjectureTrue(65));
+    EXPECT_TRUE(isTwinPrimeConjectureTrue(84));
+}
+
+TEST(PrimeAndFactorUtilitiesTest, IsLegendreConjectureTrueWorks) {
+    EXPECT_TRUE(isLegendreConjectureTrue(13));
+    EXPECT_TRUE(isLegendreConjectureTrue(64));
+    EXPECT_TRUE(isLegendreConjectureTrue(65));
+    EXPECT_TRUE(isLegendreConjectureTrue(84));
+}
+
+TEST(PrimeAndFactorUtilitiesTest, IsWilsonTheoremTrueWorks) {
+    EXPECT_FALSE(isWilsonTheoremTrue(1));  // Wrong input so its false, we know that 1 and 0 are not prime
+    EXPECT_TRUE(isWilsonTheoremTrue(13));
+    EXPECT_TRUE(isWilsonTheoremTrue(64));
+    EXPECT_TRUE(isWilsonTheoremTrue(65));
+    EXPECT_TRUE(isWilsonTheoremTrue(84));
 }
 
 }  // namespace alba::math

@@ -42,6 +42,35 @@ public:
     void mergeIntervals(BooleanBinaryFunction const& shouldMerge) { mergeIntervals(b_root, shouldMerge); }
 
 protected:
+    void updateTreeNodeDetails(Node& node) const override {
+        node.sizeOfThisSubTree = this->calculateSizeOfThisSubTree(node);
+        node.maxIntervalValueInSubtree = getMaxValueBasedFromLeftAndRight(node);
+    }
+
+    void putStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) override {
+        if (nodePointer) {
+            Key const& currentKey(nodePointer->key);
+            if (key < currentKey) {
+                putStartingOnThisNode(nodePointer->left, key);
+                this->updateTreeNodeDetails(*nodePointer);
+            } else if (key > currentKey) {
+                putStartingOnThisNode(nodePointer->right, key);
+                this->updateTreeNodeDetails(*nodePointer);
+            }
+            if (this->hasARightLeaningRedLinkOnOneChild(nodePointer)) {
+                this->rotateLeft(nodePointer);
+            }
+            if (this->hasTwoLeftLeaningRedLinksInARow(nodePointer)) {
+                this->rotateRight(nodePointer);
+            }
+            if (this->hasTwoRedLinksOnItsChildren(nodePointer)) {
+                this->setParentAsRedAndChildrenAsBlack(nodePointer);
+            }
+        } else {
+            nodePointer.reset(new Node{key, nullptr, nullptr, 1, RedBlackColor::Red, key.end});
+        }
+    }
+
     [[nodiscard]] bool areIntersectingIntervals(Key const& interval1, Key const& interval2) const {
         auto delta1(mathHelper::getPositiveDelta(interval1.start, interval1.end));
         auto delta2(mathHelper::getPositiveDelta(interval2.start, interval2.end));
@@ -50,11 +79,6 @@ protected:
             mathHelper::getPositiveDelta(interval1.start, interval2.end),
             mathHelper::getPositiveDelta(interval2.start, interval1.end)));
         return maxDeltaEndpoints <= sumOfDeltas;
-    }
-
-    void updateTreeNodeDetails(Node& node) const override {
-        node.sizeOfThisSubTree = this->calculateSizeOfThisSubTree(node);
-        node.maxIntervalValueInSubtree = getMaxValueBasedFromLeftAndRight(node);
     }
 
     void searchForIntersectingIntervals(
@@ -87,30 +111,6 @@ protected:
             maxIntervalValueInSubtree = std::max(maxIntervalValueInSubtree, node.right->key.end);
         }
         return maxIntervalValueInSubtree;
-    }
-
-    void putStartingOnThisNode(NodeUniquePointer& nodePointer, Key const& key) override {
-        if (nodePointer) {
-            Key const& currentKey(nodePointer->key);
-            if (key < currentKey) {
-                putStartingOnThisNode(nodePointer->left, key);
-                this->updateTreeNodeDetails(*nodePointer);
-            } else if (key > currentKey) {
-                putStartingOnThisNode(nodePointer->right, key);
-                this->updateTreeNodeDetails(*nodePointer);
-            }
-            if (this->hasARightLeaningRedLinkOnOneChild(nodePointer)) {
-                this->rotateLeft(nodePointer);
-            }
-            if (this->hasTwoLeftLeaningRedLinksInARow(nodePointer)) {
-                this->rotateRight(nodePointer);
-            }
-            if (this->hasTwoRedLinksOnItsChildren(nodePointer)) {
-                this->setParentAsRedAndChildrenAsBlack(nodePointer);
-            }
-        } else {
-            nodePointer.reset(new Node{key, nullptr, nullptr, 1, RedBlackColor::Red, key.end});
-        }
     }
 
     void mergeIntervals(NodeUniquePointer& nodePointer, BooleanBinaryFunction const& shouldMerge) {

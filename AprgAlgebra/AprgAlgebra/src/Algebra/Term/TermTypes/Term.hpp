@@ -83,8 +83,8 @@ public:
     Variable& getAsVariableReference();
 
 private:
-    static BaseTermDataPointer createANewDataPointerFrom(Term const& term);
     void initializeBasedOnString(std::string const& stringAsParameter);
+    static BaseTermDataPointer createANewDataPointerFrom(Term const& term);
     friend std::ostream& operator<<(std::ostream& out, Term const& term);
     TermType m_type;
     bool m_isSimplified;

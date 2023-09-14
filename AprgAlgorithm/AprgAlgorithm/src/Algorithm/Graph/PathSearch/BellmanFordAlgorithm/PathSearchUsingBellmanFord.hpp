@@ -129,33 +129,25 @@ private:
 // Negative weights failed attempts:
 // -> Dijkstra does not work on negative edge weights
 // -> Reweighting (adding a constant to make all weights positive) does not work either.
-
 // Proposition: A SPT (shortest path tree) exists iff no negative cycles.
 // Proposition: A LPT (longest path tree) exists iff no positive cycles.
-
 // Bellman Ford algorithm: Works on negative weights
 // Process:
 // "s" is the starting vertex
 // 1) Initialize distTo[s]=0 and distTo[v]=infinity for all other vertices
 // 2) Repeat V times: Relax each edge.
-
 // Proposition: Dynamic programming algorithm computes SPT in any edge weight digraph with no negative cycles in time
 // proportional to E*V Proof idea: After pass i, it found the shortest path containing at most i edges.
-
 // Observation: If distTo[v] does not change during pass i, no need to relax any edge pointing from v in pass i+1
 // -> Use a queue! Maintain a queue of vertices whose distTo are changed.
-
 // Overall effect:
 // -> running time is still proportional to E*V in worst case.
 // -> But much faster than that in practice.
-
 // Observation: If there is a negative cycle, Bellman-Ford gets stuck in a loop, updating distTo and edgeTo entries in
 // the cycle. Proposition: If any vertex V is updated in phase V there exists a negative cycle (and can be traced back
 // edgeTo[v] entries to find it) We can just check if there are any cycles when relax happened V times. This is
 // implemented above.
-
 // Other discussions:
-
 // Bellman–Ford Algorithm
 // Given a graph and a source vertex src in graph, find shortest paths from src to all vertices in the given graph.
 // The graph may contain negative weight edges.
@@ -164,7 +156,6 @@ private:
 // Dijkstra doesn’t work for Graphs with negative weight edges, Bellman-Ford works for such graphs.
 // Bellman-Ford is also simpler than Dijkstra and suites well for distributed systems.
 // But time complexity of Bellman-Ford is O(VE), which is more than Dijkstra.
-
 // Algorithm
 // Following are the detailed steps.
 // Input: Graph and a source vertex src
@@ -180,11 +171,9 @@ private:
 // -------> dist[v] = dist[u] + weight of edge uv
 // -> 3) This step reports if there is a negative weight cycle in graph. Do following for each edge u-v
 // ---> If dist[v] > dist[u] + weight of edge uv, then “Graph contains negative weight cycle”
-
 // The idea of step 3 is, step 2 guarantees the shortest distances if the graph doesn’t contain a negative weight cycle.
 // If we iterate through all edges one more time and get a shorter path for any vertex, then there is a negative weight
 // cycle. (AUTOMATIC CYCLE DETECTION)
-
 // How does this work?
 // -> Like other Dynamic Programming Problems, the algorithm calculates shortest paths in a bottom-up manner.
 // -> It first calculates the shortest distances which have at-most one edge in the path.
@@ -209,7 +198,6 @@ private:
 // -> After k rounds, we have the correct answer for vk. k<=|V|-1 because p is simple.
 // Corollary (contrapositive): If the Bellman Ford for fails to converge after |V|-1 round, then there must be a
 // negative weight cycle.
-
 // Notes:
 // -> 1) Negative weights are found in various applications of graphs.
 // For example, instead of paying cost for a path, we may get some advantage if we follow the path.
@@ -217,7 +205,6 @@ private:
 // Unlike Dijkstra’s where we need to find the minimum value of all vertices, in Bellman-Ford, edges are considered one
 // by one.
 // -> 3) Bellman-Ford does not work with undirected graph with negative edges as it will declared as negative cycle.
-
 // Exercise:
 // -> 1) The standard Bellman-Ford algorithm reports the shortest path only if there are no negative weight cycles.
 // Modify it so that it reports minimum distances even if there is a negative weight cycle.
@@ -225,17 +212,14 @@ private:
 // for graphs with negative weights – one idea can be, calculate the minimum weight value,
 // add a positive value (equal to absolute value of minimum weight value)
 // to all weights and run the Dijkstra’s algorithm for the modified graph. Will this algorithm work?
-
 // Other discussions:
 // The Bellman–Ford algorithm finds shortest paths from a starting node to all nodes of the graph.
 // The algorithm can process all kinds of graphs, provided that the graph does not contain a cycle with negative length.
 // If the graph contains a negative cycle, the algorithm can detect this.
-
 // The algorithm keeps track of distances from the starting node to all nodes of the graph.
 // Initially, the distance to the starting node is 0 and the distance to all other nodes in infinite.
 // The algorithm reduces the distances by finding edges that shorten the paths until it is not possible to reduce any
 // distance.
-
 // Other analysis:
 // The time complexity of the algorithm is O(nm), because the algorithm consists of n-1 rounds and iterates through all
 // m edges during a round. If there are no negative cycles in the graph, all distances are final after n=1 rounds,
@@ -243,7 +227,6 @@ private:
 // faster than in n-1 rounds. Thus, a possible way to make the algorithm more efficient is to stop the algorithm if no
 // distance can be reduced during a round. Note: In the implementation above, relax function uses a map to store weights
 // which will result to have a logarithmic term in the running time instead.
-
 // Other improvements:
 // The SPFA algorithm ("Shortest Path Faster Algorithm") is a variant of the Bellman–Ford algorithm,
 // that is often more efficient than the original algorithm.

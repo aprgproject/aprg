@@ -25,10 +25,10 @@ public:
     void setAdditionalStepsInProcessingAStringFromEngine(ProcessAStringFunction const& additionalSteps);
 
 private:
-    static std::string getLogHeader(LogType const logtype);
     void initializeEngine();
     void shutdownEngine();
     void log(LogType const logtype, std::string const& logString);
+    static std::string getLogHeader(LogType const logtype);
     std::string m_enginePath;
     std::mutex m_readMutex;
     STARTUPINFO m_startupInfo;

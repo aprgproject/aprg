@@ -10,10 +10,9 @@ namespace alba::algorithm {
 template <typename Object>
 class DoublingSizeStack : public BaseStack<Object> {
 public:
-    DoublingSizeStack() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
     ~DoublingSizeStack() override { deleteAllObjects(); }
+    DoublingSizeStack() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
     [[nodiscard]] int getSize() const override { return m_stackSize; }
-    [[nodiscard]] int getContainerSize() const { return m_containerSize; }
     [[nodiscard]] bool isEmpty() const override { return m_stackSize == 0; }
 
     // constant amortized (best case: constant, worst case: linear due to resizing)
@@ -30,6 +29,7 @@ public:
         return result;
     }
 
+    [[nodiscard]] int getContainerSize() const { return m_containerSize; }
     static constexpr int MINUMUM_CONTAINER_SIZE = 1;
 
 private:

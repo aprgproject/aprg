@@ -35,9 +35,7 @@ private:
 // -> Start Time
 // -> Finish Time
 // -> Profit or Value Associated
-
 // Find the maximum profit subset of jobs such that no two jobs in the subset overlap.
-
 // Example:
 // Input: Number of Jobs n = 4
 // -> Job Details {Start Time, Finish Time, Profit}

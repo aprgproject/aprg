@@ -153,128 +153,6 @@ void TermsOverTerms::simplify() {
     }
 }
 
-void TermsOverTerms::clearTermsThenEmplacePolynomialAndRemainingTerms(
-    Polynomial const& polynomialNumerator, Terms const& remainingNumerators, Terms& termsToUpdate) {
-    termsToUpdate.clear();
-    emplacePolynomialIfNeeded(termsToUpdate, polynomialNumerator);
-    termsToUpdate.reserve(remainingNumerators.size());
-    copy(remainingNumerators.cbegin(), remainingNumerators.cend(), back_inserter(termsToUpdate));
-}
-
-void TermsOverTerms::emplacePolynomialIfNeeded(Terms& termsResult, Polynomial const& polynomial) {
-    if (isTheValue(polynomial, 0)) {
-        termsResult.emplace_back(0);
-    } else if (!isTheValue(polynomial, 1)) {
-        termsResult.emplace_back(simplifyAndConvertPolynomialToSimplestTerm(polynomial));
-    }
-}
-
-void TermsOverTerms::retrievePolynomialAndNonPolynomialsTerms(
-    Terms const& termsToCheck, Polynomial& polynomial, Terms& nonPolynomialTerms) {
-    polynomial = (createPolynomialFromNumber(1));
-    for (Term const& termToCheck : termsToCheck) {
-        if (canBeConvertedToPolynomial(termToCheck)) {
-            polynomial.multiplyPolynomial(createPolynomialIfPossible(termToCheck));
-        } else {
-            nonPolynomialTerms.emplace_back(termToCheck);
-        }
-    }
-}
-
-void TermsOverTerms::handleZerosInNumeratorOrDenominator(Terms& denominators, Terms& numerators) {
-    bool const hasZeroOnNumerators(hasZero(numerators));
-    bool const hasZeroOnDenominators(hasZero(denominators));
-    if (hasZeroOnNumerators && hasZeroOnDenominators) {
-        numerators.clear();
-        denominators.clear();
-        numerators.emplace_back(ALBA_NUMBER_NOT_A_NUMBER);
-    } else if (hasZeroOnNumerators) {
-        numerators.clear();
-        denominators.clear();
-        numerators.emplace_back(0);
-    } else if (hasZeroOnDenominators) {
-        denominators.clear();
-        denominators.emplace_back(0);
-    }
-}
-
-void TermsOverTerms::populateTermsWithBase(Terms& termsToUpdate, Term const& base, AlbaNumber const& exponent) {
-    int const exponentCount = static_cast<int>(getAbsoluteValue(exponent).getInteger());
-    for (int i = 0; i < exponentCount; ++i) {
-        termsToUpdate.emplace_back(base);
-    }
-}
-
-void TermsOverTerms::removeTermsThatHaveNoEffect(Terms& terms) {
-    terms.erase(
-        remove_if(
-            terms.begin(), terms.end(),
-            [](Term const& term) { return willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term); }),
-        terms.end());
-}
-
-void TermsOverTerms::putTermsOnNumeratorAndDenominatorCorrectly(Terms& numerators, Terms& denominators) {
-    Terms retainedNumerators;
-    Terms retainedDenominators;
-    Terms termsToPutInNumerators;
-    Terms termsToPutInDenominators;
-    putTermsToRetainAndOnTheOtherSide(numerators, retainedNumerators, termsToPutInDenominators);
-    putTermsToRetainAndOnTheOtherSide(denominators, retainedDenominators, termsToPutInNumerators);
-
-    numerators.clear();
-    denominators.clear();
-
-    numerators.reserve(retainedNumerators.size() + termsToPutInNumerators.size());
-    copy(retainedNumerators.cbegin(), retainedNumerators.cend(), back_inserter(numerators));
-    copy(termsToPutInNumerators.cbegin(), termsToPutInNumerators.cend(), back_inserter(numerators));
-
-    denominators.reserve(retainedDenominators.size() + termsToPutInDenominators.size());
-    copy(retainedDenominators.cbegin(), retainedDenominators.cend(), back_inserter(denominators));
-    copy(termsToPutInDenominators.cbegin(), termsToPutInDenominators.cend(), back_inserter(denominators));
-}
-
-void TermsOverTerms::putTermsToRetainAndOnTheOtherSide(
-    Terms const& termsToCheck, Terms& termsToRetain, Terms& termsToPutOnTheOtherSide) {
-    for (Term const& termToCheck : termsToCheck) {
-        bool isNeededToPutOnTheOtherSide(false);
-        Term transformedTermOnTheOtherSide;
-        if (termToCheck.isExpression()) {
-            Expression const& expression(termToCheck.getAsExpression());
-            TermsWithDetails const& termsWithDetails(expression.getTermsWithAssociation().getTermsWithDetails());
-            if (OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel() && termsWithDetails.size() == 2) {
-                Term const& base(getTermConstReferenceFromUniquePointer(termsWithDetails[0].baseTermPointer));
-                Term const& exponent(getTermConstReferenceFromUniquePointer(termsWithDetails[1].baseTermPointer));
-                isNeededToPutOnTheOtherSide = isANegativeTerm(exponent);
-                transformedTermOnTheOtherSide = createExpressionIfPossible({base, "^", negateTerm(exponent)});
-            }
-        }
-        if (isNeededToPutOnTheOtherSide) {
-            transformedTermOnTheOtherSide.simplify();
-            termsToPutOnTheOtherSide.emplace_back(transformedTermOnTheOtherSide);
-        } else {
-            termsToRetain.emplace_back(termToCheck);
-        }
-    }
-}
-
-void TermsOverTerms::simplifyPolynomialNumeratorAndPolynomialDenominator(
-    Polynomial& polynomialNumerator, Polynomial& polynomialDenominator) {
-    PolynomialOverPolynomial numeratorAndDenominator(polynomialNumerator, polynomialDenominator);
-    numeratorAndDenominator.simplifyWithoutFactorization();
-    polynomialNumerator = numeratorAndDenominator.getNumerator();
-    polynomialDenominator = numeratorAndDenominator.getDenominator();
-}
-
-Polynomial TermsOverTerms::multiplyPolynomialTerms(Terms const& polynomialTerms) {
-    Polynomial polynomialResult(createPolynomialFromNumber(1));
-    for (Term const& polynomialTerm : polynomialTerms) {
-        if (canBeConvertedToPolynomial(polynomialTerm)) {
-            polynomialResult.multiplyPolynomial(createPolynomialIfPossible(polynomialTerm));
-        }
-    }
-    return polynomialResult;
-}
-
 Terms TermsOverTerms::factorizeIfNeeded(Terms const& terms) const {
     if (m_shouldSimplifyToFactors || !(m_numerators.empty() && m_denominators.empty())) {
         return factorize(terms);
@@ -400,6 +278,128 @@ bool TermsOverTerms::removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(Terms& nu
 
     return previousNumberOfNumerators != static_cast<int>(numerators.size()) ||
            previousNumberOfDenominators != static_cast<int>(denominators.size());
+}
+
+void TermsOverTerms::clearTermsThenEmplacePolynomialAndRemainingTerms(
+    Polynomial const& polynomialNumerator, Terms const& remainingNumerators, Terms& termsToUpdate) {
+    termsToUpdate.clear();
+    emplacePolynomialIfNeeded(termsToUpdate, polynomialNumerator);
+    termsToUpdate.reserve(remainingNumerators.size());
+    copy(remainingNumerators.cbegin(), remainingNumerators.cend(), back_inserter(termsToUpdate));
+}
+
+void TermsOverTerms::emplacePolynomialIfNeeded(Terms& termsResult, Polynomial const& polynomial) {
+    if (isTheValue(polynomial, 0)) {
+        termsResult.emplace_back(0);
+    } else if (!isTheValue(polynomial, 1)) {
+        termsResult.emplace_back(simplifyAndConvertPolynomialToSimplestTerm(polynomial));
+    }
+}
+
+void TermsOverTerms::retrievePolynomialAndNonPolynomialsTerms(
+    Terms const& termsToCheck, Polynomial& polynomial, Terms& nonPolynomialTerms) {
+    polynomial = (createPolynomialFromNumber(1));
+    for (Term const& termToCheck : termsToCheck) {
+        if (canBeConvertedToPolynomial(termToCheck)) {
+            polynomial.multiplyPolynomial(createPolynomialIfPossible(termToCheck));
+        } else {
+            nonPolynomialTerms.emplace_back(termToCheck);
+        }
+    }
+}
+
+void TermsOverTerms::handleZerosInNumeratorOrDenominator(Terms& denominators, Terms& numerators) {
+    bool const hasZeroOnNumerators(hasZero(numerators));
+    bool const hasZeroOnDenominators(hasZero(denominators));
+    if (hasZeroOnNumerators && hasZeroOnDenominators) {
+        numerators.clear();
+        denominators.clear();
+        numerators.emplace_back(ALBA_NUMBER_NOT_A_NUMBER);
+    } else if (hasZeroOnNumerators) {
+        numerators.clear();
+        denominators.clear();
+        numerators.emplace_back(0);
+    } else if (hasZeroOnDenominators) {
+        denominators.clear();
+        denominators.emplace_back(0);
+    }
+}
+
+void TermsOverTerms::populateTermsWithBase(Terms& termsToUpdate, Term const& base, AlbaNumber const& exponent) {
+    int const exponentCount = static_cast<int>(getAbsoluteValue(exponent).getInteger());
+    for (int i = 0; i < exponentCount; ++i) {
+        termsToUpdate.emplace_back(base);
+    }
+}
+
+void TermsOverTerms::removeTermsThatHaveNoEffect(Terms& terms) {
+    terms.erase(
+        remove_if(
+            terms.begin(), terms.end(),
+            [](Term const& term) { return willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(term); }),
+        terms.end());
+}
+
+void TermsOverTerms::putTermsOnNumeratorAndDenominatorCorrectly(Terms& numerators, Terms& denominators) {
+    Terms retainedNumerators;
+    Terms retainedDenominators;
+    Terms termsToPutInNumerators;
+    Terms termsToPutInDenominators;
+    putTermsToRetainAndOnTheOtherSide(numerators, retainedNumerators, termsToPutInDenominators);
+    putTermsToRetainAndOnTheOtherSide(denominators, retainedDenominators, termsToPutInNumerators);
+
+    numerators.clear();
+    denominators.clear();
+
+    numerators.reserve(retainedNumerators.size() + termsToPutInNumerators.size());
+    copy(retainedNumerators.cbegin(), retainedNumerators.cend(), back_inserter(numerators));
+    copy(termsToPutInNumerators.cbegin(), termsToPutInNumerators.cend(), back_inserter(numerators));
+
+    denominators.reserve(retainedDenominators.size() + termsToPutInDenominators.size());
+    copy(retainedDenominators.cbegin(), retainedDenominators.cend(), back_inserter(denominators));
+    copy(termsToPutInDenominators.cbegin(), termsToPutInDenominators.cend(), back_inserter(denominators));
+}
+
+void TermsOverTerms::putTermsToRetainAndOnTheOtherSide(
+    Terms const& termsToCheck, Terms& termsToRetain, Terms& termsToPutOnTheOtherSide) {
+    for (Term const& termToCheck : termsToCheck) {
+        bool isNeededToPutOnTheOtherSide(false);
+        Term transformedTermOnTheOtherSide;
+        if (termToCheck.isExpression()) {
+            Expression const& expression(termToCheck.getAsExpression());
+            TermsWithDetails const& termsWithDetails(expression.getTermsWithAssociation().getTermsWithDetails());
+            if (OperatorLevel::RaiseToPower == expression.getCommonOperatorLevel() && termsWithDetails.size() == 2) {
+                Term const& base(getTermConstReferenceFromUniquePointer(termsWithDetails[0].baseTermPointer));
+                Term const& exponent(getTermConstReferenceFromUniquePointer(termsWithDetails[1].baseTermPointer));
+                isNeededToPutOnTheOtherSide = isANegativeTerm(exponent);
+                transformedTermOnTheOtherSide = createExpressionIfPossible({base, "^", negateTerm(exponent)});
+            }
+        }
+        if (isNeededToPutOnTheOtherSide) {
+            transformedTermOnTheOtherSide.simplify();
+            termsToPutOnTheOtherSide.emplace_back(transformedTermOnTheOtherSide);
+        } else {
+            termsToRetain.emplace_back(termToCheck);
+        }
+    }
+}
+
+void TermsOverTerms::simplifyPolynomialNumeratorAndPolynomialDenominator(
+    Polynomial& polynomialNumerator, Polynomial& polynomialDenominator) {
+    PolynomialOverPolynomial numeratorAndDenominator(polynomialNumerator, polynomialDenominator);
+    numeratorAndDenominator.simplifyWithoutFactorization();
+    polynomialNumerator = numeratorAndDenominator.getNumerator();
+    polynomialDenominator = numeratorAndDenominator.getDenominator();
+}
+
+Polynomial TermsOverTerms::multiplyPolynomialTerms(Terms const& polynomialTerms) {
+    Polynomial polynomialResult(createPolynomialFromNumber(1));
+    for (Term const& polynomialTerm : polynomialTerms) {
+        if (canBeConvertedToPolynomial(polynomialTerm)) {
+            polynomialResult.multiplyPolynomial(createPolynomialIfPossible(polynomialTerm));
+        }
+    }
+    return polynomialResult;
 }
 
 ostream& operator<<(ostream& out, TermsOverTerms const& termsOverTerms) {

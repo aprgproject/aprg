@@ -11,6 +11,9 @@ TermMatcher::TermMatcher(std::string const& content) : m_contentOptional(content
 TermMatcher::TermMatcher(MatcherType const matcherType) : m_matcherTypeOptional(matcherType) {}
 TermMatcher::TermMatcher(TermType const termType, string const& content)
     : m_termTypeOptional(termType), m_contentOptional(content) {}
+TermMatcher::MatcherTypeOptional const& TermMatcher::getMatcherTypeOptional() const { return m_matcherTypeOptional; }
+TermMatcher::StringOptional const& TermMatcher::getContentOptional() const { return m_contentOptional; }
+TermMatcher::TermTypeOptional const& TermMatcher::getTermTypeOptional() const { return m_termTypeOptional; }
 
 ostream& operator<<(ostream& out, TermMatcher const& matcher) {
     out << "[Matcher ";
@@ -49,11 +52,5 @@ bool operator==(TermMatcher const& matcher, Term const& term) {
 bool operator==(Term const& term, TermMatcher const& matcher) { return operator==(matcher, term); }
 bool operator!=(TermMatcher const& matcher, Term const& term) { return !operator==(matcher, term); }
 bool operator!=(Term const& term, TermMatcher const& matcher) { return !operator==(matcher, term); }
-
-TermMatcher::TermTypeOptional const& TermMatcher::getTermTypeOptional() const { return m_termTypeOptional; }
-
-TermMatcher::StringOptional const& TermMatcher::getContentOptional() const { return m_contentOptional; }
-
-TermMatcher::MatcherTypeOptional const& TermMatcher::getMatcherTypeOptional() const { return m_matcherTypeOptional; }
 
 }  // namespace alba::CodeUtilities

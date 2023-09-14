@@ -26,12 +26,12 @@ public:
     [[nodiscard]] CoordinatePair getNearestEqualPairUsingBfs(Value const value) const;
 
 private:
-    static int getDistance(Coordinate const& coordinate1, Coordinate const& coordinate2);
     [[nodiscard]] Coordinate getFirstCoordinateUsingBfs(Value const value) const;
     [[nodiscard]] Coordinate getSecondCoordinateUsingBfs(Value const value, Coordinate const& firstCoordinate) const;
     [[nodiscard]] Coordinates getCoordinatesWithThisValue(Value const value) const;
     Coordinate getCoordinateUsingBfs(Value const value, Coordinate const& firstCoordinate, Bfs& bfs) const;
     void initializeGraph();
+    static int getDistance(Coordinate const& coordinate1, Coordinate const& coordinate2);
     ValueMatrix const& m_valueMatrix;
     Graph m_coordinateGraph;
 };

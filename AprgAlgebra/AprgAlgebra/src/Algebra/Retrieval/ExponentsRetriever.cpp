@@ -2,12 +2,12 @@
 
 namespace alba::algebra {
 
-AlbaNumbersSet const& ExponentsRetriever::getExponents() const { return m_exponents; }
-
 void ExponentsRetriever::retrieveFromMonomial(Monomial const& monomial) {
     for (auto const& [_, exponent] : monomial.getVariablesToExponentsMap()) {
         m_exponents.emplace(exponent);
     }
 }
+
+AlbaNumbersSet const& ExponentsRetriever::getExponents() const { return m_exponents; }
 
 }  // namespace alba::algebra

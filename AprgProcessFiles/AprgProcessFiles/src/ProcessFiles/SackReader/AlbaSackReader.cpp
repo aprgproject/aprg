@@ -42,6 +42,32 @@ void AlbaSackReader::process() {
     }
 }
 
+void AlbaSackReader::processDirectory(string const& path) {
+    set<string> listOfFiles;
+    set<string> listOfDirectories;
+    AlbaLocalPathHandler(path).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
+    for (string const& filePath : listOfFiles) {
+        processFile(filePath);
+    }
+}
+
+void AlbaSackReader::processFile(string const& path) {
+    AlbaLocalPathHandler const filePathHandler(path);
+    stringHelper::strings tokens;
+    if (m_fileEvaluator.isInvalid() || m_fileEvaluator.evaluate(filePathHandler.getFile())) {
+        cout << "ProcessFile: " << path << "\n";
+        ifstream inputLogFileStream(filePathHandler.getFullPath());
+        AlbaFileReader fileReader(inputLogFileStream);
+        while (fileReader.isNotFinished()) {
+            string const line(fileReader.getLineAndIgnoreWhiteSpaces());
+            tokenize(tokens, line);
+        }
+    }
+    combineWords(tokens);
+    combineArrayOperators(tokens);
+    analyze(tokens);
+}
+
 void AlbaSackReader::tokenize(stringHelper::strings& tokens, string const& line) {
     stringHelper::strings tokensInLine;
     stringHelper::splitToStrings<stringHelper::SplitStringType::WithDelimeters>(tokensInLine, line, " \t\n\r;{}[]");
@@ -155,32 +181,6 @@ string AlbaSackReader::getReaderStateString(ReaderState const state) {
     }
     return {};
 #undef GET_ENUM_STRING
-}
-
-void AlbaSackReader::processDirectory(string const& path) {
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    AlbaLocalPathHandler(path).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        processFile(filePath);
-    }
-}
-
-void AlbaSackReader::processFile(string const& path) {
-    AlbaLocalPathHandler const filePathHandler(path);
-    stringHelper::strings tokens;
-    if (m_fileEvaluator.isInvalid() || m_fileEvaluator.evaluate(filePathHandler.getFile())) {
-        cout << "ProcessFile: " << path << "\n";
-        ifstream inputLogFileStream(filePathHandler.getFullPath());
-        AlbaFileReader fileReader(inputLogFileStream);
-        while (fileReader.isNotFinished()) {
-            string const line(fileReader.getLineAndIgnoreWhiteSpaces());
-            tokenize(tokens, line);
-        }
-    }
-    combineWords(tokens);
-    combineArrayOperators(tokens);
-    analyze(tokens);
 }
 
 template <>

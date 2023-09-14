@@ -42,16 +42,6 @@ void EightPuzzlePossibleProblem::printStepsToSolve() {
     }
 }
 
-void EightPuzzlePossibleProblem::moveTile(
-    NumberMatrix& matrix, Coordinate const& previousBlankTile, Coordinate const& nextBlankTile) {
-    swap(
-        matrix.getEntryReference(previousBlankTile.first, previousBlankTile.second),
-        matrix.getEntryReference(nextBlankTile.first, nextBlankTile.second));
-}
-
-void EightPuzzlePossibleProblem::printMatrix(NumberMatrix const& numberMatrix) { cout << numberMatrix << "\n"; }
-int EightPuzzlePossibleProblem::getCost(SearchNode const& node) { return node.differenceFromTarget + node.searchLevel; }
-
 EightPuzzlePossibleProblem::Coordinate EightPuzzlePossibleProblem::getBlankTile(NumberMatrix const& matrix) const {
     Coordinate result{};
     for (int y = 0; y < m_sideSize; ++y) {
@@ -117,5 +107,15 @@ EightPuzzlePossibleProblem::SearchNode EightPuzzlePossibleProblem::createNode(
 }
 
 EightPuzzlePossibleProblem::SearchNodeId EightPuzzlePossibleProblem::getNextNodeId() { return m_nodeId++; }
+
+void EightPuzzlePossibleProblem::moveTile(
+    NumberMatrix& matrix, Coordinate const& previousBlankTile, Coordinate const& nextBlankTile) {
+    swap(
+        matrix.getEntryReference(previousBlankTile.first, previousBlankTile.second),
+        matrix.getEntryReference(nextBlankTile.first, nextBlankTile.second));
+}
+
+void EightPuzzlePossibleProblem::printMatrix(NumberMatrix const& numberMatrix) { cout << numberMatrix << "\n"; }
+int EightPuzzlePossibleProblem::getCost(SearchNode const& node) { return node.differenceFromTarget + node.searchLevel; }
 
 }  // namespace alba

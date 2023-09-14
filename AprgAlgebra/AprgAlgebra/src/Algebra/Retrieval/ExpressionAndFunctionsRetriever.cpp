@@ -2,7 +2,6 @@
 
 namespace alba::algebra {
 
-TermSet const& ExpressionAndFunctionsRetriever::getExpressionsAndFunctions() const { return m_expressionsAndFunctions; }
 void ExpressionAndFunctionsRetriever::retrieveFromPolynomial(Polynomial const&) {}
 
 void ExpressionAndFunctionsRetriever::retrieveFromExpression(Expression const& expression) {
@@ -14,5 +13,7 @@ void ExpressionAndFunctionsRetriever::retrieveFromFunction(Function const& funct
     m_expressionsAndFunctions.emplace(Term(functionObject));
     BaseRetriever::retrieveFromFunction(functionObject);
 }
+
+TermSet const& ExpressionAndFunctionsRetriever::getExpressionsAndFunctions() const { return m_expressionsAndFunctions; }
 
 }  // namespace alba::algebra

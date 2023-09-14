@@ -39,17 +39,18 @@ public:
     ValidationResult validate();
 
 private:
+    void saveRetrievedDataToMatrixRandomly(
+        MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int const numberOfSamples);
+    void saveRetrievedDataToMatrix(
+        MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int const numberOfSamples);
+    void calculateCoefficientsUsingLeastSquares();
+
     static void copyVectorToMatrix(
         unsigned int const numberOfColumns, unsigned int const numberOfRows, VectorOfDoubles const& retrievedDataForX,
         MatrixOfDoubles& matrixOfDoubles);
 
     static void printData(MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY);
     static unsigned int getIndex(unsigned int const i, unsigned int const j, unsigned int const numberOfColumns);
-    void saveRetrievedDataToMatrixRandomly(
-        MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int const numberOfSamples);
-    void saveRetrievedDataToMatrix(
-        MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int const numberOfSamples);
-    void calculateCoefficientsUsingLeastSquares();
     MatrixOfDoubles m_coefficients;
     MatrixOfDoubles m_modelingDataForX;
     MatrixOfDoubles m_modelingDataForY;

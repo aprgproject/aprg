@@ -17,7 +17,6 @@ using namespace std;
 // Taken from Sean Parent's lecture ("C++ Seasoning")
 // Taken from Conor Hoekstra ("Algorithm Intuition")
 // Taken from Michael VanLoon's lecture ("STL Algorithms in Action")
-
 namespace alba {
 
 TEST(AlgorithmExamplesTest, SlideToTheRightWorksByUsingRotate) {
@@ -278,7 +277,6 @@ TEST(AlgorithmExamplesTest, GenerateFibonacciNumbersUsingAdjacentDifference) {
 // Notes
 
 // -> rotate is very common as a solution in real problems
-
 // -> This are not the same:
 // ---> This is wrong:
 // -----> auto x = reduce(cbegin(v), cend(v), 0, [](auto a, auto b){return a+b*b});

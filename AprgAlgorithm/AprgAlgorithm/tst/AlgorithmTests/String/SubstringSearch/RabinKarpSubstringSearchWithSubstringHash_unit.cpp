@@ -14,6 +14,14 @@ using HashValue = uint64_t;
 using SubstringSearchForTest = RabinKarpSubstringSearchWithSubstringHash<Index, HashValue>;
 }  // namespace
 
+TEST(RabinKarpSubstringSearchWithSubstringHashTest, SearchWorksUsingExample1) {
+    testSearchUsingExample1<SubstringSearchForTest, Index>();
+}
+
+TEST(RabinKarpSubstringSearchWithSubstringHashTest, SearchWorksUsingExample2) {
+    testSearchUsingExample2<SubstringSearchForTest, Index>();
+}
+
 TEST(RabinKarpSubstringSearchWithSubstringHashTest, SearchWorksUsingEmptyStringsAndDoesNotCrash) {
     // SubstringSearchUsingZAlgorithm has unique results of handling empty strings
     string const emptyString;
@@ -25,14 +33,6 @@ TEST(RabinKarpSubstringSearchWithSubstringHashTest, SearchWorksUsingEmptyStrings
     EXPECT_EQ(Index(string::npos), emptyStringSearch.search(nonEmptyString));
     EXPECT_EQ(Index(string::npos), nonEmptyStringSearch.search(emptyString));
     EXPECT_EQ(Index(0), nonEmptyStringSearch.search(nonEmptyString));
-}
-
-TEST(RabinKarpSubstringSearchWithSubstringHashTest, SearchWorksUsingExample1) {
-    testSearchUsingExample1<SubstringSearchForTest, Index>();
-}
-
-TEST(RabinKarpSubstringSearchWithSubstringHashTest, SearchWorksUsingExample2) {
-    testSearchUsingExample2<SubstringSearchForTest, Index>();
 }
 
 }  // namespace alba::algorithm

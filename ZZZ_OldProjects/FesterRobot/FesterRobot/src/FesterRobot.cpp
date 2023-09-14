@@ -5,7 +5,6 @@
 
 #include <iostream>
 #include <sstream>
-
 #define POLLING_DELAY_TO_WAIT_FOR_START 1000
 #define EXCEL_CELL_COORDINATES1 1256, 437
 #define EXCEL_CELL_COORDINATES2 1256, 466
@@ -40,10 +39,6 @@ void FesterRobot::run() {
         alba::AlbaWindowsUserAutomation::sleep(POLLING_DELAY_TO_WAIT_FOR_START);
     }
     alba::AlbaWindowsUserAutomation::setMousePosition(MousePosition(ORIGIN));
-}
-
-bool FesterRobot::isRunningInClipboardData(string const& clipboardData) {
-    return stringHelper::isStringFoundCaseSensitive(clipboardData, "running iteration");
 }
 
 string FesterRobot::getClipboardFormattedData() const {
@@ -162,6 +157,10 @@ void FesterRobot::updateFrequenciesBasedFreqUsageBits(unsigned int const freqUsa
     if ((freqUsageBits & 0x32) > 0) {
         m_frequencies.emplace_back(1800);
     }
+}
+
+bool FesterRobot::isRunningInClipboardData(string const& clipboardData) {
+    return stringHelper::isStringFoundCaseSensitive(clipboardData, "running iteration");
 }
 
 }  // namespace alba

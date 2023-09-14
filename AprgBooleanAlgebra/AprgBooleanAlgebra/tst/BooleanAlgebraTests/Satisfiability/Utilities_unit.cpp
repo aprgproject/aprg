@@ -5,15 +5,6 @@
 
 namespace alba::booleanAlgebra {
 
-TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityLevelWorks) {
-    SatisfiabilityTerms satTermsToTest{
-        {VariableTerm("a")},
-        {VariableTerm("b"), VariableTerm("c")},
-        {VariableTerm("d"), VariableTerm("e"), VariableTerm("f")}};
-
-    EXPECT_EQ(3, getSatisfiabilityLevel(satTermsToTest));
-}
-
 TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityTermsWorksWithTerm) {
     Term term1(true);
     Term term2("x");
@@ -72,6 +63,15 @@ TEST(
     SatisfiabilityTerms satTermsToVerify(getSatisfiabilityTerms(expressionToTest));
 
     EXPECT_TRUE(satTermsToVerify.empty());
+}
+
+TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityLevelWorks) {
+    SatisfiabilityTerms satTermsToTest{
+        {VariableTerm("a")},
+        {VariableTerm("b"), VariableTerm("c")},
+        {VariableTerm("d"), VariableTerm("e"), VariableTerm("f")}};
+
+    EXPECT_EQ(3, getSatisfiabilityLevel(satTermsToTest));
 }
 
 }  // namespace alba::booleanAlgebra

@@ -112,32 +112,6 @@ AlbaNumberOptional const& BrentMethod::getSolution() {
     return m_values.solutionOptional;
 }
 
-AlbaNumber BrentMethod::calculateBiSectionMethod(AlbaNumber const& a, AlbaNumber const& b) { return (a + b) / 2; }
-
-bool BrentMethod::isAlmostEqualForBrentMethod(AlbaNumber const& value1, AlbaNumber const& value2) {
-    return isAlmostEqual(value1.getDouble(), value2.getDouble(), BRENT_METHOD_COMPARISON_TOLERANCE);
-}
-
-bool BrentMethod::isAlmostEqualForBrentMethod(AlbaNumber const& value1, double const value2) {
-    return isAlmostEqual(value1.getDouble(), value2, BRENT_METHOD_COMPARISON_TOLERANCE);
-}
-
-bool BrentMethod::isBisectionMethodNeeded(
-    AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c, AlbaNumber const& d, AlbaNumber const& s,
-    bool const mflag) {
-    AlbaNumber const first = ((a * 3) + b) / 4;
-    AlbaNumber const second = b;
-    AlbaNumber const minForConditionOne = min(first, second);
-    AlbaNumber const maxForConditionOne = max(first, second);
-    AlbaNumber const gamma = 1;
-    bool const isConditionOne = s < minForConditionOne || maxForConditionOne < s;
-    bool const isConditionTwo = mflag && getAbsoluteValue(s - b) >= (getAbsoluteValue(b - c) / 2);
-    bool const isConditionThree = !mflag && getAbsoluteValue(s - b) >= (getAbsoluteValue(c - d) / 2);
-    bool const isConditionFour = mflag && getAbsoluteValue(b - c) < getAbsoluteValue(gamma);
-    bool const isConditionFive = !mflag && getAbsoluteValue(c - d) < getAbsoluteValue(gamma);
-    return isConditionOne || isConditionTwo || isConditionThree || isConditionFour || isConditionFive;
-}
-
 AlbaNumber BrentMethod::calculate(AlbaNumber const& inputValue) const {
     AlbaNumber result;
     AlbaNumber partialProduct(1);
@@ -192,6 +166,32 @@ void BrentMethod::convertSolutionToIntegerIfNeeded() {
             }
         }
     }
+}
+
+AlbaNumber BrentMethod::calculateBiSectionMethod(AlbaNumber const& a, AlbaNumber const& b) { return (a + b) / 2; }
+
+bool BrentMethod::isAlmostEqualForBrentMethod(AlbaNumber const& value1, AlbaNumber const& value2) {
+    return isAlmostEqual(value1.getDouble(), value2.getDouble(), BRENT_METHOD_COMPARISON_TOLERANCE);
+}
+
+bool BrentMethod::isAlmostEqualForBrentMethod(AlbaNumber const& value1, double const value2) {
+    return isAlmostEqual(value1.getDouble(), value2, BRENT_METHOD_COMPARISON_TOLERANCE);
+}
+
+bool BrentMethod::isBisectionMethodNeeded(
+    AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c, AlbaNumber const& d, AlbaNumber const& s,
+    bool const mflag) {
+    AlbaNumber const first = ((a * 3) + b) / 4;
+    AlbaNumber const second = b;
+    AlbaNumber const minForConditionOne = min(first, second);
+    AlbaNumber const maxForConditionOne = max(first, second);
+    AlbaNumber const gamma = 1;
+    bool const isConditionOne = s < minForConditionOne || maxForConditionOne < s;
+    bool const isConditionTwo = mflag && getAbsoluteValue(s - b) >= (getAbsoluteValue(b - c) / 2);
+    bool const isConditionThree = !mflag && getAbsoluteValue(s - b) >= (getAbsoluteValue(c - d) / 2);
+    bool const isConditionFour = mflag && getAbsoluteValue(b - c) < getAbsoluteValue(gamma);
+    bool const isConditionFive = !mflag && getAbsoluteValue(c - d) < getAbsoluteValue(gamma);
+    return isConditionOne || isConditionTwo || isConditionThree || isConditionFour || isConditionFive;
 }
 
 }  // namespace alba::algebra

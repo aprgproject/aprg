@@ -43,13 +43,13 @@ public:
     void process();
 
 private:
+    void processDirectory(std::string const& path);
+    void processFile(std::string const& path);
+    void analyze(stringHelper::strings const& tokens);
     static void tokenize(stringHelper::strings& tokens, std::string const& line);
     static void combineWords(stringHelper::strings& tokens);
     static void combineArrayOperators(stringHelper::strings& tokens);
     static std::string getReaderStateString(ReaderState const state);
-    void processDirectory(std::string const& path);
-    void processFile(std::string const& path);
-    void analyze(stringHelper::strings const& tokens);
     template <ReaderState readerState>
     void analyzeInReaderState(ReaderTransactionData& transactionData, std::string const& token);
     AlbaLocalPathHandler m_inputPathHandler;

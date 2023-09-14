@@ -23,36 +23,6 @@ MultipleVariableSolutionSets SolverUsingSubstitution::calculateSolutionAndReturn
     return m_solutionsWithAllVariables;
 }
 
-SubstitutionOfVariablesToValues SolverUsingSubstitution::getSubstitutionFromSolutionSet(
-    MultipleVariableSolutionSet const& solutionSet) {
-    MultipleVariableSolutionSet::VariableNameToSolutionSetMap const& variableNameToSolutionSetMap(
-        solutionSet.getVariableNameToSolutionSetMap());
-    SubstitutionOfVariablesToValues substitution;
-    for (auto const& variableNameToSolutionSet : variableNameToSolutionSetMap) {
-        AlbaNumbers const& acceptedValues(variableNameToSolutionSet.second.getAcceptedValues());
-        if (!acceptedValues.empty()) {
-            substitution.putVariableWithValue(variableNameToSolutionSet.first, acceptedValues.front());
-        }
-    }
-    return substitution;
-}
-
-bool SolverUsingSubstitution::isSolutionCorrect(
-    MultipleVariableSolutionSet const& solutionSet, Equations const& equations) {
-    bool result(true);
-    SubstitutionOfVariablesToValues const substitution(getSubstitutionFromSolutionSet(solutionSet));
-    for (Equation const& equation : equations) {
-        Equation const potentialSolvedEquation(substitution.performSubstitutionTo(equation));
-        result = result && isARealFiniteConstant(potentialSolvedEquation.getLeftHandTerm()) &&
-                 isARealFiniteConstant(potentialSolvedEquation.getRightHandTerm()) &&
-                 potentialSolvedEquation.isEquationSatisfied();
-        if (!result) {
-            break;
-        }
-    }
-    return result;
-}
-
 bool SolverUsingSubstitution::isTheValueAlreadyExisting(string const& variableName, AlbaNumber const& value) const {
     bool result(false);
     for (MultipleVariableSolutionSet const& solutionSet : m_solutionsWithAllVariables) {
@@ -117,6 +87,36 @@ void SolverUsingSubstitution::solveAndUpdate(
             m_solutionsWithSomeVariables.emplace_back(multipleVariableSolutionSet);
         }
     }
+}
+
+SubstitutionOfVariablesToValues SolverUsingSubstitution::getSubstitutionFromSolutionSet(
+    MultipleVariableSolutionSet const& solutionSet) {
+    MultipleVariableSolutionSet::VariableNameToSolutionSetMap const& variableNameToSolutionSetMap(
+        solutionSet.getVariableNameToSolutionSetMap());
+    SubstitutionOfVariablesToValues substitution;
+    for (auto const& variableNameToSolutionSet : variableNameToSolutionSetMap) {
+        AlbaNumbers const& acceptedValues(variableNameToSolutionSet.second.getAcceptedValues());
+        if (!acceptedValues.empty()) {
+            substitution.putVariableWithValue(variableNameToSolutionSet.first, acceptedValues.front());
+        }
+    }
+    return substitution;
+}
+
+bool SolverUsingSubstitution::isSolutionCorrect(
+    MultipleVariableSolutionSet const& solutionSet, Equations const& equations) {
+    bool result(true);
+    SubstitutionOfVariablesToValues const substitution(getSubstitutionFromSolutionSet(solutionSet));
+    for (Equation const& equation : equations) {
+        Equation const potentialSolvedEquation(substitution.performSubstitutionTo(equation));
+        result = result && isARealFiniteConstant(potentialSolvedEquation.getLeftHandTerm()) &&
+                 isARealFiniteConstant(potentialSolvedEquation.getRightHandTerm()) &&
+                 potentialSolvedEquation.isEquationSatisfied();
+        if (!result) {
+            break;
+        }
+    }
+    return result;
 }
 
 SolverUsingSubstitution::SolverUsingSubstitution() = default;

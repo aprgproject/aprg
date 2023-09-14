@@ -52,6 +52,22 @@ TEST(WeightedQuickUnionWithArrayTest, GetRootWorks) {
     EXPECT_EQ(4, unionFind.getRoot(9));
 }
 
+TEST(WeightedQuickUnionWithArrayTest, GetRelativeRootArrayWorks) {
+    UnionFindForTest unionFind;
+
+    UnionFindForTest::RootArray const expectedInitialRelativeRootArray{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    EXPECT_EQ(expectedInitialRelativeRootArray, unionFind.getRelativeRootArray());
+
+    unionFind.connect(4, 3);
+    unionFind.connect(3, 8);
+    unionFind.connect(6, 5);
+    unionFind.connect(9, 4);
+    unionFind.connect(2, 1);
+
+    UnionFindForTest::RootArray const expectedRelativeRootArray{0, 2, 2, 4, 4, 6, 6, 7, 4, 4, 10, 11, 12};
+    EXPECT_EQ(expectedRelativeRootArray, unionFind.getRelativeRootArray());
+}
+
 TEST(WeightedQuickUnionWithArrayTest, GetRootWithPathCompressionOnePassWorks) {
     // Change test does not really check implementation
     UnionFindForTest unionFind;
@@ -92,22 +108,6 @@ TEST(WeightedQuickUnionWithArrayTest, GetRootWithPathCompressionTwoPassWorks) {
     EXPECT_EQ(7, unionFind.getRootWithPathCompressionTwoPass(7));
     EXPECT_EQ(4, unionFind.getRootWithPathCompressionTwoPass(8));
     EXPECT_EQ(4, unionFind.getRootWithPathCompressionTwoPass(9));
-}
-
-TEST(WeightedQuickUnionWithArrayTest, GetRelativeRootArrayWorks) {
-    UnionFindForTest unionFind;
-
-    UnionFindForTest::RootArray const expectedInitialRelativeRootArray{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-    EXPECT_EQ(expectedInitialRelativeRootArray, unionFind.getRelativeRootArray());
-
-    unionFind.connect(4, 3);
-    unionFind.connect(3, 8);
-    unionFind.connect(6, 5);
-    unionFind.connect(9, 4);
-    unionFind.connect(2, 1);
-
-    UnionFindForTest::RootArray const expectedRelativeRootArray{0, 2, 2, 4, 4, 6, 6, 7, 4, 4, 10, 11, 12};
-    EXPECT_EQ(expectedRelativeRootArray, unionFind.getRelativeRootArray());
 }
 
 }  // namespace alba::algorithm

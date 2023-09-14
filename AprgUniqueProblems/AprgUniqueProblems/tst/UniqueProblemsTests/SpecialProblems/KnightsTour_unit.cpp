@@ -17,23 +17,10 @@ TEST(KnightsTourTest, GetAnOpenKnightsTourWorksOn3By3) {
     EXPECT_EQ(expectedKnightsTour, knightsTour.getAnOpenKnightsTour());
 }
 
-TEST(KnightsTourTest, GetAClosedKnightsTourWorksOn3By3) {
-    KnightsTour const knightsTour(3, 3);
-
-    ChessBoardIndexes const expectedKnightsTour{0, 5, 6, 1, 8, 3, 2, 7, 0};
-    EXPECT_EQ(expectedKnightsTour, knightsTour.getAClosedKnightsTour());
-}
-
 TEST(KnightsTourTest, GetAnOpenKnightsTourWorksOn4By4) {
     KnightsTour const knightsTour(4, 4);
 
     EXPECT_TRUE(knightsTour.getAnOpenKnightsTour().empty());
-}
-
-TEST(KnightsTourTest, GetAClosedKnightsTourWorksOn4By4) {
-    KnightsTour const knightsTour(4, 4);
-
-    EXPECT_TRUE(knightsTour.getAClosedKnightsTour().empty());
 }
 
 TEST(KnightsTourTest, GetAnOpenKnightsTourWorksOn5By5) {
@@ -44,22 +31,10 @@ TEST(KnightsTourTest, GetAnOpenKnightsTourWorksOn5By5) {
     EXPECT_EQ(expectedKnightsTour, knightsTour.getAnOpenKnightsTour());
 }
 
-TEST(KnightsTourTest, DISABLED_GetAClosedKnightsTourWorksOn5By5) {
-    KnightsTour const knightsTour(5, 5);
-
-    EXPECT_TRUE(knightsTour.getAClosedKnightsTour().empty());
-}
-
 TEST(KnightsTourTest, GetAnOpenKnightsTourWorksOn2By4) {
     KnightsTour const knightsTour(2, 4);
 
     EXPECT_TRUE(knightsTour.getAnOpenKnightsTour().empty());
-}
-
-TEST(KnightsTourTest, GetAClosedKnightsTourWorksOn2By4) {
-    KnightsTour const knightsTour(2, 4);
-
-    EXPECT_TRUE(knightsTour.getAClosedKnightsTour().empty());
 }
 
 TEST(KnightsTourTest, GetAnOpenKnightsTourWorksOn4By5) {
@@ -67,6 +42,31 @@ TEST(KnightsTourTest, GetAnOpenKnightsTourWorksOn4By5) {
 
     ChessBoardIndexes const expectedKnightsTour{0, 6, 15, 17, 8, 1, 7, 14, 16, 9, 2, 4, 13, 19, 10, 3, 5, 12, 18, 11};
     EXPECT_EQ(expectedKnightsTour, knightsTour.getAnOpenKnightsTour());
+}
+
+TEST(KnightsTourTest, GetAClosedKnightsTourWorksOn3By3) {
+    KnightsTour const knightsTour(3, 3);
+
+    ChessBoardIndexes const expectedKnightsTour{0, 5, 6, 1, 8, 3, 2, 7, 0};
+    EXPECT_EQ(expectedKnightsTour, knightsTour.getAClosedKnightsTour());
+}
+
+TEST(KnightsTourTest, GetAClosedKnightsTourWorksOn4By4) {
+    KnightsTour const knightsTour(4, 4);
+
+    EXPECT_TRUE(knightsTour.getAClosedKnightsTour().empty());
+}
+
+TEST(KnightsTourTest, DISABLED_GetAClosedKnightsTourWorksOn5By5) {
+    KnightsTour const knightsTour(5, 5);
+
+    EXPECT_TRUE(knightsTour.getAClosedKnightsTour().empty());
+}
+
+TEST(KnightsTourTest, GetAClosedKnightsTourWorksOn2By4) {
+    KnightsTour const knightsTour(2, 4);
+
+    EXPECT_TRUE(knightsTour.getAClosedKnightsTour().empty());
 }
 
 TEST(KnightsTourTest, DISABLED_GetAClosedKnightsTourWorksOn4By5) {

@@ -102,17 +102,6 @@ void Bitmap::setSnippetWriteToFile(BitmapSnippet const& snippet) const {
     }
 }
 
-void Bitmap::adjustToTargetLength(int& low, int& high, int const targetLength, int const maxLength) {
-    if (high - low + 1 < targetLength) {
-        int const additionalSizeInX = targetLength - (high - low + 1);
-        if ((low - additionalSizeInX) >= 0) {
-            low = low - additionalSizeInX;
-        } else if ((high + additionalSizeInX) < maxLength) {
-            high = high + additionalSizeInX;
-        }
-    }
-}
-
 void Bitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(
     BitmapXY& topLeftCorner, BitmapXY& bottomRightCorner, BitmapXY const center, int const numberOfBytes) const {
     int const side(static_cast<int>(m_configuration.getEstimatedSquareSideInPixels(numberOfBytes)));
@@ -137,6 +126,17 @@ void Bitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(
     topLeftCorner.setY(top);
     bottomRightCorner.setX(right);
     bottomRightCorner.setY(bottom);
+}
+
+void Bitmap::adjustToTargetLength(int& low, int& high, int const targetLength, int const maxLength) {
+    if (high - low + 1 < targetLength) {
+        int const additionalSizeInX = targetLength - (high - low + 1);
+        if ((low - additionalSizeInX) >= 0) {
+            low = low - additionalSizeInX;
+        } else if ((high + additionalSizeInX) < maxLength) {
+            high = high + additionalSizeInX;
+        }
+    }
 }
 
 }  // namespace alba::AprgBitmap

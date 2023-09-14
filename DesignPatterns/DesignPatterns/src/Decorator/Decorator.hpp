@@ -68,19 +68,16 @@ public:
 
 // ONE LINE NOTE:
 // -> DECORATE (or attach) additional RESPONSIBILITIES into an object in runtime.
-
 // Intent:
 // Attach additional responsibilities to an object dynamically.
 // Decorators provide a flexible alternative to subclassing for extending functionality.
 // The pattern has structural purpose and applies to objects.
 // Note: It both uses the "has a" and "is a" approach.
-
 // When to use (applicability):
 // -> to add responsibilities to individual objects dynamically and transparently, that is, without affecting other
 // objects
 // -> for responsibilities that can be withdrawn
 // -> when extension by subclassing is impractical
-
 // Consequences:
 // -> More flexibility than static inheritance.
 // ---> With decorators, responsibilities can be added and removed at runtime simply by attaching and detaching them.
@@ -100,7 +97,6 @@ public:
 // ---> A design that uses Decorator often results in system of lot of little objects that all look alike.
 // ---> Although these systems are easy to customizable by those who understand them, they can be hard to learn and
 // debug.
-
 // Implementation:
 // -> Interface conformance
 // ---> A decorator objects interface must conform to interface of the component it decorates.
@@ -114,7 +110,6 @@ public:
 // ---> Since the Decorator pattern only changes a component from the outside, the component deoesnt have to know
 // anything about its decorators.
 // ---> It contrast, the Strategy pattern is a good example of a pattern for changing the guts.
-
 // Related Patterns
 // -> [Adapter]: A decorator is different from an adapter in that a decorator only changes an object responsibilities
 // and not its interface. And an adapter will give an object a completely new interface.

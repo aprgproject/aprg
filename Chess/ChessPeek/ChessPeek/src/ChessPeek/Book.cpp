@@ -9,6 +9,17 @@ using namespace std;
 
 namespace alba::chess::ChessPeek {
 
+Book::LineDetailOptional Book::getLine(Board const& board) const {
+    LineDetailOptional result;
+    auto itPair = m_boardToLineDetail.find(BoardValue(board));
+    if (itPair != m_boardToLineDetail.cend()) {
+        result = itPair->second;
+    }
+    return result;
+}
+
+size_t Book::getSize() const { return m_boardToLineDetail.size(); }
+
 void Book::saveDatabaseTo(std::string const& path) const {
     ofstream outStream(path);
     for (auto const& pairValue : m_boardToLineDetail) {
@@ -24,16 +35,6 @@ void Book::saveDatabaseTo(std::string const& path) const {
     }
 }
 
-Book::LineDetailOptional Book::getLine(Board const& board) const {
-    LineDetailOptional result;
-    auto itPair = m_boardToLineDetail.find(BoardValue(board));
-    if (itPair != m_boardToLineDetail.cend()) {
-        result = itPair->second;
-    }
-    return result;
-}
-
-size_t Book::getSize() const { return m_boardToLineDetail.size(); }
 void Book::clear() { m_boardToLineDetail.clear(); }
 
 void Book::addLine(Board const& board, LineDetail const& lineDetail) {

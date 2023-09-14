@@ -19,7 +19,6 @@ int main(int const argc, char* argv[]) {
     argumentsInMain.emplace_back("maxCellTxPower=30");
     argumentsInMain.emplace_back("inputType=sine");
     argumentsInMain.emplace_back("machsModelType=MachsModel1");*/
-
     PidSimulator simulator(argumentsInMain);
     simulator.generateInput();
 

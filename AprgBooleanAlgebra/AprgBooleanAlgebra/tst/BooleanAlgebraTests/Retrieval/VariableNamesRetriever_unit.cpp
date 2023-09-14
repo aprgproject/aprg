@@ -29,17 +29,6 @@ TEST(VariableNamesRetrieverTest, RetrieveFromConstantWorks) {
     EXPECT_TRUE(variableNamesSet.empty());
 }
 
-TEST(VariableNamesRetrieverTest, RetrieveFromVariableTermWorks) {
-    VariableNamesRetriever retriever;
-
-    retriever.retrieveFromVariableTerm(VariableTerm("x"));
-
-    VariableNamesSet const& variableNamesSet(retriever.getSavedData());
-    ASSERT_EQ(1U, variableNamesSet.size());
-    auto it = variableNamesSet.cbegin();
-    EXPECT_EQ("x", *(it++));
-}
-
 TEST(VariableNamesRetrieverTest, RetrieveFromExpressionWorks) {
     VariableNamesRetriever retriever;
 
@@ -50,6 +39,17 @@ TEST(VariableNamesRetrieverTest, RetrieveFromExpressionWorks) {
     auto it = variableNamesSet.cbegin();
     EXPECT_EQ("a", *(it++));
     EXPECT_EQ("b", *(it++));
+}
+
+TEST(VariableNamesRetrieverTest, RetrieveFromVariableTermWorks) {
+    VariableNamesRetriever retriever;
+
+    retriever.retrieveFromVariableTerm(VariableTerm("x"));
+
+    VariableNamesSet const& variableNamesSet(retriever.getSavedData());
+    ASSERT_EQ(1U, variableNamesSet.size());
+    auto it = variableNamesSet.cbegin();
+    EXPECT_EQ("x", *(it++));
 }
 
 }  // namespace alba::booleanAlgebra

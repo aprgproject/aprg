@@ -14,41 +14,49 @@ using namespace std;
 
 namespace alba::algebra::VectorUtilities {
 
-TEST(MathVectorOfTermsUtilitiesTest, IsDivergenceOfCurlZeroWorks) {
+TEST(MathVectorOfTermsUtilitiesTest, GetTangentPlaneOnAPointOfASurfaceWorks) {
+    Term surfaceLeftPart(Polynomial{Monomial(4, {{"x", 2}}), Monomial(1, {{"y", 2}}), Monomial(-16, {{"z", 1}})});
+    Equation equationToTest(surfaceLeftPart, "=", 0);
+
+    Equation equationToVerify(getTangentPlaneOnAPointOfASurface(equationToTest, {"x", "y", "z"}, {2, 4, 2}));
+
+    string stringToExpect("(2[x] + 1[y] + -2[z] + -4) = 0");
+    EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
+}
+
+TEST(MathVectorOfTermsUtilitiesTest, GetPerpendicularLineOnAPointOfASurfaceWorks) {
+    Term surfaceLeftPart(Polynomial{Monomial(4, {{"x", 2}}), Monomial(1, {{"y", 2}}), Monomial(-16, {{"z", 1}})});
+    Equation equationToTest(surfaceLeftPart, "=", 0);
+
+    Equations equationsToVerify(getPerpendicularLineOnAPointOfASurface(equationToTest, {"x", "y", "z"}, {2, 4, 2}));
+
+    string stringToExpect1("(1[x] + -2[y] + 6) = 0");
+    string stringToExpect2("(1[x] + 1[z] + -4) = 0");
+    ASSERT_EQ(2U, equationsToVerify.size());
+    EXPECT_EQ(stringToExpect1, convertToString(equationsToVerify[0]));
+    EXPECT_EQ(stringToExpect2, convertToString(equationsToVerify[1]));
+}
+
+TEST(MathVectorOfTermsUtilitiesTest, GetNormalOfASurfaceOnAPointWorks) {
+    Term surfaceLeftPart(Polynomial{Monomial(4, {{"x", 2}}), Monomial(1, {{"y", 2}}), Monomial(-16, {{"z", 1}})});
+    Equation equationToTest(surfaceLeftPart, "=", 0);
+
+    MathVectorOfThreeTerms vectorToVerify(getNormalOfASurfaceOnAPoint(equationToTest, {"x", "y", "z"}, {2, 4, 2}));
+
+    string stringToExpect("{16, 8, -16}");
+    EXPECT_EQ(stringToExpect, convertToString(vectorToVerify));
+}
+
+TEST(MathVectorOfTermsUtilitiesTest, GetCurlWorks) {
     Term x(createExpressionIfPossible({getEAsATerm(), "^", Monomial(2, {{"x", 1}})}));
     Term y(Monomial(3, {{"x", 2}, {"y", 1}, {"z", 1}}));
     Term z(Polynomial{Monomial(2, {{"y", 2}, {"z", 1}}), Monomial(1, {{"x", 1}})});
     MathVectorOfThreeTerms vectorField{x, y, z};
 
-    EXPECT_TRUE(isDivergenceOfCurlZero(vectorField, {"x", "y", "z"}));
-}
+    MathVectorOfThreeTerms vectorToVerify(getCurl(vectorField, {"x", "y", "z"}));
 
-TEST(MathVectorOfTermsUtilitiesTest, IsGaussDivergenceTheoremInAPlaneTrueWorks) {
-    Term xInVectorField(Monomial(2, {{"y", 1}}));
-    Term yInVectorField(Monomial(5, {{"x", 1}}));
-    MathVectorOfTwoTerms vectorField{xInVectorField, yInVectorField};
-    MathVectorOfTwoTerms regionOfLineIntegral{cos("t"), sin("t")};
-    MathVectorOfTwoTerms unitOutwardNormal{cos("t"), sin("t")};
-    DetailsForDefiniteIntegralWithTerms lineIntegralDetails{"t", 0, 2 * getPiAsATerm()};
-    DetailsForDefiniteIntegralWithTerms xDetails{"x", -1, 1};
-    DetailsForDefiniteIntegralWithTerms yDetails{"y", -1, 1};
-
-    EXPECT_TRUE(isGaussDivergenceTheoremInAPlaneTrue(
-        vectorField, regionOfLineIntegral, unitOutwardNormal, lineIntegralDetails, xDetails, yDetails, {"x", "y"}));
-}
-
-TEST(MathVectorOfTermsUtilitiesTest, IsStokesTheoremInAPlaneTrueWorks) {
-    Term xInVectorField(Monomial(2, {{"y", 1}}));
-    Term yInVectorField(Monomial(5, {{"x", 1}}));
-    MathVectorOfTwoTerms vectorField{xInVectorField, yInVectorField};
-    MathVectorOfTwoTerms regionOfLineIntegral{cos("t"), sin("t")};
-    MathVectorOfTwoTerms unitTangent{sin("t") * -1, cos("t")};
-    DetailsForDefiniteIntegralWithTerms lineIntegralDetails{"t", 0, 2 * getPiAsATerm()};
-    DetailsForDefiniteIntegralWithTerms xDetails{"x", 0, 1};
-    DetailsForDefiniteIntegralWithTerms yDetails{"y", 0, getPiAsATerm()};
-
-    EXPECT_TRUE(isStokesTheoremInAPlaneTrue(
-        vectorField, regionOfLineIntegral, unitTangent, lineIntegralDetails, xDetails, yDetails, {"x", "y"}));
+    string stringToExpect("{(-3[x^2][y] + 4[y][z]), -1, 6[x][y][z]}");
+    EXPECT_EQ(stringToExpect, convertToString(vectorToVerify));
 }
 
 TEST(MathVectorOfTermsUtilitiesTest, GetDyOverDxWorks) {
@@ -115,49 +123,41 @@ TEST(MathVectorOfTermsUtilitiesTest, GetAreaOfAClosedNonIntersectingPathUsingGre
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
-TEST(MathVectorOfTermsUtilitiesTest, GetNormalOfASurfaceOnAPointWorks) {
-    Term surfaceLeftPart(Polynomial{Monomial(4, {{"x", 2}}), Monomial(1, {{"y", 2}}), Monomial(-16, {{"z", 1}})});
-    Equation equationToTest(surfaceLeftPart, "=", 0);
-
-    MathVectorOfThreeTerms vectorToVerify(getNormalOfASurfaceOnAPoint(equationToTest, {"x", "y", "z"}, {2, 4, 2}));
-
-    string stringToExpect("{16, 8, -16}");
-    EXPECT_EQ(stringToExpect, convertToString(vectorToVerify));
-}
-
-TEST(MathVectorOfTermsUtilitiesTest, GetTangentPlaneOnAPointOfASurfaceWorks) {
-    Term surfaceLeftPart(Polynomial{Monomial(4, {{"x", 2}}), Monomial(1, {{"y", 2}}), Monomial(-16, {{"z", 1}})});
-    Equation equationToTest(surfaceLeftPart, "=", 0);
-
-    Equation equationToVerify(getTangentPlaneOnAPointOfASurface(equationToTest, {"x", "y", "z"}, {2, 4, 2}));
-
-    string stringToExpect("(2[x] + 1[y] + -2[z] + -4) = 0");
-    EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
-}
-
-TEST(MathVectorOfTermsUtilitiesTest, GetPerpendicularLineOnAPointOfASurfaceWorks) {
-    Term surfaceLeftPart(Polynomial{Monomial(4, {{"x", 2}}), Monomial(1, {{"y", 2}}), Monomial(-16, {{"z", 1}})});
-    Equation equationToTest(surfaceLeftPart, "=", 0);
-
-    Equations equationsToVerify(getPerpendicularLineOnAPointOfASurface(equationToTest, {"x", "y", "z"}, {2, 4, 2}));
-
-    string stringToExpect1("(1[x] + -2[y] + 6) = 0");
-    string stringToExpect2("(1[x] + 1[z] + -4) = 0");
-    ASSERT_EQ(2U, equationsToVerify.size());
-    EXPECT_EQ(stringToExpect1, convertToString(equationsToVerify[0]));
-    EXPECT_EQ(stringToExpect2, convertToString(equationsToVerify[1]));
-}
-
-TEST(MathVectorOfTermsUtilitiesTest, GetCurlWorks) {
+TEST(MathVectorOfTermsUtilitiesTest, IsDivergenceOfCurlZeroWorks) {
     Term x(createExpressionIfPossible({getEAsATerm(), "^", Monomial(2, {{"x", 1}})}));
     Term y(Monomial(3, {{"x", 2}, {"y", 1}, {"z", 1}}));
     Term z(Polynomial{Monomial(2, {{"y", 2}, {"z", 1}}), Monomial(1, {{"x", 1}})});
     MathVectorOfThreeTerms vectorField{x, y, z};
 
-    MathVectorOfThreeTerms vectorToVerify(getCurl(vectorField, {"x", "y", "z"}));
+    EXPECT_TRUE(isDivergenceOfCurlZero(vectorField, {"x", "y", "z"}));
+}
 
-    string stringToExpect("{(-3[x^2][y] + 4[y][z]), -1, 6[x][y][z]}");
-    EXPECT_EQ(stringToExpect, convertToString(vectorToVerify));
+TEST(MathVectorOfTermsUtilitiesTest, IsGaussDivergenceTheoremInAPlaneTrueWorks) {
+    Term xInVectorField(Monomial(2, {{"y", 1}}));
+    Term yInVectorField(Monomial(5, {{"x", 1}}));
+    MathVectorOfTwoTerms vectorField{xInVectorField, yInVectorField};
+    MathVectorOfTwoTerms regionOfLineIntegral{cos("t"), sin("t")};
+    MathVectorOfTwoTerms unitOutwardNormal{cos("t"), sin("t")};
+    DetailsForDefiniteIntegralWithTerms lineIntegralDetails{"t", 0, 2 * getPiAsATerm()};
+    DetailsForDefiniteIntegralWithTerms xDetails{"x", -1, 1};
+    DetailsForDefiniteIntegralWithTerms yDetails{"y", -1, 1};
+
+    EXPECT_TRUE(isGaussDivergenceTheoremInAPlaneTrue(
+        vectorField, regionOfLineIntegral, unitOutwardNormal, lineIntegralDetails, xDetails, yDetails, {"x", "y"}));
+}
+
+TEST(MathVectorOfTermsUtilitiesTest, IsStokesTheoremInAPlaneTrueWorks) {
+    Term xInVectorField(Monomial(2, {{"y", 1}}));
+    Term yInVectorField(Monomial(5, {{"x", 1}}));
+    MathVectorOfTwoTerms vectorField{xInVectorField, yInVectorField};
+    MathVectorOfTwoTerms regionOfLineIntegral{cos("t"), sin("t")};
+    MathVectorOfTwoTerms unitTangent{sin("t") * -1, cos("t")};
+    DetailsForDefiniteIntegralWithTerms lineIntegralDetails{"t", 0, 2 * getPiAsATerm()};
+    DetailsForDefiniteIntegralWithTerms xDetails{"x", 0, 1};
+    DetailsForDefiniteIntegralWithTerms yDetails{"y", 0, getPiAsATerm()};
+
+    EXPECT_TRUE(isStokesTheoremInAPlaneTrue(
+        vectorField, regionOfLineIntegral, unitTangent, lineIntegralDetails, xDetails, yDetails, {"x", "y"}));
 }
 
 TEST(MathVectorOfTermsUtilitiesTest, IsContinuousAtWorks) {
@@ -330,6 +330,18 @@ TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralWorksOnExample2) {
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
+TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralEqualsGetLineIntegralIndependentOfPath) {
+    Term x(Polynomial{Monomial(1, {{"y", 2}}), Monomial(2, {{"x", 1}}), Monomial(4, {})});
+    Term y(Polynomial{Monomial(2, {{"x", 1}, {"y", 1}}), Monomial(4, {{"y", 1}}), Monomial(-5, {})});
+    MathVectorOfTwoTerms vectorField{x, y};
+    MathVectorOfTwoTerms linePath{"t", "t"};
+
+    Term lineIntegral(getLineIntegral(vectorField, {"x", "y"}, linePath, {"t", 0, 1}));
+    Term lineIntegralIndependentOfPath(getLineIntegralIndependentOfPath(vectorField, {"x", "y"}, {0, 0}, {1, 1}));
+
+    EXPECT_EQ(lineIntegral, lineIntegralIndependentOfPath);
+}
+
 TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralIndependentOfPathWorksOnExample1) {
     Term x(Polynomial{Monomial(1, {{"y", 2}}), Monomial(2, {{"x", 1}}), Monomial(4, {})});
     Term y(Polynomial{Monomial(2, {{"x", 1}, {"y", 1}}), Monomial(4, {{"y", 1}}), Monomial(-5, {})});
@@ -351,18 +363,6 @@ TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralIndependentOfPathWorksOnExam
 
     string stringToExpect("-13");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
-}
-
-TEST(MathVectorOfTermsUtilitiesTest, GetLineIntegralEqualsGetLineIntegralIndependentOfPath) {
-    Term x(Polynomial{Monomial(1, {{"y", 2}}), Monomial(2, {{"x", 1}}), Monomial(4, {})});
-    Term y(Polynomial{Monomial(2, {{"x", 1}, {"y", 1}}), Monomial(4, {{"y", 1}}), Monomial(-5, {})});
-    MathVectorOfTwoTerms vectorField{x, y};
-    MathVectorOfTwoTerms linePath{"t", "t"};
-
-    Term lineIntegral(getLineIntegral(vectorField, {"x", "y"}, linePath, {"t", 0, 1}));
-    Term lineIntegralIndependentOfPath(getLineIntegralIndependentOfPath(vectorField, {"x", "y"}, {0, 0}, {1, 1}));
-
-    EXPECT_EQ(lineIntegral, lineIntegralIndependentOfPath);
 }
 
 TEST(MathVectorOfTermsUtilitiesTest, GetLimitWorks) {

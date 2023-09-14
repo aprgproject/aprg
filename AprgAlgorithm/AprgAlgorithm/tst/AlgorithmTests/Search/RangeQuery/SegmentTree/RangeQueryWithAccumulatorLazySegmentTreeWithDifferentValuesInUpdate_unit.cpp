@@ -28,36 +28,6 @@ RangeQueryForTest::IncrementFunction incrementFunction = [](IndexForTest const i
 
 TEST(
     RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest,
-    GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues) {
-    ValuesForTest const values;
-    RangeQueryForTest sumRangeQuery(values, plusFunction, incrementFunction);
-
-    EXPECT_EQ(0, sumRangeQuery.getValueOnInterval(0, 0));
-}
-
-TEST(
-    RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest, GetValueOnIntervalWithSumWorksOnExample1) {
-    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest sumRangeQuery(values, plusFunction, incrementFunction);
-
-    EXPECT_EQ(1, sumRangeQuery.getValueOnInterval(0, 0));
-    EXPECT_EQ(4, sumRangeQuery.getValueOnInterval(0, 1));
-    EXPECT_EQ(8, sumRangeQuery.getValueOnInterval(0, 2));
-    EXPECT_EQ(16, sumRangeQuery.getValueOnInterval(0, 3));
-    EXPECT_EQ(22, sumRangeQuery.getValueOnInterval(0, 4));
-    EXPECT_EQ(23, sumRangeQuery.getValueOnInterval(0, 5));
-    EXPECT_EQ(27, sumRangeQuery.getValueOnInterval(0, 6));
-    EXPECT_EQ(29, sumRangeQuery.getValueOnInterval(0, 7));
-    EXPECT_EQ(38, sumRangeQuery.getValueOnInterval(0, 8));
-    EXPECT_EQ(0, sumRangeQuery.getValueOnInterval(0, 9));
-    EXPECT_EQ(26, sumRangeQuery.getValueOnInterval(1, 6));
-    EXPECT_EQ(19, sumRangeQuery.getValueOnInterval(2, 5));
-    EXPECT_EQ(14, sumRangeQuery.getValueOnInterval(3, 4));
-    EXPECT_EQ(6, sumRangeQuery.getValueOnInterval(4, 4));
-}
-
-TEST(
-    RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest,
     IncreaseAtRangeWithSumWorksWithEmptySetOfValues) {
     ValuesForTest const values;
     RangeQueryForTest sumRangeQuery(values, plusFunction, incrementFunction);
@@ -87,6 +57,36 @@ TEST(RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest, In
     EXPECT_EQ(37, sumRangeQuery.getValueOnInterval(2, 5));
     EXPECT_EQ(23, sumRangeQuery.getValueOnInterval(3, 4));
     EXPECT_EQ(11, sumRangeQuery.getValueOnInterval(4, 4));
+}
+
+TEST(
+    RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest,
+    GetValueOnIntervalWithMinimumWorksWithEmptySetOfValues) {
+    ValuesForTest const values;
+    RangeQueryForTest sumRangeQuery(values, plusFunction, incrementFunction);
+
+    EXPECT_EQ(0, sumRangeQuery.getValueOnInterval(0, 0));
+}
+
+TEST(
+    RangeQueryWithAccumulatorLazySegmentTreeWithDifferentValuesInUpdateTest, GetValueOnIntervalWithSumWorksOnExample1) {
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest sumRangeQuery(values, plusFunction, incrementFunction);
+
+    EXPECT_EQ(1, sumRangeQuery.getValueOnInterval(0, 0));
+    EXPECT_EQ(4, sumRangeQuery.getValueOnInterval(0, 1));
+    EXPECT_EQ(8, sumRangeQuery.getValueOnInterval(0, 2));
+    EXPECT_EQ(16, sumRangeQuery.getValueOnInterval(0, 3));
+    EXPECT_EQ(22, sumRangeQuery.getValueOnInterval(0, 4));
+    EXPECT_EQ(23, sumRangeQuery.getValueOnInterval(0, 5));
+    EXPECT_EQ(27, sumRangeQuery.getValueOnInterval(0, 6));
+    EXPECT_EQ(29, sumRangeQuery.getValueOnInterval(0, 7));
+    EXPECT_EQ(38, sumRangeQuery.getValueOnInterval(0, 8));
+    EXPECT_EQ(0, sumRangeQuery.getValueOnInterval(0, 9));
+    EXPECT_EQ(26, sumRangeQuery.getValueOnInterval(1, 6));
+    EXPECT_EQ(19, sumRangeQuery.getValueOnInterval(2, 5));
+    EXPECT_EQ(14, sumRangeQuery.getValueOnInterval(3, 4));
+    EXPECT_EQ(6, sumRangeQuery.getValueOnInterval(4, 4));
 }
 
 }  // namespace alba::algorithm

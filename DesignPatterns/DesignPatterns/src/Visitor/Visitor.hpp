@@ -65,12 +65,10 @@ public:
 // ONE LINE NOTE:
 // -> Provide an ABSTRACT VISITOR that can be PASSED to an ABSTRACT ELEMENT so that it can perform "visit operations"
 // without relying on concretions.
-
 // Intent:
 // Visitor represents an operation to be performed on the elements of an object structure.
 // It lets you define a new operation without changing the classes of the elements on which it operates.
 // The pattern has behavioral purpose and applies to the objects.
-
 // When to use (applicability):
 // -> an object structure contains many classes of objects with differing interfaces,
 // ---> and you want to perform operations on these objects that depend on their concrete classes
@@ -78,7 +76,6 @@ public:
 // ---> and you want to avoid "polluting" their classes with these operations
 // -> the classes defining the object structure rarely change, but you often want to define new operations over the
 // structure
-
 // Consequences:
 // -> Visitor makes adding new operation easy.
 // ---> Visitors make it easy to add operations that depend on the components of complex objects.
@@ -115,7 +112,6 @@ public:
 // ---> Visitor approach assumes that the ConcreteElement interface is powerful enough to let visitor do their job.
 // ---> As a result, pattern often forces you to provide public operations that access an element's internal state,
 // which may compromise its encapsulation.
-
 // Implementation:
 // -> Each object structure will have an associated Visitor class.
 // ---> This abstract visitor class declares a VisitConcreteElement operation for each class of ConcreteElement defining
@@ -162,7 +158,6 @@ public:
 // ConcreteElement.
 // ---> The main reason to put the traversal strategy in the visitor is to implement a particularly complex traversal,
 // -----> one that depends on the results of the operations on the object structure.
-
 // Related Patterns
 // -> [Composite]: Visitors can be used to apply an operation over an object structure defined by the [Composite]
 // pattern.

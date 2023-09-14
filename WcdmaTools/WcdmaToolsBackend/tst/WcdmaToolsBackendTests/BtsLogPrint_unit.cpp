@@ -12,141 +12,6 @@ using namespace std;
 
 namespace wcdmaToolsBackend {
 
-TEST(BtsLogPrintTest, DefaultConstructorIsEmpty) {
-    BtsLogPrint const logPrint;
-    EXPECT_TRUE(logPrint.isEmpty());
-}
-
-TEST(BtsLogPrintTest, ClearingMakesItEmpty) {
-    BtsLogPrint logPrint(
-        "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
-        "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
-        "averagePowerRxLevel: 65");
-    EXPECT_FALSE(logPrint.isEmpty());
-    logPrint.clear();
-    EXPECT_TRUE(logPrint.isEmpty());
-}
-
-TEST(BtsLogPrintTest, PrintFromBtsSyslogsIsUsed) {
-    BtsLogPrint const logPrint(
-        "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
-        "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
-        "averagePowerRxLevel: 65");
-    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
-    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
-    string const expectedHardwareType("FSP-120D");
-    string const expectedPrint(
-        "FSP-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG "
-        "from 0x120D0156, size: 20 cellId: 1996, averagePowerRxLevel: 65");
-
-    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
-    EXPECT_EQ(expectedPcTime, logPrint.getPcTime());
-    EXPECT_EQ(expectedHardwareType, logPrint.getHardwareAddress());
-    EXPECT_EQ(expectedPrint, logPrint.getPrint());
-}
-
-TEST(BtsLogPrintTest, PrintFromBtsLogSorterIsUsed) {
-    BtsLogPrint const logPrint(
-        "SYSLOG_73.LOG            |26.11 07:39:15.009000 FSP-120C-0-TCOMexe <2015-11-26T05:39:14.187399Z> 74 "
-        "INF/TCOM/G, Received BB_SAMPLE_REPORT_IND_MSG Provider: MasterHsupa, SampleStartSfn: 0, SampledDataVolume: 0, "
-        "CFs: 0, NumberOfUsers: 0, NumberOfCells: 0");
-    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-11-26T05:39:14.187399Z");
-    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "26.11 07:39:15.009000");
-    string const expectedHardwareType("FSP-120C");
-    string const expectedPrint(
-        "FSP-120C-0-TCOMexe <2015-11-26T05:39:14.187399Z> 74 INF/TCOM/G, Received BB_SAMPLE_REPORT_IND_MSG Provider: "
-        "MasterHsupa, SampleStartSfn: 0, SampledDataVolume: 0, CFs: 0, NumberOfUsers: 0, NumberOfCells: 0");
-
-    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
-    EXPECT_EQ(expectedPcTime, logPrint.getPcTime());
-    EXPECT_EQ(expectedHardwareType, logPrint.getHardwareAddress());
-    EXPECT_EQ(expectedPrint, logPrint.getPrint());
-}
-
-TEST(BtsLogPrintTest, PrintFromSnapshotIsUsed) {
-    BtsLogPrint const logPrint(
-        "a7 FSP-140D-0-TCOMexe <22.10 11:38:33.309447> 83 INF/TCOM/Logger, RLH_TUP_HsdpaDeleteReq: nbccId: 1740, "
-        "activationMethod: 2, cfn: 56, rcv: 0x14820363");
-    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "22.10 11:38:33.309447");
-    string const expectedHardwareType("FSP-140D");
-    string const expectedPrint(
-        "FSP-140D-0-TCOMexe <22.10 11:38:33.309447> 83 INF/TCOM/Logger, RLH_TUP_HsdpaDeleteReq: nbccId: 1740, "
-        "activationMethod: 2, cfn: 56, rcv: 0x14820363");
-
-    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
-    EXPECT_TRUE(logPrint.getPcTime().isEmpty());
-    EXPECT_EQ(expectedHardwareType, logPrint.getHardwareAddress());
-    EXPECT_EQ(expectedPrint, logPrint.getPrint());
-}
-
-TEST(BtsLogPrintTest, PrintFromSctLogsIsUsed) {
-    BtsLogPrint const logPrint(
-        "00 0x1011-0-ld-linux <2015-05-26T06:00:14.137037Z> 5A03 INF/TCOM/LRM/CCH, Cell waited for this "
-        "modeChangeResp; cpuId: 0x14500000; cellId: 1");
-    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-05-26T06:00:14.137037Z");
-    string const expectedPrint(
-        "00 0x1011-0-ld-linux <2015-05-26T06:00:14.137037Z> 5A03 INF/TCOM/LRM/CCH, Cell waited for this "
-        "modeChangeResp; cpuId: 0x14500000; cellId: 1");
-
-    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
-    EXPECT_TRUE(logPrint.getPcTime().isEmpty());
-    EXPECT_TRUE(logPrint.getHardwareAddress().empty());
-    EXPECT_EQ(expectedPrint, logPrint.getPrint());
-}
-
-TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetectedWithNothreeLetters) {
-    BtsLogPrint const logPrint(
-        "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSPJ-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
-        "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
-        "averagePowerRxLevel: 65");
-    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
-    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
-    string const expectedPrint(
-        "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSPJ-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
-        "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
-        "averagePowerRxLevel: 65");
-
-    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
-    EXPECT_EQ(expectedPcTime, logPrint.getPcTime());
-    EXPECT_TRUE(logPrint.getHardwareAddress().empty());
-    EXPECT_EQ(expectedPrint, logPrint.getPrint());
-}
-
-TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetectedWithNoFourHexDigit) {
-    BtsLogPrint const logPrint(
-        "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120DE-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
-        "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
-        "averagePowerRxLevel: 65");
-    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
-    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
-    string const expectedPrint(
-        "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120DE-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
-        "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
-        "averagePowerRxLevel: 65");
-
-    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
-    EXPECT_EQ(expectedPcTime, logPrint.getPcTime());
-    EXPECT_TRUE(logPrint.getHardwareAddress().empty());
-    EXPECT_EQ(expectedPrint, logPrint.getPrint());
-}
-
-TEST(BtsLogPrintTest, RfHardwareTypesAreRecognized) {
-    BtsLogPrint const logPrint(
-        "027966 17.12 14:10:43.903  [192.168.254.129]  d0 FRM_REL2 <2004-01-01T00:33:46.806457Z> 20088 INF/LTX/RX_VD, "
-        "RX1: RX_SET_INPUT_ATTENUATOR_REQ attenuator 0 (StatusOk)");
-    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2004-01-01T00:33:46.806457Z");
-    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "17.12 14:10:43.903");
-    string const expectedHardwareType("FRM_REL2");
-    string const expectedPrint(
-        "FRM_REL2 <2004-01-01T00:33:46.806457Z> 20088 INF/LTX/RX_VD, RX1: RX_SET_INPUT_ATTENUATOR_REQ attenuator 0 "
-        "(StatusOk)");
-
-    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
-    EXPECT_EQ(expectedPcTime, logPrint.getPcTime());
-    EXPECT_EQ(expectedHardwareType, logPrint.getHardwareAddress());
-    EXPECT_EQ(expectedPrint, logPrint.getPrint());
-}
-
 TEST(BtsLogPrintTest, OperatorLessThanWorksWhenHigherBtsTimeIsCompared) {
     BtsLogPrint const printWithNoPcTimeDuringLowerBtsStartupTime(
         "FCT-1011-3-BTSOMex <1990-01-01T01:01:01.111111Z> 2F9 INF/SUBSYSTEM/SUBCOMPONENT, This is a print");
@@ -373,6 +238,139 @@ TEST(BtsLogPrintTest, SyslogAndSnapshotPrintRuntimeComparisonTest) {
     EXPECT_FALSE(logPrint1 > logPrint2);
 }
 
+TEST(BtsLogPrintTest, DISABLED_InputStreamWorks) {
+    ifstream inputFileStream(
+        AlbaLocalPathHandler(APRG_DIR R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ProblemFiles\BLOCK_701.txt)")
+            .getFullPath());
+    int count(0);
+    while (inputFileStream.good()) {
+        BtsLogPrint logPrint;
+        inputFileStream >> logPrint;
+        ++count;
+    }
+    EXPECT_EQ(1001, count);
+}
+
+TEST(BtsLogPrintTest, PrintFromBtsSyslogsIsUsed) {
+    BtsLogPrint const logPrint(
+        "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
+        "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
+        "averagePowerRxLevel: 65");
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
+    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
+    string const expectedHardwareType("FSP-120D");
+    string const expectedPrint(
+        "FSP-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG "
+        "from 0x120D0156, size: 20 cellId: 1996, averagePowerRxLevel: 65");
+
+    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
+    EXPECT_EQ(expectedPcTime, logPrint.getPcTime());
+    EXPECT_EQ(expectedHardwareType, logPrint.getHardwareAddress());
+    EXPECT_EQ(expectedPrint, logPrint.getPrint());
+}
+
+TEST(BtsLogPrintTest, PrintFromBtsLogSorterIsUsed) {
+    BtsLogPrint const logPrint(
+        "SYSLOG_73.LOG            |26.11 07:39:15.009000 FSP-120C-0-TCOMexe <2015-11-26T05:39:14.187399Z> 74 "
+        "INF/TCOM/G, Received BB_SAMPLE_REPORT_IND_MSG Provider: MasterHsupa, SampleStartSfn: 0, SampledDataVolume: 0, "
+        "CFs: 0, NumberOfUsers: 0, NumberOfCells: 0");
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-11-26T05:39:14.187399Z");
+    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "26.11 07:39:15.009000");
+    string const expectedHardwareType("FSP-120C");
+    string const expectedPrint(
+        "FSP-120C-0-TCOMexe <2015-11-26T05:39:14.187399Z> 74 INF/TCOM/G, Received BB_SAMPLE_REPORT_IND_MSG Provider: "
+        "MasterHsupa, SampleStartSfn: 0, SampledDataVolume: 0, CFs: 0, NumberOfUsers: 0, NumberOfCells: 0");
+
+    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
+    EXPECT_EQ(expectedPcTime, logPrint.getPcTime());
+    EXPECT_EQ(expectedHardwareType, logPrint.getHardwareAddress());
+    EXPECT_EQ(expectedPrint, logPrint.getPrint());
+}
+
+TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetectedWithNothreeLetters) {
+    BtsLogPrint const logPrint(
+        "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSPJ-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
+        "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
+        "averagePowerRxLevel: 65");
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
+    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
+    string const expectedPrint(
+        "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSPJ-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
+        "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
+        "averagePowerRxLevel: 65");
+
+    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
+    EXPECT_EQ(expectedPcTime, logPrint.getPcTime());
+    EXPECT_TRUE(logPrint.getHardwareAddress().empty());
+    EXPECT_EQ(expectedPrint, logPrint.getPrint());
+}
+
+TEST(BtsLogPrintTest, HardwareTypeIsEmptyWhenInvalidHardwareTypesAreDetectedWithNoFourHexDigit) {
+    BtsLogPrint const logPrint(
+        "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120DE-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
+        "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
+        "averagePowerRxLevel: 65");
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-09-23T09:06:04.156235Z");
+    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "23.09 12:06:04.213");
+    string const expectedPrint(
+        "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120DE-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
+        "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
+        "averagePowerRxLevel: 65");
+
+    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
+    EXPECT_EQ(expectedPcTime, logPrint.getPcTime());
+    EXPECT_TRUE(logPrint.getHardwareAddress().empty());
+    EXPECT_EQ(expectedPrint, logPrint.getPrint());
+}
+
+TEST(BtsLogPrintTest, RfHardwareTypesAreRecognized) {
+    BtsLogPrint const logPrint(
+        "027966 17.12 14:10:43.903  [192.168.254.129]  d0 FRM_REL2 <2004-01-01T00:33:46.806457Z> 20088 INF/LTX/RX_VD, "
+        "RX1: RX_SET_INPUT_ATTENUATOR_REQ attenuator 0 (StatusOk)");
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2004-01-01T00:33:46.806457Z");
+    BtsLogTime const expectedPcTime(BtsLogTimeType::PcTimeStamp, "17.12 14:10:43.903");
+    string const expectedHardwareType("FRM_REL2");
+    string const expectedPrint(
+        "FRM_REL2 <2004-01-01T00:33:46.806457Z> 20088 INF/LTX/RX_VD, RX1: RX_SET_INPUT_ATTENUATOR_REQ attenuator 0 "
+        "(StatusOk)");
+
+    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
+    EXPECT_EQ(expectedPcTime, logPrint.getPcTime());
+    EXPECT_EQ(expectedHardwareType, logPrint.getHardwareAddress());
+    EXPECT_EQ(expectedPrint, logPrint.getPrint());
+}
+
+TEST(BtsLogPrintTest, PrintFromSnapshotIsUsed) {
+    BtsLogPrint const logPrint(
+        "a7 FSP-140D-0-TCOMexe <22.10 11:38:33.309447> 83 INF/TCOM/Logger, RLH_TUP_HsdpaDeleteReq: nbccId: 1740, "
+        "activationMethod: 2, cfn: 56, rcv: 0x14820363");
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "22.10 11:38:33.309447");
+    string const expectedHardwareType("FSP-140D");
+    string const expectedPrint(
+        "FSP-140D-0-TCOMexe <22.10 11:38:33.309447> 83 INF/TCOM/Logger, RLH_TUP_HsdpaDeleteReq: nbccId: 1740, "
+        "activationMethod: 2, cfn: 56, rcv: 0x14820363");
+
+    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
+    EXPECT_TRUE(logPrint.getPcTime().isEmpty());
+    EXPECT_EQ(expectedHardwareType, logPrint.getHardwareAddress());
+    EXPECT_EQ(expectedPrint, logPrint.getPrint());
+}
+
+TEST(BtsLogPrintTest, PrintFromSctLogsIsUsed) {
+    BtsLogPrint const logPrint(
+        "00 0x1011-0-ld-linux <2015-05-26T06:00:14.137037Z> 5A03 INF/TCOM/LRM/CCH, Cell waited for this "
+        "modeChangeResp; cpuId: 0x14500000; cellId: 1");
+    BtsLogTime const expectedBtsTime(BtsLogTimeType::BtsTimeStamp, "2015-05-26T06:00:14.137037Z");
+    string const expectedPrint(
+        "00 0x1011-0-ld-linux <2015-05-26T06:00:14.137037Z> 5A03 INF/TCOM/LRM/CCH, Cell waited for this "
+        "modeChangeResp; cpuId: 0x14500000; cellId: 1");
+
+    EXPECT_EQ(expectedBtsTime, logPrint.getBtsTime());
+    EXPECT_TRUE(logPrint.getPcTime().isEmpty());
+    EXPECT_TRUE(logPrint.getHardwareAddress().empty());
+    EXPECT_EQ(expectedPrint, logPrint.getPrint());
+}
+
 TEST(BtsLogPrintTest, SortingTestWithAndWithoutPcTime) {
     vector<BtsLogPrint> logPrints;
     logPrints.emplace_back(
@@ -429,17 +427,19 @@ TEST(BtsLogPrintTest, SortingTestWithAndWithoutPcTime2) {
         logPrints[3].getPrint());
 }
 
-TEST(BtsLogPrintTest, DISABLED_InputStreamWorks) {
-    ifstream inputFileStream(
-        AlbaLocalPathHandler(APRG_DIR R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ProblemFiles\BLOCK_701.txt)")
-            .getFullPath());
-    int count(0);
-    while (inputFileStream.good()) {
-        BtsLogPrint logPrint;
-        inputFileStream >> logPrint;
-        ++count;
-    }
-    EXPECT_EQ(1001, count);
+TEST(BtsLogPrintTest, DefaultConstructorIsEmpty) {
+    BtsLogPrint const logPrint;
+    EXPECT_TRUE(logPrint.isEmpty());
+}
+
+TEST(BtsLogPrintTest, ClearingMakesItEmpty) {
+    BtsLogPrint logPrint(
+        "000312 23.09 12:06:04.213  [192.168.255.1]  b5 FSP-120D-1-TCOMexe <2015-09-23T09:06:04.156235Z> BE6 "
+        "DBG/TCOM/CH, TC_TOAM_POWERLEVEL_REPORT_NOTIFICATION_MSG from 0x120D0156, size: 20 cellId: 1996, "
+        "averagePowerRxLevel: 65");
+    EXPECT_FALSE(logPrint.isEmpty());
+    logPrint.clear();
+    EXPECT_TRUE(logPrint.isEmpty());
 }
 
 }  // namespace wcdmaToolsBackend

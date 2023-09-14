@@ -91,42 +91,6 @@ Indexes searchPatternsAt(Terms const& terms, int const termIndex, Patterns const
     return {};
 }
 
-int getPatternIndexOfAMatchBySearchingForward(int& termIndex, Terms const& terms, Patterns const& searchPatterns) {
-    int patternIndex(-1);
-    for (; termIndex < static_cast<int>(terms.size()); ++termIndex) {
-        patternIndex = getPatternIndexOfAMatchAt(terms, termIndex, searchPatterns);
-        if (patternIndex >= 0) {
-            break;
-        }
-    }
-    return patternIndex;
-}
-
-int getPatternIndexOfAMatchAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns) {
-    int patternIndex(0);
-    for (Pattern const& searchPattern : searchPatterns) {
-        int matchIndex = 0;
-        for (int termIndex2 = termIndex;
-             termIndex2 < static_cast<int>(terms.size()) && matchIndex < static_cast<int>(searchPattern.size());
-             ++termIndex2) {
-            Term const& currentTerm(terms[termIndex2]);
-            bool const isMatchForThisIndex = currentTerm == searchPattern[matchIndex];
-            if (isMatchForThisIndex) {
-                ++matchIndex;
-            }
-            if (!isCommentOrWhiteSpace(currentTerm) && !isMatchForThisIndex) {
-                break;
-            }
-        }
-        if (matchIndex == static_cast<int>(searchPattern.size())) {
-            break;
-        }
-        ++patternIndex;
-    }
-    // -1 represents no hit
-    return patternIndex < static_cast<int>(searchPatterns.size()) ? patternIndex : -1;
-}
-
 Indexes searchBackwardsWithMatcher(Terms const& terms, int const termIndex, TermMatcher const& matcher) {
     Indexes hitIndexes;
     for (int termIndex2 = termIndex; termIndex2 >= 0; --termIndex2) {
@@ -204,6 +168,42 @@ string convertToString(MatcherType const type) {
         ALBA_MACROS_CASE_ENUM_STRING(MatcherType::WhiteSpaceWithNewLine)
     }
     return {};
+}
+
+int getPatternIndexOfAMatchBySearchingForward(int& termIndex, Terms const& terms, Patterns const& searchPatterns) {
+    int patternIndex(-1);
+    for (; termIndex < static_cast<int>(terms.size()); ++termIndex) {
+        patternIndex = getPatternIndexOfAMatchAt(terms, termIndex, searchPatterns);
+        if (patternIndex >= 0) {
+            break;
+        }
+    }
+    return patternIndex;
+}
+
+int getPatternIndexOfAMatchAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns) {
+    int patternIndex(0);
+    for (Pattern const& searchPattern : searchPatterns) {
+        int matchIndex = 0;
+        for (int termIndex2 = termIndex;
+             termIndex2 < static_cast<int>(terms.size()) && matchIndex < static_cast<int>(searchPattern.size());
+             ++termIndex2) {
+            Term const& currentTerm(terms[termIndex2]);
+            bool const isMatchForThisIndex = currentTerm == searchPattern[matchIndex];
+            if (isMatchForThisIndex) {
+                ++matchIndex;
+            }
+            if (!isCommentOrWhiteSpace(currentTerm) && !isMatchForThisIndex) {
+                break;
+            }
+        }
+        if (matchIndex == static_cast<int>(searchPattern.size())) {
+            break;
+        }
+        ++patternIndex;
+    }
+    // -1 represents no hit
+    return patternIndex < static_cast<int>(searchPatterns.size()) ? patternIndex : -1;
 }
 
 bool isAllWhiteSpaceOrComment(Terms const& terms) {

@@ -22,8 +22,8 @@ public:
     friend bool operator==(BoardValue const& bv1, BoardValue const& bv2);
 
 private:
-    static Coordinate getCorrectCoordinate(Board const& board, CoordinateDataType const x, CoordinateDataType const y);
     void saveBoardToData(Board const& board);
+    static Coordinate getCorrectCoordinate(Board const& board, CoordinateDataType const x, CoordinateDataType const y);
     Data m_data;
 };
 

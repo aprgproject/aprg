@@ -15,6 +15,7 @@ public:
     using Keys = std::vector<Key>;
     using TraverseFunction = std::function<void(Node const&)>;
     ~BaseBinarySearchTree() override = default;  // virtual destructor because of virtual functions (vtable exists)
+
     [[nodiscard]] Key getMinimum() const override {
         Key result{};
         Node const* const nodePointer(getMinimumNodeStartingOnThisNode(m_root));
@@ -72,7 +73,6 @@ public:
         return result;
     }
 
-    [[nodiscard]] NodeUniquePointer const& getRoot() const { return m_root; }
     [[nodiscard]] int getSize() const override { return getSizeOfThisSubTree(m_root); }
     [[nodiscard]] int getRank(Key const& key) const override { return getRankStartingOnThisNode(m_root, key); }
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
@@ -80,6 +80,7 @@ public:
     void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyStartingOnThisNode(m_root, key); }
     void deleteMinimum() override { deleteMinimumStartingOnThisNode(m_root); }
     void deleteMaximum() override { deleteMaximumStartingOnThisNode(m_root); }
+    [[nodiscard]] NodeUniquePointer const& getRoot() const { return m_root; }
     void traverseByPreOrder(TraverseFunction const& traverseFunction) { traverseByPreOrder(m_root, traverseFunction); }
     void traverseByInOrder(TraverseFunction const& traverseFunction) { traverseByInOrder(m_root, traverseFunction); }
 
@@ -346,22 +347,17 @@ protected:
 // BST maintains symmetric order. It means that each node has a key and every node's key is:
 // -> Larger than all keys in its left subtree
 // -> Smaller than all keys in its right subtree
-
 // Implementation details: subtree counts are stored in each node -> This facilitates efficient implementation of rank()
 // and select().
-
 // Tree shape depends on the order of insertion
 // -> Best case: They are perfectly balanced.
 // -> Worst case: Nodes are only placed on a single side (all are placed in left or all are placed in right).
 // --->If the input came in sorted order this will happen.
-
 // BST corresponds to quicksort partitioning
 // There is a direct correspondence if the array has no duplicate keys.
-
 // Proposition: if N distinct keys are inserted into a BST in random order, the expected number of compares for a
 // search/insert is ~ 2*log2(N) Proof: 1-1 correspondence with quicksort partitioning. Worst case is ~4.311 ln N. This
 // is proved by Bruce Reed in 2003.
-
 // Alternating insertion and deletion (randomly) causes the tree to be asymmetric.
 // Hibbard deletion approach of deleting the minimum to the right causes the tree to be asymmetric.
 // Researchers discovered that after a long sequence of insertion and deletion the height becomes sqrt(N).

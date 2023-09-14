@@ -19,11 +19,11 @@
 #include <sstream>
 
 using namespace alba::AprgBitmap;
-using namespace alba::mathHelper;
-using namespace alba::TwoDimensions;
-using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace alba::FrequencyStatistics;
+using namespace alba::TwoDimensions::twoDimensionsUtilities;
+using namespace alba::TwoDimensions;
 using namespace alba::TwoDimensionsStatistics;
+using namespace alba::mathHelper;
 using namespace std;
 
 namespace alba::soosa {
@@ -83,11 +83,6 @@ void SOOSA::FrequencyDatabase::addAnswer(int const questionIndex, int const answ
     }
 }
 
-SOOSA::Status SOOSA::Status::getInstance() {
-    static Status const instance;
-    return instance;
-}
-
 string SOOSA::Status::getStatusString() const {
     string result;
     if (!m_errors.empty()) {
@@ -101,6 +96,11 @@ string SOOSA::Status::getStatusString() const {
 bool SOOSA::Status::isStatusNoError() const { return m_errors.empty(); }
 void SOOSA::Status::setError(string const& error) { m_errors.emplace_back(error); }
 void SOOSA::Status::clearErrors() { m_errors.clear(); }
+
+SOOSA::Status SOOSA::Status::getInstance() {
+    static Status const instance;
+    return instance;
+}
 
 SOOSA::SOOSA(SoosaConfiguration const& soosaConfiguration, InputConfiguration const& inputConfiguration)
     : m_soosaConfiguration(soosaConfiguration),
@@ -140,172 +140,6 @@ void SOOSA::process() {
 
     cout << "\n";
     saveOutputHtmlFile(pathHandler.getFullPath());
-}
-
-SOOSA::OneDimensionSamples SOOSA::getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints) {
-    OneDimensionSamples barHeights;
-    for (TwoDimensionSamples const& barPoints : groupOfBarPoints) {
-        if (!barPoints.empty()) {
-            // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
-            barHeights.emplace_back(OneDimensionSample{getHeight(barPoints)});
-        }
-    }
-    return barHeights;
-}
-
-double SOOSA::getHeight(TwoDimensionSamples const& barPoints) {
-    return getDistance(convertToPoint(barPoints.front()), convertToPoint(barPoints.back()));
-}
-
-int SOOSA::getRetainSizeInLineModel(int const size, double const removalRatio) {
-    int const removalSize = ceil(size * removalRatio);
-    return clampHigherBound(size - removalSize, size);
-}
-
-bool SOOSA::areLinesValid(Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine) {
-    Line const emptyLine;
-    if (emptyLine == leftLine || !isConsideredVertical(leftLine.getACoefficient(), leftLine.getBCoefficient())) {
-        cout << "The leftLine is not found.\n";
-        return false;
-    }
-    if (emptyLine == rightLine || !isConsideredVertical(rightLine.getACoefficient(), rightLine.getBCoefficient())) {
-        cout << "The rightLine is not found.\n";
-        return false;
-    }
-    if (emptyLine == topLine || !isConsideredHorizontal(topLine.getACoefficient(), topLine.getBCoefficient())) {
-        cout << "The topLine is not found.\n";
-        return false;
-    }
-    if (emptyLine == bottomLine ||
-        !isConsideredHorizontal(bottomLine.getACoefficient(), bottomLine.getBCoefficient())) {
-        cout << "The bottomLine is not found.\n";
-        return false;
-    }
-    return true;
-}
-
-bool SOOSA::isConsideredHorizontal(double const aCoefficient, double const bCoefficient) {
-    return getAbsoluteValue(aCoefficient) <= getAbsoluteValue(bCoefficient);
-}
-
-bool SOOSA::isConsideredVertical(double const aCoefficient, double const bCoefficient) {
-    return getAbsoluteValue(aCoefficient) >= getAbsoluteValue(bCoefficient);
-}
-
-void SOOSA::updateSamplesForLineModeling(
-    TwoDimensionSamples& samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap,
-    double const maxAcceptableSquareError) {
-    samplesLineModeling.clear();
-    for (auto const& squareErrorToSamplePair : squareErrorToSampleMultimap) {
-        if (squareErrorToSamplePair.first <= maxAcceptableSquareError) {
-            samplesLineModeling.emplace_back(squareErrorToSamplePair.second);
-        } else {
-            break;
-        }
-    }
-}
-
-void SOOSA::retrieveBarPointsThatFitAndSaveToKMeans(
-    TwoDimensionKMeans& kMeansForBarPoints, PointAndWidthPairs const& pointAndWidthPairs,
-    RangeOfDoubles const& minMaxCriteriaForBar) {
-    for (PointAndWidthPair const& pointAndWidthPair : pointAndWidthPairs) {
-        if (minMaxCriteriaForBar.isValueInsideInclusive(pointAndWidthPair.second)) {
-            kMeansForBarPoints.addSample(convertToTwoDimensionSample(pointAndWidthPair.first));
-        }
-    }
-}
-
-void SOOSA::saveQuestionBarCoordinatesFromKMeansWithBarPoints(
-    QuestionBarCoordinates& questionBarCoordinates, TwoDimensionKMeans const& kMeansForBarPoints,
-    int const numberQuestionsInColumn) {
-    GroupOfTwoDimensionSamples const groupOfBarPoints(
-        kMeansForBarPoints.getGroupOfSamplesUsingKMeans(numberQuestionsInColumn));
-    for (TwoDimensionSamples const& barPoints : groupOfBarPoints) {
-        if (!barPoints.empty()) {
-            // for (TwoDimensionSample const& barPoint : barPoints) {
-            //     writePointInDebug(convertToBitmapXY(barPoint), 0x00EE00);
-            // }
-            // writePointInDebug(convertToBitmapXY(barPoints.front()), 0xEE0000);
-            // writePointInDebug(convertToBitmapXY(barPoints.back()), 0xEE0000);
-            questionBarCoordinates.emplace_back(convertToPoint(barPoints.front()), convertToPoint(barPoints.back()));
-        }
-    }
-}
-
-void SOOSA::removeBarPointsWithFewHeightPointsCount(
-    TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn,
-    CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap) {
-    TwoDimensionSamples barPointsSamplesCopy(kMeansForBarPoints.getSamples());
-    kMeansForBarPoints.clear();
-    int count = 0;
-    for (auto itMap = countToEndPointsIndexesMultiMap.crbegin(); itMap != countToEndPointsIndexesMultiMap.crend();
-         ++itMap) {
-        EndPointIndexes const& range(itMap->second);
-        for (auto itForRange = barPointsSamplesCopy.begin() + range.first;
-             itForRange != barPointsSamplesCopy.begin() + range.second + 1; ++itForRange) {
-            kMeansForBarPoints.addSample(*itForRange);
-        }
-        ++count;
-        if (count >= numberQuestionsInColumn) {
-            break;
-        }
-    }
-    TwoDimensionSamples& samplesToSort(kMeansForBarPoints.getSamplesReference());
-    sort(samplesToSort.begin(), samplesToSort.end(), [](Sample const& sample1, Sample const& sample2) {
-        return sample1.getValueAt(1) < sample2.getValueAt(1);
-    });
-}
-
-BitmapXY SOOSA::convertToBitmapXY(Point const& point) {
-    return {
-        static_cast<int>(round(clampLowerBound(point.getX(), static_cast<double>(0)))),
-        static_cast<int>(round(clampLowerBound(point.getY(), static_cast<double>(0))))};
-}
-
-SOOSA::OneDimensionKMeans SOOSA::getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs) {
-    OneDimensionKMeans result;
-    for (PointAndWidthPair const& pointAndWidthPair : pointAndWidthPairs) {
-        result.addSample(OneDimensionSample{pointAndWidthPair.second});
-    }
-    return result;
-}
-
-Point SOOSA::convertToPoint(BitmapXY const& bitmapXY) {
-    return {static_cast<double>(bitmapXY.getX()), static_cast<double>(bitmapXY.getY())};
-}
-
-SOOSA::RangeOfDoubles SOOSA::getMinMaxCriteriaForBar(
-    OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics) {
-    RangeOfDoubles result;
-    if (firstGroupStatistics.getMean().getValueAt(0) > secondGroupStatistics.getMean().getValueAt(0)) {
-        result = getMinMaxRangeOfSamples(firstGroupStatistics.getSamples());
-    } else {
-        result = getMinMaxRangeOfSamples(secondGroupStatistics.getSamples());
-    }
-    return result;
-}
-
-SOOSA::RangeOfDoubles SOOSA::getMinMaxRangeOfSamples(OneDimensionSamples const& samples) {
-    DoubleCollection collection;
-    for (OneDimensionSample const& sample : samples) {
-        collection.addData(sample.getValueAt(0));
-    }
-    return {collection.getMinimum(), collection.getMaximum(), 1};
-}
-
-string SOOSA::getPrintableStringForPercentage(double const numerator, double const denominator) {
-    stringstream errorStream;
-    if (denominator == 0) {
-        errorStream << " - ";
-    } else {
-        int const numbers = getIntegerAfterRoundingADoubleValue<int>(numerator / denominator * 1000);
-        errorStream << numbers / 10;
-        if (numbers % 10 > 0) {
-            errorStream << "." << numbers % 10;
-        }
-        errorStream << "%";
-    }
-    return errorStream.str();
 }
 
 SOOSA::Answers SOOSA::getAnswersAtQuestion(
@@ -1165,6 +999,172 @@ void SOOSA::processQuestions(
 void SOOSA::setAnswerToQuestionInColumn(int const columnNumber, int const questionOffsetInColumn, int const answer) {
     m_questionToAnswersMap[m_inputConfiguration.getQuestionIndexInColumn(columnNumber, questionOffsetInColumn)] =
         answer;
+}
+
+SOOSA::OneDimensionSamples SOOSA::getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints) {
+    OneDimensionSamples barHeights;
+    for (TwoDimensionSamples const& barPoints : groupOfBarPoints) {
+        if (!barPoints.empty()) {
+            // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
+            barHeights.emplace_back(OneDimensionSample{getHeight(barPoints)});
+        }
+    }
+    return barHeights;
+}
+
+double SOOSA::getHeight(TwoDimensionSamples const& barPoints) {
+    return getDistance(convertToPoint(barPoints.front()), convertToPoint(barPoints.back()));
+}
+
+int SOOSA::getRetainSizeInLineModel(int const size, double const removalRatio) {
+    int const removalSize = ceil(size * removalRatio);
+    return clampHigherBound(size - removalSize, size);
+}
+
+bool SOOSA::areLinesValid(Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine) {
+    Line const emptyLine;
+    if (emptyLine == leftLine || !isConsideredVertical(leftLine.getACoefficient(), leftLine.getBCoefficient())) {
+        cout << "The leftLine is not found.\n";
+        return false;
+    }
+    if (emptyLine == rightLine || !isConsideredVertical(rightLine.getACoefficient(), rightLine.getBCoefficient())) {
+        cout << "The rightLine is not found.\n";
+        return false;
+    }
+    if (emptyLine == topLine || !isConsideredHorizontal(topLine.getACoefficient(), topLine.getBCoefficient())) {
+        cout << "The topLine is not found.\n";
+        return false;
+    }
+    if (emptyLine == bottomLine ||
+        !isConsideredHorizontal(bottomLine.getACoefficient(), bottomLine.getBCoefficient())) {
+        cout << "The bottomLine is not found.\n";
+        return false;
+    }
+    return true;
+}
+
+bool SOOSA::isConsideredHorizontal(double const aCoefficient, double const bCoefficient) {
+    return getAbsoluteValue(aCoefficient) <= getAbsoluteValue(bCoefficient);
+}
+
+bool SOOSA::isConsideredVertical(double const aCoefficient, double const bCoefficient) {
+    return getAbsoluteValue(aCoefficient) >= getAbsoluteValue(bCoefficient);
+}
+
+void SOOSA::updateSamplesForLineModeling(
+    TwoDimensionSamples& samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap,
+    double const maxAcceptableSquareError) {
+    samplesLineModeling.clear();
+    for (auto const& squareErrorToSamplePair : squareErrorToSampleMultimap) {
+        if (squareErrorToSamplePair.first <= maxAcceptableSquareError) {
+            samplesLineModeling.emplace_back(squareErrorToSamplePair.second);
+        } else {
+            break;
+        }
+    }
+}
+
+void SOOSA::retrieveBarPointsThatFitAndSaveToKMeans(
+    TwoDimensionKMeans& kMeansForBarPoints, PointAndWidthPairs const& pointAndWidthPairs,
+    RangeOfDoubles const& minMaxCriteriaForBar) {
+    for (PointAndWidthPair const& pointAndWidthPair : pointAndWidthPairs) {
+        if (minMaxCriteriaForBar.isValueInsideInclusive(pointAndWidthPair.second)) {
+            kMeansForBarPoints.addSample(convertToTwoDimensionSample(pointAndWidthPair.first));
+        }
+    }
+}
+
+void SOOSA::saveQuestionBarCoordinatesFromKMeansWithBarPoints(
+    QuestionBarCoordinates& questionBarCoordinates, TwoDimensionKMeans const& kMeansForBarPoints,
+    int const numberQuestionsInColumn) {
+    GroupOfTwoDimensionSamples const groupOfBarPoints(
+        kMeansForBarPoints.getGroupOfSamplesUsingKMeans(numberQuestionsInColumn));
+    for (TwoDimensionSamples const& barPoints : groupOfBarPoints) {
+        if (!barPoints.empty()) {
+            // for (TwoDimensionSample const& barPoint : barPoints) {
+            //     writePointInDebug(convertToBitmapXY(barPoint), 0x00EE00);
+            // }
+            // writePointInDebug(convertToBitmapXY(barPoints.front()), 0xEE0000);
+            // writePointInDebug(convertToBitmapXY(barPoints.back()), 0xEE0000);
+            questionBarCoordinates.emplace_back(convertToPoint(barPoints.front()), convertToPoint(barPoints.back()));
+        }
+    }
+}
+
+void SOOSA::removeBarPointsWithFewHeightPointsCount(
+    TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn,
+    CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap) {
+    TwoDimensionSamples barPointsSamplesCopy(kMeansForBarPoints.getSamples());
+    kMeansForBarPoints.clear();
+    int count = 0;
+    for (auto itMap = countToEndPointsIndexesMultiMap.crbegin(); itMap != countToEndPointsIndexesMultiMap.crend();
+         ++itMap) {
+        EndPointIndexes const& range(itMap->second);
+        for (auto itForRange = barPointsSamplesCopy.begin() + range.first;
+             itForRange != barPointsSamplesCopy.begin() + range.second + 1; ++itForRange) {
+            kMeansForBarPoints.addSample(*itForRange);
+        }
+        ++count;
+        if (count >= numberQuestionsInColumn) {
+            break;
+        }
+    }
+    TwoDimensionSamples& samplesToSort(kMeansForBarPoints.getSamplesReference());
+    sort(samplesToSort.begin(), samplesToSort.end(), [](Sample const& sample1, Sample const& sample2) {
+        return sample1.getValueAt(1) < sample2.getValueAt(1);
+    });
+}
+
+BitmapXY SOOSA::convertToBitmapXY(Point const& point) {
+    return {
+        static_cast<int>(round(clampLowerBound(point.getX(), static_cast<double>(0)))),
+        static_cast<int>(round(clampLowerBound(point.getY(), static_cast<double>(0))))};
+}
+
+SOOSA::OneDimensionKMeans SOOSA::getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs) {
+    OneDimensionKMeans result;
+    for (PointAndWidthPair const& pointAndWidthPair : pointAndWidthPairs) {
+        result.addSample(OneDimensionSample{pointAndWidthPair.second});
+    }
+    return result;
+}
+
+Point SOOSA::convertToPoint(BitmapXY const& bitmapXY) {
+    return {static_cast<double>(bitmapXY.getX()), static_cast<double>(bitmapXY.getY())};
+}
+
+SOOSA::RangeOfDoubles SOOSA::getMinMaxCriteriaForBar(
+    OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics) {
+    RangeOfDoubles result;
+    if (firstGroupStatistics.getMean().getValueAt(0) > secondGroupStatistics.getMean().getValueAt(0)) {
+        result = getMinMaxRangeOfSamples(firstGroupStatistics.getSamples());
+    } else {
+        result = getMinMaxRangeOfSamples(secondGroupStatistics.getSamples());
+    }
+    return result;
+}
+
+SOOSA::RangeOfDoubles SOOSA::getMinMaxRangeOfSamples(OneDimensionSamples const& samples) {
+    DoubleCollection collection;
+    for (OneDimensionSample const& sample : samples) {
+        collection.addData(sample.getValueAt(0));
+    }
+    return {collection.getMinimum(), collection.getMaximum(), 1};
+}
+
+string SOOSA::getPrintableStringForPercentage(double const numerator, double const denominator) {
+    stringstream errorStream;
+    if (denominator == 0) {
+        errorStream << " - ";
+    } else {
+        int const numbers = getIntegerAfterRoundingADoubleValue<int>(numerator / denominator * 1000);
+        errorStream << numbers / 10;
+        if (numbers % 10 > 0) {
+            errorStream << "." << numbers % 10;
+        }
+        errorStream << "%";
+    }
+    return errorStream.str();
 }
 
 SOOSA::Status::Status() = default;

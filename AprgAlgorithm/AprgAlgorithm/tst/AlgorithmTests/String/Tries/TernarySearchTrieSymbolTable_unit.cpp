@@ -32,15 +32,6 @@ TEST(TernarySearchTrieSymbolTableTest, GetNumberOfNodesWorksWhenEmpty) {
     EXPECT_EQ(0, trie.getNumberOfNodes());
 }
 
-TEST(TernarySearchTrieSymbolTableTest, GetNumberOfNodesWorksWhenNotEmpty) {
-    TrieForTest trie;
-    trie.put("she", 0);
-    trie.put("sells", 1);
-    trie.put("sea", 2);
-
-    EXPECT_EQ(8, trie.getNumberOfNodes());
-}
-
 TEST(TernarySearchTrieSymbolTableTest, PutWorksWithNumberOfNodes) {
     TrieForTest trie;
 
@@ -85,6 +76,15 @@ TEST(TernarySearchTrieSymbolTableTest, DeleteBasedOnKeyWorksWithNumberOfNodes) {
     trie.deleteBasedOnKey("sea");
     EXPECT_TRUE(trie.isEmpty());
     EXPECT_EQ(0, trie.getNumberOfNodes());
+}
+
+TEST(TernarySearchTrieSymbolTableTest, GetNumberOfNodesWorksWhenNotEmpty) {
+    TrieForTest trie;
+    trie.put("she", 0);
+    trie.put("sells", 1);
+    trie.put("sea", 2);
+
+    EXPECT_EQ(8, trie.getNumberOfNodes());
 }
 
 TEST(TernarySearchTrieSymbolTableTest, DeleteBasedOnKeyWhenEmptyStringHasNoEffect) {

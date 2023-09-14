@@ -2,7 +2,7 @@
 
 #include <Common/Math/Helpers/ComplexNumberHelpers.hpp>
 #include <Common/Math/Helpers/DivisibilityHelpers.hpp>
-#include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
+#include <Common/Math/Helpers/FactorAndMultiplesHelpers.hpp>
 #include <Common/Math/Helpers/FractionHelpers.hpp>
 #include <Common/Math/Helpers/PowerHelpers.hpp>
 #include <Common/Math/Number/AlbaComplexNumber.hpp>
@@ -16,10 +16,6 @@ using namespace std;
 // NOLINTBEGIN(cppcoreguidelines-pro-type-union-access)
 namespace alba {
 
-AlbaNumber::ConfigurationDetails AlbaNumber::Configuration::getConfigurationDetailsWithZeroTolerance() {
-    return ConfigurationDetails{0.0, 0.0};
-}
-
 void AlbaNumber::Configuration::setConfigurationTolerancesToZero() {
     setConfigurationDetails(getConfigurationDetailsWithZeroTolerance());
 }
@@ -30,6 +26,10 @@ void AlbaNumber::Configuration::setComparisonTolerance(double const comparisonTo
 
 void AlbaNumber::Configuration::setFloatAdjustmentTolerance(double const comparisonTolerance) {
     m_configurationDetails.floatAdjustmentTolerance = comparisonTolerance;
+}
+
+AlbaNumber::ConfigurationDetails AlbaNumber::Configuration::getConfigurationDetailsWithZeroTolerance() {
+    return ConfigurationDetails{0.0, 0.0};
 }
 
 void AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero() {

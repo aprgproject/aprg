@@ -14,12 +14,12 @@ private:
         explicit UniqueUserId(std::string const& lineInLogs);
         UniqueUserId();
         bool operator<(UniqueUserId const& uniqueUserId) const;
-        static int getNbccId(std::string const& lineInLogs);
-        static int getCrnccId(std::string const& lineInLogs);
-        static int getTransactionId(std::string const& lineInLogs);
         void saveNbccId(std::string const& lineInLogs);
         void saveCrnccId(std::string const& lineInLogs);
         void saveTransactionId(std::string const& lineInLogs);
+        static int getNbccId(std::string const& lineInLogs);
+        static int getCrnccId(std::string const& lineInLogs);
+        static int getTransactionId(std::string const& lineInLogs);
         int nbccId;
         int crnccId;
         int transactionId;
@@ -32,10 +32,6 @@ private:
 
 public:
     PerformanceAnalyzer();
-    static int getDelayTimeInUs(
-        wcdmaToolsBackend::BtsLogTime const& endTime, wcdmaToolsBackend::BtsLogTime const& startTime);
-    static int getDelayTimeInMinutes(
-        wcdmaToolsBackend::BtsLogTime const& endTime, wcdmaToolsBackend::BtsLogTime const& startTime);
     [[nodiscard]] std::string extract(std::string const& inputPath) const;
     [[nodiscard]] std::string combineAndSort(std::string const& inputPath) const;
     void setFileForRawDataDump(std::string const& rawDataPath);
@@ -53,6 +49,10 @@ public:
     void processFileForRlSetupPerSecond(std::string const& filePath);
     void processFileForTraceLog(std::string const& traceLogPath);
     void processDirectoryForTraceLog(std::string const& traceLogPath);
+    static int getDelayTimeInUs(
+        wcdmaToolsBackend::BtsLogTime const& endTime, wcdmaToolsBackend::BtsLogTime const& startTime);
+    static int getDelayTimeInMinutes(
+        wcdmaToolsBackend::BtsLogTime const& endTime, wcdmaToolsBackend::BtsLogTime const& startTime);
 
 private:
     std::string m_extractGrepCondition{

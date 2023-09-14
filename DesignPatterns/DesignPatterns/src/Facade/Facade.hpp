@@ -73,17 +73,14 @@ private:
 
 // ONE LINE NOTE:
 // -> Provide a FACADE (or unified interface) for MULTIPLE components in a SUBSYSTEM
-
 // Intent:
 // Provide a unified interface to a set of interfaces in a subsystem.
 // Facade defines a higher-level interface that makes the subsystem easier to use.
 // The pattern has structural purpose and applies to objects.
-
 // When to use (applicability):
 // -> you want to provide a simple interface to a complex subsystem
 // -> there are many dependencies between clients and the implementation classes of an abstraction
 // -> you want to layer your subsystems, use a facade to define an entry point to each subsystem level
-
 // Consequences:
 // -> It shields clients from subsystem components, making it easier to use several subsystem components.
 // -> It promotes weak coupling between the subsystem and its clients.
@@ -98,7 +95,6 @@ private:
 // ---> This pattern can also simplify porting systems to other platforms.
 // -> It doesnt prevent applications from using subsystem classes if they need to.
 // ---> Thus you can choose between ease of use and generality.
-
 // Implementation:
 // -> Reducing client-subsystem coupling.
 // ---> The coupling can be reduced more by making Facade an abstract class and have concrete classes with different
@@ -110,7 +106,6 @@ private:
 // ---> Since we can have public and private interface of a class, we can also do it for subsystems.
 // -----> The public interface consists of classes that all clients can access.
 // -----> The private interface is just for subsystem extenders.
-
 // Related Patterns
 // -> [AbstractFactory] can be used with Facade to provide an interface for creating subsystem objects in a subsystem
 // independent way.

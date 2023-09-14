@@ -107,5 +107,4 @@ private:
 // -> and the subtree rooted at a node contains values no larger than that contained at the node itself.
 // Conversely, the the smallest element in a min-heap is stored at the root,
 // -> and the subtree rooted at a node contains values no smaller than that contained at the node itself
-
 }  // namespace alba::algorithm

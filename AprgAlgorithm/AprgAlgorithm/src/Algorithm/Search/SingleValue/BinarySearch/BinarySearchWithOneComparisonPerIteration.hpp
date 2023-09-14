@@ -96,7 +96,6 @@ private:
 // If we observe, we are using two comparisons per iteration except during final successful match, if any.
 // In practice, comparison would be costly operation, it won’t be just primitive type comparison.
 // It is more economical to minimize comparisons as that of theoretical limit.
-
 // In the while loop we are depending only on one comparison.
 // The search space converges to place l and r point two different consecutive elements.
 // We need one more comparison to trace search status.

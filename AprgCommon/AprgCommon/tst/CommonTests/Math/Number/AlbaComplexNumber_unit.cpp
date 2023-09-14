@@ -8,16 +8,6 @@ using namespace std;
 
 namespace alba {
 
-TEST(AlbaComplexNumberTest, ConstructionWorks) {
-    AlbaComplexNumber<double> const complex1;
-    AlbaComplexNumber<double> const complex2(3, 4);
-
-    EXPECT_DOUBLE_EQ(0, complex1.getRealPart());
-    EXPECT_DOUBLE_EQ(0, complex1.getImaginaryPart());
-    EXPECT_DOUBLE_EQ(3, complex2.getRealPart());
-    EXPECT_DOUBLE_EQ(4, complex2.getImaginaryPart());
-}
-
 TEST(AlbaComplexNumberTest, OperatorEqualsWorks) {
     AlbaComplexNumber<double> const complex1(3, 4);
     AlbaComplexNumber<double> const complex2(3, 4);
@@ -92,16 +82,6 @@ TEST(AlbaComplexNumberTest, OperatorDivideWorks) {
     EXPECT_EQ(expectedComplex, actualComplex);
 }
 
-TEST(AlbaComplexNumberTest, OperatorDivideWorksWithZero) {
-    AlbaComplexNumber<double> const complex1(5, 6);
-    AlbaComplexNumber<double> const complex2(0, 0);
-
-    AlbaComplexNumber<double> const actualComplex(complex1 / complex2);
-
-    EXPECT_TRUE(isnan(actualComplex.getRealPart()));
-    EXPECT_TRUE(isnan(actualComplex.getImaginaryPart()));
-}
-
 TEST(AlbaComplexNumberTest, OperatorRaiseToPowerWorks) {
     AlbaComplexNumber<double> const actualComplex1(AlbaComplexNumber<double>(-0.5, sqrt(3) / 2) ^ 3);
     AlbaComplexNumber<double> const actualComplex2(AlbaComplexNumber<double>(-8, 0) ^ (static_cast<double>(1) / 3));
@@ -161,10 +141,66 @@ TEST(AlbaComplexNumberTest, OperatorDivisionAssignmentWorks) {
     EXPECT_EQ(expectedComplex, actualComplex);
 }
 
+TEST(AlbaComplexNumberTest, OutputStreamOperatorWorks) {
+    stringstream testStream;
+    AlbaComplexNumber<double> const complex(3.5, 4.5);
+
+    testStream << complex;
+
+    EXPECT_EQ("(3.5 + 4.5i)", testStream.str());
+}
+
+TEST(AlbaComplexNumberTest, GetConjugateWorks) {
+    AlbaComplexNumber<double> const complex1(3, 4);
+
+    AlbaComplexNumber<double> const actualComplex(complex1.getConjugate());
+
+    AlbaComplexNumber<double> const expectedComplex(3, -4);
+    EXPECT_EQ(expectedComplex, actualComplex);
+}
+
+TEST(AlbaComplexNumberTest, GetNthRootWorks) {
+    AlbaComplexNumber<double> const complex(1, 0);
+
+    AlbaComplexNumber<double> const actualComplex1(complex.getNthRoot(0U, 4U));
+    AlbaComplexNumber<double> const actualComplex2(complex.getNthRoot(1U, 4U));
+    AlbaComplexNumber<double> const actualComplex3(complex.getNthRoot(2U, 4U));
+    AlbaComplexNumber<double> const actualComplex4(complex.getNthRoot(3U, 4U));
+
+    AlbaComplexNumber<double> const expectedComplex1(1, 0);
+    AlbaComplexNumber<double> const expectedComplex2(0, 1);
+    AlbaComplexNumber<double> const expectedComplex3(-1, 0);
+    AlbaComplexNumber<double> const expectedComplex4(0, -1);
+    EXPECT_EQ(expectedComplex1, actualComplex1);
+    EXPECT_EQ(expectedComplex2, actualComplex2);
+    EXPECT_EQ(expectedComplex3, actualComplex3);
+    EXPECT_EQ(expectedComplex4, actualComplex4);
+}
+
 TEST(AlbaComplexNumberTest, GetRealPartWorks) {
     AlbaComplexNumber<double> const complex(3.5, 4.5);
 
     EXPECT_DOUBLE_EQ(3.5, complex.getRealPart());
+}
+
+TEST(AlbaComplexNumberTest, ConstructionWorks) {
+    AlbaComplexNumber<double> const complex1;
+    AlbaComplexNumber<double> const complex2(3, 4);
+
+    EXPECT_DOUBLE_EQ(0, complex1.getRealPart());
+    EXPECT_DOUBLE_EQ(0, complex1.getImaginaryPart());
+    EXPECT_DOUBLE_EQ(3, complex2.getRealPart());
+    EXPECT_DOUBLE_EQ(4, complex2.getImaginaryPart());
+}
+
+TEST(AlbaComplexNumberTest, OperatorDivideWorksWithZero) {
+    AlbaComplexNumber<double> const complex1(5, 6);
+    AlbaComplexNumber<double> const complex2(0, 0);
+
+    AlbaComplexNumber<double> const actualComplex(complex1 / complex2);
+
+    EXPECT_TRUE(isnan(actualComplex.getRealPart()));
+    EXPECT_TRUE(isnan(actualComplex.getImaginaryPart()));
 }
 
 TEST(AlbaComplexNumberTest, GetImaginaryPartWorks) {
@@ -201,42 +237,6 @@ TEST(AlbaComplexNumberTest, GetBestAngleInRaiseToPowerInRadiansWorks) {
     AlbaComplexNumber<double> const complex(-8, 0);
 
     EXPECT_DOUBLE_EQ(3.1415926535897931, complex.getBestAngleInRaiseToPowerInRadians(static_cast<double>(1) / 3));
-}
-
-TEST(AlbaComplexNumberTest, GetConjugateWorks) {
-    AlbaComplexNumber<double> const complex1(3, 4);
-
-    AlbaComplexNumber<double> const actualComplex(complex1.getConjugate());
-
-    AlbaComplexNumber<double> const expectedComplex(3, -4);
-    EXPECT_EQ(expectedComplex, actualComplex);
-}
-
-TEST(AlbaComplexNumberTest, GetNthRootWorks) {
-    AlbaComplexNumber<double> const complex(1, 0);
-
-    AlbaComplexNumber<double> const actualComplex1(complex.getNthRoot(0U, 4U));
-    AlbaComplexNumber<double> const actualComplex2(complex.getNthRoot(1U, 4U));
-    AlbaComplexNumber<double> const actualComplex3(complex.getNthRoot(2U, 4U));
-    AlbaComplexNumber<double> const actualComplex4(complex.getNthRoot(3U, 4U));
-
-    AlbaComplexNumber<double> const expectedComplex1(1, 0);
-    AlbaComplexNumber<double> const expectedComplex2(0, 1);
-    AlbaComplexNumber<double> const expectedComplex3(-1, 0);
-    AlbaComplexNumber<double> const expectedComplex4(0, -1);
-    EXPECT_EQ(expectedComplex1, actualComplex1);
-    EXPECT_EQ(expectedComplex2, actualComplex2);
-    EXPECT_EQ(expectedComplex3, actualComplex3);
-    EXPECT_EQ(expectedComplex4, actualComplex4);
-}
-
-TEST(AlbaComplexNumberTest, OutputStreamOperatorWorks) {
-    stringstream testStream;
-    AlbaComplexNumber<double> const complex(3.5, 4.5);
-
-    testStream << complex;
-
-    EXPECT_EQ("(3.5 + 4.5i)", testStream.str());
 }
 
 }  // namespace alba

@@ -313,6 +313,24 @@ Variable& Term::getAsVariableReference() {
     return *static_cast<Variable*>(m_baseTermDataPointer.get());
 }
 
+void Term::initializeBasedOnString(string const& stringAsParameter) {
+    if (stringAsParameter.empty()) {
+        // do nothing
+    } else if (isNumber(stringAsParameter.front())) {
+        m_type = TermType::Constant;
+        m_baseTermDataPointer = make_unique<Constant>(convertStringToAlbaNumber(stringAsParameter));
+    } else if (algebra::isOperator(stringAsParameter)) {
+        m_type = TermType::Operator;
+        m_baseTermDataPointer = make_unique<Operator>(stringAsParameter);
+    } else if (algebra::isFunction(stringAsParameter)) {
+        m_type = TermType::Function;
+        m_baseTermDataPointer = make_unique<Function>(createFunctionWithEmptyInputExpression(stringAsParameter));
+    } else {
+        m_type = TermType::Variable;
+        m_baseTermDataPointer = make_unique<Variable>(stringAsParameter);
+    }
+}
+
 Term::BaseTermDataPointer Term::createANewDataPointerFrom(Term const& term) {
     BaseTermDataPointer result;
     switch (term.getTermType()) {
@@ -341,24 +359,6 @@ Term::BaseTermDataPointer Term::createANewDataPointerFrom(Term const& term) {
             break;
     }
     return result;
-}
-
-void Term::initializeBasedOnString(string const& stringAsParameter) {
-    if (stringAsParameter.empty()) {
-        // do nothing
-    } else if (isNumber(stringAsParameter.front())) {
-        m_type = TermType::Constant;
-        m_baseTermDataPointer = make_unique<Constant>(convertStringToAlbaNumber(stringAsParameter));
-    } else if (algebra::isOperator(stringAsParameter)) {
-        m_type = TermType::Operator;
-        m_baseTermDataPointer = make_unique<Operator>(stringAsParameter);
-    } else if (algebra::isFunction(stringAsParameter)) {
-        m_type = TermType::Function;
-        m_baseTermDataPointer = make_unique<Function>(createFunctionWithEmptyInputExpression(stringAsParameter));
-    } else {
-        m_type = TermType::Variable;
-        m_baseTermDataPointer = make_unique<Variable>(stringAsParameter);
-    }
 }
 
 ostream& operator<<(ostream& out, Term const& term) {

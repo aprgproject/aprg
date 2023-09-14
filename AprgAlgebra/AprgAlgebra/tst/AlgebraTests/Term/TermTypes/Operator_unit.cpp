@@ -6,14 +6,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-TEST(OperatorTest, OperatorsAreConstructedCorrectly) {
-    Operator operator1;
-    Operator operator2("test");
-
-    EXPECT_EQ("", operator1.getOperatorString());
-    EXPECT_EQ("test", operator2.getOperatorString());
-}
-
 TEST(OperatorTest, EqualityOperatorWorks) {
     Operator operator1;
     Operator operator2("+");
@@ -40,11 +32,92 @@ TEST(OperatorTest, InequalityOperatorWorks) {
     EXPECT_FALSE(operator2 != operator4);
 }
 
+TEST(OperatorTest, OutputStreamOperatorWorks) {
+    stringstream ss;
+    Operator nullOperator;
+    Operator addOperator("+");
+    Operator subtractOperator("-");
+    Operator multiplyOperator("*");
+    Operator divideOperator("/");
+    Operator raiseToPowerOperator("^");
+    Operator openingGroupOperator("(");
+    Operator closingGroupOperator(")");
+    Operator invalidOperator("invalid");
+
+    ss << nullOperator << "," << addOperator << "," << subtractOperator << "," << multiplyOperator << ","
+       << divideOperator << "," << raiseToPowerOperator << "," << openingGroupOperator << "," << closingGroupOperator
+       << "," << invalidOperator;
+
+    EXPECT_EQ(",+,-,*,/,^,(,),invalid", ss.str());
+}
+
 TEST(OperatorTest, LessThanOperatorWorks) {
     EXPECT_FALSE(Operator() < Operator());
     EXPECT_FALSE(Operator("*") < Operator("*"));
     EXPECT_FALSE(Operator("*") < Operator("+"));
     EXPECT_TRUE(Operator("*") < Operator("/"));
+}
+
+TEST(OperatorTest, GetOperatorLevelWorks) {
+    Operator nullOperator;
+    Operator addOperator("+");
+    Operator subtractOperator("-");
+    Operator multiplyOperator("*");
+    Operator divideOperator("/");
+    Operator raiseToPowerOperator("^");
+    Operator openingGroupOperator("(");
+    Operator closingGroupOperator(")");
+    Operator invalidOperator("invalid");
+
+    EXPECT_EQ(OperatorLevel::Unknown, nullOperator.getOperatorLevel());
+    EXPECT_EQ(OperatorLevel::AdditionAndSubtraction, addOperator.getOperatorLevel());
+    EXPECT_EQ(OperatorLevel::AdditionAndSubtraction, subtractOperator.getOperatorLevel());
+    EXPECT_EQ(OperatorLevel::MultiplicationAndDivision, multiplyOperator.getOperatorLevel());
+    EXPECT_EQ(OperatorLevel::MultiplicationAndDivision, divideOperator.getOperatorLevel());
+    EXPECT_EQ(OperatorLevel::RaiseToPower, raiseToPowerOperator.getOperatorLevel());
+    EXPECT_EQ(OperatorLevel::Unknown, openingGroupOperator.getOperatorLevel());
+    EXPECT_EQ(OperatorLevel::Unknown, closingGroupOperator.getOperatorLevel());
+    EXPECT_EQ(OperatorLevel::Unknown, invalidOperator.getOperatorLevel());
+}
+
+TEST(OperatorTest, OperatorsAreConstructedCorrectly) {
+    Operator operator1;
+    Operator operator2("test");
+
+    EXPECT_EQ("", operator1.getOperatorString());
+    EXPECT_EQ("test", operator2.getOperatorString());
+}
+
+TEST(OperatorTest, GetOperatorStringValueWorks) {
+    Operator nullOperator;
+    Operator addOperator("+");
+    Operator subtractOperator("-");
+    Operator multiplyOperator("*");
+    Operator divideOperator("/");
+    Operator raiseToPowerOperator("^");
+    Operator openingGroupOperator("(");
+    Operator closingGroupOperator(")");
+    Operator invalidOperator("invalid");
+
+    EXPECT_TRUE(nullOperator.getOperatorString().empty());
+    EXPECT_EQ("+", addOperator.getOperatorString());
+    EXPECT_EQ("-", subtractOperator.getOperatorString());
+    EXPECT_EQ("*", multiplyOperator.getOperatorString());
+    EXPECT_EQ("/", divideOperator.getOperatorString());
+    EXPECT_EQ("^", raiseToPowerOperator.getOperatorString());
+    EXPECT_EQ("(", openingGroupOperator.getOperatorString());
+    EXPECT_EQ(")", closingGroupOperator.getOperatorString());
+    EXPECT_EQ("invalid", invalidOperator.getOperatorString());
+}
+
+TEST(OperatorTest, SettingANewOperatingStringWorks) {
+    Operator operatorForTest1;
+    Operator operatorForTest2;
+
+    operatorForTest2.setOperatorString("multiply");
+
+    EXPECT_EQ("", operatorForTest1.getOperatorString());
+    EXPECT_EQ("multiply", operatorForTest2.getOperatorString());
 }
 
 TEST(OperatorTest, IsAdditionWorks) {
@@ -221,79 +294,6 @@ TEST(OperatorTest, IsClosingGroupOperatorWorks) {
     EXPECT_FALSE(openingGroupOperator.isClosingGroupOperator());
     EXPECT_TRUE(closingGroupOperator.isClosingGroupOperator());
     EXPECT_FALSE(invalidOperator.isClosingGroupOperator());
-}
-
-TEST(OperatorTest, GetOperatorLevelWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
-
-    EXPECT_EQ(OperatorLevel::Unknown, nullOperator.getOperatorLevel());
-    EXPECT_EQ(OperatorLevel::AdditionAndSubtraction, addOperator.getOperatorLevel());
-    EXPECT_EQ(OperatorLevel::AdditionAndSubtraction, subtractOperator.getOperatorLevel());
-    EXPECT_EQ(OperatorLevel::MultiplicationAndDivision, multiplyOperator.getOperatorLevel());
-    EXPECT_EQ(OperatorLevel::MultiplicationAndDivision, divideOperator.getOperatorLevel());
-    EXPECT_EQ(OperatorLevel::RaiseToPower, raiseToPowerOperator.getOperatorLevel());
-    EXPECT_EQ(OperatorLevel::Unknown, openingGroupOperator.getOperatorLevel());
-    EXPECT_EQ(OperatorLevel::Unknown, closingGroupOperator.getOperatorLevel());
-    EXPECT_EQ(OperatorLevel::Unknown, invalidOperator.getOperatorLevel());
-}
-
-TEST(OperatorTest, GetOperatorStringValueWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
-
-    EXPECT_TRUE(nullOperator.getOperatorString().empty());
-    EXPECT_EQ("+", addOperator.getOperatorString());
-    EXPECT_EQ("-", subtractOperator.getOperatorString());
-    EXPECT_EQ("*", multiplyOperator.getOperatorString());
-    EXPECT_EQ("/", divideOperator.getOperatorString());
-    EXPECT_EQ("^", raiseToPowerOperator.getOperatorString());
-    EXPECT_EQ("(", openingGroupOperator.getOperatorString());
-    EXPECT_EQ(")", closingGroupOperator.getOperatorString());
-    EXPECT_EQ("invalid", invalidOperator.getOperatorString());
-}
-
-TEST(OperatorTest, SettingANewOperatingStringWorks) {
-    Operator operatorForTest1;
-    Operator operatorForTest2;
-
-    operatorForTest2.setOperatorString("multiply");
-
-    EXPECT_EQ("", operatorForTest1.getOperatorString());
-    EXPECT_EQ("multiply", operatorForTest2.getOperatorString());
-}
-
-TEST(OperatorTest, OutputStreamOperatorWorks) {
-    stringstream ss;
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
-
-    ss << nullOperator << "," << addOperator << "," << subtractOperator << "," << multiplyOperator << ","
-       << divideOperator << "," << raiseToPowerOperator << "," << openingGroupOperator << "," << closingGroupOperator
-       << "," << invalidOperator;
-
-    EXPECT_EQ(",+,-,*,/,^,(,),invalid", ss.str());
 }
 
 }  // namespace alba::algebra

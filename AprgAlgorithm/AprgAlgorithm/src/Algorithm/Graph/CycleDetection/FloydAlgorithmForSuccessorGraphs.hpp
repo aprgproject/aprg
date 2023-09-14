@@ -73,5 +73,4 @@ private:
 // Both pointers begin at a node x that is the starting node of the graph.
 // Then, on each turn, the pointer a walks one step forward and the pointer b walks two steps forward.
 // The process continues until the pointers meet each other.
-
 }  // namespace alba::algorithm

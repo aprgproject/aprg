@@ -82,16 +82,6 @@ double Line::getBCoefficient() const { return m_bCoefficient; }
 double Line::getCCoefficient() const { return m_cCoefficient; }
 bool Line::isInvalid() const { return areAllCoefficientsZero(); }
 
-optional<double> Line::calculateOtherCoordinate(
-    double const& initialValue1, double const coefficient1, double const& initialValue2, double const coefficient2,
-    double const coordinate2) {
-    optional<double> result;
-    if (!isAlmostEqual(coefficient2, 0.0)) {
-        result = ((coordinate2 - initialValue2) / coefficient2 * coefficient1) + initialValue1;
-    }
-    return result;
-}
-
 bool Line::areAllCoefficientsZero() const {
     return isAlmostEqual(m_aCoefficient, 0.0) && isAlmostEqual(m_cCoefficient, 0.0) &&
            isAlmostEqual(m_cCoefficient, 0.0);
@@ -128,6 +118,16 @@ void Line::calculateAndSaveInitialValuesIfPossible(Point const& first) {
         m_yInitialValue = first.getY() + minimizedMultiplierForInitialValue * m_bCoefficient;
         m_zInitialValue = first.getZ() + minimizedMultiplierForInitialValue * m_cCoefficient;
     }
+}
+
+optional<double> Line::calculateOtherCoordinate(
+    double const& initialValue1, double const coefficient1, double const& initialValue2, double const coefficient2,
+    double const coordinate2) {
+    optional<double> result;
+    if (!isAlmostEqual(coefficient2, 0.0)) {
+        result = ((coordinate2 - initialValue2) / coefficient2 * coefficient1) + initialValue1;
+    }
+    return result;
 }
 
 ostream& operator<<(ostream& out, Line const& line) {

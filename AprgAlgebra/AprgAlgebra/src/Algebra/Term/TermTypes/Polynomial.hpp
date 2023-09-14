@@ -36,10 +36,10 @@ public:
     Monomials& getMonomialsReference();
 
 private:
-    static bool isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify);
     void setNan();
     void simplifyContinuouslyIfChanged();
     void simplifyMonomialsAndReAdd();
+    static bool isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify);
     friend std::ostream& operator<<(std::ostream& out, Polynomial const& polynomial);
     Monomials m_monomials;
     bool m_isSimplified;

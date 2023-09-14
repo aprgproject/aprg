@@ -14,10 +14,20 @@ TEST(SignRelatedHelpersTest, GetAbsoluteValueWorksForPrimitiveTypes) {
     EXPECT_EQ(0.5, getAbsoluteValue(-0.5));
 }
 
+TEST(SignRelatedHelpersTest, GetAbsoluteValueForAlbaNumberWorks) {
+    EXPECT_EQ(AlbaNumber::createFraction(1, 3), getAbsoluteValue(AlbaNumber::createFraction(1, 3)));
+    EXPECT_EQ(AlbaNumber::createFraction(1, 3), getAbsoluteValue(AlbaNumber::createFraction(-1, 3)));
+}
+
 TEST(SignRelatedHelpersTest, GetSignWorksForPrimitiveTypes) {
     EXPECT_EQ(-1, getSign(-10));
     EXPECT_EQ(1, getSign(0));
     EXPECT_EQ(1, getSign(10));
+}
+
+TEST(SignRelatedHelpersTest, GetSignForAlbaNumberWorks) {
+    EXPECT_EQ(AlbaNumber(1), getSign(AlbaNumber::createFraction(1, 3)));
+    EXPECT_EQ(AlbaNumber(-1), getSign(AlbaNumber::createFraction(-1, 3)));
 }
 
 TEST(SignRelatedHelpersTest, GetPositiveDeltaWorksForPrimitiveTypes) {
@@ -31,26 +41,16 @@ TEST(SignRelatedHelpersTest, GetPositiveDeltaWorksForPrimitiveTypes) {
     EXPECT_EQ(90, getPositiveDelta(10, 100));
 }
 
+TEST(SignRelatedHelpersTest, GetPositiveDeltaForAlbaNumberWorks) {
+    EXPECT_EQ(AlbaNumber(4.444), getPositiveDelta(AlbaNumber(1.234), AlbaNumber(5.678)));
+    EXPECT_EQ(AlbaNumber(4.444), getPositiveDelta(AlbaNumber(5.678), AlbaNumber(1.234)));
+}
+
 TEST(SignRelatedHelpersTest, ConvertToSignedThenSubtractWorks) {
     EXPECT_EQ(0, convertToSignedThenSubtract(0U, 0U));
     EXPECT_EQ(0, convertToSignedThenSubtract(5U, 5U));
     EXPECT_EQ(4, convertToSignedThenSubtract(5U, 1U));
     EXPECT_EQ(-4, convertToSignedThenSubtract(1U, 5U));
-}
-
-TEST(SignRelatedHelpersTest, GetAbsoluteValueForAlbaNumberWorks) {
-    EXPECT_EQ(AlbaNumber::createFraction(1, 3), getAbsoluteValue(AlbaNumber::createFraction(1, 3)));
-    EXPECT_EQ(AlbaNumber::createFraction(1, 3), getAbsoluteValue(AlbaNumber::createFraction(-1, 3)));
-}
-
-TEST(SignRelatedHelpersTest, GetSignForAlbaNumberWorks) {
-    EXPECT_EQ(AlbaNumber(1), getSign(AlbaNumber::createFraction(1, 3)));
-    EXPECT_EQ(AlbaNumber(-1), getSign(AlbaNumber::createFraction(-1, 3)));
-}
-
-TEST(SignRelatedHelpersTest, GetPositiveDeltaForAlbaNumberWorks) {
-    EXPECT_EQ(AlbaNumber(4.444), getPositiveDelta(AlbaNumber(1.234), AlbaNumber(5.678)));
-    EXPECT_EQ(AlbaNumber(4.444), getPositiveDelta(AlbaNumber(5.678), AlbaNumber(1.234)));
 }
 
 }  // namespace alba::mathHelper

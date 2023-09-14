@@ -81,12 +81,6 @@ public:
     }
 
     bool operator!=(AlbaSparseMatrix const& secondMatrix) const { return !operator==(secondMatrix); }
-    [[nodiscard]] size_t getNumberOfColumns() const { return m_numberOfColumns; }
-    [[nodiscard]] size_t getNumberOfRows() const { return m_numberOfRows; }
-
-    [[nodiscard]] size_t getMatrixIndex(size_t const xPosition, size_t const yPosition) const {
-        return getMatrixIndex(xPosition, yPosition, m_numberOfColumns);
-    }
 
     [[nodiscard]] DataType getEntry(size_t const xPosition, size_t const yPosition) const {
         assert((xPosition < m_numberOfColumns) && (yPosition < m_numberOfRows));
@@ -94,6 +88,12 @@ public:
     }
 
     [[nodiscard]] MatrixData const& getMatrixData() const { return m_matrixData; }
+    [[nodiscard]] size_t getNumberOfColumns() const { return m_numberOfColumns; }
+    [[nodiscard]] size_t getNumberOfRows() const { return m_numberOfRows; }
+
+    [[nodiscard]] size_t getMatrixIndex(size_t const xPosition, size_t const yPosition) const {
+        return getMatrixIndex(xPosition, yPosition, m_numberOfColumns);
+    }
 
     void setEntry(size_t const xPosition, size_t const yPosition, DataType const& value) {
         assert((xPosition < m_numberOfColumns) && (yPosition < m_numberOfRows));
@@ -136,15 +136,6 @@ public:
     }
 
 private:
-    [[nodiscard]] size_t getMatrixIndex(
-        size_t const xPosition, size_t const yPosition, size_t const numberOfColumns) const {
-        return (yPosition * numberOfColumns) + xPosition;
-    }
-
-    [[nodiscard]] size_t getTranposeIndex(size_t const index) const {
-        return getMatrixIndex(index / m_numberOfColumns, index % m_numberOfColumns, m_numberOfRows);
-    }
-
     [[nodiscard]] AlbaSparseMatrix doUnaryOperation(
         AlbaSparseMatrix const& inputMatrix, UnaryFunction const& unaryFunction) const {
         AlbaSparseMatrix resultMatrix(inputMatrix.getNumberOfColumns(), inputMatrix.getNumberOfRows());
@@ -187,6 +178,15 @@ private:
             result.emplace(index);
         }
         return result;
+    }
+
+    [[nodiscard]] size_t getMatrixIndex(
+        size_t const xPosition, size_t const yPosition, size_t const numberOfColumns) const {
+        return (yPosition * numberOfColumns) + xPosition;
+    }
+
+    [[nodiscard]] size_t getTranposeIndex(size_t const index) const {
+        return getMatrixIndex(index / m_numberOfColumns, index % m_numberOfColumns, m_numberOfRows);
     }
 
     friend std::ostream& operator<<(std::ostream& out, AlbaSparseMatrix<DataType> const& matrix) {

@@ -35,7 +35,6 @@ private:
 // The train goes from station 0 to N-1.
 // The ticket cost for all pair of stations (i, j) is given where j is greater than i.
 // Find the minimum cost to reach the destination.
-
 // Example
 // Input:
 // -> cost[N][N] = { {0, 15, 80, 90},
@@ -45,7 +44,6 @@ private:
 // ->              };
 // -> There are 4 stations and cost[i][j] indicates cost to reach j
 // -> from i. The entries where j < i are meaningless.
-
 // Output:
 // -> The minimum cost is 65
 // -> The minimum cost can be obtained by first going to station 1 from 0.

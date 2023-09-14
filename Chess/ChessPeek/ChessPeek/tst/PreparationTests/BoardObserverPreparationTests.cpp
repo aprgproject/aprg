@@ -153,6 +153,10 @@ uint32_t getLabelColor(int const label) {
     return static_cast<uint32_t>(newValue) % 0xFFFFFF;
 }
 
+uint32_t getLabelColor(SetOfPieces const& setOfPieces) {
+    return getLabelColor(getLabelBasedOnSetOfPieces(setOfPieces));
+}
+
 int getLabelBasedOnSetOfPieces(SetOfPieces const& setOfPieces) {
     int result(0U);
     for (PieceColorAndType const piece : setOfPieces) {
@@ -161,11 +165,8 @@ int getLabelBasedOnSetOfPieces(SetOfPieces const& setOfPieces) {
     return result;
 }
 
-uint32_t getLabelColor(SetOfPieces const& setOfPieces) {
-    return getLabelColor(getLabelBasedOnSetOfPieces(setOfPieces));
-}
-
 }  // namespace
+
 TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValue_ForChessDotComVersus) {
     AlbaLocalPathHandler const inputFile(
         APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComVersus\ChessDotComVersus.bmp)");

@@ -4,14 +4,6 @@
 
 namespace alba::algebra {
 
-TEST(PolynomialRaiseToAnUnsignedIntTest, ConstructionWorks) {
-    Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})};
-    PolynomialRaiseToAnUnsignedInt polynomialRaiseToAnUnsignedInt(polynomial);
-
-    EXPECT_EQ(polynomial, polynomialRaiseToAnUnsignedInt.getBase());
-    EXPECT_EQ(1, polynomialRaiseToAnUnsignedInt.getExponent());
-}
-
 TEST(PolynomialRaiseToAnUnsignedIntTest, GetBaseWorks) {
     Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})};
     PolynomialRaiseToAnUnsignedInt polynomialRaiseToAnUnsignedInt(polynomial);
@@ -19,18 +11,12 @@ TEST(PolynomialRaiseToAnUnsignedIntTest, GetBaseWorks) {
     EXPECT_EQ(polynomial, polynomialRaiseToAnUnsignedInt.getBase());
 }
 
-TEST(PolynomialRaiseToAnUnsignedIntTest, GetExponentWorks) {
+TEST(PolynomialRaiseToAnUnsignedIntTest, ConstructionWorks) {
     Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})};
     PolynomialRaiseToAnUnsignedInt polynomialRaiseToAnUnsignedInt(polynomial);
 
+    EXPECT_EQ(polynomial, polynomialRaiseToAnUnsignedInt.getBase());
     EXPECT_EQ(1, polynomialRaiseToAnUnsignedInt.getExponent());
-}
-
-TEST(PolynomialRaiseToAnUnsignedIntTest, IsExponentOneWorks) {
-    Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})};
-    PolynomialRaiseToAnUnsignedInt polynomialRaiseToAnUnsignedInt(polynomial);
-
-    EXPECT_TRUE(polynomialRaiseToAnUnsignedInt.isExponentOne());
 }
 
 TEST(PolynomialRaiseToAnUnsignedIntTest, PolynomialWithCommonMonomialAndFactorsButExponentIsStillOneWorks) {
@@ -103,6 +89,20 @@ TEST(PolynomialRaiseToAnUnsignedIntTest, PolynomialWithPerfectSquaresAndPerfect4
         Monomial(512, {{"y", 2}})};
     EXPECT_EQ(expectedBase, polynomialRaiseToAnUnsignedInt.getBase());
     EXPECT_EQ(2, polynomialRaiseToAnUnsignedInt.getExponent());
+}
+
+TEST(PolynomialRaiseToAnUnsignedIntTest, GetExponentWorks) {
+    Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})};
+    PolynomialRaiseToAnUnsignedInt polynomialRaiseToAnUnsignedInt(polynomial);
+
+    EXPECT_EQ(1, polynomialRaiseToAnUnsignedInt.getExponent());
+}
+
+TEST(PolynomialRaiseToAnUnsignedIntTest, IsExponentOneWorks) {
+    Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})};
+    PolynomialRaiseToAnUnsignedInt polynomialRaiseToAnUnsignedInt(polynomial);
+
+    EXPECT_TRUE(polynomialRaiseToAnUnsignedInt.isExponentOne());
 }
 
 }  // namespace alba::algebra

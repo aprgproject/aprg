@@ -35,7 +35,6 @@ private:
 // Maximum sum rectangle in a 2D matrix
 
 // Given a 2D array, find the maximum sum subarray in it.
-
 // For example, in the following 2D array, the maximum sum subarray is highlighted with # rectangle and sum of this
 // subarray is 29.
 // -----------------
@@ -47,13 +46,11 @@ private:
 // ----#--------#----
 // |-4 #-1| 1| 7# -6|
 // ----##########----
-
 // The Naive Solution for this problem is to check every possible rectangle in the given 2D array.
 // This solution requires 6 nested loops":
 // -> 4 for start and end coordinate of the 2 axis O(n^4)
 // -> and 2 for the summation of the sub-matrix O(n^2) (This is constant if you use a 2D range query structure)
 // The overall time complexity of this solution would be O(n^6). (And 0(n^4) if you use a 2D range query structure)
-
 // Efficient Approach:
 // Kadane’s algorithm for 1D array can be used to reduce the time complexity to O(n^3).
 // The idea is to fix the left and right columns one by one and find the maximum sum contiguous rows for every left and

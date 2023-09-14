@@ -75,25 +75,21 @@ private:
 
 // ONE LINE NOTE:
 // -> Encapsulate a REQUEST into a "command object" that can INVOKE different operations (such as execute/undo)
-
 // Intent:
 // Command pattern encapsulates a request as an object,
 // thereby letting you parameterize clients with different requests, queue or log requests, and supports undoable
 // operations. The pattern has a behavioral purpose and deals with relationships between objects.
-
 // When to use (applicability):
 // -> want to parameterize objects by an action to perform
 // -> want to specify, queue, and execute requests at different times
 // -> support undo
 // -> support logging changes so that they can be reapplied in case of a system crash
 // -> structure a system around high-level operations built on primitives operations
-
 // Consequences:
 // -> The command decouples the object that invokes the operation from the one that knows how to perform it.
 // -> The commands are first-class objects. They can be manipulated and extended like any other object.
 // -> You can assemble command into a composite command (using [Composite] pattern).
 // -> Its easy to add new Commands, because you don't have to change existing classes.
-
 // Implementation:
 // -> How intelligent should a command be?
 // ---> At one extreme it merely defines a binding between a receiver and the actions that carry out the request.
@@ -118,7 +114,6 @@ private:
 // -> Using C++ templates
 // ---> For commands that arent undoable and dont require arguments, we can use C++ templates to avoid creating
 // additional subclasses.
-
 // Related Patterns
 // -> A [Composite] can be used to implement MacroCommands (commands that contain multiple commands).
 // -> A [Memento] can keep the state the command requires to undo its effect.

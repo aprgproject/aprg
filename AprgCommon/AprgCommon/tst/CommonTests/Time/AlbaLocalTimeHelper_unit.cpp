@@ -36,20 +36,6 @@ TEST(AlbaLocalTimerHelperTest, DISABLED_ConvertSystemTimeToAlbaDateTimeWorks) {
     EXPECT_EQ(" 1 * 2021-09-13 02:39:51.893963", convertToString(currentTime));
 }
 
-TEST(AlbaLocalTimerHelperTest, DISABLED_ConvertSinceEpochTimeToAlbaDateTimeWorksForSystemTime) {
-    // this is unstable because time varies
-    AlbaDateTime const currentTime(convertSinceEpochTimeToAlbaDateTime(getSystemTimeNow()));
-
-    EXPECT_EQ(" 1 * 0051-09-11 18:49:14.042623", convertToString(currentTime));
-}
-
-TEST(AlbaLocalTimerHelperTest, DISABLED_ConvertSinceEpochTimeToAlbaDateTimeWorksForSteadyTime) {
-    // this is unstable because time varies
-    AlbaDateTime const currentTime(convertSinceEpochTimeToAlbaDateTime(getSteadyTimeNow()));
-
-    EXPECT_EQ(" 1 * 0000-01-00 07:45:15.164525", convertToString(currentTime));
-}
-
 TEST(AlbaLocalTimerHelperTest, DISABLED_ConvertAlbaDateTimeToSystemTimeWorks) {
     AlbaDateTime const inputTime(1990, 4, 13, 7, 7, 7, 7);
 
@@ -62,6 +48,20 @@ TEST(AlbaLocalTimerHelperTest, DISABLED_ConvertAlbaDateTimeToSystemTimeWorks) {
 TEST(AlbaLocalTimerHelperTest, DISABLED_GetCurrentDateTimeWorks) {
     // this is unstable because time varies
     EXPECT_EQ(" 1 * 2021-09-13 02:39:51.893963", convertToString(getCurrentDateTime()));
+}
+
+TEST(AlbaLocalTimerHelperTest, DISABLED_ConvertSinceEpochTimeToAlbaDateTimeWorksForSteadyTime) {
+    // this is unstable because time varies
+    AlbaDateTime const currentTime(convertSinceEpochTimeToAlbaDateTime(getSteadyTimeNow()));
+
+    EXPECT_EQ(" 1 * 0000-01-00 07:45:15.164525", convertToString(currentTime));
+}
+
+TEST(AlbaLocalTimerHelperTest, DISABLED_ConvertSinceEpochTimeToAlbaDateTimeWorksForSystemTime) {
+    // this is unstable because time varies
+    AlbaDateTime const currentTime(convertSinceEpochTimeToAlbaDateTime(getSystemTimeNow()));
+
+    EXPECT_EQ(" 1 * 0051-09-11 18:49:14.042623", convertToString(currentTime));
 }
 
 }  // namespace alba

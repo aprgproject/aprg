@@ -9,7 +9,6 @@ inline void performAMonteCarloAlgorithm(MonteCarloAlgorithm const& monteCarloAlg
 
 // A Monte Carlo algorithm is a randomized algorithm that may sometimes give a wrong answer.
 // For such an algorithm to be useful, the probability of a wrong answer should be small.
-
 // Monte Carlo:
 // -> Produce correct or optimum result with some probability.
 // -> These algorithms have deterministic running time

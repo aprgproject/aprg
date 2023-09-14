@@ -109,5 +109,4 @@ private:
 // There are polynomial algorithms for finding maximum matchings in general graphs, but such algorithms are complex and
 // rarely seen in programming contests. However, in bipartite graphs, the maximum matching problem is much easier to
 // solve, because we can reduce it to the maximum flow problem.
-
 }  // namespace alba::algorithm

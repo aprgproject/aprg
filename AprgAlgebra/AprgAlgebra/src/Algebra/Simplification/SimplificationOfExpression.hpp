@@ -31,6 +31,8 @@ public:
     class ScopeObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {};
     explicit SimplificationOfExpression(Expression const& expression);
     SimplificationOfExpression();
+    [[nodiscard]] Expression getExpression() const;
+    void simplify();
     static bool shouldSimplifyToACommonDenominator();
     static bool shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase();
     static bool shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision();
@@ -42,10 +44,16 @@ public:
     static bool shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue();
     static bool shouldNotSimplifyByDistributingConstantExponentToEachBase();
     static bool shouldPerformDebug();
-    [[nodiscard]] Expression getExpression() const;
-    void simplify();
 
 private:
+    void simplifyExpressionUntilNoChange();
+    void simplifyExpressionUntilNoChangeInitiallyIfNeeded();
+    void simplifyToACommonDenominatorIfNeeded();
+    void simplifyBySubstitutingExpressionAndFunctionsToVariablesIfNeeded();
+    void convertPolynomialOverPolynomialIfNeeded();
+    void convertPolynomialToPolynomialOverPolynomial(Term& term);
+    void convertPolynomialToPolynomialOverPolynomial(Expression& expression);
+    bool tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(Expression const& expression);
     static void simplifyExpression(Expression& expression);
     static void processTermsBaseOnOperatorLevel(
         Expression& expression, TermsWithDetails const& termsToProcess, OperatorLevel const operatorLevel);
@@ -70,14 +78,6 @@ private:
     static bool isChangeDetected(Expression const& expression1, Expression const& expression2);
     // other functions
     static bool shouldDistributeExponentConstantToEachBase();
-    void simplifyExpressionUntilNoChange();
-    void simplifyExpressionUntilNoChangeInitiallyIfNeeded();
-    void simplifyToACommonDenominatorIfNeeded();
-    void simplifyBySubstitutingExpressionAndFunctionsToVariablesIfNeeded();
-    void convertPolynomialOverPolynomialIfNeeded();
-    void convertPolynomialToPolynomialOverPolynomial(Term& term);
-    void convertPolynomialToPolynomialOverPolynomial(Expression& expression);
-    bool tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(Expression const& expression);
     Expression m_expression;
 };
 

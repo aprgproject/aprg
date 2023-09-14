@@ -10,22 +10,6 @@ namespace {
 using IntXYZ = AlbaXYZ<int>;
 }  // namespace
 
-TEST(AlbaXYZTest, DefaultValuesAreZero) {
-    IntXYZ const xyz;
-
-    EXPECT_EQ(0, xyz.getX());
-    EXPECT_EQ(0, xyz.getY());
-    EXPECT_EQ(0, xyz.getZ());
-}
-
-TEST(AlbaXYZTest, ValuesAreSetAtConstruction) {
-    IntXYZ const xyz(-5, 5, 10);
-
-    EXPECT_EQ(-5, xyz.getX());
-    EXPECT_EQ(5, xyz.getY());
-    EXPECT_EQ(10, xyz.getZ());
-}
-
 TEST(AlbaXYZTest, EqualityOperatorWorks) {
     IntXYZ const xyz(-5, 5, 10);
 
@@ -81,15 +65,35 @@ TEST(AlbaXYZTest, MinusAssignmentOperatorWorks) {
     EXPECT_EQ(IntXYZ(-3, 7, 9), xyzToTest);
 }
 
-TEST(AlbaXYZTest, IsEmptyWorks) {
-    EXPECT_TRUE(IntXYZ().isEmpty());
-    EXPECT_FALSE(IntXYZ(-5, 5, 10).isEmpty());
+TEST(AlbaXYZTest, OutputStreamOperatorWorks) {
+    stringstream testStream;
+    IntXYZ const xyz(-5, 5, 10);
+
+    testStream << xyz;
+
+    EXPECT_EQ("(-5,5,10)", testStream.str());
 }
 
 TEST(AlbaXYZTest, GetXWorks) {
     IntXYZ const xyz(-5, 5, 10);
 
     EXPECT_EQ(-5, xyz.getX());
+}
+
+TEST(AlbaXYZTest, DefaultValuesAreZero) {
+    IntXYZ const xyz;
+
+    EXPECT_EQ(0, xyz.getX());
+    EXPECT_EQ(0, xyz.getY());
+    EXPECT_EQ(0, xyz.getZ());
+}
+
+TEST(AlbaXYZTest, ValuesAreSetAtConstruction) {
+    IntXYZ const xyz(-5, 5, 10);
+
+    EXPECT_EQ(-5, xyz.getX());
+    EXPECT_EQ(5, xyz.getY());
+    EXPECT_EQ(10, xyz.getZ());
 }
 
 TEST(AlbaXYZTest, GetYWorks) {
@@ -108,6 +112,11 @@ TEST(AlbaXYZTest, GetXTimesYTimesZWorks) {
     IntXYZ const xyz(-5, 5, 10);
 
     EXPECT_EQ(-250, xyz.getXTimesYTimesZ());
+}
+
+TEST(AlbaXYZTest, IsEmptyWorks) {
+    EXPECT_TRUE(IntXYZ().isEmpty());
+    EXPECT_FALSE(IntXYZ(-5, 5, 10).isEmpty());
 }
 
 TEST(AlbaXYZTest, SetXWorks) {
@@ -162,15 +171,6 @@ TEST(AlbaXYZTest, SaveMaximumXAndYAndZWorks) {
     xyz.saveMaximumXAndYAndZ(IntXYZ(5, 5, 10));
 
     EXPECT_EQ(IntXYZ(5, 5, 10), xyz);
-}
-
-TEST(AlbaXYZTest, OutputStreamOperatorWorks) {
-    stringstream testStream;
-    IntXYZ const xyz(-5, 5, 10);
-
-    testStream << xyz;
-
-    EXPECT_EQ("(-5,5,10)", testStream.str());
 }
 
 }  // namespace alba

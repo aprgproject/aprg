@@ -74,7 +74,6 @@ private:
 // interpolation search may go to different locations according to the target of the key being searched. For example, if
 // the target of the key is closer to the last element, interpolation search is likely to start search toward the end
 // side.
-
 // To find the position to be searched, it uses following formula:
 // pos = lo + [ (x-arr[lo])*(hi-lo) / (arr[hi]-arr[Lo]) ]
 // arr[] ==> Array where elements need to be searched
@@ -83,16 +82,13 @@ private:
 // hi    ==> Ending index in arr[]
 // The idea of formula is to return higher target of pos when element to be searched is closer to arr[hi].
 // And smaller target when closer to arr[lo]
-
 // Algorithm
 // Rest of the Interpolation algorithm is the same except the above partition logic.
 // Step1: In a loop, calculate the target of “pos” using the probe position formula.
 // Step2: If it is a match, return the index of the item, and exit.
 // Step3: If the item is less than arr[pos], calculate the probe position of the left sub-array. Otherwise calculate the
 // same in the right sub-array. Step4: Repeat until a match is found or the sub-array reduces to zero.
-
 // Interpolation search vs Binary search
-
 // Interpolation search works better than Binary Search for a Sorted and Uniformly Distributed array.
 // Binary Search goes to the middle element to check irrespective of search-key.
 // On the other hand, Interpolation Search may go to different locations according to search-key.

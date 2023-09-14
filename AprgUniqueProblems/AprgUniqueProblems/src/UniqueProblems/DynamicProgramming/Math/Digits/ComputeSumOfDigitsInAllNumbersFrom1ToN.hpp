@@ -16,8 +16,8 @@ public:
     [[nodiscard]] Value getValueUsingSummationValues() const;
 
 private:
-    static Value getSummationFrom1ToN(Value const number);
     [[nodiscard]] Value getValueUsingMemoizationDP(Value const number) const;
+    static Value getSummationFrom1ToN(Value const number);
     Value const m_lastNumber;
 };
 

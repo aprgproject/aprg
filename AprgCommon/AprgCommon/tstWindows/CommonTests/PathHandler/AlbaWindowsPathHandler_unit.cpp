@@ -210,38 +210,6 @@ TEST_F(AlbaWindowsPathHandlerTest, ReInputFileThatIsToBeDeleted_ActualLocalDirec
     EXPECT_FALSE(pathHandler.isFoundInLocalSystem());
 }
 
-TEST_F(AlbaWindowsPathHandlerTest, ReInputFileThatIsToBeRenamed_ActualLocalDirectory) {
-    string const pathOfFileToBeRenamed(
-        pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\FileToBeRenamed.log)");
-    ofstream fileToBeDeleted(pathOfFileToBeRenamed);
-    fileToBeDeleted.close();
-
-    AlbaWindowsPathHandler pathHandler(pathOfFileToBeRenamed);
-    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
-    EXPECT_EQ(
-        convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)"),
-        pathHandler.getDirectory());
-    EXPECT_EQ("FileToBeRenamed.log", pathHandler.getFile());
-    EXPECT_EQ("FileToBeRenamed", pathHandler.getFilenameOnly());
-    EXPECT_EQ("log", pathHandler.getExtension());
-    EXPECT_EQ(PathType::File, pathHandler.getPathType());
-    EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
-
-    EXPECT_TRUE(pathHandler.renameFile("RenamedFile.txt"));
-
-    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
-    EXPECT_EQ(
-        convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)"),
-        pathHandler.getDirectory());
-    EXPECT_EQ("RenamedFile.txt", pathHandler.getFile());
-    EXPECT_EQ("RenamedFile", pathHandler.getFilenameOnly());
-    EXPECT_EQ("txt", pathHandler.getExtension());
-    EXPECT_EQ(PathType::File, pathHandler.getPathType());
-    EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
-
-    EXPECT_TRUE(pathHandler.deleteFile());
-}
-
 TEST_F(AlbaWindowsPathHandlerTest, FileIsCopiedToNewFile_ActualLocalDirectory) {
     string const pathOfFileToBeCopied(
         pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\FileToBeCopied.log)");
@@ -275,6 +243,38 @@ TEST_F(AlbaWindowsPathHandlerTest, FileIsCopiedToNewFile_ActualLocalDirectory) {
 
     EXPECT_TRUE(pathHandler.deleteFile());
     EXPECT_TRUE(pathHandlerOfCopiedFile.deleteFile());
+}
+
+TEST_F(AlbaWindowsPathHandlerTest, ReInputFileThatIsToBeRenamed_ActualLocalDirectory) {
+    string const pathOfFileToBeRenamed(
+        pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\FileToBeRenamed.log)");
+    ofstream fileToBeDeleted(pathOfFileToBeRenamed);
+    fileToBeDeleted.close();
+
+    AlbaWindowsPathHandler pathHandler(pathOfFileToBeRenamed);
+    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
+    EXPECT_EQ(
+        convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)"),
+        pathHandler.getDirectory());
+    EXPECT_EQ("FileToBeRenamed.log", pathHandler.getFile());
+    EXPECT_EQ("FileToBeRenamed", pathHandler.getFilenameOnly());
+    EXPECT_EQ("log", pathHandler.getExtension());
+    EXPECT_EQ(PathType::File, pathHandler.getPathType());
+    EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
+
+    EXPECT_TRUE(pathHandler.renameFile("RenamedFile.txt"));
+
+    EXPECT_EQ(getDriveOfAprgDir(), pathHandler.getDriveOrRoot());
+    EXPECT_EQ(
+        convertToSimplestPath(pathOfAprgDirectory + R"(AprgCommon\FilesForTests\DirectoryTest\)"),
+        pathHandler.getDirectory());
+    EXPECT_EQ("RenamedFile.txt", pathHandler.getFile());
+    EXPECT_EQ("RenamedFile", pathHandler.getFilenameOnly());
+    EXPECT_EQ("txt", pathHandler.getExtension());
+    EXPECT_EQ(PathType::File, pathHandler.getPathType());
+    EXPECT_TRUE(pathHandler.isFoundInLocalSystem());
+
+    EXPECT_TRUE(pathHandler.deleteFile());
 }
 
 TEST_F(AlbaWindowsPathHandlerTest, ReInputDirectoryThatIsToBeRenamed_ActualLocalDirectory) {

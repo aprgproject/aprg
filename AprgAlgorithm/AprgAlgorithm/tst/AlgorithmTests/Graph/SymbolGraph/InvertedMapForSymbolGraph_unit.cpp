@@ -12,15 +12,17 @@ namespace {
 using InvertedMapForTest = InvertedMapForSymbolGraph<int, string>;
 }  // namespace
 
-TEST(InvertedMapForSymbolGraphTest, GetVertexIdentifierAndAddObjectIfNeededWorksWhenAddingVertices) {
+TEST(InvertedMapForSymbolGraphTest, ClearWorks) {
     InvertedMapForTest invertedMap;
-
     invertedMap.getVertexIdentifierAndAddObjectIfNeeded("zero");
     invertedMap.getVertexIdentifierAndAddObjectIfNeeded("one");
     invertedMap.getVertexIdentifierAndAddObjectIfNeeded("two");
+    invertedMap.removeObject("zero");
+    invertedMap.removeObject("one");
 
-    InvertedMapForTest::ObjectToVertexMap const expectedMap{{"zero", 0}, {"one", 1}, {"two", 2}};
-    EXPECT_EQ(expectedMap, invertedMap.getObjectToVertexMap());
+    invertedMap.clear();
+
+    EXPECT_TRUE(invertedMap.getObjectToVertexMap().empty());
     EXPECT_TRUE(invertedMap.getUnusedVertices().empty());
 }
 
@@ -55,17 +57,15 @@ TEST(InvertedMapForSymbolGraphTest, RemoveObjectWorksWhenAddingObjects) {
     EXPECT_EQ(expectedUnusedVertices, invertedMap.getUnusedVertices());
 }
 
-TEST(InvertedMapForSymbolGraphTest, ClearWorks) {
+TEST(InvertedMapForSymbolGraphTest, GetVertexIdentifierAndAddObjectIfNeededWorksWhenAddingVertices) {
     InvertedMapForTest invertedMap;
+
     invertedMap.getVertexIdentifierAndAddObjectIfNeeded("zero");
     invertedMap.getVertexIdentifierAndAddObjectIfNeeded("one");
     invertedMap.getVertexIdentifierAndAddObjectIfNeeded("two");
-    invertedMap.removeObject("zero");
-    invertedMap.removeObject("one");
 
-    invertedMap.clear();
-
-    EXPECT_TRUE(invertedMap.getObjectToVertexMap().empty());
+    InvertedMapForTest::ObjectToVertexMap const expectedMap{{"zero", 0}, {"one", 1}, {"two", 2}};
+    EXPECT_EQ(expectedMap, invertedMap.getObjectToVertexMap());
     EXPECT_TRUE(invertedMap.getUnusedVertices().empty());
 }
 

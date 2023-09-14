@@ -43,23 +43,19 @@ public:
 
 // ONE LINE NOTE:
 // -> Create a NULL OBJECT to HANDLE special NULL or EMPTY cases with polymorphism.
-
 // Intent:
 // The Null object pattern is a design pattern that handles null references.
 // Null objects can arise in a program and it is usually handled as a special case which is unnecessarily adds a test
 // case. A better way to handle this is to add native support for null objects in the class design.
-
 // It focuses on simplifying the use of dependencies.
 // The given operation is achieved by using instances of a concrete class that further implements a known interface,
 // instead of null references.
-
 // When to use (applicability):
 // -> an object requires a collaborator.
 // ---> The Null Object pattern does not introduce this collaboration.
 // ---> It makes use of a collaboration that already exists
 // -> some collaborator instances should do nothing
 // -> you want to abstract the handling of null away from the client
-
 // Consequences:
 // ---> The Null Object pattern defines class hierarchies consisting of real objects and null objects.
 // -----> Null objects can be used in place of real objects when the object is expected to do nothing.
@@ -89,7 +85,6 @@ public:
 // -----> on how the null object should do nothing as when your AbstractObject interface is not well defined.
 // ---> The Null Object pattern always acts as a do nothing object.
 // -----> The Null Object does not transform into a Real Object.
-
 // Implementation:
 // -> There are several issues to consider when implementing the Null Object pattern:
 // ---> Null Object as Singleton.
@@ -142,6 +137,5 @@ public:
 // -----> The null behavior is not designed to be mixed into an object that needs some do nothing behavior.
 // -----> It is designed for a class which delegates to a collaborator all of the behavior that may or may not be do
 // nothing behavior. [Woolf96]
-
 // Related Patterns
 // -> It can be regarded as a special case of the [State] pattern and the [Strategy] pattern.

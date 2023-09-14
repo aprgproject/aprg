@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-using namespace alba;
 using namespace alba::chess::ChessPeek;
+using namespace alba;
 using namespace std;
 
 int main() {

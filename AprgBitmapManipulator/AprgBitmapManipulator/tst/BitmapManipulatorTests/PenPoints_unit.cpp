@@ -7,14 +7,6 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
-TEST(PenPointsTest, IsPenPointWorks) {
-    PenPoints penPoints;
-    penPoints.addAsPenPoint(BitmapXY(4155U, 6416U));
-
-    EXPECT_FALSE(penPoints.isPenPoint(BitmapXY(256U, 552U)));
-    EXPECT_TRUE(penPoints.isPenPoint(BitmapXY(4155U, 6416U)));
-}
-
 TEST(PenPointsTest, GetPenPointsWorks) {
     PenPoints penPoints;
     penPoints.addAsPenPoint(BitmapXY(4155U, 6416U));
@@ -37,20 +29,6 @@ TEST(PenPointsTest, AddAsPenPointWorks) {
     EXPECT_EQ(BitmapXY(4155U, 6416U), pointToVerify);
 }
 
-TEST(PenPointsTest, AddAsPenPointsWorks) {
-    PenPoints penPoints;
-
-    penPoints.addAsPenPoints({BitmapXY(4155U, 6416U), BitmapXY(4156U, 256U)});
-
-    PenPoints::PenPointsSet const& penPointsToVerify(penPoints.getPenPoints());
-    ASSERT_EQ(2U, penPointsToVerify.size());
-    auto itToVerify = penPointsToVerify.cbegin();
-    BitmapXY const& pointToVerify1(*itToVerify++);
-    BitmapXY const& pointToVerify2(*itToVerify++);
-    EXPECT_EQ(BitmapXY(4155U, 6416U), pointToVerify1);
-    EXPECT_EQ(BitmapXY(4156U, 256U), pointToVerify2);
-}
-
 TEST(PenPointsTest, RemovePenPointWorks) {
     PenPoints penPoints;
     penPoints.addAsPenPoint(BitmapXY(4155U, 6416U));
@@ -69,6 +47,28 @@ TEST(PenPointsTest, ClearWorks) {
 
     PenPoints::PenPointsSet const& penPointsToVerify(penPoints.getPenPoints());
     ASSERT_TRUE(penPointsToVerify.empty());
+}
+
+TEST(PenPointsTest, AddAsPenPointsWorks) {
+    PenPoints penPoints;
+
+    penPoints.addAsPenPoints({BitmapXY(4155U, 6416U), BitmapXY(4156U, 256U)});
+
+    PenPoints::PenPointsSet const& penPointsToVerify(penPoints.getPenPoints());
+    ASSERT_EQ(2U, penPointsToVerify.size());
+    auto itToVerify = penPointsToVerify.cbegin();
+    BitmapXY const& pointToVerify1(*itToVerify++);
+    BitmapXY const& pointToVerify2(*itToVerify++);
+    EXPECT_EQ(BitmapXY(4155U, 6416U), pointToVerify1);
+    EXPECT_EQ(BitmapXY(4156U, 256U), pointToVerify2);
+}
+
+TEST(PenPointsTest, IsPenPointWorks) {
+    PenPoints penPoints;
+    penPoints.addAsPenPoint(BitmapXY(4155U, 6416U));
+
+    EXPECT_FALSE(penPoints.isPenPoint(BitmapXY(256U, 552U)));
+    EXPECT_TRUE(penPoints.isPenPoint(BitmapXY(4155U, 6416U)));
 }
 
 }  // namespace alba::AprgBitmap

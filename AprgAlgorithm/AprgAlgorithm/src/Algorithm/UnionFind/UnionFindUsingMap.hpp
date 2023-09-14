@@ -12,7 +12,6 @@ public:
     using ConnectionMap =
         std::map<Object, Object>;  // you are using map, so log N but this should to be near constant (boo!)
     UnionFindUsingMap() = default;
-    [[nodiscard]] ConnectionMap const& getConnectionMap() const { return m_connectionMap; }
 
     [[nodiscard]] Object getRoot(Object const& object) const override {
         // Is it log(N) * log(N) * log(N)...?
@@ -41,6 +40,8 @@ public:
         m_connectionMap[object1] = root;
         m_connectionMap[object2] = root;
     }
+
+    [[nodiscard]] ConnectionMap const& getConnectionMap() const { return m_connectionMap; }
 
 private:
     void initializeToConnectionMapIfNeeded(Object const& object) { m_connectionMap.emplace(object, object); }

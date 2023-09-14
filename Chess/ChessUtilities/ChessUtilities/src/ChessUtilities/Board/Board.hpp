@@ -77,28 +77,6 @@ public:
     void move(Move const& move);
 
 private:
-    static void updateAttackDefendCount(
-        Board::AttackDefendCount& count, PieceColor const pieceColor, PieceColor const sameColor,
-        PieceColor const oppositeColor);
-
-    static CastleType getCastleTypeWithAlgebraicNotation(std::string const& textInAlgebraicNotation);
-    static Coordinate getCoordinateFromGridIndex(int const gridIndex);
-    static CoordinateDataType reverse(CoordinateDataType const value);
-    static CoordinateDataType getOneIncrement(CoordinateDataType const coordinateDataType);
-    static Coordinates getLDeltaCoordinates();
-    static Coordinates getDiagonalIncrementDeltaCoordinates();
-    static Coordinates getStraightIncrementDeltaCoordinates();
-    static Coordinates getOneStepDeltaCoordinates();
-    static PieceGrid getInitialValues(BoardOrientation const& inputType);
-    static int getGridIndex(int const x, int const y);
-    static bool isPieceEmptyOrHasOpposingColors(Piece const& piece, PieceColor const color);
-    static bool isPieceNonEmptyAndHasOpposingColors(Piece const& piece, PieceColor const color);
-    static bool isADiagonalMove(Move const& move);
-    static bool isAStraightMove(Move const& move);
-    static bool isAnLMove(Move const& move);
-    static bool isAOneStepMove(Move const& move);
-    static bool doesAllCellsInBetweenSatisfyTheCondition(
-        Coordinate const& startpoint, Coordinate const& endpoint, CoordinateCondition const& condition);
     [[nodiscard]] Coordinate getCorrectCoordinateFromAlgebraicNotation(
         CoordinateDataType const x, CoordinateDataType const y) const;
     [[nodiscard]] CoordinateDataType getXInCorrectOrientation(CoordinateDataType const x) const;
@@ -190,6 +168,29 @@ private:
     void retrieveQueenAttackDefendCountToThis(AttackDefendCount& count, Coordinate const& endpoint) const;
     void retrieveKingOneStepAttackDefendCountToThis(AttackDefendCount& count, Coordinate const& endpoint) const;
     void changePieceGridWithMove(Move const& move);
+
+    static void updateAttackDefendCount(
+        Board::AttackDefendCount& count, PieceColor const pieceColor, PieceColor const sameColor,
+        PieceColor const oppositeColor);
+
+    static CastleType getCastleTypeWithAlgebraicNotation(std::string const& textInAlgebraicNotation);
+    static Coordinate getCoordinateFromGridIndex(int const gridIndex);
+    static CoordinateDataType reverse(CoordinateDataType const value);
+    static CoordinateDataType getOneIncrement(CoordinateDataType const coordinateDataType);
+    static Coordinates getLDeltaCoordinates();
+    static Coordinates getDiagonalIncrementDeltaCoordinates();
+    static Coordinates getStraightIncrementDeltaCoordinates();
+    static Coordinates getOneStepDeltaCoordinates();
+    static PieceGrid getInitialValues(BoardOrientation const& inputType);
+    static int getGridIndex(int const x, int const y);
+    static bool isPieceEmptyOrHasOpposingColors(Piece const& piece, PieceColor const color);
+    static bool isPieceNonEmptyAndHasOpposingColors(Piece const& piece, PieceColor const color);
+    static bool isADiagonalMove(Move const& move);
+    static bool isAStraightMove(Move const& move);
+    static bool isAnLMove(Move const& move);
+    static bool isAOneStepMove(Move const& move);
+    static bool doesAllCellsInBetweenSatisfyTheCondition(
+        Coordinate const& startpoint, Coordinate const& endpoint, CoordinateCondition const& condition);
     BoardOrientation m_orientation;
     PieceGrid m_pieceGrid;
 };

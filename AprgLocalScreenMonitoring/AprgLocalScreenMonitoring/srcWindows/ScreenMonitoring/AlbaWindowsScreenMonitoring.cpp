@@ -10,11 +10,7 @@ using namespace std;
 
 namespace alba {
 
-AlbaWindowsScreenMonitoring::AlbaWindowsScreenMonitoring()
-    : m_screenWidth{}, m_screenHeight{}, m_screenHandler(nullptr), m_bitmapInfo{} {
-    initialize();
-}
-
+AlbaWindowsScreenMonitoring::AlbaWindowsScreenMonitoring() : m_screenWidth{}, m_screenHeight {}
 AlbaWindowsScreenMonitoring::~AlbaWindowsScreenMonitoring() { cleanup(); }
 
 uint32_t AlbaWindowsScreenMonitoring::getColorAt(int const x, int const y) const {
@@ -97,5 +93,8 @@ HBITMAP AlbaWindowsScreenMonitoring::createBitmapHandlerFromScreen(HDC const scr
     DeleteDC(memoryHandler);
     return bitmapHandler;
 }
+
+}
+, m_screenHandler(nullptr), m_bitmapInfo{} { initialize(); }
 
 }  // namespace alba

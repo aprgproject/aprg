@@ -11,6 +11,7 @@
 using namespace alba::containerHelper;
 using namespace alba::mathHelper;
 using namespace std;
+
 namespace alba::TwoDimensions::twoDimensionsUtilities {
 
 namespace {

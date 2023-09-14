@@ -2,50 +2,6 @@
 
 namespace alba {
 
-EDssWcdmaFilterBandwidth LrmDssWcdmaLteLoadMonitoring::convertLoadStateToFilterBandwidth(
-    EDssWcdmaLoad const loadState) {
-    EDssWcdmaFilterBandwidth result(EDssWcdmaFilterBandwidth_0_KHz);
-    switch (loadState) {
-        case EDssWcdmaLoad_Low:
-            result = EDssWcdmaFilterBandwidth_1200_KHz;
-            break;
-        case EDssWcdmaLoad_Medium:
-            result = EDssWcdmaFilterBandwidth_600_KHz;
-            break;
-        case EDssWcdmaLoad_High:
-            result = EDssWcdmaFilterBandwidth_0_KHz;
-            break;
-    }
-    return result;
-}
-
-EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getNextLowerLoadState(EDssWcdmaLoad const loadState) {
-    EDssWcdmaLoad result(EDssWcdmaLoad_Low);
-    unsigned int const loadStateValue = static_cast<EDssWcdmaLoad>(loadState);
-    constexpr unsigned int lowLoadStateValue = static_cast<EDssWcdmaLoad>(EDssWcdmaLoad_Low);
-    if (loadStateValue > lowLoadStateValue) {
-        result = static_cast<EDssWcdmaLoad>(loadStateValue - 1);
-    }
-    return result;
-}
-
-EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::convertFilterBandwidthToLoadState(
-    EDssWcdmaFilterBandwidth const filterBandwidth) {
-    EDssWcdmaLoad result(EDssWcdmaLoad_Low);
-    switch (filterBandwidth) {
-        case EDssWcdmaFilterBandwidth_0_KHz:
-            result = EDssWcdmaLoad_High;
-            break;
-        case EDssWcdmaFilterBandwidth_600_KHz:
-            result = EDssWcdmaLoad_Medium;
-            break;
-        case EDssWcdmaFilterBandwidth_1200_KHz:
-            result = EDssWcdmaLoad_Low;
-            break;
-    }
-    return result;
-}
-
 EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getLoadStateFromCellLoad(unsigned int const cellLoad) const {
     EDssWcdmaLoad loadState(EDssWcdmaLoad_Low);
 
@@ -101,6 +57,50 @@ LrmDssWcdmaLteLoadMonitoring::determineLoadStateForTheNextFilterUpdateAndUpdateC
         }
     } else {
         m_consecutiveLowerLoadStateCount = 0;
+    }
+    return result;
+}
+
+EDssWcdmaFilterBandwidth LrmDssWcdmaLteLoadMonitoring::convertLoadStateToFilterBandwidth(
+    EDssWcdmaLoad const loadState) {
+    EDssWcdmaFilterBandwidth result(EDssWcdmaFilterBandwidth_0_KHz);
+    switch (loadState) {
+        case EDssWcdmaLoad_Low:
+            result = EDssWcdmaFilterBandwidth_1200_KHz;
+            break;
+        case EDssWcdmaLoad_Medium:
+            result = EDssWcdmaFilterBandwidth_600_KHz;
+            break;
+        case EDssWcdmaLoad_High:
+            result = EDssWcdmaFilterBandwidth_0_KHz;
+            break;
+    }
+    return result;
+}
+
+EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::getNextLowerLoadState(EDssWcdmaLoad const loadState) {
+    EDssWcdmaLoad result(EDssWcdmaLoad_Low);
+    unsigned int const loadStateValue = static_cast<EDssWcdmaLoad>(loadState);
+    constexpr unsigned int lowLoadStateValue = static_cast<EDssWcdmaLoad>(EDssWcdmaLoad_Low);
+    if (loadStateValue > lowLoadStateValue) {
+        result = static_cast<EDssWcdmaLoad>(loadStateValue - 1);
+    }
+    return result;
+}
+
+EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::convertFilterBandwidthToLoadState(
+    EDssWcdmaFilterBandwidth const filterBandwidth) {
+    EDssWcdmaLoad result(EDssWcdmaLoad_Low);
+    switch (filterBandwidth) {
+        case EDssWcdmaFilterBandwidth_0_KHz:
+            result = EDssWcdmaLoad_High;
+            break;
+        case EDssWcdmaFilterBandwidth_600_KHz:
+            result = EDssWcdmaLoad_Medium;
+            break;
+        case EDssWcdmaFilterBandwidth_1200_KHz:
+            result = EDssWcdmaLoad_Low;
+            break;
     }
     return result;
 }

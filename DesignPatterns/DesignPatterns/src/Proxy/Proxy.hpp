@@ -42,13 +42,11 @@ private:
 // ONE LINE NOTE:
 // -> Provide a "proxy object" that LOOKS like a real object but its a PLACEHOLDER ONLY to control ACCESS to the real
 // object
-
 // Intent:
 // Proxy pattern provides a surrogate or placeholder for another object to control access to it.
 // The pattern has structural purpose and applies to objects.
 // Note: The proxy looks like the original subject.
 // Note: It both uses the "has a" and "is a" approach.
-
 // When to use (applicability):
 // -> whenever there is a need for a more versatile or sophisticated reference to an object than a simple pointer
 // -> Here are several common situations in which the Proxy pattern is applicable:
@@ -68,7 +66,6 @@ private:
 // references.
 // -----> loading a persistent object into memory when its first referenced.
 // -----> checking that the real object is locked before its accessed to ensure that no other object can change it.
-
 // Consequences:
 // -> The Proxy pattern introduces a level of indirection when accessing an object.
 // ---> The additional indirection has many uses, depending on the kind of proxy:
@@ -76,7 +73,6 @@ private:
 // -----> A virtual proxy can perform optimizations such as creating an object on demand.
 // -------> It can "copy on write" (if the copy is never modified there;s no need to incur this cost).
 // -----> Both protection proxies and smart reference allow additional housekeeping tasks when an object is accessed.
-
 // Implementation:
 // -> Overloading the member access operator in C++.
 // ---> C++ supports overloading the member access operator(operator->)
@@ -85,7 +81,6 @@ private:
 // -----> Overloading the member access operator isn't a good solution for every kind of proxy.
 // -------> Some proxies need to know precisely which operation is called and overloading the member access operator
 // doesn't work in those cases.
-
 // Related Patterns
 // -> An [Adapter] provides a different interface to the object it adapts.
 // ---> In contrast, a proxy provides the same interface as its subject.

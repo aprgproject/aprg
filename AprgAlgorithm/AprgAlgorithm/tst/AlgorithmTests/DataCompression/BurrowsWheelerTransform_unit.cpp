@@ -23,17 +23,6 @@ TEST(BurrowsWheelerTransformTest, EncodeWorksUsingExample1) {
     EXPECT_EQ("BNN^AA_|A", outputSs.str());
 }
 
-TEST(BurrowsWheelerTransformTest, DecodeWorksUsingExample1) {
-    stringstream inputSs;
-    inputSs << "BNN^AA_|A";
-    stringstream outputSs;
-    TransformForTest transform;
-
-    transform.decode(inputSs, outputSs);
-
-    EXPECT_EQ("^BANANA|", outputSs.str());
-}
-
 TEST(BurrowsWheelerTransformTest, EncodeWorksUsingExample2) {
     stringstream inputSs;
     inputSs << "ABRACADABRA!";
@@ -43,6 +32,17 @@ TEST(BurrowsWheelerTransformTest, EncodeWorksUsingExample2) {
     transform.encode(inputSs, outputSs);
 
     EXPECT_EQ("ARD_RCAAAABB!", outputSs.str());
+}
+
+TEST(BurrowsWheelerTransformTest, DecodeWorksUsingExample1) {
+    stringstream inputSs;
+    inputSs << "BNN^AA_|A";
+    stringstream outputSs;
+    TransformForTest transform;
+
+    transform.decode(inputSs, outputSs);
+
+    EXPECT_EQ("^BANANA|", outputSs.str());
 }
 
 TEST(BurrowsWheelerTransformTest, DecodeWorksUsingExample2) {

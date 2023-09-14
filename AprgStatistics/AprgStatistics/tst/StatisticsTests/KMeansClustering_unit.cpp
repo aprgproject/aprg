@@ -12,32 +12,6 @@ using LocalSample = LocalKMeans::Sample;
 using LocalGroupOfSamples = LocalKMeans::GroupOfSamples;
 TEST(KMeansClusteringTestTwoDimensions, KMeansObjectCanbeCreated) { LocalKMeans const kMeans; }
 
-TEST(KMeansClusteringTestTwoDimensions, DataSampleCanBeAdded) {
-    LocalKMeans kMeans;
-    kMeans.addSample(LocalSample{1, 1});
-
-    LocalSamples result(kMeans.getSamples());
-
-    ASSERT_EQ(1U, result.size());
-    EXPECT_EQ((LocalSample{1, 1}), result[0]);
-}
-
-TEST(KMeansClusteringTestTwoDimensions, DataSamplesCanBeAdded) {
-    LocalKMeans kMeans;
-    LocalSamples samples;
-    // NOLINTBEGIN(hicpp-use-emplace)
-    samples.emplace_back(LocalSample{1, 1});
-    samples.emplace_back(LocalSample{2, 2});
-    // NOLINTEND(hicpp-use-emplace)
-    kMeans.addSamples(samples);
-
-    LocalSamples result(kMeans.getSamples());
-
-    ASSERT_EQ(2U, result.size());
-    EXPECT_EQ((LocalSample{1, 1}), result[0]);
-    EXPECT_EQ((LocalSample{2, 2}), result[1]);
-}
-
 TEST(KMeansClusteringTestTwoDimensions, PerformKMeansWithNoSamples) {
     LocalKMeans const kMeans;
 
@@ -115,6 +89,32 @@ TEST(KMeansClusteringTestTwoDimensions, PerformKMeansForTwoGroupsWithManyDiffere
     EXPECT_EQ((LocalSample{3.5, 5}), result[1][2]);
     EXPECT_EQ((LocalSample{4.5, 5}), result[1][3]);
     EXPECT_EQ((LocalSample{3.5, 4.5}), result[1][4]);
+}
+
+TEST(KMeansClusteringTestTwoDimensions, DataSampleCanBeAdded) {
+    LocalKMeans kMeans;
+    kMeans.addSample(LocalSample{1, 1});
+
+    LocalSamples result(kMeans.getSamples());
+
+    ASSERT_EQ(1U, result.size());
+    EXPECT_EQ((LocalSample{1, 1}), result[0]);
+}
+
+TEST(KMeansClusteringTestTwoDimensions, DataSamplesCanBeAdded) {
+    LocalKMeans kMeans;
+    LocalSamples samples;
+    // NOLINTBEGIN(hicpp-use-emplace)
+    samples.emplace_back(LocalSample{1, 1});
+    samples.emplace_back(LocalSample{2, 2});
+    // NOLINTEND(hicpp-use-emplace)
+    kMeans.addSamples(samples);
+
+    LocalSamples result(kMeans.getSamples());
+
+    ASSERT_EQ(2U, result.size());
+    EXPECT_EQ((LocalSample{1, 1}), result[0]);
+    EXPECT_EQ((LocalSample{2, 2}), result[1]);
 }
 
 }  // namespace alba

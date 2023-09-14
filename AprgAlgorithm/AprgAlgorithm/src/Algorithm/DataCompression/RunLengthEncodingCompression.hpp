@@ -75,5 +75,4 @@ public:
 // Application
 // -> Compress a bitmap
 // ---> Observation: Bits are mostly white
-
 }  // namespace alba::algorithm

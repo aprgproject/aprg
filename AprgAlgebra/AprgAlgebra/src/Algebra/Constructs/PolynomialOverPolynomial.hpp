@@ -27,16 +27,16 @@ public:
     QuotientAndRemainder simplifyAndDivide();
 
 private:
-    static Monomial getMonomialWithMaxNegativeExponentsAndConvertItToPositive(Polynomial const& polynomial);
-    static Polynomial multiplyAndSimplifyFactors(Polynomials const& factors);
-    static int getLcmForDenominatorCoefficients(Polynomial const& polynomial);
-    static bool removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
-        Polynomials& numeratorFactors, Polynomials& denominatorFactors);
     [[nodiscard]] bool shouldPerformFactorization() const;
     void convertFractionCoefficientsToInteger();
     void convertNegativeExponentsToPositive();
     void removeCommonMonomialOnAllMonomialsInNumeratorAndDenominator();
     void factorizeRemoveCommonFactorsInNumeratorAndDenominatorAndCombineRemainingFactors();
+    static Monomial getMonomialWithMaxNegativeExponentsAndConvertItToPositive(Polynomial const& polynomial);
+    static Polynomial multiplyAndSimplifyFactors(Polynomials const& factors);
+    static int getLcmForDenominatorCoefficients(Polynomial const& polynomial);
+    static bool removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(
+        Polynomials& numeratorFactors, Polynomials& denominatorFactors);
     Polynomial m_numerator;
     Polynomial m_denominator;
     bool m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue;

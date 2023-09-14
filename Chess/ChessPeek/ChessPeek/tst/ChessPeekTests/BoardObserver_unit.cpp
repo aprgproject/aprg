@@ -48,6 +48,7 @@ void verifyGetChessCellPieceForBlackUpWhiteDown(BoardObserver const& retriever) 
 }
 
 }  // namespace
+
 TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForChessDotComVersus) {
     AlbaLocalPathHandler const inputFile(
         APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComVersus\ChessDotComVersus.bmp)");

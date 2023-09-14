@@ -338,98 +338,6 @@ void Board::move(Move const& move) {
     }
 }
 
-void Board::updateAttackDefendCount(
-    Board::AttackDefendCount& count, PieceColor const pieceColor, PieceColor const sameColor,
-    PieceColor const oppositeColor) {
-    if (sameColor == pieceColor) {
-        count.defend++;
-    } else if (oppositeColor == pieceColor) {
-        count.attack++;
-    }
-}
-
-Board::CastleType Board::getCastleTypeWithAlgebraicNotation(string const& textInAlgebraicNotation) {
-    return textInAlgebraicNotation == "O-O"     ? CastleType::KingSideCastle
-           : textInAlgebraicNotation == "O-O-O" ? CastleType::QueenSideCastle
-                                                : CastleType::NotACastle;
-}
-
-Coordinate Board::getCoordinateFromGridIndex(int const gridIndex) {
-    return Coordinate{gridIndex % CHESS_SIDE_SIZE, gridIndex / CHESS_SIDE_SIZE};
-}
-
-CoordinateDataType Board::reverse(CoordinateDataType const value) { return 7 - value; }
-
-CoordinateDataType Board::getOneIncrement(CoordinateDataType const coordinateDataType) {
-    return coordinateDataType > 0 ? 1 : coordinateDataType < 0 ? -1 : 0;
-}
-
-Coordinates Board::getLDeltaCoordinates() {
-    return Coordinates{{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};
-}
-
-Coordinates Board::getDiagonalIncrementDeltaCoordinates() { return Coordinates{{-1, -1}, {-1, 1}, {1, -1}, {1, 1}}; }
-Coordinates Board::getStraightIncrementDeltaCoordinates() { return Coordinates{{0, -1}, {0, 1}, {-1, 0}, {1, 0}}; }
-
-Coordinates Board::getOneStepDeltaCoordinates() {
-    return Coordinates{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
-}
-
-Board::PieceGrid Board::getInitialValues(BoardOrientation const& inputType) {
-    if (BoardOrientation::BlackUpWhiteDown == inputType) {
-        return {12, 10, 11, 13, 14, 11, 10, 12, 9, 9, 9, 9, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 4, 2, 3, 5, 6, 3, 2, 4};
-    }
-    if (BoardOrientation::WhiteUpBlackDown == inputType) {
-        return {4, 2, 3, 6, 5, 3, 2, 4, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 9, 9, 9, 9, 9, 9, 9, 12, 10, 11, 14, 13, 11, 10, 12};
-    }
-    return {};
-}
-
-int Board::getGridIndex(int const x, int const y) { return (y * CHESS_SIDE_SIZE) + x; }
-
-bool Board::isPieceEmptyOrHasOpposingColors(Piece const& piece, PieceColor const color) {
-    return piece.isEmpty() || areOpposingColors(color, piece.getColor());
-}
-
-bool Board::isPieceNonEmptyAndHasOpposingColors(Piece const& piece, PieceColor const color) {
-    return !piece.isEmpty() && areOpposingColors(color, piece.getColor());
-}
-
-bool Board::isADiagonalMove(Move const& move) {
-    Coordinate const moveDelta = move.second - move.first;
-    return getAbsoluteValue(moveDelta.getX()) == getAbsoluteValue(moveDelta.getY());
-}
-
-bool Board::isAStraightMove(Move const& move) {
-    Coordinate const moveDelta = move.second - move.first;
-    return (moveDelta.getX() == 0 && moveDelta.getY() != 0) || (moveDelta.getX() != 0 && moveDelta.getY() == 0);
-}
-
-bool Board::isAnLMove(Move const& move) {
-    Coordinate moveDelta = move.second - move.first;
-    Coordinates const lDeltas(getLDeltaCoordinates());
-    return any_of(
-        lDeltas.cbegin(), lDeltas.cend(), [&moveDelta](Coordinate const& lDelta) { return moveDelta == lDelta; });
-}
-
-bool Board::isAOneStepMove(Move const& move) {
-    Coordinate const moveDelta = move.second - move.first;
-    return moveDelta.getX() >= -1 && moveDelta.getX() <= 1 && moveDelta.getY() >= -1 && moveDelta.getY() <= 1;
-}
-
-bool Board::doesAllCellsInBetweenSatisfyTheCondition(
-    Coordinate const& startpoint, Coordinate const& endpoint, CoordinateCondition const& condition) {
-    Coordinate const moveDelta = endpoint - startpoint;
-    Coordinate const oneIncrementDelta(getOneIncrement(moveDelta.getX()), getOneIncrement(moveDelta.getY()));
-    Coordinate cellInBetween = startpoint + oneIncrementDelta;
-    while (isCoordinateWithinTheBoard(cellInBetween) && endpoint != cellInBetween && condition(cellInBetween)) {
-        cellInBetween += oneIncrementDelta;
-    }
-    return cellInBetween == endpoint;
-}
-
 Coordinate Board::getCorrectCoordinateFromAlgebraicNotation(
     CoordinateDataType const x, CoordinateDataType const y) const {
     Coordinate result{};
@@ -1475,6 +1383,98 @@ void Board::retrieveKingOneStepAttackDefendCountToThis(AttackDefendCount& count,
 void Board::changePieceGridWithMove(Move const& move) {
     setPieceAt(move.second, getPieceAt(move.first));
     setPieceAt(move.first, {});
+}
+
+void Board::updateAttackDefendCount(
+    Board::AttackDefendCount& count, PieceColor const pieceColor, PieceColor const sameColor,
+    PieceColor const oppositeColor) {
+    if (sameColor == pieceColor) {
+        count.defend++;
+    } else if (oppositeColor == pieceColor) {
+        count.attack++;
+    }
+}
+
+Board::CastleType Board::getCastleTypeWithAlgebraicNotation(string const& textInAlgebraicNotation) {
+    return textInAlgebraicNotation == "O-O"     ? CastleType::KingSideCastle
+           : textInAlgebraicNotation == "O-O-O" ? CastleType::QueenSideCastle
+                                                : CastleType::NotACastle;
+}
+
+Coordinate Board::getCoordinateFromGridIndex(int const gridIndex) {
+    return Coordinate{gridIndex % CHESS_SIDE_SIZE, gridIndex / CHESS_SIDE_SIZE};
+}
+
+CoordinateDataType Board::reverse(CoordinateDataType const value) { return 7 - value; }
+
+CoordinateDataType Board::getOneIncrement(CoordinateDataType const coordinateDataType) {
+    return coordinateDataType > 0 ? 1 : coordinateDataType < 0 ? -1 : 0;
+}
+
+Coordinates Board::getLDeltaCoordinates() {
+    return Coordinates{{-2, -1}, {-2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};
+}
+
+Coordinates Board::getDiagonalIncrementDeltaCoordinates() { return Coordinates{{-1, -1}, {-1, 1}, {1, -1}, {1, 1}}; }
+Coordinates Board::getStraightIncrementDeltaCoordinates() { return Coordinates{{0, -1}, {0, 1}, {-1, 0}, {1, 0}}; }
+
+Coordinates Board::getOneStepDeltaCoordinates() {
+    return Coordinates{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+}
+
+Board::PieceGrid Board::getInitialValues(BoardOrientation const& inputType) {
+    if (BoardOrientation::BlackUpWhiteDown == inputType) {
+        return {12, 10, 11, 13, 14, 11, 10, 12, 9, 9, 9, 9, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 4, 2, 3, 5, 6, 3, 2, 4};
+    }
+    if (BoardOrientation::WhiteUpBlackDown == inputType) {
+        return {4, 2, 3, 6, 5, 3, 2, 4, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 9, 9, 9, 9, 9, 9, 9, 12, 10, 11, 14, 13, 11, 10, 12};
+    }
+    return {};
+}
+
+int Board::getGridIndex(int const x, int const y) { return (y * CHESS_SIDE_SIZE) + x; }
+
+bool Board::isPieceEmptyOrHasOpposingColors(Piece const& piece, PieceColor const color) {
+    return piece.isEmpty() || areOpposingColors(color, piece.getColor());
+}
+
+bool Board::isPieceNonEmptyAndHasOpposingColors(Piece const& piece, PieceColor const color) {
+    return !piece.isEmpty() && areOpposingColors(color, piece.getColor());
+}
+
+bool Board::isADiagonalMove(Move const& move) {
+    Coordinate const moveDelta = move.second - move.first;
+    return getAbsoluteValue(moveDelta.getX()) == getAbsoluteValue(moveDelta.getY());
+}
+
+bool Board::isAStraightMove(Move const& move) {
+    Coordinate const moveDelta = move.second - move.first;
+    return (moveDelta.getX() == 0 && moveDelta.getY() != 0) || (moveDelta.getX() != 0 && moveDelta.getY() == 0);
+}
+
+bool Board::isAnLMove(Move const& move) {
+    Coordinate moveDelta = move.second - move.first;
+    Coordinates const lDeltas(getLDeltaCoordinates());
+    return any_of(
+        lDeltas.cbegin(), lDeltas.cend(), [&moveDelta](Coordinate const& lDelta) { return moveDelta == lDelta; });
+}
+
+bool Board::isAOneStepMove(Move const& move) {
+    Coordinate const moveDelta = move.second - move.first;
+    return moveDelta.getX() >= -1 && moveDelta.getX() <= 1 && moveDelta.getY() >= -1 && moveDelta.getY() <= 1;
+}
+
+bool Board::doesAllCellsInBetweenSatisfyTheCondition(
+    Coordinate const& startpoint, Coordinate const& endpoint, CoordinateCondition const& condition) {
+    Coordinate const moveDelta = endpoint - startpoint;
+    Coordinate const oneIncrementDelta(getOneIncrement(moveDelta.getX()), getOneIncrement(moveDelta.getY()));
+    Coordinate cellInBetween = startpoint + oneIncrementDelta;
+    while (isCoordinateWithinTheBoard(cellInBetween) && endpoint != cellInBetween && condition(cellInBetween)) {
+        cellInBetween += oneIncrementDelta;
+    }
+    return cellInBetween == endpoint;
 }
 
 Move Board::getNonCastleMoveWithAlgebraicNotation(

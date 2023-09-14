@@ -32,6 +32,19 @@ public:
     void simplify();
 
 private:
+    [[nodiscard]] Terms factorizeIfNeeded(Terms const& terms) const;
+    [[nodiscard]] Terms factorize(Terms const& terms) const;
+    void putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToTerms(
+        Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToTerms const& termsRaiseToTerms) const;
+    void putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToNumbers(
+        Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToNumbers const& termsRaiseToNumbers) const;
+    void continueToSimplifyToFactors(Terms& factorizedNumerators, Terms& factorizedDenominators);
+    void continueToSimplifyAndCombineFactors(Terms& factorizedNumerators, Terms& factorizedDenominators);
+    void calculateBasesAndExponentsAndPutThatToNumeratorsAndDenominators(
+        Terms& numeratorTerms, Terms& denominatorTerms);
+    void simplifyMonomialsToPolynomialOverPolynomial();
+    void simplifyPolynomialsToPolynomialOverPolynomial();
+    bool removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(Terms& numerators, Terms& denominators);
     static void clearTermsThenEmplacePolynomialAndRemainingTerms(
         Polynomial const& polynomialNumerator, Terms const& remainingNumerators, Terms& termsToUpdate);
     static void emplacePolynomialIfNeeded(Terms& termsResult, Polynomial const& polynomialNumerator);
@@ -46,19 +59,6 @@ private:
     static void simplifyPolynomialNumeratorAndPolynomialDenominator(
         Polynomial& polynomialNumerator, Polynomial& polynomialDenominator);
     static Polynomial multiplyPolynomialTerms(Terms const& polynomialTerms);
-    [[nodiscard]] Terms factorizeIfNeeded(Terms const& terms) const;
-    [[nodiscard]] Terms factorize(Terms const& terms) const;
-    void putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToTerms(
-        Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToTerms const& termsRaiseToTerms) const;
-    void putTermsOnNumeratorAndDenominatorBasedFromTermsRaiseToNumbers(
-        Terms& numeratorTerms, Terms& denominatorTerms, TermsRaiseToNumbers const& termsRaiseToNumbers) const;
-    void continueToSimplifyToFactors(Terms& factorizedNumerators, Terms& factorizedDenominators);
-    void continueToSimplifyAndCombineFactors(Terms& factorizedNumerators, Terms& factorizedDenominators);
-    void calculateBasesAndExponentsAndPutThatToNumeratorsAndDenominators(
-        Terms& numeratorTerms, Terms& denominatorTerms);
-    void simplifyMonomialsToPolynomialOverPolynomial();
-    void simplifyPolynomialsToPolynomialOverPolynomial();
-    bool removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(Terms& numerators, Terms& denominators);
     friend std::ostream& operator<<(std::ostream& out, TermsOverTerms const& termsOverTerms);
     Terms m_numerators;
     Terms m_denominators;

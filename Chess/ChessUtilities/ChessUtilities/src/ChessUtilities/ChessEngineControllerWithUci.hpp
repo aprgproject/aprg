@@ -48,8 +48,6 @@ public:
     bool waitTillReadyAndReturnIfResetWasPerformed();
 
 private:
-    static std::string constructUciOptionCommand(std::string const& name, std::string const& value);
-    static std::string getEnumString(ControllerState const state);
     // clear functions
     void resetData();
     void clearCalculationDetails();
@@ -74,6 +72,8 @@ private:
     void processInWaitingForUciOkay(std::string const& stringToProcess);
     void processInCalculating(std::string const& stringToProcess);
     void putStringProcessingFunctionAsCallBack();
+    static std::string constructUciOptionCommand(std::string const& name, std::string const& value);
+    static std::string getEnumString(ControllerState const state);
     ChessEngineHandler& m_engineHandler;
     stringHelper::StringPairs m_uciOptionNamesAndValuePairs;
     std::optional<StepsInCalculationMonitoring> m_additionalStepsInCalculationMonitoring;

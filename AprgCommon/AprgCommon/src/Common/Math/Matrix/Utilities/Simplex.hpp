@@ -154,15 +154,12 @@ void pivotAt(AlbaMatrix<DataType>& simplexTable, size_t const pivotingColumn, si
 // Simplex algorithm:
 //-> Developed shortly after WWII in response to logistical problems including the Berlin airlift
 //-> Ranked as one of the top 10 scientific algorithms of 20th century
-
 // Generic algorithm:
 //-> Start at some extreme point
 //-> Pivot from one extreme point to an adjacent one
 //-> Repeat until optimal
-
 // How to implement?
 //-> Linear algebra
-
 // Basis
 //-> A basis is a subset of m of the n variables.
 //-> Basic feasible solution
@@ -170,24 +167,19 @@ void pivotAt(AlbaMatrix<DataType>& simplexTable, size_t const pivotingColumn, si
 //---> Solve m equations in m unknowns
 //---> If unique and feasible -> BFS
 //---> BFS <-> extreme point
-
 // Simplex algorithm: running time
 // Remarkable property: In typical practical applications, simplex algorithm terminates after at most 2(m+n) pivots. ->
 // linear!
 // -> Still today is somewhat mysterious
 // -> Paper: "Smoothed Analysis of Algorithms: Why the Simplex Algorithm Usually takes Polynomial Time."
-
 // Pivoting rules: Carefully balance the cost of finding an entering variable with the number of pivots needed
 // -> No pivot rule is known that is guaranteed to be polynomial
 // -> Mose pivot rules are known to be exponential (or worse) in worst-case.
-
 // Simplex algorithm degeneracy
 // -> Degeneracy here means that there is a new basis, but same extreme point
-
 // Cycling: Get stuck by cycling through different bases that all correspond to same extreme point.
 // -> Doesn't occur in the wild
 // -> Bland's rule guarantees finite # of pivots
-
 // Simplex algorithm: implementation issues
 // To improve the bare-bones implementation:
 // -> Avoid stalling -> requires artful engineering
@@ -195,12 +187,9 @@ void pivotAt(AlbaMatrix<DataType>& simplexTable, size_t const pivotingColumn, si
 // -> Numerical stability -> requires advanced math (take note floating points errors)
 // -> Defect infeasibility - > run "phase I" simplex algorithm (How about we run simplex when there is no solution)
 // -> Defect unboundedness - > no leaving row (there are not enough constraints)
-
 // Best practice: Don't implement it yourself
-
 // Basic implementations: Available in many programming environments.
 // Industrial-strength solvers: Routinely solve LPs with millions of variables.
 // -> IBM ILOG CPLEX, COIN|OR, MOSEK
-
 // Modeling languages: Simplify task of modeling problem as LP
 // -> AMPL, AIMMS 3

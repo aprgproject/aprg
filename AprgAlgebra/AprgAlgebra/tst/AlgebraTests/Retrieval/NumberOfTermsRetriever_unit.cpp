@@ -5,6 +5,49 @@
 
 namespace alba::algebra {
 
+TEST(NumberOfTermsRetrieverTest, RetrieveFromConstantWorks) {
+    NumberOfTermsRetriever retriever;
+
+    retriever.retrieveFromConstant(Constant(1.234));
+
+    EXPECT_EQ(1, retriever.getNumberOfTerms());
+}
+
+TEST(NumberOfTermsRetrieverTest, RetrieveFromVariableWorks) {
+    NumberOfTermsRetriever retriever;
+
+    retriever.retrieveFromVariable(Variable("x"));
+
+    EXPECT_EQ(1, retriever.getNumberOfTerms());
+}
+
+TEST(NumberOfTermsRetrieverTest, RetrieveFromMonomialWorks) {
+    NumberOfTermsRetriever retriever;
+
+    retriever.retrieveFromMonomial(Monomial(34, {{"x", 5}, {"y", 6}}));
+
+    EXPECT_EQ(1, retriever.getNumberOfTerms());
+}
+
+TEST(NumberOfTermsRetrieverTest, RetrieveFromExpressionWorks) {
+    NumberOfTermsRetriever retriever;
+
+    retriever.retrieveFromExpression(createExpressionIfPossible({678, "+", Monomial(576, {{"x", 9}})}));
+
+    EXPECT_EQ(3, retriever.getNumberOfTerms());
+}
+
+TEST(NumberOfTermsRetrieverTest, RetrieveFromFunctionWorks) {
+    NumberOfTermsRetriever retriever;
+    Function functionObject(
+        "functionName", Term(createExpressionIfPossible({4516, "+", Monomial(7895, {{"x", 10}})})),
+        [](AlbaNumber const& number) -> AlbaNumber { return number; });
+
+    retriever.retrieveFromFunction(functionObject);
+
+    EXPECT_EQ(4, retriever.getNumberOfTerms());
+}
+
 TEST(NumberOfTermsRetrieverTest, RetrieveFromEquationsWorks) {
     NumberOfTermsRetriever retriever;
     Equation equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
@@ -42,55 +85,12 @@ TEST(NumberOfTermsRetrieverTest, RetrieveFromTermWorks) {
     EXPECT_EQ(12, retriever.getNumberOfTerms());
 }
 
-TEST(NumberOfTermsRetrieverTest, RetrieveFromConstantWorks) {
-    NumberOfTermsRetriever retriever;
-
-    retriever.retrieveFromConstant(Constant(1.234));
-
-    EXPECT_EQ(1, retriever.getNumberOfTerms());
-}
-
-TEST(NumberOfTermsRetrieverTest, RetrieveFromVariableWorks) {
-    NumberOfTermsRetriever retriever;
-
-    retriever.retrieveFromVariable(Variable("x"));
-
-    EXPECT_EQ(1, retriever.getNumberOfTerms());
-}
-
-TEST(NumberOfTermsRetrieverTest, RetrieveFromMonomialWorks) {
-    NumberOfTermsRetriever retriever;
-
-    retriever.retrieveFromMonomial(Monomial(34, {{"x", 5}, {"y", 6}}));
-
-    EXPECT_EQ(1, retriever.getNumberOfTerms());
-}
-
 TEST(NumberOfTermsRetrieverTest, RetrieveFromPolynomialWorks) {
     NumberOfTermsRetriever retriever;
 
     retriever.retrieveFromPolynomial(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
 
     EXPECT_EQ(2, retriever.getNumberOfTerms());
-}
-
-TEST(NumberOfTermsRetrieverTest, RetrieveFromExpressionWorks) {
-    NumberOfTermsRetriever retriever;
-
-    retriever.retrieveFromExpression(createExpressionIfPossible({678, "+", Monomial(576, {{"x", 9}})}));
-
-    EXPECT_EQ(3, retriever.getNumberOfTerms());
-}
-
-TEST(NumberOfTermsRetrieverTest, RetrieveFromFunctionWorks) {
-    NumberOfTermsRetriever retriever;
-    Function functionObject(
-        "functionName", Term(createExpressionIfPossible({4516, "+", Monomial(7895, {{"x", 10}})})),
-        [](AlbaNumber const& number) -> AlbaNumber { return number; });
-
-    retriever.retrieveFromFunction(functionObject);
-
-    EXPECT_EQ(4, retriever.getNumberOfTerms());
 }
 
 TEST(NumberOfTermsRetrieverTest, RetrieveFromPolynomialsWorks) {

@@ -16,28 +16,60 @@ using namespace std;
 
 namespace alba::algebra {
 
-TEST(DifferentiationUtilitiesTest, IsTheFirstFundamentalTheoremOfCalculusTrueWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
+TEST(DifferentiationUtilitiesTest, SimplifyDerivativeByDefinitionWorks) {
+    Term xPlusOneTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
+    Expression squareRootOfXPlusOne(createExpressionIfPossible({xPlusOneTerm, "^", AlbaNumber::createFraction(1, 2)}));
+    Term termToTest(createExpressionIfPossible({"x", "*", squareRootOfXPlusOne}));
 
-    EXPECT_TRUE(isTheFirstFundamentalTheoremOfCalculusTrue(termToTest1, "x"));
-    EXPECT_TRUE(isTheFirstFundamentalTheoremOfCalculusTrue(termToTest2, "x"));
-    EXPECT_TRUE(isTheFirstFundamentalTheoremOfCalculusTrue(termToTest3, "x"));
+    simplifyDerivativeByDefinition(termToTest);
+
+    string stringToExpect("(x*((1[x] + 1)^(1/2)))");
+    EXPECT_EQ(stringToExpect, convertToString(termToTest));
 }
 
-TEST(DifferentiationUtilitiesTest, IsDifferentiableAtWorks) {
-    Term termToTest(Monomial(1, {{"x", AlbaNumber::createFraction(1, 3)}}));
+TEST(DifferentiationUtilitiesTest, GetRelationshipOfDerivativeOfTheInverseAndTheDerivativeWorks) {
+    Term termToTest1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
+    Term termToTest2(Polynomial{Monomial(1, {{"x", 2}}), Monomial(2, {})});
+    Term termToTest3(Polynomial{Monomial(1, {{"x", 3}}), Monomial(3, {})});
 
-    EXPECT_FALSE(isDifferentiableAt(termToTest, "x", 0));
-    EXPECT_TRUE(isDifferentiableAt(termToTest, "x", 2));
+    Equation equation1(getRelationshipOfDerivativeOfTheInverseAndTheDerivative(termToTest1, "x", "c", "d"));
+    Equation equation2(getRelationshipOfDerivativeOfTheInverseAndTheDerivative(termToTest2, "x", "c", "d"));
+    Equation equation3(getRelationshipOfDerivativeOfTheInverseAndTheDerivative(termToTest3, "x", "c", "d"));
+
+    string stringToExpect1("1 = 1");
+    string stringToExpect2("((1/2)/((1[d] + -2)^(1/2))) = (1/2)[c^-1]");
+    string stringToExpect3("((1/3)/((1[d] + -3)^(2/3))) = (1/3)[c^-2]");
+    EXPECT_EQ(stringToExpect1, convertToString(equation1));
+    EXPECT_EQ(stringToExpect2, convertToString(equation2));
+    EXPECT_EQ(stringToExpect3, convertToString(equation3));
 }
 
-TEST(DifferentiationUtilitiesTest, IsDifferentiableAtUsingDerivativeDefinitionWorks) {
-    Term termToTest(Monomial(1, {{"x", AlbaNumber::createFraction(1, 3)}}));
+TEST(DifferentiationUtilitiesTest, GetIntegralEquationForFirstOrderDifferentialEquationWorks) {
+    Term leftHandSide(
+        Polynomial{Monomial(1, {{"d[y]/d[x]", 1}}), Monomial(-2, {{"x", 1}, {"y", 1}}), Monomial(-3, {{"x", 1}})});
+    Equation equationToTest(leftHandSide, "=", 0);
 
-    EXPECT_FALSE(isDifferentiableAtUsingDerivativeDefinition(termToTest, "x", 0));
-    EXPECT_TRUE(isDifferentiableAtUsingDerivativeDefinition(termToTest, "x", 2));
+    Equation equationToVerify(getIntegralEquationForFirstOrderDifferentialEquation(equationToTest, "x", "y"));
+
+    string stringToExpect("y = ((((e)^1[x^2][y])*-3/2[y^2]/((e)^1[x^2][y]))+(((e)^1[x^2][y])*(e)*((e)^1[x^2][y])))");
+    EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
+}
+
+TEST(DifferentiationUtilitiesTest, GetDifferentiabilityDomainWorks) {
+    Polynomial numerator{Monomial(1, {{"x", 1}}), Monomial(3, {})};
+    Polynomial denominator{Monomial(1, {{"x", 1}}), Monomial(-1, {})};
+    Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
+
+    SolutionSet differentiabilityDomain(getDifferentiabilityDomain(termToTest, "x"));
+
+    AlbaNumberIntervals const& intervalToVerify(differentiabilityDomain.getAcceptedIntervals());
+    ASSERT_EQ(2U, intervalToVerify.size());
+    EXPECT_EQ(
+        AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(0.9999979999999644)),
+        intervalToVerify[0]);
+    EXPECT_EQ(
+        AlbaNumberInterval(createOpenEndpoint(1.000001999999898), createPositiveInfinityOpenEndpoint()),
+        intervalToVerify[1]);
 }
 
 TEST(DifferentiationUtilitiesTest, GetDerivativeDefinitionWorks) {
@@ -130,34 +162,6 @@ TEST(DifferentiationUtilitiesTest, GetDerivativeAtUsingLimitWorksForPolynomialOv
     Term expectedDenominator(Polynomial{Monomial(1, {{"a", 2}}), Monomial(-6, {{"a", 1}}), Monomial(9, {})});
     Term termToExpect(createExpressionIfPossible({5, "/", expectedDenominator}));
     EXPECT_EQ(termToExpect, derivative);
-}
-
-TEST(DifferentiationUtilitiesTest, GetRelationshipOfDerivativeOfTheInverseAndTheDerivativeWorks) {
-    Term termToTest1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
-    Term termToTest2(Polynomial{Monomial(1, {{"x", 2}}), Monomial(2, {})});
-    Term termToTest3(Polynomial{Monomial(1, {{"x", 3}}), Monomial(3, {})});
-
-    Equation equation1(getRelationshipOfDerivativeOfTheInverseAndTheDerivative(termToTest1, "x", "c", "d"));
-    Equation equation2(getRelationshipOfDerivativeOfTheInverseAndTheDerivative(termToTest2, "x", "c", "d"));
-    Equation equation3(getRelationshipOfDerivativeOfTheInverseAndTheDerivative(termToTest3, "x", "c", "d"));
-
-    string stringToExpect1("1 = 1");
-    string stringToExpect2("((1/2)/((1[d] + -2)^(1/2))) = (1/2)[c^-1]");
-    string stringToExpect3("((1/3)/((1[d] + -3)^(2/3))) = (1/3)[c^-2]");
-    EXPECT_EQ(stringToExpect1, convertToString(equation1));
-    EXPECT_EQ(stringToExpect2, convertToString(equation2));
-    EXPECT_EQ(stringToExpect3, convertToString(equation3));
-}
-
-TEST(DifferentiationUtilitiesTest, GetIntegralEquationForFirstOrderDifferentialEquationWorks) {
-    Term leftHandSide(
-        Polynomial{Monomial(1, {{"d[y]/d[x]", 1}}), Monomial(-2, {{"x", 1}, {"y", 1}}), Monomial(-3, {{"x", 1}})});
-    Equation equationToTest(leftHandSide, "=", 0);
-
-    Equation equationToVerify(getIntegralEquationForFirstOrderDifferentialEquation(equationToTest, "x", "y"));
-
-    string stringToExpect("y = ((((e)^1[x^2][y])*-3/2[y^2]/((e)^1[x^2][y]))+(((e)^1[x^2][y])*(e)*((e)^1[x^2][y])))");
-    EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
 TEST(DifferentiationUtilitiesTest, GetLogarithmicDifferentiationToYieldDyOverDxWorks) {
@@ -270,32 +274,28 @@ TEST(DifferentiationUtilitiesTest, GetPartialDerivativeContinuouslyWorks) {
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
-TEST(DifferentiationUtilitiesTest, GetDifferentiabilityDomainWorks) {
-    Polynomial numerator{Monomial(1, {{"x", 1}}), Monomial(3, {})};
-    Polynomial denominator{Monomial(1, {{"x", 1}}), Monomial(-1, {})};
-    Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
+TEST(DifferentiationUtilitiesTest, IsTheFirstFundamentalTheoremOfCalculusTrueWorks) {
+    Term termToTest1(Monomial(1, {{"x", 1}}));
+    Term termToTest2(Monomial(1, {{"x", 2}}));
+    Term termToTest3(Monomial(1, {{"x", 3}}));
 
-    SolutionSet differentiabilityDomain(getDifferentiabilityDomain(termToTest, "x"));
-
-    AlbaNumberIntervals const& intervalToVerify(differentiabilityDomain.getAcceptedIntervals());
-    ASSERT_EQ(2U, intervalToVerify.size());
-    EXPECT_EQ(
-        AlbaNumberInterval(createNegativeInfinityOpenEndpoint(), createCloseEndpoint(0.9999979999999644)),
-        intervalToVerify[0]);
-    EXPECT_EQ(
-        AlbaNumberInterval(createOpenEndpoint(1.000001999999898), createPositiveInfinityOpenEndpoint()),
-        intervalToVerify[1]);
+    EXPECT_TRUE(isTheFirstFundamentalTheoremOfCalculusTrue(termToTest1, "x"));
+    EXPECT_TRUE(isTheFirstFundamentalTheoremOfCalculusTrue(termToTest2, "x"));
+    EXPECT_TRUE(isTheFirstFundamentalTheoremOfCalculusTrue(termToTest3, "x"));
 }
 
-TEST(DifferentiationUtilitiesTest, SimplifyDerivativeByDefinitionWorks) {
-    Term xPlusOneTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
-    Expression squareRootOfXPlusOne(createExpressionIfPossible({xPlusOneTerm, "^", AlbaNumber::createFraction(1, 2)}));
-    Term termToTest(createExpressionIfPossible({"x", "*", squareRootOfXPlusOne}));
+TEST(DifferentiationUtilitiesTest, IsDifferentiableAtWorks) {
+    Term termToTest(Monomial(1, {{"x", AlbaNumber::createFraction(1, 3)}}));
 
-    simplifyDerivativeByDefinition(termToTest);
+    EXPECT_FALSE(isDifferentiableAt(termToTest, "x", 0));
+    EXPECT_TRUE(isDifferentiableAt(termToTest, "x", 2));
+}
 
-    string stringToExpect("(x*((1[x] + 1)^(1/2)))");
-    EXPECT_EQ(stringToExpect, convertToString(termToTest));
+TEST(DifferentiationUtilitiesTest, IsDifferentiableAtUsingDerivativeDefinitionWorks) {
+    Term termToTest(Monomial(1, {{"x", AlbaNumber::createFraction(1, 3)}}));
+
+    EXPECT_FALSE(isDifferentiableAtUsingDerivativeDefinition(termToTest, "x", 0));
+    EXPECT_TRUE(isDifferentiableAtUsingDerivativeDefinition(termToTest, "x", 2));
 }
 
 }  // namespace alba::algebra

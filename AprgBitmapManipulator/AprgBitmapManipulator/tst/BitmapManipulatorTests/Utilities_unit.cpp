@@ -8,17 +8,6 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
-TEST(UtilitiesTest, ConvertBitmapXYToPointWorks) {
-    BitmapXY bitmapXY1;
-    BitmapXY bitmapXY2(12, 34);
-
-    Point point1(convertBitmapXYToPoint(bitmapXY1));
-    Point point2(convertBitmapXYToPoint(bitmapXY2));
-
-    EXPECT_EQ(Point(0, 0), point1);
-    EXPECT_EQ(Point(12, 34), point2);
-}
-
 TEST(UtilitiesTest, ConvertPointToBitmapXYWorks) {
     Point point1;
     Point point2(1.4, 1.4);
@@ -31,6 +20,17 @@ TEST(UtilitiesTest, ConvertPointToBitmapXYWorks) {
     EXPECT_EQ(BitmapXY(0, 0), bitmapXY1);
     EXPECT_EQ(BitmapXY(1, 1), bitmapXY2);
     EXPECT_EQ(BitmapXY(2, 2), bitmapXY3);
+}
+
+TEST(UtilitiesTest, ConvertBitmapXYToPointWorks) {
+    BitmapXY bitmapXY1;
+    BitmapXY bitmapXY2(12, 34);
+
+    Point point1(convertBitmapXYToPoint(bitmapXY1));
+    Point point2(convertBitmapXYToPoint(bitmapXY2));
+
+    EXPECT_EQ(Point(0, 0), point1);
+    EXPECT_EQ(Point(12, 34), point2);
 }
 
 }  // namespace alba::AprgBitmap

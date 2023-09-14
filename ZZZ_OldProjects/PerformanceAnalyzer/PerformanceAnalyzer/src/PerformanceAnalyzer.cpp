@@ -41,6 +41,13 @@ bool PerformanceAnalyzer::UniqueUserId::operator<(UniqueUserId const& uniqueUser
     return transactionId < uniqueUserId.transactionId;
 }
 
+void PerformanceAnalyzer::UniqueUserId::saveNbccId(std::string const& lineInLogs) { nbccId = getNbccId(lineInLogs); }
+void PerformanceAnalyzer::UniqueUserId::saveCrnccId(std::string const& lineInLogs) { crnccId = getCrnccId(lineInLogs); }
+
+void PerformanceAnalyzer::UniqueUserId::saveTransactionId(std::string const& lineInLogs) {
+    transactionId = getTransactionId(lineInLogs);
+}
+
 int PerformanceAnalyzer::UniqueUserId::getNbccId(std::string const& lineInLogs) {
     int properNbccId = 0;
     int const nbccid = convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "nbccid: "));
@@ -71,13 +78,6 @@ int PerformanceAnalyzer::UniqueUserId::getTransactionId(std::string const& lineI
     return convertStringToNumber<int>(getNumberAfterThisString(lineInLogs, "transactionId: "));
 }
 
-void PerformanceAnalyzer::UniqueUserId::saveNbccId(std::string const& lineInLogs) { nbccId = getNbccId(lineInLogs); }
-void PerformanceAnalyzer::UniqueUserId::saveCrnccId(std::string const& lineInLogs) { crnccId = getCrnccId(lineInLogs); }
-
-void PerformanceAnalyzer::UniqueUserId::saveTransactionId(std::string const& lineInLogs) {
-    transactionId = getTransactionId(lineInLogs);
-}
-
 PerformanceAnalyzer::PerformanceAnalyzer() {
     // defautlvalues
     AlbaLocalPathHandler const pathHandler(R"(C:\temp\BtsSorter\)");
@@ -102,16 +102,6 @@ PerformanceAnalyzer::PerformanceAnalyzer() {
     m_sorterConfiguration.m_configurationWithoutPcTime.m_maximumNumberOfObjectsPerBlock = 100000;
     m_sorterConfiguration.m_configurationWithoutPcTime.m_maximumNumberOfObjectsInMemory = 200000;
     m_sorterConfiguration.m_configurationWithoutPcTime.m_maximumFileStreams = 70;
-}
-
-int PerformanceAnalyzer::getDelayTimeInUs(BtsLogTime const& endTime, BtsLogTime const& startTime) {
-    BtsLogTime const delayTime = endTime - startTime;
-    return delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000;
-}
-
-int PerformanceAnalyzer::getDelayTimeInMinutes(BtsLogTime const& endTime, BtsLogTime const& startTime) {
-    BtsLogTime const delayTime = endTime - startTime;
-    return delayTime.getMinutes();
 }
 
 string PerformanceAnalyzer::extract(string const& inputPath) const {
@@ -1153,6 +1143,16 @@ void PerformanceAnalyzer::processDirectoryForTraceLog(string const& traceLogPath
             processFileForTraceLog(AlbaLocalPathHandler(filePath).getFullPath());
         }
     }
+}
+
+int PerformanceAnalyzer::getDelayTimeInUs(BtsLogTime const& endTime, BtsLogTime const& startTime) {
+    BtsLogTime const delayTime = endTime - startTime;
+    return delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000;
+}
+
+int PerformanceAnalyzer::getDelayTimeInMinutes(BtsLogTime const& endTime, BtsLogTime const& startTime) {
+    BtsLogTime const delayTime = endTime - startTime;
+    return delayTime.getMinutes();
 }
 
 }  // namespace alba

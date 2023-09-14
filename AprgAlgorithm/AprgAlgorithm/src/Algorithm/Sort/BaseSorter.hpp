@@ -27,7 +27,6 @@ public:
 // -> Computer graphics
 // -> Computational biology
 // -> Load balancing on a parallel computer
-
 // There are a hundreds of algorithms on sorting.
 // Attributes in sorting:
 // -> Stability?

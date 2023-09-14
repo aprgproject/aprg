@@ -8,6 +8,30 @@ using namespace std;
 
 namespace alba::TwoDimensions {
 
+TEST(HyperbolaTest, AreaTraversalIsCorrect) {
+    // traversal
+}
+
+TEST(HyperbolaTest, GetAsymptotesWorks) {
+    Hyperbola const hyperbola1(Point(0, 0), 1, 1);
+    Hyperbola const hyperbola2(Point(0, 0), 3, 4);
+    Hyperbola const hyperbola3(Point(0, 0), -3, -4);
+
+    Lines asymptotes1(hyperbola1.getAsymptotes());
+    Lines asymptotes2(hyperbola2.getAsymptotes());
+    Lines asymptotes3(hyperbola3.getAsymptotes());
+
+    ASSERT_EQ(2U, asymptotes1.size());
+    EXPECT_EQ(Line(1, 1, 0), asymptotes1[0]);
+    EXPECT_EQ(Line(1, -1, 0), asymptotes1[1]);
+    ASSERT_EQ(2U, asymptotes2.size());
+    EXPECT_EQ(Line(4, 3, 0), asymptotes2[0]);
+    EXPECT_EQ(Line(4, -3, 0), asymptotes2[1]);
+    ASSERT_EQ(2U, asymptotes3.size());
+    EXPECT_EQ(Line(-4, -3, 0), asymptotes3[0]);
+    EXPECT_EQ(Line(-4, 3, 0), asymptotes3[1]);
+}
+
 TEST(HyperbolaTest, EmptyHyperbola) {
     Hyperbola const hyperbola;
 
@@ -96,30 +120,6 @@ TEST(HyperbolaTest, GetVerticesWorks) {
     ASSERT_EQ(2U, vertices3.size());
     EXPECT_EQ(Point(0, 4), vertices3[0]);
     EXPECT_EQ(Point(0, -4), vertices3[1]);
-}
-
-TEST(HyperbolaTest, GetAsymptotesWorks) {
-    Hyperbola const hyperbola1(Point(0, 0), 1, 1);
-    Hyperbola const hyperbola2(Point(0, 0), 3, 4);
-    Hyperbola const hyperbola3(Point(0, 0), -3, -4);
-
-    Lines asymptotes1(hyperbola1.getAsymptotes());
-    Lines asymptotes2(hyperbola2.getAsymptotes());
-    Lines asymptotes3(hyperbola3.getAsymptotes());
-
-    ASSERT_EQ(2U, asymptotes1.size());
-    EXPECT_EQ(Line(1, 1, 0), asymptotes1[0]);
-    EXPECT_EQ(Line(1, -1, 0), asymptotes1[1]);
-    ASSERT_EQ(2U, asymptotes2.size());
-    EXPECT_EQ(Line(4, 3, 0), asymptotes2[0]);
-    EXPECT_EQ(Line(4, -3, 0), asymptotes2[1]);
-    ASSERT_EQ(2U, asymptotes3.size());
-    EXPECT_EQ(Line(-4, -3, 0), asymptotes3[0]);
-    EXPECT_EQ(Line(-4, 3, 0), asymptotes3[1]);
-}
-
-TEST(HyperbolaTest, AreaTraversalIsCorrect) {
-    // traversal
 }
 
 }  // namespace alba::TwoDimensions

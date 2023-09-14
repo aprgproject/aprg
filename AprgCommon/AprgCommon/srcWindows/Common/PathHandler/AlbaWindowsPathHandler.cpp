@@ -18,9 +18,9 @@ using namespace std;
 namespace alba {
 
 AlbaWindowsPathHandler::AlbaWindowsPathHandler(string_view const path) : AlbaPathHandler(R"(\)") { setPath(path); }
-AlbaWindowsPathHandler AlbaWindowsPathHandler::createPathHandlerForDetectedPath() {
-    return AlbaWindowsPathHandler{getCurrentDetectedPath()};
-}
+string AlbaWindowsPathHandler::getDriveOrRoot() const { return m_driveOrRoot; }
+bool AlbaWindowsPathHandler::isFoundInLocalSystem() const { return m_foundInLocalSystem; }
+bool AlbaWindowsPathHandler::isRelativePath() const { return m_relativePath; }
 
 void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const {
     string const fullPath(getFullPath());
@@ -46,10 +46,6 @@ void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const
         index = indexWithSlashCharacter + 1;
     }
 }
-
-string AlbaWindowsPathHandler::getDriveOrRoot() const { return m_driveOrRoot; }
-bool AlbaWindowsPathHandler::isFoundInLocalSystem() const { return m_foundInLocalSystem; }
-bool AlbaWindowsPathHandler::isRelativePath() const { return m_relativePath; }
 
 void AlbaWindowsPathHandler::deleteFilesInDirectory() {
     set<string> listOfFiles;
@@ -204,23 +200,8 @@ bool AlbaWindowsPathHandler::renameImmediateDirectory(string_view const newDirec
     return isSuccessful;
 }
 
-string AlbaWindowsPathHandler::getCurrentDetectedPath() {
-    string result;
-    constexpr size_t MAXIMUM_CHARACTERS_PATH = 1000;
-    WCHAR currentPathFromWindowsWideCharArray[MAXIMUM_CHARACTERS_PATH];
-    if (GetModuleFileNameW(nullptr, currentPathFromWindowsWideCharArray, MAX_PATH) != 0U) {
-        result = convertToAnotherBasicStringVariant<wstring, string>(wstring(currentPathFromWindowsWideCharArray));
-    } else {
-        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
-    }
-    return result;
-}
-
-bool AlbaWindowsPathHandler::canBeLocated(string_view const fullPath) {
-    DWORD const attributes =
-        GetFileAttributesW(convertToAnotherBasicStringVariant<string_view, wstring>(fullPath).c_str());
-    return INVALID_FILE_ATTRIBUTES != attributes;
+AlbaWindowsPathHandler AlbaWindowsPathHandler::createPathHandlerForDetectedPath() {
+    return AlbaWindowsPathHandler{getCurrentDetectedPath()};
 }
 
 bool AlbaWindowsPathHandler::isSlashNeededAtTheEnd(
@@ -272,6 +253,25 @@ void AlbaWindowsPathHandler::setDriveOrRoot() {
         m_driveOrRoot = getStringWithCapitalLetters(m_directory.substr(0, index));
     }
     m_relativePath = m_driveOrRoot.empty();
+}
+
+bool AlbaWindowsPathHandler::canBeLocated(string_view const fullPath) {
+    DWORD const attributes =
+        GetFileAttributesW(convertToAnotherBasicStringVariant<string_view, wstring>(fullPath).c_str());
+    return INVALID_FILE_ATTRIBUTES != attributes;
+}
+
+string AlbaWindowsPathHandler::getCurrentDetectedPath() {
+    string result;
+    constexpr size_t MAXIMUM_CHARACTERS_PATH = 1000;
+    WCHAR currentPathFromWindowsWideCharArray[MAXIMUM_CHARACTERS_PATH];
+    if (GetModuleFileNameW(nullptr, currentPathFromWindowsWideCharArray, MAX_PATH) != 0U) {
+        result = convertToAnotherBasicStringVariant<wstring, string>(wstring(currentPathFromWindowsWideCharArray));
+    } else {
+        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+    }
+    return result;
 }
 
 void AlbaWindowsPathHandler::findFilesAndDirectoriesOneDepth(

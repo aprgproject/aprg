@@ -57,11 +57,9 @@ private:
 // The usual way to implement binary search resembles looking for a word in a dictionary.
 // The search maintains an active region in the array, which initially contains all array elements.
 // Then, a number of steps is performed, each of which halves the size of the region.
-
 // At each step, the search checks the middle element of the active region.
 // If the middle element is the target element, the search terminates.
 // Otherwise, the search recursively continues to the left or right half of the region, depending on the target of the
 // middle element.
-
 // In this implementation, the active region is a...b, and initially the region is 0...n-1.
 // The algorithm halves the size of the region at each step, so the time complexity is O(logn).

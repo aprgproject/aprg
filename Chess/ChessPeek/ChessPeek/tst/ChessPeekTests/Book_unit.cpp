@@ -6,17 +6,6 @@ using namespace std;
 
 namespace alba::chess::ChessPeek {
 
-TEST(BookTest, GetSizeWorks) {
-    Book book;
-    Board const board(BoardOrientation::BlackUpWhiteDown);
-    Book::LineDetail const lineDetail{"LineForTesting", PieceColor::White, {}, {}};
-
-    EXPECT_EQ(0U, book.getSize());
-
-    book.addLine(board, lineDetail);
-    EXPECT_EQ(1U, book.getSize());
-}
-
 TEST(BookTest, GetLineWorks) {
     Book book;
     Board const board(BoardOrientation::BlackUpWhiteDown);
@@ -32,20 +21,6 @@ TEST(BookTest, GetLineWorks) {
     EXPECT_EQ("LineForTesting", actualLineDetail.nameOfLine);
     EXPECT_EQ(PieceColor::White, actualLineDetail.colorToMove);
     EXPECT_EQ(0, actualLineDetail.totalNumberOfGames);
-}
-
-TEST(BookTest, ClearWorks) {
-    Book book;
-    Board const board(BoardOrientation::BlackUpWhiteDown);
-    Book::LineDetail const lineDetail{"LineForTesting", PieceColor::White, 100, {}};
-
-    EXPECT_EQ(0U, book.getSize());
-
-    book.addLine(board, lineDetail);
-    EXPECT_EQ(1U, book.getSize());
-
-    book.clear();
-    EXPECT_EQ(0U, book.getSize());
 }
 
 TEST(BookTest, AddLineWorksOnAddingANewLine) {
@@ -95,6 +70,31 @@ TEST(BookTest, AddLineWorksOnOverwritingAnExistingLineIfGreaterThanTotalNumberOf
     EXPECT_EQ("LineIsOverwritten", actualLineDetail.nameOfLine);
     EXPECT_EQ(PieceColor::Black, actualLineDetail.colorToMove);
     EXPECT_EQ(200, actualLineDetail.totalNumberOfGames);
+}
+
+TEST(BookTest, ClearWorks) {
+    Book book;
+    Board const board(BoardOrientation::BlackUpWhiteDown);
+    Book::LineDetail const lineDetail{"LineForTesting", PieceColor::White, 100, {}};
+
+    EXPECT_EQ(0U, book.getSize());
+
+    book.addLine(board, lineDetail);
+    EXPECT_EQ(1U, book.getSize());
+
+    book.clear();
+    EXPECT_EQ(0U, book.getSize());
+}
+
+TEST(BookTest, GetSizeWorks) {
+    Book book;
+    Board const board(BoardOrientation::BlackUpWhiteDown);
+    Book::LineDetail const lineDetail{"LineForTesting", PieceColor::White, {}, {}};
+
+    EXPECT_EQ(0U, book.getSize());
+
+    book.addLine(board, lineDetail);
+    EXPECT_EQ(1U, book.getSize());
 }
 
 }  // namespace alba::chess::ChessPeek

@@ -61,11 +61,9 @@ private:
 
 // Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in
 // wrong order.
-
 // Optimized Implementation:
 // The above function always runs O(n^2) time even if the array is sorted.
 // It can be optimized by stopping the algorithm if inner loop didn’t cause any swap.
-
 // Worst and Average Case Time Complexity: O(n^2). (should be not Oh)
 // Worst case occurs when array is reverse sorted.
 // Best Case Time Complexity: O(n) (should be not Oh). Best case occurs when array is already sorted.
@@ -73,7 +71,6 @@ private:
 // Boundary Cases: Bubble sort takes minimum time (Order of n) when elements are already sorted.
 // Sorting In Place: Yes
 // Stable: Yes
-
 // Due to its simplicity, bubble sort is often used to introduce the concept of a sorting algorithm.
 // In computer graphics it is popular for its capability to detect a very small error (like swap of just two elements)
 // in almost-sorted arrays and fix it with just linear complexity (2n).

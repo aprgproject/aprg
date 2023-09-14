@@ -95,21 +95,18 @@ public:
 
 // ONE LINE NOTE:
 // -> Create FAMILIES of objects using an ABSTRACT/CHANGING factory
-
 // Intent:
 // Abstract factory pattern has creational purpose.
 // It provides an interface for creating families of related or dependent objects without specifying their concrete
 // classes. Pattern applies to object and deal with object relationships (families), which are more dynamic. In contrast
 // to Factory Method, Abstract Factory pattern produces family of types that are related, ie. it has more than one
 // method of types it produces. NOTE: This is related to "Open Close Principle".
-
 // When to use (applicability):
 // -> a system should be independent of how its products are created, composed, and represented
 // -> a system should be configured with one of multiple families of products
 // -> a family of related product objects is designed to be used together
 // -> you want to provide a class library of products, and you want to reveal just their interfaces, not their
 // implementations
-
 // Consequences:
 // -> It isolates concrete classes
 // ---> Because the factory encapsulates the responsibility and process of creating product objects, it isolates clients
@@ -124,7 +121,6 @@ public:
 // ---> Abstract Facotry interfaces fixes the set of product that can be created.
 // ---> Supporting new kinds of product requires extending the factory interface, which involves changing all of its
 // subclasses.
-
 // Implementation:
 // -> Factories as singletons
 // ---> Typically needs only one instance of a ConcreteFactory per product family, so its usually best implemented as a
@@ -144,7 +140,6 @@ public:
 // -----> This parameter specifies the kind of object to be created.
 // -----> AbstractFactory only needs a single "create"/"make" operation with a parameter indicating the kind of Product
 // to create.
-
 // Related Patterns
 // -> [FactoryMethod] or [Prototype]: are often used to implement AbstractFactory.
 // -> [Singleton]: A concrete factory is often a singleton.

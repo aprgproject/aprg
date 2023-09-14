@@ -155,7 +155,7 @@ public:
         // producing 0 if none
         // (e.g., 01011000 ⇒ 00000111):
         return ~value & (value - 1);  // This formula works as well
-        // return ~(value | -value); // This formula works as well
+                                      // return ~(value | -value); // This formula works as well
         // return (value & -value) -1; // This formula works as well
     }
 
@@ -353,4 +353,5 @@ public:
 };
 
 }  // namespace alba
+
 // NOLINTEND(hicpp-signed-bitwise)

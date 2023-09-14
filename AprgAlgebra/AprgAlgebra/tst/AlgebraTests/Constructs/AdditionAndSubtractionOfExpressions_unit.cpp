@@ -36,66 +36,6 @@ TEST(AdditionAndSubtractionOfExpressionsTest, TermsWithDetailsConstructionWorks)
     EXPECT_EQ(TermAssociationType::Positive, associations[1]);
 }
 
-TEST(AdditionAndSubtractionOfExpressionsTest, GetExpressionsWorks) {
-    AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression1(createExpressionIfPossible({"x"}));
-    Expression expression2(createExpressionIfPossible({"y"}));
-    additionAndSubtraction.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);
-    additionAndSubtraction.putAsAddOrSubtraction(expression2, TermAssociationType::Negative);
-
-    Expressions const& expressions(additionAndSubtraction.getExpressions());
-
-    ASSERT_EQ(2U, expressions.size());
-    EXPECT_EQ(expression1, expressions[0]);
-    EXPECT_EQ(expression2, expressions[1]);
-}
-
-TEST(AdditionAndSubtractionOfExpressionsTest, GetAssociationsWorks) {
-    AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression1(createExpressionIfPossible({"x"}));
-    Expression expression2(createExpressionIfPossible({"y"}));
-    additionAndSubtraction.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);
-    additionAndSubtraction.putAsAddOrSubtraction(expression2, TermAssociationType::Negative);
-
-    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
-
-    ASSERT_EQ(2U, associations.size());
-    EXPECT_EQ(TermAssociationType::Positive, associations[0]);
-    EXPECT_EQ(TermAssociationType::Negative, associations[1]);
-}
-
-TEST(AdditionAndSubtractionOfExpressionsTest, GetSizeWorks) {
-    AdditionAndSubtractionOfExpressions additionAndSubtraction1;
-    AdditionAndSubtractionOfExpressions additionAndSubtraction2;
-    Expression expression1(createExpressionIfPossible({"x"}));
-    Expression expression2(createExpressionIfPossible({"y"}));
-    additionAndSubtraction2.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);
-    additionAndSubtraction2.putAsAddOrSubtraction(expression2, TermAssociationType::Negative);
-
-    EXPECT_EQ(0, additionAndSubtraction1.getSize());
-    EXPECT_EQ(2, additionAndSubtraction2.getSize());
-}
-
-TEST(AdditionAndSubtractionOfExpressionsTest, GetAsTermsWithDetailsWorks) {
-    AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression1(createExpressionIfPossible({"x"}));
-    Expression expression2(createExpressionIfPossible({"y"}));
-    additionAndSubtraction.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);
-    additionAndSubtraction.putAsAddOrSubtraction(expression2, TermAssociationType::Negative);
-
-    TermsWithDetails termsWithDetails(additionAndSubtraction.getAsTermsWithDetails());
-
-    ASSERT_EQ(2U, termsWithDetails.size());
-    Term const& term1(getTermConstReferenceFromUniquePointer(termsWithDetails[0].baseTermPointer));
-    ASSERT_EQ(TermType::Variable, term1.getTermType());
-    EXPECT_EQ("x", term1.getAsVariable().getVariableName());
-    EXPECT_EQ(TermAssociationType::Positive, termsWithDetails[0].association);
-    Term const& term2(getTermConstReferenceFromUniquePointer(termsWithDetails[1].baseTermPointer));
-    ASSERT_EQ(TermType::Variable, term2.getTermType());
-    EXPECT_EQ("y", term2.getAsVariable().getVariableName());
-    EXPECT_EQ(TermAssociationType::Negative, termsWithDetails[1].association);
-}
-
 TEST(AdditionAndSubtractionOfExpressionsTest, PutAsAdditionWorks) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
     Expression expression(createExpressionIfPossible({"x"}));
@@ -108,54 +48,6 @@ TEST(AdditionAndSubtractionOfExpressionsTest, PutAsAdditionWorks) {
     TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
     ASSERT_EQ(1U, associations.size());
     EXPECT_EQ(TermAssociationType::Positive, associations[0]);
-}
-
-TEST(AdditionAndSubtractionOfExpressionsTest, PutAsSubtractionWorks) {
-    AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression(createExpressionIfPossible({"x"}));
-
-    additionAndSubtraction.putAsSubtraction(expression);
-
-    Expressions const& expressions(additionAndSubtraction.getExpressions());
-    ASSERT_EQ(1U, expressions.size());
-    EXPECT_EQ(expression, expressions[0]);
-    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
-    ASSERT_EQ(1U, associations.size());
-    EXPECT_EQ(TermAssociationType::Negative, associations[0]);
-}
-
-TEST(AdditionAndSubtractionOfExpressionsTest, PutAsAddOrSubtractionWorks) {
-    AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression(createExpressionIfPossible({"x"}));
-
-    additionAndSubtraction.putAsAddOrSubtraction(expression, TermAssociationType::Negative);
-
-    Expressions const& expressions(additionAndSubtraction.getExpressions());
-    ASSERT_EQ(1U, expressions.size());
-    EXPECT_EQ(expression, expressions[0]);
-    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
-    ASSERT_EQ(1U, associations.size());
-    EXPECT_EQ(TermAssociationType::Negative, associations[0]);
-}
-
-TEST(AdditionAndSubtractionOfExpressionsTest, PutTermsWithDetailsWorks) {
-    AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression1(createExpressionIfPossible({"x"}));
-    Expression expression2(createExpressionIfPossible({"y"}));
-    TermWithDetails termWithDetails1(Term(expression1), TermAssociationType::Negative);
-    TermWithDetails termWithDetails2(Term(expression2), TermAssociationType::Positive);
-    TermsWithDetails termsWithDetails{termWithDetails1, termWithDetails2};
-
-    additionAndSubtraction.putTermsWithDetails(termsWithDetails);
-
-    Expressions const& expressions(additionAndSubtraction.getExpressions());
-    ASSERT_EQ(2U, expressions.size());
-    EXPECT_EQ(expression1, expressions[0]);
-    EXPECT_EQ(expression2, expressions[1]);
-    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
-    ASSERT_EQ(2U, associations.size());
-    EXPECT_EQ(TermAssociationType::Negative, associations[0]);
-    EXPECT_EQ(TermAssociationType::Positive, associations[1]);
 }
 
 TEST(
@@ -265,48 +157,6 @@ TEST(
     EXPECT_EQ(TermAssociationType::Positive, associations[1]);
 }
 
-TEST(
-    AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksAndSquareRootExpressionAreAddedCorrectly) {
-    AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Term xPlusOneTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
-    Expression squareRootOfXPlusOne(createExpressionIfPossible({xPlusOneTerm, "^", AlbaNumber::createFraction(1, 2)}));
-    additionAndSubtraction.putAsAddition(squareRootOfXPlusOne);
-    additionAndSubtraction.putAsAddition(squareRootOfXPlusOne);
-
-    additionAndSubtraction.combineExpressionsIfPossible();
-
-    Expression expressionToExpect(createExpressionIfPossible({2, "*", squareRootOfXPlusOne}));
-    Expressions const& expressions(additionAndSubtraction.getExpressions());
-    ASSERT_EQ(1U, expressions.size());
-    EXPECT_EQ(expressionToExpect, expressions[0]);
-    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
-    ASSERT_EQ(1U, associations.size());
-    EXPECT_EQ(TermAssociationType::Positive, associations[0]);
-}
-
-TEST(
-    AdditionAndSubtractionOfExpressionsTest,
-    CombineExpressionIfPossibleWorksWithNegativeTermWithTrigonometricFunctions) {
-    Expression positiveCosX(createExpressionIfPossible({cos("x")}));
-    Expression negativeSinX(createExpressionIfPossible({-1, "*", sin("x")}));
-    AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    additionAndSubtraction.putAsAddition(positiveCosX);
-    additionAndSubtraction.putAsAddition(negativeSinX);
-
-    additionAndSubtraction.combineExpressionsIfPossible();
-
-    Expression cosX(createExpressionIfPossible({cos("x")}));
-    Expression sinX(createExpressionIfPossible({sin("x")}));
-    Expressions const& expressions(additionAndSubtraction.getExpressions());
-    ASSERT_EQ(2U, expressions.size());
-    EXPECT_EQ(cosX, expressions[0]);
-    EXPECT_EQ(sinX, expressions[1]);
-    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
-    ASSERT_EQ(2U, associations.size());
-    EXPECT_EQ(TermAssociationType::Positive, associations[0]);
-    EXPECT_EQ(TermAssociationType::Negative, associations[1]);
-}
-
 TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWithEToTheXWithTrigonometricExpressions) {
     Term eToTheX(createExpressionIfPossible({getEAsATerm(), "^", "x"}));
     Term eToTheXTimesSinX(createExpressionIfPossible({eToTheX, "*", sin("x")}));
@@ -358,6 +208,156 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWi
     ASSERT_EQ(2U, associations.size());
     EXPECT_EQ(TermAssociationType::Positive, associations[0]);
     EXPECT_EQ(TermAssociationType::Positive, associations[1]);
+}
+
+TEST(
+    AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksAndSquareRootExpressionAreAddedCorrectly) {
+    AdditionAndSubtractionOfExpressions additionAndSubtraction;
+    Term xPlusOneTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
+    Expression squareRootOfXPlusOne(createExpressionIfPossible({xPlusOneTerm, "^", AlbaNumber::createFraction(1, 2)}));
+    additionAndSubtraction.putAsAddition(squareRootOfXPlusOne);
+    additionAndSubtraction.putAsAddition(squareRootOfXPlusOne);
+
+    additionAndSubtraction.combineExpressionsIfPossible();
+
+    Expression expressionToExpect(createExpressionIfPossible({2, "*", squareRootOfXPlusOne}));
+    Expressions const& expressions(additionAndSubtraction.getExpressions());
+    ASSERT_EQ(1U, expressions.size());
+    EXPECT_EQ(expressionToExpect, expressions[0]);
+    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
+    ASSERT_EQ(1U, associations.size());
+    EXPECT_EQ(TermAssociationType::Positive, associations[0]);
+}
+
+TEST(
+    AdditionAndSubtractionOfExpressionsTest,
+    CombineExpressionIfPossibleWorksWithNegativeTermWithTrigonometricFunctions) {
+    Expression positiveCosX(createExpressionIfPossible({cos("x")}));
+    Expression negativeSinX(createExpressionIfPossible({-1, "*", sin("x")}));
+    AdditionAndSubtractionOfExpressions additionAndSubtraction;
+    additionAndSubtraction.putAsAddition(positiveCosX);
+    additionAndSubtraction.putAsAddition(negativeSinX);
+
+    additionAndSubtraction.combineExpressionsIfPossible();
+
+    Expression cosX(createExpressionIfPossible({cos("x")}));
+    Expression sinX(createExpressionIfPossible({sin("x")}));
+    Expressions const& expressions(additionAndSubtraction.getExpressions());
+    ASSERT_EQ(2U, expressions.size());
+    EXPECT_EQ(cosX, expressions[0]);
+    EXPECT_EQ(sinX, expressions[1]);
+    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
+    ASSERT_EQ(2U, associations.size());
+    EXPECT_EQ(TermAssociationType::Positive, associations[0]);
+    EXPECT_EQ(TermAssociationType::Negative, associations[1]);
+}
+
+TEST(AdditionAndSubtractionOfExpressionsTest, PutAsSubtractionWorks) {
+    AdditionAndSubtractionOfExpressions additionAndSubtraction;
+    Expression expression(createExpressionIfPossible({"x"}));
+
+    additionAndSubtraction.putAsSubtraction(expression);
+
+    Expressions const& expressions(additionAndSubtraction.getExpressions());
+    ASSERT_EQ(1U, expressions.size());
+    EXPECT_EQ(expression, expressions[0]);
+    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
+    ASSERT_EQ(1U, associations.size());
+    EXPECT_EQ(TermAssociationType::Negative, associations[0]);
+}
+
+TEST(AdditionAndSubtractionOfExpressionsTest, PutAsAddOrSubtractionWorks) {
+    AdditionAndSubtractionOfExpressions additionAndSubtraction;
+    Expression expression(createExpressionIfPossible({"x"}));
+
+    additionAndSubtraction.putAsAddOrSubtraction(expression, TermAssociationType::Negative);
+
+    Expressions const& expressions(additionAndSubtraction.getExpressions());
+    ASSERT_EQ(1U, expressions.size());
+    EXPECT_EQ(expression, expressions[0]);
+    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
+    ASSERT_EQ(1U, associations.size());
+    EXPECT_EQ(TermAssociationType::Negative, associations[0]);
+}
+
+TEST(AdditionAndSubtractionOfExpressionsTest, PutTermsWithDetailsWorks) {
+    AdditionAndSubtractionOfExpressions additionAndSubtraction;
+    Expression expression1(createExpressionIfPossible({"x"}));
+    Expression expression2(createExpressionIfPossible({"y"}));
+    TermWithDetails termWithDetails1(Term(expression1), TermAssociationType::Negative);
+    TermWithDetails termWithDetails2(Term(expression2), TermAssociationType::Positive);
+    TermsWithDetails termsWithDetails{termWithDetails1, termWithDetails2};
+
+    additionAndSubtraction.putTermsWithDetails(termsWithDetails);
+
+    Expressions const& expressions(additionAndSubtraction.getExpressions());
+    ASSERT_EQ(2U, expressions.size());
+    EXPECT_EQ(expression1, expressions[0]);
+    EXPECT_EQ(expression2, expressions[1]);
+    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
+    ASSERT_EQ(2U, associations.size());
+    EXPECT_EQ(TermAssociationType::Negative, associations[0]);
+    EXPECT_EQ(TermAssociationType::Positive, associations[1]);
+}
+
+TEST(AdditionAndSubtractionOfExpressionsTest, GetExpressionsWorks) {
+    AdditionAndSubtractionOfExpressions additionAndSubtraction;
+    Expression expression1(createExpressionIfPossible({"x"}));
+    Expression expression2(createExpressionIfPossible({"y"}));
+    additionAndSubtraction.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);
+    additionAndSubtraction.putAsAddOrSubtraction(expression2, TermAssociationType::Negative);
+
+    Expressions const& expressions(additionAndSubtraction.getExpressions());
+
+    ASSERT_EQ(2U, expressions.size());
+    EXPECT_EQ(expression1, expressions[0]);
+    EXPECT_EQ(expression2, expressions[1]);
+}
+
+TEST(AdditionAndSubtractionOfExpressionsTest, GetAssociationsWorks) {
+    AdditionAndSubtractionOfExpressions additionAndSubtraction;
+    Expression expression1(createExpressionIfPossible({"x"}));
+    Expression expression2(createExpressionIfPossible({"y"}));
+    additionAndSubtraction.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);
+    additionAndSubtraction.putAsAddOrSubtraction(expression2, TermAssociationType::Negative);
+
+    TermAssociationTypes const& associations(additionAndSubtraction.getAssociations());
+
+    ASSERT_EQ(2U, associations.size());
+    EXPECT_EQ(TermAssociationType::Positive, associations[0]);
+    EXPECT_EQ(TermAssociationType::Negative, associations[1]);
+}
+
+TEST(AdditionAndSubtractionOfExpressionsTest, GetAsTermsWithDetailsWorks) {
+    AdditionAndSubtractionOfExpressions additionAndSubtraction;
+    Expression expression1(createExpressionIfPossible({"x"}));
+    Expression expression2(createExpressionIfPossible({"y"}));
+    additionAndSubtraction.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);
+    additionAndSubtraction.putAsAddOrSubtraction(expression2, TermAssociationType::Negative);
+
+    TermsWithDetails termsWithDetails(additionAndSubtraction.getAsTermsWithDetails());
+
+    ASSERT_EQ(2U, termsWithDetails.size());
+    Term const& term1(getTermConstReferenceFromUniquePointer(termsWithDetails[0].baseTermPointer));
+    ASSERT_EQ(TermType::Variable, term1.getTermType());
+    EXPECT_EQ("x", term1.getAsVariable().getVariableName());
+    EXPECT_EQ(TermAssociationType::Positive, termsWithDetails[0].association);
+    Term const& term2(getTermConstReferenceFromUniquePointer(termsWithDetails[1].baseTermPointer));
+    ASSERT_EQ(TermType::Variable, term2.getTermType());
+    EXPECT_EQ("y", term2.getAsVariable().getVariableName());
+    EXPECT_EQ(TermAssociationType::Negative, termsWithDetails[1].association);
+}
+
+TEST(AdditionAndSubtractionOfExpressionsTest, GetSizeWorks) {
+    AdditionAndSubtractionOfExpressions additionAndSubtraction1;
+    AdditionAndSubtractionOfExpressions additionAndSubtraction2;
+    Expression expression1(createExpressionIfPossible({"x"}));
+    Expression expression2(createExpressionIfPossible({"y"}));
+    additionAndSubtraction2.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);
+    additionAndSubtraction2.putAsAddOrSubtraction(expression2, TermAssociationType::Negative);
+
+    EXPECT_EQ(0, additionAndSubtraction1.getSize());
+    EXPECT_EQ(2, additionAndSubtraction2.getSize());
 }
 
 }  // namespace alba::algebra

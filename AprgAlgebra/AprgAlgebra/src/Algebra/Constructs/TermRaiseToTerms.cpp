@@ -111,62 +111,6 @@ void TermRaiseToTerms::simplify() {
 
 Term& TermRaiseToTerms::getBaseReference() { return m_base; }
 
-void TermRaiseToTerms::simplifyConstantRaiseToFunction(
-    Term& base, TermsWithDetails& exponents, Term const& exponentCombinedTerm) {
-    Function const& functionObject(exponentCombinedTerm.getAsFunction());
-    string const& functionName(functionObject.getFunctionName());
-    if ((getEAsATerm() == base && "ln" == functionName) || (Term(10) == base && "log" == functionName)) {
-        base = getTermConstReferenceFromBaseTerm(functionObject.getInputTerm());
-    } else {
-        exponents.emplace_back(exponentCombinedTerm, TermAssociationType::Positive);
-    }
-}
-
-void TermRaiseToTerms::simplifyMonomialRaiseToConstant(
-    Term& base, Monomial const& monomialBase, AlbaNumber const& exponent) {
-    Monomial result(monomialBase);
-    result.raiseToPowerNumber(exponent);
-    base = simplifyAndConvertMonomialToSimplestTerm(result);
-}
-
-void TermRaiseToTerms::simplifyPolynomialRaiseToPositiveInteger(
-    Term& base, Polynomial const& polynomialBase, int const exponent) {
-    Polynomial result(polynomialBase);
-    result.raiseToUnsignedInteger(exponent);
-    base = simplifyAndConvertPolynomialToSimplestTerm(result);
-}
-
-void TermRaiseToTerms::simplifyAdditionAndSubtractionExpressionRaiseToPositiveInteger(
-    Term& base, Expression const& expressionBase, int const exponent) {
-    Term result(1);
-    Term const termToMultiply(expressionBase);
-    for (int i = 0; i < exponent; ++i) {
-        result = result * termToMultiply;
-    }
-    result.simplify();
-    base = result;
-}
-
-void TermRaiseToTerms::simplifyConstantRaiseToMultiplicationAndDivisionExpression(
-    Term& base, TermsWithDetails& exponents, Term const& exponentCombinedTerm) {
-    TermsWithDetails termsWithDetails(
-        exponentCombinedTerm.getAsExpression().getTermsWithAssociation().getTermsWithDetails());
-    for (int i = 0; i < static_cast<int>(termsWithDetails.size()); ++i) {
-        TermWithDetails const& exponentWithDetails(termsWithDetails[i]);
-        Term const& exponent(getTermConstReferenceFromUniquePointer(exponentWithDetails.baseTermPointer));
-        if (exponentWithDetails.hasPositiveAssociation() && exponent.isFunction()) {
-            Function const& functionObject(exponent.getAsFunction());
-            string const& functionName(functionObject.getFunctionName());
-            if ((getEAsATerm() == base && "ln" == functionName) || (Term(10) == base && "log" == functionName)) {
-                base = getTermConstReferenceFromBaseTerm(functionObject.getInputTerm());
-                termsWithDetails.erase(termsWithDetails.begin() + i);
-                break;
-            }
-        }
-    }
-    exponents = termsWithDetails;
-}
-
 Term TermRaiseToTerms::getCombinedBaseAndExponents() const {
     Term combinedTerm;
     if (m_exponents.empty()) {
@@ -247,6 +191,62 @@ void TermRaiseToTerms::initializeExponentsInTerms(Terms const& exponents) {
     transform(exponents.cbegin(), exponents.cend(), back_inserter(m_exponents), [](Term const& exponent) {
         return TermWithDetails(exponent, TermAssociationType::Positive);
     });
+}
+
+void TermRaiseToTerms::simplifyConstantRaiseToFunction(
+    Term& base, TermsWithDetails& exponents, Term const& exponentCombinedTerm) {
+    Function const& functionObject(exponentCombinedTerm.getAsFunction());
+    string const& functionName(functionObject.getFunctionName());
+    if ((getEAsATerm() == base && "ln" == functionName) || (Term(10) == base && "log" == functionName)) {
+        base = getTermConstReferenceFromBaseTerm(functionObject.getInputTerm());
+    } else {
+        exponents.emplace_back(exponentCombinedTerm, TermAssociationType::Positive);
+    }
+}
+
+void TermRaiseToTerms::simplifyMonomialRaiseToConstant(
+    Term& base, Monomial const& monomialBase, AlbaNumber const& exponent) {
+    Monomial result(monomialBase);
+    result.raiseToPowerNumber(exponent);
+    base = simplifyAndConvertMonomialToSimplestTerm(result);
+}
+
+void TermRaiseToTerms::simplifyPolynomialRaiseToPositiveInteger(
+    Term& base, Polynomial const& polynomialBase, int const exponent) {
+    Polynomial result(polynomialBase);
+    result.raiseToUnsignedInteger(exponent);
+    base = simplifyAndConvertPolynomialToSimplestTerm(result);
+}
+
+void TermRaiseToTerms::simplifyAdditionAndSubtractionExpressionRaiseToPositiveInteger(
+    Term& base, Expression const& expressionBase, int const exponent) {
+    Term result(1);
+    Term const termToMultiply(expressionBase);
+    for (int i = 0; i < exponent; ++i) {
+        result = result * termToMultiply;
+    }
+    result.simplify();
+    base = result;
+}
+
+void TermRaiseToTerms::simplifyConstantRaiseToMultiplicationAndDivisionExpression(
+    Term& base, TermsWithDetails& exponents, Term const& exponentCombinedTerm) {
+    TermsWithDetails termsWithDetails(
+        exponentCombinedTerm.getAsExpression().getTermsWithAssociation().getTermsWithDetails());
+    for (int i = 0; i < static_cast<int>(termsWithDetails.size()); ++i) {
+        TermWithDetails const& exponentWithDetails(termsWithDetails[i]);
+        Term const& exponent(getTermConstReferenceFromUniquePointer(exponentWithDetails.baseTermPointer));
+        if (exponentWithDetails.hasPositiveAssociation() && exponent.isFunction()) {
+            Function const& functionObject(exponent.getAsFunction());
+            string const& functionName(functionObject.getFunctionName());
+            if ((getEAsATerm() == base && "ln" == functionName) || (Term(10) == base && "log" == functionName)) {
+                base = getTermConstReferenceFromBaseTerm(functionObject.getInputTerm());
+                termsWithDetails.erase(termsWithDetails.begin() + i);
+                break;
+            }
+        }
+    }
+    exponents = termsWithDetails;
 }
 
 }  // namespace alba::algebra

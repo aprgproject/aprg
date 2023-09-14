@@ -28,10 +28,20 @@
 #include <iterator>
 #include <vector>
 
-using namespace alba;
-using namespace alba::matrix;
 using namespace alba::mathHelper;
+using namespace alba::matrix;
+using namespace alba;
 using namespace std;
+
+double function1ToIntegrate(double const inputValue, void *parameters) {
+    double const alpha = *static_cast<double *>(parameters);
+    return log(alpha * inputValue) / sqrt(inputValue);
+}
+
+double function2ToIntegrate(double const inputValue, void *parameters) {
+    int const mFunctionInput = *static_cast<int *>(parameters);
+    return gsl_pow_int(inputValue, mFunctionInput) + 1.0;
+}
 
 TEST(GslTest, GettingTheBesselFunctionInGslWorks) {
     double const xValue = 5.0;
@@ -43,7 +53,6 @@ TEST(GslTest, GettingTheBesselFunctionInGslWorks) {
 TEST(GslTest, PolynomialRootFindingInGslWorks) {
     // To demonstrate the use of the general polynomial solver we will take the polynomial P(x) = x^5 - 1
     // which has these roots: 1; e^(2*pi*index/5); e^(4*pi*index/5); e^(6*pi*index/5); e^(8*pi*index/5)
-
     // coefficients of P(x) = -1 + x^5
     constexpr int NUMBER_OF_COEFFICIENTS = 6;
     std::array<double, NUMBER_OF_COEFFICIENTS> coefficients = {-1, 0, 0, 0, 0, 1};
@@ -67,7 +76,6 @@ TEST(GslTest, PolynomialRootFindingInGslWorks) {
 
 TEST(GslTest, PermutationFunctionsInGslWorks) {
     // Th iscreates a random permutation (by shuffling the elements of the identity) and finds its inverse.
-
     using PermutationVector = vector<size_t>;
     constexpr size_t NUMBER_OF_DIGITS = 5;
     gsl_permutation *permutation1 = gsl_permutation_alloc(NUMBER_OF_DIGITS);
@@ -122,7 +130,6 @@ TEST(GslTest, GettingRandomPermutationsInGslWorks) {
 
 TEST(GslTest, GettingPermutationsInGslWorks) {
     // This steps forwards through all possible third order permutations, starting from the identity.
-
     gsl_permutation *permutation = gsl_permutation_alloc(3);
     gsl_permutation_init(permutation);
     int exitStatus = GSL_SUCCESS;
@@ -136,7 +143,6 @@ TEST(GslTest, GettingPermutationsInGslWorks) {
 
 TEST(GslTest, GettingCombinationsInGslWorks) {
     // This prints all subsets of the set 0, 1, 2, 3 ordered by size.
-
     constexpr int NUMBER_OF_DIGITS = 3;
     cout << "All subsets of {0,1,2,3} by size:\n";
     for (int index = 0; index <= NUMBER_OF_DIGITS; ++index) {
@@ -154,7 +160,6 @@ TEST(GslTest, GettingCombinationsInGslWorks) {
 
 TEST(GslTest, GettingMultisetsInGslWorks) {
     // This prints all multisets elements containing the values 0; 1; 2; 3 ordered by size.
-
     constexpr int NUMBER_OF_DIGITS = 3;
     cout << "All subsets of {0,1,2} by size:\n";
     for (int index = 0; index <= NUMBER_OF_DIGITS; ++index) {
@@ -172,7 +177,6 @@ TEST(GslTest, GettingMultisetsInGslWorks) {
 
 TEST(GslTest, SortingAndGettingTheSmallestValuesInGslWorks) {
     // This uses the function gsl_sort_smallest() to select the 5 smallest numbers.
-
     constexpr int NUMBER_OF_VALUES = 10;
     constexpr int NUMBER_OF_SMALLEST_VALUES = 5;
     constexpr size_t stride = 1;
@@ -187,7 +191,6 @@ TEST(GslTest, SortingAndGettingTheSmallestValuesInGslWorks) {
 
 TEST(GslTest, MatrixMultiplicationInGslWorks) {
     // Thi computes the product of two matrices using the Level-3 BLAS function DGEMM.
-
     // Create two matrices.
     AlbaMatrix<double> matrixA(3, 2, {0.11, 0.12, 0.13, 0.21, 0.22, 0.23});
     AlbaMatrix<double> matrixB(2, 3, {1011, 1012, 1021, 1022, 1031, 1032});
@@ -239,7 +242,6 @@ TEST(GslTest, MatrixMultiplicationWithRandomNumbersInGslWorks) {
 
 TEST(GslTest, SolvingLinearSystemInGslWorks) {
     // This solves the linear system Ax = b.
-
     AlbaMatrix<double> matrixA(
         4, 4, {0.18, 0.60, 0.57, 0.96, 0.41, 0.24, 0.99, 0.58, 0.14, 0.30, 0.97, 0.66, 0.51, 0.13, 0.19, 0.85});
     vector<double> vectorB{1.0, 2.0, 3.0, 4.0};
@@ -262,7 +264,6 @@ TEST(GslTest, SolvingLinearSystemInGslWorks) {
 TEST(GslTest, GettingEigenValuesAndVectorInGslWorks) {
     // This computes the eigenvalues and eigenvectors of the 4-th order Hilbert matrix, H(index,index2) = 1/(index
     // +index2 + 1).
-
     AlbaMatrix<double> matrixHilbert(
         4, 4,
         {1.0, 1 / 2.0, 1 / 3.0, 1 / 4.0, 1 / 2.0, 1 / 3.0, 1 / 4.0, 1 / 5.0, 1 / 3.0, 1 / 4.0, 1 / 5.0, 1 / 6.0,
@@ -299,7 +300,6 @@ TEST(GslTest, FastFourierTransformInGslWorks) {
     // to give a filtered version of the square pulse.
     // Since Fourier coefficients are stored using the half-complex symmetry both positive and negative
     // frequencies are removed and the final filtered signal is also real.
-
     constexpr int NUMBER_OF_ITEMS = 100;
     array<double, NUMBER_OF_ITEMS> inputData{};
     gsl_fft_real_workspace *workspace = gsl_fft_real_workspace_alloc(NUMBER_OF_ITEMS);
@@ -333,18 +333,12 @@ TEST(GslTest, FastFourierTransformInGslWorks) {
     gsl_fft_real_workspace_free(workspace);
 }
 
-double function1ToIntegrate(double const inputValue, void *parameters) {
-    double const alpha = *static_cast<double *>(parameters);
-    return log(alpha * inputValue) / sqrt(inputValue);
-}
-
 TEST(GslTest, NumericalAdaptiveIntegrationInGslWorks) {
     // This uses adaptive integration to integrate.
     // The integrator QAGS will handle a large class of definite integrals.
     // For example, consider the following integral, which has an algebraic-logarithmic singularity at the origin,
     // integrate(x^(-1/2) * log(x) dx) evaluated from 1 to 0 = -4
     // The program below computes this integral to a relative accuracy bound of 1e-7.
-
     gsl_integration_workspace *workspace = gsl_integration_workspace_alloc(1000);
     double estimatedError{};
     double alpha = 1.0;
@@ -366,18 +360,12 @@ TEST(GslTest, NumericalAdaptiveIntegrationInGslWorks) {
     gsl_integration_workspace_free(workspace);
 }
 
-double function2ToIntegrate(double const inputValue, void *parameters) {
-    int const mFunctionInput = *static_cast<int *>(parameters);
-    return gsl_pow_int(inputValue, mFunctionInput) + 1.0;
-}
-
 TEST(GslTest, NumericalFixedPointQuadratureIntegrationInGslWorks) {
     // This uses a fixed-point quadrature rule to integrate.
     // Consulting our table of fixed point quadratures,
     // we see that this integral can be evaluated with a Hermite uadrature rule, setting  = 0; a = 0; b = 1.
     // Since we are integrating a polynomial of degree m,
     // we need to choose the number of nodes n  (m + 1) = 2 to achieve the best results.
-
     constexpr int numberOfQuadratureNodes = 6;
     const gsl_integration_fixed_type *integrationType = gsl_integration_fixed_hermite;
     gsl_integration_fixed_workspace *workspace =
@@ -405,7 +393,6 @@ TEST(GslTest, NumericalFixedPointQuadratureIntegrationInGslWorks) {
 TEST(GslTest, UsingARandomGeneratorInGslWorks) {
     // This demonstrates the use of a random number generator
     // to produce uniform random numbers in the range [0.0, 1.0),
-
     const gsl_rng_type *randomGeneratorType = gsl_rng_default;
     gsl_rng_env_setup();
     gsl_rng *randomGenerator = gsl_rng_alloc(randomGeneratorType);
@@ -420,7 +407,6 @@ TEST(GslTest, UsingARandomGeneratorInGslWorks) {
 
 TEST(GslTest, UsingAQuasiRandomGeneratorInGslWorks) {
     // The following program prints the first 10 points of the 2-dimensional Sobol sequence.
-
     gsl_qrng *quasiRandomSequenceGenerator = gsl_qrng_alloc(gsl_qrng_sobol, 2);
     std::array<double, 2> randomValues{};
     for (int index = 0; index < 10; ++index) {

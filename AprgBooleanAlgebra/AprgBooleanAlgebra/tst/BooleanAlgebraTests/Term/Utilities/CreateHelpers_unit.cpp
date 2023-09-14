@@ -18,6 +18,33 @@ TEST(CreateHelpersTest, CreateExpressionInExpressionWorks) {
     EXPECT_EQ(expressionToExpect2, expressionToVerify2);
 }
 
+TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplifyExpressionInAExpression) {
+    Expression expression1(createExpressionIfPossible({true}));
+    Expression expression2(createExpressionInAnExpression(expression1));
+    Expression expression3(createExpressionInAnExpression(expression2));
+
+    Expression expressionToTest1(createExpressionIfPossible({expression3}));
+
+    EXPECT_EQ(OperatorLevel::Unknown, expressionToTest1.getCommonOperatorLevel());
+    WrappedTerms const& termsToVerify1(expressionToTest1.getWrappedTerms());
+    ASSERT_EQ(1U, termsToVerify1.size());
+    Term const& termToVerify1(getTermConstReferenceFromUniquePointer(termsToVerify1[0].baseTermPointer));
+    ASSERT_TRUE(termToVerify1.isExpression());
+    Expression const& expressionToTest2(termToVerify1.getExpressionConstReference());
+    EXPECT_EQ(OperatorLevel::Unknown, expressionToTest2.getCommonOperatorLevel());
+    WrappedTerms const& termsToVerify2(expressionToTest2.getWrappedTerms());
+    ASSERT_EQ(1U, termsToVerify2.size());
+    Term const& termToVerify2(getTermConstReferenceFromUniquePointer(termsToVerify2[0].baseTermPointer));
+    ASSERT_TRUE(termToVerify2.isExpression());
+    Expression const& expressionToTest3(termToVerify2.getExpressionConstReference());
+    EXPECT_EQ(OperatorLevel::Unknown, expressionToTest3.getCommonOperatorLevel());
+    WrappedTerms const& termsToVerify3(expressionToTest3.getWrappedTerms());
+    ASSERT_EQ(1U, termsToVerify3.size());
+    Term const& termToVerify3(getTermConstReferenceFromUniquePointer(termsToVerify3[0].baseTermPointer));
+    ASSERT_TRUE(termToVerify3.isConstant());
+    EXPECT_EQ(Constant(true), termToVerify3.getConstantConstReference());
+}
+
 TEST(CreateHelpersTest, CreateAndWrapExpressionFromATermWorks) {
     Expression expression1(createExpressionIfPossible({false}));
     Expression expression2(createExpressionIfPossible({true}));
@@ -51,33 +78,6 @@ TEST(CreateHelpersTest, CreateExpressionIfPossibleWorks) {
     EXPECT_EQ(Term("y"), getTermConstReferenceFromUniquePointer(termsToVerify[1].baseTermPointer));
 }
 
-TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplifyExpressionInAExpression) {
-    Expression expression1(createExpressionIfPossible({true}));
-    Expression expression2(createExpressionInAnExpression(expression1));
-    Expression expression3(createExpressionInAnExpression(expression2));
-
-    Expression expressionToTest1(createExpressionIfPossible({expression3}));
-
-    EXPECT_EQ(OperatorLevel::Unknown, expressionToTest1.getCommonOperatorLevel());
-    WrappedTerms const& termsToVerify1(expressionToTest1.getWrappedTerms());
-    ASSERT_EQ(1U, termsToVerify1.size());
-    Term const& termToVerify1(getTermConstReferenceFromUniquePointer(termsToVerify1[0].baseTermPointer));
-    ASSERT_TRUE(termToVerify1.isExpression());
-    Expression const& expressionToTest2(termToVerify1.getExpressionConstReference());
-    EXPECT_EQ(OperatorLevel::Unknown, expressionToTest2.getCommonOperatorLevel());
-    WrappedTerms const& termsToVerify2(expressionToTest2.getWrappedTerms());
-    ASSERT_EQ(1U, termsToVerify2.size());
-    Term const& termToVerify2(getTermConstReferenceFromUniquePointer(termsToVerify2[0].baseTermPointer));
-    ASSERT_TRUE(termToVerify2.isExpression());
-    Expression const& expressionToTest3(termToVerify2.getExpressionConstReference());
-    EXPECT_EQ(OperatorLevel::Unknown, expressionToTest3.getCommonOperatorLevel());
-    WrappedTerms const& termsToVerify3(expressionToTest3.getWrappedTerms());
-    ASSERT_EQ(1U, termsToVerify3.size());
-    Term const& termToVerify3(getTermConstReferenceFromUniquePointer(termsToVerify3[0].baseTermPointer));
-    ASSERT_TRUE(termToVerify3.isConstant());
-    EXPECT_EQ(Constant(true), termToVerify3.getConstantConstReference());
-}
-
 TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplify) {
     Expression expressionToTest(createExpressionIfPossible({"x", "&", "x"}));
 
@@ -94,6 +94,24 @@ TEST(CreateHelpersTest, CreateExpressionIfPossibleReturnsEmptyIfListOfTermsAreWr
     EXPECT_EQ(OperatorLevel::Unknown, expressionToTest.getCommonOperatorLevel());
     WrappedTerms const& termsToVerify(expressionToTest.getWrappedTerms());
     ASSERT_TRUE(termsToVerify.empty());
+}
+
+TEST(CreateHelpersTest, CreateTermWithAdditionAndSubtractionWrappedTermsWorksWithMultipleTerms) {
+    WrappedTerms wrappedTerms{Term("x"), Term("y"), Term("z")};
+
+    Term termToExpect(createTermWithAndOperationWrappedTerms(wrappedTerms));
+
+    Term termToVerify(createExpressionIfPossible({"x", "&", "y", "&", "z"}));
+    EXPECT_EQ(termToVerify, termToExpect);
+}
+
+TEST(CreateHelpersTest, CreateTermWithMultiplicationAndDivisionWrappedTermsWorksWithMultipleTerms) {
+    WrappedTerms wrappedTerms{Term("x"), Term("y"), Term("z")};
+
+    Term termToExpect(createTermWithOrOperationWrappedTerms(wrappedTerms));
+
+    Term termToVerify(createExpressionIfPossible({"x", "|", "y", "|", "z"}));
+    EXPECT_EQ(termToVerify, termToExpect);
 }
 
 TEST(CreateHelpersTest, CreateSimplifiedExpressionIfPossibleWorks) {
@@ -122,30 +140,12 @@ TEST(CreateHelpersTest, CreateTermWithAdditionAndSubtractionWrappedTermsWorksWit
     EXPECT_EQ(termToVerify, termToExpect);
 }
 
-TEST(CreateHelpersTest, CreateTermWithAdditionAndSubtractionWrappedTermsWorksWithMultipleTerms) {
-    WrappedTerms wrappedTerms{Term("x"), Term("y"), Term("z")};
-
-    Term termToExpect(createTermWithAndOperationWrappedTerms(wrappedTerms));
-
-    Term termToVerify(createExpressionIfPossible({"x", "&", "y", "&", "z"}));
-    EXPECT_EQ(termToVerify, termToExpect);
-}
-
 TEST(CreateHelpersTest, CreateTermWithMultiplicationAndDivisionWrappedTermsWorksWithASingleTerm) {
     WrappedTerms wrappedTerms{Term("x")};
 
     Term termToExpect(createTermWithOrOperationWrappedTerms(wrappedTerms));
 
     Term termToVerify("x");
-    EXPECT_EQ(termToVerify, termToExpect);
-}
-
-TEST(CreateHelpersTest, CreateTermWithMultiplicationAndDivisionWrappedTermsWorksWithMultipleTerms) {
-    WrappedTerms wrappedTerms{Term("x"), Term("y"), Term("z")};
-
-    Term termToExpect(createTermWithOrOperationWrappedTerms(wrappedTerms));
-
-    Term termToVerify(createExpressionIfPossible({"x", "|", "y", "|", "z"}));
     EXPECT_EQ(termToVerify, termToExpect);
 }
 

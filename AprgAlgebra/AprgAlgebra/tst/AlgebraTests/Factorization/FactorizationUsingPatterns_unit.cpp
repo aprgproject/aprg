@@ -6,28 +6,6 @@ using namespace std;
 
 namespace alba::algebra::Factorization {
 
-TEST(FactorizationUsingPatternsTest, FactorizeUsingPatternsWorksWhenItCannotBeFactored) {
-    Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
-
-    Polynomials polynomialsToVerify(factorizeUsingPatterns(polynomialToTest));
-
-    ASSERT_EQ(1U, polynomialsToVerify.size());
-    Polynomial const& polynomialToExpect1(polynomialToTest);
-    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
-}
-
-TEST(FactorizationUsingPatternsTest, FactorizeUsingPatternsWorksWhenItCanBeFactored) {
-    Polynomial polynomialToTest{Monomial(9, {{"x", 8}, {"y", 2}}), Monomial(-16, {{"z", 4}})};
-
-    Polynomials polynomialsToVerify(factorizeUsingPatterns(polynomialToTest));
-
-    ASSERT_EQ(2U, polynomialsToVerify.size());
-    Polynomial polynomialToExpect1{Monomial(3, {{"x", 4}, {"y", 1}}), Monomial(4, {{"z", 2}})};
-    Polynomial polynomialToExpect2{Monomial(3, {{"x", 4}, {"y", 1}}), Monomial(-4, {{"z", 2}})};
-    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
-    EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
-}
-
 TEST(FactorizationUsingPatternsTest, FactorizeUsingPatternsIfPossibleWorksWhenItCannotBeFactored) {
     Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
 
@@ -264,6 +242,28 @@ TEST(FactorizationUsingPatternsTest, AddFactorsOfSumOfCubesWorks) {
     EXPECT_EQ(polynomialToExpect3, polynomialsToVerify2[0]);
     EXPECT_EQ(polynomialToExpect4, polynomialsToVerify2[1]);
     EXPECT_EQ(polynomialToExpect5, polynomialsToVerify2[2]);
+}
+
+TEST(FactorizationUsingPatternsTest, FactorizeUsingPatternsWorksWhenItCannotBeFactored) {
+    Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
+
+    Polynomials polynomialsToVerify(factorizeUsingPatterns(polynomialToTest));
+
+    ASSERT_EQ(1U, polynomialsToVerify.size());
+    Polynomial const& polynomialToExpect1(polynomialToTest);
+    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
+}
+
+TEST(FactorizationUsingPatternsTest, FactorizeUsingPatternsWorksWhenItCanBeFactored) {
+    Polynomial polynomialToTest{Monomial(9, {{"x", 8}, {"y", 2}}), Monomial(-16, {{"z", 4}})};
+
+    Polynomials polynomialsToVerify(factorizeUsingPatterns(polynomialToTest));
+
+    ASSERT_EQ(2U, polynomialsToVerify.size());
+    Polynomial polynomialToExpect1{Monomial(3, {{"x", 4}, {"y", 1}}), Monomial(4, {{"z", 2}})};
+    Polynomial polynomialToExpect2{Monomial(3, {{"x", 4}, {"y", 1}}), Monomial(-4, {{"z", 2}})};
+    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
+    EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
 }
 
 TEST(FactorizationUsingPatternsTest, IsDifferenceOfSquaresWorks) {

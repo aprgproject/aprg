@@ -8,15 +8,12 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
-
 #ifndef PATH_OF_7Z_EXECUTABLE
 static_assert(false, "PATH_OF_7Z_EXECUTABLE is not set in cmake");
 #endif
-
 #ifndef NULL_DEVICE
 static_assert(false, "NULL_DEVICE is not set in cmake");
 #endif
-
 #ifndef PATH_OF_7Z_TEMP_FILE
 static_assert(false, "PATH_OF_7Z_TEMP_FILE is not set in cmake");
 #endif
@@ -45,14 +42,6 @@ AprgFileExtractor::AprgFileExtractor()
 AprgFileExtractor::AprgFileExtractor(
     string const& condition, string const& pathOf7zExecutable, string const& pathOf7zTempFile)
     : m_grepEvaluator(condition), m_pathOf7zExecutable(pathOf7zExecutable), m_pathOf7zTempFile(pathOf7zTempFile) {}
-
-bool AprgFileExtractor::isRecognizedCompressedFile(string const& extension) {
-    return stringHelper::isEqualNotCaseSensitive("zip", extension) ||
-           stringHelper::isEqualNotCaseSensitive("tar", extension) ||
-           stringHelper::isEqualNotCaseSensitive("7z", extension) ||
-           stringHelper::isEqualNotCaseSensitive("xz", extension) ||
-           stringHelper::isEqualNotCaseSensitive("gz", extension);
-}
 
 void AprgFileExtractor::copyRelativeFilePathsFromCompressedFile(
     string const& filePathOfCompressedFile, SetOfFilePaths& files) const {
@@ -116,21 +105,12 @@ void AprgFileExtractor::extractAllRelevantFiles(string const& pathOfFileOrDirect
     }
 }
 
-void AprgFileExtractor::runInConsole(string const& command) {
-#if defined(OS_LINUX)
-    ALBA_INF_PRINT1(cout, command);
-    system(command.c_str());
-#elif defined(OS_WINDOWS)
-    string const revisedCommand = string(R"(cmd /S /C ")") + command + string(R"(")");
-    ALBA_INF_PRINT1(cout, revisedCommand);
-    system(revisedCommand.c_str());
-#endif
-}
-
-bool AprgFileExtractor::isTheExtensionXzOrGzOrTar(string const& extension) {
-    return stringHelper::isEqualNotCaseSensitive("xz", extension) ||
-           stringHelper::isEqualNotCaseSensitive("gz", extension) ||
-           stringHelper::isEqualNotCaseSensitive("tar", extension);
+bool AprgFileExtractor::isRecognizedCompressedFile(string const& extension) {
+    return stringHelper::isEqualNotCaseSensitive("zip", extension) ||
+           stringHelper::isEqualNotCaseSensitive("tar", extension) ||
+           stringHelper::isEqualNotCaseSensitive("7z", extension) ||
+           stringHelper::isEqualNotCaseSensitive("xz", extension) ||
+           stringHelper::isEqualNotCaseSensitive("gz", extension);
 }
 
 void AprgFileExtractor::extractAllRelevantFilesInThisDirectory(string const& directoryPath) {
@@ -179,6 +159,23 @@ void AprgFileExtractor::extractAllRelevantFilesRecursively(string const& filePat
         }
         ProgressCounters::numberOfFilesAnalyzedForExtraction++;
     }
+}
+
+void AprgFileExtractor::runInConsole(string const& command) {
+#if defined(OS_LINUX)
+    ALBA_INF_PRINT1(cout, command);
+    system(command.c_str());
+#elif defined(OS_WINDOWS)
+    string const revisedCommand = string(R"(cmd /S /C ")") + command + string(R"(")");
+    ALBA_INF_PRINT1(cout, revisedCommand);
+    system(revisedCommand.c_str());
+#endif
+}
+
+bool AprgFileExtractor::isTheExtensionXzOrGzOrTar(string const& extension) {
+    return stringHelper::isEqualNotCaseSensitive("xz", extension) ||
+           stringHelper::isEqualNotCaseSensitive("gz", extension) ||
+           stringHelper::isEqualNotCaseSensitive("tar", extension);
 }
 
 }  // namespace alba

@@ -36,9 +36,6 @@ public:
     }
 
     [[nodiscard]] int getSize() const override { return getSizeStartingOnThisNode(m_root); }
-    [[nodiscard]] int getNumberOfNodes() const {
-        return getNumberOfNodes(m_root);  // dont count the root pointer
-    }
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
     [[nodiscard]] bool doesContain(Key const& key) const override {
@@ -47,6 +44,9 @@ public:
     }
 
     void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyStartingOnThisNode(m_root, key, 0); }
+    [[nodiscard]] int getNumberOfNodes() const {
+        return getNumberOfNodes(m_root);  // dont count the root pointer
+    }
 
 protected:
     [[nodiscard]] virtual int getSizeStartingOnThisNode(NodeUniquePointer const& currentNodePointer) const = 0;
@@ -103,9 +103,7 @@ protected:
 // ---> left: Link to TST for all keys that start with a letter before s
 // ---> middle: Link to TST for all keys that start with a letter s
 // ---> right: Link to TST for all keys that start with a letter after s
-
 // almost like a binary search tree
-
 // Search in a TST
 // -> Follow links corresponding to each character in the key.
 // ---> If less, take left link

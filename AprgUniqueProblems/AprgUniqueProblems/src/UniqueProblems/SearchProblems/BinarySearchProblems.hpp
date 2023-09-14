@@ -132,12 +132,9 @@ private:
 //              =  1 if x > y
 // Did you come across any instruction set in which a comparison behaves like signum function?
 // Can it make first implementation of binary search optimal?
-
 // 2. Implement ceil function replica of floor function.
-
 // 3. Discuss with your friends on “Is binary search optimal (results in least number of comparisons)?
 // Why not ternary search or interpolation search on sorted array?
 // When do you prefer ternary or interpolation search over binary search?”
-
 // 4. Draw a tree representation of binary search (believe me, it helps you a lot to understand many internals of binary
 // search).

@@ -45,13 +45,6 @@ TEST(LinearNearestValueSearchWithOneIndexTest, GetIndexOfNearestValueWorksWhenTh
     testGetIndexOfNearestValueWithOneUnsignedInt<SearchForTest, ValuesForTest>();
 }
 
-TEST(LinearNearestValueSearchWithOneIndexTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
-    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
-    SearchForTest search(duplicateValues);
-
-    EXPECT_EQ(0, search.getIndexOfNearestValue(33));
-}
-
 TEST(LinearNearestValueSearchWithOneIndexTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues) {
     testGetIndexOfNearestValueWithMultipleUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
@@ -62,6 +55,13 @@ TEST(LinearNearestValueSearchWithOneIndexTest, GetIndexOfNearestValueWorksWhenNe
 
 TEST(LinearNearestValueSearchWithOneIndexTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher) {
     testGetIndexOfNearestValueWhenNearestValueIsHigherWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
+TEST(LinearNearestValueSearchWithOneIndexTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
+    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
+    SearchForTest search(duplicateValues);
+
+    EXPECT_EQ(0, search.getIndexOfNearestValue(33));
 }
 
 TEST(

@@ -81,6 +81,67 @@ PolynomialOverPolynomial::QuotientAndRemainder PolynomialOverPolynomial::simplif
     return divide();
 }
 
+bool PolynomialOverPolynomial::shouldPerformFactorization() const {
+    return !canBeConvertedToConstant(m_numerator) && !canBeConvertedToConstant(m_denominator);
+}
+
+void PolynomialOverPolynomial::convertFractionCoefficientsToInteger() {
+    int const numeratorMultiplier(getLcmForDenominatorCoefficients(m_numerator));
+    m_numerator.multiplyNumber(numeratorMultiplier);
+    m_denominator.multiplyNumber(numeratorMultiplier);
+    int const denominatorMultiplier(getLcmForDenominatorCoefficients(m_denominator));
+    m_numerator.multiplyNumber(denominatorMultiplier);
+    m_denominator.multiplyNumber(denominatorMultiplier);
+}
+
+void PolynomialOverPolynomial::convertNegativeExponentsToPositive() {
+    Monomial const monomialExponentNumerator(getMonomialWithMaxNegativeExponentsAndConvertItToPositive(m_numerator));
+    Monomial const monomialExponentDenominator(
+        getMonomialWithMaxNegativeExponentsAndConvertItToPositive(m_denominator));
+    m_numerator.multiplyMonomial(monomialExponentNumerator);
+    m_numerator.multiplyMonomial(monomialExponentDenominator);
+    m_denominator.multiplyMonomial(monomialExponentNumerator);
+    m_denominator.multiplyMonomial(monomialExponentDenominator);
+}
+
+void PolynomialOverPolynomial::removeCommonMonomialOnAllMonomialsInNumeratorAndDenominator() {
+    Monomials numeratorAndDenominatorMonomials;
+    Monomials const& numeratorMonomials(m_numerator.getMonomials());
+    Monomials const& denominatorMonomials(m_denominator.getMonomials());
+    numeratorAndDenominatorMonomials.reserve(numeratorMonomials.size() + denominatorMonomials.size());
+    copy(numeratorMonomials.cbegin(), numeratorMonomials.cend(), back_inserter(numeratorAndDenominatorMonomials));
+    copy(denominatorMonomials.cbegin(), denominatorMonomials.cend(), back_inserter(numeratorAndDenominatorMonomials));
+    Monomial const gcfMonomial(getGcfMonomialInMonomials(numeratorAndDenominatorMonomials));
+    if (!isTheValue(gcfMonomial, 0)) {
+        m_numerator.divideMonomial(gcfMonomial);
+        m_denominator.divideMonomial(gcfMonomial);
+        bool const isDenominatorHasNegativeSign = getCommonSignInMonomials(m_denominator.getMonomials()) == -1;
+        if (isDenominatorHasNegativeSign) {
+            m_numerator.divideMonomial(createMonomialFromNumber(-1));
+            m_denominator.divideMonomial(createMonomialFromNumber(-1));
+        }
+    }
+}
+
+void PolynomialOverPolynomial::factorizeRemoveCommonFactorsInNumeratorAndDenominatorAndCombineRemainingFactors() {
+    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
+    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue =
+        m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue;
+    ScopeObject const scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+
+    if (shouldPerformFactorization()) {
+        Polynomials numeratorFactors(factorizeAPolynomial(m_numerator));
+        Polynomials denominatorFactors(factorizeAPolynomial(m_denominator));
+        bool const areSomeFactorsRemoved(
+            removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(numeratorFactors, denominatorFactors));
+        if (areSomeFactorsRemoved) {
+            m_numerator = multiplyAndSimplifyFactors(numeratorFactors);
+            m_denominator = multiplyAndSimplifyFactors(denominatorFactors);
+        }
+    }
+}
+
 Monomial PolynomialOverPolynomial::getMonomialWithMaxNegativeExponentsAndConvertItToPositive(
     Polynomial const& polynomial) {
     Monomial resultMonomial(1, {});
@@ -151,67 +212,6 @@ bool PolynomialOverPolynomial::removeCommonFactorsAndReturnIfSomeFactorsAreRemov
         }
     }
     return areSomeFactorsRemoved;
-}
-
-bool PolynomialOverPolynomial::shouldPerformFactorization() const {
-    return !canBeConvertedToConstant(m_numerator) && !canBeConvertedToConstant(m_denominator);
-}
-
-void PolynomialOverPolynomial::convertFractionCoefficientsToInteger() {
-    int const numeratorMultiplier(getLcmForDenominatorCoefficients(m_numerator));
-    m_numerator.multiplyNumber(numeratorMultiplier);
-    m_denominator.multiplyNumber(numeratorMultiplier);
-    int const denominatorMultiplier(getLcmForDenominatorCoefficients(m_denominator));
-    m_numerator.multiplyNumber(denominatorMultiplier);
-    m_denominator.multiplyNumber(denominatorMultiplier);
-}
-
-void PolynomialOverPolynomial::convertNegativeExponentsToPositive() {
-    Monomial const monomialExponentNumerator(getMonomialWithMaxNegativeExponentsAndConvertItToPositive(m_numerator));
-    Monomial const monomialExponentDenominator(
-        getMonomialWithMaxNegativeExponentsAndConvertItToPositive(m_denominator));
-    m_numerator.multiplyMonomial(monomialExponentNumerator);
-    m_numerator.multiplyMonomial(monomialExponentDenominator);
-    m_denominator.multiplyMonomial(monomialExponentNumerator);
-    m_denominator.multiplyMonomial(monomialExponentDenominator);
-}
-
-void PolynomialOverPolynomial::removeCommonMonomialOnAllMonomialsInNumeratorAndDenominator() {
-    Monomials numeratorAndDenominatorMonomials;
-    Monomials const& numeratorMonomials(m_numerator.getMonomials());
-    Monomials const& denominatorMonomials(m_denominator.getMonomials());
-    numeratorAndDenominatorMonomials.reserve(numeratorMonomials.size() + denominatorMonomials.size());
-    copy(numeratorMonomials.cbegin(), numeratorMonomials.cend(), back_inserter(numeratorAndDenominatorMonomials));
-    copy(denominatorMonomials.cbegin(), denominatorMonomials.cend(), back_inserter(numeratorAndDenominatorMonomials));
-    Monomial const gcfMonomial(getGcfMonomialInMonomials(numeratorAndDenominatorMonomials));
-    if (!isTheValue(gcfMonomial, 0)) {
-        m_numerator.divideMonomial(gcfMonomial);
-        m_denominator.divideMonomial(gcfMonomial);
-        bool const isDenominatorHasNegativeSign = getCommonSignInMonomials(m_denominator.getMonomials()) == -1;
-        if (isDenominatorHasNegativeSign) {
-            m_numerator.divideMonomial(createMonomialFromNumber(-1));
-            m_denominator.divideMonomial(createMonomialFromNumber(-1));
-        }
-    }
-}
-
-void PolynomialOverPolynomial::factorizeRemoveCommonFactorsInNumeratorAndDenominatorAndCombineRemainingFactors() {
-    ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
-    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue =
-        m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue;
-    ScopeObject const scopeObject;
-    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
-    if (shouldPerformFactorization()) {
-        Polynomials numeratorFactors(factorizeAPolynomial(m_numerator));
-        Polynomials denominatorFactors(factorizeAPolynomial(m_denominator));
-        bool const areSomeFactorsRemoved(
-            removeCommonFactorsAndReturnIfSomeFactorsAreRemoved(numeratorFactors, denominatorFactors));
-        if (areSomeFactorsRemoved) {
-            m_numerator = multiplyAndSimplifyFactors(numeratorFactors);
-            m_denominator = multiplyAndSimplifyFactors(denominatorFactors);
-        }
-    }
 }
 
 }  // namespace alba::algebra

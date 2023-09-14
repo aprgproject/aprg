@@ -10,6 +10,7 @@ public:
     using HashTable = typename BaseSeparateChainingHash::HashTable;
     ~BaseSymbolTableWithBaseSeparateChainingHash() override =
         default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
+
     BaseSymbolTableWithBaseSeparateChainingHash()
         : b_size(BaseSeparateChainingHash::m_size),
           b_smallerSymbolTables(BaseSeparateChainingHash::m_smallerSymbolTables) {}

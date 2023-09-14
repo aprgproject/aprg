@@ -67,26 +67,21 @@ private:
 
 // Given n cities and distances between every pair of cities, select k cities to place warehouses (or ATMs or Cloud
 // Server) such that the maximum distance of a city to a warehouse (or ATM or Cloud Server) is minimized.
-
 // For example consider the following four cities, 0, 1, 2 and 3 and distances between them,
 // how do place 2 ATMs among these 4 cities so that the maximum distance of a city to an ATM is minimized.
-
 // There is no polynomial time solution available for this problem as the problem is a known NP-Hard problem.
 // There is a polynomial time Greedy approximate algorithm,
 // the greedy algorithm provides a solution which is never worse that twice the optimal solution.
 // The greedy solution works only if the distances between cities follow Triangular Inequality
 // (Distance between two points is always smaller than sum of distances through a third point).
-
 // The 2-Approximate Greedy Algorithm:
 // -> Step 1: Choose the first center arbitrarily.
 // -> Step 2: Choose remaining k-1 centers using the following criteria.
 // ---> Let c1, c2, c3, … ci be the already chosen centers.
 // ---> Choose (i+1)’th center by picking the city whi   ch is farthest from already selected centers,
 // ---> i.e, the point p which has following value as maximum Min[dist(p, c1), dist(p, c2), dist(p, c3), …. dist(p, ci)]
-
 // Note that the greedy algorithm doesn’t give best solution as this is just an approximate algorithm with bound as
 // twice of optimal.
-
 // Proof that the above greedy algorithm is 2 approximate.
 // -> Let OPT be the maximum distance of a city from a center in the Optimal solution.
 // ---> We need to show that the maximum distance obtained from Greedy algorithm is 2*OPT.

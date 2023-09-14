@@ -146,5 +146,4 @@ protected:
 // idea is to calculate values of a function possible(S, x), where S is a subset of nodes and x is one of the nodes. The
 // function indicates whether there is a Hamiltonian path that visits the nodes of S and ends at node x. It is possible
 // to implement this solution in O(2^n * n^2) time.
-
 }  // namespace alba::algorithm

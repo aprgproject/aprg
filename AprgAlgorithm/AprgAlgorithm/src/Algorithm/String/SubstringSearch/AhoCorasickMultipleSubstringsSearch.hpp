@@ -14,11 +14,11 @@ namespace alba::algorithm {
 template <typename Index>
 class AhoCorasickMultipleSubstringsSearch {
 public:
-    static_assert(typeHelper::isIntegralType<Index>(), "Index must be signed (to handle UNUSED_STATE)");
     static constexpr Index MAX_NUMBER_OF_QUERIES = 64;
     static constexpr Index RADIX = 256;
     static constexpr Index UNUSED_STATE = -1;
     static constexpr Index START_STATE_ZERO = 0;
+    static_assert(typeHelper::isIntegralType<Index>(), "Index must be signed (to handle UNUSED_STATE)");
     using Strings = std::vector<std::string>;
     using Indexes = std::vector<Index>;
     using DequeOfIndexes = std::deque<Index>;

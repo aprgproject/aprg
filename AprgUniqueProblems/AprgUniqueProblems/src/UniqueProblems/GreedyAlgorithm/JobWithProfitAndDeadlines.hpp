@@ -31,7 +31,6 @@ private:
 // Only one job can be scheduled at a time. Each job takes 1 unit of time to complete.
 // We earn the profit if and only if the job is completed by its deadline. The task is to find the subset of jobs that
 // maximizes profit.
-
 // Examples:
 // -> Input: Four Jobs with following deadlines and profits
 // ---> JobID Deadline Profit
@@ -40,7 +39,6 @@ private:
 // --->    c      1      40
 // --->    d      1      30
 // ---> Output: Following is maximum profit sequence of jobs: c, a
-
 // -> Input: Five Jobs with following deadlines and profits
 // ---> JobID Deadline Profit
 // --->    a     2       100
@@ -49,7 +47,6 @@ private:
 // --->    d     1       25
 // --->    e     3       15
 // ---> Output: Following is maximum profit sequence of jobs: c, a, e
-
 // Greedy Algorithm:
 // -> Step 1: Sort all jobs in decreasing order of profit.
 // -> Step 2: Initialize the result sequence as first job in sorted jobs.
@@ -57,7 +54,6 @@ private:
 // ---> If the current job can fit in the current result sequence without missing the deadline, add current job to the
 // result.
 // ---> Else ignore the current job.
-
 // Using Disjoint Set for Job Sequencing
 // All time slots are individual sets initially.
 // We first find the maximum deadline of all jobs.
@@ -69,9 +65,7 @@ private:
 // We use the parent array of Disjoint Set Data structures for this purpose.
 // The root of the tree is always the latest available slot.
 // If for a deadline d, there is no slot available, then root would be 0.
-
 // Initialize Disjoint Set: Creates initial disjoint sets.
-
 // How come find returns the latest available time slot?
 // Initially all time slots are individual slots.
 // So the time slot returned is always maximum.

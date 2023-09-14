@@ -52,28 +52,6 @@ TEST(TermsWithAssociationTest, TermsWithAssociationLessThanOperatorWorks) {
     EXPECT_TRUE(terms2 < terms5);
 }
 
-TEST(TermsWithAssociationTest, IsEmptyWorks) {
-    TermWithDetails termWithDetails(Term(10), TermAssociationType::Negative);
-    TermsWithAssociation terms1;
-    TermsWithAssociation terms2{termWithDetails};
-    TermsWithAssociation terms3{termWithDetails, termWithDetails};
-
-    EXPECT_TRUE(terms1.isEmpty());
-    EXPECT_FALSE(terms2.isEmpty());
-    EXPECT_FALSE(terms3.isEmpty());
-}
-
-TEST(TermsWithAssociationTest, GetSizeWorks) {
-    TermWithDetails termWithDetails(Term(10), TermAssociationType::Negative);
-    TermsWithAssociation terms1;
-    TermsWithAssociation terms2{termWithDetails};
-    TermsWithAssociation terms3{termWithDetails, termWithDetails};
-
-    EXPECT_EQ(0, terms1.getSize());
-    EXPECT_EQ(1, terms2.getSize());
-    EXPECT_EQ(2, terms3.getSize());
-}
-
 TEST(TermsWithAssociationTest, GetFirstTermWorks) {
     TermWithDetails termWithDetails1(Term(10), TermAssociationType::Negative);
     TermWithDetails termWithDetails2(Term(20), TermAssociationType::Positive);
@@ -242,6 +220,28 @@ TEST(TermsWithAssociationTest, ReverseTheAssociationOfTheTermsWorks) {
     EXPECT_EQ(TermAssociationType::Negative, termsToVerify[0].association);
     EXPECT_EQ(Term(10), getTermConstReferenceFromUniquePointer(termsToVerify[1].baseTermPointer));
     EXPECT_EQ(TermAssociationType::Negative, termsToVerify[1].association);
+}
+
+TEST(TermsWithAssociationTest, GetSizeWorks) {
+    TermWithDetails termWithDetails(Term(10), TermAssociationType::Negative);
+    TermsWithAssociation terms1;
+    TermsWithAssociation terms2{termWithDetails};
+    TermsWithAssociation terms3{termWithDetails, termWithDetails};
+
+    EXPECT_EQ(0, terms1.getSize());
+    EXPECT_EQ(1, terms2.getSize());
+    EXPECT_EQ(2, terms3.getSize());
+}
+
+TEST(TermsWithAssociationTest, IsEmptyWorks) {
+    TermWithDetails termWithDetails(Term(10), TermAssociationType::Negative);
+    TermsWithAssociation terms1;
+    TermsWithAssociation terms2{termWithDetails};
+    TermsWithAssociation terms3{termWithDetails, termWithDetails};
+
+    EXPECT_TRUE(terms1.isEmpty());
+    EXPECT_FALSE(terms2.isEmpty());
+    EXPECT_FALSE(terms3.isEmpty());
 }
 
 }  // namespace alba::algebra

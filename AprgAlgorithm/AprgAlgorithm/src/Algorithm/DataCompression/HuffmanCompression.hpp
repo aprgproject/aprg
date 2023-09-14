@@ -239,37 +239,31 @@ private:
 // -> use different numbers of bit to encode different chars
 // ---> example: Morse code
 // ---> issue: Ambuiguity (it can be translated to multiple things). Solution: there is pause when transmitting
-
 // How to we ambiguity?
 // -> Ensure that no codeword is a prefix of another
 // ---> Solution 1: Fixed length code
 // ---> Solution 2: Append special stop character to each codeword
 // ---> Solution 3: General prefix free code -> Huffman code is an example (it also uses the fewest bits for
 // representing)
-
 // How to represent the prefix free code?
 // -> We can use a binary trie!
 // ---> Two children: 0 and 1 (bit)
 // ---> Chars in the leaves
 // ---> Codeword is path from root to leaf
-
 // Compression:
 // -> Method 1: Start at leaf: Follow path up to the root; print bits in reverse
 // -> Method 2: create ST of key value pairs
-
 // Expansion:
 // -> 1) Start at root
 // -> 2) Go left if bit is 0; go right is 1.
 // -> 3) If leaf node, print cahr and return to root.
 // -> Running time: Linear
-
 // How to transmit?
 // -> How to write the trie?
 // ---> Write preorder tranversal of trie; mark left and internal nodes with a bit.
 // ---> Note: If message is long -> overhead of transmitting a trie is small
 // -> How to read in the trie?
 // ---> Reconstruct from preorder traversal of trie
-
 // How to find best prefix-free code?
 // -> Shannon-Fano algorithm:
 // ---> 1) Partition symbols S into two subset S0 and S1 of (roughly) equal frequency.
@@ -283,25 +277,19 @@ private:
 // ---> 3) Repeat this until a single trie is formed
 // ---> 3.1) Select two tries with minimum weight
 // ---> 3.2) Merge into a single trie with cumulative weight
-
 // Huffman algorithm is used in:
 // -> JPEG
 // -> PDF
 // -> MP3
 // -> DIVX
 // -> GZIP
-
 // Proposition: Huffman algorithm produces an optimal prefix-free code
 // Proof: See textbook.
-
 // Implementation.
 // -> Pass 1: Tabulate char frequencies and build trie
 // -> Pass 2: Encode file by traversing trie or lookup table
-
 // Running time for encoding -> N*R*log(R) -> Where R is the RADIX
-
 // Other discussions:
-
 // Huffman coding is a lossless data compression algorithm.
 // The idea is to assign variable-length codes to input characters,
 // lengths of the assigned codes are based on the frequencies of corresponding characters.
@@ -310,16 +298,13 @@ private:
 // means the codes (bit sequences) are assigned in such a way that the code assigned to one character
 // is not the prefix of code assigned to any other character.
 // This is how Huffman Coding makes sure that there is no ambiguity when decoding the generated bitstream.
-
 // Let us understand prefix codes with a counter example.
 // Let there be four characters a, b, c and d, and their corresponding variable length codes be 00, 01, 0 and 1.
 // This coding leads to ambiguity because code assigned to c is the prefix of codes assigned to a and b.
 // If the compressed bit stream is 0001, the de-compressed output may be “cccd” or “ccb” or “acd” or “ab”.
-
 // There are mainly two major parts in Huffman Coding
 // -> Build a Huffman Tree from input characters.
 // -> Traverse the Huffman Tree and assign codes to characters.
-
 // Steps to build Huffman Tree
 // Input is an array of unique characters along with their frequency of occurrences and output is Huffman Tree.
 // 1) Create a leaf node for each unique character and build a min heap of all leaf nodes (Min Heap is used as a
@@ -331,26 +316,21 @@ private:
 // -> Add this node to the min heap.
 // 4) Repeat steps#2 and #3 until the heap contains only one node.
 // -> The remaining node is the root node and the tree is complete.
-
 // Steps to print codes from Huffman Tree:
 // 1) Traverse the tree formed starting from the root.
 // 2) Maintain an auxiliary array.
 // 3.1) While moving to the left child, write 0 to the array.
 // 3.2) While moving to the right child, write 1 to the array.
 // 4) Print the array when a leaf node is encountered.
-
 // Time complexity: O(nlogn) where n is the number of unique characters.
 // If there are n nodes, extractMin() is called 2*(n – 1) times, extractMin() takes O(logn) time as it calles
 // minHeapify(). So, overall complexity is O(nlogn). If the input array is sorted, there exists a linear time algorithm.
 // We will soon be discussing in our next post.
-
 // Applications of Huffman Coding:
 // -> They are used for transmitting fax and text.
 // -> They are used by conventional compression formats like PKZIP, GZIP, etc.
 // It is useful in cases where there is a series of frequently occurring characters.
-
 // Improvements:
-
 // Efficient Huffman Coding for Sorted Input (NOT IMPLEMENTED)
 // Time complexity of the algorithm discussed in above is O(nLogn).
 // If we know that the given array is sorted (by non-decreasing order of frequency), we can generate Huffman codes in
@@ -370,7 +350,6 @@ private:
 // -> If the input is not sorted, it need to be sorted first before it can be processed by the above algorithm.
 // -> Sorting can be done using heap-sort or merge-sort both of which run in Theta(nlogn).
 // -> So, the overall time complexity becomes O(nlogn) for unsorted input.
-
 // Example Huffman tree:
 // -> Example original string: "abbccddeee"
 // -> Huffman tree will be:

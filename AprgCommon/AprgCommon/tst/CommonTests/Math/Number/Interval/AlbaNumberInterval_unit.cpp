@@ -7,16 +7,6 @@ using namespace std;
 
 namespace alba {
 
-TEST(AlbaNumberIntervalTest, ConstructionForIntervalWorks) {
-    AlbaNumberInterval const interval1(createOpenEndpoint(645), createCloseEndpoint(784));
-    AlbaNumberInterval const interval2(createCloseEndpoint(784), createOpenEndpoint(645));
-
-    EXPECT_EQ(createOpenEndpoint(645), interval1.getLowerEndpoint());
-    EXPECT_EQ(createCloseEndpoint(784), interval1.getHigherEndpoint());
-    EXPECT_EQ(createOpenEndpoint(645), interval2.getLowerEndpoint());
-    EXPECT_EQ(createCloseEndpoint(784), interval2.getHigherEndpoint());
-}
-
 TEST(AlbaNumberIntervalTest, EqualityForIntervalsWorks) {
     AlbaNumberInterval const interval1(createOpenEndpoint(451), createOpenEndpoint(658));
     AlbaNumberInterval const interval2(createOpenEndpoint(451), createOpenEndpoint(658));
@@ -28,6 +18,60 @@ TEST(AlbaNumberIntervalTest, EqualityForIntervalsWorks) {
     EXPECT_FALSE(interval1 == interval3);
     EXPECT_FALSE(interval1 == interval4);
     EXPECT_FALSE(interval1 == interval5);
+}
+
+TEST(AlbaNumberIntervalTest, OutputStreamOperatorWorks) {
+    stringstream testStream;
+    AlbaNumberInterval const interval(createOpenEndpoint(645), createCloseEndpoint(784));
+
+    testStream << interval;
+
+    EXPECT_EQ("(645, 784]", testStream.str());
+}
+
+TEST(AlbaNumberIntervalTest, GetLowerEndpointWorks) {
+    AlbaNumberInterval const interval(createOpenEndpoint(645), createCloseEndpoint(784));
+
+    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, interval.getLowerEndpoint().getType());
+    EXPECT_EQ(645, interval.getLowerEndpoint().getValue().getInteger());
+}
+
+TEST(AlbaNumberIntervalTest, ConstructionForIntervalWorks) {
+    AlbaNumberInterval const interval1(createOpenEndpoint(645), createCloseEndpoint(784));
+    AlbaNumberInterval const interval2(createCloseEndpoint(784), createOpenEndpoint(645));
+
+    EXPECT_EQ(createOpenEndpoint(645), interval1.getLowerEndpoint());
+    EXPECT_EQ(createCloseEndpoint(784), interval1.getHigherEndpoint());
+    EXPECT_EQ(createOpenEndpoint(645), interval2.getLowerEndpoint());
+    EXPECT_EQ(createCloseEndpoint(784), interval2.getHigherEndpoint());
+}
+
+TEST(AlbaNumberIntervalTest, SetNewEndpointWorks) {
+    AlbaNumberInterval interval1(createOpenEndpoint(645), createOpenEndpoint(784));
+    AlbaNumberInterval interval2(createOpenEndpoint(645), createOpenEndpoint(784));
+    AlbaNumberInterval interval3(createOpenEndpoint(645), createOpenEndpoint(784));
+    AlbaNumberInterval interval4(createOpenEndpoint(645), createOpenEndpoint(784));
+
+    interval1.setNewEndpoint(createCloseEndpoint(640));
+    interval2.setNewEndpoint(createCloseEndpoint(790));
+    interval3.setNewEndpoint(createCloseEndpoint(645));
+    interval4.setNewEndpoint(createCloseEndpoint(784));
+
+    EXPECT_EQ(createCloseEndpoint(640), interval1.getLowerEndpoint());
+    EXPECT_EQ(createOpenEndpoint(784), interval1.getHigherEndpoint());
+    EXPECT_EQ(createOpenEndpoint(645), interval2.getLowerEndpoint());
+    EXPECT_EQ(createCloseEndpoint(790), interval2.getHigherEndpoint());
+    EXPECT_EQ(createCloseEndpoint(645), interval3.getLowerEndpoint());
+    EXPECT_EQ(createOpenEndpoint(784), interval3.getHigherEndpoint());
+    EXPECT_EQ(createOpenEndpoint(645), interval4.getLowerEndpoint());
+    EXPECT_EQ(createCloseEndpoint(784), interval4.getHigherEndpoint());
+}
+
+TEST(AlbaNumberIntervalTest, GetHigherEndpointWorks) {
+    AlbaNumberInterval const interval(createOpenEndpoint(645), createCloseEndpoint(784));
+
+    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Close, interval.getHigherEndpoint().getType());
+    EXPECT_EQ(784, interval.getHigherEndpoint().getValue().getInteger());
 }
 
 TEST(AlbaNumberIntervalTest, IsValueInsideTheIntervalWorks) {
@@ -116,50 +160,6 @@ TEST(AlbaNumberIntervalTest, IsIntervalInsideTheIntervalWorks) {
     EXPECT_FALSE(closeInterval.isIntervalInsideTheInterval(intervalToTest7));
     EXPECT_FALSE(openInterval.isIntervalInsideTheInterval(intervalToTest8));
     EXPECT_FALSE(closeInterval.isIntervalInsideTheInterval(intervalToTest8));
-}
-
-TEST(AlbaNumberIntervalTest, GetLowerEndpointWorks) {
-    AlbaNumberInterval const interval(createOpenEndpoint(645), createCloseEndpoint(784));
-
-    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Open, interval.getLowerEndpoint().getType());
-    EXPECT_EQ(645, interval.getLowerEndpoint().getValue().getInteger());
-}
-
-TEST(AlbaNumberIntervalTest, GetHigherEndpointWorks) {
-    AlbaNumberInterval const interval(createOpenEndpoint(645), createCloseEndpoint(784));
-
-    EXPECT_EQ(AlbaNumberIntervalEndpoint::Type::Close, interval.getHigherEndpoint().getType());
-    EXPECT_EQ(784, interval.getHigherEndpoint().getValue().getInteger());
-}
-
-TEST(AlbaNumberIntervalTest, SetNewEndpointWorks) {
-    AlbaNumberInterval interval1(createOpenEndpoint(645), createOpenEndpoint(784));
-    AlbaNumberInterval interval2(createOpenEndpoint(645), createOpenEndpoint(784));
-    AlbaNumberInterval interval3(createOpenEndpoint(645), createOpenEndpoint(784));
-    AlbaNumberInterval interval4(createOpenEndpoint(645), createOpenEndpoint(784));
-
-    interval1.setNewEndpoint(createCloseEndpoint(640));
-    interval2.setNewEndpoint(createCloseEndpoint(790));
-    interval3.setNewEndpoint(createCloseEndpoint(645));
-    interval4.setNewEndpoint(createCloseEndpoint(784));
-
-    EXPECT_EQ(createCloseEndpoint(640), interval1.getLowerEndpoint());
-    EXPECT_EQ(createOpenEndpoint(784), interval1.getHigherEndpoint());
-    EXPECT_EQ(createOpenEndpoint(645), interval2.getLowerEndpoint());
-    EXPECT_EQ(createCloseEndpoint(790), interval2.getHigherEndpoint());
-    EXPECT_EQ(createCloseEndpoint(645), interval3.getLowerEndpoint());
-    EXPECT_EQ(createOpenEndpoint(784), interval3.getHigherEndpoint());
-    EXPECT_EQ(createOpenEndpoint(645), interval4.getLowerEndpoint());
-    EXPECT_EQ(createCloseEndpoint(784), interval4.getHigherEndpoint());
-}
-
-TEST(AlbaNumberIntervalTest, OutputStreamOperatorWorks) {
-    stringstream testStream;
-    AlbaNumberInterval const interval(createOpenEndpoint(645), createCloseEndpoint(784));
-
-    testStream << interval;
-
-    EXPECT_EQ("(645, 784]", testStream.str());
 }
 
 }  // namespace alba

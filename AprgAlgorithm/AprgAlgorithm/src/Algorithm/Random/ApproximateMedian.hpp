@@ -51,7 +51,6 @@ public:
 // compute an element whose rank (position in sorted A[]) is in the range [(1 – ε)n/2, (1 + ε)n/2].
 // For ½ Approximate Median Algorithm &epsilon;
 // is 1/2 => rank should be in the range [n/4, 3n/4]
-
 // How is probability of error less than 2/n2?
 // -> Algorithm makes an error if the set S has at least k/2 elements are from the Left Quarter or Right Quarter.
 // -> It is quite easy to visualize this statement since the median which we report will be (k/2)th element

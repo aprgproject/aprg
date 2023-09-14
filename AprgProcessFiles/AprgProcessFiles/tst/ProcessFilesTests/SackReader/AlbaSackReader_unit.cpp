@@ -11,12 +11,6 @@ using namespace std;
 
 namespace alba {
 
-TEST(AlbaSackReaderTest, SackTest) {
-    AlbaSackReader sackReader(R"(D:\W\trunk\I_Interface)", "[.cpp] || [.hpp] || [.c] || [.h]");
-    sackReader.process();
-    sackReader.printAll();
-}
-
 TEST(AlbaSackReaderTest, ClassesAreRecognized) {
     AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     ofstream testFile(file1ToReadPathHandler.getFullPath());
@@ -206,6 +200,12 @@ TEST(AlbaSackReaderTest, TypedefWithEnumAreRecognized) {
     AlbaSackReaderType const myClass = sackReader.getType("MyEnum");
     AlbaSackReaderType::Parameters const myClassParameters = myClass.getParameters();
     ASSERT_EQ(0U, myClassParameters.size());
+}
+
+TEST(AlbaSackReaderTest, SackTest) {
+    AlbaSackReader sackReader(R"(D:\W\trunk\I_Interface)", "[.cpp] || [.hpp] || [.c] || [.h]");
+    sackReader.process();
+    sackReader.printAll();
 }
 
 }  // namespace alba

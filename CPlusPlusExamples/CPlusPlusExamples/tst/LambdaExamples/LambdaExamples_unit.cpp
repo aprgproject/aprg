@@ -43,6 +43,7 @@ auto badIncrementBy(int const y) {
 }
 
 }  // namespace
+
 TEST(LambdaExamplesTest, TestCapturingByValueVsByReference) {
     auto goodIncrement5 = goodIncrementBy(5);
     cout << "goodIncrement5:[" << goodIncrement5(2) << "]\n";  // This returns 7.
@@ -103,6 +104,7 @@ auto makeKittenWithEachHasStatic(int const capturedByValue) {
 }
 
 }  // namespace
+
 TEST(LambdaExamplesTest, CapturingStaticVariablesWorks) {
     auto kitten1 = makeKitten(1);
     auto kitten2 = makeKitten(2);
@@ -250,7 +252,6 @@ TEST(LambdaExamplesTest, WholeParameterPackCaptureWorks) {
 // ---> Convertible to raw function pointer (when there are no capture involved)
 // ---> Variables with file/global scope are not captured
 // ---> Lambdas may have local state (but not in the way you think)
-
 // Many redundant shorthands:
 // -> [t=title](){decltype(title)... use(t);}
 // -> [title](){decltype(title)... use(title);} // no array decay!

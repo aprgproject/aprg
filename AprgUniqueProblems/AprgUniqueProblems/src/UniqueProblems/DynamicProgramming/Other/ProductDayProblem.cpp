@@ -71,23 +71,6 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingIterativeDP() co
     return result;
 }
 
-// inline optimization can work here because the usage belongs to same translation unit
-inline bool ProductDayProblem::isProductIncluded(ProductBits const productBits, Product const product) {
-    return (productBits & getProductBits(product)) != 0;
-}
-
-inline ProductDayProblem::ProductBits ProductDayProblem::getProductBits(Product const product) { return 1 << product; }
-
-inline ProductDayProblem::ProductBits ProductDayProblem::addProduct(
-    ProductBits const productBits, Product const product) {
-    return productBits | (1 << product);
-}
-
-inline ProductDayProblem::ProductBits ProductDayProblem::removeProduct(
-    ProductBits const productBits, Product const product) {
-    return productBits & ~(1 << product);
-}
-
 inline ProductDayProblem::Day ProductDayProblem::getNumberOfDays() const {
     return m_pricesInDayByProduct.getNumberOfColumns();
 }
@@ -128,6 +111,23 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingMemoizationDP(
         return result;
     }
     return INVALID_PRICE;
+}
+
+// inline optimization can work here because the usage belongs to same translation unit
+inline bool ProductDayProblem::isProductIncluded(ProductBits const productBits, Product const product) {
+    return (productBits & getProductBits(product)) != 0;
+}
+
+inline ProductDayProblem::ProductBits ProductDayProblem::getProductBits(Product const product) { return 1 << product; }
+
+inline ProductDayProblem::ProductBits ProductDayProblem::addProduct(
+    ProductBits const productBits, Product const product) {
+    return productBits | (1 << product);
+}
+
+inline ProductDayProblem::ProductBits ProductDayProblem::removeProduct(
+    ProductBits const productBits, Product const product) {
+    return productBits & ~(1 << product);
 }
 
 }  // namespace alba

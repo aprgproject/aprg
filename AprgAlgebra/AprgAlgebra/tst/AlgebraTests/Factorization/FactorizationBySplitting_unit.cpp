@@ -7,30 +7,6 @@ using namespace std;
 
 namespace alba::algebra::Factorization {
 
-TEST(FactorizationBySplittingTest, FactorizeBySplittingSmallerPolynomialsWorksWhenItCannotBeFactored) {
-    Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
-
-    Polynomials polynomialsToVerify(factorizeBySplittingToSmallerPolynomials(polynomialToTest));
-
-    ASSERT_EQ(1U, polynomialsToVerify.size());
-    Polynomial const& polynomialToExpect1(polynomialToTest);
-    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
-}
-
-TEST(FactorizationBySplittingTest, FactorizeBySplittingSmallerPolynomialsWorksWhenItCanBeFactored) {
-    Polynomial polynomialToTest{
-        Monomial(1, {{"a", 1}, {"c", 1}, {"x", 2}}), Monomial(1, {{"a", 1}, {"d", 1}, {"x", 1}}),
-        Monomial(1, {{"b", 1}, {"c", 1}, {"x", 1}}), Monomial(1, {{"b", 1}, {"d", 1}})};
-
-    Polynomials polynomialsToVerify(factorizeBySplittingToSmallerPolynomials(polynomialToTest));
-
-    ASSERT_EQ(2U, polynomialsToVerify.size());
-    Polynomial polynomialToExpect1{Monomial(1, {{"a", 1}, {"x", 1}}), Monomial(1, {{"b", 1}})};
-    Polynomial polynomialToExpect2{Monomial(1, {{"c", 1}, {"x", 1}}), Monomial(1, {{"d", 1}})};
-    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
-    EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
-}
-
 TEST(FactorizationBySplittingTest, FactorizeBySplittingToSmallerPolynomialsIfPossibleIsEmptyWhenItCannotBeFactored) {
     Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
 
@@ -366,23 +342,6 @@ TEST(FactorizationBySplittingTest, GetCommonFactorsInThesePolynomialsWorks) {
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
 }
 
-TEST(FactorizationBySplittingTest, GetNewPolynomialWithVariablesWorks) {
-    SubstitutionOfVariablesToTerms variableSubstitution;
-    Polynomial polynomial1{Monomial(25, {{"x", 2}}), Monomial(30, {{"x", 1}, {"y", 1}}), Monomial(9, {{"y", 2}})};
-    Polynomial polynomial2{Monomial(15, {{"x", 1}}), Monomial(9, {{"y", 1}})};
-    Polynomial polynomial3{Monomial(2, {})};
-    Polynomials polynomialsToTest{polynomial1, polynomial2, polynomial3};
-
-    Polynomial polynomia1ToVerify(getNewPolynomialWithNewVariables(variableSubstitution, polynomialsToTest));
-
-    ASSERT_EQ(1, variableSubstitution.getSize());
-    Term termToExpect(Polynomial{Monomial(5, {{"x", 1}}), Monomial(3, {{"y", 1}})});
-    EXPECT_EQ(termToExpect, variableSubstitution.getTermForVariable("{(5[x] + 3[y])}"));
-    Polynomial polynomialToExpect{
-        Monomial(1, {{"{(5[x] + 3[y])}", 2}}), Monomial(3, {{"{(5[x] + 3[y])}", 1}}), Monomial(2, {})};
-    EXPECT_EQ(polynomialToExpect, polynomia1ToVerify);
-}
-
 TEST(FactorizationBySplittingTest, RemoveCommonFactorsInPolynomialsWorks) {
     Polynomial polynomial1{Monomial(12, {{"x", 3}}), Monomial(24, {{"x", 2}}), Monomial(12, {{"x", 1}})};
     Polynomial polynomial2{Monomial(6, {{"x", 4}}), Monomial(-6, {{"x", 2}})};
@@ -430,6 +389,47 @@ TEST(FactorizationBySplittingTest, CombinePolynomialsByAdditionAndEmplaceBackWor
     ASSERT_EQ(1U, polynomialsToVerify.size());
     Polynomial polynomialToExpect{Monomial(3, {{"x", 1}}), Monomial(7, {})};
     EXPECT_EQ(polynomialToExpect, polynomialsToVerify[0]);
+}
+
+TEST(FactorizationBySplittingTest, GetNewPolynomialWithVariablesWorks) {
+    SubstitutionOfVariablesToTerms variableSubstitution;
+    Polynomial polynomial1{Monomial(25, {{"x", 2}}), Monomial(30, {{"x", 1}, {"y", 1}}), Monomial(9, {{"y", 2}})};
+    Polynomial polynomial2{Monomial(15, {{"x", 1}}), Monomial(9, {{"y", 1}})};
+    Polynomial polynomial3{Monomial(2, {})};
+    Polynomials polynomialsToTest{polynomial1, polynomial2, polynomial3};
+
+    Polynomial polynomia1ToVerify(getNewPolynomialWithNewVariables(variableSubstitution, polynomialsToTest));
+
+    ASSERT_EQ(1, variableSubstitution.getSize());
+    Term termToExpect(Polynomial{Monomial(5, {{"x", 1}}), Monomial(3, {{"y", 1}})});
+    EXPECT_EQ(termToExpect, variableSubstitution.getTermForVariable("{(5[x] + 3[y])}"));
+    Polynomial polynomialToExpect{
+        Monomial(1, {{"{(5[x] + 3[y])}", 2}}), Monomial(3, {{"{(5[x] + 3[y])}", 1}}), Monomial(2, {})};
+    EXPECT_EQ(polynomialToExpect, polynomia1ToVerify);
+}
+
+TEST(FactorizationBySplittingTest, FactorizeBySplittingSmallerPolynomialsWorksWhenItCannotBeFactored) {
+    Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
+
+    Polynomials polynomialsToVerify(factorizeBySplittingToSmallerPolynomials(polynomialToTest));
+
+    ASSERT_EQ(1U, polynomialsToVerify.size());
+    Polynomial const& polynomialToExpect1(polynomialToTest);
+    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
+}
+
+TEST(FactorizationBySplittingTest, FactorizeBySplittingSmallerPolynomialsWorksWhenItCanBeFactored) {
+    Polynomial polynomialToTest{
+        Monomial(1, {{"a", 1}, {"c", 1}, {"x", 2}}), Monomial(1, {{"a", 1}, {"d", 1}, {"x", 1}}),
+        Monomial(1, {{"b", 1}, {"c", 1}, {"x", 1}}), Monomial(1, {{"b", 1}, {"d", 1}})};
+
+    Polynomials polynomialsToVerify(factorizeBySplittingToSmallerPolynomials(polynomialToTest));
+
+    ASSERT_EQ(2U, polynomialsToVerify.size());
+    Polynomial polynomialToExpect1{Monomial(1, {{"a", 1}, {"x", 1}}), Monomial(1, {{"b", 1}})};
+    Polynomial polynomialToExpect2{Monomial(1, {{"c", 1}, {"x", 1}}), Monomial(1, {{"d", 1}})};
+    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
+    EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
 }
 
 }  // namespace alba::algebra::Factorization

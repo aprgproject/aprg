@@ -31,7 +31,6 @@ public:
 // Can we do better than generic symbol tables?
 // Yes, if we can avoid examining the entrie key, as with string sorting.
 // So create a specialized string symbol table
-
 // Applications:
 // Character based operations
 // -> Prefix match

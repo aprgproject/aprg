@@ -7,7 +7,6 @@ namespace algorithm {}
 // Master theorem is too hard to code.
 
 // From AlgorithmNotes.txt
-
 // -----> (3) Master Method:
 // -------> Master Method is a direct way to get the solution.
 // -------> The master method works only for the following type of recurrences or for recurrences that can be

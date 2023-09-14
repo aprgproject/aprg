@@ -29,13 +29,6 @@ TEST(LinearSearchWithTwoIndicesTest, GetIndexOfValueWorksWhenValueIsNotFoundAndW
     testGetIndexOfValueWhenValueIsNotFoundWithDuplicatesWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-TEST(LinearSearchWithTwoIndicesTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreDuplicateValues) {
-    ValuesForTest const unsortedValues{96, 96, 53, 53, 53, 72, 72, 72, 72, 14, 33, 33, 33, 13, 13};
-    SearchForTest const search(unsortedValues);
-
-    EXPECT_EQ(12, search.getIndexOfValue(33));
-}
-
 TEST(LinearSearchWithTwoIndicesTest, GetIndexOfValueWorksWhenValueIsNotFoundAndWhenThereAreMultipleValues) {
     testGetIndexOfValueWhenValueIsNotFoundWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
@@ -50,6 +43,13 @@ TEST(LinearSearchWithTwoIndicesTest, GetIndexOfValueWithIndicesWorksWhenValueIsN
 
 TEST(LinearSearchWithTwoIndicesTest, GetIndexOfValueWithIndicesWorksWhenValueIsFoundAndWhenThereAreMultipleValues) {
     testGetIndexOfValueWithIndicesWhenValueIsFoundWithUnsortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
+TEST(LinearSearchWithTwoIndicesTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreDuplicateValues) {
+    ValuesForTest const unsortedValues{96, 96, 53, 53, 53, 72, 72, 72, 72, 14, 33, 33, 33, 13, 13};
+    SearchForTest const search(unsortedValues);
+
+    EXPECT_EQ(12, search.getIndexOfValue(33));
 }
 
 }  // namespace alba::algorithm

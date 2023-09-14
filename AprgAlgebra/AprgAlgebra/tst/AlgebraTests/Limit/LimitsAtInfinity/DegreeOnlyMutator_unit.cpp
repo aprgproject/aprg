@@ -21,6 +21,37 @@ TEST(DegreeOnlyMutatorTest, MutateEquationWorks) {
     EXPECT_EQ(expectedEquation, equation);
 }
 
+TEST(DegreeOnlyMutatorTest, MutateConstantWorks) {
+    DegreeOnlyMutator mutator("x");
+    Constant constant(110);
+
+    mutator.mutateConstant(constant);
+
+    EXPECT_EQ(Constant(110), constant);
+}
+
+TEST(DegreeOnlyMutatorTest, MutateVariableWorks) {
+    DegreeOnlyMutator mutator("x");
+    Variable variable("x");
+
+    mutator.mutateVariable(variable);
+
+    EXPECT_EQ(Variable("x"), variable);
+}
+
+TEST(DegreeOnlyMutatorTest, MutateFunctionWorks) {
+    DegreeOnlyMutator mutator("x");
+    Function functionObject(
+        "functionName", Term(createExpressionIfPossible({4516, "+", Monomial(7895, {{"x", 10}})})),
+        [](AlbaNumber const& number) -> AlbaNumber { return number; });
+
+    mutator.mutateFunction(functionObject);
+
+    Function expectedFunction(
+        "functionName", Term(Monomial(1, {{"x", 10}})), [](AlbaNumber const& number) -> AlbaNumber { return number; });
+    EXPECT_EQ(expectedFunction, functionObject);
+}
+
 TEST(DegreeOnlyMutatorTest, MutateTermWorks) {
     DegreeOnlyMutator mutator("x");
     Term constantTerm(Constant(110));
@@ -47,24 +78,6 @@ TEST(DegreeOnlyMutatorTest, MutateTermWorks) {
     Term expectedFunctionTerm(Function(
         "functionName", Term(Monomial(1, {{"x", 10}})), [](AlbaNumber const& number) -> AlbaNumber { return number; }));
     EXPECT_EQ(expectedFunctionTerm, functionTerm);
-}
-
-TEST(DegreeOnlyMutatorTest, MutateConstantWorks) {
-    DegreeOnlyMutator mutator("x");
-    Constant constant(110);
-
-    mutator.mutateConstant(constant);
-
-    EXPECT_EQ(Constant(110), constant);
-}
-
-TEST(DegreeOnlyMutatorTest, MutateVariableWorks) {
-    DegreeOnlyMutator mutator("x");
-    Variable variable("x");
-
-    mutator.mutateVariable(variable);
-
-    EXPECT_EQ(Variable("x"), variable);
 }
 
 TEST(DegreeOnlyMutatorTest, MutateMonomialWorks) {
@@ -106,19 +119,6 @@ TEST(DegreeOnlyMutatorTest, MutateExpressionWorksWhenRaiseToPowerFractionalExpon
 
     Expression expectedExpression(Term(Monomial(1, {{"x", 12}})));
     EXPECT_EQ(expectedExpression, expression);
-}
-
-TEST(DegreeOnlyMutatorTest, MutateFunctionWorks) {
-    DegreeOnlyMutator mutator("x");
-    Function functionObject(
-        "functionName", Term(createExpressionIfPossible({4516, "+", Monomial(7895, {{"x", 10}})})),
-        [](AlbaNumber const& number) -> AlbaNumber { return number; });
-
-    mutator.mutateFunction(functionObject);
-
-    Function expectedFunction(
-        "functionName", Term(Monomial(1, {{"x", 10}})), [](AlbaNumber const& number) -> AlbaNumber { return number; });
-    EXPECT_EQ(expectedFunction, functionObject);
 }
 
 }  // namespace alba::algebra

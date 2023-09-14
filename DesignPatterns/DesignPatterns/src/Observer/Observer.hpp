@@ -80,17 +80,14 @@ void ConcreteObserver::update(Subject const* const subject) {
 // ONE LINE NOTE:
 // -> Have Observers OBSERVE a Subject/Observable so that when something is changed, the Observers are NOTIFIED and
 // UPDATED AUTOMATICALLY
-
 // Intent:
 // Observer defines a one-to-many dependency between objects so that when one object changes state,
 // all its dependents are notified and updated automatically.
 // The pattern has behavioral purpose and applies to the objects.
-
 // When to use (applicability):
 // -> when an abstraction has two aspects, one dependent on the other
 // -> when a change to one object requires changing others, and you don't know how many objects need to be changed
 // -> when an object should be able to notify other objects without making assumptions about who these objects are
-
 // Consequences:
 // -> Abstract coupling between Subject and Observer
 // ---> Subject does not know the concrete class of any observer, thus coupling needs to be abstract and minimal
@@ -105,7 +102,6 @@ void ConcreteObserver::update(Subject const* const subject) {
 // -----> Moreover, dependency criteria that aren't well-defined or maintained usually lead to spurious updates (which
 // can be hard to track down).
 // ---> It can be a problem since there no details on what changed in the subject.
-
 // Implementation:
 // -> Mapping subject to thair observers.
 // ---> The simplest way for a subject to keep track of the observers it should notify is to store references to them
@@ -145,7 +141,6 @@ void ConcreteObserver::update(Subject const* const subject) {
 // -----> 1) It maps a subject to its observers and provide an interface to maintain this mapping.
 // -----> 2) It defines a particular update strategy.
 // -----> 3) It updates all dependent observers at the request of a subject.
-
 // Related Patterns
 // -> [Mediator]: By encapsulating complex update semantics, the ChangeManager acts a mediator between subjects and
 // observers.

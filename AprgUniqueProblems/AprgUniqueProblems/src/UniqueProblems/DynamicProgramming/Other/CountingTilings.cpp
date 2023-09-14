@@ -31,41 +31,6 @@ CountingTilings::Count CountingTilings::getNumberOfSolutionsUsingCompleteSearch(
     return m_numberOfSolutions;
 }
 
-CountingTilings::Row CountingTilings::getEmptyRow(Count const length) {
-    // NOLINTNEXTLINE(modernize-return-braced-init-list)
-    return Row(length, ' ');
-}
-
-CountingTilings::Rows CountingTilings::calculateNextRows(Row const& currentRow) {
-    // This is not exactly DP but "complete search".
-    struct NextDetail {
-        Row nextRow;
-        Count nextIndex;
-    };
-
-    Rows result;
-    stack<NextDetail> possibleNextDetails;
-    possibleNextDetails.emplace(NextDetail{getEmptyRow(currentRow.length()), 0});
-    while (!possibleNextDetails.empty()) {
-        NextDetail const& nextDetail(possibleNextDetails.top());
-        Row nextRow(nextDetail.nextRow);
-        Count const nextIndex(nextDetail.nextIndex);
-        possibleNextDetails.pop();
-        if (nextIndex >= static_cast<Count>(currentRow.length())) {
-            result.emplace_back(nextRow);
-        } else if (currentRow[nextIndex] == ' ') {
-            if (nextIndex + 1 < static_cast<Count>(currentRow.length()) && currentRow[nextIndex + 1] == ' ') {
-                possibleNextDetails.emplace(NextDetail{nextRow, nextIndex + 2});
-            }
-            nextRow[nextIndex] = 'V';
-            possibleNextDetails.emplace(NextDetail{nextRow, nextIndex + 1});
-        } else {
-            possibleNextDetails.emplace(NextDetail{nextRow, nextIndex + 1});
-        }
-    }
-    return result;
-}
-
 void CountingTilings::searchNextRow(Count const rowIndex, Row const& currentRow) {
     if (rowIndex < m_numberOfRows - 1) {
         for (Row const& nextRow : getNextRows(currentRow)) {
@@ -130,6 +95,41 @@ CountingTilings::Rows const& CountingTilings::getNextRows(Row const& currentRow)
     }
     m_currentRowToNextRows[currentRow] = calculateNextRows(currentRow);
     return m_currentRowToNextRows[currentRow];
+}
+
+CountingTilings::Row CountingTilings::getEmptyRow(Count const length) {
+    // NOLINTNEXTLINE(modernize-return-braced-init-list)
+    return Row(length, ' ');
+}
+
+CountingTilings::Rows CountingTilings::calculateNextRows(Row const& currentRow) {
+    // This is not exactly DP but "complete search".
+    struct NextDetail {
+        Row nextRow;
+        Count nextIndex;
+    };
+
+    Rows result;
+    stack<NextDetail> possibleNextDetails;
+    possibleNextDetails.emplace(NextDetail{getEmptyRow(currentRow.length()), 0});
+    while (!possibleNextDetails.empty()) {
+        NextDetail const& nextDetail(possibleNextDetails.top());
+        Row nextRow(nextDetail.nextRow);
+        Count const nextIndex(nextDetail.nextIndex);
+        possibleNextDetails.pop();
+        if (nextIndex >= static_cast<Count>(currentRow.length())) {
+            result.emplace_back(nextRow);
+        } else if (currentRow[nextIndex] == ' ') {
+            if (nextIndex + 1 < static_cast<Count>(currentRow.length()) && currentRow[nextIndex + 1] == ' ') {
+                possibleNextDetails.emplace(NextDetail{nextRow, nextIndex + 2});
+            }
+            nextRow[nextIndex] = 'V';
+            possibleNextDetails.emplace(NextDetail{nextRow, nextIndex + 1});
+        } else {
+            possibleNextDetails.emplace(NextDetail{nextRow, nextIndex + 1});
+        }
+    }
+    return result;
 }
 
 }  // namespace alba

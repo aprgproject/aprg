@@ -9,6 +9,63 @@ using namespace std;
 
 namespace alba::algebra::Factorization {
 
+TEST(FactorizationOfPolynomialsTest, FactorizeCommonMonomialIfPossibleIsEmptyWhenItCannotBeFactored) {
+    Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
+
+    Polynomials polynomialsToVerify;
+    factorizeCommonMonomialIfPossible(polynomialsToVerify, polynomialToTest);
+
+    EXPECT_TRUE(polynomialsToVerify.empty());
+}
+
+TEST(FactorizationOfPolynomialsTest, FactorizeCommonMonomialIfPossibleIsEmptyWhenItsOneMonomial) {
+    Polynomial polynomialToTest{Monomial(7, {{"x", 7}})};
+
+    Polynomials polynomialsToVerify;
+    factorizeCommonMonomialIfPossible(polynomialsToVerify, polynomialToTest);
+
+    EXPECT_TRUE(polynomialsToVerify.empty());
+}
+
+TEST(FactorizationOfPolynomialsTest, FactorizeCommonMonomialIfPossibleWorksWhenGettingTheGcfMonomial) {
+    Polynomial polynomialToTest{Monomial(9, {{"x", 1}, {"y", 2}}), Monomial(6, {{"x", 3}})};
+
+    Polynomials polynomialsToVerify;
+    factorizeCommonMonomialIfPossible(polynomialsToVerify, polynomialToTest);
+
+    ASSERT_EQ(2U, polynomialsToVerify.size());
+    Polynomial polynomialToExpect1{Monomial(3, {{"x", 1}})};
+    Polynomial polynomialToExpect2{Monomial(2, {{"x", 2}}), Monomial(3, {{"y", 2}})};
+    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
+    EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
+}
+
+TEST(FactorizationOfPolynomialsTest, PutFactorizedPolynomialsIfPossibleWorksAtDefault) {
+    Polynomial polynomial{Monomial(1, {{"x", 1}, {"y", 2}}), Monomial(0.56789, {{"x", 3}})};
+    Polynomials polynomials{polynomial};
+
+    Polynomials result;
+    putFactorizedPolynomialsIfPossible(result, polynomials);
+
+    ASSERT_EQ(1U, result.size());
+    EXPECT_EQ(polynomial, result[0]);
+}
+
+TEST(FactorizationOfPolynomialsTest, PutFactorizedPolynomialsIfPossibleWorksWhenFlagIsSet) {
+    ConfigurationDetails configurationDetails(getDefaultConfigurationDetails<ConfigurationDetails>());
+    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
+    ScopeObject scopeObject;
+    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+
+    Polynomial polynomial{Monomial(1, {{"x", 1}, {"y", 2}}), Monomial(0.56789, {{"x", 3}})};
+    Polynomials polynomials{polynomial};
+
+    Polynomials result;
+    putFactorizedPolynomialsIfPossible(result, polynomials);
+
+    EXPECT_TRUE(result.empty());
+}
+
 TEST(FactorizationOfPolynomialsTest, CommonConstantCanBeFactored) {
     Polynomial polynomialToTest{Monomial(4, {{"x", 1}}), Monomial(20, {})};
 
@@ -459,63 +516,6 @@ TEST(FactorizationOfPolynomialsTest, FactorizeCommonMonomialWorksWhenItCanBeFact
     Polynomial polynomialToExpect2{Monomial(2, {{"x", 2}}), Monomial(3, {{"y", 2}})};
     EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
     EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
-}
-
-TEST(FactorizationOfPolynomialsTest, FactorizeCommonMonomialIfPossibleIsEmptyWhenItCannotBeFactored) {
-    Polynomial polynomialToTest{Monomial(1, {{"x", 1}}), Monomial(13, {})};
-
-    Polynomials polynomialsToVerify;
-    factorizeCommonMonomialIfPossible(polynomialsToVerify, polynomialToTest);
-
-    EXPECT_TRUE(polynomialsToVerify.empty());
-}
-
-TEST(FactorizationOfPolynomialsTest, FactorizeCommonMonomialIfPossibleIsEmptyWhenItsOneMonomial) {
-    Polynomial polynomialToTest{Monomial(7, {{"x", 7}})};
-
-    Polynomials polynomialsToVerify;
-    factorizeCommonMonomialIfPossible(polynomialsToVerify, polynomialToTest);
-
-    EXPECT_TRUE(polynomialsToVerify.empty());
-}
-
-TEST(FactorizationOfPolynomialsTest, FactorizeCommonMonomialIfPossibleWorksWhenGettingTheGcfMonomial) {
-    Polynomial polynomialToTest{Monomial(9, {{"x", 1}, {"y", 2}}), Monomial(6, {{"x", 3}})};
-
-    Polynomials polynomialsToVerify;
-    factorizeCommonMonomialIfPossible(polynomialsToVerify, polynomialToTest);
-
-    ASSERT_EQ(2U, polynomialsToVerify.size());
-    Polynomial polynomialToExpect1{Monomial(3, {{"x", 1}})};
-    Polynomial polynomialToExpect2{Monomial(2, {{"x", 2}}), Monomial(3, {{"y", 2}})};
-    EXPECT_EQ(polynomialToExpect1, polynomialsToVerify[0]);
-    EXPECT_EQ(polynomialToExpect2, polynomialsToVerify[1]);
-}
-
-TEST(FactorizationOfPolynomialsTest, PutFactorizedPolynomialsIfPossibleWorksAtDefault) {
-    Polynomial polynomial{Monomial(1, {{"x", 1}, {"y", 2}}), Monomial(0.56789, {{"x", 3}})};
-    Polynomials polynomials{polynomial};
-
-    Polynomials result;
-    putFactorizedPolynomialsIfPossible(result, polynomials);
-
-    ASSERT_EQ(1U, result.size());
-    EXPECT_EQ(polynomial, result[0]);
-}
-
-TEST(FactorizationOfPolynomialsTest, PutFactorizedPolynomialsIfPossibleWorksWhenFlagIsSet) {
-    ConfigurationDetails configurationDetails(getDefaultConfigurationDetails<ConfigurationDetails>());
-    configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
-    ScopeObject scopeObject;
-    scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
-    Polynomial polynomial{Monomial(1, {{"x", 1}, {"y", 2}}), Monomial(0.56789, {{"x", 3}})};
-    Polynomials polynomials{polynomial};
-
-    Polynomials result;
-    putFactorizedPolynomialsIfPossible(result, polynomials);
-
-    EXPECT_TRUE(result.empty());
 }
 
 }  // namespace alba::algebra::Factorization

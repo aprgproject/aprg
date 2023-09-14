@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
+#include <Common/Math/Helpers/FactorAndMultiplesHelpers.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 
 #include <vector>

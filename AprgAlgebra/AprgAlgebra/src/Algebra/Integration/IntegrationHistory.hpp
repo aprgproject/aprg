@@ -22,13 +22,13 @@ using IntegrationPurposes = std::vector<IntegrationPurpose>;
 class IntegrationHistory {
 public:
     IntegrationHistory();
-    static std::string getEnumShortString(IntegrationPurpose const purpose);
     [[nodiscard]] IntegrationPurpose getLastIntegrationPurpose() const;
     [[nodiscard]] int getDepth() const;
     [[nodiscard]] bool didThisIntegrationPurposeAlreadyHappened(IntegrationPurpose const purpose) const;
     void performStepsBeforeIntegration(Term const& input, IntegrationPurpose const purpose);
     void performStepsAfterIntegration(Term const& input, IntegrationPurpose const purpose, Term const& output);
     void clear();
+    static std::string getEnumShortString(IntegrationPurpose const purpose);
 
 private:
     void addIntegrationPurpose(IntegrationPurpose const purpose);

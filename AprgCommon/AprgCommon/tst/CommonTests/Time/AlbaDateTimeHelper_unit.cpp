@@ -2,10 +2,55 @@
 
 #include <gtest/gtest.h>
 
-using namespace std;
 using namespace alba::dateTimeHelper;
+using namespace std;
 
 namespace alba {
+
+TEST(AlbaDateTimeHelperTest, ReorganizeOverflowValuesWorksIfThereIsNoOverflow) {
+    uint32_t days = 0;
+    uint32_t seconds = 0;
+    uint32_t microSeconds = 0;
+    reorganizeOverflowValues(days, seconds, microSeconds);
+    EXPECT_EQ(0U, days);
+    EXPECT_EQ(0U, seconds);
+    EXPECT_EQ(0U, microSeconds);
+}
+
+TEST(AlbaDateTimeHelperTest, ReorganizeOverflowValuesWorksIfThereIsOverflow) {
+    uint32_t days = 99999999;
+    uint32_t seconds = 99999999;
+    uint32_t microSeconds = 99999999;
+    reorganizeOverflowValues(days, seconds, microSeconds);
+    EXPECT_EQ(100001156U, days);
+    EXPECT_EQ(35298U, seconds);
+    EXPECT_EQ(999999U, microSeconds);
+}
+
+TEST(AlbaDateTimeHelperTest, ReorganizeUnderflowValuesWorksIfThereIsNoUnderflow) {
+    int days = 0;
+    int seconds = 0;
+    int microSeconds = 0;
+    reorganizeUnderflowValues(days, seconds, microSeconds);
+    EXPECT_EQ(0, days);
+    EXPECT_EQ(0, seconds);
+    EXPECT_EQ(0, microSeconds);
+}
+
+TEST(AlbaDateTimeHelperTest, ReorganizeUnderflowValuesWorksIfThereIsUnderflow) {
+    int days = 99999999;
+    int seconds = -99999999;
+    int microSeconds = -99999999;
+    reorganizeUnderflowValues(days, seconds, microSeconds);
+    EXPECT_EQ(99998841, days);
+    EXPECT_EQ(51101, seconds);
+    EXPECT_EQ(1, microSeconds);
+}
+
+TEST(AlbaDateTimeHelperTest, GetDayOfTheWeekWorks) {
+    EXPECT_EQ(AlbaDateTimeConstants::THURSDAY, getDayOfTheWeek(2016, 11, 31));
+    EXPECT_EQ(AlbaDateTimeConstants::MONDAY, getDayOfTheWeek(2010, 8, 30));
+}
 
 TEST(AlbaDateTimeHelperTest, GetMonthStringWorks) {
     EXPECT_EQ("January", getMonthString(1));
@@ -40,21 +85,6 @@ TEST(AlbaDateTimeHelperTest, ConvertTo12HourFormatWorks) {
     EXPECT_EQ(12U, convertTo12HourFormat(0));
     EXPECT_EQ(12U, convertTo12HourFormat(12));
     EXPECT_EQ(13U, convertTo12HourFormat(25));
-}
-
-TEST(AlbaDateTimeHelperTest, IsLeapYearWorks) {
-    EXPECT_TRUE(isLeapYear(0));
-    EXPECT_FALSE(isLeapYear(3));
-    EXPECT_TRUE(isLeapYear(4));
-    EXPECT_FALSE(isLeapYear(5));
-    EXPECT_FALSE(isLeapYear(99));
-    EXPECT_FALSE(isLeapYear(100));
-    EXPECT_FALSE(isLeapYear(101));
-    EXPECT_FALSE(isLeapYear(399));
-    EXPECT_TRUE(isLeapYear(400));
-    EXPECT_FALSE(isLeapYear(401));
-    EXPECT_TRUE(isLeapYear(2016));
-    EXPECT_FALSE(isLeapYear(2017));
 }
 
 TEST(AlbaDateTimeHelperTest, GetNumberOfDaysInAYearWorks) {
@@ -283,11 +313,6 @@ TEST(AlbaDateTimeHelperTest, GetTotalSecondsWorks) {
     EXPECT_EQ(86399U, getTotalSeconds(23, 59, 59));
 }
 
-TEST(AlbaDateTimeHelperTest, GetDayOfTheWeekWorks) {
-    EXPECT_EQ(AlbaDateTimeConstants::THURSDAY, getDayOfTheWeek(2016, 11, 31));
-    EXPECT_EQ(AlbaDateTimeConstants::MONDAY, getDayOfTheWeek(2010, 8, 30));
-}
-
 TEST(AlbaDateTimeHelperTest, GetAndRemoveYearsFromNumberOfDaysWorks) {
     uint32_t totalDays = 0;
     EXPECT_EQ(0U, getAndRemoveYearsFromNumberOfDays(totalDays));
@@ -344,44 +369,19 @@ TEST(AlbaDateTimeHelperTest, GetAndRemoveMinutesFromNumberOfSecondsWorks) {
     EXPECT_EQ(59U, totalSeconds);
 }
 
-TEST(AlbaDateTimeHelperTest, ReorganizeOverflowValuesWorksIfThereIsNoOverflow) {
-    uint32_t days = 0;
-    uint32_t seconds = 0;
-    uint32_t microSeconds = 0;
-    reorganizeOverflowValues(days, seconds, microSeconds);
-    EXPECT_EQ(0U, days);
-    EXPECT_EQ(0U, seconds);
-    EXPECT_EQ(0U, microSeconds);
-}
-
-TEST(AlbaDateTimeHelperTest, ReorganizeOverflowValuesWorksIfThereIsOverflow) {
-    uint32_t days = 99999999;
-    uint32_t seconds = 99999999;
-    uint32_t microSeconds = 99999999;
-    reorganizeOverflowValues(days, seconds, microSeconds);
-    EXPECT_EQ(100001156U, days);
-    EXPECT_EQ(35298U, seconds);
-    EXPECT_EQ(999999U, microSeconds);
-}
-
-TEST(AlbaDateTimeHelperTest, ReorganizeUnderflowValuesWorksIfThereIsNoUnderflow) {
-    int days = 0;
-    int seconds = 0;
-    int microSeconds = 0;
-    reorganizeUnderflowValues(days, seconds, microSeconds);
-    EXPECT_EQ(0, days);
-    EXPECT_EQ(0, seconds);
-    EXPECT_EQ(0, microSeconds);
-}
-
-TEST(AlbaDateTimeHelperTest, ReorganizeUnderflowValuesWorksIfThereIsUnderflow) {
-    int days = 99999999;
-    int seconds = -99999999;
-    int microSeconds = -99999999;
-    reorganizeUnderflowValues(days, seconds, microSeconds);
-    EXPECT_EQ(99998841, days);
-    EXPECT_EQ(51101, seconds);
-    EXPECT_EQ(1, microSeconds);
+TEST(AlbaDateTimeHelperTest, IsLeapYearWorks) {
+    EXPECT_TRUE(isLeapYear(0));
+    EXPECT_FALSE(isLeapYear(3));
+    EXPECT_TRUE(isLeapYear(4));
+    EXPECT_FALSE(isLeapYear(5));
+    EXPECT_FALSE(isLeapYear(99));
+    EXPECT_FALSE(isLeapYear(100));
+    EXPECT_FALSE(isLeapYear(101));
+    EXPECT_FALSE(isLeapYear(399));
+    EXPECT_TRUE(isLeapYear(400));
+    EXPECT_FALSE(isLeapYear(401));
+    EXPECT_TRUE(isLeapYear(2016));
+    EXPECT_FALSE(isLeapYear(2017));
 }
 
 }  // namespace alba

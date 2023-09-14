@@ -51,11 +51,6 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
     return result;
 }
 
-ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom1ToN::getSummationFrom1ToN(
-    Value const number) {
-    return number * (number + 1) / 2;
-}
-
 ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom1ToN::getValueUsingMemoizationDP(
     Value const number) const {
     // Time Complexity: Even though there are recursion calls the time complexity is O(numberOfDigits)
@@ -87,6 +82,11 @@ ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom
                  mostSignificantDigit * (1 + remainingDigits) + getValueUsingMemoizationDP(remainingDigits);
     }
     return result;
+}
+
+ComputeSumOfDigitsInAllNumbersFrom1ToN::Value ComputeSumOfDigitsInAllNumbersFrom1ToN::getSummationFrom1ToN(
+    Value const number) {
+    return number * (number + 1) / 2;
 }
 
 }  // namespace alba

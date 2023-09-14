@@ -14,15 +14,15 @@ public:
     using NumberSet = std::set<Number>;
     using NumberMatrix = matrix::AlbaMatrix<Number>;
     static constexpr Number UNUSED_VALUE = std::numeric_limits<Number>::max();
+    [[nodiscard]] Number getNthFibonacciUsingNaiveRecursion(Number const number) const;
+    Number getNthFibonacciUsingMemoizationDP(Number const number);
+    Number getNthFibonacciUsingLogarithmicMemoizationDP(Number const number);
     static Number getNthFibonacciUsingIterativeDP(Number const number);
     static Number getNthFibonacciUsingIterativeDPAndSpaceEfficient(Number const number);
     static Number getNthFibonacciNumberUsingBinetsFormula(Number const number);
     static Number getNthFibonacciUsingMatrixMultiplication(Number const number);
     static Number getNthFibonacciUsingMatrixPowerWithLogarithmicTime(Number const number);
     static Number getNthFibonacciUsingLogarithmicIterativeDP(Number const number);
-    [[nodiscard]] Number getNthFibonacciUsingNaiveRecursion(Number const number) const;
-    Number getNthFibonacciUsingMemoizationDP(Number const number);
-    Number getNthFibonacciUsingLogarithmicMemoizationDP(Number const number);
 
 private:
     Number getNthFibonacciUsingMemoizationDP(Numbers& memoizationData, Number const number);
@@ -33,26 +33,21 @@ private:
 
 // The Fibonacci numbers are the numbers in the following integer sequence.
 // -> 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...
-
 // In mathematical terms, the sequence Fn of Fibonacci numbers is defined by the recurrence relation:
 // -> Fn = Fn-1 + Fn-2
 // with seed values:
 // -> F0 = 0 and F1 = 1.
-
 // Examples:
 // -> Input  : n = 2
 // ---> Output : 1
 // -> Input  : n = 9
 // ---> Output : 34
-
 // Logarithmic version of Fibonacci:
-
 // Below is one more interesting recurrence formula that can be used to find n’th Fibonacci Number in O(Log n) time.
 // If n is even then k = n/2:
 // -> F(n) = [2*F(k-1) + F(k)]*F(k)
 // If n is odd then k = (n + 1)/2
 // -> F(n) = F(k)*F(k) + F(k-1)*F(k-1)
-
 // How does this formula work?
 // ---> The formula can be derived from above matrix equation.
 // -> Taking determinant on both sides, we get

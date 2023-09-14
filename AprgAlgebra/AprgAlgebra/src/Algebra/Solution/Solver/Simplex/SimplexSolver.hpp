@@ -17,10 +17,6 @@ public:
     [[nodiscard]] bool isOptimized() const;
 
 private:
-    static void processConstraints(
-        Equations const& constraints, Polynomials& constraintsInStandardForm,
-        VariableNamesRetriever& inputVariablesRetriever, std::set<int>& indicesWithSlackVariables);
-
     void intialize(Equations const& constraints, Polynomial const& objectiveFunction);
     void solve();
     void saveInputVariables(VariableNamesSet const& inputVariableNames);
@@ -28,6 +24,10 @@ private:
     void initializeSimplexTable(
         Polynomial const& objectiveFunction, Polynomials const& constraintsInStandardForm,
         VariableNamesSet const& inputVariableNames, std::set<int> const& indicesWithSlackVariables);
+
+    static void processConstraints(
+        Equations const& constraints, Polynomials& constraintsInStandardForm,
+        VariableNamesRetriever& inputVariablesRetriever, std::set<int>& indicesWithSlackVariables);
 
     SimplexMatrix m_simplexTable;
     VariableNames m_inputVariables;

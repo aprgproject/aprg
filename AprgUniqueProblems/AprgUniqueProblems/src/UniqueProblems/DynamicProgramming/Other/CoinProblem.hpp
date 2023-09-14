@@ -81,13 +81,11 @@ private:
 // and we have infinite supply of each of S = { S1, S2, .. , Sm} valued coins,
 // how many ways can we make the change?
 // The order of coins doesn’t matter.
-
 // Examples:
 // For N = 4 and S = {1,2,3}, there are four solutions: {1,1,1,1},{1,1,2},{2,2},{1,3}.
 // -> So output should be 4.
 // For N = 10 and S = {2, 5, 3, 6}, there are five solutions: {2,2,2,2,2}, {2,2,3,3}, {2,2,6}, {2,3,5} and {5,5}.
 // -> So the output should be 5.
-
 // 1) Optimal Substructure
 // -> To count the total number of solutions, we can divide all set solutions into two sets.
 // ---> 1) Solutions that do not contain mth coin (or Sm).
@@ -96,7 +94,6 @@ private:
 // then it can be written as sum of count(S[], m-1, n) and count(S[], m, n-Sm).
 // -> Therefore, the problem has optimal substructure property as the problem can be solved using solutions to
 // subproblems.
-
 // It should be noted that without memoization the above function computes the same subproblems again and again.
 // See the following recursion tree for S = {1, 2, 3} and n = 5.
 // The function C({1}, 3) is called two times.
@@ -118,11 +115,9 @@ private:
 //                                                | |
 //                                               |   |
 //                                              .      .
-
 // FEWEST COIN PROBLEM:
 // Given a value V, if we want to make change for V cents, and we have infinite supply of each of C = { C1, C2, .. , Cm}
 // valued coins, what is the minimum number of coins to make the change?
-
 // Examples:
 // -> Input: coins[] = {25, 10, 5}, V = 30
 // ---> Output: Minimum 2 coins required
@@ -130,15 +125,12 @@ private:
 // -> Input: coins[] = {9, 6, 5, 1}, V = 11
 // ---> Output: Minimum 2 coins required
 // ---> We can use one coin of 6 cents and 1 coin of 5 cents
-
 // This problem is a variation of the problem discussed Coin Change Problem.
 // Here instead of finding total number of possible solutions, we need to find the solution with minimum number of
 // coins.
-
 // The minimum number of coins for a value V can be computed using below recursive formula.
 // If V == 0, then 0 coins required.
 // If V > 0, minCoins(coins[0..m-1], V) = min {1 + minCoins(V-coin[i])} where i varies from 0 to m-1  and coin[i] <= V
-
 // The time complexity of a direct solution is exponential.
 // If we draw the complete recursion tree, we can observe that many subproblems are solved again and again.
 // For example, when we start from V = 11, we can reach 6 by subtracting one 5 times and by subtracting 5 one times.

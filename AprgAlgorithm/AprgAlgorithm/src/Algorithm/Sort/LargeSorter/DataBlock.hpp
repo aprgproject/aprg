@@ -35,6 +35,7 @@ public:
     }
 
     [[nodiscard]] DataBlockType getBlockType() const { return m_blockType; }
+    [[nodiscard]] ObjectToSort getLowestObject() const { return m_lowestValue; }
     [[nodiscard]] int getBlockId() const { return m_blockId; }
     [[nodiscard]] int getNumberOfObjects() const { return m_numberOfObjects; }
 
@@ -53,8 +54,6 @@ public:
         }
         return isOpened;
     }
-
-    [[nodiscard]] ObjectToSort getLowestObject() const { return m_lowestValue; }
 
     void add(ObjectToSort const& objectToSort) {
         switch (m_blockType) {

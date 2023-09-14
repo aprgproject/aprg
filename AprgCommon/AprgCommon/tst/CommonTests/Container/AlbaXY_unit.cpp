@@ -10,18 +10,6 @@ namespace {
 using IntXY = AlbaXY<int>;
 }  // namespace
 
-TEST(AlbaXYTest, DefaultValuesAreZero) {
-    IntXY const xyValues;
-    EXPECT_EQ(0, xyValues.getX());
-    EXPECT_EQ(0, xyValues.getY());
-}
-
-TEST(AlbaXYTest, ValuesAreSetAtConstruction) {
-    IntXY const xyValues(-5, 5);
-    EXPECT_EQ(-5, xyValues.getX());
-    EXPECT_EQ(5, xyValues.getY());
-}
-
 TEST(AlbaXYTest, EqualityOperatorWorks) {
     IntXY const xyValues(-5, 5);
 
@@ -73,15 +61,31 @@ TEST(AlbaXYTest, MinusAssignmentOperatorWorks) {
     EXPECT_EQ(IntXY(-2, 6), xyzToTest);
 }
 
-TEST(AlbaXYTest, IsEmptyWorks) {
-    EXPECT_TRUE(IntXY().isEmpty());
-    EXPECT_FALSE(IntXY(-5, 5).isEmpty());
+TEST(AlbaXYTest, OutputStreamOperatorWorks) {
+    stringstream testStream;
+    IntXY const xyValues(-5, 5);
+
+    testStream << xyValues;
+
+    EXPECT_EQ("(-5,5)", testStream.str());
 }
 
 TEST(AlbaXYTest, GetXWorks) {
     IntXY const xyValues(-5, 5);
 
     EXPECT_EQ(-5, xyValues.getX());
+}
+
+TEST(AlbaXYTest, DefaultValuesAreZero) {
+    IntXY const xyValues;
+    EXPECT_EQ(0, xyValues.getX());
+    EXPECT_EQ(0, xyValues.getY());
+}
+
+TEST(AlbaXYTest, ValuesAreSetAtConstruction) {
+    IntXY const xyValues(-5, 5);
+    EXPECT_EQ(-5, xyValues.getX());
+    EXPECT_EQ(5, xyValues.getY());
 }
 
 TEST(AlbaXYTest, GetYWorks) {
@@ -94,6 +98,11 @@ TEST(AlbaXYTest, GetXTimesYWorks) {
     IntXY const xyValues(-5, 5);
 
     EXPECT_EQ(-25, xyValues.getXTimesY());
+}
+
+TEST(AlbaXYTest, IsEmptyWorks) {
+    EXPECT_TRUE(IntXY().isEmpty());
+    EXPECT_FALSE(IntXY(-5, 5).isEmpty());
 }
 
 TEST(AlbaXYTest, SetXWorks) {
@@ -140,15 +149,6 @@ TEST(AlbaXYTest, SaveMaximumXAndYWorks) {
     xyValues.saveMaximumXAndY(IntXY(5, 5));
 
     EXPECT_EQ(IntXY(5, 5), xyValues);
-}
-
-TEST(AlbaXYTest, OutputStreamOperatorWorks) {
-    stringstream testStream;
-    IntXY const xyValues(-5, 5);
-
-    testStream << xyValues;
-
-    EXPECT_EQ("(-5,5)", testStream.str());
 }
 
 }  // namespace alba

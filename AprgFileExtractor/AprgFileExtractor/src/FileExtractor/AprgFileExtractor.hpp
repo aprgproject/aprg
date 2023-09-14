@@ -15,7 +15,6 @@ public:
     AprgFileExtractor();
     AprgFileExtractor(
         std::string const& condition, std::string const& pathOf7zExecutable, std::string const& pathOf7zTempFile);
-    static bool isRecognizedCompressedFile(std::string const& extension);
     void copyRelativeFilePathsFromCompressedFile(
         std::string const& filePathOfCompressedFile, SetOfFilePaths& files) const;
     // NOLINTNEXTLINE(modernize-use-nodiscard)
@@ -24,14 +23,15 @@ public:
     std::string extractOneFile(
         std::string const& filePathOfCompressedFile, std::string const& relativePathOfFile) const;
     void extractAllRelevantFiles(std::string const& pathOfFileOrDirectory);
+    static bool isRecognizedCompressedFile(std::string const& extension);
 
 private:
-    static void runInConsole(std::string const& command);
-    static bool isTheExtensionXzOrGzOrTar(std::string const& extension);
     void extractAllRelevantFilesInThisDirectory(std::string const& directoryPath);
     void extractAllRelevantFilesInThisCompressedFile(std::string const& filePathOfCompressedFile);
     void extractAllFilesRecursively(std::string const& filePathOfCompressedFile);
     void extractAllRelevantFilesRecursively(std::string const& filePathOfCompressedFile);
+    static void runInConsole(std::string const& command);
+    static bool isTheExtensionXzOrGzOrTar(std::string const& extension);
     AlbaGrepStringEvaluator m_grepEvaluator;
     std::string m_pathOf7zExecutable;
     std::string m_pathOf7zTempFile;

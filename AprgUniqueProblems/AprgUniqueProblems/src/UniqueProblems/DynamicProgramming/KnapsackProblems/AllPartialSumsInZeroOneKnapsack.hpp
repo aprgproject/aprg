@@ -35,7 +35,6 @@ private:
 // ---> Traverse all the partial sums (from maximum sum to zero):
 // -----> This "partial sum" is possible if "partial sum" >= "input value" and if "partial sum"-"input value" is
 // possible
-
 // 2) Dynamic Programming by Iterative method (by setting future values):
 // -> Get the maximum possible partial sum and create an array of booleans ("isPartialSumPossible") with that size
 // -> Thus each "partial sum" has a boolean if its possible.
@@ -47,18 +46,14 @@ private:
 // ---> Traverse all the partial sums (from maximum sum to zero):
 // -----> If current "partial sum" is possible:
 // -------> A future "partial sum" is possible if its equal to the current "partial sum" plus an "input value".
-
 // The term knapsack refers to problems where a set of objects is given, and subsets with some properties have to be
 // found. Knapsack problems can often be solved using dynamic programming.
-
 // In this section, we focus on the following problem:
 // Given a list of weights [w1,w2,...,wn], determine all sums that can be constructed using the weights.
-
 // Recurrence formulation:
 // -> Let possible(x,k) = true if we can construct a sum x using the first k weights, and otherwise possible(x,k) =
 // false
 // -> possible(x,k) = possible(x-weight of k,k-1) union possible(x,k-1)
-
 // Other discussions:
 // Given weights and values of n items, put these items in a knapsack of capacity W to get the maximum total value in
 // the knapsack. In other words, given two integer arrays val[0..n-1] and wt[0..n-1] which represent values and weights

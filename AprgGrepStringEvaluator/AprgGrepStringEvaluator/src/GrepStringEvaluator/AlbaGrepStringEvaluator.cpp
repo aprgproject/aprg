@@ -29,15 +29,6 @@ bool AlbaGrepStringEvaluator::evaluate(string const& stringToEvaluate) {
     return result;
 }
 
-char AlbaGrepStringEvaluator::convertTildeToExclamationPointIfNeeded(char const character) {
-    return ('~' == character) ? '!' : character;
-}
-
-bool AlbaGrepStringEvaluator::isOperator(char const character) {
-    return '!' == character || '~' == character || '&' == character || '|' == character || '^' == character;
-}
-
-bool AlbaGrepStringEvaluator::isParenthesis(char const character) { return '(' == character || ')' == character; }
 bool AlbaGrepStringEvaluator::isEvaluationPossible() const { return m_postfixEvaluator.isEvaluationPossible(); }
 
 void AlbaGrepStringEvaluator::extractTokens(string const& condition) {
@@ -224,5 +215,15 @@ void AlbaGrepStringEvaluator::setErrorMessage(string const& errorMessage) {
     m_isEvaluatorInvalid = true;
     m_errorMessage = errorMessage;
 }
+
+char AlbaGrepStringEvaluator::convertTildeToExclamationPointIfNeeded(char const character) {
+    return ('~' == character) ? '!' : character;
+}
+
+bool AlbaGrepStringEvaluator::isOperator(char const character) {
+    return '!' == character || '~' == character || '&' == character || '|' == character || '^' == character;
+}
+
+bool AlbaGrepStringEvaluator::isParenthesis(char const character) { return '(' == character || ')' == character; }
 
 }  // namespace alba

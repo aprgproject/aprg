@@ -66,8 +66,8 @@ public:
     NaiveIntVector& operator=(NaiveIntVector&& rightHandSide) noexcept {
         cout << "Move assignment\n";
         NaiveIntVector copy(std::move(rightHandSide));  // calls the move constructor
-        // std::move is needed (because rvalue has a name)
-        swap(copy, *this);  // The copy-and-swap idiom (to be safe for "self assignment").
+                                                        // std::move is needed (because rvalue has a name)
+        swap(copy, *this);                              // The copy-and-swap idiom (to be safe for "self assignment").
         return *this;
     }
 
@@ -84,7 +84,7 @@ public:
         int* newPtr = new int[m_size + 1];  // This is inefficient because it rellocates every time.
         copy(m_ptr, m_ptr + m_size, newPtr);
         delete[] m_ptr;  // delete does not crash even if m_ptr is empty
-        // (see https://en.cppreference.com/w/cpp/language/delete)
+                         // (see https://en.cppreference.com/w/cpp/language/delete)
         m_ptr = newPtr;
         m_ptr[m_size++] = newValue;
     }
@@ -128,7 +128,6 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // ---> Deleting, defaulting and the Rule of Zero
 // ---> Move semantics and the Rule of Five (or Four)
 // ---> Recap and examples of RAII types
-
 // -> Classes that manage resources
 // ---> A "resource" for our purposes, is anything that requires special (manual) management.
 // ---> C++ programs can manage many different kinds of "resources".
@@ -138,7 +137,6 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // -----> Mutex locks (pthread_mutex_lock/pthread_mutex_unlock)
 // -----> C++ threads (spawn/join)
 // -----> Objective-C resource-counted objects (retain/release)
-
 // -> Classes that manage resources
 // ---> Some of these resources are intinsically "unique" (mutex locks)
 // -----> and some are "duplicable" (heap allocations, POSIX file handles).
@@ -146,7 +144,6 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // ---> What matters is that there is some explicit action that needs to be taken
 // -----> by the program in order to free the resource
 // ---> We'll stick with the callsing boring example of heap allocation.
-
 // -> The Rule of Three
 // ---> This is needed if your class directly manages some kind of resource (such as new'ed pointer),
 // -----> then you almost certainly need to hand-write three special member functions:
@@ -155,7 +152,6 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // -------> A "copy assignment operator" to free the left hand resource and copy the right hand one.
 // ---> Use the copy-and-swap idiom to implement assignment.
 // ---> Guideline: You need to write this if the destructor needs some sort of cleanup.
-
 // -> Why copy-and-swap?
 // ---> Alternative is not safe for "safe assignment":
 // -----> NaiveIntVector& operator=(NaiveIntVector const& rightHandSide) {
@@ -167,17 +163,14 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // -----> }
 // ---> Also, how about if you have complicated structure (where nodes can refer to itself)
 // -----> Follow the copy-and-swap idiom to be safe.
-
 // -> Copy-and-swap to the rescue
 // ---> See the code above
 // ---> We make a complete copy of rhse before the first modification to *this.
 // ---> So any aliasing relationship between rhs and *this cannot trip us up.
-
 // -> RAII meaning
 // ---> "Resource Acquisition Is Initialization"
 // ---> The slogan is about initialization but its meaning is really about cleanup.
 // ---> The should have been "Resource freeing is deletion/destruction".
-
 // -> RAII and exception safefy
 // ---> Destructors help us write code that is robust against exceptions
 // ---> C++ supports try/catch and throw.
@@ -187,19 +180,16 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // -----> For every local scope between the throw and the catch handler,
 // -----> the runtime invokes the destructors of all local variables in that scope.
 // ---> To avoid leaks, place all your cleanup code in destructors.
-
 // -> Deleted special member functions
 // ---> We can improve RAII objects by making it non-copyable.
 // ---> When a function definition has the body=delete; instead of a curly-braced compound statement,
 // -----> the compiler will reject calls to that function at compile time.
 // ---> This facility is completely unrelated to new/delete; its just a cutesy use of an existing keyword.
 // ---> New keywords are expensive, because C++ values backward compatibility.
-
 // -> Defaulted special member functions
 // ---> When a special member function has the body =default; instead of a curly-braced compound statement,
 // -----> the compiler will create a default version of that function, just as if it were implicity generated.
 // ---> Explicitly defaulting your special members can help your code to be "self-documenting".
-
 // -> The Rule of Zero
 // ---> If your class does not directly manage any resource,
 // -----> but merely uses library components such as vector and string,
@@ -212,7 +202,6 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // -------> NOTE: A non-member friend swap function can be recognized by the STL and will call them appropriately.
 // -------> Similar to comparison operators (==, !=, etc)
 // ---> This is known as the "Rule of Zero".
-
 // -> There are two kinds of well-designed value-semantic C++ classes:
 // ---> Business-logic classes that do not manually manage any resources and follow the Rule of Zero:
 // -----> They delegate the job of resource management to data member of types such as string.
@@ -220,14 +209,12 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // -----> Acquire the resource in each constructor.
 // -----> Free the resource in your destructor.
 // -----> Copy-and-swap in you assignment operator.
-
 // -> Introducing rvalue references
 // ---> C++11 introduces rvalue-reference types.
 // ---> The reference we've seen so far are lvalue references.
 // ---> The terms "lvalue" and "rvalue" come from the syntax of assignment expressions.
 // -----> An lvalue "can" appear on the lef-hand side of an assignment.
 // -----> An revalue "must" appear on the right-hand side.
-
 // -> Introducing rvalue references
 // ---> int& is an lvalue reference to an int.
 // ---> int&& (two ampersands) is an rvalue reference to an int.
@@ -235,13 +222,11 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // -----> and rvalue reference parameters do not bind to lvalues.
 // ---> NOTE: Special case for backward compability:
 // -----> A const lvalue reference will happily bind to an rvalue.
-
 // -> Rvalues won't be missed
 // ---> When pass and rvalue as a parameter, we can steal the guts of the parameter because its a temporary.
 // ---> The most common application of rvalue references is the move constructor.
 // ---> Allocating and copying is slow, the move constructor doesn't need to do either of those slow things!
 // ---> Each STL container type has a move constructor in addition to its copy constructor.
-
 // -> The Rule of Five
 // ---> If your class directly manages some kind of resource (such as a new'ed pointer),
 // -----> then you may need to hand-write five special member functions for correctness and performance.
@@ -250,7 +235,6 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // -------> A move constructor to transfer ownership of the resource
 // -------> A copy assignment operator to free the left-hand resource and copy the right-hand one.
 // -------> A move assignment operator to free the left-hand resource and transfer ownership of the right-hand one.
-
 // -> Copy and swap leads to duplication
 // ---> We have similar code on our "copy assignment" and "move assignment".
 // ---> By value assignment operator (Copy by value assignment)
@@ -258,7 +242,6 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // -----> I'm not aware of any problems with this idiom.
 // -----> Writing copy assignment and move assignment separately is more frequently seen.
 // -------> In particular, the STL always writes them separately.
-
 // -> The Rule of Four (and a half)
 // ---> If your class directly manages some kind of resource (such as a new'ed pointer),
 // -----> then you may need to hand-write five special member functions for correctness and performance.
@@ -267,7 +250,6 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // -------> A move constructor to transfer ownership of the resource
 // -------> A by-value assignment operator to free the left-hand resource and transfer ownership of the right-hand one.
 // -------> (1/2) A nonmember swap function, and ideally a member version too.
-
 // -> Closer to rule of zero vector
 // ---> Just use "unique_ptr" to lessen the work
 // -----> Move constructor can be set a default
@@ -275,7 +257,6 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // -----> Still might need to create copy constructor
 // -----> Assignment can be needed too
 // -----> swap function might be needed as well
-
 // -> Examples of resource management
 // ---> "unique_ptr: manages a raw pointer to a uniquely owned heap allocation:
 // -----> Destructor frees the resource
@@ -310,7 +291,6 @@ TEST(RuleOfZeroExamplesTest, NaiveIntVectorPushBackWorks) {
 // -------> We =delete this member function.
 // -----> Move assignment operator frees the left hand side and transfer ownership of the right hand side
 // -------> Calls "close", then transfers the handle and contents of the buffer.
-
 // -> Pilfering implies an empty state
 // ---> Each of the preceding examples had a move operation which involved:
 // -----> disengageing the right-hand side

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+
 namespace alba::algorithm {
 
 template <int numberOfLoops>
@@ -77,13 +78,11 @@ int BruteForceSubstringSearch<2>::searchWithLoops(std::string const& searchSpace
 // Brute-force substring search: worst case
 // -> Brute force algorithm can be slow if test and pattern are repetitive.
 // -> Worst case: ~MN char compares
-
 // Backup:
 // -> In many applications we want to avoid backup in text stream
 // ---> Treat input as stream of data
 // ---> Abstract model: standard input
 // -> Brute-force algorithm beeds to backup for every mismatch
-
 // Brute force is not always good enough:
 // -> Theoretical challenge: Linear time guarantee.
 // -> Avoid backup in the text stream.

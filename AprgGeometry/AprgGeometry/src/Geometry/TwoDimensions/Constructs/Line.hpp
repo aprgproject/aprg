@@ -35,12 +35,6 @@ public:
     [[nodiscard]] double calculateXFromY(double const y) const;
 
 private:
-    static void mergePointsFromPointsFromXAndY(
-        Points& points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate,
-        bool const isDirectionAscendingForX);
-
-    static LineType determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX);
-    static LineType determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient);
     void getPointsForVerticalLine(Points& points, Point const& first, Point const& second, double const interval) const;
     void getPointsForHorizontalLine(
         Points& points, Point const& first, Point const& second, double const interval) const;
@@ -51,6 +45,13 @@ private:
         double const aCoefficient, double const bCoefficient, double const cCoefficient);
     void setCoefficientsUsingLineTypeAndDeltaXandDeltaYAndAPoint(
         double const deltaY, double const deltaX, Point const& point);
+
+    static void mergePointsFromPointsFromXAndY(
+        Points& points, Points const& pointsFromXCoordinate, Points const& pointsFromYCoordinate,
+        bool const isDirectionAscendingForX);
+
+    static LineType determineLineTypeUsingDeltaXandDeltaY(double const deltaY, double const deltaX);
+    static LineType determineLineTypeUsingCoefficients(double const aCoefficient, double const bCoefficient);
     friend std::ostream& operator<<(std::ostream& out, Line const& line);
     LineType m_type;
     double m_aCoefficient;  // form: a*x + b*y + c = 0

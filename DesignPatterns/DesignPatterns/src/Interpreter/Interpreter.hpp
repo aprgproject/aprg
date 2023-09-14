@@ -69,16 +69,13 @@ private:
 
 // ONE LINE NOTE:
 // -> Provide a class (with subclasses) that can be INTERPRETED differently depending on the CONTEXT.
-
 // Intent:
 // Given a language, the pattern defines a represention for its grammar along with an
 // interpreter that uses the representation to interpret sentences in the language.
 // The Interpreter pattern has behavioral purpose and applies to the classes.
-
 // When to use (applicability):
 // -> when the grammar is simple (in case of complex grammars, there are better alternatives)
 // -> efficiency is not a critical concern
-
 // Consequences:
 // -> Its easy to change and extend the grammar.
 // ---> Because the pattern uses classes to represent grammar rules, you can use inheritance to change or extend the
@@ -99,7 +96,6 @@ private:
 // expression classes.
 // ---> If you keep creating new ways of interpreting an expression, then consider using the [Visitor] parrent to avoid
 // changing the grammar classes.
-
 // Implementation:
 // -> Creating the abstract syntax tree.
 // ---> The Interpreter pattern doesn't explain how to create an abstract syntax tree.
@@ -122,7 +118,6 @@ private:
 // -----> Parent nodes pass them whatever context they need during interpretation.
 // -----> Hence there is a distinction between shared (intrinsic) state and passed-in (extrinsic) state, and the
 // [Flyweight] pattern applies.
-
 // Related Patterns
 // -> [Composite]: The abstract syntax tree is an instance of the [Composite] pattern.
 // -> [Flyweight] shows how to share terminal symbols within the abstract syntax tree.

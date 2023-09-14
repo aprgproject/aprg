@@ -7,8 +7,6 @@ namespace alba::algebra {
 class IntegrationForFiniteCalculus {
 public:
     explicit IntegrationForFiniteCalculus(std::string const& nameOfVariableToIntegrate);
-    static Term integrate(Function const& functionObject);
-    static Term integrateFunction(Function const& functionObject);
     [[nodiscard]] Monomial integrateConstant(Constant const& constant) const;
     [[nodiscard]] Polynomial integrateVariable(Variable const& variable) const;
     [[nodiscard]] Term integrate(Term const& term) const;
@@ -24,11 +22,10 @@ public:
     [[nodiscard]] Term integrateMonomial(Monomial const& monomial) const;
     [[nodiscard]] Term integratePolynomial(Polynomial const& polynomial) const;
     [[nodiscard]] Term integrateExpression(Expression const& expression) const;
+    static Term integrate(Function const& functionObject);
+    static Term integrateFunction(Function const& functionObject);
 
 private:
-    static void integrateChangingTermsInMultiplicationOrDivision(Term& result, TermsWithDetails const&);
-    static Term integrateChangingTermRaiseToNonChangingTerm(Term const& base, Term const& exponent);
-    static Term integrateChangingTermRaiseToChangingTerm(Term const& firstTerm, Term const& secondTerm);
     // For Monomial and Polynomial
     [[nodiscard]] Monomial integrateMonomialInFallingPower(Monomial const& monomial) const;
     [[nodiscard]] Polynomial integratePolynomialInFallingPower(Polynomial const& polynomial) const;
@@ -57,6 +54,9 @@ private:
         TermsWithDetails const& termsToSegregate, TermsWithDetails& nonChangingTerms,
         TermsWithDetails& changingTerms) const;
 
+    static void integrateChangingTermsInMultiplicationOrDivision(Term& result, TermsWithDetails const&);
+    static Term integrateChangingTermRaiseToNonChangingTerm(Term const& base, Term const& exponent);
+    static Term integrateChangingTermRaiseToChangingTerm(Term const& firstTerm, Term const& secondTerm);
     std::string m_nameOfVariableToIntegrate;
 };
 

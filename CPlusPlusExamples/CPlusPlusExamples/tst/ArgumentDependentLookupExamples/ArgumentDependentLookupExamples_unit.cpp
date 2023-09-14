@@ -31,7 +31,7 @@ TEST(ArgumentDependentLookupExamplesTest, FunctionNotOnTheCurrentNamespaceStillW
     // ---> N4696 14.2/2: For a template-name fo be explicitly qualified by the template arguments, the name must be
     // known to refer to a template.
     f3<0>(A::DL{3.14});  // compiles even though f3 is in a different namespace and does not match (just let the
-    // compiler know f3 is a template).
+                         // compiler know f3 is a template).
 }
 
 }  // namespace alba::FunctionNotOnTheCurrentNamespaceStillWorks

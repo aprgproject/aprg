@@ -76,18 +76,15 @@ void ConcreteColleague::receive(std::string const& message) {
 // ONE LINE NOTE:
 // -> MEDIATE communications between different colleagues to decouple, simplify, abstract, centralize the way of
 // communication.
-
 // Intent:
 // Mediator pattern has behavioral purpose and applies on objects.
 // The pattern defines an object that encapsulates how a set of objects interact.
 // It promotes loose coupling by keeping objects from referring to each
 // other explicitly, and it lets you vary their interaction independently.
-
 // When to use (applicability):
 // -> a set of objects communicate in well-defined but complex ways
 // -> reusing an object is difficult because it refers to and communicates with many other objects
 // -> a behavior that's distributed between several classes should be customizable without a lot of subclassing
-
 // Consequences:
 // -> It limits subclassing.
 // ---> A mediator localizes behavior that otherwise would be distributed among several objects.
@@ -107,7 +104,6 @@ void ConcreteColleague::receive(std::string const& message) {
 // ---> The Mediator pattern trade complexity of interaction for complexity in the mediator.
 // ---> Because a mediator encapsulates protocols it can become more complex than any individual colleague.
 // ---> This can make the mediator itself a monolith that's hard to maintain.
-
 // Implementation:
 // -> Omitting the abstract Mediator class
 // ---> There's no need to define an abstract Mediator class when colleagues work with only one mediator.
@@ -121,7 +117,6 @@ void ConcreteColleague::receive(std::string const& message) {
 // ---> Another approach defines a specialized notification interface in Mediator that lets colleagues be more direct in
 // their communication.
 // -----> Smalltalk/V for Windows uses a form of delegation in the communication.
-
 // Related Patterns
 // -> [Facade] differs from Mediator in that it abstracts a subsystem of objects to provide a more convenient interface.
 // ---> Its protocol is unidirectional: Facade objects make request of the subsystem classes but not vice versa.

@@ -5,68 +5,6 @@
 
 namespace alba::algebra {
 
-TEST(SubTermsRetrieverTest, RetrieveFromEquationsWorks) {
-    SubTermsRetriever retriever;
-    Equation equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
-    Equation equation2(Monomial(95, {{"x", 7}}), "=", Monomial(18, {{"y", 8}}));
-
-    retriever.retrieveFromEquations({equation1, equation2});
-
-    TermSet const& termsSet(retriever.getSubTerms());
-    ASSERT_EQ(4U, termsSet.size());
-    auto it = termsSet.cbegin();
-    EXPECT_EQ(Term(Monomial(34, {{"x", 5}})), *(it++));
-    EXPECT_EQ(Term(Monomial(41, {{"y", 6}})), *(it++));
-    EXPECT_EQ(Term(Monomial(95, {{"x", 7}})), *(it++));
-    EXPECT_EQ(Term(Monomial(18, {{"y", 8}})), *(it++));
-}
-
-TEST(SubTermsRetrieverTest, RetrieveFromEquationWorks) {
-    SubTermsRetriever retriever;
-    Term leftHandTerm(Monomial(34, {{"x", 5}}));
-    Term rightHandTerm(Monomial(41, {{"y", 6}}));
-    Equation equation(leftHandTerm, "=", rightHandTerm);
-
-    retriever.retrieveFromEquation(equation);
-
-    TermSet const& termsSet(retriever.getSubTerms());
-    ASSERT_EQ(2U, termsSet.size());
-    auto it = termsSet.cbegin();
-    EXPECT_EQ(Term(Monomial(34, {{"x", 5}})), *(it++));
-    EXPECT_EQ(Term(Monomial(41, {{"y", 6}})), *(it++));
-}
-
-TEST(SubTermsRetrieverTest, RetrieveFromTermWorks) {
-    SubTermsRetriever retriever;
-    Term expesssionTerm1(createExpressionIfPossible({"a", "^", 2}));
-    Term expesssionTerm2(createExpressionIfPossible({678, "+", Monomial(576, {{"g", 9}})}));
-    Function functionObject(
-        "functionName", expesssionTerm1, [](AlbaNumber const& number) -> AlbaNumber { return number; });
-    Term functionTerm1(functionObject);
-
-    retriever.retrieveFromTerm(Constant(1.234));
-    retriever.retrieveFromTerm(Variable("b"));
-    retriever.retrieveFromTerm(Monomial(34, {{"c", 5}, {"d", 6}}));
-    retriever.retrieveFromTerm(Polynomial{Monomial(516, {{"e", 7}}), Monomial(643, {{"f", 8}})});
-    retriever.retrieveFromTerm(expesssionTerm2);
-    retriever.retrieveFromTerm(functionTerm1);
-
-    TermSet const& termsSet(retriever.getSubTerms());
-    ASSERT_EQ(11U, termsSet.size());
-    auto it = termsSet.cbegin();
-    EXPECT_EQ(Term(1.234), *(it++));
-    EXPECT_EQ(Term(2), *(it++));
-    EXPECT_EQ(Term(678), *(it++));
-    EXPECT_EQ(Term("a"), *(it++));
-    EXPECT_EQ(Term("b"), *(it++));
-    EXPECT_EQ(Term(Monomial(576, {{"g", 9}})), *(it++));
-    EXPECT_EQ(Term(Monomial(34, {{"c", 5}, {"d", 6}})), *(it++));
-    EXPECT_EQ(Term(Polynomial{Monomial(516, {{"e", 7}}), Monomial(643, {{"f", 8}})}), *(it++));
-    EXPECT_EQ(expesssionTerm1, *(it++));
-    EXPECT_EQ(expesssionTerm2, *(it++));
-    EXPECT_EQ(functionTerm1, *(it++));
-}
-
 TEST(SubTermsRetrieverTest, RetrieveFromConstantWorks) {
     SubTermsRetriever retriever;
 
@@ -140,6 +78,68 @@ TEST(SubTermsRetrieverTest, RetrieveFromFunctionWorks) {
     EXPECT_EQ(Term(Monomial(7895, {{"x", 10}})), *(it++));
     EXPECT_EQ(Term(expression), *(it++));
     EXPECT_EQ(Term(functionObject), *(it++));
+}
+
+TEST(SubTermsRetrieverTest, RetrieveFromEquationsWorks) {
+    SubTermsRetriever retriever;
+    Equation equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
+    Equation equation2(Monomial(95, {{"x", 7}}), "=", Monomial(18, {{"y", 8}}));
+
+    retriever.retrieveFromEquations({equation1, equation2});
+
+    TermSet const& termsSet(retriever.getSubTerms());
+    ASSERT_EQ(4U, termsSet.size());
+    auto it = termsSet.cbegin();
+    EXPECT_EQ(Term(Monomial(34, {{"x", 5}})), *(it++));
+    EXPECT_EQ(Term(Monomial(41, {{"y", 6}})), *(it++));
+    EXPECT_EQ(Term(Monomial(95, {{"x", 7}})), *(it++));
+    EXPECT_EQ(Term(Monomial(18, {{"y", 8}})), *(it++));
+}
+
+TEST(SubTermsRetrieverTest, RetrieveFromEquationWorks) {
+    SubTermsRetriever retriever;
+    Term leftHandTerm(Monomial(34, {{"x", 5}}));
+    Term rightHandTerm(Monomial(41, {{"y", 6}}));
+    Equation equation(leftHandTerm, "=", rightHandTerm);
+
+    retriever.retrieveFromEquation(equation);
+
+    TermSet const& termsSet(retriever.getSubTerms());
+    ASSERT_EQ(2U, termsSet.size());
+    auto it = termsSet.cbegin();
+    EXPECT_EQ(Term(Monomial(34, {{"x", 5}})), *(it++));
+    EXPECT_EQ(Term(Monomial(41, {{"y", 6}})), *(it++));
+}
+
+TEST(SubTermsRetrieverTest, RetrieveFromTermWorks) {
+    SubTermsRetriever retriever;
+    Term expesssionTerm1(createExpressionIfPossible({"a", "^", 2}));
+    Term expesssionTerm2(createExpressionIfPossible({678, "+", Monomial(576, {{"g", 9}})}));
+    Function functionObject(
+        "functionName", expesssionTerm1, [](AlbaNumber const& number) -> AlbaNumber { return number; });
+    Term functionTerm1(functionObject);
+
+    retriever.retrieveFromTerm(Constant(1.234));
+    retriever.retrieveFromTerm(Variable("b"));
+    retriever.retrieveFromTerm(Monomial(34, {{"c", 5}, {"d", 6}}));
+    retriever.retrieveFromTerm(Polynomial{Monomial(516, {{"e", 7}}), Monomial(643, {{"f", 8}})});
+    retriever.retrieveFromTerm(expesssionTerm2);
+    retriever.retrieveFromTerm(functionTerm1);
+
+    TermSet const& termsSet(retriever.getSubTerms());
+    ASSERT_EQ(11U, termsSet.size());
+    auto it = termsSet.cbegin();
+    EXPECT_EQ(Term(1.234), *(it++));
+    EXPECT_EQ(Term(2), *(it++));
+    EXPECT_EQ(Term(678), *(it++));
+    EXPECT_EQ(Term("a"), *(it++));
+    EXPECT_EQ(Term("b"), *(it++));
+    EXPECT_EQ(Term(Monomial(576, {{"g", 9}})), *(it++));
+    EXPECT_EQ(Term(Monomial(34, {{"c", 5}, {"d", 6}})), *(it++));
+    EXPECT_EQ(Term(Polynomial{Monomial(516, {{"e", 7}}), Monomial(643, {{"f", 8}})}), *(it++));
+    EXPECT_EQ(expesssionTerm1, *(it++));
+    EXPECT_EQ(expesssionTerm2, *(it++));
+    EXPECT_EQ(functionTerm1, *(it++));
 }
 
 TEST(SubTermsRetrieverTest, RetrieveFromPolynomialsWorks) {

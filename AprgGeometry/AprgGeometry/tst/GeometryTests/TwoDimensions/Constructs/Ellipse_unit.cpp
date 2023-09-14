@@ -8,6 +8,38 @@ using namespace std;
 
 namespace alba::TwoDimensions {
 
+TEST(EllipseTest, AreaTraversalIsCorrect) {
+    // traversal
+}
+
+TEST(EllipseTest, GetMajorAxisWorks) {
+    Ellipse const ellipse1(Point(0, 0), 1, 1);
+    Ellipse const ellipse2(Point(0, 0), 4, 5);
+    Ellipse const ellipse3(Point(0, 0), 5, 4);
+
+    Line const majorAxis1(ellipse1.getMajorAxis());
+    Line const majorAxis2(ellipse2.getMajorAxis());
+    Line const majorAxis3(ellipse3.getMajorAxis());
+
+    EXPECT_EQ(Line(), majorAxis1);
+    EXPECT_EQ(Line(10, 0, 0), majorAxis2);
+    EXPECT_EQ(Line(0, 10, 0), majorAxis3);
+}
+
+TEST(EllipseTest, GetMinorAxisWorks) {
+    Ellipse const ellipse1(Point(0, 0), 1, 1);
+    Ellipse const ellipse2(Point(0, 0), 4, 5);
+    Ellipse const ellipse3(Point(0, 0), 5, 4);
+
+    Line const minorAxis1(ellipse1.getMinorAxis());
+    Line const minorAxis2(ellipse2.getMinorAxis());
+    Line const minorAxis3(ellipse3.getMinorAxis());
+
+    EXPECT_EQ(Line(), minorAxis1);
+    EXPECT_EQ(Line(0, 8, 0), minorAxis2);
+    EXPECT_EQ(Line(-8, 0, 0), minorAxis3);
+}
+
 TEST(EllipseTest, EmptyEllipse) {
     Ellipse const ellipse;
 
@@ -52,13 +84,6 @@ TEST(EllipseTest, EllipseAtOriginWithRadius) {
     EXPECT_EQ(Point(1, -1.8856180831641267126), points[13]);
     EXPECT_EQ(Point(2, -1.490711984999859796), points[14]);
     EXPECT_EQ(Point(2.5980762113533160118, -1), points[15]);
-}
-
-TEST(EllipseTest, IsInsideWorks) {
-    Ellipse const ellipse(Point(0, 0), 5, 4);
-
-    EXPECT_TRUE(ellipse.isInside(Point(0, 0)));
-    EXPECT_FALSE(ellipse.isInside(Point(5, 5)));
 }
 
 TEST(EllipseTest, GetFociWorks) {
@@ -116,36 +141,11 @@ TEST(EllipseTest, GetMinorVerticesWorks) {
     EXPECT_EQ(Point(0, -4), minorVertices3[1]);
 }
 
-TEST(EllipseTest, GetMajorAxisWorks) {
-    Ellipse const ellipse1(Point(0, 0), 1, 1);
-    Ellipse const ellipse2(Point(0, 0), 4, 5);
-    Ellipse const ellipse3(Point(0, 0), 5, 4);
+TEST(EllipseTest, IsInsideWorks) {
+    Ellipse const ellipse(Point(0, 0), 5, 4);
 
-    Line const majorAxis1(ellipse1.getMajorAxis());
-    Line const majorAxis2(ellipse2.getMajorAxis());
-    Line const majorAxis3(ellipse3.getMajorAxis());
-
-    EXPECT_EQ(Line(), majorAxis1);
-    EXPECT_EQ(Line(10, 0, 0), majorAxis2);
-    EXPECT_EQ(Line(0, 10, 0), majorAxis3);
-}
-
-TEST(EllipseTest, GetMinorAxisWorks) {
-    Ellipse const ellipse1(Point(0, 0), 1, 1);
-    Ellipse const ellipse2(Point(0, 0), 4, 5);
-    Ellipse const ellipse3(Point(0, 0), 5, 4);
-
-    Line const minorAxis1(ellipse1.getMinorAxis());
-    Line const minorAxis2(ellipse2.getMinorAxis());
-    Line const minorAxis3(ellipse3.getMinorAxis());
-
-    EXPECT_EQ(Line(), minorAxis1);
-    EXPECT_EQ(Line(0, 8, 0), minorAxis2);
-    EXPECT_EQ(Line(-8, 0, 0), minorAxis3);
-}
-
-TEST(EllipseTest, AreaTraversalIsCorrect) {
-    // traversal
+    EXPECT_TRUE(ellipse.isInside(Point(0, 0)));
+    EXPECT_FALSE(ellipse.isInside(Point(5, 5)));
 }
 
 }  // namespace alba::TwoDimensions

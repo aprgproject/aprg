@@ -45,16 +45,6 @@ bool Monster::hasStoneCurseSkill() const {
     return result;
 }
 
-string RagnarokOnline::getFixedItemName(Item const& item) {
-    string result(item.name);
-    if (item.slot != 0) {
-        stringstream slotStream;
-        slotStream << " [" << item.slot << "]";
-        result += slotStream.str();
-    }
-    return result;
-}
-
 Item RagnarokOnline::getItem(string const& fixedItemName) const {
     Item result{};
     auto it1 = m_itemNameToItemIdMap.find(fixedItemName);
@@ -802,6 +792,16 @@ void RagnarokOnline::buildMonsterNameToMonsterId() {
         Monster const& monster(monsterIdMonsterPair.second);
         m_monsterNameToMonsterIdMap.emplace(monster.name, monsterIdMonsterPair.first);
     }
+}
+
+string RagnarokOnline::getFixedItemName(Item const& item) {
+    string result(item.name);
+    if (item.slot != 0) {
+        stringstream slotStream;
+        slotStream << " [" << item.slot << "]";
+        result += slotStream.str();
+    }
+    return result;
 }
 
 string RagnarokOnline::fixText(string const& text) {

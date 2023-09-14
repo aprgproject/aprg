@@ -5,6 +5,29 @@
 
 namespace alba::algebra {
 
+TEST(VariableNamesRetrieverTest, RetrieveFromVariableWorks) {
+    VariableNamesRetriever retriever;
+
+    retriever.retrieveFromVariable(Variable("x"));
+
+    VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
+    ASSERT_EQ(1U, variableNamesSet.size());
+    auto it = variableNamesSet.cbegin();
+    EXPECT_EQ("x", *(it++));
+}
+
+TEST(VariableNamesRetrieverTest, RetrieveFromMonomialWorks) {
+    VariableNamesRetriever retriever;
+
+    retriever.retrieveFromMonomial(Monomial(34, {{"x", 5}, {"y", 6}}));
+
+    VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
+    ASSERT_EQ(2U, variableNamesSet.size());
+    auto it = variableNamesSet.cbegin();
+    EXPECT_EQ("x", *(it++));
+    EXPECT_EQ("y", *(it++));
+}
+
 TEST(VariableNamesRetrieverTest, RetrieveFromEquationsWorks) {
     VariableNamesRetriever retriever;
     Equation equation1("a", "=", "b");
@@ -71,29 +94,6 @@ TEST(VariableNamesRetrieverTest, RetrieveFromConstantWorks) {
 
     VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
     EXPECT_TRUE(variableNamesSet.empty());
-}
-
-TEST(VariableNamesRetrieverTest, RetrieveFromVariableWorks) {
-    VariableNamesRetriever retriever;
-
-    retriever.retrieveFromVariable(Variable("x"));
-
-    VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
-    ASSERT_EQ(1U, variableNamesSet.size());
-    auto it = variableNamesSet.cbegin();
-    EXPECT_EQ("x", *(it++));
-}
-
-TEST(VariableNamesRetrieverTest, RetrieveFromMonomialWorks) {
-    VariableNamesRetriever retriever;
-
-    retriever.retrieveFromMonomial(Monomial(34, {{"x", 5}, {"y", 6}}));
-
-    VariableNamesSet const& variableNamesSet(retriever.getVariableNames());
-    ASSERT_EQ(2U, variableNamesSet.size());
-    auto it = variableNamesSet.cbegin();
-    EXPECT_EQ("x", *(it++));
-    EXPECT_EQ("y", *(it++));
 }
 
 TEST(VariableNamesRetrieverTest, RetrieveFromPolynomialWorks) {

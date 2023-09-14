@@ -14,6 +14,14 @@ using SubstringSearchForTest = SubstringSearchUsingZAlgorithm<Index, '#'>;
 using Indexes = SubstringSearchForTest::Indexes;
 }  // namespace
 
+TEST(SubstringSearchUsingZAlgorithmTest, SearchWorksUsingExample1) {
+    testSearchUsingExample1<SubstringSearchForTest, Index>();
+}
+
+TEST(SubstringSearchUsingZAlgorithmTest, SearchWorksUsingExample2) {
+    testSearchUsingExample2<SubstringSearchForTest, Index>();
+}
+
 TEST(SubstringSearchUsingZAlgorithmTest, SearchWorksUsingEmptyStringsAndDoesNotCrash) {
     // SubstringSearchUsingZAlgorithm has unique results of handling empty strings
     string const emptyString;
@@ -25,14 +33,6 @@ TEST(SubstringSearchUsingZAlgorithmTest, SearchWorksUsingEmptyStringsAndDoesNotC
     EXPECT_EQ(Index(string::npos), emptyStringSearch.search(nonEmptyString));
     EXPECT_EQ(Index(string::npos), nonEmptyStringSearch.search(emptyString));
     EXPECT_EQ(Index(0), nonEmptyStringSearch.search(nonEmptyString));
-}
-
-TEST(SubstringSearchUsingZAlgorithmTest, SearchWorksUsingExample1) {
-    testSearchUsingExample1<SubstringSearchForTest, Index>();
-}
-
-TEST(SubstringSearchUsingZAlgorithmTest, SearchWorksUsingExample2) {
-    testSearchUsingExample2<SubstringSearchForTest, Index>();
 }
 
 TEST(SubstringSearchUsingZAlgorithmTest, SearchForFirstSubstringWorksUsingExample1) {

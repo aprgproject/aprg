@@ -29,13 +29,6 @@ TEST(FibonacciSearchTest, GetIndexOfValueWorksWhenValueIsNotFoundAndWhenThereAre
     testGetIndexOfValueWhenValueIsNotFoundWithDuplicatesWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
 
-TEST(FibonacciSearchTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreDuplicateValues) {
-    ValuesForTest const sortedValues{13, 13, 14, 33, 33, 33, 53, 53, 53, 72, 72, 72, 72, 96, 96};
-    SearchForTest search(sortedValues);
-
-    EXPECT_EQ(3, search.getIndexOfValue(33));
-}
-
 TEST(FibonacciSearchTest, GetIndexOfValueWorksWhenValueIsNotFoundAndWhenThereAreMultipleValues) {
     testGetIndexOfValueWhenValueIsNotFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
@@ -50,6 +43,13 @@ TEST(FibonacciSearchTest, GetIndexOfValueWorksWhenValueIsLessThanTheHighestValue
 
 TEST(FibonacciSearchTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreMultipleValues) {
     testGetIndexOfValueWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
+TEST(FibonacciSearchTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreDuplicateValues) {
+    ValuesForTest const sortedValues{13, 13, 14, 33, 33, 33, 53, 53, 53, 72, 72, 72, 72, 96, 96};
+    SearchForTest search(sortedValues);
+
+    EXPECT_EQ(3, search.getIndexOfValue(33));
 }
 
 }  // namespace alba::algorithm

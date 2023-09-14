@@ -35,7 +35,6 @@ public:
 // Given three arrays sorted in non-decreasing order, print all common elements in these arrays.
 // We are given two arrays ar1[0…m-1] and ar2[0..n-1] and a number x,
 // we need to find the pair ar1[i] + ar2[j] such that absolute value of (ar1[i] + ar2[j] – x) is minimum.
-
 // A simple solution is to first find intersection of two arrays and store the intersection in a temporary array,
 // then find the intersection of third array and temporary array.
 // Time complexity of this solution is O(n1 + n2 + n3) where n1, n2 and n3 are sizes of ar1[], ar2[] and ar3[]

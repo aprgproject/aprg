@@ -15,6 +15,7 @@ public:
     Ellipse(
         Point const& center, double const aCoefficient,
         double const bCoefficient);  // ((x-center.x)^2/aCoefficient^2) + ((y-center.y)^2/bCoefficient^2) = 1
+
     bool operator==(Ellipse const& ellipse) const;
     bool operator!=(Ellipse const& ellipse) const;
     [[nodiscard]] Line getMajorAxis() const;

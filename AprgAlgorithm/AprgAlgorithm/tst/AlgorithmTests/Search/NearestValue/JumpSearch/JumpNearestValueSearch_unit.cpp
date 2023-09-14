@@ -45,13 +45,6 @@ TEST(JumpNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereIsOneValue)
     testGetIndexOfNearestValueWithOneUnsignedInt<SearchForTest, ValuesForTest>();
 }
 
-TEST(JumpNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
-    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
-    SearchForTest search(duplicateValues);
-
-    EXPECT_EQ(4, search.getIndexOfNearestValue(33));
-}
-
 TEST(JumpNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues) {
     testGetIndexOfNearestValueWithMultipleSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
@@ -62,6 +55,13 @@ TEST(JumpNearestValueSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsLo
 
 TEST(JumpNearestValueSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher) {
     testGetIndexOfNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
+TEST(JumpNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
+    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
+    SearchForTest search(duplicateValues);
+
+    EXPECT_EQ(4, search.getIndexOfNearestValue(33));
 }
 
 }  // namespace alba::algorithm

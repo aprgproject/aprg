@@ -9,35 +9,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-TEST(IsolationOfOneVariableOnEqualityEquationTest, CanBeIsolatedWorksOnPolynomialEquation) {
-    Polynomial leftHandSide{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 2}})};
-    Polynomial rightHandSide{Monomial(3, {{"a", 3}}), Monomial(4, {{"b", 4}})};
-    Equation equation(leftHandSide, "=", rightHandSide);
-    IsolationOfOneVariableOnEqualityEquation isolation(equation);
-
-    EXPECT_TRUE(isolation.canBeIsolated("x"));
-    EXPECT_TRUE(isolation.canBeIsolated("y"));
-    EXPECT_FALSE(isolation.canBeIsolated("z"));
-    EXPECT_TRUE(isolation.canBeIsolated("a"));
-    EXPECT_TRUE(isolation.canBeIsolated("b"));
-    EXPECT_FALSE(isolation.canBeIsolated("c"));
-}
-
-TEST(
-    IsolationOfOneVariableOnEqualityEquationTest, CanBeIsolatedWorksOnPolynomialEquationWithMultipleVariableMonomials) {
-    Polynomial leftHandSide{Monomial(1, {{"x", 1}, {"y", 2}})};
-    Polynomial rightHandSide{Monomial(3, {{"a", 3}, {"b", 4}})};
-    Equation equation(leftHandSide, "=", rightHandSide);
-    IsolationOfOneVariableOnEqualityEquation isolation(equation);
-
-    EXPECT_TRUE(isolation.canBeIsolated("x"));
-    EXPECT_TRUE(isolation.canBeIsolated("y"));
-    EXPECT_FALSE(isolation.canBeIsolated("z"));
-    EXPECT_TRUE(isolation.canBeIsolated("a"));
-    EXPECT_TRUE(isolation.canBeIsolated("b"));
-    EXPECT_FALSE(isolation.canBeIsolated("c"));
-}
-
 TEST(IsolationOfOneVariableOnEqualityEquationTest, GetIdenticalExponentForVariableIfPossibleWorksOnPolynomialEquation) {
     Polynomial leftHandSide{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 2}})};
     Polynomial rightHandSide{Monomial(3, {{"a", 3}}), Monomial(4, {{"b", 4}})};
@@ -121,6 +92,35 @@ TEST(IsolationOfOneVariableOnEqualityEquationTest, GetTermByIsolatingVariableWor
     EXPECT_EQ(expectedTermForY, isolation.getEquivalentTermByIsolatingAVariable("y"));
     EXPECT_EQ(expectedTermForA, isolation.getEquivalentTermByIsolatingAVariable("a"));
     EXPECT_EQ(expectedTermForB, isolation.getEquivalentTermByIsolatingAVariable("b"));
+}
+
+TEST(IsolationOfOneVariableOnEqualityEquationTest, CanBeIsolatedWorksOnPolynomialEquation) {
+    Polynomial leftHandSide{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 2}})};
+    Polynomial rightHandSide{Monomial(3, {{"a", 3}}), Monomial(4, {{"b", 4}})};
+    Equation equation(leftHandSide, "=", rightHandSide);
+    IsolationOfOneVariableOnEqualityEquation isolation(equation);
+
+    EXPECT_TRUE(isolation.canBeIsolated("x"));
+    EXPECT_TRUE(isolation.canBeIsolated("y"));
+    EXPECT_FALSE(isolation.canBeIsolated("z"));
+    EXPECT_TRUE(isolation.canBeIsolated("a"));
+    EXPECT_TRUE(isolation.canBeIsolated("b"));
+    EXPECT_FALSE(isolation.canBeIsolated("c"));
+}
+
+TEST(
+    IsolationOfOneVariableOnEqualityEquationTest, CanBeIsolatedWorksOnPolynomialEquationWithMultipleVariableMonomials) {
+    Polynomial leftHandSide{Monomial(1, {{"x", 1}, {"y", 2}})};
+    Polynomial rightHandSide{Monomial(3, {{"a", 3}, {"b", 4}})};
+    Equation equation(leftHandSide, "=", rightHandSide);
+    IsolationOfOneVariableOnEqualityEquation isolation(equation);
+
+    EXPECT_TRUE(isolation.canBeIsolated("x"));
+    EXPECT_TRUE(isolation.canBeIsolated("y"));
+    EXPECT_FALSE(isolation.canBeIsolated("z"));
+    EXPECT_TRUE(isolation.canBeIsolated("a"));
+    EXPECT_TRUE(isolation.canBeIsolated("b"));
+    EXPECT_FALSE(isolation.canBeIsolated("c"));
 }
 
 TEST(IsolationOfOneVariableOnEqualityEquationTest, IsolateTermWithVariableWorksOnPolynomialEquation) {

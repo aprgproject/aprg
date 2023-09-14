@@ -33,7 +33,6 @@ private:
 
 // Write an efficient program to find the sum of contiguous subarray within a one-dimensional array of numbers that has
 // the largest sum.
-
 // Kadane’s Algorithm:
 // -> Initialize:
 // ->     max_so_far = INT_MIN
@@ -45,7 +44,6 @@ private:
 // ->   (c) if(max_ending_here < 0)
 // ->             max_ending_here = 0
 // -> return max_so_far
-
 // Explanation:
 // The simple idea of Kadane’s algorithm is to look for all positive contiguous segments of the array (max_ending_here
 // is used for this). And keep track of maximum sum contiguous segment among all positive segments (max_so_far is used

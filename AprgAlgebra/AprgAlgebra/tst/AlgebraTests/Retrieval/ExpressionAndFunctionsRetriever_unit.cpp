@@ -5,6 +5,42 @@
 
 namespace alba::algebra {
 
+TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromPolynomialWorks) {
+    ExpressionAndFunctionsRetriever retriever;
+
+    retriever.retrieveFromPolynomial(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
+
+    TermSet const& termsSet(retriever.getExpressionsAndFunctions());
+    EXPECT_TRUE(termsSet.empty());
+}
+
+TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromExpressionWorks) {
+    ExpressionAndFunctionsRetriever retriever;
+    Expression expression(createExpressionIfPossible({678, "+", Monomial(576, {{"g", 9}})}));
+
+    retriever.retrieveFromExpression(expression);
+
+    TermSet const& termsSet(retriever.getExpressionsAndFunctions());
+    ASSERT_EQ(1U, termsSet.size());
+    auto it = termsSet.cbegin();
+    EXPECT_EQ(Term(expression), *(it++));
+}
+
+TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromFunctionWorks) {
+    ExpressionAndFunctionsRetriever retriever;
+    Expression expression(createExpressionIfPossible({4516, "+", Monomial(7895, {{"x", 10}})}));
+    Function functionObject(
+        "functionName", Term(expression), [](AlbaNumber const& number) -> AlbaNumber { return number; });
+
+    retriever.retrieveFromFunction(functionObject);
+
+    TermSet const& termsSet(retriever.getExpressionsAndFunctions());
+    ASSERT_EQ(2U, termsSet.size());
+    auto it = termsSet.cbegin();
+    EXPECT_EQ(Term(expression), *(it++));
+    EXPECT_EQ(Term(functionObject), *(it++));
+}
+
 TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromEquationsWorks) {
     ExpressionAndFunctionsRetriever retriever;
     Equation equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
@@ -76,42 +112,6 @@ TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromMonomialWorks) {
 
     TermSet const& termsSet(retriever.getExpressionsAndFunctions());
     EXPECT_TRUE(termsSet.empty());
-}
-
-TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromPolynomialWorks) {
-    ExpressionAndFunctionsRetriever retriever;
-
-    retriever.retrieveFromPolynomial(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
-
-    TermSet const& termsSet(retriever.getExpressionsAndFunctions());
-    EXPECT_TRUE(termsSet.empty());
-}
-
-TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromExpressionWorks) {
-    ExpressionAndFunctionsRetriever retriever;
-    Expression expression(createExpressionIfPossible({678, "+", Monomial(576, {{"g", 9}})}));
-
-    retriever.retrieveFromExpression(expression);
-
-    TermSet const& termsSet(retriever.getExpressionsAndFunctions());
-    ASSERT_EQ(1U, termsSet.size());
-    auto it = termsSet.cbegin();
-    EXPECT_EQ(Term(expression), *(it++));
-}
-
-TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromFunctionWorks) {
-    ExpressionAndFunctionsRetriever retriever;
-    Expression expression(createExpressionIfPossible({4516, "+", Monomial(7895, {{"x", 10}})}));
-    Function functionObject(
-        "functionName", Term(expression), [](AlbaNumber const& number) -> AlbaNumber { return number; });
-
-    retriever.retrieveFromFunction(functionObject);
-
-    TermSet const& termsSet(retriever.getExpressionsAndFunctions());
-    ASSERT_EQ(2U, termsSet.size());
-    auto it = termsSet.cbegin();
-    EXPECT_EQ(Term(expression), *(it++));
-    EXPECT_EQ(Term(functionObject), *(it++));
 }
 
 TEST(ExpressionAndFunctionsRetrieverTest, RetrieveFromPolynomialsWorks) {

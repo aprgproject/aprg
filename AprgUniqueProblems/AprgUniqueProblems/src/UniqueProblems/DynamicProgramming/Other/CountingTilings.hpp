@@ -20,12 +20,12 @@ public:
     Count getNumberOfSolutionsUsingCompleteSearch();
 
 private:
-    static Row getEmptyRow(Count const length);
-    static Rows calculateNextRows(Row const& currentRow);
     void searchNextRow(Count const rowIndex, Row const& currentRow);
     void startCompleteSearch();
     void doCompleteSearchAt(Count const gridIndex);
     Rows const& getNextRows(Row const& currentRow);
+    static Row getEmptyRow(Count const length);
+    static Rows calculateNextRows(Row const& currentRow);
     Count m_numberOfColumns;
     Count m_numberOfRows;
     Count const m_numberOfCells;
@@ -41,7 +41,6 @@ private:
 
 // Given a “2 x n” board and tiles of size “2 x 1”, count the number of ways to tile the given board using the 2 x 1
 // tiles. A tile can either be placed horizontally i.e., as a 1 x 2 tile or vertically i.e., as 2 x 1 tile.
-
 // Examples:
 // Input: n = 4
 // -> Output: 3
@@ -57,13 +56,10 @@ private:
 // ---> We can tile the board using following ways
 // -----> Place all 3 tiles vertically.
 // -----> Place 1 tile vertically and remaining 2 tiles horizontally.
-
 // Other description
-
 // Sometimes the states of a dynamic programming solution are more complex than fixed combinations of numbers.
 // As an example, consider the problem of calculating the number of distinct ways to fill an nxm grid using 1x2 and 2x1
 // size tiles.
-
 // Recursive formulation:
 // -> Next non filled row = all possible permutations of current row (based on previous "Next non filled row")
 // -> Thus on the last row, all the complete solutions have the "Next non filled row" to be empty

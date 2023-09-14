@@ -35,7 +35,6 @@ private:
 // cuts needed for a palindrome partitioning of a given string. For example, minimum of 3 cuts are needed for
 // “ababbbabbababa”. The three cuts are “a|babbbab|b|ababa”. If a string is a palindrome, then minimum 0 cuts are
 // needed. If a string of length n containing all different characters, then minimum n-1 cuts are needed.
-
 // Examples :
 // -> Input : str = “geek”
 // ---> Output : 2
@@ -47,14 +46,12 @@ private:
 // ---> Output : 4
 // -> Input : str = “abbac”
 // ---> Output : 1
-
 // This problem is a variation of Matrix Chain Multiplication problem.
 // If the string is a palindrome, then we simply return 0.
 // Else, like the Matrix Chain Multiplication problem, we try making cuts at all possible places,
 // recursively calculate the cost for each cut and return the minimum value.
 // Let the given string be str and minPalPartion() be the function that returns the fewest cuts needed for palindrome
 // partitioning.
-
 // Using Recursion
 // -> i is the starting index and j is the ending index. i must be passed as 0 and j as n-1
 // -> minPalPartion(str, i, j) = 0 if i == j. // When string is of length 1.

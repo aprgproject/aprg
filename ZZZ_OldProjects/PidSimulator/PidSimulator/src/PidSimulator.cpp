@@ -10,8 +10,8 @@
 #include <iostream>
 
 using namespace alba::AprgBitmap;
-using namespace alba::mathHelper;
 using namespace alba::TwoDimensions;
+using namespace alba::mathHelper;
 using namespace std;
 
 namespace alba {
@@ -20,20 +20,6 @@ PidSimulator::PidSimulator(stringHelper::strings const& argumentsInMain)
     : m_conf(argumentsInMain),
 
       m_randomizer(0, static_cast<int>(m_conf.amplitudeOfInputDemand)) {}
-
-double PidSimulator::computeFromMachsModel1(
-    double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) {
-    double const newDemand = inputDemandSample + adjustedDemand;
-    double const machsOutput = min(psuedoMaxTxPower, newDemand);
-    adjustedDemand = max(newDemand - psuedoMaxTxPower, static_cast<double>(0));
-    return machsOutput;
-}
-
-double PidSimulator::computeFromMachsModel2(
-    double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) {
-    adjustedDemand = 0;
-    return min(psuedoMaxTxPower, inputDemandSample);
-}
 
 double PidSimulator::calculatePid(double const input, double const target) const {
     // https://en.wikipedia.org/wiki/PID_controller
@@ -215,6 +201,41 @@ void PidSimulator::calculateAndGenerateOutputImage() {
     }
 }
 
+double PidSimulator::computeFromMachsModel1(
+    double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) {
+    double const newDemand = inputDemandSample + adjustedDemand;
+    double const machsOutput = min(psuedoMaxTxPower, newDemand);
+    adjustedDemand = max(newDemand - psuedoMaxTxPower, static_cast<double>(0));
+    return machsOutput;
+}
+
+double PidSimulator::computeFromMachsModel2(
+    double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) {
+    adjustedDemand = 0;
+    return min(psuedoMaxTxPower, inputDemandSample);
+}
+
+void PidSimulator::calculateMagnificationAndOffset(
+    double const xLeftMax, double const xRightMax, double const yBottomMax, double const yTopMax,
+    double const bitmapSizeInX, double const bitmapSizeInY) {
+    m_xMagnificationToGraph = bitmapSizeInX / (xRightMax - xLeftMax);
+    int const xOffsetGraph = static_cast<int>(round(-1 * m_xMagnificationToGraph * xLeftMax));
+    if (xOffsetGraph < 0) {
+        m_xOffsetToGraph = 0;
+    } else {
+        m_xOffsetToGraph = static_cast<unsigned int>(xOffsetGraph);
+    }
+    m_yMagnificationToGraph = bitmapSizeInY / (yTopMax - yBottomMax);
+    int const yOffsetGraph = static_cast<int>(round(1 * m_yMagnificationToGraph * yTopMax));
+    if (yOffsetGraph < 0) {
+        m_yOffsetToGraph = 0;
+    } else {
+        m_yOffsetToGraph = static_cast<unsigned int>(yOffsetGraph);
+    }
+    m_xGridInterval = static_cast<double>(pow(10, 2 + round(log10(1 / m_xMagnificationToGraph))));
+    m_yGridInterval = static_cast<double>(pow(10, 2 + round(log10(1 / m_yMagnificationToGraph))));
+}
+
 void PidSimulator::updateAllMaxWithBuffer(int& xLeftMax, int& xRightMax, int& yBottomMax, int& yTopMax) {
     updateMaxWithBuffer(xLeftMax, xRightMax);
     updateMaxWithBuffer(yBottomMax, yTopMax);
@@ -265,27 +286,6 @@ void PidSimulator::updateBottomMax(int& yBottomMax, int const yCoordinate) {
     if (yCoordinate >= hardMax && yBottomMax > yCoordinate) {
         yBottomMax = yCoordinate;
     }
-}
-
-void PidSimulator::calculateMagnificationAndOffset(
-    double const xLeftMax, double const xRightMax, double const yBottomMax, double const yTopMax,
-    double const bitmapSizeInX, double const bitmapSizeInY) {
-    m_xMagnificationToGraph = bitmapSizeInX / (xRightMax - xLeftMax);
-    int const xOffsetGraph = static_cast<int>(round(-1 * m_xMagnificationToGraph * xLeftMax));
-    if (xOffsetGraph < 0) {
-        m_xOffsetToGraph = 0;
-    } else {
-        m_xOffsetToGraph = static_cast<unsigned int>(xOffsetGraph);
-    }
-    m_yMagnificationToGraph = bitmapSizeInY / (yTopMax - yBottomMax);
-    int const yOffsetGraph = static_cast<int>(round(1 * m_yMagnificationToGraph * yTopMax));
-    if (yOffsetGraph < 0) {
-        m_yOffsetToGraph = 0;
-    } else {
-        m_yOffsetToGraph = static_cast<unsigned int>(yOffsetGraph);
-    }
-    m_xGridInterval = static_cast<double>(pow(10, 2 + round(log10(1 / m_xMagnificationToGraph))));
-    m_yGridInterval = static_cast<double>(pow(10, 2 + round(log10(1 / m_yMagnificationToGraph))));
 }
 
 }  // namespace alba

@@ -85,55 +85,6 @@ Term AdditionAndSubtractionOfExpressions::getCombinedTerm() {
     return combinedTerm;
 }
 
-void AdditionAndSubtractionOfExpressions::prepareCommonParts(Terms& commonParts) {
-    for (Term& commonPart : commonParts) {
-        commonPart.simplify();
-        if (commonPart.isExpression()) {
-            commonPart.getAsExpressionReference().sort();
-        }
-    }
-}
-
-void AdditionAndSubtractionOfExpressions::retrieveMergePart(Term& mergePart, Expression const& expression) {
-    if (OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel()) {
-        mergePart = 1;
-        TermsWithDetails const termsToBeMerged = retrieveTermsWithDetailsThatSatisfiesCondition(
-            expression.getTermsWithAssociation().getTermsWithDetails(), isMergePart);
-
-        accumulateTermsForMultiplicationAndDivision(mergePart, termsToBeMerged);
-    } else {
-        mergePart = 1;
-    }
-}
-
-void AdditionAndSubtractionOfExpressions::retrieveCommonPart(Term& commonPart, Expression const& expression) {
-    if (OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel()) {
-        commonPart = 1;
-        TermsWithDetails const termsToBeMerged = retrieveTermsWithDetailsThatSatisfiesCondition(
-            expression.getTermsWithAssociation().getTermsWithDetails(), isCommonPart);
-
-        accumulateTermsForMultiplicationAndDivision(commonPart, termsToBeMerged);
-    } else {
-        commonPart = convertExpressionToSimplestTerm(expression);
-    }
-}
-
-Term AdditionAndSubtractionOfExpressions::mergeTerms(
-    Term const& mergePart1, Term const& mergePart2, TermAssociationType const association1,
-    TermAssociationType const association2) {
-    Term result;
-    TermsWithDetails termsWithDetailsToMerge;
-    termsWithDetailsToMerge.emplace_back(mergePart1, association1);
-    termsWithDetailsToMerge.emplace_back(mergePart2, association2);
-    accumulateTermsForAdditionAndSubtraction(result, termsWithDetailsToMerge);
-    return result;
-}
-
-bool AdditionAndSubtractionOfExpressions::canBeMerged(
-    Term const& mergePart1, Term const& mergePart2, Term const& commonPart1, Term const& commonPart2) {
-    return commonPart1 == commonPart2 && canBeMergedInAMonomialByAdditionOrSubtraction(mergePart1, mergePart2);
-}
-
 bool AdditionAndSubtractionOfExpressions::doAllSizesMatch(Terms const& mergeParts, Terms const& commonParts) const {
     return mergeParts.size() == commonParts.size() && mergeParts.size() == m_expressions.size() &&
            mergeParts.size() == m_associations.size();
@@ -188,6 +139,55 @@ void AdditionAndSubtractionOfExpressions::putItem(Expression const& expression, 
     correctedExpression.simplify();
     m_expressions.emplace_back(correctedExpression);
     m_associations.emplace_back(correctedAssociation);
+}
+
+void AdditionAndSubtractionOfExpressions::prepareCommonParts(Terms& commonParts) {
+    for (Term& commonPart : commonParts) {
+        commonPart.simplify();
+        if (commonPart.isExpression()) {
+            commonPart.getAsExpressionReference().sort();
+        }
+    }
+}
+
+void AdditionAndSubtractionOfExpressions::retrieveMergePart(Term& mergePart, Expression const& expression) {
+    if (OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel()) {
+        mergePart = 1;
+        TermsWithDetails const termsToBeMerged = retrieveTermsWithDetailsThatSatisfiesCondition(
+            expression.getTermsWithAssociation().getTermsWithDetails(), isMergePart);
+
+        accumulateTermsForMultiplicationAndDivision(mergePart, termsToBeMerged);
+    } else {
+        mergePart = 1;
+    }
+}
+
+void AdditionAndSubtractionOfExpressions::retrieveCommonPart(Term& commonPart, Expression const& expression) {
+    if (OperatorLevel::MultiplicationAndDivision == expression.getCommonOperatorLevel()) {
+        commonPart = 1;
+        TermsWithDetails const termsToBeMerged = retrieveTermsWithDetailsThatSatisfiesCondition(
+            expression.getTermsWithAssociation().getTermsWithDetails(), isCommonPart);
+
+        accumulateTermsForMultiplicationAndDivision(commonPart, termsToBeMerged);
+    } else {
+        commonPart = convertExpressionToSimplestTerm(expression);
+    }
+}
+
+Term AdditionAndSubtractionOfExpressions::mergeTerms(
+    Term const& mergePart1, Term const& mergePart2, TermAssociationType const association1,
+    TermAssociationType const association2) {
+    Term result;
+    TermsWithDetails termsWithDetailsToMerge;
+    termsWithDetailsToMerge.emplace_back(mergePart1, association1);
+    termsWithDetailsToMerge.emplace_back(mergePart2, association2);
+    accumulateTermsForAdditionAndSubtraction(result, termsWithDetailsToMerge);
+    return result;
+}
+
+bool AdditionAndSubtractionOfExpressions::canBeMerged(
+    Term const& mergePart1, Term const& mergePart2, Term const& commonPart1, Term const& commonPart2) {
+    return commonPart1 == commonPart2 && canBeMergedInAMonomialByAdditionOrSubtraction(mergePart1, mergePart2);
 }
 
 AdditionAndSubtractionOfExpressions::AdditionAndSubtractionOfExpressions() = default;

@@ -6,47 +6,6 @@
 
 namespace alba::algebra {
 
-TEST(CreateHelpersTest, CreateMonomialFromNumberWorks) {
-    EXPECT_EQ(Monomial(5648, {}), createMonomialFromNumber(5648));
-}
-
-TEST(CreateHelpersTest, CreateMonomialFromVariableWorks) {
-    EXPECT_EQ(Monomial(1, {{"weight", 1}}), createMonomialFromVariable(Variable("weight")));
-}
-
-TEST(CreateHelpersTest, CreateMonomialIfPossibleWorks) {
-    EXPECT_EQ(Monomial(0, {}), createMonomialIfPossible(Term{}));
-    EXPECT_EQ(Monomial(42, {}), createMonomialIfPossible(42));
-    EXPECT_EQ(Monomial(1, {{"weight", 1}}), createMonomialIfPossible("weight"));
-    EXPECT_EQ(Monomial(0, {}), createMonomialIfPossible("+"));
-    EXPECT_EQ(Monomial(-1.5, {{"r", -3.75}}), createMonomialIfPossible(Monomial(-1.5, {{"r", -3.75}})));
-    EXPECT_EQ(
-        Monomial(0, {}),
-        createMonomialIfPossible(Polynomial{Monomial(3, {}), Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}})}));
-    EXPECT_EQ(Monomial(0, {}), createMonomialIfPossible(createExpressionIfPossible({5, "+", "interest"})));
-}
-
-TEST(CreateHelpersTest, CreatePolynomialFromNumberWorks) {
-    EXPECT_EQ(Polynomial{Monomial(5648, {})}, createPolynomialFromNumber(5648));
-}
-
-TEST(CreateHelpersTest, CreatePolynomialFromVariableWorks) {
-    EXPECT_EQ(Polynomial{Monomial(1, {{"weight", 1}})}, createPolynomialFromVariable(Variable("weight")));
-}
-
-TEST(CreateHelpersTest, CreatePolynomialFromMonomialWorks) {
-    EXPECT_EQ(Polynomial{Monomial(2, {{"weight", 3}})}, createPolynomialFromMonomial(Monomial(2, {{"weight", 3}})));
-}
-
-TEST(CreateHelpersTest, CreatePolynomialIfPossibleWorks) {
-    EXPECT_EQ((Polynomial{}), createPolynomialIfPossible(Term{}));
-    EXPECT_EQ((Polynomial{Monomial(97, {})}), createPolynomialIfPossible(97));
-    EXPECT_EQ((Polynomial{Monomial(1, {{"weight", 1}})}), createPolynomialIfPossible("weight"));
-    EXPECT_EQ((Polynomial{Monomial(24, {{"i", 5}})}), createPolynomialIfPossible(Monomial(24, {{"i", 5}})));
-    EXPECT_EQ((Polynomial{Monomial(39, {{"r", 7}})}), createPolynomialIfPossible(Polynomial{Monomial(39, {{"r", 7}})}));
-    EXPECT_EQ((Polynomial{}), createPolynomialIfPossible(createExpressionIfPossible({5, "+", "interest"})));
-}
-
 TEST(CreateHelpersTest, CreateExpressionInExpressionWorks) {
     Expression expression1(createExpressionIfPossible({254}));
     Expression expression2(createExpressionIfPossible({4752}));
@@ -58,6 +17,36 @@ TEST(CreateHelpersTest, CreateExpressionInExpressionWorks) {
     Expression expressionToExpect2(getBaseTermConstReferenceFromTerm(Expression(Term(expression2))));
     EXPECT_EQ(expressionToExpect1, expressionToVerify1);
     EXPECT_EQ(expressionToExpect2, expressionToVerify2);
+}
+
+TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplifyExpressionInAExpression) {
+    Expression expression1(createExpressionIfPossible({88}));
+    Expression expression2(createExpressionInAnExpression(expression1));
+    Expression expression3(createExpressionInAnExpression(expression2));
+
+    Expression expressionToTest1(createExpressionIfPossible({expression3}));
+
+    EXPECT_EQ(OperatorLevel::Unknown, expressionToTest1.getCommonOperatorLevel());
+    TermsWithDetails const& termsToVerify1(expressionToTest1.getTermsWithAssociation().getTermsWithDetails());
+    ASSERT_EQ(1U, termsToVerify1.size());
+    EXPECT_EQ(TermAssociationType::Positive, termsToVerify1[0].association);
+    Term const& termToVerify1(getTermConstReferenceFromUniquePointer(termsToVerify1[0].baseTermPointer));
+    ASSERT_TRUE(termToVerify1.isExpression());
+    Expression const& expressionToTest2(termToVerify1.getAsExpression());
+    EXPECT_EQ(OperatorLevel::Unknown, expressionToTest2.getCommonOperatorLevel());
+    TermsWithDetails const& termsToVerify2(expressionToTest2.getTermsWithAssociation().getTermsWithDetails());
+    ASSERT_EQ(1U, termsToVerify2.size());
+    EXPECT_EQ(TermAssociationType::Positive, termsToVerify2[0].association);
+    Term const& termToVerify2(getTermConstReferenceFromUniquePointer(termsToVerify2[0].baseTermPointer));
+    ASSERT_TRUE(termToVerify2.isExpression());
+    Expression const& expressionToTest3(termToVerify2.getAsExpression());
+    EXPECT_EQ(OperatorLevel::Unknown, expressionToTest3.getCommonOperatorLevel());
+    TermsWithDetails const& termsToVerify3(expressionToTest3.getTermsWithAssociation().getTermsWithDetails());
+    ASSERT_EQ(1U, termsToVerify3.size());
+    EXPECT_EQ(TermAssociationType::Positive, termsToVerify3[0].association);
+    Term const& termToVerify3(getTermConstReferenceFromUniquePointer(termsToVerify3[0].baseTermPointer));
+    ASSERT_TRUE(termToVerify3.isConstant());
+    EXPECT_EQ(Constant(88), termToVerify3.getAsConstant());
 }
 
 TEST(CreateHelpersTest, CreateAndWrapExpressionFromATermWorks) {
@@ -98,36 +87,6 @@ TEST(CreateHelpersTest, CreateExpressionIfPossibleWorks) {
     EXPECT_EQ(Term(Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})}), termToVerify2);
 }
 
-TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplifyExpressionInAExpression) {
-    Expression expression1(createExpressionIfPossible({88}));
-    Expression expression2(createExpressionInAnExpression(expression1));
-    Expression expression3(createExpressionInAnExpression(expression2));
-
-    Expression expressionToTest1(createExpressionIfPossible({expression3}));
-
-    EXPECT_EQ(OperatorLevel::Unknown, expressionToTest1.getCommonOperatorLevel());
-    TermsWithDetails const& termsToVerify1(expressionToTest1.getTermsWithAssociation().getTermsWithDetails());
-    ASSERT_EQ(1U, termsToVerify1.size());
-    EXPECT_EQ(TermAssociationType::Positive, termsToVerify1[0].association);
-    Term const& termToVerify1(getTermConstReferenceFromUniquePointer(termsToVerify1[0].baseTermPointer));
-    ASSERT_TRUE(termToVerify1.isExpression());
-    Expression const& expressionToTest2(termToVerify1.getAsExpression());
-    EXPECT_EQ(OperatorLevel::Unknown, expressionToTest2.getCommonOperatorLevel());
-    TermsWithDetails const& termsToVerify2(expressionToTest2.getTermsWithAssociation().getTermsWithDetails());
-    ASSERT_EQ(1U, termsToVerify2.size());
-    EXPECT_EQ(TermAssociationType::Positive, termsToVerify2[0].association);
-    Term const& termToVerify2(getTermConstReferenceFromUniquePointer(termsToVerify2[0].baseTermPointer));
-    ASSERT_TRUE(termToVerify2.isExpression());
-    Expression const& expressionToTest3(termToVerify2.getAsExpression());
-    EXPECT_EQ(OperatorLevel::Unknown, expressionToTest3.getCommonOperatorLevel());
-    TermsWithDetails const& termsToVerify3(expressionToTest3.getTermsWithAssociation().getTermsWithDetails());
-    ASSERT_EQ(1U, termsToVerify3.size());
-    EXPECT_EQ(TermAssociationType::Positive, termsToVerify3[0].association);
-    Term const& termToVerify3(getTermConstReferenceFromUniquePointer(termsToVerify3[0].baseTermPointer));
-    ASSERT_TRUE(termToVerify3.isConstant());
-    EXPECT_EQ(Constant(88), termToVerify3.getAsConstant());
-}
-
 TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplify) {
     Expression expressionToTest(createExpressionIfPossible({7.625, "+", 2.375}));
 
@@ -148,6 +107,63 @@ TEST(CreateHelpersTest, CreateExpressionIfPossibleReturnsEmptyIfListOfTermsAreWr
     EXPECT_EQ(OperatorLevel::Unknown, expressionToTest.getCommonOperatorLevel());
     TermsWithDetails const& termsToVerify(expressionToTest.getTermsWithAssociation().getTermsWithDetails());
     ASSERT_TRUE(termsToVerify.empty());
+}
+
+TEST(CreateHelpersTest, CreateMonomialIfPossibleWorks) {
+    EXPECT_EQ(Monomial(0, {}), createMonomialIfPossible(Term{}));
+    EXPECT_EQ(Monomial(42, {}), createMonomialIfPossible(42));
+    EXPECT_EQ(Monomial(1, {{"weight", 1}}), createMonomialIfPossible("weight"));
+    EXPECT_EQ(Monomial(0, {}), createMonomialIfPossible("+"));
+    EXPECT_EQ(Monomial(-1.5, {{"r", -3.75}}), createMonomialIfPossible(Monomial(-1.5, {{"r", -3.75}})));
+    EXPECT_EQ(
+        Monomial(0, {}),
+        createMonomialIfPossible(Polynomial{Monomial(3, {}), Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}})}));
+    EXPECT_EQ(Monomial(0, {}), createMonomialIfPossible(createExpressionIfPossible({5, "+", "interest"})));
+}
+
+TEST(CreateHelpersTest, CreatePolynomialIfPossibleWorks) {
+    EXPECT_EQ((Polynomial{}), createPolynomialIfPossible(Term{}));
+    EXPECT_EQ((Polynomial{Monomial(97, {})}), createPolynomialIfPossible(97));
+    EXPECT_EQ((Polynomial{Monomial(1, {{"weight", 1}})}), createPolynomialIfPossible("weight"));
+    EXPECT_EQ((Polynomial{Monomial(24, {{"i", 5}})}), createPolynomialIfPossible(Monomial(24, {{"i", 5}})));
+    EXPECT_EQ((Polynomial{Monomial(39, {{"r", 7}})}), createPolynomialIfPossible(Polynomial{Monomial(39, {{"r", 7}})}));
+    EXPECT_EQ((Polynomial{}), createPolynomialIfPossible(createExpressionIfPossible({5, "+", "interest"})));
+}
+
+TEST(CreateHelpersTest, CreateTermWithAdditionAndSubtractionTermsWithDetailsWorksWithMultipleTerms) {
+    TermsWithDetails termsWithDetails{
+        {Term("x"), TermAssociationType::Positive},
+        {Term("y"), TermAssociationType::Negative},
+        {Term("z"), TermAssociationType::Positive}};
+
+    Term termToExpect(createTermWithAdditionAndSubtractionTermsWithDetails(termsWithDetails));
+
+    Term termToVerify(createExpressionIfPossible({"x", "-", "y", "+", "z"}));
+    EXPECT_EQ(termToVerify, termToExpect);
+}
+
+TEST(CreateHelpersTest, CreateTermWithMultiplicationAndDivisionTermsWithDetailsWorksWithMultipleTerms) {
+    TermsWithDetails termsWithDetails{
+        {Term("x"), TermAssociationType::Positive},
+        {Term("y"), TermAssociationType::Negative},
+        {Term("z"), TermAssociationType::Positive}};
+
+    Term termToExpect(createTermWithMultiplicationAndDivisionTermsWithDetails(termsWithDetails));
+
+    Term termToVerify(createExpressionIfPossible({"x", "/", "y", "*", "z"}));
+    EXPECT_EQ(termToVerify, termToExpect);
+}
+
+TEST(CreateHelpersTest, CreateTermWithRaiseToPowerTermsWithDetailsWorksWithMultipleTerms) {
+    TermsWithDetails termsWithDetails{
+        {Term("x"), TermAssociationType::Positive},
+        {Term("y"), TermAssociationType::Positive},
+        {Term("z"), TermAssociationType::Positive}};
+
+    Term termToExpect(createTermWithRaiseToPowerTermsWithDetails(termsWithDetails));
+
+    Term termToVerify(createExpressionIfPossible({"x", "^", "y", "^", "z"}));
+    EXPECT_EQ(termToVerify, termToExpect);
 }
 
 TEST(CreateHelpersTest, CreateSimplifiedExpressionIfPossibleWorks) {
@@ -188,24 +204,32 @@ TEST(CreateHelpersTest, CreateFunctionInAnFunctionWorks) {
     EXPECT_EQ(absInAbsInAbsFunction, functionToVerify2);
 }
 
+TEST(CreateHelpersTest, CreateMonomialFromNumberWorks) {
+    EXPECT_EQ(Monomial(5648, {}), createMonomialFromNumber(5648));
+}
+
+TEST(CreateHelpersTest, CreateMonomialFromVariableWorks) {
+    EXPECT_EQ(Monomial(1, {{"weight", 1}}), createMonomialFromVariable(Variable("weight")));
+}
+
+TEST(CreateHelpersTest, CreatePolynomialFromNumberWorks) {
+    EXPECT_EQ(Polynomial{Monomial(5648, {})}, createPolynomialFromNumber(5648));
+}
+
+TEST(CreateHelpersTest, CreatePolynomialFromVariableWorks) {
+    EXPECT_EQ(Polynomial{Monomial(1, {{"weight", 1}})}, createPolynomialFromVariable(Variable("weight")));
+}
+
+TEST(CreateHelpersTest, CreatePolynomialFromMonomialWorks) {
+    EXPECT_EQ(Polynomial{Monomial(2, {{"weight", 3}})}, createPolynomialFromMonomial(Monomial(2, {{"weight", 3}})));
+}
+
 TEST(CreateHelpersTest, CreateTermWithAdditionAndSubtractionTermsWithDetailsWorksWithASingleTerm) {
     TermsWithDetails termsWithDetails{{Term("x"), TermAssociationType::Positive}};
 
     Term termToExpect(createTermWithAdditionAndSubtractionTermsWithDetails(termsWithDetails));
 
     Term termToVerify("x");
-    EXPECT_EQ(termToVerify, termToExpect);
-}
-
-TEST(CreateHelpersTest, CreateTermWithAdditionAndSubtractionTermsWithDetailsWorksWithMultipleTerms) {
-    TermsWithDetails termsWithDetails{
-        {Term("x"), TermAssociationType::Positive},
-        {Term("y"), TermAssociationType::Negative},
-        {Term("z"), TermAssociationType::Positive}};
-
-    Term termToExpect(createTermWithAdditionAndSubtractionTermsWithDetails(termsWithDetails));
-
-    Term termToVerify(createExpressionIfPossible({"x", "-", "y", "+", "z"}));
     EXPECT_EQ(termToVerify, termToExpect);
 }
 
@@ -218,36 +242,12 @@ TEST(CreateHelpersTest, CreateTermWithMultiplicationAndDivisionTermsWithDetailsW
     EXPECT_EQ(termToVerify, termToExpect);
 }
 
-TEST(CreateHelpersTest, CreateTermWithMultiplicationAndDivisionTermsWithDetailsWorksWithMultipleTerms) {
-    TermsWithDetails termsWithDetails{
-        {Term("x"), TermAssociationType::Positive},
-        {Term("y"), TermAssociationType::Negative},
-        {Term("z"), TermAssociationType::Positive}};
-
-    Term termToExpect(createTermWithMultiplicationAndDivisionTermsWithDetails(termsWithDetails));
-
-    Term termToVerify(createExpressionIfPossible({"x", "/", "y", "*", "z"}));
-    EXPECT_EQ(termToVerify, termToExpect);
-}
-
 TEST(CreateHelpersTest, CreateTermWithRaiseToPowerTermsWithDetailsWorksWithASingleTerm) {
     TermsWithDetails termsWithDetails{{Term("x"), TermAssociationType::Positive}};
 
     Term termToExpect(createTermWithRaiseToPowerTermsWithDetails(termsWithDetails));
 
     Term termToVerify("x");
-    EXPECT_EQ(termToVerify, termToExpect);
-}
-
-TEST(CreateHelpersTest, CreateTermWithRaiseToPowerTermsWithDetailsWorksWithMultipleTerms) {
-    TermsWithDetails termsWithDetails{
-        {Term("x"), TermAssociationType::Positive},
-        {Term("y"), TermAssociationType::Positive},
-        {Term("z"), TermAssociationType::Positive}};
-
-    Term termToExpect(createTermWithRaiseToPowerTermsWithDetails(termsWithDetails));
-
-    Term termToVerify(createExpressionIfPossible({"x", "^", "y", "^", "z"}));
     EXPECT_EQ(termToVerify, termToExpect);
 }
 

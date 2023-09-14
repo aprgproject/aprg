@@ -21,6 +21,24 @@ TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateEquationWorks) {
     EXPECT_EQ(expectedEquation, equation);
 }
 
+TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateConstantWorks) {
+    RemoveMonomialsWithNegativeExponentMutator mutator("x");
+    Constant constant(110);
+
+    mutator.mutateConstant(constant);
+
+    EXPECT_EQ(Constant(110), constant);
+}
+
+TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateVariableWorks) {
+    RemoveMonomialsWithNegativeExponentMutator mutator("x");
+    Variable variable("x");
+
+    mutator.mutateVariable(variable);
+
+    EXPECT_EQ(Variable("x"), variable);
+}
+
 TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateTermWorks) {
     RemoveMonomialsWithNegativeExponentMutator mutator("x");
     Term constantTerm(Constant(110));
@@ -45,24 +63,6 @@ TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateTermWorks) {
     EXPECT_EQ(Term(Monomial(643, {{"x", 8}})), polynomialTerm);
     EXPECT_EQ(Term(678), expressionTerm);
     EXPECT_EQ(Term(4516), functionTerm);
-}
-
-TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateConstantWorks) {
-    RemoveMonomialsWithNegativeExponentMutator mutator("x");
-    Constant constant(110);
-
-    mutator.mutateConstant(constant);
-
-    EXPECT_EQ(Constant(110), constant);
-}
-
-TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateVariableWorks) {
-    RemoveMonomialsWithNegativeExponentMutator mutator("x");
-    Variable variable("x");
-
-    mutator.mutateVariable(variable);
-
-    EXPECT_EQ(Variable("x"), variable);
 }
 
 TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateMonomialWorks) {

@@ -26,6 +26,41 @@ MultipleVariableSolutionSet LinearEquationsEqualitySolver::calculateSolutionAndR
     return solutionSet;
 }
 
+void LinearEquationsEqualitySolver::calculateSolution(
+    MultipleVariableSolutionSet& solutionSet, Equations const& equations) {
+    if (doesAllEquationsHaveEqualityOperator(equations)) {
+        Polynomials polynomials;
+        for (Equation const& equation : equations) {
+            Equation simplifiedEquation(equation);
+            simplifiedEquation.simplify();
+            Term const& nonZeroLeftHandTerm(simplifiedEquation.getLeftHandTerm());
+            if (canBeConvertedToPolynomial(nonZeroLeftHandTerm)) {
+                polynomials.emplace_back(createPolynomialIfPossible(nonZeroLeftHandTerm));
+            }
+        }
+        calculateSolution(solutionSet, polynomials);
+    }
+}
+
+void LinearEquationsEqualitySolver::calculateSolution(
+    MultipleVariableSolutionSet& solutionSet, Polynomials const& polynomials) {
+    ExponentsRetriever exponentsRetriever;
+    VariableNamesRetriever variablesRetriever;
+    exponentsRetriever.retrieveFromPolynomials(polynomials);
+    variablesRetriever.retrieveFromPolynomials(polynomials);
+    AlbaNumbersSet const& exponents(exponentsRetriever.getExponents());
+    VariableNamesSet const& variables(variablesRetriever.getVariableNames());
+    if (areExponentsEqualToOneAndZero(exponents) && variables.size() == polynomials.size()) {
+        NumberMatrix coefficientsMatrix(variables.size() + 1, polynomials.size());
+        setMatrixCoefficients(coefficientsMatrix, variables, polynomials);
+        transformToReducedEchelonFormUsingGaussJordanReduction(coefficientsMatrix);
+        if (isReducedRowEchelonForm(coefficientsMatrix)) {
+            saveSolutionSetsFromTheCoefficientMatrix(solutionSet, coefficientsMatrix, variables);
+            setAsCompleteSolution();
+        }
+    }
+}
+
 void LinearEquationsEqualitySolver::setMatrixCoefficients(
     NumberMatrix& coefficientsMatrix, VariableNamesSet const& variableNames, Polynomials const& polynomials) {
     int rowIndex = 0;
@@ -62,41 +97,6 @@ bool LinearEquationsEqualitySolver::areExponentsEqualToOneAndZero(AlbaNumbersSet
     return all_of(exponents.cbegin(), exponents.cend(), [](AlbaNumber const& exponent) {
         return exponent == 1 || exponent == 0;
     });
-}
-
-void LinearEquationsEqualitySolver::calculateSolution(
-    MultipleVariableSolutionSet& solutionSet, Equations const& equations) {
-    if (doesAllEquationsHaveEqualityOperator(equations)) {
-        Polynomials polynomials;
-        for (Equation const& equation : equations) {
-            Equation simplifiedEquation(equation);
-            simplifiedEquation.simplify();
-            Term const& nonZeroLeftHandTerm(simplifiedEquation.getLeftHandTerm());
-            if (canBeConvertedToPolynomial(nonZeroLeftHandTerm)) {
-                polynomials.emplace_back(createPolynomialIfPossible(nonZeroLeftHandTerm));
-            }
-        }
-        calculateSolution(solutionSet, polynomials);
-    }
-}
-
-void LinearEquationsEqualitySolver::calculateSolution(
-    MultipleVariableSolutionSet& solutionSet, Polynomials const& polynomials) {
-    ExponentsRetriever exponentsRetriever;
-    VariableNamesRetriever variablesRetriever;
-    exponentsRetriever.retrieveFromPolynomials(polynomials);
-    variablesRetriever.retrieveFromPolynomials(polynomials);
-    AlbaNumbersSet const& exponents(exponentsRetriever.getExponents());
-    VariableNamesSet const& variables(variablesRetriever.getVariableNames());
-    if (areExponentsEqualToOneAndZero(exponents) && variables.size() == polynomials.size()) {
-        NumberMatrix coefficientsMatrix(variables.size() + 1, polynomials.size());
-        setMatrixCoefficients(coefficientsMatrix, variables, polynomials);
-        transformToReducedEchelonFormUsingGaussJordanReduction(coefficientsMatrix);
-        if (isReducedRowEchelonForm(coefficientsMatrix)) {
-            saveSolutionSetsFromTheCoefficientMatrix(solutionSet, coefficientsMatrix, variables);
-            setAsCompleteSolution();
-        }
-    }
 }
 
 LinearEquationsEqualitySolver::LinearEquationsEqualitySolver() = default;

@@ -77,7 +77,6 @@ private:
 // ---> distTo[w] cannot decrease (relax prevents this)
 // ---> distTo[v] will not change at all
 // ---> Thus, upon termination shortest path optimality conditions hold.
-
 // Running time:
 // depends on Indexed-PQ implementation: Total = V inserts + V deletemins + E decrease-keys
 // array: insert(1), delete-min(V), decrease-key(1) -> total = V^2
@@ -90,23 +89,19 @@ private:
 // -> Binary heap is faster for sparse graphs
 // -> 4 way heap is worth the trouble in performance-critical situations
 // -> Fibonacci heap is best in theory, but too complicated to implement (not worth it in practice)
-
 // Negative weights:
 // Dijsktra algorithm: Does not work on negative weights
 // The efficiency of Dijkstra’s algorithm is based on the fact that the graph does not contain negative edges.
 // If there is an edge with negative weights, the algorithm may give incorrect results.
-
 // Other discussions:
 // Dijkstra’s algorithm finds shortest paths from the starting node to all nodes of the graph, like the Bellman–Ford
 // algorithm. The benefit of Dijsktra’s algorithm is that it is more efficient and can be used for processing large
 // graphs. However, the algorithm requires that there are no negative weight edges in the graph.
-
 // Like in the Bellman–Ford algorithm, initially the distance to the starting node is 0 and the distance to all other
 // nodes is infinite. At each step, Dijkstra’s algorithm selects a node that has not been processed yet and whose
 // distance is as small as possible. The first such node is node 1 with distance 0. A remarkable property in Dijkstra’s
 // algorithm is that whenever a node is selected (selected in the PQ), its distance is final (because there are no
 // negative weights).
-
 // Dijkstra’s algorithm is very similar to Prim’s algorithm for minimum spanning tree.
 // Like Prim’s MST, we generate a SPT (shortest path tree) with a given source as a root.
 // We maintain two sets, one set contains vertices included in the shortest-path tree,
@@ -114,7 +109,6 @@ private:
 // At every step of the algorithm, we find a vertex that is in the other set (set of not yet included) and has a minimum
 // distance from the source. Below are the detailed steps used in Dijkstra’s algorithm to find the shortest path from a
 // single source vertex to all other vertices in the given graph.
-
 // Algorithm
 // -> 1) Create a set sptSet (shortest path tree set) that keeps track of vertices included in the shortest-path tree,
 // i.e., whose minimum distance from the source is calculated and finalized. Initially, this set is empty.
@@ -127,7 +121,6 @@ private:
 // -----> To update the distance values, iterate through all adjacent vertices.
 // -----> For every adjacent vertex v, if the sum of distance value of u (from source)
 // -----> and weight of edge u-v, is less than the distance value of v, then update the distance value of v.
-
 // Notes:
 // -> 1) The code calculates the shortest distance but doesn’t calculate the path information.
 // ---> We can create a parent array, update the parent array when distance is updated (like prim’s implementation)
@@ -146,7 +139,6 @@ private:
 // ---> and that version will lose its fast time complexity.
 // ---> For graphs with negative weight edges and cycles, Bellman–Ford algorithm can be used, we will soon be discussing
 // it as a separate post.
-
 // Other analysis:
 // The time complexity of the above implementation is O(n + mlogm). Note: 'n' is nodes and 'm' is edges.
 // This because the algorithm goes through all nodes of the graph and adds for each edge at most one distance to the

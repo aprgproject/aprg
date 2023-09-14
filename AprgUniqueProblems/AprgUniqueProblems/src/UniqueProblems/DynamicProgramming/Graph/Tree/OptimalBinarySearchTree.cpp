@@ -68,11 +68,6 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingIterat
     return result;
 }
 
-// inline optimization can work here because the usage belongs to same translation unit
-inline OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getCost(Cost const depth, Cost const frequency) {
-    return depth * frequency;
-}
-
 OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingNaiveRecursion(
     Cost const depth, Index const left, Index const right) const {
     Cost result(0);
@@ -102,6 +97,11 @@ void OptimalBinarySearchTree::sortByValue() {
         [](ValueAndFrequencyPair const& pair1, ValueAndFrequencyPair const& pair2) {
             return pair1.first < pair2.first;
         });
+}
+
+// inline optimization can work here because the usage belongs to same translation unit
+inline OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getCost(Cost const depth, Cost const frequency) {
+    return depth * frequency;
 }
 
 }  // namespace alba

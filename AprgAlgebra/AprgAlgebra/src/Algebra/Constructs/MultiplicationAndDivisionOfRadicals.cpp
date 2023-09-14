@@ -8,8 +8,8 @@
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 #include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
 
-using namespace alba::mathHelper;
 using namespace alba::algebra::Simplification;
+using namespace alba::mathHelper;
 using namespace std;
 
 namespace alba::algebra {
@@ -55,35 +55,6 @@ void MultiplicationAndDivisionOfRadicals::simplify() {
         combineMonomialAndRadicalsAndSave(radicalDetails, combinedMonomial, gcfOfExponents);
         saveRemainingTerms(remainingTerms);
     }
-}
-
-AlbaNumber MultiplicationAndDivisionOfRadicals::getGcfOfExponents(RadicalDetails const& radicalDetails) {
-    AlbaNumber gcfOfExponents(1);
-    if (!radicalDetails.empty()) {
-        gcfOfExponents = radicalDetails.front().radical.getExponent();
-        for (auto it = radicalDetails.cbegin() + 1; it != radicalDetails.cend(); ++it) {
-            gcfOfExponents = getGreatestCommonFactor(gcfOfExponents, it->radical.getExponent());
-        }
-    }
-    return gcfOfExponents;
-}
-
-bool MultiplicationAndDivisionOfRadicals::shouldBeCombined(
-    RadicalDetails const& radicalDetails, Monomial const& combinedMonomial, AlbaNumber const& gcfOfExponents) {
-    return gcfOfExponents != 1 && !radicalDetails.empty() &&
-           isNotANegativeTermWithExponentDenominatorEven(combinedMonomial, gcfOfExponents);
-}
-
-bool MultiplicationAndDivisionOfRadicals::isNotANegativeTermWithExponentDenominatorEven(
-    Monomial const& combinedMonomial, AlbaNumber const& gcfOfExponents) {
-    bool result(true);
-    if (gcfOfExponents.isIntegerOrFractionType()) {
-        AlbaNumber::FractionData const fractionData(gcfOfExponents.getFractionData());
-        if (isEven(static_cast<int>(getAbsoluteValue<int>(fractionData.denominator)))) {
-            result = !isANegativeMonomial(combinedMonomial);
-        }
-    }
-    return result;
 }
 
 void MultiplicationAndDivisionOfRadicals::gatherDetails(
@@ -141,6 +112,35 @@ void MultiplicationAndDivisionOfRadicals::saveRemainingTerms(TermsWithDetails co
     for (TermWithDetails const& remainingTerm : remainingTerms) {
         m_termsWithDetails.emplace_back(remainingTerm);
     }
+}
+
+AlbaNumber MultiplicationAndDivisionOfRadicals::getGcfOfExponents(RadicalDetails const& radicalDetails) {
+    AlbaNumber gcfOfExponents(1);
+    if (!radicalDetails.empty()) {
+        gcfOfExponents = radicalDetails.front().radical.getExponent();
+        for (auto it = radicalDetails.cbegin() + 1; it != radicalDetails.cend(); ++it) {
+            gcfOfExponents = getGreatestCommonFactor(gcfOfExponents, it->radical.getExponent());
+        }
+    }
+    return gcfOfExponents;
+}
+
+bool MultiplicationAndDivisionOfRadicals::shouldBeCombined(
+    RadicalDetails const& radicalDetails, Monomial const& combinedMonomial, AlbaNumber const& gcfOfExponents) {
+    return gcfOfExponents != 1 && !radicalDetails.empty() &&
+           isNotANegativeTermWithExponentDenominatorEven(combinedMonomial, gcfOfExponents);
+}
+
+bool MultiplicationAndDivisionOfRadicals::isNotANegativeTermWithExponentDenominatorEven(
+    Monomial const& combinedMonomial, AlbaNumber const& gcfOfExponents) {
+    bool result(true);
+    if (gcfOfExponents.isIntegerOrFractionType()) {
+        AlbaNumber::FractionData const fractionData(gcfOfExponents.getFractionData());
+        if (isEven(static_cast<int>(getAbsoluteValue<int>(fractionData.denominator)))) {
+            result = !isANegativeMonomial(combinedMonomial);
+        }
+    }
+    return result;
 }
 
 MultiplicationAndDivisionOfRadicals::MultiplicationAndDivisionOfRadicals() = default;

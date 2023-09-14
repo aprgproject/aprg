@@ -9,6 +9,30 @@ using namespace std;
 
 namespace alba::algebra {
 
+TEST(ConstructUtilitiesTest, CreateTermRaiseToANumberFromRaiseToPowerExpressionWorks) {
+    Expression raiseToPowerExpression(createExpressionIfPossible({abs("x"), "^", 100}));
+
+    TermRaiseToANumber result;
+    createTermRaiseToANumberFromRaiseToPowerExpression(result, raiseToPowerExpression);
+
+    EXPECT_EQ(Term(abs("x")), result.getBase());
+    EXPECT_EQ(AlbaNumber(100), result.getExponent());
+}
+
+TEST(ConstructUtilitiesTest, CreateTermRaiseToANumberFromMultiplicationAndDivisionExpressionWorks) {
+    Monomial numerator(32, {{"x", 5}});
+    Polynomial polynomialForDenominator{Monomial(1, {{"x", 1}}), Monomial(7, {})};
+    Expression denominator(createExpressionIfPossible({polynomialForDenominator, "^", 10}));
+    Expression multiplicationAndDivisionExpression(createExpressionIfPossible({numerator, "/", denominator}));
+
+    TermRaiseToANumber result;
+    createTermRaiseToANumberFromMultiplicationAndDivisionExpression(result, multiplicationAndDivisionExpression);
+
+    Term expectedBase(createExpressionIfPossible({2, "*", "x", "/", polynomialForDenominator, "^", 2}));
+    EXPECT_EQ(expectedBase, result.getBase());
+    EXPECT_EQ(AlbaNumber(5), result.getExponent());
+}
+
 TEST(
     ConstructUtilitiesTest,
     CreatePolynomialOverPolynomialFromTermIfPossibleWorksForTermThatCanBeConvertedToPolynomial) {
@@ -66,43 +90,6 @@ TEST(ConstructUtilitiesTest, CreatePolynomialOverPolynomialFromTermIfPossibleWor
     PolynomialOverPolynomialOptional popOptional(createPolynomialOverPolynomialFromTermIfPossible(expressionTerm));
 
     EXPECT_FALSE(popOptional);
-}
-
-TEST(ConstructUtilitiesTest, CreateTermsOverTermsFromTermWorksForNonExpression) {
-    Term nonExpressionTerm("x");
-
-    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(nonExpressionTerm));
-
-    Terms numeratorsToVerify(termsOverTerms.getNumerators());
-    ASSERT_EQ(1U, numeratorsToVerify.size());
-    EXPECT_EQ(Term("x"), numeratorsToVerify[0]);
-    Terms const& denominatorsToVerify(termsOverTerms.getDenominators());
-    EXPECT_TRUE(denominatorsToVerify.empty());
-}
-
-TEST(ConstructUtilitiesTest, CreateTermsOverTermsFromTermWorksForNonMultiplicationDivisionExpression) {
-    Term nonMultiplicationDivisionExpressionTerm(createExpressionIfPossible({"x", "^", "x"}));
-
-    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(nonMultiplicationDivisionExpressionTerm));
-
-    Terms numeratorsToVerify(termsOverTerms.getNumerators());
-    ASSERT_EQ(1U, numeratorsToVerify.size());
-    EXPECT_EQ(nonMultiplicationDivisionExpressionTerm, numeratorsToVerify[0]);
-    Terms const& denominatorsToVerify(termsOverTerms.getDenominators());
-    EXPECT_TRUE(denominatorsToVerify.empty());
-}
-
-TEST(ConstructUtilitiesTest, CreateTermsOverTermsFromTermWorksForMultiplicationDivisionExpression) {
-    Term multiplicationDivisionExpressionTerm(createExpressionIfPossible({"x", "/", "y"}));
-
-    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(multiplicationDivisionExpressionTerm));
-
-    Terms numeratorsToVerify(termsOverTerms.getNumerators());
-    ASSERT_EQ(1U, numeratorsToVerify.size());
-    EXPECT_EQ(Term("x"), numeratorsToVerify[0]);
-    Terms const& denominatorsToVerify(termsOverTerms.getDenominators());
-    ASSERT_EQ(1U, denominatorsToVerify.size());
-    EXPECT_EQ(Term("y"), denominatorsToVerify[0]);
 }
 
 TEST(ConstructUtilitiesTest, CreateTermRaiseToANumberFromTermWorksForNonMonomialOrExpression) {
@@ -265,30 +252,6 @@ TEST(ConstructUtilitiesTest, CreateTermRaiseToANumberFromExpressionWorksWithDivi
     EXPECT_EQ(AlbaNumber(-2), termRaiseToANumber.getExponent());
 }
 
-TEST(ConstructUtilitiesTest, CreateTermRaiseToANumberFromRaiseToPowerExpressionWorks) {
-    Expression raiseToPowerExpression(createExpressionIfPossible({abs("x"), "^", 100}));
-
-    TermRaiseToANumber result;
-    createTermRaiseToANumberFromRaiseToPowerExpression(result, raiseToPowerExpression);
-
-    EXPECT_EQ(Term(abs("x")), result.getBase());
-    EXPECT_EQ(AlbaNumber(100), result.getExponent());
-}
-
-TEST(ConstructUtilitiesTest, CreateTermRaiseToANumberFromMultiplicationAndDivisionExpressionWorks) {
-    Monomial numerator(32, {{"x", 5}});
-    Polynomial polynomialForDenominator{Monomial(1, {{"x", 1}}), Monomial(7, {})};
-    Expression denominator(createExpressionIfPossible({polynomialForDenominator, "^", 10}));
-    Expression multiplicationAndDivisionExpression(createExpressionIfPossible({numerator, "/", denominator}));
-
-    TermRaiseToANumber result;
-    createTermRaiseToANumberFromMultiplicationAndDivisionExpression(result, multiplicationAndDivisionExpression);
-
-    Term expectedBase(createExpressionIfPossible({2, "*", "x", "/", polynomialForDenominator, "^", 2}));
-    EXPECT_EQ(expectedBase, result.getBase());
-    EXPECT_EQ(AlbaNumber(5), result.getExponent());
-}
-
 TEST(ConstructUtilitiesTest, CreateTermRaiseToTermsFromTermWorksForNonMonomialOrExpression) {
     Term nonMonomialOrExpressionTerm("x");
 
@@ -432,6 +395,43 @@ TEST(ConstructUtilitiesTest, CreateTermRaiseToTermsFromExpressionWorksWithDivisi
         Polynomial{Monomial(1, {{"x", 3}}), Monomial(19, {{"x", 2}}), Monomial(119, {{"x", 1}}), Monomial(245, {})});
     EXPECT_EQ(expectedBase, termRaiseToTerms.getBase());
     EXPECT_EQ(Term(-2), termRaiseToTerms.getCombinedExponents());
+}
+
+TEST(ConstructUtilitiesTest, CreateTermsOverTermsFromTermWorksForNonExpression) {
+    Term nonExpressionTerm("x");
+
+    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(nonExpressionTerm));
+
+    Terms numeratorsToVerify(termsOverTerms.getNumerators());
+    ASSERT_EQ(1U, numeratorsToVerify.size());
+    EXPECT_EQ(Term("x"), numeratorsToVerify[0]);
+    Terms const& denominatorsToVerify(termsOverTerms.getDenominators());
+    EXPECT_TRUE(denominatorsToVerify.empty());
+}
+
+TEST(ConstructUtilitiesTest, CreateTermsOverTermsFromTermWorksForNonMultiplicationDivisionExpression) {
+    Term nonMultiplicationDivisionExpressionTerm(createExpressionIfPossible({"x", "^", "x"}));
+
+    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(nonMultiplicationDivisionExpressionTerm));
+
+    Terms numeratorsToVerify(termsOverTerms.getNumerators());
+    ASSERT_EQ(1U, numeratorsToVerify.size());
+    EXPECT_EQ(nonMultiplicationDivisionExpressionTerm, numeratorsToVerify[0]);
+    Terms const& denominatorsToVerify(termsOverTerms.getDenominators());
+    EXPECT_TRUE(denominatorsToVerify.empty());
+}
+
+TEST(ConstructUtilitiesTest, CreateTermsOverTermsFromTermWorksForMultiplicationDivisionExpression) {
+    Term multiplicationDivisionExpressionTerm(createExpressionIfPossible({"x", "/", "y"}));
+
+    TermsOverTerms termsOverTerms(createTermsOverTermsFromTerm(multiplicationDivisionExpressionTerm));
+
+    Terms numeratorsToVerify(termsOverTerms.getNumerators());
+    ASSERT_EQ(1U, numeratorsToVerify.size());
+    EXPECT_EQ(Term("x"), numeratorsToVerify[0]);
+    Terms const& denominatorsToVerify(termsOverTerms.getDenominators());
+    ASSERT_EQ(1U, denominatorsToVerify.size());
+    EXPECT_EQ(Term("y"), denominatorsToVerify[0]);
 }
 
 }  // namespace alba::algebra

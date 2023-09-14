@@ -14,7 +14,6 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using AdjacencyMatrix = matrix::AlbaMatrix<bool>;
     DirectedGraphWithAdjacencyMatrix() : m_adjacencyMatrix(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE) {}
-    [[nodiscard]] AdjacencyMatrix const& getAdjacencyMatrix() const { return m_adjacencyMatrix; }
 
     [[nodiscard]] Edges getEdges() const override {
         Edges result;
@@ -90,6 +89,8 @@ public:
         m_numberOfEdges = 0;
         m_adjacencyMatrix.clearAndResize(MAX_VERTEX_VALUE, MAX_VERTEX_VALUE);
     }
+
+    [[nodiscard]] AdjacencyMatrix const& getAdjacencyMatrix() const { return m_adjacencyMatrix; }
 
 protected:
     friend std::ostream& operator<<(std::ostream& out, DirectedGraphWithAdjacencyMatrix const& graph) {

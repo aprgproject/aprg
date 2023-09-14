@@ -13,14 +13,6 @@ using IntegerRandomizerForTest = AlbaUniformDeterministicAllBitsRandomizer<int>;
 using FloatingPointRandomizerForTest = AlbaUniformDeterministicAllBitsRandomizer<double>;
 }  // namespace
 
-// Dont test if uniformly distributed because its too large just trust the C++ implementation
-TEST(AlbaUniformDeterministicAllBitsRandomizerTest, DefaultConstructorWorks) {
-    IntegerRandomizerForTest randomizer;
-
-    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
-    EXPECT_NO_FATAL_FAILURE(randomizer.getRandomValue());
-}
-
 TEST(AlbaUniformDeterministicAllBitsRandomizerTest, SetRandomSeedWorks) {
     constexpr auto minimumValue(static_cast<long long>(numeric_limits<int>::min()));
     constexpr auto maximumValue(static_cast<long long>(numeric_limits<int>::max()));
@@ -35,6 +27,14 @@ TEST(AlbaUniformDeterministicAllBitsRandomizerTest, SetRandomSeedWorks) {
         ASSERT_GE(randomValue, minimumValue);
         ASSERT_LE(randomValue, maximumValue);
     }
+}
+
+// Dont test if uniformly distributed because its too large just trust the C++ implementation
+TEST(AlbaUniformDeterministicAllBitsRandomizerTest, DefaultConstructorWorks) {
+    IntegerRandomizerForTest randomizer;
+
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
+    EXPECT_NO_FATAL_FAILURE(randomizer.getRandomValue());
 }
 
 TEST(AlbaUniformDeterministicAllBitsRandomizerTest, GetRandomIntegerWorksWithinMinimumAndMaximumValues) {

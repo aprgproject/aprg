@@ -21,18 +21,6 @@ TEST(PolynomialOverPolynomialTest, ConstructionWorks) {
     EXPECT_EQ(Polynomial{Monomial(100, {})}, actual3.getDenominator());
 }
 
-TEST(PolynomialOverPolynomialTest, IsEmptyWorks) {
-    PolynomialOverPolynomial actual1;
-    PolynomialOverPolynomial actual2(Polynomial{}, Polynomial{});
-    PolynomialOverPolynomial actual3(Polynomial{}, (Polynomial{Monomial(100, {})}));
-    PolynomialOverPolynomial actual4((Polynomial{Monomial(10, {})}), (Polynomial{Monomial(100, {})}));
-
-    EXPECT_TRUE(actual1.isEmpty());
-    EXPECT_TRUE(actual2.isEmpty());
-    EXPECT_FALSE(actual3.isEmpty());
-    EXPECT_FALSE(actual4.isEmpty());
-}
-
 TEST(PolynomialOverPolynomialTest, SimplifyWorksWithZeroOverDouble) {
     Polynomial numerator(createPolynomialFromNumber(0));
     Polynomial denominator(createPolynomialFromNumber(1.17157287525381));
@@ -202,6 +190,62 @@ TEST(PolynomialOverPolynomialTest, SimplifyWorksOnCancellingFactorsExample4) {
     EXPECT_EQ(denominatorToExpect, polynomialOverPolynomial.getDenominator());
 }
 
+TEST(PolynomialOverPolynomialTest, DivideWithNoRemainder) {
+    Polynomial numerator{
+        Monomial(3, {{"x", 3}}), Monomial(-4, {{"x", 2}, {"y", 1}}), Monomial(5, {{"x", 1}, {"y", 2}}),
+        Monomial(6, {{"y", 3}})};
+    Polynomial denominator{Monomial(1, {{"x", 2}}), Monomial(-2, {{"x", 1}, {"y", 1}}), Monomial(3, {{"y", 2}})};
+    PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
+
+    PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(polynomialOverPolynomial.divide());
+
+    Polynomial quotientToExpect{Monomial(3, {{"x", 1}}), Monomial(2, {{"y", 1}})};
+    Polynomial remainderToExpect{};
+    EXPECT_EQ(quotientToExpect, quotientAndRemainder.quotient);
+    EXPECT_EQ(remainderToExpect, quotientAndRemainder.remainder);
+}
+
+TEST(PolynomialOverPolynomialTest, DivideOnAQuarticWithNoRemainder) {
+    Polynomial numerator{
+        Monomial(2112, {{"x", 4}}), Monomial(-296, {{"x", 3}}), Monomial(-5878, {{"x", 2}}), Monomial(409, {{"x", 1}}),
+        Monomial(4095, {})};
+    Polynomial denominator{Monomial(11, {{"x", 1}}), Monomial(-13, {})};
+    PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
+
+    PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(polynomialOverPolynomial.divide());
+
+    Polynomial quotientToExpect{
+        Monomial(192, {{"x", 3}}), Monomial(200, {{"x", 2}}), Monomial(-298, {{"x", 1}}), Monomial(-315, {})};
+    Polynomial remainderToExpect{};
+    EXPECT_EQ(quotientToExpect, quotientAndRemainder.quotient);
+    EXPECT_EQ(remainderToExpect, quotientAndRemainder.remainder);
+}
+
+TEST(PolynomialOverPolynomialTest, DivideWithRemainder) {
+    Polynomial numerator{Monomial(5, {{"x", 3}}), Monomial(-14, {{"x", 1}}), Monomial(3, {})};
+    Polynomial denominator{Monomial(1, {{"x", 1}}), Monomial(-2, {})};
+    PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
+
+    PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(polynomialOverPolynomial.divide());
+
+    Polynomial quotientToExpect{Monomial(5, {{"x", 2}}), Monomial(10, {{"x", 1}}), Monomial(6, {})};
+    Polynomial remainderToExpect{Monomial(15, {})};
+    EXPECT_EQ(quotientToExpect, quotientAndRemainder.quotient);
+    EXPECT_EQ(remainderToExpect, quotientAndRemainder.remainder);
+}
+
+TEST(PolynomialOverPolynomialTest, IsEmptyWorks) {
+    PolynomialOverPolynomial actual1;
+    PolynomialOverPolynomial actual2(Polynomial{}, Polynomial{});
+    PolynomialOverPolynomial actual3(Polynomial{}, (Polynomial{Monomial(100, {})}));
+    PolynomialOverPolynomial actual4((Polynomial{Monomial(10, {})}), (Polynomial{Monomial(100, {})}));
+
+    EXPECT_TRUE(actual1.isEmpty());
+    EXPECT_TRUE(actual2.isEmpty());
+    EXPECT_FALSE(actual3.isEmpty());
+    EXPECT_FALSE(actual4.isEmpty());
+}
+
 TEST(PolynomialOverPolynomialTest, SimplifyAndDivideWorksWithZeroOverDouble) {
     Polynomial numerator(createPolynomialFromNumber(0));
     Polynomial denominator(createPolynomialFromNumber(1.17157287525381));
@@ -264,50 +308,6 @@ TEST(PolynomialOverPolynomialTest, SimplifyAndDivideWorksWithRemainder) {
 
     Polynomial quotientToExpect{Monomial(5, {{"x", 2}}), Monomial(2, {{"x", 1}}), Monomial(10, {})};
     Polynomial remainderToExpect{Monomial(24, {})};
-    EXPECT_EQ(quotientToExpect, quotientAndRemainder.quotient);
-    EXPECT_EQ(remainderToExpect, quotientAndRemainder.remainder);
-}
-
-TEST(PolynomialOverPolynomialTest, DivideWithNoRemainder) {
-    Polynomial numerator{
-        Monomial(3, {{"x", 3}}), Monomial(-4, {{"x", 2}, {"y", 1}}), Monomial(5, {{"x", 1}, {"y", 2}}),
-        Monomial(6, {{"y", 3}})};
-    Polynomial denominator{Monomial(1, {{"x", 2}}), Monomial(-2, {{"x", 1}, {"y", 1}}), Monomial(3, {{"y", 2}})};
-    PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
-
-    PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(polynomialOverPolynomial.divide());
-
-    Polynomial quotientToExpect{Monomial(3, {{"x", 1}}), Monomial(2, {{"y", 1}})};
-    Polynomial remainderToExpect{};
-    EXPECT_EQ(quotientToExpect, quotientAndRemainder.quotient);
-    EXPECT_EQ(remainderToExpect, quotientAndRemainder.remainder);
-}
-
-TEST(PolynomialOverPolynomialTest, DivideOnAQuarticWithNoRemainder) {
-    Polynomial numerator{
-        Monomial(2112, {{"x", 4}}), Monomial(-296, {{"x", 3}}), Monomial(-5878, {{"x", 2}}), Monomial(409, {{"x", 1}}),
-        Monomial(4095, {})};
-    Polynomial denominator{Monomial(11, {{"x", 1}}), Monomial(-13, {})};
-    PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
-
-    PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(polynomialOverPolynomial.divide());
-
-    Polynomial quotientToExpect{
-        Monomial(192, {{"x", 3}}), Monomial(200, {{"x", 2}}), Monomial(-298, {{"x", 1}}), Monomial(-315, {})};
-    Polynomial remainderToExpect{};
-    EXPECT_EQ(quotientToExpect, quotientAndRemainder.quotient);
-    EXPECT_EQ(remainderToExpect, quotientAndRemainder.remainder);
-}
-
-TEST(PolynomialOverPolynomialTest, DivideWithRemainder) {
-    Polynomial numerator{Monomial(5, {{"x", 3}}), Monomial(-14, {{"x", 1}}), Monomial(3, {})};
-    Polynomial denominator{Monomial(1, {{"x", 1}}), Monomial(-2, {})};
-    PolynomialOverPolynomial polynomialOverPolynomial(numerator, denominator);
-
-    PolynomialOverPolynomial::QuotientAndRemainder quotientAndRemainder(polynomialOverPolynomial.divide());
-
-    Polynomial quotientToExpect{Monomial(5, {{"x", 2}}), Monomial(10, {{"x", 1}}), Monomial(6, {})};
-    Polynomial remainderToExpect{Monomial(15, {})};
     EXPECT_EQ(quotientToExpect, quotientAndRemainder.quotient);
     EXPECT_EQ(remainderToExpect, quotientAndRemainder.remainder);
 }

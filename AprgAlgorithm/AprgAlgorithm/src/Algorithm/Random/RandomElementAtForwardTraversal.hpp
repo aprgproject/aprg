@@ -45,7 +45,6 @@ public:
 // --->           = [1 / (N-1)] * [(N-1)/N]
 // --->           = 1/N
 // ---> Similarly, we can show the probability for 3rd last node and other nodes.
-
 // -> This can be used to solve this problem:
 // ---> Given a singly linked list, select a random node from the linked list
 // ---> (the probability of picking a node should be 1/N if there are N nodes in the list).

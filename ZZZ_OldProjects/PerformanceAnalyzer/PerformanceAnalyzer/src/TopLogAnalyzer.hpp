@@ -47,14 +47,6 @@ public:
     void processTopLog(std::string const& pathOfTopLog);
 
 private:
-    static void putHeadersInCpuReport(
-        stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream);
-    static void putHeadersInMemReport(
-        stringHelper::strings const& processNamesInReport, std::ofstream& memReportFileStream);
-    static void saveTimeFromTop(std::string const& lineInLogs, DataEntry& currentEntry);
-    static void saveOverallCpuData(std::string const& lineInLogs, DataEntry& currentEntry);
-    static bool isTopCommandFirstLine(std::string const& lineInLogs);
-    static bool isTopCommandHeaderLine(std::string const& lineInLogs);
     void putEntriesInCpuReport(
         stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream) const;
     void putEntriesInMemReport(
@@ -67,6 +59,14 @@ private:
     void saveCpuAndMem(std::string const& lineInLogs, DataEntry& currentEntry);
     stringHelper::strings getProcessNamesForCpuReport();
     stringHelper::strings getProcessNamesForMemReport();
+    static void putHeadersInCpuReport(
+        stringHelper::strings const& processNamesInReport, std::ofstream& cpuReportFileStream);
+    static void putHeadersInMemReport(
+        stringHelper::strings const& processNamesInReport, std::ofstream& memReportFileStream);
+    static void saveTimeFromTop(std::string const& lineInLogs, DataEntry& currentEntry);
+    static void saveOverallCpuData(std::string const& lineInLogs, DataEntry& currentEntry);
+    static bool isTopCommandFirstLine(std::string const& lineInLogs);
+    static bool isTopCommandHeaderLine(std::string const& lineInLogs);
     TopLogAnalyzerState m_state;
     ColumnHeaders m_columnHeaders{};
     std::vector<DataEntry> m_dataEntries;

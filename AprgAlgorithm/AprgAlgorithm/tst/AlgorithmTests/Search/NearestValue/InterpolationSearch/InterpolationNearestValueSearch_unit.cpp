@@ -45,13 +45,6 @@ TEST(InterpolationNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereIs
     testGetIndexOfNearestValueWithOneUnsignedInt<SearchForTest, ValuesForTest>();
 }
 
-TEST(InterpolationNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
-    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
-    SearchForTest search(duplicateValues);
-
-    EXPECT_EQ(3, search.getIndexOfNearestValue(33));
-}
-
 TEST(InterpolationNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues) {
     testGetIndexOfNearestValueWithMultipleSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
@@ -62,6 +55,13 @@ TEST(InterpolationNearestValueSearchTest, GetIndexOfNearestValueWorksWhenNearest
 
 TEST(InterpolationNearestValueSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher) {
     testGetIndexOfNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
+TEST(InterpolationNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
+    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
+    SearchForTest search(duplicateValues);
+
+    EXPECT_EQ(3, search.getIndexOfNearestValue(33));
 }
 
 TEST(InterpolationNearestValueSearchTest, GetNearestValueWorksWithInitialIndexesWhenDistanceFromLowerToHigherIsOne) {

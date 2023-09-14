@@ -37,6 +37,5 @@ private:
 // The C++ standard library contains the following functions that are based on binary search and work in logarithmic
 // time: • lower_bound returns a pointer to the first array element whose target is at least x. • upper_bound returns a
 // pointer to the first array element whose target is larger than x. • equal_range returns both above pointers.
-
 // The functions assume that the array is sorted.
 // If there is no such element, the pointer points to the element after the last array element.

@@ -22,15 +22,6 @@ public:
         : BaseClass(graph), b_graph(BaseClass::b_graph) {}
 
 private:
-    [[nodiscard]] VertexToAdjacencyVerticesMap createVertexToAdjacentVerticesMap() const {
-        VertexToAdjacencyVerticesMap result;
-        Vertices const allVertices(b_graph.getVertices());
-        for (Vertex const& vertex : allVertices) {
-            result.emplace(vertex, b_graph.getAdjacentVerticesAt(vertex));
-        }
-        return result;
-    }
-
     void searchForEulerPath(Path& result, Vertex const& startingVertex) const override {
         VertexToAdjacencyVerticesMap vertexToAdjacentVerticesMap(createVertexToAdjacentVerticesMap());
 
@@ -53,6 +44,15 @@ private:
             }
         }
         std::reverse(result.begin(), result.end());
+    }
+
+    [[nodiscard]] VertexToAdjacencyVerticesMap createVertexToAdjacentVerticesMap() const {
+        VertexToAdjacencyVerticesMap result;
+        Vertices const allVertices(b_graph.getVertices());
+        for (Vertex const& vertex : allVertices) {
+            result.emplace(vertex, b_graph.getAdjacentVerticesAt(vertex));
+        }
+        return result;
     }
 
     BaseDirectedGraphWithVertex const& b_graph;

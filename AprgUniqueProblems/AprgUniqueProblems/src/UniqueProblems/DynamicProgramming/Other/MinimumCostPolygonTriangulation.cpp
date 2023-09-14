@@ -2,8 +2,8 @@
 
 #include <Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.hpp>
 
-using namespace alba::TwoDimensions;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
+using namespace alba::TwoDimensions;
 using namespace std;
 
 namespace alba {

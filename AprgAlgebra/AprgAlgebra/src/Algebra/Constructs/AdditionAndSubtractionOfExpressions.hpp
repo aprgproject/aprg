@@ -20,6 +20,11 @@ public:
     Term getCombinedTerm();
 
 private:
+    [[nodiscard]] bool doAllSizesMatch(Terms const& mergeParts, Terms const& commonParts) const;
+    void mergeExpressionsByCheckingTwoTermsAtATime(Terms& mergeParts, Terms& commonParts);
+    void retrieveMergeParts(Terms& mergeParts);
+    void retrieveCommonParts(Terms& commonParts);
+    void putItem(Expression const& expression, TermAssociationType const association);
     static void prepareCommonParts(Terms& commonParts);
     static void retrieveMergePart(Term& mergePart, Expression const& expression);
     static void retrieveCommonPart(Term& commonPart, Expression const& expression);
@@ -30,11 +35,6 @@ private:
 
     static bool canBeMerged(
         Term const& mergePart1, Term const& mergePart2, Term const& commonPart1, Term const& commonPart2);
-    [[nodiscard]] bool doAllSizesMatch(Terms const& mergeParts, Terms const& commonParts) const;
-    void mergeExpressionsByCheckingTwoTermsAtATime(Terms& mergeParts, Terms& commonParts);
-    void retrieveMergeParts(Terms& mergeParts);
-    void retrieveCommonParts(Terms& commonParts);
-    void putItem(Expression const& expression, TermAssociationType const association);
     Expressions m_expressions;
     TermAssociationTypes m_associations;
 };

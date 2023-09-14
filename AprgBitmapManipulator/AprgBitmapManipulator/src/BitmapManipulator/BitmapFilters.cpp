@@ -11,14 +11,154 @@
 #include <Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.hpp>
 
 using namespace alba::AprgBitmap::ColorUtilities;
-using namespace alba::mathHelper;
 using namespace alba::TwoDimensions;
+using namespace alba::mathHelper;
 using namespace std;
 
 namespace alba::AprgBitmap {
 
 constexpr int MAX_PEN_CIRCLE_RADIUS_COORDINATE = 5;
 BitmapFilters::BitmapFilters(string const& path) : m_bitmap(path) {}
+BitmapSnippet BitmapFilters::getWholeBitmapSnippet() const { return m_bitmap.getSnippetReadFromFileWholeBitmap(); }
+
+BitmapSnippet BitmapFilters::getBlankSnippet(uint8_t const backgroundColorByte) const {
+    return m_bitmap.createColorFilledSnippetWithSizeOfWholeBitmap(backgroundColorByte);
+}
+
+BitmapSnippet BitmapFilters::getBlankSnippetWithBackground() const {
+    return getBlankSnippet(static_cast<uint8_t>(m_backgroundColor & 0xFF));
+}
+
+BitmapSnippet BitmapFilters::getBlankSnippetWithColor(uint32_t const color) const {
+    return getBlankSnippet(static_cast<uint8_t>(color & 0xFF));
+}
+
+bool BitmapFilters::isBackgroundColor(uint32_t const color) const {
+    return getColorValueOnly(color) == m_backgroundColor;
+}
+
+bool BitmapFilters::isNotBackgroundColor(uint32_t const color) const {
+    return getColorValueOnly(color) != m_backgroundColor;
+}
+
+void BitmapFilters::saveSnippetIntoCurrentBitmapFile(BitmapSnippet const& snippet) const {
+    m_bitmap.setSnippetWriteToFile(snippet);
+}
+
+void BitmapFilters::determineConnectedComponentsByOneComponentAtATime(BitmapSnippet const& inputSnippet) {
+    int currentLabel = 1;
+    deque<BitmapXY> pointsInDeque;
+    inputSnippet.traverse([&](BitmapXY const& currentPoint, uint32_t const currentPointColor) {
+        int const pixelLabel = m_labelForPixels.getLabel(currentPoint);
+        if (isNotBackgroundColor(currentPointColor) && isInitialLabel(pixelLabel)) {
+            m_labelForPixels.setLabel(currentPoint, currentLabel);
+            pointsInDeque.push_front(currentPoint);
+            while (!pointsInDeque.empty()) {
+                BitmapXY const poppedPoint(pointsInDeque.back());
+                pointsInDeque.pop_back();
+                analyzeFourConnectivityNeighborPointsForConnectedComponentsOneComponentAtATime(
+                    inputSnippet, pointsInDeque, poppedPoint, currentLabel);
+            }
+            ++currentLabel;
+        }
+    });
+}
+
+void BitmapFilters::determineConnectedComponentsUsingTwoPass(BitmapSnippet const& inputSnippet) {
+    UnionFindForLabels unionFindForLabels;
+    determineConnectedComponentsUsingTwoPassInFirstPass(inputSnippet, unionFindForLabels);
+    determineConnectedComponentsUsingTwoPassInSecondPass(inputSnippet, unionFindForLabels);
+}
+
+void BitmapFilters::drawBlurredNonPenPoints(
+    PenPoints const& penPoints, BitmapSnippet const& inputSnippet, BitmapSnippet& outputSnippet,
+    double const blurRadius, uint32_t const similarityColorLimit) {
+    inputSnippet.traverse([&](BitmapXY const& bitmapPoint, uint32_t const) {
+        bool const isPenPoint(penPoints.isPenPoint(bitmapPoint));
+        if (!isPenPoint) {
+            outputSnippet.setPixelAt(
+                bitmapPoint,
+                getBlurredColorUsingACircle(
+                    inputSnippet, bitmapPoint, blurRadius,
+                    [&](uint32_t const centerColor, uint32_t const currentColor, BitmapXY const& pointInCircle) {
+                        bool const isPointInCircleAPenPoint(penPoints.isPenPoint(pointInCircle));
+                        return isSimilar(centerColor, currentColor, similarityColorLimit) &&
+                               isNotBackgroundColor(currentColor) && !isPointInCircleAPenPoint;
+                    }));
+        }
+    });
+}
+
+void BitmapFilters::drawBlurredColorsUsingCircles(
+    BitmapSnippet& snippet, double const blurRadius, uint32_t const similarityColorLimit) {
+    BitmapSnippet tempSnippet(snippet);
+    tempSnippet.traverse([&](BitmapXY const& bitmapPoint, uint32_t const) {
+        snippet.setPixelAt(
+            bitmapPoint, getBlurredColorUsingACircle(
+                             tempSnippet, bitmapPoint, blurRadius,
+                             [&](uint32_t const centerColor, uint32_t const currentColor, BitmapXY const&) {
+                                 return isSimilar(centerColor, currentColor, similarityColorLimit) &&
+                                        isNotBackgroundColor(currentColor);
+                             }));
+    });
+}
+
+void BitmapFilters::drawToFillGapsUsingBlur(BitmapSnippet& snippet, double const blurRadius) {
+    BitmapXYs backgroundPoints;
+    snippet.traverse([&](BitmapXY const& bitmapPoint, uint32_t const color) {
+        if (isBackgroundColor(color)) {
+            backgroundPoints.emplace_back(bitmapPoint);
+        }
+    });
+    int previousNumberOfPoints = 0;
+    while (previousNumberOfPoints != static_cast<int>(backgroundPoints.size()) && !backgroundPoints.empty()) {
+        previousNumberOfPoints = backgroundPoints.size();
+        BitmapXYs newBackgroundPoints;
+        BitmapSnippet tempSnippet(snippet);
+        for (BitmapXY const& backgroundPoint : backgroundPoints) {
+            uint32_t const newColor = getBlurredColorUsingACircle(
+                snippet, backgroundPoint, blurRadius,
+                [&](uint32_t const, uint32_t const currentColor, BitmapXY const&) {
+                    return isNotBackgroundColor(currentColor);
+                });
+            if (isBackgroundColor(newColor)) {
+                newBackgroundPoints.emplace_back(backgroundPoint);
+            } else {
+                tempSnippet.setPixelAt(backgroundPoint, newColor);
+            }
+        }
+        backgroundPoints = newBackgroundPoints;
+        snippet = tempSnippet;
+    }
+}
+
+void BitmapFilters::drawNewColorForLabels(BitmapSnippet& snippet) {
+    snippet.traverse([&](BitmapXY const& bitmapPoint, uint32_t const) {
+        int const pixelLabel = m_labelForPixels.getLabel(bitmapPoint);
+        if (!isInitialOrInvalidLabel(pixelLabel)) {
+            snippet.setPixelAt(bitmapPoint, getLabelColor(pixelLabel));
+        }
+    });
+}
+
+void BitmapFilters::saveSnippetIntoFileInTheSameDirectory(BitmapSnippet const& snippet, string const& filename) {
+    AlbaLocalPathHandler const originalBitmapPathHandler(m_bitmap.getConfiguration().getPath());
+    saveSnippetIntoFileWithFullFilePath(snippet, originalBitmapPathHandler.getDirectory() + filename);
+}
+
+void BitmapFilters::saveSnippetIntoFileWithFullFilePath(BitmapSnippet const& snippet, string const& fullFilePath) {
+    AlbaLocalPathHandler originalBitmapPathHandler(m_bitmap.getConfiguration().getPath());
+    AlbaLocalPathHandler const newFilePathHandler(fullFilePath);
+    originalBitmapPathHandler.copyToNewFile(newFilePathHandler.getFullPath());
+    Bitmap const newBitmap(newFilePathHandler.getFullPath());
+    newBitmap.setSnippetWriteToFile(snippet);
+}
+
+void BitmapFilters::setBackgroundColor(uint32_t const backgroundColor) { m_backgroundColor = backgroundColor; }
+
+void BitmapFilters::gatherAndSaveColorDataAndStatistics() {
+    gatherAndSaveColorStatistics(m_bitmap.getConfiguration().getPath());
+}
 
 void BitmapFilters::determinePenPoints(
     PenPoints& penPoints, BitmapSnippet const& inputSnippet, double const penSearchRadius,
@@ -172,145 +312,121 @@ optional<Circle> BitmapFilters::getPossiblePenCircle(
     return result;
 }
 
-BitmapSnippet BitmapFilters::getWholeBitmapSnippet() const { return m_bitmap.getSnippetReadFromFileWholeBitmap(); }
-
-BitmapSnippet BitmapFilters::getBlankSnippet(uint8_t const backgroundColorByte) const {
-    return m_bitmap.createColorFilledSnippetWithSizeOfWholeBitmap(backgroundColorByte);
-}
-
-BitmapSnippet BitmapFilters::getBlankSnippetWithBackground() const {
-    return getBlankSnippet(static_cast<uint8_t>(m_backgroundColor & 0xFF));
-}
-
-BitmapSnippet BitmapFilters::getBlankSnippetWithColor(uint32_t const color) const {
-    return getBlankSnippet(static_cast<uint8_t>(color & 0xFF));
-}
-
-bool BitmapFilters::isBackgroundColor(uint32_t const color) const {
-    return getColorValueOnly(color) == m_backgroundColor;
-}
-
-bool BitmapFilters::isNotBackgroundColor(uint32_t const color) const {
-    return getColorValueOnly(color) != m_backgroundColor;
-}
-
-void BitmapFilters::saveSnippetIntoCurrentBitmapFile(BitmapSnippet const& snippet) const {
-    m_bitmap.setSnippetWriteToFile(snippet);
-}
-
-void BitmapFilters::determineConnectedComponentsByOneComponentAtATime(BitmapSnippet const& inputSnippet) {
-    int currentLabel = 1;
-    deque<BitmapXY> pointsInDeque;
-    inputSnippet.traverse([&](BitmapXY const& currentPoint, uint32_t const currentPointColor) {
-        int const pixelLabel = m_labelForPixels.getLabel(currentPoint);
-        if (isNotBackgroundColor(currentPointColor) && isInitialLabel(pixelLabel)) {
-            m_labelForPixels.setLabel(currentPoint, currentLabel);
-            pointsInDeque.push_front(currentPoint);
-            while (!pointsInDeque.empty()) {
-                BitmapXY const poppedPoint(pointsInDeque.back());
-                pointsInDeque.pop_back();
-                analyzeFourConnectivityNeighborPointsForConnectedComponentsOneComponentAtATime(
-                    inputSnippet, pointsInDeque, poppedPoint, currentLabel);
-            }
-            ++currentLabel;
+uint32_t BitmapFilters::getBlurredColorUsingACircle(
+    BitmapSnippet const& snippet, BitmapXY const& centerXY, double const blurRadius,
+    BlurCondition const& isIncludedInBlur) const {
+    uint32_t const centerColor(snippet.getColorAt(centerXY));
+    double totalBlurredColorRed(0);
+    double totalBlurredColorGreen(0);
+    double totalBlurredColorBlue(0);
+    double totalBlurWeight(0);
+    bool isChanged(false);
+    Circle const circle(convertBitmapXYToPoint(centerXY), blurRadius);
+    BitmapSnippetTraversal const snippetTraversal(snippet);
+    snippetTraversal.traverseCircleArea(circle, [&](BitmapXY const& pointInCircle) {
+        uint32_t const currentColor(snippet.getColorAt(pointInCircle));
+        if (isIncludedInBlur(centerColor, currentColor, pointInCircle)) {
+            isChanged = true;
+            double const distanceFromCenter(twoDimensionsUtilities::getDistance(
+                convertBitmapXYToPoint(centerXY), convertBitmapXYToPoint(pointInCircle)));
+            double const blurWeight(getBlurWeight(distanceFromCenter, blurRadius));
+            totalBlurredColorRed += blurWeight * extractRed(currentColor);
+            totalBlurredColorGreen += blurWeight * extractGreen(currentColor);
+            totalBlurredColorBlue += blurWeight * extractBlue(currentColor);
+            totalBlurWeight += blurWeight;
         }
     });
+    uint32_t blurredColor(m_backgroundColor);
+    if (isChanged) {
+        blurredColor = combineRgbToColor(
+            static_cast<uint8_t>(totalBlurredColorRed / totalBlurWeight),
+            static_cast<uint8_t>(totalBlurredColorGreen / totalBlurWeight),
+            static_cast<uint8_t>(totalBlurredColorBlue / totalBlurWeight));
+    }
+    return blurredColor;
 }
 
-void BitmapFilters::determineConnectedComponentsUsingTwoPass(BitmapSnippet const& inputSnippet) {
-    UnionFindForLabels unionFindForLabels;
-    determineConnectedComponentsUsingTwoPassInFirstPass(inputSnippet, unionFindForLabels);
-    determineConnectedComponentsUsingTwoPassInSecondPass(inputSnippet, unionFindForLabels);
+void BitmapFilters::analyzeFourConnectivityNeighborPointsForConnectedComponentsOneComponentAtATime(
+    BitmapSnippet const& inputSnippet, deque<BitmapXY>& pointsInDeque, BitmapXY const& poppedPoint,
+    int const currentLabel) {
+    // 4-connectivity
+    BitmapXY const neighbor1(poppedPoint.getX() - 1, poppedPoint.getY());
+    BitmapXY const neighbor2(poppedPoint.getX(), poppedPoint.getY() - 1);
+    BitmapXY const neighbor3(poppedPoint.getX() + 1, poppedPoint.getY());
+    BitmapXY const neighbor4(poppedPoint.getX(), poppedPoint.getY() + 1);
+    analyzeNeighborPointForConnectedComponentsOneComponentAtATime(inputSnippet, pointsInDeque, neighbor1, currentLabel);
+    analyzeNeighborPointForConnectedComponentsOneComponentAtATime(inputSnippet, pointsInDeque, neighbor2, currentLabel);
+    analyzeNeighborPointForConnectedComponentsOneComponentAtATime(inputSnippet, pointsInDeque, neighbor3, currentLabel);
+    analyzeNeighborPointForConnectedComponentsOneComponentAtATime(inputSnippet, pointsInDeque, neighbor4, currentLabel);
 }
 
-void BitmapFilters::drawBlurredNonPenPoints(
-    PenPoints const& penPoints, BitmapSnippet const& inputSnippet, BitmapSnippet& outputSnippet,
-    double const blurRadius, uint32_t const similarityColorLimit) {
-    inputSnippet.traverse([&](BitmapXY const& bitmapPoint, uint32_t const) {
-        bool const isPenPoint(penPoints.isPenPoint(bitmapPoint));
-        if (!isPenPoint) {
-            outputSnippet.setPixelAt(
-                bitmapPoint,
-                getBlurredColorUsingACircle(
-                    inputSnippet, bitmapPoint, blurRadius,
-                    [&](uint32_t const centerColor, uint32_t const currentColor, BitmapXY const& pointInCircle) {
-                        bool const isPointInCircleAPenPoint(penPoints.isPenPoint(pointInCircle));
-                        return isSimilar(centerColor, currentColor, similarityColorLimit) &&
-                               isNotBackgroundColor(currentColor) && !isPointInCircleAPenPoint;
-                    }));
+void BitmapFilters::analyzeNeighborPointForConnectedComponentsOneComponentAtATime(
+    BitmapSnippet const& inputSnippet, deque<BitmapXY>& pointsInDeque, BitmapXY const& neighborPoint,
+    int const currentLabel) {
+    if (inputSnippet.isPositionInsideTheSnippet(neighborPoint)) {
+        uint32_t const neighborPointColor = inputSnippet.getColorAt(neighborPoint);
+        int const neighborPointLabel = m_labelForPixels.getLabel(neighborPoint);
+        if (isNotBackgroundColor(neighborPointColor) && isInitialLabel(neighborPointLabel)) {
+            m_labelForPixels.setLabel(neighborPoint, currentLabel);
+            pointsInDeque.push_front(neighborPoint);
         }
-    });
-}
-
-void BitmapFilters::drawBlurredColorsUsingCircles(
-    BitmapSnippet& snippet, double const blurRadius, uint32_t const similarityColorLimit) {
-    BitmapSnippet tempSnippet(snippet);
-    tempSnippet.traverse([&](BitmapXY const& bitmapPoint, uint32_t const) {
-        snippet.setPixelAt(
-            bitmapPoint, getBlurredColorUsingACircle(
-                             tempSnippet, bitmapPoint, blurRadius,
-                             [&](uint32_t const centerColor, uint32_t const currentColor, BitmapXY const&) {
-                                 return isSimilar(centerColor, currentColor, similarityColorLimit) &&
-                                        isNotBackgroundColor(currentColor);
-                             }));
-    });
-}
-
-void BitmapFilters::drawToFillGapsUsingBlur(BitmapSnippet& snippet, double const blurRadius) {
-    BitmapXYs backgroundPoints;
-    snippet.traverse([&](BitmapXY const& bitmapPoint, uint32_t const color) {
-        if (isBackgroundColor(color)) {
-            backgroundPoints.emplace_back(bitmapPoint);
-        }
-    });
-    int previousNumberOfPoints = 0;
-    while (previousNumberOfPoints != static_cast<int>(backgroundPoints.size()) && !backgroundPoints.empty()) {
-        previousNumberOfPoints = backgroundPoints.size();
-        BitmapXYs newBackgroundPoints;
-        BitmapSnippet tempSnippet(snippet);
-        for (BitmapXY const& backgroundPoint : backgroundPoints) {
-            uint32_t const newColor = getBlurredColorUsingACircle(
-                snippet, backgroundPoint, blurRadius,
-                [&](uint32_t const, uint32_t const currentColor, BitmapXY const&) {
-                    return isNotBackgroundColor(currentColor);
-                });
-            if (isBackgroundColor(newColor)) {
-                newBackgroundPoints.emplace_back(backgroundPoint);
-            } else {
-                tempSnippet.setPixelAt(backgroundPoint, newColor);
-            }
-        }
-        backgroundPoints = newBackgroundPoints;
-        snippet = tempSnippet;
     }
 }
 
-void BitmapFilters::drawNewColorForLabels(BitmapSnippet& snippet) {
-    snippet.traverse([&](BitmapXY const& bitmapPoint, uint32_t const) {
-        int const pixelLabel = m_labelForPixels.getLabel(bitmapPoint);
-        if (!isInitialOrInvalidLabel(pixelLabel)) {
-            snippet.setPixelAt(bitmapPoint, getLabelColor(pixelLabel));
+void BitmapFilters::determineConnectedComponentsUsingTwoPassInFirstPass(
+    BitmapSnippet const& inputSnippet, UnionFindForLabels& unionFindForLabels) {
+    int currentLabel = 1;
+    inputSnippet.traverse([&](BitmapXY const& currentPoint, uint32_t const currentPointColor) {
+        if (isNotBackgroundColor(currentPointColor)) {
+            int const smallestNeighborLabel =
+                analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
+                    inputSnippet, unionFindForLabels, currentPoint);
+            if (!isInvalidLabel(smallestNeighborLabel)) {
+                m_labelForPixels.setLabel(currentPoint, smallestNeighborLabel);
+            } else {
+                m_labelForPixels.setLabel(currentPoint, currentLabel);
+                ++currentLabel;
+            }
         }
     });
 }
 
-void BitmapFilters::saveSnippetIntoFileInTheSameDirectory(BitmapSnippet const& snippet, string const& filename) {
-    AlbaLocalPathHandler const originalBitmapPathHandler(m_bitmap.getConfiguration().getPath());
-    saveSnippetIntoFileWithFullFilePath(snippet, originalBitmapPathHandler.getDirectory() + filename);
+void BitmapFilters::determineConnectedComponentsUsingTwoPassInSecondPass(
+    BitmapSnippet const& inputSnippet, UnionFindForLabels const& unionFindForLabels) {
+    inputSnippet.traverse([&](BitmapXY const& currentPoint, uint32_t const currentPointColor) {
+        int const pixelLabel = m_labelForPixels.getLabel(currentPoint);
+        if (isNotBackgroundColor(currentPointColor) && !isInitialLabel(pixelLabel)) {
+            int const smallestLabel = unionFindForLabels.getRoot(pixelLabel);
+            m_labelForPixels.setLabel(currentPoint, smallestLabel);
+        }
+    });
 }
 
-void BitmapFilters::saveSnippetIntoFileWithFullFilePath(BitmapSnippet const& snippet, string const& fullFilePath) {
-    AlbaLocalPathHandler originalBitmapPathHandler(m_bitmap.getConfiguration().getPath());
-    AlbaLocalPathHandler const newFilePathHandler(fullFilePath);
-    originalBitmapPathHandler.copyToNewFile(newFilePathHandler.getFullPath());
-    Bitmap const newBitmap(newFilePathHandler.getFullPath());
-    newBitmap.setSnippetWriteToFile(snippet);
+int BitmapFilters::analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
+    BitmapSnippet const& inputSnippet, UnionFindForLabels& unionFindForLabels, BitmapXY const& neighborPoint) {
+    // 4-connectivity
+    int smallestLabel = INVALID_LABEL_VALUE;
+    BitmapXY const neighbor1(neighborPoint.getX() - 1, neighborPoint.getY());
+    BitmapXY const neighbor2(neighborPoint.getX(), neighborPoint.getY() - 1);
+    int const neighbor1Label = analyzeNeighborPointForConnectedComponentsTwoPassAneReturnLabel(inputSnippet, neighbor1);
+    int const neighbor2Label = analyzeNeighborPointForConnectedComponentsTwoPassAneReturnLabel(inputSnippet, neighbor2);
+    smallestLabel = min(smallestLabel, neighbor1Label);
+    smallestLabel = min(smallestLabel, neighbor2Label);
+    updateUnionFindForLabels(unionFindForLabels, smallestLabel, neighbor1Label, neighbor2Label);
+    return smallestLabel;
 }
 
-void BitmapFilters::setBackgroundColor(uint32_t const backgroundColor) { m_backgroundColor = backgroundColor; }
-
-void BitmapFilters::gatherAndSaveColorDataAndStatistics() {
-    gatherAndSaveColorStatistics(m_bitmap.getConfiguration().getPath());
+int BitmapFilters::analyzeNeighborPointForConnectedComponentsTwoPassAneReturnLabel(
+    BitmapSnippet const& inputSnippet, BitmapXY const& neighborPoint) {
+    int labelResult = INVALID_LABEL_VALUE;
+    if (inputSnippet.isPositionInsideTheSnippet(neighborPoint)) {
+        uint32_t const neighborPointColor = inputSnippet.getColorAt(neighborPoint);
+        int const neighborPointLabel = m_labelForPixels.getLabel(neighborPoint);
+        if (isNotBackgroundColor(neighborPointColor) && !isInitialLabel(neighborPointLabel)) {
+            labelResult = neighborPointLabel;
+        }
+    }
+    return labelResult;
 }
 
 uint32_t BitmapFilters::getBlurredColor(
@@ -439,123 +555,6 @@ bool BitmapFilters::isThisPenCircleBetter(
         isBetter = circleToCheck.getRadius() > circleToCompare.getRadius();
     }
     return isBetter;
-}
-
-uint32_t BitmapFilters::getBlurredColorUsingACircle(
-    BitmapSnippet const& snippet, BitmapXY const& centerXY, double const blurRadius,
-    BlurCondition const& isIncludedInBlur) const {
-    uint32_t const centerColor(snippet.getColorAt(centerXY));
-    double totalBlurredColorRed(0);
-    double totalBlurredColorGreen(0);
-    double totalBlurredColorBlue(0);
-    double totalBlurWeight(0);
-    bool isChanged(false);
-    Circle const circle(convertBitmapXYToPoint(centerXY), blurRadius);
-    BitmapSnippetTraversal const snippetTraversal(snippet);
-    snippetTraversal.traverseCircleArea(circle, [&](BitmapXY const& pointInCircle) {
-        uint32_t const currentColor(snippet.getColorAt(pointInCircle));
-        if (isIncludedInBlur(centerColor, currentColor, pointInCircle)) {
-            isChanged = true;
-            double const distanceFromCenter(twoDimensionsUtilities::getDistance(
-                convertBitmapXYToPoint(centerXY), convertBitmapXYToPoint(pointInCircle)));
-            double const blurWeight(getBlurWeight(distanceFromCenter, blurRadius));
-            totalBlurredColorRed += blurWeight * extractRed(currentColor);
-            totalBlurredColorGreen += blurWeight * extractGreen(currentColor);
-            totalBlurredColorBlue += blurWeight * extractBlue(currentColor);
-            totalBlurWeight += blurWeight;
-        }
-    });
-    uint32_t blurredColor(m_backgroundColor);
-    if (isChanged) {
-        blurredColor = combineRgbToColor(
-            static_cast<uint8_t>(totalBlurredColorRed / totalBlurWeight),
-            static_cast<uint8_t>(totalBlurredColorGreen / totalBlurWeight),
-            static_cast<uint8_t>(totalBlurredColorBlue / totalBlurWeight));
-    }
-    return blurredColor;
-}
-
-void BitmapFilters::analyzeFourConnectivityNeighborPointsForConnectedComponentsOneComponentAtATime(
-    BitmapSnippet const& inputSnippet, deque<BitmapXY>& pointsInDeque, BitmapXY const& poppedPoint,
-    int const currentLabel) {
-    // 4-connectivity
-    BitmapXY const neighbor1(poppedPoint.getX() - 1, poppedPoint.getY());
-    BitmapXY const neighbor2(poppedPoint.getX(), poppedPoint.getY() - 1);
-    BitmapXY const neighbor3(poppedPoint.getX() + 1, poppedPoint.getY());
-    BitmapXY const neighbor4(poppedPoint.getX(), poppedPoint.getY() + 1);
-    analyzeNeighborPointForConnectedComponentsOneComponentAtATime(inputSnippet, pointsInDeque, neighbor1, currentLabel);
-    analyzeNeighborPointForConnectedComponentsOneComponentAtATime(inputSnippet, pointsInDeque, neighbor2, currentLabel);
-    analyzeNeighborPointForConnectedComponentsOneComponentAtATime(inputSnippet, pointsInDeque, neighbor3, currentLabel);
-    analyzeNeighborPointForConnectedComponentsOneComponentAtATime(inputSnippet, pointsInDeque, neighbor4, currentLabel);
-}
-
-void BitmapFilters::analyzeNeighborPointForConnectedComponentsOneComponentAtATime(
-    BitmapSnippet const& inputSnippet, deque<BitmapXY>& pointsInDeque, BitmapXY const& neighborPoint,
-    int const currentLabel) {
-    if (inputSnippet.isPositionInsideTheSnippet(neighborPoint)) {
-        uint32_t const neighborPointColor = inputSnippet.getColorAt(neighborPoint);
-        int const neighborPointLabel = m_labelForPixels.getLabel(neighborPoint);
-        if (isNotBackgroundColor(neighborPointColor) && isInitialLabel(neighborPointLabel)) {
-            m_labelForPixels.setLabel(neighborPoint, currentLabel);
-            pointsInDeque.push_front(neighborPoint);
-        }
-    }
-}
-
-void BitmapFilters::determineConnectedComponentsUsingTwoPassInFirstPass(
-    BitmapSnippet const& inputSnippet, UnionFindForLabels& unionFindForLabels) {
-    int currentLabel = 1;
-    inputSnippet.traverse([&](BitmapXY const& currentPoint, uint32_t const currentPointColor) {
-        if (isNotBackgroundColor(currentPointColor)) {
-            int const smallestNeighborLabel =
-                analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
-                    inputSnippet, unionFindForLabels, currentPoint);
-            if (!isInvalidLabel(smallestNeighborLabel)) {
-                m_labelForPixels.setLabel(currentPoint, smallestNeighborLabel);
-            } else {
-                m_labelForPixels.setLabel(currentPoint, currentLabel);
-                ++currentLabel;
-            }
-        }
-    });
-}
-
-void BitmapFilters::determineConnectedComponentsUsingTwoPassInSecondPass(
-    BitmapSnippet const& inputSnippet, UnionFindForLabels const& unionFindForLabels) {
-    inputSnippet.traverse([&](BitmapXY const& currentPoint, uint32_t const currentPointColor) {
-        int const pixelLabel = m_labelForPixels.getLabel(currentPoint);
-        if (isNotBackgroundColor(currentPointColor) && !isInitialLabel(pixelLabel)) {
-            int const smallestLabel = unionFindForLabels.getRoot(pixelLabel);
-            m_labelForPixels.setLabel(currentPoint, smallestLabel);
-        }
-    });
-}
-
-int BitmapFilters::analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
-    BitmapSnippet const& inputSnippet, UnionFindForLabels& unionFindForLabels, BitmapXY const& neighborPoint) {
-    // 4-connectivity
-    int smallestLabel = INVALID_LABEL_VALUE;
-    BitmapXY const neighbor1(neighborPoint.getX() - 1, neighborPoint.getY());
-    BitmapXY const neighbor2(neighborPoint.getX(), neighborPoint.getY() - 1);
-    int const neighbor1Label = analyzeNeighborPointForConnectedComponentsTwoPassAneReturnLabel(inputSnippet, neighbor1);
-    int const neighbor2Label = analyzeNeighborPointForConnectedComponentsTwoPassAneReturnLabel(inputSnippet, neighbor2);
-    smallestLabel = min(smallestLabel, neighbor1Label);
-    smallestLabel = min(smallestLabel, neighbor2Label);
-    updateUnionFindForLabels(unionFindForLabels, smallestLabel, neighbor1Label, neighbor2Label);
-    return smallestLabel;
-}
-
-int BitmapFilters::analyzeNeighborPointForConnectedComponentsTwoPassAneReturnLabel(
-    BitmapSnippet const& inputSnippet, BitmapXY const& neighborPoint) {
-    int labelResult = INVALID_LABEL_VALUE;
-    if (inputSnippet.isPositionInsideTheSnippet(neighborPoint)) {
-        uint32_t const neighborPointColor = inputSnippet.getColorAt(neighborPoint);
-        int const neighborPointLabel = m_labelForPixels.getLabel(neighborPoint);
-        if (isNotBackgroundColor(neighborPointColor) && !isInitialLabel(neighborPointLabel)) {
-            labelResult = neighborPointLabel;
-        }
-    }
-    return labelResult;
 }
 
 }  // namespace alba::AprgBitmap

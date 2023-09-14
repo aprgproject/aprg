@@ -32,14 +32,6 @@ TEST(
 }
 
 TEST(
-    BinarySearchWithOneComparisonPerIterationTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreDuplicateValues) {
-    ValuesForTest const sortedValues{13, 13, 14, 33, 33, 33, 53, 53, 53, 72, 72, 72, 72, 96, 96};
-    SearchForTest const search(sortedValues);
-
-    EXPECT_EQ(5, search.getIndexOfValue(33));
-}
-
-TEST(
     BinarySearchWithOneComparisonPerIterationTest,
     GetIndexOfValueWorksWhenValueIsNotFoundAndWhenThereAreMultipleValues) {
     testGetIndexOfValueWhenValueIsNotFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
@@ -71,6 +63,14 @@ TEST(
     BinarySearchWithOneComparisonPerIterationTest,
     GetIndexOfValueWithIndicesWorksWhenValueIsFoundAndWhenThereAreMultipleValues) {
     testGetIndexOfValueWithIndicesWhenValueIsFoundWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
+TEST(
+    BinarySearchWithOneComparisonPerIterationTest, GetIndexOfValueWorksWhenValueIsFoundAndWhenThereAreDuplicateValues) {
+    ValuesForTest const sortedValues{13, 13, 14, 33, 33, 33, 53, 53, 53, 72, 72, 72, 72, 96, 96};
+    SearchForTest const search(sortedValues);
+
+    EXPECT_EQ(5, search.getIndexOfValue(33));
 }
 
 }  // namespace alba::algorithm

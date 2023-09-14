@@ -28,9 +28,6 @@ public:
         return currentRoot;
     }
 
-    [[nodiscard]] RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
-    [[nodiscard]] SizeArray const& getSizesOfRootsArray() const { return m_sizesOfRoots; }
-
     [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
         return getRoot(object1) == getRoot(object2);
     }
@@ -43,6 +40,9 @@ public:
             connectRootsBasedOnSize(root2, root1);
         }
     }
+
+    [[nodiscard]] RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
+    [[nodiscard]] SizeArray const& getSizesOfRootsArray() const { return m_sizesOfRoots; }
 
     Object getRootWithPathCompressionOnePass(Object const& object) {
         // no longer const
@@ -102,7 +102,6 @@ private:
 // When does the depth of x increase? Increase by 1 when tree T1 containing x is merged into another tree T2.
 // -> The size of the tree containing x [at least doubles] since size of T2 >= size of T1
 // -> Size of the tree containing x [can double] at most log2 times.
-
 // Other discussions:
 // The efficiency of the union-find structure depends on how the sets are joined.
 // It turns out that we can follow a simple strategy:

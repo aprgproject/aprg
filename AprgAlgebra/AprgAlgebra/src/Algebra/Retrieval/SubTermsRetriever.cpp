@@ -2,7 +2,6 @@
 
 namespace alba::algebra {
 
-TermSet const& SubTermsRetriever::getSubTerms() const { return m_subTerms; }
 void SubTermsRetriever::retrieveFromConstant(Constant const& constant) { m_subTerms.emplace(Term(constant)); }
 void SubTermsRetriever::retrieveFromVariable(Variable const& variable) { m_subTerms.emplace(Term(variable)); }
 void SubTermsRetriever::retrieveFromMonomial(Monomial const& monomial) { m_subTerms.emplace(Term(monomial)); }
@@ -18,6 +17,7 @@ void SubTermsRetriever::retrieveFromFunction(Function const& functionObject) {
     BaseRetriever::retrieveFromFunction(functionObject);
 }
 
+TermSet const& SubTermsRetriever::getSubTerms() const { return m_subTerms; }
 SubTermsRetriever::SubTermsRetriever() = default;
 
 }  // namespace alba::algebra

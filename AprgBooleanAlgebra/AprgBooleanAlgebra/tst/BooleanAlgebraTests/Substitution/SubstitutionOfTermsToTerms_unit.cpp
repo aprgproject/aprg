@@ -7,6 +7,25 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
+TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionForExpressionWorks) {
+    SubstitutionOfTermsToTerms substitution({{"x", "a"}, {"y", true}});
+    Expression expression(createExpressionIfPossible({"x", "&", "y"}));
+
+    Expression verifyExpression(substitution.performSubstitutionForExpression(expression));
+
+    Expression expectExpression(createExpressionIfPossible({"a", "&", true}));
+    EXPECT_EQ(expectExpression, verifyExpression);
+}
+
+TEST(SubstitutionOfTermsToTermsTest, GetTermForTermWorks) {
+    SubstitutionOfTermsToTerms substitution({{"x", false}, {"y", true}});
+
+    EXPECT_EQ(Term(false), substitution.getTermForTerm("x"));
+    EXPECT_EQ(Term(true), substitution.getTermForTerm("y"));
+    EXPECT_EQ(Term(), substitution.getTermForTerm("a"));
+    EXPECT_EQ(Term(), substitution.getTermForTerm("b"));
+}
+
 TEST(SubstitutionOfTermsToTermsTest, ConstructionWorks) {
     SubstitutionOfTermsToTerms substitution1;
     SubstitutionOfTermsToTerms substitution2{{"x", false}, {"y", true}};
@@ -20,40 +39,6 @@ TEST(SubstitutionOfTermsToTermsTest, ConstructionWorks) {
     EXPECT_EQ(2, substitution3.getSize());
     EXPECT_EQ(Term(false), substitution3.getTermForTerm("x"));
     EXPECT_EQ(Term(true), substitution3.getTermForTerm("y"));
-}
-
-TEST(SubstitutionOfTermsToTermsTest, IsEmptyWorks) {
-    SubstitutionOfTermsToTerms substitution1;
-    SubstitutionOfTermsToTerms substitution2({{"x", false}, {"y", true}});
-
-    EXPECT_TRUE(substitution1.isEmpty());
-    EXPECT_FALSE(substitution2.isEmpty());
-}
-
-TEST(SubstitutionOfTermsToTermsTest, IsTermFoundWorks) {
-    SubstitutionOfTermsToTerms substitution({{"x", false}, {"y", true}});
-
-    EXPECT_TRUE(substitution.isTermFound("x"));
-    EXPECT_TRUE(substitution.isTermFound("y"));
-    EXPECT_FALSE(substitution.isTermFound("a"));
-    EXPECT_FALSE(substitution.isTermFound("b"));
-}
-
-TEST(SubstitutionOfTermsToTermsTest, GetSizeWorks) {
-    SubstitutionOfTermsToTerms substitution1;
-    SubstitutionOfTermsToTerms substitution2({{"x", false}, {"y", true}});
-
-    EXPECT_EQ(0, substitution1.getSize());
-    EXPECT_EQ(2, substitution2.getSize());
-}
-
-TEST(SubstitutionOfTermsToTermsTest, GetTermForTermWorks) {
-    SubstitutionOfTermsToTerms substitution({{"x", false}, {"y", true}});
-
-    EXPECT_EQ(Term(false), substitution.getTermForTerm("x"));
-    EXPECT_EQ(Term(true), substitution.getTermForTerm("y"));
-    EXPECT_EQ(Term(), substitution.getTermForTerm("a"));
-    EXPECT_EQ(Term(), substitution.getTermForTerm("b"));
 }
 
 TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionToWorksOnExpression) {
@@ -92,14 +77,29 @@ TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionToWorksOnTerm) {
     EXPECT_EQ(expectTerm4, verifyTerm4);
 }
 
-TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionForExpressionWorks) {
-    SubstitutionOfTermsToTerms substitution({{"x", "a"}, {"y", true}});
-    Expression expression(createExpressionIfPossible({"x", "&", "y"}));
+TEST(SubstitutionOfTermsToTermsTest, GetSizeWorks) {
+    SubstitutionOfTermsToTerms substitution1;
+    SubstitutionOfTermsToTerms substitution2({{"x", false}, {"y", true}});
 
-    Expression verifyExpression(substitution.performSubstitutionForExpression(expression));
+    EXPECT_EQ(0, substitution1.getSize());
+    EXPECT_EQ(2, substitution2.getSize());
+}
 
-    Expression expectExpression(createExpressionIfPossible({"a", "&", true}));
-    EXPECT_EQ(expectExpression, verifyExpression);
+TEST(SubstitutionOfTermsToTermsTest, IsEmptyWorks) {
+    SubstitutionOfTermsToTerms substitution1;
+    SubstitutionOfTermsToTerms substitution2({{"x", false}, {"y", true}});
+
+    EXPECT_TRUE(substitution1.isEmpty());
+    EXPECT_FALSE(substitution2.isEmpty());
+}
+
+TEST(SubstitutionOfTermsToTermsTest, IsTermFoundWorks) {
+    SubstitutionOfTermsToTerms substitution({{"x", false}, {"y", true}});
+
+    EXPECT_TRUE(substitution.isTermFound("x"));
+    EXPECT_TRUE(substitution.isTermFound("y"));
+    EXPECT_FALSE(substitution.isTermFound("a"));
+    EXPECT_FALSE(substitution.isTermFound("b"));
 }
 
 }  // namespace alba::booleanAlgebra

@@ -98,5 +98,4 @@ private:
 // Note that in the general case, it is difficult to find out if the nodes in a graph
 // can be colored using k colors so that no adjacent nodes have the same color.
 // Even when k=3, no efficient algorithm is known but the problem is NP-hard.
-
 }  // namespace alba::algorithm

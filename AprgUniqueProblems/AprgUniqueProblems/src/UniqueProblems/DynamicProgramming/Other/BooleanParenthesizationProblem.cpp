@@ -82,11 +82,6 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
     return result;
 }
 
-inline BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::convertBoolToCount(
-    bool const booleanValue) {
-    return booleanValue ? 1 : 0;
-}
-
 bool BooleanParenthesizationProblem::areSizesCorrect() const { return m_operators.size() + 1 == m_inputValues.size(); }
 
 void BooleanParenthesizationProblem::initialize() {
@@ -95,6 +90,11 @@ void BooleanParenthesizationProblem::initialize() {
         m_inputValues.clear();
         m_operators.clear();
     }
+}
+
+inline BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::convertBoolToCount(
+    bool const booleanValue) {
+    return booleanValue ? 1 : 0;
 }
 
 BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberOfWaysUsingNaiveRecursion(

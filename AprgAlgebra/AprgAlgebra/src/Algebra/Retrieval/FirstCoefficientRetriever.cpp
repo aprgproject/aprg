@@ -2,8 +2,6 @@
 
 namespace alba::algebra {
 
-AlbaNumber const& FirstCoefficientRetriever::getFirstCoefficient() const { return m_firstCoefficient; }
-
 void FirstCoefficientRetriever::retrieveFromEquations(Equations const& equations) {
     if (!m_isValueSet) {
         BaseRetriever::retrieveFromEquations(equations);
@@ -54,6 +52,7 @@ void FirstCoefficientRetriever::retrieveFromPolynomials(Polynomials const& polyn
     }
 }
 
+AlbaNumber const& FirstCoefficientRetriever::getFirstCoefficient() const { return m_firstCoefficient; }
 FirstCoefficientRetriever::FirstCoefficientRetriever() = default;
 
 void FirstCoefficientRetriever::retrieveFromTerm(Term const& term) {

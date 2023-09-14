@@ -12,17 +12,6 @@ using DirectedGraphForTest = DirectedGraphWithListOfEdges<VertexForTest>;
 using FlowNetworkForTest = SinkSourceFlowNetwork<VertexForTest, FlowDataTypeForTest, DirectedGraphForTest>;
 }  // namespace
 
-TEST(FlowNetworkTest, IsAnStCutWorks) {
-    FlowNetworkForTest graph(0, 2);
-    graph.connect(0, 1, 15.25, 3.5);
-    graph.connect(1, 2, 16.25, 4.5);
-
-    EXPECT_FALSE(graph.isAnStCut({1, 2}, {0, 1}));
-    EXPECT_FALSE(graph.isAnStCut({0, 1}, {0, 1}));
-    EXPECT_FALSE(graph.isAnStCut({1, 2}, {1, 2}));
-    EXPECT_TRUE(graph.isAnStCut({0, 1}, {1, 2}));
-}
-
 TEST(FlowNetworkTest, GetSourceVertexWorks) {
     FlowNetworkForTest graph(0, 2);
     graph.connect(0, 1, 15.25, 3.5);
@@ -37,6 +26,17 @@ TEST(FlowNetworkTest, GetSinkVerteWorks) {
     graph.connect(1, 2, 16.25, 4.5);
 
     EXPECT_EQ(2, graph.getSinkVertex());
+}
+
+TEST(FlowNetworkTest, IsAnStCutWorks) {
+    FlowNetworkForTest graph(0, 2);
+    graph.connect(0, 1, 15.25, 3.5);
+    graph.connect(1, 2, 16.25, 4.5);
+
+    EXPECT_FALSE(graph.isAnStCut({1, 2}, {0, 1}));
+    EXPECT_FALSE(graph.isAnStCut({0, 1}, {0, 1}));
+    EXPECT_FALSE(graph.isAnStCut({1, 2}, {1, 2}));
+    EXPECT_TRUE(graph.isAnStCut({0, 1}, {1, 2}));
 }
 
 }  // namespace alba::algorithm

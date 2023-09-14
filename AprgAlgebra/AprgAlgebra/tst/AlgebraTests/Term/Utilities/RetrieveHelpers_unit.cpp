@@ -9,20 +9,19 @@ using namespace alba::algebra::Functions;
 
 namespace alba::algebra {
 
-TEST(RetrieveHelpersTest, HasAnyFunctionsWorks) {
-    Term term1(5);
-    Term term2(Functions::abs(5));
+TEST(RetrieveHelpersTest, RetrieveTermsFromTermsWithDetailsWorks) {
+    TermsWithDetails termsWithDetails{
+        TermWithDetails(Term(10), TermAssociationType::Positive),
+        TermWithDetails(Term(9), TermAssociationType::Negative),
+        TermWithDetails(Term(11), TermAssociationType::Positive)};
 
-    EXPECT_FALSE(hasAnyFunctions(term1));
-    EXPECT_TRUE(hasAnyFunctions(term2));
-}
+    Terms terms;
+    retrieveTermsFromTermsWithDetails(terms, termsWithDetails);
 
-TEST(RetrieveHelpersTest, IsVariableFoundInTermWorks) {
-    Term term1("a");
-    Term term2("x");
-
-    EXPECT_FALSE(isVariableFoundInTerm(term1, "x"));
-    EXPECT_TRUE(isVariableFoundInTerm(term2, "x"));
+    ASSERT_EQ(3U, terms.size());
+    EXPECT_EQ(Term(10), terms[0]);
+    EXPECT_EQ(Term(9), terms[1]);
+    EXPECT_EQ(Term(11), terms[2]);
 }
 
 TEST(RetrieveHelpersTest, GetCoefficientOfMonomialWithNoVariablesWorks) {
@@ -43,43 +42,6 @@ TEST(RetrieveHelpersTest, GetCoefficientOfMonomialWithVariableOnlyWorks) {
     EXPECT_EQ(AlbaNumber(0), getCoefficientOfMonomialWithVariableOnly(polynomial1, "x"));
     EXPECT_EQ(AlbaNumber(516), getCoefficientOfMonomialWithVariableOnly(polynomial2, "a"));
     EXPECT_EQ(AlbaNumber(975), getCoefficientOfMonomialWithVariableOnly(polynomial3, "y"));
-}
-
-TEST(RetrieveHelpersTest, GetCoefficientsForVariablesOnlyWorks) {
-    Polynomial polynomial{
-        Monomial(516, {{"a", 7}}), Monomial(643, {{"b", 8}}), Monomial(587, {{"x", 9}}), Monomial(975, {{"y", 10}})};
-
-    VariableToValueMap variableToValueMap(getCoefficientsForVariablesOnly(polynomial));
-
-    ASSERT_EQ(4U, variableToValueMap.size());
-    auto it = variableToValueMap.cbegin();
-    EXPECT_EQ("a", it->first);
-    EXPECT_EQ(AlbaNumber(516), it->second);
-    ++it;
-    EXPECT_EQ("b", it->first);
-    EXPECT_EQ(AlbaNumber(643), it->second);
-    ++it;
-    EXPECT_EQ("x", it->first);
-    EXPECT_EQ(AlbaNumber(587), it->second);
-    ++it;
-    EXPECT_EQ("y", it->first);
-    EXPECT_EQ(AlbaNumber(975), it->second);
-    ++it;
-}
-
-TEST(RetrieveHelpersTest, RetrieveTermsFromTermsWithDetailsWorks) {
-    TermsWithDetails termsWithDetails{
-        TermWithDetails(Term(10), TermAssociationType::Positive),
-        TermWithDetails(Term(9), TermAssociationType::Negative),
-        TermWithDetails(Term(11), TermAssociationType::Positive)};
-
-    Terms terms;
-    retrieveTermsFromTermsWithDetails(terms, termsWithDetails);
-
-    ASSERT_EQ(3U, terms.size());
-    EXPECT_EQ(Term(10), terms[0]);
-    EXPECT_EQ(Term(9), terms[1]);
-    EXPECT_EQ(Term(11), terms[2]);
 }
 
 TEST(RetrieveHelpersTest, RetrieveSubExpressionsAndSubFunctionsWorks) {
@@ -121,6 +83,44 @@ TEST(RetrieveHelpersTest, GetTermsWithDetailsThatSatisfiesCondition) {
     ASSERT_EQ(1U, termsWithDetailsToVerify.size());
     EXPECT_EQ(Term("z"), getTermConstReferenceFromUniquePointer(termsWithDetailsToVerify[0].baseTermPointer));
     EXPECT_EQ(TermAssociationType::Negative, termsWithDetailsToVerify[0].association);
+}
+
+TEST(RetrieveHelpersTest, GetCoefficientsForVariablesOnlyWorks) {
+    Polynomial polynomial{
+        Monomial(516, {{"a", 7}}), Monomial(643, {{"b", 8}}), Monomial(587, {{"x", 9}}), Monomial(975, {{"y", 10}})};
+
+    VariableToValueMap variableToValueMap(getCoefficientsForVariablesOnly(polynomial));
+
+    ASSERT_EQ(4U, variableToValueMap.size());
+    auto it = variableToValueMap.cbegin();
+    EXPECT_EQ("a", it->first);
+    EXPECT_EQ(AlbaNumber(516), it->second);
+    ++it;
+    EXPECT_EQ("b", it->first);
+    EXPECT_EQ(AlbaNumber(643), it->second);
+    ++it;
+    EXPECT_EQ("x", it->first);
+    EXPECT_EQ(AlbaNumber(587), it->second);
+    ++it;
+    EXPECT_EQ("y", it->first);
+    EXPECT_EQ(AlbaNumber(975), it->second);
+    ++it;
+}
+
+TEST(RetrieveHelpersTest, HasAnyFunctionsWorks) {
+    Term term1(5);
+    Term term2(Functions::abs(5));
+
+    EXPECT_FALSE(hasAnyFunctions(term1));
+    EXPECT_TRUE(hasAnyFunctions(term2));
+}
+
+TEST(RetrieveHelpersTest, IsVariableFoundInTermWorks) {
+    Term term1("a");
+    Term term2("x");
+
+    EXPECT_FALSE(isVariableFoundInTerm(term1, "x"));
+    EXPECT_TRUE(isVariableFoundInTerm(term2, "x"));
 }
 
 }  // namespace alba::algebra

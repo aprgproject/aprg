@@ -70,17 +70,13 @@ private:
 // This is another example of a problem that can be solved in O(nlogn) time using a sweep line algorithm.
 // We go through the points from left to right and maintain a value d: the minimum distance between two points seen so
 // far.
-
 // At each point, we find the nearest point to the left.
 // If the distance is less than d, it is the new minimum distance and we update the value of d.
-
 // If the current point is (x, y) and there is a point to the left within a distance of less than d,
 // the x coordinate of such a point must be between [x-d, x] and the y coordinate must be between [y-d, y+d].
 // Thus, it suffices to only consider points that are located in those ranges, which makes the algorithm efficient.
-
 // The efficiency of the algorithm is based on the fact that the region always contains only O(1) points.
 // We can go through those points in O(logn) time by maintaining a set of points whose x coordinate is between [x-d, x],
 // in increasing order according to their y coordinates.
-
 // The time complexity of the algorithm is O(nlogn), because we go through n points and find for each point the nearest
 // point to the left in O(logn) time.

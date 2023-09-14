@@ -9,23 +9,6 @@ namespace alba::AprgAudio {
 
 NewSamplesBuilder::NewSamplesBuilder(Samples const& oldSamples) : m_oldSamples(oldSamples) {}
 
-void NewSamplesBuilder::retrieveSampleMergingDetails(
-    SamplesMergingDetails& samplesMergingDetails, SearchResultsDetails const& details, Samples const& searchSamples) {
-    int const searchSamplesSize = searchSamples.size();
-    for (SearchResultDetails const& detail : details) {
-        double const midpoint = static_cast<double>(detail.numberOfSamples) / 2;
-        for (int i = 0; i < detail.numberOfSamples && (i + detail.searchIndex) < searchSamplesSize; ++i) {
-            double const distanceFromMidpoint = getPositiveDelta(midpoint, static_cast<double>(i));
-            double const weightForPosition = 1 - distanceFromMidpoint / midpoint;
-            double const searchSampleValue(searchSamples[i + detail.searchIndex]);
-            SampleMergingDetails& newSampleDetail(samplesMergingDetails[i + detail.replicationIndex]);
-            newSampleDetail.isChanged = true;
-            newSampleDetail.totalValue += searchSampleValue * weightForPosition;
-            newSampleDetail.weight += weightForPosition;
-        }
-    }
-}
-
 void NewSamplesBuilder::saveToNewSamples(
     Samples& newSamples, SamplesMergingDetails const& samplesMergingDetails, bool const alwaysPutNewValue) {
     int const sampleSize = min(samplesMergingDetails.size(), newSamples.size());
@@ -40,6 +23,23 @@ void NewSamplesBuilder::saveToNewSamples(
                 getPositiveDelta(newValue, oldSample) < getPositiveDelta(currentSample, oldSample)) {
                 currentSample = newValue;
             }
+        }
+    }
+}
+
+void NewSamplesBuilder::retrieveSampleMergingDetails(
+    SamplesMergingDetails& samplesMergingDetails, SearchResultsDetails const& details, Samples const& searchSamples) {
+    int const searchSamplesSize = searchSamples.size();
+    for (SearchResultDetails const& detail : details) {
+        double const midpoint = static_cast<double>(detail.numberOfSamples) / 2;
+        for (int i = 0; i < detail.numberOfSamples && (i + detail.searchIndex) < searchSamplesSize; ++i) {
+            double const distanceFromMidpoint = getPositiveDelta(midpoint, static_cast<double>(i));
+            double const weightForPosition = 1 - distanceFromMidpoint / midpoint;
+            double const searchSampleValue(searchSamples[i + detail.searchIndex]);
+            SampleMergingDetails& newSampleDetail(samplesMergingDetails[i + detail.replicationIndex]);
+            newSampleDetail.isChanged = true;
+            newSampleDetail.totalValue += searchSampleValue * weightForPosition;
+            newSampleDetail.weight += weightForPosition;
         }
     }
 }

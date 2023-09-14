@@ -49,15 +49,6 @@ StartupLogAnalyzer::StartupLogAnalyzer()
 
 {}
 
-void StartupLogAnalyzer::saveDataTimeToCsv(
-    ofstream& outputCsvFileStream, string const& description, vector<double> const& data) {
-    outputCsvFileStream << description << ",";
-    for (double const value : data) {
-        outputCsvFileStream << value << ",";
-    }
-    outputCsvFileStream << "\n";
-}
-
 void StartupLogAnalyzer::clear() { m_processingAndMessagingTotalDelay = 0; }
 
 void StartupLogAnalyzer::saveDataToCsv(string const& csvPath) {
@@ -122,16 +113,13 @@ void StartupLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBt
     }
 }
 
-double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& beforeTime, BtsLogTime const& afterTime) {
-    BtsLogTime const latency = afterTime - beforeTime;
-    return getTotalSeconds(latency);
-}
-
-double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& btsLogTime) {
-    double const result(
-        static_cast<double>(btsLogTime.getMinutes()) * 1000000 * 60 +
-        static_cast<double>(btsLogTime.getSeconds()) * 1000000 + static_cast<double>(btsLogTime.getMicroSeconds()));
-    return result / 1000000;
+void StartupLogAnalyzer::saveDataTimeToCsv(
+    ofstream& outputCsvFileStream, string const& description, vector<double> const& data) {
+    outputCsvFileStream << description << ",";
+    for (double const value : data) {
+        outputCsvFileStream << value << ",";
+    }
+    outputCsvFileStream << "\n";
 }
 
 void StartupLogAnalyzer::analyzeStartupDelays(string const& lineInLogs, BtsLogTime& previousNotableTime) {
@@ -489,6 +477,18 @@ void StartupLogAnalyzer::analyzeStartupDelays(string const& lineInLogs, BtsLogTi
             state = 1;
         }
     }
+}
+
+double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& beforeTime, BtsLogTime const& afterTime) {
+    BtsLogTime const latency = afterTime - beforeTime;
+    return getTotalSeconds(latency);
+}
+
+double StartupLogAnalyzer::getTotalSeconds(BtsLogTime const& btsLogTime) {
+    double const result(
+        static_cast<double>(btsLogTime.getMinutes()) * 1000000 * 60 +
+        static_cast<double>(btsLogTime.getSeconds()) * 1000000 + static_cast<double>(btsLogTime.getMicroSeconds()));
+    return result / 1000000;
 }
 
 }  // namespace alba

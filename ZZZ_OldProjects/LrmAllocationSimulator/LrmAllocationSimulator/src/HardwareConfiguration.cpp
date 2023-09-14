@@ -288,15 +288,6 @@ void HardwareConfiguration::printDspAllocations(unsigned int const printFlags) {
 AddressToDspMap& HardwareConfiguration::getAddressToDspMapReference() { return m_dspAddressToDspMap; }
 AddressToFspMap& HardwareConfiguration::getAddressToFspMapReference() { return m_fspAddressToFspMap; }
 
-NyquistType HardwareConfiguration::computeNyquistTypeBasedOnDspAddress(unsigned int const dspAddress) {
-    bool const isCpuEven = isEven((dspAddress & 0x00F0) >> 4);
-    return isCpuEven ? NyquistType::TurboNyquist : NyquistType::Nyquist;
-}
-
-SmType HardwareConfiguration::getSmTypeBasedOnAddress(unsigned int const fspAddress) {
-    return ((fspAddress & 0xF000) >> 12 == 1) ? SmType::MSM : SmType::ESM;
-}
-
 void HardwareConfiguration::addFsp(unsigned int const fspAddress) {
     unsigned int const correctFspAddress = fspAddress & 0xFF00;
     FspDetails fspDetails;
@@ -331,6 +322,15 @@ void HardwareConfiguration::setLcgIdOfDsps(LcgIds const& lcgIds) {
         ++lcgIdsIterator;
         ++mapIterator;
     }
+}
+
+NyquistType HardwareConfiguration::computeNyquistTypeBasedOnDspAddress(unsigned int const dspAddress) {
+    bool const isCpuEven = isEven((dspAddress & 0x00F0) >> 4);
+    return isCpuEven ? NyquistType::TurboNyquist : NyquistType::Nyquist;
+}
+
+SmType HardwareConfiguration::getSmTypeBasedOnAddress(unsigned int const fspAddress) {
+    return ((fspAddress & 0xF000) >> 12 == 1) ? SmType::MSM : SmType::ESM;
 }
 
 }  // namespace alba

@@ -26,5 +26,4 @@ private:
 // The string contains the characters of the starting node and all characters of the edges.
 // The starting node has n-1 characters and there are k^n characters in the edges, so the length of the string is k^n +
 // n - 1.
-
 }  // namespace alba

@@ -121,6 +121,56 @@ TEST(DifferentiationForFiniteCalculusTest, DifferentiateWorksForEquation) {
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
+TEST(DifferentiationForFiniteCalculusTest, DifferentiateWorksWithTermRaiseToTerm) {
+    DifferentiationForFiniteCalculus differentiationForX("x");
+    Term termToTest1(createExpressionIfPossible({"n", "^", "n"}));
+    Term termToTest2(createExpressionIfPossible({"n", "^", "x"}));
+    Term termToTest3(createExpressionIfPossible({"x", "^", "n"}));
+    Term termToTest4(createExpressionIfPossible({"x", "^", "x"}));
+
+    Term termToVerify1(differentiationForX.differentiate(termToTest1));
+    Term termToVerify2(differentiationForX.differentiate(termToTest2));
+    Term termToVerify3(differentiationForX.differentiate(termToTest3));
+    Term termToVerify4(differentiationForX.differentiate(termToTest4));
+
+    Term termToExpect1(0);
+    string stringToExpect2("((n^(1[x] + 1))-(n^x))");
+    string stringToExpect3("(((1[x] + 1)^n)-(x^n))");
+    string stringToExpect4("(((1[x] + 1)^(1[x] + 1))-(x^x))");
+    EXPECT_EQ(termToExpect1, termToVerify1);
+    EXPECT_EQ(stringToExpect2, convertToString(termToVerify2));
+    EXPECT_EQ(stringToExpect3, convertToString(termToVerify3));
+    EXPECT_EQ(stringToExpect4, convertToString(termToVerify4));
+}
+
+TEST(DifferentiationForFiniteCalculusTest, DifferentiateFunctionWorks) {
+    DifferentiationForFiniteCalculus differentiationForX("x");
+    Term xPlusOne(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
+
+    Term termToVerify(differentiationForX.differentiate(sin("x")));
+
+    Term termToExpect(createExpressionIfPossible({sin(xPlusOne), "-", sin("x")}));
+    EXPECT_EQ(termToExpect, termToVerify);
+}
+
+TEST(DifferentiationForFiniteCalculusTest, DifferentiateEquationWorks) {
+    DifferentiationForFiniteCalculus differentiationForX("x");
+    Term term1ForEquation1(Polynomial{Monomial(1, {{"x", 6}}), Monomial(-2, {{"x", 1}})});
+    Term term2ForEquation1(Polynomial{Monomial(3, {{"y", 6}}), Monomial(1, {{"y", 5}}), Monomial(-1, {{"y", 2}})});
+    Equation equation1(term1ForEquation1, "=", term2ForEquation1);
+    Term term1ForEquation2(Polynomial{Monomial(3, {{"x", 4}, {"y", 2}}), Monomial(-7, {{"x", 1}, {"y", 3}})});
+    Term term2ForEquation2(Polynomial{Monomial(4, {}), Monomial(8, {{"y", 1}})});
+    Equation equation2(term1ForEquation2, "=", term2ForEquation2);
+
+    Equation equationToVerify1(differentiationForX.differentiate(equation1));
+    Equation equationToVerify2(differentiationForX.differentiate(equation2));
+
+    string stringToExpect1("(6[x^5] + 15[x^4] + 20[x^3] + 15[x^2] + 6[x] + -1) = 0");
+    string stringToExpect2("(12[x^3][y^2] + 18[x^2][y^2] + 12[x][y^2] + -7[y^3] + 3[y^2]) = 0");
+    EXPECT_EQ(stringToExpect1, convertToString(equationToVerify1));
+    EXPECT_EQ(stringToExpect2, convertToString(equationToVerify2));
+}
+
 TEST(DifferentiationForFiniteCalculusTest, DifferentiateMultipleTimesWorksForTerm) {
     DifferentiationForFiniteCalculus differentiationForX("x");
     Term termToTest(Monomial(3, {{"x", 4}}));
@@ -154,6 +204,15 @@ TEST(DifferentiationForFiniteCalculusTest, DifferentiateMultipleTimesWorksForEqu
     EXPECT_EQ(stringToExpect3, convertToString(equationToVerify3));
 }
 
+TEST(DifferentiationForFiniteCalculusTest, DifferentiateVariableWorks) {
+    DifferentiationForFiniteCalculus differentiationForX("x");
+    Polynomial zeroPolynomial(createPolynomialFromNumber(0));
+    Polynomial xPlusOne{Monomial(1, {{"x", 1}}), Monomial(1, {})};
+
+    EXPECT_EQ(xPlusOne, differentiationForX.differentiateVariable(Variable("x")));
+    EXPECT_EQ(zeroPolynomial, differentiationForX.differentiateVariable(Variable("y")));
+}
+
 TEST(DifferentiationForFiniteCalculusTest, DifferentiateTermWorks) {
     DifferentiationForFiniteCalculus differentiationForX("x");
     Term xPlusOne(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
@@ -176,21 +235,6 @@ TEST(DifferentiationForFiniteCalculusTest, DifferentiateTermWorks) {
     EXPECT_EQ(termToExpect3, termToVerify3);
     EXPECT_EQ(termToExpect4, termToVerify4);
     EXPECT_EQ(termToExpect5, termToVerify5);
-}
-
-TEST(DifferentiationForFiniteCalculusTest, DifferentiateConstantWorks) {
-    DifferentiationForFiniteCalculus differentiationForX("x");
-
-    EXPECT_EQ(AlbaNumber(0), differentiationForX.differentiateConstant(Constant(5)));
-}
-
-TEST(DifferentiationForFiniteCalculusTest, DifferentiateVariableWorks) {
-    DifferentiationForFiniteCalculus differentiationForX("x");
-    Polynomial zeroPolynomial(createPolynomialFromNumber(0));
-    Polynomial xPlusOne{Monomial(1, {{"x", 1}}), Monomial(1, {})};
-
-    EXPECT_EQ(xPlusOne, differentiationForX.differentiateVariable(Variable("x")));
-    EXPECT_EQ(zeroPolynomial, differentiationForX.differentiateVariable(Variable("y")));
 }
 
 TEST(DifferentiationForFiniteCalculusTest, DifferentiateMonomialWorks) {
@@ -260,54 +304,10 @@ TEST(DifferentiationForFiniteCalculusTest, DifferentiateExpressionWorks) {
     EXPECT_EQ(termToExpect2, termToVerify2);
 }
 
-TEST(DifferentiationForFiniteCalculusTest, DifferentiateWorksWithTermRaiseToTerm) {
+TEST(DifferentiationForFiniteCalculusTest, DifferentiateConstantWorks) {
     DifferentiationForFiniteCalculus differentiationForX("x");
-    Term termToTest1(createExpressionIfPossible({"n", "^", "n"}));
-    Term termToTest2(createExpressionIfPossible({"n", "^", "x"}));
-    Term termToTest3(createExpressionIfPossible({"x", "^", "n"}));
-    Term termToTest4(createExpressionIfPossible({"x", "^", "x"}));
 
-    Term termToVerify1(differentiationForX.differentiate(termToTest1));
-    Term termToVerify2(differentiationForX.differentiate(termToTest2));
-    Term termToVerify3(differentiationForX.differentiate(termToTest3));
-    Term termToVerify4(differentiationForX.differentiate(termToTest4));
-
-    Term termToExpect1(0);
-    string stringToExpect2("((n^(1[x] + 1))-(n^x))");
-    string stringToExpect3("(((1[x] + 1)^n)-(x^n))");
-    string stringToExpect4("(((1[x] + 1)^(1[x] + 1))-(x^x))");
-    EXPECT_EQ(termToExpect1, termToVerify1);
-    EXPECT_EQ(stringToExpect2, convertToString(termToVerify2));
-    EXPECT_EQ(stringToExpect3, convertToString(termToVerify3));
-    EXPECT_EQ(stringToExpect4, convertToString(termToVerify4));
-}
-
-TEST(DifferentiationForFiniteCalculusTest, DifferentiateFunctionWorks) {
-    DifferentiationForFiniteCalculus differentiationForX("x");
-    Term xPlusOne(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
-
-    Term termToVerify(differentiationForX.differentiate(sin("x")));
-
-    Term termToExpect(createExpressionIfPossible({sin(xPlusOne), "-", sin("x")}));
-    EXPECT_EQ(termToExpect, termToVerify);
-}
-
-TEST(DifferentiationForFiniteCalculusTest, DifferentiateEquationWorks) {
-    DifferentiationForFiniteCalculus differentiationForX("x");
-    Term term1ForEquation1(Polynomial{Monomial(1, {{"x", 6}}), Monomial(-2, {{"x", 1}})});
-    Term term2ForEquation1(Polynomial{Monomial(3, {{"y", 6}}), Monomial(1, {{"y", 5}}), Monomial(-1, {{"y", 2}})});
-    Equation equation1(term1ForEquation1, "=", term2ForEquation1);
-    Term term1ForEquation2(Polynomial{Monomial(3, {{"x", 4}, {"y", 2}}), Monomial(-7, {{"x", 1}, {"y", 3}})});
-    Term term2ForEquation2(Polynomial{Monomial(4, {}), Monomial(8, {{"y", 1}})});
-    Equation equation2(term1ForEquation2, "=", term2ForEquation2);
-
-    Equation equationToVerify1(differentiationForX.differentiate(equation1));
-    Equation equationToVerify2(differentiationForX.differentiate(equation2));
-
-    string stringToExpect1("(6[x^5] + 15[x^4] + 20[x^3] + 15[x^2] + 6[x] + -1) = 0");
-    string stringToExpect2("(12[x^3][y^2] + 18[x^2][y^2] + 12[x][y^2] + -7[y^3] + 3[y^2]) = 0");
-    EXPECT_EQ(stringToExpect1, convertToString(equationToVerify1));
-    EXPECT_EQ(stringToExpect2, convertToString(equationToVerify2));
+    EXPECT_EQ(AlbaNumber(0), differentiationForX.differentiateConstant(Constant(5)));
 }
 
 }  // namespace alba::algebra

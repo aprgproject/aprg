@@ -5,6 +5,18 @@
 
 namespace alba::algebra {
 
+TEST(ExponentsRetrieverTest, RetrieveFromMonomialWorks) {
+    ExponentsRetriever retriever;
+
+    retriever.retrieveFromMonomial(Monomial(34, {{"x", 5}, {"y", 6}}));
+
+    AlbaNumbersSet const& numbersSet(retriever.getExponents());
+    ASSERT_EQ(2U, numbersSet.size());
+    auto it = numbersSet.cbegin();
+    EXPECT_EQ(AlbaNumber(5), *(it++));
+    EXPECT_EQ(AlbaNumber(6), *(it++));
+}
+
 TEST(ExponentsRetrieverTest, RetrieveFromEquationsWorks) {
     ExponentsRetriever retriever;
     Equation equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
@@ -76,18 +88,6 @@ TEST(ExponentsRetrieverTest, RetrieveFromVariableWorks) {
 
     AlbaNumbersSet const& numbersSet(retriever.getExponents());
     EXPECT_TRUE(numbersSet.empty());
-}
-
-TEST(ExponentsRetrieverTest, RetrieveFromMonomialWorks) {
-    ExponentsRetriever retriever;
-
-    retriever.retrieveFromMonomial(Monomial(34, {{"x", 5}, {"y", 6}}));
-
-    AlbaNumbersSet const& numbersSet(retriever.getExponents());
-    ASSERT_EQ(2U, numbersSet.size());
-    auto it = numbersSet.cbegin();
-    EXPECT_EQ(AlbaNumber(5), *(it++));
-    EXPECT_EQ(AlbaNumber(6), *(it++));
 }
 
 TEST(ExponentsRetrieverTest, RetrieveFromPolynomialWorks) {

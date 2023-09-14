@@ -60,7 +60,6 @@ public:
     }
 
     [[nodiscard]] int getSize() const override { return getSize(m_root); }
-    [[nodiscard]] int getNumberOfNodes() const { return getNumberOfNodes(m_root); }
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
     [[nodiscard]] bool doesContain(Key const& key) const override {
@@ -70,6 +69,7 @@ public:
 
     void put(Key const& key, Value const& value) override { put(m_root, key, value, 0); }
     void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyAndReturnIfDeleted(m_root, key, 0); }
+    [[nodiscard]] int getNumberOfNodes() const { return getNumberOfNodes(m_root); }
 
 private:
     [[nodiscard]] Node const* get(NodeUniquePointer const& currentNodePointer, Key const& key, int const index) const {
@@ -210,45 +210,35 @@ private:
 // ---> Each node has R children, on for each possible character.
 // ---> Store values in nodes corresponding to last character in keys.
 // -----> so only the last character has the value for the key
-
 // Search in a trie
 // -> Follow the links corresponding to each character in the key.
 // ---> Search hit: node where search ends has a non-null values.
 // ---> Seach miss: reach null or node where search end has null value.
-
 // Insertion into a trie
 // -> Follow links corresponding to each character in the key.
 // ---> Encounter a null link: create a new node
 // ---> Encounter the last character of the key: set value in that node
-
 // Node: A value, plus references to R nodes
 // -> Neither keys nor characters are not explicitly stored
 // -> characters are implicitly defined by link index
 // -> each node has an array of links and a value
-
 // Trie Performance
 // -> Search hit: Need to examine all L characters for equality. (linear)
 // -> Search miss: Could have mismatch on first character
 // ---> Typical case: examine only a few characters (sublinear)
-
 // Space
 // R null links at each leaf. -> Costly
 // -> but sublinear space possible if many short string share common prefixes
-
 // Bottom line: Fast search hit and even faster search miss, but wastes space.
-
 // Interview question: Design a data structure to perform efficient spell checking
 // -> Solution build a 26-way trie (key=word, value=bit)
-
 // Deletion in an R-way trie
 // -> Find the node corresponding to key and set value to null
 // -> If the node has all null link, remove that node (and recur)
-
 // R-way trie
 // -> Method of choice for small R.
 // -> Too much memory for large R.
 // Challenge: Use less memory e.g. 65536-way trie for Unicode!
-
 // Longest prefix in an R-way trie
 // -> Find longest key in symbol table that is a prefix of query string.
 // ---> Search for query string

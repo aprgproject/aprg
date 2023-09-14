@@ -5,6 +5,38 @@
 
 namespace alba::algebra {
 
+TEST(FunctionsRetrieverTest, RetrieveFromPolynomialWorks) {
+    FunctionsRetriever retriever([](Function const&) { return false; });
+
+    retriever.retrieveFromPolynomial(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
+
+    FunctionsSet const& functionsSet(retriever.getFunctions());
+    EXPECT_TRUE(functionsSet.empty());
+}
+
+TEST(FunctionsRetrieverTest, RetrieveFromFunctionWorks) {
+    FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject) {
+        return functionObject.getFunctionName() == "functionName";
+    };
+    FunctionsRetriever::FunctionCondition conditionThatWillNotMatch = [](Function const& functionObject) {
+        return functionObject.getFunctionName() == "WillNotMatch";
+    };
+    FunctionsRetriever retriever1(conditionThatWillMatch);
+    FunctionsRetriever retriever2(conditionThatWillNotMatch);
+    Function functionObject(
+        "functionName", Term(createExpressionIfPossible({"x", "^", "y"})),
+        [](AlbaNumber const& number) -> AlbaNumber { return number; });
+
+    retriever1.retrieveFromFunction(functionObject);
+    retriever2.retrieveFromFunction(functionObject);
+
+    FunctionsSet const& functionsSets1(retriever1.getFunctions());
+    FunctionsSet const& functionsSets2(retriever2.getFunctions());
+    ASSERT_EQ(1U, functionsSets1.size());
+    EXPECT_EQ(functionObject, *(functionsSets1.begin()));
+    EXPECT_TRUE(functionsSets2.empty());
+}
+
 TEST(FunctionsRetrieverTest, RetrieveFromEquationsWorks) {
     FunctionsRetriever retriever([](Function const&) { return false; });
     Equation equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
@@ -113,15 +145,6 @@ TEST(FunctionsRetrieverTest, RetrieveFromMonomialWorks) {
     EXPECT_TRUE(functionsSet.empty());
 }
 
-TEST(FunctionsRetrieverTest, RetrieveFromPolynomialWorks) {
-    FunctionsRetriever retriever([](Function const&) { return false; });
-
-    retriever.retrieveFromPolynomial(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
-
-    FunctionsSet const& functionsSet(retriever.getFunctions());
-    EXPECT_TRUE(functionsSet.empty());
-}
-
 TEST(FunctionsRetrieverTest, RetrieveFromExpressionWorks) {
     FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject) {
         return functionObject.getFunctionName() == "functionName";
@@ -138,29 +161,6 @@ TEST(FunctionsRetrieverTest, RetrieveFromExpressionWorks) {
 
     retriever1.retrieveFromExpression(expression);
     retriever2.retrieveFromExpression(expression);
-
-    FunctionsSet const& functionsSets1(retriever1.getFunctions());
-    FunctionsSet const& functionsSets2(retriever2.getFunctions());
-    ASSERT_EQ(1U, functionsSets1.size());
-    EXPECT_EQ(functionObject, *(functionsSets1.begin()));
-    EXPECT_TRUE(functionsSets2.empty());
-}
-
-TEST(FunctionsRetrieverTest, RetrieveFromFunctionWorks) {
-    FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject) {
-        return functionObject.getFunctionName() == "functionName";
-    };
-    FunctionsRetriever::FunctionCondition conditionThatWillNotMatch = [](Function const& functionObject) {
-        return functionObject.getFunctionName() == "WillNotMatch";
-    };
-    FunctionsRetriever retriever1(conditionThatWillMatch);
-    FunctionsRetriever retriever2(conditionThatWillNotMatch);
-    Function functionObject(
-        "functionName", Term(createExpressionIfPossible({"x", "^", "y"})),
-        [](AlbaNumber const& number) -> AlbaNumber { return number; });
-
-    retriever1.retrieveFromFunction(functionObject);
-    retriever2.retrieveFromFunction(functionObject);
 
     FunctionsSet const& functionsSets1(retriever1.getFunctions());
     FunctionsSet const& functionsSets2(retriever2.getFunctions());

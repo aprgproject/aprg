@@ -7,6 +7,32 @@ using namespace std;
 
 namespace alba::mathHelper {
 
+TEST(PowerHelpersTest, IsPerfectNthPowerForUnsignedIntWorks) {
+    EXPECT_FALSE(isPerfectNthPower(0, 0));
+    EXPECT_TRUE(isPerfectNthPower(1, 1));
+    EXPECT_FALSE(isPerfectNthPower(100, 0));
+    EXPECT_TRUE(isPerfectNthPower(100, 1));
+    EXPECT_TRUE(isPerfectNthPower(100, 2));
+    EXPECT_FALSE(isPerfectNthPower(101, 2));
+    EXPECT_TRUE(isPerfectNthPower(1000, 3));
+    EXPECT_FALSE(isPerfectNthPower(1001, 3));
+}
+
+TEST(PowerHelpersTest, IsPerfectNthPowerForAlbaNumberWorks) {
+    EXPECT_FALSE(isPerfectNthPower(AlbaNumber(0), 0));
+    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(1), 1));
+    EXPECT_FALSE(isPerfectNthPower(AlbaNumber(100), 0));
+    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(100), 1));
+    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(100), 2));
+    EXPECT_FALSE(isPerfectNthPower(AlbaNumber(101), 2));
+    EXPECT_TRUE(isPerfectNthPower(AlbaNumber::createFraction(100, 36), 2));
+    EXPECT_FALSE(isPerfectNthPower(AlbaNumber::createFraction(100, 37), 2));
+    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(1000), 3));
+    EXPECT_FALSE(isPerfectNthPower(AlbaNumber(1001), 3));
+    EXPECT_TRUE(isPerfectNthPower(AlbaNumber::createFraction(1000, 27), 3));
+    EXPECT_FALSE(isPerfectNthPower(AlbaNumber::createFraction(1001, 26), 3));
+}
+
 TEST(PowerHelpersTest, IsPowerOfTwoForUnsignedIntWorks) {
     EXPECT_TRUE(isPowerOfTwo(0));
     EXPECT_TRUE(isPowerOfTwo(1));
@@ -24,6 +50,17 @@ TEST(PowerHelpersTest, IsPerfectSquareForUnsignedIntWorks) {
     EXPECT_FALSE(isPerfectSquare(101));
 }
 
+TEST(PowerHelpersTest, IsPerfectSquareForAlbaNumberWorks) {
+    EXPECT_TRUE(isPerfectSquare(AlbaNumber(0)));
+    EXPECT_TRUE(isPerfectSquare(AlbaNumber(1)));
+    EXPECT_FALSE(isPerfectSquare(AlbaNumber(3)));
+    EXPECT_TRUE(isPerfectSquare(AlbaNumber(4)));
+    EXPECT_TRUE(isPerfectSquare(AlbaNumber(100)));
+    EXPECT_FALSE(isPerfectSquare(AlbaNumber(101)));
+    EXPECT_TRUE(isPerfectSquare(AlbaNumber::createFraction(100, 36)));
+    EXPECT_FALSE(isPerfectSquare(AlbaNumber::createFraction(100, 37)));
+}
+
 TEST(PowerHelpersTest, IsPerfectCubeForUnsignedIntWorks) {
     EXPECT_TRUE(isPerfectCube(0));
     EXPECT_TRUE(isPerfectCube(1));
@@ -33,15 +70,15 @@ TEST(PowerHelpersTest, IsPerfectCubeForUnsignedIntWorks) {
     EXPECT_FALSE(isPerfectCube(1001));
 }
 
-TEST(PowerHelpersTest, IsPerfectNthPowerForUnsignedIntWorks) {
-    EXPECT_FALSE(isPerfectNthPower(0, 0));
-    EXPECT_TRUE(isPerfectNthPower(1, 1));
-    EXPECT_FALSE(isPerfectNthPower(100, 0));
-    EXPECT_TRUE(isPerfectNthPower(100, 1));
-    EXPECT_TRUE(isPerfectNthPower(100, 2));
-    EXPECT_FALSE(isPerfectNthPower(101, 2));
-    EXPECT_TRUE(isPerfectNthPower(1000, 3));
-    EXPECT_FALSE(isPerfectNthPower(1001, 3));
+TEST(PowerHelpersTest, IsPerfectCubeForAlbaNumberWorks) {
+    EXPECT_TRUE(isPerfectCube(AlbaNumber(0)));
+    EXPECT_TRUE(isPerfectCube(AlbaNumber(1)));
+    EXPECT_TRUE(isPerfectCube(AlbaNumber(8)));
+    EXPECT_FALSE(isPerfectCube(AlbaNumber(9)));
+    EXPECT_TRUE(isPerfectCube(AlbaNumber(1000)));
+    EXPECT_FALSE(isPerfectCube(AlbaNumber(1001)));
+    EXPECT_TRUE(isPerfectCube(AlbaNumber::createFraction(1000, 27)));
+    EXPECT_FALSE(isPerfectCube(AlbaNumber::createFraction(1000, 26)));
 }
 
 TEST(PowerHelpersTest, Get2ToThePowerOfWorks) {
@@ -63,6 +100,45 @@ TEST(PowerHelpersTest, GetRaiseToPowerForIntegersWorks) {
     EXPECT_EQ(1, getRaiseToPowerForIntegers(-2, -1));  // this is wrong, but its easier on impl
 }
 
+TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformanceTestWithIncreasingInput) {
+    // Results: ~1s
+    long long result(0);
+    for (long long base = 1; base < 2000; ++base) {
+        for (long long exponent = 1; exponent < 2000; ++exponent) {
+            result = std::max(result, getRaiseToPowerForIntegers(base, exponent));
+        }
+    }
+    EXPECT_EQ(9223358334150761985LL, result);
+}
+
+TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformanceTestWithRandomInput) {
+    // Results: ~3.1s
+    long long result(0);
+    int const minValue(1);
+    int const maxValue(2000);
+    AlbaUniformNonDeterministicRandomizer<long long> randomizer(minValue, maxValue);
+    for (long long iterations = 1; iterations < 10000000LL; ++iterations) {
+        long long const base = randomizer.getRandomValue();
+        long long const exponent = randomizer.getRandomValue();
+        result = max(result, getRaiseToPowerForIntegers(base, exponent));
+    }
+    EXPECT_LT(0LL, result);
+}
+
+TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPerformanceTestWithRandomInput) {
+    // Results: ~3.1s
+    long long result(0);
+    int const minValue(1);
+    int const maxValue(2000);
+    AlbaUniformNonDeterministicRandomizer<long long> randomizer(minValue, maxValue);
+    for (long long iterations = 1; iterations < 10000000LL; ++iterations) {
+        long long const base = randomizer.getRandomValue();
+        long long const exponent = randomizer.getRandomValue();
+        result = max(result, getRaiseToPowerForIntegers(base, exponent));
+    }
+    EXPECT_LT(0LL, result);
+}
+
 TEST(PowerHelpersTest, GetRaiseToPowerForIntegersUsingPowWorks) {
     EXPECT_EQ(1, getRaiseToPowerForIntegersUsingPow(0, 0));
     EXPECT_EQ(1, getRaiseToPowerForIntegersUsingPow(1, 0));
@@ -70,6 +146,17 @@ TEST(PowerHelpersTest, GetRaiseToPowerForIntegersUsingPowWorks) {
     EXPECT_EQ(243, getRaiseToPowerForIntegersUsingPow(3, 5));
     EXPECT_EQ(-128, getRaiseToPowerForIntegersUsingPow(-2, 7));
     EXPECT_EQ(0, getRaiseToPowerForIntegersUsingPow(-2, -1));
+}
+
+TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPerformanceTestWithIncreasingInput) {
+    // Results: ~1.3s
+    long long result(0);
+    for (long long base = 1; base < 2000; ++base) {
+        for (long long exponent = 1; exponent < 2000; ++exponent) {
+            result = std::max(result, getRaiseToPowerForIntegersUsingPow(base, exponent));
+        }
+    }
+    EXPECT_EQ(2146689000LL, result);
 }
 
 TEST(PowerHelpersTest, GetRaiseToPowerBasedOnTypeWorks) {
@@ -137,14 +224,6 @@ TEST(PowerHelpersTest, GetSquareRootUsingNewtonMethodWorks) {
     EXPECT_DOUBLE_EQ(6.0002529841194185, getSquareRootUsingNewtonMethod(36.0, 1.0, 5));
 }
 
-TEST(PowerHelpersTest, GetEToTheXWorks) {
-    EXPECT_DOUBLE_EQ(1, getEToTheX(0.0, 0.0));
-    EXPECT_DOUBLE_EQ(1, getEToTheX(0.0, 1.0));
-    EXPECT_DOUBLE_EQ(1, getEToTheX(1.0, 0.0));
-    EXPECT_DOUBLE_EQ(2.7182815255731922, getEToTheX(1.0, 10.0));
-    EXPECT_DOUBLE_EQ(7.3887125220458554, getEToTheX(2.0, 10.0));
-}
-
 TEST(PowerHelpersTest, GetSquareRootUsingBinarySearchWorks) {
     EXPECT_EQ(0, getSquareRootUsingBinarySearch(0));
     EXPECT_EQ(1, getSquareRootUsingBinarySearch(1));
@@ -159,91 +238,12 @@ TEST(PowerHelpersTest, GetSquareRootUsingBinarySearchWorks) {
     // EXPECT_DOUBLE_EQ(0, getSquareRootUsingBinarySearch(0.0));  // static assert should happen
 }
 
-TEST(PowerHelpersTest, IsPerfectSquareForAlbaNumberWorks) {
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber(0)));
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber(1)));
-    EXPECT_FALSE(isPerfectSquare(AlbaNumber(3)));
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber(4)));
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber(100)));
-    EXPECT_FALSE(isPerfectSquare(AlbaNumber(101)));
-    EXPECT_TRUE(isPerfectSquare(AlbaNumber::createFraction(100, 36)));
-    EXPECT_FALSE(isPerfectSquare(AlbaNumber::createFraction(100, 37)));
-}
-
-TEST(PowerHelpersTest, IsPerfectCubeForAlbaNumberWorks) {
-    EXPECT_TRUE(isPerfectCube(AlbaNumber(0)));
-    EXPECT_TRUE(isPerfectCube(AlbaNumber(1)));
-    EXPECT_TRUE(isPerfectCube(AlbaNumber(8)));
-    EXPECT_FALSE(isPerfectCube(AlbaNumber(9)));
-    EXPECT_TRUE(isPerfectCube(AlbaNumber(1000)));
-    EXPECT_FALSE(isPerfectCube(AlbaNumber(1001)));
-    EXPECT_TRUE(isPerfectCube(AlbaNumber::createFraction(1000, 27)));
-    EXPECT_FALSE(isPerfectCube(AlbaNumber::createFraction(1000, 26)));
-}
-
-TEST(PowerHelpersTest, IsPerfectNthPowerForAlbaNumberWorks) {
-    EXPECT_FALSE(isPerfectNthPower(AlbaNumber(0), 0));
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(1), 1));
-    EXPECT_FALSE(isPerfectNthPower(AlbaNumber(100), 0));
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(100), 1));
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(100), 2));
-    EXPECT_FALSE(isPerfectNthPower(AlbaNumber(101), 2));
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber::createFraction(100, 36), 2));
-    EXPECT_FALSE(isPerfectNthPower(AlbaNumber::createFraction(100, 37), 2));
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber(1000), 3));
-    EXPECT_FALSE(isPerfectNthPower(AlbaNumber(1001), 3));
-    EXPECT_TRUE(isPerfectNthPower(AlbaNumber::createFraction(1000, 27), 3));
-    EXPECT_FALSE(isPerfectNthPower(AlbaNumber::createFraction(1001, 26), 3));
-}
-
-TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformanceTestWithIncreasingInput) {
-    // Results: ~1s
-    long long result(0);
-    for (long long base = 1; base < 2000; ++base) {
-        for (long long exponent = 1; exponent < 2000; ++exponent) {
-            result = std::max(result, getRaiseToPowerForIntegers(base, exponent));
-        }
-    }
-    EXPECT_EQ(9223358334150761985LL, result);
-}
-
-TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPerformanceTestWithIncreasingInput) {
-    // Results: ~1.3s
-    long long result(0);
-    for (long long base = 1; base < 2000; ++base) {
-        for (long long exponent = 1; exponent < 2000; ++exponent) {
-            result = std::max(result, getRaiseToPowerForIntegersUsingPow(base, exponent));
-        }
-    }
-    EXPECT_EQ(2146689000LL, result);
-}
-
-TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformanceTestWithRandomInput) {
-    // Results: ~3.1s
-    long long result(0);
-    int const minValue(1);
-    int const maxValue(2000);
-    AlbaUniformNonDeterministicRandomizer<long long> randomizer(minValue, maxValue);
-    for (long long iterations = 1; iterations < 10000000LL; ++iterations) {
-        long long const base = randomizer.getRandomValue();
-        long long const exponent = randomizer.getRandomValue();
-        result = max(result, getRaiseToPowerForIntegers(base, exponent));
-    }
-    EXPECT_LT(0LL, result);
-}
-
-TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPerformanceTestWithRandomInput) {
-    // Results: ~3.1s
-    long long result(0);
-    int const minValue(1);
-    int const maxValue(2000);
-    AlbaUniformNonDeterministicRandomizer<long long> randomizer(minValue, maxValue);
-    for (long long iterations = 1; iterations < 10000000LL; ++iterations) {
-        long long const base = randomizer.getRandomValue();
-        long long const exponent = randomizer.getRandomValue();
-        result = max(result, getRaiseToPowerForIntegers(base, exponent));
-    }
-    EXPECT_LT(0LL, result);
+TEST(PowerHelpersTest, GetEToTheXWorks) {
+    EXPECT_DOUBLE_EQ(1, getEToTheX(0.0, 0.0));
+    EXPECT_DOUBLE_EQ(1, getEToTheX(0.0, 1.0));
+    EXPECT_DOUBLE_EQ(1, getEToTheX(1.0, 0.0));
+    EXPECT_DOUBLE_EQ(2.7182815255731922, getEToTheX(1.0, 10.0));
+    EXPECT_DOUBLE_EQ(7.3887125220458554, getEToTheX(2.0, 10.0));
 }
 
 }  // namespace alba::mathHelper

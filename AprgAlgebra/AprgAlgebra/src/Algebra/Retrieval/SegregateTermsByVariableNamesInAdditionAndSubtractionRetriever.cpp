@@ -14,19 +14,6 @@ SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::
     initializeWithVariableNames(variableNames);
 }
 
-Term const& SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::getTermWithMultipleVariableNames() const {
-    return m_termWithMultipleVariableNames;
-}
-
-Term const& SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::getRemainingTerm() const {
-    return m_remainingTerm;
-}
-
-SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::VariableNameToTermMap const&
-SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::getVariableNameToTermMap() const {
-    return m_variableNameToTermMap;
-}
-
 void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFromConstant(Constant const& constant) {
     m_remainingTerm += Term(constant);
 }
@@ -53,6 +40,19 @@ void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::retrieveFro
         }
     }
     saveTerm(Term(monomial), numberOfTimesFound, lastVariableNameFound);
+}
+
+Term const& SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::getTermWithMultipleVariableNames() const {
+    return m_termWithMultipleVariableNames;
+}
+
+Term const& SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::getRemainingTerm() const {
+    return m_remainingTerm;
+}
+
+SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::VariableNameToTermMap const&
+SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::getVariableNameToTermMap() const {
+    return m_variableNameToTermMap;
 }
 
 void SegregateTermsByVariableNamesInAdditionAndSubtractionRetriever::initializeWithVariableNames(

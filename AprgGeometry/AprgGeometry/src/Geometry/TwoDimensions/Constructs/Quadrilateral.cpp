@@ -3,8 +3,8 @@
 #include <Common/Container/AlbaValueRange.hpp>
 #include <Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.hpp>
 
-using namespace alba::mathHelper;
 using namespace alba::TwoDimensions::twoDimensionsUtilities;
+using namespace alba::mathHelper;
 using namespace std;
 
 namespace alba::TwoDimensions {
@@ -23,6 +23,33 @@ void Quadrilateral::traverseArea(double const interval, TraverseOperation const&
         AlbaValueRange<double> const rangeForX(startEndOfXAndY.xStart, startEndOfXAndY.xEnd, interval);
         rangeForX.traverse([&](double const x) { traverseOperation(Point(x, startEndOfXAndY.y)); });
     }
+}
+
+Quadrilateral::GroupOfPoints Quadrilateral::getGroupOfPointsBasedOnYValue() const {
+    GroupOfPoints result;
+    Points vertices(m_vertices.begin(), m_vertices.end());
+    if (!vertices.empty()) {
+        sortPointsInYAndThenX(vertices);
+        int groupOfPointsIndex(0);
+        Point previousPoint(vertices.front());
+        result.emplace_back();
+        result[groupOfPointsIndex].emplace_back(vertices.front());
+        for (auto it = vertices.cbegin() + 1; it != vertices.cend(); ++it) {
+            Point const& currentPoint(*it);
+            if (isAlmostEqual(currentPoint.getY(), previousPoint.getY())) {
+                result[groupOfPointsIndex].emplace_back(currentPoint);
+            } else {
+                result.emplace_back();
+                ++groupOfPointsIndex;
+                result[groupOfPointsIndex].emplace_back(currentPoint);
+            }
+            previousPoint = currentPoint;
+        }
+        for (Points& pointsInResult : result) {
+            sort(pointsInResult.begin(), pointsInResult.end());
+        }
+    }
+    return result;
 }
 
 Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXs(
@@ -224,33 +251,6 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor4Points(
             rangeForY.traverse([&](double const y) {
                 result.emplace_back(line3To4.calculateXFromY(y), line2To4.calculateXFromY(y), y);
             });
-        }
-    }
-    return result;
-}
-
-Quadrilateral::GroupOfPoints Quadrilateral::getGroupOfPointsBasedOnYValue() const {
-    GroupOfPoints result;
-    Points vertices(m_vertices.begin(), m_vertices.end());
-    if (!vertices.empty()) {
-        sortPointsInYAndThenX(vertices);
-        int groupOfPointsIndex(0);
-        Point previousPoint(vertices.front());
-        result.emplace_back();
-        result[groupOfPointsIndex].emplace_back(vertices.front());
-        for (auto it = vertices.cbegin() + 1; it != vertices.cend(); ++it) {
-            Point const& currentPoint(*it);
-            if (isAlmostEqual(currentPoint.getY(), previousPoint.getY())) {
-                result[groupOfPointsIndex].emplace_back(currentPoint);
-            } else {
-                result.emplace_back();
-                ++groupOfPointsIndex;
-                result[groupOfPointsIndex].emplace_back(currentPoint);
-            }
-            previousPoint = currentPoint;
-        }
-        for (Points& pointsInResult : result) {
-            sort(pointsInResult.begin(), pointsInResult.end());
         }
     }
     return result;

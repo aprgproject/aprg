@@ -112,74 +112,6 @@ void CPlusPlusFileFixer::processFile(string const& path) {
     writeFile(path);
 }
 
-bool CPlusPlusFileFixer::isOtherLibraryHeaders(string const& header) {
-    bool result(false);
-    if (isLinuxHeader(header) || isWindowsHeader(header) || isGtestHeader(header) || isQtHeader(header)) {
-        result = true;
-    }
-    return result;
-}
-
-void CPlusPlusFileFixer::notifyIfThereAreCommentsInHeader(string const& path, string const& line) {
-    if (isStringFoundCaseSensitive(line, "//")) {
-        cout << "CHECK THIS: Header comments on:[" << path << "] in line:[" << line << "]\n";
-    }
-}
-
-bool CPlusPlusFileFixer::isLineWithALoopStart(string const& line) {
-    bool result(false);
-    if (isStringFoundCaseSensitive(line, "for(") || isStringFoundCaseSensitive(line, "while(")) {
-        result = true;
-    }
-    return result;
-}
-
-bool CPlusPlusFileFixer::isLineWithALoopEnd(string const& line) {
-    bool result(false);
-    if (isStringFoundCaseSensitive(line, "}") && !isStringFoundCaseSensitive(line, "{")) {
-        result = true;
-    }
-    return result;
-}
-
-bool CPlusPlusFileFixer::isPathIgnored(string const& path) {
-    bool result(false);
-    if (isStringFoundCaseSensitive(path, "ACodeReview") || isStringFoundCaseSensitive(path, "AllCommonCMakeFiles") ||
-        isStringFoundCaseSensitive(path, "CImg") || isStringFoundCaseSensitive(path, "curl-7.38.0") ||
-        isStringFoundCaseSensitive(path, "CurlCpp") || isStringFoundCaseSensitive(path, "gsl1.8") ||
-        isStringFoundCaseSensitive(path, "gtest-1.7.0") || isStringFoundCaseSensitive(path, "plantumlqeditor") ||
-        isStringFoundCaseSensitive(path, "zlib128")) {
-        result = true;
-    }
-    return result;
-}
-
-bool CPlusPlusFileFixer::isCPlusPlusHeader(string const& header) {
-    return listOfCPlusPlusHeaders.find(header) != listOfCPlusPlusHeaders.cend();
-}
-
-bool CPlusPlusFileFixer::isLinuxHeader(string const& header) {
-    return listOfLinuxHeaders.find(header) != listOfLinuxHeaders.cend() || isStringFoundCaseSensitive(header, "sys/");
-}
-
-bool CPlusPlusFileFixer::isWindowsHeader(string const& header) {
-    return listOfWindowsHeaders.find(header) != listOfWindowsHeaders.cend();
-}
-
-bool CPlusPlusFileFixer::isGtestHeader(string const& header) { return isStringFoundCaseSensitive(header, "gtest"); }
-
-bool CPlusPlusFileFixer::isQtHeader(string const& header) {
-    bool result(false);
-    AlbaLocalPathHandler const headerFileHandler(header);
-    if (header.length() >= 2) {
-        if ('Q' == header[0] && ('t' == header[1] || isCapitalLetter(header[1])) &&
-            headerFileHandler.getExtension().empty()) {
-            result = true;
-        }
-    }
-    return result;
-}
-
 void CPlusPlusFileFixer::notifyIfAlbaDebugHeaderExistInProductionCode(string const& path) const {
     bool const isAlbaDebugHeaderFound =
         (find(
@@ -418,6 +350,74 @@ void CPlusPlusFileFixer::writeFile(string const& path) {
     for (string const& line : m_linesAfterTheHeader) {
         outputLogFileStream << line << "\n";
     }
+}
+
+bool CPlusPlusFileFixer::isOtherLibraryHeaders(string const& header) {
+    bool result(false);
+    if (isLinuxHeader(header) || isWindowsHeader(header) || isGtestHeader(header) || isQtHeader(header)) {
+        result = true;
+    }
+    return result;
+}
+
+void CPlusPlusFileFixer::notifyIfThereAreCommentsInHeader(string const& path, string const& line) {
+    if (isStringFoundCaseSensitive(line, "//")) {
+        cout << "CHECK THIS: Header comments on:[" << path << "] in line:[" << line << "]\n";
+    }
+}
+
+bool CPlusPlusFileFixer::isLineWithALoopStart(string const& line) {
+    bool result(false);
+    if (isStringFoundCaseSensitive(line, "for(") || isStringFoundCaseSensitive(line, "while(")) {
+        result = true;
+    }
+    return result;
+}
+
+bool CPlusPlusFileFixer::isLineWithALoopEnd(string const& line) {
+    bool result(false);
+    if (isStringFoundCaseSensitive(line, "}") && !isStringFoundCaseSensitive(line, "{")) {
+        result = true;
+    }
+    return result;
+}
+
+bool CPlusPlusFileFixer::isPathIgnored(string const& path) {
+    bool result(false);
+    if (isStringFoundCaseSensitive(path, "ACodeReview") || isStringFoundCaseSensitive(path, "AllCommonCMakeFiles") ||
+        isStringFoundCaseSensitive(path, "CImg") || isStringFoundCaseSensitive(path, "curl-7.38.0") ||
+        isStringFoundCaseSensitive(path, "CurlCpp") || isStringFoundCaseSensitive(path, "gsl1.8") ||
+        isStringFoundCaseSensitive(path, "gtest-1.7.0") || isStringFoundCaseSensitive(path, "plantumlqeditor") ||
+        isStringFoundCaseSensitive(path, "zlib128")) {
+        result = true;
+    }
+    return result;
+}
+
+bool CPlusPlusFileFixer::isCPlusPlusHeader(string const& header) {
+    return listOfCPlusPlusHeaders.find(header) != listOfCPlusPlusHeaders.cend();
+}
+
+bool CPlusPlusFileFixer::isLinuxHeader(string const& header) {
+    return listOfLinuxHeaders.find(header) != listOfLinuxHeaders.cend() || isStringFoundCaseSensitive(header, "sys/");
+}
+
+bool CPlusPlusFileFixer::isWindowsHeader(string const& header) {
+    return listOfWindowsHeaders.find(header) != listOfWindowsHeaders.cend();
+}
+
+bool CPlusPlusFileFixer::isGtestHeader(string const& header) { return isStringFoundCaseSensitive(header, "gtest"); }
+
+bool CPlusPlusFileFixer::isQtHeader(string const& header) {
+    bool result(false);
+    AlbaLocalPathHandler const headerFileHandler(header);
+    if (header.length() >= 2) {
+        if ('Q' == header[0] && ('t' == header[1] || isCapitalLetter(header[1])) &&
+            headerFileHandler.getExtension().empty()) {
+            result = true;
+        }
+    }
+    return result;
 }
 
 }  // namespace alba

@@ -23,8 +23,8 @@ public:
 class ConcreteAggregate : public Aggregate {
 public:
     explicit ConcreteAggregate(int const size) : m_listPointer(std::make_unique<int[]>(size)), m_count(size) {}
-    [[nodiscard]] int size() const { return m_count; }
     std::unique_ptr<Iterator> createIterator() override;  // defined after Iterator is declared
+    [[nodiscard]] int size() const { return m_count; }
     int getValueAt(int const index) { return m_listPointer[index]; }
 
     // ...
@@ -74,17 +74,14 @@ std::unique_ptr<Iterator> ConcreteAggregate::createIterator() { return std::make
 // ONE LINE NOTE:
 // -> Provide a "iterator object" that can ITERATE and ACCESS elements on an AGGREGATE without EXPOSING its underlying
 // representation.
-
 // Intent:
 // Iterator pattern has behavioral purpose and applies to objects.
 // The pattern provides a way to access the elements of an aggregate object sequentially without exposing its underlying
 // representation.
-
 // When to use (applicability):
 // -> to access an aggregate object's contents without exposing its internal representation
 // -> to support multiple traversals of aggregate objects
 // -> to provide a uniform interface for traversing different aggregate structures (to support polymorphic iteration)
-
 // Consequences:
 // -> It supports variation in the traversal of an aggregate.
 // ---> Complex aggregates may be traversed in many ways (for example in trees, it can be preorder, inorder or
@@ -98,7 +95,6 @@ std::unique_ptr<Iterator> ConcreteAggregate::createIterator() { return std::make
 // -> More than one traversal can be pending on an aggregate
 // ---> An iterator keeps track of its own traversal state.
 // -----> Therefore you can have more than one traversal in progress at once.
-
 // Implementation:
 // -> Who controls the iteration?
 // ---> A fundamental issue is deciding which party controls the iterations, the iterator or the client that uses the
@@ -178,7 +174,6 @@ std::unique_ptr<Iterator> ConcreteAggregate::createIterator() { return std::make
 // -----> Aggregate elements return a concrete iterator as usual.
 // -----> But Leaf elements return an instance of NullIterator.
 // -------> That lets us implement traversal over the entire structure in a uniform way.
-
 // Related Patterns
 // -> [Composite]: Iterators are often applied to recursive structures such as [Composites].
 // -> [FactoryMethod]: Polymorphic iterators rely on factory methods to instantiate.

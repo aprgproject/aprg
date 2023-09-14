@@ -43,21 +43,6 @@ Piece BoardObserver::getPieceFromCell(int const xIndex, int const yIndex) const 
     return Piece(getBestPieceFromChessCellBitValue(getBitValueFromCell(xIndex, yIndex).to_ullong()));
 }
 
-void BoardObserver::retrieveChessCellTopLeftAndBottomRight(
-    XY& chessCellTopLeft, XY& chessCellBottomRight, int const xIndex, int const yIndex) const {
-    double const startX = m_configuration.getTopLeftOfBoard().getX();
-    double const startY = m_configuration.getTopLeftOfBoard().getY();
-    double const endX = m_configuration.getBottomRightOfBoard().getX();
-    double const endY = m_configuration.getBottomRightOfBoard().getY();
-    double const deltaX = (endX - startX) / 8;
-    double const deltaY = (endY - startY) / 8;
-    chessCellTopLeft =
-        XY{static_cast<int>(round(startX + deltaX * xIndex)), static_cast<int>(round(startY + deltaY * yIndex))};
-    chessCellBottomRight =
-        XY{static_cast<int>(round(startX + deltaX * (xIndex + 1))),
-           static_cast<int>(round(startY + deltaY * (yIndex + 1)))};
-}
-
 PieceColorAndType BoardObserver::getBestPieceFromChessCellBitValue(uint64_t const chessCellBitValue) const {
     PieceColorAndTypes bestFitPieces(getBestFitPiecesFromChessCellBitValue(chessCellBitValue));
 
@@ -146,6 +131,21 @@ bool BoardObserver::isBitValueAsserted(
         result = minimum < m_configuration.getBlackColorLimit();
     }
     return result;
+}
+
+void BoardObserver::retrieveChessCellTopLeftAndBottomRight(
+    XY& chessCellTopLeft, XY& chessCellBottomRight, int const xIndex, int const yIndex) const {
+    double const startX = m_configuration.getTopLeftOfBoard().getX();
+    double const startY = m_configuration.getTopLeftOfBoard().getY();
+    double const endX = m_configuration.getBottomRightOfBoard().getX();
+    double const endY = m_configuration.getBottomRightOfBoard().getY();
+    double const deltaX = (endX - startX) / 8;
+    double const deltaY = (endY - startY) / 8;
+    chessCellTopLeft =
+        XY{static_cast<int>(round(startX + deltaX * xIndex)), static_cast<int>(round(startY + deltaY * yIndex))};
+    chessCellBottomRight =
+        XY{static_cast<int>(round(startX + deltaX * (xIndex + 1))),
+           static_cast<int>(round(startY + deltaY * (yIndex + 1)))};
 }
 
 void BoardObserver::initialize(Configuration::Type const type) {

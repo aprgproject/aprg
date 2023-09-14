@@ -44,7 +44,6 @@ private:
 // -------> Result is 1 (if partial sum is zero, add one count for zero digit value)
 // ---> Else "partialSum" <= 9 ((this means the most significant digit should be 1 to 9):
 // -----> Result is 1 (if last digit, add one count if possible)
-
 // 2) Dynamic Programming by Iterative method:
 // -> Create an matrix of counts with size of columns as "targetSumOfDigits"+1 and size of rows as "numberOfDigits"
 // -> At the start, because its for the most significant digit, fill the first row with 1 if possible (note the count
@@ -57,7 +56,6 @@ private:
 // -----> With "digit value" from of 0 to 9:
 // -------> Get the previous count by checking the matrix with "partialSum" - "digit value" and "digit index"-1
 // -> The last entry in the matrix (with indices "targetSumOfDigits" and "numberOfDigits"-1) contains the total count.
-
 // 3) Dynamic Programming by Iterative method and space efficient:
 // -> Create an array of counts with size as "targetSumOfDigits"+1.
 // -> Initially, because its for the most significant digit, initialize with 1 if possible (note the count for zero is
@@ -71,14 +69,11 @@ private:
 // -----> With "digit value" from of 1 to 9 (no need to process zero because the count is 1):
 // -------> Get the previous count by checking the array with "partialSum" - "digit value"
 // -> The last entry in the array (with index "targetSumOfDigits") contains the total count.
-
 // Count of n digit numbers whose sum of digits equals to given sum
-
 // Given two integers ‘n’ and ‘sum’, find count of all n digit numbers with sum of digits as ‘sum’. Leading 0’s are not
 // counted as digits.
 // -> 1 <= n <= 100 and
 // -> 1 <= sum <= 500
-
 // Example:
 // Input:  n = 2, sum = 2
 // -> Output: 2
@@ -88,18 +83,15 @@ private:
 // -> Explanation: Numbers are 14, 23, 32, 41 and 50
 // Input:  n = 3, sum = 6
 // -> Output: 21
-
 // The idea is simple, we subtract all values from 0 to 9 from given sum and recur for sum minus that digit. Below is
 // recursive formula.
 //
 // -> countRec(n, sum) = ∑countRec(n-1, sum-x)
 // ->                         where 0 =< x = 0
-
 // One important observation is, leading 0's must be handled explicitly as they are not counted as digits.
 // So our final count can be written as below.
 // -> finalCount(n, sum) = ∑countRec(n-1, sum-x)
 // ->                        where 1 =< x = 0
-
 // Another Method
 // -> We can easily count n digit numbers whose sum of digit equals to given sum by iterating all n digits
 // -> and checking if current n digit number’s sum is equal to given sum,

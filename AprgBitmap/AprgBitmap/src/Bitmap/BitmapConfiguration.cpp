@@ -12,12 +12,6 @@ using namespace std;
 
 namespace alba::AprgBitmap {
 
-BitmapXY BitmapConfiguration::getUpLeftCornerPoint() { return {0, 0}; }
-
-int BitmapConfiguration::getCoordinateWithinRange(int const coordinate, int const maxLength) {
-    return (coordinate < 0 || maxLength <= 0) ? 0 : (coordinate >= maxLength) ? maxLength - 1 : coordinate;
-}
-
 BitmapXY BitmapConfiguration::getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const {
     return {getXCoordinateWithinTheBitmap(xCoordinate), getYCoordinateWithinTheBitmap(yCoordinate)};
 }
@@ -158,44 +152,10 @@ void BitmapConfiguration::readBitmap(string const& path) {
     }
 }
 
-CompressedMethodType BitmapConfiguration::determineCompressedMethodType(uint32_t const compressedMethodValue) {
-    CompressedMethodType compressedMethodType(CompressedMethodType::Unknown);
-    switch (compressedMethodValue) {
-        case 0:
-            compressedMethodType = CompressedMethodType::RGB;
-            break;
-        case 1:
-            compressedMethodType = CompressedMethodType::RLE8;
-            break;
-        case 2:
-            compressedMethodType = CompressedMethodType::RLE4;
-            break;
-        case 3:
-            compressedMethodType = CompressedMethodType::BITFIELDS;
-            break;
-        case 4:
-            compressedMethodType = CompressedMethodType::JPEG;
-            break;
-        case 5:
-            compressedMethodType = CompressedMethodType::PNG;
-            break;
-        case 6:
-            compressedMethodType = CompressedMethodType::ALPHABITFIELDS;
-            break;
-        case 11:
-            compressedMethodType = CompressedMethodType::CMYK;
-            break;
-        case 12:
-            compressedMethodType = CompressedMethodType::CMYKRLE8;
-            break;
-        case 13:
-            compressedMethodType = CompressedMethodType::CMYKRLE4;
-            break;
-        default:
-            compressedMethodType = CompressedMethodType::Unknown;
-            break;
-    }
-    return compressedMethodType;
+BitmapXY BitmapConfiguration::getUpLeftCornerPoint() { return {0, 0}; }
+
+int BitmapConfiguration::getCoordinateWithinRange(int const coordinate, int const maxLength) {
+    return (coordinate < 0 || maxLength <= 0) ? 0 : (coordinate >= maxLength) ? maxLength - 1 : coordinate;
 }
 
 void BitmapConfiguration::readBitmapFileHeader(AlbaFileReader& fileReader) {
@@ -260,6 +220,46 @@ void BitmapConfiguration::calculateOtherValuesAfterReading() {
     m_paddingForRowMemoryAlignment = (4 - (m_numberOfBytesForDataInRow % 4)) % 4;
     m_numberOfBytesPerRowInFile = m_numberOfBytesForDataInRow + m_paddingForRowMemoryAlignment;
     m_bitMaskForValue = AlbaBitValueUtilities<uint32_t>::generateOnesWithNumberOfBits(m_numberOfBitsPerPixel);
+}
+
+CompressedMethodType BitmapConfiguration::determineCompressedMethodType(uint32_t const compressedMethodValue) {
+    CompressedMethodType compressedMethodType(CompressedMethodType::Unknown);
+    switch (compressedMethodValue) {
+        case 0:
+            compressedMethodType = CompressedMethodType::RGB;
+            break;
+        case 1:
+            compressedMethodType = CompressedMethodType::RLE8;
+            break;
+        case 2:
+            compressedMethodType = CompressedMethodType::RLE4;
+            break;
+        case 3:
+            compressedMethodType = CompressedMethodType::BITFIELDS;
+            break;
+        case 4:
+            compressedMethodType = CompressedMethodType::JPEG;
+            break;
+        case 5:
+            compressedMethodType = CompressedMethodType::PNG;
+            break;
+        case 6:
+            compressedMethodType = CompressedMethodType::ALPHABITFIELDS;
+            break;
+        case 11:
+            compressedMethodType = CompressedMethodType::CMYK;
+            break;
+        case 12:
+            compressedMethodType = CompressedMethodType::CMYKRLE8;
+            break;
+        case 13:
+            compressedMethodType = CompressedMethodType::CMYKRLE4;
+            break;
+        default:
+            compressedMethodType = CompressedMethodType::Unknown;
+            break;
+    }
+    return compressedMethodType;
 }
 
 bool areBitmapConfigurationsCompatibleForChangingPixelData(

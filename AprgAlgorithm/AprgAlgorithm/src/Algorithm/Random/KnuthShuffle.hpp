@@ -66,7 +66,6 @@ public:
 // --->  x (probability that ith element is picked in this iteration)
 // ---> So the probability = ((n-1)/n) x (1/(n-1)) = 1/n
 // We can easily generalize above proof for any other position.
-
 // -> Fisher–Yates shuffle
 // ---> This is (also known as the Knuth shuffle): randomly shuffle a finite set
 // ---> The Fisher–Yates shuffle is an algorithm for generating a random permutation of a finite sequence—in plain

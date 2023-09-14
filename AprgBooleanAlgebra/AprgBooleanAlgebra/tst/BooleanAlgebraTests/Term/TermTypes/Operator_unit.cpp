@@ -6,14 +6,6 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-TEST(OperatorTest, OperatorsAreConstructedCorrectly) {
-    Operator operator1;
-    Operator operator2("test");
-
-    EXPECT_EQ("", operator1.getOperatorString());
-    EXPECT_EQ("test", operator2.getOperatorString());
-}
-
 TEST(OperatorTest, EqualityOperatorWorks) {
     Operator operator1;
     Operator operator2("&");
@@ -40,11 +32,81 @@ TEST(OperatorTest, InequalityOperatorWorks) {
     EXPECT_FALSE(operator2 != operator4);
 }
 
+TEST(OperatorTest, OutputStreamOperatorWorks) {
+    stringstream ss;
+    Operator nullOperator;
+    Operator notOperator("~");
+    Operator andOperator("&");
+    Operator orOperator("|");
+    Operator openingGroupOperator("(");
+    Operator closingGroupOperator(")");
+    Operator invalidOperator("invalid");
+
+    ss << nullOperator << "," << notOperator << "," << andOperator << "," << orOperator << "," << openingGroupOperator
+       << "," << closingGroupOperator << "," << invalidOperator;
+
+    EXPECT_EQ(",~,&,|,(,),invalid", ss.str());
+}
+
 TEST(OperatorTest, LessThanOperatorWorks) {
     EXPECT_FALSE(Operator() < Operator());
     EXPECT_FALSE(Operator("&") < Operator("&"));
     EXPECT_FALSE(Operator("|") < Operator("&"));
     EXPECT_TRUE(Operator("&") < Operator("|"));
+}
+
+TEST(OperatorTest, GetOperatorTypeWorks) {
+    Operator nullOperator;
+    Operator notOperator("~");
+    Operator andOperator("&");
+    Operator orOperator("|");
+    Operator openingGroupOperator("(");
+    Operator closingGroupOperator(")");
+    Operator invalidOperator("invalid");
+
+    EXPECT_EQ(OperatorType::Unknown, nullOperator.getOperatorType());
+    EXPECT_EQ(OperatorType::Not, notOperator.getOperatorType());
+    EXPECT_EQ(OperatorType::And, andOperator.getOperatorType());
+    EXPECT_EQ(OperatorType::Or, orOperator.getOperatorType());
+    EXPECT_EQ(OperatorType::Unknown, openingGroupOperator.getOperatorType());
+    EXPECT_EQ(OperatorType::Unknown, closingGroupOperator.getOperatorType());
+    EXPECT_EQ(OperatorType::Unknown, invalidOperator.getOperatorType());
+}
+
+TEST(OperatorTest, OperatorsAreConstructedCorrectly) {
+    Operator operator1;
+    Operator operator2("test");
+
+    EXPECT_EQ("", operator1.getOperatorString());
+    EXPECT_EQ("test", operator2.getOperatorString());
+}
+
+TEST(OperatorTest, GetOperatorStringValueWorks) {
+    Operator nullOperator;
+    Operator notOperator("~");
+    Operator andOperator("&");
+    Operator orOperator("|");
+    Operator openingGroupOperator("(");
+    Operator closingGroupOperator(")");
+    Operator invalidOperator("invalid");
+
+    EXPECT_TRUE(nullOperator.getOperatorString().empty());
+    EXPECT_EQ("~", notOperator.getOperatorString());
+    EXPECT_EQ("&", andOperator.getOperatorString());
+    EXPECT_EQ("|", orOperator.getOperatorString());
+    EXPECT_EQ("(", openingGroupOperator.getOperatorString());
+    EXPECT_EQ(")", closingGroupOperator.getOperatorString());
+    EXPECT_EQ("invalid", invalidOperator.getOperatorString());
+}
+
+TEST(OperatorTest, SettingANewOperatingStringWorks) {
+    Operator operatorForTest1;
+    Operator operatorForTest2;
+
+    operatorForTest2.setOperatorString("multiply");
+
+    EXPECT_EQ("", operatorForTest1.getOperatorString());
+    EXPECT_EQ("multiply", operatorForTest2.getOperatorString());
 }
 
 TEST(OperatorTest, IsNotWorks) {
@@ -214,68 +276,6 @@ TEST(OperatorTest, IsSameOperatorInputTypeWorks) {
     EXPECT_FALSE(closingGroupOperator.isSameOperatorInputType(OperatorInputType::BinaryOperation));
     EXPECT_FALSE(invalidOperator.isSameOperatorInputType(OperatorInputType::UnaryOperation));
     EXPECT_FALSE(invalidOperator.isSameOperatorInputType(OperatorInputType::BinaryOperation));
-}
-
-TEST(OperatorTest, GetOperatorTypeWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
-
-    EXPECT_EQ(OperatorType::Unknown, nullOperator.getOperatorType());
-    EXPECT_EQ(OperatorType::Not, notOperator.getOperatorType());
-    EXPECT_EQ(OperatorType::And, andOperator.getOperatorType());
-    EXPECT_EQ(OperatorType::Or, orOperator.getOperatorType());
-    EXPECT_EQ(OperatorType::Unknown, openingGroupOperator.getOperatorType());
-    EXPECT_EQ(OperatorType::Unknown, closingGroupOperator.getOperatorType());
-    EXPECT_EQ(OperatorType::Unknown, invalidOperator.getOperatorType());
-}
-
-TEST(OperatorTest, GetOperatorStringValueWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
-
-    EXPECT_TRUE(nullOperator.getOperatorString().empty());
-    EXPECT_EQ("~", notOperator.getOperatorString());
-    EXPECT_EQ("&", andOperator.getOperatorString());
-    EXPECT_EQ("|", orOperator.getOperatorString());
-    EXPECT_EQ("(", openingGroupOperator.getOperatorString());
-    EXPECT_EQ(")", closingGroupOperator.getOperatorString());
-    EXPECT_EQ("invalid", invalidOperator.getOperatorString());
-}
-
-TEST(OperatorTest, SettingANewOperatingStringWorks) {
-    Operator operatorForTest1;
-    Operator operatorForTest2;
-
-    operatorForTest2.setOperatorString("multiply");
-
-    EXPECT_EQ("", operatorForTest1.getOperatorString());
-    EXPECT_EQ("multiply", operatorForTest2.getOperatorString());
-}
-
-TEST(OperatorTest, OutputStreamOperatorWorks) {
-    stringstream ss;
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
-
-    ss << nullOperator << "," << notOperator << "," << andOperator << "," << orOperator << "," << openingGroupOperator
-       << "," << closingGroupOperator << "," << invalidOperator;
-
-    EXPECT_EQ(",~,&,|,(,),invalid", ss.str());
 }
 
 }  // namespace alba::booleanAlgebra

@@ -16,14 +16,14 @@ public:
     explicit TermMatcher(std::string const& content);
     explicit TermMatcher(MatcherType const matcherType);
     TermMatcher(TermType const termType, std::string const& content);
+    [[nodiscard]] MatcherTypeOptional const& getMatcherTypeOptional() const;
+    [[nodiscard]] StringOptional const& getContentOptional() const;
+    [[nodiscard]] TermTypeOptional const& getTermTypeOptional() const;
     friend std::ostream& operator<<(std::ostream& out, TermMatcher const& matcher);
     friend bool operator==(TermMatcher const& matcher, Term const& term);
     friend bool operator==(Term const& term, TermMatcher const& matcher);
     friend bool operator!=(TermMatcher const& matcher, Term const& term);
     friend bool operator!=(Term const& term, TermMatcher const& matcher);
-    [[nodiscard]] TermTypeOptional const& getTermTypeOptional() const;
-    [[nodiscard]] StringOptional const& getContentOptional() const;
-    [[nodiscard]] MatcherTypeOptional const& getMatcherTypeOptional() const;
 
 private:
     TermTypeOptional m_termTypeOptional;

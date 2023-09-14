@@ -9,6 +9,7 @@ template <typename DataType>
 class BaseRetriever {
 public:
     virtual ~BaseRetriever() = default;  // virtual destructor because of virtual functions (vtable exists)
+
     virtual void retrieveFromTerm(Term const& term) {
         if (term.isConstant()) {
             retrieveFromConstant(term.getConstantConstReference());

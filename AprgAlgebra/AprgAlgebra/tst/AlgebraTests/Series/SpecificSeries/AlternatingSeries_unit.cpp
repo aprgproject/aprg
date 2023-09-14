@@ -28,15 +28,6 @@ TEST(AlternatingSeriesTest, GetValueAtIndexWorks) {
     EXPECT_EQ(Term(AlbaNumber::createFraction(7, 12)), series.getValueAtIndex(3));
 }
 
-TEST(AlternatingSeriesTest, IsConvergentWorks) {
-    Term numerator(1);
-    Term denominator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(1, {})});
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    AlternatingSeries series(formula, "n");
-
-    EXPECT_TRUE(series.isConvergent());
-}
-
 TEST(AlternatingSeriesTest, GetRemainderAtIndexWorks) {
     Term numerator(1);
     Term denominator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(1, {})});
@@ -47,6 +38,15 @@ TEST(AlternatingSeriesTest, GetRemainderAtIndexWorks) {
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), series.getRemainderAtIndex(1));
     EXPECT_EQ(Term(AlbaNumber::createFraction(5, 6)), series.getRemainderAtIndex(2));
     EXPECT_EQ(Term(AlbaNumber::createFraction(7, 12)), series.getRemainderAtIndex(3));
+}
+
+TEST(AlternatingSeriesTest, IsConvergentWorks) {
+    Term numerator(1);
+    Term denominator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(1, {})});
+    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
+    AlternatingSeries series(formula, "n");
+
+    EXPECT_TRUE(series.isConvergent());
 }
 
 }  // namespace alba::algebra

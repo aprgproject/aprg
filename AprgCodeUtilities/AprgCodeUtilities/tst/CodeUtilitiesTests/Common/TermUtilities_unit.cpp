@@ -6,6 +6,23 @@ using namespace std;
 
 namespace alba::CodeUtilities {
 
+TEST(TermUtilitiesTest, ReplaceAllForwardsWorks) {
+    Terms terms{
+        Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
+        Term(TermType::Identifier, "identifier3"), Term(TermType::Identifier, "identifier4"),
+        Term(TermType::Identifier, "identifier5")};
+    Patterns const patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
+    Terms const replacementTerms{Term(TermType::Identifier, "identifier7")};
+
+    replaceAllForwards(terms, 0, patterns, replacementTerms);
+
+    ASSERT_EQ(3U, terms.size());
+    auto itTerms = terms.cbegin();
+    EXPECT_EQ(Term(TermType::Identifier, "identifier1"), *itTerms++);
+    EXPECT_EQ(Term(TermType::Identifier, "identifier7"), *itTerms++);
+    EXPECT_EQ(Term(TermType::Identifier, "identifier5"), *itTerms++);
+}
+
 TEST(TermUtilitiesTest, CombineTermsInPlaceWorks) {
     Terms terms{
         Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
@@ -92,23 +109,6 @@ TEST(TermUtilitiesTest, SearchForPatternsBackwardsWorksAsGoingBackward) {
     ASSERT_EQ(1U, patternIndexes.size());
     auto itPatterns = patternIndexes.cbegin();
     EXPECT_EQ(3, *itPatterns++);
-}
-
-TEST(TermUtilitiesTest, ReplaceAllForwardsWorks) {
-    Terms terms{
-        Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
-        Term(TermType::Identifier, "identifier3"), Term(TermType::Identifier, "identifier4"),
-        Term(TermType::Identifier, "identifier5")};
-    Patterns const patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
-    Terms const replacementTerms{Term(TermType::Identifier, "identifier7")};
-
-    replaceAllForwards(terms, 0, patterns, replacementTerms);
-
-    ASSERT_EQ(3U, terms.size());
-    auto itTerms = terms.cbegin();
-    EXPECT_EQ(Term(TermType::Identifier, "identifier1"), *itTerms++);
-    EXPECT_EQ(Term(TermType::Identifier, "identifier7"), *itTerms++);
-    EXPECT_EQ(Term(TermType::Identifier, "identifier5"), *itTerms++);
 }
 
 TEST(TermUtilitiesTest, ConvertToStringWorks) {

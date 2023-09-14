@@ -5,6 +5,9 @@
 namespace alba {
 
 struct SampleClassWithStatic {
+    // mutable static int staticMutableData; // Static data members cannot be mutable.
+    [[nodiscard]] int nonStaticFunctionWithClassDeclaration() const;
+    [[nodiscard]] int nonStaticFunctionWithClassDefinition() const { return nonStaticData; }
     static int staticFunctionWithClassDeclaration();
 
     static int staticFunctionWithClassDefinition() {
@@ -14,15 +17,12 @@ struct SampleClassWithStatic {
         return staticData;
     }
 
-    // mutable static int staticMutableData; // Static data members cannot be mutable.
-    [[nodiscard]] int nonStaticFunctionWithClassDeclaration() const;
-    [[nodiscard]] int nonStaticFunctionWithClassDefinition() const { return nonStaticData; }
-    int nonStaticData = 100;
-    // static int staticData = 200; // Error: non-const static data member must be initialized out of line
-    static int staticData;  // declaration only (incomplete type and must be defined)
     static constexpr int staticConstData = 300;
     static inline int staticInlinedData = 400;  // C++17, this saves the hassle of defining static data
     static inline std::string staticInlinedString = "500";
+    int nonStaticData = 100;
+    // static int staticData = 200; // Error: non-const static data member must be initialized out of line
+    static int staticData;  // declaration only (incomplete type and must be defined)
     // static int staticFunctionWithConst() const; // Static member functions cannot be const.
     // static virtual int staticFunctionWithConst(); // Static member functions cannot be const.
     // static int staticFunctionWithConst() volatile; // Static member functions cannot be const.
@@ -33,7 +33,6 @@ struct SampleClassWithStatic {
 // int SampleClassWithStatic::staticData = 200; // Linker error: multiple definition of
 // `alba::SampleClassWithStatic::staticData' inline int staticInlinedData=400; // Out-of-class definition works too.
 // inline const int myRandomInt = generateRandomInt(); // Calculating a random number at runtime works too!
-
 }  // namespace alba
 
 // Notes:
@@ -46,7 +45,6 @@ struct SampleClassWithStatic {
 // -------> Declares a static data member.
 // -----> (2) static member_function
 // -------> Declares a static member function.
-
 // Explanation
 // -> Static members of a class are not associated with the objects of the class:
 // ---> they are independent variables with static or thread (since C++11) storage duration or regular functions.
@@ -61,13 +59,11 @@ struct SampleClassWithStatic {
 // E.m or E->m,
 // ---> where E is an expression that evaluates to T or T* respectively.
 // -> Static members obey the class member access rules (private, protected, public).
-
 // Static member functions
 // -> Static member functions are not associated with any object. When called, they have no this pointer.
 // -> Static member functions cannot be virtual, const, volatile, or ref-qualified.
 // -> The address of a static member function may be stored in a regular pointer to function, but not in a pointer to
 // member function.
-
 // Static data members
 // -> Static data members are not associated with any object.
 // -> They exist even if no objects of the class have been defined.
@@ -82,7 +78,6 @@ struct SampleClassWithStatic {
 // -> A static data member may be declared inline.
 // ---> An inline static data member can be defined in the class definition and may specify an initializer.
 // ---> It does not need an out-of-class definition.
-
 // Constant static members
 // -> If a static data member of integral or enumeration type is declared const (and not volatile),
 // ---> it can be initialized with an initializer in which every expression is a constant expression, right inside the

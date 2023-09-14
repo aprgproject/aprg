@@ -85,7 +85,6 @@ private:
 // Find the Minimum length Unsorted Subarray, sorting which makes the complete array sorted
 // Given an unsorted array arr[0..n-1] of size n,
 // find the minimum length subarray arr[s..e] such that sorting this subarray makes the whole array sorted.
-
 // Solution:
 // 1) Find the candidate unsorted subarray
 // a) Scan from left to right and find the first element which is greater than the next element.
@@ -104,5 +103,4 @@ private:
 // element.
 // ---> In the above example 1, e is changed to 8 (index of 35)
 // 3) Print s and e.
-
 // Time Complexity: O(n)

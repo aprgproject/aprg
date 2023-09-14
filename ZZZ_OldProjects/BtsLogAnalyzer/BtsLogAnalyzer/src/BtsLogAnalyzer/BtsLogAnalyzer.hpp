@@ -43,10 +43,6 @@ class BtsLogAnalyzer {
 public:
     explicit BtsLogAnalyzer(std::string const& pathOfOutputFile);
     BtsLogAnalyzer();
-    static void processFileForToCountUsersWithTracing(std::string const& filePath);
-    static void processFileForBtsDelayForMikhailKnife(std::string const& filePath);
-    static std::string getNumberAfterThisString(std::string const& mainString, std::string const& stringToSearch);
-    static double getWireSharkTime(std::string const& lineInLogs);
     [[nodiscard]] double getComputedAverageDelay() const;
     void processDirectoryForWireSharkDelay(std::string const& directoryPath);
     void processFileForWireSharkDelay(std::string const& filePath);
@@ -54,6 +50,10 @@ public:
     void processFileForBtsDelayForRlh(std::string const& filePath);
     void processFileForBtsDelayForRlDeletion(std::string const& filePath);
     void processFileForBtsDelayForGrm(std::string const& filePath);
+    static void processFileForToCountUsersWithTracing(std::string const& filePath);
+    static void processFileForBtsDelayForMikhailKnife(std::string const& filePath);
+    static std::string getNumberAfterThisString(std::string const& mainString, std::string const& stringToSearch);
+    static double getWireSharkTime(std::string const& lineInLogs);
 
 private:
     std::ofstream m_outputStream;

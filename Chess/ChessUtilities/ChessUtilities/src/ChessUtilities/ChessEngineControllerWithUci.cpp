@@ -125,22 +125,6 @@ bool ChessEngineControllerWithUci::waitTillReadyAndReturnIfResetWasPerformed() {
     return shouldReset;
 }
 
-string ChessEngineControllerWithUci::constructUciOptionCommand(string const& name, string const& value) {
-    return "setoption name " + name + " value " + value;
-}
-
-string ChessEngineControllerWithUci::getEnumString(ControllerState const state) {
-    switch (state) {
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Initializing, "Initializing")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(
-            ChessEngineControllerWithUci::ControllerState::WaitingForUciOkay, "WaitingForUciOkay")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Idle, "Idle")
-        ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Calculating, "Calculating")
-        default:
-            return "default";
-    }
-}
-
 void ChessEngineControllerWithUci::resetData() {
     changeState(ControllerState::Initializing);
     m_waitingForReadyOkay = false;
@@ -303,6 +287,22 @@ void ChessEngineControllerWithUci::processInCalculating(string const& stringToPr
 void ChessEngineControllerWithUci::putStringProcessingFunctionAsCallBack() {
     m_engineHandler.setAdditionalStepsInProcessingAStringFromEngine(
         [&](string const& stringFromEngine) { processAStringFromEngine(stringFromEngine); });
+}
+
+string ChessEngineControllerWithUci::constructUciOptionCommand(string const& name, string const& value) {
+    return "setoption name " + name + " value " + value;
+}
+
+string ChessEngineControllerWithUci::getEnumString(ControllerState const state) {
+    switch (state) {
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Initializing, "Initializing")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(
+            ChessEngineControllerWithUci::ControllerState::WaitingForUciOkay, "WaitingForUciOkay")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Idle, "Idle")
+        ALBA_MACROS_CASE_ENUM_SHORT_STRING(ChessEngineControllerWithUci::ControllerState::Calculating, "Calculating")
+        default:
+            return "default";
+    }
 }
 
 }  // namespace alba::chess

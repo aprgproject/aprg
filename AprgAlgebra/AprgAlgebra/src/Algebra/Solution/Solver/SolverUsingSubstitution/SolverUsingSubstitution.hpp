@@ -13,11 +13,6 @@ public:
     MultipleVariableSolutionSets calculateSolutionAndReturnSolutionSet(Equations const& equations);
 
 private:
-    static void substituteSolutionSetValuesToEquations(
-        Equations& substitutedEquations, MultipleVariableSolutionSet const& multipleVariableSolutionSet);
-    static SubstitutionOfVariablesToValues getSubstitutionFromSolutionSet(
-        MultipleVariableSolutionSet const& solutionSet);
-    static bool isSolutionCorrect(MultipleVariableSolutionSet const& solutionSet, Equations const& equations);
     [[nodiscard]] bool isTheValueAlreadyExisting(std::string const& variableName, AlbaNumber const& value) const;
     void clear();
     void calculateSolutions(Equations const& equations);
@@ -33,6 +28,11 @@ private:
         MultipleVariableSolutionSet& solutionSet, Equation const& equationToSolve,
         std::string const& variableNameToSolve);
 
+    static void substituteSolutionSetValuesToEquations(
+        Equations& substitutedEquations, MultipleVariableSolutionSet const& multipleVariableSolutionSet);
+    static SubstitutionOfVariablesToValues getSubstitutionFromSolutionSet(
+        MultipleVariableSolutionSet const& solutionSet);
+    static bool isSolutionCorrect(MultipleVariableSolutionSet const& solutionSet, Equations const& equations);
     MultipleVariableSolutionSets m_solutionsWithAllVariables;
     MultipleVariableSolutionSets m_solutionsWithSomeVariables;
     VariableNamesSet m_variablesNames;

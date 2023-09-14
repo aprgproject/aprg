@@ -6,8 +6,8 @@
 
 #include <iostream>
 
-using namespace std;
 using namespace alba::stringHelper;
+using namespace std;
 
 namespace alba {
 
@@ -52,16 +52,6 @@ std::string BtsTraceDecoder::getNearestLowerSymbol(int const address, int const 
     return symbol;
 }
 
-int BtsTraceDecoder::getAddressFromLineInFile(string const& lineInFile, SymbolTableFileType const filetype) {
-    int address = 0;
-    if (filetype == SymbolTableFileType::SymbolTableFromObjdump) {
-        address = convertHexStringToNumber<int>(getStringBeforeThisString(lineInFile, " "));
-    } else if (filetype == SymbolTableFileType::MappedFile) {
-        address = convertHexStringToNumber<int>(getStringInBetweenTwoStrings(lineInFile, "0x", " "));
-    }
-    return address;
-}
-
 void BtsTraceDecoder::saveSymbolTable(std::string const& symbolTableFilePath, SymbolTableFileType const filetype) {
     ifstream symbolTableFileStream(AlbaLocalPathHandler(symbolTableFilePath).getFullPath());
     if (symbolTableFileStream.is_open()) {
@@ -80,6 +70,16 @@ void BtsTraceDecoder::saveLineInSymbolMapIfValid(int const address, std::string 
     if (address != 0) {
         m_symbolMap.emplace(address, lineInFile);
     }
+}
+
+int BtsTraceDecoder::getAddressFromLineInFile(string const& lineInFile, SymbolTableFileType const filetype) {
+    int address = 0;
+    if (filetype == SymbolTableFileType::SymbolTableFromObjdump) {
+        address = convertHexStringToNumber<int>(getStringBeforeThisString(lineInFile, " "));
+    } else if (filetype == SymbolTableFileType::MappedFile) {
+        address = convertHexStringToNumber<int>(getStringInBetweenTwoStrings(lineInFile, "0x", " "));
+    }
+    return address;
 }
 
 BtsTraceDecoder::BtsTraceDecoder() = default;

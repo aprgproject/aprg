@@ -9,54 +9,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-TEST(SubstitutionOfVariablesToTermsTest, ConstructionWorks) {
-    SubstitutionOfVariablesToTerms substitution1;
-    SubstitutionOfVariablesToTerms substitution2{{"x", "y"}};
-    VariablesToTermsMap variableWithExpressions{{"x", "y"}};
-    SubstitutionOfVariablesToTerms substitution3{variableWithExpressions};
-
-    EXPECT_TRUE(substitution1.isEmpty());
-    EXPECT_EQ(1, substitution2.getSize());
-    EXPECT_EQ(Term("y"), substitution2.getTermForVariable("x"));
-    EXPECT_EQ(1, substitution3.getSize());
-    EXPECT_EQ(Term("y"), substitution3.getTermForVariable("x"));
-}
-
-TEST(SubstitutionOfVariablesToTermsTest, IsEmptyWorks) {
-    SubstitutionOfVariablesToTerms substitution1;
-    SubstitutionOfVariablesToTerms substitution2({{"x", "y"}});
-
-    EXPECT_TRUE(substitution1.isEmpty());
-    EXPECT_FALSE(substitution2.isEmpty());
-}
-
-TEST(SubstitutionOfVariablesToTermsTest, IsVariableFoundWorks) {
-    SubstitutionOfVariablesToTerms substitution({{"x", "y"}});
-
-    EXPECT_TRUE(substitution.isVariableFound("x"));
-    EXPECT_FALSE(substitution.isVariableFound("y"));
-    EXPECT_FALSE(substitution.isVariableFound("a"));
-    EXPECT_FALSE(substitution.isVariableFound("b"));
-}
-
-TEST(SubstitutionOfVariablesToTermsTest, GetSizeWorks) {
-    SubstitutionOfVariablesToTerms substitution1;
-    SubstitutionOfVariablesToTerms substitution2({{"x", "y"}});
-
-    EXPECT_EQ(0, substitution1.getSize());
-    EXPECT_EQ(1, substitution2.getSize());
-}
-
-TEST(SubstitutionOfVariablesToTermsTest, GetValueForVariableWorks) {
-    SubstitutionOfVariablesToTerms substitution({{"x", "y"}});
-
-    Term termToExpect("y");
-    EXPECT_EQ(termToExpect, substitution.getTermForVariable("x"));
-    EXPECT_EQ(Term{}, substitution.getTermForVariable("y"));
-    EXPECT_EQ(Term{}, substitution.getTermForVariable("a"));
-    EXPECT_EQ(Term{}, substitution.getTermForVariable("b"));
-}
-
 TEST(SubstitutionOfVariablesToTermsTest, PerformSubstitutionToWorksOnVariable) {
     SubstitutionOfVariablesToTerms substitution({{"x", "y"}});
     Variable variable1;
@@ -258,6 +210,54 @@ TEST(SubstitutionOfVariablesToTermsTest, PerformSubstitutionForFunctionWorks) {
 
     Function expectExpression(abs(Term(32)));
     EXPECT_EQ(expectExpression, verifyFunction);
+}
+
+TEST(SubstitutionOfVariablesToTermsTest, GetValueForVariableWorks) {
+    SubstitutionOfVariablesToTerms substitution({{"x", "y"}});
+
+    Term termToExpect("y");
+    EXPECT_EQ(termToExpect, substitution.getTermForVariable("x"));
+    EXPECT_EQ(Term{}, substitution.getTermForVariable("y"));
+    EXPECT_EQ(Term{}, substitution.getTermForVariable("a"));
+    EXPECT_EQ(Term{}, substitution.getTermForVariable("b"));
+}
+
+TEST(SubstitutionOfVariablesToTermsTest, ConstructionWorks) {
+    SubstitutionOfVariablesToTerms substitution1;
+    SubstitutionOfVariablesToTerms substitution2{{"x", "y"}};
+    VariablesToTermsMap variableWithExpressions{{"x", "y"}};
+    SubstitutionOfVariablesToTerms substitution3{variableWithExpressions};
+
+    EXPECT_TRUE(substitution1.isEmpty());
+    EXPECT_EQ(1, substitution2.getSize());
+    EXPECT_EQ(Term("y"), substitution2.getTermForVariable("x"));
+    EXPECT_EQ(1, substitution3.getSize());
+    EXPECT_EQ(Term("y"), substitution3.getTermForVariable("x"));
+}
+
+TEST(SubstitutionOfVariablesToTermsTest, GetSizeWorks) {
+    SubstitutionOfVariablesToTerms substitution1;
+    SubstitutionOfVariablesToTerms substitution2({{"x", "y"}});
+
+    EXPECT_EQ(0, substitution1.getSize());
+    EXPECT_EQ(1, substitution2.getSize());
+}
+
+TEST(SubstitutionOfVariablesToTermsTest, IsEmptyWorks) {
+    SubstitutionOfVariablesToTerms substitution1;
+    SubstitutionOfVariablesToTerms substitution2({{"x", "y"}});
+
+    EXPECT_TRUE(substitution1.isEmpty());
+    EXPECT_FALSE(substitution2.isEmpty());
+}
+
+TEST(SubstitutionOfVariablesToTermsTest, IsVariableFoundWorks) {
+    SubstitutionOfVariablesToTerms substitution({{"x", "y"}});
+
+    EXPECT_TRUE(substitution.isVariableFound("x"));
+    EXPECT_FALSE(substitution.isVariableFound("y"));
+    EXPECT_FALSE(substitution.isVariableFound("a"));
+    EXPECT_FALSE(substitution.isVariableFound("b"));
 }
 
 }  // namespace alba::algebra

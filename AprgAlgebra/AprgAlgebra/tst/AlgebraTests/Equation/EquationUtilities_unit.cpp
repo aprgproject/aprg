@@ -8,6 +8,27 @@ using namespace std;
 
 namespace alba::algebra {
 
+TEST(EquationUtilitiesTest, BuildEquationIfPossibleWorks) {
+    Equation expectedEquation("a", "=", "b");
+
+    EXPECT_EQ(expectedEquation, buildEquationIfPossible("a=b"));
+}
+
+TEST(EquationUtilitiesTest, GetEquationOperatorCharactersWorks) { EXPECT_EQ("!=<>", getEquationOperatorCharacters()); }
+
+TEST(EquationUtilitiesTest, GetReverseEquationOperatorStringWorks) {
+    EXPECT_EQ("", getReverseEquationOperatorString(""));
+    EXPECT_EQ("=", getReverseEquationOperatorString("="));
+    EXPECT_EQ("==", getReverseEquationOperatorString("=="));
+    EXPECT_EQ("!=", getReverseEquationOperatorString("!="));
+    EXPECT_EQ(">", getReverseEquationOperatorString("<"));
+    EXPECT_EQ("<", getReverseEquationOperatorString(">"));
+    ;
+    EXPECT_EQ(">=", getReverseEquationOperatorString("<="));
+    EXPECT_EQ("<=", getReverseEquationOperatorString(">="));
+    EXPECT_EQ("!!", getReverseEquationOperatorString("!!"));
+}
+
 TEST(EquationUtilitiesTest, IsEquationOperatorStringWorks) {
     EXPECT_FALSE(isEquationOperatorString(""));
     EXPECT_TRUE(isEquationOperatorString("="));
@@ -191,27 +212,6 @@ TEST(EquationUtilitiesTest, DoesAllEquationsHaveEqualityOperatorWorks) {
     EXPECT_TRUE(doesAllEquationsHaveEqualityOperator(Equations{equation1, equation2}));
     EXPECT_TRUE(doesAllEquationsHaveEqualityOperator(Equations{equation1, equation1, equation1, equation1}));
     EXPECT_FALSE(doesAllEquationsHaveEqualityOperator(Equations{equation1, equation1, equation1, equation3}));
-}
-
-TEST(EquationUtilitiesTest, GetEquationOperatorCharactersWorks) { EXPECT_EQ("!=<>", getEquationOperatorCharacters()); }
-
-TEST(EquationUtilitiesTest, GetReverseEquationOperatorStringWorks) {
-    EXPECT_EQ("", getReverseEquationOperatorString(""));
-    EXPECT_EQ("=", getReverseEquationOperatorString("="));
-    EXPECT_EQ("==", getReverseEquationOperatorString("=="));
-    EXPECT_EQ("!=", getReverseEquationOperatorString("!="));
-    EXPECT_EQ(">", getReverseEquationOperatorString("<"));
-    EXPECT_EQ("<", getReverseEquationOperatorString(">"));
-    ;
-    EXPECT_EQ(">=", getReverseEquationOperatorString("<="));
-    EXPECT_EQ("<=", getReverseEquationOperatorString(">="));
-    EXPECT_EQ("!!", getReverseEquationOperatorString("!!"));
-}
-
-TEST(EquationUtilitiesTest, BuildEquationIfPossibleWorks) {
-    Equation expectedEquation("a", "=", "b");
-
-    EXPECT_EQ(expectedEquation, buildEquationIfPossible("a=b"));
 }
 
 }  // namespace alba::algebra

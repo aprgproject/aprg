@@ -19,15 +19,9 @@ TEST(DoublingSizeStackTest, GetSizeWorksWhenNotEmpty) { testGetSizeWhenNotEmptyW
 TEST(DoublingSizeStackTest, PushWorks) { testPushWithInt<StackForTest>(); }
 TEST(DoublingSizeStackTest, PopWorks) { testPopWithInt<StackForTest>(); }
 
-TEST(DoublingSizeStackTest, GetContainerSizeWorks) {
-    StackForTest const stack1;
-    StackForTest stack2;
-    stack2.push(10);
-    stack2.push(5);
-    stack2.push(4);
-
-    EXPECT_EQ(1, stack1.getContainerSize());
-    EXPECT_EQ(4, stack2.getContainerSize());
+// disabled because it takes too long
+TEST(DoublingSizeStackTest, DISABLED_PopWorksWithAssertionWhenItsEmpty) {
+    testPopAssertionWhenEmptyWithInt<StackForTest>();
 }
 
 TEST(DoublingSizeStackTest, MinimumContainerSizeIsContained) {
@@ -36,22 +30,6 @@ TEST(DoublingSizeStackTest, MinimumContainerSizeIsContained) {
     stack.pop();
 
     EXPECT_EQ(StackForTest::MINUMUM_CONTAINER_SIZE, stack.getContainerSize());
-}
-
-TEST(DoublingSizeStackTest, PushWorksWithDoublingContainerSize) {
-    StackForTest stack;
-    EXPECT_EQ(1, stack.getContainerSize());
-
-    stack.push(1);
-    stack.push(2);
-    EXPECT_EQ(2, stack.getContainerSize());
-
-    stack.push(3);
-    EXPECT_EQ(4, stack.getContainerSize());
-
-    stack.push(4);
-    stack.push(5);
-    EXPECT_EQ(8, stack.getContainerSize());
 }
 
 TEST(DoublingSizeStackTest, PopWorksWithHalvingContainerSize) {
@@ -76,9 +54,31 @@ TEST(DoublingSizeStackTest, PopWorksWithHalvingContainerSize) {
     EXPECT_EQ(1, stack.getContainerSize());
 }
 
-// disabled because it takes too long
-TEST(DoublingSizeStackTest, DISABLED_PopWorksWithAssertionWhenItsEmpty) {
-    testPopAssertionWhenEmptyWithInt<StackForTest>();
+TEST(DoublingSizeStackTest, GetContainerSizeWorks) {
+    StackForTest const stack1;
+    StackForTest stack2;
+    stack2.push(10);
+    stack2.push(5);
+    stack2.push(4);
+
+    EXPECT_EQ(1, stack1.getContainerSize());
+    EXPECT_EQ(4, stack2.getContainerSize());
+}
+
+TEST(DoublingSizeStackTest, PushWorksWithDoublingContainerSize) {
+    StackForTest stack;
+    EXPECT_EQ(1, stack.getContainerSize());
+
+    stack.push(1);
+    stack.push(2);
+    EXPECT_EQ(2, stack.getContainerSize());
+
+    stack.push(3);
+    EXPECT_EQ(4, stack.getContainerSize());
+
+    stack.push(4);
+    stack.push(5);
+    EXPECT_EQ(8, stack.getContainerSize());
 }
 
 }  // namespace alba::algorithm

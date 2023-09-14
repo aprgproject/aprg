@@ -7,7 +7,6 @@ namespace alba {
 
 // Internal macros
 // This is a revised approach in printing because of MSVC limitation on macros.
-
 #define Z_ALBA_PRINT_START(out)                                                    \
     alba::printLogHeader(                                                          \
         out, static_cast<const char*>(ALBA_MACROS_GET_FILE), ALBA_MACROS_GET_LINE, \

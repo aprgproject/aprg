@@ -15,6 +15,7 @@ public:
     Hyperbola(
         Point const& center, double const aCoefficient,
         double const bCoefficient);  // ((x-center.x)^2/aCoefficient^2) - ((y-center.y)^2/bCoefficient^2) = 1
+
     bool operator==(Hyperbola const& hyperbola) const;
     bool operator!=(Hyperbola const& hyperbola) const;
     [[nodiscard]] Lines getAsymptotes() const;

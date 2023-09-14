@@ -39,24 +39,20 @@ private:
 
 std::unique_ptr<Singleton> Singleton::m_instancePointer;  // this still have problem of static variables (whether they
 // are initialized when called)
-
 }  // namespace Singleton
 
 // Singleton discussion:
 
 // ONE LINE NOTE:
 // -> Ensure a class only has SINGLE instance, and provide a global point of access to it.
-
 // Intent:
 // Ensure a class only has one instance, and provide a global point of access to it.
 // Pattern has creational purpose and deals with object relationships, which are more dynamic.
 // The Singleton is often used as a part another design patterns (see [Façade] and [Flyweight]).
-
 // When to use (applicability):
 // -> there must be exactly one instance of a class, and it must be accessible to clients from a well-known access point
 // -> when the sole instance should be extensible by subclassing, and clients should be able to use an extended instance
 // without modifying their code
-
 // Consequences:
 // -> Controlled access to sole instance
 // ---> It can have strict control over how and when clients access it.
@@ -72,12 +68,10 @@ std::unique_ptr<Singleton> Singleton::m_instancePointer;  // this still have pro
 // -> More flexible than class operations
 // ---> A way to package a singleton's functionality is to use class operations (static member functions in C++).
 // ---> The static member functions in C++ are never virtual, so subclasses can't override them polymorphically.
-
 // Implementation:
 // -> Ensuring a unique instance
 // ---> Static member function and private constructor in C++
 // -> Subclassing the Singleton class
-
 // Related Patterns
 // -> [Mediator]: By encapsulating complex update semantics, the ChangeManager acts a mediator between subjects and
 // observers.

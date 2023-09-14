@@ -32,6 +32,11 @@ public:
     AlbaNumberOptional const& getSolution();
 
 private:
+    [[nodiscard]] AlbaNumber calculate(AlbaNumber const& inputValue) const;
+    [[nodiscard]] AlbaNumberOptional calculateInverseQuadraticInterpolation(
+        AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c) const;
+    [[nodiscard]] AlbaNumberOptional calculateSecantMethod(AlbaNumber const& a, AlbaNumber const& b) const;
+    void convertSolutionToIntegerIfNeeded();
     static AlbaNumber calculateBiSectionMethod(AlbaNumber const& a, AlbaNumber const& b);
     static bool isAlmostEqualForBrentMethod(AlbaNumber const& value1, AlbaNumber const& value2);
     static bool isAlmostEqualForBrentMethod(AlbaNumber const& value1, double const value2);
@@ -40,11 +45,6 @@ private:
         AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c, AlbaNumber const& d, AlbaNumber const& s,
         bool const mflag);
 
-    [[nodiscard]] AlbaNumber calculate(AlbaNumber const& inputValue) const;
-    [[nodiscard]] AlbaNumberOptional calculateInverseQuadraticInterpolation(
-        AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c) const;
-    [[nodiscard]] AlbaNumberOptional calculateSecantMethod(AlbaNumber const& a, AlbaNumber const& b) const;
-    void convertSolutionToIntegerIfNeeded();
     int m_numberOfIterationsExecuted{0};
     AlbaNumbers m_coefficients;
     CalculationValues m_values;

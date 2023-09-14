@@ -26,8 +26,6 @@ public:
         return currentRoot;
     }
 
-    [[nodiscard]] RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
-
     [[nodiscard]] bool isConnected(Object const& object1, Object const& object2) const override {
         return getRoot(object1) == getRoot(object2);
     }
@@ -41,6 +39,8 @@ public:
             //(check weighted union find for implementation that consider sizes)
         }
     }
+
+    [[nodiscard]] RootArray const& getRelativeRootArray() const { return m_relativeRoots; }
 
 private:
     void initialize() {

@@ -32,20 +32,6 @@ RangeQueryForTest::ValuesFunction plusForARangeOfBlockValues = [](BlockValuesFor
 
 }  // namespace
 
-TEST(RangeQueryWithBlocksTest, GetBlockSizeWithSumWorksOnExample1) {
-    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
-    RangeQueryForTest const sumRangeQuery(values, 2, plusForARangeOfValues, plusForARangeOfBlockValues);
-
-    EXPECT_EQ(4, sumRangeQuery.getBlockSize());
-}
-
-TEST(RangeQueryWithBlocksTest, GetBlockSizeWithCountWorksOnExample1) {
-    ValuesForTest const values{4, 2, 5, 4, 2, 4, 3, 3, 4};
-    RangeQueryForTest const countRangeQuery(values, 2, countFoursForARangeOfValues, plusForARangeOfBlockValues);
-
-    EXPECT_EQ(4, countRangeQuery.getBlockSize());
-}
-
 TEST(RangeQueryWithBlocksTest, GetBlocksWithSumWorksOnExample1) {
     ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
     RangeQueryForTest const sumRangeQuery(values, 2, plusForARangeOfValues, plusForARangeOfBlockValues);
@@ -60,6 +46,20 @@ TEST(RangeQueryWithBlocksTest, GetBlocksWithCountWorksOnExample1) {
 
     BlockValuesForTest const blocks{2, 1, 1};
     EXPECT_EQ(blocks, countRangeQuery.getBlocks());
+}
+
+TEST(RangeQueryWithBlocksTest, GetBlockSizeWithSumWorksOnExample1) {
+    ValuesForTest const values{1, 3, 4, 8, 6, 1, 4, 2, 9};
+    RangeQueryForTest const sumRangeQuery(values, 2, plusForARangeOfValues, plusForARangeOfBlockValues);
+
+    EXPECT_EQ(4, sumRangeQuery.getBlockSize());
+}
+
+TEST(RangeQueryWithBlocksTest, GetBlockSizeWithCountWorksOnExample1) {
+    ValuesForTest const values{4, 2, 5, 4, 2, 4, 3, 3, 4};
+    RangeQueryForTest const countRangeQuery(values, 2, countFoursForARangeOfValues, plusForARangeOfBlockValues);
+
+    EXPECT_EQ(4, countRangeQuery.getBlockSize());
 }
 
 TEST(RangeQueryWithBlocksTest, GetResultOnIntervalWithSumWorksWithEmptySetOfValues) {

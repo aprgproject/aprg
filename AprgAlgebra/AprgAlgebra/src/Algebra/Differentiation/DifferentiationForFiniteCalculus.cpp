@@ -9,11 +9,6 @@ namespace alba::algebra {
 
 DifferentiationForFiniteCalculus::DifferentiationForFiniteCalculus(string const& nameOfVariableToDifferentiate)
     : m_nameOfVariableToDifferentiate(nameOfVariableToDifferentiate) {}
-AlbaNumber DifferentiationForFiniteCalculus::differentiateConstant(Constant const&) { return 0; }
-
-Term DifferentiationForFiniteCalculus::differentiate(Constant const& constant) {
-    return {differentiateConstant(constant)};
-}
 
 Equation DifferentiationForFiniteCalculus::differentiate(Equation const& equation) const {
     return differentiateEquation(equation);
@@ -112,6 +107,12 @@ Term DifferentiationForFiniteCalculus::differentiateExpression(Expression const&
 
 Term DifferentiationForFiniteCalculus::differentiateFunction(Function const& functionObject) const {
     return {getDerivativeDefinitionForFiniteCalculus(Term(functionObject), m_nameOfVariableToDifferentiate)};
+}
+
+AlbaNumber DifferentiationForFiniteCalculus::differentiateConstant(Constant const&) { return 0; }
+
+Term DifferentiationForFiniteCalculus::differentiate(Constant const& constant) {
+    return {differentiateConstant(constant)};
 }
 
 bool DifferentiationForFiniteCalculus::isVariableToDifferentiate(string const& variableName) const {

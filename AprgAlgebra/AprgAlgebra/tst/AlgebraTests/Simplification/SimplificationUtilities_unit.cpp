@@ -24,6 +24,35 @@ TEST(SimplificationUtilitiesTest, SimplifyTermToACommonDenominatorWorks) {
     EXPECT_EQ(expectedTerm, termToTest);
 }
 
+TEST(SimplificationUtilitiesTest, SimplifyAndCopyTermsAndChangeOperatorLevelIfNeededWorksForOneTerm) {
+    TermsWithDetails inputTermWithDetails;
+    inputTermWithDetails.emplace_back(Term(Monomial(5, {{}})), TermAssociationType::Positive);
+    OperatorLevel operatorLevel(OperatorLevel::Unknown);
+    TermsWithDetails outputTermsWithDetails;
+
+    simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(outputTermsWithDetails, operatorLevel, inputTermWithDetails);
+
+    TermsWithDetails expectedTermsWithDetails;
+    expectedTermsWithDetails.emplace_back(Term(5), TermAssociationType::Positive);
+    EXPECT_EQ(expectedTermsWithDetails, outputTermsWithDetails);
+}
+
+TEST(
+    SimplificationUtilitiesTest, SimplifyAndCopyTermsAndChangeOperatorLevelIfNeededWorksForOneTermWithManyExpressions) {
+    Term oneTerm(createExpressionInAnExpression(
+        createExpressionInAnExpression(createAndWrapExpressionFromATerm(Monomial(5, {{}})))));
+    TermsWithDetails inputTermWithDetails;
+    inputTermWithDetails.emplace_back(oneTerm, TermAssociationType::Positive);
+    OperatorLevel operatorLevel(OperatorLevel::Unknown);
+    TermsWithDetails outputTermsWithDetails;
+
+    simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(outputTermsWithDetails, operatorLevel, inputTermWithDetails);
+
+    TermsWithDetails expectedTermsWithDetails;
+    expectedTermsWithDetails.emplace_back(Term(5), TermAssociationType::Positive);
+    EXPECT_EQ(expectedTermsWithDetails, outputTermsWithDetails);
+}
+
 TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorks) {
     Expression expression(createExpressionIfPossible(tokenizeToTerms("((4)/(x+2))+((x+3)/(x*x-4))+((2*x+1)/(x-2))")));
 
@@ -59,35 +88,6 @@ TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorksOnExponentWit
     Expression expressionToExpect(createExpressionIfPossible({2, "^", subExpression}));
     EXPECT_EQ(expressionToExpect, expression);
     EXPECT_FALSE(didItOccurOnTopLevelExpression);
-}
-
-TEST(SimplificationUtilitiesTest, SimplifyAndCopyTermsAndChangeOperatorLevelIfNeededWorksForOneTerm) {
-    TermsWithDetails inputTermWithDetails;
-    inputTermWithDetails.emplace_back(Term(Monomial(5, {{}})), TermAssociationType::Positive);
-    OperatorLevel operatorLevel(OperatorLevel::Unknown);
-    TermsWithDetails outputTermsWithDetails;
-
-    simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(outputTermsWithDetails, operatorLevel, inputTermWithDetails);
-
-    TermsWithDetails expectedTermsWithDetails;
-    expectedTermsWithDetails.emplace_back(Term(5), TermAssociationType::Positive);
-    EXPECT_EQ(expectedTermsWithDetails, outputTermsWithDetails);
-}
-
-TEST(
-    SimplificationUtilitiesTest, SimplifyAndCopyTermsAndChangeOperatorLevelIfNeededWorksForOneTermWithManyExpressions) {
-    Term oneTerm(createExpressionInAnExpression(
-        createExpressionInAnExpression(createAndWrapExpressionFromATerm(Monomial(5, {{}})))));
-    TermsWithDetails inputTermWithDetails;
-    inputTermWithDetails.emplace_back(oneTerm, TermAssociationType::Positive);
-    OperatorLevel operatorLevel(OperatorLevel::Unknown);
-    TermsWithDetails outputTermsWithDetails;
-
-    simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(outputTermsWithDetails, operatorLevel, inputTermWithDetails);
-
-    TermsWithDetails expectedTermsWithDetails;
-    expectedTermsWithDetails.emplace_back(Term(5), TermAssociationType::Positive);
-    EXPECT_EQ(expectedTermsWithDetails, outputTermsWithDetails);
 }
 
 }  // namespace alba::algebra::Simplification

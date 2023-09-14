@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Common/Bit/AlbaBitValueUtilities.hpp>
-#include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
+#include <Common/Math/Helpers/FactorAndMultiplesHelpers.hpp>
 #include <Common/Math/Helpers/PowerHelpers.hpp>
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Types/AlbaTypeHelper.hpp>

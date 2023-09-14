@@ -37,7 +37,6 @@ public:
 
 // ONE LINE NOTE:
 // -> ADAPT a MISMATCHED interface into a matched interface using a class inheritance or object composition
-
 // Intent:
 // Convert the interface of a class into another interface the clients expect.
 // Adapter lets classes work together that couldn't otherwise because of incompatible interfaces,
@@ -45,13 +44,11 @@ public:
 // Adapter has structural purpose and can be applied on classes and also on object.
 // A class adapter uses multiple inheritance to adapt one interface to another ("is a" approach).
 // A object adapter uses object composition to combine classes with different interfaces ("has a" approach).
-
 // When to use (applicability):
 // -> you want to use an existing class, and its interface does not match the one you need
 // -> you want to create a reusable class that cooperates with classes that don't necessarily have compatible interfaces
 // -> (object adapter only) you need to use several existing subclasses, but its impractical to adapt their interface by
 // subclassing every one.
-
 // Consequences:
 // -> A class adapter
 // ---> adapts Adaptee to target by commiting to a concrete Adapter class.
@@ -81,7 +78,6 @@ public:
 // -----> An adapted object no longer conforms to the Adaptee interface, to it can't be used as is wherever an Adaptee
 // object can.
 // -----> Two-way adapters are useful when two different clients need to view an object differently.
-
 // Implementation:
 // -> Implementing class adapters in C++.
 // ---> The adapter would inherit publicly from Target and privately from Adaptee.
@@ -95,7 +91,6 @@ public:
 // -------> Statically typed langurages like C++ require an explicit interface definition for the delegate.
 // -------> We can specify such an interface by putting the narrow Adaptee interface into an abstract Delegate class.
 // -----> (3) Parameterized adapters
-
 // Related Patterns
 // -> [Bridge] has a structure similar to an object adapter, but Bridge has different intent.
 // ---> [Bridge] is meant to separate an interface from its implementation so that they can be varied easily and

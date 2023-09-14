@@ -8,36 +8,6 @@ using namespace alba::algebra::Functions;
 
 namespace alba::algebra {
 
-TEST(ConvertHelpersTest, CanBeConvertedToConstantWorks) {
-    EXPECT_TRUE(canBeConvertedToConstant(Polynomial()));
-    EXPECT_TRUE(canBeConvertedToConstant(Polynomial{Monomial(96, {})}));
-    EXPECT_FALSE(canBeConvertedToConstant(Polynomial{Monomial(96, {{"x", 1}})}));
-    EXPECT_FALSE(canBeConvertedToConstant(Polynomial{Monomial(96, {}), Monomial(96, {{"x", 1}})}));
-}
-
-TEST(ConvertHelpersTest, CanBeConvertedToMonomialWorks) {
-    EXPECT_FALSE(canBeConvertedToMonomial(Term()));
-    EXPECT_TRUE(canBeConvertedToMonomial(Term(0)));
-    EXPECT_TRUE(canBeConvertedToMonomial(Term(15)));
-    EXPECT_TRUE(canBeConvertedToMonomial(Term(Variable("x"))));
-    EXPECT_TRUE(canBeConvertedToMonomial(Term(Monomial(96, {{"x", 1}}))));
-    EXPECT_TRUE(canBeConvertedToMonomial(Term(Polynomial{Monomial(96, {{"x", 1}})})));
-    EXPECT_FALSE(canBeConvertedToMonomial(Term(Polynomial{Monomial(96, {{"x", 1}}), Monomial(73, {{"y", 1}})})));
-    EXPECT_FALSE(canBeConvertedToMonomial(Term(createExpressionIfPossible({254}))));
-    EXPECT_FALSE(canBeConvertedToMonomial(Term(Expression())));
-}
-
-TEST(ConvertHelpersTest, CanBeConvertedToPolynomialWorks) {
-    EXPECT_FALSE(canBeConvertedToPolynomial(Term()));
-    EXPECT_TRUE(canBeConvertedToPolynomial(Term(0)));
-    EXPECT_TRUE(canBeConvertedToPolynomial(Term(15)));
-    EXPECT_TRUE(canBeConvertedToPolynomial(Term(Variable("x"))));
-    EXPECT_TRUE(canBeConvertedToPolynomial(Term(Monomial(96, {{"x", 1}}))));
-    EXPECT_TRUE(canBeConvertedToPolynomial(Term(Polynomial{Monomial(96, {{"x", 1}})})));
-    EXPECT_FALSE(canBeConvertedToPolynomial(Term(createExpressionIfPossible({254}))));
-    EXPECT_FALSE(canBeConvertedToPolynomial(Term(Expression())));
-}
-
 TEST(ConvertHelpersTest, ReverseWorks) {
     Operator nullOperator;
     Operator addOperator("+");
@@ -192,6 +162,36 @@ TEST(ConvertHelpersTest, ConvertFunctionToSimplestTermWorks) {
     ASSERT_TRUE(termToVerify3.isFunction());
     EXPECT_EQ(function3, termToVerify3.getAsFunction());
     EXPECT_EQ(termToExpect, termToVerify4);
+}
+
+TEST(ConvertHelpersTest, CanBeConvertedToConstantWorks) {
+    EXPECT_TRUE(canBeConvertedToConstant(Polynomial()));
+    EXPECT_TRUE(canBeConvertedToConstant(Polynomial{Monomial(96, {})}));
+    EXPECT_FALSE(canBeConvertedToConstant(Polynomial{Monomial(96, {{"x", 1}})}));
+    EXPECT_FALSE(canBeConvertedToConstant(Polynomial{Monomial(96, {}), Monomial(96, {{"x", 1}})}));
+}
+
+TEST(ConvertHelpersTest, CanBeConvertedToMonomialWorks) {
+    EXPECT_FALSE(canBeConvertedToMonomial(Term()));
+    EXPECT_TRUE(canBeConvertedToMonomial(Term(0)));
+    EXPECT_TRUE(canBeConvertedToMonomial(Term(15)));
+    EXPECT_TRUE(canBeConvertedToMonomial(Term(Variable("x"))));
+    EXPECT_TRUE(canBeConvertedToMonomial(Term(Monomial(96, {{"x", 1}}))));
+    EXPECT_TRUE(canBeConvertedToMonomial(Term(Polynomial{Monomial(96, {{"x", 1}})})));
+    EXPECT_FALSE(canBeConvertedToMonomial(Term(Polynomial{Monomial(96, {{"x", 1}}), Monomial(73, {{"y", 1}})})));
+    EXPECT_FALSE(canBeConvertedToMonomial(Term(createExpressionIfPossible({254}))));
+    EXPECT_FALSE(canBeConvertedToMonomial(Term(Expression())));
+}
+
+TEST(ConvertHelpersTest, CanBeConvertedToPolynomialWorks) {
+    EXPECT_FALSE(canBeConvertedToPolynomial(Term()));
+    EXPECT_TRUE(canBeConvertedToPolynomial(Term(0)));
+    EXPECT_TRUE(canBeConvertedToPolynomial(Term(15)));
+    EXPECT_TRUE(canBeConvertedToPolynomial(Term(Variable("x"))));
+    EXPECT_TRUE(canBeConvertedToPolynomial(Term(Monomial(96, {{"x", 1}}))));
+    EXPECT_TRUE(canBeConvertedToPolynomial(Term(Polynomial{Monomial(96, {{"x", 1}})})));
+    EXPECT_FALSE(canBeConvertedToPolynomial(Term(createExpressionIfPossible({254}))));
+    EXPECT_FALSE(canBeConvertedToPolynomial(Term(Expression())));
 }
 
 }  // namespace alba::algebra

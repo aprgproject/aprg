@@ -155,5 +155,4 @@ private:
 // Unix compress, GIF, TIFF, V.41bis modem: LZW
 // zip, 7zip, gzip, jar, png, pdf: deflate/zlib
 // iPhone, Sony Playstation 3 Apache HTTP server: deflate/zlib
-
 }  // namespace alba::algorithm

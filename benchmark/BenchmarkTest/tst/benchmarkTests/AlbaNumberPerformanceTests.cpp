@@ -6,6 +6,18 @@ using namespace std;
 
 namespace alba {
 
+// Register the function as a benchmark
+BENCHMARK(BM_BaseRunForInteger);
+BENCHMARK(BM_BaseRunForDouble);
+BENCHMARK(BM_BaseRunForTwoIntegers);
+BENCHMARK(BM_BaseRunForTwoFloats);
+BENCHMARK(BM_AlbaNumberIntegerCreation);
+BENCHMARK(BM_AlbaNumberDoubleCreation);
+BENCHMARK(BM_AlbaNumberFractionCreation);
+BENCHMARK(BM_AlbaNumberComplexNumberCreation);
+// Run the benchmark
+BENCHMARK_MAIN();
+
 static void BM_BaseRunForInteger(benchmark::State& state) {
     // Perform setup here
     AlbaUniformNonDeterministicRandomizer<int64_t> randomizer(
@@ -99,17 +111,5 @@ static void BM_AlbaNumberComplexNumberCreation(benchmark::State& state) {
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
-
-// Register the function as a benchmark
-BENCHMARK(BM_BaseRunForInteger);
-BENCHMARK(BM_BaseRunForDouble);
-BENCHMARK(BM_BaseRunForTwoIntegers);
-BENCHMARK(BM_BaseRunForTwoFloats);
-BENCHMARK(BM_AlbaNumberIntegerCreation);
-BENCHMARK(BM_AlbaNumberDoubleCreation);
-BENCHMARK(BM_AlbaNumberFractionCreation);
-BENCHMARK(BM_AlbaNumberComplexNumberCreation);
-// Run the benchmark
-BENCHMARK_MAIN();
 
 }  // namespace alba

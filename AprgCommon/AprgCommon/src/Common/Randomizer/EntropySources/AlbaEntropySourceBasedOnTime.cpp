@@ -2,8 +2,8 @@
 
 #include <Common/Time/AlbaLocalTimeHelper.hpp>
 
-using namespace std;
 using namespace std::chrono;
+using namespace std;
 
 namespace alba {
 

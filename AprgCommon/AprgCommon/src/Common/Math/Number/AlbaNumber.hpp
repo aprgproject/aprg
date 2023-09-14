@@ -55,10 +55,10 @@ public:
     class Configuration : public AlbaConfigurationHolder<ConfigurationDetails> {
     public:
         using BaseConfigurationHolder = AlbaConfigurationHolder<ConfigurationDetails>;
-        static ConfigurationDetails getConfigurationDetailsWithZeroTolerance();
         void setConfigurationTolerancesToZero();
         void setComparisonTolerance(double const comparisonTolerance);
         void setFloatAdjustmentTolerance(double const comparisonTolerance);
+        static ConfigurationDetails getConfigurationDetailsWithZeroTolerance();
     };
 
     class ScopeConfigurationObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {

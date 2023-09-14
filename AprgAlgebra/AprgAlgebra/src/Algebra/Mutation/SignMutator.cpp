@@ -24,24 +24,6 @@ void SignMutator::putVariableWithSign(string const& variableName, TermAssociatio
     }
 }
 
-Term SignMutator::getTermForMutationOfFunction(Function const& functionObject) {
-    Term result(functionObject);
-    result.simplify();
-    if (result.isFunction()) {
-        Function const& simplifiedFunction(result.getAsFunction());
-        string const& simplifiedFunctionName(simplifiedFunction.getFunctionName());
-        if ("abs" == simplifiedFunctionName || "cosh" == simplifiedFunctionName || "sech" == simplifiedFunctionName ||
-            "arccosh" == simplifiedFunctionName || "arcsech" == simplifiedFunctionName) {
-            result = 1;
-        } else {
-            result = ALBA_NUMBER_NOT_A_NUMBER;
-        }
-    } else if (!result.isConstant()) {
-        result = ALBA_NUMBER_NOT_A_NUMBER;
-    }
-    return result;
-}
-
 void SignMutator::mutateExpressionWithAdditionAndSubtraction(Expression& expression) {
     bool areAllTheValuesOne(true);
     bool areAllTheValuesNegativeOne(true);
@@ -100,6 +82,24 @@ void SignMutator::mutateExpressionWithRaiseToPower(Expression& expression) {
 Term SignMutator::getTermForMutationOfVariable(Variable const& variable) {
     Term result(m_substitution.performSubstitutionTo(variable));
     if (!isTheValue(result, 1) && !isTheValue(result, -1)) {
+        result = ALBA_NUMBER_NOT_A_NUMBER;
+    }
+    return result;
+}
+
+Term SignMutator::getTermForMutationOfFunction(Function const& functionObject) {
+    Term result(functionObject);
+    result.simplify();
+    if (result.isFunction()) {
+        Function const& simplifiedFunction(result.getAsFunction());
+        string const& simplifiedFunctionName(simplifiedFunction.getFunctionName());
+        if ("abs" == simplifiedFunctionName || "cosh" == simplifiedFunctionName || "sech" == simplifiedFunctionName ||
+            "arccosh" == simplifiedFunctionName || "arcsech" == simplifiedFunctionName) {
+            result = 1;
+        } else {
+            result = ALBA_NUMBER_NOT_A_NUMBER;
+        }
+    } else if (!result.isConstant()) {
         result = ALBA_NUMBER_NOT_A_NUMBER;
     }
     return result;

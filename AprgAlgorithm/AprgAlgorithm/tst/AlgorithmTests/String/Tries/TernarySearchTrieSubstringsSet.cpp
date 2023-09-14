@@ -16,6 +16,38 @@ TEST(TernarySearchTrieSubstringsSetTest, IsEmptyWorksWhenEmpty) {
     EXPECT_TRUE(trie.isEmpty());
 }
 
+TEST(TernarySearchTrieSubstringsSetTest, GetSizeWorksWhenEmpty) {
+    TrieForTest const trie;
+
+    EXPECT_EQ(0, trie.getSize());
+}
+
+TEST(TernarySearchTrieSubstringsSetTest, GetNumberOfNodesWorksWhenEmpty) {
+    TrieForTest const trie;
+
+    EXPECT_EQ(0, trie.getNumberOfNodes());
+}
+
+TEST(TernarySearchTrieSubstringsSetTest, GetAllKeysWithPrefixWorks) {
+    using Strings = typename TrieForTest::Strings;
+    TrieForTest trie;
+    trie.put("she");
+    trie.put("sells");
+    trie.put("sea");
+    trie.put("shells");
+    trie.put("by");
+    trie.put("the");
+    trie.put("sea");
+    trie.put("shore");
+    trie.put("s");
+
+    Strings const keysToVerify(trie.getAllKeysWithPrefix("s"));
+
+    Strings const expectedKeys{"s",   "se",   "sea",   "sel",    "sell", "sells", "sh",
+                               "she", "shel", "shell", "shells", "sho",  "shor",  "shore"};
+    EXPECT_EQ(expectedKeys, keysToVerify);
+}
+
 TEST(TernarySearchTrieSubstringsSetTest, IsEmptyWorksWhenNotEmpty) {
     TrieForTest trie;
     trie.put("she");
@@ -29,12 +61,6 @@ TEST(TernarySearchTrieSubstringsSetTest, DoesContainWorks) {
 
     EXPECT_FALSE(trie.doesContain("he"));
     EXPECT_TRUE(trie.doesContain("she"));
-}
-
-TEST(TernarySearchTrieSubstringsSetTest, GetSizeWorksWhenEmpty) {
-    TrieForTest const trie;
-
-    EXPECT_EQ(0, trie.getSize());
 }
 
 TEST(TernarySearchTrieSubstringsSetTest, GetSizeWorksWhenNotEmpty) {
@@ -115,26 +141,6 @@ TEST(TernarySearchTrieSubstringsSetTest, GetKeysWorks) {
     EXPECT_EQ(expectedKeys, keysToVerify);
 }
 
-TEST(TernarySearchTrieSubstringsSetTest, GetAllKeysWithPrefixWorks) {
-    using Strings = typename TrieForTest::Strings;
-    TrieForTest trie;
-    trie.put("she");
-    trie.put("sells");
-    trie.put("sea");
-    trie.put("shells");
-    trie.put("by");
-    trie.put("the");
-    trie.put("sea");
-    trie.put("shore");
-    trie.put("s");
-
-    Strings const keysToVerify(trie.getAllKeysWithPrefix("s"));
-
-    Strings const expectedKeys{"s",   "se",   "sea",   "sel",    "sell", "sells", "sh",
-                               "she", "shel", "shell", "shells", "sho",  "shor",  "shore"};
-    EXPECT_EQ(expectedKeys, keysToVerify);
-}
-
 TEST(TernarySearchTrieSubstringsSetTest, GetAllKeysThatMatchWorks) {
     using Strings = typename TrieForTest::Strings;
     TrieForTest trie;
@@ -177,12 +183,6 @@ TEST(TernarySearchTrieSubstringsSetTest, Example1Works) {
     EXPECT_FALSE(trie.doesContain("CANDY"));
     EXPECT_FALSE(trie.doesContain("THE"));
     EXPECT_FALSE(trie.doesContain("THERE"));
-}
-
-TEST(TernarySearchTrieSubstringsSetTest, GetNumberOfNodesWorksWhenEmpty) {
-    TrieForTest const trie;
-
-    EXPECT_EQ(0, trie.getNumberOfNodes());
 }
 
 TEST(TernarySearchTrieSubstringsSetTest, GetNumberOfNodesWorksWhenNotEmpty) {

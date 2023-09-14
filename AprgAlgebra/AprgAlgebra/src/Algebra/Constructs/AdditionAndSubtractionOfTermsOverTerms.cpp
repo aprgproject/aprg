@@ -80,6 +80,56 @@ void AdditionAndSubtractionOfTermsOverTerms::putAsAddOrSubtraction(
     putItem(getSimplifiedTermsOverTerms(item), association);
 }
 
+Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedNumeratorExpression(
+    Terms const& lcmDenominatorTerms) const {
+    Expression combinedNumerator;
+    int const numberOfItems = m_items.size();
+    for (int numeratorIndex = 0; numeratorIndex < numberOfItems; ++numeratorIndex) {
+        Expression const combinedNumeratorOnIndex(
+            getCombinedExpressionForNumeratorOnIndex(numeratorIndex, lcmDenominatorTerms));
+        combineExpressionAsAddOrSubtract(combinedNumerator, combinedNumeratorOnIndex, m_associations[numeratorIndex]);
+    }
+    return combinedNumerator;
+}
+
+Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpressionForNumeratorOnIndex(
+    int const numeratorIndex, Terms const& lcmDenominatorTerms) const {
+    Expression combinedNumeratorOnIndex(Term(1));
+    Terms const numeratorTermsOnIndex(getRevisedNumeratorTermsBasedOnLcmOnIndex(numeratorIndex, lcmDenominatorTerms));
+    for (Term const& numeratorTermOnIndex : numeratorTermsOnIndex) {
+        combinedNumeratorOnIndex.putTermWithMultiplicationIfNeeded(numeratorTermOnIndex);
+    }
+    return combinedNumeratorOnIndex;
+}
+
+void AdditionAndSubtractionOfTermsOverTerms::updateMonomialAndNonMonomialMultipliersBasedOnDenominatorOnIndex(
+    int const itemIndex, Monomial& monomialMultiplier, Terms& nonMonomialMultiplierTerms) const {
+    for (Term const& denominatorTerm : m_items[itemIndex].getDenominators()) {
+        if (canBeConvertedToMonomial(denominatorTerm)) {
+            monomialMultiplier.divideMonomial(createMonomialIfPossible(denominatorTerm));
+        } else {
+            auto multiplierIterator =
+                find(nonMonomialMultiplierTerms.begin(), nonMonomialMultiplierTerms.end(), denominatorTerm);
+            if (multiplierIterator != nonMonomialMultiplierTerms.end()) {
+                nonMonomialMultiplierTerms.erase(multiplierIterator);
+            }
+        }
+    }
+}
+
+void AdditionAndSubtractionOfTermsOverTerms::emplaceExistingNumeratorTerms(
+    Terms& numeratorTerms, int const itemIndex) const {
+    for (Term const& numeratorTerm : m_items[itemIndex].getNumerators()) {
+        numeratorTerms.emplace_back(numeratorTerm);
+    }
+}
+
+void AdditionAndSubtractionOfTermsOverTerms::putItem(
+    TermsOverTerms const& item, TermAssociationType const association) {
+    m_items.emplace_back(item);
+    m_associations.emplace_back(association);
+}
+
 void AdditionAndSubtractionOfTermsOverTerms::eraseCommonFactorOrAddDistinctFactor(
     Term const& termToCheck, Terms& commonFactors, Terms& outputFactors) {
     auto matchedTermIterator = find(commonFactors.begin(), commonFactors.end(), termToCheck);
@@ -137,56 +187,6 @@ TermsOverTerms AdditionAndSubtractionOfTermsOverTerms::getSimplifiedTermsOverTer
     termsOverTermsSimplified.setAsShouldSimplifyToFactors(true);
     termsOverTermsSimplified.simplify();
     return termsOverTermsSimplified;
-}
-
-Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedNumeratorExpression(
-    Terms const& lcmDenominatorTerms) const {
-    Expression combinedNumerator;
-    int const numberOfItems = m_items.size();
-    for (int numeratorIndex = 0; numeratorIndex < numberOfItems; ++numeratorIndex) {
-        Expression const combinedNumeratorOnIndex(
-            getCombinedExpressionForNumeratorOnIndex(numeratorIndex, lcmDenominatorTerms));
-        combineExpressionAsAddOrSubtract(combinedNumerator, combinedNumeratorOnIndex, m_associations[numeratorIndex]);
-    }
-    return combinedNumerator;
-}
-
-Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedExpressionForNumeratorOnIndex(
-    int const numeratorIndex, Terms const& lcmDenominatorTerms) const {
-    Expression combinedNumeratorOnIndex(Term(1));
-    Terms const numeratorTermsOnIndex(getRevisedNumeratorTermsBasedOnLcmOnIndex(numeratorIndex, lcmDenominatorTerms));
-    for (Term const& numeratorTermOnIndex : numeratorTermsOnIndex) {
-        combinedNumeratorOnIndex.putTermWithMultiplicationIfNeeded(numeratorTermOnIndex);
-    }
-    return combinedNumeratorOnIndex;
-}
-
-void AdditionAndSubtractionOfTermsOverTerms::updateMonomialAndNonMonomialMultipliersBasedOnDenominatorOnIndex(
-    int const itemIndex, Monomial& monomialMultiplier, Terms& nonMonomialMultiplierTerms) const {
-    for (Term const& denominatorTerm : m_items[itemIndex].getDenominators()) {
-        if (canBeConvertedToMonomial(denominatorTerm)) {
-            monomialMultiplier.divideMonomial(createMonomialIfPossible(denominatorTerm));
-        } else {
-            auto multiplierIterator =
-                find(nonMonomialMultiplierTerms.begin(), nonMonomialMultiplierTerms.end(), denominatorTerm);
-            if (multiplierIterator != nonMonomialMultiplierTerms.end()) {
-                nonMonomialMultiplierTerms.erase(multiplierIterator);
-            }
-        }
-    }
-}
-
-void AdditionAndSubtractionOfTermsOverTerms::emplaceExistingNumeratorTerms(
-    Terms& numeratorTerms, int const itemIndex) const {
-    for (Term const& numeratorTerm : m_items[itemIndex].getNumerators()) {
-        numeratorTerms.emplace_back(numeratorTerm);
-    }
-}
-
-void AdditionAndSubtractionOfTermsOverTerms::putItem(
-    TermsOverTerms const& item, TermAssociationType const association) {
-    m_items.emplace_back(item);
-    m_associations.emplace_back(association);
 }
 
 AdditionAndSubtractionOfTermsOverTerms::AdditionAndSubtractionOfTermsOverTerms() = default;

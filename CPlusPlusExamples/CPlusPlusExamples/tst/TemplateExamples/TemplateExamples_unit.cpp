@@ -75,6 +75,7 @@ template <typename T>
 int ST<T>::intData = 42;  // still fine in header
 template <typename T>
 T ST<T>::tData = {};  // still fine in header
+
 // -> Templates are similar to inline
 // ---> How come I can define ST<T>::intData in a header file and #include it all over the place,
 // -----> whereas I get a multiple-definition linker error if I try the same thing with S::intData?
@@ -96,6 +97,7 @@ struct isVoidStruct {
 
 template <typename T>
 constexpr bool isVoidVariable = isVoidType<T>();  // variable template
+
 // -> In C++14, variable templates was introduced.
 // -> Variable templates are syntactic sugar
 // ---> A variable template is exactly 100% equivalent to a static data member of class template.
@@ -113,6 +115,7 @@ namespace AliasTemplatesWork {
 
 template <typename T>
 using myvec = vector<T>;  // alias template
+
 // -> In C++11, alias templates was introduced.
 // -> Alias templates are literally the same type from its source.
 TEST(TemplateExamplesTest, AliasTemplatesWork) {
@@ -338,6 +341,7 @@ namespace AliasTemplatesCannotBeSpecialized {
 
 template <typename T>
 using myvec = vector<T>;  // alias template
+
 template <typename T>
 void foo(myvec<T>&) {
     cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
@@ -532,11 +536,11 @@ struct NoInstantiationClass {
 
 template <typename T>
 struct InstantiationClass {
-    static void noInstantiationStaticFunction() {
+    void noInstantiationFunction() {
         static_assert(sizeof(T) == -1, "This will not happen because we are not instantiated");
     }
 
-    void noInstantiationFunction() {
+    static void noInstantiationStaticFunction() {
         static_assert(sizeof(T) == -1, "This will not happen because we are not instantiated");
     }
 };
@@ -625,10 +629,12 @@ TEST(TemplateExamplesTest, TemplateTypeDeductionWorksUsingPrettyFunction) {
     // foo6('x', 1, 2);  // Compiler error: requires 1 argument, but 3 were provided
     // Us... is NOT at the end of function parameter list.
     // Us... doesnt contribute to deduction, so this fails
-    foo6<int, int, int>('x', 1, 2);  // [with T = int; Us = {int, int}]
-    // Us.. doesnt contribute to deduction, but we explicit mention T = int; Us = {int, int} so it works
+    foo6<int, int, int>(
+        'x', 1,
+        2);  // [with T = int; Us = {int, int}]
+             // Us.. doesnt contribute to deduction, but we explicit mention T = int; Us = {int, int} so it works
     foo7<int, int>(1, 2, 3);  // [with Ts = {int, int}; Us = {int}]
-    // -> What does it mean to contribute to deduction?
+                              // -> What does it mean to contribute to deduction?
     // ---> Clang: claims Ts can't be deduced; compiler error
     // ---> MSVC/GCC: assumes Ts wont be lengthened Ts=<int, int> Us=<int>
 }
@@ -722,11 +728,11 @@ void commonFunctionName(float) {
 TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
     // perfect match is first
     commonFunctionName(5);  // commonFunctionName(int)
-    // template specialization is second
+                            // template specialization is second
     commonFunctionName(5.F);  // commonFunctionName(Type) [with Type = float]
-    // template instantiation is third
+                              // template instantiation is third
     commonFunctionName(5.0);  // commonFunctionName(Type) [with Type = double]
-    // implicit conversions is last
+                              // implicit conversions is last
     commonFunctionName(5U);  // commonFunctionName(int)
 }
 
@@ -736,7 +742,6 @@ TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
 
 // Collect all notes here:
 // General Notes:
-
 // Template kinds (introduction year):
 // ------------------------------------
 // | Template kind | Introduction year
@@ -746,7 +751,6 @@ TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
 // | Alias         | 2011
 // | Variable      | 2014
 // ------------------------------------
-
 // Template kinds:
 // -----------------------------------------------------------------------------------------------------
 // | Template kind | Does type deduction occur?    | Is full specialization | Is partial specialization
@@ -761,7 +765,6 @@ TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
 // -> The standard calls full specialization as "explicit specialization".
 // -> Partial specialization is not allowed for function templates.
 // ---> If you need partial specialization, then you should delegate all the work to a class template.
-
 // -> Type deduction in a nutshell (N4606 14.8.2.1 [temp.deduct.call]):
 // ---> Any template parameters that were explicitly specified by the caller
 // -----> are fixed as whatever the caller said they were
@@ -786,7 +789,6 @@ TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
 // ---> Furthermore, any function parameter that does contribute to deduction
 // -----> must match its function argument type exactly.
 // -----> No implicit conversions allowed!
-
 // -> Reference collapsing:
 // ---> The rule to remember when dealing with references is that combining two reference types
 // -----> mins the number of ampersands between them.
@@ -794,7 +796,6 @@ TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
 // -------> & + && = &
 // -------> && + & = &
 // -------> && + && = &&
-
 // -> Defining a specialization in a nutshell
 // ---> Prefix the definition with template<>, and then write the function definition
 // -----> as if you were USING the specialization that you want to write.
@@ -802,7 +803,6 @@ TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
 // -----> this usually means you don't need to write any more angle brackets at all.
 // -----> But when a type can't be deduced or defaulted, you have to write the brackets.
 // -> (N4606 14.7.3 [temp.expl.spec]/1)
-
 // -> A partial specialization is any specialization that is, itself a template
 // ---> It still requires further "customization" by the user before it can be used.
 // -> The user can explicitly specify values for the original template's template parameters,
@@ -811,13 +811,11 @@ TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
 // -> The number of template paramters on the partial specialization is completely unrelated
 // ---> to the number of template parameters on the original template.
 // -> (N4606 14.5.5 [temp.class.spec])
-
 // -> Selecting the specialization
 // ---> First, deduce all the template type parameters
 // -----> Then, if they exactly match some full specialization, of course well use that full specialization
 // -----> Otherwise, look for the best-matching partial specialization.
 // -------> If the "best match" is hard to identify (ambiguous), give an error instead.
-
 // -> Define a specialization in another translation unit
 // ---> Declarations and definitions work just the way you'd expect them to.
 // ---> In our .h file, we might have this:
@@ -828,7 +826,6 @@ TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
 // -----> template <> int mblen<ascii>(const char*, int) { impl }
 // -----> template <> int mblen<utf8>(const char*, int) { impl }
 // -> Note: This violates "Dont pay for what you don't use" philosophy so be careful.
-
 // -> Explicit instantiation definition
 // ---> This special syntax means:
 // -----> "Please instantiate this template, with the given template parameters, as if it were being used right here."
@@ -841,32 +838,27 @@ TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
 // -------> extern template int abs(int);
 // -> Note: This violates "Dont pay for what you don't use" philosophy so be careful.
 // -> N4606 14.7.2 [temp.explicit] /2
-
 // -> Explicit instantiation of a class template (what are we going to do with members)
 // ---> When you explicitly instantiate a template class,
 // -----> that single definition counts as an explicit instantiation of all member of that template class too,
 // -----> both the static members and the non-static members.
 // -> N4606 14.7.2 [temp.explicit] /8
-
 // -> Dont mix and match template specialization and instantiation
 // ---> Because  we can instantiate and we can explicitly specialize,
 // -----> we can have got two competing definitions.
 // -----> Which one wins depends on your optimization level.
 // -> N4606 14.7.3 [temp.expl.spec]/6; 14.7.2 [temp.explicit] /11
-
 // -> Template entities on header and translation unit
 // ---> N4606 "A function template, member function of a class template, or static data member of a class template
 // -----> shall be defined in every translation unit in which it is implicitly instantiated
 // -----> unless the corresponding specialization is explicitly instantiated in some translation unit."
 // -----> N4606 14 [temp]/7
-
 // -> There are at least four ways template stuff can go wrong.
 // ---> The compiler can't figure out the template parameters. Result: Compiler error.
 // ---> Problems in instantiating a declaration. Result: Compiler error.
 // ---> Problems in instantiating a definition. Result: Compiler error.
 // ---> Instantiating only a declaration (or nothing at all),
 // -----> when you though you were getting a definition. Result: Linker error.
-
 // -> When is instantiation needed?
 // ---> A decent rule of thumb is: Never instantiate anything you don't absolutely 100% have to.
 // -----> N4604 14.7.1 [temp.inst]/1
@@ -879,7 +871,6 @@ TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
 // -----> N4606 14.7.1 temp.inst/5:
 // -------> Unless a variable template specialization has been explicitly instantiated or explicitly specialized,
 // ---------> the variable template specialization is implicitly instantiated when the specialization is used.
-
 // -> static_assert
 // ---> static_assert(false) makes the program ill-formed
 // ---> static_assert(some-falsely-expression-dependent-on-T) make the program ill-form

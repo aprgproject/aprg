@@ -26,7 +26,6 @@
 // ---> template specialization: template<> struct [[deprecated]] X<int> {};
 // -> A name declared non-deprecated may be redeclared deprecated. A name declared deprecated cannot be un-deprecated by
 // redeclaring it without this attribute.
-
 // attribute: [[maybe_unused]]
 // -> Source: https://en.cppreference.com/w/cpp/language/attributes/maybe_unused
 // C++ attribute: maybe_unused (since C++17)
@@ -45,7 +44,6 @@
 // ---> enumerator: enum { A [[maybe_unused]], B [[maybe_unused]] = 42 };.
 // -> If the compiler issues warnings on unused entities, that warning is suppressed for any entity declared
 // maybe_unused.
-
 // attribute: [[nodiscard]]
 // -> Source: https://en.cppreference.com/w/cpp/language/attributes/nodiscard
 // C++ attribute: nodiscard (since C++17)
@@ -64,7 +62,6 @@
 // ---> an object of an enumeration or class type declared nodiscard is initialized by explicit type conversion or
 // static_cast,
 // -> the compiler is encouraged to issue a warning.
-
 // attribute: [[noreturn]]
 // -> Source: https://en.cppreference.com/w/cpp/language/attributes/noreturn
 // C++ attribute: noreturn (since C++11)
@@ -79,7 +76,6 @@
 // -> If a function is declared with [[noreturn]] in one translation unit,
 // -> and the same function is declared without [[noreturn]] in another translation unit,
 // -> the program is ill-formed; no diagnostic required.
-
 // attribute: [[fallthrough]]
 // -> Source: https://en.cppreference.com/w/cpp/language/attributes/fallthrough
 // C++ attribute: fallthrough (since C++11)
@@ -94,7 +90,6 @@
 // that loop.
 // -> Indicates that the fall through from the previous case label is intentional and should not be diagnosed by a
 // compiler that warns on fallthrough.
-
 // attribute: [[carries_dependency]]
 // -> Source: https://en.cppreference.com/w/cpp/language/attributes/carries_dependency
 // C++ attribute: carries_dependency (since C++11)
@@ -117,7 +112,6 @@
 // unit.
 // -> If it is not used on the first declaration of a function or one of its parameters in another translation unit,
 // -> the program is ill-formed; no diagnostic required.
-
 // attribute: [[likely]] [[unlikely]]
 // -> Source: https://en.unlikely.com/w/cpp/language/attributes/likely
 // C++ attribute: likely, unlikely (since C++20)

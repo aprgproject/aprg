@@ -58,15 +58,6 @@ public:
     void processFileWithSortedPrints(std::string const& pathOfBtsSortedLog);
 
 private:
-    static void setFirstLogTimeInPair(
-        std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
-    static void setSecondLogTimeInPair(
-        std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
-    static void saveUserIndentifierAndLatencyToCsvFile(
-        UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, std::ofstream& csvFileStream);
-    static void setLogTimeIfNeeded(std::string const& lineInLogs, LogTime& logTime);
-    static double getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser);
-    static double getTotalMicroseconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime);
     void initializeMessageQueueingTimeFileStream();
     void initializeRlSetupTimeFileStream();
     void initializeRlDeletionTimeFileStream();
@@ -111,6 +102,15 @@ private:
         UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
     void saveMessageQueueingTimeToCsvFile(std::string const& lineInLogs, unsigned int const messageQueueingTime);
     void savePrintsAvailableToCsvFile(UserIdentifiers const& userIdentifiers, std::ofstream& csvFileStream);
+    static void setFirstLogTimeInPair(
+        std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
+    static void setSecondLogTimeInPair(
+        std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
+    static void saveUserIndentifierAndLatencyToCsvFile(
+        UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, std::ofstream& csvFileStream);
+    static void setLogTimeIfNeeded(std::string const& lineInLogs, LogTime& logTime);
+    static double getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser);
+    static double getTotalMicroseconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime);
     DataCollection<double> m_messageQueueingTime;
     DataCollection<double> m_rlhRlSetupLatency;
     DataCollection<double> m_rlhRlDeletionLatency;

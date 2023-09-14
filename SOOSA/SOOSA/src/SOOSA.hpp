@@ -43,11 +43,11 @@ public:
         Status();
 
     public:
-        static Status getInstance();
         [[nodiscard]] std::string getStatusString() const;
         [[nodiscard]] bool isStatusNoError() const;
         void setError(std::string const& error);
         void clearErrors();
+        static Status getInstance();
 
     private:
         alba::stringHelper::strings m_errors;
@@ -87,42 +87,6 @@ public:
     void process();
 
 private:
-    [[nodiscard]] static OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints);
-    [[nodiscard]] static double getHeight(TwoDimensionSamples const& barPoints);
-    [[nodiscard]] static int getRetainSizeInLineModel(int const size, double const removalRatio);
-    // find line
-    [[nodiscard]] static bool areLinesValid(
-        Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine);
-    [[nodiscard]] static bool isConsideredHorizontal(double const aCoefficient, double const bCoefficient);
-    [[nodiscard]] static bool isConsideredVertical(double const aCoefficient, double const bCoefficient);
-
-    static void updateSamplesForLineModeling(
-        TwoDimensionSamples& samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap,
-        double const maxAcceptableSquareError);
-
-    static void retrieveBarPointsThatFitAndSaveToKMeans(
-        TwoDimensionKMeans& kMeansForBarPoints, PointAndWidthPairs const& pointAndWidthPairs,
-        RangeOfDoubles const& minMaxCriteriaForBar);
-
-    static void saveQuestionBarCoordinatesFromKMeansWithBarPoints(
-        QuestionBarCoordinates& questionBarCoordinates, TwoDimensionKMeans const& kMeansForBarPoints,
-        int const numberQuestionsInColumn);
-
-    static void removeBarPointsWithFewHeightPointsCount(
-        TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn,
-        CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap);
-
-    static BitmapXY convertToBitmapXY(Point const& point);
-    static BitmapXY convertToBitmapXY(TwoDimensionSample const& sample);
-    static OneDimensionKMeans getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs);
-    static Point convertToPoint(BitmapXY const& bitmapXY);
-    static Point convertToPoint(TwoDimensionSample const& sample);
-    static RangeOfDoubles getMinMaxCriteriaForBar(
-        OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics);
-    static RangeOfDoubles getMinMaxRangeOfSamples(OneDimensionSamples const& samples);
-    static TwoDimensionSample convertToTwoDimensionSample(Point const& point);
-    static std::string getPrintableStringForPercentage(double const numerator, double const denominator);
-
     [[nodiscard]] Answers getAnswersAtQuestion(
         BitmapSnippet const& snippet, QuestionBarCoordinate const& leftCoordinate,
         QuestionBarCoordinate const& rightCoordinate) const;
@@ -235,6 +199,41 @@ private:
         int const numberQuestionsInColumn);
 
     void setAnswerToQuestionInColumn(int const columnNumber, int const questionOffsetInColumn, int const answer);
+    [[nodiscard]] static OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints);
+    [[nodiscard]] static double getHeight(TwoDimensionSamples const& barPoints);
+    [[nodiscard]] static int getRetainSizeInLineModel(int const size, double const removalRatio);
+    // find line
+    [[nodiscard]] static bool areLinesValid(
+        Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine);
+    [[nodiscard]] static bool isConsideredHorizontal(double const aCoefficient, double const bCoefficient);
+    [[nodiscard]] static bool isConsideredVertical(double const aCoefficient, double const bCoefficient);
+
+    static void updateSamplesForLineModeling(
+        TwoDimensionSamples& samplesLineModeling, ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap,
+        double const maxAcceptableSquareError);
+
+    static void retrieveBarPointsThatFitAndSaveToKMeans(
+        TwoDimensionKMeans& kMeansForBarPoints, PointAndWidthPairs const& pointAndWidthPairs,
+        RangeOfDoubles const& minMaxCriteriaForBar);
+
+    static void saveQuestionBarCoordinatesFromKMeansWithBarPoints(
+        QuestionBarCoordinates& questionBarCoordinates, TwoDimensionKMeans const& kMeansForBarPoints,
+        int const numberQuestionsInColumn);
+
+    static void removeBarPointsWithFewHeightPointsCount(
+        TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn,
+        CountToEndPointIndexesMultiMap const& countToEndPointsIndexesMultiMap);
+
+    static BitmapXY convertToBitmapXY(Point const& point);
+    static BitmapXY convertToBitmapXY(TwoDimensionSample const& sample);
+    static OneDimensionKMeans getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs);
+    static Point convertToPoint(BitmapXY const& bitmapXY);
+    static Point convertToPoint(TwoDimensionSample const& sample);
+    static RangeOfDoubles getMinMaxCriteriaForBar(
+        OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics);
+    static RangeOfDoubles getMinMaxRangeOfSamples(OneDimensionSamples const& samples);
+    static TwoDimensionSample convertToTwoDimensionSample(Point const& point);
+    static std::string getPrintableStringForPercentage(double const numerator, double const denominator);
     SoosaConfiguration m_soosaConfiguration;
     InputConfiguration m_inputConfiguration;
     int m_numberOfRespondents{};

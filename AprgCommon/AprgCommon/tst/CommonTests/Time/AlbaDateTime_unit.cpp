@@ -9,58 +9,6 @@ using PrintFormat = alba::AlbaDateTime::PrintFormat;
 
 namespace alba {
 
-TEST(AlbaDateTimeTest, DefaultConstructorWorks) {
-    AlbaDateTime const dateTime;
-
-    EXPECT_TRUE(dateTime.isEmpty());
-    EXPECT_EQ(0U, dateTime.getYears());
-    EXPECT_EQ(0U, dateTime.getMonths());
-    EXPECT_EQ(0U, dateTime.getDays());
-    EXPECT_EQ(0U, dateTime.getHours());
-    EXPECT_EQ(0U, dateTime.getMinutes());
-    EXPECT_EQ(0U, dateTime.getSeconds());
-    EXPECT_EQ(0U, dateTime.getMicroSeconds());
-}
-
-TEST(AlbaDateTimeTest, ConstructorWithYearMonthDayAndHourMinuteSecondAndMicrosecondWorks) {
-    AlbaDateTime const dateTime(AlbaYearMonthDay(2017, 10, 6), AlbaHourMinuteSecond(4, 59, 44), 32487);
-
-    EXPECT_FALSE(dateTime.isEmpty());
-    EXPECT_EQ(2017U, dateTime.getYears());
-    EXPECT_EQ(10U, dateTime.getMonths());
-    EXPECT_EQ(6U, dateTime.getDays());
-    EXPECT_EQ(4U, dateTime.getHours());
-    EXPECT_EQ(59U, dateTime.getMinutes());
-    EXPECT_EQ(44U, dateTime.getSeconds());
-    EXPECT_EQ(32487U, dateTime.getMicroSeconds());
-}
-
-TEST(AlbaDateTimeTest, ConstructorWithAllParametersWorks) {
-    AlbaDateTime const dateTime(2017, 10, 6, 4, 59, 44, 32487);
-
-    EXPECT_FALSE(dateTime.isEmpty());
-    EXPECT_EQ(2017U, dateTime.getYears());
-    EXPECT_EQ(10U, dateTime.getMonths());
-    EXPECT_EQ(6U, dateTime.getDays());
-    EXPECT_EQ(4U, dateTime.getHours());
-    EXPECT_EQ(59U, dateTime.getMinutes());
-    EXPECT_EQ(44U, dateTime.getSeconds());
-    EXPECT_EQ(32487U, dateTime.getMicroSeconds());
-}
-
-TEST(AlbaDateTimeTest, NamedConstructorWithTotalDaysAndTotalSecondsAndTotalMicrosecondsWorks) {
-    AlbaDateTime const dateTime(AlbaDateTime::createFromTotalDaysAndSecondsAndMicroSeconds(736974U, 17984U, 32487U));
-
-    EXPECT_FALSE(dateTime.isEmpty());
-    EXPECT_EQ(2017U, dateTime.getYears());
-    EXPECT_EQ(10U, dateTime.getMonths());
-    EXPECT_EQ(6U, dateTime.getDays());
-    EXPECT_EQ(4U, dateTime.getHours());
-    EXPECT_EQ(59U, dateTime.getMinutes());
-    EXPECT_EQ(44U, dateTime.getSeconds());
-    EXPECT_EQ(32487U, dateTime.getMicroSeconds());
-}
-
 TEST(AlbaDateTimeTest, LessThanOperatorWorksAsIntended) {
     AlbaDateTime const dateTime1(2015, 8, 20, 18, 14, 51, 565172);
     AlbaDateTime const dateTime2(2015, 8, 20, 18, 14, 51, 565173);
@@ -203,16 +151,6 @@ TEST(AlbaDateTimeTest, SubtractionOperatorWithUnderflowValues) {
     EXPECT_EQ(expectedAnswer, actualAnswer);
 }
 
-TEST(AlbaDateTimeTest, SubtractionOperatorWithNegativeResult) {
-    AlbaDateTime const dateTime1(0000, 00, 00, 00, 00, 00, 000001);
-    AlbaDateTime const dateTime2(2000, 01, 01, 00, 00, 00, 000000);
-    AlbaDateTime expectedAnswer(1999, 12, 31, 23, 59, 59, 999999);
-    expectedAnswer.negate();
-
-    AlbaDateTime const actualAnswer = dateTime1 - dateTime2;
-    EXPECT_EQ(expectedAnswer, actualAnswer);
-}
-
 TEST(AlbaDateTimeTest, SubtractionOperatorWorksInRealScenario) {
     AlbaDateTime const dateTime1(2018, 9, 30, 9, 55, 50, 110000);
     AlbaDateTime const dateTime2(2018, 9, 30, 9, 55, 42, 91000);
@@ -222,18 +160,74 @@ TEST(AlbaDateTimeTest, SubtractionOperatorWorksInRealScenario) {
     EXPECT_EQ(expectedAnswer, actualAnswer);
 }
 
-TEST(AlbaDateTimeTest, IsEmptyWorks) {
-    AlbaDateTime const emptyDateTime;
-    AlbaDateTime const nonEmptyDateTime(2017, 10, 6, 4, 59, 44, 32487);
+TEST(AlbaDateTimeTest, OutputStreamOperatorWorks) {
+    AlbaDateTime const dateTime(2017, 10, 6, 4, 59, 44, 32487);
 
-    EXPECT_TRUE(emptyDateTime.isEmpty());
-    EXPECT_FALSE(nonEmptyDateTime.isEmpty());
+    EXPECT_EQ(" 1 * 2017-10-06 04:59:44.032487", convertToString(dateTime));
+}
+
+TEST(AlbaDateTimeTest, ConstructorWithYearMonthDayAndHourMinuteSecondAndMicrosecondWorks) {
+    AlbaDateTime const dateTime(AlbaYearMonthDay(2017, 10, 6), AlbaHourMinuteSecond(4, 59, 44), 32487);
+
+    EXPECT_FALSE(dateTime.isEmpty());
+    EXPECT_EQ(2017U, dateTime.getYears());
+    EXPECT_EQ(10U, dateTime.getMonths());
+    EXPECT_EQ(6U, dateTime.getDays());
+    EXPECT_EQ(4U, dateTime.getHours());
+    EXPECT_EQ(59U, dateTime.getMinutes());
+    EXPECT_EQ(44U, dateTime.getSeconds());
+    EXPECT_EQ(32487U, dateTime.getMicroSeconds());
+}
+
+TEST(AlbaDateTimeTest, GetYearMonthDayWorks) {
+    AlbaDateTime const dateTime(2017, 10, 6, 4, 59, 44, 32487);
+
+    EXPECT_EQ(AlbaYearMonthDay(2017, 10, 6), dateTime.getYearMonthDay());
 }
 
 TEST(AlbaDateTimeTest, GetYearsWorks) {
     AlbaDateTime const dateTime(2017, 10, 6, 4, 59, 44, 32487);
 
     EXPECT_EQ(2017U, dateTime.getYears());
+}
+
+TEST(AlbaDateTimeTest, DefaultConstructorWorks) {
+    AlbaDateTime const dateTime;
+
+    EXPECT_TRUE(dateTime.isEmpty());
+    EXPECT_EQ(0U, dateTime.getYears());
+    EXPECT_EQ(0U, dateTime.getMonths());
+    EXPECT_EQ(0U, dateTime.getDays());
+    EXPECT_EQ(0U, dateTime.getHours());
+    EXPECT_EQ(0U, dateTime.getMinutes());
+    EXPECT_EQ(0U, dateTime.getSeconds());
+    EXPECT_EQ(0U, dateTime.getMicroSeconds());
+}
+
+TEST(AlbaDateTimeTest, ConstructorWithAllParametersWorks) {
+    AlbaDateTime const dateTime(2017, 10, 6, 4, 59, 44, 32487);
+
+    EXPECT_FALSE(dateTime.isEmpty());
+    EXPECT_EQ(2017U, dateTime.getYears());
+    EXPECT_EQ(10U, dateTime.getMonths());
+    EXPECT_EQ(6U, dateTime.getDays());
+    EXPECT_EQ(4U, dateTime.getHours());
+    EXPECT_EQ(59U, dateTime.getMinutes());
+    EXPECT_EQ(44U, dateTime.getSeconds());
+    EXPECT_EQ(32487U, dateTime.getMicroSeconds());
+}
+
+TEST(AlbaDateTimeTest, NamedConstructorWithTotalDaysAndTotalSecondsAndTotalMicrosecondsWorks) {
+    AlbaDateTime const dateTime(AlbaDateTime::createFromTotalDaysAndSecondsAndMicroSeconds(736974U, 17984U, 32487U));
+
+    EXPECT_FALSE(dateTime.isEmpty());
+    EXPECT_EQ(2017U, dateTime.getYears());
+    EXPECT_EQ(10U, dateTime.getMonths());
+    EXPECT_EQ(6U, dateTime.getDays());
+    EXPECT_EQ(4U, dateTime.getHours());
+    EXPECT_EQ(59U, dateTime.getMinutes());
+    EXPECT_EQ(44U, dateTime.getSeconds());
+    EXPECT_EQ(32487U, dateTime.getMicroSeconds());
 }
 
 TEST(AlbaDateTimeTest, GetMonthsWorks) {
@@ -246,6 +240,20 @@ TEST(AlbaDateTimeTest, GetDaysWorks) {
     AlbaDateTime const dateTime(2017, 10, 6, 4, 59, 44, 32487);
 
     EXPECT_EQ(6U, dateTime.getDays());
+}
+
+TEST(AlbaDateTimeTest, IsEmptyWorks) {
+    AlbaDateTime const emptyDateTime;
+    AlbaDateTime const nonEmptyDateTime(2017, 10, 6, 4, 59, 44, 32487);
+
+    EXPECT_TRUE(emptyDateTime.isEmpty());
+    EXPECT_FALSE(nonEmptyDateTime.isEmpty());
+}
+
+TEST(AlbaDateTimeTest, GetHourMinutesSecondWorks) {
+    AlbaDateTime const dateTime(2017, 10, 6, 4, 59, 44, 32487);
+
+    EXPECT_EQ(AlbaHourMinuteSecond(4, 59, 44), dateTime.getHourMinutesSecond());
 }
 
 TEST(AlbaDateTimeTest, GetHoursWorks) {
@@ -272,22 +280,14 @@ TEST(AlbaDateTimeTest, GetMicroSecondsWorks) {
     EXPECT_EQ(32487U, dateTime.getMicroSeconds());
 }
 
-TEST(AlbaDateTimeTest, GetYearMonthDayWorks) {
-    AlbaDateTime const dateTime(2017, 10, 6, 4, 59, 44, 32487);
+TEST(AlbaDateTimeTest, SubtractionOperatorWithNegativeResult) {
+    AlbaDateTime const dateTime1(0000, 00, 00, 00, 00, 00, 000001);
+    AlbaDateTime const dateTime2(2000, 01, 01, 00, 00, 00, 000000);
+    AlbaDateTime expectedAnswer(1999, 12, 31, 23, 59, 59, 999999);
+    expectedAnswer.negate();
 
-    EXPECT_EQ(AlbaYearMonthDay(2017, 10, 6), dateTime.getYearMonthDay());
-}
-
-TEST(AlbaDateTimeTest, GetHourMinutesSecondWorks) {
-    AlbaDateTime const dateTime(2017, 10, 6, 4, 59, 44, 32487);
-
-    EXPECT_EQ(AlbaHourMinuteSecond(4, 59, 44), dateTime.getHourMinutesSecond());
-}
-
-TEST(AlbaDateTimeTest, OutputStreamOperatorWorks) {
-    AlbaDateTime const dateTime(2017, 10, 6, 4, 59, 44, 32487);
-
-    EXPECT_EQ(" 1 * 2017-10-06 04:59:44.032487", convertToString(dateTime));
+    AlbaDateTime const actualAnswer = dateTime1 - dateTime2;
+    EXPECT_EQ(expectedAnswer, actualAnswer);
 }
 
 TEST(AlbaDateTimeTest, OutputStreamOperatorWorksForPrintObjectWithDifferentTypes) {

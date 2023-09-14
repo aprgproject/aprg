@@ -59,7 +59,6 @@ public:
 // ---> …a) Generate a random number from 0 to i where i is the index of the current item in stream[].
 // ---> Let the generated random number is j.
 // ---> …b) If j is in range 0 to k-1, replace reservoir[j] with stream[i]
-
 // -> How does this work?
 // ---> To prove that this solution works perfectly,
 // ---> we must prove that the probability that any item stream[i]

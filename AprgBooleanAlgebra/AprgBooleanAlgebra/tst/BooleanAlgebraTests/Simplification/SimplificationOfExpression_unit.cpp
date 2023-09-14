@@ -9,48 +9,6 @@ using namespace std;
 
 namespace alba::booleanAlgebra::Simplification {
 
-TEST(SimplificationOfExpressionTest, ShouldSimplifyWithOuterOrAndInnerAndWorks) {
-    EXPECT_FALSE(SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd());
-    {
-        SimplificationOfExpression::ConfigurationDetails configurationDetails(
-            SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
-        configurationDetails.shouldSimplifyWithOuterOrAndInnerAnd = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
-        scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
-        EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd());
-    }
-    EXPECT_FALSE(SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd());
-}
-
-TEST(SimplificationOfExpressionTest, ShouldSimplifyWithOuterAndAndInnerOrWorks) {
-    EXPECT_FALSE(SimplificationOfExpression::shouldSimplifyWithOuterAndAndInnerOr());
-    {
-        SimplificationOfExpression::ConfigurationDetails configurationDetails(
-            SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
-        configurationDetails.shouldSimplifyWithOuterAndAndInnerOr = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
-        scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
-        EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyWithOuterAndAndInnerOr());
-    }
-    EXPECT_FALSE(SimplificationOfExpression::shouldSimplifyWithOuterAndAndInnerOr());
-}
-
-TEST(SimplificationOfExpressionTest, ShouldSimplifyByQuineMcKluskeyWorks) {
-    EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyByQuineMcKluskey());
-    {
-        SimplificationOfExpression::ConfigurationDetails configurationDetails(
-            SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
-        configurationDetails.shouldSimplifyByQuineMcKluskey = false;
-        SimplificationOfExpression::ScopeObject scopeObject;
-        scopeObject.setInThisScopeThisConfiguration(configurationDetails);
-
-        EXPECT_FALSE(SimplificationOfExpression::shouldSimplifyByQuineMcKluskey());
-    }
-    EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyByQuineMcKluskey());
-}
-
 TEST(SimplificationOfExpressionTest, SimplifyWorksOnSimplifyingInnerTerms) {
     Expression subExpression1(createExpressionIfPossible({"x", "&", "x"}));
     Expression subExpression2(createExpressionIfPossible({"y", "|", "y"}));
@@ -469,6 +427,48 @@ TEST(SimplificationOfExpressionTest, SimplifyWorksOnConsensusTheoremPattern2) {
     string stringToVerify(convertToString(simplification.getExpression()));
     string stringToExpect("((x|y)&(x'|z))");
     EXPECT_EQ(stringToExpect, stringToVerify);
+}
+
+TEST(SimplificationOfExpressionTest, ShouldSimplifyWithOuterOrAndInnerAndWorks) {
+    EXPECT_FALSE(SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd());
+    {
+        SimplificationOfExpression::ConfigurationDetails configurationDetails(
+            SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
+        configurationDetails.shouldSimplifyWithOuterOrAndInnerAnd = true;
+        SimplificationOfExpression::ScopeObject scopeObject;
+        scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+
+        EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd());
+    }
+    EXPECT_FALSE(SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd());
+}
+
+TEST(SimplificationOfExpressionTest, ShouldSimplifyWithOuterAndAndInnerOrWorks) {
+    EXPECT_FALSE(SimplificationOfExpression::shouldSimplifyWithOuterAndAndInnerOr());
+    {
+        SimplificationOfExpression::ConfigurationDetails configurationDetails(
+            SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
+        configurationDetails.shouldSimplifyWithOuterAndAndInnerOr = true;
+        SimplificationOfExpression::ScopeObject scopeObject;
+        scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+
+        EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyWithOuterAndAndInnerOr());
+    }
+    EXPECT_FALSE(SimplificationOfExpression::shouldSimplifyWithOuterAndAndInnerOr());
+}
+
+TEST(SimplificationOfExpressionTest, ShouldSimplifyByQuineMcKluskeyWorks) {
+    EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyByQuineMcKluskey());
+    {
+        SimplificationOfExpression::ConfigurationDetails configurationDetails(
+            SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
+        configurationDetails.shouldSimplifyByQuineMcKluskey = false;
+        SimplificationOfExpression::ScopeObject scopeObject;
+        scopeObject.setInThisScopeThisConfiguration(configurationDetails);
+
+        EXPECT_FALSE(SimplificationOfExpression::shouldSimplifyByQuineMcKluskey());
+    }
+    EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyByQuineMcKluskey());
 }
 
 }  // namespace alba::booleanAlgebra::Simplification

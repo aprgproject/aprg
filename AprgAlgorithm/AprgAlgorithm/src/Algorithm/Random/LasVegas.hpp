@@ -10,7 +10,6 @@ inline void performALasVegasAlgorithm(LasVegasAlgorithm const& lasVegasAlgorithm
 // A Las Vegas algorithm is a randomized algorithm that always gives the correct answer,
 // but its running time varies randomly.
 // The goal is to design an algorithm that is efficient with high probability.
-
 // Las Vegas algorithm:
 // -> These algorithms always produce correct or optimum result.
 // -> Time complexity of these algorithms is based on a random value

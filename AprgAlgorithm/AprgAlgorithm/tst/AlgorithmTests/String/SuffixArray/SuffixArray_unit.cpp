@@ -30,6 +30,14 @@ TEST(SuffixArrayTest, GetRankWorks) {
     EXPECT_EQ(2, suffixArray.getRank("LetsSingInstead"));
 }
 
+TEST(SuffixArrayTest, GetLongestCommonPrefixOfTwoSuffixesWorks) {
+    SuffixArrayForTest const suffixArray("LetsDanceToThisSong");
+
+    EXPECT_EQ("T", suffixArray.getLongestCommonPrefixOfTwoSuffixes(3, 4));
+    EXPECT_TRUE(suffixArray.getLongestCommonPrefixOfTwoSuffixes(5, 6).empty());
+    EXPECT_EQ("e", suffixArray.getLongestCommonPrefixOfTwoSuffixes(7, 8));
+}
+
 TEST(SuffixArrayTest, GetSuffixViewAtWorks) {
     SuffixArrayForTest const suffixArray("LetsDanceToThisSong");
 
@@ -43,14 +51,6 @@ TEST(SuffixArrayTest, GetSuffixViewAtWorks) {
     EXPECT_EQ("eToThisSong", suffixArray.getSuffixViewAt(7));
     EXPECT_EQ("etsDanceToThisSong", suffixArray.getSuffixViewAt(8));
     EXPECT_EQ("g", suffixArray.getSuffixViewAt(9));
-}
-
-TEST(SuffixArrayTest, GetLongestCommonPrefixOfTwoSuffixesWorks) {
-    SuffixArrayForTest const suffixArray("LetsDanceToThisSong");
-
-    EXPECT_EQ("T", suffixArray.getLongestCommonPrefixOfTwoSuffixes(3, 4));
-    EXPECT_TRUE(suffixArray.getLongestCommonPrefixOfTwoSuffixes(5, 6).empty());
-    EXPECT_EQ("e", suffixArray.getLongestCommonPrefixOfTwoSuffixes(7, 8));
 }
 
 }  // namespace alba::algorithm

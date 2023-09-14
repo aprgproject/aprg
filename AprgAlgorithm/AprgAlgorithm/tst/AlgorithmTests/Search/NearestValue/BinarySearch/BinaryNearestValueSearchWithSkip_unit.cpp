@@ -45,13 +45,6 @@ TEST(BinaryNearestValueSearchWithSkipTest, GetIndexOfNearestValueWorksWhenThereI
     testGetIndexOfNearestValueWithOneUnsignedInt<SearchForTest, ValuesForTest>();
 }
 
-TEST(BinaryNearestValueSearchWithSkipTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
-    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
-    SearchForTest const search(duplicateValues);
-
-    EXPECT_EQ(4, search.getIndexOfNearestValue(33));
-}
-
 TEST(BinaryNearestValueSearchWithSkipTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues) {
     testGetIndexOfNearestValueWithMultipleSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
@@ -62,6 +55,13 @@ TEST(BinaryNearestValueSearchWithSkipTest, GetIndexOfNearestValueWorksWhenNeares
 
 TEST(BinaryNearestValueSearchWithSkipTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher) {
     testGetIndexOfNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
+TEST(BinaryNearestValueSearchWithSkipTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
+    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
+    SearchForTest const search(duplicateValues);
+
+    EXPECT_EQ(4, search.getIndexOfNearestValue(33));
 }
 
 }  // namespace alba::algorithm

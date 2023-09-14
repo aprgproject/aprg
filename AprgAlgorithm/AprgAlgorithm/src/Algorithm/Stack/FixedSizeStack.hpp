@@ -12,7 +12,6 @@ class FixedSizeStack : public BaseStack<Object> {
 public:
     using Objects = std::array<Object, SIZE>;
     FixedSizeStack() = default;
-    [[nodiscard]] Objects const& getObjects() const { return m_objects; }
     [[nodiscard]] int getSize() const override { return m_size; }
     [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
@@ -27,6 +26,8 @@ public:
         assert(m_size > 0);
         return m_objects[--m_size];
     }
+
+    [[nodiscard]] Objects const& getObjects() const { return m_objects; }
 
 private:
     int m_size{0};

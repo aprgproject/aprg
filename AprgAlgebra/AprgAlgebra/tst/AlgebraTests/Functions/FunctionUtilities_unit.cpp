@@ -9,13 +9,6 @@ using namespace std;
 
 namespace alba::algebra::Functions {
 
-TEST(FunctionUtilitiesTest, IsFunctionContinuousWorks) {
-    Function unknownFunction("functionToTest", Term("x"), [](AlbaNumber const& number) { return number; });
-
-    EXPECT_FALSE(isFunctionContinuous(unknownFunction));
-    EXPECT_TRUE(isFunctionContinuous(abs("x")));
-}
-
 TEST(FunctionUtilitiesTest, EvaluateAndGetInputOutputPairWorks) {
     AlbaNumbers inputNumbers{-2, -1, 0, 1, 2};
 
@@ -33,6 +26,13 @@ TEST(FunctionUtilitiesTest, EvaluateAndGetInputOutputPairWorks) {
     EXPECT_EQ(AlbaNumber(1), inputAndOutputPairs[3].second);
     EXPECT_EQ(AlbaNumber(2), inputAndOutputPairs[4].first);
     EXPECT_EQ(AlbaNumber(2), inputAndOutputPairs[4].second);
+}
+
+TEST(FunctionUtilitiesTest, IsFunctionContinuousWorks) {
+    Function unknownFunction("functionToTest", Term("x"), [](AlbaNumber const& number) { return number; });
+
+    EXPECT_FALSE(isFunctionContinuous(unknownFunction));
+    EXPECT_TRUE(isFunctionContinuous(abs("x")));
 }
 
 }  // namespace alba::algebra::Functions

@@ -59,6 +59,47 @@ TEST(SnapshotStatisticsTest, DISABLED_SnapshotFilesRel2) {
         R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\results\outputFileSizesStatistics.csv)");
 }
 
+TEST(SnapshotStatisticsTest, DISABLED_SnapshotFilesRel3) {
+    cout << PATH_OF_7Z_EXECUTABLE << "\n";
+    cout << PATH_OF_7Z_TEMP_FILE << "\n";
+
+    SnapshotStatistics statistics;
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot1_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot2_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot3_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot4_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot5_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
+
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\BB RESET_REL3\Snapshot_baseband reset rel3_WBTS-669_WBTS18_2000_0449_07.zip)");
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\CELL BLOCK UNBLOCK\Snapshot_cell block unblock_WBTS-669_WBTS18_2000_0449_07.zip)");
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\CELL LOCK UNLOCK\Snapshot_cell lock unlock_WBTS-669_WBTS18_2000_0449_07.zip)");
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\ESM HOT REMOVE\Snapshot_esm hot remove insert_WBTS-669_WBTS18_2000_0449_07.zip)");
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\LINK BREAK\Snapshot_link break_WBTS-669_WBTS18_2000_0449_07.zip)");
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\NYQUIST CRASH\Snapshot_nyquist crash_WBTS-669_WBTS18_2000_0449_0.zip)");
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\RF BLOCK UNBLOCK\Snapshot_rf block unblock_WBTS-669_WBTS18_2000_0449_07.zip)");
+    statistics.processSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\RF HOT INSERT REMOVE\Snapshot_rf hot remove insert_WBTS-669_WBTS18_2000_0449_07.zip)");
+
+    statistics.saveFileListForSnapshot(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\results\outputFileSizes.csv)");
+
+    statistics.fetchStatisticsForSnapshot();
+    statistics.saveStatisticsToFile(
+        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\results\outputFileSizesStatistics.csv)");
+}
+
 TEST(SnapshotStatisticsTest, DISABLED_RomUsageRel2) {
     SnapshotStatistics statistics;
     statistics.processMemory(
@@ -159,47 +200,6 @@ TEST(SnapshotStatisticsTest, DISABLED_RamUsageRel2) {
     statistics.fetchStatisticsForMemory();
     statistics.saveStatisticsToFile(
         R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\results\outputRamStatistics.csv)");
-}
-
-TEST(SnapshotStatisticsTest, DISABLED_SnapshotFilesRel3) {
-    cout << PATH_OF_7Z_EXECUTABLE << "\n";
-    cout << PATH_OF_7Z_TEMP_FILE << "\n";
-
-    SnapshotStatistics statistics;
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot1_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot2_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot3_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot4_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP2_REL3\Snapshot5_WBTS-669_WBTS18_2000_0449_07_WBTS669ALDLOGS_20181205-1803.zip)");
-
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\BB RESET_REL3\Snapshot_baseband reset rel3_WBTS-669_WBTS18_2000_0449_07.zip)");
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\CELL BLOCK UNBLOCK\Snapshot_cell block unblock_WBTS-669_WBTS18_2000_0449_07.zip)");
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\CELL LOCK UNLOCK\Snapshot_cell lock unlock_WBTS-669_WBTS18_2000_0449_07.zip)");
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\ESM HOT REMOVE\Snapshot_esm hot remove insert_WBTS-669_WBTS18_2000_0449_07.zip)");
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\LINK BREAK\Snapshot_link break_WBTS-669_WBTS18_2000_0449_07.zip)");
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\NYQUIST CRASH\Snapshot_nyquist crash_WBTS-669_WBTS18_2000_0449_0.zip)");
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\RF BLOCK UNBLOCK\Snapshot_rf block unblock_WBTS-669_WBTS18_2000_0449_07.zip)");
-    statistics.processSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\AP3_REL3\RF HOT INSERT REMOVE\Snapshot_rf hot remove insert_WBTS-669_WBTS18_2000_0449_07.zip)");
-
-    statistics.saveFileListForSnapshot(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\results\outputFileSizes.csv)");
-
-    statistics.fetchStatisticsForSnapshot();
-    statistics.saveStatisticsToFile(
-        R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL3\results\outputFileSizesStatistics.csv)");
 }
 
 TEST(SnapshotStatisticsTest, DISABLED_RomUsageRel3) {

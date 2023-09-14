@@ -8,9 +8,9 @@
 
 #include <gtest/gtest.h>
 
-using namespace alba::algebra;
 using namespace alba::algebra::Functions;
 using namespace alba::algebra::ThreeDimensions;
+using namespace alba::algebra;
 using namespace std;
 
 namespace alba {

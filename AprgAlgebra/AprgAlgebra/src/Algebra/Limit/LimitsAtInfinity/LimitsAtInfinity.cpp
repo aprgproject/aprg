@@ -29,18 +29,6 @@ Term LimitsAtInfinity::getValueAtInfinity(AlbaNumber const infinityValue) const 
     return substitution.performSubstitutionTo(m_simplifiedTermAtInfinity);
 }
 
-AlbaNumber LimitsAtInfinity::getDegreeToRemove(AlbaNumber const& numeratorDegree, AlbaNumber const& denominatorDegree) {
-    AlbaNumber degreeToRemove;
-    if (numeratorDegree == denominatorDegree) {
-        degreeToRemove = numeratorDegree;
-    } else if (numeratorDegree > denominatorDegree) {
-        degreeToRemove = min(numeratorDegree, denominatorDegree);
-    } else {
-        degreeToRemove = max(numeratorDegree, denominatorDegree);
-    }
-    return degreeToRemove;
-}
-
 void LimitsAtInfinity::simplify() {
     simplifyAsATerm();
     if (!isNan(m_simplifiedTermAtInfinity)) {
@@ -96,6 +84,18 @@ AlbaNumber LimitsAtInfinity::getMaxDegree(Term const& term) {
         degree = getDegree(createMonomialIfPossible(degreeOnlyTerm));
     }
     return degree;
+}
+
+AlbaNumber LimitsAtInfinity::getDegreeToRemove(AlbaNumber const& numeratorDegree, AlbaNumber const& denominatorDegree) {
+    AlbaNumber degreeToRemove;
+    if (numeratorDegree == denominatorDegree) {
+        degreeToRemove = numeratorDegree;
+    } else if (numeratorDegree > denominatorDegree) {
+        degreeToRemove = min(numeratorDegree, denominatorDegree);
+    } else {
+        degreeToRemove = max(numeratorDegree, denominatorDegree);
+    }
+    return degreeToRemove;
 }
 
 }  // namespace alba::algebra

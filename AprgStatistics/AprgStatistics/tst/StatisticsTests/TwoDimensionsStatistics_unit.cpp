@@ -142,36 +142,6 @@ TEST(TwoDimensionsStatisticsTest, LineModelingWithScatteredValue) {
     EXPECT_DOUBLE_EQ(-0.64846044526168001, lineModel.cCoefficient);
 }
 
-TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForInvalidLine) {
-    LocalLineModel lineModel(0, 0, 0);
-
-    EXPECT_EQ(0, TwoDimensionsStatistics::calculateSquareError(LocalSample{5, 3}, lineModel));
-    EXPECT_EQ(0, TwoDimensionsStatistics::calculateSquareError(LocalSample{7, 5}, lineModel));
-}
-
-TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForVerticalLine) {
-    LocalLineModel lineModel(-1, 0, 5);
-
-    EXPECT_EQ(25, TwoDimensionsStatistics::calculateSquareError(LocalSample{10, 10}, lineModel));
-}
-
-TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForHorizontalLine) {
-    LocalLineModel lineModel(0, -1, 5);
-
-    EXPECT_EQ(25, TwoDimensionsStatistics::calculateSquareError(LocalSample{10, 10}, lineModel));
-}
-
-TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForScatteredPoints) {
-    LocalLineModel lineModel(-61.27218654211062443, 1, 39.061955918843921154);
-
-    EXPECT_EQ(
-        1.4444234765251897645, TwoDimensionsStatistics::calculateSquareError(LocalSample{1.47, 52.21}, lineModel));
-    EXPECT_EQ(
-        0.55823592527027865451, TwoDimensionsStatistics::calculateSquareError(LocalSample{1.65, 61.29}, lineModel));
-    EXPECT_EQ(
-        1.9428304975833747825, TwoDimensionsStatistics::calculateSquareError(LocalSample{1.83, 74.46}, lineModel));
-}
-
 TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelForInvalidLine) {
     LocalSamples samples;
     samples.emplace_back(LocalSample{5, 3});
@@ -275,6 +245,36 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
     EXPECT_EQ((LocalSample{1.80, 72.19}), it++->second);
     EXPECT_EQ((LocalSample{1.47, 52.21}), it++->second);
     EXPECT_EQ((LocalSample{1.83, 74.46}), it++->second);
+}
+
+TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForInvalidLine) {
+    LocalLineModel lineModel(0, 0, 0);
+
+    EXPECT_EQ(0, TwoDimensionsStatistics::calculateSquareError(LocalSample{5, 3}, lineModel));
+    EXPECT_EQ(0, TwoDimensionsStatistics::calculateSquareError(LocalSample{7, 5}, lineModel));
+}
+
+TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForVerticalLine) {
+    LocalLineModel lineModel(-1, 0, 5);
+
+    EXPECT_EQ(25, TwoDimensionsStatistics::calculateSquareError(LocalSample{10, 10}, lineModel));
+}
+
+TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForHorizontalLine) {
+    LocalLineModel lineModel(0, -1, 5);
+
+    EXPECT_EQ(25, TwoDimensionsStatistics::calculateSquareError(LocalSample{10, 10}, lineModel));
+}
+
+TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForScatteredPoints) {
+    LocalLineModel lineModel(-61.27218654211062443, 1, 39.061955918843921154);
+
+    EXPECT_EQ(
+        1.4444234765251897645, TwoDimensionsStatistics::calculateSquareError(LocalSample{1.47, 52.21}, lineModel));
+    EXPECT_EQ(
+        0.55823592527027865451, TwoDimensionsStatistics::calculateSquareError(LocalSample{1.65, 61.29}, lineModel));
+    EXPECT_EQ(
+        1.9428304975833747825, TwoDimensionsStatistics::calculateSquareError(LocalSample{1.83, 74.46}, lineModel));
 }
 
 }  // namespace alba

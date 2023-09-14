@@ -16,6 +16,17 @@ TEST(LogarithmHelpersTest, GetLogarithmWorks) {
     EXPECT_DOUBLE_EQ(1.9534452978042594, getLogarithm(4, 15));
 }
 
+TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksWithIncreasingInput) {
+    // Results: ~330ms
+    double result(0);
+    for (int base = 2; base < 200; ++base) {
+        for (int exponent = 1; exponent < 20000; ++exponent) {
+            result = std::max(result, getLogarithm(base, exponent));
+        }
+    }
+    EXPECT_DOUBLE_EQ(14.287640242993977, result);
+}
+
 TEST(LogarithmHelpersTest, GetLogarithmWithBase2OfWorks) {
     EXPECT_EQ(2, getLogarithmWithBase2Of(4));
     EXPECT_EQ(3, getLogarithmWithBase2Of(10));
@@ -31,43 +42,6 @@ TEST(LogarithmHelpersTest, GetLogarithmForIntegersWorks) {
     EXPECT_EQ(1, getLogarithmForIntegers(4, 15));
     EXPECT_EQ(2, getLogarithmForIntegers(4, 16));
     EXPECT_EQ(2, getLogarithmForIntegers(4, 17));
-}
-
-TEST(LogarithmHelpersTest, GetCeilOfLogarithmForIntegersWorks) {
-    EXPECT_EQ(0, getCeilOfLogarithmForIntegers(1, 100));
-    EXPECT_EQ(2, getCeilOfLogarithmForIntegers(3, 9));
-    EXPECT_EQ(5, getCeilOfLogarithmForIntegers(2, 32));
-    EXPECT_EQ(31LL, getCeilOfLogarithmForIntegers(2LL, 2147483648LL));
-    EXPECT_EQ(2, getCeilOfLogarithmForIntegers(4, 15));
-    EXPECT_EQ(2, getCeilOfLogarithmForIntegers(4, 16));
-    EXPECT_EQ(3, getCeilOfLogarithmForIntegers(4, 17));
-}
-
-TEST(LogarithmHelpersTest, GetIterativeLogarithmWorks) {
-    EXPECT_EQ(2, getIterativeLogarithm<int>(3, 9));
-    EXPECT_EQ(4, getIterativeLogarithm<int>(2, 32));
-    EXPECT_EQ(0, getIterativeLogarithm<int>(2, 0.0625));
-    EXPECT_EQ(0, getIterativeLogarithm<int>(2, -1));
-    EXPECT_EQ(2, getIterativeLogarithm<int>(4, 15));
-}
-
-TEST(LogarithmHelpersTest, GetSuperLogarithmWorks) {
-    EXPECT_EQ(2, getSuperLogarithm<int>(3, 9));
-    EXPECT_EQ(4, getSuperLogarithm<int>(2, 32));
-    EXPECT_EQ(0, getSuperLogarithm<int>(2, 0.0625));
-    EXPECT_EQ(-1, getSuperLogarithm<int>(2, -1));
-    EXPECT_EQ(2, getSuperLogarithm<int>(4, 15));
-}
-
-TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksWithIncreasingInput) {
-    // Results: ~330ms
-    double result(0);
-    for (int base = 2; base < 200; ++base) {
-        for (int exponent = 1; exponent < 20000; ++exponent) {
-            result = std::max(result, getLogarithm(base, exponent));
-        }
-    }
-    EXPECT_DOUBLE_EQ(14.287640242993977, result);
 }
 
 TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanceTestWorksWithIncreasingInput) {
@@ -107,6 +81,32 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanc
         result = max(result, getLogarithmForIntegers(base, exponent));
     }
     EXPECT_LT(0LL, result);
+}
+
+TEST(LogarithmHelpersTest, GetCeilOfLogarithmForIntegersWorks) {
+    EXPECT_EQ(0, getCeilOfLogarithmForIntegers(1, 100));
+    EXPECT_EQ(2, getCeilOfLogarithmForIntegers(3, 9));
+    EXPECT_EQ(5, getCeilOfLogarithmForIntegers(2, 32));
+    EXPECT_EQ(31LL, getCeilOfLogarithmForIntegers(2LL, 2147483648LL));
+    EXPECT_EQ(2, getCeilOfLogarithmForIntegers(4, 15));
+    EXPECT_EQ(2, getCeilOfLogarithmForIntegers(4, 16));
+    EXPECT_EQ(3, getCeilOfLogarithmForIntegers(4, 17));
+}
+
+TEST(LogarithmHelpersTest, GetIterativeLogarithmWorks) {
+    EXPECT_EQ(2, getIterativeLogarithm<int>(3, 9));
+    EXPECT_EQ(4, getIterativeLogarithm<int>(2, 32));
+    EXPECT_EQ(0, getIterativeLogarithm<int>(2, 0.0625));
+    EXPECT_EQ(0, getIterativeLogarithm<int>(2, -1));
+    EXPECT_EQ(2, getIterativeLogarithm<int>(4, 15));
+}
+
+TEST(LogarithmHelpersTest, GetSuperLogarithmWorks) {
+    EXPECT_EQ(2, getSuperLogarithm<int>(3, 9));
+    EXPECT_EQ(4, getSuperLogarithm<int>(2, 32));
+    EXPECT_EQ(0, getSuperLogarithm<int>(2, 0.0625));
+    EXPECT_EQ(-1, getSuperLogarithm<int>(2, -1));
+    EXPECT_EQ(2, getSuperLogarithm<int>(4, 15));
 }
 
 }  // namespace alba::mathHelper

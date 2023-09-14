@@ -27,11 +27,9 @@ private:
 // Find longest increasing subsequence (LIS) in the array.
 // I know many of you might have read recursive and dynamic programming (DP) solutions.
 // There are few requests for O(N log N) algo in the forum posts.
-
 // For the time being, forget about recursive and DP solutions.
 // Let us take small samples and extend the solution to large instances.
 // Even though it may look complex at first time, once if we understood the logic, coding is simple.
-
 // Consider an input array A = {2, 5, 3}.
 // I will extend the array during explanation.
 // By observation we know that the LIS is either {2, 3} or {2, 5}.
@@ -43,7 +41,6 @@ private:
 // Note that the latest element 8 is greater than smallest element of any active sequence (will discuss shortly about
 // active sequences). How can we extend the existing sequences with 8? First of all, can 8 be part of LIS? If yes, how?
 // If we want to add 8, it should come after 7 (by replacing 11).
-
 // Since the approach is offline (what we mean by offline?), we are not sure whether adding 8 will extend the series or
 // not. Assume there is 9 in the input array, say {2, 5, 3, 7, 11, 8, 7, 9 ...}. We can replace 11 with 8, as there is
 // potentially best candidate (9) that can extend the new series {2, 3, 7, 8} or {2, 5, 7, 8}. Our observation is,
@@ -65,7 +62,6 @@ private:
 // lists of varying length. We are adding an element A[i] to these lists. We scan the lists (for end elements) in
 // decreasing order of their length. We will verify the end elements of all the lists to find a list whose end element
 // is smaller than A[i] (floor value).
-
 // Our strategy determined by the following conditions:
 // 1. If A[i] is smallest among all end candidates of active lists, we will start new active list of length 1.
 // 2. If A[i] is largest among all end candidates of active lists, we will clone the largest active list, and extend it
@@ -73,12 +69,10 @@ private:
 // 3. If A[i] is in between, we will find a list with largest end element that is smaller than A[i].
 // -> Clone and extend this list by A[i].
 // -> We will discard all other lists of same length as that of this modified list.
-
 // Note that at any instance during our construction of active lists, the following condition is maintained.
 // "end element of smaller list is smaller than end elements of larger lists".
 // It will be clear with an example, let us take example from wiki {0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7,
 // 15}.
-
 // A[0] = 0. Case 1. There are no active lists, create one.
 // 0.
 // -----------------------------------------------------------------------------
@@ -180,12 +174,10 @@ private:
 // 0, 2, 6, 9, 11.
 // 0, 2, 6, 9, 11, 15. <-- LIS List
 // ----------------------------------------------------------------------------
-
 // It is required to understand above strategy to devise an algorithm.
 // Also, ensure we have maintained the condition, “end element of smaller list is smaller than end elements of larger
 // lists“. Try with few other examples, before reading further. It is important to understand what happening to end
 // elements.
-
 // Algorithm:
 // Querying length of longest is fairly easy.
 // Note that we are dealing with end elements only.
@@ -198,7 +190,6 @@ private:
 // and replace ceil value with A[i].
 // We extend a list by adding element to auxiliary array.
 // We also maintain a counter to keep track of auxiliary array length.
-
 // Bonus: You have learnt Patience Sorting technique partially.
 // Here is a proverb, “Tell me and I will forget. Show me and I will remember. Involve me and I will understand.”
 // So, pick a suit from deck of cards.

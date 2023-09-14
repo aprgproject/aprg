@@ -46,39 +46,6 @@ Equations SimplexSolver::getSolutionEquations() const {
 
 bool SimplexSolver::isOptimized() const { return isOptimal(m_simplexTable); }
 
-void SimplexSolver::processConstraints(
-    Equations const& constraints, Polynomials& constraintsInStandardForm,
-    VariableNamesRetriever& inputVariablesRetriever, set<int>& indicesWithSlackVariables) {
-    int index(0);
-    for (Equation const& constraint : constraints) {
-        Equation simplifiedEquation(constraint);
-        simplifiedEquation.simplify();
-        Term const& leftHandTerm(simplifiedEquation.getLeftHandTerm());
-        if (canBeConvertedToPolynomial(leftHandTerm)) {
-            Polynomial constraintLeftTerm(createPolynomialIfPossible(leftHandTerm));
-            inputVariablesRetriever.retrieveFromPolynomial(constraintLeftTerm);
-            if (isPolynomialLinear(constraintLeftTerm)) {
-                EquationOperator const& equationOperator(simplifiedEquation.getEquationOperator());
-                bool shouldIncludeConstraint(false);
-                if (equationOperator.isEqual()) {
-                    shouldIncludeConstraint = true;
-                } else if (equationOperator.isALessThanVariant()) {
-                    indicesWithSlackVariables.emplace(index);
-                    shouldIncludeConstraint = true;
-                } else if (equationOperator.isAGreaterThanVariant()) {
-                    indicesWithSlackVariables.emplace(index);
-                    constraintLeftTerm.multiplyNumber(-1);
-                    shouldIncludeConstraint = true;
-                }
-                if (shouldIncludeConstraint) {
-                    constraintsInStandardForm.emplace_back(constraintLeftTerm);
-                    ++index;
-                }
-            }
-        }
-    }
-}
-
 void SimplexSolver::intialize(Equations const& constraints, Polynomial const& objectiveFunction) {
     if (isPolynomialLinear(objectiveFunction)) {
         Polynomials constraintsInStandardForm;
@@ -143,6 +110,39 @@ void SimplexSolver::initializeSimplexTable(
                 m_simplexTable.setEntry(
                     it->second, lastY,
                     monomial.getCoefficient());  // put objective function variable coefficient
+            }
+        }
+    }
+}
+
+void SimplexSolver::processConstraints(
+    Equations const& constraints, Polynomials& constraintsInStandardForm,
+    VariableNamesRetriever& inputVariablesRetriever, set<int>& indicesWithSlackVariables) {
+    int index(0);
+    for (Equation const& constraint : constraints) {
+        Equation simplifiedEquation(constraint);
+        simplifiedEquation.simplify();
+        Term const& leftHandTerm(simplifiedEquation.getLeftHandTerm());
+        if (canBeConvertedToPolynomial(leftHandTerm)) {
+            Polynomial constraintLeftTerm(createPolynomialIfPossible(leftHandTerm));
+            inputVariablesRetriever.retrieveFromPolynomial(constraintLeftTerm);
+            if (isPolynomialLinear(constraintLeftTerm)) {
+                EquationOperator const& equationOperator(simplifiedEquation.getEquationOperator());
+                bool shouldIncludeConstraint(false);
+                if (equationOperator.isEqual()) {
+                    shouldIncludeConstraint = true;
+                } else if (equationOperator.isALessThanVariant()) {
+                    indicesWithSlackVariables.emplace(index);
+                    shouldIncludeConstraint = true;
+                } else if (equationOperator.isAGreaterThanVariant()) {
+                    indicesWithSlackVariables.emplace(index);
+                    constraintLeftTerm.multiplyNumber(-1);
+                    shouldIncludeConstraint = true;
+                }
+                if (shouldIncludeConstraint) {
+                    constraintsInStandardForm.emplace_back(constraintLeftTerm);
+                    ++index;
+                }
             }
         }
     }

@@ -18,6 +18,12 @@ public:
     using EdgesWithWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgesWithWeight;
     using Weights = std::vector<Weight>;
     EdgeWeightedGraph() = default;
+
+    void disconnect(Vertex const& vertex1, Vertex const& vertex2) override {
+        BaseClass::disconnect(vertex1, vertex2);
+        m_edgeToWeightMap.erase(createEdgeInMap(vertex1, vertex2));
+    }
+
     [[nodiscard]] EdgeToWeightMap const& getEdgeToWeightMap() const { return m_edgeToWeightMap; }
 
     [[nodiscard]] EdgesWithWeight getEdgesWithWeight() const {
@@ -54,13 +60,9 @@ public:
         m_edgeToWeightMap[createEdgeInMap(vertex1, vertex2)] = weight;
     }
 
-    void disconnect(Vertex const& vertex1, Vertex const& vertex2) override {
-        BaseClass::disconnect(vertex1, vertex2);
-        m_edgeToWeightMap.erase(createEdgeInMap(vertex1, vertex2));
-    }
-
 private:
     using Graph::connect;  // prevents clang warning about hiding an overloaded virtual function
+
     [[nodiscard]] Edge createEdgeInMap(Vertex const& vertex1, Vertex const& vertex2) const {
         if (this->DIRECTION_TYPE == GraphDirectionType::Undirected) {
             return createSortedEdge<Vertex, Edge>(vertex1, vertex2);

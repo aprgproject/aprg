@@ -6,14 +6,6 @@ using namespace std;
 
 namespace alba::chess {
 
-TEST(BoardUtilitiesTest, IsCoordinateOnBoardWorks) {
-    Coordinate const inBoardCoordinate{4, 4};
-    Coordinate const outBoardCoordinate{-1, 8};
-
-    EXPECT_TRUE(isCoordinateWithinTheBoard(inBoardCoordinate));
-    EXPECT_FALSE(isCoordinateWithinTheBoard(outBoardCoordinate));
-}
-
 TEST(BoardUtilitiesTest, ConstructFenStringWorks) {
     Board const board(
         BoardOrientation::BlackUpWhiteDown,
@@ -24,6 +16,14 @@ TEST(BoardUtilitiesTest, ConstructFenStringWorks) {
 
     string const expectedFenString("3kq3/rnb2bnr/P1P1P1P1/1P1P1P1P/pp2pp2/2pp2pp/RNB2BNR/3KQ3 w KQkq e3 0 1");
     EXPECT_EQ(expectedFenString, actualFenString);
+}
+
+TEST(BoardUtilitiesTest, IsCoordinateOnBoardWorks) {
+    Coordinate const inBoardCoordinate{4, 4};
+    Coordinate const outBoardCoordinate{-1, 8};
+
+    EXPECT_TRUE(isCoordinateWithinTheBoard(inBoardCoordinate));
+    EXPECT_FALSE(isCoordinateWithinTheBoard(outBoardCoordinate));
 }
 
 }  // namespace alba::chess

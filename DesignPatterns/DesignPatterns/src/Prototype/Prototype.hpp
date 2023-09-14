@@ -62,17 +62,14 @@ private:
 
 // ONE LINE NOTE:
 // -> Create objects by CLONING or copying PROTOTYPE objects that can be set in runtime.
-
 // Intent:
 // Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this
 // prototype. Pattern has creational purpose and deals with object relationships, which are more dynamic. The pattern
 // hides the complexities of making new instances from the client.
-
 // When to use (applicability):
 // -> when the classes to instantiate are specified at run-time
 // -> to avoid building a class hierarchy of factories that parallels the class hierarchy of products
 // -> when instances of a class can have one of only a few different combinations of state
-
 // Consequences:
 // -> Prototype has many of the same consequences that [AbstractFactory] and [Builder] have:
 // ---> It hides the concrete product classes from the client, thereby reducing the number of names clients know about.
@@ -115,7 +112,6 @@ private:
 // manager.
 // -----> Then the application can ask the prototype manager for instances of newly loaded classes, classes that weren't
 // linked with the problem originally.
-
 // Implementation:
 // -> Prototype is particularly useful with static langurage like C++, where classes are not objects and little or no
 // type information is available at runtime.
@@ -161,7 +157,6 @@ private:
 // internal state accordingly
 // -----> Beware of deep-copying Clone operations, the copies may have to be deleted (either explicitly or within
 // "Initialize") before you reinitialize them.
-
 // Related Patterns
 // -> [Prototype] and [AbstractFactory] are competing patterns in some ways, as we discuss at the end of this chapter.
 // ---> However, they can also be used together, an [AbstractFactory] might store a set of prototypes from which to

@@ -9,13 +9,30 @@ using namespace std;
 
 namespace alba {
 
-TEST(AlbaPathHandlerTest, EmptyPathWorks) {
-    AlbaPathHandler const pathHandler("");
-    EXPECT_TRUE(pathHandler.getDirectory().empty());
-    EXPECT_TRUE(pathHandler.getFile().empty());
-    EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
-    EXPECT_TRUE(pathHandler.getExtension().empty());
-    EXPECT_EQ(PathType::Empty, pathHandler.getPathType());
+TEST(AlbaPathHandlerTest, GoUpUntilLastFolder) {
+    AlbaPathHandler pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)", R"(\)");
+    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)", pathHandler.getFullPath());
+    EXPECT_EQ(PathType::File, pathHandler.getPathType());
+
+    pathHandler.goUp();
+    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\)", pathHandler.getFullPath());
+    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
+
+    pathHandler.goUp();
+    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\)", pathHandler.getFullPath());
+    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
+
+    pathHandler.goUp();
+    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\)", pathHandler.getFullPath());
+    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
+
+    pathHandler.goUp();
+    EXPECT_EQ(R"(APRG_DRIVE:\)", pathHandler.getFullPath());
+    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
+
+    pathHandler.goUp();
+    EXPECT_EQ(R"(APRG_DRIVE:\)", pathHandler.getFullPath());
+    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
 }
 
 TEST(AlbaPathHandlerTest, FullPathWithDirectoryAndFileGiven) {
@@ -49,30 +66,13 @@ TEST(AlbaPathHandlerTest, ReInputFile) {
     EXPECT_TRUE(pathHandler.getImmediateDirectoryName().empty());
 }
 
-TEST(AlbaPathHandlerTest, GoUpUntilLastFolder) {
-    AlbaPathHandler pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)", R"(\)");
-    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)", pathHandler.getFullPath());
-    EXPECT_EQ(PathType::File, pathHandler.getPathType());
-
-    pathHandler.goUp();
-    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\)", pathHandler.getFullPath());
-    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
-
-    pathHandler.goUp();
-    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\)", pathHandler.getFullPath());
-    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
-
-    pathHandler.goUp();
-    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\)", pathHandler.getFullPath());
-    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
-
-    pathHandler.goUp();
-    EXPECT_EQ(R"(APRG_DRIVE:\)", pathHandler.getFullPath());
-    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
-
-    pathHandler.goUp();
-    EXPECT_EQ(R"(APRG_DRIVE:\)", pathHandler.getFullPath());
-    EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
+TEST(AlbaPathHandlerTest, EmptyPathWorks) {
+    AlbaPathHandler const pathHandler("");
+    EXPECT_TRUE(pathHandler.getDirectory().empty());
+    EXPECT_TRUE(pathHandler.getFile().empty());
+    EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
+    EXPECT_TRUE(pathHandler.getExtension().empty());
+    EXPECT_EQ(PathType::Empty, pathHandler.getPathType());
 }
 
 }  // namespace alba

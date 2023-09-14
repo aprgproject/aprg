@@ -8,14 +8,6 @@ using namespace std;
 
 namespace alba::math {
 
-TEST(ProbabilityUtilitiesTest, DoesExpectedValuesHaveLinearityWorks) {
-    ValueAndProbabilityPairs const firstPairs{
-        {1U, getProbability(1U, 5U)}, {2U, getProbability(1U, 5U)}, {3U, getProbability(1U, 5U)}};
-    ValueAndProbabilityPairs const secondPairs{{4U, getProbability(1U, 5U)}, {5U, getProbability(1U, 5U)}};
-
-    EXPECT_TRUE(doesExpectedValuesHaveLinearity(firstPairs, secondPairs));
-}
-
 TEST(ProbabilityUtilitiesTest, GetCorrectProbabilityWorks) {
     EXPECT_EQ(AlbaNumber::createFraction(1, 2U), getCorrectProbability(AlbaNumber::createFraction(1, 2U)));
     EXPECT_EQ(AlbaNumber(1), getCorrectProbability(AlbaNumber::createFraction(3, 2U)));
@@ -124,6 +116,14 @@ TEST(ProbabilityUtilitiesTest, GetExpectedValueWorksOnHatCheckProblem) {
         {1U, getProbability(1U, 5U)}};
 
     EXPECT_EQ(AlbaNumber(1), getExpectedValue(pairsToTest));
+}
+
+TEST(ProbabilityUtilitiesTest, DoesExpectedValuesHaveLinearityWorks) {
+    ValueAndProbabilityPairs const firstPairs{
+        {1U, getProbability(1U, 5U)}, {2U, getProbability(1U, 5U)}, {3U, getProbability(1U, 5U)}};
+    ValueAndProbabilityPairs const secondPairs{{4U, getProbability(1U, 5U)}, {5U, getProbability(1U, 5U)}};
+
+    EXPECT_TRUE(doesExpectedValuesHaveLinearity(firstPairs, secondPairs));
 }
 
 TEST(ProbabilityUtilitiesTest, GetExpectedValueInUniformDistributionWorks) {

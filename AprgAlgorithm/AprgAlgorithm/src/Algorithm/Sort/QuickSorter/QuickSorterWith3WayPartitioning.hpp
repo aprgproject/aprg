@@ -58,21 +58,16 @@ private:
 // The motivation of this algorithm is to handle items with duplicate keys more efficiently. (compared to original quick
 // sort algorithm) Put the equal items in place and focus(sort/partition) on items that are not equal. This version of
 // quicksort is still NOT STABLE.
-
 // This algorithm runs by dividing the partition into 3 parts:
 // 1) Values less than the partition value is on the left
 // 2) Values greater than the partition value is on the right
 // 3) Values equal to the partition value is between (1) and (2)
-
 // This is proposed by Djisktra and he was interested in the correctness of programs.
-
 // Worst case (Lower bound): When the keys are distinct so no need to divide the partition into 3 parts.
 // What is interesting about this algorithm is that the number compares its using is equal to the lower bound within a
 // constant factor. Proof: provided by Sedgewick-Bentley in 1997
-
 // Bottom line is that randomized quicksort with 3-way partitioning reduces running time from linearithmic to linear in
 // broad class of applications.
-
 // Engineering a sort function -> paper by Jon L Bentley and M Douglass Mcllroy
 // -> Cut off to insertion sort for small subarrays
 // -> Partitioning scheme: 3-way partitioning (like Dijkstra)

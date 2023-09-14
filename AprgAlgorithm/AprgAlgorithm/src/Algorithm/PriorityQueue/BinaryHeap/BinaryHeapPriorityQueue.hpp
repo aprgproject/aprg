@@ -56,5 +56,4 @@ private:
 // -> Spam filter (Bayesian spam filter)
 // Performance: insert -> log N,  deleteAndGetTopObject -> log N,  top -> log N
 // Impossible performance: insert -> constant,  deleteAndGetTopObject -> constant,  top -> constant
-
 }  // namespace alba::algorithm

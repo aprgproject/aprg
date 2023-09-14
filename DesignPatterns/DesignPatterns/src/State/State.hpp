@@ -49,17 +49,14 @@ private:
 // ONE LINE NOTE:
 // -> Implement a common ABSTRACT STATE INTERFACE and implement different STATE SPECIFIC BEHAVIORS by having STATE
 // SUBCLASSES
-
 // Intent:
 // The pattern allows an object to alter its behavior when its internal state changes.
 // The object will appear to change its class.
 // It has behavioral purpose and applies to the objects.
-
 // When to use (applicability):
 // -> when an object's behavior depends on its state, and it must change its behavior at run-time depending on that
 // state
 // -> operations have large, multipart conditional statements that depend on the object's state
-
 // Consequences:
 // -> It localizes state-specific behavior and partitions behavior for different states.
 // ---> The State pattern puts all behavior associated with a particular state into one object/class.
@@ -83,7 +80,6 @@ private:
 // ---> If state objects have no instance variables(they represented entirely in their type), then the contexts can
 // share a State object.
 // -----> When states are shared in this way, they are essentially flyweights with no intrinsic state only behavior.
-
 // Implementation:
 // -> Who defines the state transitions?
 // ---> The state pattern does not specify which participant defines the criteria for state transitions.
@@ -127,7 +123,6 @@ private:
 // ---> Changing the behavior for a particular request could be accomplished by changing object class at runtime but its
 // not possible in most OOP languages.
 // -----> This is not possible in C++.
-
 // Related Patterns
 // -> The [Flyweight] pattern explains when and how State objects can be shared.
 // -> State objects are often [Singletons].

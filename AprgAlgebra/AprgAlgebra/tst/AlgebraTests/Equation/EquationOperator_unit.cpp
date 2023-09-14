@@ -6,14 +6,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-TEST(EquationOperatorTest, EquationOperatorsAreConstructedCorrectly) {
-    EquationOperator operator1;
-    EquationOperator operator2("test");
-
-    EXPECT_EQ("", operator1.getOperatorString());
-    EXPECT_EQ("test", operator2.getOperatorString());
-}
-
 TEST(EquationOperatorTest, EqualityEquationOperatorWorks) {
     EquationOperator operator1;
     EquationOperator operator2("=");
@@ -40,11 +32,60 @@ TEST(EquationOperatorTest, InequalityEquationOperatorWorks) {
     EXPECT_FALSE(operator2 != operator4);
 }
 
+TEST(EquationOperatorTest, OutputStreamOperatorWorks) {
+    stringstream ss;
+    EquationOperator nullOperator;
+    EquationOperator singleEqualityOperator("=");
+    EquationOperator doubleEqualityOperator("==");
+    EquationOperator inequalityOperator("!=");
+    EquationOperator lessThanOperator("<");
+    EquationOperator greaterThanOperator(">");
+    EquationOperator lessThanOperatorOrEqual("<=");
+    EquationOperator greaterThanOperatorOrEqual(">=");
+    EquationOperator invalidEquationOperator("invalid");
+
+    ss << nullOperator << "," << singleEqualityOperator << "," << doubleEqualityOperator << "," << inequalityOperator
+       << "," << lessThanOperator << "," << greaterThanOperator << "," << lessThanOperatorOrEqual << ","
+       << greaterThanOperatorOrEqual << "," << invalidEquationOperator;
+
+    EXPECT_EQ(",=,==,!=,<,>,<=,>=,invalid", ss.str());
+}
+
 TEST(EquationOperatorTest, LessThanEquationOperatorWorks) {
     EXPECT_FALSE(EquationOperator() < EquationOperator());
     EXPECT_FALSE(EquationOperator("=") < EquationOperator("="));
     EXPECT_TRUE(EquationOperator("=") < EquationOperator("=="));
     EXPECT_TRUE(EquationOperator("=") < EquationOperator(">"));
+}
+
+TEST(EquationOperatorTest, EquationOperatorsAreConstructedCorrectly) {
+    EquationOperator operator1;
+    EquationOperator operator2("test");
+
+    EXPECT_EQ("", operator1.getOperatorString());
+    EXPECT_EQ("test", operator2.getOperatorString());
+}
+
+TEST(EquationOperatorTest, GetEquationOperatorStringValueWorks) {
+    EquationOperator nullOperator;
+    EquationOperator singleEqualityOperator("=");
+    EquationOperator doubleEqualityOperator("==");
+    EquationOperator inequalityOperator("!=");
+    EquationOperator lessThanOperator("<");
+    EquationOperator greaterThanOperator(">");
+    EquationOperator lessThanOperatorOrEqual("<=");
+    EquationOperator greaterThanOperatorOrEqual(">=");
+    EquationOperator invalidEquationOperator("invalid");
+
+    EXPECT_TRUE(nullOperator.getOperatorString().empty());
+    EXPECT_EQ("=", singleEqualityOperator.getOperatorString());
+    EXPECT_EQ("==", doubleEqualityOperator.getOperatorString());
+    EXPECT_EQ("!=", inequalityOperator.getOperatorString());
+    EXPECT_EQ("<", lessThanOperator.getOperatorString());
+    EXPECT_EQ(">", greaterThanOperator.getOperatorString());
+    EXPECT_EQ("<=", lessThanOperatorOrEqual.getOperatorString());
+    EXPECT_EQ(">=", greaterThanOperatorOrEqual.getOperatorString());
+    EXPECT_EQ("invalid", invalidEquationOperator.getOperatorString());
 }
 
 TEST(EquationOperatorTest, IsEqualWorks) {
@@ -243,47 +284,6 @@ TEST(EquationOperatorTest, IsAGreaterThanVariantWorks) {
     EXPECT_FALSE(lessThanOperatorOrEqual.isAGreaterThanVariant());
     EXPECT_TRUE(greaterThanOperatorOrEqual.isAGreaterThanVariant());
     EXPECT_FALSE(invalidEquationOperator.isAGreaterThanVariant());
-}
-
-TEST(EquationOperatorTest, GetEquationOperatorStringValueWorks) {
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
-
-    EXPECT_TRUE(nullOperator.getOperatorString().empty());
-    EXPECT_EQ("=", singleEqualityOperator.getOperatorString());
-    EXPECT_EQ("==", doubleEqualityOperator.getOperatorString());
-    EXPECT_EQ("!=", inequalityOperator.getOperatorString());
-    EXPECT_EQ("<", lessThanOperator.getOperatorString());
-    EXPECT_EQ(">", greaterThanOperator.getOperatorString());
-    EXPECT_EQ("<=", lessThanOperatorOrEqual.getOperatorString());
-    EXPECT_EQ(">=", greaterThanOperatorOrEqual.getOperatorString());
-    EXPECT_EQ("invalid", invalidEquationOperator.getOperatorString());
-}
-
-TEST(EquationOperatorTest, OutputStreamOperatorWorks) {
-    stringstream ss;
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
-
-    ss << nullOperator << "," << singleEqualityOperator << "," << doubleEqualityOperator << "," << inequalityOperator
-       << "," << lessThanOperator << "," << greaterThanOperator << "," << lessThanOperatorOrEqual << ","
-       << greaterThanOperatorOrEqual << "," << invalidEquationOperator;
-
-    EXPECT_EQ(",=,==,!=,<,>,<=,>=,invalid", ss.str());
 }
 
 }  // namespace alba::algebra

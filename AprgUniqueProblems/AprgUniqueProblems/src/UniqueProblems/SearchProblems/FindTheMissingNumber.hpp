@@ -53,7 +53,6 @@ public:
 // There are no duplicates in the list.
 // One of the integers is missing in the list.
 // Write an efficient code to find the missing integer.
-
 // Examples:
 // -> Input: arr[] = {1, 2, 4, 6, 3, 7, 8}
 // ---> Output: 5
@@ -61,14 +60,11 @@ public:
 // -> Input: arr[] = {1, 2, 3, 5}
 // ---> Output: 4
 // ---> Explanation: The missing number from 1 to 5 is 4
-
 // This method uses the technique of XOR to solve the problem.
-
 // Approach:
 // -> XOR has certain properties
 // ---> Assume a1 ^ a2 ^ a3 ^...^ an = a and a1 ^ a2 ^ a3 ^ …^ an-1 = b
 // ---> Then a ^ b = an
-
 // Algorithm:
 // -> Step 1: Create two variables a = 0 and b = 0
 // -> Step 2: Run a loop from 1 to n with i as counter.
@@ -76,7 +72,6 @@ public:
 // -> Step 4: Now traverse the array from start to end.
 // -> Step 5: For every index update b as b = b ^ array[i]
 // -> Step 6: Print the missing number as a ^ b.
-
 // Complexity Analysis:
 // Time Complexity: O(n).
 // -> Only one traversal of the array is needed.

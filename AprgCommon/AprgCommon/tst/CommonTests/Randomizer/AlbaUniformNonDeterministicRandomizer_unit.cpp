@@ -13,13 +13,6 @@ using IntegerRandomizerForTest = AlbaUniformNonDeterministicRandomizer<int>;
 using FloatingPointRandomizerForTest = AlbaUniformNonDeterministicRandomizer<double>;
 }  // namespace
 
-TEST(AlbaUniformNonDeterministicRandomizerTest, DefaultConstructorWorks) {
-    IntegerRandomizerForTest randomizer;
-
-    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
-    EXPECT_NO_FATAL_FAILURE(randomizer.getRandomValue());
-}
-
 TEST(AlbaUniformNonDeterministicRandomizerTest, SetMinimumAndMaximumWorks) {
     constexpr int minimumValue(0);
     constexpr int maximumValue(9);
@@ -46,6 +39,13 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, ResetRandomSeedWorks) {
         ASSERT_GE(randomValue, minimumValue);
         ASSERT_LE(randomValue, maximumValue);
     }
+}
+
+TEST(AlbaUniformNonDeterministicRandomizerTest, DefaultConstructorWorks) {
+    IntegerRandomizerForTest randomizer;
+
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
+    EXPECT_NO_FATAL_FAILURE(randomizer.getRandomValue());
 }
 
 TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorksWithinMinimumAndMaximumValues) {

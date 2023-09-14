@@ -31,13 +31,13 @@ public:
     [[nodiscard]] Count getMaxCountOfAOnScreenUsingIterativeDPAndSpaceEfficient() const;
 
 private:
-    static void updateDetailsBasedOnPressType(CountDetails& previousDetails, PressType const pressType);
     [[nodiscard]] CountDetail getMaxCountOfAOnScreenUsingNaiveRecursion(
         Count const remainingNumberOfPresses, PressType const pressType) const;
     CountDetail getMaxCountOfAOnScreenUsingMemoizationDP(
         CountDetailMatrix& savedCounts, Count const remainingNumberOfPresses, PressType const pressType) const;
     CountDetail getBestDetailBasedOnPreviousDetails(
         CountDetails& previousDetails, Count const remainingNumberOfPresses, PressType const pressType) const;
+    static void updateDetailsBasedOnPressType(CountDetails& previousDetails, PressType const pressType);
     Count const m_numberOfPresses;
 };
 
@@ -49,19 +49,16 @@ std::ostream& operator<<(std::ostream& out, PrintMaximumNumberOfAs::CountDetail 
 
 // This is a famous interview question asked in Google, Paytm and many other company interviews.
 // Below is the problem statement.
-
 // Imagine you have a special keyboard with the following keys:
 // Key 1:  Prints 'A' on screen
 // Key 2: (Ctrl-A): Select screen
 // Key 3: (Ctrl-C): Copy selection to buffer
 // Key 4: (Ctrl-V): Print buffer on screen appending it
 //                  after what has already been printed.
-
 // If you can only press the keyboard for N times (with the above four
 // keys), write a program to produce maximum numbers of A's. That is to
 // say, the input parameter is N (No. of keys that you can press), the
 // output is M (No. of As that you can produce).
-
 // Examples:
 // Input:  N = 3
 // -> Output: 3

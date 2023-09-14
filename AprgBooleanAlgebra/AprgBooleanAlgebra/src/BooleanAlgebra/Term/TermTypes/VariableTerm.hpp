@@ -15,12 +15,12 @@ public:
     bool operator==(VariableTerm const& second) const;
     bool operator!=(VariableTerm const& second) const;
     bool operator<(VariableTerm const& second) const;
-    // rule of zero
-    static VariableTerm createNegatedVariableTerm(std::string const& variableName);
     [[nodiscard]] std::string getVariableTermName() const;
     [[nodiscard]] bool isNegated() const;
     void setVariableTermName(std::string const& variableName);
     void negate();
+    // rule of zero
+    static VariableTerm createNegatedVariableTerm(std::string const& variableName);
 
 private:
     void initializeIfNotEmpty();

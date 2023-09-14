@@ -19,15 +19,9 @@ TEST(DoublingSizeCircularQueueTest, GetSizeWorksWhenNotEmpty) { testGetSizeWhenN
 TEST(DoublingSizeCircularQueueTest, EnqueueWorks) { testEnqueueWithInt<QueueForTest>(); }
 TEST(DoublingSizeCircularQueueTest, DequeueWorks) { testDequeueWithInt<QueueForTest>(); }
 
-TEST(DoublingSizeCircularQueueTest, GetContainerSizeWorks) {
-    QueueForTest const queue1;
-    QueueForTest queue2;
-    queue2.enqueue(10);
-    queue2.enqueue(5);
-    queue2.enqueue(4);
-
-    EXPECT_EQ(1, queue1.getContainerSize());
-    EXPECT_EQ(4, queue2.getContainerSize());
+// disabled because it takes too long
+TEST(DoublingSizeCircularQueueTest, DISABLED_DequeueWorksWithAssertionWhenItsEmpty) {
+    testDequeueAssertionWhenEmptyWithInt<QueueForTest>();
 }
 
 TEST(DoublingSizeCircularQueueTest, MinimumContainerSizeIsContained) {
@@ -36,22 +30,6 @@ TEST(DoublingSizeCircularQueueTest, MinimumContainerSizeIsContained) {
     queue.dequeue();
 
     EXPECT_EQ(QueueForTest::MINUMUM_CONTAINER_SIZE, queue.getContainerSize());
-}
-
-TEST(DoublingSizeCircularQueueTest, PushWorksWithDoublingContainerSize) {
-    QueueForTest queue;
-    EXPECT_EQ(1, queue.getContainerSize());
-
-    queue.enqueue(1);
-    queue.enqueue(2);
-    EXPECT_EQ(2, queue.getContainerSize());
-
-    queue.enqueue(3);
-    EXPECT_EQ(4, queue.getContainerSize());
-
-    queue.enqueue(4);
-    queue.enqueue(5);
-    EXPECT_EQ(8, queue.getContainerSize());
 }
 
 TEST(DoublingSizeCircularQueueTest, PopWorksWithHalvingContainerSize) {
@@ -76,9 +54,31 @@ TEST(DoublingSizeCircularQueueTest, PopWorksWithHalvingContainerSize) {
     EXPECT_EQ(1, queue.getContainerSize());
 }
 
-// disabled because it takes too long
-TEST(DoublingSizeCircularQueueTest, DISABLED_DequeueWorksWithAssertionWhenItsEmpty) {
-    testDequeueAssertionWhenEmptyWithInt<QueueForTest>();
+TEST(DoublingSizeCircularQueueTest, GetContainerSizeWorks) {
+    QueueForTest const queue1;
+    QueueForTest queue2;
+    queue2.enqueue(10);
+    queue2.enqueue(5);
+    queue2.enqueue(4);
+
+    EXPECT_EQ(1, queue1.getContainerSize());
+    EXPECT_EQ(4, queue2.getContainerSize());
+}
+
+TEST(DoublingSizeCircularQueueTest, PushWorksWithDoublingContainerSize) {
+    QueueForTest queue;
+    EXPECT_EQ(1, queue.getContainerSize());
+
+    queue.enqueue(1);
+    queue.enqueue(2);
+    EXPECT_EQ(2, queue.getContainerSize());
+
+    queue.enqueue(3);
+    EXPECT_EQ(4, queue.getContainerSize());
+
+    queue.enqueue(4);
+    queue.enqueue(5);
+    EXPECT_EQ(8, queue.getContainerSize());
 }
 
 }  // namespace alba::algorithm

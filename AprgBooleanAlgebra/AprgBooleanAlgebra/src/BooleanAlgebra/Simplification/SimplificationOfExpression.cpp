@@ -11,19 +11,6 @@ namespace alba {
 namespace booleanAlgebra::Simplification {
 
 SimplificationOfExpression::SimplificationOfExpression(Expression const& expression) : m_expression(expression) {}
-
-bool SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd() {
-    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyWithOuterOrAndInnerAnd;
-}
-
-bool SimplificationOfExpression::shouldSimplifyWithOuterAndAndInnerOr() {
-    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyWithOuterAndAndInnerOr;
-}
-
-bool SimplificationOfExpression::shouldSimplifyByQuineMcKluskey() {
-    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyByQuineMcKluskey;
-}
-
 Expression SimplificationOfExpression::getExpression() const { return m_expression; }
 
 void SimplificationOfExpression::simplify() {
@@ -43,6 +30,26 @@ void SimplificationOfExpression::simplify() {
     } else {
         simplifyExpressionUntilNoChange();
     }
+}
+
+bool SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd() {
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyWithOuterOrAndInnerAnd;
+}
+
+bool SimplificationOfExpression::shouldSimplifyWithOuterAndAndInnerOr() {
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyWithOuterAndAndInnerOr;
+}
+
+bool SimplificationOfExpression::shouldSimplifyByQuineMcKluskey() {
+    return Configuration::getInstance().getConfigurationDetails().shouldSimplifyByQuineMcKluskey;
+}
+
+void SimplificationOfExpression::simplifyExpressionUntilNoChange() {
+    Expression beforeSimplify;
+    do {
+        beforeSimplify = m_expression;
+        simplifyExpression(m_expression);
+    } while (isChangeDetected(beforeSimplify, m_expression));
 }
 
 void SimplificationOfExpression::simplifyExpression(Expression& expression) {
@@ -101,14 +108,6 @@ void SimplificationOfExpression::processAndSaveTermsForOrOperation(
 
 bool SimplificationOfExpression::isChangeDetected(Expression const& expression1, Expression const& expression2) {
     return expression1 != expression2;
-}
-
-void SimplificationOfExpression::simplifyExpressionUntilNoChange() {
-    Expression beforeSimplify;
-    do {
-        beforeSimplify = m_expression;
-        simplifyExpression(m_expression);
-    } while (isChangeDetected(beforeSimplify, m_expression));
 }
 
 SimplificationOfExpression::SimplificationOfExpression() = default;

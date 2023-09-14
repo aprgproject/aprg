@@ -25,10 +25,6 @@ namespace alba {
 
 AlbaLinuxPathHandler::AlbaLinuxPathHandler(string_view const path) : AlbaPathHandler(R"(/)") { setPath(path); }
 
-AlbaLinuxPathHandler AlbaLinuxPathHandler::createPathHandlerForDetectedPath() {
-    return AlbaLinuxPathHandler(getCurrentDetectedPath());
-}
-
 AlbaDateTime AlbaLinuxPathHandler::getFileCreationTime() const {
     struct stat fileStatus {};
     AlbaDateTime fileCreationTime;
@@ -203,23 +199,8 @@ bool AlbaLinuxPathHandler::renameImmediateDirectory(string_view const newDirecto
     return isSuccessful;
 }
 
-string AlbaLinuxPathHandler::getCurrentDetectedPath() {
-    constexpr size_t MAX_ARGUMENT_LENGTH = 50;
-    constexpr size_t MAX_PATH = 1000;
-    array<char, MAX_ARGUMENT_LENGTH> argument{};
-    array<char, MAX_PATH> detectedLocalPath{};
-
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg,hicpp-vararg,cert-err33-c)
-    snprintf(argument.data(), MAX_ARGUMENT_LENGTH, "/proc/%d/exe", getpid());
-    auto length = static_cast<size_t>(readlink(argument.data(), detectedLocalPath.data(), MAX_PATH));
-    length = (length == 0) ? 1 : length;
-    detectedLocalPath[length] = '\0';
-    return {detectedLocalPath.cbegin(), detectedLocalPath.cend()};
-}
-
-bool AlbaLinuxPathHandler::canBeLocated(string_view const fullPath) {
-    struct stat statBuffer {};
-    return stat(fullPath.data(), &statBuffer) == 0;
+AlbaLinuxPathHandler AlbaLinuxPathHandler::createPathHandlerForDetectedPath() {
+    return AlbaLinuxPathHandler(getCurrentDetectedPath());
 }
 
 bool AlbaLinuxPathHandler::isPathADirectory(string_view const fileOrDirectoryName) const {
@@ -331,6 +312,25 @@ void AlbaLinuxPathHandler::setPath(string_view const path) {
     setDirectoryAndFileFromPath(correctPath);
     setFileType();
     m_foundInLocalSystem = canBeLocated(correctPath);
+}
+
+string AlbaLinuxPathHandler::getCurrentDetectedPath() {
+    constexpr size_t MAX_ARGUMENT_LENGTH = 50;
+    constexpr size_t MAX_PATH = 1000;
+    array<char, MAX_ARGUMENT_LENGTH> argument{};
+    array<char, MAX_PATH> detectedLocalPath{};
+
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg,hicpp-vararg,cert-err33-c)
+    snprintf(argument.data(), MAX_ARGUMENT_LENGTH, "/proc/%d/exe", getpid());
+    auto length = static_cast<size_t>(readlink(argument.data(), detectedLocalPath.data(), MAX_PATH));
+    length = (length == 0) ? 1 : length;
+    detectedLocalPath[length] = '\0';
+    return {detectedLocalPath.cbegin(), detectedLocalPath.cend()};
+}
+
+bool AlbaLinuxPathHandler::canBeLocated(string_view const fullPath) {
+    struct stat statBuffer {};
+    return stat(fullPath.data(), &statBuffer) == 0;
 }
 
 void AlbaLinuxPathHandler::findFilesAndDirectoriesOneDepth(

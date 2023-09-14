@@ -95,38 +95,6 @@ PrintMaximumNumberOfAs::Count PrintMaximumNumberOfAs::getMaxCountOfAOnScreenUsin
     return countsOnScreen.back();
 }
 
-void PrintMaximumNumberOfAs::updateDetailsBasedOnPressType(CountDetails& previousDetails, PressType const pressType) {
-    switch (pressType) {
-        case PressType::TypeA: {
-            for (auto& previousDetail : previousDetails) {
-                previousDetail.numberInScreen++;
-            }
-            break;
-        }
-        case PressType::CtrlA: {
-            for (auto& previousDetail : previousDetails) {
-                previousDetail.numberInSelection = previousDetail.numberInScreen;
-            }
-            break;
-        }
-        case PressType::CtrlC: {
-            for (auto& previousDetail : previousDetails) {
-                previousDetail.numberInBuffer = previousDetail.numberInSelection;
-            }
-            break;
-        }
-        case PressType::CtrlV: {
-            for (auto& previousDetail : previousDetails) {
-                previousDetail.numberInScreen += previousDetail.numberInBuffer;
-            }
-            break;
-        }
-        case PressType::Unknown: {
-            break;
-        }
-    }
-}
-
 PrintMaximumNumberOfAs::CountDetail PrintMaximumNumberOfAs::getMaxCountOfAOnScreenUsingNaiveRecursion(
     Count const remainingNumberOfPresses, PressType const pressType) const {
     CountDetail result{0, 0, 0};
@@ -183,6 +151,38 @@ PrintMaximumNumberOfAs::CountDetail PrintMaximumNumberOfAs::getBestDetailBasedOn
                    second.numberInScreen + max(second.numberInBuffer, second.numberInSelection);
         });
     return *it;
+}
+
+void PrintMaximumNumberOfAs::updateDetailsBasedOnPressType(CountDetails& previousDetails, PressType const pressType) {
+    switch (pressType) {
+        case PressType::TypeA: {
+            for (auto& previousDetail : previousDetails) {
+                previousDetail.numberInScreen++;
+            }
+            break;
+        }
+        case PressType::CtrlA: {
+            for (auto& previousDetail : previousDetails) {
+                previousDetail.numberInSelection = previousDetail.numberInScreen;
+            }
+            break;
+        }
+        case PressType::CtrlC: {
+            for (auto& previousDetail : previousDetails) {
+                previousDetail.numberInBuffer = previousDetail.numberInSelection;
+            }
+            break;
+        }
+        case PressType::CtrlV: {
+            for (auto& previousDetail : previousDetails) {
+                previousDetail.numberInScreen += previousDetail.numberInBuffer;
+            }
+            break;
+        }
+        case PressType::Unknown: {
+            break;
+        }
+    }
 }
 
 ostream& operator<<(ostream& out, PrintMaximumNumberOfAs::CountDetail const& countDetail) {

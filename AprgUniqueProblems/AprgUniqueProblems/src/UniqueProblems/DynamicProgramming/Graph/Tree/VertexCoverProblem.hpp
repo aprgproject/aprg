@@ -42,9 +42,7 @@ private:
 // ---> Get count when vertex is not included (recursively call the count of grandChildren and add 1 for this each
 // children)
 // ---> Return the minimum of the two counts
-
 // Vertex Cover Problem
-
 // A vertex cover of an undirected graph is a subset of its vertices such that
 // for every edge (u, v) of the graph, either ‘u’ or ‘v’ is in vertex cover.
 // Although the name is Vertex Cover, the set covers all edges of the given graph.
@@ -52,10 +50,8 @@ private:
 // But it can be solved in polynomial time for trees.
 // In this post a solution for Binary Tree is discussed.
 // The same solution can be extended for n-ary trees.
-
 // For example, consider the following binary tree. The smallest vertex cover is {20, 50, 30} and size of the vertex
 // cover is 3.
-
 // The idea is to consider following two possibilities for root and recursively for all nodes down the root.
 // 1) Root is part of vertex cover:
 // -> In this case root covers all children edges.

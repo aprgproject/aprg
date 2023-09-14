@@ -13,10 +13,6 @@ AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm(bool const result)
 AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm()
     : m_type(AlbaGrepStringEvaluatorTermType::Unknown), m_savedResult(false) {}
 
-void AlbaGrepStringEvaluatorTerm::setMainString(std::string const& mainString) {
-    s_mainString = stringHelper::getStringWithCapitalLetters(mainString);
-}
-
 bool AlbaGrepStringEvaluatorTerm::getResult() const {
     bool result(false);
     if (AlbaGrepStringEvaluatorTermType::BooleanResult == m_type) {
@@ -25,6 +21,10 @@ bool AlbaGrepStringEvaluatorTerm::getResult() const {
         result = stringHelper::isStringFoundCaseSensitive(s_mainString, m_stringToFind);
     }
     return result;
+}
+
+void AlbaGrepStringEvaluatorTerm::setMainString(std::string const& mainString) {
+    s_mainString = stringHelper::getStringWithCapitalLetters(mainString);
 }
 
 string AlbaGrepStringEvaluatorTerm::s_mainString;

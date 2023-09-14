@@ -1,4 +1,5 @@
 #pragma once
+
 #include <Statistics/DataSample.hpp>
 #include <Statistics/DataStatisticsUtilities.hpp>
 

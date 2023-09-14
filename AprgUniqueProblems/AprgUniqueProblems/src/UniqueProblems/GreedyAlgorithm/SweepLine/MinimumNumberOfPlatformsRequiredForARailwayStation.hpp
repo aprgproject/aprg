@@ -18,6 +18,7 @@ public:
 
     [[nodiscard]] int getMinimumNumberOfPlatforms() const;
     void addTrainSchedule(int const startTime, int const endTime);  // assumption is every entry is unique
+
 private:
     std::multiset<Event> m_sortedEvents;
 };
@@ -36,5 +37,4 @@ private:
 // ---> Explanation: Only one platform is needed.
 // The running time of the algorithm is O(nlogn), because sorting the events takes O(nlogn) time
 // and the rest of the algorithm takes O(n) time.
-
 }  // namespace alba

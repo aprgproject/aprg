@@ -17,11 +17,11 @@ public:
     void putVariableWithSign(std::string const& variableName, TermAssociationType const association);
 
 private:
-    static Term getTermForMutationOfFunction(Function const& functionObject);
     void mutateExpressionWithAdditionAndSubtraction(Expression& expression);
     void mutateExpressionWithMultiplicationAndDivision(Expression& expression);
     void mutateExpressionWithRaiseToPower(Expression& expression);
     Term getTermForMutationOfVariable(Variable const& variable);
+    static Term getTermForMutationOfFunction(Function const& functionObject);
     SubstitutionOfVariablesToValues m_substitution;
 };
 

@@ -26,6 +26,14 @@ TEST(RWayTrieUsingMatrixTest, GetAllKeysWithPrefixWorks) { testGetAllKeysWithPre
 TEST(RWayTrieUsingMatrixTest, GetAllKeysThatMatchWorks) { testGetAllKeysThatMatchWithInt<TrieForTest>(); }
 TEST(RWayTrieUsingMatrixTest, Example1Works) { testExample1WithInt<TrieForTest>(); }
 
+// disabled because it takes too long
+TEST(RWayTrieUsingMatrixTest, DISABLED_AssertionWorksWhenNodeIdsReachesMaximumSize) {
+    RWayTrieUsingMatrix<int, 1> trie;
+
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c)
+    EXPECT_DEATH(trie.put("se", 100), "Assertion failed!");
+}
+
 TEST(RWayTrieUsingMatrixTest, PutWhenEmptyStringHasNoEffect) {
     TrieForTest trie;
 
@@ -33,34 +41,6 @@ TEST(RWayTrieUsingMatrixTest, PutWhenEmptyStringHasNoEffect) {
 
     EXPECT_EQ(0, trie.getSize());
     EXPECT_EQ(0, trie.get(""));
-}
-
-TEST(RWayTrieUsingMatrixTest, DeleteBasedOnKeyWhenEmptyStringWorks) {
-    TrieForTest trie;
-    trie.put("", 17);
-
-    trie.deleteBasedOnKey("");
-    EXPECT_TRUE(trie.isEmpty());
-
-    trie.deleteBasedOnKey("");
-    EXPECT_TRUE(trie.isEmpty());
-}
-
-TEST(RWayTrieUsingMatrixTest, PutDeleteAlternatelyWorks) {
-    TrieForTest trie;
-    trie.put("she", 0);
-
-    trie.put("sells", 1);
-    trie.put("sea", 2);
-
-    trie.deleteBasedOnKey("she");
-    EXPECT_EQ((TrieForTest::SetOfNodeIds{2}), trie.getUnusedNodeIds());
-
-    trie.deleteBasedOnKey("sells");
-    EXPECT_EQ((TrieForTest::SetOfNodeIds{2, 4, 5}), trie.getUnusedNodeIds());
-
-    trie.deleteBasedOnKey("sea");
-    EXPECT_EQ((TrieForTest::SetOfNodeIds{0, 1, 2, 3, 4, 5}), trie.getUnusedNodeIds());
 }
 
 TEST(RWayTrieUsingMatrixTest, GetUnusedNodeIdsWorks) {
@@ -129,12 +109,32 @@ TEST(RWayTrieUsingMatrixTest, GetUnusedNodeIdsWorks) {
     EXPECT_EQ(6, trie.get("sea"));
 }
 
-// disabled because it takes too long
-TEST(RWayTrieUsingMatrixTest, DISABLED_AssertionWorksWhenNodeIdsReachesMaximumSize) {
-    RWayTrieUsingMatrix<int, 1> trie;
+TEST(RWayTrieUsingMatrixTest, DeleteBasedOnKeyWhenEmptyStringWorks) {
+    TrieForTest trie;
+    trie.put("", 17);
 
-    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c)
-    EXPECT_DEATH(trie.put("se", 100), "Assertion failed!");
+    trie.deleteBasedOnKey("");
+    EXPECT_TRUE(trie.isEmpty());
+
+    trie.deleteBasedOnKey("");
+    EXPECT_TRUE(trie.isEmpty());
+}
+
+TEST(RWayTrieUsingMatrixTest, PutDeleteAlternatelyWorks) {
+    TrieForTest trie;
+    trie.put("she", 0);
+
+    trie.put("sells", 1);
+    trie.put("sea", 2);
+
+    trie.deleteBasedOnKey("she");
+    EXPECT_EQ((TrieForTest::SetOfNodeIds{2}), trie.getUnusedNodeIds());
+
+    trie.deleteBasedOnKey("sells");
+    EXPECT_EQ((TrieForTest::SetOfNodeIds{2, 4, 5}), trie.getUnusedNodeIds());
+
+    trie.deleteBasedOnKey("sea");
+    EXPECT_EQ((TrieForTest::SetOfNodeIds{0, 1, 2, 3, 4, 5}), trie.getUnusedNodeIds());
 }
 
 }  // namespace alba::algorithm

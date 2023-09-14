@@ -8,33 +8,6 @@ using namespace std;
 
 namespace alba {
 
-TEST(AlbaStreamBitReaderTest, ReadBoolDataWorks) {
-    stringstream testStream;
-    testStream << "A";
-    AlbaStreamBitReader reader(testStream);
-
-    EXPECT_FALSE(reader.readBoolData());
-    EXPECT_TRUE(reader.readBoolData());
-    EXPECT_FALSE(reader.readBoolData());
-    EXPECT_FALSE(reader.readBoolData());
-    EXPECT_FALSE(reader.readBoolData());
-    EXPECT_FALSE(reader.readBoolData());
-    EXPECT_FALSE(reader.readBoolData());
-    EXPECT_TRUE(reader.readBoolData());
-    EXPECT_TRUE(reader.noRemainingBitsInBuffer());
-}
-
-TEST(AlbaStreamBitReaderTest, ReadCharDataWorks) {
-    stringstream testStream;
-    testStream << "./*";
-    AlbaStreamBitReader reader(testStream);
-
-    EXPECT_EQ('.', reader.readCharData());
-    EXPECT_EQ('/', reader.readCharData());
-    EXPECT_EQ('*', reader.readCharData());
-    EXPECT_TRUE(reader.noRemainingBitsInBuffer());
-}
-
 TEST(AlbaStreamBitReaderTest, ReadStringDataWorks) {
     stringstream testStream;
     testStream << "./*";
@@ -50,6 +23,33 @@ TEST(AlbaStreamBitReaderTest, ReadWholeStreamAsStringDataWorks) {
     AlbaStreamBitReader reader(testStream);
 
     EXPECT_EQ("./*", reader.readWholeStreamAsStringData());
+    EXPECT_TRUE(reader.noRemainingBitsInBuffer());
+}
+
+TEST(AlbaStreamBitReaderTest, ReadCharDataWorks) {
+    stringstream testStream;
+    testStream << "./*";
+    AlbaStreamBitReader reader(testStream);
+
+    EXPECT_EQ('.', reader.readCharData());
+    EXPECT_EQ('/', reader.readCharData());
+    EXPECT_EQ('*', reader.readCharData());
+    EXPECT_TRUE(reader.noRemainingBitsInBuffer());
+}
+
+TEST(AlbaStreamBitReaderTest, ReadBoolDataWorks) {
+    stringstream testStream;
+    testStream << "A";
+    AlbaStreamBitReader reader(testStream);
+
+    EXPECT_FALSE(reader.readBoolData());
+    EXPECT_TRUE(reader.readBoolData());
+    EXPECT_FALSE(reader.readBoolData());
+    EXPECT_FALSE(reader.readBoolData());
+    EXPECT_FALSE(reader.readBoolData());
+    EXPECT_FALSE(reader.readBoolData());
+    EXPECT_FALSE(reader.readBoolData());
+    EXPECT_TRUE(reader.readBoolData());
     EXPECT_TRUE(reader.noRemainingBitsInBuffer());
 }
 

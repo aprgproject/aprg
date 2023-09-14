@@ -9,6 +9,16 @@ using namespace std;
 
 namespace alba::algebra {
 
+TEST(NegationMutatorTest, MutatePolynomialWorks) {
+    NegationMutator mutator;
+    Polynomial polynomial{Monomial(9, {{"a", 1}}), Monomial(11, {{"b", 1}})};
+
+    mutator.mutatePolynomial(polynomial);
+
+    Polynomial polynomiaToExpect{Monomial(-9, {{"a", 1}}), Monomial(-11, {{"b", 1}})};
+    EXPECT_EQ(polynomiaToExpect, polynomial);
+}
+
 TEST(NegationMutatorTest, MutateTermWorks) {
     NegationMutator mutator;
     Term term1(5);
@@ -67,16 +77,6 @@ TEST(NegationMutatorTest, MutateMonomialWorks) {
 
     Monomial monomialToExpect(-7, {{"a", 1}});
     EXPECT_EQ(monomialToExpect, monomial);
-}
-
-TEST(NegationMutatorTest, MutatePolynomialWorks) {
-    NegationMutator mutator;
-    Polynomial polynomial{Monomial(9, {{"a", 1}}), Monomial(11, {{"b", 1}})};
-
-    mutator.mutatePolynomial(polynomial);
-
-    Polynomial polynomiaToExpect{Monomial(-9, {{"a", 1}}), Monomial(-11, {{"b", 1}})};
-    EXPECT_EQ(polynomiaToExpect, polynomial);
 }
 
 TEST(NegationMutatorTest, MutateExpressionWorks) {

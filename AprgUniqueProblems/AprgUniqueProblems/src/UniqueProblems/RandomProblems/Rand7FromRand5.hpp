@@ -21,7 +21,6 @@ private:
 // ---> Implement a method rand7() given rand5().
 // ---> That is, given a method that generates a random number between O and 4 (inclusive),
 // ---> write a method that generates a random number between O and 6 (inclusive).
-
 // rand5() possibilities (uniform probability):
 // 0,1,2,3,4
 // rand5()*5 possibilities (uniform probability):

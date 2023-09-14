@@ -17,49 +17,47 @@ using namespace std;
 
 namespace alba::algebra {
 
-TEST(LimitTest, IsAlmostEqualForLimitIterationWorks) {
-    AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
-    AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
+TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricExample) {
+    Term oneOverX(createExpressionIfPossible({1, "/", "x"}));
+    Term termToTest(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
 
-    EXPECT_TRUE(isAlmostEqualForLimitIteration(AlbaNumber(0), AlbaNumber(0)));
-    EXPECT_FALSE(isAlmostEqualForLimitIteration(AlbaNumber(0.1), AlbaNumber(0.2)));
-    EXPECT_FALSE(isAlmostEqualForLimitIteration(AlbaNumber(1E-15), AlbaNumber(3E-15)));
-    EXPECT_TRUE(isAlmostEqualForLimitIteration(AlbaNumber(1E-16), AlbaNumber(3E-16)));
+    Term newTerm;
+    Term limitValue;
+    calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", ALBA_NUMBER_POSITIVE_INFINITY);
+
+    string stringToExpect("((1[x^2] + 1)*cos((1/x))/1[x^2])");
+    EXPECT_EQ(Term(1), limitValue);
+    EXPECT_EQ(stringToExpect, convertToString(newTerm));
 }
 
-TEST(LimitTest, IsAlmostEqualForLimitCheckingWorks) {
-    EXPECT_TRUE(isAlmostEqualForLimitChecking(AlbaNumber(0), AlbaNumber(0)));
-    EXPECT_FALSE(isAlmostEqualForLimitChecking(AlbaNumber(0.1), AlbaNumber(0.2)));
-    EXPECT_FALSE(isAlmostEqualForLimitChecking(AlbaNumber(1E-5), AlbaNumber(3E-5)));
-    EXPECT_TRUE(isAlmostEqualForLimitChecking(AlbaNumber(1E-6), AlbaNumber(3E-6)));
+TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingLogarithmicAndExponentialExample) {
+    Term insideLogarithm(createExpressionIfPossible({2, "+", getEAsATerm(), "^", "x"}));
+    Term numerator(ln(insideLogarithm));
+    Term denominator(Monomial(3, {{"x", 1}}));
+    Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
+
+    Term newTerm;
+    Term limitValue;
+    calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", ALBA_NUMBER_POSITIVE_INFINITY);
+
+    string stringToExpect("(1/3)");
+    EXPECT_EQ(Term(AlbaNumber::createFraction(1, 3)), limitValue);
+    EXPECT_EQ(stringToExpect, convertToString(newTerm));
 }
 
-TEST(LimitTest, HasVerticalAsymptoteAtValueWorks) {
-    Term numerator(3);
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
-    Term constantOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricExample2) {
+    Term xSquared(Monomial(1, {{"x", 2}}));
+    Term termToTestPart1(createExpressionIfPossible({1, "/", xSquared}));
+    Term termToTestPart2(createExpressionIfPossible({1, "/", xSquared, "/", sec("x")}));
+    Term termToTest(createExpressionIfPossible({termToTestPart1, "-", termToTestPart2}));
 
-    EXPECT_FALSE(hasVerticalAsymptoteAtValue("x", "x", 2));
-    EXPECT_TRUE(hasVerticalAsymptoteAtValue(constantOverPolynomialTerm, "x", 2));
-}
+    Term newTerm;
+    Term limitValue;
+    calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", 0);
 
-TEST(LimitTest, HasHorizontalAsymptoteAtValueWorks) {
-    Term numerator("x");
-    Term denominatorInSquareRoot(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {})});
-    Term denominator(createExpressionIfPossible({denominatorInSquareRoot, "^", AlbaNumber::createFraction(1, 2)}));
-    Term term(createExpressionIfPossible({numerator, "/", denominator}));
-
-    EXPECT_FALSE(hasHorizontalAsymptoteAtValue(term, "x", 3));
-    EXPECT_TRUE(hasHorizontalAsymptoteAtValue(term, "x", 1));
-}
-
-TEST(LimitTest, IsSqueezeTheoremSatisfiedWorks) {
-    Term f(buildTermIfPossible("-4*(x-2)^2 + 3"));
-    Term g(buildTermIfPossible("(x-2)*(x^2 - 4*x + 7)/(x-2)"));
-    Term h(buildTermIfPossible("4*(x-2)^2 + 3"));
-
-    EXPECT_FALSE(isSqueezeTheoremSatisfied(h, g, f, "x", 1));
-    EXPECT_TRUE(isSqueezeTheoremSatisfied(h, g, f, "x", 2));
+    string stringToExpect("((sec(x)^2)/(2+(1[x^2]*(sec(x)^2))+(2[x]*tan(x))))");
+    EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), limitValue);
+    EXPECT_EQ(stringToExpect, convertToString(newTerm));
 }
 
 TEST(LimitTest, GetLimitAtAValueByApproachTypeWorksForPolynomialOverPolynomial) {
@@ -200,49 +198,6 @@ TEST(LimitTest, GetTermUsingLhopitalsRuleWorks) {
     EXPECT_EQ(stringToExpect3, convertToString(termToVerify3));
 }
 
-TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricExample) {
-    Term oneOverX(createExpressionIfPossible({1, "/", "x"}));
-    Term termToTest(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
-
-    Term newTerm;
-    Term limitValue;
-    calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", ALBA_NUMBER_POSITIVE_INFINITY);
-
-    string stringToExpect("((1[x^2] + 1)*cos((1/x))/1[x^2])");
-    EXPECT_EQ(Term(1), limitValue);
-    EXPECT_EQ(stringToExpect, convertToString(newTerm));
-}
-
-TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingLogarithmicAndExponentialExample) {
-    Term insideLogarithm(createExpressionIfPossible({2, "+", getEAsATerm(), "^", "x"}));
-    Term numerator(ln(insideLogarithm));
-    Term denominator(Monomial(3, {{"x", 1}}));
-    Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
-
-    Term newTerm;
-    Term limitValue;
-    calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", ALBA_NUMBER_POSITIVE_INFINITY);
-
-    string stringToExpect("(1/3)");
-    EXPECT_EQ(Term(AlbaNumber::createFraction(1, 3)), limitValue);
-    EXPECT_EQ(stringToExpect, convertToString(newTerm));
-}
-
-TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricExample2) {
-    Term xSquared(Monomial(1, {{"x", 2}}));
-    Term termToTestPart1(createExpressionIfPossible({1, "/", xSquared}));
-    Term termToTestPart2(createExpressionIfPossible({1, "/", xSquared, "/", sec("x")}));
-    Term termToTest(createExpressionIfPossible({termToTestPart1, "-", termToTestPart2}));
-
-    Term newTerm;
-    Term limitValue;
-    calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", 0);
-
-    string stringToExpect("((sec(x)^2)/(2+(1[x^2]*(sec(x)^2))+(2[x]*tan(x))))");
-    EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), limitValue);
-    EXPECT_EQ(stringToExpect, convertToString(newTerm));
-}
-
 TEST(LimitTest, GetLimitAtAValueOrInfinityWorks) {
     Term termToTest1(Polynomial{Monomial(4, {{"x", 1}}), Monomial(-7, {})});
     Term termToTest2(createExpressionIfPossible({1, "/", "x"}));
@@ -339,25 +294,6 @@ TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomialWithEqualDegreeB
         getLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::NegativeSide));
 }
 
-TEST(
-    LimitTest,
-    SimplifyAndGetLimitAtAValueWorksForPolynomialOverPolynomialWithDiscontinuityAtOneTwoThreeAndCancelsProblematicFactors) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-2, {{"x", 2}})});
-    Term denominator(
-        Polynomial{Monomial(1, {{"x", 3}}), Monomial(-6, {{"x", 2}}), Monomial(11, {{"x", 1}}), Monomial(-6, {})});
-    Term polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
-
-    EXPECT_EQ(
-        Term(-4),
-        simplifyAndGetLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::BothSides));
-    EXPECT_EQ(
-        Term(-4),
-        simplifyAndGetLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::PositiveSide));
-    EXPECT_EQ(
-        Term(-4),
-        simplifyAndGetLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::NegativeSide));
-}
-
 TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomialWithFractionalValues) {
     Term numerator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(-2, {})});
     Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-4, {})});
@@ -406,6 +342,25 @@ TEST(LimitTest, GetLimitAtAValueWorksForASpecifiedFunction) {
     EXPECT_EQ(Term(3), getLimitAtAValue(functionTermToTest, "x", 1, LimitAtAValueApproachType::NegativeSide));
 }
 
+TEST(
+    LimitTest,
+    SimplifyAndGetLimitAtAValueWorksForPolynomialOverPolynomialWithDiscontinuityAtOneTwoThreeAndCancelsProblematicFactors) {
+    Term numerator(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-2, {{"x", 2}})});
+    Term denominator(
+        Polynomial{Monomial(1, {{"x", 3}}), Monomial(-6, {{"x", 2}}), Monomial(11, {{"x", 1}}), Monomial(-6, {})});
+    Term polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+
+    EXPECT_EQ(
+        Term(-4),
+        simplifyAndGetLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::BothSides));
+    EXPECT_EQ(
+        Term(-4),
+        simplifyAndGetLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::PositiveSide));
+    EXPECT_EQ(
+        Term(-4),
+        simplifyAndGetLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::NegativeSide));
+}
+
 TEST(LimitTest, GetLimitAtInfinityWorks) {
     EXPECT_EQ(getNegativeInfinityAsATerm(), getLimitAtInfinity("x", "x", ALBA_NUMBER_NEGATIVE_INFINITY));
     EXPECT_EQ(getPositiveInfinityAsATerm(), getLimitAtInfinity("x", "x", ALBA_NUMBER_POSITIVE_INFINITY));
@@ -431,6 +386,51 @@ TEST(LimitTest, GetObliqueAsymptoteWorksWhenThereIsAnObliqueAsymptote) {
     Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_EQ(Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})}), getObliqueAsymptote(termToTest));
+}
+
+TEST(LimitTest, IsAlmostEqualForLimitIterationWorks) {
+    AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
+    AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
+
+    EXPECT_TRUE(isAlmostEqualForLimitIteration(AlbaNumber(0), AlbaNumber(0)));
+    EXPECT_FALSE(isAlmostEqualForLimitIteration(AlbaNumber(0.1), AlbaNumber(0.2)));
+    EXPECT_FALSE(isAlmostEqualForLimitIteration(AlbaNumber(1E-15), AlbaNumber(3E-15)));
+    EXPECT_TRUE(isAlmostEqualForLimitIteration(AlbaNumber(1E-16), AlbaNumber(3E-16)));
+}
+
+TEST(LimitTest, IsAlmostEqualForLimitCheckingWorks) {
+    EXPECT_TRUE(isAlmostEqualForLimitChecking(AlbaNumber(0), AlbaNumber(0)));
+    EXPECT_FALSE(isAlmostEqualForLimitChecking(AlbaNumber(0.1), AlbaNumber(0.2)));
+    EXPECT_FALSE(isAlmostEqualForLimitChecking(AlbaNumber(1E-5), AlbaNumber(3E-5)));
+    EXPECT_TRUE(isAlmostEqualForLimitChecking(AlbaNumber(1E-6), AlbaNumber(3E-6)));
+}
+
+TEST(LimitTest, HasVerticalAsymptoteAtValueWorks) {
+    Term numerator(3);
+    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
+    Term constantOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+
+    EXPECT_FALSE(hasVerticalAsymptoteAtValue("x", "x", 2));
+    EXPECT_TRUE(hasVerticalAsymptoteAtValue(constantOverPolynomialTerm, "x", 2));
+}
+
+TEST(LimitTest, HasHorizontalAsymptoteAtValueWorks) {
+    Term numerator("x");
+    Term denominatorInSquareRoot(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {})});
+    Term denominator(createExpressionIfPossible({denominatorInSquareRoot, "^", AlbaNumber::createFraction(1, 2)}));
+    Term term(createExpressionIfPossible({numerator, "/", denominator}));
+
+    EXPECT_FALSE(hasHorizontalAsymptoteAtValue(term, "x", 3));
+    EXPECT_TRUE(hasHorizontalAsymptoteAtValue(term, "x", 1));
+}
+
+TEST(LimitTest, IsSqueezeTheoremSatisfiedWorks) {
+    Term f(buildTermIfPossible("-4*(x-2)^2 + 3"));
+    Term g(buildTermIfPossible("(x-2)*(x^2 - 4*x + 7)/(x-2)"));
+    Term h(buildTermIfPossible("4*(x-2)^2 + 3"));
+
+    EXPECT_FALSE(isSqueezeTheoremSatisfied(h, g, f, "x", 1));
+    EXPECT_TRUE(isSqueezeTheoremSatisfied(h, g, f, "x", 2));
 }
 
 }  // namespace alba::algebra

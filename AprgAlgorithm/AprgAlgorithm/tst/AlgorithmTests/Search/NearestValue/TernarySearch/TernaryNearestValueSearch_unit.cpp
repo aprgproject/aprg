@@ -45,13 +45,6 @@ TEST(TernaryNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereIsOneVal
     testGetIndexOfNearestValueWithOneUnsignedInt<SearchForTest, ValuesForTest>();
 }
 
-TEST(TernaryNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
-    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
-    SearchForTest const search(duplicateValues);
-
-    EXPECT_EQ(4, search.getIndexOfNearestValue(33));
-}
-
 TEST(TernaryNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereAreMultipleValues) {
     testGetIndexOfNearestValueWithMultipleSortedUnsignedInts<SearchForTest, ValuesForTest>();
 }
@@ -62,6 +55,13 @@ TEST(TernaryNearestValueSearchTest, GetIndexOfNearestValueWorksWhenNearestValueI
 
 TEST(TernaryNearestValueSearchTest, GetIndexOfNearestValueWorksWhenNearestValueIsHigher) {
     testGetIndexOfNearestValueWhenNearestValueIsHigherWithSortedUnsignedInts<SearchForTest, ValuesForTest>();
+}
+
+TEST(TernaryNearestValueSearchTest, GetIndexOfNearestValueWorksWhenThereAreDuplicateValues) {
+    ValuesForTest const duplicateValues{0, 0, 0, 0, 0};
+    SearchForTest const search(duplicateValues);
+
+    EXPECT_EQ(4, search.getIndexOfNearestValue(33));
 }
 
 TEST(TernaryNearestValueSearchTest, GetIndexOfNearestValueWorksWithIndexesWhenDistanceFromLowerToHigherIsOne) {

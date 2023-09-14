@@ -7,26 +7,6 @@ using namespace std;
 
 namespace alba::soosa {
 
-TEST(SoosaConfigurationTest, AParameterCanBeUpdated) {
-    SoosaConfiguration soosaConfiguration;
-
-    soosaConfiguration.bufferNameAndValueString("m_numberOfChoices", "10");
-    soosaConfiguration.update();
-
-    EXPECT_EQ(10, soosaConfiguration.getNumberOfChoices());
-}
-
-TEST(SoosaConfigurationTest, TwoParametersCanBeUpdated) {
-    SoosaConfiguration soosaConfiguration;
-
-    soosaConfiguration.bufferNameAndValueString("m_numberOfChoices", "10");
-    soosaConfiguration.bufferNameAndValueString("m_acceptableLineDeviationForLineModelInPixels", "200");
-    soosaConfiguration.update();
-
-    EXPECT_EQ(10, soosaConfiguration.getNumberOfChoices());
-    EXPECT_EQ(200, soosaConfiguration.getAcceptableLineDeviationForLineModelInPixels());
-}
-
 TEST(SoosaConfigurationTest, LoadConfigurationFromFileWorks) {
     AlbaLocalPathHandler fileForSoosa(APRG_DIR R"(\SOOSA\FilesForTests\SoosaConfigurationForUnitTest.txt)");
     SoosaConfiguration soosaConfiguration;
@@ -57,6 +37,26 @@ TEST(SoosaConfigurationTest, LoadConfigurationFromFileWorks) {
     EXPECT_EQ(170, soosaConfiguration.getColorIntensityForWhite());
     EXPECT_DOUBLE_EQ(0.75, soosaConfiguration.getBarHeightToDiameterMultiplier());
     EXPECT_DOUBLE_EQ(0.40, soosaConfiguration.getMinimumPercentageOfBlackPixelsForAFilledCircle());
+}
+
+TEST(SoosaConfigurationTest, TwoParametersCanBeUpdated) {
+    SoosaConfiguration soosaConfiguration;
+
+    soosaConfiguration.bufferNameAndValueString("m_numberOfChoices", "10");
+    soosaConfiguration.bufferNameAndValueString("m_acceptableLineDeviationForLineModelInPixels", "200");
+    soosaConfiguration.update();
+
+    EXPECT_EQ(10, soosaConfiguration.getNumberOfChoices());
+    EXPECT_EQ(200, soosaConfiguration.getAcceptableLineDeviationForLineModelInPixels());
+}
+
+TEST(SoosaConfigurationTest, AParameterCanBeUpdated) {
+    SoosaConfiguration soosaConfiguration;
+
+    soosaConfiguration.bufferNameAndValueString("m_numberOfChoices", "10");
+    soosaConfiguration.update();
+
+    EXPECT_EQ(10, soosaConfiguration.getNumberOfChoices());
 }
 
 }  // namespace alba::soosa

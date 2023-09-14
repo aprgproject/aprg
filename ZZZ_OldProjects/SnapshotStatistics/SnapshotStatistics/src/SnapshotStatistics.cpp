@@ -18,21 +18,6 @@ int numberOfFilesAnalyzedForExtraction;
 
 SnapshotStatistics::SnapshotStatistics() : m_fileExtractor("[.]") { initializeFileGroups(); }
 
-string SnapshotStatistics::getSnapshotDirectory(string const& snapshotPath) {
-    AlbaLocalPathHandler const snapshotPathHandler(snapshotPath);
-    return snapshotPathHandler.getDirectory() + R"(\)" + snapshotPathHandler.getFilenameOnly();
-}
-
-double SnapshotStatistics::convertFileSizeToDouble(string const& fileSizeInString) {
-    auto fileSizeInBytes(stringHelper::convertStringToNumber<double>(fileSizeInString));
-    if (stringHelper::isStringFoundCaseSensitive(fileSizeInString, "K")) {
-        fileSizeInBytes *= 1000;
-    } else if (stringHelper::isStringFoundCaseSensitive(fileSizeInString, "M")) {
-        fileSizeInBytes *= 1000000;
-    }
-    return fileSizeInBytes;
-}
-
 string SnapshotStatistics::getWildcardNameIfFileGroupsIsFound(string const& fileName) const {
     for (FileGroup const& fileGroup : m_fileGroups) {
         if (fileGroup.isInFileGroup(fileName)) {
@@ -864,6 +849,21 @@ void SnapshotStatistics::initializeFileGroups() {
         return stringHelper::isStringFoundCaseSensitive(fileName, "licences/") &&
                stringHelper::isStringFoundCaseSensitive(fileName, ".XML");
     });
+}
+
+string SnapshotStatistics::getSnapshotDirectory(string const& snapshotPath) {
+    AlbaLocalPathHandler const snapshotPathHandler(snapshotPath);
+    return snapshotPathHandler.getDirectory() + R"(\)" + snapshotPathHandler.getFilenameOnly();
+}
+
+double SnapshotStatistics::convertFileSizeToDouble(string const& fileSizeInString) {
+    auto fileSizeInBytes(stringHelper::convertStringToNumber<double>(fileSizeInString));
+    if (stringHelper::isStringFoundCaseSensitive(fileSizeInString, "K")) {
+        fileSizeInBytes *= 1000;
+    } else if (stringHelper::isStringFoundCaseSensitive(fileSizeInString, "M")) {
+        fileSizeInBytes *= 1000000;
+    }
+    return fileSizeInBytes;
 }
 
 }  // namespace alba

@@ -10,10 +10,6 @@ namespace alba {
 class PidSimulator {
 public:
     explicit PidSimulator(stringHelper::strings const& argumentsInMain);
-    static double computeFromMachsModel1(
-        double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand);
-    static double computeFromMachsModel2(
-        double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand);
     [[nodiscard]] double calculatePid(double const input, double const target) const;
     double computeFromMachsModel(
         double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) const;
@@ -24,8 +20,16 @@ public:
     void generateStepDownForInput();
     void generateRandomForInput();
     void calculateAndGenerateOutputImage();
+    static double computeFromMachsModel1(
+        double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand);
+    static double computeFromMachsModel2(
+        double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand);
 
 private:
+    void calculateMagnificationAndOffset(
+        double const xLeftMax, double const xRightMax, double const yBottomMax, double const yTopMax,
+        double const bitmapSizeInX, double const bitmapSizeInY);
+
     static void updateAllMaxWithBuffer(int& xLeftMax, int& xRightMax, int& yBottomMax, int& yTopMax);
     static void updateMaxWithBuffer(int& lowerValue, int& higherValue);
     static void updateMaxPoints(
@@ -34,11 +38,6 @@ private:
     static void updateLeftMax(int& xLeftMax, int const xCoordinate);
     static void updateTopMax(int& yTopMax, int const yCoordinate);
     static void updateBottomMax(int& yBottomMax, int const yCoordinate);
-
-    void calculateMagnificationAndOffset(
-        double const xLeftMax, double const xRightMax, double const yBottomMax, double const yTopMax,
-        double const bitmapSizeInX, double const bitmapSizeInY);
-
     PidSimulatorConfiguration m_conf;
     double m_xMagnificationToGraph{0};
     double m_yMagnificationToGraph{0};

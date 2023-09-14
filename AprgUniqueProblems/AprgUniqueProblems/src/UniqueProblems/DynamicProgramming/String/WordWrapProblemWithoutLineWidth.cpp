@@ -55,26 +55,6 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
     return result;
 }
 
-WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getCost(
-    Index const maxLength, Indices const& lengths) {
-    Cost result(0);
-    if (lengths.size() == 1) {
-        result = getCostFromExtraSpaces(lengths.front());
-    } else {
-        for (Index const length : lengths) {
-            result += getCostFromExtraSpaces(maxLength - length);
-        }
-    }
-    return result;
-}
-
-// inline optimization can work here because the usage belongs to same translation unit
-inline WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getCostFromExtraSpaces(
-    Index const numberOfExtraSpaces) {
-    return numberOfExtraSpaces * numberOfExtraSpaces *
-           numberOfExtraSpaces;  // sum of cubes is used for cost to avoid single long lengths
-}
-
 WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimizedCostUsingNaiveRecursion(
     RecursionDetails const& recursionDetails, Index const wordIndex) const {
     Cost result(0);
@@ -109,6 +89,26 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getTotalL
         }
     }
     return result;
+}
+
+WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getCost(
+    Index const maxLength, Indices const& lengths) {
+    Cost result(0);
+    if (lengths.size() == 1) {
+        result = getCostFromExtraSpaces(lengths.front());
+    } else {
+        for (Index const length : lengths) {
+            result += getCostFromExtraSpaces(maxLength - length);
+        }
+    }
+    return result;
+}
+
+// inline optimization can work here because the usage belongs to same translation unit
+inline WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getCostFromExtraSpaces(
+    Index const numberOfExtraSpaces) {
+    return numberOfExtraSpaces * numberOfExtraSpaces *
+           numberOfExtraSpaces;  // sum of cubes is used for cost to avoid single long lengths
 }
 
 }  // namespace alba

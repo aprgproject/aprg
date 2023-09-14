@@ -55,13 +55,11 @@ private:
 // Begin with an interval covering the whole array.
 // If the target of the search key is less than the item in the middle of the interval, narrow the interval to the lower
 // half. Otherwise, narrow it to the upper half. Repeatedly check until the target is found or the interval is empty.
-
 // We basically ignore half of the elements just after one comparison.
 // Compare x with the middle element.
 // If x matches with the middle element, we return the mid index.
 // Else If x is greater than the mid element, then x can only lie in the right half subarray after the mid element. So
 // we recur for the right half. Else (x is smaller) recur for the left half.
-
 // Time Complexity:
 // The time complexity of Binary Search can be written as
 // T(n) = T(n/2) + c
@@ -69,7 +67,6 @@ private:
 // It falls in case II of the Master Method and the solution of the recurrence is Theta(Logn) .
 // Auxiliary Space: O(1) in case of iterative implementation. In the case of recursive implementation, O(Logn) recursion
 // call stack space.
-
 // Note, its better to have:
 // -> int mid = low + (high – low)/2;
 // Maybe, you wonder why we are calculating the middle index this way, we can simply add the lower and higher index and

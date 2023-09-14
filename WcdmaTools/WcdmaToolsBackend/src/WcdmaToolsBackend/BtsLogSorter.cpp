@@ -9,8 +9,8 @@
 #include <iostream>
 #include <map>
 
-using namespace alba;
 using namespace alba::algorithm;
+using namespace alba;
 using namespace std;
 
 namespace alba::ProgressCounters {
@@ -105,16 +105,6 @@ double BtsLogSorter::getTotalSizeToBeRead(set<string> const& listOfFiles) {
         }
     }
     return totalFileSize;
-}
-
-void BtsLogSorter::deleteFilesInDirectory(string const& directoryOfLogs) {
-    AlbaLocalPathHandler(directoryOfLogs).deleteFilesInDirectory();
-}
-
-string BtsLogSorter::getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
-    string const& directory, string const& hardwareAddress) {
-    string const filename = hardwareAddress.empty() ? "NoHardwareAddress" : hardwareAddress;
-    return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getFullPath();
 }
 
 void BtsLogSorter::createTempDirectories() const {
@@ -267,6 +257,16 @@ void BtsLogSorter::updateOrWriteCurrentPrint(BtsLogPrint const& logPrint, ofstre
 void BtsLogSorter::writeLastPrint(ofstream& outputLogFileStream) {
     outputLogFileStream << m_currentPrintToWrite.getPrintWithAllDetails() << "\n";
     m_currentPrintToWrite = BtsLogPrint{};
+}
+
+void BtsLogSorter::deleteFilesInDirectory(string const& directoryOfLogs) {
+    AlbaLocalPathHandler(directoryOfLogs).deleteFilesInDirectory();
+}
+
+string BtsLogSorter::getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
+    string const& directory, string const& hardwareAddress) {
+    string const filename = hardwareAddress.empty() ? "NoHardwareAddress" : hardwareAddress;
+    return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getFullPath();
 }
 
 }  // namespace wcdmaToolsBackend

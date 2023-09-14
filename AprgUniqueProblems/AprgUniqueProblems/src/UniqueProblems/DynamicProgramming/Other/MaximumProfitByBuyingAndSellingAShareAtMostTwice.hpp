@@ -28,7 +28,6 @@ private:
 // If the trader is allowed to make at most 2 transactions in a day,
 // whereas the second transaction can only start after the first one is complete (Buy->sell->Buy->sell).
 // Given stock prices throughout the day, find out the maximum profit that a share trader could have made.
-
 // Examples:
 // Input:   price[] = {10, 22, 5, 75, 65, 80}
 // -> Output:  87

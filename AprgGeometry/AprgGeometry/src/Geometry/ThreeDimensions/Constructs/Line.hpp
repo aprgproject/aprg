@@ -34,12 +34,13 @@ public:
     [[nodiscard]] bool isInvalid() const;
 
 private:
+    [[nodiscard]] bool areAllCoefficientsZero() const;
+    void calculateAndSaveInitialValuesIfPossible(Point const& first);
+
     static std::optional<double> calculateOtherCoordinate(
         double const& initialValue1, double const coefficient1, double const& initialValue2, double const coefficient2,
         double const coordinate2);
 
-    [[nodiscard]] bool areAllCoefficientsZero() const;
-    void calculateAndSaveInitialValuesIfPossible(Point const& first);
     friend std::ostream& operator<<(std::ostream& out, Line const& line);
     double m_aCoefficient{0};   // form: (x-x0)/a = (y-y0)/b = (z-z0)/c
     double m_bCoefficient{0};   // form: (x-x0)/a = (y-y0)/b = (z-z0)/c

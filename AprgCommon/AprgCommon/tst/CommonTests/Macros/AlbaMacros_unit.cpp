@@ -8,18 +8,6 @@ using namespace std;
 
 namespace alba {
 
-TEST(AlbaMacrosTest, StandardPredefinedMacrosWorks) {
-    EXPECT_FALSE(string(ALBA_MACROS_GET_FILE).empty());
-    EXPECT_EQ(13, ALBA_MACROS_GET_LINE);
-    EXPECT_FALSE(string(ALBA_MACROS_GET_COMPILATION_DATE).empty());
-    EXPECT_FALSE(string(ALBA_MACROS_GET_TIME_OF_TRANSLATION).empty());
-#if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
-    EXPECT_LT(201100, ALBA_MACROS_GET_COMPILER_VERSION);  // it should be above 2011 compiler
-#elif defined(_MSC_VER)
-    EXPECT_LT(199700, ALBA_MACROS_GET_COMPILER_VERSION);  // MSVC returns wrong version
-#endif
-}
-
 TEST(AlbaMacrosTest, CompilerPredefinedMacrosWorks) {
     EXPECT_FALSE(string(static_cast<const char*>(ALBA_MACROS_GET_FUNCTION)).empty());
     string const actualPrettyFunction(static_cast<const char*>(ALBA_MACROS_GET_PRETTY_FUNCTION));
@@ -32,12 +20,16 @@ TEST(AlbaMacrosTest, CompilerPredefinedMacrosWorks) {
     EXPECT_EQ(3, ALBA_MACROS_GET_UNIQUE_COUNTER_VALUE);
 }
 
-TEST(AlbaMacrosTest, DisplayMessageTest) {
-#define ALBA_MACROS_TEST_SAMPLE_MACRO1 10000
-    EXPECT_STREQ(
-        "ALBA_MACROS_TEST_SAMPLE_MACRO1=10000",
-        ALBA_MACROS_PARAMETER_FOR_PRAGMA_MESSAGE(ALBA_MACROS_TEST_SAMPLE_MACRO1));
-#pragma message(ALBA_MACROS_PARAMETER_FOR_PRAGMA_MESSAGE(ALBA_MACROS_TEST_SAMPLE_MACRO1))
+TEST(AlbaMacrosTest, StandardPredefinedMacrosWorks) {
+    EXPECT_FALSE(string(ALBA_MACROS_GET_FILE).empty());
+    EXPECT_EQ(25, ALBA_MACROS_GET_LINE);
+    EXPECT_FALSE(string(ALBA_MACROS_GET_COMPILATION_DATE).empty());
+    EXPECT_FALSE(string(ALBA_MACROS_GET_TIME_OF_TRANSLATION).empty());
+#if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
+    EXPECT_LT(201100, ALBA_MACROS_GET_COMPILER_VERSION);  // it should be above 2011 compiler
+#elif defined(_MSC_VER)
+    EXPECT_LT(199700, ALBA_MACROS_GET_COMPILER_VERSION);  // MSVC returns wrong version
+#endif
 }
 
 TEST(AlbaMacrosTest, GetStringLiteralWorks) {
@@ -46,6 +38,14 @@ TEST(AlbaMacrosTest, GetStringLiteralWorks) {
     EXPECT_STREQ("12345", ALBA_MACROS_GET_STRING_LITERAL(12345));
     EXPECT_STREQ("SampleEnumClass::Type1", ALBA_MACROS_GET_STRING_LITERAL(SampleEnumClass::Type1));
     EXPECT_STREQ("SampleEnumClass::Type2", ALBA_MACROS_GET_STRING_LITERAL(SampleEnumClass::Type2));
+}
+
+TEST(AlbaMacrosTest, DisplayMessageTest) {
+#define ALBA_MACROS_TEST_SAMPLE_MACRO1 10000
+    EXPECT_STREQ(
+        "ALBA_MACROS_TEST_SAMPLE_MACRO1=10000",
+        ALBA_MACROS_PARAMETER_FOR_PRAGMA_MESSAGE(ALBA_MACROS_TEST_SAMPLE_MACRO1));
+#pragma message(ALBA_MACROS_PARAMETER_FOR_PRAGMA_MESSAGE(ALBA_MACROS_TEST_SAMPLE_MACRO1))
 }
 
 TEST(AlbaMacrosTest, CaseEnumStringWorks) {

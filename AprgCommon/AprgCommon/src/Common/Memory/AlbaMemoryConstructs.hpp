@@ -1,4 +1,3 @@
-
 // Source: https://en.cppreference.com/w/cpp/types/size_t
 // Construct: std::size_t
 //
@@ -35,7 +34,6 @@
 // Output:
 // -> 0 1 2 3 4 5 6 7 8 9
 // -> 9 8 7 6 5 4 3 2 1 0
-
 // Source: https://en.cppreference.com/w/cpp/types/offsetof
 // Construct: offsetof
 //
@@ -72,7 +70,6 @@
 // -> offset of double m1 = 8
 // -> offset of short  m2 = 16
 // -> offset of char   m3 = 18
-
 // Source: https://en.cppreference.com/w/cpp/language/alignas
 // Construct: alignas
 //
@@ -163,7 +160,6 @@
 // -> &x: 0x7fffcec89960
 // -> &y: 0x7fffcec89980
 // -> &z: 0x7fffcec899a0
-
 // Source: https://en.cppreference.com/w/cpp/language/alignof
 // Construct: alignof
 //
@@ -220,7 +216,6 @@
 // -> - class Foo2       : 16
 // -> - empty class      : 1
 // -> - alignas(64) Empty: 64
-
 // Source: https://en.cppreference.com/w/cpp/types/alignment_of
 // Construct: alignment_of
 //
@@ -259,7 +254,6 @@
 //
 // Possible output:
 // -> 1 2 4 8
-
 // Source: https://en.cppreference.com/w/cpp/thread/hardware_destructive_interference_size
 // Construct: std::hardware_destructive_interference_size, std::hardware_constructive_interference_size
 //

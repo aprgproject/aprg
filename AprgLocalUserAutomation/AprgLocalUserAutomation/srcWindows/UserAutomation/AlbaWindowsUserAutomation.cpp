@@ -13,6 +13,76 @@ using namespace std;
 
 namespace alba {
 
+void AlbaWindowsUserAutomation::doDoubleLeftClick() const {
+    doLeftClick();
+    doLeftClick();
+}
+
+void AlbaWindowsUserAutomation::doLeftClickAt(MousePosition const& position) const {
+    setMousePosition(position);
+    doLeftClick();
+}
+
+void AlbaWindowsUserAutomation::doDoubleLeftClickAt(MousePosition const& position) const {
+    setMousePosition(position);
+    doDoubleLeftClick();
+}
+
+void AlbaWindowsUserAutomation::doRightClickAt(MousePosition const& position) const {
+    setMousePosition(position);
+    doRightClick();
+}
+
+void AlbaWindowsUserAutomation::typeCharacter(char const character) const { typeKey(convertToVirtualKey(character)); }
+
+void AlbaWindowsUserAutomation::typeString(string_view const& stringToType) const {
+    for (char const character : stringToType) {
+        typeCharacter(character);
+    }
+}
+
+void AlbaWindowsUserAutomation::saveBitmapOnScreen(string_view const& filePath) const {
+    // Note: the difference on partially capturing the screen is negligible
+    typeKey(VK_SNAPSHOT);
+    saveBitmapFromClipboard(filePath);
+}
+
+MousePosition AlbaWindowsUserAutomation::getMousePosition() {
+    MousePosition const position;
+    POINT mouse;
+    GetCursorPos(&mouse);
+    return MousePosition(mouse.x, mouse.y);
+}
+
+string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() {
+    int const LENGTH = 1000;
+    char className[LENGTH];
+    GetClassName(GetForegroundWindow(), className, LENGTH);
+    return string(className);
+}
+
+string AlbaWindowsUserAutomation::getStringFromClipboard() {
+    string stringInClipboard;
+    if (OpenClipboard(nullptr) != 0) {
+        HANDLE clipboardData = GetClipboardData(CF_TEXT);
+        stringInClipboard = static_cast<char*>(clipboardData);
+        CloseClipboard();
+    }
+    return stringInClipboard;
+}
+
+bool AlbaWindowsUserAutomation::isKeyPressed(int const key) {
+    // https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getasynckeystate
+    // If the function succeeds, the return value specifies whether the key was pressed since the last call to
+    // GetAsyncKeyState, and whether the key is currently up or down. If the most significant bit is set, the key is
+    // down. If the least significant bit is set, the key was pressed after the previous call to GetAsyncKeyState.
+    // However, you should not rely on this last behavior; for more information, see the Remarks.
+    USHORT const status = GetAsyncKeyState(key);
+    return (status & 0x8000) >> 15 == 1;  // || (status & 1) == 1;
+}
+
+bool AlbaWindowsUserAutomation::isLetterPressed(char const letter) { return isKeyPressed(::toupper(letter)); }
+
 void AlbaWindowsUserAutomation::setMousePosition(MousePosition const& position) {
     long const screenWidth = GetSystemMetrics(SM_CXSCREEN) - 1;
     long const screenHeight = GetSystemMetrics(SM_CYSCREEN) - 1;
@@ -49,21 +119,6 @@ void AlbaWindowsUserAutomation::doLeftClick() {
     sleepWithRealisticDelay();
 }
 
-void AlbaWindowsUserAutomation::doDoubleLeftClick() const {
-    doLeftClick();
-    doLeftClick();
-}
-
-void AlbaWindowsUserAutomation::doLeftClickAt(MousePosition const& position) const {
-    setMousePosition(position);
-    doLeftClick();
-}
-
-void AlbaWindowsUserAutomation::doDoubleLeftClickAt(MousePosition const& position) const {
-    setMousePosition(position);
-    doDoubleLeftClick();
-}
-
 void AlbaWindowsUserAutomation::pressRightButtonOnMouse() {
     doOperation([](INPUT& input) {
         input.type = INPUT_MOUSE;
@@ -83,11 +138,6 @@ void AlbaWindowsUserAutomation::doRightClick() {
     sleepWithRealisticDelay();
     releaseRightButtonOnMouse();
     sleepWithRealisticDelay();
-}
-
-void AlbaWindowsUserAutomation::doRightClickAt(MousePosition const& position) const {
-    setMousePosition(position);
-    doRightClick();
 }
 
 void AlbaWindowsUserAutomation::pressKey(uint16_t const key) {
@@ -117,14 +167,6 @@ void AlbaWindowsUserAutomation::typeKey(uint16_t const key) {
     sleepWithRealisticDelay();
     releaseKey(key);
     sleepWithRealisticDelay();
-}
-
-void AlbaWindowsUserAutomation::typeCharacter(char const character) const { typeKey(convertToVirtualKey(character)); }
-
-void AlbaWindowsUserAutomation::typeString(string_view const& stringToType) const {
-    for (char const character : stringToType) {
-        typeCharacter(character);
-    }
 }
 
 void AlbaWindowsUserAutomation::performKeyCombination(
@@ -168,12 +210,6 @@ void AlbaWindowsUserAutomation::setForegroundWindowWithWindowName(string_view co
 
 void AlbaWindowsUserAutomation::sleepWithRealisticDelay() { Sleep(REALISTIC_DELAY_IN_MILLISECONDS); }
 void AlbaWindowsUserAutomation::sleep(int const milliseconds) { Sleep(milliseconds); }
-
-void AlbaWindowsUserAutomation::saveBitmapOnScreen(string_view const& filePath) const {
-    // Note: the difference on partially capturing the screen is negligible
-    typeKey(VK_SNAPSHOT);
-    saveBitmapFromClipboard(filePath);
-}
 
 void AlbaWindowsUserAutomation::setStringToClipboard(string_view const& clipBoardText) {
     HANDLE hData = nullptr;
@@ -224,41 +260,15 @@ void AlbaWindowsUserAutomation::saveBitmapFromClipboard(string_view const& fileP
     }
 }
 
-MousePosition AlbaWindowsUserAutomation::getMousePosition() {
-    MousePosition const position;
-    POINT mouse;
-    GetCursorPos(&mouse);
-    return MousePosition(mouse.x, mouse.y);
-}
-
-string AlbaWindowsUserAutomation::getClassNameOfForegroundWindow() {
-    int const LENGTH = 1000;
-    char className[LENGTH];
-    GetClassName(GetForegroundWindow(), className, LENGTH);
-    return string(className);
-}
-
-string AlbaWindowsUserAutomation::getStringFromClipboard() {
-    string stringInClipboard;
-    if (OpenClipboard(nullptr) != 0) {
-        HANDLE clipboardData = GetClipboardData(CF_TEXT);
-        stringInClipboard = static_cast<char*>(clipboardData);
-        CloseClipboard();
+uint16_t AlbaWindowsUserAutomation::convertToVirtualKey(char const character) {
+    int virtualKey = character;
+    if (stringHelper::isLetter(character)) {
+        virtualKey = ::toupper(character);
+    } else if ('.' == character) {
+        virtualKey = VK_OEM_PERIOD;
     }
-    return stringInClipboard;
+    return virtualKey;
 }
-
-bool AlbaWindowsUserAutomation::isKeyPressed(int const key) {
-    // https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getasynckeystate
-    // If the function succeeds, the return value specifies whether the key was pressed since the last call to
-    // GetAsyncKeyState, and whether the key is currently up or down. If the most significant bit is set, the key is
-    // down. If the least significant bit is set, the key was pressed after the previous call to GetAsyncKeyState.
-    // However, you should not rely on this last behavior; for more information, see the Remarks.
-    USHORT const status = GetAsyncKeyState(key);
-    return (status & 0x8000) >> 15 == 1;  // || (status & 1) == 1;
-}
-
-bool AlbaWindowsUserAutomation::isLetterPressed(char const letter) { return isKeyPressed(::toupper(letter)); }
 
 void AlbaWindowsUserAutomation::setForegroundWindowWithWindowHandle(HWND const windowHandle) {
     bool isSuccessful(false);
@@ -284,16 +294,6 @@ void AlbaWindowsUserAutomation::doOperation(AlbaWindowsUserAutomation::InputFunc
     memset(&input, 0, sizeof(INPUT));
     inputFunction(input);
     SendInput(1, &input, sizeof(INPUT));
-}
-
-uint16_t AlbaWindowsUserAutomation::convertToVirtualKey(char const character) {
-    int virtualKey = character;
-    if (stringHelper::isLetter(character)) {
-        virtualKey = ::toupper(character);
-    } else if ('.' == character) {
-        virtualKey = VK_OEM_PERIOD;
-    }
-    return virtualKey;
 }
 
 }  // namespace alba

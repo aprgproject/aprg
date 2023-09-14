@@ -18,6 +18,7 @@ namespace {
 using CallBackData = struct _mydata {
     ChessEngineHandler* epointer;
 };
+
 using PointerToCallBackData = CallBackData*;
 
 DWORD WINAPI engineMonitoringCallbackFunction(LPVOID const lpParam) {
@@ -35,6 +36,7 @@ int IsWinNT() {
 }
 
 }  // namespace
+
 ChessEngineHandler::ChessEngineHandler(string const& enginePath)
     : m_enginePath(enginePath),
 
@@ -138,25 +140,6 @@ void ChessEngineHandler::setAdditionalStepsInProcessingAStringFromEngine(
     m_additionalStepsInProcessingAStringFromEngine = additionalSteps;
 }
 
-string ChessEngineHandler::getLogHeader(LogType const logtype) {
-    string result;
-    switch (logtype) {
-        case LogType::FromEngine: {
-            result = "From engine: ";
-            break;
-        }
-        case LogType::ToEngine: {
-            result = "To engine: ";
-            break;
-        }
-        case LogType::HandlerStatus: {
-            result = "HandlerStatus: ";
-            break;
-        }
-    }
-    return result;
-}
-
 void ChessEngineHandler::initializeEngine() {
     SECURITY_DESCRIPTOR securityDescriptor{};  // security information for pipes
     SECURITY_ATTRIBUTES securityAttributes;
@@ -212,6 +195,25 @@ void ChessEngineHandler::log(LogType const logtype, string const& logString) {
         m_logFileStreamOptional.value() << getLogHeader(logtype) << logString << "\n";
         m_logFileStreamOptional.value().flush();
     }
+}
+
+string ChessEngineHandler::getLogHeader(LogType const logtype) {
+    string result;
+    switch (logtype) {
+        case LogType::FromEngine: {
+            result = "From engine: ";
+            break;
+        }
+        case LogType::ToEngine: {
+            result = "To engine: ";
+            break;
+        }
+        case LogType::HandlerStatus: {
+            result = "HandlerStatus: ";
+            break;
+        }
+    }
+    return result;
 }
 
 }  // namespace alba::chess

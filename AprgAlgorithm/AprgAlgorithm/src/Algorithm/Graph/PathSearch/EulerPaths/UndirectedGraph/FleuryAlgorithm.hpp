@@ -125,12 +125,9 @@ private:
 // At the end of the algorithm there are no edges left,
 // and the sequence from which the edges were chosen forms an Eulerian cycle if the graph has no vertices of odd degree,
 // or an Eulerian trail if there are exactly two vertices of odd degree.
-
 // While the graph traversal in Fleury's algorithm is linear in the number of edges, i.e. O(E),
 // we also need to factor in the complexity of detecting bridges.
-
 // If we are to re-run Tarjan's linear time bridge-finding algorithm after the removal of every edge,
 // Fleury's algorithm will have a time complexity of O(E^2)
-
 // A dynamic bridge-finding algorithm of Thorup (2000) allows this to be improved to O (E*log^3(E)*log(log(E)),
 // but this is still significantly slower than alternative algorithms.

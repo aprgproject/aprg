@@ -17,16 +17,50 @@ using Edges = GraphTypes<VertexForTest>::Edges;
 using EdgeToWeightMap = EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap;
 }  // namespace
 
-TEST(EdgeWeightedGraphTest, HasAUniqueMinimumSpanningTreeWorksOnUndirectedGraph) {
-    EdgeWeightedUndirectedGraphForTest graphWithDifferentWeights;
-    graphWithDifferentWeights.connect(0, 1, 3.5);
-    graphWithDifferentWeights.connect(0, 2, 4.5);
-    EdgeWeightedUndirectedGraphForTest graphWithNonDifferentWeights;
-    graphWithNonDifferentWeights.connect(0, 1, 3.5);
-    graphWithNonDifferentWeights.connect(0, 2, 3.5);
+TEST(EdgeWeightedGraphTest, DisconnectWorksOnUndirectedGraph) {
+    EdgeWeightedUndirectedGraphForTest graph;
+    graph.connect(0, 1, 3.5);
+    graph.connect(0, 2, 4.5);
 
-    EXPECT_TRUE(graphWithDifferentWeights.hasAUniqueMinimumSpanningTree());
-    EXPECT_FALSE(graphWithNonDifferentWeights.hasAUniqueMinimumSpanningTree());
+    graph.disconnect(0, 1);
+
+    EXPECT_EQ(2, graph.getNumberOfVertices());
+    EXPECT_EQ(1, graph.getNumberOfEdges());
+    Edges const edgesToExpect{{0, 2}};
+    EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap const expectedEdgesToWeight{{{0, 2}, 4.5}};
+    EXPECT_EQ(edgesToExpect, graph.getEdges());
+    EXPECT_EQ(expectedEdgesToWeight, graph.getEdgeToWeightMap());
+}
+
+TEST(EdgeWeightedGraphTest, GetEdgeToWeightMapWorksOnUndirectedGraph) {
+    EdgeWeightedUndirectedGraphForTest graph;
+    graph.connect(0, 1, 3.5);
+    graph.connect(0, 2, 4.5);
+
+    EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap const expectedEdgesToWeight{{{0, 1}, 3.5}, {{0, 2}, 4.5}};
+    EXPECT_EQ(expectedEdgesToWeight, graph.getEdgeToWeightMap());
+}
+
+TEST(EdgeWeightedGraphTest, ConnectWorksOnUndirectedGraph) {
+    EdgeWeightedUndirectedGraphForTest graph;
+    graph.connect(0, 1, 3.5);
+    graph.connect(0, 2, 4.5);
+
+    EXPECT_EQ(3, graph.getNumberOfVertices());
+    EXPECT_EQ(2, graph.getNumberOfEdges());
+    Edges const edgesToExpect{{0, 1}, {0, 2}};
+    EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap const expectedEdgesToWeight{{{0, 1}, 3.5}, {{0, 2}, 4.5}};
+    EXPECT_EQ(edgesToExpect, graph.getEdges());
+    EXPECT_EQ(expectedEdgesToWeight, graph.getEdgeToWeightMap());
+}
+
+TEST(EdgeWeightedGraphTest, GetEdgesWithWeightWorksOnUndirectedGraph) {
+    EdgeWeightedUndirectedGraphForTest graph;
+    graph.connect(0, 1, 3.5);
+    graph.connect(0, 2, 4.5);
+
+    EdgeWeightedUndirectedGraphForTest::EdgesWithWeight const expectedEdgesWithWeight{{0, 1, 3.5}, {0, 2, 4.5}};
+    EXPECT_EQ(expectedEdgesWithWeight, graph.getEdgesWithWeight());
 }
 
 TEST(EdgeWeightedGraphTest, GetWeightWorksOnUndirectedGraph) {
@@ -49,50 +83,16 @@ TEST(EdgeWeightedGraphTest, GetSortedWeightsWorksOnUndirectedGraph) {
     EXPECT_EQ(expectedWeights, graph.getSortedWeights());
 }
 
-TEST(EdgeWeightedGraphTest, GetEdgeToWeightMapWorksOnUndirectedGraph) {
-    EdgeWeightedUndirectedGraphForTest graph;
-    graph.connect(0, 1, 3.5);
-    graph.connect(0, 2, 4.5);
+TEST(EdgeWeightedGraphTest, HasAUniqueMinimumSpanningTreeWorksOnUndirectedGraph) {
+    EdgeWeightedUndirectedGraphForTest graphWithDifferentWeights;
+    graphWithDifferentWeights.connect(0, 1, 3.5);
+    graphWithDifferentWeights.connect(0, 2, 4.5);
+    EdgeWeightedUndirectedGraphForTest graphWithNonDifferentWeights;
+    graphWithNonDifferentWeights.connect(0, 1, 3.5);
+    graphWithNonDifferentWeights.connect(0, 2, 3.5);
 
-    EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap const expectedEdgesToWeight{{{0, 1}, 3.5}, {{0, 2}, 4.5}};
-    EXPECT_EQ(expectedEdgesToWeight, graph.getEdgeToWeightMap());
-}
-
-TEST(EdgeWeightedGraphTest, GetEdgesWithWeightWorksOnUndirectedGraph) {
-    EdgeWeightedUndirectedGraphForTest graph;
-    graph.connect(0, 1, 3.5);
-    graph.connect(0, 2, 4.5);
-
-    EdgeWeightedUndirectedGraphForTest::EdgesWithWeight const expectedEdgesWithWeight{{0, 1, 3.5}, {0, 2, 4.5}};
-    EXPECT_EQ(expectedEdgesWithWeight, graph.getEdgesWithWeight());
-}
-
-TEST(EdgeWeightedGraphTest, ConnectWorksOnUndirectedGraph) {
-    EdgeWeightedUndirectedGraphForTest graph;
-    graph.connect(0, 1, 3.5);
-    graph.connect(0, 2, 4.5);
-
-    EXPECT_EQ(3, graph.getNumberOfVertices());
-    EXPECT_EQ(2, graph.getNumberOfEdges());
-    Edges const edgesToExpect{{0, 1}, {0, 2}};
-    EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap const expectedEdgesToWeight{{{0, 1}, 3.5}, {{0, 2}, 4.5}};
-    EXPECT_EQ(edgesToExpect, graph.getEdges());
-    EXPECT_EQ(expectedEdgesToWeight, graph.getEdgeToWeightMap());
-}
-
-TEST(EdgeWeightedGraphTest, DisconnectWorksOnUndirectedGraph) {
-    EdgeWeightedUndirectedGraphForTest graph;
-    graph.connect(0, 1, 3.5);
-    graph.connect(0, 2, 4.5);
-
-    graph.disconnect(0, 1);
-
-    EXPECT_EQ(2, graph.getNumberOfVertices());
-    EXPECT_EQ(1, graph.getNumberOfEdges());
-    Edges const edgesToExpect{{0, 2}};
-    EdgeWeightedUndirectedGraphForTest::EdgeToWeightMap const expectedEdgesToWeight{{{0, 2}, 4.5}};
-    EXPECT_EQ(edgesToExpect, graph.getEdges());
-    EXPECT_EQ(expectedEdgesToWeight, graph.getEdgeToWeightMap());
+    EXPECT_TRUE(graphWithDifferentWeights.hasAUniqueMinimumSpanningTree());
+    EXPECT_FALSE(graphWithNonDifferentWeights.hasAUniqueMinimumSpanningTree());
 }
 
 }  // namespace alba::algorithm

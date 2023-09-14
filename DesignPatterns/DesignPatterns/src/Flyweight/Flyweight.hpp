@@ -53,10 +53,6 @@ private:
 // that flyweights are shared properly
 class FlyweightFactory {
 public:
-    static std::unique_ptr<Flyweight> getUnsharedFlyweight(int const value) {
-        return std::make_unique<UnsharedConcreteFlyweight>(value);
-    }
-
     std::unique_ptr<Flyweight> getSharedFlyweight(int const key) {
         auto it = m_keyToSharedValueMap.find(key);
         if (it != m_keyToSharedValueMap.end()) {
@@ -64,6 +60,10 @@ public:
         }
         auto iteratorAndFlagPair = m_keyToSharedValueMap.emplace(key, key);  // use key as value
         return std::make_unique<SharedConcreteFlyweight>(iteratorAndFlagPair.first->second);
+    }
+
+    static std::unique_ptr<Flyweight> getUnsharedFlyweight(int const value) {
+        return std::make_unique<UnsharedConcreteFlyweight>(value);
     }
 
     // ...
@@ -80,13 +80,11 @@ private:
 // -> Provide a "flyweight object" that can have SHARED data (extrinsic state) or SEPARATED data (intrinsic state)
 // -> Provide a "flyweight object" that SEPARATES INTRINSIC/NON-CONTEXT data (can be shared and saved in object) and
 // EXTRINSIC/CONTEXT data (can be removed and be sent to object instead)
-
 // Intent:
 // Flyweight pattern has has structural purpose, applies to objects and uses sharing to support large numbers of
 // fine-grained objects efficiently.
 // The pattern can be used to reduce memory usage when you need to create a large number of similar objects.
 // Instead of storing the whole data on the object, separate intrinsic and extrinsic data to lessen memory usage.
-
 // When to use (applicability):
 // -> when one instance of a class can be used to provide many "virtual instances"
 // -> when all of the following are true
@@ -95,7 +93,6 @@ private:
 // --> most object state can be made extrinsic
 // --> many groups of objects may be replaced by relatively few shared objects once extrinsic state is removed
 // --> the application doesn't depend on object identity
-
 // Consequences:
 // -> Flyweights may introduce run-time cost associated with transferring, funding, and/or computing extrinsic state,
 // ---> especially if it was formerly stored as intrinsic state.
@@ -116,7 +113,6 @@ private:
 // ---> A consequence of sharing is that flyweight leaf nodes cannot store a pointer to their parent.
 // ---> Rather, the parent pointer is passed ot the flyweight as part of its extrinsic state.
 // ---> This has a major impact on how the objects in the hierarchy communicate with each other.
-
 // Implementation:
 // -> Removing extrinsic state.
 // ---> The pattern's applicability is determined largely by how easy it is to identify extrinsic state and remove it
@@ -133,7 +129,6 @@ private:
 // when its no longer needed.
 // -----> However, neither is necessary if the number of flyweights is fixed and small.
 // -------> In this case, the flyweights are worth keeping around permanently.
-
 // Related Patterns
 // -> The [Flyweight] pattern is often combined with the [Composite] pattern to implement a logically hierarchical
 // structure
