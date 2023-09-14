@@ -23,7 +23,7 @@ void runFormatter(string const& file) {
     command += file;
     command += R"(")";
     cout << "---> command [" << command << "]:\n";
-    // system(command.c_str());
+    system(command.c_str());
 }
 
 void runDiffForTwoFiles(string const& file1, string const& file2) {
@@ -34,7 +34,7 @@ void runDiffForTwoFiles(string const& file1, string const& file2) {
     command += file2;
     command += R"(")";
     cout << "---> command [" << command << "]:\n";
-    // system(command.c_str());
+    system(command.c_str());
 }
 
 void runFormatterInDirectory(string const& directoryPath) {
