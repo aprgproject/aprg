@@ -19,7 +19,7 @@ lsCommand="ls -la --color=auto"
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 
 # Validate inputs
-if [[ -z $scriptOption ]]; then
+if [[ -z "$scriptOption" ]]; then
     scriptPrintInCppMatcherFormat "$scriptPath" "$LINENO" "${BASH_LINENO[0]}" "error: The scriptOption: [$scriptOption] is empty."
     exit 1
 fi
@@ -119,19 +119,19 @@ performRun(){
     for fileInInstall in ./*; do
         if [[ -x "$fileInInstall" ]]; then
             scriptPrint "$scriptName" "$LINENO" "Running executable: [$(pwd)/$fileInInstall]."
-            if [[ -z $argument1 ]] || [[ $argument1 == "--gtest_filter=*.*" ]]; then
+            if [[ -z "$argument1" ]] || [[ "$argument1" == "--gtest_filter=*.*" ]]; then
                 
                 set +e
                 "$fileInInstall" | tee "$outputLogPath" 2>&1
                 exitStatus="${PIPESTATUS[0]}"
                 set -e
                 failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
-                scriptPrint "$scriptName" "$LINENO" "The exitStatus is: [$exitStatus]."
+                scriptPrint "$scriptName" "$LINENO" "The gtest exit status is: [$exitStatus]."
                 scriptPrint "$scriptName" "$LINENO" "The contents of failingTests are: [$failingTests]."
                 if [[ "$exitStatus" -eq 0 ]]; then
                     scriptPrint "$scriptName" "$LINENO" "All tests passed!"
                 else
-                    if [[ -z $failingTests ]]; then
+                    if [[ -z "$failingTests" ]]; then
                         scriptPrint "$scriptName" "$LINENO" "Failing tests is empty, so immediately exiting with error (no re-runs)."
                     else
                         scriptPrint "$scriptName" "$LINENO" "Running the failing tests again..."
