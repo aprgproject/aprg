@@ -644,7 +644,7 @@ void splitToStrings(strings& listOfStrings, string_view const mainText, string_v
         if (startingIndexOfFind != delimiterIndex) {
             listOfStrings.emplace_back(mainText.substr(startingIndexOfFind, delimiterIndex - startingIndexOfFind));
         }
-        if (SplitStringType::WithDelimeters == splitStringType) {
+        if constexpr (SplitStringType::WithDelimeters == splitStringType) {
             listOfStrings.emplace_back(mainText.substr(delimiterIndex, delimeterLength));
         }
         startingIndexOfFind = delimiterIndex + delimeterLength;
