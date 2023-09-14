@@ -141,8 +141,10 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
 
 Terms CPlusPlusReorganizer::extractTermsInRange(int const start, int const end) const {
     Terms extractedTerms;
-    extractedTerms.reserve(end + 1 - start);
-    copy(m_terms.begin() + start, m_terms.cbegin() + end + 1, back_inserter(extractedTerms));
+    if (start <= end) {
+        extractedTerms.reserve(end + 1 - start);
+        copy(m_terms.begin() + start, m_terms.cbegin() + end + 1, back_inserter(extractedTerms));
+    }
     return extractedTerms;
 }
 
@@ -442,40 +444,46 @@ bool CPlusPlusReorganizer::hasEndBrace(string const& content) {
 }
 
 void CPlusPlusReorganizer::makeIsolatedCommentsStickWithNextLine(Terms& terms) {
-    int searchIndex = 0;
-    Patterns const searchPatterns{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
-    bool isFound(true);
-    while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(terms, searchIndex, searchPatterns);
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            int const firstHitIndex = hitIndexes.front();
-            int const lastHitIndex = hitIndexes.back();
-            if (firstHitIndex == 0 || (firstHitIndex > 0 && isWhiteSpaceWithNewLine(terms[firstHitIndex - 1]))) {
-                terms[lastHitIndex] = Term(TermType::WhiteSpace, "\n");
+    if (!terms.empty()) {
+        int searchIndex = 0;
+        Patterns const searchPatterns{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+        bool isFound(true);
+        while (isFound) {
+            Indexes hitIndexes = searchForwardsForPatterns(terms, searchIndex, searchPatterns);
+            isFound = !hitIndexes.empty();
+            if (isFound) {
+                int const firstHitIndex = hitIndexes.front();
+                int const lastHitIndex = hitIndexes.back();
+                if (firstHitIndex == 0 || (firstHitIndex > 0 && isWhiteSpaceWithNewLine(terms[firstHitIndex - 1]))) {
+                    terms[lastHitIndex] = Term(TermType::WhiteSpace, "\n");
+                }
+                searchIndex = lastHitIndex + 1;
             }
-            searchIndex = lastHitIndex + 1;
         }
     }
 }
 
 void CPlusPlusReorganizer::removeStartingAndTrailingWhiteSpace(Terms& terms) {
-    int nonWhiteSpace = 0;
-    for (; nonWhiteSpace < static_cast<int>(terms.size()); ++nonWhiteSpace) {
-        Term const& term(terms[nonWhiteSpace]);
-        if (!isWhiteSpace(term)) {
-            break;
+    if (!terms.empty()) {
+        int nonWhiteSpace = 0;
+        for (; nonWhiteSpace < static_cast<int>(terms.size()); ++nonWhiteSpace) {
+            Term const& term(terms[nonWhiteSpace]);
+            if (!isWhiteSpace(term)) {
+                break;
+            }
         }
+        terms.erase(terms.begin(), terms.begin() + nonWhiteSpace);
     }
-    terms.erase(terms.begin(), terms.begin() + nonWhiteSpace);
-    nonWhiteSpace = static_cast<int>(terms.size()) - 1;
-    for (; nonWhiteSpace >= 0; --nonWhiteSpace) {
-        Term const& term(terms[nonWhiteSpace]);
-        if (!isWhiteSpace(term)) {
-            break;
+    if (!terms.empty()) {
+        int nonWhiteSpace = static_cast<int>(terms.size()) - 1;
+        for (; nonWhiteSpace >= 0; --nonWhiteSpace) {
+            Term const& term(terms[nonWhiteSpace]);
+            if (!isWhiteSpace(term)) {
+                break;
+            }
         }
+        terms.erase(terms.begin() + 1 + nonWhiteSpace, terms.end());
     }
-    terms.erase(terms.begin() + nonWhiteSpace + 1, terms.cend());
 }
 
 int CPlusPlusReorganizer::getIndexAtClosingString(
