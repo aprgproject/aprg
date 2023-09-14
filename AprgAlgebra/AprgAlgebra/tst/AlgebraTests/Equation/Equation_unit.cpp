@@ -9,12 +9,12 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(EquationTest, EqualityOperatorWorks) {
-    Equation equation1(Term(), "=", Term());
-    Equation equation2(7, ">", 8);
-    Equation equation3(7, ">", 8);
-    Equation equation4(7, ">", Monomial(1, {{"x", 1}}));
-    Equation equation5(Monomial(1, {{"x", 1}}), ">", 8);
-    Equation equation6(Monomial(1, {{"x", 1}}), ">=", 8);
+    Equation const equation1(Term(), "=", Term());
+    Equation const equation2(7, ">", 8);
+    Equation const equation3(7, ">", 8);
+    Equation const equation4(7, ">", Monomial(1, {{"x", 1}}));
+    Equation const equation5(Monomial(1, {{"x", 1}}), ">", 8);
+    Equation const equation6(Monomial(1, {{"x", 1}}), ">=", 8);
 
     EXPECT_TRUE(equation1 == equation1);
     EXPECT_FALSE(equation1 == equation2);
@@ -26,12 +26,12 @@ TEST(EquationTest, EqualityOperatorWorks) {
 }
 
 TEST(EquationTest, InequalityOperatorWorks) {
-    Equation equation1(Term(), "=", Term());
-    Equation equation2(7, ">", 8);
-    Equation equation3(7, ">", 8);
-    Equation equation4(7, ">", Monomial(1, {{"x", 1}}));
-    Equation equation5(Monomial(1, {{"x", 1}}), ">", 8);
-    Equation equation6(Monomial(1, {{"x", 1}}), ">=", 8);
+    Equation const equation1(Term(), "=", Term());
+    Equation const equation2(7, ">", 8);
+    Equation const equation3(7, ">", 8);
+    Equation const equation4(7, ">", Monomial(1, {{"x", 1}}));
+    Equation const equation5(Monomial(1, {{"x", 1}}), ">", 8);
+    Equation const equation6(Monomial(1, {{"x", 1}}), ">=", 8);
 
     EXPECT_FALSE(equation1 != equation1);
     EXPECT_TRUE(equation1 != equation2);
@@ -43,15 +43,15 @@ TEST(EquationTest, InequalityOperatorWorks) {
 }
 
 TEST(EquationTest, LessThanOperatorWorks) {
-    Equation equation1(Term(), "=", Term());
-    Equation equation2(7, "<", 17);
-    Equation equation3(7, "<", 17);
-    Equation equation4(7, "<", 16);
-    Equation equation5(7, "<", 18);
-    Equation equation6(6, "<", 17);
-    Equation equation7(8, "<", 17);
-    Equation equation8(7, "==", 17);
-    Equation equation9(7, ">", 17);
+    Equation const equation1(Term(), "=", Term());
+    Equation const equation2(7, "<", 17);
+    Equation const equation3(7, "<", 17);
+    Equation const equation4(7, "<", 16);
+    Equation const equation5(7, "<", 18);
+    Equation const equation6(6, "<", 17);
+    Equation const equation7(8, "<", 17);
+    Equation const equation8(7, "==", 17);
+    Equation const equation9(7, ">", 17);
 
     EXPECT_FALSE(equation1 < equation1);
     EXPECT_FALSE(equation2 < equation3);
@@ -64,24 +64,24 @@ TEST(EquationTest, LessThanOperatorWorks) {
 }
 
 TEST(EquationTest, OutputStreamOperatorWorks) {
-    Equation equation1(Term(), "=", Term());
-    Equation equation2(7, ">", 8);
+    Equation const equation1(Term(), "=", Term());
+    Equation const equation2(7, ">", 8);
 
     EXPECT_EQ("{EmptyTerm} = {EmptyTerm}", convertToString(equation1));
     EXPECT_EQ("7 > 8", convertToString(equation2));
 }
 
 TEST(EquationTest, GetEquationOperatorWorks) {
-    Equation equation1(Term(), "=", Term());
-    Equation equation2(7, ">", 8);
+    Equation const equation1(Term(), "=", Term());
+    Equation const equation2(7, ">", 8);
 
     EXPECT_EQ(EquationOperator("="), equation1.getEquationOperator());
     EXPECT_EQ(EquationOperator(">"), equation2.getEquationOperator());
 }
 
 TEST(EquationTest, EquationsAreConstructedCorrectly) {
-    Equation equation1(Term(), "=", Term());
-    Equation equation2(7, ">", 8);
+    Equation const equation1(Term(), "=", Term());
+    Equation const equation2(7, ">", 8);
 
     EXPECT_EQ(EquationOperator("="), equation1.getEquationOperator());
     EXPECT_TRUE(equation1.getLeftHandTerm().isEmpty());
@@ -102,8 +102,8 @@ TEST(EquationTest, SimplifyWorks) {
 }
 
 TEST(EquationTest, GetLeftHandTermWorks) {
-    Equation equation1(Term(), "=", Term());
-    Equation equation2(7, ">", 8);
+    Equation const equation1(Term(), "=", Term());
+    Equation const equation2(7, ">", 8);
 
     EXPECT_TRUE(equation1.getLeftHandTerm().isEmpty());
     EXPECT_EQ(Term(7), equation2.getLeftHandTerm());
@@ -118,8 +118,8 @@ TEST(EquationTest, GetLeftHandTermReferenceWorks) {
 }
 
 TEST(EquationTest, GetRightHandTermWorks) {
-    Equation equation1(Term(), "=", Term());
-    Equation equation2(7, ">", 8);
+    Equation const equation1(Term(), "=", Term());
+    Equation const equation2(7, ">", 8);
 
     EXPECT_TRUE(equation1.getRightHandTerm().isEmpty());
     EXPECT_EQ(Term(8), equation2.getRightHandTerm());
@@ -134,16 +134,16 @@ TEST(EquationTest, GetRightHandTermReferenceWorks) {
 }
 
 TEST(EquationTest, IsEmptyWorks) {
-    Equation equation1;
-    Equation equation2(7, "=", 8);
+    Equation const equation1;
+    Equation const equation2(7, "=", 8);
 
     EXPECT_TRUE(equation1.isEmpty());
     EXPECT_FALSE(equation2.isEmpty());
 }
 
 TEST(EquationTest, IsEquationSatisfiedWorks) {
-    Equation equation1(7, "=", 7);
-    Equation equation2(7, "=", 8);
+    Equation const equation1(7, "=", 7);
+    Equation const equation2(7, "=", 8);
 
     EXPECT_TRUE(equation1.isEquationSatisfied());
     EXPECT_FALSE(equation2.isEquationSatisfied());

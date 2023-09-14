@@ -13,28 +13,28 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(DifferentiationTest, DifferentiateWorksForTerm) {
-    Differentiation differentiationForX("x");
-    Term constantTerm(5);
-    Term variableTerm("x");
-    Term monomialTerm(Monomial(1, {{"x", 8}}));
-    Term polynomialTerm(
+    Differentiation const differentiationForX("x");
+    Term const constantTerm(5);
+    Term const variableTerm("x");
+    Term const monomialTerm(Monomial(1, {{"x", 8}}));
+    Term const polynomialTerm(
         Polynomial{Monomial(7, {{"x", 4}}), Monomial(-2, {{"x", 3}}), Monomial(8, {{"x", 1}}), Monomial(5, {})});
-    Term expressionTerm(createExpressionIfPossible({cos("x")}));
-    Term functionTerm(sin("x"));
+    Term const expressionTerm(createExpressionIfPossible({cos("x")}));
+    Term const functionTerm(sin("x"));
 
-    Term termToVerify1(differentiationForX.differentiate(constantTerm));
-    Term termToVerify2(differentiationForX.differentiate(variableTerm));
-    Term termToVerify3(differentiationForX.differentiate(monomialTerm));
-    Term termToVerify4(differentiationForX.differentiate(polynomialTerm));
-    Term termToVerify5(differentiationForX.differentiate(expressionTerm));
-    Term termToVerify6(differentiationForX.differentiate(functionTerm));
+    Term const termToVerify1(differentiationForX.differentiate(constantTerm));
+    Term const termToVerify2(differentiationForX.differentiate(variableTerm));
+    Term const termToVerify3(differentiationForX.differentiate(monomialTerm));
+    Term const termToVerify4(differentiationForX.differentiate(polynomialTerm));
+    Term const termToVerify5(differentiationForX.differentiate(expressionTerm));
+    Term const termToVerify6(differentiationForX.differentiate(functionTerm));
 
-    Term termToExpect1(0);
-    Term termToExpect2(1);
-    Term termToExpect3(Monomial(8, {{"x", 7}}));
-    Term termToExpect4(Polynomial{Monomial(28, {{"x", 3}}), Monomial(-6, {{"x", 2}}), Monomial(8, {})});
-    Term termToExpect5(createExpressionIfPossible({-1, "*", sin("x")}));
-    Term termToExpect6(cos("x"));
+    Term const termToExpect1(0);
+    Term const termToExpect2(1);
+    Term const termToExpect3(Monomial(8, {{"x", 7}}));
+    Term const termToExpect4(Polynomial{Monomial(28, {{"x", 3}}), Monomial(-6, {{"x", 2}}), Monomial(8, {})});
+    Term const termToExpect5(createExpressionIfPossible({-1, "*", sin("x")}));
+    Term const termToExpect6(cos("x"));
     EXPECT_EQ(termToExpect1, termToVerify1);
     EXPECT_EQ(termToExpect2, termToVerify2);
     EXPECT_EQ(termToExpect3, termToVerify3);
@@ -44,35 +44,35 @@ TEST(DifferentiationTest, DifferentiateWorksForTerm) {
 }
 
 TEST(DifferentiationTest, DifferentiateWorksForConstant) {
-    Differentiation differentiationForX("x");
+    Differentiation const differentiationForX("x");
 
     EXPECT_EQ(Term(0), differentiationForX.differentiate(Constant(5)));
 }
 
 TEST(DifferentiationTest, DifferentiateWorksForVariable) {
-    Differentiation differentiationForXWithY("x", {"y"});
+    Differentiation const differentiationForXWithY("x", {"y"});
 
-    Term termToVerify1(differentiationForXWithY.differentiate(Variable("x")));
-    Term termToVerify2(differentiationForXWithY.differentiate(Variable("y")));
-    Term termToVerify3(differentiationForXWithY.differentiate(Variable("a")));
+    Term const termToVerify1(differentiationForXWithY.differentiate(Variable("x")));
+    Term const termToVerify2(differentiationForXWithY.differentiate(Variable("y")));
+    Term const termToVerify3(differentiationForXWithY.differentiate(Variable("a")));
 
-    Term termToExpect1(1);
-    Term termToExpect2(Variable("d[y]/d[x]"));
-    Term termToExpect3(0);
+    Term const termToExpect1(1);
+    Term const termToExpect2(Variable("d[y]/d[x]"));
+    Term const termToExpect3(0);
     EXPECT_EQ(termToExpect1, termToVerify1);
     EXPECT_EQ(termToExpect2, termToVerify2);
     EXPECT_EQ(termToExpect3, termToVerify3);
 }
 
 TEST(DifferentiationTest, DifferentiateWorksForMonomial) {
-    Differentiation differentiationForXWithY("x", {"y"});
+    Differentiation const differentiationForXWithY("x", {"y"});
 
-    Term termToVerify1(differentiationForXWithY.differentiate(Monomial(13, {})));
-    Term termToVerify2(
+    Term const termToVerify1(differentiationForXWithY.differentiate(Monomial(13, {})));
+    Term const termToVerify2(
         differentiationForXWithY.differentiate(Monomial(5, {{"d[y]/d[x]", 6}, {"x", 7}, {"y", 8}, {"z", 9}})));
 
-    Term termToExpect1(0);
-    Term termToExpect2(Polynomial(
+    Term const termToExpect1(0);
+    Term const termToExpect2(Polynomial(
         {Monomial(30, {{"d2[y]/d[x]2", 1}, {"d[y]/d[x]", 5}, {"x", 7}, {"y", 8}, {"z", 9}}),
          Monomial(35, {{"d[y]/d[x]", 6}, {"x", 6}, {"y", 8}, {"z", 9}}),
          Monomial(40, {{"d[y]/d[x]", 1}, {"x", 7}, {"y", 7}, {"z", 9}})}));
@@ -81,15 +81,15 @@ TEST(DifferentiationTest, DifferentiateWorksForMonomial) {
 }
 
 TEST(DifferentiationTest, DifferentiateWorksForPolynomial) {
-    Differentiation differentiationForXWithY("x", {"y"});
-    Polynomial polynomial1{Monomial(13, {})};
-    Polynomial polynomial2{Monomial(-1, {{"x", -2}, {"y", -3}}), Monomial(-4, {{"x", -5}, {"z", -6}})};
+    Differentiation const differentiationForXWithY("x", {"y"});
+    Polynomial const polynomial1{Monomial(13, {})};
+    Polynomial const polynomial2{Monomial(-1, {{"x", -2}, {"y", -3}}), Monomial(-4, {{"x", -5}, {"z", -6}})};
 
-    Term termToVerify1(differentiationForXWithY.differentiate(polynomial1));
-    Term termToVerify2(differentiationForXWithY.differentiate(polynomial2));
+    Term const termToVerify1(differentiationForXWithY.differentiate(polynomial1));
+    Term const termToVerify2(differentiationForXWithY.differentiate(polynomial2));
 
-    Term termToExpect1(0);
-    Term termToExpect2(Polynomial{
+    Term const termToExpect1(0);
+    Term const termToExpect2(Polynomial{
         Monomial(3, {{"d[y]/d[x]", 1}, {"x", -2}, {"y", -4}}), Monomial(2, {{"x", -3}, {"y", -3}}),
         Monomial(20, {{"x", -6}, {"z", -6}})});
     EXPECT_EQ(termToExpect1, termToVerify1);
@@ -97,31 +97,32 @@ TEST(DifferentiationTest, DifferentiateWorksForPolynomial) {
 }
 
 TEST(DifferentiationTest, DifferentiateWorksForExpression) {
-    Differentiation differentiationForX("x");
-    Expression expression01{createExpressionIfPossible({"x"})};
-    Expression expression02{createExpressionIfPossible({cos("x"), "^", 3})};
+    Differentiation const differentiationForX("x");
+    Expression const expression01{createExpressionIfPossible({"x"})};
+    Expression const expression02{createExpressionIfPossible({cos("x"), "^", 3})};
 
-    Term termToVerify1(differentiationForX.differentiate(expression01));
-    Term termToVerify2(differentiationForX.differentiate(expression02));
+    Term const termToVerify1(differentiationForX.differentiate(expression01));
+    Term const termToVerify2(differentiationForX.differentiate(expression02));
 
-    Term cosSquared{createExpressionIfPossible({cos("x"), "^", 2})};
-    Term termToExpect01(1);
-    Term termToExpect02(createExpressionIfPossible({-3, "*", cosSquared, "*", sin("x")}));
+    Term const cosSquared{createExpressionIfPossible({cos("x"), "^", 2})};
+    Term const termToExpect01(1);
+    Term const termToExpect02(createExpressionIfPossible({-3, "*", cosSquared, "*", sin("x")}));
     EXPECT_EQ(termToExpect01, termToVerify1);
     EXPECT_EQ(termToExpect02, termToVerify2);
 }
 
 TEST(DifferentiationTest, DifferentiateWorksForFunction) {
-    Differentiation differentiationForX("x");
+    Differentiation const differentiationForX("x");
 
     EXPECT_EQ(Term(cos("x")), differentiationForX.differentiate(sin("x")));
 }
 
 TEST(DifferentiationTest, DifferentiateWorksForEquation) {
-    Differentiation differentiationForXWithY("x", {"y"});
-    Term term1ForEquation1(Polynomial{Monomial(1, {{"x", 6}}), Monomial(-2, {{"x", 1}})});
-    Term term2ForEquation1(Polynomial{Monomial(3, {{"y", 6}}), Monomial(1, {{"y", 5}}), Monomial(-1, {{"y", 2}})});
-    Equation equation1(term1ForEquation1, "=", term2ForEquation1);
+    Differentiation const differentiationForXWithY("x", {"y"});
+    Term const term1ForEquation1(Polynomial{Monomial(1, {{"x", 6}}), Monomial(-2, {{"x", 1}})});
+    Term const term2ForEquation1(
+        Polynomial{Monomial(3, {{"y", 6}}), Monomial(1, {{"y", 5}}), Monomial(-1, {{"y", 2}})});
+    Equation const equation1(term1ForEquation1, "=", term2ForEquation1);
 
     EXPECT_EQ(
         "(18[d[y]/d[x]][y^5] + 5[d[y]/d[x]][y^4] + -6[x^5] + -2[d[y]/d[x]][y] + 2) = 0",
@@ -129,38 +130,38 @@ TEST(DifferentiationTest, DifferentiateWorksForEquation) {
 }
 
 TEST(DifferentiationTest, DifferentiateWorksOnOneOverPolynomial) {
-    Differentiation differentiationForX("x");
-    Term numerator(1);
-    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(2, {{"x", 1}}), Monomial(2, {})});
-    Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
+    Differentiation const differentiationForX("x");
+    Term const numerator(1);
+    Term const denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(2, {{"x", 1}}), Monomial(2, {})});
+    Term const termToTest(createExpressionIfPossible({numerator, "/", denominator}));
 
-    Term termToVerify(differentiationForX.differentiate(termToTest));
+    Term const termToVerify(differentiationForX.differentiate(termToTest));
 
-    Term expectedNumeratorPart(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
-    Term expectedNumerator(createExpressionIfPossible({-2, "*", expectedNumeratorPart}));
-    Term expectedDenominator(Polynomial{
+    Term const expectedNumeratorPart(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
+    Term const expectedNumerator(createExpressionIfPossible({-2, "*", expectedNumeratorPart}));
+    Term const expectedDenominator(Polynomial{
         Monomial(1, {{"x", 4}}), Monomial(4, {{"x", 3}}), Monomial(8, {{"x", 2}}), Monomial(8, {{"x", 1}}),
         Monomial(4, {})});
-    Term termToExpect(createExpressionIfPossible({expectedNumerator, "/", expectedDenominator}));
+    Term const termToExpect(createExpressionIfPossible({expectedNumerator, "/", expectedDenominator}));
     EXPECT_EQ(termToExpect, termToVerify);
 }
 
 TEST(DifferentiationTest, DifferentiateWorksWithTermRaiseToTerm) {
-    Differentiation differentiationForX("x");
-    Term termToTest1(createExpressionIfPossible({"n", "^", "n"}));
-    Term termToTest2(createExpressionIfPossible({"n", "^", "x"}));
-    Term termToTest3(createExpressionIfPossible({"x", "^", "n"}));
-    Term termToTest4(createExpressionIfPossible({"x", "^", "x"}));
+    Differentiation const differentiationForX("x");
+    Term const termToTest1(createExpressionIfPossible({"n", "^", "n"}));
+    Term const termToTest2(createExpressionIfPossible({"n", "^", "x"}));
+    Term const termToTest3(createExpressionIfPossible({"x", "^", "n"}));
+    Term const termToTest4(createExpressionIfPossible({"x", "^", "x"}));
 
-    Term termToVerify1(differentiationForX.differentiate(termToTest1));
-    Term termToVerify2(differentiationForX.differentiate(termToTest2));
-    Term termToVerify3(differentiationForX.differentiate(termToTest3));
-    Term termToVerify4(differentiationForX.differentiate(termToTest4));
+    Term const termToVerify1(differentiationForX.differentiate(termToTest1));
+    Term const termToVerify2(differentiationForX.differentiate(termToTest2));
+    Term const termToVerify3(differentiationForX.differentiate(termToTest3));
+    Term const termToVerify4(differentiationForX.differentiate(termToTest4));
 
-    Term termToExpect1(0);
-    Term termToExpect2(createExpressionIfPossible({"n", "^", "x", "*", ln("n")}));
-    Term exponentForTerm3(Polynomial{Monomial(1, {{"n", 1}}), Monomial(-1, {})});
-    Term termToExpect3(createExpressionIfPossible({"n", "*", "x", "^", exponentForTerm3}));
+    Term const termToExpect1(0);
+    Term const termToExpect2(createExpressionIfPossible({"n", "^", "x", "*", ln("n")}));
+    Term const exponentForTerm3(Polynomial{Monomial(1, {{"n", 1}}), Monomial(-1, {})});
+    Term const termToExpect3(createExpressionIfPossible({"n", "*", "x", "^", exponentForTerm3}));
     EXPECT_EQ(termToExpect1, termToVerify1);
     EXPECT_EQ(termToExpect2, termToVerify2);
     EXPECT_EQ(termToExpect3, termToVerify3);
@@ -168,100 +169,101 @@ TEST(DifferentiationTest, DifferentiateWorksWithTermRaiseToTerm) {
 }
 
 TEST(DifferentiationTest, DifferentiateWorksWithDivisionExpressionRaiseToAConstant) {
-    Differentiation differentiationForX("x");
-    Term subTerm1(createExpressionIfPossible({2, "/", Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {})}}));
-    Term termToTest(createExpressionIfPossible({subTerm1, "^", 5}));
+    Differentiation const differentiationForX("x");
+    Term const subTerm1(createExpressionIfPossible({2, "/", Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {})}}));
+    Term const termToTest(createExpressionIfPossible({subTerm1, "^", 5}));
 
-    Term termToVerify(differentiationForX.differentiate(termToTest));
+    Term const termToVerify(differentiationForX.differentiate(termToTest));
 
-    string stringToExpect("(-160/((1[x] + -1)^6))");
+    string const stringToExpect("(-160/((1[x] + -1)^6))");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
 TEST(DifferentiationTest, DifferentiateWorksWithChainRule) {
-    Differentiation differentiationForX("x");
-    Term termToTest(createExpressionIfPossible({sec(Monomial(2, {{"x", 2}})), "^", 4}));
+    Differentiation const differentiationForX("x");
+    Term const termToTest(createExpressionIfPossible({sec(Monomial(2, {{"x", 2}})), "^", 4}));
 
-    Term termToVerify(differentiationForX.differentiate(termToTest));
+    Term const termToVerify(differentiationForX.differentiate(termToTest));
 
-    string stringToExpect("(16[x]*(sec(2[x^2])^4)*tan(2[x^2]))");
+    string const stringToExpect("(16[x]*(sec(2[x^2])^4)*tan(2[x^2]))");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
 TEST(DifferentiationTest, DifferentiateWorksWithSquareRootOfAPolynomial) {
-    Differentiation differentiationForX("x");
-    Polynomial subPolynomial{Monomial(2, {{"x", 3}}), Monomial(-4, {{"x", 1}}), Monomial(5, {})};
-    Term termToTest(createExpressionIfPossible({subPolynomial, "^", AlbaNumber::createFraction(1, 2)}));
+    Differentiation const differentiationForX("x");
+    Polynomial const subPolynomial{Monomial(2, {{"x", 3}}), Monomial(-4, {{"x", 1}}), Monomial(5, {})};
+    Term const termToTest(createExpressionIfPossible({subPolynomial, "^", AlbaNumber::createFraction(1, 2)}));
 
-    Term termToVerify(differentiationForX.differentiate(termToTest));
+    Term const termToVerify(differentiationForX.differentiate(termToTest));
 
-    string stringToExpect("((3[x^2] + -2)/((2[x^3] + -4[x] + 5)^(1/2)))");
+    string const stringToExpect("((3[x^2] + -2)/((2[x^3] + -4[x] + 5)^(1/2)))");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
 TEST(DifferentiationTest, DifferentiateMultipleTimesWorksForTerm) {
-    Differentiation differentiationForX("x");
-    Term termToTest(Monomial(3, {{"x", 4}}));
+    Differentiation const differentiationForX("x");
+    Term const termToTest(Monomial(3, {{"x", 4}}));
 
-    Term termToVerify1(differentiationForX.differentiateMultipleTimes(termToTest, 0));
-    Term termToVerify2(differentiationForX.differentiateMultipleTimes(termToTest, 1));
-    Term termToVerify3(differentiationForX.differentiateMultipleTimes(termToTest, 2));
+    Term const termToVerify1(differentiationForX.differentiateMultipleTimes(termToTest, 0));
+    Term const termToVerify2(differentiationForX.differentiateMultipleTimes(termToTest, 1));
+    Term const termToVerify3(differentiationForX.differentiateMultipleTimes(termToTest, 2));
 
-    Term termToExpect1(Monomial(3, {{"x", 4}}));
-    Term termToExpect2(Monomial(12, {{"x", 3}}));
-    Term termToExpect3(Monomial(36, {{"x", 2}}));
+    Term const termToExpect1(Monomial(3, {{"x", 4}}));
+    Term const termToExpect2(Monomial(12, {{"x", 3}}));
+    Term const termToExpect3(Monomial(36, {{"x", 2}}));
     EXPECT_EQ(termToExpect1, termToVerify1);
     EXPECT_EQ(termToExpect2, termToVerify2);
     EXPECT_EQ(termToExpect3, termToVerify3);
 }
 
 TEST(DifferentiationTest, DifferentiateMultipleTimesWorksForEquation) {
-    Differentiation differentiationForX("x");
-    Equation equationToTest(Monomial(3, {{"x", 4}}), "=", Monomial(5, {{"x", 6}}));
+    Differentiation const differentiationForX("x");
+    Equation const equationToTest(Monomial(3, {{"x", 4}}), "=", Monomial(5, {{"x", 6}}));
 
-    Equation equationToVerify1(differentiationForX.differentiateMultipleTimes(equationToTest, 0));
-    Equation equationToVerify2(differentiationForX.differentiateMultipleTimes(equationToTest, 1));
-    Equation equationToVerify3(differentiationForX.differentiateMultipleTimes(equationToTest, 2));
+    Equation const equationToVerify1(differentiationForX.differentiateMultipleTimes(equationToTest, 0));
+    Equation const equationToVerify2(differentiationForX.differentiateMultipleTimes(equationToTest, 1));
+    Equation const equationToVerify3(differentiationForX.differentiateMultipleTimes(equationToTest, 2));
 
-    Equation equationToExpect1(Monomial(3, {{"x", 4}}), "=", Monomial(5, {{"x", 6}}));
-    Equation equationToExpect2(Polynomial{Monomial(5, {{"x", 5}}), Monomial(-2, {{"x", 3}})}, "=", 0);
-    Equation equationToExpect3(Polynomial{Monomial(25, {{"x", 4}}), Monomial(-6, {{"x", 2}})}, "=", 0);
+    Equation const equationToExpect1(Monomial(3, {{"x", 4}}), "=", Monomial(5, {{"x", 6}}));
+    Equation const equationToExpect2(Polynomial{Monomial(5, {{"x", 5}}), Monomial(-2, {{"x", 3}})}, "=", 0);
+    Equation const equationToExpect3(Polynomial{Monomial(25, {{"x", 4}}), Monomial(-6, {{"x", 2}})}, "=", 0);
     EXPECT_EQ(equationToExpect1, equationToVerify1);
     EXPECT_EQ(equationToExpect2, equationToVerify2);
     EXPECT_EQ(equationToExpect3, equationToVerify3);
 }
 
 TEST(DifferentiationTest, DifferentiateEquationWorks) {
-    Differentiation differentiationForXWithY("x", {"y"});
-    Term term1ForEquation1(Polynomial{Monomial(1, {{"x", 6}}), Monomial(-2, {{"x", 1}})});
-    Term term2ForEquation1(Polynomial{Monomial(3, {{"y", 6}}), Monomial(1, {{"y", 5}}), Monomial(-1, {{"y", 2}})});
-    Equation equation1(term1ForEquation1, "=", term2ForEquation1);
-    Term term1ForEquation2(Polynomial{Monomial(3, {{"x", 4}, {"y", 2}}), Monomial(-7, {{"x", 1}, {"y", 3}})});
-    Term term2ForEquation2(Polynomial{Monomial(4, {}), Monomial(8, {{"y", 1}})});
-    Equation equation2(term1ForEquation2, "=", term2ForEquation2);
+    Differentiation const differentiationForXWithY("x", {"y"});
+    Term const term1ForEquation1(Polynomial{Monomial(1, {{"x", 6}}), Monomial(-2, {{"x", 1}})});
+    Term const term2ForEquation1(
+        Polynomial{Monomial(3, {{"y", 6}}), Monomial(1, {{"y", 5}}), Monomial(-1, {{"y", 2}})});
+    Equation const equation1(term1ForEquation1, "=", term2ForEquation1);
+    Term const term1ForEquation2(Polynomial{Monomial(3, {{"x", 4}, {"y", 2}}), Monomial(-7, {{"x", 1}, {"y", 3}})});
+    Term const term2ForEquation2(Polynomial{Monomial(4, {}), Monomial(8, {{"y", 1}})});
+    Equation const equation2(term1ForEquation2, "=", term2ForEquation2);
 
-    Equation equationToVerify1(differentiationForXWithY.differentiateEquation(equation1));
-    Equation equationToVerify2(differentiationForXWithY.differentiateEquation(equation2));
+    Equation const equationToVerify1(differentiationForXWithY.differentiateEquation(equation1));
+    Equation const equationToVerify2(differentiationForXWithY.differentiateEquation(equation2));
 
-    string stringToExpect1("(18[d[y]/d[x]][y^5] + 5[d[y]/d[x]][y^4] + -6[x^5] + -2[d[y]/d[x]][y] + 2) = 0");
-    string stringToExpect2(
+    string const stringToExpect1("(18[d[y]/d[x]][y^5] + 5[d[y]/d[x]][y^4] + -6[x^5] + -2[d[y]/d[x]][y] + 2) = 0");
+    string const stringToExpect2(
         "(6[d[y]/d[x]][x^4][y] + 12[x^3][y^2] + -21[d[y]/d[x]][x][y^2] + -7[y^3] + -8[d[y]/d[x]]) = 0");
     EXPECT_EQ(stringToExpect1, convertToString(equationToVerify1));
     EXPECT_EQ(stringToExpect2, convertToString(equationToVerify2));
 }
 
 TEST(DifferentiationTest, DifferentiateVariableWorks) {
-    Differentiation differentiationForXWithY("x", {"y"});
+    Differentiation const differentiationForXWithY("x", {"y"});
 
-    Monomial monomialToVerify1(differentiationForXWithY.differentiateVariable(Variable("x")));
-    Monomial monomialToVerify2(differentiationForXWithY.differentiateVariable(Variable("y")));
-    Monomial monomialToVerify3(differentiationForXWithY.differentiateVariable(Variable("a")));
-    Monomial monomialToVerify4(differentiationForXWithY.differentiateVariable(Variable("d[y]/d[x]")));
+    Monomial const monomialToVerify1(differentiationForXWithY.differentiateVariable(Variable("x")));
+    Monomial const monomialToVerify2(differentiationForXWithY.differentiateVariable(Variable("y")));
+    Monomial const monomialToVerify3(differentiationForXWithY.differentiateVariable(Variable("a")));
+    Monomial const monomialToVerify4(differentiationForXWithY.differentiateVariable(Variable("d[y]/d[x]")));
 
-    Monomial monomialToExpect1(1, {});
-    Monomial monomialToExpect2(1, {{"d[y]/d[x]", 1}});
-    Monomial monomialToExpect3(0, {});
-    Monomial monomialToExpect4(1, {{"d2[y]/d[x]2", 1}});
+    Monomial const monomialToExpect1(1, {});
+    Monomial const monomialToExpect2(1, {{"d[y]/d[x]", 1}});
+    Monomial const monomialToExpect3(0, {});
+    Monomial const monomialToExpect4(1, {{"d2[y]/d[x]2", 1}});
     EXPECT_EQ(monomialToExpect1, monomialToVerify1);
     EXPECT_EQ(monomialToExpect2, monomialToVerify2);
     EXPECT_EQ(monomialToExpect3, monomialToVerify3);
@@ -269,22 +271,22 @@ TEST(DifferentiationTest, DifferentiateVariableWorks) {
 }
 
 TEST(DifferentiationTest, DifferentiateMonomialWorks) {
-    Differentiation differentiationForXWithY("x", {"y"});
+    Differentiation const differentiationForXWithY("x", {"y"});
 
-    Polynomial polynomialToVerify1(differentiationForXWithY.differentiateMonomial(Monomial(13, {})));
-    Polynomial polynomialToVerify2(differentiationForXWithY.differentiateMonomial(Monomial(13, {{"x", 0}})));
-    Polynomial polynomialToVerify3(differentiationForXWithY.differentiateMonomial(Monomial(1, {{"x", 8}})));
-    Polynomial polynomialToVerify4(differentiationForXWithY.differentiateMonomial(Monomial(3, {{"x", -5}})));
-    Polynomial polynomialToVerify5(differentiationForXWithY.differentiateMonomial(Monomial(3, {{"z", -5}})));
-    Polynomial polynomialToVerify6(
+    Polynomial const polynomialToVerify1(differentiationForXWithY.differentiateMonomial(Monomial(13, {})));
+    Polynomial const polynomialToVerify2(differentiationForXWithY.differentiateMonomial(Monomial(13, {{"x", 0}})));
+    Polynomial const polynomialToVerify3(differentiationForXWithY.differentiateMonomial(Monomial(1, {{"x", 8}})));
+    Polynomial const polynomialToVerify4(differentiationForXWithY.differentiateMonomial(Monomial(3, {{"x", -5}})));
+    Polynomial const polynomialToVerify5(differentiationForXWithY.differentiateMonomial(Monomial(3, {{"z", -5}})));
+    Polynomial const polynomialToVerify6(
         differentiationForXWithY.differentiateMonomial(Monomial(5, {{"d[y]/d[x]", 6}, {"x", 7}, {"y", 8}, {"z", 9}})));
 
-    Polynomial polynomialToExpect1;
-    Polynomial polynomialToExpect2;
-    Polynomial polynomialToExpect3{Monomial(8, {{"x", 7}})};
-    Polynomial polynomialToExpect4{Monomial(-15, {{"x", -6}})};
-    Polynomial polynomialToExpect5;
-    Polynomial polynomialToExpect6{
+    Polynomial const polynomialToExpect1;
+    Polynomial const polynomialToExpect2;
+    Polynomial const polynomialToExpect3{Monomial(8, {{"x", 7}})};
+    Polynomial const polynomialToExpect4{Monomial(-15, {{"x", -6}})};
+    Polynomial const polynomialToExpect5;
+    Polynomial const polynomialToExpect6{
         Monomial(30, {{"d2[y]/d[x]2", 1}, {"d[y]/d[x]", 5}, {"x", 7}, {"y", 8}, {"z", 9}}),
         Monomial(35, {{"d[y]/d[x]", 6}, {"x", 6}, {"y", 8}, {"z", 9}}),
         Monomial(40, {{"d[y]/d[x]", 1}, {"x", 7}, {"y", 7}, {"z", 9}})};
@@ -297,26 +299,28 @@ TEST(DifferentiationTest, DifferentiateMonomialWorks) {
 }
 
 TEST(DifferentiationTest, DifferentiatePolynomialWorks) {
-    Differentiation differentiationForXWithY("x", {"y"});
-    Polynomial polynomial1{Monomial(0, {})};
-    Polynomial polynomial2{Monomial(5, {{"x", 0}})};
-    Polynomial polynomial3{Monomial(7, {{"x", 4}}), Monomial(-2, {{"x", 3}}), Monomial(8, {{"x", 1}}), Monomial(5, {})};
-    Polynomial polynomial4{Monomial(-1, {{"x", -2}, {"y", -3}}), Monomial(-4, {{"x", -5}, {"z", -6}})};
-    Polynomial polynomial5{Monomial(1, {{"a", 2}}), Monomial(3, {{"b", 4}}), Monomial(5, {{"c", 6}}), Monomial(7, {})};
+    Differentiation const differentiationForXWithY("x", {"y"});
+    Polynomial const polynomial1{Monomial(0, {})};
+    Polynomial const polynomial2{Monomial(5, {{"x", 0}})};
+    Polynomial const polynomial3{
+        Monomial(7, {{"x", 4}}), Monomial(-2, {{"x", 3}}), Monomial(8, {{"x", 1}}), Monomial(5, {})};
+    Polynomial const polynomial4{Monomial(-1, {{"x", -2}, {"y", -3}}), Monomial(-4, {{"x", -5}, {"z", -6}})};
+    Polynomial const polynomial5{
+        Monomial(1, {{"a", 2}}), Monomial(3, {{"b", 4}}), Monomial(5, {{"c", 6}}), Monomial(7, {})};
 
-    Polynomial polynomialToVerify1(differentiationForXWithY.differentiatePolynomial(polynomial1));
-    Polynomial polynomialToVerify2(differentiationForXWithY.differentiatePolynomial(polynomial2));
-    Polynomial polynomialToVerify3(differentiationForXWithY.differentiatePolynomial(polynomial3));
-    Polynomial polynomialToVerify4(differentiationForXWithY.differentiatePolynomial(polynomial4));
-    Polynomial polynomialToVerify5(differentiationForXWithY.differentiatePolynomial(polynomial5));
+    Polynomial const polynomialToVerify1(differentiationForXWithY.differentiatePolynomial(polynomial1));
+    Polynomial const polynomialToVerify2(differentiationForXWithY.differentiatePolynomial(polynomial2));
+    Polynomial const polynomialToVerify3(differentiationForXWithY.differentiatePolynomial(polynomial3));
+    Polynomial const polynomialToVerify4(differentiationForXWithY.differentiatePolynomial(polynomial4));
+    Polynomial const polynomialToVerify5(differentiationForXWithY.differentiatePolynomial(polynomial5));
 
-    Polynomial polynomialToExpect1;
-    Polynomial polynomialToExpect2;
-    Polynomial polynomialToExpect3{Monomial(28, {{"x", 3}}), Monomial(-6, {{"x", 2}}), Monomial(8, {})};
-    Polynomial polynomialToExpect4{
+    Polynomial const polynomialToExpect1;
+    Polynomial const polynomialToExpect2;
+    Polynomial const polynomialToExpect3{Monomial(28, {{"x", 3}}), Monomial(-6, {{"x", 2}}), Monomial(8, {})};
+    Polynomial const polynomialToExpect4{
         Monomial(3, {{"d[y]/d[x]", 1}, {"x", -2}, {"y", -4}}), Monomial(2, {{"x", -3}, {"y", -3}}),
         Monomial(20, {{"x", -6}, {"z", -6}})};
-    Polynomial polynomialToExpect5;
+    Polynomial const polynomialToExpect5;
     EXPECT_EQ(polynomialToExpect1, polynomialToVerify1);
     EXPECT_EQ(polynomialToExpect2, polynomialToVerify2);
     EXPECT_EQ(polynomialToExpect3, polynomialToVerify3);
@@ -325,60 +329,60 @@ TEST(DifferentiationTest, DifferentiatePolynomialWorks) {
 }
 
 TEST(DifferentiationTest, DifferentiateWithDefiniteValueWorks) {
-    Differentiation differentiationForX("x");
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
+    Differentiation const differentiationForX("x");
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
 
-    Term termToVerify1(differentiationForX.differentiateWithDefiniteValue(termToTest1, 5));
-    Term termToVerify2(differentiationForX.differentiateWithDefiniteValue(termToTest2, 5));
-    Term termToVerify3(differentiationForX.differentiateWithDefiniteValue(termToTest3, 5));
+    Term const termToVerify1(differentiationForX.differentiateWithDefiniteValue(termToTest1, 5));
+    Term const termToVerify2(differentiationForX.differentiateWithDefiniteValue(termToTest2, 5));
+    Term const termToVerify3(differentiationForX.differentiateWithDefiniteValue(termToTest3, 5));
 
-    Term termToExpect1(1);
-    Term termToExpect2(10);
-    Term termToExpect3(75);
+    Term const termToExpect1(1);
+    Term const termToExpect2(10);
+    Term const termToExpect3(75);
     EXPECT_EQ(termToExpect1, termToVerify1);
     EXPECT_EQ(termToExpect2, termToVerify2);
     EXPECT_EQ(termToExpect3, termToVerify3);
 }
 
 TEST(DifferentiationTest, DifferentiateExpressionWorks) {
-    Differentiation differentiationForXWithY("x", {"y"});
-    Expression expression01{createExpressionIfPossible({"x"})};
-    Expression expression02{createExpressionIfPossible({cos("x")})};
-    Expression expression03{createExpressionIfPossible({cos("y")})};
-    Expression expression04{createExpressionIfPossible({sin("x"), "+", cos("x")})};
-    Expression expression05{createExpressionIfPossible({sin("x"), "-", cos("x")})};
-    Expression expression06{createExpressionIfPossible({sin("x"), "*", cos("x")})};
-    Expression expression07{createExpressionIfPossible({sin("x"), "/", cos("x")})};
-    Expression expression08{createExpressionIfPossible({cos("x"), "^", 3})};
-    Expression expression09{createExpressionIfPossible({3, "^", cos("x")})};
-    Expression expression10{createExpressionIfPossible({sin("x"), "^", cos("x")})};
+    Differentiation const differentiationForXWithY("x", {"y"});
+    Expression const expression01{createExpressionIfPossible({"x"})};
+    Expression const expression02{createExpressionIfPossible({cos("x")})};
+    Expression const expression03{createExpressionIfPossible({cos("y")})};
+    Expression const expression04{createExpressionIfPossible({sin("x"), "+", cos("x")})};
+    Expression const expression05{createExpressionIfPossible({sin("x"), "-", cos("x")})};
+    Expression const expression06{createExpressionIfPossible({sin("x"), "*", cos("x")})};
+    Expression const expression07{createExpressionIfPossible({sin("x"), "/", cos("x")})};
+    Expression const expression08{createExpressionIfPossible({cos("x"), "^", 3})};
+    Expression const expression09{createExpressionIfPossible({3, "^", cos("x")})};
+    Expression const expression10{createExpressionIfPossible({sin("x"), "^", cos("x")})};
 
-    Term expressionToVerify01(differentiationForXWithY.differentiateExpression(expression01));
-    Term expressionToVerify02(differentiationForXWithY.differentiateExpression(expression02));
-    Term expressionToVerify03(differentiationForXWithY.differentiateExpression(expression03));
-    Term expressionToVerify04(differentiationForXWithY.differentiateExpression(expression04));
-    Term expressionToVerify05(differentiationForXWithY.differentiateExpression(expression05));
-    Term expressionToVerify06(differentiationForXWithY.differentiateExpression(expression06));
-    Term expressionToVerify07(differentiationForXWithY.differentiateExpression(expression07));
-    Term expressionToVerify08(differentiationForXWithY.differentiateExpression(expression08));
-    Term expressionToVerify09(differentiationForXWithY.differentiateExpression(expression09));
-    Term expressionToVerify10(differentiationForXWithY.differentiateExpression(expression10));
+    Term const expressionToVerify01(differentiationForXWithY.differentiateExpression(expression01));
+    Term const expressionToVerify02(differentiationForXWithY.differentiateExpression(expression02));
+    Term const expressionToVerify03(differentiationForXWithY.differentiateExpression(expression03));
+    Term const expressionToVerify04(differentiationForXWithY.differentiateExpression(expression04));
+    Term const expressionToVerify05(differentiationForXWithY.differentiateExpression(expression05));
+    Term const expressionToVerify06(differentiationForXWithY.differentiateExpression(expression06));
+    Term const expressionToVerify07(differentiationForXWithY.differentiateExpression(expression07));
+    Term const expressionToVerify08(differentiationForXWithY.differentiateExpression(expression08));
+    Term const expressionToVerify09(differentiationForXWithY.differentiateExpression(expression09));
+    Term const expressionToVerify10(differentiationForXWithY.differentiateExpression(expression10));
 
-    Term sinSquared{createExpressionIfPossible({sin("x"), "^", 2})};
-    Term cosSquared{createExpressionIfPossible({cos("x"), "^", 2})};
-    Term termToExpect01(1);
-    Term termToExpect02(createExpressionIfPossible({-1, "*", sin("x")}));
-    Term termToExpect03(createExpressionIfPossible({Monomial(-1, {{"d[y]/d[x]", 1}}), "*", sin("y")}));
-    Term termToExpect04(createExpressionIfPossible({cos("x"), "-", sin("x")}));
-    Term termToExpect05(createExpressionIfPossible({cos("x"), "+", sin("x")}));
-    Term termToExpect06(createExpressionIfPossible({cosSquared, "-", sinSquared}));
-    Term expectedNumerator07(createExpressionIfPossible({cosSquared, "+", sinSquared}));
-    Term expectedDenominator07(createExpressionIfPossible({cosSquared}));
-    Term termToExpect07(createExpressionIfPossible({expectedNumerator07, "/", expectedDenominator07}));
-    Term termToExpect08(createExpressionIfPossible({-3, "*", cosSquared, "*", sin("x")}));
-    Term termToExpect09(createExpressionIfPossible({-1.09861228866811, "*", 3, "^", cos("x"), "*", sin("x")}));
+    Term const sinSquared{createExpressionIfPossible({sin("x"), "^", 2})};
+    Term const cosSquared{createExpressionIfPossible({cos("x"), "^", 2})};
+    Term const termToExpect01(1);
+    Term const termToExpect02(createExpressionIfPossible({-1, "*", sin("x")}));
+    Term const termToExpect03(createExpressionIfPossible({Monomial(-1, {{"d[y]/d[x]", 1}}), "*", sin("y")}));
+    Term const termToExpect04(createExpressionIfPossible({cos("x"), "-", sin("x")}));
+    Term const termToExpect05(createExpressionIfPossible({cos("x"), "+", sin("x")}));
+    Term const termToExpect06(createExpressionIfPossible({cosSquared, "-", sinSquared}));
+    Term const expectedNumerator07(createExpressionIfPossible({cosSquared, "+", sinSquared}));
+    Term const expectedDenominator07(createExpressionIfPossible({cosSquared}));
+    Term const termToExpect07(createExpressionIfPossible({expectedNumerator07, "/", expectedDenominator07}));
+    Term const termToExpect08(createExpressionIfPossible({-3, "*", cosSquared, "*", sin("x")}));
+    Term const termToExpect09(createExpressionIfPossible({-1.09861228866811, "*", 3, "^", cos("x"), "*", sin("x")}));
     EXPECT_EQ(termToExpect01, expressionToVerify01);
     EXPECT_EQ(termToExpect02, expressionToVerify02);
     EXPECT_EQ(termToExpect03, expressionToVerify03);
@@ -392,54 +396,54 @@ TEST(DifferentiationTest, DifferentiateExpressionWorks) {
 }
 
 TEST(DifferentiationTest, DifferentiateFunctionWorksWithFunctionsInCommonFunctionLibrary) {
-    Differentiation differentiationForXWithY("x", {"y"});
+    Differentiation const differentiationForXWithY("x", {"y"});
 
-    Term termToVerify01(differentiationForXWithY.differentiateFunction(abs("x")));
-    Term termToVerify02(differentiationForXWithY.differentiateFunction(ln("x")));
-    Term termToVerify03(differentiationForXWithY.differentiateFunction(log("x")));
-    Term termToVerify04(differentiationForXWithY.differentiateFunction(sin("x")));
-    Term termToVerify05(differentiationForXWithY.differentiateFunction(cos("x")));
-    Term termToVerify06(differentiationForXWithY.differentiateFunction(cos("y")));
-    Term termToVerify07(differentiationForXWithY.differentiateFunction(tan("x")));
-    Term termToVerify08(differentiationForXWithY.differentiateFunction(csc("x")));
-    Term termToVerify09(differentiationForXWithY.differentiateFunction(sec("x")));
-    Term termToVerify10(differentiationForXWithY.differentiateFunction(cot("x")));
-    Term termToVerify11(differentiationForXWithY.differentiateFunction(arcsin("x")));
-    Term termToVerify12(differentiationForXWithY.differentiateFunction(arccos("x")));
-    Term termToVerify13(differentiationForXWithY.differentiateFunction(arctan("x")));
-    Term termToVerify14(differentiationForXWithY.differentiateFunction(arccsc("x")));
-    Term termToVerify15(differentiationForXWithY.differentiateFunction(arcsec("x")));
-    Term termToVerify16(differentiationForXWithY.differentiateFunction(arccot("x")));
-    Term termToVerify17(differentiationForXWithY.differentiateFunction(sinh("x")));
-    Term termToVerify18(differentiationForXWithY.differentiateFunction(cosh("x")));
-    Term termToVerify19(differentiationForXWithY.differentiateFunction(tanh("x")));
-    Term termToVerify20(differentiationForXWithY.differentiateFunction(csch("x")));
-    Term termToVerify21(differentiationForXWithY.differentiateFunction(sech("x")));
-    Term termToVerify22(differentiationForXWithY.differentiateFunction(coth("x")));
+    Term const termToVerify01(differentiationForXWithY.differentiateFunction(abs("x")));
+    Term const termToVerify02(differentiationForXWithY.differentiateFunction(ln("x")));
+    Term const termToVerify03(differentiationForXWithY.differentiateFunction(log("x")));
+    Term const termToVerify04(differentiationForXWithY.differentiateFunction(sin("x")));
+    Term const termToVerify05(differentiationForXWithY.differentiateFunction(cos("x")));
+    Term const termToVerify06(differentiationForXWithY.differentiateFunction(cos("y")));
+    Term const termToVerify07(differentiationForXWithY.differentiateFunction(tan("x")));
+    Term const termToVerify08(differentiationForXWithY.differentiateFunction(csc("x")));
+    Term const termToVerify09(differentiationForXWithY.differentiateFunction(sec("x")));
+    Term const termToVerify10(differentiationForXWithY.differentiateFunction(cot("x")));
+    Term const termToVerify11(differentiationForXWithY.differentiateFunction(arcsin("x")));
+    Term const termToVerify12(differentiationForXWithY.differentiateFunction(arccos("x")));
+    Term const termToVerify13(differentiationForXWithY.differentiateFunction(arctan("x")));
+    Term const termToVerify14(differentiationForXWithY.differentiateFunction(arccsc("x")));
+    Term const termToVerify15(differentiationForXWithY.differentiateFunction(arcsec("x")));
+    Term const termToVerify16(differentiationForXWithY.differentiateFunction(arccot("x")));
+    Term const termToVerify17(differentiationForXWithY.differentiateFunction(sinh("x")));
+    Term const termToVerify18(differentiationForXWithY.differentiateFunction(cosh("x")));
+    Term const termToVerify19(differentiationForXWithY.differentiateFunction(tanh("x")));
+    Term const termToVerify20(differentiationForXWithY.differentiateFunction(csch("x")));
+    Term const termToVerify21(differentiationForXWithY.differentiateFunction(sech("x")));
+    Term const termToVerify22(differentiationForXWithY.differentiateFunction(coth("x")));
 
-    Term cscSquared(createExpressionIfPossible({csc("x"), "^", 2}));
-    Term termToExpect01(sgn("x"));
-    Term termToExpect02(Monomial(1, {{"x", -1}}));
-    Term termToExpect03(Monomial(2.302585092994046, {{"x", -1}}));
-    Term termToExpect04(cos("x"));
-    Term termToExpect05(createExpressionIfPossible({-1, "*", sin("x")}));
-    Term termToExpect06(createExpressionIfPossible({Monomial(-1, {{"d[y]/d[x]", 1}}), "*", sin("y")}));
-    Term termToExpect07(createExpressionIfPossible({sec("x"), "^", 2}));
-    Term termToExpect08(createExpressionIfPossible({-1, "*", cot("x"), "*", csc("x")}));
-    Term termToExpect09(createExpressionIfPossible({sec("x"), "*", tan("x")}));
-    Term termToExpect10(createExpressionIfPossible({-1, "*", cscSquared}));
-    string stringToExpect11("(1/((-1[x^2] + 1)^(1/2)))");
-    string stringToExpect12("(-1/((-1[x^2] + 1)^(1/2)))");
-    string stringToExpect13("(1/(1[x^2] + 1))");
-    string stringToExpect14("(-1/x/((1[x] + -1)^(1/2))/((1[x] + 1)^(1/2)))");
-    string stringToExpect15("(1/x/((1[x] + -1)^(1/2))/((1[x] + 1)^(1/2)))");
-    string stringToExpect16("(-1/(1[x^2] + 1))");
-    string stringToExpect17("cosh(x)");
-    string stringToExpect18("sinh(x)");
-    string stringToExpect19("(sech(x)^2)");
-    string stringToExpect20("(-1*coth(x)*csch(x))");
-    string stringToExpect21("(-1*sech(x)*tanh(x))");
-    string stringToExpect22("(-1*(csch(x)^2))");
+    Term const cscSquared(createExpressionIfPossible({csc("x"), "^", 2}));
+    Term const termToExpect01(sgn("x"));
+    Term const termToExpect02(Monomial(1, {{"x", -1}}));
+    Term const termToExpect03(Monomial(2.302585092994046, {{"x", -1}}));
+    Term const termToExpect04(cos("x"));
+    Term const termToExpect05(createExpressionIfPossible({-1, "*", sin("x")}));
+    Term const termToExpect06(createExpressionIfPossible({Monomial(-1, {{"d[y]/d[x]", 1}}), "*", sin("y")}));
+    Term const termToExpect07(createExpressionIfPossible({sec("x"), "^", 2}));
+    Term const termToExpect08(createExpressionIfPossible({-1, "*", cot("x"), "*", csc("x")}));
+    Term const termToExpect09(createExpressionIfPossible({sec("x"), "*", tan("x")}));
+    Term const termToExpect10(createExpressionIfPossible({-1, "*", cscSquared}));
+    string const stringToExpect11("(1/((-1[x^2] + 1)^(1/2)))");
+    string const stringToExpect12("(-1/((-1[x^2] + 1)^(1/2)))");
+    string const stringToExpect13("(1/(1[x^2] + 1))");
+    string const stringToExpect14("(-1/x/((1[x] + -1)^(1/2))/((1[x] + 1)^(1/2)))");
+    string const stringToExpect15("(1/x/((1[x] + -1)^(1/2))/((1[x] + 1)^(1/2)))");
+    string const stringToExpect16("(-1/(1[x^2] + 1))");
+    string const stringToExpect17("cosh(x)");
+    string const stringToExpect18("sinh(x)");
+    string const stringToExpect19("(sech(x)^2)");
+    string const stringToExpect20("(-1*coth(x)*csch(x))");
+    string const stringToExpect21("(-1*sech(x)*tanh(x))");
+    string const stringToExpect22("(-1*(csch(x)^2))");
     EXPECT_EQ(termToExpect01, termToVerify01);
     EXPECT_EQ(termToExpect02, termToVerify02);
     EXPECT_EQ(termToExpect03, termToVerify03);
@@ -465,39 +469,40 @@ TEST(DifferentiationTest, DifferentiateFunctionWorksWithFunctionsInCommonFunctio
 }
 
 TEST(DifferentiationTest, DifferentiateFunctionWorksWithChainRule) {
-    Differentiation differentiationForX("x");
-    Function functionToTest(sin(Monomial(10, {{"x", 8}})));
+    Differentiation const differentiationForX("x");
+    Function const functionToTest(sin(Monomial(10, {{"x", 8}})));
 
-    Term termToVerify(differentiationForX.differentiateFunction(functionToTest));
+    Term const termToVerify(differentiationForX.differentiateFunction(functionToTest));
 
-    Term termToExpect(createExpressionIfPossible({Monomial(80, {{"x", 7}}), "*", cos(Monomial(10, {{"x", 8}}))}));
+    Term const termToExpect(createExpressionIfPossible({Monomial(80, {{"x", 7}}), "*", cos(Monomial(10, {{"x", 8}}))}));
     EXPECT_EQ(termToExpect, termToVerify);
 }
 
 TEST(DifferentiationTest, DifferentiateTwoMultipliedTermsWorks) {
-    Differentiation differentiationForX("x");
-    Term term1(Polynomial{Monomial(2, {{"x", 2}}), Monomial(-4, {{"x", 1}})});
-    Term term2(Polynomial{Monomial(3, {{"x", 2}}), Monomial(7, {{"x", 1}})});
+    Differentiation const differentiationForX("x");
+    Term const term1(Polynomial{Monomial(2, {{"x", 2}}), Monomial(-4, {{"x", 1}})});
+    Term const term2(Polynomial{Monomial(3, {{"x", 2}}), Monomial(7, {{"x", 1}})});
 
-    Term termToVerify(differentiationForX.differentiateTwoMultipliedTerms(term1, term2));
+    Term const termToVerify(differentiationForX.differentiateTwoMultipliedTerms(term1, term2));
 
-    string stringToExpect("(((2[x^2] + -4[x])*(6[x] + 7))+((3[x^2] + 7[x])*(4[x] + -4)))");
+    string const stringToExpect("(((2[x^2] + -4[x])*(6[x] + 7))+((3[x^2] + 7[x])*(4[x] + -4)))");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
 TEST(DifferentiationTest, DifferentiateTwoDividedTermsWorks) {
-    Differentiation differentiationForX("x");
-    Term numerator(Polynomial{Monomial(2, {{"x", 3}}), Monomial(4, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {{"x", 1}}), Monomial(1, {})});
+    Differentiation const differentiationForX("x");
+    Term const numerator(Polynomial{Monomial(2, {{"x", 3}}), Monomial(4, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {{"x", 1}}), Monomial(1, {})});
 
-    Term termToVerify(differentiationForX.differentiateTwoDividedTerms(numerator, denominator));
+    Term const termToVerify(differentiationForX.differentiateTwoDividedTerms(numerator, denominator));
 
-    string stringToExpect("((((1[x^2] + -4[x] + 1)*6[x^2])-((2[x^3] + 4)*(2[x] + -4)))/((1[x^2] + -4[x] + 1)^2))");
+    string const stringToExpect(
+        "((((1[x^2] + -4[x] + 1)*6[x^2])-((2[x^3] + 4)*(2[x] + -4)))/((1[x^2] + -4[x] + 1)^2))");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
 TEST(DifferentiationTest, DifferentiateConstantWorks) {
-    Differentiation differentiationForX("x");
+    Differentiation const differentiationForX("x");
 
     EXPECT_EQ(AlbaNumber(0), differentiationForX.differentiateConstant(Constant(5)));
 }

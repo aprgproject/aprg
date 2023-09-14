@@ -27,7 +27,7 @@ Equation SubstitutionOfVariablesToTerms::performSubstitutionTo(Equation const& e
 
 Expression SubstitutionOfVariablesToTerms::performSubstitutionForMonomial(Monomial const& monomial) const {
     Monomial remainingMonomial(createMonomialFromNumber(monomial.getCoefficient()));
-    Monomial::VariablesToExponentsMap const previousVariableExponentMap(monomial.getVariablesToExponentsMap());
+    Monomial::VariablesToExponentsMap const& previousVariableExponentMap(monomial.getVariablesToExponentsMap());
     Expression substitutedExpressions;
     for (auto const& [variableName, exponent] : previousVariableExponentMap) {
         if (isVariableFound(variableName)) {

@@ -14,7 +14,7 @@ TEST(FactorizationConfigurationTest, SomeConditionWorksAndCanBeChangedAndChanged
     {
         ConfigurationDetails configurationDetails(getDefaultConfigurationDetails<ConfigurationDetails>());
         configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
-        ScopeObject scopeObject;
+        ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         EXPECT_TRUE(shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue());

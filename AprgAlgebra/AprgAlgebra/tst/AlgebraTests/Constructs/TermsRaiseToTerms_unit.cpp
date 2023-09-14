@@ -10,8 +10,8 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(TermsRaiseToTermsTest, ConstructionWorks) {
-    TermsRaiseToTerms termsRaiseToTerms1;
-    TermsRaiseToTerms termsRaiseToTerms2({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToTerms const termsRaiseToTerms1;
+    TermsRaiseToTerms const termsRaiseToTerms2({{"x", 1}, {"y", -2}, {"z", 3}});
 
     EXPECT_TRUE(termsRaiseToTerms1.getBaseToExponentMap().empty());
     TermsRaiseToTerms::BaseToExponentMap const& mapToVerify(termsRaiseToTerms2.getBaseToExponentMap());
@@ -28,7 +28,7 @@ TEST(TermsRaiseToTermsTest, ConstructionWorks) {
 }
 
 TEST(TermsRaiseToTermsTest, GetBaseToExponentMapWorks) {
-    TermsRaiseToTerms termsRaiseToTerms({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToTerms const termsRaiseToTerms({{"x", 1}, {"y", -2}, {"z", 3}});
 
     TermsRaiseToTerms::BaseToExponentMap const& mapToVerify(termsRaiseToTerms.getBaseToExponentMap());
 
@@ -45,7 +45,7 @@ TEST(TermsRaiseToTermsTest, GetBaseToExponentMapWorks) {
 }
 
 TEST(TermsRaiseToTermsTest, GetExponentOfBaseWorks) {
-    TermsRaiseToTerms termsRaiseToTerms({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToTerms const termsRaiseToTerms({{"x", 1}, {"y", -2}, {"z", 3}});
 
     EXPECT_EQ(Term(1), termsRaiseToTerms.getExponentOfBase("x"));
     EXPECT_EQ(Term(-2), termsRaiseToTerms.getExponentOfBase("y"));
@@ -54,13 +54,13 @@ TEST(TermsRaiseToTermsTest, GetExponentOfBaseWorks) {
 }
 
 TEST(TermsRaiseToTermsTest, GetTermsInMultiplicationOperationWorks) {
-    TermsRaiseToTerms termsRaiseToTerms({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToTerms const termsRaiseToTerms({{"x", 1}, {"y", -2}, {"z", 3}});
 
     Terms const termsToVerify(termsRaiseToTerms.getTermsInMultiplicationOperation());
 
-    Term expectedTerm1("x");
-    Term expectedTerm2(Monomial(1, {{"y", -2}}));
-    Term expectedTerm3(Monomial(1, {{"z", 3}}));
+    Term const expectedTerm1("x");
+    Term const expectedTerm2(Monomial(1, {{"y", -2}}));
+    Term const expectedTerm3(Monomial(1, {{"z", 3}}));
     ASSERT_EQ(3U, termsToVerify.size());
     EXPECT_EQ(expectedTerm1, termsToVerify[0]);
     EXPECT_EQ(expectedTerm2, termsToVerify[1]);
@@ -68,16 +68,16 @@ TEST(TermsRaiseToTermsTest, GetTermsInMultiplicationOperationWorks) {
 }
 
 TEST(TermsRaiseToTermsTest, GetTermWithDetailsInMultiplicationAndDivisionOperationWorks) {
-    TermsRaiseToTerms termsRaiseToTerms({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToTerms const termsRaiseToTerms({{"x", 1}, {"y", -2}, {"z", 3}});
 
     TermsWithDetails const termsToVerify(termsRaiseToTerms.getTermWithDetailsInMultiplicationAndDivisionOperation());
 
-    Term expectedTerm1("x");
-    TermWithDetails expectedTermWithDetails1({expectedTerm1, TermAssociationType::Positive});
-    Term expectedTerm2(Monomial(1, {{"y", 2}}));
-    TermWithDetails expectedTermWithDetails2({expectedTerm2, TermAssociationType::Negative});
-    Term expectedTerm3(Monomial(1, {{"z", 3}}));
-    TermWithDetails expectedTermWithDetails3({expectedTerm3, TermAssociationType::Positive});
+    Term const expectedTerm1("x");
+    TermWithDetails const expectedTermWithDetails1({expectedTerm1, TermAssociationType::Positive});
+    Term const expectedTerm2(Monomial(1, {{"y", 2}}));
+    TermWithDetails const expectedTermWithDetails2({expectedTerm2, TermAssociationType::Negative});
+    Term const expectedTerm3(Monomial(1, {{"z", 3}}));
+    TermWithDetails const expectedTermWithDetails3({expectedTerm3, TermAssociationType::Positive});
     ASSERT_EQ(3U, termsToVerify.size());
     EXPECT_EQ(expectedTermWithDetails1, termsToVerify[0]);
     EXPECT_EQ(expectedTermWithDetails2, termsToVerify[1]);
@@ -85,7 +85,7 @@ TEST(TermsRaiseToTermsTest, GetTermWithDetailsInMultiplicationAndDivisionOperati
 }
 
 TEST(TermsRaiseToTermsTest, AddExponentsWorks) {
-    TermsRaiseToTerms termsRaiseToTermsToAdd({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToTerms const termsRaiseToTermsToAdd({{"x", 1}, {"y", -2}, {"z", 3}});
     TermsRaiseToTerms termsRaiseToTerms({{"x", 4}, {"y", -5}, {"z", 6}});
 
     termsRaiseToTerms.addExponents(termsRaiseToTermsToAdd);
@@ -105,7 +105,7 @@ TEST(TermsRaiseToTermsTest, AddExponentsWorks) {
 
 TEST(TermsRaiseToTermsTest, SubtractExponentsWorks) {
     TermsRaiseToTerms termsRaiseToTerms({{"x", 4}, {"y", -5}, {"z", 6}});
-    TermsRaiseToTerms termsRaiseToTermsToSubtract({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToTerms const termsRaiseToTermsToSubtract({{"x", 1}, {"y", -2}, {"z", 3}});
 
     termsRaiseToTerms.subtractExponents(termsRaiseToTermsToSubtract);
 
@@ -142,9 +142,9 @@ TEST(TermsRaiseToTermsTest, MultiplyNumberToExponentsWorks) {
 
 TEST(TermsRaiseToTermsTest, PutTermWorksOnMonomial) {
     TermsRaiseToTerms termsRaiseToTerms({{"x", 1}, {"y", -2}, {"z", 3}});
-    Term termWithPositive(Monomial(5, {{"x", 6}}));
-    Term termWithNegative(Monomial(7, {{"y", 8}}));
-    Term termWithHaveNoEffect(Monomial(1, {{"z", 0}}));
+    Term const termWithPositive(Monomial(5, {{"x", 6}}));
+    Term const termWithNegative(Monomial(7, {{"y", 8}}));
+    Term const termWithHaveNoEffect(Monomial(1, {{"z", 0}}));
 
     termsRaiseToTerms.putTerm(termWithPositive, TermAssociationType::Positive);
     termsRaiseToTerms.putTerm(termWithNegative, TermAssociationType::Negative);
@@ -171,8 +171,8 @@ TEST(TermsRaiseToTermsTest, PutTermWorksOnMonomial) {
 
 TEST(TermsRaiseToTermsTest, PutTermWorksOnOtherTermTypes) {
     TermsRaiseToTerms termsRaiseToTerms({{cos("x"), 1}, {sin("x"), -2}, {tan("x"), 3}});
-    Term termWithPositive(createExpressionIfPossible({cos("x"), "^", 6}));
-    Term termWithNegative(createExpressionIfPossible({sin("x"), "^", 8}));
+    Term const termWithPositive(createExpressionIfPossible({cos("x"), "^", 6}));
+    Term const termWithNegative(createExpressionIfPossible({sin("x"), "^", 8}));
 
     termsRaiseToTerms.putTerm(termWithPositive, TermAssociationType::Positive);
     termsRaiseToTerms.putTerm(termWithNegative, TermAssociationType::Negative);

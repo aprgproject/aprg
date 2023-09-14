@@ -7,7 +7,7 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(DerivativeVariableNameTest, ConstructionUsingParameterWorks) {
-    DerivativeVariableName derivativeVariableName(2, "x", "y");
+    DerivativeVariableName const derivativeVariableName(2, "x", "y");
 
     EXPECT_TRUE(derivativeVariableName.isValid());
     EXPECT_EQ(2, derivativeVariableName.getDifferentiationLevel());
@@ -16,7 +16,7 @@ TEST(DerivativeVariableNameTest, ConstructionUsingParameterWorks) {
 }
 
 TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorksWithOneCharacterVariables) {
-    DerivativeVariableName derivativeVariableName("d[y]/d[x]");
+    DerivativeVariableName const derivativeVariableName("d[y]/d[x]");
 
     EXPECT_TRUE(derivativeVariableName.isValid());
     EXPECT_EQ(1, derivativeVariableName.getDifferentiationLevel());
@@ -25,7 +25,7 @@ TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorks
 }
 
 TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorksWithMultipleCharacterVariables) {
-    DerivativeVariableName derivativeVariableName("d[distance]/d[time]");
+    DerivativeVariableName const derivativeVariableName("d[distance]/d[time]");
 
     EXPECT_TRUE(derivativeVariableName.isValid());
     EXPECT_EQ(1, derivativeVariableName.getDifferentiationLevel());
@@ -36,7 +36,7 @@ TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorks
 TEST(
     DerivativeVariableNameTest,
     ConstructionUsingLeibnizNotationExpressionWorksWithOneCharacterVariablesAndMultipleNumbers) {
-    DerivativeVariableName derivativeVariableName("d32[y]/d[x]32");
+    DerivativeVariableName const derivativeVariableName("d32[y]/d[x]32");
 
     EXPECT_TRUE(derivativeVariableName.isValid());
     EXPECT_EQ(32, derivativeVariableName.getDifferentiationLevel());
@@ -47,7 +47,7 @@ TEST(
 TEST(
     DerivativeVariableNameTest,
     ConstructionUsingLeibnizNotationExpressionWorksWithMultipleCharacterVariablesAndMultipleNumbers) {
-    DerivativeVariableName derivativeVariableName("d175[distance]/d[time]175");
+    DerivativeVariableName const derivativeVariableName("d175[distance]/d[time]175");
 
     EXPECT_TRUE(derivativeVariableName.isValid());
     EXPECT_EQ(175, derivativeVariableName.getDifferentiationLevel());
@@ -56,25 +56,25 @@ TEST(
 }
 
 TEST(DerivativeVariableNameTest, GetNameInLeibnizNotationWorksWhenDifferentiationLevelIsOne) {
-    DerivativeVariableName derivativeVariableName(1, "time", "volume");
+    DerivativeVariableName const derivativeVariableName(1, "time", "volume");
 
     EXPECT_EQ("d[volume]/d[time]", derivativeVariableName.getNameInLeibnizNotation());
 }
 
 TEST(DerivativeVariableNameTest, GetNameInLeibnizNotationWorksWhenDifferentiationLevelIsNotOne) {
-    DerivativeVariableName derivativeVariableName(46, "time", "volume");
+    DerivativeVariableName const derivativeVariableName(46, "time", "volume");
 
     EXPECT_EQ("d46[volume]/d[time]46", derivativeVariableName.getNameInLeibnizNotation());
 }
 
 TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorksWithInvalidFormatResultsToInvalid) {
-    DerivativeVariableName derivativeVariableName("oisuadhfh");
+    DerivativeVariableName const derivativeVariableName("oisuadhfh");
 
     EXPECT_FALSE(derivativeVariableName.isValid());
 }
 
 TEST(DerivativeVariableNameTest, ConstructionUsingLeibnizNotationExpressionWorksWithNotEqualNumbersResultsToInvalid) {
-    DerivativeVariableName derivativeVariableName("d175[distance]/d[time]471");
+    DerivativeVariableName const derivativeVariableName("d175[distance]/d[time]471");
 
     EXPECT_FALSE(derivativeVariableName.isValid());
 }

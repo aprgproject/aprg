@@ -12,19 +12,19 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(AdditionAndSubtractionOfExpressionsTest, DefaultConstructionWorks) {
-    AdditionAndSubtractionOfExpressions additionAndSubtraction;
+    AdditionAndSubtractionOfExpressions const additionAndSubtraction;
 
     EXPECT_TRUE(additionAndSubtraction.getExpressions().empty());
     EXPECT_TRUE(additionAndSubtraction.getAssociations().empty());
 }
 
 TEST(AdditionAndSubtractionOfExpressionsTest, TermsWithDetailsConstructionWorks) {
-    Expression expression1(createExpressionIfPossible({"x"}));
-    Expression expression2(createExpressionIfPossible({"y"}));
-    TermWithDetails termWithDetails1(Term(expression1), TermAssociationType::Negative);
-    TermWithDetails termWithDetails2(Term(expression2), TermAssociationType::Positive);
-    TermsWithDetails termsWithDetails{termWithDetails1, termWithDetails2};
-    AdditionAndSubtractionOfExpressions additionAndSubtraction(termsWithDetails);
+    Expression const expression1(createExpressionIfPossible({"x"}));
+    Expression const expression2(createExpressionIfPossible({"y"}));
+    TermWithDetails const termWithDetails1(Term(expression1), TermAssociationType::Negative);
+    TermWithDetails const termWithDetails2(Term(expression2), TermAssociationType::Positive);
+    TermsWithDetails const termsWithDetails{termWithDetails1, termWithDetails2};
+    AdditionAndSubtractionOfExpressions const additionAndSubtraction(termsWithDetails);
 
     Expressions const& expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(2U, expressions.size());
@@ -38,7 +38,7 @@ TEST(AdditionAndSubtractionOfExpressionsTest, TermsWithDetailsConstructionWorks)
 
 TEST(AdditionAndSubtractionOfExpressionsTest, PutAsAdditionWorks) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression(createExpressionIfPossible({"x"}));
+    Expression const expression(createExpressionIfPossible({"x"}));
 
     additionAndSubtraction.putAsAddition(expression);
 
@@ -54,17 +54,17 @@ TEST(
     AdditionAndSubtractionOfExpressionsTest,
     CombineExpressionIfPossibleWorksOnAddingAndSubtractingRaiseToPowerExpressions) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression1(createExpressionIfPossible({5, "*", "y", "^", "y"}));
-    Expression expression2(createExpressionIfPossible({"y", "^", "y"}));
-    Expression expression3(createExpressionIfPossible({3, "*", "y", "^", "y"}));
+    Expression const expression1(createExpressionIfPossible({5, "*", "y", "^", "y"}));
+    Expression const expression2(createExpressionIfPossible({"y", "^", "y"}));
+    Expression const expression3(createExpressionIfPossible({3, "*", "y", "^", "y"}));
     additionAndSubtraction.putAsAddition(expression1);
     additionAndSubtraction.putAsAddition(expression2);
     additionAndSubtraction.putAsSubtraction(expression3);
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
-    Expression subExpression(createExpressionIfPossible({"y", "^", "y"}));
-    Expression expressionToExpect(createExpressionIfPossible({3, "*", subExpression}));
+    Expression const subExpression(createExpressionIfPossible({"y", "^", "y"}));
+    Expression const expressionToExpect(createExpressionIfPossible({3, "*", subExpression}));
     Expressions const& expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(1U, expressions.size());
     EXPECT_EQ(expressionToExpect, expressions[0]);
@@ -77,12 +77,12 @@ TEST(
     AdditionAndSubtractionOfExpressionsTest,
     CombineExpressionIfPossibleWorksOnAddingAndSubtractingMultipleRaiseToPowerExpressions) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression1(createExpressionIfPossible({"x", "^", "y"}));
-    Expression expression2(createExpressionIfPossible({2, "*", "y", "^", "y"}));
-    Expression expression3(createExpressionIfPossible({3, "*", "x", "^", "y"}));
-    Expression expression4(createExpressionIfPossible({"y", "^", "y"}));
-    Expression expression5(createExpressionIfPossible({4, "*", "x", "^", "y"}));
-    Expression expression6(createExpressionIfPossible({5, "*", "y", "^", "y"}));
+    Expression const expression1(createExpressionIfPossible({"x", "^", "y"}));
+    Expression const expression2(createExpressionIfPossible({2, "*", "y", "^", "y"}));
+    Expression const expression3(createExpressionIfPossible({3, "*", "x", "^", "y"}));
+    Expression const expression4(createExpressionIfPossible({"y", "^", "y"}));
+    Expression const expression5(createExpressionIfPossible({4, "*", "x", "^", "y"}));
+    Expression const expression6(createExpressionIfPossible({5, "*", "y", "^", "y"}));
     additionAndSubtraction.putAsAddition(expression1);
     additionAndSubtraction.putAsSubtraction(expression2);
     additionAndSubtraction.putAsSubtraction(expression3);
@@ -92,10 +92,10 @@ TEST(
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
-    Expression subExpression1(createExpressionIfPossible({"x", "^", "y"}));
-    Expression subExpression2(createExpressionIfPossible({"y", "^", "y"}));
-    Expression expressionToExpect1(createExpressionIfPossible({2, "*", subExpression1}));
-    Expression expressionToExpect2(createExpressionIfPossible({4, "*", subExpression2}));
+    Expression const subExpression1(createExpressionIfPossible({"x", "^", "y"}));
+    Expression const subExpression2(createExpressionIfPossible({"y", "^", "y"}));
+    Expression const expressionToExpect1(createExpressionIfPossible({2, "*", subExpression1}));
+    Expression const expressionToExpect2(createExpressionIfPossible({4, "*", subExpression2}));
     Expressions const& expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(2U, expressions.size());
     EXPECT_EQ(expressionToExpect1, expressions[0]);
@@ -110,17 +110,17 @@ TEST(
     AdditionAndSubtractionOfExpressionsTest,
     CombineExpressionIfPossibleWorksOnAddingAndSubtractingNonSortedRaiseToPowerExpressions) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression1(createExpressionIfPossible({100, "*", "y", "^", "y", "*", "x", "^", "x"}));
-    Expression expression2(createExpressionIfPossible({10, "*", "x", "^", "x", "*", "y", "^", "y"}));
+    Expression const expression1(createExpressionIfPossible({100, "*", "y", "^", "y", "*", "x", "^", "x"}));
+    Expression const expression2(createExpressionIfPossible({10, "*", "x", "^", "x", "*", "y", "^", "y"}));
     additionAndSubtraction.putAsAddition(expression1);
     additionAndSubtraction.putAsSubtraction(expression2);
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
-    Expression subExpression1(createExpressionIfPossible({"x", "^", "x"}));
-    Expression subExpression2(createExpressionIfPossible({"y", "^", "y"}));
-    Expression subExpression3(createExpressionIfPossible({subExpression1, "*", subExpression2}));
-    Expression expressionToExpect(createExpressionIfPossible({90, "*", subExpression3}));
+    Expression const subExpression1(createExpressionIfPossible({"x", "^", "x"}));
+    Expression const subExpression2(createExpressionIfPossible({"y", "^", "y"}));
+    Expression const subExpression3(createExpressionIfPossible({subExpression1, "*", subExpression2}));
+    Expression const expressionToExpect(createExpressionIfPossible({90, "*", subExpression3}));
     Expressions const& expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(1U, expressions.size());
     EXPECT_EQ(expressionToExpect, expressions[0]);
@@ -133,10 +133,10 @@ TEST(
     AdditionAndSubtractionOfExpressionsTest,
     CombineExpressionIfPossibleWorksOnAddingAndSubtractingRaiseToPowerExpressionsThatCannotBeAdded) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression1(createExpressionIfPossible({10, "*", "y", "^", "y"}));
-    Expression expression2(createExpressionIfPossible({"x", "*", "y", "^", "y"}));
-    Expression expression3(createExpressionIfPossible({8, "*", "y", "^", "y"}));
-    Expression expression4(createExpressionIfPossible({6, "*", "x", "*", "y", "^", "y"}));
+    Expression const expression1(createExpressionIfPossible({10, "*", "y", "^", "y"}));
+    Expression const expression2(createExpressionIfPossible({"x", "*", "y", "^", "y"}));
+    Expression const expression3(createExpressionIfPossible({8, "*", "y", "^", "y"}));
+    Expression const expression4(createExpressionIfPossible({6, "*", "x", "*", "y", "^", "y"}));
     additionAndSubtraction.putAsAddition(expression1);
     additionAndSubtraction.putAsAddition(expression2);
     additionAndSubtraction.putAsSubtraction(expression3);
@@ -144,9 +144,9 @@ TEST(
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
-    Expression subExpression1(createExpressionIfPossible({"y", "^", "y"}));
-    Expression expressionToExpect1(createExpressionIfPossible({2, "*", subExpression1}));
-    Expression expressionToExpect2(createExpressionIfPossible({Monomial(-5, {{"x", 1}}), "*", subExpression1}));
+    Expression const subExpression1(createExpressionIfPossible({"y", "^", "y"}));
+    Expression const expressionToExpect1(createExpressionIfPossible({2, "*", subExpression1}));
+    Expression const expressionToExpect2(createExpressionIfPossible({Monomial(-5, {{"x", 1}}), "*", subExpression1}));
     Expressions const& expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(2U, expressions.size());
     EXPECT_EQ(expressionToExpect1, expressions[0]);
@@ -158,11 +158,11 @@ TEST(
 }
 
 TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWithEToTheXWithTrigonometricExpressions) {
-    Term eToTheX(createExpressionIfPossible({getEAsATerm(), "^", "x"}));
-    Term eToTheXTimesSinX(createExpressionIfPossible({eToTheX, "*", sin("x")}));
-    Term eToTheXTimesCosX(createExpressionIfPossible({eToTheX, "*", cos("x")}));
-    Term eToTheXTimesSinXTimes2(createExpressionIfPossible({2, "*", eToTheXTimesSinX}));
-    Term eToTheXTimesCosXTimes2(createExpressionIfPossible({2, "*", eToTheXTimesCosX}));
+    Term const eToTheX(createExpressionIfPossible({getEAsATerm(), "^", "x"}));
+    Term const eToTheXTimesSinX(createExpressionIfPossible({eToTheX, "*", sin("x")}));
+    Term const eToTheXTimesCosX(createExpressionIfPossible({eToTheX, "*", cos("x")}));
+    Term const eToTheXTimesSinXTimes2(createExpressionIfPossible({2, "*", eToTheXTimesSinX}));
+    Term const eToTheXTimesCosXTimes2(createExpressionIfPossible({2, "*", eToTheXTimesCosX}));
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
     additionAndSubtraction.putAsAddition(Expression(eToTheXTimesSinXTimes2));
     additionAndSubtraction.putAsSubtraction(Expression(eToTheXTimesCosXTimes2));
@@ -171,7 +171,7 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWi
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
-    Term negativeEToTheXTimesCosX(createExpressionIfPossible({-1, "*", eToTheXTimesCosX}));
+    Term const negativeEToTheXTimesCosX(createExpressionIfPossible({-1, "*", eToTheXTimesCosX}));
     Expressions const& expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(2U, expressions.size());
     EXPECT_EQ(eToTheXTimesSinX, expressions[0]);
@@ -183,14 +183,14 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWi
 }
 
 TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWithSinLogarithmicExpressions) {
-    Term lnOfX(ln("x"));
-    Term sinOfLnOfX(sin(lnOfX));
-    Term cosOfLnOfX(cos(lnOfX));
-    Term twoX(Monomial(2, {{"x", 1}}));
-    Term twoXTimesSinOfLnOfX(createExpressionIfPossible({twoX, "*", sinOfLnOfX}));
-    Term twoXTimesCosOfLnOfX(createExpressionIfPossible({twoX, "*", cosOfLnOfX}));
-    Term xTimesSinOfLnOfX(createExpressionIfPossible({"x", "*", sinOfLnOfX}));
-    Term xTimesCosOfLnOfX(createExpressionIfPossible({"x", "*", cosOfLnOfX}));
+    Term const lnOfX(ln("x"));
+    Term const sinOfLnOfX(sin(lnOfX));
+    Term const cosOfLnOfX(cos(lnOfX));
+    Term const twoX(Monomial(2, {{"x", 1}}));
+    Term const twoXTimesSinOfLnOfX(createExpressionIfPossible({twoX, "*", sinOfLnOfX}));
+    Term const twoXTimesCosOfLnOfX(createExpressionIfPossible({twoX, "*", cosOfLnOfX}));
+    Term const xTimesSinOfLnOfX(createExpressionIfPossible({"x", "*", sinOfLnOfX}));
+    Term const xTimesCosOfLnOfX(createExpressionIfPossible({"x", "*", cosOfLnOfX}));
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
     additionAndSubtraction.putAsAddition(Expression(twoXTimesSinOfLnOfX));
     additionAndSubtraction.putAsSubtraction(Expression(twoXTimesCosOfLnOfX));
@@ -199,7 +199,7 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWi
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
-    Term negativeXTimesCosOfLnOfX(createExpressionIfPossible({Monomial(-1, {{"x", 1}}), "*", cosOfLnOfX}));
+    Term const negativeXTimesCosOfLnOfX(createExpressionIfPossible({Monomial(-1, {{"x", 1}}), "*", cosOfLnOfX}));
     Expressions const& expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(2U, expressions.size());
     EXPECT_EQ(xTimesSinOfLnOfX, expressions[0]);
@@ -213,14 +213,15 @@ TEST(AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksWi
 TEST(
     AdditionAndSubtractionOfExpressionsTest, CombineExpressionIfPossibleWorksAndSquareRootExpressionAreAddedCorrectly) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Term xPlusOneTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
-    Expression squareRootOfXPlusOne(createExpressionIfPossible({xPlusOneTerm, "^", AlbaNumber::createFraction(1, 2)}));
+    Term const xPlusOneTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
+    Expression const squareRootOfXPlusOne(
+        createExpressionIfPossible({xPlusOneTerm, "^", AlbaNumber::createFraction(1, 2)}));
     additionAndSubtraction.putAsAddition(squareRootOfXPlusOne);
     additionAndSubtraction.putAsAddition(squareRootOfXPlusOne);
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
-    Expression expressionToExpect(createExpressionIfPossible({2, "*", squareRootOfXPlusOne}));
+    Expression const expressionToExpect(createExpressionIfPossible({2, "*", squareRootOfXPlusOne}));
     Expressions const& expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(1U, expressions.size());
     EXPECT_EQ(expressionToExpect, expressions[0]);
@@ -232,16 +233,16 @@ TEST(
 TEST(
     AdditionAndSubtractionOfExpressionsTest,
     CombineExpressionIfPossibleWorksWithNegativeTermWithTrigonometricFunctions) {
-    Expression positiveCosX(createExpressionIfPossible({cos("x")}));
-    Expression negativeSinX(createExpressionIfPossible({-1, "*", sin("x")}));
+    Expression const positiveCosX(createExpressionIfPossible({cos("x")}));
+    Expression const negativeSinX(createExpressionIfPossible({-1, "*", sin("x")}));
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
     additionAndSubtraction.putAsAddition(positiveCosX);
     additionAndSubtraction.putAsAddition(negativeSinX);
 
     additionAndSubtraction.combineExpressionsIfPossible();
 
-    Expression cosX(createExpressionIfPossible({cos("x")}));
-    Expression sinX(createExpressionIfPossible({sin("x")}));
+    Expression const cosX(createExpressionIfPossible({cos("x")}));
+    Expression const sinX(createExpressionIfPossible({sin("x")}));
     Expressions const& expressions(additionAndSubtraction.getExpressions());
     ASSERT_EQ(2U, expressions.size());
     EXPECT_EQ(cosX, expressions[0]);
@@ -254,7 +255,7 @@ TEST(
 
 TEST(AdditionAndSubtractionOfExpressionsTest, PutAsSubtractionWorks) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression(createExpressionIfPossible({"x"}));
+    Expression const expression(createExpressionIfPossible({"x"}));
 
     additionAndSubtraction.putAsSubtraction(expression);
 
@@ -268,7 +269,7 @@ TEST(AdditionAndSubtractionOfExpressionsTest, PutAsSubtractionWorks) {
 
 TEST(AdditionAndSubtractionOfExpressionsTest, PutAsAddOrSubtractionWorks) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression(createExpressionIfPossible({"x"}));
+    Expression const expression(createExpressionIfPossible({"x"}));
 
     additionAndSubtraction.putAsAddOrSubtraction(expression, TermAssociationType::Negative);
 
@@ -282,11 +283,11 @@ TEST(AdditionAndSubtractionOfExpressionsTest, PutAsAddOrSubtractionWorks) {
 
 TEST(AdditionAndSubtractionOfExpressionsTest, PutTermsWithDetailsWorks) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression1(createExpressionIfPossible({"x"}));
-    Expression expression2(createExpressionIfPossible({"y"}));
-    TermWithDetails termWithDetails1(Term(expression1), TermAssociationType::Negative);
-    TermWithDetails termWithDetails2(Term(expression2), TermAssociationType::Positive);
-    TermsWithDetails termsWithDetails{termWithDetails1, termWithDetails2};
+    Expression const expression1(createExpressionIfPossible({"x"}));
+    Expression const expression2(createExpressionIfPossible({"y"}));
+    TermWithDetails const termWithDetails1(Term(expression1), TermAssociationType::Negative);
+    TermWithDetails const termWithDetails2(Term(expression2), TermAssociationType::Positive);
+    TermsWithDetails const termsWithDetails{termWithDetails1, termWithDetails2};
 
     additionAndSubtraction.putTermsWithDetails(termsWithDetails);
 
@@ -302,8 +303,8 @@ TEST(AdditionAndSubtractionOfExpressionsTest, PutTermsWithDetailsWorks) {
 
 TEST(AdditionAndSubtractionOfExpressionsTest, GetExpressionsWorks) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression1(createExpressionIfPossible({"x"}));
-    Expression expression2(createExpressionIfPossible({"y"}));
+    Expression const expression1(createExpressionIfPossible({"x"}));
+    Expression const expression2(createExpressionIfPossible({"y"}));
     additionAndSubtraction.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);
     additionAndSubtraction.putAsAddOrSubtraction(expression2, TermAssociationType::Negative);
 
@@ -316,8 +317,8 @@ TEST(AdditionAndSubtractionOfExpressionsTest, GetExpressionsWorks) {
 
 TEST(AdditionAndSubtractionOfExpressionsTest, GetAssociationsWorks) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression1(createExpressionIfPossible({"x"}));
-    Expression expression2(createExpressionIfPossible({"y"}));
+    Expression const expression1(createExpressionIfPossible({"x"}));
+    Expression const expression2(createExpressionIfPossible({"y"}));
     additionAndSubtraction.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);
     additionAndSubtraction.putAsAddOrSubtraction(expression2, TermAssociationType::Negative);
 
@@ -330,8 +331,8 @@ TEST(AdditionAndSubtractionOfExpressionsTest, GetAssociationsWorks) {
 
 TEST(AdditionAndSubtractionOfExpressionsTest, GetAsTermsWithDetailsWorks) {
     AdditionAndSubtractionOfExpressions additionAndSubtraction;
-    Expression expression1(createExpressionIfPossible({"x"}));
-    Expression expression2(createExpressionIfPossible({"y"}));
+    Expression const expression1(createExpressionIfPossible({"x"}));
+    Expression const expression2(createExpressionIfPossible({"y"}));
     additionAndSubtraction.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);
     additionAndSubtraction.putAsAddOrSubtraction(expression2, TermAssociationType::Negative);
 
@@ -349,10 +350,10 @@ TEST(AdditionAndSubtractionOfExpressionsTest, GetAsTermsWithDetailsWorks) {
 }
 
 TEST(AdditionAndSubtractionOfExpressionsTest, GetSizeWorks) {
-    AdditionAndSubtractionOfExpressions additionAndSubtraction1;
+    AdditionAndSubtractionOfExpressions const additionAndSubtraction1;
     AdditionAndSubtractionOfExpressions additionAndSubtraction2;
-    Expression expression1(createExpressionIfPossible({"x"}));
-    Expression expression2(createExpressionIfPossible({"y"}));
+    Expression const expression1(createExpressionIfPossible({"x"}));
+    Expression const expression2(createExpressionIfPossible({"y"}));
     additionAndSubtraction2.putAsAddOrSubtraction(expression1, TermAssociationType::Positive);
     additionAndSubtraction2.putAsAddOrSubtraction(expression2, TermAssociationType::Negative);
 

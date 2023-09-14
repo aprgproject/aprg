@@ -15,7 +15,7 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithNoTerms) {
 
     aggregator.buildExpressionFromTerms();
 
-    Terms termsToVerify(aggregator.getTermsConstReference());
+    Terms const termsToVerify(aggregator.getTermsConstReference());
     ASSERT_TRUE(termsToVerify.empty());
 }
 
@@ -26,7 +26,7 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithUnaryOperation) {
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Term termToExpect(createExpressionIfPossible({"-", "x"}));
+    Term const termToExpect(createExpressionIfPossible({"-", "x"}));
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -37,7 +37,7 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithBinaryOperation) {
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Term termToExpect(createExpressionIfPossible({"x", "+", "x"}));
+    Term const termToExpect(createExpressionIfPossible({"x", "+", "x"}));
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -48,10 +48,10 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithDifferentOperationLevels) {
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Expression subExpression1(createExpressionIfPossible({"c", "^", "d"}));
-    Expression subExpression2(createExpressionIfPossible({"b", "*", subExpression1}));
-    Expression subExpression3(createExpressionIfPossible({"a", "+", subExpression2}));
-    Term termToExpect(subExpression3);
+    Expression const subExpression1(createExpressionIfPossible({"c", "^", "d"}));
+    Expression const subExpression2(createExpressionIfPossible({"b", "*", subExpression1}));
+    Expression const subExpression3(createExpressionIfPossible({"a", "+", subExpression2}));
+    Term const termToExpect(subExpression3);
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -63,10 +63,10 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithParenthesis) {
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
     ASSERT_EQ(TermType::Expression, termsToVerify[0].getTermType());
-    Expression subExpression1(createExpressionIfPossible({"a", "+", "b"}));
-    Expression subExpression2(createExpressionIfPossible({subExpression1, "*", "c"}));
-    Expression subExpression3(createExpressionIfPossible({subExpression2, "^", "d"}));
-    Term termToExpect(subExpression3);
+    Expression const subExpression1(createExpressionIfPossible({"a", "+", "b"}));
+    Expression const subExpression2(createExpressionIfPossible({subExpression1, "*", "c"}));
+    Expression const subExpression3(createExpressionIfPossible({subExpression2, "^", "d"}));
+    Term const termToExpect(subExpression3);
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -78,8 +78,8 @@ TEST(TermsAggregatorTest, BuildExpressionFromTermsWorksOnNegativeFractionInParen
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
     ASSERT_EQ(TermType::Expression, termsToVerify[0].getTermType());
-    Expression subExpression1(createExpressionIfPossible({"-", 1}));
-    Term termToExpect(createExpressionIfPossible({subExpression1, "/", 3}));
+    Expression const subExpression1(createExpressionIfPossible({"-", 1}));
+    Term const termToExpect(createExpressionIfPossible({subExpression1, "/", 3}));
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -88,7 +88,7 @@ TEST(TermsAggregatorTest, SimplifyWorksWithNoTerms) {
 
     aggregator.simplifyTerms();
 
-    Terms termsToVerify(aggregator.getTermsConstReference());
+    Terms const termsToVerify(aggregator.getTermsConstReference());
     ASSERT_TRUE(termsToVerify.empty());
 }
 
@@ -140,7 +140,7 @@ TEST(TermsAggregatorTest, SimplifyWorksWithNegativeValues) {
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
     ASSERT_EQ(TermType::Monomial, termsToVerify[0].getTermType());
-    Term termToExpect(Monomial(1, {{"x", 2}, {"y", -3}, {"z", 4}}));
+    Term const termToExpect(Monomial(1, {{"x", 2}, {"y", -3}, {"z", 4}}));
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -151,7 +151,7 @@ TEST(TermsAggregatorTest, SimplifyWorksWithFunction) {
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Term termToExpect(Functions::abs(5));
+    Term const termToExpect(Functions::abs(5));
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 

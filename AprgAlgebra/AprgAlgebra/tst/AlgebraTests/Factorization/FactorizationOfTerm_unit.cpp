@@ -26,11 +26,11 @@ TEST(FactorizationOfTermTest, FactorizeTermWorksOnPolynomialTerm) {
 }
 
 TEST(FactorizationOfTermTest, FactorizeTermWorksOnExpressionTermWhenshouldSimplifyExpressionsToFactorsAsDefault) {
-    Expression expressionToTest(createExpressionIfPossible({cos("x"), "*", sin("x"), "*", tan("x")}));
+    Expression const expressionToTest(createExpressionIfPossible({cos("x"), "*", sin("x"), "*", tan("x")}));
 
     Terms factorizedTerms(factorizeTerm(expressionToTest));
 
-    Term termToExpect1(createExpressionIfPossible({cos("x"), "*", sin("x"), "*", tan("x")}));
+    Term const termToExpect1(createExpressionIfPossible({cos("x"), "*", sin("x"), "*", tan("x")}));
     EXPECT_EQ(1U, factorizedTerms.size());
     EXPECT_EQ(termToExpect1, factorizedTerms[0]);
 }
@@ -38,10 +38,10 @@ TEST(FactorizationOfTermTest, FactorizeTermWorksOnExpressionTermWhenshouldSimpli
 TEST(FactorizationOfTermTest, FactorizeTermWorksOnExpressionTermWhenShouldSimplifyExpressionsToFactorsIsTrue) {
     ConfigurationDetails configurationDetails(Factorization::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyExpressionsToFactors = true;
-    ScopeObject scopeObject;
+    ScopeObject const scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
-    Expression expressionToTest(createExpressionIfPossible({cos("x"), "*", sin("x"), "*", tan("x")}));
+    Expression const expressionToTest(createExpressionIfPossible({cos("x"), "*", sin("x"), "*", tan("x")}));
 
     Terms factorizedTerms(factorizeTerm(expressionToTest));
     EXPECT_EQ(3U, factorizedTerms.size());
@@ -51,7 +51,7 @@ TEST(FactorizationOfTermTest, FactorizeTermWorksOnExpressionTermWhenShouldSimpli
 }
 
 TEST(FactorizationOfTermTest, FactorizeTermsWorks) {
-    Terms terms{5, Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})}};
+    Terms const terms{5, Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})}};
 
     Terms factorizedTerms(factorizeTerms(terms));
 

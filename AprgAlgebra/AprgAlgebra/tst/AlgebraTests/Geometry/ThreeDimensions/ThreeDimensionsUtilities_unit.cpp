@@ -9,69 +9,69 @@ using namespace std;
 namespace alba::algebra::ThreeDimensions {
 
 TEST(ThreeDimensionsUtilitiesTest, GetEllipsoidEquationWorks) {
-    Equation equationToVerify(getEllipsoidEquation());
+    Equation const equationToVerify(getEllipsoidEquation());
 
-    string stringToExpect("((((x-x0)^2)/(a^2))+(((y-y0)^2)/(b^2))+(((z-z0)^2)/(c^2))) = 1");
+    string const stringToExpect("((((x-x0)^2)/(a^2))+(((y-y0)^2)/(b^2))+(((z-z0)^2)/(c^2))) = 1");
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
 TEST(ThreeDimensionsUtilitiesTest, GetEllipticConeEquationWorks) {
-    Equation equationToVerify(getEllipticConeEquation());
+    Equation const equationToVerify(getEllipticConeEquation());
 
-    string stringToExpect("((((x-x0)^2)/(a^2))+(((y-y0)^2)/(b^2))+(((z-z0)^2)/(c^2))) = 0");
+    string const stringToExpect("((((x-x0)^2)/(a^2))+(((y-y0)^2)/(b^2))+(((z-z0)^2)/(c^2))) = 0");
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
 TEST(ThreeDimensionsUtilitiesTest, GetEllipticHyperboloidEquationEquationWorks) {
-    Equation equationToVerify1(getEllipticHyperboloidEquation(false));
-    Equation equationToVerify2(getEllipticHyperboloidEquation(true));
+    Equation const equationToVerify1(getEllipticHyperboloidEquation(false));
+    Equation const equationToVerify2(getEllipticHyperboloidEquation(true));
 
-    string stringToExpect1("((((x-x0)^2)/(a^2))+(((y-y0)^2)/(b^2))-(((z-z0)^2)/(c^2))) = 1");
-    string stringToExpect2("((((x-x0)^2)/(a^2))+(((y-y0)^2)/(b^2))-(((z-z0)^2)/(c^2))) = -1");
+    string const stringToExpect1("((((x-x0)^2)/(a^2))+(((y-y0)^2)/(b^2))-(((z-z0)^2)/(c^2))) = 1");
+    string const stringToExpect2("((((x-x0)^2)/(a^2))+(((y-y0)^2)/(b^2))-(((z-z0)^2)/(c^2))) = -1");
     EXPECT_EQ(stringToExpect1, convertToString(equationToVerify1));
     EXPECT_EQ(stringToExpect2, convertToString(equationToVerify2));
 }
 
 TEST(ThreeDimensionsUtilitiesTest, GetEllipticParaboloidEquationEquationWorks) {
-    Equation equationToVerify(getEllipticParaboloidEquation());
+    Equation const equationToVerify(getEllipticParaboloidEquation());
 
-    string stringToExpect("((((x-x0)^2)/(a^2))+(((y-y0)^2)/(b^2))) = ((z-z0)/c)");
+    string const stringToExpect("((((x-x0)^2)/(a^2))+(((y-y0)^2)/(b^2))) = ((z-z0)/c)");
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
 TEST(ThreeDimensionsUtilitiesTest, GetHyperbolicParaboloidEquationEquationWorks) {
-    Equation equationToVerify(getHyperbolicParaboloidEquation());
+    Equation const equationToVerify(getHyperbolicParaboloidEquation());
 
-    string stringToExpect("((((y-y0)^2)/(b^2))-(((x-x0)^2)/(a^2))) = ((z-z0)/c)");
+    string const stringToExpect("((((y-y0)^2)/(b^2))-(((x-x0)^2)/(a^2))) = ((z-z0)/c)");
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
 TEST(ThreeDimensionsUtilitiesTest, GetPlaneEquationWorks) {
-    Equation equationToVerify(getPlaneEquation());
+    Equation const equationToVerify(getPlaneEquation());
 
-    string stringToExpect("((a*x)+(b*y)+(c*z)+d) = 0");
+    string const stringToExpect("((a*x)+(b*y)+(c*z)+d) = 0");
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
 TEST(ThreeDimensionsUtilitiesTest, GetPlaneEquationWithPointCoordinatesWorks) {
-    Equation equationToVerify(getPlaneEquationWithPointCoordinates());
+    Equation const equationToVerify(getPlaneEquationWithPointCoordinates());
 
-    string stringToExpect("((a*x)-(a*x0)+(b*y)-(b*y0)+(c*z)-(c*z0)) = 0");
+    string const stringToExpect("((a*x)-(a*x0)+(b*y)-(b*y0)+(c*z)-(c*z0)) = 0");
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
 TEST(ThreeDimensionsUtilitiesTest, GetSphereEquationWorks) {
-    Equation equationToVerify(getSphereEquation());
+    Equation const equationToVerify(getSphereEquation());
 
-    string stringToExpect("(((x-x0)^2)+((y-y0)^2)+((z-z0)^2)) = (r^2)");
+    string const stringToExpect("(((x-x0)^2)+((y-y0)^2)+((z-z0)^2)) = (r^2)");
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
 TEST(ThreeDimensionsUtilitiesTest, GetLineEquationsWorks) {
     Equations equationsToVerify(getLineEquations());
 
-    string stringToExpect1("((x-x0)/a) = ((y-y0)/b)");
-    string stringToExpect2("((x-x0)/a) = ((z-z0)/c)");
+    string const stringToExpect1("((x-x0)/a) = ((y-y0)/b)");
+    string const stringToExpect2("((x-x0)/a) = ((z-z0)/c)");
     ASSERT_EQ(2U, equationsToVerify.size());
     EXPECT_EQ(stringToExpect1, convertToString(equationsToVerify[0]));
     EXPECT_EQ(stringToExpect2, convertToString(equationsToVerify[1]));

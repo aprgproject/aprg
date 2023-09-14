@@ -9,7 +9,7 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(EquationUtilitiesTest, BuildEquationIfPossibleWorks) {
-    Equation expectedEquation("a", "=", "b");
+    Equation const expectedEquation("a", "=", "b");
 
     EXPECT_EQ(expectedEquation, buildEquationIfPossible("a=b"));
 }
@@ -80,11 +80,11 @@ TEST(EquationUtilitiesTest, IsSymmetricOnOriginWorks) {
 }
 
 TEST(EquationUtilitiesTest, IsEqualWorks) {
-    Term term1(1234);
-    Term term2(1234);
-    Term term3(1111);
-    Term term4(5678);
-    Term term5("x");
+    Term const term1(1234);
+    Term const term2(1234);
+    Term const term3(1111);
+    Term const term4(5678);
+    Term const term5("x");
 
     EXPECT_TRUE(isEqual(term1, term1));
     EXPECT_TRUE(isEqual(term1, term2));
@@ -94,11 +94,11 @@ TEST(EquationUtilitiesTest, IsEqualWorks) {
 }
 
 TEST(EquationUtilitiesTest, IsNotEqualWorks) {
-    Term term1(1234);
-    Term term2(1234);
-    Term term3(1111);
-    Term term4(5678);
-    Term term5("x");
+    Term const term1(1234);
+    Term const term2(1234);
+    Term const term3(1111);
+    Term const term4(5678);
+    Term const term5("x");
 
     EXPECT_FALSE(isNotEqual(term1, term1));
     EXPECT_FALSE(isNotEqual(term1, term2));
@@ -108,11 +108,11 @@ TEST(EquationUtilitiesTest, IsNotEqualWorks) {
 }
 
 TEST(EquationUtilitiesTest, IsLessThanWorks) {
-    Term term1(1234);
-    Term term2(1234);
-    Term term3(1111);
-    Term term4(5678);
-    Term term5("x");
+    Term const term1(1234);
+    Term const term2(1234);
+    Term const term3(1111);
+    Term const term4(5678);
+    Term const term5("x");
 
     EXPECT_FALSE(isLessThan(term1, term1));
     EXPECT_FALSE(isLessThan(term1, term2));
@@ -122,11 +122,11 @@ TEST(EquationUtilitiesTest, IsLessThanWorks) {
 }
 
 TEST(EquationUtilitiesTest, IsGreaterThanWorks) {
-    Term term1(1234);
-    Term term2(1234);
-    Term term3(1111);
-    Term term4(5678);
-    Term term5("x");
+    Term const term1(1234);
+    Term const term2(1234);
+    Term const term3(1111);
+    Term const term4(5678);
+    Term const term5("x");
 
     EXPECT_FALSE(isGreaterThan(term1, term1));
     EXPECT_FALSE(isGreaterThan(term1, term2));
@@ -136,11 +136,11 @@ TEST(EquationUtilitiesTest, IsGreaterThanWorks) {
 }
 
 TEST(EquationUtilitiesTest, IsLessThanOrEqualWorks) {
-    Term term1(1234);
-    Term term2(1234);
-    Term term3(1111);
-    Term term4(5678);
-    Term term5("x");
+    Term const term1(1234);
+    Term const term2(1234);
+    Term const term3(1111);
+    Term const term4(5678);
+    Term const term5("x");
 
     EXPECT_TRUE(isLessThanOrEqual(term1, term1));
     EXPECT_TRUE(isLessThanOrEqual(term1, term2));
@@ -150,11 +150,11 @@ TEST(EquationUtilitiesTest, IsLessThanOrEqualWorks) {
 }
 
 TEST(EquationUtilitiesTest, IsGreaterThanOrEqualWorks) {
-    Term term1(1234);
-    Term term2(1234);
-    Term term3(1111);
-    Term term4(5678);
-    Term term5("x");
+    Term const term1(1234);
+    Term const term2(1234);
+    Term const term3(1111);
+    Term const term4(5678);
+    Term const term5("x");
 
     EXPECT_TRUE(isGreaterThanOrEqual(term1, term1));
     EXPECT_TRUE(isGreaterThanOrEqual(term1, term2));
@@ -164,11 +164,11 @@ TEST(EquationUtilitiesTest, IsGreaterThanOrEqualWorks) {
 }
 
 TEST(EquationUtilitiesTest, IsEquationOperationSatisfiedWorks) {
-    Term term1(1234);
-    Term term2(1234);
-    Term term3(1111);
-    Term term4(5678);
-    Term term5("x");
+    Term const term1(1234);
+    Term const term2(1234);
+    Term const term3(1111);
+    Term const term4(5678);
+    Term const term5("x");
 
     EXPECT_TRUE(isEquationOperationSatisfied(EquationOperator("="), term1, term1));
     EXPECT_TRUE(isEquationOperationSatisfied(EquationOperator("="), term1, term2));
@@ -203,9 +203,9 @@ TEST(EquationUtilitiesTest, IsEquationOperationSatisfiedWorks) {
 }
 
 TEST(EquationUtilitiesTest, DoesAllEquationsHaveEqualityOperatorWorks) {
-    Equation equation1("a", "=", "b");
-    Equation equation2("x", "=", "y");
-    Equation equation3("r", "!=", "p");
+    Equation const equation1("a", "=", "b");
+    Equation const equation2("x", "=", "y");
+    Equation const equation3("r", "!=", "p");
 
     EXPECT_TRUE(doesAllEquationsHaveEqualityOperator(Equations{}));
     EXPECT_FALSE(doesAllEquationsHaveEqualityOperator(Equations{equation1, equation2, equation3}));

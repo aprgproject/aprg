@@ -9,65 +9,65 @@ using namespace std;
 namespace alba::algebra::TwoDimensions {
 
 TEST(TwoDimensionsUtilitiesTest, GetCircleEquationWorks) {
-    Equation equationToVerify(getCircleEquation());
+    Equation const equationToVerify(getCircleEquation());
 
-    string stringToExpect("(((x-x0)^2)+((y-y0)^2)) = (r^2)");
+    string const stringToExpect("(((x-x0)^2)+((y-y0)^2)) = (r^2)");
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetEllipseEquationWorks) {
-    Equation equationToVerify(getEllipseEquation());
+    Equation const equationToVerify(getEllipseEquation());
 
-    string stringToExpect("((((x-x0)^2)/(a^2))+(((y-y0)^2)/(b^2))) = 1");
+    string const stringToExpect("((((x-x0)^2)/(a^2))+(((y-y0)^2)/(b^2))) = 1");
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetHyperbolaEquationWorks) {
-    Equation equationToVerify(getHyperbolaEquation());
+    Equation const equationToVerify(getHyperbolaEquation());
 
-    string stringToExpect("((((x-x0)^2)/(a^2))-(((y-y0)^2)/(b^2))) = 1");
+    string const stringToExpect("((((x-x0)^2)/(a^2))-(((y-y0)^2)/(b^2))) = 1");
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetLimaconEquationWorks) {
-    Equation equationToVerify1(getLimaconEquation(LimaconTrigonometricFunctionType::Cosine));
-    Equation equationToVerify2(getLimaconEquation(LimaconTrigonometricFunctionType::Sine));
+    Equation const equationToVerify1(getLimaconEquation(LimaconTrigonometricFunctionType::Cosine));
+    Equation const equationToVerify2(getLimaconEquation(LimaconTrigonometricFunctionType::Sine));
 
-    string stringToExpect1("(a+(b*cos(theta))) = r");
-    string stringToExpect2("(a+(b*sin(theta))) = r");
+    string const stringToExpect1("(a+(b*cos(theta))) = r");
+    string const stringToExpect2("(a+(b*sin(theta))) = r");
     EXPECT_EQ(stringToExpect1, convertToString(equationToVerify1));
     EXPECT_EQ(stringToExpect2, convertToString(equationToVerify2));
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetLineEquationWorks) {
-    Equation equationToVerify(getLineEquation());
+    Equation const equationToVerify(getLineEquation());
 
-    string stringToExpect("((a*x)+(b*y)+c) = 0");
+    string const stringToExpect("((a*x)+(b*y)+c) = 0");
     EXPECT_EQ(stringToExpect, convertToString(equationToVerify));
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetParabolaEquationWorks) {
-    Equation equationToVerify1(getParabolaEquation(ParabolaOrientation::PolynomialX));
-    Equation equationToVerify2(getParabolaEquation(ParabolaOrientation::PolynomialY));
+    Equation const equationToVerify1(getParabolaEquation(ParabolaOrientation::PolynomialX));
+    Equation const equationToVerify2(getParabolaEquation(ParabolaOrientation::PolynomialY));
 
-    string stringToExpect1("((a*(x^2))+(b*x)+c) = y");
-    string stringToExpect2("((a*(y^2))+(b*y)+c) = x");
+    string const stringToExpect1("((a*(x^2))+(b*x)+c) = y");
+    string const stringToExpect2("((a*(y^2))+(b*y)+c) = x");
     EXPECT_EQ(stringToExpect1, convertToString(equationToVerify1));
     EXPECT_EQ(stringToExpect2, convertToString(equationToVerify2));
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetSurfaceAreaOfAConicalFrustumWorks) {
-    Term termToVerify(getSurfaceAreaOfAConicalFrustum());
+    Term const termToVerify(getSurfaceAreaOfAConicalFrustum());
 
-    string stringToExpect(
+    string const stringToExpect(
         "(((pi)*(rt^2))+((pi)*(rb^2))+((pi)*rb*((((rb-rt)^2)+(h^2))^(1/2)))+((pi)*rt*((((rb-rt)^2)+(h^2))^(1/2))))");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
 TEST(TwoDimensionsUtilitiesTest, GetVolumeOfAConicalFrustumWorks) {
-    Term termToVerify(getVolumeOfAConicalFrustum());
+    Term const termToVerify(getVolumeOfAConicalFrustum());
 
-    string stringToExpect("(((1/3)*(pi)*h*(rt^2))+((1/3)*(pi)*h*rt*rb)+((1/3)*(pi)*h*(rb^2)))");
+    string const stringToExpect("(((1/3)*(pi)*h*(rt^2))+((1/3)*(pi)*h*rt*rb)+((1/3)*(pi)*h*(rb^2)))");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 

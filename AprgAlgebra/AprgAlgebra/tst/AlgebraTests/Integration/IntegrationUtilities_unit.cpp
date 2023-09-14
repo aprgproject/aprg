@@ -7,9 +7,9 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(IntegrationUtilitiesTest, GetInputForAverageValueInBetweenTwoValuesWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
 
     AlbaNumbers numbersToVerify1(getInputForAverageValueInBetweenTwoValues(termToTest1, "x", 5, 10));
     AlbaNumbers numbersToVerify2(getInputForAverageValueInBetweenTwoValues(termToTest2, "x", 5, 10));
@@ -24,13 +24,13 @@ TEST(IntegrationUtilitiesTest, GetInputForAverageValueInBetweenTwoValuesWorks) {
 }
 
 TEST(IntegrationUtilitiesTest, GetApproximateValuesForDefiniteIntegralWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
 
-    LowerAndHigherValues valuesToVerify1(getApproximateValuesForDefiniteIntegral(termToTest1, "x", 5, 10));
-    LowerAndHigherValues valuesToVerify2(getApproximateValuesForDefiniteIntegral(termToTest2, "x", 5, 10));
-    LowerAndHigherValues valuesToVerify3(getApproximateValuesForDefiniteIntegral(termToTest3, "x", 5, 10));
+    LowerAndHigherValues const valuesToVerify1(getApproximateValuesForDefiniteIntegral(termToTest1, "x", 5, 10));
+    LowerAndHigherValues const valuesToVerify2(getApproximateValuesForDefiniteIntegral(termToTest2, "x", 5, 10));
+    LowerAndHigherValues const valuesToVerify3(getApproximateValuesForDefiniteIntegral(termToTest3, "x", 5, 10));
 
     EXPECT_EQ(AlbaNumber(25), valuesToVerify1.lowerValue);
     EXPECT_EQ(AlbaNumber(50), valuesToVerify1.higherValue);
@@ -41,9 +41,9 @@ TEST(IntegrationUtilitiesTest, GetApproximateValuesForDefiniteIntegralWorks) {
 }
 
 TEST(IntegrationUtilitiesTest, GetAverageValueInBetweenTwoValuesWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
 
     EXPECT_EQ(Term(AlbaNumber::createFraction(15, 2)), getAverageValueInBetweenTwoValues(termToTest1, {"x", 5, 10}));
     EXPECT_EQ(Term(AlbaNumber::createFraction(175, 3)), getAverageValueInBetweenTwoValues(termToTest2, {"x", 5, 10}));
@@ -51,9 +51,9 @@ TEST(IntegrationUtilitiesTest, GetAverageValueInBetweenTwoValuesWorks) {
 }
 
 TEST(IntegrationUtilitiesTest, EvaluateValuesAndGetDifferenceWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
 
     EXPECT_EQ(Term(5), evaluateValuesAndGetDifference(termToTest1, "x", 5, 10));
     EXPECT_EQ(Term(75), evaluateValuesAndGetDifference(termToTest2, "x", 5, 10));
@@ -61,26 +61,26 @@ TEST(IntegrationUtilitiesTest, EvaluateValuesAndGetDifferenceWorks) {
 }
 
 TEST(IntegrationUtilitiesTest, EvaluateTermsAndGetDifferenceWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
 
-    Term termToVerify1(evaluateTermsAndGetDifference(termToTest1, "x", "a", "b"));
-    Term termToVerify2(evaluateTermsAndGetDifference(termToTest2, "x", "a", "b"));
-    Term termToVerify3(evaluateTermsAndGetDifference(termToTest3, "x", "a", "b"));
+    Term const termToVerify1(evaluateTermsAndGetDifference(termToTest1, "x", "a", "b"));
+    Term const termToVerify2(evaluateTermsAndGetDifference(termToTest2, "x", "a", "b"));
+    Term const termToVerify3(evaluateTermsAndGetDifference(termToTest3, "x", "a", "b"));
 
-    Term termToExpect1(Polynomial{Monomial(-1, {{"a", 1}}), Monomial(1, {{"b", 1}})});
-    Term termToExpect2(Polynomial{Monomial(-1, {{"a", 2}}), Monomial(1, {{"b", 2}})});
-    Term termToExpect3(Polynomial{Monomial(-1, {{"a", 3}}), Monomial(1, {{"b", 3}})});
+    Term const termToExpect1(Polynomial{Monomial(-1, {{"a", 1}}), Monomial(1, {{"b", 1}})});
+    Term const termToExpect2(Polynomial{Monomial(-1, {{"a", 2}}), Monomial(1, {{"b", 2}})});
+    Term const termToExpect3(Polynomial{Monomial(-1, {{"a", 3}}), Monomial(1, {{"b", 3}})});
     EXPECT_EQ(termToExpect1, termToVerify1);
     EXPECT_EQ(termToExpect2, termToVerify2);
     EXPECT_EQ(termToExpect3, termToVerify3);
 }
 
 TEST(IntegrationUtilitiesTest, GetAreaUnderACurveUsingReimannSumsWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
 
     EXPECT_EQ(Term(AlbaNumber::createFraction(75, 2)), getAreaUnderACurveUsingReimannSums(termToTest1, "x", 5, 10));
     EXPECT_EQ(Term(AlbaNumber::createFraction(875, 3)), getAreaUnderACurveUsingReimannSums(termToTest2, "x", 5, 10));
@@ -88,9 +88,9 @@ TEST(IntegrationUtilitiesTest, GetAreaUnderACurveUsingReimannSumsWorks) {
 }
 
 TEST(IntegrationUtilitiesTest, IsTheSecondFundamentalTheoremOfCalculusTrueWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
 
     EXPECT_TRUE(isTheSecondFundamentalTheoremOfCalculusTrue(termToTest1, "x", 5, 10));
     EXPECT_TRUE(isTheSecondFundamentalTheoremOfCalculusTrue(termToTest2, "x", 5, 10));
@@ -98,9 +98,9 @@ TEST(IntegrationUtilitiesTest, IsTheSecondFundamentalTheoremOfCalculusTrueWorks)
 }
 
 TEST(IntegrationUtilitiesTest, IsTheIntegralDefinitionForFiniteCalculusIsTrueWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
 
     EXPECT_TRUE(isTheIntegralDefinitionForFiniteCalculusIsTrue(termToTest1, "x", 5, 10));
     EXPECT_TRUE(isTheIntegralDefinitionForFiniteCalculusIsTrue(termToTest2, "x", 5, 10));
@@ -108,9 +108,9 @@ TEST(IntegrationUtilitiesTest, IsTheIntegralDefinitionForFiniteCalculusIsTrueWor
 }
 
 TEST(IntegrationUtilitiesTest, IsAreaUnderTheCurveEqualToDefiniteIntegralWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
 
     EXPECT_TRUE(isAreaUnderTheCurveEqualToDefiniteIntegral(termToTest1, "x", 5, 10));
     EXPECT_TRUE(isAreaUnderTheCurveEqualToDefiniteIntegral(termToTest2, "x", 5, 10));

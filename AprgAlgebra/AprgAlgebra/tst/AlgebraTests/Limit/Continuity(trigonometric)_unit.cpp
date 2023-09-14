@@ -11,9 +11,9 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(ContinuityTest, GetContinuityDomainWorksOnSine) {
-    Term termToTest(sin("x"));
+    Term const termToTest(sin("x"));
 
-    SolutionSet continuityDomain(getContinuityDomain(termToTest));
+    SolutionSet const continuityDomain(getContinuityDomain(termToTest));
 
     AlbaNumberIntervals const& intervalToVerify(continuityDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, intervalToVerify.size());
@@ -21,9 +21,9 @@ TEST(ContinuityTest, GetContinuityDomainWorksOnSine) {
 }
 
 TEST(ContinuityTest, GetContinuityDomainWorksOnCosine) {
-    Term termToTest(cos("x"));
+    Term const termToTest(cos("x"));
 
-    SolutionSet continuityDomain(getContinuityDomain(termToTest));
+    SolutionSet const continuityDomain(getContinuityDomain(termToTest));
 
     AlbaNumberIntervals const& intervalToVerify(continuityDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, intervalToVerify.size());

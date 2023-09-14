@@ -10,8 +10,8 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(TermsRaiseToNumbersTest, ConstructionWorks) {
-    TermsRaiseToNumbers termsRaiseToNumbers1;
-    TermsRaiseToNumbers termsRaiseToNumbers2({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToNumbers const termsRaiseToNumbers1;
+    TermsRaiseToNumbers const termsRaiseToNumbers2({{"x", 1}, {"y", -2}, {"z", 3}});
 
     EXPECT_TRUE(termsRaiseToNumbers1.getBaseToExponentMap().empty());
     TermsRaiseToNumbers::BaseToExponentMap const& mapToVerify(termsRaiseToNumbers2.getBaseToExponentMap());
@@ -28,7 +28,7 @@ TEST(TermsRaiseToNumbersTest, ConstructionWorks) {
 }
 
 TEST(TermsRaiseToNumbersTest, GetBaseToExponentMapWorks) {
-    TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToNumbers const termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
 
     TermsRaiseToNumbers::BaseToExponentMap const& mapToVerify(termsRaiseToNumbers.getBaseToExponentMap());
 
@@ -45,7 +45,7 @@ TEST(TermsRaiseToNumbersTest, GetBaseToExponentMapWorks) {
 }
 
 TEST(TermsRaiseToNumbersTest, GetExponentOfBaseWorks) {
-    TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToNumbers const termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
 
     EXPECT_EQ(AlbaNumber(1), termsRaiseToNumbers.getExponentOfBase("x"));
     EXPECT_EQ(AlbaNumber(-2), termsRaiseToNumbers.getExponentOfBase("y"));
@@ -54,13 +54,13 @@ TEST(TermsRaiseToNumbersTest, GetExponentOfBaseWorks) {
 }
 
 TEST(TermsRaiseToNumbersTest, GetTermsInMultiplicationOperationWorks) {
-    TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToNumbers const termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
 
     Terms const termsToVerify(termsRaiseToNumbers.getTermsInMultiplicationOperation());
 
-    Term expectedTerm1("x");
-    Term expectedTerm2(Monomial(1, {{"y", -2}}));
-    Term expectedTerm3(Monomial(1, {{"z", 3}}));
+    Term const expectedTerm1("x");
+    Term const expectedTerm2(Monomial(1, {{"y", -2}}));
+    Term const expectedTerm3(Monomial(1, {{"z", 3}}));
     ASSERT_EQ(3U, termsToVerify.size());
     EXPECT_EQ(expectedTerm1, termsToVerify[0]);
     EXPECT_EQ(expectedTerm2, termsToVerify[1]);
@@ -68,16 +68,16 @@ TEST(TermsRaiseToNumbersTest, GetTermsInMultiplicationOperationWorks) {
 }
 
 TEST(TermsRaiseToNumbersTest, GetTermWithDetailsInMultiplicationAndDivisionOperationWorks) {
-    TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToNumbers const termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
 
     TermsWithDetails const termsToVerify(termsRaiseToNumbers.getTermWithDetailsInMultiplicationAndDivisionOperation());
 
-    Term expectedTerm1("x");
-    TermWithDetails expectedTermWithDetails1({expectedTerm1, TermAssociationType::Positive});
-    Term expectedTerm2(Monomial(1, {{"y", 2}}));
-    TermWithDetails expectedTermWithDetails2({expectedTerm2, TermAssociationType::Negative});
-    Term expectedTerm3(Monomial(1, {{"z", 3}}));
-    TermWithDetails expectedTermWithDetails3({expectedTerm3, TermAssociationType::Positive});
+    Term const expectedTerm1("x");
+    TermWithDetails const expectedTermWithDetails1({expectedTerm1, TermAssociationType::Positive});
+    Term const expectedTerm2(Monomial(1, {{"y", 2}}));
+    TermWithDetails const expectedTermWithDetails2({expectedTerm2, TermAssociationType::Negative});
+    Term const expectedTerm3(Monomial(1, {{"z", 3}}));
+    TermWithDetails const expectedTermWithDetails3({expectedTerm3, TermAssociationType::Positive});
     ASSERT_EQ(3U, termsToVerify.size());
     EXPECT_EQ(expectedTermWithDetails1, termsToVerify[0]);
     EXPECT_EQ(expectedTermWithDetails2, termsToVerify[1]);
@@ -85,7 +85,7 @@ TEST(TermsRaiseToNumbersTest, GetTermWithDetailsInMultiplicationAndDivisionOpera
 }
 
 TEST(TermsRaiseToNumbersTest, AddExponentsWorks) {
-    TermsRaiseToNumbers termsRaiseToNumbersToAdd({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToNumbers const termsRaiseToNumbersToAdd({{"x", 1}, {"y", -2}, {"z", 3}});
     TermsRaiseToNumbers termsRaiseToNumbers({{"x", 4}, {"y", -5}, {"z", 6}});
 
     termsRaiseToNumbers.addExponents(termsRaiseToNumbersToAdd);
@@ -105,7 +105,7 @@ TEST(TermsRaiseToNumbersTest, AddExponentsWorks) {
 
 TEST(TermsRaiseToNumbersTest, SubtractExponentsWorks) {
     TermsRaiseToNumbers termsRaiseToNumbers({{"x", 4}, {"y", -5}, {"z", 6}});
-    TermsRaiseToNumbers termsRaiseToNumbersToSubtract({{"x", 1}, {"y", -2}, {"z", 3}});
+    TermsRaiseToNumbers const termsRaiseToNumbersToSubtract({{"x", 1}, {"y", -2}, {"z", 3}});
 
     termsRaiseToNumbers.subtractExponents(termsRaiseToNumbersToSubtract);
 
@@ -142,9 +142,9 @@ TEST(TermsRaiseToNumbersTest, MultiplyNumberToExponentsWorks) {
 
 TEST(TermsRaiseToNumbersTest, PutTermWorksOnMonomial) {
     TermsRaiseToNumbers termsRaiseToNumbers({{"x", 1}, {"y", -2}, {"z", 3}});
-    Term termWithPositive(Monomial(5, {{"x", 6}}));
-    Term termWithNegative(Monomial(7, {{"y", 8}}));
-    Term termWithHaveNoEffect(Monomial(1, {{"z", 0}}));
+    Term const termWithPositive(Monomial(5, {{"x", 6}}));
+    Term const termWithNegative(Monomial(7, {{"y", 8}}));
+    Term const termWithHaveNoEffect(Monomial(1, {{"z", 0}}));
 
     termsRaiseToNumbers.putTerm(termWithPositive, TermAssociationType::Positive);
     termsRaiseToNumbers.putTerm(termWithNegative, TermAssociationType::Negative);
@@ -171,8 +171,8 @@ TEST(TermsRaiseToNumbersTest, PutTermWorksOnMonomial) {
 
 TEST(TermsRaiseToNumbersTest, PutTermWorksOnOtherTermTypes) {
     TermsRaiseToNumbers termsRaiseToNumbers({{cos("x"), 1}, {sin("x"), -2}, {tan("x"), 3}});
-    Term termWithPositive(createExpressionIfPossible({cos("x"), "^", 6}));
-    Term termWithNegative(createExpressionIfPossible({sin("x"), "^", 8}));
+    Term const termWithPositive(createExpressionIfPossible({cos("x"), "^", 6}));
+    Term const termWithNegative(createExpressionIfPossible({sin("x"), "^", 8}));
 
     termsRaiseToNumbers.putTerm(termWithPositive, TermAssociationType::Positive);
     termsRaiseToNumbers.putTerm(termWithNegative, TermAssociationType::Negative);

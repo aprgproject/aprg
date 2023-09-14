@@ -9,21 +9,21 @@ namespace alba::algebra {
 TEST(EquationBuilderTest, ConstructionWorks) { EquationBuilder(""); }
 
 TEST(EquationBuilderTest, GetEquationWorksWhenVariableEqualsVariable) {
-    EquationBuilder builder("a=b");
+    EquationBuilder const builder("a=b");
 
-    Equation expectedEquation("a", "=", "b");
+    Equation const expectedEquation("a", "=", "b");
     EXPECT_EQ(expectedEquation, builder.getEquation());
 }
 
 TEST(EquationBuilderTest, GetEquationWorksWhenMonomialEqualsMonomial) {
-    EquationBuilder builder("531*x^2*y^3 = 145*a^4*b^5");
+    EquationBuilder const builder("531*x^2*y^3 = 145*a^4*b^5");
 
-    Equation expectedEquation(Monomial(531, {{"x", 2}, {"y", 3}}), "=", Monomial(145, {{"a", 4}, {"b", 5}}));
+    Equation const expectedEquation(Monomial(531, {{"x", 2}, {"y", 3}}), "=", Monomial(145, {{"a", 4}, {"b", 5}}));
     EXPECT_EQ(expectedEquation, builder.getEquation());
 }
 
 TEST(EquationBuilderTest, GetTermStringsWorks) {
-    EquationBuilder builder("a=b=c=d");
+    EquationBuilder const builder("a=b=c=d");
 
     stringHelper::strings termStrings(builder.getTermStrings());
 
@@ -35,7 +35,7 @@ TEST(EquationBuilderTest, GetTermStringsWorks) {
 }
 
 TEST(EquationBuilderTest, GetEquationOperatorStringsWorks) {
-    EquationBuilder builder("a=a==a!=a<a>a<=a>=a");
+    EquationBuilder const builder("a=a==a!=a<a>a<=a>=a");
 
     stringHelper::strings equationOperatorStrings(builder.getEquationOperatorStrings());
 

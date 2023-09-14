@@ -10,7 +10,7 @@ using namespace std;
 namespace alba::algebra::Functions {
 
 TEST(FunctionUtilitiesTest, EvaluateAndGetInputOutputPairWorks) {
-    AlbaNumbers inputNumbers{-2, -1, 0, 1, 2};
+    AlbaNumbers const inputNumbers{-2, -1, 0, 1, 2};
 
     AlbaNumberPairs inputAndOutputPairs(
         evaluateAndGetInputOutputPair(inputNumbers, "x", abs(createExpressionIfPossible({"x"}))));
@@ -29,7 +29,7 @@ TEST(FunctionUtilitiesTest, EvaluateAndGetInputOutputPairWorks) {
 }
 
 TEST(FunctionUtilitiesTest, IsFunctionContinuousWorks) {
-    Function unknownFunction("functionToTest", Term("x"), [](AlbaNumber const& number) { return number; });
+    Function const unknownFunction("functionToTest", Term("x"), [](AlbaNumber const& number) { return number; });
 
     EXPECT_FALSE(isFunctionContinuous(unknownFunction));
     EXPECT_TRUE(isFunctionContinuous(abs("x")));

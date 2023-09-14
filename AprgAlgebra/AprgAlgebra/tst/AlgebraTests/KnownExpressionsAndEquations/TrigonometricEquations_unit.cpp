@@ -15,12 +15,12 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(TrigonometricEquationsTest, GetTrigonometricPythagoreanIdentityWorks) {
-    Equation actualEquation(getTrigonometricPythagoreanIdentity("x"));
+    Equation const actualEquation(getTrigonometricPythagoreanIdentity("x"));
 
-    Term expectedSineSquaredTerm(createExpressionIfPossible({sin("x"), "^", 2}));
-    Term expectedCosineSquaredTerm(createExpressionIfPossible({cos("x"), "^", 2}));
-    Term leftHandSide(createExpressionIfPossible({expectedSineSquaredTerm, "+", expectedCosineSquaredTerm}));
-    Equation expectedEquation(leftHandSide, "=", 1);
+    Term const expectedSineSquaredTerm(createExpressionIfPossible({sin("x"), "^", 2}));
+    Term const expectedCosineSquaredTerm(createExpressionIfPossible({cos("x"), "^", 2}));
+    Term const leftHandSide(createExpressionIfPossible({expectedSineSquaredTerm, "+", expectedCosineSquaredTerm}));
+    Equation const expectedEquation(leftHandSide, "=", 1);
     EXPECT_EQ(expectedEquation, actualEquation);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", 5);
@@ -28,11 +28,11 @@ TEST(TrigonometricEquationsTest, GetTrigonometricPythagoreanIdentityWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetSineEquationOfRightTriangleWorks) {
-    Equation actualEquation(getSineEquationOfRightTriangle("x", "o", "h"));
+    Equation const actualEquation(getSineEquationOfRightTriangle("x", "o", "h"));
 
-    Term leftHandSide(sin("x"));
-    Term rightHandSide(createExpressionIfPossible({"o", "/", "h"}));
-    Equation expectedEquation(leftHandSide, "=", rightHandSide);
+    Term const leftHandSide(sin("x"));
+    Term const rightHandSide(createExpressionIfPossible({"o", "/", "h"}));
+    Equation const expectedEquation(leftHandSide, "=", rightHandSide);
     EXPECT_EQ(expectedEquation, actualEquation);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi() / 6);
@@ -42,11 +42,11 @@ TEST(TrigonometricEquationsTest, GetSineEquationOfRightTriangleWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetCosineEquationOfRightTriangleWorks) {
-    Equation actualEquation(getCosineEquationOfRightTriangle("x", "a", "h"));
+    Equation const actualEquation(getCosineEquationOfRightTriangle("x", "a", "h"));
 
-    Term leftHandSide(cos("x"));
-    Term rightHandSide(createExpressionIfPossible({"a", "/", "h"}));
-    Equation expectedEquation(leftHandSide, "=", rightHandSide);
+    Term const leftHandSide(cos("x"));
+    Term const rightHandSide(createExpressionIfPossible({"a", "/", "h"}));
+    Equation const expectedEquation(leftHandSide, "=", rightHandSide);
     EXPECT_EQ(expectedEquation, actualEquation);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi() / 6);
@@ -56,11 +56,11 @@ TEST(TrigonometricEquationsTest, GetCosineEquationOfRightTriangleWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetTangentEquationOfRightTriangleWorks) {
-    Equation actualEquation(getTangentEquationOfRightTriangle("x", "o", "a"));
+    Equation const actualEquation(getTangentEquationOfRightTriangle("x", "o", "a"));
 
-    Term leftHandSide(tan("x"));
-    Term rightHandSide(createExpressionIfPossible({"o", "/", "a"}));
-    Equation expectedEquation(leftHandSide, "=", rightHandSide);
+    Term const leftHandSide(tan("x"));
+    Term const rightHandSide(createExpressionIfPossible({"o", "/", "a"}));
+    Equation const expectedEquation(leftHandSide, "=", rightHandSide);
     EXPECT_EQ(expectedEquation, actualEquation);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi() / 6);
@@ -70,11 +70,11 @@ TEST(TrigonometricEquationsTest, GetTangentEquationOfRightTriangleWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetLawOfSineEquationWorks) {
-    Equation actualEquation(getLawOfSineEquation("s1", "a1", "s2", "a2"));
+    Equation const actualEquation(getLawOfSineEquation("s1", "a1", "s2", "a2"));
 
-    Term leftHandSide(createExpressionIfPossible({"s1", "/", sin("a1")}));
-    Term rightHandSide(createExpressionIfPossible({"s2", "/", sin("a2")}));
-    Equation expectedEquation(leftHandSide, "=", rightHandSide);
+    Term const leftHandSide(createExpressionIfPossible({"s1", "/", sin("a1")}));
+    Term const rightHandSide(createExpressionIfPossible({"s2", "/", sin("a2")}));
+    Equation const expectedEquation(leftHandSide, "=", rightHandSide);
     EXPECT_EQ(expectedEquation, actualEquation);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("s1", 5);
@@ -85,15 +85,15 @@ TEST(TrigonometricEquationsTest, GetLawOfSineEquationWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetLawOfCosineEquationWorks) {
-    Equation actualEquation(getLawOfCosineEquation("s1", "s2", "s3", "a1"));
+    Equation const actualEquation(getLawOfCosineEquation("s1", "s2", "s3", "a1"));
 
-    Term side1Squared(createExpressionIfPossible({"s1", "^", 2}));
-    Term side2Squared(createExpressionIfPossible({"s2", "^", 2}));
-    Term side3Squared(createExpressionIfPossible({"s3", "^", 2}));
-    Term cosinePart(createExpressionIfPossible({2, "*", "s2", "*", "s3", "*", cos("a1")}));
+    Term const side1Squared(createExpressionIfPossible({"s1", "^", 2}));
+    Term const side2Squared(createExpressionIfPossible({"s2", "^", 2}));
+    Term const side3Squared(createExpressionIfPossible({"s3", "^", 2}));
+    Term const cosinePart(createExpressionIfPossible({2, "*", "s2", "*", "s3", "*", cos("a1")}));
     Term const& leftHandSide(side1Squared);
-    Term rightHandSide(createExpressionIfPossible({side2Squared, "+", side3Squared, "-", cosinePart}));
-    Equation expectedEquation(leftHandSide, "=", rightHandSide);
+    Term const rightHandSide(createExpressionIfPossible({side2Squared, "+", side3Squared, "-", cosinePart}));
+    Equation const expectedEquation(leftHandSide, "=", rightHandSide);
     EXPECT_EQ(expectedEquation, actualEquation);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("s1", 5);
@@ -104,9 +104,9 @@ TEST(TrigonometricEquationsTest, GetLawOfCosineEquationWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetSineSquaredWorks) {
-    Term actualTerm(getSineSquared("x"));
+    Term const actualTerm(getSineSquared("x"));
 
-    Term expectedTerm(createExpressionIfPossible({sin("x"), "^", 2}));
+    Term const expectedTerm(createExpressionIfPossible({sin("x"), "^", 2}));
     EXPECT_EQ(expectedTerm, actualTerm);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi() / 6);
@@ -114,9 +114,10 @@ TEST(TrigonometricEquationsTest, GetSineSquaredWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetCosineOfDoubledValueWorks) {
-    Term actualCosineOfDoubledValue(getCosineOfDoubledValue("x"));
+    Term const actualCosineOfDoubledValue(getCosineOfDoubledValue("x"));
 
-    Term expectedCosineOfDoubledValue(createExpressionIfPossible({getCosineSquared("x"), "-", getSineSquared("x")}));
+    Term const expectedCosineOfDoubledValue(
+        createExpressionIfPossible({getCosineSquared("x"), "-", getSineSquared("x")}));
     EXPECT_EQ(expectedCosineOfDoubledValue, actualCosineOfDoubledValue);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi() / 6);
@@ -124,9 +125,9 @@ TEST(TrigonometricEquationsTest, GetCosineOfDoubledValueWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetSineSquaredInCosineWorks) {
-    Term actualTerm(getSineSquaredInCosine("x"));
+    Term const actualTerm(getSineSquaredInCosine("x"));
 
-    Term expectedTerm(createExpressionIfPossible({1, "-", cos("x"), "^", 2}));
+    Term const expectedTerm(createExpressionIfPossible({1, "-", cos("x"), "^", 2}));
     EXPECT_EQ(expectedTerm, actualTerm);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi() / 6);
@@ -134,9 +135,9 @@ TEST(TrigonometricEquationsTest, GetSineSquaredInCosineWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetCosineSquaredWorks) {
-    Term actualTerm(getCosineSquared("x"));
+    Term const actualTerm(getCosineSquared("x"));
 
-    Term expectedTerm(createExpressionIfPossible({cos("x"), "^", 2}));
+    Term const expectedTerm(createExpressionIfPossible({cos("x"), "^", 2}));
     EXPECT_EQ(expectedTerm, actualTerm);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi() / 3);
@@ -144,9 +145,9 @@ TEST(TrigonometricEquationsTest, GetCosineSquaredWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetCosineSquaredInSineWorks) {
-    Term actualTerm(getCosineSquaredInSine("x"));
+    Term const actualTerm(getCosineSquaredInSine("x"));
 
-    Term expectedTerm(createExpressionIfPossible({1, "-", sin("x"), "^", 2}));
+    Term const expectedTerm(createExpressionIfPossible({1, "-", sin("x"), "^", 2}));
     EXPECT_EQ(expectedTerm, actualTerm);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi() / 3);
@@ -154,9 +155,9 @@ TEST(TrigonometricEquationsTest, GetCosineSquaredInSineWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetTangentSquaredWorks) {
-    Term actualTerm(getTangentSquared("x"));
+    Term const actualTerm(getTangentSquared("x"));
 
-    Term expectedTerm(createExpressionIfPossible({tan("x"), "^", 2}));
+    Term const expectedTerm(createExpressionIfPossible({tan("x"), "^", 2}));
     EXPECT_EQ(expectedTerm, actualTerm);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi() / 4);
@@ -164,11 +165,11 @@ TEST(TrigonometricEquationsTest, GetTangentSquaredWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetTangentOfDoubledValueWorks) {
-    Term actualTangentOfDoubledValue(getTangentOfDoubledValue("x"));
+    Term const actualTangentOfDoubledValue(getTangentOfDoubledValue("x"));
 
-    Term expectedNumerator(createExpressionIfPossible({2, "*", tan("x")}));
-    Term expectedDenominator(createExpressionIfPossible({1, "-", getTangentSquared("x")}));
-    Term expectedTangentOfDoubledValue(createExpressionIfPossible({expectedNumerator, "/", expectedDenominator}));
+    Term const expectedNumerator(createExpressionIfPossible({2, "*", tan("x")}));
+    Term const expectedDenominator(createExpressionIfPossible({1, "-", getTangentSquared("x")}));
+    Term const expectedTangentOfDoubledValue(createExpressionIfPossible({expectedNumerator, "/", expectedDenominator}));
     EXPECT_EQ(expectedTangentOfDoubledValue, actualTangentOfDoubledValue);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi() / 8);
@@ -176,13 +177,13 @@ TEST(TrigonometricEquationsTest, GetTangentOfDoubledValueWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetSineOfSumOrDifferenceOfTwoTermsWorks) {
-    Term actualSineOfSumOfValues(getSineOfSumOrDifferenceOfTwoTerms("x", Operator("+"), "y"));
-    Term actualSineOfDifferenceOfValues(getSineOfSumOrDifferenceOfTwoTerms("x", Operator("-"), "y"));
+    Term const actualSineOfSumOfValues(getSineOfSumOrDifferenceOfTwoTerms("x", Operator("+"), "y"));
+    Term const actualSineOfDifferenceOfValues(getSineOfSumOrDifferenceOfTwoTerms("x", Operator("-"), "y"));
 
-    Term firstPart(createExpressionIfPossible({sin("x"), "*", cos("y")}));
-    Term secondPart(createExpressionIfPossible({cos("x"), "*", sin("y")}));
-    Term expectedSineOfSumOfValues(createExpressionIfPossible({firstPart, "+", secondPart}));
-    Term expectedSineOfDifferenceOfValues(createExpressionIfPossible({firstPart, "-", secondPart}));
+    Term const firstPart(createExpressionIfPossible({sin("x"), "*", cos("y")}));
+    Term const secondPart(createExpressionIfPossible({cos("x"), "*", sin("y")}));
+    Term const expectedSineOfSumOfValues(createExpressionIfPossible({firstPart, "+", secondPart}));
+    Term const expectedSineOfDifferenceOfValues(createExpressionIfPossible({firstPart, "-", secondPart}));
     EXPECT_EQ(expectedSineOfSumOfValues, actualSineOfSumOfValues);
     EXPECT_EQ(expectedSineOfDifferenceOfValues, actualSineOfDifferenceOfValues);
     SubstitutionOfVariablesToValues substitution;
@@ -193,13 +194,13 @@ TEST(TrigonometricEquationsTest, GetSineOfSumOrDifferenceOfTwoTermsWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetCosineOfSumOrDifferenceOfTwoTermsWorks) {
-    Term actualCosineOfSumOfValues(getCosineOfSumOrDifferenceOfTwoTerms("x", Operator("+"), "y"));
-    Term actualCosineOfDifferenceOfValues(getCosineOfSumOrDifferenceOfTwoTerms("x", Operator("-"), "y"));
+    Term const actualCosineOfSumOfValues(getCosineOfSumOrDifferenceOfTwoTerms("x", Operator("+"), "y"));
+    Term const actualCosineOfDifferenceOfValues(getCosineOfSumOrDifferenceOfTwoTerms("x", Operator("-"), "y"));
 
-    Term firstPart(createExpressionIfPossible({cos("x"), "*", cos("y")}));
-    Term secondPart(createExpressionIfPossible({sin("x"), "*", sin("y")}));
-    Term expectedCosineOfSumOfValues(createExpressionIfPossible({firstPart, "-", secondPart}));
-    Term expectedCosineOfDifferenceOfValues(createExpressionIfPossible({firstPart, "+", secondPart}));
+    Term const firstPart(createExpressionIfPossible({cos("x"), "*", cos("y")}));
+    Term const secondPart(createExpressionIfPossible({sin("x"), "*", sin("y")}));
+    Term const expectedCosineOfSumOfValues(createExpressionIfPossible({firstPart, "-", secondPart}));
+    Term const expectedCosineOfDifferenceOfValues(createExpressionIfPossible({firstPart, "+", secondPart}));
     EXPECT_EQ(expectedCosineOfSumOfValues, actualCosineOfSumOfValues);
     EXPECT_EQ(expectedCosineOfDifferenceOfValues, actualCosineOfDifferenceOfValues);
     SubstitutionOfVariablesToValues substitution;
@@ -210,16 +211,17 @@ TEST(TrigonometricEquationsTest, GetCosineOfSumOrDifferenceOfTwoTermsWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetTangentOfSumOrDifferenceOfTwoTermsWorks) {
-    Term actualTangentOfSumOfValues(getTangentOfSumOrDifferenceOfTwoTerms("x", Operator("+"), "y"));
-    Term actualTangentOfDifferenceOfValues(getTangentOfSumOrDifferenceOfTwoTerms("x", Operator("-"), "y"));
+    Term const actualTangentOfSumOfValues(getTangentOfSumOrDifferenceOfTwoTerms("x", Operator("+"), "y"));
+    Term const actualTangentOfDifferenceOfValues(getTangentOfSumOrDifferenceOfTwoTerms("x", Operator("-"), "y"));
 
-    Term numeratorSum(createExpressionIfPossible({tan("x"), "+", tan("y")}));
-    Term denominatorSum(createExpressionIfPossible({1, "-", createExpressionIfPossible({tan("x"), "*", tan("y")})}));
-    Term numeratorDifference(createExpressionIfPossible({tan("x"), "-", tan("y")}));
-    Term denominatorDifference(
+    Term const numeratorSum(createExpressionIfPossible({tan("x"), "+", tan("y")}));
+    Term const denominatorSum(
+        createExpressionIfPossible({1, "-", createExpressionIfPossible({tan("x"), "*", tan("y")})}));
+    Term const numeratorDifference(createExpressionIfPossible({tan("x"), "-", tan("y")}));
+    Term const denominatorDifference(
         createExpressionIfPossible({1, "+", createExpressionIfPossible({tan("x"), "*", tan("y")})}));
-    Term expectedTangentOfSumOfValues(createExpressionIfPossible({numeratorSum, "/", denominatorSum}));
-    Term expectedTangentOfDifferenceOfValues(
+    Term const expectedTangentOfSumOfValues(createExpressionIfPossible({numeratorSum, "/", denominatorSum}));
+    Term const expectedTangentOfDifferenceOfValues(
         createExpressionIfPossible({numeratorDifference, "/", denominatorDifference}));
     EXPECT_EQ(expectedTangentOfSumOfValues, actualTangentOfSumOfValues);
     EXPECT_EQ(expectedTangentOfDifferenceOfValues, actualTangentOfDifferenceOfValues);
@@ -231,9 +233,9 @@ TEST(TrigonometricEquationsTest, GetTangentOfSumOrDifferenceOfTwoTermsWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetSineOfDoubledValueWorks) {
-    Term actualSineOfDoubledValue(getSineOfDoubledValue("x"));
+    Term const actualSineOfDoubledValue(getSineOfDoubledValue("x"));
 
-    Term expectedSineOfDoubledValue(createExpressionIfPossible({2, "*", sin("x"), "*", cos("x")}));
+    Term const expectedSineOfDoubledValue(createExpressionIfPossible({2, "*", sin("x"), "*", cos("x")}));
     EXPECT_EQ(expectedSineOfDoubledValue, actualSineOfDoubledValue);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi() / 12);
@@ -241,13 +243,13 @@ TEST(TrigonometricEquationsTest, GetSineOfDoubledValueWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetSineOfHalvedValueWorks) {
-    Term actualPositiveRoot(getSineOfHalvedValue("x", true));
-    Term actualNegativeRoot(getSineOfHalvedValue("x", false));
+    Term const actualPositiveRoot(getSineOfHalvedValue("x", true));
+    Term const actualNegativeRoot(getSineOfHalvedValue("x", false));
 
-    Term numerator(createExpressionIfPossible({1, "-", cos("x")}));
-    Term squaredValue(createExpressionIfPossible({numerator, "/", 2}));
-    Term expectedPositiveRoot(createExpressionIfPossible({squaredValue, "^", AlbaNumber::createFraction(1, 2)}));
-    Term expectedNegativeRoot(createExpressionIfPossible({-1, "*", expectedPositiveRoot}));
+    Term const numerator(createExpressionIfPossible({1, "-", cos("x")}));
+    Term const squaredValue(createExpressionIfPossible({numerator, "/", 2}));
+    Term const expectedPositiveRoot(createExpressionIfPossible({squaredValue, "^", AlbaNumber::createFraction(1, 2)}));
+    Term const expectedNegativeRoot(createExpressionIfPossible({-1, "*", expectedPositiveRoot}));
     EXPECT_EQ(expectedPositiveRoot, actualPositiveRoot);
     EXPECT_EQ(expectedNegativeRoot, actualNegativeRoot);
     SubstitutionOfVariablesToValues substitution;
@@ -257,13 +259,13 @@ TEST(TrigonometricEquationsTest, GetSineOfHalvedValueWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetCosineOfHalvedValueWorks) {
-    Term actualPositiveRoot(getCosineOfHalvedValue("x", true));
-    Term actualNegativeRoot(getCosineOfHalvedValue("x", false));
+    Term const actualPositiveRoot(getCosineOfHalvedValue("x", true));
+    Term const actualNegativeRoot(getCosineOfHalvedValue("x", false));
 
-    Term numerator(createExpressionIfPossible({1, "+", cos("x")}));
-    Term squaredValue(createExpressionIfPossible({numerator, "/", 2}));
-    Term expectedPositiveRoot(createExpressionIfPossible({squaredValue, "^", AlbaNumber::createFraction(1, 2)}));
-    Term expectedNegativeRoot(createExpressionIfPossible({-1, "*", expectedPositiveRoot}));
+    Term const numerator(createExpressionIfPossible({1, "+", cos("x")}));
+    Term const squaredValue(createExpressionIfPossible({numerator, "/", 2}));
+    Term const expectedPositiveRoot(createExpressionIfPossible({squaredValue, "^", AlbaNumber::createFraction(1, 2)}));
+    Term const expectedNegativeRoot(createExpressionIfPossible({-1, "*", expectedPositiveRoot}));
     EXPECT_EQ(expectedPositiveRoot, actualPositiveRoot);
     EXPECT_EQ(expectedNegativeRoot, actualNegativeRoot);
     SubstitutionOfVariablesToValues substitution;
@@ -273,10 +275,10 @@ TEST(TrigonometricEquationsTest, GetCosineOfHalvedValueWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetSineSquaredOfHalvedValueWorks) {
-    Term termToVerify(getSineSquaredOfHalvedValue("x"));
+    Term const termToVerify(getSineSquaredOfHalvedValue("x"));
 
-    Term numerator(createExpressionIfPossible({1, "-", cos("x")}));
-    Term termToExpect(createExpressionIfPossible({numerator, "/", 2}));
+    Term const numerator(createExpressionIfPossible({1, "-", cos("x")}));
+    Term const termToExpect(createExpressionIfPossible({numerator, "/", 2}));
     EXPECT_EQ(termToExpect, termToVerify);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi());
@@ -284,10 +286,10 @@ TEST(TrigonometricEquationsTest, GetSineSquaredOfHalvedValueWorks) {
 }
 
 TEST(TrigonometricEquationsTest, GetCosineSquaredOfHalvedValueWorks) {
-    Term termToVerify(getCosineSquaredOfHalvedValue("x"));
+    Term const termToVerify(getCosineSquaredOfHalvedValue("x"));
 
-    Term numerator(createExpressionIfPossible({1, "+", cos("x")}));
-    Term termToExpect(createExpressionIfPossible({numerator, "/", 2}));
+    Term const numerator(createExpressionIfPossible({1, "+", cos("x")}));
+    Term const termToExpect(createExpressionIfPossible({numerator, "/", 2}));
     EXPECT_EQ(termToExpect, termToVerify);
     SubstitutionOfVariablesToValues substitution;
     substitution.putVariableWithValue("x", getPi());

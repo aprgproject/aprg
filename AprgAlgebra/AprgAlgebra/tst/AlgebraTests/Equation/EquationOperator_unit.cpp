@@ -7,10 +7,10 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(EquationOperatorTest, EqualityEquationOperatorWorks) {
-    EquationOperator operator1;
-    EquationOperator operator2("=");
-    EquationOperator operator3("<");
-    EquationOperator operator4("=");
+    EquationOperator const operator1;
+    EquationOperator const operator2("=");
+    EquationOperator const operator3("<");
+    EquationOperator const operator4("=");
 
     EXPECT_TRUE(operator1 == operator1);
     EXPECT_FALSE(operator1 == operator2);
@@ -20,10 +20,10 @@ TEST(EquationOperatorTest, EqualityEquationOperatorWorks) {
 }
 
 TEST(EquationOperatorTest, InequalityEquationOperatorWorks) {
-    EquationOperator operator1;
-    EquationOperator operator2("=");
-    EquationOperator operator3("<");
-    EquationOperator operator4("=");
+    EquationOperator const operator1;
+    EquationOperator const operator2("=");
+    EquationOperator const operator3("<");
+    EquationOperator const operator4("=");
 
     EXPECT_FALSE(operator1 != operator1);
     EXPECT_TRUE(operator1 != operator2);
@@ -34,15 +34,15 @@ TEST(EquationOperatorTest, InequalityEquationOperatorWorks) {
 
 TEST(EquationOperatorTest, OutputStreamOperatorWorks) {
     stringstream ss;
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
+    EquationOperator const nullOperator;
+    EquationOperator const singleEqualityOperator("=");
+    EquationOperator const doubleEqualityOperator("==");
+    EquationOperator const inequalityOperator("!=");
+    EquationOperator const lessThanOperator("<");
+    EquationOperator const greaterThanOperator(">");
+    EquationOperator const lessThanOperatorOrEqual("<=");
+    EquationOperator const greaterThanOperatorOrEqual(">=");
+    EquationOperator const invalidEquationOperator("invalid");
 
     ss << nullOperator << "," << singleEqualityOperator << "," << doubleEqualityOperator << "," << inequalityOperator
        << "," << lessThanOperator << "," << greaterThanOperator << "," << lessThanOperatorOrEqual << ","
@@ -59,23 +59,23 @@ TEST(EquationOperatorTest, LessThanEquationOperatorWorks) {
 }
 
 TEST(EquationOperatorTest, EquationOperatorsAreConstructedCorrectly) {
-    EquationOperator operator1;
-    EquationOperator operator2("test");
+    EquationOperator const operator1;
+    EquationOperator const operator2("test");
 
     EXPECT_EQ("", operator1.getOperatorString());
     EXPECT_EQ("test", operator2.getOperatorString());
 }
 
 TEST(EquationOperatorTest, GetEquationOperatorStringValueWorks) {
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
+    EquationOperator const nullOperator;
+    EquationOperator const singleEqualityOperator("=");
+    EquationOperator const doubleEqualityOperator("==");
+    EquationOperator const inequalityOperator("!=");
+    EquationOperator const lessThanOperator("<");
+    EquationOperator const greaterThanOperator(">");
+    EquationOperator const lessThanOperatorOrEqual("<=");
+    EquationOperator const greaterThanOperatorOrEqual(">=");
+    EquationOperator const invalidEquationOperator("invalid");
 
     EXPECT_TRUE(nullOperator.getOperatorString().empty());
     EXPECT_EQ("=", singleEqualityOperator.getOperatorString());
@@ -89,15 +89,15 @@ TEST(EquationOperatorTest, GetEquationOperatorStringValueWorks) {
 }
 
 TEST(EquationOperatorTest, IsEqualWorks) {
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
+    EquationOperator const nullOperator;
+    EquationOperator const singleEqualityOperator("=");
+    EquationOperator const doubleEqualityOperator("==");
+    EquationOperator const inequalityOperator("!=");
+    EquationOperator const lessThanOperator("<");
+    EquationOperator const greaterThanOperator(">");
+    EquationOperator const lessThanOperatorOrEqual("<=");
+    EquationOperator const greaterThanOperatorOrEqual(">=");
+    EquationOperator const invalidEquationOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isEqual());
     EXPECT_TRUE(singleEqualityOperator.isEqual());
@@ -111,15 +111,15 @@ TEST(EquationOperatorTest, IsEqualWorks) {
 }
 
 TEST(EquationOperatorTest, IsNotEqualWorks) {
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
+    EquationOperator const nullOperator;
+    EquationOperator const singleEqualityOperator("=");
+    EquationOperator const doubleEqualityOperator("==");
+    EquationOperator const inequalityOperator("!=");
+    EquationOperator const lessThanOperator("<");
+    EquationOperator const greaterThanOperator(">");
+    EquationOperator const lessThanOperatorOrEqual("<=");
+    EquationOperator const greaterThanOperatorOrEqual(">=");
+    EquationOperator const invalidEquationOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isNotEqual());
     EXPECT_FALSE(singleEqualityOperator.isNotEqual());
@@ -133,15 +133,15 @@ TEST(EquationOperatorTest, IsNotEqualWorks) {
 }
 
 TEST(EquationOperatorTest, IsLessThanWorks) {
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
+    EquationOperator const nullOperator;
+    EquationOperator const singleEqualityOperator("=");
+    EquationOperator const doubleEqualityOperator("==");
+    EquationOperator const inequalityOperator("!=");
+    EquationOperator const lessThanOperator("<");
+    EquationOperator const greaterThanOperator(">");
+    EquationOperator const lessThanOperatorOrEqual("<=");
+    EquationOperator const greaterThanOperatorOrEqual(">=");
+    EquationOperator const invalidEquationOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isLessThan());
     EXPECT_FALSE(singleEqualityOperator.isLessThan());
@@ -155,15 +155,15 @@ TEST(EquationOperatorTest, IsLessThanWorks) {
 }
 
 TEST(EquationOperatorTest, IsGreaterThanWorks) {
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
+    EquationOperator const nullOperator;
+    EquationOperator const singleEqualityOperator("=");
+    EquationOperator const doubleEqualityOperator("==");
+    EquationOperator const inequalityOperator("!=");
+    EquationOperator const lessThanOperator("<");
+    EquationOperator const greaterThanOperator(">");
+    EquationOperator const lessThanOperatorOrEqual("<=");
+    EquationOperator const greaterThanOperatorOrEqual(">=");
+    EquationOperator const invalidEquationOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isGreaterThan());
     EXPECT_FALSE(singleEqualityOperator.isGreaterThan());
@@ -177,15 +177,15 @@ TEST(EquationOperatorTest, IsGreaterThanWorks) {
 }
 
 TEST(EquationOperatorTest, IsLessThanOrEqualWorks) {
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
+    EquationOperator const nullOperator;
+    EquationOperator const singleEqualityOperator("=");
+    EquationOperator const doubleEqualityOperator("==");
+    EquationOperator const inequalityOperator("!=");
+    EquationOperator const lessThanOperator("<");
+    EquationOperator const greaterThanOperator(">");
+    EquationOperator const lessThanOperatorOrEqual("<=");
+    EquationOperator const greaterThanOperatorOrEqual(">=");
+    EquationOperator const invalidEquationOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isLessThanOrEqual());
     EXPECT_FALSE(singleEqualityOperator.isLessThanOrEqual());
@@ -199,15 +199,15 @@ TEST(EquationOperatorTest, IsLessThanOrEqualWorks) {
 }
 
 TEST(EquationOperatorTest, IsGreaterThanOrEqualWorks) {
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
+    EquationOperator const nullOperator;
+    EquationOperator const singleEqualityOperator("=");
+    EquationOperator const doubleEqualityOperator("==");
+    EquationOperator const inequalityOperator("!=");
+    EquationOperator const lessThanOperator("<");
+    EquationOperator const greaterThanOperator(">");
+    EquationOperator const lessThanOperatorOrEqual("<=");
+    EquationOperator const greaterThanOperatorOrEqual(">=");
+    EquationOperator const invalidEquationOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isGreaterThanOrEqual());
     EXPECT_FALSE(singleEqualityOperator.isGreaterThanOrEqual());
@@ -221,15 +221,15 @@ TEST(EquationOperatorTest, IsGreaterThanOrEqualWorks) {
 }
 
 TEST(EquationOperatorTest, IsAnEqualityVariantWorks) {
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
+    EquationOperator const nullOperator;
+    EquationOperator const singleEqualityOperator("=");
+    EquationOperator const doubleEqualityOperator("==");
+    EquationOperator const inequalityOperator("!=");
+    EquationOperator const lessThanOperator("<");
+    EquationOperator const greaterThanOperator(">");
+    EquationOperator const lessThanOperatorOrEqual("<=");
+    EquationOperator const greaterThanOperatorOrEqual(">=");
+    EquationOperator const invalidEquationOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isAnEqualityVariant());
     EXPECT_TRUE(singleEqualityOperator.isAnEqualityVariant());
@@ -243,15 +243,15 @@ TEST(EquationOperatorTest, IsAnEqualityVariantWorks) {
 }
 
 TEST(EquationOperatorTest, IsALessThanVariantWorks) {
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
+    EquationOperator const nullOperator;
+    EquationOperator const singleEqualityOperator("=");
+    EquationOperator const doubleEqualityOperator("==");
+    EquationOperator const inequalityOperator("!=");
+    EquationOperator const lessThanOperator("<");
+    EquationOperator const greaterThanOperator(">");
+    EquationOperator const lessThanOperatorOrEqual("<=");
+    EquationOperator const greaterThanOperatorOrEqual(">=");
+    EquationOperator const invalidEquationOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isALessThanVariant());
     EXPECT_FALSE(singleEqualityOperator.isALessThanVariant());
@@ -265,15 +265,15 @@ TEST(EquationOperatorTest, IsALessThanVariantWorks) {
 }
 
 TEST(EquationOperatorTest, IsAGreaterThanVariantWorks) {
-    EquationOperator nullOperator;
-    EquationOperator singleEqualityOperator("=");
-    EquationOperator doubleEqualityOperator("==");
-    EquationOperator inequalityOperator("!=");
-    EquationOperator lessThanOperator("<");
-    EquationOperator greaterThanOperator(">");
-    EquationOperator lessThanOperatorOrEqual("<=");
-    EquationOperator greaterThanOperatorOrEqual(">=");
-    EquationOperator invalidEquationOperator("invalid");
+    EquationOperator const nullOperator;
+    EquationOperator const singleEqualityOperator("=");
+    EquationOperator const doubleEqualityOperator("==");
+    EquationOperator const inequalityOperator("!=");
+    EquationOperator const lessThanOperator("<");
+    EquationOperator const greaterThanOperator(">");
+    EquationOperator const lessThanOperatorOrEqual("<=");
+    EquationOperator const greaterThanOperatorOrEqual(">=");
+    EquationOperator const invalidEquationOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isAGreaterThanVariant());
     EXPECT_FALSE(singleEqualityOperator.isAGreaterThanVariant());

@@ -7,8 +7,8 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(BrentMethodTest, ConstructionWorks) {
-    BrentMethod brentMethod1(AlbaNumbers{});
-    BrentMethod brentMethod2(AlbaNumbers{1, 2, 3});
+    BrentMethod const brentMethod1(AlbaNumbers{});
+    BrentMethod const brentMethod2(AlbaNumbers{1, 2, 3});
 
     EXPECT_EQ(0, brentMethod1.getNumberOfIterationsExecuted());
     EXPECT_EQ(AlbaNumbers({}), brentMethod1.getCoefficients());
@@ -20,7 +20,7 @@ TEST(BrentMethodTest, GetCalculationValuesWorks) {
     BrentMethod brentMethod(AlbaNumbers{1, 4, 4});
     brentMethod.resetCalculation(-4, 4);
 
-    BrentMethod::CalculationValues calculationValues(brentMethod.getCalculationValues());
+    BrentMethod::CalculationValues const calculationValues(brentMethod.getCalculationValues());
 
     EXPECT_FALSE(calculationValues.solutionOptional);
     EXPECT_EQ(AlbaNumber(4), calculationValues.a);
@@ -38,7 +38,7 @@ TEST(BrentMethodTest, ResetCalculationWorksBeforeRunning) {
 
     brentMethod.resetCalculation(-4, 4);
 
-    BrentMethod::CalculationValues calculationValues(brentMethod.getCalculationValues());
+    BrentMethod::CalculationValues const calculationValues(brentMethod.getCalculationValues());
     EXPECT_FALSE(calculationValues.solutionOptional);
     EXPECT_EQ(AlbaNumber(4), calculationValues.a);
     EXPECT_EQ(AlbaNumber(-4), calculationValues.b);
@@ -149,7 +149,7 @@ TEST(BrentMethodTest, ResetCalculationWorksAfterRunning) {
 
     brentMethod.resetCalculation(-4, 4);
 
-    BrentMethod::CalculationValues calculationValues(brentMethod.getCalculationValues());
+    BrentMethod::CalculationValues const calculationValues(brentMethod.getCalculationValues());
     EXPECT_FALSE(calculationValues.solutionOptional);
     EXPECT_EQ(AlbaNumber(4), calculationValues.a);
     EXPECT_EQ(AlbaNumber(-4), calculationValues.b);
@@ -162,7 +162,7 @@ TEST(BrentMethodTest, ResetCalculationWorksAfterRunning) {
 }
 
 TEST(BrentMethodTest, GetNumberOfIterationsExecutedWorks) {
-    BrentMethod brentMethod1(AlbaNumbers{});
+    BrentMethod const brentMethod1(AlbaNumbers{});
     BrentMethod brentMethod2(AlbaNumbers{1, 4, 4});
     brentMethod2.resetCalculation(-4, 4);
     brentMethod2.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -202,7 +202,7 @@ TEST(BrentMethodTest, RunWorksWithNoRealRoots) {
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
 
-    AlbaNumberOptional solution(brentMethod.getSolution());
+    AlbaNumberOptional const solution(brentMethod.getSolution());
     ASSERT_FALSE(solution);
     EXPECT_EQ(1000, brentMethod.getNumberOfIterationsExecuted());
 }
@@ -297,7 +297,7 @@ TEST(BrentMethodTest, RunWorksOnQuarticFailedExampleBasedOnInitialValues) {
 
     brentMethod.runMaxNumberOfIterationsOrUntilFinished(1000);
 
-    AlbaNumberOptional solution(brentMethod.getSolution());
+    AlbaNumberOptional const solution(brentMethod.getSolution());
     ASSERT_FALSE(solution);
     EXPECT_EQ(1000, brentMethod.getNumberOfIterationsExecuted());
 }
@@ -339,7 +339,7 @@ TEST(BrentMethodTest, RunWorksOnPrecisionExample) {
 }
 
 TEST(BrentMethodTest, IsFinishedWorks) {
-    BrentMethod brentMethod1(AlbaNumbers{});
+    BrentMethod const brentMethod1(AlbaNumbers{});
     BrentMethod brentMethod2(AlbaNumbers{1, 4, 4});
     brentMethod2.resetCalculation(-4, 4);
     brentMethod2.runMaxNumberOfIterationsOrUntilFinished(1000);
@@ -354,7 +354,7 @@ TEST(BrentMethodTest, GetSolutionWorks) {
     brentMethod2.resetCalculation(-4, 4);
     brentMethod2.runMaxNumberOfIterationsOrUntilFinished(1000);
 
-    AlbaNumberOptional solution1(brentMethod1.getSolution());
+    AlbaNumberOptional const solution1(brentMethod1.getSolution());
     ASSERT_FALSE(solution1);
     AlbaNumberOptional solution2(brentMethod2.getSolution());
     ASSERT_TRUE(solution2);

@@ -9,7 +9,7 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(ExtremaUtilitiesTest, GetInputValuesInIntervalWithSameAsMeanOfIntervalWorks) {
-    Term termToTest(Polynomial({Monomial(1, {{"x", 3}}), Monomial(-5, {{"x", 2}}), Monomial(-3, {{"x", 1}})}));
+    Term const termToTest(Polynomial({Monomial(1, {{"x", 3}}), Monomial(-5, {{"x", 2}}), Monomial(-3, {{"x", 1}})}));
 
     AlbaNumbers values(getInputValuesInIntervalWithSameAsMeanOfInterval(termToTest, "x", 1, 3));
 
@@ -18,9 +18,9 @@ TEST(ExtremaUtilitiesTest, GetInputValuesInIntervalWithSameAsMeanOfIntervalWorks
 }
 
 TEST(ExtremaUtilitiesTest, GetInputValuesForCauchyMeanValueTheoremWorks) {
-    Term numerator(Polynomial({Monomial(3, {{"x", 2}}), Monomial(3, {{"x", 1}})}));
-    Term denominator(Polynomial({Monomial(1, {{"x", 3}}), Monomial(-4, {{"x", 1}})}));
-    Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Polynomial({Monomial(3, {{"x", 2}}), Monomial(3, {{"x", 1}})}));
+    Term const denominator(Polynomial({Monomial(1, {{"x", 3}}), Monomial(-4, {{"x", 1}})}));
+    Term const termToTest(createExpressionIfPossible({numerator, "/", denominator}));
 
     AlbaNumbers values(getInputValuesForCauchyMeanValueTheorem(termToTest, "x", 1, 3));
 
@@ -29,7 +29,7 @@ TEST(ExtremaUtilitiesTest, GetInputValuesForCauchyMeanValueTheoremWorks) {
 }
 
 TEST(ExtremaUtilitiesTest, GetCriticalNumbersWorks) {
-    Term termToTest(Polynomial(
+    Term const termToTest(Polynomial(
         {Monomial(1, {{"x", AlbaNumber::createFraction(4, 3)}}),
          Monomial(4, {{"x", AlbaNumber::createFraction(1, 3)}})}));
 
@@ -41,7 +41,7 @@ TEST(ExtremaUtilitiesTest, GetCriticalNumbersWorks) {
 }
 
 TEST(ExtremaUtilitiesTest, GetInputValuesAtPointsOfInflectionWorksWithExample1) {
-    Term termToTest(Monomial(1, {{"x", 3}}));
+    Term const termToTest(Monomial(1, {{"x", 3}}));
 
     AlbaNumbers values(getInputValuesAtPointsOfInflection(termToTest, "x"));
 
@@ -50,7 +50,7 @@ TEST(ExtremaUtilitiesTest, GetInputValuesAtPointsOfInflectionWorksWithExample1) 
 }
 
 TEST(ExtremaUtilitiesTest, GetInputValuesAtPointsOfInflectionWorksWithExample2) {
-    Term termToTest(Polynomial(
+    Term const termToTest(Polynomial(
         {Monomial(1, {{"x", AlbaNumber::createFraction(2, 3)}}),
          Monomial(-2, {{"x", AlbaNumber::createFraction(1, 3)}})}));
 
@@ -62,7 +62,7 @@ TEST(ExtremaUtilitiesTest, GetInputValuesAtPointsOfInflectionWorksWithExample2) 
 }
 
 TEST(ExtremaUtilitiesTest, GetRelativeExtremaWorksOnExample1) {
-    Term termToTest(Polynomial(
+    Term const termToTest(Polynomial(
         {Monomial(1, {{"x", 4}}), Monomial(AlbaNumber::createFraction(4, 3), {{"x", 3}}), Monomial(-4, {{"x", 2}})}));
 
     Extrema extrema(getRelativeExtrema(termToTest, "x"));
@@ -80,7 +80,7 @@ TEST(ExtremaUtilitiesTest, GetRelativeExtremaWorksOnExample1) {
 }
 
 TEST(ExtremaUtilitiesTest, GetRelativeExtremaWorksOnExample2) {
-    Term termToTest(Polynomial(
+    Term const termToTest(Polynomial(
         {Monomial(1, {{"x", AlbaNumber::createFraction(2, 3)}}),
          Monomial(-2, {{"x", AlbaNumber::createFraction(1, 3)}})}));
 
@@ -93,12 +93,12 @@ TEST(ExtremaUtilitiesTest, GetRelativeExtremaWorksOnExample2) {
 }
 
 TEST(ExtremaUtilitiesTest, GetAbsoluteExtremumBasedOnRelativeExtremaOnIntervalWorks) {
-    Term termToTest(Polynomial(
+    Term const termToTest(Polynomial(
         {Monomial(3, {{"x", 4}}), Monomial(-8, {{"x", 3}}), Monomial(12, {{"x", 2}}), Monomial(-12, {{"x", 1}}),
          Monomial(3, {})}));
-    Extrema relativeExtrema(getRelativeExtrema(termToTest, "x"));
+    Extrema const relativeExtrema(getRelativeExtrema(termToTest, "x"));
 
-    Extremum expectedAbsoluteExtremum(
+    Extremum const expectedAbsoluteExtremum(
         getAbsoluteExtremumBasedOnRelativeExtremaOnInterval(relativeExtrema, createAllRealValuesInterval()));
 
     EXPECT_EQ(ExtremumType::Minimum, expectedAbsoluteExtremum.extremumType);
@@ -108,7 +108,7 @@ TEST(ExtremaUtilitiesTest, GetAbsoluteExtremumBasedOnRelativeExtremaOnIntervalWo
 
 TEST(ExtremaUtilitiesTest, GetRelativeExtremaWithMultipleVariablesWithExample1) {
     // z = y^2 - x^2
-    Term termToTest(Polynomial({Monomial(1, {{"y", 2}}), Monomial(-1, {{"x", 2}})}));
+    Term const termToTest(Polynomial({Monomial(1, {{"y", 2}}), Monomial(-1, {{"x", 2}})}));
 
     ExtremaWithMultipleVariables extrema(getRelativeExtremaWithMultipleVariables(termToTest, {"x", "y"}));
 
@@ -127,7 +127,7 @@ TEST(ExtremaUtilitiesTest, GetRelativeExtremaWithMultipleVariablesWithExample1) 
 
 TEST(ExtremaUtilitiesTest, GetRelativeExtremaWithMultipleVariablesWithExample2) {
     // z = 6x - 4y - x^2 - 2*y^2
-    Term termToTest(Polynomial(
+    Term const termToTest(Polynomial(
         {Monomial(6, {{"x", 1}}), Monomial(-4, {{"y", 1}}), Monomial(-1, {{"x", 2}}), Monomial(-2, {{"y", 2}})}));
 
     ExtremaWithMultipleVariables extrema(getRelativeExtremaWithMultipleVariables(termToTest, {"x", "y"}));
@@ -147,7 +147,7 @@ TEST(ExtremaUtilitiesTest, GetRelativeExtremaWithMultipleVariablesWithExample2) 
 
 TEST(ExtremaUtilitiesTest, GetRelativeExtremaWithMultipleVariablesWithExample3) {
     // z = 2*x^4 + y^2 - x^2 - 2*y
-    Term termToTest(Polynomial(
+    Term const termToTest(Polynomial(
         {Monomial(2, {{"x", 4}}), Monomial(1, {{"y", 2}}), Monomial(-1, {{"x", 2}}), Monomial(-2, {{"y", 1}})}));
 
     ExtremaWithMultipleVariables extrema(getRelativeExtremaWithMultipleVariables(termToTest, {"x", "y"}));
@@ -188,11 +188,12 @@ TEST(ExtremaUtilitiesTest, GetRelativeExtremaWithMultipleVariablesWithExample3) 
 }
 
 TEST(ExtremaUtilitiesTest, GetMaximumAndMinimumAtClosedIntervalWorksOnExample1) {
-    Term termToTest(
+    Term const termToTest(
         Polynomial({Monomial(1, {{"x", 3}}), Monomial(1, {{"x", 2}}), Monomial(-1, {{"x", 1}}), Monomial(1, {})}));
-    AlbaNumberInterval closedInterval(createCloseEndpoint(-2), createCloseEndpoint(AlbaNumber::createFraction(1, 2)));
+    AlbaNumberInterval const closedInterval(
+        createCloseEndpoint(-2), createCloseEndpoint(AlbaNumber::createFraction(1, 2)));
 
-    MinimumAndMaximum minmax(getMinimumAndMaximumAtClosedInterval(termToTest, "x", closedInterval));
+    MinimumAndMaximum const minmax(getMinimumAndMaximumAtClosedInterval(termToTest, "x", closedInterval));
 
     EXPECT_EQ(AlbaNumber(-2), minmax.minimumInputOutputValues.first);
     EXPECT_EQ(AlbaNumber(-1), minmax.minimumInputOutputValues.second);
@@ -201,11 +202,11 @@ TEST(ExtremaUtilitiesTest, GetMaximumAndMinimumAtClosedIntervalWorksOnExample1) 
 }
 
 TEST(ExtremaUtilitiesTest, GetMaximumAndMinimumAtClosedIntervalWorksOnExample2) {
-    Term subPolynomial(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
-    Term termToTest(createExpressionIfPossible({subPolynomial, "^", AlbaNumber::createFraction(2, 3)}));
-    AlbaNumberInterval closedInterval(createCloseEndpoint(1), createCloseEndpoint(5));
+    Term const subPolynomial(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
+    Term const termToTest(createExpressionIfPossible({subPolynomial, "^", AlbaNumber::createFraction(2, 3)}));
+    AlbaNumberInterval const closedInterval(createCloseEndpoint(1), createCloseEndpoint(5));
 
-    MinimumAndMaximum minmax(getMinimumAndMaximumAtClosedInterval(termToTest, "x", closedInterval));
+    MinimumAndMaximum const minmax(getMinimumAndMaximumAtClosedInterval(termToTest, "x", closedInterval));
 
     EXPECT_EQ(AlbaNumber(2), minmax.minimumInputOutputValues.first);
     EXPECT_EQ(AlbaNumber(0), minmax.minimumInputOutputValues.second);
@@ -215,9 +216,9 @@ TEST(ExtremaUtilitiesTest, GetMaximumAndMinimumAtClosedIntervalWorksOnExample2) 
 
 TEST(ExtremaUtilitiesTest, GetCriticalNumbersWithMultipleVariablesWorksWithExample1) {
     // z = y^2 - x^2
-    Term termToTest(Polynomial({Monomial(1, {{"y", 2}}), Monomial(-1, {{"x", 2}})}));
+    Term const termToTest(Polynomial({Monomial(1, {{"y", 2}}), Monomial(-1, {{"x", 2}})}));
 
-    VariableNameToCriticalNumbersMap variableToCriticalNumbersMap(
+    VariableNameToCriticalNumbersMap const variableToCriticalNumbersMap(
         getCriticalNumbersWithMultipleVariables(termToTest, {"x", "y"}));
 
     ASSERT_EQ(2U, variableToCriticalNumbersMap.size());
@@ -231,10 +232,10 @@ TEST(ExtremaUtilitiesTest, GetCriticalNumbersWithMultipleVariablesWorksWithExamp
 
 TEST(ExtremaUtilitiesTest, GetCriticalNumbersWithMultipleVariablesWorksWithExample2) {
     // z = 6x - 4y - x^2 - 2*y^2
-    Term termToTest(Polynomial(
+    Term const termToTest(Polynomial(
         {Monomial(6, {{"x", 1}}), Monomial(-4, {{"y", 1}}), Monomial(-1, {{"x", 2}}), Monomial(-2, {{"y", 2}})}));
 
-    VariableNameToCriticalNumbersMap variableToCriticalNumbersMap(
+    VariableNameToCriticalNumbersMap const variableToCriticalNumbersMap(
         getCriticalNumbersWithMultipleVariables(termToTest, {"x", "y"}));
 
     ASSERT_EQ(2U, variableToCriticalNumbersMap.size());
@@ -247,24 +248,24 @@ TEST(ExtremaUtilitiesTest, GetCriticalNumbersWithMultipleVariablesWorksWithExamp
 }
 
 TEST(ExtremaUtilitiesTest, WillYieldToAbsoluteMinimumValueWorks) {
-    Term xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
-    Term negativeXSquared(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(9, {})});
+    Term const xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
+    Term const negativeXSquared(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(9, {})});
 
     EXPECT_TRUE(willYieldToAbsoluteMinimumValue(xSquared, "x", 0));
     EXPECT_FALSE(willYieldToAbsoluteMinimumValue(negativeXSquared, "x", 0));
 }
 
 TEST(ExtremaUtilitiesTest, WillYieldToAbsoluteMaximumValueWorks) {
-    Term xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
-    Term negativeXSquared(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(9, {})});
+    Term const xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
+    Term const negativeXSquared(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(9, {})});
 
     EXPECT_FALSE(willYieldToAbsoluteMaximumValue(xSquared, "x", 0));
     EXPECT_TRUE(willYieldToAbsoluteMaximumValue(negativeXSquared, "x", 0));
 }
 
 TEST(ExtremaUtilitiesTest, WillYieldToRelativeMinimumValueWorks) {
-    Term xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
-    Term negativeXSquared(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(9, {})});
+    Term const xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
+    Term const negativeXSquared(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(9, {})});
 
     EXPECT_FALSE(willYieldToRelativeMinimumValue(
         xSquared, "x", 0, AlbaNumberInterval(createCloseEndpoint(-3), createOpenEndpoint(3))));
@@ -281,8 +282,8 @@ TEST(ExtremaUtilitiesTest, WillYieldToRelativeMinimumValueWorks) {
 }
 
 TEST(ExtremaUtilitiesTest, WillYieldToRelativeMaximumValueWorks) {
-    Term xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
-    Term negativeXSquared(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(9, {})});
+    Term const xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
+    Term const negativeXSquared(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(9, {})});
 
     EXPECT_FALSE(willYieldToRelativeMaximumValue(
         xSquared, "x", 0, AlbaNumberInterval(createCloseEndpoint(-3), createOpenEndpoint(3))));
@@ -299,8 +300,8 @@ TEST(ExtremaUtilitiesTest, WillYieldToRelativeMaximumValueWorks) {
 }
 
 TEST(ExtremaUtilitiesTest, WillYieldToExtremumValueWorks) {
-    Term xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
-    Term negativeXSquared(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(9, {})});
+    Term const xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
+    Term const negativeXSquared(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(9, {})});
 
     EXPECT_FALSE(
         willYieldToExtremumValue(ExtremumType::Maximum, xSquared, "x", 0, AlbaNumbers{-3, -2, -1, 0, 1, 2, 3}));
@@ -312,8 +313,8 @@ TEST(ExtremaUtilitiesTest, WillYieldToExtremumValueWorks) {
 }
 
 TEST(ExtremaUtilitiesTest, IsDerivativeZeroOnPossibleExtremumWorks) {
-    Term xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
-    Term negativeXSquared(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(9, {})});
+    Term const xSquared(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-9, {})});
+    Term const negativeXSquared(Polynomial{Monomial(-1, {{"x", 2}}), Monomial(9, {})});
 
     EXPECT_TRUE(isDerivativeZeroOnPossibleExtremum(
         xSquared, "x", 0, AlbaNumberInterval(createOpenEndpoint(-3), createOpenEndpoint(3))));
@@ -357,7 +358,7 @@ TEST(ExtremaUtilitiesTest, HasPointOfInflectionAtWorks) {
 }
 
 TEST(ExtremaUtilitiesTest, IsRolleTheoremSatisfiedWorks) {
-    Term termToTest(Polynomial({Monomial(4, {{"x", 3}}), Monomial(-9, {{"x", 1}})}));
+    Term const termToTest(Polynomial({Monomial(4, {{"x", 3}}), Monomial(-9, {{"x", 1}})}));
 
     EXPECT_FALSE(isRolleTheoremSatisfied(termToTest, "x", 1, 1, 1));
     EXPECT_TRUE(

@@ -120,8 +120,8 @@ AlbaNumbers getRoots(RootType const rootType, Polynomial const& polynomial) {
             if (monomialsToCheck.size() == 1 && maxDegree > 0) {
                 result.emplace_back(0);
             } else if (monomialsToCheck.size() == 2) {
-                Monomial const firstMonomial(monomialsToCheck[0]);
-                Monomial const secondMonomial(monomialsToCheck[1]);
+                Monomial const& firstMonomial(monomialsToCheck[0]);
+                Monomial const& secondMonomial(monomialsToCheck[1]);
                 if (isConstantOnly(secondMonomial)) {
                     AlbaNumber constant(-secondMonomial.getCoefficient());
                     constant = constant / firstMonomial.getCoefficient();

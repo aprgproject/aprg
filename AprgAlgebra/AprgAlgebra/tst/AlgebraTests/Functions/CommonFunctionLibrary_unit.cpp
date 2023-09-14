@@ -14,7 +14,7 @@ using namespace std;
 namespace alba::algebra::Functions {
 
 TEST(CommonFunctionLibraryTest, AbsoluteValueFunctionWorks) {
-    Function absoluteValueFunction(abs(-5));
+    Function const absoluteValueFunction(abs(-5));
 
     EXPECT_EQ("abs", absoluteValueFunction.getFunctionName());
     EXPECT_EQ(Term(-5), getTermConstReferenceFromBaseTerm(absoluteValueFunction.getInputTerm()));
@@ -22,7 +22,7 @@ TEST(CommonFunctionLibraryTest, AbsoluteValueFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, GreatestIntegerFunctionWorks) {
-    Function greatestIntegerFunctionObject(greatestIntegerFunction(-5.1));
+    Function const greatestIntegerFunctionObject(greatestIntegerFunction(-5.1));
 
     EXPECT_EQ("greatestIntegerFunction", greatestIntegerFunctionObject.getFunctionName());
     EXPECT_EQ(Term(-5.1), getTermConstReferenceFromBaseTerm(greatestIntegerFunctionObject.getInputTerm()));
@@ -30,7 +30,7 @@ TEST(CommonFunctionLibraryTest, GreatestIntegerFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, SignumFunctionWorks) {
-    Function signumFunctionObject(sgn(-5.1));
+    Function const signumFunctionObject(sgn(-5.1));
 
     EXPECT_EQ("sgn", signumFunctionObject.getFunctionName());
     EXPECT_EQ(Term(-5.1), getTermConstReferenceFromBaseTerm(signumFunctionObject.getInputTerm()));
@@ -38,7 +38,7 @@ TEST(CommonFunctionLibraryTest, SignumFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, FactorialFunctionWorks) {
-    Function signumFunctionObject(factorial(5));
+    Function const signumFunctionObject(factorial(5));
 
     EXPECT_EQ("factorial", signumFunctionObject.getFunctionName());
     EXPECT_EQ(Term(5), getTermConstReferenceFromBaseTerm(signumFunctionObject.getInputTerm()));
@@ -46,7 +46,7 @@ TEST(CommonFunctionLibraryTest, FactorialFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, FactorialFunctionWorksWhenInputIsZero) {
-    Function signumFunctionObject(factorial(0));
+    Function const signumFunctionObject(factorial(0));
 
     EXPECT_EQ("factorial", signumFunctionObject.getFunctionName());
     EXPECT_EQ(Term(0), getTermConstReferenceFromBaseTerm(signumFunctionObject.getInputTerm()));
@@ -54,7 +54,7 @@ TEST(CommonFunctionLibraryTest, FactorialFunctionWorksWhenInputIsZero) {
 }
 
 TEST(CommonFunctionLibraryTest, NaturalLogarithmFunctionWorks) {
-    Function naturalLogarithmFunctionObject(ln(5));
+    Function const naturalLogarithmFunctionObject(ln(5));
 
     EXPECT_EQ("ln", naturalLogarithmFunctionObject.getFunctionName());
     EXPECT_EQ(Term(5), getTermConstReferenceFromBaseTerm(naturalLogarithmFunctionObject.getInputTerm()));
@@ -83,7 +83,7 @@ TEST(CommonFunctionLibraryTest, LogarithmsCanSimplifiedToLoweringOperatorValue) 
 }
 
 TEST(CommonFunctionLibraryTest, LogarithmBase10FunctionWorks) {
-    Function logarithmBase10FunctionObject(log(5));
+    Function const logarithmBase10FunctionObject(log(5));
 
     EXPECT_EQ("log", logarithmBase10FunctionObject.getFunctionName());
     EXPECT_EQ(Term(5), getTermConstReferenceFromBaseTerm(logarithmBase10FunctionObject.getInputTerm()));
@@ -91,7 +91,7 @@ TEST(CommonFunctionLibraryTest, LogarithmBase10FunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, HarmonicNumberFunctionWorks) {
-    Function harmonicNumberFunctionObject(harmonicNumber(5));
+    Function const harmonicNumberFunctionObject(harmonicNumber(5));
 
     EXPECT_EQ("harmonicNumber", harmonicNumberFunctionObject.getFunctionName());
     EXPECT_EQ(Term(5), getTermConstReferenceFromBaseTerm(harmonicNumberFunctionObject.getInputTerm()));
@@ -100,7 +100,7 @@ TEST(CommonFunctionLibraryTest, HarmonicNumberFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, HarmonicNumberFunctionHasAnUpperBoundOfLog2NPlusOne) {
-    AlbaNumber sampleValue(100);
+    AlbaNumber const sampleValue(100);
     Term actualHarmonicNumber(harmonicNumber(sampleValue));
     Term upperBoundValue(getLogarithm(2, sampleValue.getDouble()) + 1);  // upper bound: lg(N)+1
     actualHarmonicNumber.simplify();
@@ -110,7 +110,7 @@ TEST(CommonFunctionLibraryTest, HarmonicNumberFunctionHasAnUpperBoundOfLog2NPlus
 }
 
 TEST(CommonFunctionLibraryTest, SineFunctionWorks) {
-    Function sineFunction(sin(getPiAsATerm()));
+    Function const sineFunction(sin(getPiAsATerm()));
 
     EXPECT_EQ("sin", sineFunction.getFunctionName());
     EXPECT_EQ(getPiAsATerm(), getTermConstReferenceFromBaseTerm(sineFunction.getInputTerm()));
@@ -118,7 +118,7 @@ TEST(CommonFunctionLibraryTest, SineFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, CosineFunctionWorks) {
-    Function cosineFunction(cos(getPiAsATerm()));
+    Function const cosineFunction(cos(getPiAsATerm()));
 
     EXPECT_EQ("cos", cosineFunction.getFunctionName());
     EXPECT_EQ(getPiAsATerm(), getTermConstReferenceFromBaseTerm(cosineFunction.getInputTerm()));
@@ -126,7 +126,7 @@ TEST(CommonFunctionLibraryTest, CosineFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, TangentFunctionWorks) {
-    Function tangentFunction(tan(getPiAsATerm()));
+    Function const tangentFunction(tan(getPiAsATerm()));
 
     EXPECT_EQ("tan", tangentFunction.getFunctionName());
     EXPECT_EQ(getPiAsATerm(), getTermConstReferenceFromBaseTerm(tangentFunction.getInputTerm()));
@@ -134,7 +134,7 @@ TEST(CommonFunctionLibraryTest, TangentFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, CosecantFunctionWorks) {
-    Function cosecantFunction(csc(getPi() / 2));
+    Function const cosecantFunction(csc(getPi() / 2));
 
     EXPECT_EQ("csc", cosecantFunction.getFunctionName());
     EXPECT_EQ(Term(getPi() / 2), getTermConstReferenceFromBaseTerm(cosecantFunction.getInputTerm()));
@@ -142,7 +142,7 @@ TEST(CommonFunctionLibraryTest, CosecantFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, SecantFunctionWorks) {
-    Function secantFunction(sec(getPiAsATerm()));
+    Function const secantFunction(sec(getPiAsATerm()));
 
     EXPECT_EQ("sec", secantFunction.getFunctionName());
     EXPECT_EQ(getPiAsATerm(), getTermConstReferenceFromBaseTerm(secantFunction.getInputTerm()));
@@ -150,7 +150,7 @@ TEST(CommonFunctionLibraryTest, SecantFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, CotangentFunctionWorks) {
-    Function cotangentFunction(cot(getPi() / 2));
+    Function const cotangentFunction(cot(getPi() / 2));
 
     EXPECT_EQ("cot", cotangentFunction.getFunctionName());
     EXPECT_EQ(Term(getPi() / 2), getTermConstReferenceFromBaseTerm(cotangentFunction.getInputTerm()));
@@ -158,7 +158,7 @@ TEST(CommonFunctionLibraryTest, CotangentFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, ArcSineFunctionWorks) {
-    Function arcSineFunction(arcsin(1));
+    Function const arcSineFunction(arcsin(1));
 
     EXPECT_EQ("arcsin", arcSineFunction.getFunctionName());
     EXPECT_EQ(Term(1), getTermConstReferenceFromBaseTerm(arcSineFunction.getInputTerm()));
@@ -166,7 +166,7 @@ TEST(CommonFunctionLibraryTest, ArcSineFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, ArcCosineFunctionWorks) {
-    Function arcCosineFunction(arccos(1));
+    Function const arcCosineFunction(arccos(1));
 
     EXPECT_EQ("arccos", arcCosineFunction.getFunctionName());
     EXPECT_EQ(Term(1), getTermConstReferenceFromBaseTerm(arcCosineFunction.getInputTerm()));
@@ -174,7 +174,7 @@ TEST(CommonFunctionLibraryTest, ArcCosineFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, ArcTangentFunctionWorks) {
-    Function arcTangentFunction(arctan(0));
+    Function const arcTangentFunction(arctan(0));
 
     EXPECT_EQ("arctan", arcTangentFunction.getFunctionName());
     EXPECT_EQ(Term(0), getTermConstReferenceFromBaseTerm(arcTangentFunction.getInputTerm()));
@@ -182,7 +182,7 @@ TEST(CommonFunctionLibraryTest, ArcTangentFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, ArcCosecantFunctionWorks) {
-    Function arcCosecantFunction(arccsc(1));
+    Function const arcCosecantFunction(arccsc(1));
 
     EXPECT_EQ("arccsc", arcCosecantFunction.getFunctionName());
     EXPECT_EQ(Term(1), getTermConstReferenceFromBaseTerm(arcCosecantFunction.getInputTerm()));
@@ -190,7 +190,7 @@ TEST(CommonFunctionLibraryTest, ArcCosecantFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, ArcSecantFunctionWorks) {
-    Function arcSecantFunction(arcsec(-1));
+    Function const arcSecantFunction(arcsec(-1));
 
     EXPECT_EQ("arcsec", arcSecantFunction.getFunctionName());
     EXPECT_EQ(Term(-1), getTermConstReferenceFromBaseTerm(arcSecantFunction.getInputTerm()));
@@ -198,7 +198,7 @@ TEST(CommonFunctionLibraryTest, ArcSecantFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, ArcCotangentFunctionWorks) {
-    Function arcCotangentFunction(arccot(0));
+    Function const arcCotangentFunction(arccot(0));
 
     EXPECT_EQ("arccot", arcCotangentFunction.getFunctionName());
     EXPECT_EQ(Term(0), getTermConstReferenceFromBaseTerm(arcCotangentFunction.getInputTerm()));
@@ -206,7 +206,7 @@ TEST(CommonFunctionLibraryTest, ArcCotangentFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, HyperbolicSineFunctionWorks) {
-    Function sinhFunction(sinh(1));
+    Function const sinhFunction(sinh(1));
 
     EXPECT_EQ("sinh", sinhFunction.getFunctionName());
     EXPECT_EQ(Term(1), getTermConstReferenceFromBaseTerm(sinhFunction.getInputTerm()));
@@ -214,7 +214,7 @@ TEST(CommonFunctionLibraryTest, HyperbolicSineFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, HyperbolicCosineFunctionWorks) {
-    Function coshFunction(cosh(1));
+    Function const coshFunction(cosh(1));
 
     EXPECT_EQ("cosh", coshFunction.getFunctionName());
     EXPECT_EQ(Term(1), getTermConstReferenceFromBaseTerm(coshFunction.getInputTerm()));
@@ -222,7 +222,7 @@ TEST(CommonFunctionLibraryTest, HyperbolicCosineFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, HyperbolicTangentFunctionWorks) {
-    Function tanhFunction(tanh(1));
+    Function const tanhFunction(tanh(1));
 
     EXPECT_EQ("tanh", tanhFunction.getFunctionName());
     EXPECT_EQ(Term(1), getTermConstReferenceFromBaseTerm(tanhFunction.getInputTerm()));
@@ -230,7 +230,7 @@ TEST(CommonFunctionLibraryTest, HyperbolicTangentFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, HyperbolicCosecantFunctionWorks) {
-    Function cschFunction(csch(1));
+    Function const cschFunction(csch(1));
 
     EXPECT_EQ("csch", cschFunction.getFunctionName());
     EXPECT_EQ(Term(1), getTermConstReferenceFromBaseTerm(cschFunction.getInputTerm()));
@@ -238,7 +238,7 @@ TEST(CommonFunctionLibraryTest, HyperbolicCosecantFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, HyperbolicSecantFunctionWorks) {
-    Function sechFunction(sech(1));
+    Function const sechFunction(sech(1));
 
     EXPECT_EQ("sech", sechFunction.getFunctionName());
     EXPECT_EQ(Term(1), getTermConstReferenceFromBaseTerm(sechFunction.getInputTerm()));
@@ -246,7 +246,7 @@ TEST(CommonFunctionLibraryTest, HyperbolicSecantFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, HyperbolicCotangentFunctionWorks) {
-    Function cothFunction(coth(1));
+    Function const cothFunction(coth(1));
 
     EXPECT_EQ("coth", cothFunction.getFunctionName());
     EXPECT_EQ(Term(1), getTermConstReferenceFromBaseTerm(cothFunction.getInputTerm()));
@@ -254,7 +254,7 @@ TEST(CommonFunctionLibraryTest, HyperbolicCotangentFunctionWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, SineHarmonicFunctionWorks) {
-    Function sineFunction(sinHarmonic(getPiAsATerm(), 4, 2, AlbaNumber(getPi() / 2)));
+    Function const sineFunction(sinHarmonic(getPiAsATerm(), 4, 2, AlbaNumber(getPi() / 2)));
 
     EXPECT_EQ("sinHarmonic", sineFunction.getFunctionName());
     EXPECT_EQ(getPiAsATerm(), getTermConstReferenceFromBaseTerm(sineFunction.getInputTerm()));

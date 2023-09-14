@@ -21,10 +21,10 @@ TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfNaturalLogarithmUsingS
 }
 
 TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfDefiniteIntegralUsingTrapezoidalRuleWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
-    DetailsForDefiniteIntegralWithValues integralDetails{"x", 5, 10};
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
+    DetailsForDefiniteIntegralWithValues const integralDetails{"x", 5, 10};
 
     EXPECT_EQ(
         Term(AlbaNumber::createFraction(75, 2)),
@@ -37,11 +37,11 @@ TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfDefiniteIntegralUsingT
 }
 
 TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfDefiniteIntegralUsingSimpsonRuleWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
-    Term termToTest4(Monomial(1, {{"x", 4}}));
-    DetailsForDefiniteIntegralWithValues integralDetails{"x", 5, 10};
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
+    Term const termToTest4(Monomial(1, {{"x", 4}}));
+    DetailsForDefiniteIntegralWithValues const integralDetails{"x", 5, 10};
 
     EXPECT_EQ(
         Term(AlbaNumber::createFraction(75, 2)),
@@ -56,10 +56,10 @@ TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfDefiniteIntegralUsingS
 }
 
 TEST(NumericalIntegrationUtilitiesTest, GetActualTruncationErrorInTrapezoidalRuleWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
-    DetailsForDefiniteIntegralWithValues integralDetails{"x", 5, 10};
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
+    DetailsForDefiniteIntegralWithValues const integralDetails{"x", 5, 10};
 
     EXPECT_EQ(Term(0), getActualTruncationErrorInTrapezoidalRule(termToTest1, integralDetails, 200));
     EXPECT_EQ(
@@ -69,11 +69,11 @@ TEST(NumericalIntegrationUtilitiesTest, GetActualTruncationErrorInTrapezoidalRul
 }
 
 TEST(NumericalIntegrationUtilitiesTest, GetActualTruncationErrorInSimpsonRuleWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
-    Term termToTest4(Monomial(1, {{"x", 4}}));
-    DetailsForDefiniteIntegralWithValues integralDetails{"x", 5, 10};
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
+    Term const termToTest4(Monomial(1, {{"x", 4}}));
+    DetailsForDefiniteIntegralWithValues const integralDetails{"x", 5, 10};
 
     EXPECT_EQ(Term(0), getActualTruncationErrorInSimpsonRule(termToTest1, integralDetails, 200));
     EXPECT_EQ(Term(0), getActualTruncationErrorInSimpsonRule(termToTest2, integralDetails, 200));
@@ -83,10 +83,10 @@ TEST(NumericalIntegrationUtilitiesTest, GetActualTruncationErrorInSimpsonRuleWor
 }
 
 TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfTruncationErrorInTrapezoidalRuleAtWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
-    DetailsForDefiniteIntegralWithValues integralDetails{"x", 5, 10};
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
+    DetailsForDefiniteIntegralWithValues const integralDetails{"x", 5, 10};
 
     EXPECT_EQ(Term(0), getAnApproximateOfTruncationErrorInTrapezoidalRuleAt(termToTest1, integralDetails, 7.5, 0.025));
     EXPECT_EQ(
@@ -98,11 +98,11 @@ TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfTruncationErrorInTrape
 }
 
 TEST(NumericalIntegrationUtilitiesTest, GetAnApproximateOfTruncationErrorInSimpsonRuleAtWorks) {
-    Term termToTest1(Monomial(1, {{"x", 1}}));
-    Term termToTest2(Monomial(1, {{"x", 2}}));
-    Term termToTest3(Monomial(1, {{"x", 3}}));
-    Term termToTest4(Monomial(1, {{"x", 4}}));
-    DetailsForDefiniteIntegralWithValues integralDetails{"x", 5, 10};
+    Term const termToTest1(Monomial(1, {{"x", 1}}));
+    Term const termToTest2(Monomial(1, {{"x", 2}}));
+    Term const termToTest3(Monomial(1, {{"x", 3}}));
+    Term const termToTest4(Monomial(1, {{"x", 4}}));
+    DetailsForDefiniteIntegralWithValues const integralDetails{"x", 5, 10};
 
     EXPECT_EQ(Term(0), getAnApproximateOfTruncationErrorInSimpsonRuleAt(termToTest1, integralDetails, 7.5, 0.025));
     EXPECT_EQ(Term(0), getAnApproximateOfTruncationErrorInSimpsonRuleAt(termToTest2, integralDetails, 7.5, 0.025));
