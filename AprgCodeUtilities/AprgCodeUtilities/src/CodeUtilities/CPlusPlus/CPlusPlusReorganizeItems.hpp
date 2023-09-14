@@ -14,6 +14,7 @@ public:
         AccessControl,
         Data,
         Declaration,
+        CommentOnly,
         Function,
         Macro,
         Namespace,
@@ -34,6 +35,7 @@ public:
         int numberOfLines;
         bool isDivider;
         bool shouldSortAlphabetically;
+        bool hasComment;
         ItemType itemType;
         ItemSubType itemSubType;
         int itemsIndex;
@@ -69,14 +71,14 @@ private:
     void saveDetailsBasedFromItem(SortItem& sortItem, std::string const& item) const;
     void saveDetailsBasedFromItemTerms(SortItem& sortItem, std::string const& item, Terms const& terms) const;
     void saveDetailsForTest(SortItem& sortItem, Terms const& terms) const;
-    void fixItemContents();
     [[nodiscard]] static GroupType getGroupType(ItemType const itemType);
-    [[nodiscard]] static Patterns getSearchPatterns();
+    [[nodiscard]] static Patterns getSearchPatternsForAnalysis();
     [[nodiscard]] static SortItem createSortItem(int const index);
     [[nodiscard]] static std::string getIdentifierBeforeParenthesis(Terms const& terms, int const parenthesisIndex);
     [[nodiscard]] static bool hasMultilineItem(SortItems const& sortItems);
     [[nodiscard]] static bool isMultiLine(int const numberOfLines);
-    static void makeIsolatedCommentsStickWithNextLine(Terms& terms, int const startIndex);
+    [[nodiscard]] static bool compareAlphabetically(std::string const& string1, std::string const& string2);
+    [[nodiscard]] static char getRevisedChar(char const character);
     static void sortByComparingItems(SortItems& sortItems);
     static void moveToEndParenthesis(Terms const& terms, int& termIndex, int const parenthesisIndex);
     static void saveDetailsBasedFromFunctionSignature(SortItem& sortItem, std::string const& functionSignature);

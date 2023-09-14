@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Common/String/AlbaStringHelper.hpp>
 #include <array>
+#include <Common/String/AlbaStringHelper.hpp>
 #include <map>
 #include <string>
 

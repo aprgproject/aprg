@@ -1,11 +1,11 @@
 #include "CPlusPlusTokenizer.hpp"
-#include <CodeUtilities/CPlusPlus/CPlusPlusConstants.hpp>
-#include <CodeUtilities/Common/TermCreateHelpers.hpp>
-#include <Common/String/AlbaStringHelper.hpp>
 #include <algorithm>
+#include <CodeUtilities/Common/TermCreateHelpers.hpp>
+#include <CodeUtilities/CPlusPlus/CPlusPlusConstants.hpp>
+#include <Common/String/AlbaStringHelper.hpp>
 
-using namespace alba::stringHelper;
 using namespace alba;
+using namespace alba::stringHelper;
 using namespace std;
 
 namespace {

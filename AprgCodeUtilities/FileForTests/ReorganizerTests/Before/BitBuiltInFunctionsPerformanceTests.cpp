@@ -1,6 +1,5 @@
-/* #include <Common/Bit/Common/AlbaBitUtilitiesBuiltIn.hpp>
+#include <Common/Bit/Common/AlbaBitUtilitiesBuiltIn.hpp>
 #include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
-
 #include <benchmark/benchmark.h>
 
 using namespace std;
@@ -143,4 +142,3 @@ BENCHMARK_MAIN();
 
 }  // namespace alba
 
-*/

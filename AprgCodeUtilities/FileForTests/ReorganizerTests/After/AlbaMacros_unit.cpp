@@ -1,6 +1,5 @@
 #include <Common/Macros/AlbaMacros.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
-
 #include <gtest/gtest.h>
 
 using namespace alba::stringHelper;
@@ -41,7 +40,9 @@ TEST(AlbaMacrosTest, DisplayMessageTest) {
 }
 
 TEST(AlbaMacrosTest, GetStringLiteralWorks) {
-    enum class SampleEnumClass { Type1, Type2 };
+    enum class SampleEnumClass {
+Type1, Type2
+};
 
     EXPECT_STREQ("12345", ALBA_MACROS_GET_STRING_LITERAL(12345));
     EXPECT_STREQ("SampleEnumClass::Type1", ALBA_MACROS_GET_STRING_LITERAL(SampleEnumClass::Type1));
@@ -49,9 +50,12 @@ TEST(AlbaMacrosTest, GetStringLiteralWorks) {
 }
 
 TEST(AlbaMacrosTest, CaseEnumStringWorks) {
-    enum class SampleEnumClass { Type1, Type2 };
+    enum class SampleEnumClass {
+Type1, Type2
+};
     struct SampleClass {
-        static string getString(SampleEnumClass const enumValue) {
+
+static string getString(SampleEnumClass const enumValue) {
             switch (enumValue) {
                 ALBA_MACROS_CASE_ENUM_STRING(SampleEnumClass::Type1)
                 ALBA_MACROS_CASE_ENUM_STRING(SampleEnumClass::Type2)
@@ -59,7 +63,8 @@ TEST(AlbaMacrosTest, CaseEnumStringWorks) {
                     return "default";
             }
         }
-    };
+
+};
     SampleEnumClass const enumValue1 = SampleEnumClass::Type1;
     SampleEnumClass const enumValue2 = SampleEnumClass::Type2;
 
@@ -69,9 +74,12 @@ TEST(AlbaMacrosTest, CaseEnumStringWorks) {
 }
 
 TEST(AlbaMacrosTest, CaseEnumShortStringWorks) {
-    enum class SampleEnumClass { Type1, Type2 };
+    enum class SampleEnumClass {
+Type1, Type2
+};
     struct SampleClass {
-        static string getString(SampleEnumClass const enumValue) {
+
+static string getString(SampleEnumClass const enumValue) {
             switch (enumValue) {
                 ALBA_MACROS_CASE_ENUM_SHORT_STRING(SampleEnumClass::Type1, "Type1")
                 ALBA_MACROS_CASE_ENUM_SHORT_STRING(SampleEnumClass::Type2, "Type2")
@@ -79,7 +87,8 @@ TEST(AlbaMacrosTest, CaseEnumShortStringWorks) {
                     return "default";
             }
         }
-    };
+
+};
     SampleEnumClass const enumValue1 = SampleEnumClass::Type1;
     SampleEnumClass const enumValue2 = SampleEnumClass::Type2;
 
@@ -92,8 +101,8 @@ TEST(AlbaMacrosTest, ConcatenateWorks) {
     EXPECT_EQ(12345678, ALBA_MACROS_CONCATENATE_EXPANSION(1234, 5678));
     EXPECT_EQ(12345678, ALBA_MACROS_CONCATENATE(1234, 5678));
     // compiler error: results to 1234__LINE__ (needs another layer of indirection)
-    // EXPECT_EQ(12345678U, ALBA_MACROS_CONCATENATE_EXPANSION(1234, __LINE__));
-    EXPECT_EQ(123496, ALBA_MACROS_CONCATENATE(1234, __LINE__));
+// EXPECT_EQ(12345678U, ALBA_MACROS_CONCATENATE_EXPANSION(1234, __LINE__));
+EXPECT_EQ(123496, ALBA_MACROS_CONCATENATE(1234, __LINE__));
 }
 
 TEST(AlbaMacrosTest, GetNameWithCountWorks) {

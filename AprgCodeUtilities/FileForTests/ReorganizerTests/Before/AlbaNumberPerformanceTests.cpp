@@ -1,6 +1,5 @@
 #include <Common/Math/Number/AlbaNumber.hpp>
 #include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
-
 #include <benchmark/benchmark.h>
 
 using namespace std;

@@ -1,7 +1,5 @@
-/*
-#include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
-
 #include <benchmark/benchmark.h>
+#include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
 
 using namespace std;
 
@@ -35,8 +33,7 @@ uint64_t arrayBasedImplementation(uint64_t const value) {
 
 uint64_t loopBasedImplementation(uint64_t const input) {
     // Perform setup here
-
-    uint64_t result(0);
+uint64_t result(0);
     for (uint64_t value = input; value > 0; value >>= 1) {
         if ((value & 1) == 1) {
             ++result;
@@ -47,48 +44,40 @@ uint64_t loopBasedImplementation(uint64_t const input) {
 
 static void BM_BaseRun(benchmark::State& state) {
     // Perform setup here
-
-    AlbaUniformNonDeterministicRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
+AlbaUniformNonDeterministicRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
     while (state.KeepRunning()) {
         // This code gets timed
-
-        benchmark::DoNotOptimize(randomizer.getRandomValue());
+benchmark::DoNotOptimize(randomizer.getRandomValue());
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
 
 static void BM_ArrayBasedImplementation(benchmark::State& state) {
     // Perform setup here
-
-    AlbaUniformNonDeterministicRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
+AlbaUniformNonDeterministicRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
     while (state.KeepRunning()) {
         // This code gets timed
-
-        benchmark::DoNotOptimize(arrayBasedImplementation(randomizer.getRandomValue()));
+benchmark::DoNotOptimize(arrayBasedImplementation(randomizer.getRandomValue()));
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
 
 static void BM_LoopBasedImplementation(benchmark::State& state) {
     // Perform setup here
-
-    AlbaUniformNonDeterministicRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
+AlbaUniformNonDeterministicRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
     while (state.KeepRunning()) {
         // This code gets timed
-
-        benchmark::DoNotOptimize(loopBasedImplementation(randomizer.getRandomValue()));
+benchmark::DoNotOptimize(loopBasedImplementation(randomizer.getRandomValue()));
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
 
 static void BM_BuiltinBasedImplementation(benchmark::State& state) {
     // Perform setup here
-
-    AlbaUniformNonDeterministicRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
+AlbaUniformNonDeterministicRandomizer<uint64_t> randomizer(0, numeric_limits<uint64_t>::max());
     while (state.KeepRunning()) {
         // This code gets timed
-
-        benchmark::DoNotOptimize(__builtin_popcount(randomizer.getRandomValue()));
+benchmark::DoNotOptimize(__builtin_popcount(randomizer.getRandomValue()));
         benchmark::ClobberMemory();  // is it not needed?
     }
 }
@@ -98,9 +87,7 @@ BENCHMARK(BM_BaseRun);
 BENCHMARK(BM_ArrayBasedImplementation);
 BENCHMARK(BM_LoopBasedImplementation);
 BENCHMARK(BM_BuiltinBasedImplementation);
-
 // Run the benchmark
 BENCHMARK_MAIN();
 
 }  // namespace alba
-*/

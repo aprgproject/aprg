@@ -1,6 +1,4 @@
-/*
 #include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
-
 #include <benchmark/benchmark.h>
 
 using namespace std;
@@ -103,4 +101,4 @@ BENCHMARK(BM_BuiltinBasedImplementation);
 BENCHMARK_MAIN();
 
 }  // namespace alba
-*/
+

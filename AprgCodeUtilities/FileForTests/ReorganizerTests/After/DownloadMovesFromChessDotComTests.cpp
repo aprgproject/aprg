@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <ChessPeek/Book.hpp>
 #include <ChessPeek/DatabaseDefinitions.hpp>
 #include <ChessPeek/DetailsFromTheScreen.hpp>
@@ -9,14 +10,11 @@
 #include <Common/PathHandler/AlbaWebPathHandler.hpp>
 #include <Common/Print/AlbaPrintFunctions.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
-#include <ScreenMonitoring/AlbaLocalScreenMonitoring.hpp>
-#include <UserAutomation/AlbaLocalUserAutomation.hpp>
-
 #include <gtest/gtest.h>
-
-#include <algorithm>
 #include <ostream>
+#include <ScreenMonitoring/AlbaLocalScreenMonitoring.hpp>
 #include <thread>
+#include <UserAutomation/AlbaLocalUserAutomation.hpp>
 #include <vector>
 
 using namespace alba::stringHelper;
@@ -27,26 +25,26 @@ namespace alba::chess::ChessPeek {
 namespace {
 
 struct Paths {
-    string url;
-    string htmlFile;
-    string dataFile;
-    string linesFile;
-    string lineNumberFile;
+string url;
+string htmlFile;
+string dataFile;
+string linesFile;
+string lineNumberFile;
 };
 
 struct MoveInfo {
-    string nextMove;
-    string numberOfGames;
-    string whiteWinPercentage;
-    string drawPercentage;
-    string blackWinPercentage;
+string nextMove;
+string numberOfGames;
+string whiteWinPercentage;
+string drawPercentage;
+string blackWinPercentage;
 };
 
 using MoveInfos = std::vector<MoveInfo>;
 
 struct WebPageInfo {
-    string nameOfLine;
-    MoveInfos moveInfos;
+string nameOfLine;
+MoveInfos moveInfos;
 };
 
 bool shouldStillRun = true;
@@ -490,10 +488,10 @@ void doAllPagesRecursively(Paths const& paths) {
 
 TEST(DownloadMovesFromChessDotComTest, DISABLED_DoAllPagesRecursivelyWorks) {
     // To reinitialize:
-    // ChessDotComMoves should be deleted or empty
-    // ChessDotComLines should be deleted or empty
-    // ChessDotComLineNumber has to contain 0
-    AlbaWebPathHandler const explorerUrl(R"(https://www.chess.com/explorer)");
+// ChessDotComMoves should be deleted or empty
+// ChessDotComLines should be deleted or empty
+// ChessDotComLineNumber has to contain 0
+AlbaWebPathHandler const explorerUrl(R"(https://www.chess.com/explorer)");
     AlbaLocalPathHandler const tempHtmlFile(APRG_DIR R"(\Chess\ChessPeek\Files\ChessDotComAutomation\temp.html)");
     AlbaLocalPathHandler const dataFile(APRG_DIR
                                         R"(\Chess\ChessPeek\Files\ChessDotComAutomation\ChessDotComDataFromSite.txt)");

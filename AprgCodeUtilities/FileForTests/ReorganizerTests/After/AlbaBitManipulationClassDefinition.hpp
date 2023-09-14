@@ -4,7 +4,6 @@
 #include <Common/Types/AlbaTypeHelper.hpp>
 
 // NOLINTBEGIN(hicpp-signed-bitwise)
-
 namespace alba {
 
 template <typename DataType>

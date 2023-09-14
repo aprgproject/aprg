@@ -86,8 +86,7 @@ void CPlusPlusReorganizer::processImplementationFile(string const& headerFile, s
 
 CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
     int const scopeHeaderStart, int const openingBraceIndex) const {
-    string const scopeHeader(getContents(scopeHeaderStart, openingBraceIndex));
-    Terms scopeHeaderTerms(getTermsFromString(scopeHeader));
+    Terms scopeHeaderTerms(extractTermsInRange(scopeHeaderStart, openingBraceIndex));
     ScopeDetail scopeDetail{scopeHeaderStart, openingBraceIndex, 0, ScopeType::Unknown, {}, {}};
     Patterns const searchPatterns{
         {M("template"), M("<")},
@@ -140,8 +139,11 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
     return scopeDetail;
 }
 
-string CPlusPlusReorganizer::getContents(int const start, int const end) const {
-    return getStringWithoutStartingAndTrailingWhiteSpace(getCombinedContents(m_terms, start, end));
+string CPlusPlusReorganizer::getFormattedContent(int const start, int const end) const {
+    Terms formattedTerms(extractTermsInRange(start, end));
+    removeStartingAndTrailingWhiteSpace(formattedTerms);
+    makeIsolatedCommentsStickWithNextLine(formattedTerms);
+    return getCombinedContents(formattedTerms);
 }
 
 strings CPlusPlusReorganizer::getScopeNames() const {
@@ -173,6 +175,13 @@ int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
         }
     }
     return endIndex;
+}
+
+Terms CPlusPlusReorganizer::extractTermsInRange(int const start, int const end) const {
+    Terms extractedTerms;
+    extractedTerms.reserve(end + 1 - start);
+    copy(m_terms.begin() + start, m_terms.cbegin() + end + 1, back_inserter(extractedTerms));
+    return extractedTerms;
 }
 
 void CPlusPlusReorganizer::reorganizeFile(string const& file) {
@@ -252,23 +261,23 @@ void CPlusPlusReorganizer::processTerms() {
 }
 
 void CPlusPlusReorganizer::processMacro(int& nextIndex, int const macroStartIndex) {
-    addItemIfNeeded(nextIndex, macroStartIndex - 1);  // add item before macro
-    nextIndex = macroStartIndex + 1;
+    int searchIndex = macroStartIndex;
     Patterns const searchPatterns{
         {M(MatcherType::WhiteSpaceWithNewLine)}, {M("\\"), M(MatcherType::WhiteSpaceWithNewLine)}};
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(m_terms, nextIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(m_terms, searchIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
             int const lastHitIndex = hitIndexes.back();
             Term const& firstTerm(m_terms[firstHitIndex]);
-            nextIndex = lastHitIndex + 1;
             if (firstTerm == M(MatcherType::WhiteSpaceWithNewLine)) {
-                addItemIfNeeded(macroStartIndex, lastHitIndex);
+                addItemIfNeeded(nextIndex, lastHitIndex);
+                nextIndex = lastHitIndex + 1;
                 break;
             }
+            searchIndex = lastHitIndex + 1;
         }
     }
 }
@@ -282,7 +291,7 @@ void CPlusPlusReorganizer::processSemiColon(int& nextIndex, int const semiColonI
 void CPlusPlusReorganizer::processOpeningAndClosingBrace(
     int& nextIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex) {
     int const endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
-    Terms const scopeHeaderTerms(getTermsFromString(getContents(nextIndex, openingBraceIndex - 1)));
+    Terms const scopeHeaderTerms(extractTermsInRange(nextIndex, openingBraceIndex - 1));
     strings& currentItems(m_scopeDetails.back().items);
     if (!currentItems.empty() && hasEndBrace(currentItems.back()) && shouldConnectToPreviousItem(scopeHeaderTerms)) {
         currentItems.back() += getCombinedContents(m_terms, nextIndex, endIndex);
@@ -293,7 +302,7 @@ void CPlusPlusReorganizer::processOpeningAndClosingBrace(
 }
 
 void CPlusPlusReorganizer::processOpeningBrace(int& nextIndex, int const openingBraceIndex) {
-    Terms const scopeHeaderTerms(getTermsFromString(getContents(nextIndex, openingBraceIndex - 1)));
+    Terms const scopeHeaderTerms(extractTermsInRange(nextIndex, openingBraceIndex - 1));
     strings& currentItems(m_scopeDetails.back().items);
     if (!currentItems.empty() && hasEndBrace(currentItems.back()) && shouldConnectToPreviousItem(scopeHeaderTerms)) {
         Terms const lastItemTerms = getTermsFromString(currentItems.back());
@@ -360,27 +369,29 @@ void CPlusPlusReorganizer::exitScope(int& nextIndex, int const closingBraceIndex
 }
 
 void CPlusPlusReorganizer::addItemIfNeeded(int const startIndex, int const endIndex) {
-    string const content = getContents(startIndex, endIndex);
-    if (!content.empty() && shouldReorganizeInThisScope(m_scopeDetails.back())) {
-        switch (m_purpose) {
-            case Purpose::Reorganize: {
-                m_scopeDetails.back().items.emplace_back(content);
-                break;
-            }
-            case Purpose::GatherInformation: {
-                string functionSignature(getFunctionSignature(content));
-                if (!functionSignature.empty()) {
-                    m_headerInformation.functionSignatures.emplace_back(functionSignature);
-                    string functionName(getFunctionName(functionSignature));
-                    if (!functionName.empty()) {
-                        m_headerInformation.functionNamePatterns.emplace_back(Pattern{M(functionName), M("(")});
-                        m_headerInformation.functionNamePatterns.emplace_back(Pattern{M(functionName), M("<")});
-                    }
+    if (shouldReorganizeInThisScope(m_scopeDetails.back())) {
+        string const content = getFormattedContent(startIndex, endIndex);
+        if (!content.empty()) {
+            switch (m_purpose) {
+                case Purpose::Reorganize: {
+                    m_scopeDetails.back().items.emplace_back(content);
+                    break;
                 }
-                break;
+                case Purpose::GatherInformation: {
+                    string functionSignature(getFunctionSignature(content));
+                    if (!functionSignature.empty()) {
+                        m_headerInformation.functionSignatures.emplace_back(functionSignature);
+                        string functionName(getFunctionName(functionSignature));
+                        if (!functionName.empty()) {
+                            m_headerInformation.functionNamePatterns.emplace_back(Pattern{M(functionName), M("(")});
+                            m_headerInformation.functionNamePatterns.emplace_back(Pattern{M(functionName), M("<")});
+                        }
+                    }
+                    break;
+                }
+                case Purpose::Unknown:
+                    break;
             }
-            case Purpose::Unknown:
-                break;
         }
     }
 }
@@ -392,14 +403,16 @@ bool CPlusPlusReorganizer::shouldReorganizeInThisScope(ScopeDetail const& scope)
 }
 
 bool CPlusPlusReorganizer::shouldConnectToPreviousItem(Terms const& scopeHeaderTerms) {
-    bool const isEmpty(scopeHeaderTerms.empty());
-    bool const hasNoInvalidKeyword = all_of(scopeHeaderTerms.cbegin(), scopeHeaderTerms.cend(), [](Term const& term) {
-        return term.getTermType() != TermType::Keyword || term.getContent() == "const_cast" ||
-               term.getContent() == "dynamic_cast" || term.getContent() == "reinterpret_cast" ||
-               term.getContent() == "static_cast";
+    bool const isOnlyWhiteSpaceOrComment(isAllWhiteSpaceOrComment(scopeHeaderTerms));
+    bool const hasInvalidKeyword = any_of(scopeHeaderTerms.cbegin(), scopeHeaderTerms.cend(), [](Term const& term) {
+        return term.getTermType() == TermType::Keyword &&
+               (term.getContent() == "catch" || term.getContent() == "class" || term.getContent() == "do" ||
+                term.getContent() == "else" || term.getContent() == "enum" || term.getContent() == "if" ||
+                term.getContent() == "namespace" || term.getContent() == "struct" || term.getContent() == "switch" ||
+                term.getContent() == "while" || term.getContent() == "union");
     });
     bool const hasCommaAtTheStart = !searchPatternsAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
-    return isEmpty || (hasNoInvalidKeyword && hasCommaAtTheStart);
+    return isOnlyWhiteSpaceOrComment || (!hasInvalidKeyword && hasCommaAtTheStart);
 }
 
 bool CPlusPlusReorganizer::hasEndBrace(string const& content) {
@@ -435,6 +448,43 @@ int CPlusPlusReorganizer::getIndexAtClosingString(
         }
     }
     return endIndex;
+}
+
+void CPlusPlusReorganizer::makeIsolatedCommentsStickWithNextLine(Terms& terms) {
+    int searchIndex = 0;
+    Patterns const searchPatterns{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForwardsForPatterns(terms, searchIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int const firstHitIndex = hitIndexes.front();
+            int const lastHitIndex = hitIndexes.back();
+            if (firstHitIndex == 0 || (firstHitIndex > 0 && isWhiteSpaceWithNewLine(terms[firstHitIndex - 1]))) {
+                terms[lastHitIndex] = Term(TermType::WhiteSpace, "\n");
+            }
+            searchIndex = lastHitIndex + 1;
+        }
+    }
+}
+
+void CPlusPlusReorganizer::removeStartingAndTrailingWhiteSpace(Terms& terms) {
+    int nonWhiteSpace = 0;
+    for (; nonWhiteSpace < static_cast<int>(terms.size()); ++nonWhiteSpace) {
+        Term const& term(terms[nonWhiteSpace]);
+        if (!isWhiteSpace(term)) {
+            break;
+        }
+    }
+    terms.erase(terms.begin(), terms.begin() + nonWhiteSpace);
+    nonWhiteSpace = static_cast<int>(terms.size()) - 1;
+    for (; nonWhiteSpace >= 0; --nonWhiteSpace) {
+        Term const& term(terms[nonWhiteSpace]);
+        if (!isWhiteSpace(term)) {
+            break;
+        }
+    }
+    terms.erase(terms.begin() + nonWhiteSpace + 1, terms.cend());
 }
 
 }  // namespace alba::CodeUtilities

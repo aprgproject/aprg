@@ -1,7 +1,6 @@
-/* #include <Common/Bit/Common/AlbaBitUtilitiesBuiltIn.hpp>
-#include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
-
 #include <benchmark/benchmark.h>
+#include <Common/Bit/Common/AlbaBitUtilitiesBuiltIn.hpp>
+#include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
 
 using namespace std;
 
@@ -48,7 +47,6 @@ BENCHMARK_FUNCTION(uint8_t, BitUtilitiesBuiltIn::isEvenParity, U8_Default_isEven
 BENCHMARK_FUNCTION(uint16_t, BitUtilitiesBuiltIn::isEvenParity, U16_Default_isEvenParity);
 BENCHMARK_FUNCTION(uint32_t, BitUtilitiesBuiltIn::isEvenParity, U32_Default_isEvenParity);
 BENCHMARK_FUNCTION(uint64_t, BitUtilitiesBuiltIn::isEvenParity, U64_Default_isEvenParity);
-
 BENCHMARK_FUNCTION(
     uint8_t, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfOnes, U8_WithoutBuiltin_getNumberOfOnes);
 BENCHMARK_FUNCTION(
@@ -73,27 +71,35 @@ BENCHMARK_FUNCTION(uint64_t, BitUtilitiesBuiltIn::getNumberOfOnes, U64_Default_g
 BENCHMARK_FUNCTION(
     uint8_t, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb,
     U8_WithoutBuiltin_getNumberOfConsecutiveZerosFromMsb);
+
 BENCHMARK_FUNCTION(
     uint16_t, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb,
     U16_WithoutBuiltin_getNumberOfConsecutiveZerosFromMsb);
+
 BENCHMARK_FUNCTION(
     uint32_t, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb,
     U32_WithoutBuiltin_getNumberOfConsecutiveZerosFromMsb);
+
 BENCHMARK_FUNCTION(
     uint64_t, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromMsb,
     U64_WithoutBuiltin_getNumberOfConsecutiveZerosFromMsb);
+
 BENCHMARK_FUNCTION(
     uint8_t, BitUtilitiesBuiltIn::BitUtilitiesWithBuiltIn::getNumberOfConsecutiveZerosFromMsb,
     U8_WithBuiltin_getNumberOfConsecutiveZerosFromMsb);
+
 BENCHMARK_FUNCTION(
     uint16_t, BitUtilitiesBuiltIn::BitUtilitiesWithBuiltIn::getNumberOfConsecutiveZerosFromMsb,
     U16_WithBuiltin_getNumberOfConsecutiveZerosFromMsb);
+
 BENCHMARK_FUNCTION(
     uint32_t, BitUtilitiesBuiltIn::BitUtilitiesWithBuiltIn::getNumberOfConsecutiveZerosFromMsb,
     U32_WithBuiltin_getNumberOfConsecutiveZerosFromMsb);
+
 BENCHMARK_FUNCTION(
     uint64_t, BitUtilitiesBuiltIn::BitUtilitiesWithBuiltIn::getNumberOfConsecutiveZerosFromMsb,
     U64_WithBuiltin_getNumberOfConsecutiveZerosFromMsb);
+
 BENCHMARK_FUNCTION(
     uint8_t, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromMsb, U8_Default_getNumberOfConsecutiveZerosFromMsb);
 BENCHMARK_FUNCTION(
@@ -106,27 +112,35 @@ BENCHMARK_FUNCTION(
 BENCHMARK_FUNCTION(
     uint8_t, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb,
     U8_WithoutBuiltin_getNumberOfConsecutiveZerosFromLsb);
+
 BENCHMARK_FUNCTION(
     uint16_t, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb,
     U16_WithoutBuiltin_getNumberOfConsecutiveZerosFromLsb);
+
 BENCHMARK_FUNCTION(
     uint32_t, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb,
     U32_WithoutBuiltin_getNumberOfConsecutiveZerosFromLsb);
+
 BENCHMARK_FUNCTION(
     uint64_t, BitUtilitiesBuiltIn::BitUtilitiesWithoutBuiltIn::getNumberOfConsecutiveZerosFromLsb,
     U64_WithoutBuiltin_getNumberOfConsecutiveZerosFromLsb);
+
 BENCHMARK_FUNCTION(
     uint8_t, BitUtilitiesBuiltIn::BitUtilitiesWithBuiltIn::getNumberOfConsecutiveZerosFromLsb,
     U8_WithBuiltin_getNumberOfConsecutiveZerosFromLsb);
+
 BENCHMARK_FUNCTION(
     uint16_t, BitUtilitiesBuiltIn::BitUtilitiesWithBuiltIn::getNumberOfConsecutiveZerosFromLsb,
     U16_WithBuiltin_getNumberOfConsecutiveZerosFromLsb);
+
 BENCHMARK_FUNCTION(
     uint32_t, BitUtilitiesBuiltIn::BitUtilitiesWithBuiltIn::getNumberOfConsecutiveZerosFromLsb,
     U32_WithBuiltin_getNumberOfConsecutiveZerosFromLsb);
+
 BENCHMARK_FUNCTION(
     uint64_t, BitUtilitiesBuiltIn::BitUtilitiesWithBuiltIn::getNumberOfConsecutiveZerosFromLsb,
     U64_WithBuiltin_getNumberOfConsecutiveZerosFromLsb);
+
 BENCHMARK_FUNCTION(
     uint8_t, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb, U8_Default_getNumberOfConsecutiveZerosFromLsb);
 BENCHMARK_FUNCTION(
@@ -135,12 +149,8 @@ BENCHMARK_FUNCTION(
     uint32_t, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb, U32_Default_getNumberOfConsecutiveZerosFromLsb);
 BENCHMARK_FUNCTION(
     uint64_t, BitUtilitiesBuiltIn::getNumberOfConsecutiveZerosFromLsb, U64_Default_getNumberOfConsecutiveZerosFromLsb);
-
 // Register the function as a benchmark
-
 // Run the benchmark
 BENCHMARK_MAIN();
 
 }  // namespace alba
-
-*/

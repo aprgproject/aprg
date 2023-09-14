@@ -1,8 +1,8 @@
 #include "AlbaStringHelper.hpp"
+#include <algorithm>
 #include <Common/Container/AlbaContainerHelper.hpp>
 #include <Common/Math/Helpers/PowerHelpers.hpp>
 #include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
-#include <algorithm>
 #include <cstring>
 #include <functional>
 #include <numeric>

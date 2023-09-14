@@ -25,7 +25,6 @@ using namespace std;
 namespace alba::chess::ChessPeek {
 
 namespace {
-
 struct Paths {
     string url;
     string htmlFile;
