@@ -57,7 +57,9 @@ TEST(LambdaExamplesTest, TestCapturingByValueVsByReference) {
 
 namespace CapturingGlobalVariablesWorks {
 
+namespace {
 int g = 10;
+}
 
 TEST(LambdaExamplesTest, CapturingGlobalVariablesWorks) {
     auto kitten = [=]() { return g + 1; };

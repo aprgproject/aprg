@@ -15,9 +15,14 @@ using namespace alba::TwoDimensions;
 using namespace alba::mathHelper;
 using namespace std;
 
-namespace alba::AprgBitmap {
+namespace {
 
 constexpr int MAX_PEN_CIRCLE_RADIUS_COORDINATE = 5;
+
+}
+
+namespace alba::AprgBitmap {
+
 BitmapFilters::BitmapFilters(string const& path) : m_bitmap(path) {}
 BitmapSnippet BitmapFilters::getWholeBitmapSnippet() const { return m_bitmap.getSnippetReadFromFileWholeBitmap(); }
 

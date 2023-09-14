@@ -9,7 +9,7 @@
 
 using namespace std;
 
-namespace alba::AprgAudio {
+namespace {
 
 // Pre-defined 10-byte representations of common sample rates
 unordered_map<int, vector<uint8_t>> const aiffSampleRateTable = {
@@ -23,6 +23,10 @@ unordered_map<int, vector<uint8_t>> const aiffSampleRateTable = {
     {176400, {64, 16, 172, 68, 0, 0, 0, 0, 0, 0}}, {192000, {64, 16, 187, 128, 0, 0, 0, 0, 0, 0}},
     {352800, {64, 17, 172, 68, 0, 0, 0, 0, 0, 0}}, {2822400, {64, 20, 172, 68, 0, 0, 0, 0, 0, 0}},
     {5644800, {64, 21, 172, 68, 0, 0, 0, 0, 0, 0}}};
+
+}  // namespace
+
+namespace alba::AprgAudio {
 
 template <class DataType>
 Audio<DataType>::Audio() {

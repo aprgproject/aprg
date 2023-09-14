@@ -8,13 +8,16 @@
 
 using namespace alba;
 using namespace std;
+using namespace wcdmaToolsBackend::BtsLogPrintStateMachine;
 
-namespace wcdmaToolsBackend {
-
-using namespace BtsLogPrintStateMachine;
+namespace {
 constexpr int NUMBER_OF_CHARACTER_FOR_FILE = 25;
 constexpr int NUMBER_OF_LETTERS_IN_HARDWARE_TYPE = 3;
 constexpr int NUMBER_OF_NUMBERS_IN_HARDWARE_TYPE = 4;
+}  // namespace
+
+namespace wcdmaToolsBackend {
+
 BtsLogPrint::BtsLogPrint(string const& lineInLogs) { analyzeLineInLogs(lineInLogs); }
 
 BtsLogPrint::BtsLogPrint(string const& filename, string const& lineInLogs) : m_fileName(filename) {
