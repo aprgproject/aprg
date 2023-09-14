@@ -1,7 +1,7 @@
 #include "ModularArithmetic.hpp"
 
 #include <Common/Math/Helpers/CombinatoricsHelpers.hpp>
-#include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
+#include <Common/Math/Helpers/FactorAndMultiplesHelpers.hpp>
 #include <Common/Math/Helpers/PowerHelpers.hpp>
 #include <Math/NumberTheory/PrimeAndFactorUtilities.hpp>
 

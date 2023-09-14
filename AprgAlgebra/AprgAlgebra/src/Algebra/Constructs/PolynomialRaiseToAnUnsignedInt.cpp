@@ -3,7 +3,7 @@
 #include <Algebra/Factorization/FactorizationOfPolynomial.hpp>
 #include <Algebra/Term/Utilities/PolynomialHelpers.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
-#include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
+#include <Common/Math/Helpers/FactorAndMultiplesHelpers.hpp>
 
 using namespace alba::algebra::Factorization;
 using namespace alba::mathHelper;

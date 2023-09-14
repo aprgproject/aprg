@@ -1,7 +1,7 @@
 #include "LinearDiophantineEquationCoefficientSolver.hpp"
 
 #include <Common/Math/Helpers/DivisibilityHelpers.hpp>
-#include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
+#include <Common/Math/Helpers/FactorAndMultiplesHelpers.hpp>
 
 using namespace alba::mathHelper;
 

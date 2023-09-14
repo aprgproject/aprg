@@ -2,7 +2,7 @@
 
 #include <Algorithm/Search/SumSearch/TwoSum.hpp>
 #include <Common/Math/Helpers/DivisibilityHelpers.hpp>
-#include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
+#include <Common/Math/Helpers/FactorAndMultiplesHelpers.hpp>
 #include <Common/Math/Helpers/PowerHelpers.hpp>
 #include <Math/NumberTheory/ModularArithmetic.hpp>
 

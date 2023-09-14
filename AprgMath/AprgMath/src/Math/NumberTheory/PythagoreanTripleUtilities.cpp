@@ -1,6 +1,6 @@
 #include "PythagoreanTripleUtilities.hpp"
 
-#include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
+#include <Common/Math/Helpers/FactorAndMultiplesHelpers.hpp>
 #include <Math/NumberTheory/PrimeAndFactorUtilities.hpp>
 
 using namespace alba::mathHelper;

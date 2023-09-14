@@ -1,7 +1,7 @@
 #include "AlbaNumber.hpp"
 #include <Common/Math/Helpers/ComplexNumberHelpers.hpp>
 #include <Common/Math/Helpers/DivisibilityHelpers.hpp>
-#include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
+#include <Common/Math/Helpers/FactorAndMultiplesHelpers.hpp>
 #include <Common/Math/Helpers/FractionHelpers.hpp>
 #include <Common/Math/Helpers/PowerHelpers.hpp>
 #include <Common/Math/Number/AlbaComplexNumber.hpp>

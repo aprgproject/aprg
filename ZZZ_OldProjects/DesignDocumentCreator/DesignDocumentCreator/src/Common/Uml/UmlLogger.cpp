@@ -1,6 +1,6 @@
 #include "UmlLogger.hpp"
 
-#include <Common/Math/Helpers/FactorAndMulitplesHelpers.hpp>
+#include <Common/Math/Helpers/FactorAndMultiplesHelpers.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/Uml/UmlArrow.hpp>
 #include <Common/Utils/StringHelpers.hpp>
