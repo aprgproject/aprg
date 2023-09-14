@@ -8,16 +8,16 @@
 namespace alba::booleanAlgebra {
 
 struct WrappedTerm {
-    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     // rule of five or six
+    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
     ~WrappedTerm() = default;
     WrappedTerm(WrappedTerm&& wrappedTerm) = default;
     WrappedTerm& operator=(WrappedTerm&& wrappedTerm) = default;
-    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
     WrappedTerm(BaseTerm const& baseTerm);
     WrappedTerm(BaseTerm&& baseTerm);
     WrappedTerm(WrappedTerm const& wrappedTerm);
     WrappedTerm& operator=(WrappedTerm const& wrappedTerm);
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     bool operator==(WrappedTerm const& second) const;
     bool operator!=(WrappedTerm const& second) const;
     bool operator<(WrappedTerm const& second) const;

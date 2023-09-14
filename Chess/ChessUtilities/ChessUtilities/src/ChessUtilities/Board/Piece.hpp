@@ -11,12 +11,12 @@ namespace alba::chess {
 
 class Piece {
 public:
-    Piece();
     // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
+    Piece();
     Piece(uint8_t const data);
     Piece(PieceColorAndType const colorAndType);
-    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     Piece(PieceColor const color, PieceType const type);
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     bool operator==(Piece const& piece) const;
     bool operator!=(Piece const& piece) const;
     [[nodiscard]] PieceColor getColor() const;
