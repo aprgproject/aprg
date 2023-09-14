@@ -22,7 +22,6 @@ private:
 }  // namespace alba
 
 // This is a variant of 0-1 Knapsack Problem
-
 // APPROACH:
 // 1) Dynamic Programming by Iterative method:
 // -> Get the maximum possible partial sum and create an array of booleans ("isPartialSumPossible") with that size

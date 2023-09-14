@@ -275,7 +275,6 @@ TEST(AlgorithmExamplesTest, GenerateFibonacciNumbersUsingAdjacentDifference) {
 }  // namespace alba
 
 // Notes
-
 // -> rotate is very common as a solution in real problems
 // -> This are not the same:
 // ---> This is wrong:

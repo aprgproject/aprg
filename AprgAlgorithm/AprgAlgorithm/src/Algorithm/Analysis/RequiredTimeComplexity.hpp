@@ -5,7 +5,6 @@ namespace algorithm {}
 }  // namespace alba
 
 // Given the input size, we can try to guess the required time complexity of the algorithm that solves the problem.
-
 // The following table contains some useful estimates assuming a time limit of ONE SECOND.
 // | input size | required time complexity
 // | n<=10      | O(n!)

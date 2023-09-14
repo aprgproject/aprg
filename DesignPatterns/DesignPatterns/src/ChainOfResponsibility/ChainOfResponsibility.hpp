@@ -70,7 +70,6 @@ public:
 }  // namespace ChainOfResponsibility
 
 // Chain of Responsibility discussion:
-
 // ONE LINE NOTE:
 // -> Have a CHAIN of handlers (with subclassing) that can process a request and ANY handler is RESPONSIBLE on consuming
 // the request

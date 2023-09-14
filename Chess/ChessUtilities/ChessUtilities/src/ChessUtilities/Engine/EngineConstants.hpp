@@ -11,6 +11,7 @@ constexpr int NUMBER_OF_VARIATIONS = 20;
 
 // Basis: https://github.com/official-stockfish/Stockfish
 // In threads: For best performance, set this equal to the number of CPU cores available.
+
 }  // namespace chess
 
 }  // namespace alba

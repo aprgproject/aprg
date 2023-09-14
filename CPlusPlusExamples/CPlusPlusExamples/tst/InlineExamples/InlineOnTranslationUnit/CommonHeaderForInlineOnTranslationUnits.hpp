@@ -50,7 +50,6 @@ TranslationUnitValues getValuesInTranslationUnit2();
 }  // namespace alba::InlineOnTranslationUnits
 
 // Notes:
-
 // From cppreference:
 // -> The inline specifier, when used in a function's decl-specifier-seq, declares the function to be an inline
 // function.

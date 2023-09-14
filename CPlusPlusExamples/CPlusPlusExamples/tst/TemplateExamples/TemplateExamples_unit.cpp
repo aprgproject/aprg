@@ -11,7 +11,6 @@ using namespace alba::typeHelper;
 using namespace std;
 
 // Taken from Arthur O'Dwyer's lecture ("Template Normal Programming")
-
 namespace alba {
 
 namespace FunctionTemplatesWork {
@@ -662,6 +661,7 @@ struct IntegralConstantWithAuto {
 //
 //     // These (IntegralConstantWithoutAuto, IntegralConstantWithAuto) are basically the same.
 // }
+
 }  // namespace TemplateAutoWorks
 
 namespace TemplateTypeDeductionWorksForClassesInCpp17 {
@@ -727,13 +727,13 @@ void commonFunctionName(float) {
 
 TEST(TemplateExamplesTest, FunctionSelectionWorksAsExpected) {
     // perfect match is first
-    commonFunctionName(5);  // commonFunctionName(int)
-                            // template specialization is second
+    commonFunctionName(5);    // commonFunctionName(int)
+                              // template specialization is second
     commonFunctionName(5.F);  // commonFunctionName(Type) [with Type = float]
                               // template instantiation is third
     commonFunctionName(5.0);  // commonFunctionName(Type) [with Type = double]
                               // implicit conversions is last
-    commonFunctionName(5U);  // commonFunctionName(int)
+    commonFunctionName(5U);   // commonFunctionName(int)
 }
 
 }  // namespace FunctionSelectionWorksAsExpected

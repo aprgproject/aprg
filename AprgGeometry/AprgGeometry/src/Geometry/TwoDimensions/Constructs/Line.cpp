@@ -7,8 +7,8 @@
 #include <cmath>
 #include <iterator>
 
-using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace alba::mathHelper;
+using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
 namespace alba::TwoDimensions {

@@ -69,7 +69,6 @@ private:
 }  // namespace alba::algorithm
 
 // Algorithm in short terms: Relax the current shortest/longest node.
-
 // Dijkstra algorithm computes a shortest path tree in any edge-weighted digraph with non negative weights,
 // Proof:
 // -> Each edge e=v->w is relaxed exactly once (when v is relaxed), leaving distTo[w] <= distTo[v] + e.weight()

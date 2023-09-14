@@ -523,6 +523,10 @@ string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& ter
     return {};
 }
 
+char CPlusPlusReorganizeItems::getRevisedChar(char const character) {
+    return (';' == character) ? ' ' : static_cast<char>(::toupper(character));
+}
+
 bool CPlusPlusReorganizeItems::hasMultilineItem(SortItems const& sortItems) {
     return any_of(sortItems.cbegin(), sortItems.cend(), [&](SortItem const& sortItem) {
         return isMultiLine(sortItem.numberOfLines);
@@ -540,10 +544,6 @@ bool CPlusPlusReorganizeItems::compareAlphabetically(string const& string1, stri
         }
     }
     return string1.size() < string2.size();
-}
-
-char CPlusPlusReorganizeItems::getRevisedChar(char const character) {
-    return (';' == character) ? ' ' : static_cast<char>(::toupper(character));
 }
 
 void CPlusPlusReorganizeItems::sortByComparingItems(SortItems& sortItems) {

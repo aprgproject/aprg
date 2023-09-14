@@ -28,7 +28,6 @@ private:
 }  // namespace alba
 
 // Collect maximum points in a grid using two traversals
-
 // Given a matrix where every cell represents points.
 // How to collect maximum points using two traversals under following conditions?
 // Let the dimensions of given grid be R x C.

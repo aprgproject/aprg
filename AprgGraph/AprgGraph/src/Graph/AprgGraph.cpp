@@ -12,9 +12,9 @@
 #include <cmath>
 
 using namespace alba::AprgBitmap;
-using namespace alba::TwoDimensions::twoDimensionsUtilities;
-using namespace alba::TwoDimensions;
 using namespace alba::algebra;
+using namespace alba::TwoDimensions;
+using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
 namespace alba {

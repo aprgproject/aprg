@@ -22,7 +22,6 @@ private:
 }  // namespace alba
 
 // VARIANT OF: Longest Increasing Subsequence
-
 // You are given n pairs of numbers.
 // In every pair, the first number is always smaller than the second number.
 // A pair (c, d) can follow another pair (a, b) if b < c.

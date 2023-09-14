@@ -51,14 +51,6 @@ TEST(WrappedTermTest, LessThanOperatorWorks) {
     EXPECT_TRUE(wrappedTerm3 < wrappedTerm1);
 }
 
-TEST(WrappedTermTest, ClearWorks) {
-    WrappedTerm wrappedTerm(Term(true));
-
-    wrappedTerm.clear();
-
-    EXPECT_EQ(nullptr, wrappedTerm.baseTermPointer.get());
-}
-
 TEST(WrappedTermTest, OutputStreamOperatorWorks) {
     stringstream ss;
     WrappedTerm wrappedTerm1(Term(true));
@@ -67,6 +59,14 @@ TEST(WrappedTermTest, OutputStreamOperatorWorks) {
     ss << wrappedTerm1 << "," << wrappedTerm2;
 
     EXPECT_EQ("[true],[false]", ss.str());
+}
+
+TEST(WrappedTermTest, ClearWorks) {
+    WrappedTerm wrappedTerm(Term(true));
+
+    wrappedTerm.clear();
+
+    EXPECT_EQ(nullptr, wrappedTerm.baseTermPointer.get());
 }
 
 }  // namespace alba::booleanAlgebra

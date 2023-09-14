@@ -38,6 +38,19 @@ TEST(FactorAndMultiplesHelpersTest, GetGreatestCommonPowerOf2FactorWorks) {
     EXPECT_EQ(4, getGreatestPowerOf2Factor(12));
 }
 
+TEST(FactorAndMultiplesHelpersTest, GetGreatestCommonFactorForAlbaNumberWorks) {
+    EXPECT_EQ(AlbaNumber(0), getGreatestCommonFactor(AlbaNumber(0), AlbaNumber(0)));
+    EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(1), AlbaNumber(1)));
+    EXPECT_EQ(
+        AlbaNumber::createFraction(1, 12),
+        getGreatestCommonFactor(AlbaNumber::createFraction(1, 6), AlbaNumber::createFraction(1, 4)));
+    EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(0.33), AlbaNumber::createFraction(1, 4)));
+    EXPECT_EQ(
+        AlbaNumber::createFraction(1, 4), getGreatestCommonFactor(AlbaNumber(5), AlbaNumber::createFraction(1, 4)));
+    EXPECT_EQ(AlbaNumber(3), getGreatestCommonFactor(AlbaNumber(6), AlbaNumber(9)));
+    EXPECT_EQ(AlbaNumber(9), getGreatestCommonFactor(AlbaNumber(-36), AlbaNumber(27)));
+}
+
 TEST(FactorAndMultiplesHelpersTest, GetGreatestCommonFactorWorks) {
     // UnsignedInteger
     EXPECT_EQ(0, getGreatestCommonFactor(0, 0));
@@ -147,6 +160,11 @@ TEST(FactorAndMultiplesHelpersTest, GetLeastCommonMultipleWorks) {
     EXPECT_EQ(262144, getLeastCommonMultiple(65536, 262144));
 }
 
+TEST(FactorAndMultiplesHelpersTest, GetLeastCommonMultipleForAlbaNumberWorks) {
+    EXPECT_EQ(
+        AlbaNumber(3), getLeastCommonMultiple(AlbaNumber::createFraction(3, 2), AlbaNumber::createFraction(1, 3)));
+}
+
 TEST(FactorAndMultiplesHelpersTest, GetLeastCommonMultipleUsingEuclidAlgorithmWorks) {
     EXPECT_EQ(0, getLeastCommonMultipleUsingEuclidAlgorithm(0, 0));
     EXPECT_EQ(1, getLeastCommonMultipleUsingEuclidAlgorithm(1, 1));
@@ -211,24 +229,6 @@ TEST(FactorAndMultiplesHelpersTest, MultiplyBySevenWorks) {
     EXPECT_EQ(8638U, multiplyBySeven(1234U));
     EXPECT_EQ(864192U, multiplyBySeven(123456U));
     EXPECT_EQ(86419752308638U, multiplyBySeven(12345678901234U));
-}
-
-TEST(FactorAndMultiplesHelpersTest, GetGreatestCommonFactorForAlbaNumberWorks) {
-    EXPECT_EQ(AlbaNumber(0), getGreatestCommonFactor(AlbaNumber(0), AlbaNumber(0)));
-    EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(1), AlbaNumber(1)));
-    EXPECT_EQ(
-        AlbaNumber::createFraction(1, 12),
-        getGreatestCommonFactor(AlbaNumber::createFraction(1, 6), AlbaNumber::createFraction(1, 4)));
-    EXPECT_EQ(AlbaNumber(1), getGreatestCommonFactor(AlbaNumber(0.33), AlbaNumber::createFraction(1, 4)));
-    EXPECT_EQ(
-        AlbaNumber::createFraction(1, 4), getGreatestCommonFactor(AlbaNumber(5), AlbaNumber::createFraction(1, 4)));
-    EXPECT_EQ(AlbaNumber(3), getGreatestCommonFactor(AlbaNumber(6), AlbaNumber(9)));
-    EXPECT_EQ(AlbaNumber(9), getGreatestCommonFactor(AlbaNumber(-36), AlbaNumber(27)));
-}
-
-TEST(FactorAndMultiplesHelpersTest, GetLeastCommonMultipleForAlbaNumberWorks) {
-    EXPECT_EQ(
-        AlbaNumber(3), getLeastCommonMultiple(AlbaNumber::createFraction(3, 2), AlbaNumber::createFraction(1, 3)));
 }
 
 }  // namespace alba::mathHelper

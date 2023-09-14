@@ -20,10 +20,10 @@
 
 using namespace alba::AprgBitmap;
 using namespace alba::FrequencyStatistics;
-using namespace alba::TwoDimensions::twoDimensionsUtilities;
-using namespace alba::TwoDimensions;
-using namespace alba::TwoDimensionsStatistics;
 using namespace alba::mathHelper;
+using namespace alba::TwoDimensions;
+using namespace alba::TwoDimensions::twoDimensionsUtilities;
+using namespace alba::TwoDimensionsStatistics;
 using namespace std;
 
 namespace alba::soosa {

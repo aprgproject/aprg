@@ -11,18 +11,6 @@ using ValusForTest = int;
 using UtilitiesForTest = SegmentTreeUtilities<ValusForTest>;
 }  // namespace
 
-TEST(SegmentTreeUtilitiesTest, IsALeftChildWorks) {
-    EXPECT_FALSE(UtilitiesForTest::isALeftChild(0));
-    EXPECT_TRUE(UtilitiesForTest::isALeftChild(1));
-    EXPECT_FALSE(UtilitiesForTest::isALeftChild(2));
-}
-
-TEST(SegmentTreeUtilitiesTest, IsARightChildWorks) {
-    EXPECT_TRUE(UtilitiesForTest::isARightChild(0));
-    EXPECT_FALSE(UtilitiesForTest::isARightChild(1));
-    EXPECT_TRUE(UtilitiesForTest::isARightChild(2));
-}
-
 TEST(SegmentTreeUtilitiesTest, GetParentWorks) {
     EXPECT_EQ(-1, UtilitiesForTest::getParent(0));  // -1 because it has no parent
     EXPECT_EQ(0, UtilitiesForTest::getParent(1));
@@ -64,6 +52,18 @@ TEST(SegmentTreeUtilitiesTest, GetMinimumNumberOfParentsWorks) {
     EXPECT_EQ(3, UtilitiesForTest::getMinimumNumberOfParents(4));
     EXPECT_EQ(63, UtilitiesForTest::getMinimumNumberOfParents(43));
     EXPECT_EQ(63, UtilitiesForTest::getMinimumNumberOfParents(44));
+}
+
+TEST(SegmentTreeUtilitiesTest, IsALeftChildWorks) {
+    EXPECT_FALSE(UtilitiesForTest::isALeftChild(0));
+    EXPECT_TRUE(UtilitiesForTest::isALeftChild(1));
+    EXPECT_FALSE(UtilitiesForTest::isALeftChild(2));
+}
+
+TEST(SegmentTreeUtilitiesTest, IsARightChildWorks) {
+    EXPECT_TRUE(UtilitiesForTest::isARightChild(0));
+    EXPECT_FALSE(UtilitiesForTest::isARightChild(1));
+    EXPECT_TRUE(UtilitiesForTest::isARightChild(2));
 }
 
 }  // namespace alba::algorithm

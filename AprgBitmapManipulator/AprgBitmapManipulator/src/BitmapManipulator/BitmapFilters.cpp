@@ -11,14 +11,12 @@
 #include <Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.hpp>
 
 using namespace alba::AprgBitmap::ColorUtilities;
-using namespace alba::TwoDimensions;
 using namespace alba::mathHelper;
+using namespace alba::TwoDimensions;
 using namespace std;
 
 namespace {
-
 constexpr int MAX_PEN_CIRCLE_RADIUS_COORDINATE = 5;
-
 }
 
 namespace alba::AprgBitmap {

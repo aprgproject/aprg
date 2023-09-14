@@ -5,7 +5,6 @@
 using namespace std;
 
 // Taken from Arthur O Dwyer's lecture ("ADT Puzzler")
-
 namespace alba::FunctionNotOnTheCurrentNamespaceStillWorks {
 
 namespace A {

@@ -99,7 +99,6 @@ private:
 }  // namespace alba::algorithm
 
 // Minimum Node Cover For Tree
-
 // A vertex cover of an undirected graph is a subset of its vertices such that
 // for every edge (u, v) of the graph, either ‘u’ or ‘v’ is in vertex cover.
 // Although the name is Vertex Cover, the set covers all edges of the given graph.

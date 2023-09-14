@@ -225,16 +225,6 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaXYZWorks) {
     clearFile(TEST_HEADER_FILE);
 }
 
-TEST(CPlusPlusReorganizerTest, ReorganizeDownloadMovesFromChessDotComTestsWorks) {
-    CPlusPlusReorganizer reorganizer;
-    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/DownloadMovesFromChessDotComTests.cpp)", TEST_UNIT_FILE);
-
-    reorganizer.processImplementationFile("", TEST_UNIT_FILE);
-
-    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/DownloadMovesFromChessDotComTests.cpp)", TEST_UNIT_FILE);
-    clearFile(TEST_HEADER_FILE);
-}
-
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaMacrosUnitTestWorks) {
     CPlusPlusReorganizer reorganizer;
     copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaMacros.hpp)", TEST_HEADER_FILE);
@@ -449,6 +439,16 @@ TEST(CPlusPlusReorganizerTest, ReorganizeCommonFunctionLibraryUnitTestWorks) {
     clearFile(TEST_HEADER_FILE);
     clearFile(TEST_IMPLEMENTATION_FILE);
     clearFile(TEST_UNIT_FILE);
+}
+
+TEST(CPlusPlusReorganizerTest, ReorganizeDownloadMovesFromChessDotComTestsWorks) {
+    CPlusPlusReorganizer reorganizer;
+    copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/DownloadMovesFromChessDotComTests.cpp)", TEST_UNIT_FILE);
+
+    reorganizer.processImplementationFile("", TEST_UNIT_FILE);
+
+    verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/DownloadMovesFromChessDotComTests.cpp)", TEST_UNIT_FILE);
+    clearFile(TEST_HEADER_FILE);
 }
 
 TEST(CPlusPlusReorganizerTest, ReorganizeBenchmarkTestsWorks) {

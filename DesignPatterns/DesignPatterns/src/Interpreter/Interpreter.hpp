@@ -66,7 +66,6 @@ private:
 }  // namespace Interpreter
 
 // Interpreter discussion:
-
 // ONE LINE NOTE:
 // -> Provide a class (with subclasses) that can be INTERPRETED differently depending on the CONTEXT.
 // Intent:

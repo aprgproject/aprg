@@ -40,7 +40,6 @@ private:
 }  // namespace alba
 
 // Notes:
-
 // On std::mt19937:
 // -> Fast
 // ---> Although generating numbers is fast, copying and constructing it isn't fast

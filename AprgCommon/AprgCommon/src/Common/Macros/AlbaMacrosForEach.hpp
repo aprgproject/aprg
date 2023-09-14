@@ -1,5 +1,4 @@
 // Inspired by: https://github.com/swansontec/map-macro/blob/master/map.h
-
 #define ALBA_MACROS_FOR_EACH_EVAL0(...) __VA_ARGS__
 #define ALBA_MACROS_FOR_EACH_EVAL1(...) \
     ALBA_MACROS_FOR_EACH_EVAL0(ALBA_MACROS_FOR_EACH_EVAL0(ALBA_MACROS_FOR_EACH_EVAL0(__VA_ARGS__)))
@@ -35,7 +34,6 @@
 /**
  * Applies the function macro `f` to each of the remaining parameters.
  */
-
 #define ALBA_MACROS_FOR_EACH(f, ...) \
     ALBA_MACROS_FOR_EACH_EVAL(ALBA_MACROS_FOR_EACH1(f, __VA_ARGS__, ()()(), ()()(), ()()(), 0))
 
@@ -43,6 +41,5 @@
  * Applies the function macro `f` to each of the remaining parameters and
  * inserts commas between the results.
  */
-
 #define ALBA_MACROS_FOR_EACH_WITH_COMMA(f, ...) \
     ALBA_MACROS_FOR_EACH_EVAL(ALBA_MACROS_FOR_EACH_LIST1(f, __VA_ARGS__, ()()(), ()()(), ()()(), 0))

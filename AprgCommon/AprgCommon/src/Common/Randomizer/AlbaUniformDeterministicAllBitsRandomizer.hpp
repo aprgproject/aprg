@@ -32,7 +32,6 @@ private:
 }  // namespace alba
 
 // Notes:
-
 // When is it safe to skip uniform_int_distribution?
 // -> mt19937 outputs: [0, 2^32)
 // -> mt19937_64 outputs: [0, 2^64)

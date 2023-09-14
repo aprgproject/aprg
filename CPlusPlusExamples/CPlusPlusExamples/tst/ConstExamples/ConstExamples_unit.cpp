@@ -337,7 +337,6 @@ TEST(ConstExamplesTest, OptimzationOfConstParametersDoesNotWork) {
 }  // namespace alba
 
 // Notes:
-
 // -> const helps you find bugs at compile time
 // -> const makes it easier to reason about your code
 // -> It helps preserve your class invariants

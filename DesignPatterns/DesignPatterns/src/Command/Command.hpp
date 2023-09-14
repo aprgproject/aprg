@@ -72,7 +72,6 @@ private:
 }  // namespace Command
 
 // Command discussion:
-
 // ONE LINE NOTE:
 // -> Encapsulate a REQUEST into a "command object" that can INVOKE different operations (such as execute/undo)
 // Intent:

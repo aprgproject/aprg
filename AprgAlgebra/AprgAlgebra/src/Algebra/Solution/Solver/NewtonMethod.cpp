@@ -1,7 +1,3 @@
-// In numerical analysis, Newton's method, also known as the Newton–Raphson method, named after Isaac Newton and Joseph
-// Raphson, is a root-finding algorithm which produces successively better approximations to the roots (or zeroes) of a
-// real-valued function.
-
 #include "NewtonMethod.hpp"
 
 #include <Common/Math/Helpers/SignRelatedHelpers.hpp>
@@ -11,6 +7,9 @@ using namespace std;
 
 namespace alba::algebra {
 
+// In numerical analysis, Newton's method, also known as the Newton–Raphson method, named after Isaac Newton and Joseph
+// Raphson, is a root-finding algorithm which produces successively better approximations to the roots (or zeroes) of a
+// real-valued function.
 NewtonMethod::NewtonMethod(AlbaNumber const& initialValue, Function const& functionToIterate)
     : m_currentValue(initialValue),
       m_positiveDeltaForSlope(INITIAL_DELTA_FOR_SLOPE),

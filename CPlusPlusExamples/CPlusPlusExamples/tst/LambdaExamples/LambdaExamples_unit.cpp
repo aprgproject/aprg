@@ -10,7 +10,6 @@
 using namespace std;
 
 // Taken from Arthur O' Dwyer's lecture ("Lambdas from First Principles- A Whirlwind Tour of C++")
-
 namespace alba {
 
 namespace TestStaticLocalVariableInFunctionTemplates {

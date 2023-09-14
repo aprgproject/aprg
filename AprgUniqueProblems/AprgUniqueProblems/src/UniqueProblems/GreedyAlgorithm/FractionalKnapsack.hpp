@@ -18,7 +18,6 @@ public:
 }  // namespace alba
 
 // This is a variant of 0-1 Knapsack Problem
-
 // -> Given the weights and values of N items,
 // ---> put these items in a knapsack of capacity W to get the maximum total value in the knapsack.
 // ---> In Fractional Knapsack,

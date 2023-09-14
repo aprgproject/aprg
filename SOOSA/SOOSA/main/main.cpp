@@ -3,9 +3,9 @@
 #include <SOOSA.hpp>
 #include <UserInterface.hpp>
 
+using namespace alba;
 using namespace alba::soosa;
 using namespace alba::stringHelper;
-using namespace alba;
 using namespace std;
 
 int main(int const argc, char *argv[]) {

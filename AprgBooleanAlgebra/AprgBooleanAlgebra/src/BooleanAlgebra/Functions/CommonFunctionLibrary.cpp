@@ -128,4 +128,5 @@ UnaryBooleanFunction getContradiction() {
 // Symbol: ⊨
 // Read as: "models"
 // Note: x ⊨ y means x models (semantically entails) y
+
 }  // namespace alba::booleanAlgebra

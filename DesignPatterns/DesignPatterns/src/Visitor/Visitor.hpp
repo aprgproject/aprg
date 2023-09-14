@@ -61,7 +61,6 @@ public:
 }  // namespace Visitor
 
 // Visitor discussion:
-
 // ONE LINE NOTE:
 // -> Provide an ABSTRACT VISITOR that can be PASSED to an ABSTRACT ELEMENT so that it can perform "visit operations"
 // without relying on concretions.

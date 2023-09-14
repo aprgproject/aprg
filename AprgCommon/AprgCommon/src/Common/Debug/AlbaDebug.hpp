@@ -45,6 +45,7 @@ inline std::ofstream debugStream(ALBA_DBG_PRINT_EXTERNAL_OUTPUT_STREAM_FILE_PATH
 // Note: Dont include "friend" keyword in macro just include in the class.
 #define ALBA_DBG_CLASS_OUTPUT_OPERATOR_DECLARATION(ParameterSignature) \
     std::ostream& operator<<(std::ostream& out, ParameterSignature);
+
 // NOLINTBEGIN(bugprone-macro-parentheses)
 #define ALBA_DBG_CLASS_OUTPUT_OPERATOR_DEFINITION(ParameterSignature, OutputOperation) \
     std::ostream& operator<<(std::ostream& out, ParameterSignature) {                  \
@@ -54,4 +55,5 @@ inline std::ofstream debugStream(ALBA_DBG_PRINT_EXTERNAL_OUTPUT_STREAM_FILE_PATH
 
 // NOLINTEND(bugprone-macro-parentheses)
 // #define ALBA_DBG_COMMENTED_LINE #warning("Uncomment this line after your done debugging.");
+
 }  // namespace alba

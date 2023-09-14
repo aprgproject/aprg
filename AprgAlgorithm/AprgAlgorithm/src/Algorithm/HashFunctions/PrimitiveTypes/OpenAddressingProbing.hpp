@@ -47,7 +47,6 @@ HashValue getHashForDoubleHash(
 }  // namespace alba::algorithm
 
 // Check other discussion in other files as well, they are understandable insights (like BaseLinearProbingHash.hpp).
-
 // We will examine three commonly used techniques to compute the probe sequences required to open addressing:
 // -> Linear probing, quadratic probing and double hashing.
 // These techniques all guarantee that the hashes geenerated fits the number of slots for each key.

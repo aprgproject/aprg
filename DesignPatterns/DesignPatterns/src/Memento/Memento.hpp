@@ -73,7 +73,6 @@ private:
 }  // namespace Memento
 
 // Memento discussion:
-
 // ONE LINE NOTE:
 // -> Provide a "memento object" that SAVES the STATE of an "originator object" so that it can be RESTORED later.
 // Intent:

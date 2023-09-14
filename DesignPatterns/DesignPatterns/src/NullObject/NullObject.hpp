@@ -40,7 +40,6 @@ public:
 }  // namespace NullObject
 
 // NullObject discussion:
-
 // ONE LINE NOTE:
 // -> Create a NULL OBJECT to HANDLE special NULL or EMPTY cases with polymorphism.
 // Intent:

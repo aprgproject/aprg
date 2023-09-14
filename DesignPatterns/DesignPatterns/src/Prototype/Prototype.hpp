@@ -59,7 +59,6 @@ private:
 }  // namespace Prototype
 
 // Prototype discussion:
-
 // ONE LINE NOTE:
 // -> Create objects by CLONING or copying PROTOTYPE objects that can be set in runtime.
 // Intent:

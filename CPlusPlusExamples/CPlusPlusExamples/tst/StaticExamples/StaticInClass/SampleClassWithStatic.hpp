@@ -33,10 +33,10 @@ struct SampleClassWithStatic {
 // int SampleClassWithStatic::staticData = 200; // Linker error: multiple definition of
 // `alba::SampleClassWithStatic::staticData' inline int staticInlinedData=400; // Out-of-class definition works too.
 // inline const int myRandomInt = generateRandomInt(); // Calculating a random number at runtime works too!
+
 }  // namespace alba
 
 // Notes:
-
 // -> static members
 // ---> Inside a class definition, the keyword static declares members that are not bound to class instances.
 // ---> Outside a class definition, it has a different meaning: see storage duration.

@@ -37,7 +37,6 @@ private:
 }  // namespace alba
 
 // Boolean Parenthesization Problem
-
 // Given a boolean expression with following symbols.
 // Symbols
 // -> 'T' ---> true

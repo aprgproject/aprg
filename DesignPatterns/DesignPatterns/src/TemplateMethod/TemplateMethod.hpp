@@ -52,7 +52,6 @@ class ConcreteClass : public AbstractClass {
 }  // namespace TemplateMethod
 
 // Template Method discussion:
-
 // It has nothing to do with C++ templates and generics!
 // ONE LINE NOTE:
 // -> Provide a "template method" with KNOWN STEPS and allow polymorphism and subclassing to support DIFFERENT VERSION

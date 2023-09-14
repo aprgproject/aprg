@@ -33,7 +33,6 @@ TEST(StaticInFunctionTest, StaticValuesAreInitializedCorrectlyAndCanBeChanged) {
 }  // namespace alba
 
 // Static local variables
-
 // Variables declared at block scope with the specifier static or thread_local (since C++11) have static or thread
 // (since C++11) storage duration but are initialized the first time control passes through their declaration (unless
 // their initialization is zero- or constant-initialization, which can be performed before the block is first entered).

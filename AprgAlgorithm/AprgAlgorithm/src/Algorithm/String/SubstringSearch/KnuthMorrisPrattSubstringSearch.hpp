@@ -72,7 +72,6 @@ private:
 }  // namespace alba::algorithm
 
 // Sedgewick: This is one of the coolest algorithm.
-
 // Intuition: Suppose we are searching in text for pattern: "BAAAAAAAAA"
 // -> Suppose we match 5 chars in pattern, with mismatch on 6th char (suppose BAAAAB).
 // -> We know previous 6 chars in text are BAAAAB

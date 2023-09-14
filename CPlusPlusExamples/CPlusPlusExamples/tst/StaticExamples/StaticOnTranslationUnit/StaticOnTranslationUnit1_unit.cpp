@@ -3,7 +3,6 @@
 #include <gtest/gtest.h>
 
 // Inspired by: https://medium.com/pranayaggarwal25/unnamed-namespaces-static-f1498741c527
-
 namespace alba::StaticOnTranslationUnits {
 
 // explicitly extern (external linkage)

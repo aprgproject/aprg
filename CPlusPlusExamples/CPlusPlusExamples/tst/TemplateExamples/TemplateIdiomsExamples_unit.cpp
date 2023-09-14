@@ -9,7 +9,6 @@ using namespace alba::typeHelper;
 using namespace std;
 
 // Taken from Arthur O'Dwyer's lecture ("Template Normal Programming")
-
 namespace alba {
 
 namespace TemplateParametersCanBeOmittedOnClassTemplates {

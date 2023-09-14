@@ -24,7 +24,6 @@ private:
 }  // namespace alba
 
 // Compute sum of digits in all numbers from 1 to n
-
 // Given a number n, find the sum of digits in all numbers from 1 to n.
 // Examples:
 // Input: n = 5

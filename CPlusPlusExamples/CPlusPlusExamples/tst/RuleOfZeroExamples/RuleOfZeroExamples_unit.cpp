@@ -6,7 +6,6 @@
 using namespace std;
 
 // Taken from Arthur O Dwyer's lecture ("RAII and the Rule of Zero")
-
 namespace alba {
 
 namespace {

@@ -30,7 +30,6 @@ static int staticFreeFunction();  // explicitly static
 }  // namespace alba::StaticOnTranslationUnits
 
 // Notes:
-
 // -> Translation Unit
 // ---> According to standard C++ (wayback machine link)
 // -----> A translation unit is the basic unit of compilation in C++.

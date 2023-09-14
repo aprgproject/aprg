@@ -34,7 +34,6 @@ public:
 }  // namespace ClassAdapter
 
 // Adapter discussion:
-
 // ONE LINE NOTE:
 // -> ADAPT a MISMATCHED interface into a matched interface using a class inheritance or object composition
 // Intent:

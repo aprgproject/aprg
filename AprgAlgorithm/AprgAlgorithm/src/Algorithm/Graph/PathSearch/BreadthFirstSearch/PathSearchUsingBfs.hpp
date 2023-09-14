@@ -132,4 +132,5 @@ private:
 // -----> for example by backtracking from the destination node up to the starting node, once the BFS has been run,
 // -----> and the predecessors nodes have been set.
 // ---> Breadth-first search produces a so-called breadth first tree.
+
 }  // namespace alba::algorithm

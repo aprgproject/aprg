@@ -128,4 +128,5 @@ protected:
 // Improved version: Two probe hashing (separate chaining variant)
 // -> Hash to two positions, insert key in shorter of the two chains
 // -> Reduces expected length of the longest chain to log log N
+
 }  // namespace alba::algorithm

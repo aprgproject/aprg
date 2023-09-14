@@ -30,7 +30,6 @@ private:
 }  // namespace alba
 
 // Find the minimum cost to reach destination using a train
-
 // There are N stations on route of a train.
 // The train goes from station 0 to N-1.
 // The ticket cost for all pair of stations (i, j) is given where j is greater than i.

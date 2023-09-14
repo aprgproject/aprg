@@ -65,7 +65,6 @@ public:
 }  // namespace Decorator
 
 // Decorator discussion:
-
 // ONE LINE NOTE:
 // -> DECORATE (or attach) additional RESPONSIBILITIES into an object in runtime.
 // Intent:

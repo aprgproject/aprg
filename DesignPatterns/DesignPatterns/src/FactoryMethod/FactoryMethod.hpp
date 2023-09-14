@@ -64,7 +64,6 @@ public:
 }  // namespace FactoryMethod
 
 // FactoryMethod discussion:
-
 // ONE LINE NOTE:
 // -> Provide a "factory method" for creating objects and let polymorphism and subclassing support DIFFERENT VERSIONS of
 // the "factory method".

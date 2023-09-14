@@ -3,7 +3,6 @@
 #include <gtest/gtest.h>
 
 // Inspired by: https://medium.com/pranayaggarwal25/unnamed-namespaces-Inline-f1498741c527
-
 namespace alba::InlineOnTranslationUnits {
 
 // constexpr int constInteger = 110;  // Error: redefinition of 'constInteger'

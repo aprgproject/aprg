@@ -29,7 +29,6 @@ private:
 }  // namespace alba
 
 // This is a variant of 0-1 Knapsack Problem
-
 // Branch and bound is an algorithm design paradigm which is generally used
 // for solving combinatorial optimization problems.
 // These problems typically exponential in terms of time complexity

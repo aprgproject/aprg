@@ -2,8 +2,8 @@
 
 #include <Geometry/ThreeDimensions/Utilities/ThreeDimensionsUtilities.hpp>
 
-using namespace alba::ThreeDimensions::threeDimensionsUtilities;
 using namespace alba::mathHelper;
+using namespace alba::ThreeDimensions::threeDimensionsUtilities;
 using namespace std;
 
 namespace alba::ThreeDimensions {

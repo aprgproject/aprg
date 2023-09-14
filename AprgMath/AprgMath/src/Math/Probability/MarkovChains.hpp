@@ -74,4 +74,5 @@ private:
 // Using this method, we can simulate a walk of m steps in O(n2m) time.
 // The transitions of a Markov chain can also be represented as a matrix that updates the probability distribution.
 // By calculating matrix powers efficiently, we can calculate the distribution after m steps in O(n3 logm) time.
+
 }  // namespace alba

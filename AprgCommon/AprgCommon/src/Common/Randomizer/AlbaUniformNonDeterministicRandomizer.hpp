@@ -45,7 +45,6 @@ private:
 }  // namespace alba
 
 // Notes:
-
 // On std::random_device:
 // -> Non determinism is not guaranteed
 // ---> std::random_device is a uniformly-distributed integer random number generator

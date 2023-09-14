@@ -916,8 +916,7 @@ TEST(TermTypeOperatorsTest, BinaryMultiplyOperatorConstantMultiplyMonomialWithSa
     EXPECT_EQ(Term(16), term);
 }
 
-TEST(
-    TermTypeOperatorsTest, BinaryMultiplyOperatorConstantMultiplyMonomialWithDifferentMonomialConstantOperationWorks) {
+TEST(TermTypeOperatorsTest, BinaryMultiplyOperatorConstantMultiplyMonomialWithDifferentMonomialConstantOperationWorks) {
     Term term(Constant(4) * Monomial(6, {{"x", 2}, {"y", 4}}));
 
     EXPECT_EQ(Term(Monomial(24, {{"x", 2}, {"y", 4}})), term);
@@ -975,8 +974,7 @@ TEST(TermTypeOperatorsTest, BinaryMultiplyOperatorVariableMultiplyMonomialWithSa
     EXPECT_EQ(Term(Monomial(7, {{"x", 2}})), term);
 }
 
-TEST(
-    TermTypeOperatorsTest, BinaryMultiplyOperatorVariableMultiplyMonomialWithDifferentMonomialVariableOperationWorks) {
+TEST(TermTypeOperatorsTest, BinaryMultiplyOperatorVariableMultiplyMonomialWithDifferentMonomialVariableOperationWorks) {
     Term term(Variable("x") * Monomial(7, {{"y", 1}}));
 
     EXPECT_EQ(Term(Monomial(7, {{"x", 1}, {"y", 1}})), term);
@@ -1016,8 +1014,7 @@ TEST(TermTypeOperatorsTest, BinaryMultiplyOperatorMonomialMultiplyConstantWithSa
     EXPECT_EQ(Term(16), term);
 }
 
-TEST(
-    TermTypeOperatorsTest, BinaryMultiplyOperatorMonomialMultiplyConstantWithDifferentMonomialConstantOperationWorks) {
+TEST(TermTypeOperatorsTest, BinaryMultiplyOperatorMonomialMultiplyConstantWithDifferentMonomialConstantOperationWorks) {
     Term term(Monomial(6, {{"x", 2}, {"y", 4}}) * Constant(4));
 
     EXPECT_EQ(Term(Monomial(24, {{"x", 2}, {"y", 4}})), term);
@@ -1029,8 +1026,7 @@ TEST(TermTypeOperatorsTest, BinaryMultiplyOperatorMonomialMultiplyVariableWithSa
     EXPECT_EQ(Term(Monomial(7, {{"x", 2}})), term);
 }
 
-TEST(
-    TermTypeOperatorsTest, BinaryMultiplyOperatorMonomialMultiplyVariableWithDifferentMonomialVariableOperationWorks) {
+TEST(TermTypeOperatorsTest, BinaryMultiplyOperatorMonomialMultiplyVariableWithDifferentMonomialVariableOperationWorks) {
     Term term(Monomial(7, {{"y", 1}}) * Variable("x"));
 
     EXPECT_EQ(Term(Monomial(7, {{"x", 1}, {"y", 1}})), term);
@@ -1779,8 +1775,7 @@ TEST(TermTypeOperatorsTest, BinaryRaiseToPowerOperatorVariableRaiseToPowerVariab
     EXPECT_EQ(Term(createExpressionIfPossible({Variable("i"), "^", Variable("i")})), term);
 }
 
-TEST(
-    TermTypeOperatorsTest, BinaryRaiseToPowerOperatorVariableRaiseToPowerVariableWithDifferentVariableOperationWorks) {
+TEST(TermTypeOperatorsTest, BinaryRaiseToPowerOperatorVariableRaiseToPowerVariableWithDifferentVariableOperationWorks) {
     Term term(Variable("i") ^ Variable("j"));
 
     EXPECT_EQ(Term(createExpressionIfPossible({Variable("i"), "^", Variable("j")})), term);
@@ -1870,8 +1865,7 @@ TEST(TermTypeOperatorsTest, BinaryRaiseToPowerOperatorMonomialRaiseToPowerMonomi
     EXPECT_EQ(Term(createExpressionIfPossible({Monomial(8, {{"x", 2}}), "^", Monomial(4, {{"x", 2}})})), term);
 }
 
-TEST(
-    TermTypeOperatorsTest, BinaryRaiseToPowerOperatorMonomialRaiseToPowerMonomialWithDifferentMonomialOperationWorks) {
+TEST(TermTypeOperatorsTest, BinaryRaiseToPowerOperatorMonomialRaiseToPowerMonomialWithDifferentMonomialOperationWorks) {
     Term term(Monomial(8, {{"x", 2}}) ^ Monomial(4, {{"x", 1}, {"y", 1}}));
 
     EXPECT_EQ(

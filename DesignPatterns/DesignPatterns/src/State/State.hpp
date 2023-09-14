@@ -45,7 +45,6 @@ private:
 }  // namespace State
 
 // State discussion:
-
 // ONE LINE NOTE:
 // -> Implement a common ABSTRACT STATE INTERFACE and implement different STATE SPECIFIC BEHAVIORS by having STATE
 // SUBCLASSES

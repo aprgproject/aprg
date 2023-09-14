@@ -27,7 +27,6 @@ private:
 }  // namespace alba
 
 // VARIANT OF: Longest Increasing Subsequence
-
 // Box Stacking Problem
 // You are given a set of n types of rectangular 3-D boxes,
 // where the i^th box has height h(i), width w(i) and depth d(i) (all real numbers).

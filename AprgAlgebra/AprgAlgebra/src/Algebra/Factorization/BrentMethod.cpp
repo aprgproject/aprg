@@ -1,10 +1,3 @@
-// In numerical analysis, Brent's method is a root-finding algorithm combining the bisection method, the secant method
-// and inverse quadratic interpolation. It has the reliability of bisection but it can be as quick as some of the
-// less-reliable methods. The algorithm tries to use the potentially fast-converging secant method or inverse quadratic
-// interpolation if possible, but it falls back to the more robust bisection method if necessary. Brent's method is due
-// to Richard Brent[1] and builds on an earlier algorithm by Theodorus Dekker.[2] Consequently, the method is also known
-// as the Brent–Dekker method.
-
 #include "BrentMethod.hpp"
 
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
@@ -17,6 +10,12 @@ using namespace std;
 
 namespace alba::algebra {
 
+// In numerical analysis, Brent's method is a root-finding algorithm combining the bisection method, the secant method
+// and inverse quadratic interpolation. It has the reliability of bisection but it can be as quick as some of the
+// less-reliable methods. The algorithm tries to use the potentially fast-converging secant method or inverse quadratic
+// interpolation if possible, but it falls back to the more robust bisection method if necessary. Brent's method is due
+// to Richard Brent[1] and builds on an earlier algorithm by Theodorus Dekker.[2] Consequently, the method is also known
+// as the Brent–Dekker method.
 namespace {
 constexpr double BRENT_METHOD_COMPARISON_TOLERANCE = 1E-13;
 constexpr double BRENT_METHOD_TOLERANCE_TO_ZERO_FOR_A_AND_B = 1E-11;

@@ -9,8 +9,8 @@
 #include <iostream>
 #include <map>
 
-using namespace alba::algorithm;
 using namespace alba;
+using namespace alba::algorithm;
 using namespace std;
 
 namespace alba::ProgressCounters {

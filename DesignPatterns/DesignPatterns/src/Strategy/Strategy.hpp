@@ -48,7 +48,6 @@ private:
 }  // namespace Strategy
 
 // Strategy discussion:
-
 // ONE LINE NOTE:
 // -> Implement a common ABSTRACT STRATEGY INTERFACE and implement different strategies or FAMILIES OF ALGORITHMS by
 // subclassing so that it can be changed in runtime.

@@ -92,7 +92,6 @@ public:
 }  // namespace AbstractFactory
 
 // AbstractFactory discussion:
-
 // ONE LINE NOTE:
 // -> Create FAMILIES of objects using an ABSTRACT/CHANGING factory
 // Intent:

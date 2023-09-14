@@ -91,4 +91,5 @@ private:
 // Other discussions:
 // Difference between eager and lazy?
 // -> Lazy adds (edge) to search regardless of weight
+
 }  // namespace alba::algorithm

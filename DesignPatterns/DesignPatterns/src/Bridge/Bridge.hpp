@@ -50,7 +50,6 @@ private:
 }  // namespace Bridge
 
 // Bridge discussion:
-
 // ONE LINE NOTE:
 // -> BRIDGE several IMPLEMENTATIONS (or responsibilities) into one class
 // Intent:

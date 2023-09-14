@@ -3,8 +3,8 @@
 #include <Common/Container/AlbaValueRange.hpp>
 #include <Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.hpp>
 
-using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace alba::mathHelper;
+using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
 namespace alba::TwoDimensions {

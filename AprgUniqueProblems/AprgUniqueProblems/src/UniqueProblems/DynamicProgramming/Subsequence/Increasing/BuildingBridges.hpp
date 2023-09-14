@@ -23,7 +23,6 @@ private:
 }  // namespace alba
 
 // VARIANT OF: Longest Increasing Subsequence
-
 // Building Bridges
 // Consider a 2-D map with a horizontal river passing through its center.
 // There are n cities on the southern bank with x-coordinates a(1) … a(n) and n cities on the northern bank with

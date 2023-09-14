@@ -72,7 +72,6 @@ void ConcreteColleague::receive(std::string const& message) {
 }  // namespace Mediator
 
 // Mediator discussion:
-
 // ONE LINE NOTE:
 // -> MEDIATE communications between different colleagues to decouple, simplify, abstract, centralize the way of
 // communication.

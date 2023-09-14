@@ -5,7 +5,6 @@ namespace algorithm {}
 }  // namespace alba
 
 // From AlgorithmNotes.txt
-
 // -> Asymptotic Analysis
 //
 // ---> NOTE: The CLRS book restricts the definitions of functions to be asymptotically non negative, other books just

@@ -11,12 +11,12 @@ using namespace alba::mathHelper;
 using namespace std;
 
 // https://en.wikipedia.org/wiki/HSL_and_HSV
-
 namespace {
 constexpr uint8_t MAX_COLOR_VALUE = 0xFF;
 }
 
 namespace alba::AprgBitmap::ColorUtilities {
+
 ColorPercentagesData calculateColorPercentagesData(uint32_t const color) {
     ColorPercentagesData result{};
     double red = extractRed(color);
@@ -242,6 +242,7 @@ double calculateSaturationColorIntensityDecimal(uint32_t const color) {
     }
     return result;
 }
+
 // bool isSimilar(uint32_t const color1, uint32_t const color2)//Pythagorean algo
 // {
 //     double
@@ -249,7 +250,6 @@ double calculateSaturationColorIntensityDecimal(uint32_t const color) {
 // (double)getGreen(color1)-(double)getGreen(color2), (double)getBlue(color1)-(double)getBlue(color2))); return
 // colorDifferenceAcrossDifferentColors < m_similarityColorLimit;
 // }
-
 bool isSimilar(uint32_t const color1, uint32_t const color2, uint32_t const similarityColorLimit) {
     // RGB algo
     bool isRedDifferenceBeyondLimit =

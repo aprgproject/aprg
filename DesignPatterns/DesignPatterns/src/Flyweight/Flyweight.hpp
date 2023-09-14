@@ -75,7 +75,6 @@ private:
 }  // namespace Flyweight
 
 // Flyweight discussion:
-
 // ONE LINE NOTE:
 // -> Provide a "flyweight object" that can have SHARED data (extrinsic state) or SEPARATED data (intrinsic state)
 // -> Provide a "flyweight object" that SEPARATES INTRINSIC/NON-CONTEXT data (can be shared and saved in object) and

@@ -67,27 +67,26 @@ private:
 
     // nth element is not stable
     /*void splitToSmallestBlocks(BlockIterator const& blockIterator, DataBlockType const blockTypeForNewBlocks) {
-                    BlockIterator iteratorAfterBlockToSplit(blockIterator);
-                    iteratorAfterBlockToSplit++;
-                    int index = 0, indexOfIndexes = 0;
-                    BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
+                            BlockIterator iteratorAfterBlockToSplit(blockIterator);
+                            iteratorAfterBlockToSplit++;
+                            int index = 0, indexOfIndexes = 0;
+                            BlockIterator newBlockIterator(iteratorAfterBlockToSplit);
 
-                    Indexes indexes;
-                    putIndexesWithMultiplesOfNumber(
-                        indexes, m_configuration.m_minimumNumberOfObjectsPerBlock, blockIterator->getNumberOfObjects());
+                            Indexes indexes;
+                            putIndexesWithMultiplesOfNumber(
+                                indexes, m_configuration.m_minimumNumberOfObjectsPerBlock,
+           blockIterator->getNumberOfObjects());
 
-                    blockIterator->nthElementThenDoFunctionThenRelease(indexes, [&](ObjectToSort const& objectToSort) {
-                        if (indexOfIndexes < indexes.size() && index >= indexes[indexOfIndexes]) {
-                            m_blocks.createNewBlockBeforeThisIterator(iteratorAfterBlockToSplit, blockTypeForNewBlocks);
-                            newBlockIterator = iteratorAfterBlockToSplit;
-                            newBlockIterator--;
-                            indexOfIndexes++;
-                        }
-                        m_blocks.addObjectToBlock(newBlockIterator, objectToSort);
-                        index++;
-                    });
-                    m_blocks.deleteBlock(blockIterator);
-                }*/
+                            blockIterator->nthElementThenDoFunctionThenRelease(indexes, [&](ObjectToSort const&
+           objectToSort) { if (indexOfIndexes < indexes.size() && index >= indexes[indexOfIndexes]) {
+                                    m_blocks.createNewBlockBeforeThisIterator(iteratorAfterBlockToSplit,
+           blockTypeForNewBlocks); newBlockIterator = iteratorAfterBlockToSplit; newBlockIterator--; indexOfIndexes++;
+                                }
+                                m_blocks.addObjectToBlock(newBlockIterator, objectToSort);
+                                index++;
+                            });
+                            m_blocks.deleteBlock(blockIterator);
+                        }*/
     // sort implementation
     void splitToSmallestBlocks(BlockIterator const& blockIterator, DataBlockType const blockTypeForNewBlocks) {
         BlockIterator iteratorAfterBlockToSplit(blockIterator);

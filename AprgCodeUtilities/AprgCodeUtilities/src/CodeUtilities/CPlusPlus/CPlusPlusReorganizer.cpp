@@ -139,6 +139,13 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
     return scopeDetail;
 }
 
+Terms CPlusPlusReorganizer::extractTermsInRange(int const start, int const end) const {
+    Terms extractedTerms;
+    extractedTerms.reserve(end + 1 - start);
+    copy(m_terms.begin() + start, m_terms.cbegin() + end + 1, back_inserter(extractedTerms));
+    return extractedTerms;
+}
+
 string CPlusPlusReorganizer::getFormattedContent(int const start, int const end) const {
     Terms formattedTerms(extractTermsInRange(start, end));
     removeStartingAndTrailingWhiteSpace(formattedTerms);
@@ -175,13 +182,6 @@ int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
         }
     }
     return endIndex;
-}
-
-Terms CPlusPlusReorganizer::extractTermsInRange(int const start, int const end) const {
-    Terms extractedTerms;
-    extractedTerms.reserve(end + 1 - start);
-    copy(m_terms.begin() + start, m_terms.cbegin() + end + 1, back_inserter(extractedTerms));
-    return extractedTerms;
 }
 
 void CPlusPlusReorganizer::reorganizeFile(string const& file) {
@@ -438,34 +438,6 @@ bool CPlusPlusReorganizer::hasEndBrace(string const& content) {
     return !hitIndexes.empty();
 }
 
-int CPlusPlusReorganizer::getIndexAtClosingString(
-    Terms const& terms, int const openingIndex, string const& openingString, string const& closingString) {
-    Patterns const searchPatterns{{M(openingString)}, {M(closingString)}};
-    int endIndex = openingIndex + 1;
-    int numberOfOpenings = 1;
-    bool isFound(true);
-    while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(terms, endIndex, searchPatterns);
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            int const firstHitIndex = hitIndexes.front();
-            Term const& firstTerm(terms[firstHitIndex]);
-            if (firstTerm.getContent() == openingString) {
-                endIndex = firstHitIndex + 1;
-                ++numberOfOpenings;
-            } else if (firstTerm.getContent() == closingString) {
-                endIndex = firstHitIndex + 1;
-                if (--numberOfOpenings == 0) {
-                    break;
-                }
-            } else {
-                break;
-            }
-        }
-    }
-    return endIndex;
-}
-
 void CPlusPlusReorganizer::makeIsolatedCommentsStickWithNextLine(Terms& terms) {
     int searchIndex = 0;
     Patterns const searchPatterns{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
@@ -501,6 +473,34 @@ void CPlusPlusReorganizer::removeStartingAndTrailingWhiteSpace(Terms& terms) {
         }
     }
     terms.erase(terms.begin() + nonWhiteSpace + 1, terms.cend());
+}
+
+int CPlusPlusReorganizer::getIndexAtClosingString(
+    Terms const& terms, int const openingIndex, string const& openingString, string const& closingString) {
+    Patterns const searchPatterns{{M(openingString)}, {M(closingString)}};
+    int endIndex = openingIndex + 1;
+    int numberOfOpenings = 1;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForwardsForPatterns(terms, endIndex, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int const firstHitIndex = hitIndexes.front();
+            Term const& firstTerm(terms[firstHitIndex]);
+            if (firstTerm.getContent() == openingString) {
+                endIndex = firstHitIndex + 1;
+                ++numberOfOpenings;
+            } else if (firstTerm.getContent() == closingString) {
+                endIndex = firstHitIndex + 1;
+                if (--numberOfOpenings == 0) {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+    return endIndex;
 }
 
 }  // namespace alba::CodeUtilities

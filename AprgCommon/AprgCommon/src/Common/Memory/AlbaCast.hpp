@@ -3,7 +3,6 @@
 #include <Common/Types/AlbaTypeHelper.hpp>
 
 // NOTE: APRG is compiled with no RTTI so dynamic_cast can't be used.
-
 // From:
 // https://stackoverflow.com/questions/332030/when-should-static-cast-dynamic-cast-const-cast-and-reinterpret-cast-be-used
 // static_cast

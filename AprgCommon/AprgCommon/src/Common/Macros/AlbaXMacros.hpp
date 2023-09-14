@@ -1,5 +1,4 @@
 // Sample lists. The list entries could contain multiple arguments.
-
 #define ALBA_XMACROS_SAMPLE_LIST_WITH_ONE_PARAMETER                   \
     ALBA_XMACROS_SAMPLE_FUNCTION_WITH_ONE_PARAMETER(parameter1InList) \
     ALBA_XMACROS_SAMPLE_FUNCTION_WITH_ONE_PARAMETER(parameter2InList) \

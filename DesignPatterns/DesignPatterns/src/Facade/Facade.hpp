@@ -70,7 +70,6 @@ private:
 }  // namespace Facade
 
 // Façade discussion:
-
 // ONE LINE NOTE:
 // -> Provide a FACADE (or unified interface) for MULTIPLE components in a SUBSYSTEM
 // Intent:

@@ -50,4 +50,5 @@ private:
 // ---> and just remove the seams
 // -> Parallel job scheduling
 // ---> How to find the minimum completion time? Longest path in the graph. This is critical path method (CPM).
+
 }  // namespace alba::algorithm

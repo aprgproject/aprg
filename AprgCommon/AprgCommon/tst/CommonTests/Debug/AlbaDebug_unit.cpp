@@ -1,7 +1,6 @@
 // Set external output stream file path
 // #define ALBA_DBG_PRINT_EXTERNAL_OUTPUT_STREAM_FILE_PATH APRG_DIR "/Log.txt"
 // Set external output stream object
-
 #include <sstream>
 
 namespace {
@@ -9,14 +8,13 @@ std::stringstream s_debugStringStream;  // clazy:exclude=non-pod-global-static
 }  // namespace
 
 #define ALBA_DBG_PRINT_EXTERNAL_OUTPUT_STREAM_OBJECT s_debugStringStream
-
-// Start of test file
-
-#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <CommonTests/Print/PrintUtilities.hpp>
 
 #include <gtest/gtest.h>
+
+// Start of test file
+#include <Common/Debug/AlbaDebug.hpp>
 
 using namespace alba::stringHelper;
 using namespace std;

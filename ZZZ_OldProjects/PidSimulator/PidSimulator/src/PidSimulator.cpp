@@ -10,8 +10,8 @@
 #include <iostream>
 
 using namespace alba::AprgBitmap;
-using namespace alba::TwoDimensions;
 using namespace alba::mathHelper;
+using namespace alba::TwoDimensions;
 using namespace std;
 
 namespace alba {

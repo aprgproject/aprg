@@ -76,7 +76,6 @@ void ConcreteObserver::update(Subject const* const subject) {
 }  // namespace Observer
 
 // Observer discussion:
-
 // ONE LINE NOTE:
 // -> Have Observers OBSERVE a Subject/Observable so that when something is changed, the Observers are NOTIFIED and
 // UPDATED AUTOMATICALLY

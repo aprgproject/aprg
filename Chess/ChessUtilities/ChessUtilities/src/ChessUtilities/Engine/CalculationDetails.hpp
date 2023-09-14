@@ -33,4 +33,5 @@ struct CalculationDetails {
 // All the nodes included by the PV are PV-nodes.
 // Inside an iterative deepening framework, it is the most important move ordering consideration to play the PV
 // collected during the current iteration, as the very first left moves of the next iteration
+
 }  // namespace alba::chess

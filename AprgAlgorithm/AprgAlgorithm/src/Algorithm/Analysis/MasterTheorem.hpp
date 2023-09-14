@@ -5,7 +5,6 @@ namespace algorithm {}
 }  // namespace alba
 
 // Master theorem is too hard to code.
-
 // From AlgorithmNotes.txt
 // -----> (3) Master Method:
 // -------> Master Method is a direct way to get the solution.

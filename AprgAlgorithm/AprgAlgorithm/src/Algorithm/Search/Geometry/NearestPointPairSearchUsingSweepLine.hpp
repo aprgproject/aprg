@@ -66,7 +66,6 @@ private:
 }  // namespace alba::algorithm
 
 // Given a set of n points, our next problem is to find two points whose Euclidean distance is minimum.
-
 // This is another example of a problem that can be solved in O(nlogn) time using a sweep line algorithm.
 // We go through the points from left to right and maintain a value d: the minimum distance between two points seen so
 // far.

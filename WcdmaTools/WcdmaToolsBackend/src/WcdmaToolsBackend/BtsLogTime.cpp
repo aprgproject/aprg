@@ -8,8 +8,8 @@
 #include <sstream>
 #include <vector>
 
-using namespace alba::stringHelper;
 using namespace alba;
+using namespace alba::stringHelper;
 using namespace std;
 
 namespace wcdmaToolsBackend {

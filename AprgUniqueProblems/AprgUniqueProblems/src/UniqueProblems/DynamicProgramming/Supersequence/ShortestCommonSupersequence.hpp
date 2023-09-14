@@ -32,7 +32,6 @@ private:
 }  // namespace alba
 
 // Shortest Common Supersequence
-
 // Given two strings str1 and str2, the task is to find the length of the shortest string that has both str1 and str2 as
 // subsequences.
 // Examples :

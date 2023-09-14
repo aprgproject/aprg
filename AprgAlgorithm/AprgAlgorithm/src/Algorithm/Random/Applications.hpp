@@ -3,6 +3,7 @@
 namespace alba {
 namespace algorithm {}  // namespace algorithm
 }  // namespace alba
+
 // Applications and Scope:
 // -> Consider a tool that basically does sorting.
 // ---> Let the tool be used by many users and there are few users who always use tool for already sorted array.

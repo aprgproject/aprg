@@ -58,7 +58,6 @@ private:
 }  // namespace alba::algorithm
 
 // Given a sorted array and a number x, find a pair in array whose sum is closest to x.
-
 // An efficient solution can find the pair in O(n) time. The idea is similar to method 1 of this post.
 // The following is a detailed algorithm:
 // -> 1) Initialize a variable diff as infinite (Diff is used to store the difference between pair and x).

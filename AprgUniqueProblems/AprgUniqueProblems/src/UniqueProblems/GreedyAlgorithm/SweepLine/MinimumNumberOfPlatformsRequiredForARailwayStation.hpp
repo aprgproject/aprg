@@ -37,4 +37,5 @@ private:
 // ---> Explanation: Only one platform is needed.
 // The running time of the algorithm is O(nlogn), because sorting the events takes O(nlogn) time
 // and the rest of the algorithm takes O(n) time.
+
 }  // namespace alba

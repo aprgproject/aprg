@@ -166,4 +166,5 @@ private:
 // which is convenient, because operations with 32 and 64 bit integers are calculated modulo 2^32 and 2^64. However,
 // this is not a good choice, because it is possible to construct stringToHashs that always generate collisions when
 // constants of the form 2^x are used.
+
 }  // namespace alba::algorithm

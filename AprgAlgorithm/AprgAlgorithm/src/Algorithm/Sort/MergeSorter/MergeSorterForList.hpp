@@ -86,6 +86,5 @@ private:
 }  // namespace alba::algorithm
 
 // Given a doubly linked list, write a function to sort the doubly linked list in increasing order using merge sort.
-
 // Time Complexity: Time complexity of the above implementation is same as time complexity of MergeSort for arrays. It
 // takes Θ(nLogn) time. Auxiliary Space Complexity: O(1). We are only using constant amount of extra space.

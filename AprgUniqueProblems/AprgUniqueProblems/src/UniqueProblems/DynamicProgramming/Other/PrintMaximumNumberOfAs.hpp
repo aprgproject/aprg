@@ -46,7 +46,6 @@ std::ostream& operator<<(std::ostream& out, PrintMaximumNumberOfAs::CountDetail 
 }  // namespace alba
 
 // How to print maximum number of A’s using given four keys
-
 // This is a famous interview question asked in Google, Paytm and many other company interviews.
 // Below is the problem statement.
 // Imagine you have a special keyboard with the following keys:

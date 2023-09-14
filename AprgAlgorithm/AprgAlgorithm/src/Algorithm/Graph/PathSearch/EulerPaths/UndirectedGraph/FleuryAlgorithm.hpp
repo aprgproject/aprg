@@ -115,7 +115,6 @@ private:
 }  // namespace alba::algorithm
 
 // Fleury's algorithm is an elegant but inefficient algorithm that dates to 1883.
-
 // Algorithm description:
 // Consider a graph known to have all edges in the same component and at most two vertices of odd degree.
 // The algorithm starts at a vertex of odd degree, or, if the graph has none, it starts with an arbitrarily chosen

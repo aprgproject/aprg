@@ -39,10 +39,10 @@ private:
 
 std::unique_ptr<Singleton> Singleton::m_instancePointer;  // this still have problem of static variables (whether they
 // are initialized when called)
+
 }  // namespace Singleton
 
 // Singleton discussion:
-
 // ONE LINE NOTE:
 // -> Ensure a class only has SINGLE instance, and provide a global point of access to it.
 // Intent:

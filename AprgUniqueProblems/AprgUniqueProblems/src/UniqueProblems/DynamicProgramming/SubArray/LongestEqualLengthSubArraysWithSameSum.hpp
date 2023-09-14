@@ -22,7 +22,6 @@ private:
 }  // namespace alba
 
 // Longest Even Length Substring such that Sum of First and Second Half is same
-
 // Given a string ‘str’ of digits, find the length of the longest substring of ‘str’,
 // such that the length of the substring is 2k digits
 // and sum of left k digits is equal to the sum of right k digits.

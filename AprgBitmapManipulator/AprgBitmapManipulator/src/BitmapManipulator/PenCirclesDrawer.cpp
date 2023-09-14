@@ -11,8 +11,8 @@
 #include <set>
 
 using namespace alba::AprgBitmap::ColorUtilities;
-using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace alba::TwoDimensions;
+using namespace alba::TwoDimensions::twoDimensionsUtilities;
 using namespace std;
 
 namespace alba::AprgBitmap {

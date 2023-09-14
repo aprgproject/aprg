@@ -11,7 +11,6 @@
 using namespace std;
 
 // Taken from Ben Deane's talk “Everyday Efficiency- In-Place Construction (Back to Basics-)")
-
 namespace alba {
 
 namespace ClassesWithBasicFunctionWorks {
@@ -600,7 +599,6 @@ TEST(InPlaceConstructionExamplesTest, VariantAssignment) {
 }  // namespace alba
 
 // Notes:
-
 // -> Are moves cheap or not?
 // ---> Observation
 // -----> Moving from a string usually isn't any faster than copying from it.

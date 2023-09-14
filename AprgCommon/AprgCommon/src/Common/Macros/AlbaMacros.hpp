@@ -1,8 +1,6 @@
 // Source(for a lot more macros): https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-160
-
 // Standard predefined macros
 // NOTE: BEWARE, if this are used in inlined stuffs, this results in ODR violations.
-
 #define ALBA_MACROS_GET_FILE __FILE__
 #define ALBA_MACROS_GET_LINE __LINE__
 #define ALBA_MACROS_GET_COMPILATION_DATE __DATE__
@@ -10,15 +8,12 @@
 #define ALBA_MACROS_GET_COMPILER_VERSION __cplusplus
 
 // Note: You can use the compilation date as some sort of version control to display when it was compiled.
-
 // Compiler specific predefined macros
 // NOTE: BEWARE, if this are used in inlined stuffs, this results in ODR violations.
-
 #define ALBA_MACROS_GET_FUNCTION __FUNCTION__
 #define ALBA_MACROS_GET_UNIQUE_COUNTER_VALUE __COUNTER__
 
 // PRETTY_FUNCTION: Same with __FUNCTION_ and includes signature (with template information) as well
-
 #if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
 #define ALBA_MACROS_GET_PRETTY_FUNCTION __PRETTY_FUNCTION__
 #elif defined(_MSC_VER)
@@ -28,7 +23,6 @@
 #endif
 
 // Macro operations
-
 #define ALBA_MACROS_GET_STRING_LITERAL(parameter) #parameter  // The number-sign or "stringizing" operator.
 
 // #define ALBA_MACROS_GET_CHAR_LITERAL(x) #@x // The charizing operator. Its not supported.
@@ -45,12 +39,10 @@
 // For example, the macro definition #define FOO bar and the macro definition
 // #define BAR baz could be concatenated to form the macro definition #define FOOBAR barbaz.
 // #pragma message macros
-
 #define ALBA_MACROS_VALUE_FOR_PRAGMA_MESSAGE(parameter) ALBA_MACROS_GET_STRING_LITERAL(parameter)
 #define ALBA_MACROS_PARAMETER_FOR_PRAGMA_MESSAGE(var) #var "=" ALBA_MACROS_VALUE_FOR_PRAGMA_MESSAGE(var)
 
 // Switch case macros
-
 #define ALBA_MACROS_CASE_ENUM_STRING(parameter) \
     case parameter:                             \
         return ALBA_MACROS_GET_STRING_LITERAL(parameter);
@@ -60,7 +52,6 @@
         return shortName;
 
 // Concatenate macros
-
 #define ALBA_MACROS_CONCATENATE_EXPANSION(first, second) first##second
 
 #define ALBA_MACROS_CONCATENATE(first, second) \
@@ -68,7 +59,6 @@
         first, second)  // another layer of indirection to expand arguments (example: __COUNTER__)
 
 // Anonymous variable
-
 #define ALBA_MACROS_GET_NAME_WITH_COUNT(prefixOfName) ALBA_MACROS_CONCATENATE(prefixOfName, __COUNTER__)
 #if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
 
@@ -82,7 +72,6 @@
 // single token. This means that the macro body is expanded with the entire series of arguments as a single unit,
 // without any separation between the individual arguments.
 // Count arguments macros
-
 #define ALBA_MACROS_COUNT_ARGUMENTS(...) \
     ALBA_MACROS_COUNT_ARGUMENTS_EXPANSION(__VA_ARGS__, ALBA_MACROS_COUNT_IN_REVERSE_SEQUENCE())
 #define ALBA_MACROS_COUNT_ARGUMENTS_EXPANSION(...) ALBA_MACROS_GET_COUNT_BASED_FROM_PLACEMENT(__VA_ARGS__)

@@ -64,7 +64,6 @@ private:
 }  // namespace Composite
 
 // Composite discussion:
-
 // ONE LINE NOTE:
 // -> Provide an object that CAN be an "individual object" or a "composite object", and they are treated UNIFORMLY
 // Intent:

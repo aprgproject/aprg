@@ -70,7 +70,6 @@ std::unique_ptr<Iterator> ConcreteAggregate::createIterator() { return std::make
 }  // namespace Iterator
 
 // Iterator discussion:
-
 // ONE LINE NOTE:
 // -> Provide a "iterator object" that can ITERATE and ACCESS elements on an AGGREGATE without EXPOSING its underlying
 // representation.
