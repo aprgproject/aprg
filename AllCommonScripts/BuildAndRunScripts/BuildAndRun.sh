@@ -122,12 +122,13 @@ performRun(){
             if [[ -z $argument1 ]] || [[ $argument1 == "--gtest_filter=*.*" ]]; then
                 
                 set +e
-                "$fileInInstall" | tee "$outputLogPath"
-                exitStatus=$?
+                "$fileInInstall" | tee "$outputLogPath" 2>&1
+                exitStatus="${PIPESTATUS[0]}"
                 set -e
                 failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
-                scriptPrint "$scriptName" "$LINENO" "The contents of failingTests are: [$failingTests]"
-                if [[ "$exitStatus" -ne 0 ]]; then
+                scriptPrint "$scriptName" "$LINENO" "The exitStatus is: [$exitStatus]."
+                scriptPrint "$scriptName" "$LINENO" "The contents of failingTests are: [$failingTests]."
+                if [[ "$exitStatus" -eq 0 ]]; then
                     scriptPrint "$scriptName" "$LINENO" "All tests passed!"
                 else
                     scriptPrint "$scriptName" "$LINENO" "Running the failing tests again..."
