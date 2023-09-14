@@ -383,15 +383,4 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaXYZWorks) {
     clearFile(TEST_HEADER_FILE);
 }
 
-// There is tellg problem in windows in this case
-// TEST(CPlusPlusReorganizerTest, ReorganizeCPlusPlusReorganizerUnitTestWorks) {
-//     CPlusPlusReorganizer reorganizer;
-//     copyFile(TEST_DIRECTORY R"(/ReorganizerTests/Before/CPlusPlusReorganizer_unit.cpp)", TEST_HEADER_FILE);
-//
-//     reorganizer.reorganizeFile(TEST_HEADER_FILE);
-//
-//     verifyFile(TEST_DIRECTORY R"(/ReorganizerTests/After/CPlusPlusReorganizer_unit.cpp)", TEST_HEADER_FILE);
-//     clearFile(TEST_HEADER_FILE);
-// }
-
 }  // namespace alba::CodeUtilities
