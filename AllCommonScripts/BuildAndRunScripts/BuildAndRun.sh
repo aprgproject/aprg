@@ -131,14 +131,17 @@ performRun(){
                 if [[ "$exitStatus" -eq 0 ]]; then
                     scriptPrint "$scriptName" "$LINENO" "All tests passed!"
                 else
-                    scriptPrint "$scriptName" "$LINENO" "Running the failing tests again..."
-                
-                    while IFS= read -r failingTestName; do
-                        echo "Running failing test: [$failingTestName]"
-                        set +e
-                        "$fileInInstall" "--gtest_filter=$failingTestName"
-                        set -e
-                    done <<< "$failingTests"
+                    if [[ -z $failingTests ]]; then
+                        scriptPrint "$scriptName" "$LINENO" "Failing tests is empty, so immediately exiting with error (no re-runs)."
+                    else
+                        scriptPrint "$scriptName" "$LINENO" "Running the failing tests again..."
+                        while IFS= read -r failingTestName; do
+                            echo "Running failing test: [$failingTestName]"
+                            set +e
+                            "$fileInInstall" "--gtest_filter=$failingTestName"
+                            set -e
+                        done <<< "$failingTests"
+                    fi
                     exit 1
                 fi
                 
