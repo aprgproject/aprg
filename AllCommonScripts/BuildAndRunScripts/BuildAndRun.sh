@@ -123,10 +123,11 @@ performRun(){
                 
                 set +e
                 "$fileInInstall" | tee "$outputLogPath"
+                exitStatus=$?
                 set -e
                 failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
                 scriptPrint "$scriptName" "$LINENO" "The contents of failingTests are: [$failingTests]"
-                if [[ -z "$failingTests" ]]; then
+                if [[ "$exitStatus" -ne 0 || -z "$failingTests" ]]; then
                     scriptPrint "$scriptName" "$LINENO" "All tests passed!"
                 else
                     scriptPrint "$scriptName" "$LINENO" "Running the failing tests again..."
