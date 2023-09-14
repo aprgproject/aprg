@@ -188,6 +188,11 @@ void CPlusPlusReorganizer::reorganizeFile(string const& file) {
     m_purpose = Purpose::Reorganize;
     AlbaLocalPathHandler const filePathHandler(file);
     if (filePathHandler.isFoundInLocalSystem()) {
+        // ALBA_DBG_PRINT(filePathHandler.getFullPath());
+        // string command("cat \"");
+        // command += filePathHandler.getFullPath();
+        // command += "\"";
+        // system(command.c_str());
         m_fileType = getFileType(filePathHandler.getExtension());
         m_terms = getTermsFromFile(filePathHandler.getFullPath());
         processTerms();
@@ -201,6 +206,11 @@ void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
     m_purpose = Purpose::GatherInformation;
     AlbaLocalPathHandler const filePathHandler(file);
     if (filePathHandler.isFoundInLocalSystem()) {
+        // ALBA_DBG_PRINT(filePathHandler.getFullPath());
+        // string command("cat \"");
+        // command += filePathHandler.getFullPath();
+        // command += "\"";
+        // system(command.c_str());
         m_fileType = getFileType(filePathHandler.getExtension());
         m_terms = getTermsFromFile(filePathHandler.getFullPath());
         processTerms();

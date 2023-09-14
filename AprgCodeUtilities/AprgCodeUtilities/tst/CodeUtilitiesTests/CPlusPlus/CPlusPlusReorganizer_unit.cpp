@@ -17,6 +17,26 @@ namespace alba::CodeUtilities {
 
 namespace {
 
+void runFormatter(string const& file) {
+    string command(FORMATTER_APPLICATION_PATH);
+    command += R"( -style=file -i ")";
+    command += file;
+    command += R"(")";
+    cout << "---> command [" << command << "]:\n";
+    // system(command.c_str());
+}
+
+void runDiffForTwoFiles(string const& file1, string const& file2) {
+    string command(DIFF_APPLICATION_PATH);
+    command += R"( ")";
+    command += file1;
+    command += R"(" ")";
+    command += file2;
+    command += R"(")";
+    cout << "---> command [" << command << "]:\n";
+    // system(command.c_str());
+}
+
 void runFormatterInDirectory(string const& directoryPath) {
     CPlusPlusReorganizer const reorganizer;
     AlbaLocalPathHandler const directoryPathHandler(directoryPath);
@@ -26,12 +46,7 @@ void runFormatterInDirectory(string const& directoryPath) {
     for (auto const& file : files) {
         AlbaLocalPathHandler const filePathHandler(file);
         if (isCppFileExtension(filePathHandler.getExtension())) {
-            string command(FORMATTER_APPLICATION_PATH);
-            command += R"( -style=file -i ")";
-            command += filePathHandler.getFullPath();
-            command += R"(")";
-            cout << "---> command [" << command << "]:\n";
-            system(command.c_str());
+            runFormatter(filePathHandler.getFullPath());
         }
     }
 }
@@ -67,14 +82,7 @@ void verifyFile(string const& expectedFile, string const& testFile) {
             cout << "---> EXPECTED: [" << lineInExpectedFile << "]\n";
             cout << "---> ACTUAL:   [" << lineInTestFile << "]\n\n";
             isDifferenceFound = true;
-            string command(DIFF_APPLICATION_PATH);
-            command += R"( ")";
-            command += expectedFilePathHandler.getFullPath();
-            command += R"(" ")";
-            command += testFilePathHandler.getFullPath();
-            command += R"(")";
-            cout << "---> command [" << command << "]:\n";
-            system(command.c_str());
+            runDiffForTwoFiles(expectedFilePathHandler.getFullPath(), testFilePathHandler.getFullPath());
             break;
         }
         lines.emplace_back(lineInExpectedFile);
