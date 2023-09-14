@@ -96,6 +96,14 @@ void verifyFile(string const& expectedFile, string const& testFile) {
         if (expectedFileReader.isNotFinished() || testFileReader.isNotFinished()) {
             cout << "---> EXPECTED LAST LINE: [" << lineInExpectedFile << "]\n";
             cout << "---> ACTUAL   LAST LINE: [" << lineInTestFile << "]\n\n";
+            cout << "Remaining EXPECTED contents:\n";
+            while (expectedFileReader.isNotFinished()) {
+                cout << expectedFileReader.getLine();
+            }
+            cout << "Remaining ACTUAL contents:\n";
+            while (testFileReader.isNotFinished()) {
+                cout << testFileReader.getLine();
+            }
         }
         EXPECT_FALSE(expectedFileReader.isNotFinished());
         EXPECT_FALSE(testFileReader.isNotFinished());
@@ -128,7 +136,7 @@ TEST(CPlusPlusReorganizerTest, DISABLED_ActualProcessAprgDirectoryTest) {
     processAprgDirectory(R"(F:\Branches\aprg_project\aprg_semi_clean\aprg)");
 }
 
-TEST(CPlusPlusReorganizerTest, ActualProcessDirectoryTest) {
+TEST(CPlusPlusReorganizerTest, DISABLED_ActualProcessDirectoryTest) {
     processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities)");
 }
 

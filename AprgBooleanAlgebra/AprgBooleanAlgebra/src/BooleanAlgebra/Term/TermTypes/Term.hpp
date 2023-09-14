@@ -16,14 +16,13 @@ namespace alba::booleanAlgebra {
 class Term : public BaseTerm {
 public:
     using BaseTermDataPointer = std::unique_ptr<BaseTermData>;
-    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     // rule of five or six
+    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
     ~Term() override = default;
     Term(Term&& term) = default;
     Term& operator=(Term&& term) = default;
     Term();
     Term(TermType const type, bool const isSimplified, BaseTermDataPointer&& m_baseTermDataPointer);  // for move
-    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
     Term(bool const boolValue);
     Term(char const* const characterString);
     Term(std::string const& stringAsParameter);
@@ -33,6 +32,7 @@ public:
     Term(Expression const& expression);
     Term(Term const& term);
     Term& operator=(Term const& term);
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     Term operator~() const;
     bool operator==(Term const& second) const;
     bool operator!=(Term const& second) const;
