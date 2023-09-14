@@ -187,20 +187,26 @@ Terms CPlusPlusReorganizer::extractTermsInRange(int const start, int const end) 
 void CPlusPlusReorganizer::reorganizeFile(string const& file) {
     m_purpose = Purpose::Reorganize;
     AlbaLocalPathHandler const filePathHandler(file);
-    m_fileType = getFileType(filePathHandler.getExtension());
-    m_terms = getTermsFromFile(filePathHandler.getFullPath());
-
-    processTerms();
-    writeAllTerms(filePathHandler.getFullPath(), m_terms);
+    if (filePathHandler.isFoundInLocalSystem()) {
+        m_fileType = getFileType(filePathHandler.getExtension());
+        m_terms = getTermsFromFile(filePathHandler.getFullPath());
+        processTerms();
+        writeAllTerms(filePathHandler.getFullPath(), m_terms);
+    } else {
+        cout << "File not found: [" << filePathHandler.getFullPath() << "]\n";
+    }
 }
 
 void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
     m_purpose = Purpose::GatherInformation;
     AlbaLocalPathHandler const filePathHandler(file);
-    m_fileType = getFileType(filePathHandler.getExtension());
-    m_terms = getTermsFromFile(filePathHandler.getFullPath());
-
-    processTerms();
+    if (filePathHandler.isFoundInLocalSystem()) {
+        m_fileType = getFileType(filePathHandler.getExtension());
+        m_terms = getTermsFromFile(filePathHandler.getFullPath());
+        processTerms();
+    } else {
+        cout << "File not found: [" << filePathHandler.getFullPath() << "]\n";
+    }
 }
 
 void CPlusPlusReorganizer::processTerms() {
