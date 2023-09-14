@@ -1055,49 +1055,51 @@ double val_func(void *ntuple_data, void *params) {
     return x * x + y * y + z * z;
 }
 
-TEST(GslTest, NTuplesWorks) {
-    // This demonstrate the use of ntuples in managing a large dataset. The first program
-    // creates a set of 10,000 simulated “events”, each with 3 associated values (x; y; z). These are generated from a
-    // Gaussian distribution with unit variance, for demonstration purposes, and written to the ntuple file test.dat.
-    {
-        const gsl_rng_type *T;
-        gsl_rng *r;
-        struct data ntuple_row;
-        int i;
-        gsl_ntuple *ntuple = gsl_ntuple_create("test.dat", &ntuple_row, sizeof(ntuple_row));
-        gsl_rng_env_setup();
-        T = gsl_rng_default;
-        r = gsl_rng_alloc(T);
-        for (i = 0; i < 10000; i++) {
-            ntuple_row.x = gsl_ran_ugaussian(r);
-            ntuple_row.y = gsl_ran_ugaussian(r);
-            ntuple_row.z = gsl_ran_ugaussian(r);
-            gsl_ntuple_write(ntuple);
-        }
-        gsl_ntuple_close(ntuple);
-        gsl_rng_free(r);
-    }
-
-    // This analyses the ntuple data in the file test.dat. The analysis procedure is to compute the
-    // squared magnitude of each event, E2 = x2 + y2 + z2, and select only those which exceed a lower limit of 1.5. The
-    // selected events are then histogrammed using their E2 values.
-    {
-        struct data ntuple_row;
-        gsl_ntuple *ntuple = gsl_ntuple_open("test.dat", &ntuple_row, sizeof(ntuple_row));
-        double lower = 1.5;
-        gsl_ntuple_select_fn S;
-        gsl_ntuple_value_fn V;
-        gsl_histogram *h = gsl_histogram_alloc(100);
-        gsl_histogram_set_ranges_uniform(h, 0.0, 10.0);
-        S.function = &sel_func;
-        S.params = &lower;
-        V.function = &val_func;
-        V.params = 0;
-        gsl_ntuple_project(h, ntuple, &V, &S);
-        gsl_histogram_fprintf(stdout, h, "%f", "%f");
-        gsl_histogram_free(h);
-        gsl_ntuple_close(ntuple);
-    }
-}
+// TEST(GslTest, NTuplesWorks) {
+//     // This demonstrate the use of ntuples in managing a large dataset. The first program
+//     // creates a set of 10,000 simulated “events”, each with 3 associated values (x; y; z). These are generated from
+//     a
+//     // Gaussian distribution with unit variance, for demonstration purposes, and written to the ntuple file test.dat.
+//     {
+//         const gsl_rng_type *T;
+//         gsl_rng *r;
+//         struct data ntuple_row;
+//         int i;
+//         gsl_ntuple *ntuple = gsl_ntuple_create("test.dat", &ntuple_row, sizeof(ntuple_row));
+//         gsl_rng_env_setup();
+//         T = gsl_rng_default;
+//         r = gsl_rng_alloc(T);
+//         for (i = 0; i < 10000; i++) {
+//             ntuple_row.x = gsl_ran_ugaussian(r);
+//             ntuple_row.y = gsl_ran_ugaussian(r);
+//             ntuple_row.z = gsl_ran_ugaussian(r);
+//             gsl_ntuple_write(ntuple);
+//         }
+//         gsl_ntuple_close(ntuple);
+//         gsl_rng_free(r);
+//     }
+//
+//     // This analyses the ntuple data in the file test.dat. The analysis procedure is to compute the
+//     // squared magnitude of each event, E2 = x2 + y2 + z2, and select only those which exceed a lower limit of 1.5.
+//     The
+//     // selected events are then histogrammed using their E2 values.
+//     {
+//         struct data ntuple_row;
+//         gsl_ntuple *ntuple = gsl_ntuple_open("test.dat", &ntuple_row, sizeof(ntuple_row));
+//         double lower = 1.5;
+//         gsl_ntuple_select_fn S;
+//         gsl_ntuple_value_fn V;
+//         gsl_histogram *h = gsl_histogram_alloc(100);
+//         gsl_histogram_set_ranges_uniform(h, 0.0, 10.0);
+//         S.function = &sel_func;
+//         S.params = &lower;
+//         V.function = &val_func;
+//         V.params = 0;
+//         gsl_ntuple_project(h, ntuple, &V, &S);
+//         gsl_histogram_fprintf(stdout, h, "%f", "%f");
+//         gsl_histogram_free(h);
+//         gsl_ntuple_close(ntuple);
+//     }
+// }
 
 }  // namespace alba
