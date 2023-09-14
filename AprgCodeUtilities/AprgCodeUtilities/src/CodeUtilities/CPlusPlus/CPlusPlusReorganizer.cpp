@@ -25,92 +25,63 @@ void CPlusPlusReorganizer::processDirectory(string const& directory) {
     for (auto const& file : files) {
         AlbaLocalPathHandler const filePathHandler(file);
         string filenameOnly(filePathHandler.getFilenameOnly());
-        CppFiles& cppFiles(filenameToFilesMap[filenameOnly]);
-        if (isHeaderFileExtension(filePathHandler.getExtension())) {
-            cppFiles.headerFile = filePathHandler.getFullPath();
-            cppFiles.isHeaderFileProcessed = false;
-        } else if (isImplementationFileExtension(filePathHandler.getExtension())) {
-            cppFiles.implementationFile = filePathHandler.getFullPath();
-            cppFiles.isImplementationFileProcessed = false;
-        }
-        if (!cppFiles.isHeaderFileProcessed && !cppFiles.headerFile.empty()) {
-            reorganizeFile(cppFiles.headerFile);
-            cppFiles.isHeaderFileProcessed = true;
-        }
-        if ((!cppFiles.isHeaderFileProcessed || !cppFiles.isImplementationFileProcessed) &&
-            !cppFiles.headerFile.empty() && !cppFiles.implementationFile.empty()) {
-            gatherInformationFromFile(cppFiles.headerFile);
-            reorganizeFile(cppFiles.implementationFile);
-            cppFiles.isHeaderFileProcessed = true;
-            cppFiles.isImplementationFileProcessed = true;
-        }
         if (isImplementationFileExtension(filePathHandler.getExtension()) &&
             isStringFoundNotCaseSensitive(filenameOnly, "_unit")) {
             replaceAllAndReturnIfFound(filenameOnly, "_unit", "");
-            CppFiles& cppFilesWithoutUnit(filenameToFilesMap[filenameOnly]);
-            cppFilesWithoutUnit.testFile = filePathHandler.getFullPath();
-            cppFilesWithoutUnit.isTestFileProcessed = false;
-            if ((!cppFilesWithoutUnit.isHeaderFileProcessed || !cppFilesWithoutUnit.isTestFileProcessed) &&
-                !cppFilesWithoutUnit.headerFile.empty() && !cppFilesWithoutUnit.testFile.empty()) {
-                gatherInformationFromFile(cppFilesWithoutUnit.headerFile);
-                reorganizeFile(cppFilesWithoutUnit.testFile);
-                cppFilesWithoutUnit.isHeaderFileProcessed = true;
-                cppFilesWithoutUnit.isTestFileProcessed = true;
+            CppFiles& cppFiles(filenameToFilesMap[filenameOnly]);
+            cppFiles.testFile = filePathHandler.getFullPath();
+            cppFiles.isTestFileProcessed = false;
+        } else {
+            CppFiles& cppFiles(filenameToFilesMap[filenameOnly]);
+            if (isHeaderFileExtension(filePathHandler.getExtension())) {
+                cppFiles.headerFile = filePathHandler.getFullPath();
+                cppFiles.isHeaderFileProcessed = false;
+            } else if (isImplementationFileExtension(filePathHandler.getExtension())) {
+                cppFiles.implementationFile = filePathHandler.getFullPath();
+                cppFiles.isImplementationFileProcessed = false;
             }
         }
+        CppFiles& cppFiles(filenameToFilesMap[filenameOnly]);
+        if (!cppFiles.isHeaderFileProcessed && !cppFiles.headerFile.empty()) {
+            processHeaderFile(cppFiles.headerFile);
+            cppFiles.isHeaderFileProcessed = true;
+        }
+        if (!cppFiles.isImplementationFileProcessed && !cppFiles.headerFile.empty() &&
+            !cppFiles.implementationFile.empty()) {
+            processImplementationFile(cppFiles.headerFile, cppFiles.implementationFile);
+            cppFiles.isImplementationFileProcessed = true;
+        }
+        if (!cppFiles.isTestFileProcessed && !cppFiles.headerFile.empty() && !cppFiles.testFile.empty()) {
+            processImplementationFile(cppFiles.headerFile, cppFiles.testFile);
+            cppFiles.isTestFileProcessed = true;
+        }
     }
-    cout << "Processing remaining files:\n";
+    cout << "Processing unprocessed files:\n";
     for (auto const& filenameToFiles : filenameToFilesMap) {
         CppFiles const& cppFiles(filenameToFiles.second);
-        if (cppFiles.isHeaderFileProcessed) {
-            reorganizeFile(cppFiles.headerFile);
+        if (!cppFiles.isHeaderFileProcessed && !cppFiles.headerFile.empty()) {
+            processHeaderFile(cppFiles.headerFile);
         }
-        if (cppFiles.isImplementationFileProcessed) {
-            reorganizeFile(cppFiles.implementationFile);
+        if (!cppFiles.isImplementationFileProcessed && !cppFiles.implementationFile.empty()) {
+            processImplementationFile(cppFiles.headerFile, cppFiles.implementationFile);
         }
-        if (cppFiles.isTestFileProcessed) {
-            reorganizeFile(cppFiles.testFile);
+        if (!cppFiles.isTestFileProcessed && !cppFiles.testFile.empty()) {
+            processImplementationFile(cppFiles.headerFile, cppFiles.testFile);
         }
     }
 }
 
-void CPlusPlusReorganizer::processHeaderAndImplementationFile(
-    string const& headerFile, string const& implementationFile) {
-    ALBA_INF_PRINT2(cout, headerFile, implementationFile);
+void CPlusPlusReorganizer::processHeaderFile(string const& headerFile) {
+    ALBA_INF_PRINT1(cout, headerFile);
     reorganizeFile(headerFile);
-    gatherInformationFromFile(headerFile);
-    reorganizeFile(implementationFile);
 }
 
-void CPlusPlusReorganizer::processHeaderImplementationAndTestFile(
-    string const& headerFile, string const& implementationFile, string const& testFile) {
+void CPlusPlusReorganizer::processImplementationFile(string const& headerFile, string const& implementationFile) {
     ALBA_INF_PRINT2(cout, headerFile, implementationFile);
-    reorganizeFile(headerFile);
-    gatherInformationFromFile(headerFile);
-    reorganizeFile(implementationFile);
-    reorganizeFile(testFile);
-}
-
-void CPlusPlusReorganizer::reorganizeFile(string const& file) {
-    ALBA_INF_PRINT1(cout, file);
-    m_purpose = Purpose::Reorganize;
-    AlbaLocalPathHandler const filePathHandler(file);
-    m_fileType = getFileType(filePathHandler.getExtension());
-    m_terms = getTermsFromFile(filePathHandler.getFullPath());
-
-    processTerms();
-    writeAllTerms(filePathHandler.getFullPath(), m_terms);
-}
-
-void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
-    ALBA_INF_PRINT1(cout, file);
-    m_purpose = Purpose::GatherInformation;
     m_headerInformation = {};
-    AlbaLocalPathHandler const filePathHandler(file);
-    m_fileType = getFileType(filePathHandler.getExtension());
-    m_terms = getTermsFromFile(filePathHandler.getFullPath());
-
-    processTerms();
+    gatherInformationFromFile(headerFile);
+    reorganizeFile(implementationFile);
+    m_headerInformation = {};
 }
 
 CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
@@ -129,7 +100,7 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
     int nextIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(scopeHeaderTerms, nextIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(scopeHeaderTerms, nextIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
@@ -188,7 +159,7 @@ strings CPlusPlusReorganizer::getSavedSignatures() const { return m_headerInform
 int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
     int endIndex = index;
     Patterns const searchPatterns{{M(TermType::WhiteSpace), M(MatcherType::Comment)}, {M(MatcherType::Comment)}};
-    Indexes hitIndexes = checkPatternAt(m_terms, index + 1, searchPatterns);
+    Indexes hitIndexes = searchPatternsAt(m_terms, index + 1, searchPatterns);
     if (!hitIndexes.empty()) {
         int const firstHitIndex = hitIndexes.front();
         int const lastHitIndex = hitIndexes.back();
@@ -202,6 +173,25 @@ int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
         }
     }
     return endIndex;
+}
+
+void CPlusPlusReorganizer::reorganizeFile(string const& file) {
+    m_purpose = Purpose::Reorganize;
+    AlbaLocalPathHandler const filePathHandler(file);
+    m_fileType = getFileType(filePathHandler.getExtension());
+    m_terms = getTermsFromFile(filePathHandler.getFullPath());
+
+    processTerms();
+    writeAllTerms(filePathHandler.getFullPath(), m_terms);
+}
+
+void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
+    m_purpose = Purpose::GatherInformation;
+    AlbaLocalPathHandler const filePathHandler(file);
+    m_fileType = getFileType(filePathHandler.getExtension());
+    m_terms = getTermsFromFile(filePathHandler.getFullPath());
+
+    processTerms();
 }
 
 void CPlusPlusReorganizer::processTerms() {
@@ -223,7 +213,7 @@ void CPlusPlusReorganizer::processTerms() {
     int searchIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(m_terms, searchIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(m_terms, searchIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
@@ -268,7 +258,7 @@ void CPlusPlusReorganizer::processMacro(int& nextIndex, int const macroStartInde
         {M(MatcherType::WhiteSpaceWithNewLine)}, {M("\\"), M(MatcherType::WhiteSpaceWithNewLine)}};
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(m_terms, nextIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(m_terms, nextIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
@@ -408,13 +398,14 @@ bool CPlusPlusReorganizer::shouldConnectToPreviousItem(Terms const& scopeHeaderT
                term.getContent() == "dynamic_cast" || term.getContent() == "reinterpret_cast" ||
                term.getContent() == "static_cast";
     });
-    bool const hasCommaAtTheStart = !checkPatternAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
+    bool const hasCommaAtTheStart = !searchPatternsAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
     return isEmpty || (hasNoInvalidKeyword && hasCommaAtTheStart);
 }
 
 bool CPlusPlusReorganizer::hasEndBrace(string const& content) {
     Terms const termsToCheck(getTermsFromString(content));
-    Indexes const hitIndexes = checkMatcherAtBackwards(termsToCheck, static_cast<int>(termsToCheck.size()) - 1, M("}"));
+    Indexes const hitIndexes =
+        searchBackwardsWithMatcher(termsToCheck, static_cast<int>(termsToCheck.size()) - 1, M("}"));
     return !hitIndexes.empty();
 }
 
@@ -425,7 +416,7 @@ int CPlusPlusReorganizer::getIndexAtClosingString(
     int numberOfOpenings = 1;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, endIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(terms, endIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
@@ -445,7 +436,5 @@ int CPlusPlusReorganizer::getIndexAtClosingString(
     }
     return endIndex;
 }
-
-CPlusPlusReorganizer::CPlusPlusReorganizer() = default;
 
 }  // namespace alba::CodeUtilities

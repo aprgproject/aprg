@@ -33,13 +33,10 @@ public:
         bool isTestFileProcessed;
     };
 
-    CPlusPlusReorganizer();
+    CPlusPlusReorganizer() = default;
     void processDirectory(std::string const& directory);
-    void processHeaderAndImplementationFile(std::string const& headerFile, std::string const& implementationFile);
-    void processHeaderImplementationAndTestFile(
-        std::string const& headerFile, std::string const& implementationFile, std::string const& testFile);
-    void reorganizeFile(std::string const& file);
-    void gatherInformationFromFile(std::string const& file);
+    void processHeaderFile(std::string const& headerFile);
+    void processImplementationFile(std::string const& headerFile, std::string const& implementationFile);
 
 private:
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
@@ -47,6 +44,8 @@ private:
     [[nodiscard]] stringHelper::strings getScopeNames() const;
     [[nodiscard]] stringHelper::strings getSavedSignatures() const;
     [[nodiscard]] int getIndexAtSameLineComment(int const index) const;
+    void reorganizeFile(std::string const& file);
+    void gatherInformationFromFile(std::string const& file);
     void processTerms();
     void processMacro(int& nextIndex, int const macroStartIndex);
     void processSemiColon(int& nextIndex, int const endIndex);

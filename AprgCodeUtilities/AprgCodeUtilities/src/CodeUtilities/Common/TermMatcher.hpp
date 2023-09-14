@@ -9,6 +9,9 @@ namespace alba::CodeUtilities {
 
 class TermMatcher {
 public:
+    using TermTypeOptional = std::optional<TermType>;
+    using StringOptional = std::optional<std::string>;
+    using MatcherTypeOptional = std::optional<MatcherType>;
     explicit TermMatcher(TermType const termType);
     explicit TermMatcher(std::string const& content);
     explicit TermMatcher(MatcherType const matcherType);
@@ -18,11 +21,14 @@ public:
     friend bool operator==(Term const& term, TermMatcher const& matcher);
     friend bool operator!=(TermMatcher const& matcher, Term const& term);
     friend bool operator!=(Term const& term, TermMatcher const& matcher);
+    [[nodiscard]] TermTypeOptional const& getTermTypeOptional() const;
+    [[nodiscard]] StringOptional const& getContentOptional() const;
+    [[nodiscard]] MatcherTypeOptional const& getMatcherTypeOptional() const;
 
 private:
-    std::optional<TermType> m_termTypeOptional;
-    std::optional<std::string> m_contentOptional;
-    std::optional<MatcherType> m_matcherTypeOptional;
+    TermTypeOptional m_termTypeOptional;
+    StringOptional m_contentOptional;
+    MatcherTypeOptional m_matcherTypeOptional;
 };
 
 #define M(argument) alba::CodeUtilities::TermMatcher(argument)

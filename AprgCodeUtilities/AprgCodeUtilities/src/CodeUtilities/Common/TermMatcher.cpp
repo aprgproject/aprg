@@ -50,4 +50,10 @@ bool operator==(Term const& term, TermMatcher const& matcher) { return operator=
 bool operator!=(TermMatcher const& matcher, Term const& term) { return !operator==(matcher, term); }
 bool operator!=(Term const& term, TermMatcher const& matcher) { return !operator==(matcher, term); }
 
+TermMatcher::TermTypeOptional const& TermMatcher::getTermTypeOptional() const { return m_termTypeOptional; }
+
+TermMatcher::StringOptional const& TermMatcher::getContentOptional() const { return m_contentOptional; }
+
+TermMatcher::MatcherTypeOptional const& TermMatcher::getMatcherTypeOptional() const { return m_matcherTypeOptional; }
+
 }  // namespace alba::CodeUtilities

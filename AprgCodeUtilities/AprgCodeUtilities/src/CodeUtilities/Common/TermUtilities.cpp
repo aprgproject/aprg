@@ -13,16 +13,16 @@ namespace alba::CodeUtilities {
 void replaceAllForwards(
     Terms& terms, int const startIndex, Patterns const& searchPatterns, Terms const& replacementTerms) {
     for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size());) {
-        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPatterns);
-        if (!patternIndexes.empty()) {
-            terms.erase(terms.cbegin() + patternIndexes.front(), terms.cbegin() + patternIndexes.back() + 1);
-            terms.insert(terms.cbegin() + patternIndexes.front(), replacementTerms.cbegin(), replacementTerms.cend());
+        Indexes hitIndexes = searchPatternsAt(terms, termIndex, searchPatterns);
+        if (!hitIndexes.empty()) {
+            terms.erase(terms.cbegin() + hitIndexes.front(), terms.cbegin() + hitIndexes.back() + 1);
+            terms.insert(terms.cbegin() + hitIndexes.front(), replacementTerms.cbegin(), replacementTerms.cend());
             int const sizeDifference =
-                static_cast<int>(replacementTerms.size()) - (patternIndexes.back() + 1 - patternIndexes.front());
+                static_cast<int>(replacementTerms.size()) - (hitIndexes.back() + 1 - hitIndexes.front());
             if (sizeDifference == 0) {
-                termIndex = patternIndexes.front() + 1;
+                termIndex = hitIndexes.front() + 1;
             } else {
-                termIndex = patternIndexes.front();
+                termIndex = hitIndexes.front();
             }
         } else {
             ++termIndex;
@@ -47,28 +47,28 @@ void changeTerm(Term& term, TermType const newTermType, string const& content) {
     term.setContent(content);
 }
 
-Indexes searchForPatternsForwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns) {
+Indexes searchForwardsForPatterns(Terms const& terms, int const startIndex, Patterns const& searchPatterns) {
     for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size()); ++termIndex) {
-        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPatterns);
-        if (!patternIndexes.empty()) {
-            return patternIndexes;
+        Indexes hitIndexes = searchPatternsAt(terms, termIndex, searchPatterns);
+        if (!hitIndexes.empty()) {
+            return hitIndexes;
         }
     }
     return {};
 }
 
-Indexes searchForPatternsBackwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns) {
+Indexes searchBackwardsForPatterns(Terms const& terms, int const startIndex, Patterns const& searchPatterns) {
     for (int termIndex = startIndex; termIndex >= 0; --termIndex) {
-        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPatterns);
-        if (!patternIndexes.empty()) {
-            return patternIndexes;
+        Indexes hitIndexes = searchPatternsAt(terms, termIndex, searchPatterns);
+        if (!hitIndexes.empty()) {
+            return hitIndexes;
         }
     }
     return {};
 }
 
-Indexes checkPatternAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns) {
-    Indexes patternIndexes;
+Indexes searchPatternsAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns) {
+    Indexes hitIndexes;
     for (Pattern const& searchPattern : searchPatterns) {
         int matchIndex = 0;
         for (int termIndex2 = termIndex;
@@ -77,7 +77,7 @@ Indexes checkPatternAt(Terms const& terms, int const termIndex, Patterns const& 
             Term const& currentTerm(terms[termIndex2]);
             bool const isMatchForThisIndex = currentTerm == searchPattern[matchIndex];
             if (isMatchForThisIndex) {
-                patternIndexes.emplace_back(termIndex2);
+                hitIndexes.emplace_back(termIndex2);
                 ++matchIndex;
             }
             if (!isCommentOrWhiteSpace(currentTerm) && !isMatchForThisIndex) {
@@ -85,25 +85,61 @@ Indexes checkPatternAt(Terms const& terms, int const termIndex, Patterns const& 
             }
         }
         if (matchIndex == static_cast<int>(searchPattern.size())) {
-            return {patternIndexes};
+            return {hitIndexes};
         }
     }
     return {};
 }
 
-Indexes checkMatcherAtBackwards(Terms const& terms, int const termIndex, TermMatcher const& matcher) {
-    Indexes patternIndexes;
+int getPatternIndexOfAMatchBySearchingForward(int& termIndex, Terms const& terms, Patterns const& searchPatterns) {
+    int patternIndex(-1);
+    for (; termIndex < static_cast<int>(terms.size()); ++termIndex) {
+        patternIndex = getPatternIndexOfAMatchAt(terms, termIndex, searchPatterns);
+        if (patternIndex >= 0) {
+            break;
+        }
+    }
+    return patternIndex;
+}
+
+int getPatternIndexOfAMatchAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns) {
+    int patternIndex(0);
+    for (Pattern const& searchPattern : searchPatterns) {
+        int matchIndex = 0;
+        for (int termIndex2 = termIndex;
+             termIndex2 < static_cast<int>(terms.size()) && matchIndex < static_cast<int>(searchPattern.size());
+             ++termIndex2) {
+            Term const& currentTerm(terms[termIndex2]);
+            bool const isMatchForThisIndex = currentTerm == searchPattern[matchIndex];
+            if (isMatchForThisIndex) {
+                ++matchIndex;
+            }
+            if (!isCommentOrWhiteSpace(currentTerm) && !isMatchForThisIndex) {
+                break;
+            }
+        }
+        if (matchIndex == static_cast<int>(searchPattern.size())) {
+            break;
+        }
+        ++patternIndex;
+    }
+    // -1 represents no hit
+    return patternIndex < static_cast<int>(searchPatterns.size()) ? patternIndex : -1;
+}
+
+Indexes searchBackwardsWithMatcher(Terms const& terms, int const termIndex, TermMatcher const& matcher) {
+    Indexes hitIndexes;
     for (int termIndex2 = termIndex; termIndex2 >= 0; --termIndex2) {
         Term const& currentTerm(terms[termIndex2]);
         bool const isMatchForThisIndex = currentTerm == matcher;
         if (isMatchForThisIndex) {
-            patternIndexes.emplace_back(termIndex2);
+            hitIndexes.emplace_back(termIndex2);
         }
         if (!isCommentOrWhiteSpace(currentTerm) || isMatchForThisIndex) {
             break;
         }
     }
-    return patternIndexes;
+    return hitIndexes;
 }
 
 string getCombinedContents(Terms const& terms) {
@@ -120,7 +156,7 @@ string getCombinedContents(Terms const& terms, int const startIndex, int const e
 
 string getLocatorString(Terms const& terms, int const index) {
     string combinedContent;
-    constexpr int itemsOnOneSide = 6;
+    constexpr int itemsOnOneSide = 8;
     int const sizeIndex = static_cast<int>(terms.size());
     int const startIndex = (index >= itemsOnOneSide) ? index - itemsOnOneSide : 0;
     int const endIndex = (index + itemsOnOneSide < sizeIndex) ? index + itemsOnOneSide : sizeIndex - 1;

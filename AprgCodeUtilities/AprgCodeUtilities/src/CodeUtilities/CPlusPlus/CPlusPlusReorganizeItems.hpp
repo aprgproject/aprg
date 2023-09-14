@@ -4,6 +4,8 @@
 #include <CodeUtilities/Common/CommonTypes.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
+#include <cstdint>
+
 namespace alba::CodeUtilities {
 
 class CPlusPlusReorganizeItems {
@@ -28,7 +30,7 @@ public:
 
     struct SortItem {
         int headerIndex;
-        int score;
+        uint32_t score;
         int numberOfLines;
         bool isDivider;
         bool shouldSortAlphabetically;
@@ -36,7 +38,7 @@ public:
         ItemSubType itemSubType;
         int itemsIndex;
         std::string functionReturnTypeName;
-        std::vector<int> functionUsageInTest;
+        std::vector<int> functionIndexesUsed;
     };
 
     using SortItems = std::vector<SortItem>;

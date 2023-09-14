@@ -52,7 +52,7 @@ Terms getTermsFromString(string const& code) {
 string getFunctionSignature(string const& functionText) {
     Terms terms(getTermsFromString(functionText));
     Patterns const terminatingPatterns{{M(";")}, {M("{")}, {M(":")}};
-    Indexes terminatingIndexes = searchForPatternsForwards(terms, 0, terminatingPatterns);
+    Indexes terminatingIndexes = searchForwardsForPatterns(terms, 0, terminatingPatterns);
     if (!terminatingIndexes.empty()) {
         terms.erase(terms.cbegin() + terminatingIndexes.front(), terms.cend());
     }
@@ -80,7 +80,7 @@ string getFunctionSignature(string const& functionText) {
 string getFunctionName(string const& functionSignature) {
     Terms terms(getTermsFromString(functionSignature));
     Patterns const searchPatterns{{M(TermType::Identifier), M("(")}};
-    Indexes hitIndexes = searchForPatternsForwards(terms, 0, searchPatterns);
+    Indexes hitIndexes = searchForwardsForPatterns(terms, 0, searchPatterns);
     if (!hitIndexes.empty()) {
         return terms[hitIndexes.front()].getContent();
     }

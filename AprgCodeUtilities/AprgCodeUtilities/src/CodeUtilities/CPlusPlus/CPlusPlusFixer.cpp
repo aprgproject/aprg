@@ -111,7 +111,7 @@ void fixCStyleStaticCast(Terms& terms, TermMatcher const& typeMatcher) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
@@ -142,7 +142,7 @@ void fixNoConstPassByValue(Terms& terms, Patterns const& searchPatterns) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
@@ -158,7 +158,7 @@ void fixCommentsPositionOfBraces(Terms& terms) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
@@ -176,7 +176,7 @@ void findTermsAndSwapAt(Terms& terms, Patterns const& searchPatterns, int const 
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
@@ -191,12 +191,12 @@ void findTermsAndCheckForLoopAndSwapAt(
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
             Patterns const forLoopPatterns{{M("for"), M("(")}, {M(";")}, {M("{")}, {M("}")}};
-            Indexes forLoopHitIndexes = searchForPatternsBackwards(terms, hitIndexes.front(), forLoopPatterns);
+            Indexes forLoopHitIndexes = searchBackwardsForPatterns(terms, hitIndexes.front(), forLoopPatterns);
             if (forLoopHitIndexes.size() == 2 && terms[forLoopHitIndexes[0]].getContent() == "for" &&
                 terms[forLoopHitIndexes[1]].getContent() == "(") {
                 std::swap(terms[hitIndexes[index1]], terms[hitIndexes[index2]]);
@@ -211,7 +211,7 @@ void combinePrimitiveTypes(Terms& terms) {
     bool isFound(true);
     Patterns const primitiveTypesPatterns{{M(TermType::PrimitiveType), M(TermType::PrimitiveType)}};
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, primitiveTypesPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, primitiveTypesPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.front();

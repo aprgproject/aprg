@@ -7,8 +7,8 @@
 #include <algorithm>
 #include <iostream>
 #include <numeric>
+#include <set>
 #include <sstream>
-#include <unordered_set>
 
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
 using namespace alba::stringHelper;
@@ -77,7 +77,7 @@ Terms CPlusPlusReorganizeItems::getReorganizedTermsInClassDeclaration() const {
         // commentStream << "/*BEGIN ADD (";
         // ALBA_INF_PRINT(
         //     commentStream, sortItem.headerIndex, (sortItem.score), sortItem.functionReturnTypeName,
-        //     sortItem.functionUsageInTest);
+        //     sortItem.functionIndexesUsed);
         // commentStream << ")*/";
         // terms.emplace_back(TermType::CommentMultiline, commentStream.str());
         terms.emplace_back(TermType::Aggregate, item);
@@ -233,7 +233,7 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
     bool isAFriend(false);
     sortItem.numberOfLines = stringHelper::getNumberOfNewLines(getTextWithoutCommentsWithNewLine(terms)) + 1;
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
@@ -379,38 +379,43 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                 (m_data.scopeType == ScopeType::NamedNamespace || m_data.scopeType == ScopeType::TopLevel)) {
                 cout << "warning: Data not wrapped in anonymous namespace. Item: [" << item << "]\n";
             }
+            if (m_data.fileType == CppFileType::HeaderFile && m_data.scopeType == ScopeType::TopLevel) {
+                cout << "warning: Data not wrapped in any namespace. Item: [" << item << "]\n";
+            }
         } else if (m_data.scopeType == ScopeType::ClassDeclaration) {
             // do not move class member data
-            sortItem.score += 0x100'0000;  // type:data
+            sortItem.score += 0x100'0000;    // type:data
+            sortItem.score &= 0xFFFF'FF00U;  // remove qualifiers and return type
         }
     }
 }
 
 void CPlusPlusReorganizeItems::saveDetailsForTest(SortItem& sortItem, Terms const& terms) const {
-    unordered_set<string> namesSet;
+    set<int> functionIndexes;
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, m_data.headerFunctionNamePatterns);
-        isFound = !hitIndexes.empty();
+        int patternIndex =
+            getPatternIndexOfAMatchBySearchingForward(termIndex, terms, m_data.headerFunctionNamePatterns);
+        isFound = patternIndex >= 0;
         if (isFound) {
-            int const firstHitIndex = hitIndexes.front();
-            int const lastHitIndex = hitIndexes.back();
-            string const& functionName(terms[firstHitIndex].getContent());
-            if (!namesSet.contains(functionName)) {
-                int functionNameIndex = 0;
-                for (Pattern const& pattern : m_data.headerFunctionNamePatterns) {
-                    if (Term(TermType::Identifier, functionName) == pattern.front()) {
-                        break;
-                    }
-                    ++functionNameIndex;
-                }
-                namesSet.emplace(functionName);
-                sortItem.functionUsageInTest.emplace_back(functionNameIndex);
-            }
-            termIndex = lastHitIndex + 1;
+            functionIndexes.emplace(patternIndex);
         }
+        ++termIndex;
     }
+    sortItem.functionIndexesUsed.reserve(functionIndexes.size());
+    copy(functionIndexes.cbegin(), functionIndexes.cend(), back_inserter(sortItem.functionIndexesUsed));
+    // if (!functionIndexes.empty()) {
+    //     ALBA_INF_PRINT(getLocatorString(terms, 0));
+    //     ALBA_INF_PRINT(functionIndexes);
+    //     strings functionNames;
+    //     transform(
+    //         functionIndexes.cbegin(), functionIndexes.cend(), back_inserter(functionNames),
+    //         [&](int const functionIndex) {
+    //             return m_data.headerFunctionNamePatterns[functionIndex].front().getContentOptional().value_or("");
+    //         });
+    //     ALBA_INF_PRINT(functionNames);
+    // }
 }
 
 void CPlusPlusReorganizeItems::fixItemContents() {
@@ -487,7 +492,7 @@ CPlusPlusReorganizeItems::SortItem CPlusPlusReorganizeItems::createSortItem(int 
 string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& terms, int const parenthesisIndex) {
     int const beforeParenthesis = parenthesisIndex - 1;
     Patterns const searchPatterns{{M(TermType::Identifier)}};
-    Indexes hitIndexes = checkPatternAt(terms, beforeParenthesis, searchPatterns);
+    Indexes hitIndexes = searchPatternsAt(terms, beforeParenthesis, searchPatterns);
     if (!hitIndexes.empty()) {
         return terms[hitIndexes.front()].getContent();
     }
@@ -506,7 +511,7 @@ void CPlusPlusReorganizeItems::makeIsolatedCommentsStickWithNextLine(Terms& term
     Patterns const searchPattern{
         {M(MatcherType::WhiteSpaceWithNewLine), M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
     for (int termIndex = startIndex; termIndex < static_cast<int>(terms.size());) {
-        Indexes patternIndexes = checkPatternAt(terms, termIndex, searchPattern);
+        Indexes patternIndexes = searchPatternsAt(terms, termIndex, searchPattern);
         if (!patternIndexes.empty()) {
             terms[patternIndexes.back()] = Term(TermType::WhiteSpace, "\n");
             termIndex = patternIndexes.back();
@@ -536,7 +541,7 @@ void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& ter
     bool isFound(true);
     bool isCloseParenthesisFound(false);
     while (isFound) {
-        Indexes hitIndexes = searchForPatternsForwards(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
@@ -560,7 +565,7 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
     SortItem& sortItem, string const& functionSignature) {
     Terms terms(getTermsFromString(functionSignature));
     Patterns const searchPatterns{{M(TermType::PrimitiveType)}, {M(TermType::Identifier)}, {M(TermType::Keyword)}};
-    Indexes hitIndexes = searchForPatternsForwards(terms, 0, searchPatterns);
+    Indexes hitIndexes = searchForwardsForPatterns(terms, 0, searchPatterns);
     if (!hitIndexes.empty()) {
         int const firstHitIndex = hitIndexes.front();
         Term const& firstTerm(terms[firstHitIndex]);
@@ -593,15 +598,15 @@ bool operator<(CPlusPlusReorganizeItems::SortItem const& item1, CPlusPlusReorgan
     if (item1.headerIndex == item2.headerIndex) {
         if (item1.score == item2.score) {
             if (item1.functionReturnTypeName == item2.functionReturnTypeName) {
-                for (int i = 0; i < static_cast<int>(item1.functionUsageInTest.size()) &&
-                                i < static_cast<int>(item2.functionUsageInTest.size());
+                for (int i = 0; i < static_cast<int>(item1.functionIndexesUsed.size()) &&
+                                i < static_cast<int>(item2.functionIndexesUsed.size());
                      ++i) {
-                    if (item1.functionUsageInTest[i] != item2.functionUsageInTest[i]) {
-                        return item1.functionUsageInTest[i] < item2.functionUsageInTest[i];
+                    if (item1.functionIndexesUsed[i] != item2.functionIndexesUsed[i]) {
+                        return item1.functionIndexesUsed[i] < item2.functionIndexesUsed[i];
                     }
                 }
-                if (item1.functionUsageInTest.size() != item2.functionUsageInTest.size()) {
-                    return item1.functionUsageInTest.size() < item2.functionUsageInTest.size();
+                if (item1.functionIndexesUsed.size() != item2.functionIndexesUsed.size()) {
+                    return item1.functionIndexesUsed.size() < item2.functionIndexesUsed.size();
                 }
                 return item1.itemsIndex < item2.itemsIndex;
             }

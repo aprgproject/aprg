@@ -7,10 +7,12 @@ void replaceAllForwards(
     Terms& terms, int const startIndex, Patterns const& searchPatterns, Terms const& replacementTerms);
 void combineTermsInPlace(Terms& terms, TermType const newTermType, int const startIndex, int const endIndex);
 void changeTerm(Term& term, TermType const newTermType, std::string const& content);
-Indexes searchForPatternsForwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns);
-Indexes searchForPatternsBackwards(Terms const& terms, int const startIndex, Patterns const& searchPatterns);
-Indexes checkPatternAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns);
-Indexes checkMatcherAtBackwards(Terms const& terms, int const termIndex, TermMatcher const& matcher);
+Indexes searchForwardsForPatterns(Terms const& terms, int const startIndex, Patterns const& searchPatterns);
+Indexes searchBackwardsForPatterns(Terms const& terms, int const startIndex, Patterns const& searchPatterns);
+Indexes searchPatternsAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns);
+Indexes searchBackwardsWithMatcher(Terms const& terms, int const termIndex, TermMatcher const& matcher);
+int getPatternIndexOfAMatchBySearchingForward(int& termIndex, Terms const& terms, Patterns const& searchPatterns);
+int getPatternIndexOfAMatchAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns);
 std::string getCombinedContents(Terms const& terms);
 std::string getCombinedContents(Terms const& terms, int const startIndex, int const endIndex);
 std::string getLocatorString(Terms const& terms, int const index);

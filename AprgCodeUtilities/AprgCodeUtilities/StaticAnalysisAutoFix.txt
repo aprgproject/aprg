@@ -356,11 +356,11 @@ D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\C
     bool hasNoInvalidKeyword = all_of(scopeHeaderTerms.cbegin(), scopeHeaderTerms.cend(), [](Term const& term) {
          ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:77:5: warning: variable 'hasCommaAtTheStart' of type 'bool' can be declared 'const' [misc-const-correctness]
-    bool hasCommaAtTheStart = !checkPatternAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
+    bool hasCommaAtTheStart = !searchPatternsAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
     ^
          const 
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:77:10: note: FIX-IT applied suggested code changes
-    bool hasCommaAtTheStart = !checkPatternAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
+    bool hasCommaAtTheStart = !searchPatternsAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
          ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:82:5: warning: variable 'termsToCheck' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
     Terms termsToCheck(getTermsFromString(content));
@@ -370,11 +370,11 @@ D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\C
     Terms termsToCheck(getTermsFromString(content));
           ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:83:5: warning: variable 'hitIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
-    Indexes hitIndexes = checkMatcherAtBackwards(termsToCheck, static_cast<int>(termsToCheck.size()) - 1, M("}"));
+    Indexes hitIndexes = searchBackwardsWithMatcher(termsToCheck, static_cast<int>(termsToCheck.size()) - 1, M("}"));
     ^
             const 
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:83:13: note: FIX-IT applied suggested code changes
-    Indexes hitIndexes = checkMatcherAtBackwards(termsToCheck, static_cast<int>(termsToCheck.size()) - 1, M("}"));
+    Indexes hitIndexes = searchBackwardsWithMatcher(termsToCheck, static_cast<int>(termsToCheck.size()) - 1, M("}"));
             ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizer.cpp:89:5: warning: variable 'searchPatterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
     Patterns searchPatterns{{M(openingString)}, {M(closingString)}};
@@ -1047,11 +1047,11 @@ D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common
     Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
              ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:31:5: warning: variable 'patternIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
-    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    Indexes patternIndexes = searchForwardsForPatterns(terms, 0, patterns);
     ^
             const 
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:31:13: note: FIX-IT applied suggested code changes
-    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    Indexes patternIndexes = searchForwardsForPatterns(terms, 0, patterns);
             ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:40:5: warning: variable 'terms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
     Terms terms{Term(TermType::Identifier, "identifier1"), Term(TermType::CommentMultiline, "/*Comment*/"),
@@ -1068,11 +1068,11 @@ D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common
     Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
              ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:47:5: warning: variable 'patternIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
-    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    Indexes patternIndexes = searchForwardsForPatterns(terms, 0, patterns);
     ^
             const 
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:47:13: note: FIX-IT applied suggested code changes
-    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    Indexes patternIndexes = searchForwardsForPatterns(terms, 0, patterns);
             ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:56:5: warning: variable 'terms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
     Terms terms{Term(TermType::Identifier, "identifier1"), Term(TermType::WhiteSpace, "\t"),
@@ -1089,11 +1089,11 @@ D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common
     Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
              ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:63:5: warning: variable 'patternIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
-    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    Indexes patternIndexes = searchForwardsForPatterns(terms, 0, patterns);
     ^
             const 
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:63:13: note: FIX-IT applied suggested code changes
-    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    Indexes patternIndexes = searchForwardsForPatterns(terms, 0, patterns);
             ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:72:5: warning: variable 'terms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
     Terms terms{
@@ -1110,11 +1110,11 @@ D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common
     Patterns patterns{{M("identifier2")}};
              ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:78:5: warning: variable 'patternIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
-    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    Indexes patternIndexes = searchForwardsForPatterns(terms, 0, patterns);
     ^
             const 
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:78:13: note: FIX-IT applied suggested code changes
-    Indexes patternIndexes = searchForPatternsForwards(terms, 0, patterns);
+    Indexes patternIndexes = searchForwardsForPatterns(terms, 0, patterns);
             ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:85:5: warning: variable 'terms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
     Terms terms{
@@ -1131,14 +1131,14 @@ D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common
     Patterns patterns{{M("identifier2")}};
              ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:91:5: warning: variable 'patternIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
-    Indexes patternIndexes = searchForPatternsBackwards(terms, terms.size() - 1, patterns);
+    Indexes patternIndexes = searchBackwardsForPatterns(terms, terms.size() - 1, patterns);
     ^
             const 
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:91:13: note: FIX-IT applied suggested code changes
-    Indexes patternIndexes = searchForPatternsBackwards(terms, terms.size() - 1, patterns);
+    Indexes patternIndexes = searchBackwardsForPatterns(terms, terms.size() - 1, patterns);
             ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:91:64: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-    Indexes patternIndexes = searchForPatternsBackwards(terms, terms.size() - 1, patterns);
+    Indexes patternIndexes = searchBackwardsForPatterns(terms, terms.size() - 1, patterns);
                                                                ^
 D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:102:5: warning: variable 'patterns' of type 'Patterns' (aka 'vector<vector<TermMatcher>>') can be declared 'const' [misc-const-correctness]
     Patterns patterns{{M("identifier2"), M("identifier3"), M("identifier4")}};
