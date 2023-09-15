@@ -7,22 +7,22 @@ using namespace std;
 namespace alba::booleanAlgebra {
 
 TEST(PerformOperationsTest, PerformOperationUnaryOperationWorks) {
-    Term termToVerify1(performOperation(Operator("~"), false));
-    Term termToVerify2(performOperation(Operator("~"), true));
+    Term const termToVerify1(performOperation(Operator("~"), false));
+    Term const termToVerify2(performOperation(Operator("~"), true));
 
     EXPECT_EQ(Term(true), termToVerify1);
     EXPECT_EQ(Term(false), termToVerify2);
 }
 
 TEST(PerformOperationsTest, PerformOperationBinaryOperationWorks) {
-    Term termToVerify1(performOperation(Operator("&"), false, false));
-    Term termToVerify2(performOperation(Operator("&"), false, true));
-    Term termToVerify3(performOperation(Operator("&"), true, false));
-    Term termToVerify4(performOperation(Operator("&"), true, true));
-    Term termToVerify5(performOperation(Operator("|"), false, false));
-    Term termToVerify6(performOperation(Operator("|"), false, true));
-    Term termToVerify7(performOperation(Operator("|"), true, false));
-    Term termToVerify8(performOperation(Operator("|"), true, true));
+    Term const termToVerify1(performOperation(Operator("&"), false, false));
+    Term const termToVerify2(performOperation(Operator("&"), false, true));
+    Term const termToVerify3(performOperation(Operator("&"), true, false));
+    Term const termToVerify4(performOperation(Operator("&"), true, true));
+    Term const termToVerify5(performOperation(Operator("|"), false, false));
+    Term const termToVerify6(performOperation(Operator("|"), false, true));
+    Term const termToVerify7(performOperation(Operator("|"), true, false));
+    Term const termToVerify8(performOperation(Operator("|"), true, true));
 
     EXPECT_EQ(Term(false), termToVerify1);
     EXPECT_EQ(Term(false), termToVerify2);
@@ -35,18 +35,18 @@ TEST(PerformOperationsTest, PerformOperationBinaryOperationWorks) {
 }
 
 TEST(PerformOperationsTest, PerformNotWorks) {
-    Term termToVerify1(performNot(false));
-    Term termToVerify2(performNot(true));
+    Term const termToVerify1(performNot(false));
+    Term const termToVerify2(performNot(true));
 
     EXPECT_EQ(Term(true), termToVerify1);
     EXPECT_EQ(Term(false), termToVerify2);
 }
 
 TEST(PerformOperationsTest, PerformAndWorks) {
-    Term termToVerify1(performAnd(false, false));
-    Term termToVerify2(performAnd(false, true));
-    Term termToVerify3(performAnd(true, false));
-    Term termToVerify4(performAnd(true, true));
+    Term const termToVerify1(performAnd(false, false));
+    Term const termToVerify2(performAnd(false, true));
+    Term const termToVerify3(performAnd(true, false));
+    Term const termToVerify4(performAnd(true, true));
 
     EXPECT_EQ(Term(false), termToVerify1);
     EXPECT_EQ(Term(false), termToVerify2);
@@ -55,10 +55,10 @@ TEST(PerformOperationsTest, PerformAndWorks) {
 }
 
 TEST(PerformOperationsTest, PerformOrWorks) {
-    Term termToVerify1(performOr(false, false));
-    Term termToVerify2(performOr(false, true));
-    Term termToVerify3(performOr(true, false));
-    Term termToVerify4(performOr(true, true));
+    Term const termToVerify1(performOr(false, false));
+    Term const termToVerify2(performOr(false, true));
+    Term const termToVerify3(performOr(true, false));
+    Term const termToVerify4(performOr(true, true));
 
     EXPECT_EQ(Term(false), termToVerify1);
     EXPECT_EQ(Term(true), termToVerify2);

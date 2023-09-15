@@ -11,22 +11,22 @@ TEST(TermUtilitiesTest, GetTermFromVariableAndPrimeValueWorks) {
 }
 
 TEST(TermUtilitiesTest, GetVariableNamesWorks) {
-    Term subTerm1(createExpressionIfPossible({"a", "&", "b"}));
-    Term subTerm2(createExpressionIfPossible({"x", "&", "y"}));
-    Term termToTest(createExpressionIfPossible({subTerm1, "|", subTerm2}));
+    Term const subTerm1(createExpressionIfPossible({"a", "&", "b"}));
+    Term const subTerm2(createExpressionIfPossible({"x", "&", "y"}));
+    Term const termToTest(createExpressionIfPossible({subTerm1, "|", subTerm2}));
 
-    VariableNamesSet namesToVerify(getVariableNames(termToTest));
+    VariableNamesSet const namesToVerify(getVariableNames(termToTest));
 
-    VariableNamesSet namesToExpect{"a", "b", "x", "y"};
+    VariableNamesSet const namesToExpect{"a", "b", "x", "y"};
     EXPECT_EQ(namesToExpect, namesToVerify);
 }
 
 TEST(TermUtilitiesTest, IsNonEmptyOrNonOperatorTypeWorks) {
-    Term term1;
-    Term term2(true);
-    Term term3(VariableTerm("x"));
-    Term term4(Operator("&"));
-    Term term5(Expression{});
+    Term const term1;
+    Term const term2(true);
+    Term const term3(VariableTerm("x"));
+    Term const term4(Operator("&"));
+    Term const term5(Expression{});
 
     EXPECT_FALSE(isNonEmptyOrNonOperatorType(term1));
     EXPECT_TRUE(isNonEmptyOrNonOperatorType(term2));
@@ -36,11 +36,11 @@ TEST(TermUtilitiesTest, IsNonEmptyOrNonOperatorTypeWorks) {
 }
 
 TEST(TermUtilitiesTest, IsNonEmptyOrNonOperatorOrNonExpressionTypeWorks) {
-    Term term1;
-    Term term2(true);
-    Term term3(VariableTerm("x"));
-    Term term4(Operator("&"));
-    Term term5(Expression{});
+    Term const term1;
+    Term const term2(true);
+    Term const term3(VariableTerm("x"));
+    Term const term4(Operator("&"));
+    Term const term5(Expression{});
 
     EXPECT_FALSE(isNonEmptyOrNonOperatorOrNonExpressionType(term1));
     EXPECT_TRUE(isNonEmptyOrNonOperatorOrNonExpressionType(term2));

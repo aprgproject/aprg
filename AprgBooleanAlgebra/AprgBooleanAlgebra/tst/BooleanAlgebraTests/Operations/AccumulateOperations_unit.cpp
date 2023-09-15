@@ -14,32 +14,32 @@ TEST(AccumulateOperationsTest, AccumulateTermsWorks) {
     accumulateTerms(termToTest1, {"a", "b", "c", "d"}, OperatorLevel::And);
     accumulateTerms(termToTest2, {"a", "b", "c", "d"}, OperatorLevel::Or);
 
-    Term termToExpect1(createExpressionIfPossible({"a", "&", "b", "&", "c", "&", "d"}));
-    Term termToExpect2(createExpressionIfPossible({"a", "|", "b", "|", "c", "|", "d"}));
+    Term const termToExpect1(createExpressionIfPossible({"a", "&", "b", "&", "c", "&", "d"}));
+    Term const termToExpect2(createExpressionIfPossible({"a", "|", "b", "|", "c", "|", "d"}));
     EXPECT_EQ(termToExpect1, termToTest1);
     EXPECT_EQ(termToExpect2, termToTest2);
 }
 
 TEST(AccumulateOperationsTest, AccumulateTermsWithAndOperationWorks) {
     Term termToTest(true);
-    Term term1(createExpressionIfPossible({"a", "&", "b"}));
-    Term term2(createExpressionIfPossible({"c", "&", "d"}));
-    Term term3(createExpressionIfPossible({"e", "&", "f"}));
-    Term term4(createExpressionIfPossible({"g", "&", "h"}));
-    Terms termsToCombine{term1, term2, term3, term4};
+    Term const term1(createExpressionIfPossible({"a", "&", "b"}));
+    Term const term2(createExpressionIfPossible({"c", "&", "d"}));
+    Term const term3(createExpressionIfPossible({"e", "&", "f"}));
+    Term const term4(createExpressionIfPossible({"g", "&", "h"}));
+    Terms const termsToCombine{term1, term2, term3, term4};
 
     accumulateTermsWithAndOperation(termToTest, termsToCombine);
 
-    Term termToExpect(
+    Term const termToExpect(
         createExpressionIfPossible({"a", "&", "b", "&", "c", "&", "d", "&", "e", "&", "f", "&", "g", "&", "h"}));
     EXPECT_EQ(termToExpect, termToTest);
 }
 
 TEST(AccumulateOperationsTest, AccumulateTermsWithAndOperationWorksWithEmptyTermAtTheStart) {
     Term termToTest;
-    Term term1;
-    Term term2(true);
-    Terms termsToCombine{term1, term2};
+    Term const term1;
+    Term const term2(true);
+    Terms const termsToCombine{term1, term2};
 
     accumulateTermsWithAndOperation(termToTest, termsToCombine);
 
@@ -48,24 +48,24 @@ TEST(AccumulateOperationsTest, AccumulateTermsWithAndOperationWorksWithEmptyTerm
 
 TEST(AccumulateOperationsTest, AccumulateTermsWithOrOperationWorks) {
     Term termToTest(false);
-    Term term1(createExpressionIfPossible({"a", "|", "b"}));
-    Term term2(createExpressionIfPossible({"c", "|", "d"}));
-    Term term3(createExpressionIfPossible({"e", "|", "f"}));
-    Term term4(createExpressionIfPossible({"g", "|", "h"}));
-    Terms termsToCombine{term1, term2, term3, term4};
+    Term const term1(createExpressionIfPossible({"a", "|", "b"}));
+    Term const term2(createExpressionIfPossible({"c", "|", "d"}));
+    Term const term3(createExpressionIfPossible({"e", "|", "f"}));
+    Term const term4(createExpressionIfPossible({"g", "|", "h"}));
+    Terms const termsToCombine{term1, term2, term3, term4};
 
     accumulateTermsWithOrOperation(termToTest, termsToCombine);
 
-    Term termToExpect(
+    Term const termToExpect(
         createExpressionIfPossible({"a", "|", "b", "|", "c", "|", "d", "|", "e", "|", "f", "|", "g", "|", "h"}));
     EXPECT_EQ(termToExpect, termToTest);
 }
 
 TEST(AccumulateOperationsTest, AccumulateTermsWithOrOperationWorksWithEmptyTermAtTheStart) {
     Term termToTest;
-    Term term1;
-    Term term2(false);
-    Terms termsToCombine{term1, term2};
+    Term const term1;
+    Term const term2(false);
+    Terms const termsToCombine{term1, term2};
 
     accumulateTermsWithOrOperation(termToTest, termsToCombine);
 

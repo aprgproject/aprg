@@ -13,10 +13,10 @@ TEST(TermOperatorsTest, UnaryNotOperatorWorks) {
 }
 
 TEST(TermOperatorsTest, BinaryAndOperatorWorks) {
-    Term term1 = Term(false) & Term(false);
-    Term term2 = Term(false) & Term(true);
-    Term term3 = Term(true) & Term(false);
-    Term term4 = Term(true) & Term(true);
+    Term const term1 = Term(false) & Term(false);
+    Term const term2 = Term(false) & Term(true);
+    Term const term3 = Term(true) & Term(false);
+    Term const term4 = Term(true) & Term(true);
 
     EXPECT_EQ(Term(false), term1);
     EXPECT_EQ(Term(false), term2);
@@ -41,10 +41,10 @@ TEST(TermOperatorsTest, BinaryAndAssignmentOperatorWorks) {
 }
 
 TEST(TermOperatorsTest, BinaryOrOperatorWorks) {
-    Term term1 = Term(false) | Term(false);
-    Term term2 = Term(false) | Term(true);
-    Term term3 = Term(true) | Term(false);
-    Term term4 = Term(true) | Term(true);
+    Term const term1 = Term(false) | Term(false);
+    Term const term2 = Term(false) | Term(true);
+    Term const term3 = Term(true) | Term(false);
+    Term const term4 = Term(true) | Term(true);
 
     EXPECT_EQ(Term(false), term1);
     EXPECT_EQ(Term(true), term2);

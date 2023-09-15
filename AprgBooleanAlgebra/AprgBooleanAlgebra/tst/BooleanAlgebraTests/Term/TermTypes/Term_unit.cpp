@@ -11,11 +11,11 @@ using namespace std;
 namespace alba::booleanAlgebra {
 
 TEST(TermTest, EqualityOperatorWorks) {
-    Term term1;
-    Term term2(Constant(false));
-    Term term3(Constant(true));
-    Term term4(VariableTerm("x"));
-    Term term5(Constant(false));
+    Term const term1;
+    Term const term2(Constant(false));
+    Term const term3(Constant(true));
+    Term const term4(VariableTerm("x"));
+    Term const term5(Constant(false));
 
     EXPECT_TRUE(term1 == term1);
     EXPECT_FALSE(term1 == term2);
@@ -26,11 +26,11 @@ TEST(TermTest, EqualityOperatorWorks) {
 }
 
 TEST(TermTest, InequalityOperatorWorks) {
-    Term term1;
-    Term term2(Constant(false));
-    Term term3(Constant(true));
-    Term term4(VariableTerm("x"));
-    Term term5(Constant(false));
+    Term const term1;
+    Term const term2(Constant(false));
+    Term const term3(Constant(true));
+    Term const term4(VariableTerm("x"));
+    Term const term5(Constant(false));
 
     EXPECT_FALSE(term1 != term1);
     EXPECT_TRUE(term1 != term2);
@@ -41,12 +41,12 @@ TEST(TermTest, InequalityOperatorWorks) {
 }
 
 TEST(TermTest, LessThanOperatorWorks) {
-    Term term1;
-    Term term2(Constant(false));
-    Term term3(Constant(false));
-    Term term4(Constant(true));
-    Term term5(Operator("&"));
-    Term term6(VariableTerm("x"));
+    Term const term1;
+    Term const term2(Constant(false));
+    Term const term3(Constant(false));
+    Term const term4(Constant(true));
+    Term const term5(Operator("&"));
+    Term const term6(VariableTerm("x"));
 
     EXPECT_FALSE(term1 < term1);
     EXPECT_FALSE(term2 < term2);
@@ -58,11 +58,11 @@ TEST(TermTest, LessThanOperatorWorks) {
 
 TEST(TermTest, OutputStreamOperatorWorks) {
     stringstream ss;
-    Term term1;
-    Term term2(false);
-    Term term3(VariableTerm("x"));
-    Term term4(Operator("&"));
-    Term term5(createExpressionIfPossible({true, "&", "x"}));
+    Term const term1;
+    Term const term2(false);
+    Term const term3(VariableTerm("x"));
+    Term const term4(Operator("&"));
+    Term const term5(createExpressionIfPossible({true, "&", "x"}));
 
     ss << term1 << "," << term2 << "," << term3 << "," << term4 << "," << term5;
 
@@ -70,8 +70,8 @@ TEST(TermTest, OutputStreamOperatorWorks) {
 }
 
 TEST(TermTest, TermsAsExpressionsWorks) {
-    Term expressionTerm1(Expression{});
-    Term expressionTerm2(createExpressionIfPossible({true, "&", "x"}));
+    Term const expressionTerm1(Expression{});
+    Term const expressionTerm2(createExpressionIfPossible({true, "&", "x"}));
 
     // For expression1
     ASSERT_EQ(TermType::Expression, expressionTerm1.getTermType());
@@ -126,11 +126,11 @@ TEST(TermTest, SimplifyWorksWhenIsSimplifiedIsNotSet) {
 }
 
 TEST(TermTest, TermsAsConstructedAsStringWorks) {
-    Term term1("");
-    Term term2("true");
-    Term term3("&");
-    Term term4("power");
-    Term term5("x1");
+    Term const term1("");
+    Term const term2("true");
+    Term const term3("&");
+    Term const term4("power");
+    Term const term5("x1");
 
     ASSERT_EQ(TermType::Empty, term1.getTermType());
 
@@ -148,11 +148,11 @@ TEST(TermTest, TermsAsConstructedAsStringWorks) {
 }
 
 TEST(TermTest, TermsAsConstantsWorks) {
-    Term constantTerm1(false);
-    Term constantTerm2(true);
-    Term constantTerm3("tRue");
-    Term constantTerm4("0");
-    Term constantTerm5("5");
+    Term const constantTerm1(false);
+    Term const constantTerm2(true);
+    Term const constantTerm3("tRue");
+    Term const constantTerm4("0");
+    Term const constantTerm5("5");
 
     ASSERT_EQ(TermType::Constant, constantTerm1.getTermType());
     EXPECT_FALSE(constantTerm1.getConstantConstReference().getBooleanValue());
@@ -180,7 +180,7 @@ TEST(TermTest, TermsAsExpressionsCanBeChanged) {
 }
 
 TEST(TermTest, ClearAllInnerSimplifiedFlagsWorks) {
-    Expression innerExpression(createExpressionIfPossible({"x", "&", "y", "|", "z"}));
+    Expression const innerExpression(createExpressionIfPossible({"x", "&", "y", "|", "z"}));
     Term term(innerExpression);
     term.setAsSimplified();
     EXPECT_TRUE(term.isSimplified());
@@ -193,9 +193,9 @@ TEST(TermTest, ClearAllInnerSimplifiedFlagsWorks) {
 }
 
 TEST(TermTest, TermsAsOperatorsWorks) {
-    Term operatorTerm1("~");
-    Term operatorTerm2("&");
-    Term operatorTerm3("|");
+    Term const operatorTerm1("~");
+    Term const operatorTerm2("&");
+    Term const operatorTerm3("|");
 
     ASSERT_EQ(TermType::Operator, operatorTerm1.getTermType());
     EXPECT_EQ("~", operatorTerm1.getOperatorConstReference().getOperatorString());
@@ -217,11 +217,11 @@ TEST(TermTest, TermsAsOperatorsCanBeChanged) {
 }
 
 TEST(TermTest, GetTermTypeWorks) {
-    Term term1;
-    Term term2(false);
-    Term term3(VariableTerm("x"));
-    Term term4(Operator("&"));
-    Term term5(Expression{});
+    Term const term1;
+    Term const term2(false);
+    Term const term3(VariableTerm("x"));
+    Term const term4(Operator("&"));
+    Term const term5(Expression{});
 
     EXPECT_EQ(TermType::Empty, term1.getTermType());
     EXPECT_EQ(TermType::Constant, term2.getTermType());
@@ -231,8 +231,8 @@ TEST(TermTest, GetTermTypeWorks) {
 }
 
 TEST(TermTest, TermsAsVariableTermsWorks) {
-    Term variableTerm1("x");
-    Term variableTerm2("power");
+    Term const variableTerm1("x");
+    Term const variableTerm2("power");
 
     ASSERT_EQ(TermType::VariableTerm, variableTerm1.getTermType());
     EXPECT_EQ("x", variableTerm1.getVariableTermConstReference().getVariableTermName());
@@ -251,8 +251,8 @@ TEST(TermTest, TermsAsVariableTermsCanBeChanged) {
 }
 
 TEST(TermTest, GetBooleanValueWorks) {
-    Term constantTerm1(false);
-    Term constantTerm2(true);
+    Term const constantTerm1(false);
+    Term const constantTerm2(true);
 
     ASSERT_EQ(TermType::Constant, constantTerm1.getTermType());
     EXPECT_FALSE(constantTerm1.getBooleanValue());
@@ -262,7 +262,7 @@ TEST(TermTest, GetBooleanValueWorks) {
 }
 
 TEST(TermTest, AssignmentOperatorWorks) {
-    Term term1 = false;
+    Term const term1 = false;
     Term term2(true);
     term2 = false;
     Term term3(false);
@@ -287,11 +287,11 @@ TEST(TermTest, TermsAsConstantsCanBeChanged) {
 }
 
 TEST(TermTest, GetDebugStringWorks) {
-    Term term1;
-    Term term2(false);
-    Term term3(VariableTerm("x"));
-    Term term4(Operator("&"));
-    Term term5(createExpressionIfPossible({true, "&", "x"}));
+    Term const term1;
+    Term const term2(false);
+    Term const term3(VariableTerm("x"));
+    Term const term4(Operator("&"));
+    Term const term5(createExpressionIfPossible({true, "&", "x"}));
 
     EXPECT_EQ("{EmptyTerm}{Empty}", term1.getDebugString());
     EXPECT_EQ("[false]{Constant}", term2.getDebugString());
@@ -301,12 +301,12 @@ TEST(TermTest, GetDebugStringWorks) {
 }
 
 TEST(TermTest, IsEmptyWorks) {
-    Term term1;
-    Term term2(false);
-    Term term3(true);
-    Term term4(VariableTerm("x"));
-    Term term5(Operator("&"));
-    Term term6(Expression{});
+    Term const term1;
+    Term const term2(false);
+    Term const term3(true);
+    Term const term4(VariableTerm("x"));
+    Term const term5(Operator("&"));
+    Term const term6(Expression{});
 
     EXPECT_TRUE(term1.isEmpty());
     EXPECT_FALSE(term2.isEmpty());
@@ -317,11 +317,11 @@ TEST(TermTest, IsEmptyWorks) {
 }
 
 TEST(TermTest, IsConstantWorks) {
-    Term term1;
-    Term term2(true);
-    Term term3(VariableTerm("x"));
-    Term term4(Operator("&"));
-    Term term5(Expression{});
+    Term const term1;
+    Term const term2(true);
+    Term const term3(VariableTerm("x"));
+    Term const term4(Operator("&"));
+    Term const term5(Expression{});
 
     EXPECT_FALSE(term1.isConstant());
     EXPECT_TRUE(term2.isConstant());
@@ -331,11 +331,11 @@ TEST(TermTest, IsConstantWorks) {
 }
 
 TEST(TermTest, IsVariableTermWorks) {
-    Term term1;
-    Term term2(true);
-    Term term3(VariableTerm("x"));
-    Term term4(Operator("&"));
-    Term term5(Expression{});
+    Term const term1;
+    Term const term2(true);
+    Term const term3(VariableTerm("x"));
+    Term const term4(Operator("&"));
+    Term const term5(Expression{});
 
     EXPECT_FALSE(term1.isVariableTerm());
     EXPECT_FALSE(term2.isVariableTerm());
@@ -345,11 +345,11 @@ TEST(TermTest, IsVariableTermWorks) {
 }
 
 TEST(TermTest, IsOperatorWorks) {
-    Term term1;
-    Term term2(true);
-    Term term3(VariableTerm("x"));
-    Term term4(Operator("&"));
-    Term term5(Expression{});
+    Term const term1;
+    Term const term2(true);
+    Term const term3(VariableTerm("x"));
+    Term const term4(Operator("&"));
+    Term const term5(Expression{});
 
     EXPECT_FALSE(term1.isOperator());
     EXPECT_FALSE(term2.isOperator());
@@ -359,11 +359,11 @@ TEST(TermTest, IsOperatorWorks) {
 }
 
 TEST(TermTest, IsExpressionWorks) {
-    Term term1;
-    Term term2(true);
-    Term term3(VariableTerm("x"));
-    Term term4(Operator("&"));
-    Term term5(Expression{});
+    Term const term1;
+    Term const term2(true);
+    Term const term3(VariableTerm("x"));
+    Term const term4(Operator("&"));
+    Term const term5(Expression{});
 
     EXPECT_FALSE(term1.isExpression());
     EXPECT_FALSE(term2.isExpression());
@@ -373,16 +373,16 @@ TEST(TermTest, IsExpressionWorks) {
 }
 
 TEST(TermTest, TermThatIsDefaultConstructedHasIsSimplifiedFlagNotSet) {
-    Term term;
+    Term const term;
 
     EXPECT_FALSE(term.isSimplified());
 }
 
 TEST(TermTest, TermThatIsConstructedWithTermTypeHasIsSimplifiedFlagNotSet) {
-    Term constantTerm(true);
-    Term variableTerm("");
-    Term operatorTerm("&");
-    Term expressionTerm(Expression{});
+    Term const constantTerm(true);
+    Term const variableTerm("");
+    Term const operatorTerm("&");
+    Term const expressionTerm(Expression{});
 
     EXPECT_FALSE(constantTerm.isSimplified());
     EXPECT_FALSE(variableTerm.isSimplified());
@@ -391,19 +391,19 @@ TEST(TermTest, TermThatIsConstructedWithTermTypeHasIsSimplifiedFlagNotSet) {
 }
 
 TEST(TermTest, TermThatIsCopyConstructedHasIsSimplifiedFlagCopied) {
-    Term termWithSimplifiedNotSet;
+    Term const termWithSimplifiedNotSet;
     Term termWithSimplifiedSet;
     termWithSimplifiedSet.setAsSimplified();
 
     Term const& term1(termWithSimplifiedNotSet);
-    Term term2(termWithSimplifiedSet);
+    Term const term2(termWithSimplifiedSet);
 
     EXPECT_FALSE(term1.isSimplified());
     EXPECT_TRUE(term2.isSimplified());
 }
 
 TEST(TermTest, TermThatIsAssignedHasIsSimplifiedFlagCopied) {
-    Term termWithSimplifiedNotSet;
+    Term const termWithSimplifiedNotSet;
     Term termWithSimplifiedSet;
     termWithSimplifiedSet.setAsSimplified();
     Term term1(true);
@@ -417,7 +417,7 @@ TEST(TermTest, TermThatIsAssignedHasIsSimplifiedFlagCopied) {
 }
 
 TEST(TermTest, IsSimplifiedWorks) {
-    Term term1;
+    Term const term1;
     Term term2;
     term2.setAsSimplified();
 
@@ -448,7 +448,7 @@ TEST(TermTest, SimplifyWorksAsSkippedWhenIsSimplifiedIsSet) {
 
     term.simplify();
 
-    Term expectedTerm(createExpressionIfPossible({true, "&", false}));
+    Term const expectedTerm(createExpressionIfPossible({true, "&", false}));
     EXPECT_EQ(expectedTerm, term);
 }
 
@@ -461,9 +461,9 @@ TEST(TermTest, SortWorks) {
     term2.sort();
     term3.sort();
 
-    Term expectTerm1;
-    Term expectTerm2(Expression{});
-    Term expectTerm3(createExpressionIfPossible({"a", "&", "b", "&", "c", "&", "d"}));
+    Term const expectTerm1;
+    Term const expectTerm2(Expression{});
+    Term const expectTerm3(createExpressionIfPossible({"a", "&", "b", "&", "c", "&", "d"}));
     EXPECT_EQ(expectTerm1, term1);
     EXPECT_EQ(expectTerm2, term2);
     EXPECT_EQ(expectTerm3, term3);
@@ -478,9 +478,9 @@ TEST(TermTest, NegateWorks) {
     term2.negate();
     term3.negate();
 
-    Term expectTerm1;
-    Term expectTerm2(Expression{});
-    Term expectTerm3(createExpressionIfPossible({"x'", "|", "x", "|", "y'", "|", "z'"}));
+    Term const expectTerm1;
+    Term const expectTerm2(Expression{});
+    Term const expectTerm3(createExpressionIfPossible({"x'", "|", "x", "|", "y'", "|", "z'"}));
     EXPECT_EQ(expectTerm1, term1);
     EXPECT_EQ(expectTerm2, term2);
     EXPECT_EQ(expectTerm3, term3);

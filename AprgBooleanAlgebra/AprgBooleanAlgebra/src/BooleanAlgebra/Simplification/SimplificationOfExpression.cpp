@@ -19,7 +19,7 @@ void SimplificationOfExpression::simplify() {
             SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldSimplifyByQuineMcKluskey = false;
 
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         Term quineTerm(m_expression);

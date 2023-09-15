@@ -33,7 +33,7 @@ Term SubstitutionOfVariablesToTerms::getTermForVariable(string const& variable) 
 
 Term SubstitutionOfVariablesToTerms::performSubstitutionTo(VariableTerm const& variableTerm) const {
     Term result;
-    string variableName(variableTerm.getVariableTermName());
+    string const variableName(variableTerm.getVariableTermName());
     if (isVariableFound(variableName)) {
         result = getTermForVariable(variableName);
     } else {

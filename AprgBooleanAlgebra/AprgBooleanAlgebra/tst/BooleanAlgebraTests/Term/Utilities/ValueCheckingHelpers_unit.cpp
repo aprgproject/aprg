@@ -40,12 +40,12 @@ TEST(ValueCheckingHelpersTest, WillHaveNoEffectOnOrOperationWorksWithExpression)
 }
 
 TEST(ValueCheckingHelpersTest, IsTheValueWorksWithTerm) {
-    Term term1;
-    Term term2(false);
-    Term term3(true);
-    Term term4(VariableTerm("x"));
-    Term term5(Operator("&"));
-    Term term6(Expression{});
+    Term const term1;
+    Term const term2(false);
+    Term const term3(true);
+    Term const term4(VariableTerm("x"));
+    Term const term5(Operator("&"));
+    Term const term6(Expression{});
 
     EXPECT_FALSE(isTheValue(term1, false));
     EXPECT_FALSE(isTheValue(term1, true));
@@ -62,9 +62,9 @@ TEST(ValueCheckingHelpersTest, IsTheValueWorksWithTerm) {
 }
 
 TEST(ValueCheckingHelpersTest, IsTheValueWorksWithConstant) {
-    Constant constant1;
-    Constant constant2(false);
-    Constant constant3(true);
+    Constant const constant1;
+    Constant const constant2(false);
+    Constant const constant3(true);
 
     EXPECT_TRUE(isTheValue(constant1, false));
     EXPECT_FALSE(isTheValue(constant1, true));

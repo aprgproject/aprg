@@ -14,7 +14,7 @@ namespace alba::booleanAlgebra {
 
 void addValueTermIfNotEmpty(Terms& terms, string const& valueString) {
     if (!valueString.empty()) {
-        terms.emplace_back(Term(valueString));
+        terms.emplace_back(valueString);
     }
 }
 
@@ -34,7 +34,7 @@ Terms tokenizeToTerms(string const& inputString) {
     string valueString;
     for (char const c : inputString) {
         if (!isWhiteSpace(c)) {
-            string characterString(1, c);
+            string const characterString(1, c);
             if (isOperator(characterString)) {
                 addValueTermIfNotEmpty(tokenizedTerms, valueString);
                 valueString.clear();
@@ -115,7 +115,7 @@ int getOperatorPriority(string const& operatorString) {
 }
 
 bool isConstant(string const& stringObject) {
-    string allCapital(getStringWithCapitalLetters(stringObject));
+    string const allCapital(getStringWithCapitalLetters(stringObject));
     return "TRUE" == allCapital || "FALSE" == allCapital ||
            std::all_of(stringObject.cbegin(), stringObject.cend(), [](char const c) { return isNumber(c); });
 }

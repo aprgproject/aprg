@@ -20,7 +20,7 @@ Term TwoSatisfiabilityUsingGraphs::getSolution() const {
     VariableNamesSet processedNames;
     Expression result;
     for (VariableTerm const& variableTerm : variableTermsInOrder) {
-        string variableName(variableTerm.getVariableTermName());
+        string const variableName(variableTerm.getVariableTermName());
         if (processedNames.find(variableName) == processedNames.cend()) {
             result.putTermWithAndOperationIfNeeded(Term(variableTerm));
             processedNames.emplace(variableName);
@@ -33,7 +33,7 @@ Term TwoSatisfiabilityUsingGraphs::getSolution() const {
 }
 
 bool TwoSatisfiabilityUsingGraphs::hasSolution() const {
-    bool isAVariableAndItsNegationConnected =
+    bool const isAVariableAndItsNegationConnected =
         any_of(m_variableNames.cbegin(), m_variableNames.cend(), [&](string const& variableName) {
             return m_connectedComponents.isConnected(
                 VariableTerm(variableName), VariableTerm::createNegatedVariableTerm(variableName));

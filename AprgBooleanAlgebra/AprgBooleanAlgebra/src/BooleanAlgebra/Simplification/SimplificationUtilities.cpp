@@ -26,7 +26,7 @@ namespace {
 
 void simplifyAndCopyTermsFromAnExpressionAndChangeOperatorLevelIfNeeded(
     WrappedTerms& newWrappedTerms, OperatorLevel& mainOperatorLevel, Expression const& subExpression) {
-    OperatorLevel subExpressionOperatorLevel(subExpression.getCommonOperatorLevel());
+    OperatorLevel const subExpressionOperatorLevel(subExpression.getCommonOperatorLevel());
     if (subExpression.containsOnlyOneTerm() || OperatorLevel::Unknown == mainOperatorLevel ||
         subExpressionOperatorLevel == mainOperatorLevel) {
         if (OperatorLevel::Unknown == mainOperatorLevel) {
@@ -59,23 +59,23 @@ void distributeTermsWithRecursion(
 }
 
 Implicants getBestPrimeImplicantsUsingQuineMcCluskey(Term const& term, VariableNamesSet const& variableNames) {
-    int numberOfBits = variableNames.size();
+    int const numberOfBits = variableNames.size();
     QuineMcCluskey qmc;
     SubstitutionOfVariablesToValues substitution;
     for (Minterm minterm = 0; minterm < static_cast<Minterm>(1) << static_cast<Minterm>(numberOfBits); ++minterm) {
         int i = 0;
         for (string const& variableName : variableNames) {
-            bool value = (minterm & (1 << i++)) > 0;
+            bool const value = (minterm & (1 << i++)) > 0;
             substitution.putVariableWithValue(variableName, value);
         }
-        Term output(substitution.performSubstitutionTo(term));
+        Term const output(substitution.performSubstitutionTo(term));
         if (output.isConstant()) {
             qmc.setInputOutput(minterm, getLogicalValue(output.getBooleanValue()));
         }
     }
     qmc.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     qmc.findAllCombinations();
-    Implicants primeImplicants(qmc.getAllPrimeImplicants());
+    Implicants const primeImplicants(qmc.getAllPrimeImplicants());
     Implicants bestPrimeImplicants(qmc.getBestPrimeImplicants(primeImplicants));
     return bestPrimeImplicants;
 }
@@ -109,7 +109,7 @@ void simplifyTermWithOuterOrAndInnerAnd(Term& term) {
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyWithOuterOrAndInnerAnd = true;
 
-    SimplificationOfExpression::ScopeObject scopeObject;
+    SimplificationOfExpression::ScopeObject const scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
     term.clearAllInnerSimplifiedFlags();
@@ -121,7 +121,7 @@ void simplifyTermWithOuterAndAndInnerOr(Term& term) {
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
     configurationDetails.shouldSimplifyWithOuterAndAndInnerOr = true;
 
-    SimplificationOfExpression::ScopeObject scopeObject;
+    SimplificationOfExpression::ScopeObject const scopeObject;
     scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
     term.clearAllInnerSimplifiedFlags();
@@ -129,8 +129,8 @@ void simplifyTermWithOuterAndAndInnerOr(Term& term) {
 }
 
 void simplifyByQuineMcKluskey(Term& term) {
-    VariableNamesSet variableNames(getVariableNames(term));
-    int numberOfBits = variableNames.size();
+    VariableNamesSet const variableNames(getVariableNames(term));
+    int const numberOfBits = variableNames.size();
     if (numberOfBits > 0 && numberOfBits <= static_cast<int>(AlbaBitValueUtilities<Minterm>::getNumberOfBits())) {
         // cannot be used if number of bits is beyond limit
         OperatorLevel targetOuter(OperatorLevel::Unknown);
@@ -140,7 +140,7 @@ void simplifyByQuineMcKluskey(Term& term) {
             DualOperationMutator mutator;
             mutator.mutateTerm(term);  // get dual if target is "outer and" "inner or"
         }
-        Implicants bestPrimeImplicants(getBestPrimeImplicantsUsingQuineMcCluskey(term, variableNames));
+        Implicants const bestPrimeImplicants(getBestPrimeImplicantsUsingQuineMcCluskey(term, variableNames));
         if (!bestPrimeImplicants.empty()) {
             Expression newExpression;
             for (Implicant const& bestPrimeImplicant : bestPrimeImplicants) {
@@ -148,7 +148,7 @@ void simplifyByQuineMcKluskey(Term& term) {
                 string bitString(bestPrimeImplicant.getEquivalentString(variableNames.size()));
                 int i = variableNames.size() - 1;
                 for (string const& variableName : variableNames) {
-                    char primeBit(bitString[i]);
+                    char const primeBit(bitString[i]);
                     implicantExpression.putTerm(
                         getTermFromVariableAndPrimeValue(variableName, primeBit),
                         targetInner);  // if "outer and" "inner or", its the saved as dual
@@ -205,7 +205,7 @@ void combineComplementaryTerms(Terms& termsToCombine, OperatorLevel const operat
 void combineTermsByCheckingCommonFactor(Terms& termsToCombine, OperatorLevel const operatorLevel) {
     for (int i = 0; i < static_cast<int>(termsToCombine.size()); ++i) {
         for (int j = i + 1; j < static_cast<int>(termsToCombine.size()); ++j) {
-            Term combinedTerm(
+            Term const combinedTerm(
                 combineTwoTermsByCheckingCommonFactorIfPossible(termsToCombine[i], termsToCombine[j], operatorLevel));
             if (!combinedTerm.isEmpty()) {
                 termsToCombine[i] = combinedTerm;
@@ -233,10 +233,11 @@ void retrieveTargetOperations(OperatorLevel& targetOuter, OperatorLevel& targetI
 Term combineTwoTermsByCheckingCommonFactorIfPossible(
     Term const& term1, Term const& term2, OperatorLevel const operatorLevel) {
     Term result;
-    bool isOneOfTheTermANonExpression = !term1.isExpression() || !term2.isExpression();
-    bool doesOperatorLevelMatchIfBothExpressions = term1.isExpression() && term2.isExpression() &&
-                                                   term1.getExpressionConstReference().getCommonOperatorLevel() ==
-                                                       term2.getExpressionConstReference().getCommonOperatorLevel();
+    bool const isOneOfTheTermANonExpression = !term1.isExpression() || !term2.isExpression();
+    bool const doesOperatorLevelMatchIfBothExpressions =
+        term1.isExpression() && term2.isExpression() &&
+        term1.getExpressionConstReference().getCommonOperatorLevel() ==
+            term2.getExpressionConstReference().getCommonOperatorLevel();
     if (isOneOfTheTermANonExpression || doesOperatorLevelMatchIfBothExpressions) {
         Terms commonFactors;
         Terms uniqueTerms1(getTermOrSubTerms(term1));
@@ -253,7 +254,7 @@ Term combineTwoTermsByCheckingCommonFactorIfPossible(
             }
         }
         if (!commonFactors.empty()) {
-            OperatorLevel subOperatorLevel(getSubOperatorLevel(term1, term2));
+            OperatorLevel const subOperatorLevel(getSubOperatorLevel(term1, term2));
             Term uniqueTerm1(getNoEffectValueInOperation(subOperatorLevel));
             Term uniqueTerm2(getNoEffectValueInOperation(subOperatorLevel));
             accumulateTerms(uniqueTerm1, uniqueTerms1, subOperatorLevel);

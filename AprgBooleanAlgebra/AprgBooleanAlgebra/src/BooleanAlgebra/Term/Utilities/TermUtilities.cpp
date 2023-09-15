@@ -26,12 +26,12 @@ VariableNamesSet getVariableNames(Term const& term) {
 }
 
 bool isNonEmptyOrNonOperatorType(Term const& term) {
-    TermType termType(term.getTermType());
+    TermType const termType(term.getTermType());
     return TermType::Empty != termType && TermType::Operator != termType;
 }
 
 bool isNonEmptyOrNonOperatorOrNonExpressionType(Term const& term) {
-    TermType termType(term.getTermType());
+    TermType const termType(term.getTermType());
     return TermType::Empty != termType && TermType::Operator != termType && TermType::Expression != termType;
 }
 

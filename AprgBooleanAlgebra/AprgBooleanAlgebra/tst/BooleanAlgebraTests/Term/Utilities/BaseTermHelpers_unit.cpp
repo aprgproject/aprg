@@ -5,7 +5,7 @@
 namespace alba::booleanAlgebra {
 
 TEST(BaseTermHelpersTest, GetBaseTermConstReferenceFromTermWorks) {
-    Term originalTerm(true);
+    Term const originalTerm(true);
 
     BaseTerm const& baseTerm(getBaseTermConstReferenceFromTerm(originalTerm));
 
@@ -15,7 +15,7 @@ TEST(BaseTermHelpersTest, GetBaseTermConstReferenceFromTermWorks) {
 }
 
 TEST(BaseTermHelpersTest, GetBaseTermConstReferenceFromUniquePointerWorks) {
-    BaseTermUniquePointer uniquePointer(createBasePointer(Term(true)));
+    BaseTermUniquePointer const uniquePointer(createBasePointer(Term(true)));
 
     BaseTerm const& baseTerm(getBaseTermConstReferenceFromUniquePointer(uniquePointer));
 
@@ -29,16 +29,16 @@ TEST(BaseTermHelpersTest, GetBaseTermReferenceFromTermWorks) {
 
     BaseTerm& baseTerm(getBaseTermReferenceFromTerm(originalTerm));
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    Term& termToVerify(static_cast<Term&>(baseTerm));
+    Term const& termToVerify(static_cast<Term&>(baseTerm));
     originalTerm = Term(true);
 
     EXPECT_EQ(Term(true), termToVerify);
 }
 
 TEST(BaseTermHelpersTest, GetBaseTermReferenceFromUniquePointerWorks) {
-    BaseTermUniquePointer uniquePointer(createBasePointer(Term(true)));
+    BaseTermUniquePointer const uniquePointer(createBasePointer(Term(true)));
 
-    BaseTerm& baseTerm(getBaseTermReferenceFromUniquePointer(uniquePointer));
+    BaseTerm const& baseTerm(getBaseTermReferenceFromUniquePointer(uniquePointer));
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     Term const& termToVerify(static_cast<Term const&>(baseTerm));
@@ -46,36 +46,36 @@ TEST(BaseTermHelpersTest, GetBaseTermReferenceFromUniquePointerWorks) {
 }
 
 TEST(BaseTermHelpersTest, DuplicateUniquePointerWorks) {
-    BaseTermUniquePointer originalPointer(createBasePointer(Term(true)));
+    BaseTermUniquePointer const originalPointer(createBasePointer(Term(true)));
 
-    BaseTermUniquePointer duplicatedPointer(duplicateUniquePointer(originalPointer));
+    BaseTermUniquePointer const duplicatedPointer(duplicateUniquePointer(originalPointer));
 
     EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(duplicatedPointer));
 }
 
 TEST(BaseTermHelpersTest, CreateBasePointerWorksForLValue) {
-    Term originalTerm(true);
+    Term const originalTerm(true);
 
-    BaseTermUniquePointer uniquePointer(createBasePointer(originalTerm));
+    BaseTermUniquePointer const uniquePointer(createBasePointer(originalTerm));
 
     EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(uniquePointer));
 }
 
 TEST(BaseTermHelpersTest, CreateBasePointerWorksForRValue) {
-    BaseTermUniquePointer uniquePointer(createBasePointer(Term(true)));
+    BaseTermUniquePointer const uniquePointer(createBasePointer(Term(true)));
 
     EXPECT_EQ(Term(true), getTermConstReferenceFromUniquePointer(uniquePointer));
 }
 
 TEST(BaseTermHelpersTest, CreateAUniquePointerFromTermWorks) {
-    BaseTermUniquePointer uniquePointerToVerify(createBasePointer(Term(true)));
+    BaseTermUniquePointer const uniquePointerToVerify(createBasePointer(Term(true)));
 
     Term const& termToVerify(getTermConstReferenceFromUniquePointer(uniquePointerToVerify));
     EXPECT_EQ(Term(true), termToVerify);
 }
 
 TEST(BaseTermHelpersTest, GetTermConstReferenceFromUniquePointerWorks) {
-    BaseTermUniquePointer uniquePointer(createBasePointer(Term(true)));
+    BaseTermUniquePointer const uniquePointer(createBasePointer(Term(true)));
 
     Term const& termToVerify(getTermConstReferenceFromUniquePointer(uniquePointer));
 
@@ -93,7 +93,7 @@ TEST(BaseTermHelpersTest, GetTermReferenceFromUniquePointerWorks) {
 }
 
 TEST(BaseTermHelpersTest, GetTermConstReferenceFromBaseTermWorks) {
-    Term originalTerm(true);
+    Term const originalTerm(true);
 
     Term const& termToVerify(getTermConstReferenceFromBaseTerm(static_cast<BaseTerm const&>(originalTerm)));
 
@@ -103,7 +103,7 @@ TEST(BaseTermHelpersTest, GetTermConstReferenceFromBaseTermWorks) {
 TEST(BaseTermHelpersTest, GetTermReferenceFromBaseTermWorks) {
     Term originalTerm(true);
 
-    Term& termToVerify(getTermReferenceFromBaseTerm(static_cast<BaseTerm&>(originalTerm)));
+    Term const& termToVerify(getTermReferenceFromBaseTerm(static_cast<BaseTerm&>(originalTerm)));
     originalTerm = Term(true);
 
     EXPECT_EQ(Term(true), termToVerify);

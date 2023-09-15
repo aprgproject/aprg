@@ -6,16 +6,16 @@
 namespace alba::booleanAlgebra {
 
 TEST(ConvertHelpersTest, SimplifyAndConvertExpressionToSimplestTermWorks) {
-    Expression expression1(createExpressionIfPossible({true}));
-    Expression expression2(createExpressionInAnExpression(expression1));
-    Expression expression3(createExpressionInAnExpression(expression2));
-    Expression expression4(createExpressionInAnExpression(expression3));
+    Expression const expression1(createExpressionIfPossible({true}));
+    Expression const expression2(createExpressionInAnExpression(expression1));
+    Expression const expression3(createExpressionInAnExpression(expression2));
+    Expression const expression4(createExpressionInAnExpression(expression3));
 
-    Term termToVerify1(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({})));
-    Term termToVerify2(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression1})));
-    Term termToVerify3(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression2})));
-    Term termToVerify4(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression3})));
-    Term termToVerify5(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression4})));
+    Term const termToVerify1(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({})));
+    Term const termToVerify2(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression1})));
+    Term const termToVerify3(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression2})));
+    Term const termToVerify4(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression3})));
+    Term const termToVerify5(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression4})));
 
     ASSERT_EQ(TermType::Empty, termToVerify1.getTermType());
     ASSERT_EQ(TermType::Constant, termToVerify2.getTermType());
@@ -29,13 +29,13 @@ TEST(ConvertHelpersTest, SimplifyAndConvertExpressionToSimplestTermWorks) {
 }
 
 TEST(ConvertHelpersTest, ConvertExpressionToSimplestTermWorks) {
-    Term termToVerify1(convertExpressionToSimplestTerm(createExpressionIfPossible({})));
-    Term termToVerify2(convertExpressionToSimplestTerm(createExpressionIfPossible({true})));
-    Term termToVerify3(convertExpressionToSimplestTerm(createExpressionIfPossible({"x", "&", "y"})));
+    Term const termToVerify1(convertExpressionToSimplestTerm(createExpressionIfPossible({})));
+    Term const termToVerify2(convertExpressionToSimplestTerm(createExpressionIfPossible({true})));
+    Term const termToVerify3(convertExpressionToSimplestTerm(createExpressionIfPossible({"x", "&", "y"})));
 
     EXPECT_EQ(Term(), termToVerify1);
     EXPECT_EQ(Term(true), termToVerify2);
-    Term termToExpect3(createExpressionIfPossible({"x", "&", "y"}));
+    Term const termToExpect3(createExpressionIfPossible({"x", "&", "y"}));
     EXPECT_EQ(termToExpect3, termToVerify3);
 }
 

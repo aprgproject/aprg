@@ -11,65 +11,66 @@ using namespace std;
 namespace alba::booleanAlgebra::Simplification {
 
 TEST(SimplificationUtilitiesTest, SimplifyTermWithOuterOrAndInnerAndWorks) {
-    Term subTerm1(createExpressionIfPossible({"a", "&", "b"}));
-    Term subTerm2(createExpressionIfPossible({subTerm1, "|", "c"}));
-    Term subTerm3(createExpressionIfPossible({subTerm2, "&", "d"}));
-    Term subTerm4(createExpressionIfPossible({subTerm3, "|", "e"}));
+    Term const subTerm1(createExpressionIfPossible({"a", "&", "b"}));
+    Term const subTerm2(createExpressionIfPossible({subTerm1, "|", "c"}));
+    Term const subTerm3(createExpressionIfPossible({subTerm2, "&", "d"}));
+    Term const subTerm4(createExpressionIfPossible({subTerm3, "|", "e"}));
     Term termToTest(createExpressionIfPossible({subTerm4, "&", "f"}));
 
     simplifyTermWithOuterOrAndInnerAnd(termToTest);
 
-    string stringToExpect("((a&b&d&f)|(c&d&f)|(e&f))");
+    string const stringToExpect("((a&b&d&f)|(c&d&f)|(e&f))");
     EXPECT_EQ(stringToExpect, convertToString(termToTest));
 }
 
 TEST(SimplificationUtilitiesTest, SimplifyTermWithOuterAndAndInnerOrWorks) {
-    Term subTerm1(createExpressionIfPossible({"a", "&", "b"}));
-    Term subTerm2(createExpressionIfPossible({subTerm1, "|", "c"}));
-    Term subTerm3(createExpressionIfPossible({subTerm2, "&", "d"}));
-    Term subTerm4(createExpressionIfPossible({subTerm3, "|", "e"}));
+    Term const subTerm1(createExpressionIfPossible({"a", "&", "b"}));
+    Term const subTerm2(createExpressionIfPossible({subTerm1, "|", "c"}));
+    Term const subTerm3(createExpressionIfPossible({subTerm2, "&", "d"}));
+    Term const subTerm4(createExpressionIfPossible({subTerm3, "|", "e"}));
     Term termToTest(createExpressionIfPossible({subTerm4, "&", "f"}));
 
     simplifyTermWithOuterAndAndInnerOr(termToTest);
 
-    string stringToExpect("(f&(a|c|e)&(b|c|e)&(d|e))");
+    string const stringToExpect("(f&(a|c|e)&(b|c|e)&(d|e))");
     EXPECT_EQ(stringToExpect, convertToString(termToTest));
 }
 
 TEST(SimplificationUtilitiesTest, SimplifyByQuineMcKluskeyWorks) {
-    Term subTerm1(createExpressionIfPossible({"a", "&", "b"}));
-    Term subTerm2(createExpressionIfPossible({subTerm1, "|", "c"}));
-    Term subTerm3(createExpressionIfPossible({subTerm2, "&", "d"}));
-    Term subTerm4(createExpressionIfPossible({subTerm3, "|", "e"}));
+    Term const subTerm1(createExpressionIfPossible({"a", "&", "b"}));
+    Term const subTerm2(createExpressionIfPossible({subTerm1, "|", "c"}));
+    Term const subTerm3(createExpressionIfPossible({subTerm2, "&", "d"}));
+    Term const subTerm4(createExpressionIfPossible({subTerm3, "|", "e"}));
     Term termToTest(createExpressionIfPossible({subTerm4, "&", "f"}));
 
     simplifyByQuineMcKluskey(termToTest);
 
-    string stringToExpect("((a&b&d&f)|(c&d&f)|(e&f))");
+    string const stringToExpect("((a&b&d&f)|(c&d&f)|(e&f))");
     EXPECT_EQ(stringToExpect, convertToString(termToTest));
 }
 
 TEST(SimplificationUtilitiesTest, SimplifyAndCopyTermsAndChangeOperatorLevelIfNeededWorksForOneTerm) {
-    WrappedTerms inputWrappedTerms{Term("x")};
+    WrappedTerms const inputWrappedTerms{Term("x")};
     OperatorLevel operatorLevel(OperatorLevel::Unknown);
     WrappedTerms outputWrappedTerms;
 
     simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(outputWrappedTerms, operatorLevel, inputWrappedTerms);
 
-    WrappedTerms expectedWrappedTerms{Term("x")};
+    WrappedTerms const expectedWrappedTerms{Term("x")};
     EXPECT_EQ(expectedWrappedTerms, outputWrappedTerms);
 }
 
 TEST(
     SimplificationUtilitiesTest, SimplifyAndCopyTermsAndChangeOperatorLevelIfNeededWorksForOneTermWithManyExpressions) {
-    Term oneTerm(createExpressionInAnExpression(createExpressionInAnExpression(createAndWrapExpressionFromATerm("x"))));
-    WrappedTerms inputWrappedTerms{oneTerm};
+    Term const oneTerm(
+        createExpressionInAnExpression(createExpressionInAnExpression(createAndWrapExpressionFromATerm("x"))));
+    WrappedTerms const inputWrappedTerms{oneTerm};
     OperatorLevel operatorLevel(OperatorLevel::Unknown);
     WrappedTerms outputWrappedTerms;
 
     simplifyAndCopyTermsAndChangeOperatorLevelIfNeeded(outputWrappedTerms, operatorLevel, inputWrappedTerms);
 
-    WrappedTerms expectedWrappedTerms{Term("x")};
+    WrappedTerms const expectedWrappedTerms{Term("x")};
     EXPECT_EQ(expectedWrappedTerms, outputWrappedTerms);
 }
 
@@ -91,8 +92,8 @@ TEST(SimplificationUtilitiesTest, CombineComplementaryTermsWorks) {
 }
 
 TEST(SimplificationUtilitiesTest, CombineTermsByCheckingCommonFactorWorks) {
-    Term xAndY(createExpressionIfPossible({"x", "&", "y"}));
-    Term xOrY(createExpressionIfPossible({"x", "|", "y"}));
+    Term const xAndY(createExpressionIfPossible({"x", "&", "y"}));
+    Term const xOrY(createExpressionIfPossible({"x", "|", "y"}));
     Terms termsToTest1{"x", xAndY};
     Terms termsToTest2{"x", xAndY};
     Terms termsToTest3{"x", xOrY};
@@ -124,10 +125,10 @@ TEST(SimplificationUtilitiesTest, CombineTermsByCheckingCommonFactorWorks) {
 TEST(SimplificationUtilitiesTest, DistributeTermsIfNeededWorks) {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
-    SimplificationOfExpression::ScopeObject scopeObject;
+    SimplificationOfExpression::ScopeObject const scopeObject;
 
-    Term xAndY(createExpressionIfPossible({"x", "&", "y"}));
-    Term xOrY(createExpressionIfPossible({"x", "|", "y"}));
+    Term const xAndY(createExpressionIfPossible({"x", "&", "y"}));
+    Term const xOrY(createExpressionIfPossible({"x", "|", "y"}));
     Term termToTest1("a");
     Term termToTest2("b");
     Term termToTest3("c");
@@ -162,7 +163,7 @@ TEST(SimplificationUtilitiesTest, DistributeTermsIfNeededWorks) {
 TEST(SimplificationUtilitiesTest, RetrieveTargetOperationsWorks) {
     SimplificationOfExpression::ConfigurationDetails configurationDetails(
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
-    SimplificationOfExpression::ScopeObject scopeObject;
+    SimplificationOfExpression::ScopeObject const scopeObject;
 
     OperatorLevel targetOuter(OperatorLevel::Unknown);
     OperatorLevel targetInner(OperatorLevel::Unknown);
@@ -197,17 +198,17 @@ TEST(SimplificationUtilitiesTest, RetrieveTargetOperationsWorks) {
 }
 
 TEST(SimplificationUtilitiesTest, CombineTwoTermsByCheckingCommonFactorIfPossibleWorks) {
-    Term xAndY(createExpressionIfPossible({"x", "&", "y"}));
-    Term xOrY(createExpressionIfPossible({"x", "|", "y"}));
+    Term const xAndY(createExpressionIfPossible({"x", "&", "y"}));
+    Term const xOrY(createExpressionIfPossible({"x", "|", "y"}));
 
-    Term termToVerify1(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::And));
-    Term termToVerify2(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::Or));
-    Term termToVerify3(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::And));
-    Term termToVerify4(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::Or));
-    Term termToVerify5(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::And));
-    Term termToVerify6(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::Or));
-    Term termToVerify7(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::And));
-    Term termToVerify8(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::Or));
+    Term const termToVerify1(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::And));
+    Term const termToVerify2(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::Or));
+    Term const termToVerify3(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::And));
+    Term const termToVerify4(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::Or));
+    Term const termToVerify5(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::And));
+    Term const termToVerify6(combineTwoTermsByCheckingCommonFactorIfPossible("x", xAndY, OperatorLevel::Or));
+    Term const termToVerify7(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::And));
+    Term const termToVerify8(combineTwoTermsByCheckingCommonFactorIfPossible("x", xOrY, OperatorLevel::Or));
 
     EXPECT_EQ("(x&y)", convertToString(termToVerify1));
     EXPECT_EQ("x", convertToString(termToVerify2));
@@ -220,11 +221,11 @@ TEST(SimplificationUtilitiesTest, CombineTwoTermsByCheckingCommonFactorIfPossibl
 }
 
 TEST(SimplificationUtilitiesTest, CreateUniqueTermsWorks) {
-    WrappedTerms wrappedTerms{Term("b"), Term("d"), Term("c"), Term("a"), Term("a"), Term("c"), Term("c")};
+    WrappedTerms const wrappedTerms{Term("b"), Term("d"), Term("c"), Term("a"), Term("a"), Term("c"), Term("c")};
 
-    Terms termsToVerify(createUniqueTerms(wrappedTerms));
+    Terms const termsToVerify(createUniqueTerms(wrappedTerms));
 
-    Terms termsToExpect{"a", "b", "c", "d"};
+    Terms const termsToExpect{"a", "b", "c", "d"};
     EXPECT_EQ(termsToExpect, termsToVerify);
 }
 

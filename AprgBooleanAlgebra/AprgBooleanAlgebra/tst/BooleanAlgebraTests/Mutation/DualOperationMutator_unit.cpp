@@ -17,9 +17,9 @@ TEST(DualOperationMutatorTest, MutateTermWorks) {
     mutator.mutateTerm(term2);
     mutator.mutateTerm(term3);
 
-    Term termToExpect1(true);
-    Term termToExpect2("a");
-    Term termToExpect3(createExpressionIfPossible({"a", "|", "b"}));
+    Term const termToExpect1(true);
+    Term const termToExpect2("a");
+    Term const termToExpect3(createExpressionIfPossible({"a", "|", "b"}));
     EXPECT_EQ(termToExpect1, term1);
     EXPECT_EQ(termToExpect2, term2);
     EXPECT_EQ(termToExpect3, term3);
@@ -31,7 +31,7 @@ TEST(DualOperationMutatorTest, MutateConstantWorks) {
 
     mutator.mutateConstant(constant);
 
-    Constant constantToExpect(true);
+    Constant const constantToExpect(true);
     EXPECT_EQ(constantToExpect, constant);
 }
 
@@ -41,7 +41,7 @@ TEST(DualOperationMutatorTest, MutateVariableTermWorks) {
 
     mutator.mutateVariableTerm(variable);
 
-    VariableTerm variableToExpect("a");
+    VariableTerm const variableToExpect("a");
     EXPECT_EQ(variableToExpect, variable);
 }
 
@@ -51,8 +51,8 @@ TEST(DualOperationMutatorTest, MutateExpressionWorks) {
 
     mutator.mutateExpression(expression);
 
-    Expression subExpression(createExpressionIfPossible({"a", "|", "b"}));
-    Expression expressionToExpect(createExpressionIfPossible({subExpression, "&", "c"}));
+    Expression const subExpression(createExpressionIfPossible({"a", "|", "b"}));
+    Expression const expressionToExpect(createExpressionIfPossible({subExpression, "&", "c"}));
     EXPECT_EQ(expressionToExpect, expression);
 }
 

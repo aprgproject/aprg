@@ -24,7 +24,7 @@ TEST(CommonFunctionLibraryTest, PredicateCanBeCreatedAndWorks) {
 TEST(CommonFunctionLibraryTest, GetNegationWorks) {
     EXPECT_EQ(Term(true), getNegation(Term(false)));
     EXPECT_EQ(Term(false), getNegation(Term(true)));
-    Term expectedTerm("x'");
+    Term const expectedTerm("x'");
     EXPECT_EQ(expectedTerm, getNegation(Term("x")));
 }
 
@@ -33,7 +33,7 @@ TEST(CommonFunctionLibraryTest, GetConjunctionWorks) {
     EXPECT_EQ(Term(false), getConjunction(Term(false), Term(true)));
     EXPECT_EQ(Term(false), getConjunction(Term(true), Term(false)));
     EXPECT_EQ(Term(true), getConjunction(Term(true), Term(true)));
-    Term expectedTerm(createExpressionIfPossible({"x", "&", "y"}));
+    Term const expectedTerm(createExpressionIfPossible({"x", "&", "y"}));
     EXPECT_EQ(expectedTerm, getConjunction(Term("x"), Term("y")));
 }
 
@@ -42,7 +42,7 @@ TEST(CommonFunctionLibraryTest, GetInclusiveDisjunctionWorks) {
     EXPECT_EQ(Term(true), getInclusiveDisjunction(Term(false), Term(true)));
     EXPECT_EQ(Term(true), getInclusiveDisjunction(Term(true), Term(false)));
     EXPECT_EQ(Term(true), getInclusiveDisjunction(Term(true), Term(true)));
-    Term expectedTerm(createExpressionIfPossible({"x", "|", "y"}));
+    Term const expectedTerm(createExpressionIfPossible({"x", "|", "y"}));
     EXPECT_EQ(expectedTerm, getInclusiveDisjunction(Term("x"), Term("y")));
 }
 
@@ -51,7 +51,7 @@ TEST(CommonFunctionLibraryTest, GetExclusiveDisjunctionWorks) {
     EXPECT_EQ(Term(true), getExclusiveDisjunction(Term(false), Term(true)));
     EXPECT_EQ(Term(true), getExclusiveDisjunction(Term(true), Term(false)));
     EXPECT_EQ(Term(false), getExclusiveDisjunction(Term(true), Term(true)));
-    Term expectedTerm(createExpressionIfPossible({"(", "x", "&", "y'", ")", "|", "(", "x'", "&", "y", ")"}));
+    Term const expectedTerm(createExpressionIfPossible({"(", "x", "&", "y'", ")", "|", "(", "x'", "&", "y", ")"}));
     EXPECT_EQ(expectedTerm, getExclusiveDisjunction(Term("x"), Term("y")));
 }
 
@@ -60,7 +60,7 @@ TEST(CommonFunctionLibraryTest, GetImplicationWorks) {
     EXPECT_EQ(Term(true), getImplication(Term(false), Term(true)));
     EXPECT_EQ(Term(false), getImplication(Term(true), Term(false)));
     EXPECT_EQ(Term(true), getImplication(Term(true), Term(true)));
-    Term expectedTerm(createExpressionIfPossible({"x'", "|", "y"}));
+    Term const expectedTerm(createExpressionIfPossible({"x'", "|", "y"}));
     EXPECT_EQ(expectedTerm, getImplication(Term("x"), Term("y")));
 }
 
@@ -69,7 +69,7 @@ TEST(CommonFunctionLibraryTest, GetEquivalenceWorks) {
     EXPECT_EQ(Term(false), getEquivalence(Term(false), Term(true)));
     EXPECT_EQ(Term(false), getEquivalence(Term(true), Term(false)));
     EXPECT_EQ(Term(true), getEquivalence(Term(true), Term(true)));
-    Term expectedTerm(createExpressionIfPossible({"(", "x", "&", "y", ")", "|", "(", "x'", "&", "y'", ")"}));
+    Term const expectedTerm(createExpressionIfPossible({"(", "x", "&", "y", ")", "|", "(", "x'", "&", "y'", ")"}));
     EXPECT_EQ(expectedTerm, getEquivalence(Term("x"), Term("y")));
 }
 
@@ -95,7 +95,7 @@ TEST(CommonFunctionLibraryTest, GetUniquenessQuantificationWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, GetTautologyWorks) {
-    UnaryBooleanFunction tautologyToTest(getTautology());
+    UnaryBooleanFunction const tautologyToTest(getTautology());
 
     EXPECT_EQ(Term(true), tautologyToTest(Term(false)));
     EXPECT_EQ(Term(true), tautologyToTest(Term(true)));
@@ -103,7 +103,7 @@ TEST(CommonFunctionLibraryTest, GetTautologyWorks) {
 }
 
 TEST(CommonFunctionLibraryTest, GetContradictionWorks) {
-    UnaryBooleanFunction contradictionToTest(getContradiction());
+    UnaryBooleanFunction const contradictionToTest(getContradiction());
 
     EXPECT_EQ(Term(false), contradictionToTest(Term(false)));
     EXPECT_EQ(Term(false), contradictionToTest(Term(true)));

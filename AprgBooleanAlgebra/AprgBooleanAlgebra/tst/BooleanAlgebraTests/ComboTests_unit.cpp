@@ -15,8 +15,8 @@ TEST(ComboTest, Example1) {
 
     simplifyTermWithOuterOrAndInnerAnd(termToTest);
 
-    string stringToVerify(convertToString(termToTest));
-    string stringToExpect("(x1'&x2'&x3&x4)");
+    string const stringToVerify(convertToString(termToTest));
+    string const stringToExpect("(x1'&x2'&x3&x4)");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
 
@@ -25,8 +25,8 @@ TEST(ComboTest, Example2) {
 
     simplifyTermWithOuterOrAndInnerAnd(termToTest);
 
-    string stringToVerify(convertToString(termToTest));
-    string stringToExpect("((x1&x2')|(x1'&x2))");
+    string const stringToVerify(convertToString(termToTest));
+    string const stringToExpect("((x1&x2')|(x1'&x2))");
     EXPECT_EQ(stringToExpect, stringToVerify);
 }
 

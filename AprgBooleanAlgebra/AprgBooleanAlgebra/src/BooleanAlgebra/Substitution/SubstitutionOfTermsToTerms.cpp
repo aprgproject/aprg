@@ -32,7 +32,7 @@ Term SubstitutionOfTermsToTerms::getTermForTerm(Term const& term) const {
 
 Term SubstitutionOfTermsToTerms::performSubstitutionTo(Expression const& expression) const {
     Term result;
-    Term expressionTerm(expression);
+    Term const expressionTerm(expression);
     if (isTermFound(expressionTerm)) {
         result = getTermForTerm(expressionTerm);
     } else {

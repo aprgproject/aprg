@@ -16,16 +16,16 @@ TEST(StringHelpersTest, AddValueTermIfNotEmptyWorks) {
 }
 
 TEST(StringHelpersTest, BuildTermIfPossibleWorks) {
-    Term termToVerify(buildTermIfPossible("x&y"));
+    Term const termToVerify(buildTermIfPossible("x&y"));
 
-    Term termToExpect(createExpressionIfPossible({"x", "&", "y"}));
+    Term const termToExpect(createExpressionIfPossible({"x", "&", "y"}));
     EXPECT_EQ(termToExpect, termToVerify);
 }
 
 TEST(StringHelpersTest, TokenizeToTermsWorks) {
-    Terms termsToVerify(tokenizeToTerms(" 5yyy & x1 & y1 | ~2015"));
+    Terms const termsToVerify(tokenizeToTerms(" 5yyy & x1 & y1 | ~2015"));
 
-    Terms termsToExpect{"5yyy", "&", "x1", "&", "y1", "|", "~", true};
+    Terms const termsToExpect{"5yyy", "&", "x1", "&", "y1", "|", "~", true};
     EXPECT_EQ(termsToExpect, termsToVerify);
 }
 
@@ -51,7 +51,7 @@ TEST(StringHelpersTest, GetStringForWrappedTermsWorks) {
 }
 
 TEST(StringHelpersTest, CreateVariableTermNameForSubstitutionWorks) {
-    Term term(createVariableTermNameForSubstitution(Term("x")));
+    Term const term(createVariableTermNameForSubstitution(Term("x")));
 
     EXPECT_EQ("{{x}}", createVariableTermNameForSubstitution(term));
 }

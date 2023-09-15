@@ -19,7 +19,7 @@ namespace alba::booleanAlgebra {
 Expression::Expression(BaseTerm const& baseTerm)
     : m_commonOperatorLevel(OperatorLevel::Unknown), m_wrappedTerms({baseTerm}), m_isSimplified(false) {}
 Expression::Expression(BaseTerm&& baseTerm)
-    : m_commonOperatorLevel(OperatorLevel::Unknown), m_wrappedTerms({move(baseTerm)}), m_isSimplified(false) {}
+    : m_commonOperatorLevel(OperatorLevel::Unknown), m_wrappedTerms({std::move(baseTerm)}), m_isSimplified(false) {}
 Expression::Expression() : m_commonOperatorLevel(OperatorLevel::Unknown), m_isSimplified(false) {}
 
 Expression::Expression(OperatorLevel const operatorLevel, WrappedTerms const& wrappedTerms)
@@ -29,7 +29,7 @@ Expression::Expression(OperatorLevel const operatorLevel, WrappedTerms const& wr
 
 Expression::Expression(OperatorLevel const operatorLevel, WrappedTerms&& wrappedTerms)
     : m_commonOperatorLevel(wrappedTerms.empty() ? OperatorLevel::Unknown : operatorLevel),
-      m_wrappedTerms(move(wrappedTerms)),
+      m_wrappedTerms(std::move(wrappedTerms)),
       m_isSimplified(false) {}
 
 Expression Expression::operator~() const {
@@ -278,7 +278,7 @@ void Expression::putTermForExpressionAndNonExpressions(BaseTerm const& baseTerm)
 
 ostream& operator<<(ostream& out, Expression const& expression) {
     WrappedTerms const& wrappedTerms(expression.m_wrappedTerms);
-    string operatorString(getString(expression.m_commonOperatorLevel));
+    string const operatorString(getString(expression.m_commonOperatorLevel));
     out << "(";
     if (!wrappedTerms.empty()) {
         out << getTermConstReferenceFromUniquePointer(wrappedTerms.front().baseTermPointer);

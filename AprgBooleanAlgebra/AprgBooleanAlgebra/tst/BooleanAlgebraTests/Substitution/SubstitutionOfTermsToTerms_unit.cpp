@@ -8,17 +8,17 @@ using namespace std;
 namespace alba::booleanAlgebra {
 
 TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionForExpressionWorks) {
-    SubstitutionOfTermsToTerms substitution({{"x", "a"}, {"y", true}});
-    Expression expression(createExpressionIfPossible({"x", "&", "y"}));
+    SubstitutionOfTermsToTerms const substitution({{"x", "a"}, {"y", true}});
+    Expression const expression(createExpressionIfPossible({"x", "&", "y"}));
 
-    Expression verifyExpression(substitution.performSubstitutionForExpression(expression));
+    Expression const verifyExpression(substitution.performSubstitutionForExpression(expression));
 
-    Expression expectExpression(createExpressionIfPossible({"a", "&", true}));
+    Expression const expectExpression(createExpressionIfPossible({"a", "&", true}));
     EXPECT_EQ(expectExpression, verifyExpression);
 }
 
 TEST(SubstitutionOfTermsToTermsTest, GetTermForTermWorks) {
-    SubstitutionOfTermsToTerms substitution({{"x", false}, {"y", true}});
+    SubstitutionOfTermsToTerms const substitution({{"x", false}, {"y", true}});
 
     EXPECT_EQ(Term(false), substitution.getTermForTerm("x"));
     EXPECT_EQ(Term(true), substitution.getTermForTerm("y"));
@@ -27,10 +27,10 @@ TEST(SubstitutionOfTermsToTermsTest, GetTermForTermWorks) {
 }
 
 TEST(SubstitutionOfTermsToTermsTest, ConstructionWorks) {
-    SubstitutionOfTermsToTerms substitution1;
-    SubstitutionOfTermsToTerms substitution2{{"x", false}, {"y", true}};
-    TermToTermMap variableWithValues{{"x", false}, {"y", true}};
-    SubstitutionOfTermsToTerms substitution3{variableWithValues};
+    SubstitutionOfTermsToTerms const substitution1;
+    SubstitutionOfTermsToTerms const substitution2{{"x", false}, {"y", true}};
+    TermToTermMap const variableWithValues{{"x", false}, {"y", true}};
+    SubstitutionOfTermsToTerms const substitution3{variableWithValues};
 
     EXPECT_TRUE(substitution1.isEmpty());
     EXPECT_EQ(2, substitution2.getSize());
@@ -42,35 +42,35 @@ TEST(SubstitutionOfTermsToTermsTest, ConstructionWorks) {
 }
 
 TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionToWorksOnExpression) {
-    SubstitutionOfTermsToTerms substitution({{"x", false}, {"y", true}});
-    Expression expression1;
-    Expression expression2(createExpressionIfPossible({"x", "&", "y"}));
+    SubstitutionOfTermsToTerms const substitution({{"x", false}, {"y", true}});
+    Expression const expression1;
+    Expression const expression2(createExpressionIfPossible({"x", "&", "y"}));
 
-    Term verifyTerm1(substitution.performSubstitutionTo(expression1));
-    Term verifyTerm2(substitution.performSubstitutionTo(expression2));
+    Term const verifyTerm1(substitution.performSubstitutionTo(expression1));
+    Term const verifyTerm2(substitution.performSubstitutionTo(expression2));
 
-    Term expectTerm1;
-    Term expectTerm2(false);
+    Term const expectTerm1;
+    Term const expectTerm2(false);
     EXPECT_EQ(expectTerm1, verifyTerm1);
     EXPECT_EQ(expectTerm2, verifyTerm2);
 }
 
 TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionToWorksOnTerm) {
-    SubstitutionOfTermsToTerms substitution({{"x", false}, {"y", true}});
-    Term term1;
-    Term term2("x");
-    Term term3(createExpressionIfPossible({"x", "&", "y"}));
-    Term term4(true);
+    SubstitutionOfTermsToTerms const substitution({{"x", false}, {"y", true}});
+    Term const term1;
+    Term const term2("x");
+    Term const term3(createExpressionIfPossible({"x", "&", "y"}));
+    Term const term4(true);
 
-    Term verifyTerm1(substitution.performSubstitutionTo(term1));
-    Term verifyTerm2(substitution.performSubstitutionTo(term2));
-    Term verifyTerm3(substitution.performSubstitutionTo(term3));
-    Term verifyTerm4(substitution.performSubstitutionTo(term4));
+    Term const verifyTerm1(substitution.performSubstitutionTo(term1));
+    Term const verifyTerm2(substitution.performSubstitutionTo(term2));
+    Term const verifyTerm3(substitution.performSubstitutionTo(term3));
+    Term const verifyTerm4(substitution.performSubstitutionTo(term4));
 
-    Term expectTerm1;
-    Term expectTerm2(false);
-    Term expectTerm3(false);
-    Term expectTerm4(true);
+    Term const expectTerm1;
+    Term const expectTerm2(false);
+    Term const expectTerm3(false);
+    Term const expectTerm4(true);
     EXPECT_EQ(expectTerm1, verifyTerm1);
     EXPECT_EQ(expectTerm2, verifyTerm2);
     EXPECT_EQ(expectTerm3, verifyTerm3);
@@ -78,23 +78,23 @@ TEST(SubstitutionOfTermsToTermsTest, PerformSubstitutionToWorksOnTerm) {
 }
 
 TEST(SubstitutionOfTermsToTermsTest, GetSizeWorks) {
-    SubstitutionOfTermsToTerms substitution1;
-    SubstitutionOfTermsToTerms substitution2({{"x", false}, {"y", true}});
+    SubstitutionOfTermsToTerms const substitution1;
+    SubstitutionOfTermsToTerms const substitution2({{"x", false}, {"y", true}});
 
     EXPECT_EQ(0, substitution1.getSize());
     EXPECT_EQ(2, substitution2.getSize());
 }
 
 TEST(SubstitutionOfTermsToTermsTest, IsEmptyWorks) {
-    SubstitutionOfTermsToTerms substitution1;
-    SubstitutionOfTermsToTerms substitution2({{"x", false}, {"y", true}});
+    SubstitutionOfTermsToTerms const substitution1;
+    SubstitutionOfTermsToTerms const substitution2({{"x", false}, {"y", true}});
 
     EXPECT_TRUE(substitution1.isEmpty());
     EXPECT_FALSE(substitution2.isEmpty());
 }
 
 TEST(SubstitutionOfTermsToTermsTest, IsTermFoundWorks) {
-    SubstitutionOfTermsToTerms substitution({{"x", false}, {"y", true}});
+    SubstitutionOfTermsToTerms const substitution({{"x", false}, {"y", true}});
 
     EXPECT_TRUE(substitution.isTermFound("x"));
     EXPECT_TRUE(substitution.isTermFound("y"));

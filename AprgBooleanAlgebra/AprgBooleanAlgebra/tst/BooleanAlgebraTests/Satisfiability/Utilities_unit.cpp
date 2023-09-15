@@ -6,19 +6,19 @@
 namespace alba::booleanAlgebra {
 
 TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityTermsWorksWithTerm) {
-    Term term1(true);
-    Term term2("x");
-    Expression subExpression1(createExpressionIfPossible({"b", "|", "c"}));
-    Expression subExpression2(createExpressionIfPossible({"d", "|", "e", "|", "f"}));
-    Term term3(createExpressionIfPossible({"a", "&", subExpression1, "&", subExpression2}));
+    Term const term1(true);
+    Term const term2("x");
+    Expression const subExpression1(createExpressionIfPossible({"b", "|", "c"}));
+    Expression const subExpression2(createExpressionIfPossible({"d", "|", "e", "|", "f"}));
+    Term const term3(createExpressionIfPossible({"a", "&", subExpression1, "&", subExpression2}));
 
-    SatisfiabilityTerms satTermsToVerify1(getSatisfiabilityTerms(term1));
-    SatisfiabilityTerms satTermsToVerify2(getSatisfiabilityTerms(term2));
-    SatisfiabilityTerms satTermsToVerify3(getSatisfiabilityTerms(term3));
+    SatisfiabilityTerms const satTermsToVerify1(getSatisfiabilityTerms(term1));
+    SatisfiabilityTerms const satTermsToVerify2(getSatisfiabilityTerms(term2));
+    SatisfiabilityTerms const satTermsToVerify3(getSatisfiabilityTerms(term3));
 
-    SatisfiabilityTerms satTermsToExpect1;
-    SatisfiabilityTerms satTermsToExpect2{{VariableTerm("x")}};
-    SatisfiabilityTerms satTermsToExpect3{
+    SatisfiabilityTerms const satTermsToExpect1;
+    SatisfiabilityTerms const satTermsToExpect2{{VariableTerm("x")}};
+    SatisfiabilityTerms const satTermsToExpect3{
         {VariableTerm("a")},
         {VariableTerm("b"), VariableTerm("c")},
         {VariableTerm("d"), VariableTerm("e"), VariableTerm("f")}};
@@ -28,13 +28,13 @@ TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityTermsWorksWithTerm) {
 }
 
 TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityTermsWorksWithExpression) {
-    Expression subExpression1(createExpressionIfPossible({"b", "|", "c"}));
-    Expression subExpression2(createExpressionIfPossible({"d", "|", "e", "|", "f"}));
-    Expression expressionToTest(createExpressionIfPossible({"a", "&", subExpression1, "&", subExpression2}));
+    Expression const subExpression1(createExpressionIfPossible({"b", "|", "c"}));
+    Expression const subExpression2(createExpressionIfPossible({"d", "|", "e", "|", "f"}));
+    Expression const expressionToTest(createExpressionIfPossible({"a", "&", subExpression1, "&", subExpression2}));
 
-    SatisfiabilityTerms satTermsToVerify(getSatisfiabilityTerms(expressionToTest));
+    SatisfiabilityTerms const satTermsToVerify(getSatisfiabilityTerms(expressionToTest));
 
-    SatisfiabilityTerms satTermsToExpect{
+    SatisfiabilityTerms const satTermsToExpect{
         {VariableTerm("a")},
         {VariableTerm("b"), VariableTerm("c")},
         {VariableTerm("d"), VariableTerm("e"), VariableTerm("f")}};
@@ -44,11 +44,11 @@ TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityTermsWorksWithExpression) {
 TEST(
     SatisfiabilityUtilitiesTest,
     GetSatisfiabilityTermsWorksWithExpressionAndResultsAreEmptyWithConstantInAndExpression) {
-    Expression subExpression1(createExpressionIfPossible({"b", "|", "c"}));
-    Expression subExpression2(createExpressionIfPossible({"d", "|", "e", "|", "f"}));
-    Expression expressionToTest(OperatorLevel::And, {Term(true), Term(subExpression1), Term(subExpression2)});
+    Expression const subExpression1(createExpressionIfPossible({"b", "|", "c"}));
+    Expression const subExpression2(createExpressionIfPossible({"d", "|", "e", "|", "f"}));
+    Expression const expressionToTest(OperatorLevel::And, {Term(true), Term(subExpression1), Term(subExpression2)});
 
-    SatisfiabilityTerms satTermsToVerify(getSatisfiabilityTerms(expressionToTest));
+    SatisfiabilityTerms const satTermsToVerify(getSatisfiabilityTerms(expressionToTest));
 
     EXPECT_TRUE(satTermsToVerify.empty());
 }
@@ -56,17 +56,17 @@ TEST(
 TEST(
     SatisfiabilityUtilitiesTest,
     GetSatisfiabilityTermsWorksWithExpressionAndResultsAreEmptyWithConstantInOrExpression) {
-    Expression subExpression1(createExpressionIfPossible({"b", "|", "c"}));
-    Expression subExpression2(createExpressionIfPossible({true, "|", "e", "|", "f"}));
-    Expression expressionToTest(OperatorLevel::And, {Term("a"), Term(subExpression1), Term(subExpression2)});
+    Expression const subExpression1(createExpressionIfPossible({"b", "|", "c"}));
+    Expression const subExpression2(createExpressionIfPossible({true, "|", "e", "|", "f"}));
+    Expression const expressionToTest(OperatorLevel::And, {Term("a"), Term(subExpression1), Term(subExpression2)});
 
-    SatisfiabilityTerms satTermsToVerify(getSatisfiabilityTerms(expressionToTest));
+    SatisfiabilityTerms const satTermsToVerify(getSatisfiabilityTerms(expressionToTest));
 
     EXPECT_TRUE(satTermsToVerify.empty());
 }
 
 TEST(SatisfiabilityUtilitiesTest, GetSatisfiabilityLevelWorks) {
-    SatisfiabilityTerms satTermsToTest{
+    SatisfiabilityTerms const satTermsToTest{
         {VariableTerm("a")},
         {VariableTerm("b"), VariableTerm("c")},
         {VariableTerm("d"), VariableTerm("e"), VariableTerm("f")}};

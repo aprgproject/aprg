@@ -7,10 +7,10 @@ using namespace std;
 namespace alba::booleanAlgebra {
 
 TEST(OperatorTest, EqualityOperatorWorks) {
-    Operator operator1;
-    Operator operator2("&");
-    Operator operator3("|");
-    Operator operator4("&");
+    Operator const operator1;
+    Operator const operator2("&");
+    Operator const operator3("|");
+    Operator const operator4("&");
 
     EXPECT_TRUE(operator1 == operator1);
     EXPECT_FALSE(operator1 == operator2);
@@ -20,10 +20,10 @@ TEST(OperatorTest, EqualityOperatorWorks) {
 }
 
 TEST(OperatorTest, InequalityOperatorWorks) {
-    Operator operator1;
-    Operator operator2("&");
-    Operator operator3("|");
-    Operator operator4("&");
+    Operator const operator1;
+    Operator const operator2("&");
+    Operator const operator3("|");
+    Operator const operator4("&");
 
     EXPECT_FALSE(operator1 != operator1);
     EXPECT_TRUE(operator1 != operator2);
@@ -34,13 +34,13 @@ TEST(OperatorTest, InequalityOperatorWorks) {
 
 TEST(OperatorTest, OutputStreamOperatorWorks) {
     stringstream ss;
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const notOperator("~");
+    Operator const andOperator("&");
+    Operator const orOperator("|");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     ss << nullOperator << "," << notOperator << "," << andOperator << "," << orOperator << "," << openingGroupOperator
        << "," << closingGroupOperator << "," << invalidOperator;
@@ -56,13 +56,13 @@ TEST(OperatorTest, LessThanOperatorWorks) {
 }
 
 TEST(OperatorTest, GetOperatorTypeWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const notOperator("~");
+    Operator const andOperator("&");
+    Operator const orOperator("|");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_EQ(OperatorType::Unknown, nullOperator.getOperatorType());
     EXPECT_EQ(OperatorType::Not, notOperator.getOperatorType());
@@ -74,21 +74,21 @@ TEST(OperatorTest, GetOperatorTypeWorks) {
 }
 
 TEST(OperatorTest, OperatorsAreConstructedCorrectly) {
-    Operator operator1;
-    Operator operator2("test");
+    Operator const operator1;
+    Operator const operator2("test");
 
     EXPECT_EQ("", operator1.getOperatorString());
     EXPECT_EQ("test", operator2.getOperatorString());
 }
 
 TEST(OperatorTest, GetOperatorStringValueWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const notOperator("~");
+    Operator const andOperator("&");
+    Operator const orOperator("|");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_TRUE(nullOperator.getOperatorString().empty());
     EXPECT_EQ("~", notOperator.getOperatorString());
@@ -100,7 +100,7 @@ TEST(OperatorTest, GetOperatorStringValueWorks) {
 }
 
 TEST(OperatorTest, SettingANewOperatingStringWorks) {
-    Operator operatorForTest1;
+    Operator const operatorForTest1;
     Operator operatorForTest2;
 
     operatorForTest2.setOperatorString("multiply");
@@ -110,13 +110,13 @@ TEST(OperatorTest, SettingANewOperatingStringWorks) {
 }
 
 TEST(OperatorTest, IsNotWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const notOperator("~");
+    Operator const andOperator("&");
+    Operator const orOperator("|");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isNot());
     EXPECT_TRUE(notOperator.isNot());
@@ -128,13 +128,13 @@ TEST(OperatorTest, IsNotWorks) {
 }
 
 TEST(OperatorTest, IsAndWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const notOperator("~");
+    Operator const andOperator("&");
+    Operator const orOperator("|");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isAnd());
     EXPECT_FALSE(notOperator.isAnd());
@@ -146,13 +146,13 @@ TEST(OperatorTest, IsAndWorks) {
 }
 
 TEST(OperatorTest, IsOrWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const notOperator("~");
+    Operator const andOperator("&");
+    Operator const orOperator("|");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isOr());
     EXPECT_FALSE(notOperator.isOr());
@@ -164,13 +164,13 @@ TEST(OperatorTest, IsOrWorks) {
 }
 
 TEST(OperatorTest, IsAnOperatorThatCanPerformedWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const notOperator("~");
+    Operator const andOperator("&");
+    Operator const orOperator("|");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isAnOperatorThatCanPerformed());
     EXPECT_TRUE(notOperator.isAnOperatorThatCanPerformed());
@@ -182,13 +182,13 @@ TEST(OperatorTest, IsAnOperatorThatCanPerformedWorks) {
 }
 
 TEST(OperatorTest, IsOpeningGroupOperatorWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const notOperator("~");
+    Operator const andOperator("&");
+    Operator const orOperator("|");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isOpeningGroupOperator());
     EXPECT_FALSE(notOperator.isOpeningGroupOperator());
@@ -200,13 +200,13 @@ TEST(OperatorTest, IsOpeningGroupOperatorWorks) {
 }
 
 TEST(OperatorTest, IsClosingGroupOperatorWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const notOperator("~");
+    Operator const andOperator("&");
+    Operator const orOperator("|");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isClosingGroupOperator());
     EXPECT_FALSE(notOperator.isClosingGroupOperator());
@@ -218,13 +218,13 @@ TEST(OperatorTest, IsClosingGroupOperatorWorks) {
 }
 
 TEST(OperatorTest, IsUnaryOperatorWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const notOperator("~");
+    Operator const andOperator("&");
+    Operator const orOperator("|");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isUnaryOperator());
     EXPECT_TRUE(notOperator.isUnaryOperator());
@@ -236,13 +236,13 @@ TEST(OperatorTest, IsUnaryOperatorWorks) {
 }
 
 TEST(OperatorTest, IsBinaryOperatorWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const notOperator("~");
+    Operator const andOperator("&");
+    Operator const orOperator("|");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isBinaryOperator());
     EXPECT_FALSE(notOperator.isBinaryOperator());
@@ -254,13 +254,13 @@ TEST(OperatorTest, IsBinaryOperatorWorks) {
 }
 
 TEST(OperatorTest, IsSameOperatorInputTypeWorks) {
-    Operator nullOperator;
-    Operator notOperator("~");
-    Operator andOperator("&");
-    Operator orOperator("|");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const notOperator("~");
+    Operator const andOperator("&");
+    Operator const orOperator("|");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isSameOperatorInputType(OperatorInputType::UnaryOperation));
     EXPECT_FALSE(nullOperator.isSameOperatorInputType(OperatorInputType::BinaryOperation));

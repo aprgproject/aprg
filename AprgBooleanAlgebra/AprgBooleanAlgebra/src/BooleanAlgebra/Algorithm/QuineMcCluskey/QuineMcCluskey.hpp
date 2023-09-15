@@ -78,7 +78,7 @@ public:
         using OuterTerms = std::deque<InnerTerms>;
 
         Implicants result;
-        SetOfMinterms mintermsToCover(getSetOfInputMintermsWithTrue());
+        SetOfMinterms const mintermsToCover(getSetOfInputMintermsWithTrue());
 
         // construct equation
         OuterTerms outerTerms;  // outer terms have "AND" logic between them
@@ -97,8 +97,8 @@ public:
 
         // distribute first two terms until theres one outer term left (top operation is OR)
         while (outerTerms.size() > 1) {
-            InnerTerms innerTerms1 = outerTerms.front();
-            InnerTerms innerTerms2 = *std::next(outerTerms.begin());
+            InnerTerms const innerTerms1 = outerTerms.front();
+            InnerTerms const innerTerms2 = *std::next(outerTerms.begin());
 
             outerTerms.erase(outerTerms.begin(), outerTerms.begin() + 2);
 
@@ -147,7 +147,7 @@ public:
             int minSize = std::numeric_limits<int>::max();
             int minSizeIndex = 0;
             for (int i = 0; i < static_cast<int>(onlyInnerTerms.size()); ++i) {
-                int idsSize = onlyInnerTerms[i].size();
+                int const idsSize = onlyInnerTerms[i].size();
                 if (minSize > idsSize) {
                     minSizeIndex = i;
                     minSize = idsSize;
@@ -258,7 +258,7 @@ public:
     }
 
     [[nodiscard]] std::string getOutputTable(Implicants const& primeImplicants) const {
-        Minterms inputsWithTrue(getInputMintermsWithTrue());
+        Minterms const inputsWithTrue(getInputMintermsWithTrue());
         DisplayTable displayTable;
         displayTable.setBorders("", "|");
         displayTable.addRow();
@@ -276,7 +276,7 @@ public:
             displayTable.addRow();
             displayTable.getLastRow().addCell(implicant.getEquivalentString(maxLength));
             for (auto const& input : inputsWithTrue) {
-                std::string cell = implicant.hasMinterm(input) ? "X" : " ";
+                std::string const cell = implicant.hasMinterm(input) ? "X" : " ";
                 displayTable.getLastRow().addCell(cell);
             }
         }

@@ -7,10 +7,10 @@ using namespace std;
 namespace alba::booleanAlgebra {
 
 TEST(VariableTermTest, NonequalityOperatorWorks) {
-    VariableTerm variableTerm1;
-    VariableTerm variableTerm2("x");
-    VariableTerm variable3("power");
-    VariableTerm variable4("x'");
+    VariableTerm const variableTerm1;
+    VariableTerm const variableTerm2("x");
+    VariableTerm const variable3("power");
+    VariableTerm const variable4("x'");
 
     EXPECT_FALSE(variableTerm1 != variableTerm1);
     EXPECT_TRUE(variableTerm1 != variableTerm2);
@@ -21,8 +21,8 @@ TEST(VariableTermTest, NonequalityOperatorWorks) {
 
 TEST(VariableTermTest, OutputStreamOperatorWorks) {
     stringstream ss;
-    VariableTerm variableTerm1;
-    VariableTerm variableTerm2("time");
+    VariableTerm const variableTerm1;
+    VariableTerm const variableTerm2("time");
 
     ss << variableTerm1 << "," << variableTerm2;
 
@@ -59,10 +59,10 @@ TEST(VariableTermTest, NegateWorks) {
 }
 
 TEST(VariableTermTest, VariableTermsAreConstructedCorrectly) {
-    VariableTerm variableTerm1;
-    VariableTerm variableTerm2("time");
-    VariableTerm variableTerm3("time'");
-    VariableTerm variableTerm4(VariableTerm::createNegatedVariableTerm("time"));
+    VariableTerm const variableTerm1;
+    VariableTerm const variableTerm2("time");
+    VariableTerm const variableTerm3("time'");
+    VariableTerm const variableTerm4(VariableTerm::createNegatedVariableTerm("time"));
 
     EXPECT_EQ("", variableTerm1.getVariableTermName());
     EXPECT_FALSE(variableTerm1.isNegated());
@@ -83,18 +83,18 @@ TEST(VariableTermTest, SettingANewVariableTermNameWorks) {
 }
 
 TEST(VariableTermTest, IsNegatedWorks) {
-    VariableTerm variableTerm1;
-    VariableTerm variableTerm2("time'");
+    VariableTerm const variableTerm1;
+    VariableTerm const variableTerm2("time'");
 
     EXPECT_FALSE(variableTerm1.isNegated());
     EXPECT_TRUE(variableTerm2.isNegated());
 }
 
 TEST(VariableTermTest, EqualityOperatorWorks) {
-    VariableTerm variableTerm1;
-    VariableTerm variableTerm2("x");
-    VariableTerm variable3("power");
-    VariableTerm variable4(VariableTerm::createNegatedVariableTerm("x"));
+    VariableTerm const variableTerm1;
+    VariableTerm const variableTerm2("x");
+    VariableTerm const variable3("power");
+    VariableTerm const variable4(VariableTerm::createNegatedVariableTerm("x"));
 
     EXPECT_TRUE(variableTerm1 == variableTerm1);
     EXPECT_FALSE(variableTerm1 == variableTerm2);

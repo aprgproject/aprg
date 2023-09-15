@@ -8,53 +8,53 @@ using namespace std;
 namespace alba::booleanAlgebra {
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnVariableTerm) {
-    SubstitutionOfVariablesToValues substitution({{"x", true}});
-    VariableTerm variableTerm1;
-    VariableTerm variableTerm2("x");
-    VariableTerm variableTerm3("y");
+    SubstitutionOfVariablesToValues const substitution({{"x", true}});
+    VariableTerm const variableTerm1;
+    VariableTerm const variableTerm2("x");
+    VariableTerm const variableTerm3("y");
 
-    Term verifyTerm1(substitution.performSubstitutionTo(variableTerm1));
-    Term verifyTerm2(substitution.performSubstitutionTo(variableTerm2));
-    Term verifyTerm3(substitution.performSubstitutionTo(variableTerm3));
+    Term const verifyTerm1(substitution.performSubstitutionTo(variableTerm1));
+    Term const verifyTerm2(substitution.performSubstitutionTo(variableTerm2));
+    Term const verifyTerm3(substitution.performSubstitutionTo(variableTerm3));
 
-    Term expectTerm1(VariableTerm{});
-    Term expectTerm2(true);
-    Term expectTerm3("y");
+    Term const expectTerm1(VariableTerm{});
+    Term const expectTerm2(true);
+    Term const expectTerm3("y");
     EXPECT_EQ(expectTerm1, verifyTerm1);
     EXPECT_EQ(expectTerm2, verifyTerm2);
     EXPECT_EQ(expectTerm3, verifyTerm3);
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnExpression) {
-    SubstitutionOfVariablesToValues substitution({{"x", false}, {"y", true}});
-    Expression expression1;
-    Expression expression2(createExpressionIfPossible({"x", "&", "y"}));
+    SubstitutionOfVariablesToValues const substitution({{"x", false}, {"y", true}});
+    Expression const expression1;
+    Expression const expression2(createExpressionIfPossible({"x", "&", "y"}));
 
-    Term verifyTerm1(substitution.performSubstitutionTo(expression1));
-    Term verifyTerm2(substitution.performSubstitutionTo(expression2));
+    Term const verifyTerm1(substitution.performSubstitutionTo(expression1));
+    Term const verifyTerm2(substitution.performSubstitutionTo(expression2));
 
-    Term expectTerm1;
-    Term expectTerm2(false);
+    Term const expectTerm1;
+    Term const expectTerm2(false);
     EXPECT_EQ(expectTerm1, verifyTerm1);
     EXPECT_EQ(expectTerm2, verifyTerm2);
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnTerm) {
-    SubstitutionOfVariablesToValues substitution({{"x", false}, {"y", true}});
-    Term term1;
-    Term term2("x");
-    Term term5(createExpressionIfPossible({"x", "&", "y"}));
-    Term term6(true);
+    SubstitutionOfVariablesToValues const substitution({{"x", false}, {"y", true}});
+    Term const term1;
+    Term const term2("x");
+    Term const term5(createExpressionIfPossible({"x", "&", "y"}));
+    Term const term6(true);
 
-    Term verifyTerm1(substitution.performSubstitutionTo(term1));
-    Term verifyTerm2(substitution.performSubstitutionTo(term2));
-    Term verifyTerm5(substitution.performSubstitutionTo(term5));
-    Term verifyTerm6(substitution.performSubstitutionTo(term6));
+    Term const verifyTerm1(substitution.performSubstitutionTo(term1));
+    Term const verifyTerm2(substitution.performSubstitutionTo(term2));
+    Term const verifyTerm5(substitution.performSubstitutionTo(term5));
+    Term const verifyTerm6(substitution.performSubstitutionTo(term6));
 
-    Term expectTerm1;
-    Term expectTerm2(false);
-    Term expectTerm5(false);
-    Term expectTerm6(true);
+    Term const expectTerm1;
+    Term const expectTerm2(false);
+    Term const expectTerm5(false);
+    Term const expectTerm6(true);
     EXPECT_EQ(expectTerm1, verifyTerm1);
     EXPECT_EQ(expectTerm2, verifyTerm2);
     EXPECT_EQ(expectTerm5, verifyTerm5);
@@ -62,18 +62,18 @@ TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnTerm) {
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, GetSizeWorks) {
-    SubstitutionOfVariablesToValues substitution1;
-    SubstitutionOfVariablesToValues substitution2({{"x", false}, {"y", true}});
+    SubstitutionOfVariablesToValues const substitution1;
+    SubstitutionOfVariablesToValues const substitution2({{"x", false}, {"y", true}});
 
     EXPECT_EQ(0, substitution1.getSize());
     EXPECT_EQ(2, substitution2.getSize());
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, ConstructionWorks) {
-    SubstitutionOfVariablesToValues substitution1;
-    SubstitutionOfVariablesToValues substitution2{{"x", false}, {"y", true}};
-    VariablesToValuesMap variableWithValues{{"x", false}, {"y", true}};
-    SubstitutionOfVariablesToValues substitution3{variableWithValues};
+    SubstitutionOfVariablesToValues const substitution1;
+    SubstitutionOfVariablesToValues const substitution2{{"x", false}, {"y", true}};
+    VariablesToValuesMap const variableWithValues{{"x", false}, {"y", true}};
+    SubstitutionOfVariablesToValues const substitution3{variableWithValues};
 
     EXPECT_TRUE(substitution1.isEmpty());
     EXPECT_EQ(2, substitution2.getSize());
@@ -85,15 +85,15 @@ TEST(SubstitutionOfVariablesToValuesTest, ConstructionWorks) {
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, IsEmptyWorks) {
-    SubstitutionOfVariablesToValues substitution1;
-    SubstitutionOfVariablesToValues substitution2({{"x", false}, {"y", true}});
+    SubstitutionOfVariablesToValues const substitution1;
+    SubstitutionOfVariablesToValues const substitution2({{"x", false}, {"y", true}});
 
     EXPECT_TRUE(substitution1.isEmpty());
     EXPECT_FALSE(substitution2.isEmpty());
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, IsVariableFoundWorks) {
-    SubstitutionOfVariablesToValues substitution({{"x", false}, {"y", true}});
+    SubstitutionOfVariablesToValues const substitution({{"x", false}, {"y", true}});
 
     EXPECT_TRUE(substitution.isVariableFound("x"));
     EXPECT_TRUE(substitution.isVariableFound("y"));
@@ -102,7 +102,7 @@ TEST(SubstitutionOfVariablesToValuesTest, IsVariableFoundWorks) {
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, GetValueForVariableWorks) {
-    SubstitutionOfVariablesToValues substitution({{"x", false}, {"y", true}});
+    SubstitutionOfVariablesToValues const substitution({{"x", false}, {"y", true}});
 
     EXPECT_FALSE(substitution.getValueForVariable("x"));
     EXPECT_TRUE(substitution.getValueForVariable("y"));

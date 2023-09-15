@@ -8,18 +8,18 @@ using namespace std;
 namespace alba::booleanAlgebra {
 
 TEST(WrappedTermTest, ConstructionWorks) {
-    WrappedTerm wrappedTerm1(Term(true));
-    WrappedTerm wrappedTerm2(wrappedTerm1);
+    WrappedTerm const wrappedTerm1(Term(true));
+    WrappedTerm const wrappedTerm2(wrappedTerm1);
 
     EXPECT_EQ(Term(10), getTermConstReferenceFromUniquePointer(wrappedTerm1.baseTermPointer));
     EXPECT_EQ(Term(10), getTermConstReferenceFromUniquePointer(wrappedTerm2.baseTermPointer));
 }
 
 TEST(WrappedTermTest, EqualityOperatorWorks) {
-    WrappedTerm wrappedTerm1(Term(true));
+    WrappedTerm const wrappedTerm1(Term(true));
     WrappedTerm const& wrappedTerm2(wrappedTerm1);
-    WrappedTerm wrappedTerm3(Term(false));
-    WrappedTerm wrappedTerm4(Term(true));
+    WrappedTerm const wrappedTerm3(Term(false));
+    WrappedTerm const wrappedTerm4(Term(true));
 
     EXPECT_TRUE(wrappedTerm1 == wrappedTerm1);
     EXPECT_TRUE(wrappedTerm1 == wrappedTerm2);
@@ -28,10 +28,10 @@ TEST(WrappedTermTest, EqualityOperatorWorks) {
 }
 
 TEST(WrappedTermTest, InequalityOperatorWorks) {
-    WrappedTerm wrappedTerm1(Term(true));
+    WrappedTerm const wrappedTerm1(Term(true));
     WrappedTerm const& wrappedTerm2(wrappedTerm1);
-    WrappedTerm wrappedTerm3(Term(false));
-    WrappedTerm wrappedTerm4(Term(true));
+    WrappedTerm const wrappedTerm3(Term(false));
+    WrappedTerm const wrappedTerm4(Term(true));
 
     EXPECT_FALSE(wrappedTerm1 != wrappedTerm1);
     EXPECT_FALSE(wrappedTerm1 != wrappedTerm2);
@@ -40,9 +40,9 @@ TEST(WrappedTermTest, InequalityOperatorWorks) {
 }
 
 TEST(WrappedTermTest, LessThanOperatorWorks) {
-    WrappedTerm wrappedTerm1(Term(true));
-    WrappedTerm wrappedTerm2(Term(true));
-    WrappedTerm wrappedTerm3(Term(false));
+    WrappedTerm const wrappedTerm1(Term(true));
+    WrappedTerm const wrappedTerm2(Term(true));
+    WrappedTerm const wrappedTerm3(Term(false));
 
     EXPECT_FALSE(wrappedTerm1 < wrappedTerm1);
     EXPECT_FALSE(wrappedTerm1 < wrappedTerm2);
@@ -53,8 +53,8 @@ TEST(WrappedTermTest, LessThanOperatorWorks) {
 
 TEST(WrappedTermTest, OutputStreamOperatorWorks) {
     stringstream ss;
-    WrappedTerm wrappedTerm1(Term(true));
-    WrappedTerm wrappedTerm2(Term(false));
+    WrappedTerm const wrappedTerm1(Term(true));
+    WrappedTerm const wrappedTerm2(Term(false));
 
     ss << wrappedTerm1 << "," << wrappedTerm2;
 

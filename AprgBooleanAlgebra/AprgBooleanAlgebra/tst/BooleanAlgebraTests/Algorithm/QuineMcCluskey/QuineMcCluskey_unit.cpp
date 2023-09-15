@@ -19,14 +19,14 @@ using ImplicantsForTest = QuineMcCluskeyForTest::Implicants;
 }  // namespace
 
 TEST(QuineMcCluskeyTest, ImplicantEquivalentStringTest) {
-    ImplicantForTest implicant({8, 10, 12, 14});
+    ImplicantForTest const implicant({8, 10, 12, 14});
     EXPECT_EQ("00001--0", implicant.getEquivalentString(8));
 }
 
 TEST(QuineMcCluskeyTest, ImplicantCompatibilityTest) {
-    ImplicantForTest implicant1({4, 12});
-    ImplicantForTest implicant2({8, 9});
-    ImplicantForTest implicant3({10, 11});
+    ImplicantForTest const implicant1({4, 12});
+    ImplicantForTest const implicant2({8, 9});
+    ImplicantForTest const implicant3({10, 11});
 
     EXPECT_FALSE(implicant1.isCompatible(implicant2));
     EXPECT_FALSE(implicant1.isCompatible(implicant3));
@@ -37,9 +37,9 @@ TEST(QuineMcCluskeyTest, ImplicantCompatibilityTest) {
 }
 
 TEST(QuineMcCluskeyTest, ImplicantSubsetTest) {
-    ImplicantForTest implicant1({4, 12});
-    ImplicantForTest implicant2({8, 9});
-    ImplicantForTest implicant3({8, 9, 10, 11});
+    ImplicantForTest const implicant1({4, 12});
+    ImplicantForTest const implicant2({8, 9});
+    ImplicantForTest const implicant3({8, 9, 10, 11});
 
     EXPECT_FALSE(implicant1.isASubsetOf(implicant2));
     EXPECT_FALSE(implicant1.isASubsetOf(implicant3));
@@ -63,13 +63,13 @@ TEST(QuineMcCluskeyTest, GetImplicantsWithTwoCommonalityCounts) {
     quineMcCluskey.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     quineMcCluskey.findAllCombinations();
 
-    ImplicantsForTest mintermsWithZero(quineMcCluskey.getImplicants(0, 2));
-    ImplicantsForTest mintermsWithOne(quineMcCluskey.getImplicants(1, 2));
-    ImplicantsForTest mintermsWithTwo(quineMcCluskey.getImplicants(2, 2));
-    ImplicantsForTest mintermsWithThree(quineMcCluskey.getImplicants(3, 2));
-    ImplicantsForTest mintermsWithFour(quineMcCluskey.getImplicants(4, 2));
-    ImplicantsForTest expectedWithOne{{8, 9, 10, 11}, {8, 10, 12, 14}};
-    ImplicantsForTest expectedWithTwo{{10, 11, 14, 15}};
+    ImplicantsForTest const mintermsWithZero(quineMcCluskey.getImplicants(0, 2));
+    ImplicantsForTest const mintermsWithOne(quineMcCluskey.getImplicants(1, 2));
+    ImplicantsForTest const mintermsWithTwo(quineMcCluskey.getImplicants(2, 2));
+    ImplicantsForTest const mintermsWithThree(quineMcCluskey.getImplicants(3, 2));
+    ImplicantsForTest const mintermsWithFour(quineMcCluskey.getImplicants(4, 2));
+    ImplicantsForTest const expectedWithOne{{8, 9, 10, 11}, {8, 10, 12, 14}};
+    ImplicantsForTest const expectedWithTwo{{10, 11, 14, 15}};
     EXPECT_TRUE(mintermsWithZero.empty());
     EXPECT_EQ(expectedWithOne, mintermsWithOne);
     EXPECT_EQ(expectedWithTwo, mintermsWithTwo);
@@ -90,15 +90,15 @@ TEST(QuineMcCluskeyTest, GetImplicantsWithZeroCommonalityCount) {
 
     quineMcCluskey.fillComputationalTableWithMintermsWithZeroCommonalityCount();
 
-    ImplicantsForTest mintermsWithZero(quineMcCluskey.getImplicants(0, 0));
-    ImplicantsForTest mintermsWithOne(quineMcCluskey.getImplicants(1, 0));
-    ImplicantsForTest mintermsWithTwo(quineMcCluskey.getImplicants(2, 0));
-    ImplicantsForTest mintermsWithThree(quineMcCluskey.getImplicants(3, 0));
-    ImplicantsForTest mintermsWithFour(quineMcCluskey.getImplicants(4, 0));
-    ImplicantsForTest expectedWithOne{{4}, {8}};
-    ImplicantsForTest expectedWithTwo{{9}, {10}, {12}};
-    ImplicantsForTest expectedWithThree{{11}, {14}};
-    ImplicantsForTest expectedWithFour{{15}};
+    ImplicantsForTest const mintermsWithZero(quineMcCluskey.getImplicants(0, 0));
+    ImplicantsForTest const mintermsWithOne(quineMcCluskey.getImplicants(1, 0));
+    ImplicantsForTest const mintermsWithTwo(quineMcCluskey.getImplicants(2, 0));
+    ImplicantsForTest const mintermsWithThree(quineMcCluskey.getImplicants(3, 0));
+    ImplicantsForTest const mintermsWithFour(quineMcCluskey.getImplicants(4, 0));
+    ImplicantsForTest const expectedWithOne{{4}, {8}};
+    ImplicantsForTest const expectedWithTwo{{9}, {10}, {12}};
+    ImplicantsForTest const expectedWithThree{{11}, {14}};
+    ImplicantsForTest const expectedWithFour{{15}};
     EXPECT_TRUE(mintermsWithZero.empty());
     EXPECT_EQ(expectedWithOne, mintermsWithOne);
     EXPECT_EQ(expectedWithTwo, mintermsWithTwo);
@@ -124,14 +124,14 @@ TEST(QuineMcCluskeyTest, GetImplicantsWithOneCommonalityCount) {
     quineMcCluskey.findCombinationOfImplicants(3, 0);
     quineMcCluskey.findCombinationOfImplicants(4, 0);
 
-    ImplicantsForTest mintermsWithZero(quineMcCluskey.getImplicants(0, 1));
-    ImplicantsForTest mintermsWithOne(quineMcCluskey.getImplicants(1, 1));
-    ImplicantsForTest mintermsWithTwo(quineMcCluskey.getImplicants(2, 1));
-    ImplicantsForTest mintermsWithThree(quineMcCluskey.getImplicants(3, 1));
-    ImplicantsForTest mintermsWithFour(quineMcCluskey.getImplicants(4, 1));
-    ImplicantsForTest expectedWithOne{{4, 12}, {8, 9}, {8, 10}, {8, 12}};
-    ImplicantsForTest expectedWithTwo{{9, 11}, {10, 11}, {10, 14}, {12, 14}};
-    ImplicantsForTest expectedWithThree{{11, 15}, {14, 15}};
+    ImplicantsForTest const mintermsWithZero(quineMcCluskey.getImplicants(0, 1));
+    ImplicantsForTest const mintermsWithOne(quineMcCluskey.getImplicants(1, 1));
+    ImplicantsForTest const mintermsWithTwo(quineMcCluskey.getImplicants(2, 1));
+    ImplicantsForTest const mintermsWithThree(quineMcCluskey.getImplicants(3, 1));
+    ImplicantsForTest const mintermsWithFour(quineMcCluskey.getImplicants(4, 1));
+    ImplicantsForTest const expectedWithOne{{4, 12}, {8, 9}, {8, 10}, {8, 12}};
+    ImplicantsForTest const expectedWithTwo{{9, 11}, {10, 11}, {10, 14}, {12, 14}};
+    ImplicantsForTest const expectedWithThree{{11, 15}, {14, 15}};
     EXPECT_TRUE(mintermsWithZero.empty());
     EXPECT_EQ(expectedWithOne, mintermsWithOne);
     EXPECT_EQ(expectedWithTwo, mintermsWithTwo);
@@ -153,13 +153,13 @@ TEST(QuineMcCluskeyTest, GetAllPrimeImplicantsAndGetBestPrimeImplicantsWorksWith
     quineMcCluskey.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     quineMcCluskey.findAllCombinations();
 
-    ImplicantsForTest primeImplicants(quineMcCluskey.getAllPrimeImplicants());
-    ImplicantsForTest expectedPrimeImplicants{{4, 12}, {8, 9, 10, 11}, {8, 10, 12, 14}, {10, 11, 14, 15}};
+    ImplicantsForTest const primeImplicants(quineMcCluskey.getAllPrimeImplicants());
+    ImplicantsForTest const expectedPrimeImplicants{{4, 12}, {8, 9, 10, 11}, {8, 10, 12, 14}, {10, 11, 14, 15}};
     EXPECT_EQ(expectedPrimeImplicants, primeImplicants);
     cout << quineMcCluskey.getOutputTable(primeImplicants);
 
-    ImplicantsForTest bestPrimeImplicants(quineMcCluskey.getBestPrimeImplicants(primeImplicants));
-    ImplicantsForTest expectedBestPrimeImplicants{{4, 12}, {8, 9, 10, 11}, {10, 11, 14, 15}};
+    ImplicantsForTest const bestPrimeImplicants(quineMcCluskey.getBestPrimeImplicants(primeImplicants));
+    ImplicantsForTest const expectedBestPrimeImplicants{{4, 12}, {8, 9, 10, 11}, {10, 11, 14, 15}};
     EXPECT_EQ(expectedBestPrimeImplicants, bestPrimeImplicants);
     cout << quineMcCluskey.getOutputTable(bestPrimeImplicants);
 }
@@ -176,13 +176,13 @@ TEST(QuineMcCluskeyTest, GetAllPrimeImplicantsAndGetBestPrimeImplicantsWorksWith
     quineMcCluskey.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     quineMcCluskey.findAllCombinations();
 
-    ImplicantsForTest primeImplicants(quineMcCluskey.getAllPrimeImplicants());
-    ImplicantsForTest expectedPrimeImplicants{{0, 1}, {0, 2}, {1, 5}, {2, 6}, {5, 7}, {6, 7}};
+    ImplicantsForTest const primeImplicants(quineMcCluskey.getAllPrimeImplicants());
+    ImplicantsForTest const expectedPrimeImplicants{{0, 1}, {0, 2}, {1, 5}, {2, 6}, {5, 7}, {6, 7}};
     EXPECT_EQ(expectedPrimeImplicants, primeImplicants);
     cout << quineMcCluskey.getOutputTable(primeImplicants);
 
-    ImplicantsForTest bestPrimeImplicants(quineMcCluskey.getBestPrimeImplicants(primeImplicants));
-    ImplicantsForTest expectedBestPrimeImplicants{{0, 1}, {2, 6}, {5, 7}};
+    ImplicantsForTest const bestPrimeImplicants(quineMcCluskey.getBestPrimeImplicants(primeImplicants));
+    ImplicantsForTest const expectedBestPrimeImplicants{{0, 1}, {2, 6}, {5, 7}};
     EXPECT_EQ(expectedBestPrimeImplicants, bestPrimeImplicants);
     cout << quineMcCluskey.getOutputTable(bestPrimeImplicants);
 }
@@ -206,15 +206,15 @@ TEST(QuineMcCluskeyTest, ExperimentalTest) {
     quineMcCluskey.fillComputationalTableWithMintermsWithZeroCommonalityCount();
     quineMcCluskey.findAllCombinations();
 
-    ImplicantsForTest primeImplicants(quineMcCluskey.getAllPrimeImplicants());
+    ImplicantsForTest const primeImplicants(quineMcCluskey.getAllPrimeImplicants());
     cout << quineMcCluskey.getOutputTable(primeImplicants);
 
-    ImplicantsForTest bestPrimeImplicants(quineMcCluskey.getBestPrimeImplicants(primeImplicants));
+    ImplicantsForTest const bestPrimeImplicants(quineMcCluskey.getBestPrimeImplicants(primeImplicants));
     cout << quineMcCluskey.getOutputTable(bestPrimeImplicants);
 }
 
 TEST(QuineMcCluskeyTest, UnintializedOutputTest) {
-    QuineMcCluskeyForTest quineMcCluskey;
+    QuineMcCluskeyForTest const quineMcCluskey;
 
     EXPECT_EQ(LogicalValue::False, quineMcCluskey.getOutput(0xA));
     EXPECT_EQ(LogicalValue::False, quineMcCluskey.getOutput(0x1));
@@ -249,12 +249,12 @@ void setInputOutput(QuineMcCluskeyForTest& quineMcCluskey, MintermForTest const 
 
 TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWorksWithInputHasZeroInDigitForByte) {
     QuineMcCluskeyForTest quineMcCluskey;
-    AlbaLocalPathHandler pathOfNewAlgorithm(
+    AlbaLocalPathHandler const pathOfNewAlgorithm(
         APRG_DIR R"(\AprgBooleanAlgebra\FilesForTests\QuineMcKluskeyTest\HasZeroInDigitForByte.txt)");
     ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());
     AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
     while (algorithmResultsReader.isNotFinished()) {
-        string lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());
         strings entries;
         splitToStrings<SplitStringType::WithoutDelimeters>(entries, lineInFile, " ");
         if (entries.size() >= 2) {
@@ -267,8 +267,8 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWorksWithInputHasZeroInDigitF
     cout << "Initial computation table: \n" << quineMcCluskey.getComputationTableString() << "\n";
     quineMcCluskey.findAllCombinations();
 
-    ImplicantsForTest primeImplicants(quineMcCluskey.getAllPrimeImplicants());
-    ImplicantsForTest expectedPrimeImplicants{
+    ImplicantsForTest const primeImplicants(quineMcCluskey.getAllPrimeImplicants());
+    ImplicantsForTest const expectedPrimeImplicants{
         {0},
         {10},
         {20},
@@ -302,8 +302,8 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWorksWithInputHasZeroInDigitF
     EXPECT_EQ(expectedPrimeImplicants, primeImplicants);
     cout << quineMcCluskey.getOutputTable(primeImplicants);
 
-    ImplicantsForTest bestPrimeImplicants(quineMcCluskey.getBestPrimeImplicants(primeImplicants));
-    ImplicantsForTest expectedBestPrimeImplicants{
+    ImplicantsForTest const bestPrimeImplicants(quineMcCluskey.getBestPrimeImplicants(primeImplicants));
+    ImplicantsForTest const expectedBestPrimeImplicants{
         {0},
         {10},
         {20},
@@ -340,12 +340,12 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWithInputHasLogarithmBase2For
     QuineMcCluskeyForTest qm0;
     QuineMcCluskeyForTest qm1;
     QuineMcCluskeyForTest qm2;
-    AlbaLocalPathHandler pathOfNewAlgorithm(
+    AlbaLocalPathHandler const pathOfNewAlgorithm(
         APRG_DIR R"(\AprgBooleanAlgebra\FilesForTests\QuineMcKluskeyTest\LogarithmBase2ForByte.txt)");
     ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());
     AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
     while (algorithmResultsReader.isNotFinished()) {
-        string lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());
         strings entries;
         splitToStrings<SplitStringType::WithoutDelimeters>(entries, lineInFile, " ");
         if (entries.size() >= 4) {
@@ -366,9 +366,9 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWithInputHasLogarithmBase2For
     qm1.findAllCombinations();
     qm2.findAllCombinations();
 
-    ImplicantsForTest primeImplicants0(qm0.getAllPrimeImplicants());
-    ImplicantsForTest primeImplicants1(qm1.getAllPrimeImplicants());
-    ImplicantsForTest primeImplicants2(qm2.getAllPrimeImplicants());
+    ImplicantsForTest const primeImplicants0(qm0.getAllPrimeImplicants());
+    ImplicantsForTest const primeImplicants1(qm1.getAllPrimeImplicants());
+    ImplicantsForTest const primeImplicants2(qm2.getAllPrimeImplicants());
     cout << qm0.getOutputTable(primeImplicants0);
     cout << qm1.getOutputTable(primeImplicants1);
     cout << qm2.getOutputTable(primeImplicants2);
@@ -379,12 +379,12 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWithInputHasZeroesStartingFro
     QuineMcCluskeyForTest qm1;
     QuineMcCluskeyForTest qm2;
     QuineMcCluskeyForTest qm3;
-    AlbaLocalPathHandler pathOfNewAlgorithm(
+    AlbaLocalPathHandler const pathOfNewAlgorithm(
         APRG_DIR R"(\AprgBooleanAlgebra\FilesForTests\QuineMcKluskeyTest\ZeroesStartingFromMsb.txt)");
     ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());
     AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
     while (algorithmResultsReader.isNotFinished()) {
-        string lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());
+        string const lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());
         strings entries;
         splitToStrings<SplitStringType::WithoutDelimeters>(entries, lineInFile, " ");
         if (entries.size() >= 5) {
@@ -409,10 +409,10 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWithInputHasZeroesStartingFro
     qm2.findAllCombinations();
     qm3.findAllCombinations();
 
-    ImplicantsForTest primeImplicants0(qm0.getAllPrimeImplicants());
-    ImplicantsForTest primeImplicants1(qm1.getAllPrimeImplicants());
-    ImplicantsForTest primeImplicants2(qm2.getAllPrimeImplicants());
-    ImplicantsForTest primeImplicants3(qm3.getAllPrimeImplicants());
+    ImplicantsForTest const primeImplicants0(qm0.getAllPrimeImplicants());
+    ImplicantsForTest const primeImplicants1(qm1.getAllPrimeImplicants());
+    ImplicantsForTest const primeImplicants2(qm2.getAllPrimeImplicants());
+    ImplicantsForTest const primeImplicants3(qm3.getAllPrimeImplicants());
     cout << qm0.getOutputTable(primeImplicants0);
     cout << qm1.getOutputTable(primeImplicants1);
     cout << qm2.getOutputTable(primeImplicants2);

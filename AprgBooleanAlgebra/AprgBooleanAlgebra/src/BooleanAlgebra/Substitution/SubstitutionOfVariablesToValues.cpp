@@ -25,7 +25,7 @@ Expression SubstitutionOfVariablesToValues::performSubstitutionForExpression(Exp
 
 Term SubstitutionOfVariablesToValues::performSubstitutionTo(VariableTerm const& variableTerm) const {
     Term result;
-    string variableName(variableTerm.getVariableTermName());
+    string const variableName(variableTerm.getVariableTermName());
     if (isVariableFound(variableName)) {
         result = Term(getValueForVariable(variableName));
     } else {

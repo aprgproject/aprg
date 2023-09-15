@@ -13,7 +13,7 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithNoTerms) {
 
     aggregator.buildExpressionFromTerms();
 
-    Terms termsToVerify(aggregator.getTermsConstReference());
+    Terms const termsToVerify(aggregator.getTermsConstReference());
     ASSERT_TRUE(termsToVerify.empty());
 }
 
@@ -24,7 +24,7 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithUnaryOperation) {
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Term termToExpect("x'");
+    Term const termToExpect("x'");
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -35,7 +35,7 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithBinaryOperation) {
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Term termToExpect(createExpressionIfPossible({"x", "&", "y"}));
+    Term const termToExpect(createExpressionIfPossible({"x", "&", "y"}));
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -46,9 +46,9 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithDifferentOperationLevelsAndOpe
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Expression subExpression1(createExpressionIfPossible({"b", "&", "c", "&", "d"}));
-    Expression subExpression2(createExpressionIfPossible({"a", "|", subExpression1, "|", "e"}));
-    Term termToExpect(subExpression2);
+    Expression const subExpression1(createExpressionIfPossible({"b", "&", "c", "&", "d"}));
+    Expression const subExpression2(createExpressionIfPossible({"a", "|", subExpression1, "|", "e"}));
+    Term const termToExpect(subExpression2);
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -59,10 +59,10 @@ TEST(TermsAggregatorTest, ExpressionCanBeBuiltWithParenthesis) {
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Expression subExpression1(createExpressionIfPossible({"a", "|", "b"}));
-    Expression subExpression2(createExpressionIfPossible({subExpression1, "&", "c"}));
-    Expression subExpression3(createExpressionIfPossible({subExpression2, "|", "d"}));
-    Term termToExpect(subExpression3);
+    Expression const subExpression1(createExpressionIfPossible({"a", "|", "b"}));
+    Expression const subExpression2(createExpressionIfPossible({subExpression1, "&", "c"}));
+    Expression const subExpression3(createExpressionIfPossible({subExpression2, "|", "d"}));
+    Term const termToExpect(subExpression3);
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -71,7 +71,7 @@ TEST(TermsAggregatorTest, SimplifyWorksWithNoTerms) {
 
     aggregator.simplifyTerms();
 
-    Terms termsToVerify(aggregator.getTermsConstReference());
+    Terms const termsToVerify(aggregator.getTermsConstReference());
     ASSERT_TRUE(termsToVerify.empty());
 }
 
@@ -82,7 +82,7 @@ TEST(TermsAggregatorTest, SimplifyWorksWithUnaryOperation) {
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Term termToExpect(false);
+    Term const termToExpect(false);
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -93,7 +93,7 @@ TEST(TermsAggregatorTest, SimplifyWorksWithBinaryOperation) {
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Term termToExpect(false);
+    Term const termToExpect(false);
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -104,7 +104,7 @@ TEST(TermsAggregatorTest, SimplifyWorksWithDifferentOperationLevels) {
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Term termToExpect(false);
+    Term const termToExpect(false);
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -115,7 +115,7 @@ TEST(TermsAggregatorTest, SimplifyWorksWithParenthesis) {
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Term termToExpect(true);
+    Term const termToExpect(true);
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 
@@ -126,10 +126,10 @@ TEST(TermsAggregatorTest, SimplifyWorksWithNegatedTermsAndVariousOperations) {
 
     Terms termsToVerify(aggregator.getTermsConstReference());
     ASSERT_EQ(1U, termsToVerify.size());
-    Expression subExpression1(createExpressionIfPossible({"a'", "&", "b'"}));
-    Expression subExpression2(createExpressionIfPossible({"c'", "&", "x"}));
-    Expression subExpression3(createExpressionIfPossible({subExpression1, "|", subExpression2, "|", "y"}));
-    Term termToExpect(subExpression3);
+    Expression const subExpression1(createExpressionIfPossible({"a'", "&", "b'"}));
+    Expression const subExpression2(createExpressionIfPossible({"c'", "&", "x"}));
+    Expression const subExpression3(createExpressionIfPossible({subExpression1, "|", subExpression2, "|", "y"}));
+    Term const termToExpect(subExpression3);
     EXPECT_EQ(termToExpect, termsToVerify[0]);
 }
 

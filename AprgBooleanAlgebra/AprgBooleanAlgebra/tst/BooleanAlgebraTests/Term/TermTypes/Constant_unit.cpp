@@ -7,10 +7,10 @@ using namespace std;
 namespace alba::booleanAlgebra {
 
 TEST(ConstantTest, EqualityOperatorWorks) {
-    Constant constant1;
-    Constant constant2(true);
-    Constant constant3(false);
-    Constant constant4(true);
+    Constant const constant1;
+    Constant const constant2(true);
+    Constant const constant3(false);
+    Constant const constant4(true);
 
     EXPECT_TRUE(constant1 == constant1);
     EXPECT_FALSE(constant1 == constant2);
@@ -20,10 +20,10 @@ TEST(ConstantTest, EqualityOperatorWorks) {
 }
 
 TEST(ConstantTest, InequalityOperatorWorks) {
-    Constant constant1;
-    Constant constant2(true);
-    Constant constant3(false);
-    Constant constant4(true);
+    Constant const constant1;
+    Constant const constant2(true);
+    Constant const constant3(false);
+    Constant const constant4(true);
 
     EXPECT_FALSE(constant1 != constant1);
     EXPECT_TRUE(constant1 != constant2);
@@ -34,9 +34,9 @@ TEST(ConstantTest, InequalityOperatorWorks) {
 
 TEST(ConstantTest, OutputStreamOperatorWorks) {
     stringstream ss;
-    Constant constant1;
-    Constant constant2(true);
-    Constant constant3(false);
+    Constant const constant1;
+    Constant const constant2(true);
+    Constant const constant3(false);
 
     ss << constant1 << "," << constant2 << "," << constant3;
 
@@ -56,9 +56,9 @@ TEST(ConstantTest, NotOperationWorks) {
 }
 
 TEST(ConstantTest, ConstantsAreConstructedCorrectly) {
-    Constant constant1;
-    Constant constant2(true);
-    Constant constant3(false);
+    Constant const constant1;
+    Constant const constant2(true);
+    Constant const constant3(false);
 
     EXPECT_FALSE(constant1.getBooleanValue());
     EXPECT_TRUE(constant2.getBooleanValue());

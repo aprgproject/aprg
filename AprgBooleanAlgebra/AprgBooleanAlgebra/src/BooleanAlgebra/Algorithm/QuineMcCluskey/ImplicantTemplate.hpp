@@ -50,7 +50,7 @@ public:
             std::bitset<NUMBER_OF_BITS> xorBits(performAndOperationOfAllMinterms() ^ performOrOperationOfAllMinterms());
             std::bitset<NUMBER_OF_BITS> displayBits(getFirstMinterm());
             for (int i = 0; i < length; ++i) {
-                int bitIndex = length - i - 1;
+                int const bitIndex = length - i - 1;
                 if (xorBits[bitIndex]) {
                     booleanEquivalent.push_back('-');
                 } else if (displayBits[bitIndex]) {
@@ -78,7 +78,7 @@ public:
     }
 
     [[nodiscard]] bool isCompatible(ImplicantTemplate const& implicant) const {
-        int commonLength(std::max(getMaxLengthOfEquivalentString(), implicant.getMaxLengthOfEquivalentString()));
+        int const commonLength(std::max(getMaxLengthOfEquivalentString(), implicant.getMaxLengthOfEquivalentString()));
         std::string string1(getEquivalentString(commonLength));
         std::string string2(implicant.getEquivalentString(commonLength));
         bool result(true);
