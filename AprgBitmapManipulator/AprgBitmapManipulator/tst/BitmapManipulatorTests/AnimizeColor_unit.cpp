@@ -10,7 +10,7 @@ using namespace std;
 namespace alba::AprgBitmap {
 
 TEST(AnimizeColorTest, DISABLED_GatherAndSaveStatistics) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
 
     gatherAndSaveDataInAnimizeColor(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\Foals.bmp)");
 }

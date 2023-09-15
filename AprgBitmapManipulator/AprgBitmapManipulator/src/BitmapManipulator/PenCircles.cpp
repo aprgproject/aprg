@@ -24,10 +24,10 @@ PenCircles::PenCircleDetails PenCircles::getPenCircleDetails(BitmapXY const& poi
 PenCircles::PointAndPenCircleDetailsPairs PenCircles::getNearestPenCirclesToAPoint(
     BitmapXY const& point, int const distance) const {
     PointAndPenCircleDetailsPairs result;
-    int minX = static_cast<int>(clampLowerBound(convertToSignedThenSubtract<int>(point.getX(), distance), 0));
-    int maxX = point.getX() + distance;
-    int minY = static_cast<int>(clampLowerBound(convertToSignedThenSubtract<int>(point.getY(), distance), 0));
-    int maxY = point.getY() + distance;
+    int const minX = static_cast<int>(clampLowerBound(convertToSignedThenSubtract<int>(point.getX(), distance), 0));
+    int const maxX = point.getX() + distance;
+    int const minY = static_cast<int>(clampLowerBound(convertToSignedThenSubtract<int>(point.getY(), distance), 0));
+    int const maxY = point.getY() + distance;
     for (auto const& pointAndPenCircleDetailsPair : m_penCircles) {
         BitmapXY const& centerPoint(pointAndPenCircleDetailsPair.first);
         if (minX <= centerPoint.getX() && centerPoint.getX() <= maxX && minY <= centerPoint.getY() &&

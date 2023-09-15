@@ -60,7 +60,7 @@ void PenCirclesDrawer::writeDrawnPointsInSnippet() {
 
 void PenCirclesDrawer::writeCirclesWithoutOverlay() {
     for (auto const& pointAndPenCircleDetailsPair : m_penCircles.getPenCircles()) {
-        Circle penCircle(
+        Circle const penCircle(
             convertBitmapXYToPoint(pointAndPenCircleDetailsPair.first), pointAndPenCircleDetailsPair.second.radius);
         int circleColor(pointAndPenCircleDetailsPair.second.color);
         m_snippetTraversal.traverseCircleArea(
@@ -71,7 +71,7 @@ void PenCirclesDrawer::writeCirclesWithoutOverlay() {
 void PenCirclesDrawer::writeCirclesWithOverlay() {
     PointToColorDetailsMap pointsWithColorDetails;
     for (auto const& pointAndPenCircleDetailsPair : m_penCircles.getPenCircles()) {
-        Circle penCircle(
+        Circle const penCircle(
             convertBitmapXYToPoint(pointAndPenCircleDetailsPair.first), pointAndPenCircleDetailsPair.second.radius);
         m_snippetTraversal.traverseCircleArea(penCircle, [&](BitmapXY const& pointInCircle) {
             pointsWithColorDetails[pointInCircle].addColor(pointAndPenCircleDetailsPair.second.color, 1);
@@ -91,7 +91,7 @@ void PenCirclesDrawer::writeCirclesWithOverlay() {
 void PenCirclesDrawer::connectCirclesIfNeeded() {
     for (auto const& mainPair : m_penCircles.getPenCircles()) {
         BitmapXY const& centerPoint(mainPair.first);
-        PenCircles::PointAndPenCircleDetailsPairs neighborPairs(
+        PenCircles::PointAndPenCircleDetailsPairs const neighborPairs(
             m_penCircles.getNearestPenCirclesToAPoint(centerPoint, static_cast<int>(round(mainPair.second.radius))));
         for (auto const& neighborPair : neighborPairs) {
             if (mainPair.first != neighborPair.first && isToBeConnected(mainPair, neighborPair)) {
@@ -103,7 +103,7 @@ void PenCirclesDrawer::connectCirclesIfNeeded() {
 
 void PenCirclesDrawer::putCirclesWithoutOverlay() {
     for (auto const& pointAndPenCircleDetailsPair : m_penCircles.getPenCircles()) {
-        Circle penCircle(
+        Circle const penCircle(
             convertBitmapXYToPoint(pointAndPenCircleDetailsPair.first), pointAndPenCircleDetailsPair.second.radius);
         int circleColor(pointAndPenCircleDetailsPair.second.color);
         m_snippetTraversal.traverseCircleArea(
@@ -114,7 +114,7 @@ void PenCirclesDrawer::putCirclesWithoutOverlay() {
 void PenCirclesDrawer::putCirclesWithOverlay() {
     PointToColorDetailsMap pointsWithColorDetails;
     for (auto const& pointAndPenCircleDetailsPair : m_penCircles.getPenCircles()) {
-        Circle penCircle(
+        Circle const penCircle(
             convertBitmapXYToPoint(pointAndPenCircleDetailsPair.first), pointAndPenCircleDetailsPair.second.radius);
         m_snippetTraversal.traverseCircleArea(penCircle, [&](BitmapXY const& pointInCircle) {
             pointsWithColorDetails[pointInCircle].addColor(pointAndPenCircleDetailsPair.second.color, 1);
@@ -148,23 +148,23 @@ void PenCirclesDrawer::putCircleConnectionsAndRemoveProcessedCircles() {
                 swap(centerPoint1, centerPoint2);
                 swap(details1, details2);
             }
-            Point referenceDelta(centerPoint2 - centerPoint1);
-            AlbaAngle referenceAngle(getAngleOfPointWithRespectToOrigin(referenceDelta));
-            double radiusDifference = circle1.getRadius() - circle2.getRadius();
-            double distanceOfCenters = getDistance(centerPoint1, centerPoint2);
-            double ratioForArcCos = radiusDifference / distanceOfCenters;
+            Point const referenceDelta(centerPoint2 - centerPoint1);
+            AlbaAngle const referenceAngle(getAngleOfPointWithRespectToOrigin(referenceDelta));
+            double const radiusDifference = circle1.getRadius() - circle2.getRadius();
+            double const distanceOfCenters = getDistance(centerPoint1, centerPoint2);
+            double const ratioForArcCos = radiusDifference / distanceOfCenters;
             if (ratioForArcCos <= 1) {
-                AlbaAngle deltaAngle(AngleUnitType::Radians, acos(ratioForArcCos));
-                AlbaAngle angle1(referenceAngle + deltaAngle);
-                AlbaAngle angle2(referenceAngle - deltaAngle);
-                Point tangentPoint1InCircle1(circle1.getPointAtAngle(angle1.getRadians()));
-                Point tangentPoint2InCircle1(circle1.getPointAtAngle(angle2.getRadians()));
-                Point tangentPoint1InCircle2(circle2.getPointAtAngle(angle1.getRadians()));
-                Point tangentPoint2InCircle2(circle2.getPointAtAngle(angle2.getRadians()));
+                AlbaAngle const deltaAngle(AngleUnitType::Radians, acos(ratioForArcCos));
+                AlbaAngle const angle1(referenceAngle + deltaAngle);
+                AlbaAngle const angle2(referenceAngle - deltaAngle);
+                Point const tangentPoint1InCircle1(circle1.getPointAtAngle(angle1.getRadians()));
+                Point const tangentPoint2InCircle1(circle1.getPointAtAngle(angle2.getRadians()));
+                Point const tangentPoint1InCircle2(circle2.getPointAtAngle(angle1.getRadians()));
+                Point const tangentPoint2InCircle2(circle2.getPointAtAngle(angle2.getRadians()));
                 Line diameterInCircle1(tangentPoint1InCircle1, tangentPoint2InCircle1);
                 Line diameterInCircle2(tangentPoint1InCircle2, tangentPoint2InCircle2);
-                Line lineOfTwoCenters(centerPoint1, centerPoint2);
-                Quadrilateral quadrilateral(
+                Line const lineOfTwoCenters(centerPoint1, centerPoint2);
+                Quadrilateral const quadrilateral(
                     tangentPoint1InCircle1, tangentPoint2InCircle1, tangentPoint1InCircle2, tangentPoint2InCircle2);
 
                 m_snippetTraversal.traverseCircleArea(circle1, [&](BitmapXY const& pointInCircle) {
@@ -178,7 +178,7 @@ void PenCirclesDrawer::putCircleConnectionsAndRemoveProcessedCircles() {
                 m_snippetTraversal.traverseQuadrilateralArea(quadrilateral, [&](BitmapXY const& pointInQuad) {
                     double weightForCircle1 = getDistance(diameterInCircle2, convertBitmapXYToPoint(pointInQuad));
                     double weightForCircle2 = getDistance(diameterInCircle1, convertBitmapXYToPoint(pointInQuad));
-                    double sumOfWeights = weightForCircle1 + weightForCircle2;
+                    double const sumOfWeights = weightForCircle1 + weightForCircle2;
                     weightForCircle1 = weightForCircle1 / sumOfWeights;
                     weightForCircle2 = weightForCircle2 / sumOfWeights;
                     ColorDetails colorDetails;

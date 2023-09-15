@@ -17,7 +17,7 @@ using namespace std;
 
 namespace {
 constexpr int MAX_PEN_CIRCLE_RADIUS_COORDINATE = 5;
-}
+}  // namespace
 
 namespace alba::AprgBitmap {
 

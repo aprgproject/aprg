@@ -11,10 +11,10 @@ using namespace std;
 namespace alba::AprgBitmap {
 
 TEST(BitmapFiltersTest, DISABLED_FindPenAndNonPenAndFillNonPenGaps) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory() + R"(PenPointsExperiments\sample.bmp)");
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const sampleFile(bitmapDirectory.getDirectory() + R"(PenPointsExperiments\sample.bmp)");
     BitmapFilters bitmapFilters(sampleFile.getFullPath());
-    BitmapSnippet tempSnippet(bitmapFilters.getWholeBitmapSnippet());
+    BitmapSnippet const tempSnippet(bitmapFilters.getWholeBitmapSnippet());
     BitmapSnippet outputSnippet(bitmapFilters.getBlankSnippetWithBackground());
     PenPoints penPoints;
 
@@ -35,11 +35,11 @@ TEST(BitmapFiltersTest, DISABLED_FindPenAndNonPenAndFillNonPenGaps) {
 }
 
 TEST(BitmapFiltersTest, DISABLED_DeterminePenCircles) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler sampleFile(
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const sampleFile(
         bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\JohnMayerVideoBlurredAnimizedColor.bmp)");
     BitmapFilters bitmapFilters(sampleFile.getFullPath());
-    BitmapSnippet tempSnippet(bitmapFilters.getWholeBitmapSnippet());
+    BitmapSnippet const tempSnippet(bitmapFilters.getWholeBitmapSnippet());
     BitmapSnippet outputSnippet(bitmapFilters.getBlankSnippetWithBackground());
     PenPoints penPoints;
     PenCircles penCircles;
@@ -57,10 +57,10 @@ TEST(BitmapFiltersTest, DISABLED_DeterminePenCircles) {
 }
 
 TEST(BitmapFiltersTest, DISABLED_DeterminePenAndNonPen) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\VeronicaMars.bmp)");
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const sampleFile(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\VeronicaMars.bmp)");
     BitmapFilters bitmapFilters(sampleFile.getFullPath());
-    BitmapSnippet tempSnippet(bitmapFilters.getWholeBitmapSnippet());
+    BitmapSnippet const tempSnippet(bitmapFilters.getWholeBitmapSnippet());
     BitmapSnippet outputSnippet(bitmapFilters.getBlankSnippetWithBackground());
     PenPoints penPoints;
 
@@ -74,8 +74,8 @@ TEST(BitmapFiltersTest, DISABLED_DeterminePenAndNonPen) {
 }
 
 TEST(BitmapFiltersTest, DISABLED_CclTestOneComponentAtATime) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory() + R"(CCL\CclTest.bmp)");
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const sampleFile(bitmapDirectory.getDirectory() + R"(CCL\CclTest.bmp)");
     BitmapFilters bitmapFilters(sampleFile.getFullPath());
     BitmapSnippet outputSnippet(bitmapFilters.getWholeBitmapSnippet());
 
@@ -85,8 +85,8 @@ TEST(BitmapFiltersTest, DISABLED_CclTestOneComponentAtATime) {
 }
 
 TEST(BitmapFiltersTest, DISABLED_CclTestTwoPass) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory() + R"(CCL\CclTest.bmp)");
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const sampleFile(bitmapDirectory.getDirectory() + R"(CCL\CclTest.bmp)");
     BitmapFilters bitmapFilters(sampleFile.getFullPath());
     BitmapSnippet outputSnippet(bitmapFilters.getWholeBitmapSnippet());
 
@@ -96,8 +96,8 @@ TEST(BitmapFiltersTest, DISABLED_CclTestTwoPass) {
 }
 
 TEST(BitmapFiltersTest, DISABLED_BlurredColors) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\santanaPixelated.bmp)");
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const sampleFile(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\santanaPixelated.bmp)");
     BitmapFilters bitmapFilters(sampleFile.getFullPath());
     BitmapSnippet outputSnippet(bitmapFilters.getWholeBitmapSnippet());
 
@@ -106,8 +106,8 @@ TEST(BitmapFiltersTest, DISABLED_BlurredColors) {
 }
 
 TEST(BitmapFiltersTest, DISABLED_FillGaps) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\White.bmp)");
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const sampleFile(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\White.bmp)");
     BitmapFilters bitmapFilters(sampleFile.getFullPath());
     BitmapSnippet outputSnippet(bitmapFilters.getWholeBitmapSnippet());
 
@@ -116,8 +116,8 @@ TEST(BitmapFiltersTest, DISABLED_FillGaps) {
 }
 
 TEST(BitmapFiltersTest, DISABLED_BlurringDisimilarColors) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\santanaPixelated.bmp)");
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const sampleFile(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\santanaPixelated.bmp)");
     BitmapFilters bitmapFilters(sampleFile.getFullPath());
     BitmapSnippet outputSnippet(bitmapFilters.getWholeBitmapSnippet());
 
@@ -126,8 +126,8 @@ TEST(BitmapFiltersTest, DISABLED_BlurringDisimilarColors) {
 }
 
 TEST(BitmapFiltersTest, DISABLED_BlurUsingSnakeLikeTraversal) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler sampleFile(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\santanaPixelated.bmp)");
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const sampleFile(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\santanaPixelated.bmp)");
     BitmapFilters bitmapFilters(sampleFile.getFullPath());
     BitmapSnippet outputSnippet(bitmapFilters.getWholeBitmapSnippet());
 
@@ -136,8 +136,8 @@ TEST(BitmapFiltersTest, DISABLED_BlurUsingSnakeLikeTraversal) {
 }
 
 TEST(BitmapFiltersTest, DISABLED_ConvertToAnimeColorWorks) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    string inputBitmapFile = bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\santana_NonPenFilledGaps.bmp)";
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    string const inputBitmapFile = bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\santana_NonPenFilledGaps.bmp)";
     BitmapFilters bitmapFilters(inputBitmapFile);
     BitmapSnippet outputSnippet(bitmapFilters.getWholeBitmapSnippet());
     AnimizeColor animizeColor;
@@ -149,7 +149,7 @@ TEST(BitmapFiltersTest, DISABLED_ConvertToAnimeColorWorks) {
 }
 
 TEST(BitmapFiltersTest, DISABLED_GatherAndSaveStatisticsWorks) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
     BitmapFilters bitmapFilters(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\Foals.bmp)");
 
     bitmapFilters.gatherAndSaveColorDataAndStatistics();

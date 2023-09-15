@@ -21,7 +21,7 @@ OutwardCircleTraversal::RadiusToCoordinates const& OutwardCircleTraversal::getRa
 void OutwardCircleTraversal::constructRadiusToCoordinates() {
     for (int i = 0; i <= m_maxRadius; ++i) {
         for (int j = i; j <= m_maxRadius; ++j) {
-            double radius(getSquareRootOfXSquaredPlusYSquared(static_cast<double>(i), static_cast<double>(j)));
+            double const radius(getSquareRootOfXSquaredPlusYSquared(static_cast<double>(i), static_cast<double>(j)));
             m_radiusToCoordinates.emplace(radius, Coordinate(i, j));
         }
     }

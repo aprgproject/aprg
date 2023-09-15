@@ -13,15 +13,15 @@ using namespace std;
 // https://en.wikipedia.org/wiki/HSL_and_HSV
 namespace {
 constexpr uint8_t MAX_COLOR_VALUE = 0xFF;
-}
+}  // namespace
 
 namespace alba::AprgBitmap::ColorUtilities {
 
 ColorPercentagesData calculateColorPercentagesData(uint32_t const color) {
     ColorPercentagesData result{};
-    double red = extractRed(color);
-    double green = extractGreen(color);
-    double blue = extractBlue(color);
+    double const red = extractRed(color);
+    double const green = extractGreen(color);
+    double const blue = extractBlue(color);
     result.redPercentage = red / MAX_COLOR_VALUE;
     result.greenPercentage = green / MAX_COLOR_VALUE;
     result.bluePercentage = blue / MAX_COLOR_VALUE;
@@ -41,7 +41,7 @@ HueSaturationLightnessData createHueSaturationLightnessData(
 }
 
 HueSaturationLightnessData convertColorToHueSaturationLightnessData(uint32_t const color) {
-    ColorPercentagesData colorPercentagesData(calculateColorPercentagesData(color));
+    ColorPercentagesData const colorPercentagesData(calculateColorPercentagesData(color));
     HueSaturationLightnessData result{};
     result.hueDegrees = calculateHueDegrees(colorPercentagesData);
     result.lightnessDecimal = (colorPercentagesData.colorPercentageMax + colorPercentagesData.colorPercentageMin) / 2;
@@ -78,7 +78,7 @@ HueSaturationValueData createHueSaturationValueData(
 }
 
 HueSaturationValueData convertColorToHueSaturationValueData(uint32_t const color) {
-    ColorPercentagesData colorPercentagesData(calculateColorPercentagesData(color));
+    ColorPercentagesData const colorPercentagesData(calculateColorPercentagesData(color));
     HueSaturationValueData result{};
     result.hueDegrees = calculateHueDegrees(colorPercentagesData);
     result.valueDecimalOfColorMax = colorPercentagesData.colorPercentageMax;
@@ -119,10 +119,10 @@ uint32_t combine2Colors(uint32_t const color1, uint32_t const color2) {
 }
 
 uint32_t convertChromaColorDataToColor(ChromaColorData const& chromaColorData) {
-    double c = chromaColorData.chroma;
-    double x = chromaColorData.xSecondLargestComponent;
-    double m = chromaColorData.mOffset;
-    double hueDegrees(chromaColorData.hueDegrees);
+    double const c = chromaColorData.chroma;
+    double const x = chromaColorData.xSecondLargestComponent;
+    double const m = chromaColorData.mOffset;
+    double const hueDegrees(chromaColorData.hueDegrees);
     double redPrime(0);
     double greenPrime(0);
     double bluePrime(0);
@@ -221,20 +221,20 @@ double calculateColorIntensityDecimal(uint32_t const color) {
 }
 
 double calculateLuma601Decimal(uint32_t const color) {
-    ColorPercentagesData colorPercentagesData(calculateColorPercentagesData(color));
+    ColorPercentagesData const colorPercentagesData(calculateColorPercentagesData(color));
     return colorPercentagesData.redPercentage * 0.2990 + colorPercentagesData.greenPercentage * 0.5870 +
            colorPercentagesData.bluePercentage * 0.1140;
 }
 
 double calculateLuma709Decimal(uint32_t const color) {
-    ColorPercentagesData colorPercentagesData(calculateColorPercentagesData(color));
+    ColorPercentagesData const colorPercentagesData(calculateColorPercentagesData(color));
     return colorPercentagesData.redPercentage * 0.2126 + colorPercentagesData.greenPercentage * 0.7152 +
            colorPercentagesData.bluePercentage * 0.0722;
 }
 
 double calculateSaturationColorIntensityDecimal(uint32_t const color) {
     double result = NAN;
-    double colorIntensityDecimal(calculateColorIntensityDecimal(color));
+    double const colorIntensityDecimal(calculateColorIntensityDecimal(color));
     if (colorIntensityDecimal == 0) {
         result = 0;
     } else {
@@ -252,11 +252,11 @@ double calculateSaturationColorIntensityDecimal(uint32_t const color) {
 // }
 bool isSimilar(uint32_t const color1, uint32_t const color2, uint32_t const similarityColorLimit) {
     // RGB algo
-    bool isRedDifferenceBeyondLimit =
+    bool const isRedDifferenceBeyondLimit =
         getPositiveDelta<uint32_t>(extractRed(color1), extractRed(color2)) > similarityColorLimit;
-    bool isGreenDifferenceBeyondLimit =
+    bool const isGreenDifferenceBeyondLimit =
         getPositiveDelta<uint32_t>(extractGreen(color1), extractGreen(color2)) > similarityColorLimit;
-    bool isBlueDifferenceBeyondLimit =
+    bool const isBlueDifferenceBeyondLimit =
         getPositiveDelta<uint32_t>(extractBlue(color1), extractBlue(color2)) > similarityColorLimit;
     return !(isRedDifferenceBeyondLimit || isGreenDifferenceBeyondLimit || isBlueDifferenceBeyondLimit);
 }

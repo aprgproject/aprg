@@ -11,7 +11,7 @@ using RadiusToCoordinates = OutwardCircleTraversal::RadiusToCoordinates;
 using ExpectedRadiusToCoordinates = vector<OutwardCircleTraversal::RadiusAndCoordinatesPair>;
 
 TEST(OutwardCircleTraversalTest, ConstructedRadiusToCoordinatesAreCorrectForZeroRadius) {
-    OutwardCircleTraversal traversal(0);
+    OutwardCircleTraversal const traversal(0);
     RadiusToCoordinates const& radiusToCoordinates(traversal.getRadiusToCoordinates());
 
     ExpectedRadiusToCoordinates expectation;
@@ -29,7 +29,7 @@ TEST(OutwardCircleTraversalTest, ConstructedRadiusToCoordinatesAreCorrectForZero
 }
 
 TEST(OutwardCircleTraversalTest, ConstructedRadiusToCoordinatesAreCorrectForRadiusWith5) {
-    OutwardCircleTraversal traversal(5);
+    OutwardCircleTraversal const traversal(5);
     OutwardCircleTraversal::RadiusToCoordinates const& radiusToCoordinates(traversal.getRadiusToCoordinates());
 
     ExpectedRadiusToCoordinates expectation;

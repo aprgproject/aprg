@@ -12,15 +12,15 @@ using namespace std;
 namespace alba::AprgBitmap {
 
 TEST(AnimeFilterTest, DISABLED_AnimizeMultipleFilesTest) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler inputDirectory(bitmapDirectory.getDirectory() + R"(AnimizeMultipleFilesTest\input2\)");
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const inputDirectory(bitmapDirectory.getDirectory() + R"(AnimizeMultipleFilesTest\input2\)");
     ListOfPaths inputSubDirectories;
     ListOfPaths inputFiles;
     inputDirectory.findFilesAndDirectoriesOneDepth("*.*", inputFiles, inputSubDirectories);
 
     for (string const& inputFile : inputFiles) {
-        AlbaLocalPathHandler inputFilePathHandler(inputFile);
-        AlbaLocalPathHandler outputFilePathHandler(
+        AlbaLocalPathHandler const inputFilePathHandler(inputFile);
+        AlbaLocalPathHandler const outputFilePathHandler(
             bitmapDirectory.getDirectory() + R"(AnimizeMultipleFilesTest\output2\Out_)" +
             inputFilePathHandler.getFile());
         animize(inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
@@ -29,9 +29,10 @@ TEST(AnimeFilterTest, DISABLED_AnimizeMultipleFilesTest) {
 }
 
 TEST(AnimeFilterTest, DISABLED_AnimizeSingleFileTest) {
-    AlbaLocalPathHandler bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler inputFilePathHandler(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\GilmoreGirls.bmp)");
-    AlbaLocalPathHandler outputFilePathHandler(
+    AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
+    AlbaLocalPathHandler const inputFilePathHandler(
+        bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\GilmoreGirls.bmp)");
+    AlbaLocalPathHandler const outputFilePathHandler(
         bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\GilmoreGirls_Animized.bmp)");
     animize(inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
 }

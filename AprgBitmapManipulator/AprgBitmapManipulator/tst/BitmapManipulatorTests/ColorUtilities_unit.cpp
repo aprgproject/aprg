@@ -8,7 +8,7 @@ using namespace std;
 namespace alba::AprgBitmap {
 
 TEST(ColorUtilitiesTest, CalculateColorPercentagesDataWorks) {
-    ColorPercentagesData data3(calculateColorPercentagesData(0xB2C368));
+    ColorPercentagesData const data3(calculateColorPercentagesData(0xB2C368));
 
     EXPECT_DOUBLE_EQ(0.69803921568627447236, data3.redPercentage);
     EXPECT_DOUBLE_EQ(0.76470588235294112422, data3.greenPercentage);
@@ -19,10 +19,10 @@ TEST(ColorUtilitiesTest, CalculateColorPercentagesDataWorks) {
 }
 
 TEST(ColorUtilitiesTest, CalculateHueDegreesWorks) {
-    double hueDegrees1(calculateHueDegrees(calculateColorPercentagesData(0x0)));
-    double hueDegrees2(calculateHueDegrees(calculateColorPercentagesData(0xFFFFFF)));
-    double hueDegrees3(calculateHueDegrees(calculateColorPercentagesData(0x83A96E)));
-    double hueDegrees4(calculateHueDegrees(calculateColorPercentagesData(0x660003)));
+    double const hueDegrees1(calculateHueDegrees(calculateColorPercentagesData(0x0)));
+    double const hueDegrees2(calculateHueDegrees(calculateColorPercentagesData(0xFFFFFF)));
+    double const hueDegrees3(calculateHueDegrees(calculateColorPercentagesData(0x83A96E)));
+    double const hueDegrees4(calculateHueDegrees(calculateColorPercentagesData(0x660003)));
 
     EXPECT_DOUBLE_EQ(0, hueDegrees1);
     EXPECT_DOUBLE_EQ(0, hueDegrees2);
@@ -31,7 +31,7 @@ TEST(ColorUtilitiesTest, CalculateHueDegreesWorks) {
 }
 
 TEST(ColorUtilitiesTest, CreateHueSaturationLightnessDataWorks) {
-    HueSaturationLightnessData hslData(createHueSaturationLightnessData(1.1, 2.2, 3.3));
+    HueSaturationLightnessData const hslData(createHueSaturationLightnessData(1.1, 2.2, 3.3));
 
     EXPECT_DOUBLE_EQ(1.1, hslData.hueDegrees);
     EXPECT_DOUBLE_EQ(2.2, hslData.saturationLightnessDecimal);
@@ -39,14 +39,14 @@ TEST(ColorUtilitiesTest, CreateHueSaturationLightnessDataWorks) {
 }
 
 TEST(ColorUtilitiesTest, ConvertHslDataToHsvDataWorks) {
-    HueSaturationLightnessData hslData1(createHueSaturationLightnessData(0, 0, 0));
-    HueSaturationLightnessData hslData2(createHueSaturationLightnessData(0, 0, 1));
-    HueSaturationLightnessData hslData3(
+    HueSaturationLightnessData const hslData1(createHueSaturationLightnessData(0, 0, 0));
+    HueSaturationLightnessData const hslData2(createHueSaturationLightnessData(0, 0, 1));
+    HueSaturationLightnessData const hslData3(
         createHueSaturationLightnessData(123.80952380952379599, 0.55752212389380539914, 0.77843137254901961786));
 
-    HueSaturationValueData expectedHsvData1(convertHslDataToHsvData(hslData1));
-    HueSaturationValueData expectedHsvData2(convertHslDataToHsvData(hslData2));
-    HueSaturationValueData expectedHsvData3(convertHslDataToHsvData(hslData3));
+    HueSaturationValueData const expectedHsvData1(convertHslDataToHsvData(hslData1));
+    HueSaturationValueData const expectedHsvData2(convertHslDataToHsvData(hslData2));
+    HueSaturationValueData const expectedHsvData3(convertHslDataToHsvData(hslData3));
 
     EXPECT_DOUBLE_EQ(0, expectedHsvData1.hueDegrees);
     EXPECT_DOUBLE_EQ(0, expectedHsvData1.saturationValueDecimal);
@@ -60,9 +60,9 @@ TEST(ColorUtilitiesTest, ConvertHslDataToHsvDataWorks) {
 }
 
 TEST(ColorUtilitiesTest, ConvertHueSaturationLightnessDataToColorWorks) {
-    HueSaturationLightnessData hslData1(createHueSaturationLightnessData(0, 0, 0));
-    HueSaturationLightnessData hslData2(createHueSaturationLightnessData(360, 1, 1));
-    HueSaturationLightnessData hslData3(
+    HueSaturationLightnessData const hslData1(createHueSaturationLightnessData(0, 0, 0));
+    HueSaturationLightnessData const hslData2(createHueSaturationLightnessData(360, 1, 1));
+    HueSaturationLightnessData const hslData3(
         createHueSaturationLightnessData(123.80952380952379599, 0.55752212389380539914, 0.77843137254901961786));
 
     EXPECT_EQ(0x0U, convertHueSaturationLightnessDataToColor(hslData1));
@@ -71,9 +71,9 @@ TEST(ColorUtilitiesTest, ConvertHueSaturationLightnessDataToColorWorks) {
 }
 
 TEST(ColorUtilitiesTest, ConvertColorToHueSaturationLightnessDataWorks) {
-    HueSaturationLightnessData hslData1(convertColorToHueSaturationLightnessData(0x0));
-    HueSaturationLightnessData hslData2(convertColorToHueSaturationLightnessData(0xFFFFFF));
-    HueSaturationLightnessData hslData3(convertColorToHueSaturationLightnessData(0xA7E6ABU));
+    HueSaturationLightnessData const hslData1(convertColorToHueSaturationLightnessData(0x0));
+    HueSaturationLightnessData const hslData2(convertColorToHueSaturationLightnessData(0xFFFFFF));
+    HueSaturationLightnessData const hslData3(convertColorToHueSaturationLightnessData(0xA7E6ABU));
 
     EXPECT_DOUBLE_EQ(0, hslData1.hueDegrees);
     EXPECT_DOUBLE_EQ(0, hslData1.saturationLightnessDecimal);
@@ -87,14 +87,14 @@ TEST(ColorUtilitiesTest, ConvertColorToHueSaturationLightnessDataWorks) {
 }
 
 TEST(ColorUtilitiesTest, ConvertHsvDataToHslDataWorks) {
-    HueSaturationValueData hsvData1(createHueSaturationValueData(0, 0, 0));
-    HueSaturationValueData hsvData2(createHueSaturationValueData(0, 0, 1));
-    HueSaturationValueData hsvData3(
+    HueSaturationValueData const hsvData1(createHueSaturationValueData(0, 0, 0));
+    HueSaturationValueData const hsvData2(createHueSaturationValueData(0, 0, 1));
+    HueSaturationValueData const hsvData3(
         createHueSaturationValueData(123.80952380952379599, 0.27391304347826089804, 0.90196078431372550543));
 
-    HueSaturationLightnessData expectedHslData1(convertHsvDataToHslData(hsvData1));
-    HueSaturationLightnessData expectedHslData2(convertHsvDataToHslData(hsvData2));
-    HueSaturationLightnessData expectedHslData3(convertHsvDataToHslData(hsvData3));
+    HueSaturationLightnessData const expectedHslData1(convertHsvDataToHslData(hsvData1));
+    HueSaturationLightnessData const expectedHslData2(convertHsvDataToHslData(hsvData2));
+    HueSaturationLightnessData const expectedHslData3(convertHsvDataToHslData(hsvData3));
 
     EXPECT_DOUBLE_EQ(0, expectedHslData1.hueDegrees);
     EXPECT_DOUBLE_EQ(0, expectedHslData1.saturationLightnessDecimal);
@@ -108,7 +108,7 @@ TEST(ColorUtilitiesTest, ConvertHsvDataToHslDataWorks) {
 }
 
 TEST(ColorUtilitiesTest, CreateHueSaturationValueDataWorks) {
-    HueSaturationValueData hsvData(createHueSaturationValueData(1.1, 2.2, 3));
+    HueSaturationValueData const hsvData(createHueSaturationValueData(1.1, 2.2, 3));
 
     EXPECT_DOUBLE_EQ(1.1, hsvData.hueDegrees);
     EXPECT_DOUBLE_EQ(2.2, hsvData.saturationValueDecimal);
@@ -116,9 +116,9 @@ TEST(ColorUtilitiesTest, CreateHueSaturationValueDataWorks) {
 }
 
 TEST(ColorUtilitiesTest, ConvertHueSaturationValueDataToColorWorks) {
-    HueSaturationValueData hsvData1(createHueSaturationValueData(0, 0, 0));
-    HueSaturationValueData hsvData2(createHueSaturationValueData(360, 0, 1));
-    HueSaturationValueData hsvData3(
+    HueSaturationValueData const hsvData1(createHueSaturationValueData(0, 0, 0));
+    HueSaturationValueData const hsvData2(createHueSaturationValueData(360, 0, 1));
+    HueSaturationValueData const hsvData3(
         createHueSaturationValueData(123.80952380952379599, 0.27391304347826089804, 0.90196078431372550543));
 
     EXPECT_EQ(0x0U, convertHueSaturationValueDataToColor(hsvData1));
@@ -127,9 +127,9 @@ TEST(ColorUtilitiesTest, ConvertHueSaturationValueDataToColorWorks) {
 }
 
 TEST(ColorUtilitiesTest, ConvertColorToHueSaturationValueDataWorks) {
-    HueSaturationValueData hsvData1(convertColorToHueSaturationValueData(0x0));
-    HueSaturationValueData hsvData2(convertColorToHueSaturationValueData(0xFFFFFF));
-    HueSaturationValueData hsvData3(convertColorToHueSaturationValueData(0xA7E6ABU));
+    HueSaturationValueData const hsvData1(convertColorToHueSaturationValueData(0x0));
+    HueSaturationValueData const hsvData2(convertColorToHueSaturationValueData(0xFFFFFF));
+    HueSaturationValueData const hsvData3(convertColorToHueSaturationValueData(0xA7E6ABU));
 
     EXPECT_DOUBLE_EQ(0, hsvData1.hueDegrees);
     EXPECT_DOUBLE_EQ(0, hsvData1.saturationValueDecimal);
@@ -169,9 +169,9 @@ TEST(ColorUtilitiesTest, ExtractBlueWorks) {
 }
 
 TEST(ColorUtilitiesTest, CalculateColorIntensityDecimalWorks) {
-    double colorIntensityDecimal1(calculateColorIntensityDecimal(0x0));
-    double colorIntensityDecimal2(calculateColorIntensityDecimal(0xFFFFFF));
-    double colorIntensityDecimal3(calculateColorIntensityDecimal(0x3C534D));
+    double const colorIntensityDecimal1(calculateColorIntensityDecimal(0x0));
+    double const colorIntensityDecimal2(calculateColorIntensityDecimal(0xFFFFFF));
+    double const colorIntensityDecimal3(calculateColorIntensityDecimal(0x3C534D));
 
     EXPECT_DOUBLE_EQ(0, colorIntensityDecimal1);
     EXPECT_DOUBLE_EQ(1, colorIntensityDecimal2);
@@ -179,9 +179,9 @@ TEST(ColorUtilitiesTest, CalculateColorIntensityDecimalWorks) {
 }
 
 TEST(ColorUtilitiesTest, CalculateLuma601DecimalWorks) {
-    double luma1(calculateLuma601Decimal(0x0));
-    double luma2(calculateLuma601Decimal(0xFFFFFF));
-    double luma3(calculateLuma601Decimal(0x3C534D));
+    double const luma1(calculateLuma601Decimal(0x0));
+    double const luma2(calculateLuma601Decimal(0xFFFFFF));
+    double const luma3(calculateLuma601Decimal(0x3C534D));
 
     EXPECT_DOUBLE_EQ(0, luma1);
     EXPECT_DOUBLE_EQ(1, luma2);
@@ -189,9 +189,9 @@ TEST(ColorUtilitiesTest, CalculateLuma601DecimalWorks) {
 }
 
 TEST(ColorUtilitiesTest, CalculateLuma709DecimalWorks) {
-    double luma1(calculateLuma709Decimal(0x0));
-    double luma2(calculateLuma709Decimal(0xFFFFFF));
-    double luma3(calculateLuma709Decimal(0xADBEFC));
+    double const luma1(calculateLuma709Decimal(0x0));
+    double const luma2(calculateLuma709Decimal(0xFFFFFF));
+    double const luma3(calculateLuma709Decimal(0xADBEFC));
 
     EXPECT_DOUBLE_EQ(0, luma1);
     EXPECT_DOUBLE_EQ(1, luma2);
@@ -199,9 +199,9 @@ TEST(ColorUtilitiesTest, CalculateLuma709DecimalWorks) {
 }
 
 TEST(ColorUtilitiesTest, CalculateSaturationColorIntensityDecimalWorks) {
-    double saturationColorIntensityDecimal1(calculateSaturationColorIntensityDecimal(0x0));
-    double saturationColorIntensityDecimal2(calculateSaturationColorIntensityDecimal(0xFFFFFF));
-    double saturationColorIntensityDecimal3(calculateSaturationColorIntensityDecimal(0xF9B88C));
+    double const saturationColorIntensityDecimal1(calculateSaturationColorIntensityDecimal(0x0));
+    double const saturationColorIntensityDecimal2(calculateSaturationColorIntensityDecimal(0xFFFFFF));
+    double const saturationColorIntensityDecimal3(calculateSaturationColorIntensityDecimal(0xF9B88C));
 
     EXPECT_DOUBLE_EQ(0, saturationColorIntensityDecimal1);
     EXPECT_DOUBLE_EQ(0, saturationColorIntensityDecimal2);
