@@ -1,17 +1,5 @@
-StaticAnalysisJobIdentifier: [011]
-2023-09-11T15:53:18
-[35m2023-09-11T15:54:34[0m | [33mBuildAndRun.sh:28[0m | The current path is [/d/a/aprg/aprg/boost/BoostTest].
-[35m2023-09-11T15:54:35[0m | [33mBuildAndRun.sh:29[0m | The scriptPath is [/d/a/aprg/aprg/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh].
-[35m2023-09-11T15:54:35[0m | [33mBuildAndRun.sh:30[0m | The scriptOption is [buildOnOneCore].
-[35m2023-09-11T15:54:35[0m | [33mBuildAndRun.sh:31[0m | The buildDirectoryName is [StaticAnalyzersBuild].
-[35m2023-09-11T15:54:35[0m | [33mBuildAndRun.sh:32[0m | The argument1 is [Debug] and argument2 is [].
-[35m2023-09-11T15:54:35[0m | [33mBuildAndRun.sh:33[0m | The immediateDirectoryName is [BoostTest].
-[35m2023-09-11T15:54:35[0m | [33mBuildAndRun.sh:84[0m | The buildType is [Debug].
-[35m2023-09-11T15:54:35[0m | [33mBuildAndRun.sh:85[0m | The numberOfCores is [2].
-[35m2023-09-11T15:54:35[0m | [33mBuildAndRun.sh:68[0m | The build path is [/d/a/aprg/aprg/boost/StaticAnalyzersBuild] and the output of [ls -la --color=auto]:
-total 28
-drwxr-xr-x 1 runneradmin 197121     0 Sep 11 15:54 .
-drwxr-xr-x 1 runneradmin 197121     0 Sep 11 15:53 ..
--rw-r--r-- 1 runneradmin 197121 19686 Sep 11 15:54 CMakeCache.txt
-drwxr-xr-x 1 runneradmin 197121     0 Sep 11 15:54 CMakeFiles
+StaticAnalysisJobIdentifier: [20]
+2023-09-15T12:26:29
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:155:67: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:158:12: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 DONE!
