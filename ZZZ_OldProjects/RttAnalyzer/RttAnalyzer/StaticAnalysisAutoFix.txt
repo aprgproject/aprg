@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [011]
-2023-09-12T02:39:33
+StaticAnalysisJobIdentifier: [20]
+2023-09-15T22:38:34
 D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Time\AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
@@ -9,32 +9,10 @@ D:/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp:23:
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:205:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:208:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:270:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:251:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer.cpp:55:13: warning: variable 'lineInFile' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer.cpp:55:20: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:19:5: warning: variable 'collectedRttDetails' of type 'ofstream' (aka 'basic_ofstream<char, char_traits<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:19:14: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:25:13: warning: variable 'lineInFile' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:25:20: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:34:5: warning: variable 'dateTime' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:34:19: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:35:5: warning: variable 'time' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:35:12: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:46:5: warning: variable 'collectedRttDetails' of type 'ofstream' (aka 'basic_ofstream<char, char_traits<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:46:14: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:54:13: warning: variable 'lineInFile' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:54:20: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:63:5: warning: variable 'dateTime' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:63:19: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:71:5: warning: variable 'pathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:71:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:78:13: warning: variable 'lineInFile' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:78:20: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:91:9: warning: variable 'difference' of type 'int' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\RttAnalyzer\RttAnalyzer\src\RttAnalyzer2.cpp:91:13: note: FIX-IT applied suggested code changes
 DONE!
