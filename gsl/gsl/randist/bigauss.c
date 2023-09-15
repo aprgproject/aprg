@@ -36,7 +36,10 @@ gsl_ran_bivariate_gaussian (const gsl_rng * r,
                             double sigma_x, double sigma_y, double rho,
                             double *x, double *y)
 {
-  double u, v, r2, scale;
+  double u;
+  double v;
+  double r2;
+  double scale;
 
   do
     {

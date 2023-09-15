@@ -63,8 +63,9 @@ transputer_set (void *vstate, unsigned long int s)
 {
   transputer_state_t *state = (transputer_state_t *) vstate;
 
-  if (s == 0)
+  if (s == 0) {
     s = 1 ;   /* default seed is 1. */
+}
 
   state->x = s;
 

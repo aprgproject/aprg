@@ -65,7 +65,7 @@ gsl_movstat_apply_accum(const gsl_movstat_end_t endtype,
       const int n = (int) x->size;
       const int H = w->H; /* number of samples to left of current sample */
       const int J = w->J; /* number of samples to right of current sample */
-      int i;
+      int i = 0;
       double x1 = 0.0;    /* pad values for data edges */
       double xN = 0.0;
       double result[2];
@@ -88,8 +88,9 @@ gsl_movstat_apply_accum(const gsl_movstat_end_t endtype,
             }
 
           /* pad initial windows with H values */
-          for (i = 0; i < H; ++i)
+          for (i = 0; i < H; ++i) {
             (accum->insert)(x1, w->state);
+}
         }
       else if (accum->delete_oldest == NULL) /* FIXME XXX */
         {
@@ -97,8 +98,9 @@ gsl_movstat_apply_accum(const gsl_movstat_end_t endtype,
           int idx1 = GSL_MAX(n - J - H, 0);
           int idx2 = n - 1;
 
-          for (i = idx1; i <= idx2; ++i)
+          for (i = idx1; i <= idx2; ++i) {
             w->work[i - idx1] = gsl_vector_get(x, i);
+}
         }
 
       /* process input vector and fill y(0:n - J - 1) */
@@ -114,8 +116,9 @@ gsl_movstat_apply_accum(const gsl_movstat_end_t endtype,
               (accum->get)(accum_params, result, w->state);
               gsl_vector_set(y, idx, result[0]);
 
-              if (z != NULL)
+              if (z != NULL) {
                 gsl_vector_set(z, idx, result[1]);
+}
             }
         }
 
@@ -132,19 +135,21 @@ gsl_movstat_apply_accum(const gsl_movstat_end_t endtype,
               for (i = idx1; i <= idx2; ++i)
                 {
                   int nsamp = n - GSL_MAX(i - H, 0); /* number of samples in this window */
-                  int j;
+                  int j = 0;
 
                   (accum->init)(w->K, w->state);
 
-                  for (j = wsize - nsamp; j < wsize; ++j)
+                  for (j = wsize - nsamp; j < wsize; ++j) {
                     (accum->insert)(w->work[j], w->state);
+}
 
                   /* yi = acc_get [ work(i:K-2) ] */
                   (accum->get)(accum_params, result, w->state);
                   gsl_vector_set(y, i, result[0]);
 
-                  if (z != NULL)
+                  if (z != NULL) {
                     gsl_vector_set(z, i, result[1]);
+}
                 }
             }
           else
@@ -161,8 +166,9 @@ gsl_movstat_apply_accum(const gsl_movstat_end_t endtype,
                   (accum->get)(accum_params, result, w->state);
                   gsl_vector_set(y, i, result[0]);
 
-                  if (z != NULL)
+                  if (z != NULL) {
                     gsl_vector_set(z, i, result[1]);
+}
                 }
             }
         }
@@ -180,8 +186,9 @@ gsl_movstat_apply_accum(const gsl_movstat_end_t endtype,
                   (accum->get)(accum_params, result, w->state);
                   gsl_vector_set(y, idx, result[0]);
 
-                  if (z != NULL)
+                  if (z != NULL) {
                     gsl_vector_set(z, idx, result[1]);
+}
                 }
             }
         }

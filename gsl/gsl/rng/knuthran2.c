@@ -60,8 +60,9 @@ ran_get (void *vstate)
   state->x1 = schrage_mult (AA1, state->x1, MM, CEIL_SQRT_MM)
     + schrage_mult (AA2, state->x0, MM, CEIL_SQRT_MM);
 
-  if (state->x1 >= MM)
+  if (state->x1 >= MM) {
     state->x1 -= MM;
+}
 
   state->x0 = xtmp;
 
@@ -81,8 +82,9 @@ ran_set (void *vstate, unsigned long int s)
 {
   ran_state_t *state = (ran_state_t *) vstate;
 
-  if ((s % MM) == 0)
+  if ((s % MM) == 0) {
     s = 1;                      /* default seed is 1 */
+}
 
   state->x0 = s % MM;
   state->x1 = s % MM;

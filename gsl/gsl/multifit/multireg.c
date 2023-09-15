@@ -35,6 +35,7 @@
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_linalg.h>
+#include <math.h>
 
 #include "linear_common.c"
 
@@ -47,8 +48,8 @@ gsl_multifit_linear_solve (const double lambda,
                            double *snorm,
                            gsl_multifit_linear_workspace * work)
 {
-  size_t rank;
-  int status;
+  size_t rank = 0;
+  int status = 0;
 
   status = multifit_linear_solve(X, y, GSL_DBL_EPSILON, lambda, &rank, c,
                                  rnorm, snorm, work);
@@ -99,13 +100,15 @@ gsl_multifit_linear_applyW(const gsl_matrix * X,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* copy WX = X; Wy = y if distinct pointers */
-      if (WX != X)
+      if (WX != X) {
         gsl_matrix_memcpy(WX, X);
-      if (Wy != y)
+}
+      if (Wy != y) {
         gsl_vector_memcpy(Wy, y);
+}
 
       if (w != NULL)
         {
@@ -113,12 +116,13 @@ gsl_multifit_linear_applyW(const gsl_matrix * X,
           for (i = 0; i < n; ++i)
             {
               double wi = gsl_vector_get(w, i);
-              double swi;
+              double swi = NAN;
               gsl_vector_view row = gsl_matrix_row(WX, i);
               double *yi = gsl_vector_ptr(Wy, i);
 
-              if (wi < 0.0)
+              if (wi < 0.0) {
                 wi = 0.0;
+}
 
               swi = sqrt(wi);
               gsl_vector_scale(&row.vector, swi);
@@ -196,12 +200,13 @@ gsl_multifit_linear_wstdform1 (const gsl_vector * L,
 
       /* compute Xs = sqrt(W) X and ys = sqrt(W) y */
       status = gsl_multifit_linear_applyW(X, w, y, Xs, ys);
-      if (status)
+      if (status) {
         return status;
+}
 
       if (L != NULL)
         {
-          size_t j;
+          size_t j = 0;
 
           /* construct X~ = sqrt(W) X * L^{-1} matrix */
           for (j = 0; j < p; ++j)
@@ -252,7 +257,7 @@ gsl_multifit_linear_stdform1 (const gsl_vector * L,
                               gsl_vector * ys,
                               gsl_multifit_linear_workspace * work)
 {
-  int status;
+  int status = 0;
 
   status = gsl_multifit_linear_wstdform1(L, X, NULL, y, Xs, ys, work);
 
@@ -264,7 +269,7 @@ gsl_multifit_linear_L_decomp (gsl_matrix * L, gsl_vector * tau)
 {
   const size_t m = L->size1;
   const size_t p = L->size2;
-  int status;
+  int status = 0;
 
   if (tau->size != GSL_MIN(m, p))
     {
@@ -386,14 +391,15 @@ gsl_multifit_linear_wstdform2 (const gsl_matrix * LQR,
         }
       else
         {
-          int status;
-          size_t i;
+          int status = 0;
+          size_t i = 0;
           gsl_matrix_const_view R = gsl_matrix_const_submatrix(LQR, 0, 0, p, p);
 
           /* compute Xs = sqrt(W) X and ys = sqrt(W) y */
           status = gsl_multifit_linear_applyW(X, w, y, Xs, ys);
-          if (status)
+          if (status) {
             return status;
+}
 
           /* compute X~ = X R^{-1} using QR decomposition of L */
           for (i = 0; i < n; ++i)
@@ -431,7 +437,7 @@ gsl_multifit_linear_wstdform2 (const gsl_matrix * LQR,
         }
       else
         {
-          int status;
+          int status = 0;
           gsl_matrix_view A = gsl_matrix_submatrix(work->A, 0, 0, n, p);
           gsl_vector_view b = gsl_vector_subvector(work->t, 0, n);
 
@@ -446,14 +452,17 @@ gsl_multifit_linear_wstdform2 (const gsl_matrix * LQR,
           gsl_matrix_view MQR = gsl_matrix_submatrix(M, 0, 0, n, pm);
           gsl_vector_view Mtau = gsl_matrix_subcolumn(M, p - 1, 0, GSL_MIN(n, pm));
 
-          gsl_matrix_view AKo, AKp, HqTAKp;
+          gsl_matrix_view AKo;
+          gsl_matrix_view AKp;
+          gsl_matrix_view HqTAKp;
           gsl_vector_view v;
-          size_t i;
+          size_t i = 0;
 
           /* compute A = sqrt(W) X and b = sqrt(W) y */
           status = gsl_multifit_linear_applyW(X, w, y, &A.matrix, &b.vector);
-          if (status)
+          if (status) {
             return status;
+}
 
           /* compute: A <- A K = [ A K_p ; A K_o ] */
           gsl_linalg_QR_matQ(&LTQR.matrix, &LTtau.vector, &A.matrix);
@@ -501,7 +510,7 @@ gsl_multifit_linear_stdform2 (const gsl_matrix * LQR,
                               gsl_matrix * M,
                               gsl_multifit_linear_workspace * work)
 {
-  int status;
+  int status = 0;
 
   status = gsl_multifit_linear_wstdform2(LQR, Ltau, X, NULL, y, Xs, ys, M, work);
 
@@ -601,7 +610,7 @@ gsl_multifit_linear_wgenform2 (const gsl_matrix * LQR,
         }
       else
         {
-          int s;
+          int s = 0;
           gsl_matrix_const_view R = gsl_matrix_const_submatrix(LQR, 0, 0, p, p); /* R factor of L */
 
           /* solve R c = cs for true solution c, using QR decomposition of L */
@@ -623,7 +632,7 @@ gsl_multifit_linear_wgenform2 (const gsl_matrix * LQR,
         }
       else
         {
-          int status;
+          int status = 0;
           const size_t pm = p - m;
           gsl_matrix_view A = gsl_matrix_submatrix(work->A, 0, 0, n, p);
           gsl_vector_view b = gsl_vector_subvector(work->t, 0, n);
@@ -634,12 +643,14 @@ gsl_multifit_linear_wgenform2 (const gsl_matrix * LQR,
           gsl_vector_const_view Mtau = gsl_matrix_const_subcolumn(M, p - 1, 0, GSL_MIN(n, pm));
           gsl_matrix_const_view To = gsl_matrix_const_submatrix(&MQR.matrix, 0, 0, pm, pm);
           gsl_vector_view workp = gsl_vector_subvector(work->xt, 0, p);
-          gsl_vector_view v1, v2;
+          gsl_vector_view v1;
+          gsl_vector_view v2;
 
           /* compute A = sqrt(W) X and b = sqrt(W) y */
           status = gsl_multifit_linear_applyW(X, w, y, &A.matrix, &b.vector);
-          if (status)
+          if (status) {
             return status;
+}
 
           /* initialize c to zero */
           gsl_vector_set_zero(c);
@@ -688,7 +699,7 @@ gsl_multifit_linear_genform2 (const gsl_matrix * LQR,
                               gsl_vector * c,
                               gsl_multifit_linear_workspace * work)
 {
-  int status;
+  int status = 0;
 
   status = gsl_multifit_linear_wgenform2(LQR, Ltau, X, NULL, y, cs, M, c, work);
 
@@ -723,8 +734,8 @@ gsl_multifit_linear_lreg (const double smin, const double smax,
       /* smallest regularization parameter */
       const double smin_ratio = 16.0 * GSL_DBL_EPSILON;
       const double new_smin = GSL_MAX(smin, smax*smin_ratio);
-      double ratio;
-      size_t i;
+      double ratio = NAN;
+      size_t i = 0;
 
       gsl_vector_set(reg_param, N - 1, new_smin);
 
@@ -794,7 +805,8 @@ gsl_multifit_linear_lcurve (const gsl_vector * y,
       int status = GSL_SUCCESS;
       const size_t p = work->p;
 
-      size_t i, j;
+      size_t i;
+      size_t j;
 
       gsl_matrix_view A = gsl_matrix_submatrix(work->A, 0, 0, n, p);
       gsl_vector_view S = gsl_vector_subvector(work->S, 0, p);
@@ -805,9 +817,9 @@ gsl_multifit_linear_lcurve (const gsl_vector * y,
       const double smax = gsl_vector_get(&S.vector, 0);
       const double smin = gsl_vector_get(&S.vector, p - 1);
 
-      double dr; /* residual error from projection */
+      double dr = NAN; /* residual error from projection */
       double normy = gsl_blas_dnrm2(y);
-      double normUTy;
+      double normUTy = NAN;
 
       /* compute projection xt = U^T y */
       gsl_blas_dgemv (CblasTrans, 1.0, &A.matrix, y, 0.0, &xt.vector);
@@ -914,7 +926,7 @@ gsl_multifit_linear_lcurvature (const gsl_vector * y,
       gsl_matrix_view U = gsl_matrix_submatrix(work->A, 0, 0, n, p);
       gsl_vector_view S = gsl_vector_subvector(work->S, 0, p);
       gsl_vector_view beta = gsl_vector_subvector(work->xt, 0, p);
-      size_t i;
+      size_t i = 0;
 
       /* compute projection beta = U^T y */
       gsl_blas_dgemv (CblasTrans, 1.0, &U.matrix, y, 0.0, &beta.vector);
@@ -925,12 +937,20 @@ gsl_multifit_linear_lcurvature (const gsl_vector * y,
           double lambda_sq = lambda * lambda;
           double eta_i = gsl_vector_get(eta, i);
           double rho_i = gsl_vector_get(rho, i);
-          double phi_i = 0.0, dphi_i = 0.0;
-          double psi_i = 0.0, dpsi_i = 0.0;
-          double deta_i, ddeta_i, drho_i, ddrho_i;
-          double dlogeta_i, ddlogeta_i, dlogrho_i, ddlogrho_i;
-          double kappa_i;
-          size_t j;
+          double phi_i = 0.0;
+          double dphi_i = 0.0;
+          double psi_i = 0.0;
+          double dpsi_i = 0.0;
+          double deta_i;
+          double ddeta_i;
+          double drho_i;
+          double ddrho_i;
+          double dlogeta_i;
+          double ddlogeta_i;
+          double dlogrho_i;
+          double ddlogrho_i;
+          double kappa_i = NAN;
+          size_t j = 0;
 
           for (j = 0; j < p; ++j)
             {
@@ -1006,9 +1026,11 @@ gsl_multifit_linear_lcorner(const gsl_vector *rho,
   else
     {
       int s = GSL_SUCCESS;
-      size_t i;
-      double x1, y1;      /* first point of triangle on L-curve */
-      double x2, y2;      /* second point of triangle on L-curve */
+      size_t i = 0;
+      double x1;
+      double y1;      /* first point of triangle on L-curve */
+      double x2;
+      double y2;      /* second point of triangle on L-curve */
       double rmin = -1.0; /* minimum radius of curvature */
 
       /* initial values */
@@ -1109,9 +1131,11 @@ gsl_multifit_linear_lcorner2(const gsl_vector *reg_param,
   else
     {
       int s = GSL_SUCCESS;
-      size_t i;
-      double x1, y1;      /* first point of triangle on L-curve */
-      double x2, y2;      /* second point of triangle on L-curve */
+      size_t i = 0;
+      double x1;
+      double y1;      /* first point of triangle on L-curve */
+      double x2;
+      double y2;      /* second point of triangle on L-curve */
       double rmin = -1.0; /* minimum radius of curvature */
 
       /* initial values */
@@ -1203,7 +1227,8 @@ gsl_multifit_linear_Lk(const size_t p, const size_t k, gsl_matrix *L)
     {
       double c_data[GSL_MULTIFIT_MAXK];
       gsl_vector_view cv = gsl_vector_view_array(c_data, k + 1);
-      size_t i, j;
+      size_t i;
+      size_t j;
 
       /* zeroth derivative */
       if (k == 0)
@@ -1290,8 +1315,9 @@ gsl_multifit_linear_Lsobolev(const size_t p, const size_t kmax,
     }
   else
     {
-      int s;
-      size_t j, k;
+      int s = 0;
+      size_t j;
+      size_t k;
       gsl_vector_view d = gsl_matrix_diagonal(L);
       const double alpha0 = gsl_vector_get(alpha, 0);
 
@@ -1306,8 +1332,9 @@ gsl_multifit_linear_Lsobolev(const size_t p, const size_t kmax,
 
           /* compute a_k L_k */
           s = gsl_multifit_linear_Lk(p, k, &Lk.matrix);
-          if (s)
+          if (s) {
             return s;
+}
 
           gsl_matrix_scale(&Lk.matrix, ak);
 
@@ -1316,16 +1343,18 @@ gsl_multifit_linear_Lsobolev(const size_t p, const size_t kmax,
         }
 
       s = gsl_linalg_cholesky_decomp(L);
-      if (s)
+      if (s) {
         return s;
+}
 
       /* copy Cholesky factor to upper triangle and zero out bottom */
       gsl_matrix_transpose_tricpy(CblasLower, CblasUnit, L, L);
 
       for (j = 0; j < p; ++j)
         {
-          for (k = 0; k < j; ++k)
+          for (k = 0; k < j; ++k) {
             gsl_matrix_set(L, j, k, 0.0);
+}
         }
 
       return GSL_SUCCESS;

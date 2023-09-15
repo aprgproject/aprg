@@ -72,7 +72,7 @@ static int qr_rcond(double * rcond, void * vstate);
 static void *
 qr_alloc (const size_t n, const size_t p)
 {
-  qr_state_t *state;
+  qr_state_t *state = NULL;
 
   (void)n;
   
@@ -155,32 +155,41 @@ qr_free(void *vstate)
 {
   qr_state_t *state = (qr_state_t *) vstate;
 
-  if (state->QR)
+  if (state->QR) {
     gsl_matrix_free(state->QR);
+}
 
-  if (state->tau_Q)
+  if (state->tau_Q) {
     gsl_vector_free(state->tau_Q);
+}
 
-  if (state->T)
+  if (state->T) {
     gsl_matrix_free(state->T);
+}
 
-  if (state->qtf)
+  if (state->qtf) {
     gsl_vector_free(state->qtf);
+}
 
-  if (state->residual)
+  if (state->residual) {
     gsl_vector_free(state->residual);
+}
 
-  if (state->perm)
+  if (state->perm) {
     gsl_permutation_free(state->perm);
+}
 
-  if (state->workn)
+  if (state->workn) {
     gsl_vector_free(state->workn);
+}
 
-  if (state->workp)
+  if (state->workp) {
     gsl_vector_free(state->workp);
+}
 
-  if (state->work3p)
+  if (state->work3p) {
     gsl_vector_free(state->work3p);
+}
 
   free(state);
 }
@@ -192,7 +201,7 @@ qr_init(const void * vtrust_state, void * vstate)
   const gsl_multifit_nlinear_trust_state *trust_state =
     (const gsl_multifit_nlinear_trust_state *) vtrust_state;
   qr_state_t *state = (qr_state_t *) vstate;
-  int signum;
+  int signum = 0;
 
   /* perform QR decomposition of J */
   gsl_matrix_memcpy(state->QR, trust_state->J);
@@ -219,7 +228,7 @@ qr_solve(const gsl_vector * f, gsl_vector *x,
          const void * vtrust_state, void *vstate)
 {
   qr_state_t *state = (qr_state_t *) vstate;
-  int status;
+  int status = 0;
 
   if (state->mu == 0.0)
     {
@@ -264,7 +273,7 @@ qr_solve(const gsl_vector * f, gsl_vector *x,
 static int
 qr_rcond(double * rcond, void * vstate)
 {
-  int status;
+  int status = 0;
   qr_state_t *state = (qr_state_t *) vstate;
 
   status = gsl_linalg_QRPT_rcond(state->QR, rcond, state->work3p);

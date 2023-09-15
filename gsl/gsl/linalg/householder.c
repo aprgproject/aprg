@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_vector.h>
@@ -60,9 +61,9 @@ gsl_linalg_householder_transform (gsl_vector * v)
     }
   
     
-      double alpha;
-      double beta;
-      double tau ;
+      double alpha = NAN;
+      double beta = NAN;
+      double tau = NAN ;
       
       gsl_vector_view x = gsl_vector_subvector (v, 1, n - 1) ; 
       
@@ -128,8 +129,8 @@ gsl_linalg_householder_transform2 (double * alpha, gsl_vector * v)
     }
   
     
-      double beta;
-      double tau;
+      double beta = NAN;
+      double tau = NAN;
       gsl_vector_view x = gsl_vector_subvector (v, 0, n - 1); 
       double xnorm = gsl_blas_dnrm2 (&x.vector);
       

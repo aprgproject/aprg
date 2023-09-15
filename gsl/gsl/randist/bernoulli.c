@@ -37,10 +37,10 @@ gsl_ran_bernoulli (const gsl_rng * r, double p)
     {
       return 1 ;
     }
-  else
-    {
+  
+    
       return 0 ;
-    }
+   
 }
 
 double
@@ -50,7 +50,7 @@ gsl_ran_bernoulli_pdf (const unsigned int k, double p)
     {
       return 1 - p ;
     }
-  else if (k == 1)
+  if (k == 1)
     {
       return p ;
     }

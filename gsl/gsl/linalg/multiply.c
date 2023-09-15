@@ -96,16 +96,16 @@ gsl_linalg_matmult_mod (const gsl_matrix * A, gsl_linalg_matrix_mod_t modA,
         }
       else
         {
-          double a;
-          double b;
+          double a = NAN;
+          double b = NAN;
           double temp = NAN;
-          size_t i;
-          size_t j;
-          size_t k;
-          size_t a1;
-          size_t a2;
-          size_t b1;
-          size_t b2;
+          size_t i = 0;
+          size_t j = 0;
+          size_t k = 0;
+          size_t a1 = 0;
+          size_t a2 = 0;
+          size_t b1 = 0;
+          size_t b2 = 0;
 
           for (i = 0; i < dim1_C; i++)
             {

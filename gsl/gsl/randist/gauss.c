@@ -47,7 +47,9 @@
 double
 gsl_ran_gaussian (const gsl_rng * r, const double sigma)
 {
-  double x, y, r2;
+  double x;
+  double y;
+  double r2;
 
   do
     {
@@ -74,7 +76,11 @@ gsl_ran_gaussian (const gsl_rng * r, const double sigma)
 double
 gsl_ran_gaussian_ratio_method (const gsl_rng * r, const double sigma)
 {
-  double u, v, x, y, Q;
+  double u;
+  double v;
+  double x;
+  double y;
+  double Q;
   const double s = 0.449871;    /* Constants from Leva */
   const double t = -0.386595;
   const double a = 0.19600;

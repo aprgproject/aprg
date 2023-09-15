@@ -73,7 +73,7 @@ int gsl_sf_bessel_Jn_e(int n, double x, gsl_sf_result * result)
       result->err = 0.0;
       return GSL_SUCCESS;
     }
-    else if(x*x < 10.0*(n+1.0)*GSL_ROOT5_DBL_EPSILON) {
+    if(x*x < 10.0*(n+1.0)*GSL_ROOT5_DBL_EPSILON) {
       gsl_sf_result b;
       int status = gsl_sf_bessel_IJ_taylor_e((double)n, x, -1, 50, GSL_DBL_EPSILON, &b);
       result->val  = sign * b.val;

@@ -35,7 +35,8 @@ gsl_rng_env_setup (void)
 
   if (p)
     {
-      const gsl_rng_type **t, **t0 = gsl_rng_types_setup ();
+      const gsl_rng_type **t;
+      const gsl_rng_type **t0 = gsl_rng_types_setup ();
 
       gsl_rng_default = 0;
 

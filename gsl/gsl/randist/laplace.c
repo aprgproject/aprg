@@ -31,7 +31,7 @@
 double
 gsl_ran_laplace (const gsl_rng * r, const double a)
 {
-  double u;
+  double u = NAN;
   do
     {
       u = 2 * gsl_rng_uniform (r) - 1.0;
@@ -42,10 +42,10 @@ gsl_ran_laplace (const gsl_rng * r, const double a)
     {
       return a * log (-u);
     }
-  else
-    {
+  
+    
       return -a * log (u);
-    }
+   
 }
 
 double

@@ -155,9 +155,9 @@ gsl_sf_complex_log_e(const double zr, const double zi, gsl_sf_result * lnr, gsl_
     theta->err = GSL_DBL_EPSILON * fabs(lnr->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     DOMAIN_ERROR_2(lnr, theta);
-  }
+ 
 }
 
 

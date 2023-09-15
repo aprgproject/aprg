@@ -141,22 +141,27 @@ cos_pi_taylor(const double x, gsl_sf_result *result)
 int
 gsl_sf_sin_pi_e(const double x, gsl_sf_result *result)
 {
-  double intx = 0.0, fracx = 0.0;
-  long q;
-  int sign = 1, status;
+  double intx = 0.0;
+  double fracx = 0.0;
+  long q = 0;
+  int sign = 1;
+  int status;
 
   result->val = 0.0;
   result->err = 0.0;
   fracx = modf(x,&intx);
-  if (fracx == 0.0) return GSL_SUCCESS;
-  if(fabs(intx) >= TWOBIG) return GSL_SUCCESS; /* to be sure. Actually should be covered by the line above */
+  if (fracx == 0.0) { return GSL_SUCCESS;
+}
+  if(fabs(intx) >= TWOBIG) { return GSL_SUCCESS; /* to be sure. Actually should be covered by the line above */
+}
 
   q = ( ( (intx >= LONG_MIN) && (intx <= LONG_MAX) ) ? intx : fmod(intx, 2.0) );
   sign = ( q % 2 ? -1 : 1 );
 
   /* int sign = 1 - 2*((int)round(fmod(fabs(intx),2.0))); */
   if (fabs(fracx) == 0.5) { /* probably unnecessary */
-    if (fracx < 0.0) sign = -sign;
+    if (fracx < 0.0) { sign = -sign;
+}
     result->val = ( sign != 1 ? -1.0 : 1.0 );
     return GSL_SUCCESS;
   }
@@ -176,21 +181,25 @@ gsl_sf_sin_pi_e(const double x, gsl_sf_result *result)
   else {
     status = sin_pi_taylor(fracx, result);
   }
-  if (sign != 1) result->val = -result->val;
+  if (sign != 1) { result->val = -result->val;
+}
   return status;
 }
 
 int
 gsl_sf_cos_pi_e(const double x, gsl_sf_result *result)
 {
-  double intx = 0.0, fracx = 0.0;
-  long q;
-  int sign = 1, status;
+  double intx = 0.0;
+  double fracx = 0.0;
+  long q = 0;
+  int sign = 1;
+  int status;
 
   result->val = 0.0;
   result->err = 0.0;
   fracx = modf(x,&intx);
-  if (fabs(fracx) == 0.5) return GSL_SUCCESS;
+  if (fabs(fracx) == 0.5) { return GSL_SUCCESS;
+}
   
   if(fabs(intx) >= TWOBIG) {
     result->val = 1.0;
@@ -221,7 +230,8 @@ gsl_sf_cos_pi_e(const double x, gsl_sf_result *result)
   else {
     status = cos_pi_taylor(fracx, result);
   }
-  if (sign != 1) result->val = -result->val;
+  if (sign != 1) { result->val = -result->val;
+}
   return status;
 }
 

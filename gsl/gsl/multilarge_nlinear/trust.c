@@ -26,6 +26,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_permutation.h>
+#include <math.h>
 
 #include "common.c"
 #include "nielsen.c"
@@ -90,7 +91,7 @@ static void *
 trust_alloc (const gsl_multilarge_nlinear_parameters * params,
              const size_t n, const size_t p)
 {
-  trust_state_t *state;
+  trust_state_t *state = NULL;
   
   state = calloc(1, sizeof(trust_state_t));
   if (state == NULL)
@@ -151,23 +152,29 @@ trust_free(void *vstate)
   trust_state_t *state = (trust_state_t *) vstate;
   const gsl_multilarge_nlinear_parameters *params = &(state->params);
 
-  if (state->diag)
+  if (state->diag) {
     gsl_vector_free(state->diag);
+}
 
-  if (state->workn)
+  if (state->workn) {
     gsl_vector_free(state->workn);
+}
 
-  if (state->x_trial)
+  if (state->x_trial) {
     gsl_vector_free(state->x_trial);
+}
 
-  if (state->f_trial)
+  if (state->f_trial) {
     gsl_vector_free(state->f_trial);
+}
 
-  if (state->trs_state)
+  if (state->trs_state) {
     (params->trs->free)(state->trs_state);
+}
 
-  if (state->solver_state)
+  if (state->solver_state) {
     (params->solver->free)(state->solver_state);
+}
 
   free(state);
 }
@@ -191,28 +198,31 @@ trust_init(void *vstate, const gsl_vector *swts,
            gsl_multilarge_nlinear_fdf *fdf, const gsl_vector *x,
            gsl_vector *f, gsl_vector *g, gsl_matrix *JTJ)
 {
-  int status;
+  int status = 0;
   trust_state_t *state = (trust_state_t *) vstate;
   const gsl_multilarge_nlinear_parameters *params = &(state->params);
-  double Dx;
+  double Dx = NAN;
 
   /* evaluate function and Jacobian at x and apply weight transform */
   status = gsl_multilarge_nlinear_eval_f(fdf, x, swts, f);
-  if (status)
+  if (status) {
    return status;
+}
 
   /* compute g = J^T f and J^T J */
   status = gsl_multilarge_nlinear_eval_df(CblasTrans, x, f, f,
                                           swts, params->h_df, params->fdtype,
                                           fdf, g, JTJ, state->workn);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* initialize diagonal scaling matrix D */
-  if (JTJ != NULL)
+  if (JTJ != NULL) {
     (params->scale->init)(JTJ, state->diag);
-  else
+  } else {
     gsl_vector_set_all(state->diag, 1.0);
+}
 
   /* compute initial trust region radius */
   Dx = trust_scaled_norm(state->diag, x);
@@ -239,8 +249,9 @@ trust_init(void *vstate, const gsl_vector *swts,
 
     status = (params->trs->init)(&trust_state, state->trs_state);
 
-    if (status)
+    if (status) {
       return status;
+}
   }
 
   /* set default parameters */
@@ -286,14 +297,14 @@ trust_iterate(void *vstate, const gsl_vector *swts,
               gsl_vector *f, gsl_vector *g, gsl_matrix *JTJ,
               gsl_vector *dx)
 {
-  int status;
+  int status = 0;
   trust_state_t *state = (trust_state_t *) vstate;
   const gsl_multilarge_nlinear_parameters *params = &(state->params);
   const gsl_multilarge_nlinear_trs *trs = params->trs;
   gsl_multilarge_nlinear_trust_state trust_state;
   gsl_vector *x_trial = state->x_trial;       /* trial x + dx */
   gsl_vector *f_trial = state->f_trial;       /* trial f(x + dx) */
-  double rho;                                 /* ratio actual_reduction/predicted_reduction */
+  double rho = NAN;                                 /* ratio actual_reduction/predicted_reduction */
   int foundstep = 0;                          /* found step dx */
   int bad_steps = 0;                          /* consecutive rejected steps */
 
@@ -312,8 +323,9 @@ trust_iterate(void *vstate, const gsl_vector *swts,
 
   /* initialize trust region subproblem with this Jacobian */
   status = (trs->preloop)(&trust_state, state->trs_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* loop until we find an acceptable step dx */
   while (!foundstep)
@@ -331,13 +343,15 @@ trust_iterate(void *vstate, const gsl_vector *swts,
 
           /* compute f_trial = f(x + dx) */
           status = gsl_multilarge_nlinear_eval_f(fdf, x_trial, swts, f_trial);
-          if (status)
+          if (status) {
             return status;
+}
 
           /* check if step should be accepted or rejected */
           status = trust_eval_step(&trust_state, f_trial, dx, &rho, state);
-          if (status == GSL_SUCCESS)
+          if (status == GSL_SUCCESS) {
             foundstep = 1;
+}
 
 #if 0 /*XXX*/
           fprintf(stdout, "delta = %.12e |D dx| = %.12e |dx| = %.12e, dx0 = %.12e dx1 = %.12e |x_trial| = %.12e |f_trial| = %.12e rho = %.12e\n",
@@ -365,10 +379,11 @@ trust_iterate(void *vstate, const gsl_vector *swts,
        * is a poor approximation so decrease trust region. This
        * can happen even if the step is accepted.
        */
-      if (rho > 0.75)
+      if (rho > 0.75) {
         state->delta *= params->factor_up;
-      else if (rho < 0.25)
+      } else if (rho < 0.25) {
         state->delta /= params->factor_down;
+}
 
       if (foundstep)
         {
@@ -384,12 +399,14 @@ trust_iterate(void *vstate, const gsl_vector *swts,
           status = gsl_multilarge_nlinear_eval_df(CblasTrans, x, f, f,
                                                   swts, params->h_df, params->fdtype,
                                                   fdf, g, JTJ, state->workn);
-          if (status)
+          if (status) {
             return status;
+}
 
           /* update scaling matrix D */
-          if (JTJ != NULL)
+          if (JTJ != NULL) {
             (params->scale->update)(JTJ, state->diag);
+}
 
           /* step accepted, decrease LM parameter */
           nielsen_accept(rho, &(state->mu), &(state->nu));
@@ -415,7 +432,7 @@ trust_iterate(void *vstate, const gsl_vector *swts,
 static int
 trust_rcond(double * rcond, const gsl_matrix * JTJ, void * vstate)
 {
-  int status;
+  int status = 0;
   trust_state_t *state = (trust_state_t *) vstate;
   const gsl_multilarge_nlinear_parameters *params = &(state->params);
 
@@ -427,7 +444,7 @@ trust_rcond(double * rcond, const gsl_matrix * JTJ, void * vstate)
 static int
 trust_covar(const gsl_matrix * JTJ, gsl_matrix * covar, void * vstate)
 {
-  int status;
+  int status = 0;
   trust_state_t *state = (trust_state_t *) vstate;
   const gsl_multilarge_nlinear_parameters *params = &(state->params);
 
@@ -448,7 +465,8 @@ static void
 trust_trial_step(const gsl_vector * x, const gsl_vector * dx,
                  gsl_vector * x_trial)
 {
-  size_t i, N = x->size;
+  size_t i;
+  size_t N = x->size;
 
   for (i = 0; i < N; i++)
     {
@@ -485,20 +503,21 @@ trust_calc_rho(const gsl_multilarge_nlinear_trust_state * trust_state,
                const gsl_vector * f_trial, const gsl_vector * dx,
                trust_state_t * state)
 {
-  int status;
+  int status = 0;
   const gsl_multilarge_nlinear_parameters *params = &(state->params);
   const gsl_multilarge_nlinear_trs *trs = params->trs;
   const gsl_vector * f = trust_state->f;
   const double normf = gsl_blas_dnrm2(f);
   const double normf_trial = gsl_blas_dnrm2(f_trial);
-  double rho;
-  double actual_reduction;
-  double pred_reduction;
-  double u;
+  double rho = NAN;
+  double actual_reduction = NAN;
+  double pred_reduction = NAN;
+  double u = NAN;
 
   /* if ||f(x+dx)|| > ||f(x)|| reject step immediately */
-  if (normf_trial >= normf)
+  if (normf_trial >= normf) {
     return -1.0;
+}
 
   /* compute numerator of rho (actual reduction) */
   u = normf_trial / normf;
@@ -510,13 +529,15 @@ trust_calc_rho(const gsl_multilarge_nlinear_trust_state * trust_state,
    * model used, which can vary according to each TRS
    */
   status = (trs->preduction)(trust_state, dx, &pred_reduction, state->trs_state);
-  if (status)
+  if (status) {
     return -1.0;
+}
 
-  if (pred_reduction > 0.0)
+  if (pred_reduction > 0.0) {
     rho = actual_reduction / pred_reduction;
-  else
+  } else {
     rho = -1.0;
+}
 
   return rho;
 }
@@ -538,14 +559,16 @@ trust_eval_step(const gsl_multilarge_nlinear_trust_state * trust_state,
   if (params->trs == gsl_multilarge_nlinear_trs_lmaccel)
     {
       /* reject step if acceleration is too large compared to velocity */
-      if (state->avratio > params->avmax)
+      if (state->avratio > params->avmax) {
         status = GSL_FAILURE;
+}
     }
 
   /* compute rho */
   *rho = trust_calc_rho(trust_state, f_trial, dx, state);
-  if (*rho <= 0.0)
+  if (*rho <= 0.0) {
     status = GSL_FAILURE;
+}
 
   return status;
 }
@@ -556,7 +579,7 @@ trust_scaled_norm(const gsl_vector *D, const gsl_vector *a)
 {
   const size_t n = a->size;
   double e2 = 0.0;
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < n; ++i)
     {

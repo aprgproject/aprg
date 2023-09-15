@@ -93,7 +93,8 @@ static void poly_multiply(
   int pc[], int  * pc_degree
   )
 {
-  int j, k;
+  int j;
+  int k;
   int pt[NIED2_MAX_DEGREE+1];
   int pt_degree = pa_degree + pb_degree;
 
@@ -140,8 +141,10 @@ static void calculate_v(
   int ph[NIED2_MAX_DEGREE+1];
   /* int ph_degree = *pb_degree; */
   int bigm = *pb_degree;      /* m from section 3.3 */
-  int m;                      /* m from section 2.3 */
-  int r, k, kj;
+  int m = 0;                      /* m from section 2.3 */
+  int r;
+  int k;
+  int kj;
 
   for(k=0; k<=NIED2_MAX_DEGREE; k++) {
     ph[k] = pb[k];
@@ -220,13 +223,14 @@ static void calculate_cj(nied2_state_t * ns, unsigned int dimension)
 {
   int ci[NIED2_NBITS][NIED2_NBITS];
   int v[MAXV+1];
-  int r;
-  unsigned int i_dim;
+  int r = 0;
+  unsigned int i_dim = 0;
 
   for(i_dim=0; i_dim<dimension; i_dim++) {
 
     const int poly_index = i_dim + 1;
-    int j, k;
+    int j;
+    int k;
 
     /* Niederreiter (page 56, after equation (7), defines two
      * variables Q and U.  We do not need Q explicitly, but we
@@ -264,7 +268,8 @@ static void calculate_cj(nied2_state_t * ns, unsigned int dimension)
       /* If U = 0, we need to set B to the next power of PX
        * and recalculate V.
        */
-      if(u == 0) calculate_v(px, px_degree, pb, &pb_degree, v, MAXV);
+      if(u == 0) { calculate_v(px, px_degree, pb, &pb_degree, v, MAXV);
+}
 
       /* Now C is obtained from V.  Niederreiter
        * obtains A from V (page 65, near the bottom), and then gets
@@ -278,7 +283,8 @@ static void calculate_cj(nied2_state_t * ns, unsigned int dimension)
 
       /* Advance Niederreiter's state variables. */
       ++u;
-      if(u == px_degree) u = 0;
+      if(u == px_degree) { u = 0;
+}
     }
 
     /* The array CI now holds the values of C(I,J,R) for this value
@@ -300,13 +306,15 @@ static void calculate_cj(nied2_state_t * ns, unsigned int dimension)
 static int nied2_init(void * state, unsigned int dimension)
 {
   nied2_state_t * n_state = (nied2_state_t *) state;
-  unsigned int i_dim;
+  unsigned int i_dim = 0;
 
-  if(dimension < 1 || dimension > NIED2_MAX_DIMENSION) return GSL_EINVAL;
+  if(dimension < 1 || dimension > NIED2_MAX_DIMENSION) { return GSL_EINVAL;
+}
 
   calculate_cj(n_state, dimension);
 
-  for(i_dim=0; i_dim<dimension; i_dim++) n_state->nextq[i_dim] = 0;
+  for(i_dim=0; i_dim<dimension; i_dim++) { n_state->nextq[i_dim] = 0;
+}
   n_state->sequence_count = 0;
 
   return GSL_SUCCESS;
@@ -317,9 +325,9 @@ static int nied2_get(void * state, unsigned int dimension, double * v)
 {
   static const double recip = 1.0/(double)(1U << NIED2_NBITS); /* 2^(-nbits) */
   nied2_state_t * n_state = (nied2_state_t *) state;
-  int r;
-  int c;
-  unsigned int i_dim;
+  int r = 0;
+  int c = 0;
+  unsigned int i_dim = 0;
 
   /* Load the result from the saved state. */
   for(i_dim=0; i_dim<dimension; i_dim++) {
@@ -337,10 +345,12 @@ static int nied2_get(void * state, unsigned int dimension, double * v)
       ++r;
       c /= 2;
     }
-    else break;
+    else { break;
+}
   }
 
-  if(r >= NIED2_NBITS) return GSL_EFAILED; /* FIXME: better error code here */
+  if(r >= NIED2_NBITS) { return GSL_EFAILED; /* FIXME: better error code here */
+}
 
   /* Calculate the next state. */
   for(i_dim=0; i_dim<dimension; i_dim++) {

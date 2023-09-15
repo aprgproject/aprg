@@ -133,7 +133,7 @@ gsl_rng_state (const gsl_rng * r)
 void
 gsl_rng_print_state (const gsl_rng * r)
 {
-  size_t i;
+  size_t i = 0;
   unsigned char *p = (unsigned char *) (r->state);
   const size_t n = r->type->size;
 

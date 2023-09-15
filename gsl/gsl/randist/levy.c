@@ -44,7 +44,10 @@
 double
 gsl_ran_levy (const gsl_rng * r, const double c, const double alpha)
 {
-  double u, v, t, s;
+  double u;
+  double v;
+  double t;
+  double s;
 
   u = M_PI * (gsl_rng_uniform_pos (r) - 0.5);
 
@@ -102,7 +105,9 @@ double
 gsl_ran_levy_skew (const gsl_rng * r, const double c, 
                    const double alpha, const double beta)
 {
-  double V, W, X;
+  double V;
+  double W;
+  double X;
 
   if (beta == 0)  /* symmetric case */
     {
@@ -123,8 +128,8 @@ gsl_ran_levy_skew (const gsl_rng * r, const double c,
            beta * log (M_PI_2 * W * cos (V) / (M_PI_2 + beta * V))) / M_PI_2;
       return c * (X + beta * log (c) / M_PI_2);
     }
-  else
-    {
+  
+    
       double t = beta * tan (M_PI_2 * alpha);
       double B = atan (t) / alpha;
       double S = pow (1 + t * t, 1/(2 * alpha));
@@ -132,5 +137,5 @@ gsl_ran_levy_skew (const gsl_rng * r, const double c,
       X = S * sin (alpha * (V + B)) / pow (cos (V), 1 / alpha)
         * pow (cos (V - alpha * (V + B)) / W, (1 - alpha) / alpha);
       return c * X;
-    }
+   
 }

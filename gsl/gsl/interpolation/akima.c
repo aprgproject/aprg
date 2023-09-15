@@ -20,6 +20,7 @@
 /* Author:  G. Jungman
  */
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gsl/gsl_errno.h>
@@ -92,7 +93,7 @@ akima_alloc (size_t size)
 static void
 akima_calc (const double x_array[], double b[],  double c[],  double d[], size_t size, double m[])
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < (size - 1); i++)
     {
@@ -108,8 +109,8 @@ akima_calc (const double x_array[], double b[],  double c[],  double d[], size_t
           const double h_i = x_array[i + 1] - x_array[i];
           const double NE_next = fabs (m[i + 2] - m[i + 1]) + fabs (m[i] - m[i - 1]);
           const double alpha_i = fabs (m[i - 1] - m[i - 2]) / NE;
-          double alpha_ip1;
-          double tL_ip1;
+          double alpha_ip1 = NAN;
+          double tL_ip1 = NAN;
           if (NE_next == 0.0)
             {
               tL_ip1 = m[i];
@@ -136,7 +137,7 @@ akima_init (void * vstate, const double x_array[], const double y_array[],
   double * m = state->_m + 2; /* offset so we can address the -1,-2
                                  components */
 
-  size_t i;
+  size_t i = 0;
   for (i = 0; i <= size - 2; i++)
     {
       m[i] = (y_array[i + 1] - y_array[i]) / (x_array[i + 1] - x_array[i]);
@@ -165,7 +166,7 @@ akima_init_periodic (void * vstate,
   double * m = state->_m + 2; /* offset so we can address the -1,-2
                                  components */
 
-  size_t i;
+  size_t i = 0;
   for (i = 0; i <= size - 2; i++)
     {
       m[i] = (y_array[i + 1] - y_array[i]) / (x_array[i + 1] - x_array[i]);
@@ -205,7 +206,7 @@ akima_eval (const void * vstate,
 {
   const akima_state_t *state = (const akima_state_t *) vstate;
 
-  size_t index;
+  size_t index = 0;
   
   if (a != 0)
     {
@@ -238,7 +239,7 @@ akima_eval_deriv (const void * vstate,
 {
   const akima_state_t *state = (const akima_state_t *) vstate;
 
-  size_t index;
+  size_t index = 0;
 
   DISCARD_POINTER(y_array); /* prevent warning about unused parameter */
   
@@ -274,7 +275,7 @@ akima_eval_deriv2 (const void * vstate,
 {
   const akima_state_t *state = (const akima_state_t *) vstate;
 
-  size_t index;
+  size_t index = 0;
 
   DISCARD_POINTER(y_array); /* prevent warning about unused parameter */
 
@@ -309,7 +310,9 @@ akima_eval_integ (const void * vstate,
 {
   const akima_state_t *state = (const akima_state_t *) vstate;
 
-  size_t i, index_a, index_b;
+  size_t i;
+  size_t index_a;
+  size_t index_b;
 
   if (acc != 0)
     {

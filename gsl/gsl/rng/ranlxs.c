@@ -73,8 +73,13 @@ static void increment_state (ranlxs_state_t * state);
 static void
 increment_state (ranlxs_state_t * state)
 {
-  int k, kmax, m;
-  double x, y1, y2, y3;
+  int k;
+  int kmax;
+  int m;
+  double x;
+  double y1;
+  double y2;
+  double y3;
 
   float *xflt = state->xflt;
   double *xdbl = state->xdbl;
@@ -165,8 +170,9 @@ increment_state (ranlxs_state_t * state)
     {
       x = xdbl[k];
       y2 = ydbl[k] - shift;
-      if (y2 > x)
+      if (y2 > x) {
         y2 -= sone_bit;
+}
       y1 = (x - y2) * sbase;
 
       xflt[m++] = (float) y1;
@@ -190,8 +196,9 @@ ranlxs_get_double (void *vstate)
 
   state->is = is;
 
-  if (is == state->is_old)
+  if (is == state->is_old) {
     increment_state (state);
+}
 
   return state->xflt[state->is];
 }
@@ -207,13 +214,20 @@ ranlxs_set_lux (void *vstate, unsigned long int s, unsigned int luxury)
 {
   ranlxs_state_t *state = (ranlxs_state_t *) vstate;
 
-  int ibit, jbit, i, k, m, xbit[31];
-  double x, y;
+  int ibit;
+  int jbit;
+  int i;
+  int k;
+  int m;
+  int xbit[31];
+  double x;
+  double y;
 
-  long int seed;
+  long int seed = 0;
 
-  if (s == 0)
+  if (s == 0) {
     s = 1;                      /* default seed is 1 */
+}
 
   seed = s;
 

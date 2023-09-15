@@ -47,6 +47,7 @@
 #include <gsl/gsl_multifit_nlinear.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 typedef struct
 {
@@ -68,7 +69,7 @@ static int svd_rcond(double * rcond, void * vstate);
 static void *
 svd_alloc (const size_t n, const size_t p)
 {
-  svd_state_t *state;
+  svd_state_t *state = NULL;
 
   (void)n;
   
@@ -116,17 +117,21 @@ svd_free(void *vstate)
 {
   svd_state_t *state = (svd_state_t *) vstate;
 
-  if (state->U)
+  if (state->U) {
     gsl_matrix_free(state->U);
+}
 
-  if (state->V)
+  if (state->V) {
     gsl_matrix_free(state->V);
+}
 
-  if (state->S)
+  if (state->S) {
     gsl_vector_free(state->S);
+}
 
-  if (state->workp)
+  if (state->workp) {
     gsl_vector_free(state->workp);
+}
 
   free(state);
 }
@@ -135,11 +140,11 @@ svd_free(void *vstate)
 static int
 svd_init(const void * vtrust_state, void * vstate)
 {
-  int status;
+  int status = 0;
   const gsl_multifit_nlinear_trust_state *trust_state =
     (const gsl_multifit_nlinear_trust_state *) vtrust_state;
   svd_state_t *state = (svd_state_t *) vstate;
-  size_t i;
+  size_t i = 0;
 
   gsl_matrix_set_zero(state->U);
 
@@ -181,7 +186,7 @@ svd_solve(const gsl_vector * f, gsl_vector *x,
   const size_t p = state->p;
   const double tol = GSL_DBL_EPSILON;
   const double s0 = gsl_vector_get(state->S, 0);
-  size_t j;
+  size_t j = 0;
 
   /* compute workp = - U^T f */
   gsl_blas_dgemv(CblasTrans, -1.0, state->U, f, 0.0, state->workp);
@@ -203,12 +208,13 @@ svd_solve(const gsl_vector * f, gsl_vector *x,
         {
           double sj = gsl_vector_get(state->S, j);
           double *ptr = gsl_vector_ptr(state->workp, j);
-          double alpha;
+          double alpha = NAN;
 
-          if (sj <= tol * s0)
+          if (sj <= tol * s0) {
             alpha = 0.0;
-          else
+          } else {
             alpha = 1.0 / sj;
+}
 
           *ptr *= alpha;
         }

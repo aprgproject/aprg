@@ -32,7 +32,7 @@
 unsigned int
 gsl_ran_poisson (const gsl_rng * r, double mu)
 {
-  double emu;
+  double emu = NAN;
   double prod = 1.0;
   unsigned int k = 0;
 
@@ -46,11 +46,11 @@ gsl_ran_poisson (const gsl_rng * r, double mu)
         {
           return k + gsl_ran_binomial (r, mu / X, m - 1);
         }
-      else
-        {
+      
+        
           k += m;
           mu -= X; 
-        }
+       
     }
 
   /* This following method works well when mu is small */
@@ -72,7 +72,7 @@ void
 gsl_ran_poisson_array (const gsl_rng * r, size_t n, unsigned int array[],
                        double mu)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < n; i++)
     {
@@ -85,7 +85,7 @@ gsl_ran_poisson_array (const gsl_rng * r, size_t n, unsigned int array[],
 double
 gsl_ran_poisson_pdf (const unsigned int k, const double mu)
 {
-  double p;
+  double p = NAN;
   double lf = gsl_sf_lnfact (k); 
 
   p = exp (log (mu) * k - lf - mu);

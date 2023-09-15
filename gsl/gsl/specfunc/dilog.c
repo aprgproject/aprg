@@ -183,7 +183,7 @@ dilog_xge0(const double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(x == 1.0) {
+  if(x == 1.0) {
     result->val = M_PI*M_PI/6.0;
     result->err = 2.0 * GSL_DBL_EPSILON * M_PI*M_PI/6.0;
     return GSL_SUCCESS;
@@ -600,8 +600,8 @@ gsl_sf_complex_dilog_xy_e(
   {
     return dilogc_unitdisk(x, y, real_dl, imag_dl);
   }
-  else
-  {
+  
+  
     /* Reduce argument to unit disk. */
     const double r = sqrt(r2);
     const double x_tmp =  x/r2;
@@ -628,7 +628,7 @@ gsl_sf_complex_dilog_xy_e(
     imag_dl->val = -result_im_tmp.val - 0.5 * lmz2_im;
     imag_dl->err =  result_im_tmp.err + 2.0*GSL_DBL_EPSILON*fabs(lmz2_im);
     return stat_dilog;
-  }
+ 
 }
 
 

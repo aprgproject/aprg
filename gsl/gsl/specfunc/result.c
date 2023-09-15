@@ -35,7 +35,7 @@ gsl_sf_result_smash_e(const gsl_sf_result_e10 * re, gsl_sf_result * r)
     r->err = re->err;
     return GSL_SUCCESS;
   }
-  else {
+  
     const double av = fabs(re->val);
     const double ae = fabs(re->err);
 
@@ -51,7 +51,7 @@ gsl_sf_result_smash_e(const gsl_sf_result_e10 * re, gsl_sf_result * r)
     else {
       return gsl_sf_exp_mult_err_e(re->e10*M_LN10, 0.0, re->val, re->err, r);
     }
-  }
+ 
 /*
   int stat_v;
   int stat_e;

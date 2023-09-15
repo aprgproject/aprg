@@ -222,7 +222,7 @@ static int
 halton_get (void *state, unsigned int dimension, double *v)
 {
   halton_state_t *h_state = (halton_state_t *) state;
-  unsigned int i;
+  unsigned int i = 0;
 
   if (dimension < 1 || dimension > HALTON_MAX_DIMENSION)
     {

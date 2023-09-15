@@ -49,13 +49,14 @@ legendreQ_CF1_xgt1(int ell, double a, double b, double x, double * result)
   double b1 = (2.0*(ell+1.0+a) + 1.0) * x;
   double An = b1*Anm1 + a1*Anm2;
   double Bn = b1*Bnm1 + a1*Bnm2;
-  double an, bn;
+  double an;
+  double bn;
   double fn = An/Bn;
 
   while(n < maxiter) {
-    double old_fn;
-    double del;
-    double lna;
+    double old_fn = NAN;
+    double del = NAN;
+    double lna = NAN;
     n++;
     Anm2 = Anm1;
     Bnm2 = Bnm1;
@@ -80,15 +81,17 @@ legendreQ_CF1_xgt1(int ell, double a, double b, double x, double * result)
     fn = An/Bn;
     del = old_fn/fn;
 
-    if(fabs(del - 1.0) < 4.0*GSL_DBL_EPSILON) break;
+    if(fabs(del - 1.0) < 4.0*GSL_DBL_EPSILON) { break;
+}
   }
 
   *result = fn;
 
-  if(n == maxiter)
+  if(n == maxiter) {
     GSL_ERROR ("error", GSL_EMAXITER);
-  else
+  } else {
     return GSL_SUCCESS; 
+}
 }
 
 
@@ -103,12 +106,14 @@ legendre_Ql_asymp_unif(const double ell, const double x, gsl_sf_result * result)
   if(x < 1.0) {
     double u   = ell + 0.5;
     double th  = acos(x);
-    gsl_sf_result Y0, Y1;
-    int stat_Y0, stat_Y1;
-    int stat_m;
-    double pre;
-    double B00;
-    double sum;
+    gsl_sf_result Y0;
+    gsl_sf_result Y1;
+    int stat_Y0;
+    int stat_Y1;
+    int stat_m = 0;
+    double pre = NAN;
+    double B00 = NAN;
+    double sum = NAN;
 
     /* B00 = 1/8 (1 - th cot(th) / th^2
      * pre = sqrt(th/sin(th))
@@ -135,7 +140,7 @@ legendre_Ql_asymp_unif(const double ell, const double x, gsl_sf_result * result)
 
     return GSL_ERROR_SELECT_3(stat_m, stat_Y0, stat_Y1);
   }
-  else {
+  
     double u   = ell + 0.5;
     double xi  = acosh(x);
     gsl_sf_result K0_scaled, K1_scaled;
@@ -169,7 +174,7 @@ legendre_Ql_asymp_unif(const double ell, const double x, gsl_sf_result * result)
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
 
     return GSL_ERROR_SELECT_3(stat_e, stat_K0, stat_K1);
-  }
+ 
 }
 
 
@@ -296,13 +301,14 @@ gsl_sf_legendre_Ql_e(const int l, const double x, gsl_sf_result * result)
   else if(x < 1.0){
     /* Forward recurrence.
      */
-    gsl_sf_result Q0, Q1;
+    gsl_sf_result Q0;
+    gsl_sf_result Q1;
     int stat_Q0 = gsl_sf_legendre_Q0_e(x, &Q0);
     int stat_Q1 = gsl_sf_legendre_Q1_e(x, &Q1);
     double Qellm1 = Q0.val;
     double Qell   = Q1.val;
-    double Qellp1;
-    int ell;
+    double Qellp1 = NAN;
+    int ell = 0;
     for(ell=1; ell<l; ell++) {
       Qellp1 = (x*(2.0*ell + 1.0) * Qell - ell * Qellm1) / (ell + 1.0);
       Qellm1 = Qell;
@@ -315,13 +321,13 @@ gsl_sf_legendre_Ql_e(const int l, const double x, gsl_sf_result * result)
   else {
     /* x > 1.0 */
 
-    double rat;
+    double rat = NAN;
     int stat_CF1  = legendreQ_CF1_xgt1(l, 0.0, 0.0, x, &rat);
-    int stat_Q;
+    int stat_Q = 0;
     double Qellp1 = rat * GSL_SQRT_DBL_MIN;
     double Qell   = GSL_SQRT_DBL_MIN;
-    double Qellm1;
-    int ell;
+    double Qellm1 = NAN;
+    int ell = 0;
     for(ell=l; ell>0; ell--) {
       Qellm1 = (x * (2.0*ell + 1.0) * Qell - (ell+1.0) * Qellp1) / ell;
       Qellp1 = Qell;

@@ -60,11 +60,20 @@ gsl_siman_solve (const gsl_rng * r, void *x0_p, gsl_siman_Efunc_t Ef,
                  size_t element_size,
                  gsl_siman_params_t params)
 {
-  void *x, *new_x, *best_x;
-  double E, new_E, best_E;
-  int i;
-  double T, T_factor;
-  int n_evals = 1, n_iter = 0, n_accepts, n_rejects, n_eless;
+  void *x;
+  void *new_x;
+  void *best_x;
+  double E;
+  double new_E;
+  double best_E;
+  int i = 0;
+  double T;
+  double T_factor;
+  int n_evals = 1;
+  int n_iter = 0;
+  int n_accepts;
+  int n_rejects;
+  int n_eless;
 
   /* this function requires that either the dynamic functions (copy,
      copy_constructor and destrcutor) are passed, or that an element
@@ -80,10 +89,10 @@ gsl_siman_solve (const gsl_rng * r, void *x0_p, gsl_siman_Efunc_t Ef,
     new_x = copy_constructor(x0_p);
     best_x = copy_constructor(x0_p);
   } else {
-    x = (void *) malloc (element_size);
+    x = malloc (element_size);
     memcpy (x, x0_p, element_size);
-    new_x = (void *) malloc (element_size);
-    best_x =  (void *) malloc (element_size);
+    new_x = malloc (element_size);
+    best_x =  malloc (element_size);
     memcpy (best_x, x0_p, element_size);
   }
 
@@ -189,21 +198,25 @@ gsl_siman_solve_many (const gsl_rng * r, void *x0_p, gsl_siman_Efunc_t Ef,
                       gsl_siman_params_t params)
 {
   /* the new set of trial points, and their energies and probabilities */
-  void *x, *new_x;
-  double *energies, *probs, *sum_probs;
-  double Ex;                    /* energy of the chosen point */
-  double T, T_factor;           /* the temperature and a step multiplier */
-  int i;
-  double u;                     /* throw the die to choose a new "x" */
-  int n_iter;
+  void *x;
+  void *new_x;
+  double *energies;
+  double *probs;
+  double *sum_probs;
+  double Ex = NAN;                    /* energy of the chosen point */
+  double T;
+  double T_factor;           /* the temperature and a step multiplier */
+  int i = 0;
+  double u = NAN;                     /* throw the die to choose a new "x" */
+  int n_iter = 0;
 
   if (print_position) {
     printf ("#-iter    temperature       position");
     printf ("         delta_pos        energy\n");
   }
 
-  x = (void *) malloc (params.n_tries * element_size);
-  new_x = (void *) malloc (params.n_tries * element_size);
+  x = malloc (params.n_tries * element_size);
+  new_x = malloc (params.n_tries * element_size);
   energies = (double *) malloc (params.n_tries * sizeof (double));
   probs = (double *) malloc (params.n_tries * sizeof (double));
   sum_probs = (double *) malloc (params.n_tries * sizeof (double));

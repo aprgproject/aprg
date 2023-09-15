@@ -166,7 +166,7 @@ typedef struct {
 
 static gsl_stack_t *
 new_stack(size_t N) {
-    gsl_stack_t *s;
+    gsl_stack_t *s = NULL;
     s = (gsl_stack_t *)malloc(sizeof(gsl_stack_t));
     s->N = N;
     s->i = 0;                  /* indicates stack is empty */
@@ -213,13 +213,18 @@ static void free_stack(gsl_stack_t *s)
 gsl_ran_discrete_t *
 gsl_ran_discrete_preproc(size_t Kevents, const double *ProbArray)
 {
-    size_t k,b,s;
-    gsl_ran_discrete_t *g;
-    size_t nBigs, nSmalls;
-    gsl_stack_t *Bigs;
-    gsl_stack_t *Smalls;
-    double *E;
-    double pTotal = 0.0, mean, d;
+    size_t k;
+    size_t b;
+    size_t s;
+    gsl_ran_discrete_t *g = NULL;
+    size_t nBigs;
+    size_t nSmalls;
+    gsl_stack_t *Bigs = NULL;
+    gsl_stack_t *Smalls = NULL;
+    double *E = NULL;
+    double pTotal = 0.0;
+    double mean;
+    double d;
     
     if (Kevents < 1) {
       /* Could probably treat Kevents=1 as a special case */
@@ -276,8 +281,9 @@ gsl_ran_discrete_preproc(size_t Kevents, const double *ProbArray)
       for (k=0; k<Kevents; ++k) {
         gsl_stack_t * Dest = which[k] ? Bigs : Smalls;
         int status = push_stack(Dest,k);
-        if (status)
+        if (status) {
           GSL_ERROR_VAL ("failed to build stacks", GSL_EFAILED, 0);
+}
       }
     }
 
@@ -355,7 +361,8 @@ size_t
 gsl_ran_discrete(const gsl_rng *r, const gsl_ran_discrete_t *g)
 {
     size_t c=0;
-    double u,f;
+    double u;
+    double f;
     u = gsl_rng_uniform(r);
 #if KNUTH_CONVENTION
     c = (u*(g->K));
@@ -366,14 +373,15 @@ gsl_ran_discrete(const gsl_rng *r, const gsl_ran_discrete_t *g)
 #endif
     f = (g->F)[c];
     /* fprintf(stderr,"c,f,u: %d %.4f %f\n",c,f,u); */
-    if (f == 1.0) return c;
+    if (f == 1.0) { return c;
+}
 
     if (u < f) {
         return c;
     }
-    else {
+    
         return (g->A)[c];
-    }
+   
 }
 
 void gsl_ran_discrete_free(gsl_ran_discrete_t *g)
@@ -387,10 +395,13 @@ void gsl_ran_discrete_free(gsl_ran_discrete_t *g)
 double
 gsl_ran_discrete_pdf(size_t k, const gsl_ran_discrete_t *g)
 {
-    size_t i,K;
-    double f,p=0;
+    size_t i;
+    size_t K;
+    double f;
+    double p=0;
     K= g->K;
-    if (k>K) return 0;
+    if (k>K) { return 0;
+}
     for (i=0; i<K; ++i) {
         f = (g->F)[i];
 #if KNUTH_CONVENTION

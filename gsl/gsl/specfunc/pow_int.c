@@ -52,7 +52,8 @@ int gsl_sf_pow_int_e(double x, int n, gsl_sf_result * result)
    * returns 0.0^0 = 1.0, so continuous in x
    */
   do {
-     if(GSL_IS_ODD(n)) value *= x;
+     if(GSL_IS_ODD(n)) { value *= x;
+}
      n >>= 1;
      x *= x;
      ++count;

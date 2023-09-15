@@ -45,7 +45,7 @@ gsl_ran_weibull_pdf (const double x, const double a, const double b)
     {
       return 0 ;
     }
-  else if (x == 0)
+  if (x == 0)
     {
       if (b == 1)
         return 1/a ;

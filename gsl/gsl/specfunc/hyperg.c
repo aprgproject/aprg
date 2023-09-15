@@ -49,7 +49,8 @@ gsl_sf_hyperg_1F1_series_e(const double a, const double b, const double x,
   double sum_err = 0.0;
 
   while(abs_del/fabs(sum_val) > 0.25*GSL_DBL_EPSILON) {
-    double u, abs_u;
+    double u;
+    double abs_u;
 
     if(bn == 0.0) {
       DOMAIN_ERROR(result);
@@ -119,9 +120,9 @@ gsl_sf_hyperg_1F1_large_b_e(const double a, const double b, const double x, gsl_
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     DOMAIN_ERROR(result);
-  }
+ 
 }
 
 
@@ -135,8 +136,8 @@ gsl_sf_hyperg_U_large_b_e(const double a, const double b, const double x,
   double eps = b - N;
   
   if(fabs(eps) < GSL_SQRT_DBL_EPSILON) {
-    double lnpre_val;
-    double lnpre_err;
+    double lnpre_val = NAN;
+    double lnpre_err = NAN;
     gsl_sf_result M;
     if(b > 1.0) {
       double tmp = (1.0-b)*log(x);
@@ -176,14 +177,18 @@ gsl_sf_hyperg_U_large_b_e(const double a, const double b, const double x,
   }
   else {
     double omb_lnx = (1.0-b)*log(x);
-    gsl_sf_result lg_1mb;    double sgn_1mb;
-    gsl_sf_result lg_1pamb;  double sgn_1pamb;
-    gsl_sf_result lg_bm1;    double sgn_bm1;
-    gsl_sf_result lg_a;      double sgn_a;
-    gsl_sf_result M1, M2;
-    double lnpre1_val, lnpre2_val;
-    double lnpre1_err, lnpre2_err;
-    double sgpre1, sgpre2;
+    gsl_sf_result lg_1mb;    double sgn_1mb = NAN;
+    gsl_sf_result lg_1pamb;  double sgn_1pamb = NAN;
+    gsl_sf_result lg_bm1;    double sgn_bm1 = NAN;
+    gsl_sf_result lg_a;      double sgn_a = NAN;
+    gsl_sf_result M1;
+    gsl_sf_result M2;
+    double lnpre1_val;
+    double lnpre2_val;
+    double lnpre1_err;
+    double lnpre2_err;
+    double sgpre1;
+    double sgpre2;
     gsl_sf_hyperg_1F1_large_b_e(    a,     b, x, &M1);
     gsl_sf_hyperg_1F1_large_b_e(1.0-a, 2.0-b, x, &M2);
 
@@ -268,7 +273,8 @@ gsl_sf_hyperg_2F0_series_e(const double a, const double b, const double x,
 
     abs_del = fabs(del);
 
-    if(abs_del > last_abs_del) break; /* series is probably starting to grow */
+    if(abs_del > last_abs_del) { break; /* series is probably starting to grow */
+}
 
     last_abs_del = abs_del;
     max_abs_del  = GSL_MAX(abs_del, max_abs_del);
@@ -277,15 +283,18 @@ gsl_sf_hyperg_2F0_series_e(const double a, const double b, const double x,
     bn += 1.0;
     n  += 1.0;
     
-    if(an == 0.0 || bn == 0.0) break;        /* series terminated */
+    if(an == 0.0 || bn == 0.0) { break;        /* series terminated */
+}
     
-    if(n_trunc >= 0 && n >= n_trunc) break;  /* reached requested timeout */
+    if(n_trunc >= 0 && n >= n_trunc) { break;  /* reached requested timeout */
+}
   }
 
   result->val = sum;
   result->err = GSL_DBL_EPSILON * n + abs_del;
-  if(n >= maxiter)
+  if(n >= maxiter) {
     GSL_ERROR ("error", GSL_EMAXITER);
-  else
+  } else {
     return GSL_SUCCESS;
+}
 }

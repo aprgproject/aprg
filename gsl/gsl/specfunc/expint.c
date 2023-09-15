@@ -354,10 +354,11 @@ int expint_E1_impl(const double x, gsl_sf_result * result, const int scale)
     result->val  = s * (1.0 +  result_c.val);
     result->err  = s * (GSL_DBL_EPSILON + result_c.err);
     result->err += 2.0 * (x + 1.0) * GSL_DBL_EPSILON * fabs(result->val);
-    if(result->val == 0.0)
+    if(result->val == 0.0) {
       UNDERFLOW_ERROR(result);
-    else
+    } else {
       return GSL_SUCCESS;
+}
   }
   else {
     UNDERFLOW_ERROR(result);
@@ -409,10 +410,11 @@ int expint_E2_impl(const double x, gsl_sf_result * result, const int scale)
     const double sum  = y*(c1+y*(c2+y*(c3+y*(c4+y*(c5+y*sum6)))));
     result->val = s * (1.0 + sum)/x;
     result->err = 2.0 * (x + 1.0) * GSL_DBL_EPSILON * result->val;
-    if(result->val == 0.0)
+    if(result->val == 0.0) {
       UNDERFLOW_ERROR(result);
-    else
+    } else {
       return GSL_SUCCESS;
+}
   }
   else {
     UNDERFLOW_ERROR(result);
@@ -446,7 +448,7 @@ int expint_En_impl(const int n, const double x, gsl_sf_result * result, const in
       result->err = 2 * GSL_DBL_EPSILON * fabs(result->val);
       CHECK_UNDERFLOW(result);
       return GSL_SUCCESS;
-    } else {
+    } 
       gsl_sf_result result_g;
       double prefactor = pow(x, n-1);
       int status = gsl_sf_gamma_inc_e (1-n, x, &result_g);
@@ -456,7 +458,7 @@ int expint_En_impl(const int n, const double x, gsl_sf_result * result, const in
       result->err += 2 * fabs(scale_factor * prefactor * result_g.err);
       if (status == GSL_SUCCESS) CHECK_UNDERFLOW(result);
       return status;
-    }
+   
   }
 }
 

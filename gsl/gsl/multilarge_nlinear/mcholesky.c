@@ -35,6 +35,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_permutation.h>
+#include <math.h>
 
 #include "common.c"
 
@@ -63,7 +64,7 @@ static int mcholesky_regularize(const double mu, const gsl_vector * diag, gsl_ma
 static void *
 mcholesky_alloc (const size_t n, const size_t p)
 {
-  mcholesky_state_t *state;
+  mcholesky_state_t *state = NULL;
 
   state = calloc(1, sizeof(mcholesky_state_t));
   if (state == NULL)
@@ -118,23 +119,29 @@ mcholesky_free(void *vstate)
 {
   mcholesky_state_t *state = (mcholesky_state_t *) vstate;
 
-  if (state->JTJ)
+  if (state->JTJ) {
     gsl_matrix_free(state->JTJ);
+}
 
-  if (state->work_JTJ)
+  if (state->work_JTJ) {
     gsl_matrix_free(state->work_JTJ);
+}
 
-  if (state->rhs)
+  if (state->rhs) {
     gsl_vector_free(state->rhs);
+}
 
-  if (state->perm)
+  if (state->perm) {
     gsl_permutation_free(state->perm);
+}
 
-  if (state->work3p)
+  if (state->work3p) {
     gsl_vector_free(state->work3p);
+}
 
-  if (state->workn)
+  if (state->workn) {
     gsl_vector_free(state->workn);
+}
 
   free(state);
 }
@@ -174,20 +181,22 @@ mcholesky_presolve(const double mu, const void * vtrust_state, void * vstate)
   mcholesky_state_t *state = (mcholesky_state_t *) vstate;
   gsl_matrix *JTJ = state->work_JTJ;
   const gsl_vector *diag = trust_state->diag;
-  int status;
+  int status = 0;
 
   /* copy lower triangle of A to workspace */
   gsl_matrix_tricpy(CblasLower, CblasNonUnit, JTJ, state->JTJ);
 
   /* augment normal equations: A -> A + mu D^T D */
   status = mcholesky_regularize(mu, diag, JTJ, state);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* compute modified Cholesky decomposition */
   status = gsl_linalg_mcholesky_decomp(JTJ, state->perm, NULL);
-  if (status)
+  if (status) {
     return status;
+}
 
   state->mu = mu;
 
@@ -210,11 +219,12 @@ mcholesky_solve(const gsl_vector * g, gsl_vector *x,
                const void * vtrust_state, void *vstate)
 {
   mcholesky_state_t *state = (mcholesky_state_t *) vstate;
-  int status;
+  int status = 0;
 
   status = mcholesky_solve_rhs(g, x, state);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* reverse direction to go downhill */
   gsl_vector_scale(x, -1.0);
@@ -227,9 +237,9 @@ mcholesky_solve(const gsl_vector * g, gsl_vector *x,
 static int
 mcholesky_rcond(double * rcond, const gsl_matrix * JTJ, void * vstate)
 {
-  int status;
+  int status = 0;
   mcholesky_state_t *state = (mcholesky_state_t *) vstate;
-  double rcond_JTJ;
+  double rcond_JTJ = NAN;
 
   /* its possible the current Cholesky decomposition is from the previous
    * iteration so do a new one to be sure we use the right Jacobian */
@@ -239,12 +249,14 @@ mcholesky_rcond(double * rcond, const gsl_matrix * JTJ, void * vstate)
 
   /* compute modified Cholesky decomposition */
   status = gsl_linalg_mcholesky_decomp(state->work_JTJ, state->perm, NULL);
-  if (status)
+  if (status) {
     return status;
+}
 
   status = gsl_linalg_mcholesky_rcond(state->work_JTJ, state->perm, &rcond_JTJ, state->work3p);
-  if (status == GSL_SUCCESS)
+  if (status == GSL_SUCCESS) {
     *rcond = sqrt(rcond_JTJ);
+}
 
   return status;
 }
@@ -252,7 +264,7 @@ mcholesky_rcond(double * rcond, const gsl_matrix * JTJ, void * vstate)
 static int
 mcholesky_covar(const gsl_matrix * JTJ, gsl_matrix * covar, void * vstate)
 {
-  int status;
+  int status = 0;
   mcholesky_state_t *state = (mcholesky_state_t *) vstate;
 
   /* its possible the current Cholesky decomposition is from the previous
@@ -263,12 +275,14 @@ mcholesky_covar(const gsl_matrix * JTJ, gsl_matrix * covar, void * vstate)
 
   /* compute modified Cholesky decomposition */
   status = gsl_linalg_mcholesky_decomp(state->work_JTJ, state->perm, NULL);
-  if (status)
+  if (status) {
     return status;
+}
 
   status = gsl_linalg_mcholesky_invert(state->work_JTJ, state->perm, covar);
-  if (status)
+  if (status) {
     return status;
+}
 
   return GSL_SUCCESS;
 }
@@ -277,12 +291,13 @@ mcholesky_covar(const gsl_matrix * JTJ, gsl_matrix * covar, void * vstate)
 static int
 mcholesky_solve_rhs(const gsl_vector * b, gsl_vector *x, mcholesky_state_t *state)
 {
-  int status;
+  int status = 0;
   gsl_matrix *JTJ = state->work_JTJ;
 
   status = gsl_linalg_mcholesky_solve(JTJ, state->perm, b, x);
-  if (status)
+  if (status) {
     return status;
+}
 
   return GSL_SUCCESS;
 }
@@ -296,7 +311,7 @@ mcholesky_regularize(const double mu, const gsl_vector * diag, gsl_matrix * A,
 
   if (mu != 0.0)
     {
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < diag->size; ++i)
         {

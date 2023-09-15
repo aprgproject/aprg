@@ -33,7 +33,11 @@
 double
 gsl_ran_lognormal (const gsl_rng * r, const double zeta, const double sigma)
 {
-  double u, v, r2, normal, z;
+  double u;
+  double v;
+  double r2;
+  double normal;
+  double z;
 
   do
     {
@@ -61,10 +65,10 @@ gsl_ran_lognormal_pdf (const double x, const double zeta, const double sigma)
     {
       return 0 ;
     }
-  else
-    {
+  
+    
       double u = (log (x) - zeta)/sigma;
       double p = 1 / (x * fabs(sigma) * sqrt (2 * M_PI)) * exp (-(u * u) /2);
       return p;
-    }
+   
 }

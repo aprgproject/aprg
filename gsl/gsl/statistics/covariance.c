@@ -94,22 +94,25 @@ compute_rank(gsl_vector *v)
       if (vi == gsl_vector_get(v, i + 1))
         {
           size_t j = i + 2;
-          size_t k;
+          size_t k = 0;
           double rank = 0.0;
 
           /* we have detected a tie, find number of equal elements */
-          while (j < n && vi == gsl_vector_get(v, j))
+          while (j < n && vi == gsl_vector_get(v, j)) {
             ++j;
+}
 
           /* compute rank */
-          for (k = i; k < j; ++k)
+          for (k = i; k < j; ++k) {
             rank += k + 1.0;
+}
 
           /* divide by number of ties */
           rank /= (double) (j - i);
 
-          for (k = i; k < j; ++k)
+          for (k = i; k < j; ++k) {
             gsl_vector_set(v, k, rank);
+}
 
           i = j;
         }
@@ -121,8 +124,9 @@ compute_rank(gsl_vector *v)
         }
     }
 
-  if (i == n - 1)
+  if (i == n - 1) {
     gsl_vector_set(v, n - 1, (double) n);
+}
 
   return GSL_SUCCESS;
 } /* compute_rank() */

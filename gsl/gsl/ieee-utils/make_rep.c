@@ -194,8 +194,8 @@ determine_ieee_type (int non_zero, int exponent, int max_exponent)
           return GSL_IEEE_TYPE_ZERO ;
        
     }
-  else
-    {
+  
+    
       return GSL_IEEE_TYPE_NORMAL ;
-    }
+   
 }

@@ -24,7 +24,7 @@
 gsl_multifit_linear_workspace *
 gsl_multifit_linear_alloc (const size_t nmax, const size_t pmax)
 {
-  gsl_multifit_linear_workspace *w;
+  gsl_multifit_linear_workspace *w = NULL;
 
   w = calloc (1, sizeof (gsl_multifit_linear_workspace));
 
@@ -104,26 +104,33 @@ gsl_multifit_linear_free (gsl_multifit_linear_workspace * w)
 {
   RETURN_IF_NULL (w);
 
-  if (w->A)
+  if (w->A) {
     gsl_matrix_free (w->A);
+}
 
-  if (w->Q)
+  if (w->Q) {
     gsl_matrix_free (w->Q);
+}
 
-  if (w->QSI)
+  if (w->QSI) {
     gsl_matrix_free (w->QSI);
+}
 
-  if (w->S)
+  if (w->S) {
     gsl_vector_free (w->S);
+}
 
-  if (w->t)
+  if (w->t) {
     gsl_vector_free (w->t);
+}
 
-  if (w->xt)
+  if (w->xt) {
     gsl_vector_free (w->xt);
+}
 
-  if (w->D)
+  if (w->D) {
     gsl_vector_free (w->D);
+}
 
   free (w);
 }

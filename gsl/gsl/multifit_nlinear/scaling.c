@@ -80,15 +80,16 @@ static int
 update_diag_marquardt (const gsl_matrix * J, gsl_vector * diag)
 {
   const size_t p = J->size2;
-  size_t j;
+  size_t j = 0;
 
   for (j = 0; j < p; j++)
     {
       gsl_vector_const_view v = gsl_matrix_const_column(J, j);
       double norm = gsl_blas_dnrm2(&v.vector);
 
-      if (norm == 0.0)
+      if (norm == 0.0) {
         norm = 1.0;
+}
 
       gsl_vector_set(diag, j, norm);
     }
@@ -101,7 +102,7 @@ update_diag_marquardt (const gsl_matrix * J, gsl_vector * diag)
 static int
 init_diag_more(const gsl_matrix * J, gsl_vector * diag)
 {
-  int status;
+  int status = 0;
 
   gsl_vector_set_zero(diag);
   status = update_diag_more(J, diag);
@@ -115,7 +116,7 @@ static int
 update_diag_more (const gsl_matrix * J, gsl_vector * diag)
 {
   const size_t p = J->size2;
-  size_t j;
+  size_t j = 0;
 
   for (j = 0; j < p; j++)
     {
@@ -123,8 +124,9 @@ update_diag_more (const gsl_matrix * J, gsl_vector * diag)
       double norm = gsl_blas_dnrm2(&v.vector);
       double *diagj = gsl_vector_ptr(diag, j);
 
-      if (norm == 0.0)
+      if (norm == 0.0) {
         norm = 1.0;
+}
 
       *diagj = GSL_MAX(*diagj, norm);
     }

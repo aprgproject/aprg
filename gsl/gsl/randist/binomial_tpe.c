@@ -96,12 +96,15 @@ gsl_ran_binomial_tpe (const gsl_rng * rng, double p, unsigned int n)
 unsigned int
 gsl_ran_binomial (const gsl_rng * rng, double p, unsigned int n)
 {
-  int ix;                       /* return value */
+  int ix = 0;                       /* return value */
   int flipped = 0;
-  double q, s, np;
+  double q;
+  double s;
+  double np;
 
-  if (n == 0)
+  if (n == 0) {
     return 0;
+}
 
   if (p > 0.5)
     {
@@ -134,8 +137,9 @@ gsl_ran_binomial (const gsl_rng * rng, double p, unsigned int n)
 
           for (ix = 0; ix <= BINV_CUTOFF; ++ix)
             {
-              if (u < f)
+              if (u < f) {
                 goto Finish;
+}
               u -= f;
               /* Use recursion f(x+1) = f(x)*[(n-x)/(x+1)]*[p/(1-p)] */
               f *= s * (n - ix) / (ix + 1);
@@ -166,7 +170,7 @@ gsl_ran_binomial (const gsl_rng * rng, double p, unsigned int n)
     {
       /* For n >= SMALL_MEAN, we invoke the BTPE algorithm */
 
-      int k;
+      int k = 0;
 
       double ffm = np + p;      /* ffm = n*p+p             */
       int m = (int) ffm;        /* m = int floor[n*p+p]    */
@@ -205,8 +209,10 @@ gsl_ran_binomial (const gsl_rng * rng, double p, unsigned int n)
       double p3 = p2 + c / lambda_l;
       double p4 = p3 + c / lambda_r;
 
-      double var, accept;
-      double u, v;              /* random variates */
+      double var;
+      double accept;
+      double u;
+      double v;              /* random variates */
 
     TryAgain:
 
@@ -225,24 +231,27 @@ gsl_ran_binomial (const gsl_rng * rng, double p, unsigned int n)
           /* Parallelogram region */
           double x = xl + (u - p1) / c;
           v = v * c + 1.0 - fabs (x - xm) / p1;
-          if (v > 1.0 || v <= 0.0)
+          if (v > 1.0 || v <= 0.0) {
             goto TryAgain;
+}
           ix = (int) x;
         }
       else if (u <= p3)
         {
           /* Left tail */
           ix = (int) (xl + log (v) / lambda_l);
-          if (ix < 0)
+          if (ix < 0) {
             goto TryAgain;
+}
           v *= ((u - p2) * lambda_l);
         }
       else
         {
           /* Right tail */
           ix = (int) (xr - log (v) / lambda_r);
-          if (ix > (double) n)
+          if (ix > (double) n) {
             goto TryAgain;
+}
           v *= ((u - p3) * lambda_r);
         }
 
@@ -283,7 +292,7 @@ gsl_ran_binomial (const gsl_rng * rng, double p, unsigned int n)
 
           if (m < ix)
             {
-              int i;
+              int i = 0;
               for (i = m + 1; i <= ix; i++)
                 {
                   f *= (g / i - s);
@@ -291,7 +300,7 @@ gsl_ran_binomial (const gsl_rng * rng, double p, unsigned int n)
             }
           else if (m > ix)
             {
-              int i;
+              int i = 0;
               for (i = ix + 1; i <= m; i++)
                 {
                   f /= (g / i - s);
@@ -314,10 +323,12 @@ gsl_ran_binomial (const gsl_rng * rng, double p, unsigned int n)
               double amaxp =
                 k / npq * ((k * (k / 3.0 + 0.625) + (1.0 / 6.0)) / npq + 0.5);
               double ynorm = -(k * k / (2.0 * npq));
-              if (var < ynorm - amaxp)
+              if (var < ynorm - amaxp) {
                 goto Finish;
-              if (var > ynorm + amaxp)
+}
+              if (var > ynorm + amaxp) {
                 goto TryAgain;
+}
             }
 
           /* Now, again: do the test log(v) vs. log f(x)/f(M) */

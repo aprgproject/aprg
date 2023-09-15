@@ -39,7 +39,7 @@ static double calc_psq(const double qp1, const double q, const double qm1,
 gsl_rstat_quantile_workspace *
 gsl_rstat_quantile_alloc(const double p)
 {
-  gsl_rstat_quantile_workspace *w;
+  gsl_rstat_quantile_workspace *w = NULL;
 
   w = calloc(1, sizeof(gsl_rstat_quantile_workspace));
   if (w == 0)
@@ -64,11 +64,12 @@ int
 gsl_rstat_quantile_reset(gsl_rstat_quantile_workspace *w)
 {
   const double p = w->p;
-  size_t i;
+  size_t i = 0;
 
   /* initialize positions n */
-  for (i = 0; i < 5; ++i)
+  for (i = 0; i < 5; ++i) {
     w->npos[i] = i + 1;
+}
 
   /* initialize n' */
   w->np[0] = 1.0;
@@ -98,7 +99,7 @@ gsl_rstat_quantile_add(const double x, gsl_rstat_quantile_workspace *w)
     }
   else
     {
-      int i;
+      int i = 0;
       int k = -1;
 
       if (w->n == 5)
@@ -137,12 +138,14 @@ gsl_rstat_quantile_add(const double x, gsl_rstat_quantile_workspace *w)
         }
 
       /* step B2(a): update n_i */
-      for (i = k + 1; i <= 4; ++i)
+      for (i = k + 1; i <= 4; ++i) {
         ++(w->npos[i]);
+}
 
       /* step B2(b): update n_i' */
-      for (i = 0; i < 5; ++i)
+      for (i = 0; i < 5; ++i) {
         w->np[i] += w->dnp[i];
+}
 
       /* step B3: update heights */
       for (i = 1; i <= 3; ++i)
@@ -162,9 +165,9 @@ gsl_rstat_quantile_add(const double x, gsl_rstat_quantile_workspace *w)
               double qp = calc_psq(qp1, qi, qm1, (double) dsign,
                                    np1, ni, nm1);
 
-              if (qm1 < qp && qp < qp1)
+              if (qm1 < qp && qp < qp1) {
                 w->q[i] = qp;
-              else
+              } else
                 {
                   /* use linear formula */
                   w->q[i] += dsign * (w->q[i + dsign] - qi) / ((double) w->npos[i + dsign] - ni);
@@ -187,12 +190,12 @@ gsl_rstat_quantile_get(gsl_rstat_quantile_workspace *w)
     {
       return w->q[2];
     }
-  else
-    {
+  
+    
       /* not yet initialized */
       gsl_sort(w->q, 1, w->n);
       return gsl_stats_quantile_from_sorted_data(w->q, 1, w->n, w->p);
-    }
+   
 } /* gsl_rstat_quantile_get() */
 
 static double

@@ -80,14 +80,14 @@ mt_get (void *vstate)
 {
   mt_state_t *state = (mt_state_t *) vstate;
 
-  unsigned long k ;
+  unsigned long k = 0 ;
   unsigned long int *const mt = state->mt;
 
 #define MAGIC(y) (((y)&0x1) ? 0x9908b0dfUL : 0)
 
   if (state->mti >= N)
     {   /* generate N words at one time */
-      int kk;
+      int kk = 0;
 
       for (kk = 0; kk < N - M; kk++)
         {
@@ -131,10 +131,11 @@ static void
 mt_set (void *vstate, unsigned long int s)
 {
   mt_state_t *state = (mt_state_t *) vstate;
-  int i;
+  int i = 0;
 
-  if (s == 0)
+  if (s == 0) {
     s = 4357;   /* the default seed is 4357 */
+}
 
   state->mt[0]= s & 0xffffffffUL;
 
@@ -156,10 +157,11 @@ static void
 mt_1999_set (void *vstate, unsigned long int s)
 {
   mt_state_t *state = (mt_state_t *) vstate;
-  int i;
+  int i = 0;
 
-  if (s == 0)
+  if (s == 0) {
     s = 4357;   /* the default seed is 4357 */
+}
 
   /* This is the October 1999 version of the seeding procedure. It
      was updated by the original developers to avoid the periodicity
@@ -189,17 +191,19 @@ static void
 mt_1998_set (void *vstate, unsigned long int s)
 {
   mt_state_t *state = (mt_state_t *) vstate;
-  int i;
+  int i = 0;
 
-  if (s == 0)
+  if (s == 0) {
     s = 4357;   /* the default seed is 4357 */
+}
 
   state->mt[0] = s & 0xffffffffUL;
 
 #define LCG1998(n) ((69069 * n) & 0xffffffffUL)
 
-  for (i = 1; i < N; i++)
+  for (i = 1; i < N; i++) {
     state->mt[i] = LCG1998 (state->mt[i - 1]);
+}
 
   state->mti = i;
 }

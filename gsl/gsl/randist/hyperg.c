@@ -61,16 +61,17 @@ gsl_ran_hypergeometric (const gsl_rng * r, unsigned int n1, unsigned int n2,
           if (b * u < a)
             {
               k++ ;
-              if (k == n1)
+              if (k == n1) {
                 return k ;
+}
               a-- ;
             }
           b-- ;
         }
       return k;
     }
-  else
-    {
+  
+    
       for (i = 0 ; i < n - t ; i++)
         {
           double u = gsl_rng_uniform(r) ;
@@ -85,7 +86,7 @@ gsl_ran_hypergeometric (const gsl_rng * r, unsigned int n1, unsigned int n2,
           b-- ;
         }
       return n1 - k;
-    }
+   
 
 
 }
@@ -105,7 +106,7 @@ gsl_ran_hypergeometric_pdf (const unsigned int k,
     {
       return 0 ;
     }
-  else if (t > n2 && k + n2 < t )
+  if (t > n2 && k + n2 < t )
     {
       return 0 ;
     }

@@ -30,7 +30,7 @@ gsl_multilarge_linear_workspace *
 gsl_multilarge_linear_alloc(const gsl_multilarge_linear_type *T,
                             const size_t p)
 {
-  gsl_multilarge_linear_workspace *w;
+  gsl_multilarge_linear_workspace *w = NULL;
 
   w = calloc(1, sizeof(gsl_multilarge_linear_workspace));
   if (w == NULL)
@@ -62,8 +62,9 @@ gsl_multilarge_linear_free(gsl_multilarge_linear_workspace *w)
 {
   RETURN_IF_NULL(w);
 
-  if (w->state)
+  if (w->state) {
     w->type->free(w->state);
+}
 
   free(w);
 }
@@ -191,12 +192,13 @@ gsl_multilarge_linear_wstdform1 (const gsl_vector * L,
 
       /* compute Xs = sqrt(W) X and ys = sqrt(W) y */
       status = gsl_multifit_linear_applyW(X, w, y, Xs, ys);
-      if (status)
+      if (status) {
         return status;
+}
 
       if (L != NULL)
         {
-          size_t j;
+          size_t j = 0;
 
           /* construct X~ = sqrt(W) X * L^{-1} matrix */
           for (j = 0; j < p; ++j)
@@ -225,7 +227,7 @@ gsl_multilarge_linear_stdform1 (const gsl_vector * L,
                                 gsl_vector * ys,
                                 gsl_multilarge_linear_workspace * work)
 {
-  int status;
+  int status = 0;
 
   status = gsl_multilarge_linear_wstdform1(L, X, NULL, y, Xs, ys, work);
 
@@ -244,7 +246,7 @@ gsl_multilarge_linear_L_decomp (gsl_matrix * L, gsl_vector * tau)
     }
   else
     {
-      int status;
+      int status = 0;
 
       status = gsl_multifit_linear_L_decomp(L, tau);
 
@@ -298,14 +300,15 @@ gsl_multilarge_linear_wstdform2 (const gsl_matrix * LQR,
     }
   else
     {
-      int status;
-      size_t i;
+      int status = 0;
+      size_t i = 0;
       gsl_matrix_const_view R = gsl_matrix_const_submatrix(LQR, 0, 0, p, p);
 
       /* compute Xs = sqrt(W) X and ys = sqrt(W) y */
       status = gsl_multifit_linear_applyW(X, w, y, Xs, ys);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* compute X~ = X R^{-1} using QR decomposition of L */
       for (i = 0; i < n; ++i)
@@ -329,7 +332,7 @@ gsl_multilarge_linear_stdform2 (const gsl_matrix * LQR,
                                 gsl_vector * ys,
                                 gsl_multilarge_linear_workspace * work)
 {
-  int status;
+  int status = 0;
 
   status = gsl_multilarge_linear_wstdform2(LQR, Ltau, X, NULL, y, Xs, ys, work);
 
@@ -397,7 +400,7 @@ gsl_multilarge_linear_genform2 (const gsl_matrix * LQR,
     }
   else
     {
-      int s;
+      int s = 0;
       gsl_matrix_const_view R = gsl_matrix_const_submatrix(LQR, 0, 0, p, p); /* R factor of L */
 
       /* solve R c = cs for true solution c, using QR decomposition of L */

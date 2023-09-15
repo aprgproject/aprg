@@ -49,7 +49,7 @@ gsl_poly_solve_cubic (double a, double b, double c,
       *x2 = - a / 3 ;
       return 3 ;
     }
-  else if (CR2 == CQ3) 
+  if (CR2 == CQ3) 
     {
       /* this test is actually R2 == Q3, written in a form suitable
          for exact computation with integers */

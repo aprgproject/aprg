@@ -36,12 +36,12 @@ gsl_poly_complex_solve_quadratic (double a, double b, double c,
         {
           return 0;
         }
-      else
-        {
+      
+        
           GSL_REAL(*z0) = -c / b;
           GSL_IMAG(*z0) = 0;
           return 1;
-        };
+       ;
     }
 
   if (disc > 0)
@@ -78,7 +78,7 @@ gsl_poly_complex_solve_quadratic (double a, double b, double c,
         }
       return 2;
     }
-  else if (disc == 0)
+  if (disc == 0)
     {
       GSL_REAL (*z0) = -0.5 * b / a;
       GSL_IMAG (*z0) = 0;

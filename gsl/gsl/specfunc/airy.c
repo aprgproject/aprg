@@ -774,7 +774,7 @@ int gsl_sf_airy_Bi_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     const double y = 2.0*x*sqrt(x)/3.0;
     const double s = exp(y);
 
@@ -789,7 +789,7 @@ int gsl_sf_airy_Bi_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
       result->err += GSL_DBL_EPSILON * fabs(result->val);
       return stat_bie;
     }
-  }
+ 
 }
 
 
@@ -838,9 +838,9 @@ gsl_sf_airy_Bi_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     return airy_bie(x, mode, result);
-  }
+ 
 }
 
 

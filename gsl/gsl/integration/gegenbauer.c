@@ -55,7 +55,7 @@ gegenbauer_check(const size_t n, const gsl_integration_fixed_params * params)
 static int
 gegenbauer_init(const size_t n, double * diag, double * subdiag, gsl_integration_fixed_params * params)
 {
-  size_t i;
+  size_t i = 0;
 
   /* construct the diagonal and subdiagonal elements of Jacobi matrix */
   diag[0] = 0.0;

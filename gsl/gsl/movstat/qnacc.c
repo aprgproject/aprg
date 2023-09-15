@@ -85,8 +85,9 @@ qnacc_delete(void * vstate)
 {
   qnacc_state_t * state = (qnacc_state_t *) vstate;
 
-  if (!ringbuf_is_empty(state->rbuf))
+  if (!ringbuf_is_empty(state->rbuf)) {
     ringbuf_pop_back(state->rbuf);
+}
 
   return GSL_SUCCESS;
 }

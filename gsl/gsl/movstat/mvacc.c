@@ -27,6 +27,7 @@
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_movstat.h>
+#include <math.h>
 
 typedef double ringbuf_type_t;
 
@@ -154,10 +155,11 @@ mvacc_variance(void * params, double * result, const void * vstate)
 
   (void) params;
 
-  if (state->k < 2)
+  if (state->k < 2) {
     *result = 0.0;
-  else
+  } else {
     *result = state->M2 / (state->k - 1.0);
+}
 
   return GSL_SUCCESS;
 }
@@ -165,7 +167,7 @@ mvacc_variance(void * params, double * result, const void * vstate)
 static int
 mvacc_sd(void * params, double * result, const void * vstate)
 {
-  double variance;
+  double variance = NAN;
   int status = mvacc_variance(params, &variance, vstate);
   *result = sqrt(variance);
   return status;

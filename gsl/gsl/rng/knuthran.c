@@ -63,20 +63,24 @@ ran_state_t;
 static inline void
 ran_array (unsigned long int aa[], unsigned int n, unsigned long int ran_x[])
 {
-  unsigned int i;
-  unsigned int j;
+  unsigned int i = 0;
+  unsigned int j = 0;
 
-  for (j = 0; j < KK; j++)
+  for (j = 0; j < KK; j++) {
     aa[j] = ran_x[j];
+}
 
-  for (; j < n; j++)
+  for (; j < n; j++) {
     aa[j] = mod_diff (aa[j - KK], aa[j - LL]);
+}
 
-  for (i = 0; i < LL; i++, j++)
+  for (i = 0; i < LL; i++, j++) {
     ran_x[i] = mod_diff (aa[j - KK], aa[j - LL]);
+}
 
-  for (; i < KK; i++, j++)
+  for (; i < KK; i++, j++) {
     ran_x[i] = mod_diff (aa[j - KK], ran_x[i - LL]);
+}
 }
 
 static inline unsigned long int
@@ -112,54 +116,64 @@ ran_set (void *vstate, unsigned long int s)
 
   long x[KK + KK - 1];          /* the preparation buffer */
 
-  register int j;
-  register int t;
+  register int j = 0;
+  register int t = 0;
   register long ss = evenize (s + 2);
 
   for (j = 0; j < KK; j++)
     {
       x[j] = ss;                /* bootstrap the buffer */
       ss <<= 1;
-      if (ss >= MM)             /* cyclic shift 29 bits */
+      if (ss >= MM) {             /* cyclic shift 29 bits */
         ss -= MM - 2;
+}
     }
-  for (; j < KK + KK - 1; j++)
+  for (; j < KK + KK - 1; j++) {
     x[j] = 0;
+}
   x[1]++;                       /* make x[1] (and only x[1]) odd */
   ss = s & (MM - 1);
   t = TT - 1;
   while (t)
     {
-      for (j = KK - 1; j > 0; j--)      /* square */
+      for (j = KK - 1; j > 0; j--) {      /* square */
         x[j + j] = x[j];
-      for (j = KK + KK - 2; j > KK - LL; j -= 2)
+}
+      for (j = KK + KK - 2; j > KK - LL; j -= 2) {
         x[KK + KK - 1 - j] = evenize (x[j]);
-      for (j = KK + KK - 2; j >= KK; j--)
+}
+      for (j = KK + KK - 2; j >= KK; j--) {
         if (is_odd (x[j]))
           {
             x[j - (KK - LL)] = mod_diff (x[j - (KK - LL)], x[j]);
             x[j - KK] = mod_diff (x[j - KK], x[j]);
           }
+}
       if (is_odd (ss))
         {                       /* multiply by "z" */
-          for (j = KK; j > 0; j--)
+          for (j = KK; j > 0; j--) {
             x[j] = x[j - 1];
+}
           x[0] = x[KK];         /* shift the buffer cyclically */
-          if (is_odd (x[KK]))
+          if (is_odd (x[KK])) {
             x[LL] = mod_diff (x[LL], x[KK]);
+}
         }
-      if (ss)
+      if (ss) {
         ss >>= 1;
-      else
+      } else {
         t--;
+}
     }
 
   state->i = 0;
 
-  for (j = 0; j < LL; j++)
+  for (j = 0; j < LL; j++) {
     state->ran_x[j + KK - LL] = x[j];
-  for (; j < KK; j++)
+}
+  for (; j < KK; j++) {
     state->ran_x[j - LL] = x[j];
+}
 
   return;
 }

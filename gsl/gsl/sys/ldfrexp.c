@@ -71,8 +71,8 @@ gsl_frexp (const double x, int *e)
       *e = 0;
       return x;
     }
-  else
-    {
+  
+    
       double ex = ceil (log (fabs (x)) / M_LN2);
       int ei = (int) ex;
       double f;
@@ -107,5 +107,5 @@ gsl_frexp (const double x, int *e)
 
       *e = ei;
       return f;
-    }
+   
 }

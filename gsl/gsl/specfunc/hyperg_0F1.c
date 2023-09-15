@@ -26,6 +26,7 @@
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_bessel.h>
 #include <gsl/gsl_sf_hyperg.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -58,14 +59,14 @@ hyperg_0F1_bessel_I(const double nu, const double x, gsl_sf_result * result)
     result->err += fabs(s * (K.val/ex)) * GSL_DBL_EPSILON * anu * M_PI;
     return GSL_ERROR_SELECT_2(stat_K, stat_I);
   }
-  else {
+  
     const double ex  = exp(x);
     gsl_sf_result I;
     int stat_I = gsl_sf_bessel_Inu_scaled_e(nu, x, &I);
     result->val = ex * I.val;
     result->err = ex * I.err + GSL_DBL_EPSILON * fabs(result->val);
     return stat_I;
-  }
+ 
 }
 
 
@@ -91,9 +92,9 @@ hyperg_0F1_bessel_J(const double nu, const double x, gsl_sf_result * result)
     result->err += fabs(anu * M_PI) * GSL_DBL_EPSILON * fabs(J.val + Y.val);
     return GSL_ERROR_SELECT_2(stat_Y, stat_J);
   }
-  else {
+  
     return gsl_sf_bessel_Jnu_e(nu, x, result);
-  }
+ 
 }
 
 
@@ -113,7 +114,7 @@ gsl_sf_hyperg_0F1_e(double c, double x, gsl_sf_result * result)
   else if(x < 0.0) {
     gsl_sf_result Jcm1;
     gsl_sf_result lg_c;
-    double sgn;
+    double sgn = NAN;
     int stat_g = gsl_sf_lngamma_sgn_e(c, &lg_c, &sgn);
     int stat_J = hyperg_0F1_bessel_J(c-1.0, 2.0*sqrt(-x), &Jcm1);
     if(stat_g != GSL_SUCCESS) {
@@ -121,7 +122,7 @@ gsl_sf_hyperg_0F1_e(double c, double x, gsl_sf_result * result)
       result->err = 0.0;
       return stat_g;
     }
-    else if(Jcm1.val == 0.0) {
+    if(Jcm1.val == 0.0) {
       result->val = 0.0;
       result->err = 0.0;
       return stat_J;
@@ -143,7 +144,7 @@ gsl_sf_hyperg_0F1_e(double c, double x, gsl_sf_result * result)
   else {
     gsl_sf_result Icm1;
     gsl_sf_result lg_c;
-    double sgn;
+    double sgn = NAN;
     int stat_g = gsl_sf_lngamma_sgn_e(c, &lg_c, &sgn);
     int stat_I = hyperg_0F1_bessel_I(c-1.0, 2.0*sqrt(x), &Icm1);
     if(stat_g != GSL_SUCCESS) {
@@ -151,7 +152,7 @@ gsl_sf_hyperg_0F1_e(double c, double x, gsl_sf_result * result)
       result->err = 0.0;
       return stat_g;
     }
-    else if(Icm1.val == 0.0) {
+    if(Icm1.val == 0.0) {
       result->val = 0.0;
       result->err = 0.0;
       return stat_I;

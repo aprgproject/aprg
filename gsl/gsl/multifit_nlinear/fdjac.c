@@ -26,6 +26,7 @@
 #include <gsl/gsl_multifit_nlinear.h>
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_matrix.h>
+#include <math.h>
 
 static int forward_jac(const double h, const gsl_vector *x,
                        const gsl_vector *wts,
@@ -53,8 +54,9 @@ forward_jac(const double h, const gsl_vector *x, const gsl_vector *wts,
             gsl_multifit_nlinear_fdf *fdf, const gsl_vector *f, gsl_matrix *J)
 {
   int status = 0;
-  size_t i, j;
-  double delta;
+  size_t i;
+  size_t j;
+  double delta = NAN;
 
   for (j = 0; j < fdf->p; ++j)
     {
@@ -64,15 +66,17 @@ forward_jac(const double h, const gsl_vector *x, const gsl_vector *wts,
       gsl_vector_view v = gsl_matrix_column(J, j);
 
       delta = h * fabs(xj);
-      if (delta == 0.0)
+      if (delta == 0.0) {
         delta = h;
+}
 
       /* perturb x_j to compute forward difference */
       gsl_vector_set((gsl_vector *) x, j, xj + delta);
 
       status += gsl_multifit_nlinear_eval_f (fdf, x, wts, &v.vector);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* restore x_j */
       gsl_vector_set((gsl_vector *) x, j, xj);
@@ -109,8 +113,9 @@ center_jac(const double h, const gsl_vector *x, const gsl_vector *wts,
            gsl_multifit_nlinear_fdf *fdf, gsl_matrix *J, gsl_vector *work)
 {
   int status = 0;
-  size_t i, j;
-  double delta;
+  size_t i;
+  size_t j;
+  double delta = NAN;
 
   for (j = 0; j < fdf->p; ++j)
     {
@@ -120,22 +125,25 @@ center_jac(const double h, const gsl_vector *x, const gsl_vector *wts,
       gsl_vector_view v = gsl_matrix_column(J, j);
 
       delta = h * fabs(xj);
-      if (delta == 0.0)
+      if (delta == 0.0) {
         delta = h;
+}
 
       /* perturb x_j to compute forward difference, f(x + 1/2 delta e_j) */
       gsl_vector_set((gsl_vector *) x, j, xj + 0.5 * delta);
 
       status += gsl_multifit_nlinear_eval_f (fdf, x, wts, &v.vector);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* perturb x_j to compute backward difference, f(x - 1/2 delta e_j) */
       gsl_vector_set((gsl_vector *) x, j, xj - 0.5 * delta);
 
       status += gsl_multifit_nlinear_eval_f (fdf, x, wts, work);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* restore x_j */
       gsl_vector_set((gsl_vector *) x, j, xj);
@@ -175,7 +183,7 @@ gsl_multifit_nlinear_df(const double h, const gsl_multifit_nlinear_fdtype fdtype
                         gsl_multifit_nlinear_fdf *fdf,
                         const gsl_vector *f, gsl_matrix *J, gsl_vector *work)
 {
-  int status;
+  int status = 0;
 
   if (fdtype == GSL_MULTIFIT_NLINEAR_FWDIFF)
     {

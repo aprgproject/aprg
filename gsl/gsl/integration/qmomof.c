@@ -33,8 +33,8 @@ gsl_integration_qawo_table_alloc (double omega, double L,
                                   enum gsl_integration_qawo_enum sine,
                                   size_t n)
 {
-  gsl_integration_qawo_table *t;
-  double * chebmo;
+  gsl_integration_qawo_table *t = NULL;
+  double * chebmo = NULL;
 
   if (n == 0)
     {
@@ -70,7 +70,7 @@ gsl_integration_qawo_table_alloc (double omega, double L,
   /* precompute the moments */
 
   { 
-    size_t i;
+    size_t i = 0;
     double scale = 1.0;
 
     for (i = 0 ; i < t->n; i++)
@@ -96,7 +96,7 @@ gsl_integration_qawo_table_set (gsl_integration_qawo_table * t,
   /* recompute the moments */
 
   { 
-    size_t i;
+    size_t i = 0;
     double scale = 1.0;
 
     for (i = 0 ; i < t->n; i++)
@@ -116,8 +116,9 @@ gsl_integration_qawo_table_set_length (gsl_integration_qawo_table * t,
 {
   /* return immediately if the length is the same as the old length */
 
-  if (L == t->L)
+  if (L == t->L) {
     return GSL_SUCCESS;
+}
 
   /* otherwise reset the table and compute the new parameters */
 
@@ -127,7 +128,7 @@ gsl_integration_qawo_table_set_length (gsl_integration_qawo_table * t,
   /* recompute the moments */
 
   { 
-    size_t i;
+    size_t i = 0;
     double scale = 1.0;
 
     for (i = 0 ; i < t->n; i++)
@@ -152,7 +153,10 @@ gsl_integration_qawo_table_free (gsl_integration_qawo_table * t)
 static void
 compute_moments (double par, double *chebmo)
 {
-  double v[28], d[25], d1[25], d2[25];
+  double v[28];
+  double d[25];
+  double d1[25];
+  double d2[25];
 
   const size_t noeq = 25;
   
@@ -163,7 +167,7 @@ compute_moments (double par, double *chebmo)
   const double sinpar = sin (par);
   const double cospar = cos (par);
 
-  size_t i;
+  size_t i = 0;
 
   /* compute the chebyschev moments with respect to cosine */
 
@@ -180,9 +184,11 @@ compute_moments (double par, double *chebmo)
       /* compute the moments as the solution of a boundary value
          problem using the asyptotic expansion as an endpoint */
       
-      double an2, ass, asap;
+      double an2;
+      double ass;
+      double asap;
       double an = 6;
-      size_t k;
+      size_t k = 0;
 
       for (k = 0; k < noeq - 1; k++)
         {
@@ -213,7 +219,7 @@ compute_moments (double par, double *chebmo)
   else
     {
       /* compute the moments by forward recursion */
-      size_t k;
+      size_t k = 0;
       double an = 4;
 
       for (k = 3; k < 13; k++)
@@ -245,8 +251,10 @@ compute_moments (double par, double *chebmo)
       /* compute the moments as the solution of a boundary value
          problem using the asyptotic expansion as an endpoint */
 
-      size_t k;
-      double an2, ass, asap;
+      size_t k = 0;
+      double an2;
+      double ass;
+      double asap;
       double an = 5;
 
       for (k = 0; k < noeq - 1; k++)
@@ -277,7 +285,7 @@ compute_moments (double par, double *chebmo)
   else
     {
       /* compute the moments by forward recursion */
-      size_t k;
+      size_t k = 0;
       double an = 3;
       for (k = 2; k < 12; k++)
         {
@@ -307,7 +315,7 @@ dgtsl (size_t n, double *c, double *d, double *e, double *b)
 
      b[0 .. n - 1]   right hand side, replaced by the solution vector x */
 
-  size_t k;
+  size_t k = 0;
 
   c[0] = d[0];
 

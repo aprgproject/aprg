@@ -158,7 +158,7 @@ static void *
 subspace2D_alloc (const void * params, const size_t n, const size_t p)
 {
   const gsl_multilarge_nlinear_parameters *par = (const gsl_multilarge_nlinear_parameters *) params;
-  subspace2D_state_t *state;
+  subspace2D_state_t *state = NULL;
   
   state = calloc(1, sizeof(subspace2D_state_t));
   if (state == NULL)
@@ -251,41 +251,53 @@ subspace2D_free(void *vstate)
 {
   subspace2D_state_t *state = (subspace2D_state_t *) vstate;
 
-  if (state->dx_gn)
+  if (state->dx_gn) {
     gsl_vector_free(state->dx_gn);
+}
 
-  if (state->dx_sd)
+  if (state->dx_sd) {
     gsl_vector_free(state->dx_sd);
+}
 
-  if (state->workp1)
+  if (state->workp1) {
     gsl_vector_free(state->workp1);
+}
 
-  if (state->workp2)
+  if (state->workp2) {
     gsl_vector_free(state->workp2);
+}
 
-  if (state->workn)
+  if (state->workn) {
     gsl_vector_free(state->workn);
+}
 
-  if (state->W)
+  if (state->W) {
     gsl_matrix_free(state->W);
+}
 
-  if (state->work_JTJ)
+  if (state->work_JTJ) {
     gsl_matrix_free(state->work_JTJ);
+}
 
-  if (state->tau)
+  if (state->tau) {
     gsl_vector_free(state->tau);
+}
 
-  if (state->subg)
+  if (state->subg) {
     gsl_vector_free(state->subg);
+}
 
-  if (state->subB)
+  if (state->subB) {
     gsl_matrix_free(state->subB);
+}
 
-  if (state->perm)
+  if (state->perm) {
     gsl_permutation_free(state->perm);
+}
 
-  if (state->poly_p)
+  if (state->poly_p) {
     gsl_poly_complex_workspace_free(state->poly_p);
+}
 
   free(state);
 }
@@ -328,24 +340,26 @@ Notes: on output,
 static int
 subspace2D_preloop(const void * vtrust_state, void * vstate)
 {
-  int status;
+  int status = 0;
   const gsl_multilarge_nlinear_trust_state *trust_state =
     (const gsl_multilarge_nlinear_trust_state *) vtrust_state;
   subspace2D_state_t *state = (subspace2D_state_t *) vstate;
   gsl_vector_view v;
   double work_data[2];
   gsl_vector_view work = gsl_vector_view_array(work_data, 2);
-  int signum;
+  int signum = 0;
 
   /* calculate Gauss-Newton step */
   status = subspace2D_calc_gn(trust_state, state->dx_gn);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* now calculate the steepest descent step */
   status = subspace2D_calc_sd(trust_state, state->dx_sd, state);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* store norms */
   state->norm_Dgn = scaled_enorm(trust_state->diag, state->dx_gn);
@@ -360,14 +374,16 @@ subspace2D_preloop(const void * vtrust_state, void * vstate)
   v = gsl_matrix_column(state->W, 0);
   gsl_vector_memcpy(&v.vector, state->dx_sd);
   gsl_vector_mul(&v.vector, trust_state->diag);
-  if (state->norm_Dsd != 0)
+  if (state->norm_Dsd != 0) {
     gsl_vector_scale(&v.vector, 1.0 / state->norm_Dsd);
+}
 
   v = gsl_matrix_column(state->W, 1);
   gsl_vector_memcpy(&v.vector, state->dx_gn);
   gsl_vector_mul(&v.vector, trust_state->diag);
-  if (state->norm_Dgn != 0)
+  if (state->norm_Dgn != 0) {
     gsl_vector_scale(&v.vector, 1.0 / state->norm_Dgn);
+}
 
   /* use a rank revealing QR decomposition in case dx_sd and dx_gn
    * are parallel */
@@ -384,8 +400,13 @@ subspace2D_preloop(const void * vtrust_state, void * vstate)
        * subB = Q^T D^{-1} B D^{-1} Q where B = J^T J
        */
       const size_t p = state->p;
-      size_t i, j;
-      double B00, B10, B11, g0, g1;
+      size_t i;
+      size_t j;
+      double B00;
+      double B10;
+      double B11;
+      double g0;
+      double g1;
 
       /* compute subg */
       gsl_vector_memcpy(state->workp1, trust_state->g);
@@ -482,7 +503,7 @@ subspace2D_step(const void * vtrust_state, const double delta,
     }
   else
     {
-      int status;
+      int status = 0;
       const double delta_sq = delta * delta;
       double u = state->normg / delta;
       double a[5];
@@ -509,7 +530,7 @@ subspace2D_step(const void * vtrust_state, const double delta,
       status = gsl_poly_complex_solve(a, 5, state->poly_p, z);
       if (status == GSL_SUCCESS)
         {
-          size_t i;
+          size_t i = 0;
           double min = 0.0;
           int mini = -1;
           double x_data[2];
@@ -523,20 +544,23 @@ subspace2D_step(const void * vtrust_state, const double delta,
            */
           for (i = 0; i < 4; ++i)
             {
-              double cost, normx;
+              double cost;
+              double normx;
 
               /*fprintf(stderr, "root: %.12e + %.12e i\n",
                       z[2*i], z[2*i+1]);*/
 
               status = subspace2D_solution(z[2*i], &x.vector, state);
-              if (status != GSL_SUCCESS)
+              if (status != GSL_SUCCESS) {
                 continue; /* singular matrix system */
+}
 
               /* ensure ||x|| = delta */
 
               normx = gsl_blas_dnrm2(&x.vector);
-              if (normx == 0.0)
+              if (normx == 0.0) {
                 continue;
+}
 
               gsl_vector_scale(&x.vector, delta / normx);
 
@@ -554,8 +578,8 @@ subspace2D_step(const void * vtrust_state, const double delta,
               /* did not find minimizer - should not get here */
               return GSL_FAILURE;
             }
-          else
-            {
+          
+            
               /* compute x which minimizes objective function */
               subspace2D_solution(z[2*mini], &x.vector, state);
 
@@ -567,7 +591,7 @@ subspace2D_step(const void * vtrust_state, const double delta,
 
               /* compute final dx by multiplying by D^{-1} */
               gsl_vector_div(dx, trust_state->diag);
-            }
+           
         }
       else
         {
@@ -622,7 +646,7 @@ subspace2D_solution(const double lambda, gsl_vector * x,
 static double
 subspace2D_objective(const gsl_vector * x, subspace2D_state_t * state)
 {
-  double f;
+  double f = NAN;
   double y_data[2];
   gsl_vector_view y = gsl_vector_view_array(y_data, 2);
 
@@ -651,26 +675,29 @@ Return: success/error
 static int
 subspace2D_calc_gn(const gsl_multilarge_nlinear_trust_state * trust_state, gsl_vector * dx)
 {
-  int status;
+  int status = 0;
   const gsl_multilarge_nlinear_parameters *params = trust_state->params;
 
   /* initialize linear least squares solver */
   status = (params->solver->init)(trust_state, trust_state->solver_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* prepare the linear solver to compute Gauss-Newton step */
   status = (params->solver->presolve)(0.0, trust_state, trust_state->solver_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* solve: J dx_gn = -f for Gauss-Newton step */
   status = (params->solver->solve)(trust_state->g,
                                    dx,
                                    trust_state,
                                    trust_state->solver_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   return GSL_SUCCESS;
 }
@@ -692,10 +719,10 @@ static int
 subspace2D_calc_sd(const gsl_multilarge_nlinear_trust_state * trust_state, gsl_vector * dx,
                    subspace2D_state_t * state)
 {
-  double norm_Dinvg;   /* || D^{-1} g || */
-  double norm_JDinv2g; /* || J D^{-2} g || */
-  double alpha;        /* || D^{-1} g ||^2 / || J D^{-2} g ||^2 */
-  double u;
+  double norm_Dinvg = NAN;   /* || D^{-1} g || */
+  double norm_JDinv2g = NAN; /* || J D^{-2} g || */
+  double alpha = NAN;        /* || D^{-1} g ||^2 / || J D^{-2} g ||^2 */
+  double u = NAN;
 
   /* compute workp1 = D^{-1} g and its norm */
   gsl_vector_memcpy(state->workp1, trust_state->g);

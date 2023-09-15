@@ -51,7 +51,7 @@ gsl_sf_bessel_In_scaled_e(int n, const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(x*x < 10.0*(n+1.0)/M_E) {
+  if(x*x < 10.0*(n+1.0)/M_E) {
     gsl_sf_result t;
     double ex   = exp(-ax);
     int stat_In = gsl_sf_bessel_IJ_taylor_e((double)n, ax, 1, 50, GSL_DBL_EPSILON, &t);

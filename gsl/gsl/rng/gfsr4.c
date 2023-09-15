@@ -95,14 +95,16 @@ static void
 gfsr4_set (void *vstate, unsigned long int s)
 {
   gfsr4_state_t *state = (gfsr4_state_t *) vstate;
-  int i, j;
+  int i;
+  int j;
   /* Masks for turning on the diagonal bit and turning off the
      leftmost bits */
   unsigned long int msb = 0x80000000UL;
   unsigned long int mask = 0xffffffffUL;
 
-  if (s == 0)
+  if (s == 0) {
     s = 4357;   /* the default seed is 4357 */
+}
 
   /* We use the congruence s_{n+1} = (69069*s_n) mod 2^32 to
      initialize the state. This works because ANSI-C unsigned long
@@ -119,8 +121,9 @@ gfsr4_set (void *vstate, unsigned long int s)
       for (j = 0; j < 32; j++)
         {
           s = LCG(s) ;
-          if (s & msb) 
+          if (s & msb) { 
             t |= bit ;
+}
           bit >>= 1 ;
         }
       state->ra[i] = t ;

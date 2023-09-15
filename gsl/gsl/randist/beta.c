@@ -35,7 +35,10 @@ gsl_ran_beta (const gsl_rng * r, const double a, const double b)
 {
   if ( (a <= 1.0) && (b <= 1.0) )
     {
-      double U, V, X, Y;
+      double U;
+      double V;
+      double X;
+      double Y;
       while (1)
         {
           U = gsl_rng_uniform_pos(r);
@@ -48,15 +51,15 @@ gsl_ran_beta (const gsl_rng * r, const double a, const double b)
                 {
                   return X/ (X + Y);
                 }
-              else
-                {
+              
+                
                   double logX = log(U)/a;
                   double logY = log(V)/b;
                   double logM = logX > logY ? logX: logY;
                   logX -= logM;
                   logY -= logM;
                   return exp(logX - log(exp(logX) + exp(logY)));
-                }
+               
             }
         }
     }
@@ -75,8 +78,8 @@ gsl_ran_beta_pdf (const double x, const double a, const double b)
     {
       return 0 ;
     }
-  else 
-    {
+  
+    
       double p;
 
       double gab = gsl_sf_lngamma (a + b);
@@ -100,5 +103,5 @@ gsl_ran_beta_pdf (const double x, const double a, const double b)
         }
 
       return p;
-    }
+   
 }

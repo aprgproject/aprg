@@ -32,6 +32,7 @@
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_min.h>
+#include <math.h>
 
 typedef struct
 {
@@ -82,10 +83,10 @@ gsl_multifit_linear_gcv_init(const gsl_vector * y,
       const double smax = gsl_vector_get(&S.vector, 0);
       const double smin = gsl_vector_get(&S.vector, p - 1);
 
-      double dr; /* residual error from projection */
+      double dr = NAN; /* residual error from projection */
 
       double normy = gsl_blas_dnrm2(y);
-      double normUTy;
+      double normUTy = NAN;
 
       /* compute projection UTy = U^T y */
       gsl_blas_dgemv (CblasTrans, 1.0, &U.matrix, y, 0.0, UTy);
@@ -97,10 +98,11 @@ gsl_multifit_linear_gcv_init(const gsl_vector * y,
       /* calculate regularization parameters */
       gsl_multifit_linear_lreg(smin, smax, reg_param);
 
-      if (n > p && dr > 0.0)
+      if (n > p && dr > 0.0) {
         *delta0 = dr;
-      else
+      } else {
         *delta0 = 0.0;
+}
 
       return GSL_SUCCESS;
     }
@@ -140,7 +142,7 @@ gsl_multifit_linear_gcv_curve(const gsl_vector * reg_param,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       gsl_vector_view S = gsl_vector_subvector(work->S, 0, p);
       gsl_vector_view workp = gsl_matrix_subcolumn(work->QSI, 0, 0, p);
@@ -200,7 +202,7 @@ gsl_multifit_linear_gcv_min(const gsl_vector * reg_param,
     }
   else
     {
-      int status;
+      int status = 0;
       const size_t max_iter = 500;
       const double tol = 1.0e-4;
       gsl_vector_view S = gsl_vector_subvector(work->S, 0, p);
@@ -214,7 +216,7 @@ gsl_multifit_linear_gcv_min(const gsl_vector * reg_param,
       gsl_function F;
 
       /* XXX FIXME */
-      gsl_min_fminimizer *min_workspace_p;
+      gsl_min_fminimizer *min_workspace_p = NULL;
 
       if (idxG == 0 || idxG == ((int)npts - 1))
         {
@@ -249,10 +251,11 @@ gsl_multifit_linear_gcv_min(const gsl_vector * reg_param,
         }
       while (status == GSL_CONTINUE && iter < max_iter);
 
-      if (status == GSL_SUCCESS)
+      if (status == GSL_SUCCESS) {
         *lambda = gsl_min_fminimizer_minimum(min_workspace_p);
-      else
+      } else {
         status = GSL_EMAXITER;
+}
 
       gsl_min_fminimizer_free(min_workspace_p);
 
@@ -289,7 +292,7 @@ gsl_multifit_linear_gcv_calc(const double lambda,
       gsl_vector_view S = gsl_vector_subvector(work->S, 0, p);
       gsl_vector_view workp = gsl_matrix_subcolumn(work->QSI, 0, 0, p);
       gcv_params params;
-      double G;
+      double G = NAN;
 
       params.S = &S.vector;
       params.UTy = UTy;
@@ -339,22 +342,25 @@ gsl_multifit_linear_gcv(const gsl_vector * y,
     }
   else
     {
-      int status;
+      int status = 0;
       const size_t p = work->p;
       gsl_vector_view UTy = gsl_vector_subvector(work->xt, 0, p);
-      double delta0;
+      double delta0 = NAN;
 
       status = gsl_multifit_linear_gcv_init(y, reg_param, &UTy.vector, &delta0, work);
-      if (status)
+      if (status) {
         return status;
+}
 
       status = gsl_multifit_linear_gcv_curve(reg_param, &UTy.vector, delta0, G, work);
-      if (status)
+      if (status) {
         return status;
+}
 
       status = gsl_multifit_linear_gcv_min(reg_param, &UTy.vector, G, delta0, lambda, work);
-      if (status)
+      if (status) {
         return status;
+}
 
       *G_lambda = gsl_multifit_linear_gcv_calc(*lambda, &UTy.vector, delta0, work);
 
@@ -372,9 +378,11 @@ gcv_func(double lambda, void * params)
   size_t np = par->np;
   gsl_vector *workp = par->workp;
   const size_t p = S->size;
-  size_t i;
+  size_t i = 0;
   double lambda_sq = lambda * lambda;
-  double G, d, norm;
+  double G;
+  double d;
+  double norm;
   double sumf = 0.0;
 
   /* compute workp = 1 - filter_factors */

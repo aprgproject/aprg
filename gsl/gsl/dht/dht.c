@@ -21,6 +21,7 @@
 /* Author:  G. Jungman
  */
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_math.h>
@@ -31,7 +32,7 @@
 gsl_dht *
 gsl_dht_alloc (size_t size)
 {
-  gsl_dht * t;
+  gsl_dht * t = NULL;
 
   if(size == 0) {
     GSL_ERROR_VAL("size == 0", GSL_EDOM, 0);
@@ -79,7 +80,7 @@ gsl_dht_alloc (size_t size)
 static int
 dht_bessel_zeros(gsl_dht * t)
 {
-  unsigned int s;
+  unsigned int s = 0;
   gsl_sf_result z;
   int stat_z = 0;
   t->j[0] = 0.0;
@@ -98,17 +99,19 @@ dht_bessel_zeros(gsl_dht * t)
 gsl_dht *
 gsl_dht_new (size_t size, double nu, double xmax)
 {
-  int status;
+  int status = 0;
 
   gsl_dht * dht = gsl_dht_alloc (size);
 
-  if (dht == 0)
+  if (dht == 0) {
     return 0;
+}
 
   status = gsl_dht_init(dht, nu, xmax);
   
-  if (status)
+  if (status) {
     return 0;
+}
 
   return dht;
 }
@@ -122,10 +125,11 @@ gsl_dht_init(gsl_dht * t, double nu, double xmax)
     GSL_ERROR ("nu is negative", GSL_EDOM);
   }
   else {
-    size_t n, m;
+    size_t n;
+    size_t m;
     int stat_bz = GSL_SUCCESS;
     int stat_J  = 0;
-    double jN;
+    double jN = NAN;
 
     if(nu != t->nu) {
       /* Recalculate Bessel zeros if necessary. */
@@ -193,12 +197,12 @@ gsl_dht_apply(const gsl_dht * t, double * f_in, double * f_out)
 {
   const double jN = t->j[t->size + 1];
   const double r  = t->xmax / jN;
-  size_t m;
-  size_t i;
+  size_t m = 0;
+  size_t i = 0;
 
   for(m=0; m<t->size; m++) {
     double sum = 0.0;
-    double Y;
+    double Y = NAN;
     for(i=0; i<t->size; i++) {
       /* Need to find max and min so that we
        * address the symmetric Jjj matrix properly.
@@ -206,8 +210,8 @@ gsl_dht_apply(const gsl_dht * t, double * f_in, double * f_out)
        * by just running over the elements of Jjj
        * in a deterministic manner.
        */
-      size_t m_local; 
-      size_t n_local;
+      size_t m_local = 0; 
+      size_t n_local = 0;
       if(i < m) {
         m_local = i;
         n_local = m;

@@ -46,8 +46,8 @@ gsl_ran_flat_pdf (double x, const double a, const double b)
     {
       return 1 / (b - a);
     }
-  else
-    {
+  
+    
       return 0;
-    }
+   
 }

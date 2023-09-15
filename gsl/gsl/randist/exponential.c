@@ -44,10 +44,10 @@ gsl_ran_exponential_pdf (const double x, const double mu)
     {
       return 0 ;
     }
-  else
-    {
+  
+    
       double p = exp (-x/mu)/mu;
       
       return p;
-    }
+   
 }

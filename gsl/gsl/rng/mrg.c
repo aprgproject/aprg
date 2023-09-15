@@ -69,17 +69,22 @@ mrg_get (void *vstate)
 {
   mrg_state_t *state = (mrg_state_t *) vstate;
 
-  long int p1, h1, p5, h5;
+  long int p1;
+  long int h1;
+  long int p5;
+  long int h5;
 
   h5 = state->x5 / q5;
   p5 = a5 * (state->x5 - h5 * q5) - h5 * r5;
-  if (p5 > 0)
+  if (p5 > 0) {
     p5 -= m;
+}
 
   h1 = state->x1 / q1;
   p1 = a1 * (state->x1 - h1 * q1) - h1 * r1;
-  if (p1 < 0)
+  if (p1 < 0) {
     p1 += m;
+}
 
   state->x5 = state->x4;
   state->x4 = state->x3;
@@ -88,8 +93,9 @@ mrg_get (void *vstate)
 
   state->x1 = p1 + p5;
 
-  if (state->x1 < 0)
+  if (state->x1 < 0) {
     state->x1 += m;
+}
 
   return state->x1;
 }
@@ -109,8 +115,9 @@ mrg_set (void *vstate, unsigned long int s)
 
   mrg_state_t *state = (mrg_state_t *) vstate;
 
-  if (s == 0)
+  if (s == 0) {
     s = 1;      /* default seed is 1 */
+}
 
 #define LCG(n) ((69069 * n) & 0xffffffffUL)
   s = LCG (s);

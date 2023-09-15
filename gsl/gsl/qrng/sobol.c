@@ -135,16 +135,18 @@ static size_t sobol_state_size(unsigned int dimension)
 static int sobol_init(void * state, unsigned int dimension)
 {
   sobol_state_t * s_state = (sobol_state_t *) state;
-  unsigned int i_dim;
-  int j, k;
-  int ell;
+  unsigned int i_dim = 0;
+  int j;
+  int k;
+  int ell = 0;
 
   if(dimension < 1 || dimension > SOBOL_MAX_DIMENSION) {
     return GSL_EINVAL;
   }
 
   /* Initialize direction table in dimension 0. */
-  for(k=0; k<SOBOL_BIT_COUNT; k++) s_state->v_direction[k][0] = 1;
+  for(k=0; k<SOBOL_BIT_COUNT; k++) { s_state->v_direction[k][0] = 1;
+}
 
   /* Initialize in remaining dimensions. */
   for(i_dim=1; i_dim<dimension; i_dim++) {
@@ -163,7 +165,8 @@ static int sobol_init(void * state, unsigned int dimension)
     }
 
     /* Leading elements for dimension i come from v_init[][]. */
-    for(j=0; j<degree_i; j++) s_state->v_direction[j][i_dim] = v_init[j][i_dim];
+    for(j=0; j<degree_i; j++) { s_state->v_direction[j][i_dim] = v_init[j][i_dim];
+}
 
     /* Calculate remaining elements for this dimension,
      * as explained in Bratley+Fox, section 2.
@@ -173,7 +176,8 @@ static int sobol_init(void * state, unsigned int dimension)
       ell = 1;
       for(k=0; k<degree_i; k++) {
         ell *= 2;
-        if(includ[k]) newv ^= (ell * s_state->v_direction[j-k-1][i_dim]);
+        if(includ[k]) { newv ^= (ell * s_state->v_direction[j-k-1][i_dim]);
+}
       }
       s_state->v_direction[j][i_dim] = newv;
     }
@@ -193,7 +197,8 @@ static int sobol_init(void * state, unsigned int dimension)
 
   /* final setup */
   s_state->sequence_count = 0;
-  for(i_dim=0; i_dim<dimension; i_dim++) s_state->last_numerator_vec[i_dim] = 0;
+  for(i_dim=0; i_dim<dimension; i_dim++) { s_state->last_numerator_vec[i_dim] = 0;
+}
 
   return GSL_SUCCESS;
 }
@@ -203,19 +208,21 @@ static int sobol_get(void * state, unsigned int dimension, double * v)
 {
   sobol_state_t * s_state = (sobol_state_t *) state;
 
-  unsigned int i_dimension;
+  unsigned int i_dimension = 0;
 
   /* Find the position of the least-significant zero in count. */
   int ell = 0;
   int c = s_state->sequence_count;
   while(1) {
     ++ell;
-    if((c % 2) == 1) c /= 2;
-    else break;
+    if((c % 2) == 1) { c /= 2;
+    } else { break;
+}
   }
 
   /* Check for exhaustion. */
-  if(ell > SOBOL_BIT_COUNT) return GSL_EFAILED; /* FIXME: good return code here */
+  if(ell > SOBOL_BIT_COUNT) { return GSL_EFAILED; /* FIXME: good return code here */
+}
 
   for(i_dimension=0; i_dimension<dimension; i_dimension++) {
     const int direction_i     = s_state->v_direction[ell-1][i_dimension];

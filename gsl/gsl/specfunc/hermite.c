@@ -37,6 +37,7 @@
 #include <gsl/gsl_sf_pow_int.h>
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_hermite.h>
+#include <math.h>
 
 #include "error.h"
 #include "eval.h"
@@ -72,8 +73,8 @@ gsl_sf_hermite_prob_e(const int n, const double x, gsl_sf_result * result)
           result->err = 0.0;
           return GSL_SUCCESS;
         }
-      else
-        {
+      
+        
           /* for n even, He_n(0) = (-1)^{n/2} (n - 1)!! */
 
           int status = GSL_SUCCESS;
@@ -92,7 +93,7 @@ gsl_sf_hermite_prob_e(const int n, const double x, gsl_sf_result * result)
             }
 
           return status;
-        }
+       
     }
   else
     {
@@ -111,7 +112,7 @@ gsl_sf_hermite_prob_e(const int n, const double x, gsl_sf_result * result)
       double e_n1 = fabs(x)*GSL_DBL_EPSILON;
       double e_n = e_n1;
 
-      int j;
+      int j = 0;
 
       for (j = 1; j < n; j++)
         {
@@ -160,7 +161,7 @@ gsl_sf_hermite_prob_deriv_e(const int m, const int n, const double x, gsl_sf_res
     }
   else
     {
-      int status;
+      int status = 0;
       double f = gsl_sf_choose(n,m)*gsl_sf_fact(m);
       gsl_sf_result He;
 
@@ -214,8 +215,8 @@ gsl_sf_hermite_e(const int n, const double x, gsl_sf_result * result)
           result->err = 0.0;
           return GSL_SUCCESS;
         }
-      else
-        {
+      
+        
           /* for n even, H_n(0) = (-2)^{n/2} (n - 1)!! */
 
           int status = GSL_SUCCESS;
@@ -249,7 +250,7 @@ gsl_sf_hermite_e(const int n, const double x, gsl_sf_result * result)
             }
 
           return status;
-        }
+       
     }
   else
     {
@@ -269,7 +270,7 @@ gsl_sf_hermite_e(const int n, const double x, gsl_sf_result * result)
       double e_n1 = 2.*fabs(x)*GSL_DBL_EPSILON;
       double e_n = e_n1;
 
-      int j;
+      int j = 0;
 
       for (j = 1; j <= n - 1; j++)
         {
@@ -319,7 +320,7 @@ gsl_sf_hermite_deriv_e(const int m, const int n, const double x, gsl_sf_result *
     }
   else
     {
-      int status;
+      int status = 0;
       double f = gsl_sf_choose(n,m)*gsl_sf_fact(m)*pow2(m);
       gsl_sf_result H;
 
@@ -361,8 +362,8 @@ gsl_sf_hermite_func_e(const int n, const double x, gsl_sf_result * result)
           result->err = 0.;
           return GSL_SUCCESS;
         }
-      else
-        {
+      
+        
           double f = (GSL_IS_ODD(n / 2) ? -1.0 : 1.0);
           int j;
 
@@ -372,7 +373,7 @@ gsl_sf_hermite_func_e(const int n, const double x, gsl_sf_result * result)
           result->val = f / sqrt(M_SQRTPI);
           result->err = GSL_DBL_EPSILON * fabs(result->val);
           return GSL_SUCCESS;
-        }
+       
     }
   else if (n == 0)
     {
@@ -410,8 +411,8 @@ gsl_sf_hermite_func_e(const int n, const double x, gsl_sf_result * result)
       double hi1 = M_SQRT2 * x * hi2;    /* \hat{h}_1 */
       double hi = 0.0;
       double sum_log_scale = 0.0;
-      double abshi;
-      int i;
+      double abshi = NAN;
+      int i = 0;
 
       for (i = 2; i <= n; ++i)
         {
@@ -461,8 +462,8 @@ gsl_sf_hermite_func_fast_e(const int n, const double x, gsl_sf_result * result)
       /* for small n, the recurrence method is faster and more accurate */
       return gsl_sf_hermite_func_e(n, x, result);
     }
-  else
-    {
+  
+    
       size_t j;
       const double k = sqrt(0.5*n);
       const size_t steps = (size_t) ceil(6.211 * sqrt(n));
@@ -515,7 +516,7 @@ gsl_sf_hermite_func_fast_e(const int n, const double x, gsl_sf_result * result)
       result->err = M_1_PI*dt*result->err + GSL_DBL_EPSILON*fabs(result->val);
 
       return GSL_SUCCESS;
-    }
+   
 }
 
 double
@@ -557,7 +558,7 @@ gsl_sf_hermite_prob_array(const int nmax, const double x, double * result_array)
       double p_n1 = x;      /* He_1(x) */
       double p_n = p_n1;
 
-      int j;
+      int j = 0;
 
       result_array[0] = 1.0;
       result_array[1] = x;
@@ -600,29 +601,32 @@ gsl_sf_hermite_prob_array_deriv(const int m, const int nmax, const double x, dou
     }
   else if (nmax < m)
     {
-      int j;
+      int j = 0;
 
-      for (j = 0; j <= nmax; j++)
+      for (j = 0; j <= nmax; j++) {
         result_array[j] = 0.0;
+}
 
       return GSL_SUCCESS;
     }
   else if (nmax == m)
     {
-      int j;
+      int j = 0;
 
-      for (j = 0; j < m; j++)
+      for (j = 0; j < m; j++) {
         result_array[j] = 0.0;
+}
 
       result_array[nmax] = gsl_sf_fact(m);
       return GSL_SUCCESS;
     }
   else if (nmax == m + 1)
     {
-      int j;
+      int j = 0;
 
-      for (j = 0; j < m; j++)
+      for (j = 0; j < m; j++) {
         result_array[j] = 0.0;
+}
 
       result_array[nmax-1] = gsl_sf_fact(m);
       result_array[nmax] = result_array[nmax-1]*(m+1)*x;
@@ -635,10 +639,11 @@ gsl_sf_hermite_prob_array_deriv(const int m, const int nmax, const double x, dou
       double p_n0 = gsl_sf_fact(m);    /* He^{(m)}_{m}(x) */
       double p_n1 = p_n0*(m+1)*x;      /* He^{(m)}_{m+1}(x) */
       double p_n = p_n1;
-      int j;
+      int j = 0;
 
-      for (j = 0; j < m; j++)
+      for (j = 0; j < m; j++) {
         result_array[j] = 0.0;
+}
 
       result_array[m] = p_n0;
       result_array[m + 1] = p_n1;
@@ -667,23 +672,25 @@ gsl_sf_hermite_prob_deriv_array(const int mmax, const int n, const double x, dou
     }
   else if (n == 0)
     {
-      int j;
+      int j = 0;
 
       result_array[0] = 1.0;
-      for (j = 1; j <= mmax; j++)
+      for (j = 1; j <= mmax; j++) {
         result_array[j] = 0.0;
+}
 
       return GSL_SUCCESS;
     }
   else if (n == 1 && mmax > 0)
     {
-      int j;
+      int j = 0;
 
       result_array[0] = x;
       result_array[1] = 1.0;
 
-      for(j=2; j <= mmax; j++)
+      for(j=2; j <= mmax; j++) {
         result_array[j] = 0.0;
+}
 
       return GSL_SUCCESS;
     }
@@ -706,10 +713,11 @@ gsl_sf_hermite_prob_deriv_array(const int mmax, const int n, const double x, dou
       double p_n0 = gsl_sf_hermite_prob(k,x);        /* He_k(x) */
       double p_n1 = gsl_sf_hermite_prob(k+1,x);      /* He_{k+1}(x) */
       double p_n  = p_n1;
-      int j;
+      int j = 0;
 
-      for(j=n+1; j <= mmax; j++)
+      for(j=n+1; j <= mmax; j++) {
         result_array[j] = 0.0;
+}
 
       result_array[GSL_MIN_INT(n,mmax)] = p_n0;
       result_array[GSL_MIN_INT(n,mmax)-1] = p_n1;
@@ -764,7 +772,7 @@ gsl_sf_hermite_prob_series_e(const int n, const double x, const double * a, gsl_
     double e1 = 0.;
     double etmp = e1;
 
-    int j;
+    int j = 0;
 
     for(j=n; j >= 0; j--){
       btmp = b0;
@@ -822,7 +830,7 @@ gsl_sf_hermite_array(const int nmax, const double x, double * result_array)
       double p_n1 = two_x;  /* H_1(x) */
       double p_n = p_n1;
 
-      int j;
+      int j = 0;
 
       result_array[0] = 1.0;
       result_array[1] = 2.0*x;
@@ -862,19 +870,21 @@ gsl_sf_hermite_array_deriv(const int m, const int nmax, const double x, double *
     }
   else if (nmax < m)
     {
-      int j;
+      int j = 0;
 
-      for(j = 0; j <= nmax; j++)
+      for(j = 0; j <= nmax; j++) {
         result_array[j] = 0.0;
+}
 
       return GSL_SUCCESS;
     }
   else if (nmax == m)
     {
-      int j;
+      int j = 0;
 
-      for(j = 0; j < m; j++)
+      for(j = 0; j < m; j++) {
         result_array[j] = 0.0;
+}
 
       result_array[nmax] = pow2(m)*gsl_sf_fact(m);
 
@@ -882,10 +892,11 @@ gsl_sf_hermite_array_deriv(const int m, const int nmax, const double x, double *
     }
   else if (nmax == m + 1)
     {
-      int j;
+      int j = 0;
 
-      for(j = 0; j < m; j++)
+      for(j = 0; j < m; j++) {
         result_array[j] = 0.0;
+}
 
       result_array[nmax-1] = pow2(m)*gsl_sf_fact(m);
       result_array[nmax] = result_array[nmax-1]*2*(m+1)*x;
@@ -897,11 +908,12 @@ gsl_sf_hermite_array_deriv(const int m, const int nmax, const double x, double *
 
       double p_n0 = pow2(m)*gsl_sf_fact(m);  /* H^{(m)}_{m}(x) */
       double p_n1 = p_n0*2*(m+1)*x;          /* H^{(m)}_{m+1}(x) */
-      double p_n;
-      int j;
+      double p_n = NAN;
+      int j = 0;
 
-      for(j = 0; j < m; j++)
+      for(j = 0; j < m; j++) {
         result_array[j] = 0.0;
+}
 
       result_array[m] = p_n0;
       result_array[m+1] = p_n1;
@@ -930,22 +942,24 @@ gsl_sf_hermite_deriv_array(const int mmax, const int n, const double x, double *
     }
   else if (n == 0)
     {
-      int j;
+      int j = 0;
 
       result_array[0] = 1.0;
-      for(j = 1; j <= mmax; j++)
+      for(j = 1; j <= mmax; j++) {
         result_array[j] = 0.0;
+}
 
       return GSL_SUCCESS;
     }
   else if (n == 1 && mmax > 0)
     {
-      int j;
+      int j = 0;
 
       result_array[0] = 2*x;
       result_array[1] = 1.0;
-      for (j = 2; j <= mmax; j++)
+      for (j = 2; j <= mmax; j++) {
         result_array[j] = 0.0;
+}
 
       return GSL_SUCCESS;
     }
@@ -968,10 +982,11 @@ gsl_sf_hermite_deriv_array(const int mmax, const int n, const double x, double *
       double p_n0 = gsl_sf_hermite(k, x);        /* H_k(x) */
       double p_n1 = gsl_sf_hermite(k + 1, x);    /* H_{k+1}(x) */
       double p_n  = p_n1;
-      int j;
+      int j = 0;
 
-      for (j = n + 1; j <= mmax; j++)
+      for (j = n + 1; j <= mmax; j++) {
         result_array[j] = 0.0;
+}
 
       result_array[GSL_MIN_INT(n,mmax)] = p_n0;
       result_array[GSL_MIN_INT(n,mmax)-1] = p_n1;
@@ -1026,7 +1041,7 @@ gsl_sf_hermite_series_e(const int n, const double x, const double * a, gsl_sf_re
     double e1 = 0.;
     double etmp = e1;
 
-    int j;
+    int j = 0;
 
     for(j=n; j >= 0; j--){
       btmp = b0;
@@ -1080,8 +1095,8 @@ gsl_sf_hermite_func_array(const int nmax, const double x, double * result_array)
       double hi1 = M_SQRT2 * x * hi2;
       double hi = 0.0;
       double sum_log_scale = 0.0;
-      double abshi;
-      int i;
+      double abshi = NAN;
+      int i = 0;
 
       result_array[0] = exp(arg) * hi2;
       result_array[1] = result_array[0] * M_SQRT2 * x;
@@ -1145,7 +1160,7 @@ gsl_sf_hermite_func_series_e(const int n, const double x, const double * a, gsl_
       double e1 = 0.;
       double etmp = e1;
 
-      int j;
+      int j = 0;
 
       for (j = n; j >= 0; j--)
         {
@@ -1192,8 +1207,8 @@ gsl_sf_hermite_func_der_e(const int m, const int n, const double x, gsl_sf_resul
       double hi1 = M_SQRT2 * x * hi2;
       double hi = 0.0;
       double sum_log_scale = 0.0;
-      double abshi;
-      int i;
+      double abshi = NAN;
+      int i = 0;
 
       for (i = 2; i <= n; ++i)
         {
@@ -1222,8 +1237,10 @@ gsl_sf_hermite_func_der_e(const int m, const int n, const double x, gsl_sf_resul
     }
   else
     {
-      int j;
-      double r,er,b;
+      int j = 0;
+      double r;
+      double er;
+      double b;
       double h0 = 1.;
       double h1 = x;
       double eh0 = GSL_DBL_EPSILON;
@@ -1234,15 +1251,17 @@ gsl_sf_hermite_func_der_e(const int m, const int n, const double x, gsl_sf_resul
       double ep1 = M_SQRT2*GSL_DBL_EPSILON;
       double f = 1.;
 
-      for (j=GSL_MAX_INT(1,n-m+1);j<=n;j++)
+      for (j=GSL_MAX_INT(1,n-m+1);j<=n;j++) {
         f *= sqrt(2.*j);
+}
 
       if (m > n)
         {
           f = (GSL_IS_ODD(m-n)?-f:f);
 
-          for (j=0;j<GSL_MIN_INT(n,m-n);j++)
+          for (j=0;j<GSL_MIN_INT(n,m-n);j++) {
             f *= (m-j)/(j+1.);
+}
         }
 
       for (j=1;j<=m-n;j++)
@@ -1311,7 +1330,9 @@ gsl_sf_hermite_func_der(const int m, const int n, const double x)
 static double
 H_zero_init(const int n, const int k)
 {
-  double p = 1., x = 1., y = 1.;
+  double p = 1.;
+  double x = 1.;
+  double y = 1.;
   if (k == 1 && n > 50) {
     x = (GSL_IS_ODD(n)?1./sqrt((n-1)/6.):1./sqrt(0.5*n));
   }
@@ -1323,10 +1344,14 @@ H_zero_init(const int n, const int k)
   }
   p = acos(x/sqrt(2*n+1.));
   y = M_PI*(-2*(n/2-k)-1.5)/(n+0.5);
-  if(gsl_fcmp(y,sin(2.*p)-2*p,GSL_SQRT_DBL_EPSILON)==0) return x; /* initial approx sufficiently accurate */
-  if (y > -GSL_DBL_EPSILON) return sqrt(2*n+1.);
-  if (p < GSL_DBL_EPSILON) p = GSL_DBL_EPSILON;
-  if (p > M_PI_2) p = M_PI_2;
+  if(gsl_fcmp(y,sin(2.*p)-2*p,GSL_SQRT_DBL_EPSILON)==0) { return x; /* initial approx sufficiently accurate */
+}
+  if (y > -GSL_DBL_EPSILON) { return sqrt(2*n+1.);
+}
+  if (p < GSL_DBL_EPSILON) { p = GSL_DBL_EPSILON;
+}
+  if (p > M_PI_2) { p = M_PI_2;
+}
   if (sin(2.*p)-2*p > y){
     x = GSL_MAX((sin(2.*p)-2*p-y)/4.,GSL_SQRT_DBL_EPSILON);
     do{
@@ -1337,7 +1362,8 @@ H_zero_init(const int n, const int k)
   do {
     x = p;
     p -= (sin(2.*p)-2.*p-y)/(2.*cos(2.*p)-2.);
-    if (p<0.||p>M_PI_2) p = M_PI_2;
+    if (p<0.||p>M_PI_2) { p = M_PI_2;
+}
   } while (gsl_fcmp(x,p,100*GSL_DBL_EPSILON)!=0);
   return sqrt(2*n+1.)*cos(p);
 }
@@ -1478,10 +1504,10 @@ gsl_sf_hermite_prob_zero_e(const int n, const int s, gsl_sf_result * result)
           result->err = 0.;
           return GSL_SUCCESS;
         }
-      else
-        {
+      
+        
           DOMAIN_ERROR(result);
-        }
+       
     }
   else if (n == 2)
     {
@@ -1497,15 +1523,18 @@ gsl_sf_hermite_prob_zero_e(const int n, const int s, gsl_sf_result * result)
     }
   else
     {
-      double d = 1., x = 1., x0 = 1.;
-      int j;
+      double d = 1.;
+      double x = 1.;
+      double x0 = 1.;
+      int j = 0;
       x = H_zero_init(n,s) * M_SQRT2;
       do
         {
           x0 = x;
           d = 0.;
-          for (j=1; j<n; j++)
+          for (j=1; j<n; j++) {
             d = j/(x-d);
+}
 
           x -= (x-d)/n;
 
@@ -1663,10 +1692,10 @@ gsl_sf_hermite_zero_e(const int n, const int s, gsl_sf_result * result)
           result->err = 0.;
           return GSL_SUCCESS;
         }
-      else
-        {
+      
+        
           DOMAIN_ERROR(result);
-        }
+       
     }
   else if (n == 2)
     {
@@ -1682,8 +1711,10 @@ gsl_sf_hermite_zero_e(const int n, const int s, gsl_sf_result * result)
     }
   else
     {
-      double d = 1., x = 1., x0 = 1.;
-      int j;
+      double d = 1.;
+      double x = 1.;
+      double x0 = 1.;
+      int j = 0;
 
       x = H_zero_init(n,s);
       do
@@ -1691,8 +1722,9 @@ gsl_sf_hermite_zero_e(const int n, const int s, gsl_sf_result * result)
           x0 = x;
           d = 0.;
 
-          for (j=1; j<n; j++)
+          for (j=1; j<n; j++) {
             d = 2*j/(2.*x-d);
+}
 
           x -= (2*x-d)*0.5/n;
 

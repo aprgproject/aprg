@@ -39,17 +39,18 @@
 static int
 bisquare(const gsl_vector *r, gsl_vector *w)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = r->size;
 
   for (i = 0; i < n; ++i)
     {
       double ri = gsl_vector_get(r, i);
 
-      if (fabs(ri) < 1.0)
+      if (fabs(ri) < 1.0) {
         gsl_vector_set(w, i, (1.0 - ri*ri)*(1.0 - ri*ri));
-      else
+      } else {
         gsl_vector_set(w, i, 0.0);
+}
     }
 
   return GSL_SUCCESS;
@@ -58,17 +59,18 @@ bisquare(const gsl_vector *r, gsl_vector *w)
 static int
 bisquare_dpsi(const gsl_vector *r, gsl_vector *dpsi)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = r->size;
 
   for (i = 0; i < n; ++i)
     {
       double ri = gsl_vector_get(r, i);
 
-      if (fabs(ri) < 1.0)
+      if (fabs(ri) < 1.0) {
         gsl_vector_set(dpsi, i, (1.0 - ri*ri)*(1.0 - 5.0*ri*ri));
-      else
+      } else {
         gsl_vector_set(dpsi, i, 0.0);
+}
     }
 
   return GSL_SUCCESS;
@@ -84,7 +86,7 @@ static const gsl_multifit_robust_type bisquare_type = {
 static int
 cauchy(const gsl_vector *r, gsl_vector *w)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = r->size;
 
   for (i = 0; i < n; ++i)
@@ -100,7 +102,7 @@ cauchy(const gsl_vector *r, gsl_vector *w)
 static int
 cauchy_dpsi(const gsl_vector *r, gsl_vector *dpsi)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = r->size;
 
   for (i = 0; i < n; ++i)
@@ -124,7 +126,7 @@ static const gsl_multifit_robust_type cauchy_type = {
 static int
 fair(const gsl_vector *r, gsl_vector *w)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = r->size;
 
   for (i = 0; i < n; ++i)
@@ -140,7 +142,7 @@ fair(const gsl_vector *r, gsl_vector *w)
 static int
 fair_dpsi(const gsl_vector *r, gsl_vector *dpsi)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = r->size;
 
   for (i = 0; i < n; ++i)
@@ -163,17 +165,18 @@ static const gsl_multifit_robust_type fair_type = {
 static int
 huber(const gsl_vector *r, gsl_vector *w)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = r->size;
 
   for (i = 0; i < n; ++i)
     {
       double absri = fabs(gsl_vector_get(r, i));
 
-      if (absri <= 1.0)
+      if (absri <= 1.0) {
         gsl_vector_set(w, i, 1.0);
-      else
+      } else {
         gsl_vector_set(w, i, 1.0 / absri);
+}
     }
 
   return GSL_SUCCESS;
@@ -182,17 +185,18 @@ huber(const gsl_vector *r, gsl_vector *w)
 static int
 huber_dpsi(const gsl_vector *r, gsl_vector *dpsi)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = r->size;
 
   for (i = 0; i < n; ++i)
     {
       double ri = gsl_vector_get(r, i);
 
-      if (fabs(ri) <= 1.0)
+      if (fabs(ri) <= 1.0) {
         gsl_vector_set(dpsi, i, 1.0);
-      else
+      } else {
         gsl_vector_set(dpsi, i, 0.0);
+}
     }
 
   return GSL_SUCCESS;
@@ -231,7 +235,7 @@ static const gsl_multifit_robust_type ols_type = {
 static int
 welsch(const gsl_vector *r, gsl_vector *w)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = r->size;
 
   for (i = 0; i < n; ++i)
@@ -247,7 +251,7 @@ welsch(const gsl_vector *r, gsl_vector *w)
 static int
 welsch_dpsi(const gsl_vector *r, gsl_vector *dpsi)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = r->size;
 
   for (i = 0; i < n; ++i)

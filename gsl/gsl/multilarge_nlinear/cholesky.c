@@ -34,6 +34,7 @@
 #include <gsl/gsl_multilarge_nlinear.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 #include "common.c"
 
@@ -61,7 +62,7 @@ static int cholesky_regularize(const double mu, const gsl_vector * diag, gsl_mat
 static void *
 cholesky_alloc (const size_t n, const size_t p)
 {
-  cholesky_state_t *state;
+  cholesky_state_t *state = NULL;
 
   state = calloc(1, sizeof(cholesky_state_t));
   if (state == NULL)
@@ -110,20 +111,25 @@ cholesky_free(void *vstate)
 {
   cholesky_state_t *state = (cholesky_state_t *) vstate;
 
-  if (state->JTJ)
+  if (state->JTJ) {
     gsl_matrix_free(state->JTJ);
+}
 
-  if (state->work_JTJ)
+  if (state->work_JTJ) {
     gsl_matrix_free(state->work_JTJ);
+}
 
-  if (state->rhs)
+  if (state->rhs) {
     gsl_vector_free(state->rhs);
+}
 
-  if (state->work3p)
+  if (state->work3p) {
     gsl_vector_free(state->work3p);
+}
 
-  if (state->workn)
+  if (state->workn) {
     gsl_vector_free(state->workn);
+}
 
   free(state);
 }
@@ -163,20 +169,22 @@ cholesky_presolve(const double mu, const void * vtrust_state, void * vstate)
   cholesky_state_t *state = (cholesky_state_t *) vstate;
   gsl_matrix *JTJ = state->work_JTJ;
   const gsl_vector *diag = trust_state->diag;
-  int status;
+  int status = 0;
 
   /* copy lower triangle of A to workspace */
   gsl_matrix_tricpy(CblasLower, CblasNonUnit, JTJ, state->JTJ);
 
   /* augment normal equations: A -> A + mu D^T D */
   status = cholesky_regularize(mu, diag, JTJ, state);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* compute Cholesky decomposition */
   status = gsl_linalg_cholesky_decomp1(JTJ);
-  if (status)
+  if (status) {
     return status;
+}
 
   state->mu = mu;
 
@@ -199,11 +207,12 @@ cholesky_solve(const gsl_vector * g, gsl_vector *x,
                const void * vtrust_state, void *vstate)
 {
   cholesky_state_t *state = (cholesky_state_t *) vstate;
-  int status;
+  int status = 0;
 
   status = cholesky_solve_rhs(g, x, state);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* reverse direction to go downhill */
   gsl_vector_scale(x, -1.0);
@@ -216,10 +225,10 @@ cholesky_solve(const gsl_vector * g, gsl_vector *x,
 static int
 cholesky_rcond(double * rcond, const gsl_matrix * JTJ, void * vstate)
 {
-  int status;
+  int status = 0;
   cholesky_state_t *state = (cholesky_state_t *) vstate;
-  gsl_error_handler_t * err_handler;
-  double rcond_JTJ;
+  gsl_error_handler_t * err_handler = NULL;
+  double rcond_JTJ = NAN;
 
   /* its possible the current Cholesky decomposition is from the previous
    * iteration so do a new one to be sure we use the right Jacobian */
@@ -240,8 +249,9 @@ cholesky_rcond(double * rcond, const gsl_matrix * JTJ, void * vstate)
     }
 
   status = gsl_linalg_cholesky_rcond(state->work_JTJ, &rcond_JTJ, state->work3p);
-  if (status == GSL_SUCCESS)
+  if (status == GSL_SUCCESS) {
     *rcond = sqrt(rcond_JTJ);
+}
 
   return status;
 }
@@ -249,8 +259,8 @@ cholesky_rcond(double * rcond, const gsl_matrix * JTJ, void * vstate)
 static int
 cholesky_covar(const gsl_matrix * JTJ, gsl_matrix * covar, void * vstate)
 {
-  int status;
-  gsl_error_handler_t * err_handler;
+  int status = 0;
+  gsl_error_handler_t * err_handler = NULL;
 
   (void) vstate;
 
@@ -265,12 +275,14 @@ cholesky_covar(const gsl_matrix * JTJ, gsl_matrix * covar, void * vstate)
   status = gsl_linalg_cholesky_decomp1(covar);
   gsl_set_error_handler(err_handler);
 
-  if (status)
+  if (status) {
     return status;
+}
 
   status = gsl_linalg_cholesky_invert(covar);
-  if (status)
+  if (status) {
     return status;
+}
 
   return GSL_SUCCESS;
 }
@@ -279,12 +291,13 @@ cholesky_covar(const gsl_matrix * JTJ, gsl_matrix * covar, void * vstate)
 static int
 cholesky_solve_rhs(const gsl_vector * b, gsl_vector *x, cholesky_state_t *state)
 {
-  int status;
+  int status = 0;
   gsl_matrix *JTJ = state->work_JTJ;
 
   status = gsl_linalg_cholesky_solve(JTJ, b, x);
-  if (status)
+  if (status) {
     return status;
+}
 
   return GSL_SUCCESS;
 }
@@ -298,7 +311,7 @@ cholesky_regularize(const double mu, const gsl_vector * diag, gsl_matrix * A,
 
   if (mu != 0.0)
     {
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < diag->size; ++i)
         {

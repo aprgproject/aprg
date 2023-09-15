@@ -126,8 +126,9 @@ uni32_get (void *vstate)
   /* important k not be unsigned */
   long int k = state->m[i] - state->m[j];
 
-  if (k < 0)
+  if (k < 0) {
     k += m1;
+}
   state->m[j] = k;
 
   if (i == 0)
@@ -160,8 +161,12 @@ uni32_get_double (void *vstate)
 static void
 uni32_set (void *vstate, unsigned long int s)
 {
-  long int seed, k0, k1, j0, j1;
-  int i;
+  long int seed;
+  long int k0;
+  long int k1;
+  long int j0;
+  long int j1;
+  int i = 0;
 
   uni32_state_t *state = (uni32_state_t *) vstate;
 

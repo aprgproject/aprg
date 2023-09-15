@@ -43,13 +43,13 @@ gsl_ran_rayleigh_pdf (const double x, const double sigma)
     {
       return 0 ;
     }
-  else
-    {
+  
+    
       double u = x / sigma ;
       double p = (u / sigma) * exp(-u * u / 2.0) ;
       
       return p;
-    }
+   
 }
 
 /* The Rayleigh tail distribution has the form
@@ -73,13 +73,13 @@ gsl_ran_rayleigh_tail_pdf (const double x, const double a, const double sigma)
     {
       return 0 ;
     }
-  else
-    {
+  
+    
       double u = x / sigma ;
       double v = a / sigma ;
 
       double p = (u / sigma) * exp((v + u) * (v - u) / 2.0) ;
       
       return p;
-    }
+   
 }

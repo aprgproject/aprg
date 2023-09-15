@@ -33,19 +33,26 @@ gsl_integration_qng (const gsl_function *f,
                      double epsabs, double epsrel,
                      double * result, double * abserr, size_t * neval)
 {
-  double fv1[5], fv2[5], fv3[5], fv4[5];
+  double fv1[5];
+  double fv2[5];
+  double fv3[5];
+  double fv4[5];
   double savfun[21];  /* array of function values which have been computed */
-  double res10, res21, res43, res87;    /* 10, 21, 43 and 87 point results */
-  double result_kronrod, err ; 
-  double resabs; /* approximation to the integral of abs(f) */
-  double resasc; /* approximation to the integral of abs(f-i/(b-a)) */
+  double res10;
+  double res21;
+  double res43;
+  double res87;    /* 10, 21, 43 and 87 point results */
+  double result_kronrod;
+  double err ; 
+  double resabs = NAN; /* approximation to the integral of abs(f) */
+  double resasc = NAN; /* approximation to the integral of abs(f-i/(b-a)) */
 
   const double half_length =  0.5 * (b - a);
   const double abs_half_length = fabs (half_length);
   const double center = 0.5 * (b + a);
   const double f_center = GSL_FN_EVAL(f, center);
 
-  int k ;
+  int k = 0 ;
 
   if (epsabs <= 0 && (epsrel < 50 * GSL_DBL_EPSILON || epsrel < 0.5e-28))
     {

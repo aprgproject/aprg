@@ -20,6 +20,7 @@
 /* Author:  G. Jungman
  */
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_linalg.h>
@@ -98,7 +99,7 @@ cspline_init (void * vstate, const double xa[], const double ya[],
 {
   cspline_state_t *state = (cspline_state_t *) vstate;
 
-  size_t i;
+  size_t i = 0;
   size_t num_points = size;
   size_t max_index = num_points - 1;  /* Engeln-Mullges + Uhlig "n" */
   size_t sys_size = max_index - 1;    /* linear system is sys_size x sys_size */
@@ -124,8 +125,8 @@ cspline_init (void * vstate, const double xa[], const double ya[],
       state->c[1] = state->g[0] / state->diag[0];
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       gsl_vector_view g_vec = gsl_vector_view_array(state->g, sys_size);
       gsl_vector_view diag_vec = gsl_vector_view_array(state->diag, sys_size);
       gsl_vector_view offdiag_vec = gsl_vector_view_array(state->offdiag, sys_size - 1);
@@ -136,7 +137,7 @@ cspline_init (void * vstate, const double xa[], const double ya[],
                                                  &g_vec.vector, 
                                                  &solution_vec.vector);
       return status;
-    }
+   
 }
 
 
@@ -149,7 +150,7 @@ cspline_init_periodic (void * vstate, const double xa[], const double ya[],
 {
   cspline_state_t *state = (cspline_state_t *) vstate;
 
-  size_t i;
+  size_t i = 0;
   size_t num_points = size;
   size_t max_index = num_points - 1;  /* Engeln-Mullges + Uhlig "n" */
   size_t sys_size = max_index;    /* linear system is sys_size x sys_size */
@@ -163,7 +164,7 @@ cspline_init_periodic (void * vstate, const double xa[], const double ya[],
     const double A = 2.0*(h0 + h1);
     const double B = h0 + h1;
     double g[2];
-    double det;
+    double det = NAN;
     
     g[0] = 3.0 * ((ya[2] - ya[1]) / h1 - (ya[1] - ya[0]) / h0);
     g[1] = 3.0 * ((ya[1] - ya[2]) / h0 - (ya[2] - ya[1]) / h1);
@@ -174,7 +175,7 @@ cspline_init_periodic (void * vstate, const double xa[], const double ya[],
     state->c[0] = state->c[2];
     
     return GSL_SUCCESS;
-  } else {
+  } 
     
     for (i = 0; i < sys_size-1; i++) {
       const double h_i       = xa[i + 1] - xa[i];
@@ -216,7 +217,7 @@ cspline_init_periodic (void * vstate, const double xa[], const double ya[],
       
       return status;
     }
-  }
+ 
 }
 
 
@@ -257,9 +258,10 @@ cspline_eval (const void * vstate,
 {
   const cspline_state_t *state = (const cspline_state_t *) vstate;
 
-  double x_lo, x_hi;
-  double dx;
-  size_t index;
+  double x_lo;
+  double x_hi;
+  double dx = NAN;
+  size_t index = 0;
   
   if (a != 0)
     {
@@ -280,16 +282,18 @@ cspline_eval (const void * vstate,
       const double y_hi = y_array[index + 1];
       const double dy = y_hi - y_lo;
       double delx = x - x_lo;
-      double b_i, c_i, d_i; 
+      double b_i;
+      double c_i;
+      double d_i; 
       coeff_calc(state->c, dy, dx, index,  &b_i, &c_i, &d_i);
       *y = y_lo + delx * (b_i + delx * (c_i + delx * d_i));
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       *y = 0.0;
       return GSL_EINVAL;
-    }
+   
 }
 
 
@@ -303,9 +307,10 @@ cspline_eval_deriv (const void * vstate,
 {
   const cspline_state_t *state = (const cspline_state_t *) vstate;
 
-  double x_lo, x_hi;
-  double dx;
-  size_t index;
+  double x_lo;
+  double x_hi;
+  double dx = NAN;
+  size_t index = 0;
   
   if (a != 0)
     {
@@ -326,16 +331,18 @@ cspline_eval_deriv (const void * vstate,
       const double y_hi = y_array[index + 1];
       const double dy = y_hi - y_lo;
       double delx = x - x_lo;
-      double b_i, c_i, d_i; 
+      double b_i;
+      double c_i;
+      double d_i; 
       coeff_calc(state->c, dy, dx, index,  &b_i, &c_i, &d_i);
       *dydx = b_i + delx * (2.0 * c_i + 3.0 * d_i * delx);
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       *dydx = 0.0;
       return GSL_EINVAL;
-    }
+   
 }
 
 
@@ -349,9 +356,10 @@ cspline_eval_deriv2 (const void * vstate,
 {
   const cspline_state_t *state = (const cspline_state_t *) vstate;
 
-  double x_lo, x_hi;
-  double dx;
-  size_t index;
+  double x_lo;
+  double x_hi;
+  double dx = NAN;
+  size_t index = 0;
   
   if (a != 0)
     {
@@ -372,16 +380,18 @@ cspline_eval_deriv2 (const void * vstate,
       const double y_hi = y_array[index + 1];
       const double dy = y_hi - y_lo;
       double delx = x - x_lo;
-      double b_i, c_i, d_i;
+      double b_i;
+      double c_i;
+      double d_i;
       coeff_calc(state->c, dy, dx, index,  &b_i, &c_i, &d_i);
       *y_pp = 2.0 * c_i + 6.0 * d_i * delx;
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       *y_pp = 0.0;
       return GSL_EINVAL;
-    }
+   
 }
 
 
@@ -395,7 +405,9 @@ cspline_eval_integ (const void * vstate,
 {
   const cspline_state_t *state = (const cspline_state_t *) vstate;
 
-  size_t i, index_a, index_b;
+  size_t i;
+  size_t index_a;
+  size_t index_b;
   
   if (acc != 0)
     {
@@ -419,7 +431,9 @@ cspline_eval_integ (const void * vstate,
     const double dx = x_hi - x_lo;
     const double dy = y_hi - y_lo;
     if(dx != 0.0) {
-      double b_i, c_i, d_i; 
+      double b_i;
+      double c_i;
+      double d_i; 
       coeff_calc(state->c, dy, dx, i,  &b_i, &c_i, &d_i);
       
       if (i == index_a || i == index_b)

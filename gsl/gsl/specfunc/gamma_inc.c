@@ -28,6 +28,7 @@
 #include <gsl/gsl_sf_log.h>
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_expint.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -39,7 +40,7 @@ int
 gamma_inc_D(const double a, const double x, gsl_sf_result * result)
 {
   if(a < 10.0) {
-    double lnr;
+    double lnr = NAN;
     gsl_sf_result lg;
     gsl_sf_lngamma_e(a+1.0, &lg);
     lnr = a * log(x) - x - lg.val;
@@ -47,7 +48,7 @@ gamma_inc_D(const double a, const double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * (fabs(lnr) + 1.0) * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     gsl_sf_result gstar;
     gsl_sf_result ln_term;
     double term1;
@@ -71,7 +72,7 @@ gamma_inc_D(const double a, const double x, gsl_sf_result * result)
     result->err += fabs(a) * ln_term.err * fabs(result->val);
     result->err += gstar.err/fabs(gstar.val) * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 
 }
 
@@ -112,8 +113,8 @@ gamma_inc_P_series(const double a, const double x, gsl_sf_result * result)
   {
     double sum  = 1.0;
     double term = 1.0;
-    double remainder;
-    int n;
+    double remainder = NAN;
+    int n = 0;
 
     /* Handle lower part of the series where t_n is increasing, |x| > a+n */
 
@@ -129,7 +130,8 @@ gamma_inc_P_series(const double a, const double x, gsl_sf_result * result)
     for (/* n = previous n */ ; n<nmax; n++)  {
       term *= x/(a+n);
       sum  += term;
-      if(fabs(term/sum) < GSL_DBL_EPSILON) break;
+      if(fabs(term/sum) < GSL_DBL_EPSILON) { break;
+}
     }
 
     /*  Estimate remainder of series ~ t_(n+1)/(1-x/(a+n+1)) */
@@ -142,10 +144,11 @@ gamma_inc_P_series(const double a, const double x, gsl_sf_result * result)
     result->err  = D.err * fabs(sum) + fabs(D.val * remainder);
     result->err += (1.0 + n) * GSL_DBL_EPSILON * fabs(result->val);
 
-    if(n == nmax && fabs(remainder/sum) > GSL_SQRT_DBL_EPSILON)
+    if(n == nmax && fabs(remainder/sum) > GSL_SQRT_DBL_EPSILON) {
       GSL_ERROR ("gamma_inc_P_series failed to converge", GSL_EMAXITER);
-    else
+    } else {
       return stat_D;
+}
   }
 }
 
@@ -164,11 +167,13 @@ gamma_inc_Q_large_x(const double a, const double x, gsl_sf_result * result)
   double sum  = 1.0;
   double term = 1.0;
   double last = 1.0;
-  int n;
+  int n = 0;
   for(n=1; n<nmax; n++) {
     term *= (a-n)/x;
-    if(fabs(term/last) > 1.0) break;
-    if(fabs(term/sum)  < GSL_DBL_EPSILON) break;
+    if(fabs(term/last) > 1.0) { break;
+}
+    if(fabs(term/sum)  < GSL_DBL_EPSILON) { break;
+}
     sum  += term;
     last  = term;
   }
@@ -177,10 +182,11 @@ gamma_inc_Q_large_x(const double a, const double x, gsl_sf_result * result)
   result->err  = D.err * fabs((a/x) * sum);
   result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
 
-  if(n == nmax)
+  if(n == nmax) {
     GSL_ERROR ("error in large x asymptotic", GSL_EMAXITER);
-  else
+  } else {
     return stat_D;
+}
 }
 
 
@@ -200,8 +206,9 @@ gamma_inc_Q_asymp_unif(const double a, const double x, gsl_sf_result * result)
 
   gsl_sf_result erfc;
 
-  double R;
-  double c0, c1;
+  double R = NAN;
+  double c0;
+  double c1;
 
   /* This used to say erfc(eta*M_SQRT2*rta), which is wrong.
    * The sqrt(2) is in the denominator. Oops.
@@ -252,40 +259,45 @@ gamma_inc_F_CF(const double a, const double x, gsl_sf_result * result)
   double hn = 1.0;           /* convergent */
   double Cn = 1.0 / small;
   double Dn = 1.0;
-  int n;
+  int n = 0;
 
   /* n == 1 has a_1, b_1, b_0 independent of a,x,
      so that has been done by hand                */
   for ( n = 2 ; n < nmax ; n++ )
   {
-    double an;
-    double delta;
+    double an = NAN;
+    double delta = NAN;
 
-    if(GSL_IS_ODD(n))
+    if(GSL_IS_ODD(n)) {
       an = 0.5*(n-1)/x;
-    else
+    } else {
       an = (0.5*n-a)/x;
+}
 
     Dn = 1.0 + an * Dn;
-    if ( fabs(Dn) < small )
+    if ( fabs(Dn) < small ) {
       Dn = small;
+}
     Cn = 1.0 + an/Cn;
-    if ( fabs(Cn) < small )
+    if ( fabs(Cn) < small ) {
       Cn = small;
+}
     Dn = 1.0 / Dn;
     delta = Cn * Dn;
     hn *= delta;
-    if(fabs(delta-1.0) < GSL_DBL_EPSILON) break;
+    if(fabs(delta-1.0) < GSL_DBL_EPSILON) { break;
+}
   }
 
   result->val = hn;
   result->err = 2.0*GSL_DBL_EPSILON * fabs(hn);
   result->err += GSL_DBL_EPSILON * (2.0 + 0.5*n) * fabs(result->val);
 
-  if(n == nmax)
+  if(n == nmax) {
     GSL_ERROR ("error in CF for F(a,x)", GSL_EMAXITER);
-  else
+  } else {
     return GSL_SUCCESS;
+}
 }
 
 
@@ -338,10 +350,10 @@ static
 int
 gamma_inc_Q_series(const double a, const double x, gsl_sf_result * result)
 {
-  double term1;  /* 1 - x^a/Gamma(a+1) */
-  double sum;    /* 1 + (a+1)/(a+2)(-x)/2! + (a+1)/(a+3)(-x)^2/3! + ... */
-  int stat_sum;
-  double term2;  /* a temporary variable used at the end */
+  double term1 = NAN;  /* 1 - x^a/Gamma(a+1) */
+  double sum = NAN;    /* 1 + (a+1)/(a+2)(-x)/2! + (a+1)/(a+3)(-x)^2/3! + ... */
+  int stat_sum = 0;
+  double term2 = NAN;  /* a temporary variable used at the end */
 
   {
     /* Evaluate series for 1 - x^a/Gamma(a+1), small a
@@ -417,19 +429,21 @@ gamma_inc_Q_series(const double a, const double x, gsl_sf_result * result)
      */
     const int nmax = 5000;
     double t = 1.0;
-    int n;
+    int n = 0;
     sum = 1.0;
 
     for(n=1; n<nmax; n++) {
       t *= -x/(n+1.0);
       sum += (a+1.0)/(a+n+1.0)*t;
-      if(fabs(t/sum) < GSL_DBL_EPSILON) break;
+      if(fabs(t/sum) < GSL_DBL_EPSILON) { break;
+}
     }
 
-    if(n == nmax)
+    if(n == nmax) {
       stat_sum = GSL_EMAXITER;
-    else
+    } else {
       stat_sum = GSL_SUCCESS;
+}
   }
 
   term2 = (1.0 - term1) * a/(a+1.0) * x * sum;
@@ -551,9 +565,9 @@ gsl_sf_gamma_inc_Q_e(const double a, const double x, gsl_sf_result * result)
        */
       return gamma_inc_Q_CF(a, x, result);
     }
-    else {
+    
       return gamma_inc_Q_large_x(a, x, result);
-    }
+   
   }
   else {
     if(x > a - sqrt(a)) {
@@ -565,14 +579,14 @@ gsl_sf_gamma_inc_Q_e(const double a, const double x, gsl_sf_result * result)
        */
       return gamma_inc_Q_CF(a, x, result);
     }
-    else {
+    
       gsl_sf_result P;
       int stat_P = gamma_inc_P_series(a, x, &P);
       result->val  = 1.0 - P.val;
       result->err  = P.err;
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return stat_P;
-    }
+   
   }
 }
 
@@ -610,7 +624,7 @@ gsl_sf_gamma_inc_P_e(const double a, const double x, gsl_sf_result * result)
      * subtractions are stable.
      */
     gsl_sf_result Q;
-    int stat_Q;
+    int stat_Q = 0;
     if(a > 0.2*x) {
       stat_Q = gamma_inc_Q_CF(a, x, &Q);
     }
@@ -635,9 +649,9 @@ gsl_sf_gamma_inc_P_e(const double a, const double x, gsl_sf_result * result)
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return stat_Q;
     }
-    else {
+    
       return gamma_inc_P_series(a, x, result);
-    }
+   
   }
 }
 

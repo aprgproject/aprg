@@ -30,7 +30,7 @@ gsl_multilarge_nlinear_alloc (const gsl_multilarge_nlinear_type * T,
                               const gsl_multilarge_nlinear_parameters * params,
                               const size_t n, const size_t p)
 {
-  gsl_multilarge_nlinear_workspace * w;
+  gsl_multilarge_nlinear_workspace * w = NULL;
 
   if (n < p)
     {
@@ -118,26 +118,33 @@ gsl_multilarge_nlinear_free (gsl_multilarge_nlinear_workspace * w)
 {
   RETURN_IF_NULL (w);
 
-  if (w->state)
+  if (w->state) {
     (w->type->free) (w->state);
+}
 
-  if (w->dx)
+  if (w->dx) {
     gsl_vector_free (w->dx);
+}
 
-  if (w->x)
+  if (w->x) {
     gsl_vector_free (w->x);
+}
 
-  if (w->f)
+  if (w->f) {
     gsl_vector_free (w->f);
+}
 
-  if (w->sqrt_wts_work)
+  if (w->sqrt_wts_work) {
     gsl_vector_free (w->sqrt_wts_work);
+}
 
-  if (w->g)
+  if (w->g) {
     gsl_vector_free (w->g);
+}
 
-  if (w->JTJ)
+  if (w->JTJ) {
     gsl_matrix_free (w->JTJ);
+}
 
   free (w);
 }
@@ -192,7 +199,7 @@ gsl_multilarge_nlinear_winit (const gsl_vector * x,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       /* initialize counters for function and Jacobian evaluations */
       fdf->nevalf = 0;
@@ -306,13 +313,14 @@ gsl_multilarge_nlinear_driver (const size_t maxiter,
                                int *info,
                                gsl_multilarge_nlinear_workspace * w)
 {
-  int status;
+  int status = 0;
   size_t iter = 0;
 
   /* call user callback function prior to any iterations
    * with initial system state */
-  if (callback)
+  if (callback) {
     callback(iter, callback_params, w);
+}
 
   do
     {
@@ -336,8 +344,9 @@ gsl_multilarge_nlinear_driver (const size_t maxiter,
 
       ++iter;
 
-      if (callback)
+      if (callback) {
         callback(iter, callback_params, w);
+}
 
       /* test for convergence */
       status = gsl_multilarge_nlinear_test(xtol, gtol, ftol, info, w);
@@ -356,8 +365,9 @@ gsl_multilarge_nlinear_driver (const size_t maxiter,
     }
 
   /* check if max iterations reached */
-  if (iter >= maxiter && status != GSL_SUCCESS)
+  if (iter >= maxiter && status != GSL_SUCCESS) {
     status = GSL_EMAXITER;
+}
 
   return status;
 } /* gsl_multilarge_nlinear_driver() */
@@ -424,8 +434,9 @@ gsl_multilarge_nlinear_eval_f(gsl_multilarge_nlinear_fdf *fdf,
   ++(fdf->nevalf);
 
   /* y <- sqrt(W) y */
-  if (swts)
+  if (swts) {
     gsl_vector_mul(y, swts);
+}
 
   return s;
 }
@@ -493,11 +504,13 @@ gsl_multilarge_nlinear_eval_df(const CBLAS_TRANSPOSE_t TransJ,
           /* call user-supplied function */
           status = ((*((fdf)->df)) (TransJ, x, u, fdf->params, v, JTJ));
 
-          if (v)
+          if (v) {
             ++(fdf->nevaldfu);
+}
 
-          if (JTJ)
+          if (JTJ) {
             ++(fdf->nevaldf2);
+}
         }
       else
         {
@@ -558,8 +571,9 @@ gsl_multilarge_nlinear_eval_fvv(const double h,
     }
 
   /* yvv <- sqrt(W) yvv */
-  if (swts)
+  if (swts) {
     gsl_vector_mul(yvv, swts);
+}
 
   return status;
 }

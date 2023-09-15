@@ -85,8 +85,8 @@ static inline unsigned long int
 r250_get (void *vstate)
 {
   r250_state_t *state = (r250_state_t *) vstate;
-  unsigned long int k;
-  int j;
+  unsigned long int k = 0;
+  int j = 0;
 
   int i = state->i;
 
@@ -125,10 +125,11 @@ r250_set (void *vstate, unsigned long int s)
 {
   r250_state_t *state = (r250_state_t *) vstate;
 
-  int i;
+  int i = 0;
 
-  if (s == 0)
+  if (s == 0) {
     s = 1;      /* default seed is 1 */
+}
 
   state->i = 0;
 

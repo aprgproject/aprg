@@ -73,7 +73,7 @@ static void *
 lm_alloc (const int accel, const void * params, const size_t n, const size_t p)
 {
   const gsl_multifit_nlinear_parameters *mparams = (const gsl_multifit_nlinear_parameters *) params;
-  lm_state_t *state;
+  lm_state_t *state = NULL;
   
   state = calloc(1, sizeof(lm_state_t));
   if (state == NULL)
@@ -136,20 +136,25 @@ lm_free(void *vstate)
 {
   lm_state_t *state = (lm_state_t *) vstate;
 
-  if (state->workp)
+  if (state->workp) {
     gsl_vector_free(state->workp);
+}
 
-  if (state->workn)
+  if (state->workn) {
     gsl_vector_free(state->workn);
+}
 
-  if (state->fvv)
+  if (state->fvv) {
     gsl_vector_free(state->fvv);
+}
 
-  if (state->vel)
+  if (state->vel) {
     gsl_vector_free(state->vel);
+}
 
-  if (state->acc)
+  if (state->acc) {
     gsl_vector_free(state->acc);
+}
 
   free(state);
 }
@@ -187,7 +192,7 @@ lm_preloop()
 static int
 lm_preloop(const void * vtrust_state, void * vstate)
 {
-  int status;
+  int status = 0;
   const gsl_multifit_nlinear_trust_state *trust_state =
     (const gsl_multifit_nlinear_trust_state *) vtrust_state;
   const gsl_multifit_nlinear_parameters *params = trust_state->params;
@@ -196,8 +201,9 @@ lm_preloop(const void * vtrust_state, void * vstate)
 
   /* initialize linear least squares solver */
   status = (params->solver->init)(trust_state, trust_state->solver_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   return GSL_SUCCESS;
 }
@@ -215,7 +221,7 @@ static int
 lm_step(const void * vtrust_state, const double delta,
         gsl_vector * dx, void * vstate)
 {
-  int status;
+  int status = 0;
   const gsl_multifit_nlinear_trust_state *trust_state =
     (const gsl_multifit_nlinear_trust_state *) vtrust_state;
   lm_state_t *state = (lm_state_t *) vstate;
@@ -226,8 +232,9 @@ lm_step(const void * vtrust_state, const double delta,
 
   /* prepare the linear solver with current LM parameter mu */
   status = (params->solver->presolve)(mu, trust_state, trust_state->solver_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   /*
    * solve: [     J      ] v = - [ f ]
@@ -237,12 +244,14 @@ lm_step(const void * vtrust_state, const double delta,
                                    state->vel,
                                    trust_state,
                                    trust_state->solver_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   if (state->accel)
     {
-      double anorm, vnorm;
+      double anorm;
+      double vnorm;
 
       /* compute geodesic acceleration */
       status = gsl_multifit_nlinear_eval_fvv(params->h_fvv,
@@ -254,8 +263,9 @@ lm_step(const void * vtrust_state, const double delta,
                                              trust_state->fdf,
                                              state->fvv,
                                              state->workp);
-      if (status)
+      if (status) {
         return status;
+}
 
       /*
        * solve: [     J      ] a = - [ fvv ]
@@ -265,8 +275,9 @@ lm_step(const void * vtrust_state, const double delta,
                                        state->acc,
                                        trust_state,
                                        trust_state->solver_state);
-      if (status)
+      if (status) {
         return status;
+}
 
       anorm = gsl_blas_dnrm2(state->acc);
       vnorm = gsl_blas_dnrm2(state->vel);
@@ -298,8 +309,9 @@ lm_preduction(const void * vtrust_state, const gsl_vector * dx,
   const double norm_Dp = scaled_enorm(diag, p);
   const double normf = gsl_blas_dnrm2(trust_state->f);
   const double mu = *(trust_state->mu);
-  double norm_Jp;
-  double u, v;
+  double norm_Jp = NAN;
+  double u;
+  double v;
 
   (void)dx;
 

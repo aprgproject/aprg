@@ -44,9 +44,12 @@ gsl_fit_linear (const double *x, const size_t xstride,
                 double *c0, double *c1,
                 double *cov_00, double *cov_01, double *cov_11, double *sumsq)
 {
-  double m_x = 0, m_y = 0, m_dx2 = 0, m_dxdy = 0;
+  double m_x = 0;
+  double m_y = 0;
+  double m_dx2 = 0;
+  double m_dxdy = 0;
 
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < n; i++)
     {
@@ -66,7 +69,8 @@ gsl_fit_linear (const double *x, const size_t xstride,
   /* In terms of y = a + b x */
 
   {
-    double s2 = 0, d2 = 0;
+    double s2 = 0;
+    double d2 = 0;
     double b = m_dxdy / m_dx2;
     double a = m_y - m_x * b;
 
@@ -122,9 +126,13 @@ gsl_fit_wlinear (const double *x, const size_t xstride,
 
   /* wm denotes a "weighted mean", wm(f) = (sum_i w_i f_i) / (sum_i w_i) */
 
-  double W = 0, wm_x = 0, wm_y = 0, wm_dx2 = 0, wm_dxdy = 0;
+  double W = 0;
+  double wm_x = 0;
+  double wm_y = 0;
+  double wm_dx2 = 0;
+  double wm_dxdy = 0;
 
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < n; i++)
     {
@@ -211,9 +219,12 @@ gsl_fit_mul (const double *x, const size_t xstride,
              const size_t n, 
              double *c1, double *cov_11, double *sumsq)
 {
-  double m_x = 0, m_y = 0, m_dx2 = 0, m_dxdy = 0;
+  double m_x = 0;
+  double m_y = 0;
+  double m_dx2 = 0;
+  double m_dxdy = 0;
 
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < n; i++)
     {
@@ -233,7 +244,8 @@ gsl_fit_mul (const double *x, const size_t xstride,
   /* In terms of y =  b x */
 
   {
-    double s2 = 0, d2 = 0;
+    double s2 = 0;
+    double d2 = 0;
     double b = (m_x * m_y + m_dxdy) / (m_x * m_x + m_dx2);
 
     *c1 = b;
@@ -271,9 +283,13 @@ gsl_fit_wmul (const double *x, const size_t xstride,
 
   /* wm denotes a "weighted mean", wm(f) = (sum_i w_i f_i) / (sum_i w_i) */
 
-  double W = 0, wm_x = 0, wm_y = 0, wm_dx2 = 0, wm_dxdy = 0;
+  double W = 0;
+  double wm_x = 0;
+  double wm_y = 0;
+  double wm_dx2 = 0;
+  double wm_dxdy = 0;
 
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < n; i++)
     {

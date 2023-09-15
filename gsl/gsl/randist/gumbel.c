@@ -66,11 +66,11 @@ gsl_ran_gumbel2_pdf (const double x, const double a, const double b)
     {
       return 0 ;
     }
-  else
-    {
+  
+    
       double p = b * a *  pow(x,-(a+1)) * exp (-b * pow(x, -a));
       return p;
-    }
+   
 }
 
 

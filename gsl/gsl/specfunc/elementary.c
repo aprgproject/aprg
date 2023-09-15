@@ -57,9 +57,9 @@ gsl_sf_multiply_e(const double x, const double y, gsl_sf_result * result)
       CHECK_UNDERFLOW(result);
       return GSL_SUCCESS;
     }
-    else {
+    
       OVERFLOW_ERROR(result);
-    }
+   
  
 }
 

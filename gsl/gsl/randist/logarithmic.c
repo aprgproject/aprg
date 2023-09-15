@@ -40,8 +40,8 @@ gsl_ran_logarithmic (const gsl_rng * r, const double p)
     {
       return 1 ;
     }
-  else
-    {
+  
+    
       double u = gsl_rng_uniform_pos (r);      
       double q = 1 - exp (c * u);
 
@@ -58,7 +58,7 @@ gsl_ran_logarithmic (const gsl_rng * r, const double p)
         {
           return 1 ;
         }
-    }
+   
 }
 
 double
@@ -68,9 +68,9 @@ gsl_ran_logarithmic_pdf (const unsigned int k, const double p)
     {
       return 0 ;
     }
-  else 
-    {
+  
+    
       double P = pow(p, (double)k) / (double) k / log(1/(1-p)) ;
       return P;
-    }
+   
 }

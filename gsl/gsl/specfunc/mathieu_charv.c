@@ -36,13 +36,15 @@ static double solve_cubic(double c2, double c1, double c0);
 static double ceer(int order, double qq, double aa, int nterms)
 {
 
-  double term, term1;
-  int ii, n1;
+  double term;
+  double term1;
+  int ii;
+  int n1;
   
 
-  if (order == 0)
+  if (order == 0) {
       term = 0.0;
-  else
+  } else
   {      
       term = 2.0*qq*qq/aa;
 
@@ -50,8 +52,9 @@ static double ceer(int order, double qq, double aa, int nterms)
       {
           n1 = order/2 - 1;
 
-          for (ii=0; ii<n1; ii++)
+          for (ii=0; ii<n1; ii++) {
               term = qq*qq/(aa - 4.0*(ii+1)*(ii+1) - term);
+}
       }
   }
   
@@ -59,12 +62,14 @@ static double ceer(int order, double qq, double aa, int nterms)
 
   term1 = 0.0;
 
-  for (ii=0; ii<nterms; ii++)
+  for (ii=0; ii<nterms; ii++) {
       term1 = qq*qq/
         (aa - (order + 2.0*(nterms - ii))*(order + 2.0*(nterms - ii)) - term1);
+}
 
-  if (order == 0)
+  if (order == 0) {
       term1 *= 2.0;
+}
   
   return (term + term1 - aa);
 }
@@ -72,20 +77,24 @@ static double ceer(int order, double qq, double aa, int nterms)
 
 static double ceor(int order, double qq, double aa, int nterms)
 {
-  double term, term1;
-  int ii, n1;
+  double term;
+  double term1;
+  int ii;
+  int n1;
 
   term = qq;
   n1 = (int)((float)order/2.0 - 0.5);
 
-  for (ii=0; ii<n1; ii++)
+  for (ii=0; ii<n1; ii++) {
       term = qq*qq/(aa - (2.0*ii + 1.0)*(2.0*ii + 1.0) - term);
+}
   term += order*order;
 
   term1 = 0.0;
-  for (ii=0; ii<nterms; ii++)
+  for (ii=0; ii<nterms; ii++) {
       term1 = qq*qq/
         (aa - (order + 2.0*(nterms - ii))*(order + 2.0*(nterms - ii)) - term1);
+}
 
   return (term + term1 - aa);
 }
@@ -93,20 +102,24 @@ static double ceor(int order, double qq, double aa, int nterms)
 
 static double seer(int order, double qq, double aa, int nterms)
 {
-  double term, term1;
-  int ii, n1;
+  double term;
+  double term1;
+  int ii;
+  int n1;
 
   term = 0.0;
   n1 = order/2 - 1;
 
-  for (ii=0; ii<n1; ii++)
+  for (ii=0; ii<n1; ii++) {
       term = qq*qq/(aa - 4.0*(ii + 1)*(ii + 1) - term);
+}
   term += order*order;
 
   term1 = 0.0;
-  for (ii=0; ii<nterms; ii++)
+  for (ii=0; ii<nterms; ii++) {
       term1 = qq*qq/
         (aa - (order + 2.0*(nterms - ii))*(order + 2.0*(nterms - ii)) - term1);
+}
 
   return (term + term1 - aa);
 }
@@ -114,20 +127,24 @@ static double seer(int order, double qq, double aa, int nterms)
 
 static double seor(int order, double qq, double aa, int nterms)
 {
-  double term, term1;
-  int ii, n1;
+  double term;
+  double term1;
+  int ii;
+  int n1;
 
 
   term = -1.0*qq;
   n1 = (int)((float)order/2.0 - 0.5);
-  for (ii=0; ii<n1; ii++)
+  for (ii=0; ii<n1; ii++) {
       term = qq*qq/(aa - (2.0*ii + 1.0)*(2.0*ii + 1.0) - term);
+}
   term += order*order;
 
   term1 = 0.0;
-  for (ii=0; ii<nterms; ii++)
+  for (ii=0; ii<nterms; ii++) {
       term1 = qq*qq/
         (aa - (order + 2.0*(nterms - ii))*(order + 2.0*(nterms - ii)) - term1);
+}
 
   return (term + term1 - aa);
 }
@@ -143,9 +160,17 @@ static double seor(int order, double qq, double aa, int nterms)
  *--------------------------------------------------------------------------*/
 static double asymptotic(int order, double qq)
 {
-  double asymp;
-  double nn, n2, n4, n6;
-  double hh, ah, ah2, ah3, ah4, ah5;
+  double asymp = NAN;
+  double nn;
+  double n2;
+  double n4;
+  double n6;
+  double hh;
+  double ah;
+  double ah2;
+  double ah3;
+  double ah4;
+  double ah5;
 
 
   /* Set up temporary variables to simplify the readability. */
@@ -176,7 +201,11 @@ static double asymptotic(int order, double qq)
 /* Solve the cubic x^3 + c2*x^2 + c1*x + c0 = 0 */
 static double solve_cubic(double c2, double c1, double c0)
 {
-  double qq, rr, ww, ss, tt;
+  double qq;
+  double rr;
+  double ww;
+  double ss;
+  double tt;
 
   
   qq = (3*c1 - c2*c2)/9;
@@ -204,8 +233,10 @@ static double solve_cubic(double c2, double c1, double c0)
 /* Compute an initial approximation for the characteristic value. */
 static double approx_c(int order, double qq)
 {
-  double approx;
-  double c0, c1, c2;
+  double approx = NAN;
+  double c0;
+  double c1;
+  double c2;
 
 
   if (order < 0)
@@ -216,17 +247,19 @@ static double approx_c(int order, double qq)
   switch (order)
   {
       case 0:
-          if (qq <= 4)
+          if (qq <= 4) {
               return (2 - sqrt(4 + 2*qq*qq)); /* Eqn. 31 */
-          else
+          } else {
               return asymptotic(order, qq);
+}
           break;
 
       case 1:
-          if (qq <= 4)
+          if (qq <= 4) {
               return (5 + 0.5*(qq - sqrt(5*qq*qq - 16*qq + 64))); /* Eqn. 32 */
-          else
+          } else {
               return asymptotic(order, qq);
+}
           break;
 
       case 2:
@@ -236,8 +269,9 @@ static double approx_c(int order, double qq)
               c1 = -48 - 3*qq*qq;
               c0 = 20*qq*qq;
           }
-          else
+          else {
               return asymptotic(order, qq);
+}
           break;
 
       case 3:
@@ -247,8 +281,9 @@ static double approx_c(int order, double qq)
               c1 = 16*qq - 128 - 2*qq*qq;
               c0 = qq*qq*(qq + 8);
           }
-          else
+          else {
               return asymptotic(order, qq);
+}
           break;
 
       default:
@@ -258,7 +293,7 @@ static double approx_c(int order, double qq)
               {
                   /* Eqn. 30 */
                   double n2 = (double)(order*order);
-                  double n22 = (double)((n2 - 1)*(n2 - 1));
+                  double n22 = ((n2 - 1)*(n2 - 1));
                   double q2 = qq*qq;
                   double q4 = q2*q2;
                   approx = n2 + 0.5*q2/(n2 - 1);
@@ -271,29 +306,33 @@ static double approx_c(int order, double qq)
                       approx *= 0.5;
                   }
               }
-              else
+              else {
                   approx = asymptotic(order, qq);
+}
 
               return approx;
           }
-          else
+          else {
               return order*order;
+}
   }
 
   /* Solve the cubic x^3 + c2*x^2 + c1*x + c0 = 0 */
   approx = solve_cubic(c2, c1, c0);
       
-  if ( approx < 0 && sqrt(qq) > 0.1*order )
+  if ( approx < 0 && sqrt(qq) > 0.1*order ) {
       return asymptotic(order-1, qq);
-  else
+  } 
       return (order*order + fabs(approx));
 }
 
   
 static double approx_s(int order, double qq)
 {
-  double approx;
-  double c0, c1, c2;
+  double approx = NAN;
+  double c0;
+  double c1;
+  double c2;
 
   
   if (order < 1)
@@ -304,17 +343,19 @@ static double approx_s(int order, double qq)
   switch (order)
   {
       case 1:
-          if (qq <= 4)
+          if (qq <= 4) {
               return (5 - 0.5*(qq + sqrt(5*qq*qq + 16*qq + 64))); /* Eqn. 35 */
-          else
+          } else {
               return asymptotic(order-1, qq);
+}
           break;
 
       case 2:
-          if (qq <= 5)
+          if (qq <= 5) {
               return (10 - sqrt(36 + qq*qq)); /* Eqn. 36 */
-          else
+          } else {
               return asymptotic(order-1, qq);
+}
           break;
 
       case 3:
@@ -324,8 +365,9 @@ static double approx_s(int order, double qq)
               c1 = -128 - 16*qq - 2*qq*qq;
               c0 = qq*qq*(8 - qq);
           }
-          else
+          else {
               return asymptotic(order-1, qq);
+}
           break;
 
       default:
@@ -335,7 +377,7 @@ static double approx_s(int order, double qq)
               {
                   /* Eqn. 30 */
                   double n2 = (double)(order*order);
-                  double n22 = (double)((n2 - 1)*(n2 - 1));
+                  double n22 = ((n2 - 1)*(n2 - 1));
                   double q2 = qq*qq;
                   double q4 = q2*q2;
                   approx = n2 + 0.5*q2/(n2 - 1);
@@ -348,36 +390,50 @@ static double approx_s(int order, double qq)
                       approx *= 0.5;
                   }
               }
-              else
+              else {
                   approx = asymptotic(order-1, qq);
+}
 
               return approx;
           }
-          else
+          else {
               return order*order;
+}
   }
 
   /* Solve the cubic x^3 + c2*x^2 + c1*x + c0 = 0 */
   approx = solve_cubic(c2, c1, c0);
       
-  if ( approx < 0 && sqrt(qq) > 0.1*order )
+  if ( approx < 0 && sqrt(qq) > 0.1*order ) {
       return asymptotic(order-1, qq);
-  else
+  } 
       return (order*order + fabs(approx));
 }
 
 
 int gsl_sf_mathieu_a_e(int order, double qq, gsl_sf_result *result)
 {
-  int even_odd, nterms = 50, ii, counter = 0, maxcount = 1000;
+  int even_odd;
+  int nterms = 50;
+  int ii;
+  int counter = 0;
+  int maxcount = 1000;
   int dir = 0;  /* step direction for new search */
-  double a1, a2, fa, fa1, dela, aa_orig, da = 0.025, aa;
-  double aa_approx;  /* current approximation for solution */
+  double a1;
+  double a2;
+  double fa;
+  double fa1;
+  double dela;
+  double aa_orig;
+  double da = 0.025;
+  double aa;
+  double aa_approx = NAN;  /* current approximation for solution */
 
 
   even_odd = 0;
-  if (order % 2 != 0)
+  if (order % 2 != 0) {
       even_odd = 1;
+}
 
   /* If the argument is 0, then the coefficient is simply the square of
      the order. */
@@ -390,13 +446,14 @@ int gsl_sf_mathieu_a_e(int order, double qq, gsl_sf_result *result)
 
   /* Use symmetry characteristics of the functions to handle cases with
      negative order and/or argument q.  See Abramowitz & Stegun, 20.8.3. */
-  if (order < 0)
+  if (order < 0) {
       order *= -1;
+}
   if (qq < 0.0)
   {
-      if (even_odd == 0)
+      if (even_odd == 0) {
           return gsl_sf_mathieu_a_e(order, -qq, result);
-      else
+      } 
           return gsl_sf_mathieu_b_e(order, -qq, result);
   }
   
@@ -412,17 +469,19 @@ int gsl_sf_mathieu_a_e(int order, double qq, gsl_sf_result *result)
   {
       a1 = aa + 0.001;
       ii = 0;
-      if (even_odd == 0)
+      if (even_odd == 0) {
           fa1 = ceer(order, qq, a1, nterms);
-      else
+      } else {
           fa1 = ceor(order, qq, a1, nterms);
+}
 
       for (;;)
       {
-          if (even_odd == 0)
+          if (even_odd == 0) {
               fa = ceer(order, qq, aa, nterms);
-          else
+          } else {
               fa = ceor(order, qq, aa, nterms);
+}
       
           a2 = a1;
           a1 = aa;
@@ -461,14 +520,16 @@ int gsl_sf_mathieu_a_e(int order, double qq, gsl_sf_result *result)
           }
           if (aa > aa_orig)
           {
-              if (dir == 1)
+              if (dir == 1) {
                   da /= 2;
+}
               dir = -1;
           }
           else
           {
-              if (dir == -1)
+              if (dir == -1) {
                   da /= 2;
+}
               dir = 1;
           }
           aa_approx += dir*da*counter;
@@ -476,7 +537,7 @@ int gsl_sf_mathieu_a_e(int order, double qq, gsl_sf_result *result)
           
           continue;
       }
-      else
+      
           break;
   }
 
@@ -495,15 +556,27 @@ int gsl_sf_mathieu_a_e(int order, double qq, gsl_sf_result *result)
 
 int gsl_sf_mathieu_b_e(int order, double qq, gsl_sf_result *result)
 {
-  int even_odd, nterms = 50, ii, counter = 0, maxcount = 1000;
+  int even_odd;
+  int nterms = 50;
+  int ii;
+  int counter = 0;
+  int maxcount = 1000;
   int dir = 0;  /* step direction for new search */
-  double a1, a2, fa, fa1, dela, aa_orig, da = 0.025, aa;
-  double aa_approx;  /* current approximation for solution */
+  double a1;
+  double a2;
+  double fa;
+  double fa1;
+  double dela;
+  double aa_orig;
+  double da = 0.025;
+  double aa;
+  double aa_approx = NAN;  /* current approximation for solution */
 
 
   even_odd = 0;
-  if (order % 2 != 0)
+  if (order % 2 != 0) {
       even_odd = 1;
+}
 
   /* The order cannot be 0. */
   if (order == 0)
@@ -522,13 +595,14 @@ int gsl_sf_mathieu_b_e(int order, double qq, gsl_sf_result *result)
 
   /* Use symmetry characteristics of the functions to handle cases with
      negative order and/or argument q.  See Abramowitz & Stegun, 20.8.3. */
-  if (order < 0)
+  if (order < 0) {
       order *= -1;
+}
   if (qq < 0.0)
   {
-      if (even_odd == 0)
+      if (even_odd == 0) {
           return gsl_sf_mathieu_b_e(order, -qq, result);
-      else
+      } 
           return gsl_sf_mathieu_a_e(order, -qq, result);
   }
   
@@ -544,17 +618,19 @@ int gsl_sf_mathieu_b_e(int order, double qq, gsl_sf_result *result)
   {
       a1 = aa + 0.001;
       ii = 0;
-      if (even_odd == 0)
+      if (even_odd == 0) {
           fa1 = seer(order, qq, a1, nterms);
-      else
+      } else {
           fa1 = seor(order, qq, a1, nterms);
+}
 
       for (;;)
       {
-          if (even_odd == 0)
+          if (even_odd == 0) {
               fa = seer(order, qq, aa, nterms);
-          else
+          } else {
               fa = seor(order, qq, aa, nterms);
+}
       
           a2 = a1;
           a1 = aa;
@@ -593,14 +669,16 @@ int gsl_sf_mathieu_b_e(int order, double qq, gsl_sf_result *result)
           }
           if (aa > aa_orig)
           {
-              if (dir == 1)
+              if (dir == 1) {
                   da /= 2;
+}
               dir = -1;
           }
           else
           {
-              if (dir == -1)
+              if (dir == -1) {
                   da /= 2;
+}
               dir = 1;
           }
           aa_approx += dir*da*counter;
@@ -608,7 +686,7 @@ int gsl_sf_mathieu_b_e(int order, double qq, gsl_sf_result *result)
           
           continue;
       }
-      else
+      
           break;
   }
   
@@ -675,7 +753,7 @@ int gsl_sf_mathieu_b_e(int order, double qq, gsl_sf_result *result)
 static int figi(int nn, double *tt, double *dd, double *ee,
                 double *e2)
 {
-  int ii;
+  int ii = 0;
 
   for (ii=0; ii<nn; ii++)
   {
@@ -709,12 +787,20 @@ static int figi(int nn, double *tt, double *dd, double *ee,
 
 int gsl_sf_mathieu_a_array(int order_min, int order_max, double qq, gsl_sf_mathieu_workspace *work, double result_array[])
 {
-  unsigned int even_order = work->even_order, odd_order = work->odd_order,
-      extra_values = work->extra_values, ii, jj;
-  int status;
-  double *tt = work->tt, *dd = work->dd, *ee = work->ee, *e2 = work->e2,
-         *zz = work->zz, *aa = work->aa;
-  gsl_matrix_view mat, evec;
+  unsigned int even_order = work->even_order;
+  unsigned int odd_order = work->odd_order;
+  unsigned int extra_values = work->extra_values;
+  unsigned int ii;
+  unsigned int jj;
+  int status = 0;
+  double *tt = work->tt;
+  double *dd = work->dd;
+  double *ee = work->ee;
+  double *e2 = work->e2;
+  double *zz = work->zz;
+  double *aa = work->aa;
+  gsl_matrix_view mat;
+  gsl_matrix_view evec;
   gsl_vector_view eval;
   gsl_eigen_symmv_workspace *wmat = work->wmat;
   
@@ -749,8 +835,9 @@ int gsl_sf_mathieu_a_array(int order_min, int order_max, double qq, gsl_sf_mathi
     }
 
   /* Fill the period \pi matrix. */
-  for (ii=0; ii<even_order*even_order; ii++)
+  for (ii=0; ii<even_order*even_order; ii++) {
       zz[ii] = 0.0;
+}
 
   zz[0] = dd[0];
   zz[1] = ee[1];
@@ -770,20 +857,24 @@ int gsl_sf_mathieu_a_array(int order_min, int order_max, double qq, gsl_sf_mathi
   gsl_eigen_symmv(&mat.matrix, &eval.vector, &evec.matrix, wmat);
   gsl_eigen_symmv_sort(&eval.vector, &evec.matrix, GSL_EIGEN_SORT_VAL_ASC);
   
-  for (ii=0; ii<even_order-extra_values; ii++)
+  for (ii=0; ii<even_order-extra_values; ii++) {
       aa[2*ii] = gsl_vector_get(&eval.vector, ii);
+}
   
   /* Fill the period 2\pi matrix. */
-  for (ii=0; ii<odd_order*odd_order; ii++)
+  for (ii=0; ii<odd_order*odd_order; ii++) {
       zz[ii] = 0.0;
-  for (ii=0; ii<odd_order; ii++)
+}
+  for (ii=0; ii<odd_order; ii++) {
       for (jj=0; jj<odd_order; jj++)
       {
-          if (ii == jj)
+          if (ii == jj) {
               zz[ii*odd_order+jj] = (2*ii + 1)*(2*ii + 1);
-          else if (ii == jj + 1 || ii + 1 == jj)
+          } else if (ii == jj + 1 || ii + 1 == jj) {
               zz[ii*odd_order+jj] = qq;
+}
       }
+}
   zz[0] += qq;
 
   /* Compute (and sort) the eigenvalues of the matrix. */
@@ -793,8 +884,9 @@ int gsl_sf_mathieu_a_array(int order_min, int order_max, double qq, gsl_sf_mathi
   gsl_eigen_symmv(&mat.matrix, &eval.vector, &evec.matrix, wmat);
   gsl_eigen_symmv_sort(&eval.vector, &evec.matrix, GSL_EIGEN_SORT_VAL_ASC);
 
-  for (ii=0; ii<odd_order-extra_values; ii++)
+  for (ii=0; ii<odd_order-extra_values; ii++) {
       aa[2*ii+1] = gsl_vector_get(&eval.vector, ii);
+}
 
   for (ii = order_min ; ii <= order_max ; ii++)
     {
@@ -807,10 +899,15 @@ int gsl_sf_mathieu_a_array(int order_min, int order_max, double qq, gsl_sf_mathi
 
 int gsl_sf_mathieu_b_array(int order_min, int order_max, double qq, gsl_sf_mathieu_workspace *work, double result_array[])
 {
-  unsigned int even_order = work->even_order-1, odd_order = work->odd_order,
-      extra_values = work->extra_values, ii, jj;
-  double *zz = work->zz, *bb = work->bb;
-  gsl_matrix_view mat, evec;
+  unsigned int even_order = work->even_order-1;
+  unsigned int odd_order = work->odd_order;
+  unsigned int extra_values = work->extra_values;
+  unsigned int ii;
+  unsigned int jj;
+  double *zz = work->zz;
+  double *bb = work->bb;
+  gsl_matrix_view mat;
+  gsl_matrix_view evec;
   gsl_vector_view eval;
   gsl_eigen_symmv_workspace *wmat = work->wmat;
 
@@ -820,16 +917,19 @@ int gsl_sf_mathieu_b_array(int order_min, int order_max, double qq, gsl_sf_mathi
     }
 
   /* Fill the period \pi matrix. */
-  for (ii=0; ii<even_order*even_order; ii++)
+  for (ii=0; ii<even_order*even_order; ii++) {
       zz[ii] = 0.0;
-  for (ii=0; ii<even_order; ii++)
+}
+  for (ii=0; ii<even_order; ii++) {
       for (jj=0; jj<even_order; jj++)
       {
-          if (ii == jj)
+          if (ii == jj) {
               zz[ii*even_order+jj] = 4*(ii + 1)*(ii + 1);
-          else if (ii == jj + 1 || ii + 1 == jj)
+          } else if (ii == jj + 1 || ii + 1 == jj) {
               zz[ii*even_order+jj] = qq;
+}
       }
+}
 
   /* Compute (and sort) the eigenvalues of the matrix. */
   mat = gsl_matrix_view_array(zz, even_order, even_order);
@@ -839,20 +939,24 @@ int gsl_sf_mathieu_b_array(int order_min, int order_max, double qq, gsl_sf_mathi
   gsl_eigen_symmv_sort(&eval.vector, &evec.matrix, GSL_EIGEN_SORT_VAL_ASC);
 
   bb[0] = 0.0;
-  for (ii=0; ii<even_order-extra_values; ii++)
+  for (ii=0; ii<even_order-extra_values; ii++) {
       bb[2*(ii+1)] = gsl_vector_get(&eval.vector, ii);
+}
   
   /* Fill the period 2\pi matrix. */
-  for (ii=0; ii<odd_order*odd_order; ii++)
+  for (ii=0; ii<odd_order*odd_order; ii++) {
       zz[ii] = 0.0;
-  for (ii=0; ii<odd_order; ii++)
+}
+  for (ii=0; ii<odd_order; ii++) {
       for (jj=0; jj<odd_order; jj++)
       {
-          if (ii == jj)
+          if (ii == jj) {
               zz[ii*odd_order+jj] = (2*ii + 1)*(2*ii + 1);
-          else if (ii == jj + 1 || ii + 1 == jj)
+          } else if (ii == jj + 1 || ii + 1 == jj) {
               zz[ii*odd_order+jj] = qq;
+}
       }
+}
 
   zz[0] -= qq;
 
@@ -863,8 +967,9 @@ int gsl_sf_mathieu_b_array(int order_min, int order_max, double qq, gsl_sf_mathi
   gsl_eigen_symmv(&mat.matrix, &eval.vector, &evec.matrix, wmat);
   gsl_eigen_symmv_sort(&eval.vector, &evec.matrix, GSL_EIGEN_SORT_VAL_ASC);
   
-  for (ii=0; ii<odd_order-extra_values; ii++)
+  for (ii=0; ii<odd_order-extra_values; ii++) {
       bb[2*ii+1] = gsl_vector_get(&eval.vector, ii);  
+}
 
   for (ii = order_min ; ii <= order_max ; ii++)
     {

@@ -43,10 +43,10 @@ halley_iteration(
   )
 {
   double w = w_initial;
-  unsigned int i;
+  unsigned int i = 0;
 
   for(i=0; i<max_iters; i++) {
-    double tol;
+    double tol = NAN;
     const double e = exp(w);
     const double p = w + 1.0;
     double t = w*e - x;
@@ -117,7 +117,7 @@ gsl_sf_lambert_W0_e(double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(q < 0.0) {
+  if(q < 0.0) {
     /* Strictly speaking this is an error. But because of the
      * arithmetic operation connecting x and q, I am a little
      * lenient in case of some epsilon overshoot. The following
@@ -169,7 +169,7 @@ gsl_sf_lambert_Wm1_e(double x, gsl_sf_result * result)
   if(x > 0.0) {
     return gsl_sf_lambert_W0_e(x, result);
   }
-  else if(x == 0.0) {
+  if(x == 0.0) {
     result->val = 0.0;
     result->err = 0.0;
     return GSL_SUCCESS;

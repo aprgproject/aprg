@@ -53,7 +53,7 @@ gsl_sum_levin_utrunc_minmax (const double *array,
       w->terms_used = 0;
       return GSL_SUCCESS;
     }
-  else if (array_size == 1)
+  if (array_size == 1)
     {
       *sum_accel = array[0];
       *abserr_trunc = GSL_POSINF;
@@ -170,7 +170,7 @@ gsl_sum_levin_utrunc_step (const double term,
 
       return GSL_EZERODIV;
     }
-  else if (n == 0)
+  if (n == 0)
     {
       *sum_accel = term;
       w->sum_plain = term;

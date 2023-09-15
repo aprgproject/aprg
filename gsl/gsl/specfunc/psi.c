@@ -425,7 +425,7 @@ psi_x(const double x, gsl_sf_result * result)
       result->err += GSL_DBL_EPSILON * fabs(result->val);
       return GSL_SUCCESS;
     }
-    else if(x < 0.0) { /* x = -1 + v */
+    if(x < 0.0) { /* x = -1 + v */
       const double v  = x + 1.0;
       const double t1 = 1.0/x;
       const double t2 = 1.0/v;
@@ -503,7 +503,7 @@ psi_complex_rhp(
   )
 {
   int n_recurse = 0;
-  int i;
+  int i = 0;
   gsl_complex a;
 
   if(GSL_REAL(z) == 0.0 && GSL_IMAG(z) == 0.0)
@@ -521,7 +521,8 @@ psi_complex_rhp(
     const double sp = sqrt(20.0 + GSL_IMAG(z));
     const double sn = sqrt(20.0 - GSL_IMAG(z));
     const double rhs = sp*sn - GSL_REAL(z);
-    if(rhs > 0.0) n_recurse = ceil(rhs);
+    if(rhs > 0.0) { n_recurse = ceil(rhs);
+}
   }
 
   /* compute asymptotic at the large value z + n_recurse */
@@ -561,7 +562,7 @@ psi_n_xg0(const int n, const double x, gsl_sf_result * result)
   if(n == 0) {
     return gsl_sf_psi_e(x, result);
   }
-  else {
+  
     /* Abramowitz + Stegun 6.4.10 */
     gsl_sf_result ln_nf;
     gsl_sf_result hzeta;
@@ -572,7 +573,7 @@ psi_n_xg0(const int n, const double x, gsl_sf_result * result)
                                            result);
     if(GSL_IS_EVEN(n)) result->val = -result->val;
     return GSL_ERROR_SELECT_3(stat_e, stat_nf, stat_hz);
-  }
+ 
 }
 
 
@@ -630,7 +631,7 @@ gsl_sf_psi_1piy_e(const double y, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * (fabs(lny) + fabs(sum));
     return GSL_SUCCESS;
   }
-  else if(ay > 10.0) {
+  if(ay > 10.0) {
     /* [Abramowitz+Stegun, 6.3.19] */
     const double yi2 = 1.0/(ay*ay);
     const double lny = log(ay);
@@ -736,13 +737,15 @@ int gsl_sf_psi_1_e(const double x, gsl_sf_result * result)
     int M = -floor(x);
     double fx = x + M;
     double sum = 0.0;
-    int m;
+    int m = 0;
 
-    if(fx == 0.0)
+    if(fx == 0.0) {
       DOMAIN_ERROR(result);
+}
 
-    for(m = 0; m < M; ++m)
+    for(m = 0; m < M; ++m) {
       sum += 1.0/((x+m)*(x+m));
+}
 
     {
       int stat_psi = psi_n_xg0(1, fx, result);
@@ -773,7 +776,7 @@ int gsl_sf_psi_n_e(const int n, const double x, gsl_sf_result * result)
   {
     return gsl_sf_psi_e(x, result);
   }
-  else if(n == 1)
+  if(n == 1)
   {
     return gsl_sf_psi_1_e(x, result);
   }
@@ -807,8 +810,8 @@ gsl_sf_complex_psi_e(
     gsl_complex z = gsl_complex_rect(x, y);
     return psi_complex_rhp(z, result_re, result_im);
   }
-  else
-  {
+  
+  
     /* reflection formula [Abramowitz+Stegun, 6.3.7] */
     gsl_complex z = gsl_complex_rect(x, y);
     gsl_complex omz = gsl_complex_rect(1.0 - x, -y);
@@ -826,7 +829,7 @@ gsl_sf_complex_psi_e(
     {
       GSL_ERROR("singularity", GSL_EDOM);
     }
-  }
+ 
 }
 
 

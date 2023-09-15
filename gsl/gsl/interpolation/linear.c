@@ -41,10 +41,12 @@ linear_eval (const void * vstate,
              gsl_interp_accel * a,
              double *y)
 {
-  double x_lo, x_hi;
-  double y_lo, y_hi;
-  double dx;
-  size_t index;
+  double x_lo;
+  double x_hi;
+  double y_lo;
+  double y_hi;
+  double dx = NAN;
+  size_t index = 0;
   
   if (a != 0)
     {
@@ -66,11 +68,11 @@ linear_eval (const void * vstate,
       *y = y_lo + (x - x_lo) / dx * (y_hi - y_lo);
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       *y = 0.0;
       return GSL_EINVAL;
-    }
+   
 }
 
 
@@ -82,11 +84,13 @@ linear_eval_deriv (const void * vstate,
                    gsl_interp_accel * a,
                    double *dydx)
 {
-  double x_lo, x_hi;
-  double y_lo, y_hi;
-  double dx;
-  double dy;
-  size_t index;
+  double x_lo;
+  double x_hi;
+  double y_lo;
+  double y_hi;
+  double dx = NAN;
+  double dy = NAN;
+  size_t index = 0;
   
   if (a != 0)
     {
@@ -109,11 +113,11 @@ linear_eval_deriv (const void * vstate,
       *dydx = dy / dx;;
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       *dydx = 0.0;
       return GSL_EINVAL;
-    }
+   
 }
 
 
@@ -139,7 +143,9 @@ linear_eval_integ (const void * vstate,
                    double a, double b,
                    double * result)
 {
-  size_t i, index_a, index_b;
+  size_t i;
+  size_t index_a;
+  size_t index_b;
   
   if (acc != 0)
     {

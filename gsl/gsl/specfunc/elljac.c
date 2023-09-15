@@ -64,7 +64,10 @@ gsl_sf_elljac_e(double u, double m, double * sn, double * cn, double * dn)
     double nu[16];
     double c[16];
     double d[16];
-    double sin_umu, cos_umu, t, r;
+    double sin_umu;
+    double cos_umu;
+    double t;
+    double r;
     int n = 0;
 
     mu[0] = 1.0;

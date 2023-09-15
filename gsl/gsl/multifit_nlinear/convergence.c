@@ -51,8 +51,10 @@ gsl_multifit_nlinear_test (const double xtol, const double gtol,
                            const double ftol, int *info,
                            const gsl_multifit_nlinear_workspace * w)
 {
-  int status;
-  double gnorm, fnorm, phi;
+  int status = 0;
+  double gnorm;
+  double fnorm;
+  double phi;
 
   *info = 0;
 
@@ -93,7 +95,7 @@ static int
 test_delta (const gsl_vector * dx, const gsl_vector * x, 
             double epsabs, double epsrel)
 {
-  size_t i;
+  size_t i = 0;
   int ok = 1;
   const size_t n = x->size ;
 
@@ -119,8 +121,9 @@ test_delta (const gsl_vector * dx, const gsl_vector * x,
         }
     }
 
-  if (ok)
+  if (ok) {
     return GSL_SUCCESS ;
+}
 
   return GSL_CONTINUE;
 }
@@ -129,7 +132,7 @@ static double
 scaled_infnorm(const gsl_vector *x, const gsl_vector *g)
 {
   const size_t n = x->size;
-  size_t i;
+  size_t i = 0;
   double norm = 0.0;
 
   for (i = 0; i < n; ++i)
@@ -138,8 +141,9 @@ scaled_infnorm(const gsl_vector *x, const gsl_vector *g)
       double gi = gsl_vector_get(g, i);
       double tmp = fabs(xi * gi);
 
-      if (tmp > norm)
+      if (tmp > norm) {
         norm = tmp;
+}
     }
 
   return norm;

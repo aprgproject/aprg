@@ -27,6 +27,7 @@
 #include <gsl/gsl_eigen.h>
 #include <gsl/gsl_multifit.h>
 #include <gsl/gsl_multilarge.h>
+#include <math.h>
 
 typedef struct
 {
@@ -79,7 +80,7 @@ Return: pointer to workspace
 static void *
 normal_alloc(const size_t p)
 {
-  normal_state_t *state;
+  normal_state_t *state = NULL;
 
   if (p == 0)
     {
@@ -161,29 +162,37 @@ normal_free(void *vstate)
 {
   normal_state_t *state = (normal_state_t *) vstate;
 
-  if (state->ATA)
+  if (state->ATA) {
     gsl_matrix_free(state->ATA);
+}
 
-  if (state->work_ATA)
+  if (state->work_ATA) {
     gsl_matrix_free(state->work_ATA);
+}
 
-  if (state->ATb)
+  if (state->ATb) {
     gsl_vector_free(state->ATb);
+}
 
-  if (state->D)
+  if (state->D) {
     gsl_vector_free(state->D);
+}
 
-  if (state->workp)
+  if (state->workp) {
     gsl_vector_free(state->workp);
+}
 
-  if (state->work3p)
+  if (state->work3p) {
     gsl_vector_free(state->work3p);
+}
 
-  if (state->c)
+  if (state->c) {
     gsl_vector_free(state->c);
+}
 
-  if (state->eigen_p)
+  if (state->eigen_p) {
     gsl_eigen_symm_free(state->eigen_p);
+}
 
   free(state);
 }
@@ -230,17 +239,19 @@ normal_accumulate(gsl_matrix * A, gsl_vector * b, void * vstate)
     }
   else
     {
-      int s;
+      int s = 0;
 
       /* ATA += A^T A, using only the lower half of the matrix */
       s = gsl_blas_dsyrk(CblasLower, CblasTrans, 1.0, A, 1.0, state->ATA);
-      if (s)
+      if (s) {
         return s;
+}
 
       /* ATb += A^T b */
       s = gsl_blas_dgemv(CblasTrans, 1.0, A, b, 1.0, state->ATb);
-      if (s)
+      if (s) {
         return s;
+}
 
       /* update || b || */
       state->normb = gsl_hypot(state->normb, gsl_blas_dnrm2(b));
@@ -279,7 +290,7 @@ normal_solve(const double lambda, gsl_vector * x,
     }
   else
     {
-      int status;
+      int status = 0;
 
       /* solve system (A^T A) x = A^T b */
       status = normal_solve_system(lambda, x, state);
@@ -300,11 +311,12 @@ normal_rcond(double * rcond, void * vstate)
 {
   normal_state_t *state = (normal_state_t *) vstate;
   int status = GSL_SUCCESS;
-  double rcond_ATA;
+  double rcond_ATA = NAN;
 
   status = gsl_linalg_cholesky_rcond(state->work_ATA, &rcond_ATA, state->work3p);
-  if (status == GSL_SUCCESS)
+  if (status == GSL_SUCCESS) {
     *rcond = sqrt(rcond_ATA);
+}
 
   return status;
 }
@@ -326,15 +338,17 @@ normal_lcurve(gsl_vector * reg_param, gsl_vector * rho,
               gsl_vector * eta, void * vstate)
 {
   normal_state_t *state = (normal_state_t *) vstate;
-  int status;
-  double smin, smax; /* minimum/maximum singular values */
-  size_t i;
+  int status = 0;
+  double smin;
+  double smax; /* minimum/maximum singular values */
+  size_t i = 0;
 
   if (state->eigen == 0)
     {
       status = normal_eigen(state);
-      if (status)
+      if (status) {
         return status;
+}
     }
 
   if (state->eval_max < 0.0)
@@ -344,10 +358,11 @@ normal_lcurve(gsl_vector * reg_param, gsl_vector * rho,
 
   /* compute singular values which are sqrts of eigenvalues */
   smax = sqrt(state->eval_max);
-  if (state->eval_min > 0.0)
+  if (state->eval_min > 0.0) {
     smin = sqrt(state->eval_min);
-  else
+  } else {
     smin = 0.0;
+}
 
   /* compute vector of regularization parameters */
   gsl_multifit_linear_lreg(smin, smax, reg_param);
@@ -356,11 +371,13 @@ normal_lcurve(gsl_vector * reg_param, gsl_vector * rho,
   for (i = 0; i < reg_param->size; ++i)
     {
       double lambda = gsl_vector_get(reg_param, i);
-      double rnorm, snorm;
+      double rnorm;
+      double snorm;
 
       status = normal_solve_system(lambda, state->c, state);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* compute ||y - X c|| and ||c|| */
       normal_calc_norms(state->c, &rnorm, &snorm, state);
@@ -403,7 +420,7 @@ Return: success/error
 static int
 normal_solve_system(const double lambda, gsl_vector * x, normal_state_t *state)
 {
-  int status;
+  int status = 0;
   const double lambda_sq = lambda * lambda;
   gsl_vector_view d = gsl_matrix_diagonal(state->work_ATA);
 
@@ -413,8 +430,9 @@ normal_solve_system(const double lambda, gsl_vector * x, normal_state_t *state)
 
   /* solve with Cholesky decomposition */
   status = normal_solve_cholesky(state->work_ATA, state->ATb, x, state);
-  if (status)
+  if (status) {
     return status;
+}
 
   return status;
 }
@@ -423,15 +441,17 @@ static int
 normal_solve_cholesky(gsl_matrix * ATA, const gsl_vector * ATb,
                       gsl_vector * x, normal_state_t *state)
 {
-  int status;
+  int status = 0;
 
   status = gsl_linalg_cholesky_decomp2(ATA, state->D);
-  if (status)
+  if (status) {
     return status;
+}
 
   status = gsl_linalg_cholesky_solve2(ATA, state->D, ATb, x);
-  if (status)
+  if (status) {
     return status;
+}
 
   return GSL_SUCCESS;
 }
@@ -451,7 +471,7 @@ static int
 normal_calc_norms(const gsl_vector *x, double *rnorm,
                   double *snorm, normal_state_t *state)
 {
-  double r2;
+  double r2 = NAN;
 
   /* compute solution norm ||x|| */
   *snorm = gsl_blas_dnrm2(x);
@@ -484,15 +504,16 @@ to the minimum/maximum eigenvalues
 static int
 normal_eigen(normal_state_t *state)
 {
-  int status;
+  int status = 0;
 
   /* copy lower triangle of ATA to temporary workspace */
   gsl_matrix_tricpy(CblasLower, CblasNonUnit, state->work_ATA, state->ATA);
 
   /* compute eigenvalues of ATA */
   status = gsl_eigen_symm(state->work_ATA, state->workp, state->eigen_p);
-  if (status)
+  if (status) {
     return status;
+}
 
   gsl_vector_minmax(state->workp, &state->eval_min, &state->eval_max);
 

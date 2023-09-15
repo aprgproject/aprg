@@ -61,7 +61,7 @@ rational_init(const size_t n, double * diag, double * subdiag, gsl_integration_f
   const double a1 = params->alpha + 1.0;
   const double aba1 = absum*a1;
   double ab2i = absum + 2.0;
-  size_t i;
+  size_t i = 0;
 
   /* construct the diagonal and subdiagonal elements of Jacobi matrix */
   

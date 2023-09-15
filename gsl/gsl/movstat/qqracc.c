@@ -79,8 +79,9 @@ qqracc_delete(void * vstate)
 {
   qqracc_state_t * state = (qqracc_state_t *) vstate;
 
-  if (!ringbuf_is_empty(state->rbuf))
+  if (!ringbuf_is_empty(state->rbuf)) {
     ringbuf_pop_back(state->rbuf);
+}
 
   return GSL_SUCCESS;
 }
@@ -92,7 +93,8 @@ qqracc_get(void * params, qqracc_type_t * result, const void * vstate)
   const qqracc_state_t * state = (const qqracc_state_t *) vstate;
   double q = *(double *) params;
   size_t n = ringbuf_copy(state->window, state->rbuf);
-  double quant1, quant2;
+  double quant1;
+  double quant2;
 
   gsl_sort(state->window, 1, n);
 

@@ -178,7 +178,7 @@ gsl_sf_sin_e(double x, gsl_sf_result * result)
       result->err = fabs(x*x2*x2 / 100.0);
       return GSL_SUCCESS;
     }
-    else {
+    
       double sgn_result = sgn_x;
       double y = floor(abs_x/(0.25*M_PI));
       int octant = y - ldexp(floor(ldexp(y,-3)),3);
@@ -227,7 +227,7 @@ gsl_sf_sin_e(double x, gsl_sf_result * result)
       }
 
       return stat_cs;
-    }
+   
   }
 }
 
@@ -250,7 +250,7 @@ gsl_sf_cos_e(double x, gsl_sf_result * result)
       result->err = fabs(x2*x2/12.0);
       return GSL_SUCCESS;
     }
-    else {
+    
       double sgn_result = 1.0;
       double y = floor(abs_x/(0.25*M_PI));
       int octant = y - ldexp(floor(ldexp(y,-3)),3);
@@ -303,7 +303,7 @@ gsl_sf_cos_e(double x, gsl_sf_result * result)
       }
 
       return stat_cs;
-    }
+   
   }
 }
 
@@ -318,7 +318,7 @@ gsl_sf_hypot_e(const double x, const double y, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else {
+  
     const double a = fabs(x);
     const double b = fabs(y);
     const double min = GSL_MIN_DBL(a,b);
@@ -334,7 +334,7 @@ gsl_sf_hypot_e(const double x, const double y, gsl_sf_result * result)
     else {
       OVERFLOW_ERROR(result);
     }
-  }
+ 
 }
 
 
@@ -346,7 +346,8 @@ gsl_sf_complex_sin_e(const double zr, const double zi,
   /* CHECK_POINTER(szi) */
 
   if(fabs(zi) < 1.0) {
-    double ch_m1, sh;
+    double ch_m1;
+    double sh;
     sinh_series(zi, &sh);
     cosh_m1_series(zi, &ch_m1);
     szr->val = sin(zr)*(ch_m1 + 1.0);
@@ -355,7 +356,7 @@ gsl_sf_complex_sin_e(const double zr, const double zi,
     szi->err = 2.0 * GSL_DBL_EPSILON * fabs(szi->val);
     return GSL_SUCCESS;
   }
-  else if(fabs(zi) < GSL_LOG_DBL_MAX) {
+  if(fabs(zi) < GSL_LOG_DBL_MAX) {
     double ex = exp(zi);
     double ch = 0.5*(ex+1.0/ex);
     double sh = 0.5*(ex-1.0/ex);
@@ -379,7 +380,8 @@ gsl_sf_complex_cos_e(const double zr, const double zi,
   /* CHECK_POINTER(czi) */
 
   if(fabs(zi) < 1.0) {
-    double ch_m1, sh;
+    double ch_m1;
+    double sh;
     sinh_series(zi, &sh);
     cosh_m1_series(zi, &ch_m1);
     czr->val =  cos(zr)*(ch_m1 + 1.0);
@@ -388,7 +390,7 @@ gsl_sf_complex_cos_e(const double zr, const double zi,
     czi->err = 2.0 * GSL_DBL_EPSILON * fabs(czi->val);
     return GSL_SUCCESS;
   }
-  else if(fabs(zi) < GSL_LOG_DBL_MAX) {
+  if(fabs(zi) < GSL_LOG_DBL_MAX) {
     double ex = exp(zi);
     double ch = 0.5*(ex+1.0/ex);
     double sh = 0.5*(ex-1.0/ex);
@@ -424,8 +426,9 @@ gsl_sf_complex_logsin_e(const double zr, const double zi,
     lszi->err = 2.0 * GSL_DBL_EPSILON * fabs(lszi->val);
   }
   else {
-    gsl_sf_result sin_r, sin_i;
-    int status;
+    gsl_sf_result sin_r;
+    gsl_sf_result sin_i;
+    int status = 0;
     gsl_sf_complex_sin_e(zr, zi, &sin_r, &sin_i); /* ok by construction */
     status = gsl_sf_complex_log_e(sin_r.val, sin_i.val, lszr, lszi);
     if(status == GSL_EDOM) {
@@ -445,7 +448,7 @@ gsl_sf_lnsinh_e(const double x, gsl_sf_result * result)
     DOMAIN_ERROR(result);
   }
   else if(fabs(x) < 1.0) {
-    double eps;
+    double eps = NAN;
     sinh_series(x, &eps);
     result->val = log(eps);
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
@@ -469,11 +472,11 @@ int gsl_sf_lncosh_e(const double x, gsl_sf_result * result)
   /* CHECK_POINTER(result) */
 
   if(fabs(x) < 1.0) {
-    double eps;
+    double eps = NAN;
     cosh_m1_series(x, &eps);
     return gsl_sf_log_1plusx_e(eps, result);
   }
-  else if(fabs(x) < -0.5*GSL_LOG_DBL_EPSILON) {
+  if(fabs(x) < -0.5*GSL_LOG_DBL_EPSILON) {
     result->val = fabs(x) + log(0.5*(1.0 + exp(-2.0*fabs(x))));
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
@@ -524,9 +527,9 @@ gsl_sf_rect_to_polar(const double x, const double y,
     theta->err = 2.0 * GSL_DBL_EPSILON * fabs(theta->val);
     return stat_h;
   }
-  else {
+  
     DOMAIN_ERROR(theta);
-  }
+ 
 }
 
 
@@ -542,7 +545,8 @@ int gsl_sf_angle_restrict_symm_err_e(const double theta, gsl_sf_result * result)
   double r = ((theta - y*P1) - y*P2) - y*P3;
 
   if(r >  M_PI) { r = (((r-2*P1)-2*P2)-2*P3); }  /* r-TwoPi */
-  else if (r < -M_PI) r = (((r+2*P1)+2*P2)+2*P3); /* r+TwoPi */
+  else if (r < -M_PI) { r = (((r+2*P1)+2*P2)+2*P3); /* r+TwoPi */
+}
 
   result->val = r;
 
@@ -693,7 +697,7 @@ int gsl_sf_sinc_e(double x, gsl_sf_result * result)
        */
       return cheb_eval_e(&sinc_cs, 2.0*ax-1.0, result);
     }
-    else if(ax < 100.0) {
+    if(ax < 100.0) {
       /* Small arguments are no problem.
        * We trust the library sin() to
        * roughly machine precision.

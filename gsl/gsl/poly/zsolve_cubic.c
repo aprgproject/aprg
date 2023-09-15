@@ -54,7 +54,7 @@ gsl_poly_complex_solve_cubic (double a, double b, double c,
       GSL_IMAG (*z2) = 0;
       return 3;
     }
-  else if (CR2 == CQ3) 
+  if (CR2 == CQ3) 
     {
       /* this test is actually R2 == Q3, written in a form suitable
          for exact computation with integers */

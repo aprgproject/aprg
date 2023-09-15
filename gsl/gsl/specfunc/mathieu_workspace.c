@@ -29,9 +29,10 @@
 gsl_sf_mathieu_workspace *gsl_sf_mathieu_alloc(const size_t nn,
                                                const double qq)
 {
-  gsl_sf_mathieu_workspace *workspace;
-  unsigned int even_order = nn/2 + 1, odd_order = (nn + 1)/2,
-               extra_values;
+  gsl_sf_mathieu_workspace *workspace = NULL;
+  unsigned int even_order = nn/2 + 1;
+  unsigned int odd_order = (nn + 1)/2;
+  unsigned int extra_values;
 
   /* Compute the maximum number of extra terms required for 10^-18 root
      accuracy for a given value of q (contributed by Brian Gladman). */

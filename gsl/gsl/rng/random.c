@@ -121,18 +121,20 @@ random8_get (void *vstate)
 static inline long int
 random_get (int * i, int * j, int n, long int * x)
 {
-  long int k ;
+  long int k = 0 ;
 
   x[*i] += x[*j] ;
   k = (x[*i] >> 1) & 0x7FFFFFFF ;
   
   (*i)++ ;
-  if (*i == n)
+  if (*i == n) {
     *i = 0 ;
+}
   
   (*j)++ ;
-  if (*j == n)
+  if (*j == n) {
     *j = 0 ;
+}
 
   return k ;
 }
@@ -204,8 +206,9 @@ random8_bsd_set (void *vstate, unsigned long int s)
 {
   random8_state_t *state = (random8_state_t *) vstate;
   
-  if (s == 0) 
+  if (s == 0) { 
     s = 1;
+}
 
   state->x = s;
 }
@@ -214,97 +217,106 @@ static void
 random32_bsd_set (void *vstate, unsigned long int s)
 {
   random32_state_t *state = (random32_state_t *) vstate;
-  int i;
+  int i = 0;
 
   bsd_initialize (state->x, 7, s) ;
 
   state->i = 3;
   state->j = 0;
   
-  for (i = 0 ; i < 10 * 7 ; i++)
+  for (i = 0 ; i < 10 * 7 ; i++) {
     random32_get (state) ; 
+}
 }
 
 static void
 random64_bsd_set (void *vstate, unsigned long int s)
 {
   random64_state_t *state = (random64_state_t *) vstate;
-  int i;
+  int i = 0;
 
   bsd_initialize (state->x, 15, s) ;
 
   state->i = 1;
   state->j = 0;
   
-  for (i = 0 ; i < 10 * 15 ; i++)
+  for (i = 0 ; i < 10 * 15 ; i++) {
     random64_get (state) ; 
+}
 }
 
 static void
 random128_bsd_set (void *vstate, unsigned long int s)
 {
   random128_state_t *state = (random128_state_t *) vstate;
-  int i;
+  int i = 0;
 
   bsd_initialize (state->x, 31, s) ;
 
   state->i = 3;
   state->j = 0;
   
-  for (i = 0 ; i < 10 * 31 ; i++)
+  for (i = 0 ; i < 10 * 31 ; i++) {
     random128_get (state) ; 
+}
 }
 
 static void
 random256_bsd_set (void *vstate, unsigned long int s)
 {
   random256_state_t *state = (random256_state_t *) vstate;
-  int i;
+  int i = 0;
 
   bsd_initialize (state->x, 63, s) ;
 
   state->i = 1;
   state->j = 0;
   
-  for (i = 0 ; i < 10 * 63 ; i++)
+  for (i = 0 ; i < 10 * 63 ; i++) {
     random256_get (state) ; 
+}
 }
 
 static void 
 bsd_initialize (long int * x, int n, unsigned long int s)
 {
-  int i; 
+  int i = 0; 
 
-  if (s == 0)
+  if (s == 0) {
     s = 1 ;
+}
 
   x[0] = s;
 
-  for (i = 1 ; i < n ; i++)
+  for (i = 1 ; i < n ; i++) {
     x[i] = 1103515245 * x[i-1] + 12345 ;
+}
 }
 
 static void 
 libc5_initialize (long int * x, int n, unsigned long int s)
 {
-  int i; 
+  int i = 0; 
 
-  if (s == 0)
+  if (s == 0) {
     s = 1 ;
+}
 
   x[0] = s;
 
-  for (i = 1 ; i < n ; i++)
+  for (i = 1 ; i < n ; i++) {
     x[i] = 1103515145 * x[i-1] + 12345 ;
+}
 }
 
 static void 
 glibc2_initialize (long int * x, int n, unsigned long int s)
 {
-  int i; 
+  int i = 0; 
 
-  if (s == 0)
+  if (s == 0) {
     s = 1 ;
+}
 
   x[0] = s;
 
@@ -330,8 +342,9 @@ random8_glibc2_set (void *vstate, unsigned long int s)
 {
   random8_state_t *state = (random8_state_t *) vstate;
   
-  if (s == 0) 
+  if (s == 0) { 
     s = 1;
+}
 
   state->x = s;
 }
@@ -340,60 +353,64 @@ static void
 random32_glibc2_set (void *vstate, unsigned long int s)
 {
   random32_state_t *state = (random32_state_t *) vstate;
-  int i;
+  int i = 0;
 
   glibc2_initialize (state->x, 7, s) ;
 
   state->i = 3;
   state->j = 0;
   
-  for (i = 0 ; i < 10 * 7 ; i++)
+  for (i = 0 ; i < 10 * 7 ; i++) {
     random32_get (state) ; 
+}
 }
 
 static void
 random64_glibc2_set (void *vstate, unsigned long int s)
 {
   random64_state_t *state = (random64_state_t *) vstate;
-  int i;
+  int i = 0;
 
   glibc2_initialize (state->x, 15, s) ;
 
   state->i = 1;
   state->j = 0;
   
-  for (i = 0 ; i < 10 * 15 ; i++)
+  for (i = 0 ; i < 10 * 15 ; i++) {
     random64_get (state) ; 
+}
 }
 
 static void
 random128_glibc2_set (void *vstate, unsigned long int s)
 {
   random128_state_t *state = (random128_state_t *) vstate;
-  int i;
+  int i = 0;
 
   glibc2_initialize (state->x, 31, s) ;
 
   state->i = 3;
   state->j = 0;
   
-  for (i = 0 ; i < 10 * 31 ; i++)
+  for (i = 0 ; i < 10 * 31 ; i++) {
     random128_get (state) ; 
+}
 }
 
 static void
 random256_glibc2_set (void *vstate, unsigned long int s)
 {
   random256_state_t *state = (random256_state_t *) vstate;
-  int i;
+  int i = 0;
 
   glibc2_initialize (state->x, 63, s) ;
 
   state->i = 1;
   state->j = 0;
   
-  for (i = 0 ; i < 10 * 63 ; i++)
+  for (i = 0 ; i < 10 * 63 ; i++) {
     random256_get (state) ; 
+}
 }
 
 
@@ -402,8 +419,9 @@ random8_libc5_set (void *vstate, unsigned long int s)
 {
   random8_state_t *state = (random8_state_t *) vstate;
   
-  if (s == 0) 
+  if (s == 0) { 
     s = 1;
+}
 
   state->x = s;
 }
@@ -412,60 +430,64 @@ static void
 random32_libc5_set (void *vstate, unsigned long int s)
 {
   random32_state_t *state = (random32_state_t *) vstate;
-  int i;
+  int i = 0;
 
   libc5_initialize (state->x, 7, s) ;
 
   state->i = 3;
   state->j = 0;
   
-  for (i = 0 ; i < 10 * 7 ; i++)
+  for (i = 0 ; i < 10 * 7 ; i++) {
     random32_get (state) ; 
+}
 }
 
 static void
 random64_libc5_set (void *vstate, unsigned long int s)
 {
   random64_state_t *state = (random64_state_t *) vstate;
-  int i;
+  int i = 0;
 
   libc5_initialize (state->x, 15, s) ;
 
   state->i = 1;
   state->j = 0;
   
-  for (i = 0 ; i < 10 * 15 ; i++)
+  for (i = 0 ; i < 10 * 15 ; i++) {
     random64_get (state) ; 
+}
 }
 
 static void
 random128_libc5_set (void *vstate, unsigned long int s)
 {
   random128_state_t *state = (random128_state_t *) vstate;
-  int i;
+  int i = 0;
 
   libc5_initialize (state->x, 31, s) ;
 
   state->i = 3;
   state->j = 0;
   
-  for (i = 0 ; i < 10 * 31 ; i++)
+  for (i = 0 ; i < 10 * 31 ; i++) {
     random128_get (state) ; 
+}
 }
 
 static void
 random256_libc5_set (void *vstate, unsigned long int s)
 {
   random256_state_t *state = (random256_state_t *) vstate;
-  int i;
+  int i = 0;
 
   libc5_initialize (state->x, 63, s) ;
 
   state->i = 1;
   state->j = 0;
   
-  for (i = 0 ; i < 10 * 63 ; i++)
+  for (i = 0 ; i < 10 * 63 ; i++) {
     random256_get (state) ; 
+}
 }
 
 static const gsl_rng_type random_glibc2_type =

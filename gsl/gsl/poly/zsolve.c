@@ -42,8 +42,8 @@ gsl_poly_complex_solve (const double *a, size_t n,
                         gsl_poly_complex_workspace * w,
                         gsl_complex_packed_ptr z)
 {
-  int status;
-  double *m;
+  int status = 0;
+  double *m = NULL;
 
   if (n == 0)
     {

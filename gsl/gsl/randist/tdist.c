@@ -43,8 +43,8 @@ gsl_ran_tdist (const gsl_rng * r, const double nu)
 
       return t;
     }
-  else
-    {
+  
+    
       double Y1, Y2, Z, t;
       do
         {
@@ -61,13 +61,13 @@ gsl_ran_tdist (const gsl_rng * r, const double nu)
 
       t = Y1 / sqrt ((1 - 2 / nu) * (1 - Z));
       return t;
-    }
+   
 }
 
 double
 gsl_ran_tdist_pdf (const double x, const double nu)
 {
-  double p;
+  double p = NAN;
 
   double lg1 = gsl_sf_lngamma (nu / 2);
   double lg2 = gsl_sf_lngamma ((nu + 1) / 2);

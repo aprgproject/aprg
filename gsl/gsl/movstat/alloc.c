@@ -93,7 +93,7 @@ Return: pointer to workspace
 gsl_movstat_workspace *
 gsl_movstat_alloc_with_size(const size_t accum_state_size, const size_t H, const size_t J)
 {
-  gsl_movstat_workspace *w;
+  gsl_movstat_workspace *w = NULL;
   size_t state_size = accum_state_size;
 
   w = calloc(1, sizeof(gsl_movstat_workspace));
@@ -144,11 +144,13 @@ gsl_movstat_alloc_with_size(const size_t accum_state_size, const size_t H, const
 void
 gsl_movstat_free(gsl_movstat_workspace * w)
 {
-  if (w->work)
+  if (w->work) {
     free(w->work);
+}
 
-  if (w->state)
+  if (w->state) {
     free(w->state);
+}
 
   free(w);
 }

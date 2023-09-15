@@ -27,9 +27,9 @@ gsl_multifit_fsolver *
 gsl_multifit_fsolver_alloc (const gsl_multifit_fsolver_type * T, 
                             size_t n, size_t p) 
 {
-  int status;
+  int status = 0;
 
-  gsl_multifit_fsolver * s;
+  gsl_multifit_fsolver * s = NULL;
 
   if (n < p)
     {
@@ -138,14 +138,15 @@ gsl_multifit_fsolver_driver (gsl_multifit_fsolver * s,
                              const double epsabs,
                              const double epsrel)
 {
-  int status;
+  int status = 0;
   size_t iter = 0;
 
   do  
     {   
       status = gsl_multifit_fsolver_iterate (s);
-      if (status) 
+      if (status) { 
         break;
+}
 
       /* test for convergence */
       status = gsl_multifit_test_delta (s->dx, s->x, epsabs, epsrel);

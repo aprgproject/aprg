@@ -224,7 +224,7 @@ static int
 reversehalton_get (void *state, unsigned int dimension, double *v)
 {
   reversehalton_state_t *h_state = (reversehalton_state_t *) state;
-  unsigned int i;
+  unsigned int i = 0;
 
   if (dimension < 1 || dimension > REVERSEHALTON_MAX_DIMENSION)
     {

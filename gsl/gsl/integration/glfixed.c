@@ -181,7 +181,7 @@ static const size_t GLAWSIZE = sizeof(glaw)/sizeof(glaw[0]);
 gsl_integration_glfixed_table *
 gsl_integration_glfixed_table_alloc (size_t n)
 {
-  int i;
+  int i = 0;
   double *x = 0;
   double *w = 0;
   gsl_integration_glfixed_table * retval = 0;
@@ -285,8 +285,12 @@ gsl_integration_glfixed (const gsl_function *f,
   const double * const x = t->x;
   const double * const w = t->w;
   const int n = t->n;
-  double A, B, Ax, s;
-  int i, m;
+  double A;
+  double B;
+  double Ax;
+  double s;
+  int i;
+  int m;
 
   m = (n + 1) >> 1;
   A = 0.5 * (b - a);
@@ -379,12 +383,24 @@ static double ltbl[1024] = {0.00000000000000000000, 0.00000000000000000000, 0.50
 static void 
 gauss_legendre_tbl(int n, double* x, double* w, double eps)
 {
-  double x0,  x1,  dx; /* Abscissas */
-  double w0,  w1,  dw; /* Weights */
-  double P0, P_1, P_2; /* Legendre polynomial values */
-  double dpdx;   /* Legendre polynomial derivative */
-  int i, j, k, m;   /* Iterators */
-  double t0, t1, t2, t3;
+  double x0;
+  double x1;
+  double dx; /* Abscissas */
+  double w0;
+  double w1;
+  double dw; /* Weights */
+  double P0;
+  double P_1;
+  double P_2; /* Legendre polynomial values */
+  double dpdx = NAN;   /* Legendre polynomial derivative */
+  int i;
+  int j;
+  int k;
+  int m;   /* Iterators */
+  double t0;
+  double t1;
+  double t2;
+  double t3;
 
   m = (n + 1) >> 1;
 
@@ -460,7 +476,8 @@ gauss_legendre_tbl(int n, double* x, double* w, double eps)
           w1 = 2.0 / ((1.0 - x1 * x1) * dpdx * dpdx);
 
           /* Compute weight w0 on first iteration, needed for dw */
-          if (j == 0) w0 = 2.0 / ((1.0 - x0 * x0) * dpdx * dpdx);
+          if (j == 0) { w0 = 2.0 / ((1.0 - x0 * x0) * dpdx * dpdx);
+}
 
           dx = x0 - x1;
 

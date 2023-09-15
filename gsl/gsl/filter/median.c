@@ -31,7 +31,7 @@
 gsl_filter_median_workspace *
 gsl_filter_median_alloc(const size_t K)
 {
-  gsl_filter_median_workspace *w;
+  gsl_filter_median_workspace *w = NULL;
   size_t H = K / 2;
 
   w = calloc(1, sizeof(gsl_filter_median_workspace));
@@ -53,8 +53,9 @@ gsl_filter_median_alloc(const size_t K)
 void
 gsl_filter_median_free(gsl_filter_median_workspace * w)
 {
-  if (w->movstat_workspace_p)
+  if (w->movstat_workspace_p) {
     gsl_movstat_free(w->movstat_workspace_p);
+}
 
   free(w);
 }

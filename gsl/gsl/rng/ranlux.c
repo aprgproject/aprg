@@ -130,10 +130,11 @@ ranlux_get (void *vstate)
 
   if (state->n == 24)
     {
-      unsigned int i;
+      unsigned int i = 0;
       state->n = 0;
-      for (i = 0; i < skip; i++)
+      for (i = 0; i < skip; i++) {
         increment_state (state);
+}
     }
 
   return r;
@@ -149,12 +150,13 @@ static void
 ranlux_set_lux (void *vstate, unsigned long int s, unsigned int luxury)
 {
   ranlux_state_t *state = (ranlux_state_t *) vstate;
-  int i;
+  int i = 0;
 
-  long int seed;
+  long int seed = 0;
 
-  if (s == 0)
+  if (s == 0) {
     s = 314159265;      /* default seed is 314159265 */
+}
 
   seed = s;
 

@@ -43,7 +43,7 @@ Return: pointer to workspace
 gsl_filter_impulse_workspace *
 gsl_filter_impulse_alloc(const size_t K)
 {
-  gsl_filter_impulse_workspace *w;
+  gsl_filter_impulse_workspace *w = NULL;
 
   w = calloc(1, sizeof(gsl_filter_impulse_workspace));
   if (w == 0)
@@ -64,8 +64,9 @@ gsl_filter_impulse_alloc(const size_t K)
 void
 gsl_filter_impulse_free(gsl_filter_impulse_workspace * w)
 {
-  if (w->movstat_workspace_p)
+  if (w->movstat_workspace_p) {
     gsl_movstat_free(w->movstat_workspace_p);
+}
 
   free(w);
 }
@@ -125,7 +126,7 @@ gsl_filter_impulse(const gsl_filter_end_t endtype, const gsl_filter_scale_t scal
     }
   else
     {
-      int status;
+      int status = 0;
       double scale = 1.0;
 
       switch (scale_type)
@@ -243,7 +244,7 @@ filter_impulse(const double scale, const double epsilon, const double t, const g
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       *noutlier = 0;
 
@@ -267,14 +268,16 @@ filter_impulse(const double scale, const double epsilon, const double t, const g
             {
               gsl_vector_set(y, i, xmedi);
               ++(*noutlier);
-              if (ioutlier)
+              if (ioutlier) {
                 gsl_vector_int_set(ioutlier, i, 1);
+}
             }
           else
             {
               gsl_vector_set(y, i, xi);
-              if (ioutlier)
+              if (ioutlier) {
                 gsl_vector_int_set(ioutlier, i, 0);
+}
             }
         }
 

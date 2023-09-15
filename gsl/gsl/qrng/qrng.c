@@ -113,6 +113,7 @@ void
 gsl_qrng_free (gsl_qrng * q)
 {
   RETURN_IF_NULL (q);
-  if(q->state != 0) free (q->state);
+  if(q->state != 0) { free (q->state);
+}
   free (q);
 }

@@ -43,8 +43,8 @@ gsl_ran_chisq_pdf (const double x, const double nu)
     {
       return 0 ;
     }
-  else
-    {
+  
+    
       if(nu == 2.0)
         {
           return exp(-x/2.0) / 2.0;
@@ -57,5 +57,5 @@ gsl_ran_chisq_pdf (const double x, const double nu)
           p = exp ((nu / 2 - 1) * log (x/2) - x/2 - lngamma) / 2;
           return p;
         }
-    }
+   
 }

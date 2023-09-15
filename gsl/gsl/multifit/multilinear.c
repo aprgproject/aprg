@@ -39,7 +39,7 @@ gsl_multifit_linear (const gsl_matrix * X,
                      gsl_matrix * cov,
                      double *chisq, gsl_multifit_linear_workspace * work)
 {
-  size_t rank;
+  size_t rank = 0;
   int status = gsl_multifit_linear_tsvd(X, y, GSL_DBL_EPSILON, c, cov, chisq, &rank, work);
 
   return status;
@@ -91,13 +91,15 @@ gsl_multifit_linear_tsvd (const gsl_matrix * X,
     }
   else
     {
-      int status;
-      double rnorm = 0.0, snorm;
+      int status = 0;
+      double rnorm = 0.0;
+      double snorm;
 
       /* compute balanced SVD */
       status = gsl_multifit_linear_bsvd (X, work);
-      if (status)
+      if (status) {
         return status;
+}
 
       status = multifit_linear_solve (X, y, tol, -1.0, rank,
                                       c, &rnorm, &snorm, work);
@@ -108,7 +110,8 @@ gsl_multifit_linear_tsvd (const gsl_matrix * X,
       {
         double r2 = rnorm * rnorm;
         double s2 = r2 / (double)(n - *rank);
-        size_t i, j;
+        size_t i;
+        size_t j;
         gsl_matrix_view QSI = gsl_matrix_submatrix(work->QSI, 0, 0, p, p);
         gsl_vector_view D = gsl_vector_subvector(work->D, 0, p);
 
@@ -121,7 +124,7 @@ gsl_multifit_linear_tsvd (const gsl_matrix * X,
               {
                 gsl_vector_view row_j = gsl_matrix_row (&QSI.matrix, j);
                 double d_j = gsl_vector_get (&D.vector, j);
-                double s;
+                double s = NAN;
 
                 gsl_blas_ddot (&row_i.vector, &row_j.vector, &s);
 
@@ -171,14 +174,15 @@ gsl_multifit_linear_rank(const double tol, const gsl_multifit_linear_workspace *
 {
   double s0 = gsl_vector_get (work->S, 0);
   size_t rank = 0;
-  size_t j;
+  size_t j = 0;
 
   for (j = 0; j < work->p; j++)
     {
       double sj = gsl_vector_get (work->S, j);
 
-      if (sj > tol * s0)
+      if (sj > tol * s0) {
         ++rank;
+}
     }
 
   return rank;
@@ -208,7 +212,8 @@ gsl_multifit_linear_est (const gsl_vector * x,
     }
   else
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
       double var = 0;
       
       gsl_blas_ddot(x, c, y);       /* y = x.c */
@@ -345,7 +350,8 @@ multifit_linear_svd (const gsl_matrix * X,
 
       /* compute reciprocal condition number rcond = smin / smax */
       {
-        double smin, smax;
+        double smin;
+        double smax;
         gsl_vector_minmax(&S.vector, &smin, &smax);
         work->rcond = smin / smax;
       }

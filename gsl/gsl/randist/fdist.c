@@ -50,8 +50,8 @@ gsl_ran_fdist_pdf (const double x, const double nu1, const double nu2)
     {
       return 0 ;
     }
-  else
-    {
+  
+    
       double p;
       double lglg = (nu1 / 2) * log (nu1) + (nu2 / 2) * log (nu2) ;
 
@@ -64,5 +64,5 @@ gsl_ran_fdist_pdf (const double x, const double nu1, const double nu2)
 	     ((nu1 + nu2) / 2) * log (nu2 + nu1 * x));
 
       return p;
-    }
+   
 }

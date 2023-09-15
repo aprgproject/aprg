@@ -44,22 +44,25 @@ static inline unsigned long int
 ran3_get (void *vstate)
 {
   ran3_state_t *state = (ran3_state_t *) vstate;
-  long int j;
+  long int j = 0;
 
   state->x++;
 
-  if (state->x == 56)
+  if (state->x == 56) {
     state->x = 1;
+}
 
   state->y++;
 
-  if (state->y == 56)
+  if (state->y == 56) {
     state->y = 1;
+}
 
   j = state->buffer[state->x] - state->buffer[state->y];
 
-  if (j < 0)
+  if (j < 0) {
     j += M_BIG;
+}
 
   state->buffer[state->x] = j;
 
@@ -76,16 +79,20 @@ static void
 ran3_set (void *vstate, unsigned long int s)
 {
   ran3_state_t *state = (ran3_state_t *) vstate;
-  int i, i1;
-  long int j, k;
+  int i;
+  int i1;
+  long int j;
+  long int k;
 
-  if (s == 0)
+  if (s == 0) {
     s = 1;      /* default seed is 1 */
+}
 
   j = (M_SEED - s) % M_BIG;
 
   /* Avoid potential problem with negative values */
-  if (j < 0) j += M_BIG;
+  if (j < 0) { j += M_BIG;
+}
 
   /* the zeroth element is never used, but we initialize it for
      consistency between states */
@@ -100,8 +107,9 @@ ran3_set (void *vstate, unsigned long int s)
       int n = (21 * i) % 55;
       state->buffer[n] = k;
       k = j - k;
-      if (k < 0)
+      if (k < 0) {
         k += M_BIG;
+}
       j = state->buffer[n];
 
     }
@@ -111,8 +119,9 @@ ran3_set (void *vstate, unsigned long int s)
       for (i = 1; i < 56; i++)
         {
           long int t = state->buffer[i] - state->buffer[1 + (i + 30) % 55];
-          if (t < 0)
+          if (t < 0) {
             t += M_BIG;
+}
           state->buffer[i] = t;
         }
     }

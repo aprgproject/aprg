@@ -71,10 +71,11 @@ ran_set (void *vstate, unsigned long int s)
 
   unsigned long int diff = ((s % 4UL) - 2UL) % MM;
 
-  if (diff)
+  if (diff) {
     state->x = (s - diff) & MM;
-  else
+  } else {
     state->x = s & MM;
+}
 
   return;
 }

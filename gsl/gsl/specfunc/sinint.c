@@ -327,7 +327,7 @@ int gsl_sf_Si_e(const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(ax <= 4.0) {
+  if(ax <= 4.0) {
     gsl_sf_result result_c;
     cheb_eval_e(&si_cs, (x*x-8.0)*0.125, &result_c);
     result->val  =  x * (0.75 + result_c.val);

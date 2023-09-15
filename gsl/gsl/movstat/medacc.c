@@ -99,7 +99,7 @@ static int
 medacc_insert(const medacc_type_t x, void * vstate)
 {
   medacc_state_t * state = (medacc_state_t *) vstate;
-  int isNew = (state->ct < (int) state->n);
+  int isNew = (state->ct < state->n);
   int p = state->pos[state->idx];
   medacc_type_t old = state->data[state->idx];
 
@@ -109,25 +109,29 @@ medacc_insert(const medacc_type_t x, void * vstate)
 
   if (p > 0)       /* new item is in minHeap */
     {
-      if (!isNew && ItemLess(old, x))
+      if (!isNew && ItemLess(old, x)) {
         minSortDown(state, p * 2);
-      else if (minSortUp(state, p))
+      } else if (minSortUp(state, p)) {
         maxSortDown(state, -1);
+}
     }
   else if (p < 0)  /* new item is in maxHeap */
     {
-      if (!isNew && ItemLess(x, old))
+      if (!isNew && ItemLess(x, old)) {
         maxSortDown(state, p * 2);
-      else if (maxSortUp(state, p))
+      } else if (maxSortUp(state, p)) {
         minSortDown(state, 1);
+}
     }
   else             /* new item is at median */
     {
-      if (maxCt(state))
+      if (maxCt(state)) {
         maxSortDown(state, -1);
+}
 
-      if (minCt(state))
+      if (minCt(state)) {
         minSortDown(state, 1);
+}
     }
 
   return GSL_SUCCESS;
@@ -171,8 +175,9 @@ medacc_get(void * params, medacc_type_t * result, const void * vstate)
 
   (void) params;
 
-  if ((state->ct & 1) == 0)
+  if ((state->ct & 1) == 0) {
     median = ItemMean(median, state->data[state->heap[-1]]);
+}
 
   *result = median;
 
@@ -211,11 +216,13 @@ minSortDown(medacc_state_t * state, int i)
 {
   for (; i <= minCt(state); i *= 2)
     {
-      if (i > 1 && i < minCt(state) && mmless(state, i + 1, i))
+      if (i > 1 && i < minCt(state) && mmless(state, i + 1, i)) {
         ++i;
+}
 
-      if (!mmCmpExch(state, i, i / 2))
+      if (!mmCmpExch(state, i, i / 2)) {
         break;
+}
    }
 }
  
@@ -225,11 +232,13 @@ maxSortDown(medacc_state_t * state, int i)
 {
   for (; i >= -maxCt(state); i *= 2)
     {
-      if (i < -1 && i > -maxCt(state) && mmless(state, i, i - 1))
+      if (i < -1 && i > -maxCt(state) && mmless(state, i, i - 1)) {
         --i;
+}
 
-      if (!mmCmpExch(state, i / 2, i))
+      if (!mmCmpExch(state, i / 2, i)) {
         break;
+}
    }
 }
  
@@ -238,8 +247,9 @@ maxSortDown(medacc_state_t * state, int i)
 static int
 minSortUp(medacc_state_t * state, int i)
 {
-  while (i > 0 && mmCmpExch(state, i, i / 2))
+  while (i > 0 && mmCmpExch(state, i, i / 2)) {
     i /= 2;
+}
 
   return (i == 0);
 }
@@ -249,8 +259,9 @@ minSortUp(medacc_state_t * state, int i)
 static int
 maxSortUp(medacc_state_t * state, int i)
 {
-  while (i<0 && mmCmpExch(state, i / 2, i))
+  while (i<0 && mmCmpExch(state, i / 2, i)) {
     i /= 2;
+}
 
   return (i == 0);
 }

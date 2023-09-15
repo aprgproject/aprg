@@ -54,8 +54,10 @@ gsl_movstat_fill(const gsl_movstat_end_t endtype, const gsl_vector * x, const si
       const int iidx = (int) idx;
       const int iH = (int) H;
       const int iJ = (int) J;
-      int idx1, idx2, j;
-      size_t window_size;
+      int idx1;
+      int idx2;
+      int j;
+      size_t window_size = 0;
 
       if (endtype == GSL_MOVSTAT_END_TRUNCATE)
         {
@@ -78,17 +80,19 @@ gsl_movstat_fill(const gsl_movstat_end_t endtype, const gsl_vector * x, const si
           if (j < 0)
             {
               /* initial condition */
-              if (endtype == GSL_MOVSTAT_END_PADZERO)
+              if (endtype == GSL_MOVSTAT_END_PADZERO) {
                 window[widx] = 0.0;
-              else if (endtype == GSL_MOVSTAT_END_PADVALUE)
+              } else if (endtype == GSL_MOVSTAT_END_PADVALUE) {
                 window[widx] = gsl_vector_get(x, 0);
+}
             }
           else if (j >= n)
             {
-              if (endtype == GSL_MOVSTAT_END_PADZERO)
+              if (endtype == GSL_MOVSTAT_END_PADZERO) {
                 window[widx] = 0.0;
-              else if (endtype == GSL_MOVSTAT_END_PADVALUE)
+              } else if (endtype == GSL_MOVSTAT_END_PADVALUE) {
                 window[widx] = gsl_vector_get(x, n - 1);
+}
             }
           else
             {

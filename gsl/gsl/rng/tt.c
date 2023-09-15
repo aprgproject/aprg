@@ -54,13 +54,13 @@ tt_get (void *vstate)
 
   const unsigned long mag01[2] =
   {0x00000000, 0x8ebfd028UL};
-  unsigned long int y;
+  unsigned long int y = 0;
   unsigned long int *const x = state->x;
   int n = state->n;
 
   if (n >= N)
     {
-      int i;
+      int i = 0;
       for (i = 0; i < N - M; i++)
         {
           x[i] = x[i + M] ^ (x[i] >> 1) ^ mag01[x[i] % 2];
@@ -118,14 +118,15 @@ tt_set (void *vstate, unsigned long int s)
     }
   else
     {
-      int i;
+      int i = 0;
 
       state->n = 0;
 
       state->x[0] = s & 0xffffffffUL;
 
-      for (i = 1; i < N; i++)
+      for (i = 1; i < N; i++) {
         state->x[i] = (69069 * state->x[i - 1]) & 0xffffffffUL;
+}
     }
 
   return;

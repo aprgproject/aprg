@@ -160,7 +160,7 @@ riemann_zeta_sgt0(double s, gsl_sf_result * result)
     result->err = c.err / fabs(s-1.0) + GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(s <= 20.0) {
+  if(s <= 20.0) {
     double x = (2.0*s - 21.0)/19.0;
     gsl_sf_result c;
     cheb_eval_e(&zeta_xgt1_cs, x, &c);
@@ -192,7 +192,7 @@ riemann_zeta1ms_slt0(double s, gsl_sf_result * result)
     result->err = c.err / (-s) + GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     double f2 = 1.0 - pow(2.0,-(1.0-s));
     double f3 = 1.0 - pow(3.0,-(1.0-s));
     double f5 = 1.0 - pow(5.0,-(1.0-s));
@@ -200,7 +200,7 @@ riemann_zeta1ms_slt0(double s, gsl_sf_result * result)
     result->val = 1.0/(f2*f3*f5*f7);
     result->err = 3.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 
@@ -747,7 +747,8 @@ int gsl_sf_hzeta_e(const double s, const double q, gsl_sf_result * result)
        */
       const int jmax = 12;
       const int kmax = 10;
-      int j, k;
+      int j;
+      int k;
       const double pmax  = pow(kmax + q, -s);
       double scp = s;
       double pcp = pmax / (kmax + q);
@@ -760,7 +761,8 @@ int gsl_sf_hzeta_e(const double s, const double q, gsl_sf_result * result)
       for(j=0; j<=jmax; j++) {
         double delta = hzeta_c[j+1] * scp * pcp;
         ans += delta;
-        if(fabs(delta/ans) < 0.5*GSL_DBL_EPSILON) break;
+        if(fabs(delta/ans) < 0.5*GSL_DBL_EPSILON) { break;
+}
         scp *= (s+2*j+1)*(s+2*j+2);
         pcp /= (kmax + q)*(kmax + q);
       }
@@ -795,7 +797,7 @@ int gsl_sf_zeta_e(const double s, gsl_sf_result * result)
       result->err = 0.0;
       return GSL_SUCCESS;
     }
-    else if(s > -170) {
+    if(s > -170) {
       /* We have to be careful about losing digits
        * in calculating pow(2 Pi, s). The gamma
        * function is fine because we were careful
@@ -860,7 +862,7 @@ int gsl_sf_zeta_int_e(const int n, gsl_sf_result * result)
       result->err = 0.0;
       return GSL_SUCCESS;
     }
-    else if(n > -ZETA_NEG_TABLE_NMAX) {
+    if(n > -ZETA_NEG_TABLE_NMAX) {
       result->val = zeta_neg_int_table[-(n+1)/2];
       result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_SUCCESS;
@@ -893,7 +895,7 @@ int gsl_sf_zetam1_e(const double s, gsl_sf_result * result)
     result->val = result->val - 1.0;
     return stat;
   }
-  else if(s < 15.0)
+  if(s < 15.0)
   {
     return riemann_zeta_minus_1_intermediate_s(s, result);
   }
@@ -912,7 +914,7 @@ int gsl_sf_zetam1_int_e(const int n, gsl_sf_result * result)
       result->err = 0.0;
       return GSL_SUCCESS;
     }
-    else if(n > -ZETA_NEG_TABLE_NMAX) {
+    if(n > -ZETA_NEG_TABLE_NMAX) {
       result->val = zeta_neg_int_table[-(n+1)/2] - 1.0;
       result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_SUCCESS;
@@ -944,7 +946,7 @@ int gsl_sf_eta_int_e(int n, gsl_sf_result * result)
     result->err = GSL_DBL_EPSILON;
     return GSL_SUCCESS;
   }
-  else if(n >= 0) {
+  if(n >= 0) {
     result->val = eta_pos_int_table[n];
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
@@ -986,7 +988,7 @@ int gsl_sf_eta_e(const double s, gsl_sf_result * result)
     result->err = GSL_DBL_EPSILON;
     return GSL_SUCCESS;
   }
-  else if(fabs(s-1.0) < 10.0*GSL_ROOT5_DBL_EPSILON) {
+  if(fabs(s-1.0) < 10.0*GSL_ROOT5_DBL_EPSILON) {
     double del = s-1.0;
     double c0  = M_LN2;
     double c1  = M_LN2 * (M_EULER - 0.5*M_LN2);

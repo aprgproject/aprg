@@ -53,7 +53,7 @@ gsl_sum_levin_u_minmax (const double *array, const size_t array_size,
       w->terms_used = 0;
       return GSL_SUCCESS;
     }
-  else if (size == 1)
+  if (size == 1)
     {
       *sum_accel = array[0];
       *abserr = 0.0;
@@ -204,8 +204,8 @@ gsl_sum_levin_u_step (const double term, const size_t n, const size_t nmax,
 
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       double result;
       double factor = 1.0;
       double ratio = (double) n / (n + 1.0);
@@ -258,5 +258,5 @@ gsl_sum_levin_u_step (const double term, const size_t n, const size_t nmax,
         }
 
       return GSL_SUCCESS;
-    }
+   
 }

@@ -40,6 +40,7 @@
 #include <gsl/gsl_sort_vector.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_linalg.h>
+#include <math.h>
 
 static int robust_test_convergence(const gsl_vector *c_prev, const gsl_vector *c,
                                    const double tol);
@@ -66,7 +67,7 @@ gsl_multifit_robust_workspace *
 gsl_multifit_robust_alloc(const gsl_multifit_robust_type *T,
                           const size_t n, const size_t p)
 {
-  gsl_multifit_robust_workspace *w;
+  gsl_multifit_robust_workspace *w = NULL;
 
   if (n < p)
     {
@@ -182,35 +183,45 @@ gsl_multifit_robust_free()
 void
 gsl_multifit_robust_free(gsl_multifit_robust_workspace *w)
 {
-  if (w->multifit_p)
+  if (w->multifit_p) {
     gsl_multifit_linear_free(w->multifit_p);
+}
 
-  if (w->r)
+  if (w->r) {
     gsl_vector_free(w->r);
+}
 
-  if (w->weights)
+  if (w->weights) {
     gsl_vector_free(w->weights);
+}
 
-  if (w->c_prev)
+  if (w->c_prev) {
     gsl_vector_free(w->c_prev);
+}
 
-  if (w->resfac)
+  if (w->resfac) {
     gsl_vector_free(w->resfac);
+}
 
-  if (w->psi)
+  if (w->psi) {
     gsl_vector_free(w->psi);
+}
 
-  if (w->dpsi)
+  if (w->dpsi) {
     gsl_vector_free(w->dpsi);
+}
 
-  if (w->QSI)
+  if (w->QSI) {
     gsl_matrix_free(w->QSI);
+}
 
-  if (w->D)
+  if (w->D) {
     gsl_vector_free(w->D);
+}
 
-  if (w->workn)
+  if (w->workn) {
     gsl_vector_free(w->workn);
+}
 
   free(w);
 } /* gsl_multifit_robust_free() */
@@ -276,16 +287,17 @@ gsl_multifit_robust_weights(const gsl_vector *r, gsl_vector *wts,
     }
   else
     {
-      int s;
-      double sigma;
+      int s = 0;
+      double sigma = NAN;
 
       sigma = robust_madsigma(r, w->p, wts);
 
       /* scale residuals by sigma and tuning factor */
       gsl_vector_memcpy(wts, r);
 
-      if (sigma > 0.0)
+      if (sigma > 0.0) {
         gsl_vector_scale(wts, 1.0 / (sigma * w->tune));
+}
 
       /* compute weights in-place */
       s = w->type->wfun(wts, wts);
@@ -343,15 +355,15 @@ gsl_multifit_robust(const gsl_matrix * X,
     }
   else
     {
-      int s;
-      double chisq;
+      int s = 0;
+      double chisq = NAN;
       const double tol = GSL_SQRT_DBL_EPSILON;
       int converged = 0;
       size_t numit = 0;
       const size_t n = y->size;
       double sigy = gsl_stats_sd(y->data, y->stride, n);
-      double sig_lower;
-      size_t i;
+      double sig_lower = NAN;
+      size_t i = 0;
 
       /*
        * if the initial fit is very good, then finding outliers by comparing
@@ -360,13 +372,15 @@ gsl_multifit_robust(const gsl_matrix * X,
        * fraction of the standard deviation of the data values
        */
       sig_lower = 1.0e-6 * sigy;
-      if (sig_lower == 0.0)
+      if (sig_lower == 0.0) {
         sig_lower = 1.0;
+}
 
       /* compute initial estimates using ordinary least squares */
       s = gsl_multifit_linear(X, y, c, cov, &chisq, w->multifit_p);
-      if (s)
+      if (s) {
         return s;
+}
 
       /* save Q S^{-1} of original matrix */
       gsl_matrix_memcpy(w->QSI, w->multifit_p->QSI);
@@ -374,36 +388,40 @@ gsl_multifit_robust(const gsl_matrix * X,
 
       /* compute statistical leverage of each data point */
       s = gsl_linalg_SV_leverage(w->multifit_p->A, w->resfac);
-      if (s)
+      if (s) {
         return s;
+}
 
       /* correct residuals with factor 1 / sqrt(1 - h) */
       for (i = 0; i < n; ++i)
         {
           double h = gsl_vector_get(w->resfac, i);
 
-          if (h > 0.9999)
+          if (h > 0.9999) {
             h = 0.9999;
+}
 
           gsl_vector_set(w->resfac, i, 1.0 / sqrt(1.0 - h));
         }
 
       /* compute residuals from OLS fit r = y - X c */
       s = gsl_multifit_linear_residuals(X, y, c, w->r);
-      if (s)
+      if (s) {
         return s;
+}
 
       /* compute estimate of sigma from ordinary least squares */
       w->stats.sigma_ols = gsl_blas_dnrm2(w->r) / sqrt((double) w->stats.dof);
 
       while (!converged && ++numit <= w->maxiter)
         {
-          double sig;
+          double sig = NAN;
 
           /* adjust residuals by statistical leverage (see DuMouchel and O'Brien) */
           s = gsl_vector_mul(w->r, w->resfac);
-          if (s)
+          if (s) {
             return s;
+}
 
           /* compute estimate of standard deviation using MAD */
           sig = robust_madsigma(w->r, w->p, w->workn);
@@ -413,20 +431,23 @@ gsl_multifit_robust(const gsl_matrix * X,
 
           /* compute weights using these residuals */
           s = w->type->wfun(w->r, w->weights);
-          if (s)
+          if (s) {
             return s;
+}
 
           gsl_vector_memcpy(w->c_prev, c);
 
           /* solve weighted least squares with new weights */
           s = gsl_multifit_wlinear(X, w->weights, y, c, cov, &chisq, w->multifit_p);
-          if (s)
+          if (s) {
             return s;
+}
 
           /* compute new residuals r = y - X c */
           s = gsl_multifit_linear_residuals(X, y, c, w->r);
-          if (s)
+          if (s) {
             return s;
+}
 
           converged = robust_test_convergence(w->c_prev, c, tol);
         }
@@ -464,8 +485,9 @@ gsl_multifit_robust(const gsl_matrix * X,
 
       /* calculate covariance matrix = sigma^2 (X^T X)^{-1} */
       s = robust_covariance(w->stats.sigma, cov, w);
-      if (s)
+      if (s) {
         return s;
+}
 
       /* raise an error if not converged */
       if (numit > w->maxiter)
@@ -528,13 +550,14 @@ gsl_multifit_robust_residuals(const gsl_matrix * X, const gsl_vector * y,
   else
     {
       const double sigma = w->stats.sigma; /* previously calculated sigma */
-      int s;
-      size_t i;
+      int s = 0;
+      size_t i = 0;
 
       /* compute r = y - X c */
       s = gsl_multifit_linear_residuals(X, y, c, r);
-      if (s)
+      if (s) {
         return s;
+}
 
       for (i = 0; i < r->size; ++i)
         {
@@ -575,15 +598,16 @@ robust_test_convergence(const gsl_vector *c_prev, const gsl_vector *c,
                         const double tol)
 {
   size_t p = c->size;
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < p; ++i)
     {
       double ai = gsl_vector_get(c_prev, i);
       double bi = gsl_vector_get(c, i);
 
-      if (fabs(bi - ai) > tol * GSL_MAX(fabs(ai), fabs(bi)))
+      if (fabs(bi - ai) > tol * GSL_MAX(fabs(ai), fabs(bi))) {
         return 0; /* not yet converged */
+}
     }
 
   /* converged */
@@ -608,8 +632,8 @@ static double
 robust_madsigma(const gsl_vector *r, const size_t p, gsl_vector *workn)
 {
   size_t n = r->size;
-  double sigma;
-  size_t i;
+  double sigma = NAN;
+  size_t i = 0;
 
   /* allow for the possibility that r->size < w->n */
   gsl_vector_view v1 = gsl_vector_subvector(workn, 0, n);
@@ -650,12 +674,14 @@ static double
 robust_robsigma(const gsl_vector *r, const double s,
                 const double tune, gsl_multifit_robust_workspace *w)
 {
-  double sigma;
-  size_t i;
+  double sigma = NAN;
+  size_t i = 0;
   const size_t n = w->n;
   const size_t p = w->p;
   const double st = s * tune;
-  double a, b, lambda;
+  double a;
+  double b;
+  double lambda;
 
   /* compute u = r / sqrt(1 - h) / st */
   gsl_vector_memcpy(w->workn, r);
@@ -711,7 +737,7 @@ static double
 robust_sigma(const double s_ols, const double s_rob,
              gsl_multifit_robust_workspace *w)
 {
-  double sigma;
+  double sigma = NAN;
   const double p = (double) w->p;
   const double n = (double) w->n;
 
@@ -741,7 +767,8 @@ robust_covariance(const double sigma, gsl_matrix *cov,
   int status = 0;
   const size_t p = w->p;
   const double s2 = sigma * sigma;
-  size_t i, j;
+  size_t i;
+  size_t j;
   gsl_matrix *QSI = w->QSI;
   gsl_vector *D = w->D;
 
@@ -756,7 +783,7 @@ robust_covariance(const double sigma, gsl_matrix *cov,
         {
           gsl_vector_view row_j = gsl_matrix_row (QSI, j);
           double d_j = gsl_vector_get (D, j);
-          double s;
+          double s = NAN;
 
           gsl_blas_ddot (&row_i.vector, &row_j.vector, &s);
 

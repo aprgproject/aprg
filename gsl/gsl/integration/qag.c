@@ -45,7 +45,7 @@ gsl_integration_qag (const gsl_function *f,
                      gsl_integration_workspace * workspace,
                      double * result, double * abserr)
 {
-  int status ;
+  int status = 0 ;
   gsl_integration_rule * integration_rule = gsl_integration_qk15 ;
 
   if (key < GSL_INTEG_GAUSS15)
@@ -99,13 +99,19 @@ qag (const gsl_function * f,
      double *result, double *abserr,
      gsl_integration_rule * q)
 {
-  double area, errsum;
-  double result0, abserr0, resabs0, resasc0;
-  double tolerance;
+  double area;
+  double errsum;
+  double result0;
+  double abserr0;
+  double resabs0;
+  double resasc0;
+  double tolerance = NAN;
   size_t iteration = 0;
-  int roundoff_type1 = 0, roundoff_type2 = 0, error_type = 0;
+  int roundoff_type1 = 0;
+  int roundoff_type2 = 0;
+  int error_type = 0;
 
-  double round_off;     
+  double round_off = NAN;     
 
   /* Initialize results */
 
@@ -169,12 +175,24 @@ qag (const gsl_function * f,
 
   do
     {
-      double a1, b1, a2, b2;
-      double a_i, b_i, r_i, e_i;
-      double area1 = 0, area2 = 0, area12 = 0;
-      double error1 = 0, error2 = 0, error12 = 0;
-      double resasc1, resasc2;
-      double resabs1, resabs2;
+      double a1;
+      double b1;
+      double a2;
+      double b2;
+      double a_i;
+      double b_i;
+      double r_i;
+      double e_i;
+      double area1 = 0;
+      double area2 = 0;
+      double area12 = 0;
+      double error1 = 0;
+      double error2 = 0;
+      double error12 = 0;
+      double resasc1;
+      double resasc2;
+      double resabs1;
+      double resabs2;
 
       /* Bisect the subinterval with the largest error estimate */
 
@@ -242,7 +260,7 @@ qag (const gsl_function * f,
     {
       return GSL_SUCCESS;
     }
-  else if (error_type == 2)
+  if (error_type == 2)
     {
       GSL_ERROR ("roundoff error prevents tolerance from being achieved",
                  GSL_EROUND);

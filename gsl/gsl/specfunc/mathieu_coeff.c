@@ -20,6 +20,7 @@
 /* Author:  L. Johnson */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gsl/gsl_sf_mathieu.h>
@@ -33,8 +34,9 @@
 static void backward_recurse_c(double aa, double qq, double xx, double *ff,
                                double *gx, int even_odd, int ni)
 {
-  int ii, nn;
-  double g1;
+  int ii;
+  int nn;
+  double g1 = NAN;
 
 
   g1 = *gx;
@@ -47,8 +49,9 @@ static void backward_recurse_c(double aa, double qq, double xx, double *ff,
           nn = GSL_SF_MATHIEU_COEFF - ii - 1;
           ff[ni-ii-1] = -1.0/((4*nn*nn - aa)/qq + ff[ni-ii]);
       }
-      if (ni == GSL_SF_MATHIEU_COEFF - 1)
+      if (ni == GSL_SF_MATHIEU_COEFF - 1) {
           ff[0] *= 2.0;
+}
   }  
   else
   {
@@ -66,8 +69,9 @@ static void backward_recurse_c(double aa, double qq, double xx, double *ff,
 static void backward_recurse_s(double aa, double qq, double xx, double *ff,
                                double *gx, int even_odd, int ni)
 {
-  int ii, nn;
-  double g1;
+  int ii;
+  int nn;
+  double g1 = NAN;
 
 
   g1 = *gx;
@@ -96,28 +100,44 @@ static void backward_recurse_s(double aa, double qq, double xx, double *ff,
 
 int gsl_sf_mathieu_a_coeff(int order, double qq, double aa, double coeff[])
 {
-  int ni, nn, ii, even_odd;
-  double eps, g1, g2, x1, x2, e1, e2, de, xh, sum, ratio,
-         ff[GSL_SF_MATHIEU_COEFF];
+  int ni;
+  int nn;
+  int ii;
+  int even_odd;
+  double eps;
+  double g1;
+  double g2;
+  double x1;
+  double x2;
+  double e1;
+  double e2;
+  double de;
+  double xh;
+  double sum;
+  double ratio;
+  double ff[GSL_SF_MATHIEU_COEFF];
 
 
   eps = 1e-14;
   coeff[0] = 1.0;
   
   even_odd = 0;
-  if (order % 2 != 0)
+  if (order % 2 != 0) {
       even_odd = 1;
+}
 
   /* If the coefficient array is not large enough to hold all necessary
      coefficients, error out. */
-  if (order > GSL_SF_MATHIEU_COEFF)
+  if (order > GSL_SF_MATHIEU_COEFF) {
       return GSL_FAILURE;
+}
   
   /* Handle the trivial case where q = 0. */
   if (qq == 0.0)
   {
-      for (ii=0; ii<GSL_SF_MATHIEU_COEFF; ii++)
+      for (ii=0; ii<GSL_SF_MATHIEU_COEFF; ii++) {
           coeff[ii] = 0.0;
+}
 
       coeff[order/2] = 1.0;
       
@@ -128,10 +148,11 @@ int gsl_sf_mathieu_a_coeff(int order, double qq, double aa, double coeff[])
   {
       nn = 0;
       sum = 0.0;
-      if (even_odd == 0)
+      if (even_odd == 0) {
           ratio = aa/qq;
-      else
+      } else {
           ratio = (aa - 1 - qq)/qq;
+}
   }
   else
   {
@@ -167,10 +188,11 @@ int gsl_sf_mathieu_a_coeff(int order, double qq, double aa, double coeff[])
   ni = GSL_SF_MATHIEU_COEFF - nn - 1;
 
   /* Compute first two points to start root-finding. */
-  if (even_odd == 0)
+  if (even_odd == 0) {
       x1 = -qq/(4.0*GSL_SF_MATHIEU_COEFF*GSL_SF_MATHIEU_COEFF);
-  else
+  } else {
       x1 = -qq/((2.0*GSL_SF_MATHIEU_COEFF + 1.0)*(2.0*GSL_SF_MATHIEU_COEFF + 1.0));
+}
   g1 = ratio;
   backward_recurse_c(aa, qq, x1, ff, &g1, even_odd, ni);
   x2 = g1;
@@ -186,8 +208,9 @@ int gsl_sf_mathieu_a_coeff(int order, double qq, double aa, double coeff[])
       de = e1 - e2;
 
       /* If we are close enough to the root, break... */
-      if (fabs(de) < eps)
+      if (fabs(de) < eps) {
           break;
+}
 
       /* Otherwise, determine the next guess and try again. */
       xh = (e1*x2 - e2*x1)/de;
@@ -209,14 +232,16 @@ int gsl_sf_mathieu_a_coeff(int order, double qq, double aa, double coeff[])
          to zero. */
       if (fabs(coeff[ii]) < 1e-20)
       {
-          for (; ii<GSL_SF_MATHIEU_COEFF;)
+          for (; ii<GSL_SF_MATHIEU_COEFF;) {
               coeff[ii++] = 0.0;
+}
       }
   }
   
   /* Normalize the coefficients. */
-  for (ii=0; ii<GSL_SF_MATHIEU_COEFF; ii++)
+  for (ii=0; ii<GSL_SF_MATHIEU_COEFF; ii++) {
       coeff[ii] /= sum;
+}
 
   return GSL_SUCCESS;
 }
@@ -224,28 +249,44 @@ int gsl_sf_mathieu_a_coeff(int order, double qq, double aa, double coeff[])
 
 int gsl_sf_mathieu_b_coeff(int order, double qq, double aa, double coeff[])
 {
-  int ni, nn, ii, even_odd;
-  double eps, g1, g2, x1, x2, e1, e2, de, xh, sum, ratio,
-         ff[GSL_SF_MATHIEU_COEFF];
+  int ni;
+  int nn;
+  int ii;
+  int even_odd;
+  double eps;
+  double g1;
+  double g2;
+  double x1;
+  double x2;
+  double e1;
+  double e2;
+  double de;
+  double xh;
+  double sum;
+  double ratio;
+  double ff[GSL_SF_MATHIEU_COEFF];
 
 
   eps = 1e-10;
   coeff[0] = 1.0;
   
   even_odd = 0;
-  if (order % 2 != 0)
+  if (order % 2 != 0) {
       even_odd = 1;
+}
 
   /* If the coefficient array is not large enough to hold all necessary
      coefficients, error out. */
-  if (order > GSL_SF_MATHIEU_COEFF)
+  if (order > GSL_SF_MATHIEU_COEFF) {
       return GSL_FAILURE;
+}
   
   /* Handle the trivial case where q = 0. */
   if (qq == 0.0)
   {
-      for (ii=0; ii<GSL_SF_MATHIEU_COEFF; ii++)
+      for (ii=0; ii<GSL_SF_MATHIEU_COEFF; ii++) {
           coeff[ii] = 0.0;
+}
 
       coeff[(order-1)/2] = 1.0;
       
@@ -256,10 +297,11 @@ int gsl_sf_mathieu_b_coeff(int order, double qq, double aa, double coeff[])
   {
       nn = 0;
       sum = 0.0;
-      if (even_odd == 0)
+      if (even_odd == 0) {
           ratio = (aa - 4)/qq;
-      else
+      } else {
           ratio = (aa - 1 - qq)/qq;
+}
   }
   else
   {
@@ -293,10 +335,11 @@ int gsl_sf_mathieu_b_coeff(int order, double qq, double aa, double coeff[])
   ni = GSL_SF_MATHIEU_COEFF - nn - 1;
 
   /* Compute first two points to start root-finding. */
-  if (even_odd == 0)
+  if (even_odd == 0) {
       x1 = -qq/(4.0*(GSL_SF_MATHIEU_COEFF + 1.0)*(GSL_SF_MATHIEU_COEFF + 1.0));
-  else
+  } else {
       x1 = -qq/((2.0*GSL_SF_MATHIEU_COEFF + 1.0)*(2.0*GSL_SF_MATHIEU_COEFF + 1.0));
+}
   g1 = ratio;
   backward_recurse_s(aa, qq, x1, ff, &g1, even_odd, ni);
   x2 = g1;
@@ -312,8 +355,9 @@ int gsl_sf_mathieu_b_coeff(int order, double qq, double aa, double coeff[])
       de = e1 - e2;
 
       /* If we are close enough to the root, break... */
-      if (fabs(de) < eps)
+      if (fabs(de) < eps) {
           break;
+}
 
       /* Otherwise, determine the next guess and try again. */
       xh = (e1*x2 - e2*x1)/de;
@@ -335,14 +379,16 @@ int gsl_sf_mathieu_b_coeff(int order, double qq, double aa, double coeff[])
          to zero. */
       if (fabs(coeff[ii]) < 1e-20)
       {
-          for (; ii<GSL_SF_MATHIEU_COEFF;)
+          for (; ii<GSL_SF_MATHIEU_COEFF;) {
               coeff[ii++] = 0.0;
+}
       }
   }
   
   /* Normalize the coefficients. */
-  for (ii=0; ii<GSL_SF_MATHIEU_COEFF; ii++)
+  for (ii=0; ii<GSL_SF_MATHIEU_COEFF; ii++) {
       coeff[ii] /= sum;
+}
 
   return GSL_SUCCESS;
 }

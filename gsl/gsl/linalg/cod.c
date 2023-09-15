@@ -567,8 +567,8 @@ cod_householder_hv(const double tau, const gsl_vector * v, gsl_vector * w)
       const size_t L = v->size;
       double w0 = gsl_vector_get(w, 0);
       gsl_vector_view w1 = gsl_vector_subvector(w, M - L, L);
-      double d1;
-      double d;
+      double d1 = NAN;
+      double d = NAN;
 
       /* d1 := v . w(M-L:M) */
       gsl_blas_ddot(v, &w1.vector, &d1);

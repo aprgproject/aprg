@@ -28,9 +28,9 @@ gsl_multifit_fdfsolver *
 gsl_multifit_fdfsolver_alloc (const gsl_multifit_fdfsolver_type * T, 
                               size_t n, size_t p)
 {
-  int status;
+  int status = 0;
 
-  gsl_multifit_fdfsolver * s;
+  gsl_multifit_fdfsolver * s = NULL;
 
   if (n < p)
     {
@@ -140,7 +140,7 @@ gsl_multifit_fdfsolver_wset (gsl_multifit_fdfsolver * s,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       s->fdf = f;
       gsl_vector_memcpy(s->x, x);
@@ -154,8 +154,9 @@ gsl_multifit_fdfsolver_wset (gsl_multifit_fdfsolver * s,
               gsl_vector_set(s->sqrt_wts, i, sqrt(wi));
             }
         }
-      else
+      else {
         gsl_vector_set_all(s->sqrt_wts, 1.0);
+}
   
       return (s->type->set) (s->state, s->sqrt_wts, s->fdf, s->x, s->f, s->dx);
     }
@@ -203,7 +204,7 @@ gsl_multifit_fdfsolver_driver (gsl_multifit_fdfsolver * s,
                                const double ftol,
                                int *info)
 {
-  int status;
+  int status = 0;
   size_t iter = 0;
 
   do
@@ -214,8 +215,9 @@ gsl_multifit_fdfsolver_driver (gsl_multifit_fdfsolver * s,
        * if status is GSL_ENOPROG or GSL_SUCCESS, continue iterating,
        * otherwise the method has converged with a GSL_ETOLx flag
        */
-      if (status != GSL_SUCCESS && status != GSL_ENOPROG)
+      if (status != GSL_SUCCESS && status != GSL_ENOPROG) {
         break;
+}
 
       /* test for convergence */
       status = gsl_multifit_fdfsolver_test(s, xtol, gtol, ftol, info);
@@ -234,8 +236,9 @@ gsl_multifit_fdfsolver_driver (gsl_multifit_fdfsolver * s,
     }
 
   /* check if max iterations reached */
-  if (iter >= maxiter && status != GSL_SUCCESS)
+  if (iter >= maxiter && status != GSL_SUCCESS) {
     status = GSL_EMAXITER;
+}
 
   return status;
 } /* gsl_multifit_fdfsolver_driver() */
@@ -267,20 +270,25 @@ gsl_multifit_fdfsolver_free (gsl_multifit_fdfsolver * s)
       free (s->state);
     }
 
-  if (s->dx)
+  if (s->dx) {
     gsl_vector_free (s->dx);
+}
 
-  if (s->x)
+  if (s->x) {
     gsl_vector_free (s->x);
+}
 
-  if (s->f)
+  if (s->f) {
     gsl_vector_free (s->f);
+}
 
-  if (s->sqrt_wts)
+  if (s->sqrt_wts) {
     gsl_vector_free (s->sqrt_wts);
+}
 
-  if (s->g)
+  if (s->g) {
     gsl_vector_free (s->g);
+}
 
   free (s);
 }
@@ -332,8 +340,9 @@ gsl_multifit_eval_wf(gsl_multifit_function_fdf *fdf, const gsl_vector *x,
   ++(fdf->nevalf);
 
   /* y <- sqrt(W) y */
-  if (swts)
+  if (swts) {
     gsl_vector_mul(y, swts);
+}
 
   return s;
 }
@@ -365,7 +374,7 @@ gsl_multifit_eval_wdf(gsl_multifit_function_fdf *fdf, const gsl_vector *x,
   if (swts)
     {
       const size_t n = swts->size;
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < n; ++i)
         {

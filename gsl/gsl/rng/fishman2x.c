@@ -64,18 +64,21 @@ ran_get (void *vstate)
 {
   ran_state_t *state = (ran_state_t *) vstate;
 
-  long int y, r;
+  long int y;
+  long int r;
 
   r = RRR_F * (state->x / QQQ_F);
   y = AAA_F * (state->x % QQQ_F) - r;
-  if (y < 0)
+  if (y < 0) {
     y += MMM_F;
+}
   state->x = y;
 
   r = RRR_L * (state->y / QQQ_L);
   y = AAA_L * (state->y % QQQ_L) - r;
-  if (y < 0)
+  if (y < 0) {
     y += MMM_L;
+}
   state->y = y;
 
   state->z = (state->x > state->y) ? (state->x - state->y) :
@@ -97,8 +100,9 @@ ran_set (void *vstate, unsigned long int s)
 {
   ran_state_t *state = (ran_state_t *) vstate;
 
-  if ((s % MMM_F) == 0 || (s % MMM_L) == 0)
+  if ((s % MMM_F) == 0 || (s % MMM_L) == 0) {
     s = 1;                      /* default seed is 1 */
+}
 
   state->x = s % MMM_F;
   state->y = s % MMM_L;

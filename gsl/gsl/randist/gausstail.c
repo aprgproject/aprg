@@ -38,7 +38,7 @@ gsl_ran_gaussian_tail (const gsl_rng * r, const double a, const double sigma)
       /* For small s, use a direct rejection method. The limit s < 1
          can be adjusted to optimise the overall efficiency */
 
-      double x;
+      double x = NAN;
 
       do
         {
@@ -47,8 +47,8 @@ gsl_ran_gaussian_tail (const gsl_rng * r, const double a, const double sigma)
       while (x < s);
       return x * sigma;
     }
-  else
-    {
+  
+    
       /* Use the "supertail" deviates from the last two steps
        * of Marsaglia's rectangle-wedge-tail method, as described
        * in Knuth, v2, 3rd ed, pp 123-128.  (See also exercise 11, p139,
@@ -69,7 +69,7 @@ gsl_ran_gaussian_tail (const gsl_rng * r, const double a, const double sigma)
         }
       while (x * u > s);
       return x * sigma;
-    }
+   
 }
 
 double
@@ -79,8 +79,8 @@ gsl_ran_gaussian_tail_pdf (const double x, const double a, const double sigma)
     {
       return 0;
     }
-  else
-    {
+  
+    
       double N, p;
       double u = x / sigma ;
 
@@ -91,7 +91,7 @@ gsl_ran_gaussian_tail_pdf (const double x, const double a, const double sigma)
       p = (1 / (N * sqrt (2 * M_PI) * sigma)) * exp (-u * u / 2);
 
       return p;
-    }
+   
 }
 
 double

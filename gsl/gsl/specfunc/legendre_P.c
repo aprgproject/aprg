@@ -96,7 +96,8 @@ On output, array[i] = sqrt(i)
 static void
 legendre_sqrts(const size_t lmax, double *array)
 {
-  size_t l;
-  for (l = 0; l <= 2 * lmax + 1; ++l)
+  size_t l = 0;
+  for (l = 0; l <= 2 * lmax + 1; ++l) {
     array[l] = sqrt((double) l);
+}
 }

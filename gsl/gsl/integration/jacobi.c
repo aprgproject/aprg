@@ -58,7 +58,7 @@ jacobi_init(const size_t n, double * diag, double * subdiag, gsl_integration_fix
   const double absum = params->beta + params->alpha;
   const double abdiff = params->beta - params->alpha;
   const double a2b2 = absum * abdiff; /* beta^2 - alpha^2 */
-  size_t i;
+  size_t i = 0;
 
   /* construct the diagonal and subdiagonal elements of Jacobi matrix */
   diag[0] = abdiff/(absum + 2.0);

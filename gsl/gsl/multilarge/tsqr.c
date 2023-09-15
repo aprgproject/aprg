@@ -102,7 +102,7 @@ Return: pointer to workspace
 static void *
 tsqr_alloc(const size_t p)
 {
-  tsqr_state_t *state;
+  tsqr_state_t *state = NULL;
 
   if (p == 0)
     {
@@ -170,23 +170,29 @@ tsqr_free(void *vstate)
 {
   tsqr_state_t *state = (tsqr_state_t *) vstate;
 
-  if (state->R)
+  if (state->R) {
     gsl_matrix_free(state->R);
+}
 
-  if (state->QTb)
+  if (state->QTb) {
     gsl_vector_free(state->QTb);
+}
 
-  if (state->T)
+  if (state->T) {
     gsl_matrix_free(state->T);
+}
 
-  if (state->work)
+  if (state->work) {
     gsl_vector_free(state->work);
+}
 
-  if (state->work3)
+  if (state->work3) {
     gsl_vector_free(state->work3);
+}
 
-  if (state->multifit_workspace_p)
+  if (state->multifit_workspace_p) {
     gsl_multifit_linear_free(state->multifit_workspace_p);
+}
 
   free(state);
 }
@@ -245,7 +251,7 @@ tsqr_accumulate(gsl_matrix * A, gsl_vector * b, void * vstate)
     }
   else if (state->nblocks == 0)
     {
-      int status;
+      int status = 0;
       gsl_matrix_view R = gsl_matrix_submatrix(A, 0, 0, p, p);
       gsl_vector_view QTb = gsl_vector_subvector(state->QTb, 0, p);
       gsl_vector_view b1 = gsl_vector_subvector(b, 0, p);
@@ -254,8 +260,9 @@ tsqr_accumulate(gsl_matrix * A, gsl_vector * b, void * vstate)
 
       /* compute QR decomposition of A */
       status = gsl_linalg_QR_decomp_r(A, state->T);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* store upper triangular R factor in state->R */
       gsl_matrix_tricpy(CblasUpper, CblasNonUnit, state->R, &R.matrix);
@@ -269,8 +276,9 @@ tsqr_accumulate(gsl_matrix * A, gsl_vector * b, void * vstate)
           gsl_vector_view b2 = gsl_vector_subvector(b, p, n - p);
           state->rnorm = gsl_blas_dnrm2(&b2.vector);
         }
-      else
+      else {
         state->rnorm = 0.0;
+}
 
       state->nblocks = 1;
 
@@ -278,13 +286,14 @@ tsqr_accumulate(gsl_matrix * A, gsl_vector * b, void * vstate)
     }
   else
     {
-      int status;
+      int status = 0;
 
       /* compute QR decomposition of [ R_{i-1} ; A_i ], accounting for
        * sparse structure */
       status = gsl_linalg_QR_UR_decomp(state->R, A, state->T);
-      if (status)
+      if (status) {
         return status;
+}
 
       /*
        * Compute:
@@ -357,20 +366,22 @@ tsqr_solve(const double lambda, gsl_vector * x,
         }
       else
         {
-          int status;
+          int status = 0;
 
           /* compute SVD of R if not already computed */
           if (state->svd == 0)
             {
               status = tsqr_svd(state);
-              if (status)
+              if (status) {
                 return status;
+}
             }
 
           status = gsl_multifit_linear_solve(lambda, state->R, state->QTb, x, rnorm, snorm,
                                              state->multifit_workspace_p);
-          if (status)
+          if (status) {
             return status;
+}
 
           *rnorm = gsl_hypot(*rnorm, state->rnorm);
         }
@@ -396,15 +407,16 @@ tsqr_lcurve(gsl_vector * reg_param, gsl_vector * rho,
             gsl_vector * eta, void * vstate)
 {
   tsqr_state_t *state = (tsqr_state_t *) vstate;
-  int status;
-  size_t i;
+  int status = 0;
+  size_t i = 0;
 
   /* compute SVD of R if not already computed */
   if (state->svd == 0)
     {
       status = tsqr_svd(state);
-      if (status)
+      if (status) {
         return status;
+}
     }
 
   status = gsl_multifit_linear_lcurve(state->QTb, reg_param, rho, eta,
@@ -456,7 +468,7 @@ Return: success/error
 static int
 tsqr_svd(tsqr_state_t * state)
 {
-  int status;
+  int status = 0;
 
   status = gsl_multifit_linear_svd(state->R, state->multifit_workspace_p);
   if (status)

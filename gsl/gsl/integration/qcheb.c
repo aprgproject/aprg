@@ -29,8 +29,9 @@
 void
 gsl_integration_qcheb (gsl_function * f, double a, double b, double *cheb12, double *cheb24)
 {
-  size_t i;
-  double fval[25], v[12];
+  size_t i = 0;
+  double fval[25];
+  double v[12];
 
   /* These are the values of cos(pi*k/24) for k=1..11 needed for the
      Chebyshev expansion of f(x) */

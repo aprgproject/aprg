@@ -38,21 +38,26 @@ gsl_integration_qawf (gsl_function * f,
                       gsl_integration_qawo_table * wf,
                       double *result, double *abserr)
 {
-  double area, errsum;
-  double res_ext, err_ext;
-  double correc, total_error = 0.0, truncation_error;
+  double area;
+  double errsum;
+  double res_ext;
+  double err_ext;
+  double correc;
+  double total_error = 0.0;
+  double truncation_error;
 
   size_t ktmin = 0;
   size_t iteration = 0;
 
   struct extrapolation_table table;
 
-  double cycle;
+  double cycle = NAN;
   double omega = wf->omega;
 
   const double p = 0.9;
   double factor = 1;
-  double initial_eps, eps;
+  double initial_eps;
+  double eps;
   int error_type = 0;
 
   /* Initialize results */
@@ -85,8 +90,8 @@ gsl_integration_qawf (gsl_function * f,
 
           return GSL_SUCCESS;
         }
-      else
-        {
+      
+        
           /* The function cos(w x) f(x) is always f(x) for w = 0 */
 
           int status = gsl_integration_qagiu (f, a, epsabs, 0.0,
@@ -94,7 +99,7 @@ gsl_integration_qawf (gsl_function * f,
                                               cycle_workspace,
                                               result, abserr);
           return status;
-        }
+       
     }
 
   if (epsabs > GSL_DBL_MIN / (1 - p))
@@ -123,7 +128,10 @@ gsl_integration_qawf (gsl_function * f,
 
   for (iteration = 0; iteration < limit; iteration++)
     {
-      double area1, error1, reseps, erreps;
+      double area1;
+      double error1;
+      double reseps;
+      double erreps;
 
       double a1 = a + iteration * cycle;
       double b1 = a1 + cycle;
@@ -189,19 +197,23 @@ gsl_integration_qawf (gsl_function * f,
           err_ext = erreps;
           res_ext = reseps;
 
-          if (err_ext + 10 * correc <= epsabs)
+          if (err_ext + 10 * correc <= epsabs) {
             break;
-          if (err_ext <= epsabs && 10 * correc >= epsabs)
+}
+          if (err_ext <= epsabs && 10 * correc >= epsabs) {
             break;
+}
         }
 
     }
 
-  if (iteration == limit)
+  if (iteration == limit) {
     error_type = 1;
+}
 
-  if (err_ext == GSL_DBL_MAX)
+  if (err_ext == GSL_DBL_MAX) {
     goto compute_result;
+}
 
   err_ext = err_ext + 10 * correc;
 
@@ -215,8 +227,9 @@ gsl_integration_qawf (gsl_function * f,
 
   if (res_ext != 0.0 && area != 0.0)
     {
-      if (err_ext / fabs (res_ext) > errsum / fabs (area))
+      if (err_ext / fabs (res_ext) > errsum / fabs (area)) {
         goto compute_result;
+}
     }
   else if (err_ext > errsum)
     {
@@ -241,14 +254,15 @@ compute_result:
 
 return_error:
 
-  if (error_type > 2)
+  if (error_type > 2) {
     error_type--;
+}
 
   if (error_type == 0)
     {
       return GSL_SUCCESS;
     }
-  else if (error_type == 1)
+  if (error_type == 1)
     {
       GSL_ERROR ("number of iterations was insufficient", GSL_EMAXITER);
     }

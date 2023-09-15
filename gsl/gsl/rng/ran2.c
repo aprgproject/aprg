@@ -64,11 +64,13 @@ ran2_get (void *vstate)
   long int h2 = y / q2;
   long int t2 = a2 * (y - h2 * q2) - h2 * r2;
 
-  if (t1 < 0)
+  if (t1 < 0) {
     t1 += m1;
+}
 
-  if (t2 < 0)
+  if (t2 < 0) {
     t2 += m2;
+}
 
   state->x = t1;
   state->y = t2;
@@ -76,8 +78,9 @@ ran2_get (void *vstate)
   {
     unsigned long int j = state->n / N_DIV;
     long int delta = state->shuffle[j] - t2;
-    if (delta < 1)
+    if (delta < 1) {
       delta += m1 - 1;
+}
     state->n = delta;
     state->shuffle[j] = t1;
   }
@@ -88,12 +91,13 @@ ran2_get (void *vstate)
 static double
 ran2_get_double (void *vstate)
 {
-  float x_max = 1 - 1.2e-7f ; /* Numerical Recipes version of 1-FLT_EPS */
+  float x_max = 1 - 1.2e-7F ; /* Numerical Recipes version of 1-FLT_EPS */
 
-  float x = ran2_get (vstate) / 2147483563.0f ;
+  float x = ran2_get (vstate) / 2147483563.0F ;
  
-  if (x > x_max) 
+  if (x > x_max) { 
     return x_max ;
+}
   
   return x ;
 }
@@ -102,10 +106,11 @@ static void
 ran2_set (void *vstate, unsigned long int s)
 {
   ran2_state_t *state = (ran2_state_t *) vstate;
-  int i;
+  int i = 0;
 
-  if (s == 0)
+  if (s == 0) {
     s = 1;      /* default seed is 1 */
+}
 
   state->y = s;
 
@@ -113,8 +118,9 @@ ran2_set (void *vstate, unsigned long int s)
     {
       long int h = s / q1;
       long int t = a1 * (s - h * q1) - h * r1;
-      if (t < 0)
+      if (t < 0) {
         t += m1;
+}
       s = t;
     }
 
@@ -122,8 +128,9 @@ ran2_set (void *vstate, unsigned long int s)
     {
       long int h = s / q1;
       long int t = a1 * (s - h * q1) - h * r1;
-      if (t < 0)
+      if (t < 0) {
         t += m1;
+}
       s = t;
       state->shuffle[i] = s;
     }

@@ -27,7 +27,7 @@
 gsl_rstat_workspace *
 gsl_rstat_alloc(void)
 {
-  gsl_rstat_workspace *w;
+  gsl_rstat_workspace *w = NULL;
 
   w = calloc(1, sizeof(gsl_rstat_workspace));
 
@@ -52,8 +52,9 @@ gsl_rstat_alloc(void)
 void
 gsl_rstat_free(gsl_rstat_workspace *w)
 {
-  if (w->median_workspace_p)
+  if (w->median_workspace_p) {
     gsl_rstat_quantile_free(w->median_workspace_p);
+}
 
   free(w);
 } /* gsl_rstat_free() */
@@ -69,7 +70,10 @@ int
 gsl_rstat_add(const double x, gsl_rstat_workspace *w)
 {
   double delta = x - w->mean;
-  double delta_n, delta_nsq, term1, n;
+  double delta_n;
+  double delta_nsq;
+  double term1;
+  double n;
 
   /* update min and max */
   if (w->n == 0)
@@ -79,10 +83,12 @@ gsl_rstat_add(const double x, gsl_rstat_workspace *w)
     }
   else
     {
-      if (x < w->min)
+      if (x < w->min) {
         w->min = x;
-      if (x > w->max)
+}
+      if (x > w->max) {
         w->max = x;
+}
     }
 
   /* update mean and variance */
@@ -128,7 +134,7 @@ gsl_rstat_variance(const gsl_rstat_workspace *w)
       double n = (double) w->n;
       return (w->M2 / (n - 1.0));
     }
-  else
+  
     return 0.0;
 } /* gsl_rstat_variance() */
 
@@ -166,7 +172,7 @@ gsl_rstat_sd_mean(const gsl_rstat_workspace *w)
       double sd = gsl_rstat_sd(w);
       return (sd / sqrt((double) w->n));
     }
-  else
+  
     return 0.0;
 } /* gsl_rstat_sd_mean() */
 
@@ -185,7 +191,7 @@ gsl_rstat_skew(const gsl_rstat_workspace *w)
       double fac = pow(n - 1.0, 1.5) / n;
       return ((fac * w->M3) / pow(w->M2, 1.5));
     }
-  else
+  
     return 0.0;
 } /* gsl_rstat_skew() */
 
@@ -198,14 +204,14 @@ gsl_rstat_kurtosis(const gsl_rstat_workspace *w)
       double fac = ((n - 1.0) / n) * (n - 1.0);
       return ((fac * w->M4) / (w->M2 * w->M2) - 3.0);
     }
-  else
+  
     return 0.0;
 } /* gsl_rstat_kurtosis() */
 
 int
 gsl_rstat_reset(gsl_rstat_workspace *w)
 {
-  int status;
+  int status = 0;
 
   w->min = 0.0;
   w->max = 0.0;

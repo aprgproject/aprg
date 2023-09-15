@@ -159,7 +159,8 @@ static const long c = 1731;
 static inline unsigned long int
 slatec_get (void *vstate)
 {
-  long y0, y1;
+  long y0;
+  long y1;
   slatec_state_t *state = (slatec_state_t *) vstate;
 
   y0 = a0 * state->x0;

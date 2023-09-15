@@ -48,8 +48,10 @@ gsl_multifit_fdfsolver_test (const gsl_multifit_fdfsolver * s,
                              const double xtol, const double gtol,
                              const double ftol, int *info)
 {
-  int status;
-  double gnorm, fnorm, phi;
+  int status = 0;
+  double gnorm;
+  double fnorm;
+  double phi;
 
   *info = 0;
 
@@ -91,7 +93,7 @@ int
 gsl_multifit_test_delta (const gsl_vector * dx, const gsl_vector * x, 
                          double epsabs, double epsrel)
 {
-  size_t i;
+  size_t i = 0;
   int ok = 1;
   const size_t n = x->size ;
 
@@ -117,8 +119,9 @@ gsl_multifit_test_delta (const gsl_vector * dx, const gsl_vector * x,
         }
     }
 
-  if (ok)
+  if (ok) {
     return GSL_SUCCESS ;
+}
 
   return GSL_CONTINUE;
 }
@@ -126,7 +129,7 @@ gsl_multifit_test_delta (const gsl_vector * dx, const gsl_vector * x,
 int
 gsl_multifit_test_gradient (const gsl_vector * g, double epsabs)
 {
-  size_t i;
+  size_t i = 0;
 
   double residual = 0;
 
@@ -157,7 +160,7 @@ static double
 scaled_infnorm(const gsl_vector *x, const gsl_vector *g)
 {
   const size_t n = x->size;
-  size_t i;
+  size_t i = 0;
   double norm = 0.0;
 
   for (i = 0; i < n; ++i)
@@ -166,8 +169,9 @@ scaled_infnorm(const gsl_vector *x, const gsl_vector *g)
       double gi = gsl_vector_get(g, i);
       double tmp = fabs(xi * gi);
 
-      if (tmp > norm)
+      if (tmp > norm) {
         norm = tmp;
+}
     }
 
   return norm;

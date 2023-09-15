@@ -20,6 +20,7 @@
 /* the code in this module performs Romberg integration */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
@@ -37,7 +38,7 @@
 gsl_integration_romberg_workspace *
 gsl_integration_romberg_alloc(const size_t n)
 {
-  gsl_integration_romberg_workspace *w;
+  gsl_integration_romberg_workspace *w = NULL;
 
   /* check inputs */
   if (n < 1)
@@ -74,11 +75,13 @@ gsl_integration_romberg_alloc(const size_t n)
 void
 gsl_integration_romberg_free(gsl_integration_romberg_workspace * w)
 {
-  if (w->work1)
+  if (w->work1) {
     free(w->work1);
+}
 
-  if (w->work2)
+  if (w->work2) {
     free(w->work2);
+}
 
   free(w);
 }
@@ -101,9 +104,9 @@ gsl_integration_romberg(const gsl_function * f, const double a, const double b,
       const size_t n = w->n;
       double *Rp = &(w->work1[0]); /* previous row */
       double *Rc = &(w->work2[0]); /* current row */
-      double *Rtmp;
+      double *Rtmp = NULL;
       double h = 0.5 * (b - a);    /* step size */
-      size_t i;
+      size_t i = 0;
 
       /* R(0,0) */
       Rp[0] = h * (GSL_FN_EVAL(f, a) + GSL_FN_EVAL(f, b));
@@ -113,10 +116,10 @@ gsl_integration_romberg(const gsl_function * f, const double a, const double b,
 
       for (i = 1; i < n; ++i)
         {
-          size_t j;
+          size_t j = 0;
           double sum = 0.0;
-          double err;
-          double four_j;         /* 4^j */
+          double err = NAN;
+          double four_j = NAN;         /* 4^j */
           size_t two_i = 1 << i; /* 2^i */
 
           for (j = 1; j < two_i; j += 2)

@@ -33,7 +33,7 @@ gsl_multifit_fdfridge *
 gsl_multifit_fdfridge_alloc (const gsl_multifit_fdfsolver_type * T,
                              const size_t n, const size_t p)
 {
-  gsl_multifit_fdfridge * work;
+  gsl_multifit_fdfridge * work = NULL;
 
   work = calloc(1, sizeof(gsl_multifit_fdfridge));
   if (work == NULL)
@@ -79,14 +79,17 @@ gsl_multifit_fdfridge_alloc (const gsl_multifit_fdfsolver_type * T,
 void
 gsl_multifit_fdfridge_free(gsl_multifit_fdfridge *work)
 {
-  if (work->s)
+  if (work->s) {
     gsl_multifit_fdfsolver_free(work->s);
+}
 
-  if (work->wts)
+  if (work->wts) {
     gsl_vector_free(work->wts);
+}
     
-  if (work->f)
+  if (work->f) {
     gsl_vector_free(work->f);
+}
 
   free(work);
 }
@@ -148,7 +151,7 @@ gsl_multifit_fdfridge_wset (gsl_multifit_fdfridge * w,
     }
   else
     {
-      int status;
+      int status = 0;
       gsl_vector_view wv = gsl_vector_subvector(w->wts, 0, n);
 
       /* save user defined fdf */
@@ -221,7 +224,7 @@ gsl_multifit_fdfridge_wset2 (gsl_multifit_fdfridge * w,
     }
   else
     {
-      int status;
+      int status = 0;
       gsl_vector_view wv = gsl_vector_subvector(w->wts, 0, n);
 
       /* save user defined fdf */
@@ -297,7 +300,7 @@ gsl_multifit_fdfridge_wset3 (gsl_multifit_fdfridge * w,
     }
   else
     {
-      int status;
+      int status = 0;
       gsl_vector_view wv = gsl_vector_subvector(w->wts, 0, n);
 
       /* save user defined fdf */
@@ -380,7 +383,7 @@ Inputs: x      - model parameters (size p)
 static int
 fdfridge_f(const gsl_vector * x, void * params, gsl_vector * f)
 {
-  int status;
+  int status = 0;
   gsl_multifit_fdfridge *w = (gsl_multifit_fdfridge *) params;
   const size_t n = w->n;
   const size_t p = w->p;
@@ -389,8 +392,9 @@ fdfridge_f(const gsl_vector * x, void * params, gsl_vector * f)
 
   /* call user callback function to get residual vector f */
   status = gsl_multifit_eval_wf(w->fdf, x, NULL, &f_user.vector);
-  if (status)
+  if (status) {
     return status;
+}
 
   if (w->L_diag)
     {
@@ -416,7 +420,7 @@ fdfridge_f(const gsl_vector * x, void * params, gsl_vector * f)
 static int
 fdfridge_df(const gsl_vector * x, void * params, gsl_matrix * J)
 {
-  int status;
+  int status = 0;
   gsl_multifit_fdfridge *w = (gsl_multifit_fdfridge *) params;
   const size_t n = w->n;
   const size_t p = w->p;
@@ -425,9 +429,9 @@ fdfridge_df(const gsl_vector * x, void * params, gsl_matrix * J)
   gsl_vector_view diag = gsl_matrix_diagonal(&J_tik.matrix);
 
   /* compute Jacobian */
-  if (w->fdf->df)
+  if (w->fdf->df) {
     status = gsl_multifit_eval_wdf(w->fdf, x, NULL, &J_user.matrix);
-  else
+  } else
     {
       /* compute f(x) and then finite difference Jacobian */
       status = gsl_multifit_eval_wf(w->fdf, x, NULL, w->f);
@@ -435,8 +439,9 @@ fdfridge_df(const gsl_vector * x, void * params, gsl_matrix * J)
                                               &J_user.matrix);
     }
 
-  if (status)
+  if (status) {
     return status;
+}
 
   if (w->L_diag)
     {

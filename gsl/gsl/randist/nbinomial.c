@@ -43,7 +43,7 @@ gsl_ran_negative_binomial (const gsl_rng * r, double p, double n)
 double
 gsl_ran_negative_binomial_pdf (const unsigned int k, const double p, double n)
 {
-  double P;
+  double P = NAN;
 
   double f = gsl_sf_lngamma (k + n) ;
   double a = gsl_sf_lngamma (n) ;

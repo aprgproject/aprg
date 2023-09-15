@@ -34,7 +34,7 @@ gsl_ran_geometric (const gsl_rng * r, const double p)
 {
   double u = gsl_rng_uniform_pos (r);
 
-  unsigned int k;
+  unsigned int k = 0;
 
   if (p == 1)
     {
@@ -55,7 +55,7 @@ gsl_ran_geometric_pdf (const unsigned int k, const double p)
     {
       return 0 ;
     }
-  else if (k == 1)
+  if (k == 1)
     {
       return p ;
     }

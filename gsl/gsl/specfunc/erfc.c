@@ -31,6 +31,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_exp.h>
 #include <gsl/gsl_sf_erf.h>
+#include <math.h>
 
 #include "check.h"
 
@@ -62,8 +63,9 @@ static double erfc8_sum(double x)
       2.260528520767326969591866945,
       1.0
   };
-  double num=0.0, den=0.0;
-  int i;
+  double num=0.0;
+  double den=0.0;
+  int i = 0;
 
   num = P[5];
   for (i=4; i>=0; --i) {
@@ -80,7 +82,7 @@ static double erfc8_sum(double x)
 inline
 static double erfc8(double x)
 {
-  double e;
+  double e = NAN;
   e = erfc8_sum(x);
   e *= exp(-x*x);
   return e;
@@ -89,7 +91,7 @@ static double erfc8(double x)
 inline
 static double log_erfc8(double x)
 {
-  double e;
+  double e = NAN;
   e = erfc8_sum(x);
   e = log(e) - x*x;
   return e;
@@ -124,8 +126,8 @@ static int erfseries(double x, gsl_sf_result * result)
 {
   double coef = x;
   double e    = coef;
-  double del;
-  int k;
+  double del = NAN;
+  int k = 0;
   for (k=1; k<30; ++k) {
     coef *= -x*x/k;
     del   = coef/(2.0*k+1.0);
@@ -256,7 +258,8 @@ log_erfc_asymptotic(double x)
 int gsl_sf_erfc_e(double x, gsl_sf_result * result)
 {
   const double ax = fabs(x);
-  double e_val, e_err;
+  double e_val;
+  double e_err;
 
   /* CHECK_POINTER(result) */
 
@@ -338,7 +341,7 @@ int gsl_sf_log_erfc_e(double x, gsl_sf_result * result)
     return GSL_SUCCESS;
   }
   */
-  else if(x > 8.0) {
+  if(x > 8.0) {
     result->val = log_erfc8(x);
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
@@ -361,14 +364,14 @@ int gsl_sf_erf_e(double x, gsl_sf_result * result)
   if(fabs(x) < 1.0) {
     return erfseries(x, result);
   }
-  else {
+  
     gsl_sf_result result_erfc;
     gsl_sf_erfc_e(x, &result_erfc);
     result->val  = 1.0 - result_erfc.val;
     result->err  = result_erfc.err;
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 
@@ -415,8 +418,8 @@ int gsl_sf_hazard_e(double x, gsl_sf_result * result)
     result->err += fabs(result_ln_erfc.err * result->val);
     return GSL_ERROR_SELECT_2(stat_l, stat_e);
   }
-  else
-  {
+  
+  
     const double ix2 = 1.0/(x*x);
     const double corrB = 1.0 - 9.0*ix2 * (1.0 - 11.0*ix2);
     const double corrM = 1.0 - 5.0*ix2 * (1.0 - 7.0*ix2 * corrB);
@@ -424,7 +427,7 @@ int gsl_sf_hazard_e(double x, gsl_sf_result * result)
     result->val = x / corrT;
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 

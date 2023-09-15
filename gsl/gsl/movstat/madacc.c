@@ -101,8 +101,9 @@ madacc_delete(void * vstate)
 {
   madacc_state_t * state = (madacc_state_t *) vstate;
 
-  if (!ringbuf_is_empty(state->rbuf))
+  if (!ringbuf_is_empty(state->rbuf)) {
     ringbuf_pop_back(state->rbuf);
+}
 
   return GSL_SUCCESS;
 }
@@ -118,16 +119,18 @@ madacc_medmad(void * params, madacc_type_t * result, const void * vstate)
     }
   else
     {
-      int status;
+      int status = 0;
       const double scale = *(double *) params;
       const int n = ringbuf_n(state->rbuf);
-      int i;
-      double median, mad;
+      int i = 0;
+      double median;
+      double mad;
 
       /* compute median of current window */
       status = (state->medacc->get)(NULL, &median, state->median_state);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* compute current window absolute deviations from median */
       for (i = 0; i < n; ++i)

@@ -21,6 +21,7 @@
  * integrands and is based on IQPACK */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_math.h>
@@ -34,8 +35,8 @@ gsl_integration_fixed_workspace *
 gsl_integration_fixed_alloc(const gsl_integration_fixed_type * type, const size_t n,
                             const double a, const double b, const double alpha, const double beta)
 {
-  int status;
-  gsl_integration_fixed_workspace *w;
+  int status = 0;
+  gsl_integration_fixed_workspace *w = NULL;
 
   /* check inputs */
   if (n < 1)
@@ -94,17 +95,21 @@ gsl_integration_fixed_alloc(const gsl_integration_fixed_type * type, const size_
 void
 gsl_integration_fixed_free(gsl_integration_fixed_workspace * w)
 {
-  if (w->weights)
+  if (w->weights) {
     free(w->weights);
+}
 
-  if (w->x)
+  if (w->x) {
     free(w->x);
+}
 
-  if (w->diag)
+  if (w->diag) {
     free(w->diag);
+}
 
-  if (w->subdiag)
+  if (w->subdiag) {
     free(w->subdiag);
+}
 
   free(w);
 }
@@ -132,7 +137,7 @@ gsl_integration_fixed(const gsl_function * func, double * result,
                       const gsl_integration_fixed_workspace * w)
 {
   const size_t n = w->n;
-  size_t i;
+  size_t i = 0;
   double sum = 0.0;
 
   for (i = 0; i < n; ++i)
@@ -155,10 +160,10 @@ static int
 fixed_compute(const double a, const double b, const double alpha, const double beta,
               gsl_integration_fixed_workspace * w)
 {
-  int s;
+  int s = 0;
   const size_t n = w->n;
   gsl_integration_fixed_params params;
-  size_t i;
+  size_t i = 0;
 
   params.a = a;
   params.b = b;
@@ -167,13 +172,15 @@ fixed_compute(const double a, const double b, const double alpha, const double b
 
   /* check input parameters */
   s = (w->type->check)(n, &params);
-  if (s)
+  if (s) {
     return s;
+}
 
   /* initialize Jacobi matrix */
   s = (w->type->init)(n, w->diag, w->subdiag, &params);
-  if (s)
+  if (s) {
     return s;
+}
 
   if (params.zemu <= 0.0)
     {
@@ -194,8 +201,9 @@ fixed_compute(const double a, const double b, const double alpha, const double b
 
   /* diagonalize the Jacobi matrix */
   s = imtqlx (n, w->x, w->subdiag, w->weights);
-  if (s)
+  if (s) {
     return s;
+}
 
   for (i = 0; i < n; i++)
     {
@@ -208,7 +216,7 @@ fixed_compute(const double a, const double b, const double alpha, const double b
    */
   {
     double p = pow ( params.slp, params.al + params.be + 1.0 );
-    size_t k;
+    size_t k = 0;
 
     for ( k = 0; k < n; k++ )
       {
@@ -284,21 +292,21 @@ fixed_compute(const double a, const double b, const double alpha, const double b
 static int
 imtqlx ( const int n, double d[], double e[], double z[] )
 {
-  double b;
-  double c;
-  double f;
-  double g;
-  int i;
-  int ii;
+  double b = NAN;
+  double c = NAN;
+  double f = NAN;
+  double g = NAN;
+  int i = 0;
+  int ii = 0;
   int itn = 30;
-  int j;
-  int k;
-  int l;
-  int m;
-  int mml;
-  double p;
-  double r;
-  double s;
+  int j = 0;
+  int k = 0;
+  int l = 0;
+  int m = 0;
+  int mml = 0;
+  double p = NAN;
+  double r = NAN;
+  double s = NAN;
 
   if ( n == 1 )
   {

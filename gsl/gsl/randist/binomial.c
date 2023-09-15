@@ -35,11 +35,14 @@
 unsigned int
 gsl_ran_binomial_knuth (const gsl_rng * r, double p, unsigned int n)
 {
-  unsigned int i, a, b, k = 0;
+  unsigned int i;
+  unsigned int a;
+  unsigned int b;
+  unsigned int k = 0;
 
   while (n > 10)        /* This parameter is tunable */
     {
-      double X;
+      double X = NAN;
       a = 1 + (n / 2);
       b = 1 + n - a;
 
@@ -61,8 +64,9 @@ gsl_ran_binomial_knuth (const gsl_rng * r, double p, unsigned int n)
   for (i = 0; i < n; i++)
     {
       double u = gsl_rng_uniform (r);
-      if (u < p)
+      if (u < p) {
         k++;
+}
     }
 
   return k;
@@ -76,8 +80,8 @@ gsl_ran_binomial_pdf (const unsigned int k, const double p,
     {
       return 0;
     }
-  else
-    {
+  
+    
       double P;
 
       if (p == 0) 
@@ -96,5 +100,5 @@ gsl_ran_binomial_pdf (const unsigned int k, const double p,
         }
 
       return P;
-    }
+   
 }

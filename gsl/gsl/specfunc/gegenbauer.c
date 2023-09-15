@@ -39,11 +39,11 @@ gsl_sf_gegenpoly_1_e(double lambda, double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     result->val = 2.0*lambda*x;
     result->err = 4.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 int
@@ -58,11 +58,11 @@ gsl_sf_gegenpoly_2_e(double lambda, double x, gsl_sf_result * result)
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     result->val = lambda*(-1.0 + 2.0*(1.0+lambda)*x*x);
     result->err = GSL_DBL_EPSILON * (2.0 * fabs(result->val) + fabs(lambda));
     return GSL_SUCCESS;
-  }
+ 
 }
 
 int
@@ -75,12 +75,12 @@ gsl_sf_gegenpoly_3_e(double lambda, double x, gsl_sf_result * result)
     result->err = GSL_DBL_EPSILON * (2.0 * fabs(result->val) + fabs(x));
     return GSL_SUCCESS;
   }
-  else {
+  
     double c = 4.0 + lambda*(6.0 + 2.0*lambda);
     result->val = 2.0*lambda * x * ( -1.0 - lambda + c*x*x/3.0 );
     result->err = GSL_DBL_EPSILON * (2.0 * fabs(result->val) + fabs(lambda * x));
     return GSL_SUCCESS;
-  }
+ 
 }
 
 
@@ -114,7 +114,7 @@ gsl_sf_gegenpoly_n_e(int n, double lambda, double x, gsl_sf_result * result)
       result->err = 2.0 * GSL_DBL_EPSILON * fabs(z * result->val);
       return GSL_SUCCESS;
     }
-    else {
+    
       int k;
       gsl_sf_result g2;
       gsl_sf_result g3;
@@ -132,7 +132,7 @@ gsl_sf_gegenpoly_n_e(int n, double lambda, double x, gsl_sf_result * result)
       result->val = gk;
       result->err = 2.0 * GSL_DBL_EPSILON * 0.5 * n * fabs(gk);
       return stat_g;
-    }
+   
   }
 }
 
@@ -140,7 +140,7 @@ gsl_sf_gegenpoly_n_e(int n, double lambda, double x, gsl_sf_result * result)
 int
 gsl_sf_gegenpoly_array(int nmax, double lambda, double x, double * result_array)
 {
-  int k;
+  int k = 0;
 
   /* CHECK_POINTER(result_array) */
 
@@ -150,13 +150,15 @@ gsl_sf_gegenpoly_array(int nmax, double lambda, double x, double * result_array)
 
   /* n == 0 */
   result_array[0] = 1.0;
-  if(nmax == 0) return GSL_SUCCESS;
+  if(nmax == 0) { return GSL_SUCCESS;
+}
 
   /* n == 1 */
-  if(lambda == 0.0)
+  if(lambda == 0.0) {
     result_array[1] = 2.0*x;
-  else
+  } else {
     result_array[1] = 2.0*lambda*x;
+}
 
   /* n <= nmax */
   for(k=2; k<=nmax; k++) {

@@ -29,7 +29,7 @@ initialise (double * ri, double * rj, double * rg, double * rh,
 gsl_integration_qaws_table * 
 gsl_integration_qaws_table_alloc (double alpha, double beta, int mu, int nu)
 {
-  gsl_integration_qaws_table * t;
+  gsl_integration_qaws_table * t = NULL;
 
   if (alpha < -1.0)
     {
@@ -126,9 +126,10 @@ initialise (double * ri, double * rj, double * rg, double * rh,
   const double r_alpha = pow (2.0, alpha_p1);
   const double r_beta = pow (2.0, beta_p1);
 
-  size_t i;
+  size_t i = 0;
   
-  double an, anm1;
+  double an;
+  double anm1;
 
   ri[0] = r_alpha / alpha_p1;
   ri[1] = ri[0] * alpha / alpha_p2;

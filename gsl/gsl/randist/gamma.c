@@ -47,7 +47,7 @@ gsl_ran_gamma_knuth (const gsl_rng * r, const double a, const double b)
     {
       return b * (gamma_large (r, floor (a)) + gamma_frac (r, a - floor (a)));
     }
-  else if (a == na)
+  if (a == na)
     {
       return b * gsl_ran_gamma_int (r, na);
     }
@@ -66,7 +66,7 @@ gsl_ran_gamma_int (const gsl_rng * r, const unsigned int a)
 {
   if (a < 12)
     {
-      unsigned int i;
+      unsigned int i = 0;
       double prod = 1;
 
       for (i = 0; i < a; i++)
@@ -81,10 +81,10 @@ gsl_ran_gamma_int (const gsl_rng * r, const unsigned int a)
 
       return -log (prod);
     }
-  else
-    {
+  
+    
       return gamma_large (r, (double) a);
-    }
+   
 }
 
 static double
@@ -96,7 +96,10 @@ gamma_large (const gsl_rng * r, const double a)
      faster one, we are told, can be found in: J. H. Ahrens and
      U. Dieter, Computing 12 (1974) 223-246.  */
 
-  double sqa, x, y, v;
+  double sqa;
+  double x;
+  double y;
+  double v;
   sqa = sqrt (2 * a - 1);
   do
     {
@@ -119,7 +122,11 @@ gamma_frac (const gsl_rng * r, const double a)
   /* This is exercise 16 from Knuth; see page 135, and the solution is
      on page 551.  */
 
-  double p, q, x, u, v;
+  double p;
+  double q;
+  double x;
+  double u;
+  double v;
 
   if (a == 0) {
     return 0;
@@ -154,7 +161,7 @@ gsl_ran_gamma_pdf (const double x, const double a, const double b)
     {
       return 0 ;
     }
-  else if (x == 0)
+  if (x == 0)
     {
       if (a == 1)
         return 1/b ;
@@ -201,7 +208,9 @@ gsl_ran_gamma (const gsl_rng * r, const double a, const double b)
     }
 
   {
-    double x, v, u;
+    double x;
+    double v;
+    double u;
     double d = a - 1.0 / 3.0;
     double c = (1.0 / 3.0) / sqrt (d);
 
@@ -217,11 +226,13 @@ gsl_ran_gamma (const gsl_rng * r, const double a, const double b)
         v = v * v * v;
         u = gsl_rng_uniform_pos (r);
 
-        if (u < 1 - 0.0331 * x * x * x * x) 
+        if (u < 1 - 0.0331 * x * x * x * x) { 
           break;
+}
 
-        if (log (u) < 0.5 * x * x + d * (1 - v + log (v)))
+        if (log (u) < 0.5 * x * x + d * (1 - v + log (v))) {
           break;
+}
       }
     
     return b * d * v;

@@ -68,7 +68,7 @@ int gsl_sf_Shi_e(const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(ax <= 0.375) {
+  if(ax <= 0.375) {
     gsl_sf_result result_c;
     cheb_eval_e(&shi_cs, 128.0*x*x/9.0-1.0, &result_c);
     result->val  = x * (1.0 + result_c.val);

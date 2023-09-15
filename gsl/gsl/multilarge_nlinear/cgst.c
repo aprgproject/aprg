@@ -79,7 +79,7 @@ static void *
 cgst_alloc (const void * params, const size_t n, const size_t p)
 {
   const gsl_multilarge_nlinear_parameters *par = (const gsl_multilarge_nlinear_parameters *) params;
-  cgst_state_t *state;
+  cgst_state_t *state = NULL;
   
   state = calloc(1, sizeof(cgst_state_t));
   if (state == NULL)
@@ -121,8 +121,9 @@ cgst_alloc (const void * params, const size_t n, const size_t p)
   state->p = p;
 
   state->cgmaxit = par->max_iter;
-  if (state->cgmaxit == 0)
+  if (state->cgmaxit == 0) {
     state->cgmaxit = n;
+}
 
   state->cgtol = par->tol;
 
@@ -134,20 +135,25 @@ cgst_free(void *vstate)
 {
   cgst_state_t *state = (cgst_state_t *) vstate;
 
-  if (state->z)
+  if (state->z) {
     gsl_vector_free(state->z);
+}
 
-  if (state->r)
+  if (state->r) {
     gsl_vector_free(state->r);
+}
 
-  if (state->d)
+  if (state->d) {
     gsl_vector_free(state->d);
+}
 
-  if (state->workp)
+  if (state->workp) {
     gsl_vector_free(state->workp);
+}
 
-  if (state->workn)
+  if (state->workn) {
     gsl_vector_free(state->workn);
+}
 
   free(state);
 }
@@ -197,7 +203,7 @@ static int
 cgst_step(const void * vtrust_state, const double delta,
           gsl_vector * dx, void * vstate)
 {
-  int status;
+  int status = 0;
   const gsl_multilarge_nlinear_trust_state *trust_state =
     (const gsl_multilarge_nlinear_trust_state *) vtrust_state;
   cgst_state_t *state = (cgst_state_t *) vstate;
@@ -207,11 +213,13 @@ cgst_step(const void * vtrust_state, const double delta,
   const gsl_vector * diag = trust_state->diag;
   const gsl_multilarge_nlinear_parameters * params = trust_state->params;
   gsl_multilarge_nlinear_fdf * fdf = trust_state->fdf;
-  double alpha, beta, u;
-  double norm_Jd;   /* || J D^{-1} d_i || */
-  double norm_r;    /* || r_i || */
-  double norm_rp1;  /* || r_{i+1} || */
-  size_t i;
+  double alpha;
+  double beta;
+  double u;
+  double norm_Jd = NAN;   /* || J D^{-1} d_i || */
+  double norm_r = NAN;    /* || r_i || */
+  double norm_rp1 = NAN;  /* || r_{i+1} || */
+  size_t i = 0;
 
   /* Step 1 of [1], section 2; scale gradient as
    *
@@ -244,8 +252,9 @@ cgst_step(const void * vtrust_state, const double delta,
       status = gsl_multilarge_nlinear_eval_df(CblasNoTrans, x, f, state->workp,
                                               swts, params->h_df, params->fdtype,
                                               fdf, state->workn, NULL, NULL);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* compute || J D^{-1} d_i || */
       norm_Jd = gsl_blas_dnrm2(state->workn);
@@ -293,8 +302,9 @@ cgst_step(const void * vtrust_state, const double delta,
       status = gsl_multilarge_nlinear_eval_df(CblasTrans, x, f, state->workn,
                                               swts, params->h_df, params->fdtype,
                                               fdf, state->workp, NULL, NULL);
-      if (status)
+      if (status) {
         return status;
+}
 
       gsl_vector_div(state->workp, trust_state->diag);
       gsl_vector_scale(state->workp, alpha);
@@ -352,8 +362,12 @@ static double
 cgst_calc_tau(const gsl_vector * p, const gsl_vector * d,
               const double delta)
 {
-  double norm_p, norm_d, u;
-  double t1, t2, tau;
+  double norm_p;
+  double norm_d;
+  double u;
+  double t1;
+  double t2;
+  double tau;
 
   norm_p = gsl_blas_dnrm2(p);
   norm_d = gsl_blas_dnrm2(d);

@@ -38,18 +38,20 @@ gsl_integration_cquad_workspace *
 gsl_integration_cquad_workspace_alloc (const size_t n)
 {
 
-  gsl_integration_cquad_workspace *w;
+  gsl_integration_cquad_workspace *w = NULL;
 
   /* Check inputs */
-  if (n < 3)
+  if (n < 3) {
     GSL_ERROR_VAL ("workspace size n must be at least 3", GSL_EDOM, 0);
+}
 
   /* Allocate first the workspace struct */
   if ((w =
        (gsl_integration_cquad_workspace *)
-       malloc (sizeof (gsl_integration_cquad_workspace))) == NULL)
+       malloc (sizeof (gsl_integration_cquad_workspace))) == NULL) {
     GSL_ERROR_VAL ("failed to allocate space for workspace struct",
 		   GSL_ENOMEM, 0);
+}
 
   /* Allocate the intervals */
   if ((w->ivals =
@@ -86,16 +88,19 @@ gsl_integration_cquad_workspace_free (gsl_integration_cquad_workspace * w)
 {
 
   /* Nothing to be done? */
-  if (w == NULL)
+  if (w == NULL) {
     return;
+}
 
   /* Free the intervals first */
-  if (w->ivals != NULL)
+  if (w->ivals != NULL) {
     free (w->ivals);
+}
 
   /* Free the heap */
-  if (w->heap != NULL)
+  if (w->heap != NULL) {
     free (w->heap);
+}
 
   /* Free the structure */
   free (w);
@@ -110,7 +115,8 @@ static void
 Vinvfx (const double *fx, double *c, const int d)
 {
 
-  int i, j;
+  int i;
+  int j;
 
   switch (d)
     {
@@ -118,32 +124,36 @@ Vinvfx (const double *fx, double *c, const int d)
       for (i = 0; i <= 4; i++)
 	{
 	  c[i] = 0.0;
-	  for (j = 0; j <= 4; j++)
+	  for (j = 0; j <= 4; j++) {
 	    c[i] += V1inv[i * 5 + j] * fx[j * 8];
+}
 	}
       break;
     case 1:
       for (i = 0; i <= 8; i++)
 	{
 	  c[i] = 0.0;
-	  for (j = 0; j <= 8; j++)
+	  for (j = 0; j <= 8; j++) {
 	    c[i] += V2inv[i * 9 + j] * fx[j * 4];
+}
 	}
       break;
     case 2:
       for (i = 0; i <= 16; i++)
 	{
 	  c[i] = 0.0;
-	  for (j = 0; j <= 16; j++)
+	  for (j = 0; j <= 16; j++) {
 	    c[i] += V3inv[i * 17 + j] * fx[j * 2];
+}
 	}
       break;
     case 3:
       for (i = 0; i <= 32; i++)
 	{
 	  c[i] = 0.0;
-	  for (j = 0; j <= 32; j++)
+	  for (j = 0; j <= 32; j++) {
 	    c[i] += V4inv[i * 33 + j] * fx[j];
+}
 	}
       break;
     }
@@ -159,24 +169,30 @@ downdate (double *c, int n, int d, int *nans, int nnans)
 {
 
   static const int bidx[4] = { 0, 6, 16, 34 };
-  double b_new[34], alpha;
-  int i, j;
+  double b_new[34];
+  double alpha;
+  int i;
+  int j;
 
-  for (i = 0; i <= n + 1; i++)
+  for (i = 0; i <= n + 1; i++) {
     b_new[i] = bee[bidx[d] + i];
+}
   for (i = 0; i < nnans; i++)
     {
       b_new[n + 1] = b_new[n + 1] / Lalpha[n];
       b_new[n] = (b_new[n] + xi[nans[i]] * b_new[n + 1]) / Lalpha[n - 1];
-      for (j = n - 1; j > 0; j--)
+      for (j = n - 1; j > 0; j--) {
 	b_new[j] =
 	  (b_new[j] + xi[nans[i]] * b_new[j + 1] -
 	   Lgamma[j + 1] * b_new[j + 2]) / Lalpha[j - 1];
-      for (j = 0; j <= n; j++)
+}
+      for (j = 0; j <= n; j++) {
 	b_new[j] = b_new[j + 1];
+}
       alpha = c[n] / b_new[n];
-      for (j = 0; j < n; j++)
+      for (j = 0; j < n; j++) {
 	c[j] -= alpha * b_new[j];
+}
       c[n] = 0;
       n--;
     }
@@ -202,28 +218,48 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
   static const int ndiv_max = 20;
 
   /* Actual variables (as opposed to constants above). */
-  double m, h, temp;
-  double igral, err, igral_final, err_final, err_excess;
-  int nivals, neval = 0;
-  int i, j, d, split, t;
-  int nnans, nans[32];
-  gsl_integration_cquad_ival *iv, *ivl, *ivr;
-  double nc, ncdiff;
+  double m;
+  double h;
+  double temp;
+  double igral;
+  double err;
+  double igral_final;
+  double err_final;
+  double err_excess;
+  int nivals;
+  int neval = 0;
+  int i;
+  int j;
+  int d;
+  int split;
+  int t;
+  int nnans;
+  int nans[32];
+  gsl_integration_cquad_ival *iv;
+  gsl_integration_cquad_ival *ivl;
+  gsl_integration_cquad_ival *ivr;
+  double nc;
+  double ncdiff;
 
   /* Check the input arguments. */
-  if (f == NULL)
+  if (f == NULL) {
     GSL_ERROR ("function pointer shouldn't be NULL", GSL_EINVAL);
-  if (result == NULL)
+}
+  if (result == NULL) {
     GSL_ERROR ("result pointer shouldn't be NULL", GSL_EINVAL);
-  if (ws == NULL)
+}
+  if (ws == NULL) {
     GSL_ERROR ("workspace pointer shouldn't be NULL", GSL_EINVAL);
+}
 
 
   /* Check for unreasonable accuracy demands */
-  if (epsabs < 0.0 || epsrel < 0.0)
+  if (epsabs < 0.0 || epsrel < 0.0) {
     GSL_ERROR ("tolerances may not be negative", GSL_EBADTOL);
-  if (epsabs <= 0 && epsrel < GSL_DBL_EPSILON)
+}
+  if (epsabs <= 0 && epsrel < GSL_DBL_EPSILON) {
     GSL_ERROR ("unreasonable accuracy requirement", GSL_EBADTOL);
+}
 
 
   /* Create the first interval. */
@@ -244,8 +280,9 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
   Vinvfx (iv->fx, &(iv->c[idx[0]]), 0);
   Vinvfx (iv->fx, &(iv->c[idx[3]]), 3);
   Vinvfx (iv->fx, &(iv->c[idx[2]]), 2);
-  for (i = 0; i < nnans; i++)
+  for (i = 0; i < nnans; i++) {
     iv->fx[nans[i]] = GSL_NAN;
+}
   iv->a = a;
   iv->b = b;
   iv->depth = 3;
@@ -268,13 +305,15 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
   ncdiff = sqrt (ncdiff);
   nc = sqrt (nc);
   iv->err = ncdiff * 2 * h;
-  if (ncdiff / nc > 0.1 && iv->err < 2 * h * nc)
+  if (ncdiff / nc > 0.1 && iv->err < 2 * h * nc) {
     iv->err = 2 * h * nc;
+}
 
 
   /* Initialize the heaps. */
-  for (i = 0; i < ws->size; i++)
+  for (i = 0; i < ws->size; i++) {
     ws->heap[i] = i;
+}
 
 
   /* Initialize some global values. */
@@ -333,8 +372,9 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
 	  if (nnans > 0)
 	    {
 	      downdate (&(iv->c[idx[d]]), n[d], d, nans, nnans);
-	      for (i = 0; i < nnans; i++)
+	      for (i = 0; i < nnans; i++) {
 		iv->fx[nans[i]] = GSL_NAN;
+}
 	    }
 
 	  /* Compute the error estimate. */
@@ -403,19 +443,20 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
 	         use it instead. */
 	      if (j + 1 < nivals
 		  && ws->ivals[ws->heap[j + 1]].err >=
-		  ws->ivals[ws->heap[j]].err)
+		  ws->ivals[ws->heap[j]].err) {
 		j++;
+}
 
 	      /* Do we need to move the ith entry up? */
-	      if (ws->ivals[ws->heap[j]].err <= ws->ivals[ws->heap[i]].err)
+	      if (ws->ivals[ws->heap[j]].err <= ws->ivals[ws->heap[i]].err) {
 		break;
-	      else
-		{
+	      } 
+		
 		  t = ws->heap[j];
 		  ws->heap[j] = ws->heap[i];
 		  ws->heap[i] = t;
 		  i = j;
-		}
+	
 	    }
 
 	}
@@ -454,14 +495,16 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
 	  if (nnans > 0)
 	    {
 	      downdate (ivl->c, n[0], 0, nans, nnans);
-	      for (i = 0; i < nnans; i++)
+	      for (i = 0; i < nnans; i++) {
 		ivl->fx[nans[i]] = GSL_NAN;
+}
 	    }
 	  for (i = 0; i <= n[d]; i++)
 	    {
 	      ivl->c[idx[d] + i] = 0.0;
-	      for (j = i; j <= n[d]; j++)
+	      for (j = i; j <= n[d]; j++) {
 		ivl->c[idx[d] + i] += Tleft[i * 33 + j] * iv->c[idx[d] + j];
+}
 	    }
 	  ncdiff = 0.0;
 	  for (i = 0; i <= n[0]; i++)
@@ -484,8 +527,9 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
 	    {
               /* need copysign(INFINITY, igral) */
 	      *result = (igral >= 0) ? GSL_POSINF : GSL_NEGINF;  
-	      if (nevals != NULL)
+	      if (nevals != NULL) {
 		*nevals = neval;
+}
 	      return GSL_EDIVERGE;
 	    }
 
@@ -520,14 +564,16 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
 	  if (nnans > 0)
 	    {
 	      downdate (ivr->c, n[0], 0, nans, nnans);
-	      for (i = 0; i < nnans; i++)
+	      for (i = 0; i < nnans; i++) {
 		ivr->fx[nans[i]] = GSL_NAN;
+}
 	    }
 	  for (i = 0; i <= n[d]; i++)
 	    {
 	      ivr->c[idx[d] + i] = 0.0;
-	      for (j = i; j <= n[d]; j++)
+	      for (j = i; j <= n[d]; j++) {
 		ivr->c[idx[d] + i] += Tright[i * 33 + j] * iv->c[idx[d] + j];
+}
 	    }
 	  ncdiff = 0.0;
 	  for (i = 0; i <= n[0]; i++)
@@ -550,8 +596,9 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
 	    {
               /* need copysign(INFINITY, igral) */
 	      *result = (igral >= 0) ? GSL_POSINF : GSL_NEGINF;  
-	      if (nevals != NULL)
+	      if (nevals != NULL) {
 		*nevals = neval;
+}
 	      return GSL_EDIVERGE;
 	    }
 
@@ -577,17 +624,18 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
 	      j = 2 * i + 1;
 	      if (j + 1 < nivals - 1
 		  && ws->ivals[ws->heap[j + 1]].err >=
-		  ws->ivals[ws->heap[j]].err)
+		  ws->ivals[ws->heap[j]].err) {
 		j++;
-	      if (ws->ivals[ws->heap[j]].err <= ws->ivals[ws->heap[i]].err)
+}
+	      if (ws->ivals[ws->heap[j]].err <= ws->ivals[ws->heap[i]].err) {
 		break;
-	      else
-		{
+	      } 
+		
 		  t = ws->heap[j];
 		  ws->heap[j] = ws->heap[i];
 		  ws->heap[i] = t;
 		  i = j;
-		}
+	
 	    }
 
 	  /* Now grab the last interval and sift it up the heap. */
@@ -602,8 +650,9 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
 		  ws->heap[i] = t;
 		  i = j;
 		}
-	      else
+	      else {
 		break;
+}
 	    }
 
 
@@ -618,17 +667,18 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
 	      j = 2 * i + 1;
 	      if (j + 1 < nivals
 		  && ws->ivals[ws->heap[j + 1]].err >=
-		  ws->ivals[ws->heap[j]].err)
+		  ws->ivals[ws->heap[j]].err) {
 		j++;
-	      if (ws->ivals[ws->heap[j]].err <= ws->ivals[ws->heap[i]].err)
+}
+	      if (ws->ivals[ws->heap[j]].err <= ws->ivals[ws->heap[i]].err) {
 		break;
-	      else
-		{
+	      } 
+		
 		  t = ws->heap[j];
 		  ws->heap[j] = ws->heap[i];
 		  ws->heap[i] = t;
 		  i = j;
-		}
+	
 	    }
 
 	}
@@ -672,10 +722,12 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
 */
   /* Clean up and present the results. */
   *result = igral;
-  if (abserr != NULL)
+  if (abserr != NULL) {
     *abserr = err;
-  if (nevals != NULL)
+}
+  if (nevals != NULL) {
     *nevals = neval;
+}
 
   /* All is well that ends well. */
   return GSL_SUCCESS;

@@ -70,7 +70,7 @@ ranf_advance (void *vstate)
   const unsigned long int x1 = (unsigned long int) state->x1 ;
   const unsigned long int x2 = (unsigned long int) state->x2 ;
 
-  unsigned long int r ;
+  unsigned long int r = 0 ;
   
   r = a0 * x0 ;
   state->x0 = (r & 0xFFFF) ;
@@ -87,7 +87,8 @@ ranf_advance (void *vstate)
 static unsigned long int 
 ranf_get (void *vstate)
 {
-  unsigned long int x1, x2;
+  unsigned long int x1;
+  unsigned long int x2;
 
   ranf_state_t *state = (ranf_state_t *) vstate;
   ranf_advance (state) ;  
@@ -115,8 +116,10 @@ ranf_set (void *vstate, unsigned long int s)
 {
   ranf_state_t *state = (ranf_state_t *) vstate;
 
-  unsigned short int x0, x1, x2 ;
-  unsigned long int r ;
+  unsigned short int x0;
+  unsigned short int x1;
+  unsigned short int x2 ;
+  unsigned long int r = 0 ;
 
   unsigned long int b0 = 0xD6DD ;
   unsigned long int b1 = 0xB894 ;

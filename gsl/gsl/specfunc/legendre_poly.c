@@ -28,6 +28,7 @@
 #include <gsl/gsl_sf_log.h>
 #include <gsl/gsl_sf_pow_int.h>
 #include <gsl/gsl_sf_legendre.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -43,8 +44,8 @@ static double legendre_Pmm(int m, double x)
   {
     return 1.0;
   }
-  else
-  {
+  
+  
     double p_mm = 1.0;
     double root_factor = sqrt(1.0-x)*sqrt(1.0+x);
     double fact_coeff = 1.0;
@@ -55,7 +56,7 @@ static double legendre_Pmm(int m, double x)
       fact_coeff += 2.0;
     }
     return p_mm;
-  }
+ 
 }
 
 
@@ -146,7 +147,7 @@ gsl_sf_legendre_Pl_e(const int l, const double x, gsl_sf_result * result)
     double e_ellm1 = fabs(x)*GSL_DBL_EPSILON;
     double e_ell = e_ellm1;
 
-    int ell;
+    int ell = 0;
 
     for(ell=2; ell <= l; ell++){
       p_ell = (x*(2*ell-1)*p_ellm1 - (ell-1)*p_ellm2) / ell;
@@ -172,9 +173,9 @@ gsl_sf_legendre_Pl_e(const int l, const double x, gsl_sf_result * result)
     gsl_sf_result Jm1;
     int stat_J0  = gsl_sf_bessel_J0_e(u*th, &J0);
     int stat_Jm1 = gsl_sf_bessel_Jn_e(-1, u*th, &Jm1);
-    double pre;
-    double B00;
-    double c1;
+    double pre = NAN;
+    double B00 = NAN;
+    double c1 = NAN;
 
     /* B00 = 1/8 (1 - th cot(th) / th^2
      * pre = sqrt(th/sin(th))
@@ -224,7 +225,7 @@ gsl_sf_legendre_Pl_array(const int lmax, const double x, double * result_array)
     double p_ellm2 = 1.0;    /* P_0(x) */
     double p_ellm1 = x;    /* P_1(x) */
     double p_ell = p_ellm1;
-    int ell;
+    int ell = 0;
 
     result_array[0] = 1.0;
     result_array[1] = x;
@@ -246,12 +247,14 @@ gsl_sf_legendre_Pl_deriv_array(const int lmax, const double x, double * result_a
 {
   int stat_array = gsl_sf_legendre_Pl_array(lmax, x, result_array);
 
-  if(lmax >= 0) result_deriv_array[0] = 0.0;
-  if(lmax >= 1) result_deriv_array[1] = 1.0;
+  if(lmax >= 0) { result_deriv_array[0] = 0.0;
+}
+  if(lmax >= 1) { result_deriv_array[1] = 1.0;
+}
 
   if(stat_array == GSL_SUCCESS)
   {
-    int ell;
+    int ell = 0;
 
     if(fabs(x - 1.0)*(lmax+1.0)*(lmax+1.0) <  GSL_SQRT_DBL_EPSILON)
     {
@@ -284,10 +287,10 @@ gsl_sf_legendre_Pl_deriv_array(const int lmax, const double x, double * result_a
 
     return GSL_SUCCESS;
   }
-  else
-  {
+  
+  
     return stat_array;
-  }
+ 
 }
 
 int
@@ -327,7 +330,7 @@ gsl_sf_legendre_Plm_e(const int l, const int m, const double x, gsl_sf_result * 
       result->err = err_amp * 2.0 * GSL_DBL_EPSILON * fabs(p_mm);
       return GSL_SUCCESS;
     }
-    else if(l == m + 1) {
+    if(l == m + 1) {
       result->val = p_mmp1;
       result->err = err_amp * 2.0 * GSL_DBL_EPSILON * fabs(p_mmp1);
       return GSL_SUCCESS;
@@ -387,14 +390,16 @@ gsl_sf_legendre_sphPlm_e(const int l, int m, const double x, gsl_sf_result * res
      */
     gsl_sf_result lncirc;
     gsl_sf_result lnpoch;
-    double lnpre_val;
-    double lnpre_err;
+    double lnpre_val = NAN;
+    double lnpre_err = NAN;
     gsl_sf_result ex_pre;
-    double sr;
+    double sr = NAN;
     const double sgn = ( GSL_IS_ODD(m) ? -1.0 : 1.0);
     const double y_mmp1_factor = x * sqrt(2.0*m + 3.0);
-    double y_mm, y_mm_err;
-    double y_mmp1, y_mmp1_err;
+    double y_mm;
+    double y_mm_err;
+    double y_mmp1;
+    double y_mmp1_err;
     gsl_sf_log_1plusx_e(-x*x, &lncirc);
     gsl_sf_lnpoch_e(m, 0.5, &lnpoch);  /* Gamma(m+1/2)/Gamma(m) */
     lnpre_val = -0.25*M_LNPI + 0.5 * (lnpoch.val + m*lncirc.val);
@@ -415,7 +420,7 @@ gsl_sf_legendre_sphPlm_e(const int l, int m, const double x, gsl_sf_result * res
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(y_mm);
       return GSL_SUCCESS;
     }
-    else if(l == m + 1) {
+    if(l == m + 1) {
       result->val  = y_mmp1;
       result->err  = y_mmp1_err;
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(y_mmp1);
@@ -470,8 +475,9 @@ gsl_sf_legendre_Plm_array(const int lmax, const int m, const double x, double * 
     GSL_ERROR ("domain error", GSL_EDOM);
   }
   else if(m > 0 && (x == 1.0 || x == -1.0)) {
-    int ell;
-    for(ell=m; ell<=lmax; ell++) result_array[ell-m] = 0.0;
+    int ell = 0;
+    for(ell=m; ell<=lmax; ell++) { result_array[ell-m] = 0.0;
+}
     return GSL_SUCCESS;
   }
   else if(exp_check < GSL_LOG_DBL_MIN + 10.0){
@@ -486,7 +492,7 @@ gsl_sf_legendre_Plm_array(const int lmax, const int m, const double x, double * 
       result_array[0] = p_mm;
       return GSL_SUCCESS;
     }
-    else if(lmax == m + 1) {
+    if(lmax == m + 1) {
       result_array[0] = p_mm;
       result_array[1] = p_mmp1;
       return GSL_SUCCESS;
@@ -535,7 +541,7 @@ gsl_sf_legendre_Plm_deriv_array(
 
     if(stat_array == GSL_SUCCESS)
     {
-      int ell;
+      int ell = 0;
 
       if(m == 1 && (1.0 - fabs(x) < GSL_DBL_EPSILON))
       {
@@ -549,7 +555,8 @@ gsl_sf_legendre_Plm_deriv_array(
         /* m = 2 gives a finite nonzero result for |x| near 1 */
         if(fabs(x - 1.0) < GSL_DBL_EPSILON)
         {
-          for(ell = m; ell <= lmax; ell++) result_deriv_array[ell-m] = -0.25 * x * (ell - 1.0)*ell*(ell+1.0)*(ell+2.0);
+          for(ell = m; ell <= lmax; ell++) { result_deriv_array[ell-m] = -0.25 * x * (ell - 1.0)*ell*(ell+1.0)*(ell+2.0);
+}
         }
         else if(fabs(x + 1.0) < GSL_DBL_EPSILON)
         {
@@ -566,11 +573,12 @@ gsl_sf_legendre_Plm_deriv_array(
         /* m > 2 is easier to deal with since the endpoints always vanish */
         if(1.0 - fabs(x) < GSL_DBL_EPSILON)
         {
-          for(ell = m; ell <= lmax; ell++) result_deriv_array[ell-m] = 0.0;
+          for(ell = m; ell <= lmax; ell++) { result_deriv_array[ell-m] = 0.0;
+}
           return GSL_SUCCESS;
         }
-        else
-        {
+        
+        
           const double diff_a = 1.0 + x;
           const double diff_b = 1.0 - x;
           result_deriv_array[0] = - m * x / (diff_a * diff_b) * result_array[0];
@@ -580,7 +588,7 @@ gsl_sf_legendre_Plm_deriv_array(
             result_deriv_array[ell-m] = - (ell * x * result_array[ell-m] - (ell+m) * result_array[ell-1-m]) / (diff_a * diff_b);
           }
           return GSL_SUCCESS;
-        }
+       
       }
     }
     else
@@ -599,13 +607,14 @@ gsl_sf_legendre_sphPlm_array(const int lmax, int m, const double x, double * res
     GSL_ERROR ("error", GSL_EDOM);
   }
   else if(m > 0 && (x == 1.0 || x == -1.0)) {
-    int ell;
-    for(ell=m; ell<=lmax; ell++) result_array[ell-m] = 0.0;
+    int ell = 0;
+    for(ell=m; ell<=lmax; ell++) { result_array[ell-m] = 0.0;
+}
     return GSL_SUCCESS;
   }
   else {
-    double y_mm;
-    double y_mmp1;
+    double y_mm = NAN;
+    double y_mmp1 = NAN;
 
     if(m == 0) {
       y_mm   = 0.5/M_SQRTPI;          /* Y00 = 1/sqrt(4pi) */
@@ -616,7 +625,7 @@ gsl_sf_legendre_sphPlm_array(const int lmax, int m, const double x, double * res
 
       gsl_sf_result lncirc;
       gsl_sf_result lnpoch;
-      double lnpre;
+      double lnpre = NAN;
       const double sgn = ( GSL_IS_ODD(m) ? -1.0 : 1.0);
       gsl_sf_log_1plusx_e(-x*x, &lncirc);
       gsl_sf_lnpoch_e(m, 0.5, &lnpoch);  /* Gamma(m+1/2)/Gamma(m) */
@@ -629,7 +638,7 @@ gsl_sf_legendre_sphPlm_array(const int lmax, int m, const double x, double * res
       result_array[0] = y_mm;
       return GSL_SUCCESS;
     }
-    else if(lmax == m + 1) {
+    if(lmax == m + 1) {
       result_array[0] = y_mm;
       result_array[1] = y_mmp1;
       return GSL_SUCCESS;
@@ -673,7 +682,7 @@ gsl_sf_legendre_sphPlm_deriv_array(
   {
     /* m = 0 is easy to trap */
     const int stat_array = gsl_sf_legendre_Pl_deriv_array(lmax, x, result_array, result_deriv_array);
-    int ell;
+    int ell = 0;
     for(ell = 0; ell <= lmax; ell++)
     {
       const double prefactor = sqrt((2.0 * ell + 1.0)/(4.0*M_PI));
@@ -689,7 +698,7 @@ gsl_sf_legendre_sphPlm_deriv_array(
      * and the scaling factor is not large for small m, so we just scale.
      */
     const int stat_array = gsl_sf_legendre_Plm_deriv_array(lmax, m, x, result_array, result_deriv_array);
-    int ell;
+    int ell = 0;
     for(ell = 1; ell <= lmax; ell++)
     {
       const double prefactor = sqrt((2.0 * ell + 1.0)/(ell + 1.0) / (4.0*M_PI*ell));
@@ -706,15 +715,16 @@ gsl_sf_legendre_sphPlm_deriv_array(
 
     if(stat_array == GSL_SUCCESS)
     {
-      int ell;
+      int ell = 0;
 
       if(1.0 - fabs(x) < GSL_DBL_EPSILON)
       {
-        for(ell = m; ell <= lmax; ell++) result_deriv_array[ell-m] = 0.0;
+        for(ell = m; ell <= lmax; ell++) { result_deriv_array[ell-m] = 0.0;
+}
         return GSL_SUCCESS;
       }
-      else
-      {
+      
+      
         const double diff_a = 1.0 + x;
         const double diff_b = 1.0 - x;
         result_deriv_array[0] = - m * x / (diff_a * diff_b) * result_array[0];
@@ -725,7 +735,7 @@ gsl_sf_legendre_sphPlm_deriv_array(
           result_deriv_array[ell-m] = - (ell * x * result_array[ell-m] - c1 * (ell+m) * result_array[ell-1-m]) / (diff_a * diff_b);
         }
         return GSL_SUCCESS;
-      }
+     
     }
     else
     {

@@ -37,6 +37,7 @@
 #include <gsl/gsl_multilarge_nlinear.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 static int init_diag_levenberg(const gsl_matrix * JTJ, gsl_vector * diag);
 static int update_diag_levenberg(const gsl_matrix * JTJ, gsl_vector * diag);
@@ -78,17 +79,18 @@ static int
 update_diag_marquardt (const gsl_matrix * JTJ, gsl_vector * diag)
 {
   const size_t p = JTJ->size2;
-  size_t j;
+  size_t j = 0;
 
   for (j = 0; j < p; j++)
     {
       double Jjj = gsl_matrix_get(JTJ, j, j);
-      double norm;
+      double norm = NAN;
 
-      if (Jjj <= 0.0)
+      if (Jjj <= 0.0) {
         norm = 1.0;
-      else
+      } else {
         norm = sqrt(Jjj);
+}
 
       gsl_vector_set(diag, j, norm);
     }
@@ -101,7 +103,7 @@ update_diag_marquardt (const gsl_matrix * JTJ, gsl_vector * diag)
 static int
 init_diag_more(const gsl_matrix * JTJ, gsl_vector * diag)
 {
-  int status;
+  int status = 0;
 
   gsl_vector_set_zero(diag);
   status = update_diag_more(JTJ, diag);
@@ -115,18 +117,19 @@ static int
 update_diag_more (const gsl_matrix * JTJ, gsl_vector * diag)
 {
   const size_t p = JTJ->size2;
-  size_t j;
+  size_t j = 0;
 
   for (j = 0; j < p; j++)
     {
       double Jjj = gsl_matrix_get(JTJ, j, j);
       double *diagj = gsl_vector_ptr(diag, j);
-      double norm;
+      double norm = NAN;
 
-      if (Jjj <= 0.0)
+      if (Jjj <= 0.0) {
         norm = 1.0;
-      else
+      } else {
         norm = sqrt(Jjj);
+}
 
       *diagj = GSL_MAX(*diagj, norm);
     }

@@ -74,7 +74,9 @@ gsl_ran_wishart (const gsl_rng * r,
     {
       /* result: X = L A A^T L^T */
 
-      size_t d = L->size1, i, j;
+      size_t d = L->size1;
+      size_t i;
+      size_t j;
 
       /* insure the upper part of A is zero before filling its lower part */
       gsl_matrix_set_zero(work);
@@ -154,9 +156,13 @@ gsl_ran_wishart_log_pdf (const gsl_matrix * X,
     }
   else
     {
-      size_t d = L->size1, i;
-      int status;
-      double log_mv_Ga, log_det_V, log_det_X, tr_Vinv_X;
+      size_t d = L->size1;
+      size_t i;
+      int status = 0;
+      double log_mv_Ga;
+      double log_det_V;
+      double log_det_X;
+      double tr_Vinv_X;
 
       /* compute the log of the multivariate Gamma */
       log_mv_Ga = d * (d-1) * 0.25 * log(M_PI);
@@ -183,8 +189,9 @@ gsl_ran_wishart_log_pdf (const gsl_matrix * X,
 
       /* compute the trace of V^(-1) X */
       status = gsl_linalg_cholesky_solve_mat(L, X, work);
-      if (status)
+      if (status) {
         return status;
+}
       tr_Vinv_X = gsl_matrix_get(work, 0, 0);
       for (i = 1; i < d; ++i)
         {
@@ -210,11 +217,12 @@ gsl_ran_wishart_pdf (const gsl_matrix * X,
                      double * result,
                      gsl_matrix * work)
 {
-  double logpdf;
+  double logpdf = NAN;
   int status = gsl_ran_wishart_log_pdf(X, L_X, df, L, &logpdf, work);
 
-  if (status == GSL_SUCCESS)
+  if (status == GSL_SUCCESS) {
     *result = exp(logpdf);
+}
 
   return status;
 }

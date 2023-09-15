@@ -492,8 +492,8 @@ gsl_sf_bessel_JY_mu_restricted(const double mu, const double x,
       return GSL_ERROR_SELECT_2(stat_J, stat_Y);
     }
     if(x < 1000.0) {
-      double P;
-      double Q;
+      double P = NAN;
+      double Q = NAN;
       double J_ratio = NAN;
       double J_sgn = NAN;
       const int stat_CF1 = gsl_sf_bessel_J_CF1(mu, x, &J_ratio, &J_sgn);

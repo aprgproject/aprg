@@ -25,7 +25,7 @@
 gsl_integration_workspace *
 gsl_integration_workspace_alloc (const size_t n) 
 {
-  gsl_integration_workspace * w ;
+  gsl_integration_workspace * w = NULL ;
   
   if (n == 0)
     {

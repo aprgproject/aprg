@@ -63,10 +63,11 @@ gsl_ran_multivariate_gaussian (const gsl_rng * r,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
-      for (i = 0; i < M; ++i)
+      for (i = 0; i < M; ++i) {
         gsl_vector_set(result, i, gsl_ran_ugaussian(r));
+}
 
       gsl_blas_dtrmv(CblasLower, CblasNoTrans, CblasNonUnit, L, result);
       gsl_vector_add(result, mu);
@@ -114,9 +115,9 @@ gsl_ran_multivariate_gaussian_log_pdf (const gsl_vector * x,
     }
   else
     {
-      size_t i;
-      double quadForm;        /* (x - mu)' Sigma^{-1} (x - mu) */
-      double logSqrtDetSigma; /* log [ sqrt(|Sigma|) ] */
+      size_t i = 0;
+      double quadForm = NAN;        /* (x - mu)' Sigma^{-1} (x - mu) */
+      double logSqrtDetSigma = NAN; /* log [ sqrt(|Sigma|) ] */
 
       /* compute: work = x - mu */
       for (i = 0; i < M; ++i)
@@ -153,11 +154,12 @@ gsl_ran_multivariate_gaussian_pdf (const gsl_vector * x,
                                    double * result,
                                    gsl_vector * work)
 {
-  double logpdf;
+  double logpdf = NAN;
   int status = gsl_ran_multivariate_gaussian_log_pdf(x, mu, L, &logpdf, work);
 
-  if (status == GSL_SUCCESS)
+  if (status == GSL_SUCCESS) {
     *result = exp(logpdf);
+}
 
   return status;
 }
@@ -181,7 +183,7 @@ gsl_ran_multivariate_gaussian_mean (const gsl_matrix * X, gsl_vector * mu_hat)
     }
   else
     {
-      size_t j;
+      size_t j = 0;
 
       for (j = 0; j < N; ++j)
         {
@@ -225,7 +227,8 @@ static int
 multivar_vcov (const double data[], size_t d, size_t tda, size_t n,
                double vcov[], size_t tda2)
 {
-  size_t j1 = 0, j2 = 0;
+  size_t j1 = 0;
+  size_t j2 = 0;
 
   for (j1 = 0; j1 < d; ++j1)
     {

@@ -42,9 +42,10 @@ gsl_integration_qk (const int n,
 
   double result_abs = fabs (result_kronrod);
   double result_asc = 0;
-  double mean = 0, err = 0;
+  double mean = 0;
+  double err = 0;
 
-  int j;
+  int j = 0;
 
   if (n % 2 == 0)
     {

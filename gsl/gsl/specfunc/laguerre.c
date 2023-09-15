@@ -91,14 +91,15 @@ laguerre_n_cp(const int n, const double a, const double x, gsl_sf_result * resul
   gsl_sf_result lnfact;
   gsl_sf_result lg1;
   gsl_sf_result lg2;
-  double s1, s2;
+  double s1;
+  double s2;
   int stat_f = gsl_sf_lnfact_e(n, &lnfact);
   int stat_g1 = gsl_sf_lngamma_sgn_e(a+1.0+n, &lg1, &s1);
   int stat_g2 = gsl_sf_lngamma_sgn_e(a+1.0, &lg2, &s2);
   double poly_1F1_val = 1.0;
   double poly_1F1_err = 0.0;
-  int stat_e;
-  int k;
+  int stat_e = 0;
+  int k = 0;
 
   double lnpre_val = (lg1.val - lg2.val) - lnfact.val;
   double lnpre_err = lg1.err + lg2.err + lnfact.err + 2.0 * GSL_DBL_EPSILON * fabs(lnpre_val);
@@ -144,7 +145,7 @@ laguerre_n_poly_safe(const int n, const double a, const double x, gsl_sf_result 
     double term = tc.val * tc_sgn;
     double sum_val = term;
     double sum_err = tc.err;
-    int k;
+    int k = 0;
     for(k=n-1; k>=0; k--) {
       term *= ((b+k)/(n-k))*(k+1.0)/mx;
       sum_val += term;
@@ -154,7 +155,7 @@ laguerre_n_poly_safe(const int n, const double a, const double x, gsl_sf_result 
     result->err = sum_err + 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(stat_tc == GSL_EOVRFLW) {
+  if(stat_tc == GSL_EOVRFLW) {
     result->val = 0.0; /* FIXME: should be Inf */
     result->err = 0.0;
     return stat_tc;
@@ -192,7 +193,7 @@ gsl_sf_laguerre_2_e(const double a, const double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     double c0 = 0.5 * (2.0+a)*(1.0+a);
     double c1 = -(2.0+a);
     double c2 = -0.5/(2.0+a);
@@ -200,7 +201,7 @@ gsl_sf_laguerre_2_e(const double a, const double x, gsl_sf_result * result)
     result->err  = 2.0 * GSL_DBL_EPSILON * (fabs(c0) + 2.0 * fabs(c1*x) * (1.0 + 2.0 * fabs(c2*x)));
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 int
@@ -215,7 +216,7 @@ gsl_sf_laguerre_3_e(const double a, const double x, gsl_sf_result * result)
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(a == -3.0) {
+  if(a == -3.0) {
     result->val = -x*x/6.0;
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
@@ -255,7 +256,7 @@ gsl_sf_laguerre_n_e(const int n, const double a, const double x, gsl_sf_result *
   }
   else if(x == 0.0) {
     double product = a + 1.0;
-    int k;
+    int k = 0;
     for(k=2; k<=n; k++) {
       product *= (a + k)/k;
     }
@@ -278,9 +279,9 @@ gsl_sf_laguerre_n_e(const int n, const double a, const double x, gsl_sf_result *
      * characteristics. One may underflow/overflow while the
      * other does not.
      */
-    if(laguerre_n_cp(n, a, x, result) == GSL_SUCCESS)
+    if(laguerre_n_cp(n, a, x, result) == GSL_SUCCESS) {
       return GSL_SUCCESS;
-    else
+    } 
       return laguerre_n_poly_safe(n, a, x, result);
   }
   else if(n > 1.0e+07 && x > 0.0 && a > -1.0 && x < 2.0*(a+1.0)+4.0*n) {
@@ -291,8 +292,8 @@ gsl_sf_laguerre_n_e(const int n, const double a, const double x, gsl_sf_result *
     int stat_lg2 = gsl_sf_laguerre_2_e(a, x, &lg2);
     double Lkm1 = 1.0 + a - x;
     double Lk   = lg2.val;
-    double Lkp1;
-    int k;
+    double Lkp1 = NAN;
+    int k = 0;
 
     for(k=2; k<n; k++) {
       Lkp1 = (-(k+a)*Lkm1 + (2.0*k+a+1.0-x)*Lk)/(k+1.0);

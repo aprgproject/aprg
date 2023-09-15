@@ -57,8 +57,9 @@ ran_get (void *vstate)
   long int r = RRR * (y / QQQ);
 
   y = AAA * (y % QQQ) - r;
-  if (y < 0)
+  if (y < 0) {
     y += MMM;
+}
 
   state->x = y;
 
@@ -78,8 +79,9 @@ ran_set (void *vstate, unsigned long int s)
 {
   ran_state_t *state = (ran_state_t *) vstate;
 
-  if ((s%MMM) == 0)
+  if ((s%MMM) == 0) {
     s = 1;                      /* default seed is 1 */
+}
 
   state->x = s % MMM;
 

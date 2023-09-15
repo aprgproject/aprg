@@ -71,8 +71,9 @@ ranmar_get (void *vstate)
 
   long int delta = state->u[i] - state->u[j];
 
-  if (delta < 0)
+  if (delta < 0) {
     delta += two24 ;
+}
   
   state->u[i] = delta;
 
@@ -100,15 +101,17 @@ ranmar_get (void *vstate)
 
   carry += - 7654321 ;
   
-  if (carry < 0)
+  if (carry < 0) {
     carry += two24 - 3;
+}
   
   state->carry = carry ;
 
   delta += - carry ;
   
-  if (delta < 0)
+  if (delta < 0) {
     delta += two24 ;
+}
 
   return delta;
 }
@@ -132,7 +135,8 @@ ranmar_set (void *vstate, unsigned long int s)
   int k = (kl / 169) % 178 + 1 ;
   int l = (kl % 169) ;
 
-  int a, b;
+  int a;
+  int b;
   
   for (a = 0; a < 97; a++)
     {
@@ -148,8 +152,9 @@ ranmar_set (void *vstate, unsigned long int s)
           l = (53 * l + 1) % 169 ;
           t >>= 1 ;
           
-          if ((l * m) % 64 >= 32)
+          if ((l * m) % 64 >= 32) {
             sum += t ;
+}
         }
 
       state->u[a] = sum ;

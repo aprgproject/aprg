@@ -27,9 +27,9 @@
 gsl_poly_complex_workspace * 
 gsl_poly_complex_workspace_alloc (size_t n)
 {
-  size_t nc ;
+  size_t nc = 0 ;
 
-  gsl_poly_complex_workspace * w ;
+  gsl_poly_complex_workspace * w = NULL ;
   
   if (n == 0)
     {

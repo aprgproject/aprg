@@ -46,9 +46,9 @@ gsl_ran_pareto_pdf (const double x, const double a, const double b)
       double p = (a/b) / pow (x/b, a + 1);
       return p;
     }
-  else
-    {
+  
+    
       return 0;
-    }
+   
 }
 

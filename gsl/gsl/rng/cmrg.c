@@ -103,16 +103,19 @@ cmrg_get (void *vstate)
     long int h2 = state->x2 / qa2;
     long int p2 = a2 * (state->x2 - h2 * qa2) - h2 * ra2;
 
-    if (p3 < 0)
+    if (p3 < 0) {
       p3 += m1;
-    if (p2 < 0)
+}
+    if (p2 < 0) {
       p2 += m1;
+}
 
     state->x3 = state->x2;
     state->x2 = state->x1;
     state->x1 = p2 - p3;
-    if (state->x1 < 0)
+    if (state->x1 < 0) {
       state->x1 += m1;
+}
   }
 
   /* Component 2 */
@@ -124,21 +127,24 @@ cmrg_get (void *vstate)
     long int h1 = state->y1 / qb1;
     long int p1 = b1 * (state->y1 - h1 * qb1) - h1 * rb1;
 
-    if (p3 < 0)
+    if (p3 < 0) {
       p3 += m2;
-    if (p1 < 0)
+}
+    if (p1 < 0) {
       p1 += m2;
+}
 
     state->y3 = state->y2;
     state->y2 = state->y1;
     state->y1 = p1 - p3;
-    if (state->y1 < 0)
+    if (state->y1 < 0) {
       state->y1 += m2;
+}
   }
   
-  if (state->x1 < state->y1)
+  if (state->x1 < state->y1) {
     return (state->x1 - state->y1 + m1);
-  else
+  } 
     return (state->x1 - state->y1);
 }
 
@@ -157,8 +163,9 @@ cmrg_set (void *vstate, unsigned long int s)
 
   cmrg_state_t *state = (cmrg_state_t *) vstate;
 
-  if (s == 0)
+  if (s == 0) {
     s = 1;      /* default seed is 1 */
+}
 
 #define LCG(n) ((69069 * n) & 0xffffffffUL)
   s = LCG (s);

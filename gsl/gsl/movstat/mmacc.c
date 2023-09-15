@@ -94,7 +94,8 @@ static int
 mmacc_insert(const mmacc_type_t x, void * vstate)
 {
   mmacc_state_t * state = (mmacc_state_t *) vstate;
-  int head, tail;
+  int head;
+  int tail;
 
   if (state->k == 0)
     {
@@ -112,8 +113,9 @@ mmacc_insert(const mmacc_type_t x, void * vstate)
 
           while (!deque_is_empty(state->maxque))
             {
-              if (x <= state->rbuf->array[deque_peek_back(state->maxque)])
+              if (x <= state->rbuf->array[deque_peek_back(state->maxque)]) {
                 break;
+}
 
               deque_pop_back(state->maxque);
             }
@@ -124,8 +126,9 @@ mmacc_insert(const mmacc_type_t x, void * vstate)
 
           while (!deque_is_empty(state->minque))
             {
-              if (x >= state->rbuf->array[deque_peek_back(state->minque)])
+              if (x >= state->rbuf->array[deque_peek_back(state->minque)]) {
                 break;
+}
 
               deque_pop_back(state->minque);
             }
@@ -148,15 +151,17 @@ mmacc_insert(const mmacc_type_t x, void * vstate)
            * queue, do not pop if queue has only 1 element, since this element would
            * be the newest sample
            */
-          if (state->maxque->head != state->maxque->tail && tail == deque_peek_front(state->maxque))
+          if (state->maxque->head != state->maxque->tail && tail == deque_peek_front(state->maxque)) {
             deque_pop_front(state->maxque);
-          else if (state->minque->head != state->minque->tail && tail == deque_peek_front(state->minque))
+          } else if (state->minque->head != state->minque->tail && tail == deque_peek_front(state->minque)) {
             deque_pop_front(state->minque);
+}
         }
     }
 
-  if (state->k < state->n)
+  if (state->k < state->n) {
     ++(state->k);
+}
 
   state->xprev = x;
 
@@ -174,10 +179,11 @@ mmacc_delete(void * vstate)
        * check if oldest window element is a global minimum/maximum; if so
        * pop it from U/L queues
        */
-      if (state->rbuf->tail == deque_peek_front(state->maxque))
+      if (state->rbuf->tail == deque_peek_front(state->maxque)) {
         deque_pop_front(state->maxque);
-      else if (state->rbuf->tail == deque_peek_front(state->minque))
+      } else if (state->rbuf->tail == deque_peek_front(state->minque)) {
         deque_pop_front(state->minque);
+}
 
       /* remove oldest element from ring buffer */
       ringbuf_pop_back(state->rbuf);

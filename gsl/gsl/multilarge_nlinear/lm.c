@@ -74,7 +74,7 @@ static void *
 lm_alloc (const int accel, const void * params, const size_t n, const size_t p)
 {
   const gsl_multilarge_nlinear_parameters *mparams = (const gsl_multilarge_nlinear_parameters *) params;
-  lm_state_t *state;
+  lm_state_t *state = NULL;
   
   state = calloc(1, sizeof(lm_state_t));
   if (state == NULL)
@@ -143,23 +143,29 @@ lm_free(void *vstate)
 {
   lm_state_t *state = (lm_state_t *) vstate;
 
-  if (state->workp)
+  if (state->workp) {
     gsl_vector_free(state->workp);
+}
 
-  if (state->workn)
+  if (state->workn) {
     gsl_vector_free(state->workn);
+}
 
-  if (state->fvv)
+  if (state->fvv) {
     gsl_vector_free(state->fvv);
+}
 
-  if (state->vel)
+  if (state->vel) {
     gsl_vector_free(state->vel);
+}
 
-  if (state->acc)
+  if (state->acc) {
     gsl_vector_free(state->acc);
+}
 
-  if (state->JTfvv)
+  if (state->JTfvv) {
     gsl_vector_free(state->JTfvv);
+}
 
   free(state);
 }
@@ -197,7 +203,7 @@ lm_preloop()
 static int
 lm_preloop(const void * vtrust_state, void * vstate)
 {
-  int status;
+  int status = 0;
   const gsl_multilarge_nlinear_trust_state *trust_state =
     (const gsl_multilarge_nlinear_trust_state *) vtrust_state;
   const gsl_multilarge_nlinear_parameters *params = trust_state->params;
@@ -206,8 +212,9 @@ lm_preloop(const void * vtrust_state, void * vstate)
 
   /* initialize linear least squares solver */
   status = (params->solver->init)(trust_state, trust_state->solver_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   return GSL_SUCCESS;
 }
@@ -225,7 +232,7 @@ static int
 lm_step(const void * vtrust_state, const double delta,
         gsl_vector * dx, void * vstate)
 {
-  int status;
+  int status = 0;
   const gsl_multilarge_nlinear_trust_state *trust_state =
     (const gsl_multilarge_nlinear_trust_state *) vtrust_state;
   lm_state_t *state = (lm_state_t *) vstate;
@@ -236,20 +243,23 @@ lm_step(const void * vtrust_state, const double delta,
 
   /* prepare the linear solver with current LM parameter mu */
   status = (params->solver->presolve)(mu, trust_state, trust_state->solver_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* solve: (J^T J + mu D^T D) v = - J^T f */
   status = (params->solver->solve)(trust_state->g,
                                    state->vel,
                                    trust_state,
                                    trust_state->solver_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   if (state->accel)
     {
-      double anorm, vnorm;
+      double anorm;
+      double vnorm;
 
       /* compute geodesic acceleration */
       status = gsl_multilarge_nlinear_eval_fvv(params->h_fvv,
@@ -260,8 +270,9 @@ lm_step(const void * vtrust_state, const double delta,
                                                trust_state->fdf,
                                                state->fvv,
                                                state->workp);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* compute J^T fvv */
       status = gsl_multilarge_nlinear_eval_df(CblasTrans,
@@ -275,16 +286,18 @@ lm_step(const void * vtrust_state, const double delta,
                                               state->JTfvv,
                                               NULL,
                                               state->workn);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* solve: (J^T J + mu D^T D) a = - J^T fvv */
       status = (params->solver->solve)(state->JTfvv,
                                        state->acc,
                                        trust_state,
                                        trust_state->solver_state);
-      if (status)
+      if (status) {
         return status;
+}
 
       anorm = gsl_blas_dnrm2(state->acc);
       vnorm = gsl_blas_dnrm2(state->vel);
@@ -316,7 +329,8 @@ lm_preduction(const void * vtrust_state, const gsl_vector * dx,
   const double norm_Dp = scaled_enorm(diag, p);
   const double normf = gsl_blas_dnrm2(trust_state->f);
   const double mu = *(trust_state->mu);
-  double u, v;
+  double u;
+  double v;
 
   (void)dx;
 

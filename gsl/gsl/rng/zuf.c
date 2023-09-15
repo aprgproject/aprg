@@ -51,8 +51,9 @@ zuf_get (void *vstate)
   const int m = (n - 273 + 607) % 607;
   unsigned long int t = state->u[n] + state->u[m];
 
-  while (t > zuf_randmax)
+  while (t > zuf_randmax) {
     t -= zuf_randmax;
+}
 
   state->u[n] = t;
 
@@ -86,9 +87,15 @@ zuf_set (void *vstate, unsigned long int s)
   long int ij = 1802;
 
   /* Local variables */
-  long int i, j, k, l, m;
-  double x, y;
-  long int ii, jj;
+  long int i;
+  long int j;
+  long int k;
+  long int l;
+  long int m;
+  double x;
+  double y;
+  long int ii;
+  long int jj;
 
   zuf_state_t *state = (zuf_state_t *) vstate;
 
@@ -98,8 +105,9 @@ zuf_set (void *vstate, unsigned long int s)
 /*  method. Taken from Marsaglia, FSU report FSU-SCRI-87-50 */
 /*  variable seed should be 0 < seed <31328 */
 
-  if (s == 0)
+  if (s == 0) {
     s = 1802;   /* default seed is 1802 */
+}
 
   ij = s;
 

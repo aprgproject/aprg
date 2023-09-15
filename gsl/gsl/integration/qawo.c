@@ -44,17 +44,27 @@ gsl_integration_qawo (gsl_function * f,
                       gsl_integration_qawo_table * wf,
                       double *result, double *abserr)
 {
-  double area, errsum;
-  double res_ext, err_ext;
-  double result0, abserr0, resabs0, resasc0;
-  double tolerance;
+  double area;
+  double errsum;
+  double res_ext;
+  double err_ext;
+  double result0;
+  double abserr0;
+  double resabs0;
+  double resasc0;
+  double tolerance = NAN;
 
   double ertest = 0;
   double error_over_large_intervals = 0;
-  double reseps = 0, abseps = 0, correc = 0;
+  double reseps = 0;
+  double abseps = 0;
+  double correc = 0;
   size_t ktmin = 0;
-  int roundoff_type1 = 0, roundoff_type2 = 0, roundoff_type3 = 0;
-  int error_type = 0, error_type2 = 0;
+  int roundoff_type1 = 0;
+  int roundoff_type2 = 0;
+  int roundoff_type3 = 0;
+  int error_type = 0;
+  int error_type2 = 0;
 
   size_t iteration = 0;
 
@@ -141,14 +151,26 @@ gsl_integration_qawo (gsl_function * f,
 
   do
     {
-      size_t current_level;
-      double a1, b1, a2, b2;
-      double a_i, b_i, r_i, e_i;
-      double area1 = 0, area2 = 0, area12 = 0;
-      double error1 = 0, error2 = 0, error12 = 0;
-      double resasc1, resasc2;
-      double resabs1, resabs2;
-      double last_e_i;
+      size_t current_level = 0;
+      double a1;
+      double b1;
+      double a2;
+      double b2;
+      double a_i;
+      double b_i;
+      double r_i;
+      double e_i;
+      double area1 = 0;
+      double area2 = 0;
+      double area12 = 0;
+      double error1 = 0;
+      double error2 = 0;
+      double error12 = 0;
+      double resasc1;
+      double resasc2;
+      double resabs1;
+      double resabs2;
+      double last_e_i = NAN;
 
       /* Bisect the subinterval with the largest error estimate */
 
@@ -273,8 +295,9 @@ gsl_integration_qawo (gsl_function * f,
               error_over_large_intervals += error12;
             }
 
-          if (extrapolate)
+          if (extrapolate) {
             goto label70;
+}
         }
       
       if (large_interval(workspace))
@@ -294,8 +317,9 @@ gsl_integration_qawo (gsl_function * f,
           size_t i = workspace->i;
           double width = workspace->blist[i] - workspace->alist[i];
           
-          if (0.25 * fabs(width) * abs_omega > 2)
+          if (0.25 * fabs(width) * abs_omega > 2) {
             continue;
+}
           
           extall = 1;
           error_over_large_intervals = errsum;
@@ -306,8 +330,9 @@ gsl_integration_qawo (gsl_function * f,
     label70:
       if (!error_type2 && error_over_large_intervals > ertest)
         {
-          if (increase_nrmax (workspace))
+          if (increase_nrmax (workspace)) {
             continue;
+}
         }
 
       /* Perform extrapolation */
@@ -338,8 +363,9 @@ gsl_integration_qawo (gsl_function * f,
           res_ext = reseps;
           correc = error_over_large_intervals;
           ertest = GSL_MAX_DBL (epsabs, epsrel * fabs (reseps));
-          if (err_ext <= ertest)
+          if (err_ext <= ertest) {
             break;
+}
         }
 
       /* Prepare bisection of the smallest interval. */
@@ -366,8 +392,9 @@ gsl_integration_qawo (gsl_function * f,
   *result = res_ext;
   *abserr = err_ext;
 
-  if (err_ext == GSL_DBL_MAX)
+  if (err_ext == GSL_DBL_MAX) {
     goto compute_result;
+}
 
   if (error_type || error_type2)
     {
@@ -376,13 +403,15 @@ gsl_integration_qawo (gsl_function * f,
           err_ext += correc;
         }
 
-      if (error_type == 0)
+      if (error_type == 0) {
         error_type = 3;
+}
 
       if (result != 0 && area != 0)
         {
-          if (err_ext / fabs (res_ext) > errsum / fabs (area))
+          if (err_ext / fabs (res_ext) > errsum / fabs (area)) {
             goto compute_result;
+}
         }
       else if (err_ext > errsum)
         {
@@ -399,15 +428,17 @@ gsl_integration_qawo (gsl_function * f,
   {
     double max_area = GSL_MAX_DBL (fabs (res_ext), fabs (area));
 
-    if (!positive_integrand && max_area < 0.01 * resabs0)
+    if (!positive_integrand && max_area < 0.01 * resabs0) {
       goto return_error;
+}
   }
 
   {
     double ratio = res_ext / area;
 
-    if (ratio < 0.01 || ratio > 100 || errsum > fabs (area))
+    if (ratio < 0.01 || ratio > 100 || errsum > fabs (area)) {
       error_type = 6;
+}
   }
 
   goto return_error;
@@ -419,14 +450,15 @@ compute_result:
 
 return_error:
 
-  if (error_type > 2)
+  if (error_type > 2) {
     error_type--;
+}
 
   if (error_type == 0)
     {
       return GSL_SUCCESS;
     }
-  else if (error_type == 1)
+  if (error_type == 1)
     {
       GSL_ERROR ("number of iterations was insufficient", GSL_EMAXITER);
     }

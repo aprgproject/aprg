@@ -681,7 +681,7 @@ gsl_sf_airy_Ai_deriv_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * r
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     const double sqrtx = sqrt(x);
     const double z = 16.0/(x*sqrtx) - 1.0;
     const double s = sqrt(sqrtx);
@@ -691,7 +691,7 @@ gsl_sf_airy_Ai_deriv_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * r
     result->err  = result_c0.err * s;
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 
@@ -730,9 +730,9 @@ gsl_sf_airy_Ai_deriv_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
                                                 result);
     return GSL_ERROR_SELECT_2(stat_e, stat_a);
   }
-  else {
+  
     UNDERFLOW_ERROR(result);
-  }
+ 
 }
 
 
@@ -786,7 +786,7 @@ gsl_sf_airy_Bi_deriv_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * r
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(x < 4.0) {
+  if(x < 4.0) {
     const double sqrtx = sqrt(x);
     const double z = atr/(x*sqrtx) + btr;
     const double s = sqrt(sqrtx);
@@ -849,7 +849,7 @@ gsl_sf_airy_Bi_deriv_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(x < GSL_ROOT3_DBL_MAX*GSL_ROOT3_DBL_MAX) {
+  if(x < GSL_ROOT3_DBL_MAX*GSL_ROOT3_DBL_MAX) {
     gsl_sf_result result_bps;
     const double arg = 2.0*(x*sqrt(x)/3.0);
     int stat_b = gsl_sf_airy_Bi_deriv_scaled_e(x, mode, &result_bps);

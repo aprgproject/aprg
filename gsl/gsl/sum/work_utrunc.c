@@ -6,7 +6,7 @@
 gsl_sum_levin_utrunc_workspace * 
 gsl_sum_levin_utrunc_alloc (size_t n)
 {
-  gsl_sum_levin_utrunc_workspace * w;
+  gsl_sum_levin_utrunc_workspace * w = NULL;
 
   if (n == 0)
     {

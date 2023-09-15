@@ -51,7 +51,7 @@ void
 gsl_ran_dirichlet (const gsl_rng * r, const size_t K,
                    const double alpha[], double theta[])
 {
-  size_t i;
+  size_t i = 0;
   double norm = 0.0;
 
   for (i = 0; i < K; i++)
@@ -87,8 +87,9 @@ static void
 ran_dirichlet_small (const gsl_rng * r, const size_t K,
                      const double alpha[], double theta[])
 {
-  size_t i;
-  double norm = 0.0, umax = 0;
+  size_t i = 0;
+  double norm = 0.0;
+  double umax = 0;
 
   for (i = 0; i < K; i++)
     {
@@ -138,7 +139,7 @@ gsl_ran_dirichlet_lnpdf (const size_t K,
                          const double alpha[], const double theta[])
 {
   /*We calculate the log of the pdf to minimize the possibility of overflow */
-  size_t i;
+  size_t i = 0;
   double log_p = 0.0;
   double sum_alpha = 0.0;
 

@@ -93,7 +93,7 @@ pochrel_smallx(const double a, const double x, gsl_sf_result * result)
   if(x == 0.0) {
     return gsl_sf_psi_e(a, result);
   }
-  else {
+  
     const double bp   = (  (a < -0.5) ? 1.0-a-x : a );
     const int    incr = ( (bp < 10.0) ? 11.0-bp : 0 );
     const double b    = bp + incr;
@@ -179,7 +179,7 @@ pochrel_smallx(const double a, const double x, gsl_sf_result * result)
       result->err += 2.0 * GSL_DBL_EPSILON * (fabs(incr) + 1.0) * fabs(result->val);
       return GSL_SUCCESS;
     }    
-  }
+ 
 }
 
 
@@ -206,7 +206,7 @@ lnpoch_pos(const double a, const double x, gsl_sf_result * result)
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_SUCCESS;
     }
-    else {
+    
       /* Otherwise we must do the subtraction.
        */
       gsl_sf_result lg1;
@@ -217,7 +217,7 @@ lnpoch_pos(const double a, const double x, gsl_sf_result * result)
       result->err  = lg2.err + lg1.err;
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_ERROR_SELECT_2(stat_1, stat_2);
-    }
+   
   }
   else if(absx < 0.1*a && a > 15.0) {
     /* Be careful about the implied subtraction.
@@ -252,7 +252,7 @@ lnpoch_pos(const double a, const double x, gsl_sf_result * result)
     const double ser = (ser_1 + ser_2)/ (12.0*a);
 
     double term1 = x * log(a/M_E);
-    double term2;
+    double term2 = NAN;
     gsl_sf_result ln_1peps;
     gsl_sf_log_1plusx_e(eps, &ln_1peps);  /* log(1 + x/a) */
     term2 = (x + a - 0.5) * ln_1peps.val;
@@ -307,7 +307,7 @@ gsl_sf_lnpoch_sgn_e(const double a, const double x,
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(a > 0.0 && a+x > 0.0) {
+  if(a > 0.0 && a+x > 0.0) {
     *sgn = 1.0;
     return lnpoch_pos(a, x, result);
   }
@@ -398,7 +398,7 @@ gsl_sf_poch_e(const double a, const double x, gsl_sf_result * result)
     result->val = 1.0;
     result->err = 0.0;
     return GSL_SUCCESS;
-  } else {
+  } 
     gsl_sf_result lnpoch;
     double sgn;
     int stat_lnpoch = gsl_sf_lnpoch_sgn_e(a, x, &lnpoch, &sgn);
@@ -412,7 +412,7 @@ gsl_sf_poch_e(const double a, const double x, gsl_sf_result * result)
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_ERROR_SELECT_2(stat_exp, stat_lnpoch);
     }
-  }
+ 
 }
 
 
@@ -426,7 +426,7 @@ gsl_sf_pochrel_e(const double a, const double x, gsl_sf_result * result)
 
   if(absx > 0.1*absa || absx*log(GSL_MAX(absa,2.0)) > 0.1) {
     gsl_sf_result lnpoch;
-    double sgn;
+    double sgn = NAN;
     int stat_poch = gsl_sf_lnpoch_sgn_e(a, x, &lnpoch, &sgn);
     if(lnpoch.val > GSL_LOG_DBL_MAX) {
       OVERFLOW_ERROR(result);

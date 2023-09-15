@@ -64,8 +64,8 @@ gsl_filter_gaussian_workspace *
 gsl_filter_gaussian_alloc(const size_t K)
 {
   const size_t H = K / 2;
-  gsl_filter_gaussian_workspace *w;
-  size_t state_size;
+  gsl_filter_gaussian_workspace *w = NULL;
+  size_t state_size = 0;
 
   w = calloc(1, sizeof(gsl_filter_gaussian_workspace));
   if (w == 0)
@@ -98,11 +98,13 @@ gsl_filter_gaussian_alloc(const size_t K)
 void
 gsl_filter_gaussian_free(gsl_filter_gaussian_workspace * w)
 {
-  if (w->kernel)
+  if (w->kernel) {
     free(w->kernel);
+}
 
-  if (w->movstat_workspace_p)
+  if (w->movstat_workspace_p) {
     gsl_movstat_free(w->movstat_workspace_p);
+}
 
   free(w);
 }
@@ -137,7 +139,7 @@ gsl_filter_gaussian(const gsl_filter_end_t endtype, const double alpha, const si
     }
   else
     {
-      int status;
+      int status = 0;
       gsl_vector_view kernel = gsl_vector_view_array(w->kernel, w->K);
 
       /* construct Gaussian kernel of length K */
@@ -182,15 +184,16 @@ gsl_filter_gaussian_kernel(const double alpha, const size_t order, const int nor
     {
       const double half = 0.5 * (N - 1.0); /* (N - 1) / 2 */
       double sum = 0.0;
-      size_t i;
+      size_t i = 0;
 
       /* check for quick return */
       if (N == 1)
         {
-          if (order == 0)
+          if (order == 0) {
             gsl_vector_set(kernel, 0, 1.0);
-          else
+          } else {
             gsl_vector_set(kernel, 0, 0.0);
+}
 
           return GSL_SUCCESS;
         }
@@ -206,14 +209,15 @@ gsl_filter_gaussian_kernel(const double alpha, const size_t order, const int nor
         }
 
       /* normalize so sum(kernel) = 1 */
-      if (normalize)
+      if (normalize) {
         gsl_vector_scale(kernel, 1.0 / sum);
+}
 
       if (order > 0)
         {
           const double beta = -0.5 * alpha * alpha;
           double q[GSL_FILTER_GAUSSIAN_MAX_ORDER + 1];
-          size_t k;
+          size_t k = 0;
 
           /*
            * Need to calculate derivatives of the Gaussian window; define
@@ -235,8 +239,9 @@ gsl_filter_gaussian_kernel(const double alpha, const size_t order, const int nor
 
           /* initialize q_0(n) = 1 / half^{order} */
           q[0] = 1.0 / gsl_pow_uint(half, order);
-          for (i = 1; i <= GSL_FILTER_GAUSSIAN_MAX_ORDER; ++i)
+          for (i = 1; i <= GSL_FILTER_GAUSSIAN_MAX_ORDER; ++i) {
             q[i] = 0.0;
+}
 
           /* loop through derivative orders and calculate q_k(n) for k = 1,...,order */
           for (k = 1; k <= order; ++k)
@@ -311,8 +316,9 @@ gaussian_delete(void * vstate)
 {
   gaussian_state_t * state = (gaussian_state_t *) vstate;
 
-  if (!ringbuf_is_empty(state->rbuf))
+  if (!ringbuf_is_empty(state->rbuf)) {
     ringbuf_pop_back(state->rbuf);
+}
 
   return GSL_SUCCESS;
 }
@@ -324,10 +330,11 @@ gaussian_get(void * params, gaussian_type_t * result, const void * vstate)
   const double * kernel = (const double *) params;
   size_t n = ringbuf_copy(state->window, state->rbuf);
   double sum = 0.0;
-  size_t i;
+  size_t i = 0;
 
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i) {
     sum += state->window[i] * kernel[n - i - 1];
+}
 
   *result = sum;
 

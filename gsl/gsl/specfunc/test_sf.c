@@ -44,9 +44,9 @@ test_sf_frac_diff(double x1, double x2)
   } if(x1 <= DBL_MAX && x2 <= DBL_MAX && (x1 + x2 != 0.0)) {
     return fabs((x1-x2)/(x1+x2));
   }
-  else {
+  
     return 1.0;
-  }
+ 
 }
 
 

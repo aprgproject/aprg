@@ -147,12 +147,12 @@ transport_sumexp(const int numexp, const int order, const double t, double x)
 {
   double rk = (double)numexp;
   double sumexp = 0.0;
-  int k;
+  int k = 0;
   for(k=1; k<=numexp; k++) {
     double sum2 = 1.0;
     double xk  = 1.0/(rk*x);
     double xk1 = 1.0;
-    int j;
+    int j = 0;
     for(j=1; j<=order; j++) {
       sum2 = sum2*xk1*xk + 1.0;
       xk1 += 1.0;

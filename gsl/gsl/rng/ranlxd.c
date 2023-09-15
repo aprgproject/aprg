@@ -64,8 +64,11 @@ static inline void increment_state (ranlxd_state_t * state);
 static inline void
 increment_state (ranlxd_state_t * state)
 {
-  int k, kmax;
-  double y1, y2, y3;
+  int k;
+  int kmax;
+  double y1;
+  double y2;
+  double y3;
 
   double *xdbl = state->xdbl;
   double carry = state->carry;
@@ -161,8 +164,9 @@ ranlxd_get_double (void *vstate)
 
   state->ir = next[ir];
 
-  if (state->ir == state->ir_old)
+  if (state->ir == state->ir_old) {
     increment_state (state);
+}
 
   return state->xdbl[state->ir];
 }
@@ -172,13 +176,20 @@ ranlxd_set_lux (void *vstate, unsigned long int s, unsigned int luxury)
 {
   ranlxd_state_t *state = (ranlxd_state_t *) vstate;
 
-  int ibit, jbit, i, k, l, xbit[31];
-  double x, y;
+  int ibit;
+  int jbit;
+  int i;
+  int k;
+  int l;
+  int xbit[31];
+  double x;
+  double y;
 
-  long int seed;
+  long int seed = 0;
 
-  if (s == 0)
+  if (s == 0) {
     s = 1;                      /* default seed is 1 */
+}
 
   seed = s;
 

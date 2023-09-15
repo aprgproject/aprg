@@ -86,8 +86,8 @@ obtain_suggestion(const gsl_matrix * A, gsl_mode_t mode)
   const double norm_A = sup_norm(A);
   if(norm_A < 0.01) { return mvl_tab[mode_prec][0];
   } if(norm_A < 0.1) { return mvl_tab[mode_prec][1];
-  } if(norm_A < 1.0) return mvl_tab[mode_prec][2];
-  else if(norm_A < 10.0) return mvl_tab[mode_prec][3];
+  } if(norm_A < 1.0) { return mvl_tab[mode_prec][2];
+  } if(norm_A < 10.0) return mvl_tab[mode_prec][3];
   else if(norm_A < 100.0) return mvl_tab[mode_prec][4];
   else if(norm_A < 1000.0) return mvl_tab[mode_prec][5];
   else

@@ -96,7 +96,7 @@ gsl_sf_bessel_Jnupos_e(const double nu, const double x, gsl_sf_result * result)
   if(nu > 50.0) {
     return gsl_sf_bessel_Jnu_asymp_Olver_e(nu, x, result);
   }
-  else if(x > 1000.0)
+  if(x > 1000.0)
   {
     /* We need this to avoid feeding large x to CF1; note that
      * due to the above check, we know that n <= 50. See similar

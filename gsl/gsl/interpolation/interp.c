@@ -24,13 +24,14 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_interp.h>
+#include <math.h>
 
 #define DISCARD_STATUS(s) if ((s) != GSL_SUCCESS) { GSL_ERROR_VAL("interpolation error", (s),  GSL_NAN); }
 
 gsl_interp *
 gsl_interp_alloc (const gsl_interp_type * T, size_t size)
 {
-  gsl_interp * interp;
+  gsl_interp * interp = NULL;
 
   if (size < T->min_size)
     {
@@ -69,7 +70,7 @@ gsl_interp_alloc (const gsl_interp_type * T, size_t size)
 int
 gsl_interp_init (gsl_interp * interp, const double x_array[], const double y_array[], size_t size)
 {
-  size_t i;
+  size_t i = 0;
 
   if (size != interp->size)
     {
@@ -116,8 +117,9 @@ gsl_interp_free (gsl_interp * interp)
 {
   RETURN_IF_NULL (interp);
 
-  if (interp->type->free)
+  if (interp->type->free) {
     interp->type->free (interp->state);
+}
   free (interp);
 }
 
@@ -142,8 +144,8 @@ gsl_interp_eval (const gsl_interp * interp,
                  const double xa[], const double ya[], double x,
                  gsl_interp_accel * a)
 {
-  double y;
-  int status;
+  double y = NAN;
+  int status = 0;
 
   if (x < interp->xmin || x > interp->xmax)
     {
@@ -178,8 +180,8 @@ gsl_interp_eval_deriv (const gsl_interp * interp,
                        const double xa[], const double ya[], double x,
                        gsl_interp_accel * a)
 {
-  double dydx;
-  int status;
+  double dydx = NAN;
+  int status = 0;
 
   if (x < interp->xmin || x > interp->xmax)
     {
@@ -214,8 +216,8 @@ gsl_interp_eval_deriv2 (const gsl_interp * interp,
                         const double xa[], const double ya[], double x,
                         gsl_interp_accel * a)
 {
-  double d2;
-  int status;
+  double d2 = NAN;
+  int status = 0;
 
   if (x < interp->xmin || x > interp->xmax)
     {
@@ -242,7 +244,7 @@ gsl_interp_eval_integ_e (const gsl_interp * interp,
       *result = GSL_NAN;
       return GSL_EDOM;
     }
-  else if(a == b)
+  if(a == b)
     {
       *result = 0.0;
       return GSL_SUCCESS;
@@ -258,8 +260,8 @@ gsl_interp_eval_integ (const gsl_interp * interp,
                        double a, double b,
                        gsl_interp_accel * acc)
 {
-  double result;
-  int status;
+  double result = NAN;
+  int status = 0;
 
   if (a > b || a < interp->xmin || b > interp->xmax)
     {

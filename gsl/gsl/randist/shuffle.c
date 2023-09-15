@@ -32,8 +32,9 @@ void swap (void * base, size_t size, size_t i, size_t j)
   register char * b = size * j + (char *) base ;
   register size_t s = size ;
 
-  if (i == j)
+  if (i == j) {
     return ;
+}
   
   do                                            
     {                                           
@@ -68,7 +69,7 @@ copy (void * dest, size_t i, void * src, size_t j, size_t size)
 void
 gsl_ran_shuffle (const gsl_rng * r, void * base, size_t n, size_t size)
 {
-  size_t i ;
+  size_t i = 0 ;
 
   for (i = n - 1; i > 0; i--)
     {
@@ -82,7 +83,8 @@ int
 gsl_ran_choose (const gsl_rng * r, void * dest, size_t k, void * src, 
                  size_t n, size_t size)
 {
-  size_t i, j = 0;
+  size_t i;
+  size_t j = 0;
 
   /* Choose k out of n items, return an array x[] of the k items.
      These items will prevserve the relative order of the original
@@ -111,7 +113,8 @@ void
 gsl_ran_sample (const gsl_rng * r, void * dest, size_t k, void * src, 
                 size_t n, size_t size)
 {
-  size_t i, j = 0;
+  size_t i;
+  size_t j = 0;
 
   /* Choose k out of n items, with replacement */
 

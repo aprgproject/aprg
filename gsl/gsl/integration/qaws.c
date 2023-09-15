@@ -39,11 +39,15 @@ gsl_integration_qaws (gsl_function * f,
                       gsl_integration_workspace * workspace,
                       double *result, double *abserr)
 {
-  double area, errsum;
-  double result0, abserr0;
-  double tolerance;
+  double area;
+  double errsum;
+  double result0;
+  double abserr0;
+  double tolerance = NAN;
   size_t iteration = 0;
-  int roundoff_type1 = 0, roundoff_type2 = 0, error_type = 0;
+  int roundoff_type1 = 0;
+  int roundoff_type2 = 0;
+  int error_type = 0;
 
   /* Initialize results */
 
@@ -71,9 +75,12 @@ gsl_integration_qaws (gsl_function * f,
   /* perform the first integration */
 
   {
-    double area1, area2;
-    double error1, error2;
-    int err_reliable1, err_reliable2;
+    double area1;
+    double area2;
+    double error1;
+    double error2;
+    int err_reliable1;
+    int err_reliable2;
     double a1 = a;
     double b1 = 0.5 * (a + b);
     double a2 = b1;
@@ -111,7 +118,7 @@ gsl_integration_qaws (gsl_function * f,
 
       return GSL_SUCCESS;
     }
-  else if (limit == 1)
+  if (limit == 1)
     {
       *result = result0;
       *abserr = abserr0;
@@ -126,11 +133,22 @@ gsl_integration_qaws (gsl_function * f,
 
   do
     {
-      double a1, b1, a2, b2;
-      double a_i, b_i, r_i, e_i;
-      double area1 = 0, area2 = 0, area12 = 0;
-      double error1 = 0, error2 = 0, error12 = 0;
-      int err_reliable1, err_reliable2;
+      double a1;
+      double b1;
+      double a2;
+      double b2;
+      double a_i;
+      double b_i;
+      double r_i;
+      double e_i;
+      double area1 = 0;
+      double area2 = 0;
+      double area12 = 0;
+      double error1 = 0;
+      double error2 = 0;
+      double error12 = 0;
+      int err_reliable1;
+      int err_reliable2;
 
       /* Bisect the subinterval with the largest error estimate */
 
@@ -198,7 +216,7 @@ gsl_integration_qaws (gsl_function * f,
     {
       return GSL_SUCCESS;
     }
-  else if (error_type == 2)
+  if (error_type == 2)
     {
       GSL_ERROR ("roundoff error prevents tolerance from being achieved",
                  GSL_EROUND);

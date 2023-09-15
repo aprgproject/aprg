@@ -23,6 +23,7 @@
 #include <gsl/gsl_permutation.h>
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_multifit_nlin.h>
+#include <math.h>
 
 /* Compute the covariance matrix
 
@@ -34,11 +35,11 @@
 int
 gsl_multifit_covar (const gsl_matrix * J, const double epsrel, gsl_matrix * covar)
 {
-  int status;
-  gsl_matrix * r;
-  gsl_vector * tau;
-  gsl_vector * norm;
-  gsl_permutation * perm;
+  int status = 0;
+  gsl_matrix * r = NULL;
+  gsl_vector * tau = NULL;
+  gsl_vector * norm = NULL;
+  gsl_permutation * perm = NULL;
   const size_t m = J->size1;
   const size_t n = J->size2;
   
@@ -81,7 +82,9 @@ gsl_multifit_covar_QRPT (gsl_matrix * r, gsl_permutation * perm,
 
   double tolr = epsrel * fabs(gsl_matrix_get(r, 0, 0));
   const size_t n = r->size2;
-  size_t i, j, k;
+  size_t i;
+  size_t j;
+  size_t k;
   size_t kmax = 0;
 
   for (k = 0 ; k < n ; k++)
@@ -152,7 +155,7 @@ gsl_multifit_covar_QRPT (gsl_matrix * r, gsl_permutation * perm,
         {
           size_t pi = gsl_permutation_get (perm, i);
 
-          double rij;
+          double rij = NAN;
 
           if (j > kmax)
             {

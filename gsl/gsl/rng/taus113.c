@@ -76,7 +76,10 @@ static inline unsigned long
 taus113_get (void *vstate)
 {
   taus113_state_t *state = (taus113_state_t *) vstate;
-  unsigned long b1, b2, b3, b4;
+  unsigned long b1;
+  unsigned long b2;
+  unsigned long b3;
+  unsigned long b4;
 
   b1 = ((((state->z1 << 6UL) & MASK) ^ state->z1) >> 13UL);
   state->z1 = ((((state->z1 & 4294967294UL) << 18UL) & MASK) ^ b1);
@@ -105,21 +108,26 @@ taus113_set (void *vstate, unsigned long int s)
 {
   taus113_state_t *state = (taus113_state_t *) vstate;
 
-  if (!s)
+  if (!s) {
     s = 1UL;                    /* default seed is 1 */
+}
 
   state->z1 = LCG (s);
-  if (state->z1 < 2UL)
+  if (state->z1 < 2UL) {
     state->z1 += 2UL;
+}
   state->z2 = LCG (state->z1);
-  if (state->z2 < 8UL)
+  if (state->z2 < 8UL) {
     state->z2 += 8UL;
+}
   state->z3 = LCG (state->z2);
-  if (state->z3 < 16UL)
+  if (state->z3 < 16UL) {
     state->z3 += 16UL;
+}
   state->z4 = LCG (state->z3);
-  if (state->z4 < 128UL)
+  if (state->z4 < 128UL) {
     state->z4 += 128UL;
+}
 
   /* Calling RNG ten times to satify recurrence condition */
   taus113_get (state);

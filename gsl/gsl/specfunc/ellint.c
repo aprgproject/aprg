@@ -24,6 +24,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_precision.h>
 #include <gsl/gsl_sf_ellint.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -88,10 +89,10 @@ gsl_sf_ellint_RC_e(double x, double y, gsl_mode_t mode, gsl_sf_result * result)
     const double c2 = 9.0 / 22.0;
     double xn = x;
     double yn = y;
-    double mu;
-    double sn;
-    double lamda;
-    double s;
+    double mu = NAN;
+    double sn = NAN;
+    double lamda = NAN;
+    double s = NAN;
     int n = 0;
     while(1) {
       mu = (xn + yn + yn) / 3.0;
@@ -140,23 +141,23 @@ gsl_sf_ellint_RD_e(double x, double y, double z, gsl_mode_t mode, gsl_sf_result 
     double zn = z;
     double sigma  = 0.0;
     double power4 = 1.0;
-    double ea;
-    double eb;
-    double ec;
-    double ed;
-    double ef;
-    double s1;
-    double s2;
-    double mu;
-    double xndev;
-    double yndev;
-    double zndev;
+    double ea = NAN;
+    double eb = NAN;
+    double ec = NAN;
+    double ed = NAN;
+    double ef = NAN;
+    double s1 = NAN;
+    double s2 = NAN;
+    double mu = NAN;
+    double xndev = NAN;
+    double yndev = NAN;
+    double zndev = NAN;
     int n = 0;
     while(1) {
-      double xnroot;
-      double ynroot;
-      double znroot;
-      double lamda;
+      double xnroot = NAN;
+      double ynroot = NAN;
+      double znroot = NAN;
+      double lamda = NAN;
       double epslon = NAN;
       mu = (xn + yn + 3.0 * zn) * 0.2;
       xndev = (mu - xn) / mu;
@@ -219,20 +220,20 @@ gsl_sf_ellint_RF_e(double x, double y, double z, gsl_mode_t mode, gsl_sf_result 
     double xn = x;
     double yn = y;
     double zn = z;
-    double mu;
-    double xndev;
-    double yndev;
-    double zndev;
-    double e2;
-    double e3;
-    double s;
+    double mu = NAN;
+    double xndev = NAN;
+    double yndev = NAN;
+    double zndev = NAN;
+    double e2 = NAN;
+    double e3 = NAN;
+    double s = NAN;
     int n = 0;
     while(1) {
-      double epslon;
-      double lamda;
-      double xnroot;
-      double ynroot;
-      double znroot;
+      double epslon = NAN;
+      double lamda = NAN;
+      double xnroot = NAN;
+      double ynroot = NAN;
+      double znroot = NAN;
       mu = (xn + yn + zn) / 3.0;
       xndev = 2.0 - (mu + xn) / mu;
       yndev = 2.0 - (mu + yn) / mu;
@@ -292,27 +293,27 @@ gsl_sf_ellint_RJ_e(double x, double y, double z, double p, gsl_mode_t mode, gsl_
     double pn = p;
     double sigma = 0.0;
     double power4 = 1.0;
-    double mu;
-    double xndev;
-    double yndev;
-    double zndev;
-    double pndev;
-    double ea;
-    double eb;
-    double ec;
-    double e2;
-    double e3;
-    double s1;
-    double s2;
-    double s3;
+    double mu = NAN;
+    double xndev = NAN;
+    double yndev = NAN;
+    double zndev = NAN;
+    double pndev = NAN;
+    double ea = NAN;
+    double eb = NAN;
+    double ec = NAN;
+    double e2 = NAN;
+    double e3 = NAN;
+    double s1 = NAN;
+    double s2 = NAN;
+    double s3 = NAN;
     int n = 0;
     while(1) {
-      double xnroot;
-      double ynroot;
-      double znroot;
-      double lamda;
-      double alfa;
-      double beta;
+      double xnroot = NAN;
+      double ynroot = NAN;
+      double znroot = NAN;
+      double lamda = NAN;
+      double alfa = NAN;
+      double beta = NAN;
       double epslon = NAN;
       gsl_sf_result rcresult;
       int rcstatus = 0;
@@ -426,7 +427,8 @@ gsl_sf_ellint_E_e(double phi, double k, gsl_mode_t mode, gsl_sf_result * result)
       return status;
     }
     
-      gsl_sf_result rf, rd;
+      gsl_sf_result rf;
+      gsl_sf_result rd;
       const double sin3_phi = sin2_phi * sin_phi;
       const int rfstatus = gsl_sf_ellint_RF_e(x, y, 1.0, mode, &rf);
       const int rdstatus = gsl_sf_ellint_RD_e(x, y, 1.0, mode, &rd);
@@ -437,13 +439,13 @@ gsl_sf_ellint_E_e(double phi, double k, gsl_mode_t mode, gsl_sf_result * result)
       result->err += k*k/3.0 * fabs(sin3_phi*rd.err);
       if (nc == 0) {
         return GSL_ERROR_SELECT_2(rfstatus, rdstatus);
-      } else {
+      } 
         gsl_sf_result re;  /* add extra terms from periodicity */
         const int restatus = gsl_sf_ellint_Ecomp_e(k, mode, &re);  
         result->val += 2*nc*re.val;
         result->err += 2*fabs(nc)*re.err;
         return GSL_ERROR_SELECT_3(rfstatus, rdstatus, restatus);
-      }
+     
    
   }
 }

@@ -79,8 +79,9 @@ funcacc_delete(void * vstate)
 {
   funcacc_state_t * state = (funcacc_state_t *) vstate;
 
-  if (!ringbuf_is_empty(state->rbuf))
+  if (!ringbuf_is_empty(state->rbuf)) {
     ringbuf_pop_back(state->rbuf);
+}
 
   return GSL_SUCCESS;
 }

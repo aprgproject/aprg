@@ -29,38 +29,47 @@
 
 int gsl_sf_mathieu_ce_e(int order, double qq, double zz, gsl_sf_result *result)
 {
-  int even_odd, ii, status;
-  double coeff[GSL_SF_MATHIEU_COEFF], norm, fn, factor;
+  int even_odd;
+  int ii;
+  int status;
+  double coeff[GSL_SF_MATHIEU_COEFF];
+  double norm;
+  double fn;
+  double factor;
   gsl_sf_result aa;
 
 
   norm = 0.0;
   even_odd = 0;
-  if (order % 2 != 0)
+  if (order % 2 != 0) {
       even_odd = 1;
+}
   
   /* Handle the trivial case where q = 0. */
   if (qq == 0.0)
   {
       norm = 1.0;
-      if (order == 0)
+      if (order == 0) {
           norm = sqrt(2.0);
+}
 
       fn = cos(order*zz)/norm;
       
       result->val = fn;
       result->err = 2.0*GSL_DBL_EPSILON;
       factor = fabs(fn);
-      if (factor > 1.0)
+      if (factor > 1.0) {
           result->err *= factor;
+}
       
       return GSL_SUCCESS;
   }
   
   /* Use symmetry characteristics of the functions to handle cases with
      negative order. */
-  if (order < 0)
+  if (order < 0) {
       order *= -1;
+}
 
   /* Compute the characteristic value. */
   status = gsl_sf_mathieu_a_e(order, qq, &aa);
@@ -102,8 +111,9 @@ int gsl_sf_mathieu_ce_e(int order, double qq, double zz, gsl_sf_result *result)
   result->val = fn;
   result->err = 2.0*GSL_DBL_EPSILON;
   factor = fabs(fn);
-  if (factor > 1.0)
+  if (factor > 1.0) {
       result->err *= factor;
+}
   
   return GSL_SUCCESS;
 }
@@ -111,15 +121,21 @@ int gsl_sf_mathieu_ce_e(int order, double qq, double zz, gsl_sf_result *result)
 
 int gsl_sf_mathieu_se_e(int order, double qq, double zz, gsl_sf_result *result)
 {
-  int even_odd, ii, status;
-  double coeff[GSL_SF_MATHIEU_COEFF], norm, fn, factor;
+  int even_odd;
+  int ii;
+  int status;
+  double coeff[GSL_SF_MATHIEU_COEFF];
+  double norm;
+  double fn;
+  double factor;
   gsl_sf_result aa;
 
 
   norm = 0.0;
   even_odd = 0;
-  if (order % 2 != 0)
+  if (order % 2 != 0) {
       even_odd = 1;
+}
   
   /* Handle the trivial cases where order = 0 and/or q = 0. */
   if (order == 0)
@@ -137,16 +153,18 @@ int gsl_sf_mathieu_se_e(int order, double qq, double zz, gsl_sf_result *result)
       result->val = fn;
       result->err = 2.0*GSL_DBL_EPSILON;
       factor = fabs(fn);
-      if (factor > 1.0)
+      if (factor > 1.0) {
           result->err *= factor;
+}
       
       return GSL_SUCCESS;
   }
   
   /* Use symmetry characteristics of the functions to handle cases with
      negative order. */
-  if (order < 0)
+  if (order < 0) {
       order *= -1;
+}
 
   /* Compute the characteristic value. */
   status = gsl_sf_mathieu_b_e(order, qq, &aa);
@@ -186,8 +204,9 @@ int gsl_sf_mathieu_se_e(int order, double qq, double zz, gsl_sf_result *result)
   result->val = fn;
   result->err = 2.0*GSL_DBL_EPSILON;
   factor = fabs(fn);
-  if (factor > 1.0)
+  if (factor > 1.0) {
       result->err *= factor;
+}
   
   return GSL_SUCCESS;
 }
@@ -197,13 +216,20 @@ int gsl_sf_mathieu_ce_array(int nmin, int nmax, double qq, double zz,
                             gsl_sf_mathieu_workspace *work,
                             double result_array[])
 {
-  int even_odd, order, ii, jj, status;
-  double coeff[GSL_SF_MATHIEU_COEFF], *aa = work->aa, norm;
+  int even_odd;
+  int order;
+  int ii;
+  int jj;
+  int status;
+  double coeff[GSL_SF_MATHIEU_COEFF];
+  double *aa = work->aa;
+  double norm;
   
 
   /* Initialize the result array to zeroes. */
-  for (ii=0; ii<nmax-nmin+1; ii++)
+  for (ii=0; ii<nmax-nmin+1; ii++) {
       result_array[ii] = 0.0;
+}
   
   /* Ensure that the workspace is large enough to accomodate. */
   if (work->size < (unsigned int)nmax)
@@ -223,15 +249,17 @@ int gsl_sf_mathieu_ce_array(int nmin, int nmax, double qq, double zz,
   {
       norm = 0.0;
       even_odd = 0;
-      if (order % 2 != 0)
+      if (order % 2 != 0) {
           even_odd = 1;
+}
   
       /* Handle the trivial case where q = 0. */
       if (qq == 0.0)
       {
           norm = 1.0;
-          if (order == 0)
+          if (order == 0) {
               norm = sqrt(2.0);
+}
 
           result_array[ii] = cos(order*zz)/norm;
 
@@ -240,8 +268,9 @@ int gsl_sf_mathieu_ce_array(int nmin, int nmax, double qq, double zz,
   
       /* Compute the series coefficients. */
       status = gsl_sf_mathieu_a_coeff(order, qq, aa[order], coeff);
-      if (status != GSL_SUCCESS)
+      if (status != GSL_SUCCESS) {
           return status;
+}
   
       if (even_odd == 0)
       {
@@ -273,13 +302,20 @@ int gsl_sf_mathieu_se_array(int nmin, int nmax, double qq, double zz,
                             gsl_sf_mathieu_workspace *work,
                             double result_array[])
 {
-  int even_odd, order, ii, jj, status;
-  double coeff[GSL_SF_MATHIEU_COEFF], *bb = work->bb, norm;
+  int even_odd;
+  int order;
+  int ii;
+  int jj;
+  int status;
+  double coeff[GSL_SF_MATHIEU_COEFF];
+  double *bb = work->bb;
+  double norm;
   
 
   /* Initialize the result array to zeroes. */
-  for (ii=0; ii<nmax-nmin+1; ii++)
+  for (ii=0; ii<nmax-nmin+1; ii++) {
       result_array[ii] = 0.0;
+}
   
   /* Ensure that the workspace is large enough to accomodate. */
   if (work->size < (unsigned int)nmax)
@@ -299,8 +335,9 @@ int gsl_sf_mathieu_se_array(int nmin, int nmax, double qq, double zz,
   {
       norm = 0.0;
       even_odd = 0;
-      if (order % 2 != 0)
+      if (order % 2 != 0) {
           even_odd = 1;
+}
   
       /* Handle the trivial cases where order = 0 and/or q = 0. */
       if (order == 0)

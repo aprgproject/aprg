@@ -40,7 +40,7 @@ gsl_sf_hyperg_2F0_e(const double a, const double b, const double x, gsl_sf_resul
     result->err = GSL_DBL_EPSILON * fabs(result->val) + pre * U.err;
     return stat_U;
   }
-  else if(x == 0.0) {
+  if(x == 0.0) {
     result->val = 1.0;
     result->err = 0.0;
     return GSL_SUCCESS;

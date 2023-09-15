@@ -77,10 +77,21 @@ static int
 lmder_alloc (void *vstate, size_t n, size_t p)
 {
   lmder_state_t *state = (lmder_state_t *) vstate;
-  gsl_matrix *r, *J;
-  gsl_vector *tau, *diag, *qtf, *newton, *gradient, *x_trial, *f_trial,
-   *df, *sdiag, *rptdx, *w, *work1;
-  gsl_permutation *perm;
+  gsl_matrix *r;
+  gsl_matrix *J;
+  gsl_vector *tau;
+  gsl_vector *diag;
+  gsl_vector *qtf;
+  gsl_vector *newton;
+  gsl_vector *gradient;
+  gsl_vector *x_trial;
+  gsl_vector *f_trial;
+  gsl_vector *df;
+  gsl_vector *sdiag;
+  gsl_vector *rptdx;
+  gsl_vector *w;
+  gsl_vector *work1;
+  gsl_permutation *perm = NULL;
 
   J = gsl_matrix_alloc (n, p);
 
@@ -383,50 +394,65 @@ lmder_free (void *vstate)
 {
   lmder_state_t *state = (lmder_state_t *) vstate;
 
-  if (state->perm)
+  if (state->perm) {
     gsl_permutation_free (state->perm);
+}
 
-  if (state->work1)
+  if (state->work1) {
     gsl_vector_free (state->work1);
+}
 
-  if (state->w)
+  if (state->w) {
     gsl_vector_free (state->w);
+}
 
-  if (state->rptdx)
+  if (state->rptdx) {
     gsl_vector_free (state->rptdx);
+}
 
-  if (state->sdiag)
+  if (state->sdiag) {
     gsl_vector_free (state->sdiag);
+}
 
-  if (state->df)
+  if (state->df) {
     gsl_vector_free (state->df);
+}
 
-  if (state->f_trial)
+  if (state->f_trial) {
     gsl_vector_free (state->f_trial);
+}
 
-  if (state->x_trial)
+  if (state->x_trial) {
     gsl_vector_free (state->x_trial);
+}
 
-  if (state->gradient)
+  if (state->gradient) {
     gsl_vector_free (state->gradient);
+}
 
-  if (state->newton)
+  if (state->newton) {
     gsl_vector_free (state->newton);
+}
 
-  if (state->qtf)
+  if (state->qtf) {
     gsl_vector_free (state->qtf);
+}
 
-  if (state->diag)
+  if (state->diag) {
     gsl_vector_free (state->diag);
+}
 
-  if (state->tau)
+  if (state->tau) {
     gsl_vector_free (state->tau);
+}
 
-  if (state->r)
+  if (state->r) {
     gsl_matrix_free (state->r);
+}
 
-  if (state->J)
+  if (state->J) {
     gsl_matrix_free (state->J);
+}
 }
 
 static const gsl_multifit_fdfsolver_type lmder_type =

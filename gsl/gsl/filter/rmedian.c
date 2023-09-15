@@ -27,6 +27,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -54,8 +55,8 @@ static const gsl_movstat_accum rmedian_accum_type;
 gsl_filter_rmedian_workspace *
 gsl_filter_rmedian_alloc(const size_t K)
 {
-  gsl_filter_rmedian_workspace *w;
-  size_t state_size;
+  gsl_filter_rmedian_workspace *w = NULL;
+  size_t state_size = 0;
 
   w = calloc(1, sizeof(gsl_filter_rmedian_workspace));
   if (w == 0)
@@ -96,14 +97,17 @@ gsl_filter_rmedian_alloc(const size_t K)
 void
 gsl_filter_rmedian_free(gsl_filter_rmedian_workspace * w)
 {
-  if (w->state)
+  if (w->state) {
     free(w->state);
+}
 
-  if (w->window)
+  if (w->window) {
     free(w->window);
+}
 
-  if (w->movstat_workspace_p)
+  if (w->movstat_workspace_p) {
     gsl_movstat_free(w->movstat_workspace_p);
+}
 
   free(w);
 }
@@ -130,8 +134,8 @@ gsl_filter_rmedian(const gsl_filter_end_t endtype, const gsl_vector * x, gsl_vec
       int status = GSL_SUCCESS;
       const size_t n = x->size;
       const int H = (int) w->H;
-      double yprev;
-      int wsize;
+      double yprev = NAN;
+      int wsize = 0;
 
       /* find median of first window to initialize filter */
       wsize = gsl_movstat_fill(endtype, x, 0, H, H, w->window);
@@ -196,19 +200,20 @@ rmedian_get(void * params, double * result, const void * vstate)
 {
   const rmedian_state_t * state = (const rmedian_state_t *) vstate;
   double *yprev = (double *) params; /* previous filter output */
-  double y;                          /* new filter output */
+  double y = NAN;                          /* new filter output */
   double xminmax[2];
 
   /* get minimum/maximum values of {x_i,...,x_{i+H}} */
   (state->minmax_acc->get)(NULL, xminmax, state->minmax_state);
 
   /* y = median [ yprev, xmin, xmax ] */
-  if (*yprev <= xminmax[0])
+  if (*yprev <= xminmax[0]) {
     y = xminmax[0];
-  else if (*yprev <= xminmax[1])
+  } else if (*yprev <= xminmax[1]) {
     y = *yprev;
-  else
+  } else {
     y = xminmax[1];
+}
 
   *result = y;
   *yprev = y;

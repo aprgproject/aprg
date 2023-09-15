@@ -25,6 +25,7 @@
 #include <gsl/gsl_multifit_nlinear.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 /*
  * This module contains an implementation of the Powell dogleg
@@ -77,7 +78,7 @@ static void *
 dogleg_alloc (const void * params, const size_t n, const size_t p)
 {
   const gsl_multifit_nlinear_parameters *mparams = (const gsl_multifit_nlinear_parameters *) params;
-  dogleg_state_t *state;
+  dogleg_state_t *state = NULL;
   
   state = calloc(1, sizeof(dogleg_state_t));
   if (state == NULL)
@@ -121,17 +122,21 @@ dogleg_free(void *vstate)
 {
   dogleg_state_t *state = (dogleg_state_t *) vstate;
 
-  if (state->dx_gn)
+  if (state->dx_gn) {
     gsl_vector_free(state->dx_gn);
+}
 
-  if (state->dx_sd)
+  if (state->dx_sd) {
     gsl_vector_free(state->dx_sd);
+}
 
-  if (state->workp)
+  if (state->workp) {
     gsl_vector_free(state->workp);
+}
 
-  if (state->workn)
+  if (state->workn) {
     gsl_vector_free(state->workn);
+}
 
   free(state);
 }
@@ -174,8 +179,8 @@ dogleg_preloop(const void * vtrust_state, void * vstate)
   const gsl_multifit_nlinear_trust_state *trust_state =
     (const gsl_multifit_nlinear_trust_state *) vtrust_state;
   dogleg_state_t *state = (dogleg_state_t *) vstate;
-  double u;
-  double alpha; /* ||g||^2 / ||Jg||^2 */
+  double u = NAN;
+  double alpha = NAN; /* ||g||^2 / ||Jg||^2 */
 
   /* calculate the steepest descent step */
 
@@ -231,8 +236,9 @@ dogleg_step(const void * vtrust_state, const double delta,
         {
           int status = dogleg_calc_gn(trust_state, state->dx_gn);
 
-          if (status)
+          if (status) {
             return status;
+}
 
           /* compute || D dx_gn || */
           state->norm_Dgn = scaled_enorm(trust_state->diag, state->dx_gn);
@@ -291,8 +297,9 @@ dogleg_double_step(const void * vtrust_state, const double delta,
         {
           int status = dogleg_calc_gn(trust_state, state->dx_gn);
 
-          if (status)
+          if (status) {
             return status;
+}
 
           /* compute || D dx_gn || */
           state->norm_Dgn = scaled_enorm(trust_state->diag, state->dx_gn);
@@ -306,7 +313,10 @@ dogleg_double_step(const void * vtrust_state, const double delta,
         }
       else
         {
-          double t, u, v, c;
+          double t;
+          double u;
+          double v;
+          double c;
 
           /* compute: u = ||D^{-1} g||^2 / ||J D^{-2} g||^2 */
           v = state->norm_Dinvg / state->norm_JDinv2g;
@@ -374,26 +384,29 @@ Return: success/error
 static int
 dogleg_calc_gn(const gsl_multifit_nlinear_trust_state * trust_state, gsl_vector * dx)
 {
-  int status;
+  int status = 0;
   const gsl_multifit_nlinear_parameters *params = trust_state->params;
 
   /* initialize linear least squares solver */
   status = (params->solver->init)(trust_state, trust_state->solver_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* prepare the linear solver to compute Gauss-Newton step */
   status = (params->solver->presolve)(0.0, trust_state, trust_state->solver_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* solve: J dx_gn = -f for Gauss-Newton step */
   status = (params->solver->solve)(trust_state->f,
                                    dx,
                                    trust_state,
                                    trust_state->solver_state);
-  if (status)
+  if (status) {
     return status;
+}
 
   return GSL_SUCCESS;
 }
@@ -429,8 +442,10 @@ static double
 dogleg_beta(const double t, const double delta,
             const gsl_vector * diag, dogleg_state_t * state)
 {
-  double beta;
-  double a, b, c;
+  double beta = NAN;
+  double a;
+  double b;
+  double c;
 
   /* compute: workp = t*dx_gn - dx_sd */
   scaled_addition(t, state->dx_gn, -1.0, state->dx_sd, state->workp);

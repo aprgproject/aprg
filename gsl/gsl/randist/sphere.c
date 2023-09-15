@@ -29,7 +29,9 @@ gsl_ran_dir_2d (const gsl_rng * r, double *x, double *y)
    * 2.55 calls to the RNG, instead of one for the direct
    * trigonometric method.  */
 
-  double u, v, s;
+  double u;
+  double v;
+  double s;
   do
     {
       u = -1 + 2 * gsl_rng_uniform (r);
@@ -65,7 +67,8 @@ gsl_ran_dir_2d_trig_method (const gsl_rng * r, double *x, double *y)
 void
 gsl_ran_dir_3d (const gsl_rng * r, double *x, double *y, double *z)
 {
-  double s, a;
+  double s;
+  double a;
 
   /* This is a variant of the algorithm for computing a random point
    * on the unit sphere; the algorithm is suggested in Knuth, v2,
@@ -93,8 +96,8 @@ gsl_ran_dir_3d (const gsl_rng * r, double *x, double *y, double *z)
 void
 gsl_ran_dir_nd (const gsl_rng * r, size_t n, double *x)
 {
-  double d;
-  size_t i;
+  double d = NAN;
+  size_t i = 0;
   /* See Knuth, v2, 3rd ed, p135-136.  The method is attributed to
    * G. W. Brown, in Modern Mathematics for the Engineer (1956).
    * The idea is that gaussians G(x) have the property that

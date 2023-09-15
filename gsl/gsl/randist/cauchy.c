@@ -32,7 +32,7 @@
 double
 gsl_ran_cauchy (const gsl_rng * r, const double a)
 {
-  double u;
+  double u = NAN;
   do
     {
       u = gsl_rng_uniform (r);

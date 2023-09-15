@@ -25,6 +25,7 @@
 #include <gsl/gsl_multifit_nlin.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 #define SCALE 0
 
@@ -129,29 +130,37 @@ lmniel_free(void *vstate)
 {
   lmniel_state_t *state = (lmniel_state_t *) vstate;
 
-  if (state->A)
+  if (state->A) {
     gsl_matrix_free(state->A);
+}
 
-  if (state->J)
+  if (state->J) {
     gsl_matrix_free(state->J);
+}
 
-  if (state->diag)
+  if (state->diag) {
     gsl_vector_free(state->diag);
+}
 
-  if (state->rhs)
+  if (state->rhs) {
     gsl_vector_free(state->rhs);
+}
 
-  if (state->work)
+  if (state->work) {
     gsl_vector_free(state->work);
+}
 
-  if (state->A_copy)
+  if (state->A_copy) {
     gsl_matrix_free(state->A_copy);
+}
 
-  if (state->x_trial)
+  if (state->x_trial) {
     gsl_vector_free(state->x_trial);
+}
 
-  if (state->f_trial)
+  if (state->f_trial) {
     gsl_vector_free(state->f_trial);
+}
 } /* lmniel_free() */
 
 static int
@@ -159,10 +168,10 @@ lmniel_set(void *vstate, const gsl_vector *swts,
            gsl_multifit_function_fdf *fdf, gsl_vector *x,
            gsl_vector *f, gsl_vector *dx)
 {
-  int status;
+  int status = 0;
   lmniel_state_t *state = (lmniel_state_t *) vstate;
   const size_t p = x->size;
-  size_t i;
+  size_t i = 0;
 
   /* initialize counters for function and Jacobian evaluations */
   fdf->nevalf = 0;
@@ -170,15 +179,18 @@ lmniel_set(void *vstate, const gsl_vector *swts,
 
   /* evaluate function and Jacobian at x and apply weight transform */
   status = gsl_multifit_eval_wf(fdf, x, swts, f);
-  if (status)
+  if (status) {
    return status;
+}
 
-  if (fdf->df)
+  if (fdf->df) {
     status = gsl_multifit_eval_wdf(fdf, x, swts, state->J);
-  else
+  } else {
     status = gsl_multifit_fdfsolver_dif_df(x, swts, fdf, f, state->J);
-  if (status)
+}
+  if (status) {
     return status;
+}
 
   /* compute rhs = -J^T f */
   gsl_blas_dgemv(CblasTrans, -1.0, state->J, f, 0.0, state->rhs);
@@ -200,7 +212,7 @@ lmniel_set(void *vstate, const gsl_vector *swts,
   for (i = 0; i < p; ++i)
     {
       gsl_vector_view c = gsl_matrix_column(state->J, i);
-      double result; /* (J^T J)_{ii} */
+      double result = NAN; /* (J^T J)_{ii} */
 
       gsl_blas_ddot(&c.vector, &c.vector, &result);
       state->mu = GSL_MAX(state->mu, result);
@@ -244,7 +256,7 @@ lmniel_iterate(void *vstate, const gsl_vector *swts,
                gsl_multifit_function_fdf *fdf, gsl_vector *x,
                gsl_vector *f, gsl_vector *dx)
 {
-  int status;
+  int status = 0;
   lmniel_state_t *state = (lmniel_state_t *) vstate;
   gsl_matrix *J = state->J;                   /* Jacobian J(x) */
   gsl_matrix *A = state->A;                   /* J^T J */
@@ -252,14 +264,15 @@ lmniel_iterate(void *vstate, const gsl_vector *swts,
   gsl_vector *x_trial = state->x_trial;       /* trial x + dx */
   gsl_vector *f_trial = state->f_trial;       /* trial f(x + dx) */
   gsl_vector *diag = state->diag;             /* diag(D) */
-  double dF;                                  /* F(x) - F(x + dx) */
-  double dL;                                  /* L(0) - L(dx) */
+  double dF = NAN;                                  /* F(x) - F(x + dx) */
+  double dL = NAN;                                  /* L(0) - L(dx) */
   int foundstep = 0;                          /* found step dx */
 
   /* compute A = J^T J */
   status = gsl_blas_dsyrk(CblasLower, CblasTrans, 1.0, J, 0.0, A);
-  if (status)
+  if (status) {
     return status;
+}
 
   /* copy lower triangle to upper */
   gsl_matrix_transpose_tricpy(CblasLower, CblasUnit, A, A);
@@ -273,16 +286,18 @@ lmniel_iterate(void *vstate, const gsl_vector *swts,
     {
       /* solve (A + mu*I) dx = g */
       status = lmniel_calc_dx(state->mu, A, rhs, dx, state);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* compute x_trial = x + dx */
       lmniel_trial_step(x, dx, x_trial);
 
       /* compute f(x + dx) */
       status = gsl_multifit_eval_wf(fdf, x_trial, swts, f_trial);
-      if (status)
+      if (status) {
        return status;
+}
 
       /* compute dF = F(x) - F(x + dx) */
       dF = lmniel_calc_dF(f, f_trial);
@@ -295,7 +310,7 @@ lmniel_iterate(void *vstate, const gsl_vector *swts,
         {
           /* reduction in error, step acceptable */
 
-          double tmp;
+          double tmp = NAN;
 
           /* update LM parameter mu */
           tmp = 2.0 * (dF / dL) - 1.0;
@@ -304,12 +319,14 @@ lmniel_iterate(void *vstate, const gsl_vector *swts,
           state->nu = 2;
 
           /* compute J <- J(x + dx) */
-          if (fdf->df)
+          if (fdf->df) {
             status = gsl_multifit_eval_wdf(fdf, x_trial, swts, J);
-          else
+          } else {
             status = gsl_multifit_fdfsolver_dif_df(x_trial, swts, fdf, f_trial, J);
-          if (status)
+}
+          if (status) {
             return status;
+}
 
           /* update x <- x + dx */
           gsl_vector_memcpy(x, x_trial);
@@ -324,7 +341,7 @@ lmniel_iterate(void *vstate, const gsl_vector *swts,
         }
       else
         {
-          long nu2;
+          long nu2 = 0;
 
           /* step did not reduce error, reject step */
           state->mu *= (double) state->nu;

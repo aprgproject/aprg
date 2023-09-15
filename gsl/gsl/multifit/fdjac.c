@@ -26,6 +26,7 @@
 #include <gsl/gsl_multifit_nlin.h>
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_matrix.h>
+#include <math.h>
 
 static int fdjac(const gsl_vector *x, const gsl_vector *wts,
                  gsl_multifit_function_fdf *fdf,
@@ -49,8 +50,9 @@ fdjac(const gsl_vector *x, const gsl_vector *wts,
       gsl_multifit_function_fdf *fdf, const gsl_vector *f, gsl_matrix *J)
 {
   int status = 0;
-  size_t i, j;
-  double h;
+  size_t i;
+  size_t j;
+  double h = NAN;
   const double epsfcn = 0.0;
   double eps = sqrt(GSL_MAX(epsfcn, GSL_DBL_EPSILON));
 
@@ -62,15 +64,17 @@ fdjac(const gsl_vector *x, const gsl_vector *wts,
       gsl_vector_view v = gsl_matrix_column(J, j);
 
       h = eps * fabs(xj);
-      if (h == 0.0)
+      if (h == 0.0) {
         h = eps;
+}
 
       /* perturb x_j to compute forward difference */
       gsl_vector_set((gsl_vector *) x, j, xj + h);
 
       status += gsl_multifit_eval_wf (fdf, x, wts, &v.vector);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* restore x_j */
       gsl_vector_set((gsl_vector *) x, j, xj);
@@ -132,12 +136,14 @@ gsl_multifit_fdfsolver_dif_fdf(const gsl_vector *x,
   int status = 0;
 
   status = gsl_multifit_eval_wf(fdf, x, NULL, f);
-  if (status)
+  if (status) {
     return status;
+}
 
   status = fdjac(x, NULL, fdf, f, J);
-  if (status)
+  if (status) {
     return status;
+}
 
   return status;
 } /* gsl_multifit_fdfsolver_dif_fdf() */

@@ -59,10 +59,10 @@ gsl_ran_exppow (const gsl_rng * r, const double a, const double b)
         {
           return z;
         }
-      else
-        {
+      
+        
           return -z;
-        }
+       
     }
   else if (b == 1)
     {
@@ -73,7 +73,9 @@ gsl_ran_exppow (const gsl_rng * r, const double a, const double b)
     {
       /* Use laplace distribution for rejection method, from Tadikamalla */
 
-      double x, h, u;
+      double x;
+      double h;
+      double u;
 
       double B = pow (1 / b, 1 / b);
 
@@ -96,7 +98,9 @@ gsl_ran_exppow (const gsl_rng * r, const double a, const double b)
     {
       /* Use gaussian for rejection method, from Tadikamalla */
 
-      double x, h, u;
+      double x;
+      double h;
+      double u;
 
       double B = pow (1 / b, 1 / b);
 
@@ -115,7 +119,7 @@ gsl_ran_exppow (const gsl_rng * r, const double a, const double b)
 double
 gsl_ran_exppow_pdf (const double x, const double a, const double b)
 {
-  double p;
+  double p = NAN;
   double lngamma = gsl_sf_lngamma (1 + 1 / b);
   p = (1 / (2 * a)) * exp (-pow (fabs (x / a), b) - lngamma);
   return p;

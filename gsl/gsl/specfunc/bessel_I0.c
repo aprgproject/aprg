@@ -170,7 +170,7 @@ int gsl_sf_bessel_I0_scaled_e(const double x, gsl_sf_result * result)
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     const double sy = sqrt(y);
     gsl_sf_result c;
     cheb_eval_e(&ai02_cs, 16.0/y-1.0, &c);
@@ -179,7 +179,7 @@ int gsl_sf_bessel_I0_scaled_e(const double x, gsl_sf_result * result)
     result->err += c.err / sy;
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 
@@ -212,9 +212,9 @@ int gsl_sf_bessel_I0_e(const double x, gsl_sf_result * result)
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     OVERFLOW_ERROR(result);
-  }
+ 
 }
 
 /*-*-*-*-*-*-*-*-*-* Functions w/ Natural Prototypes *-*-*-*-*-*-*-*-*-*-*/

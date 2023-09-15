@@ -116,8 +116,9 @@ taus_set (void *vstate, unsigned long int s)
 {
   taus_state_t *state = (taus_state_t *) vstate;
 
-  if (s == 0)
+  if (s == 0) {
     s = 1;      /* default seed is 1 */
+}
 
 #define LCG(n) ((69069 * n) & 0xffffffffUL)
   state->s1 = LCG (s);
@@ -139,16 +140,20 @@ taus2_set (void *vstate, unsigned long int s)
 {
   taus_state_t *state = (taus_state_t *) vstate;
 
-  if (s == 0)
+  if (s == 0) {
     s = 1;      /* default seed is 1 */
+}
 
 #define LCG(n) ((69069 * n) & 0xffffffffUL)
   state->s1 = LCG (s);
-  if (state->s1 < 2) state->s1 += 2UL;
+  if (state->s1 < 2) { state->s1 += 2UL;
+}
   state->s2 = LCG (state->s1);
-  if (state->s2 < 8) state->s2 += 8UL;
+  if (state->s2 < 8) { state->s2 += 8UL;
+}
   state->s3 = LCG (state->s2);
-  if (state->s3 < 16) state->s3 += 16UL;
+  if (state->s3 < 16) { state->s3 += 16UL;
+}
 
   /* "warm it up" */
   taus_get (state);

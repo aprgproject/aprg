@@ -126,8 +126,9 @@ uni_get (void *vstate)
   /* important k not be unsigned */
   long k = state->m[i] - state->m[j];
 
-  if (k < 0)
+  if (k < 0) {
     k += m1;
+}
   state->m[j] = k;
 
   if (i == 0)
@@ -160,7 +161,12 @@ uni_get_double (void *vstate)
 static void
 uni_set (void *vstate, unsigned long int s)
 {
-  unsigned int i, seed, k0, k1, j0, j1;
+  unsigned int i;
+  unsigned int seed;
+  unsigned int k0;
+  unsigned int k1;
+  unsigned int j0;
+  unsigned int j1;
 
   uni_state_t *state = (uni_state_t *) vstate;
 

@@ -38,7 +38,7 @@ gsl_acosh (const double x)
       double t = x - 1;
       return log1p (t + sqrt (2 * t + t * t));
     }
-  else if (x == 1)
+  if (x == 1)
     {
       return 0;
     }
@@ -67,10 +67,10 @@ gsl_asinh (const double x)
       double a2 = a * a;
       return s * log1p (a + a2 / (1 + sqrt (1 + a2)));
     }
-  else
-    {
+  
+    
       return x;
-    }
+   
 }
 
 double
@@ -91,7 +91,7 @@ gsl_atanh (const double x)
     {
       return s * 0.5 * log1p (2 * a / (1 - a));
     }
-  else if (a > GSL_DBL_EPSILON)
+  if (a > GSL_DBL_EPSILON)
     {
       return s * 0.5 * log1p (2 * a + 2 * a * a / (1 - a));
     }

@@ -35,7 +35,7 @@ gsl_multifit_wlinear (const gsl_matrix * X,
                       gsl_matrix * cov,
                       double *chisq, gsl_multifit_linear_workspace * work)
 {
-  size_t rank;
+  size_t rank = 0;
   int status = gsl_multifit_wlinear_tsvd(X, w, y, GSL_DBL_EPSILON, c, cov, chisq, &rank, work);
 
   return status;
@@ -76,32 +76,37 @@ gsl_multifit_wlinear_tsvd (const gsl_matrix * X,
     }
   else
     {
-      int status;
-      double rnorm, snorm;
+      int status = 0;
+      double rnorm;
+      double snorm;
       gsl_matrix_view A = gsl_matrix_submatrix(work->A, 0, 0, n, p);
       gsl_vector_view b = gsl_vector_subvector(work->t, 0, n);
 
       /* compute A = sqrt(W) X, b = sqrt(W) y */
       status = gsl_multifit_linear_applyW(X, w, y, &A.matrix, &b.vector);
-      if (status)
+      if (status) {
         return status;
+}
 
       /* compute SVD of A */
       status = gsl_multifit_linear_bsvd(&A.matrix, work);
-      if (status)
+      if (status) {
         return status;
+}
 
       status = multifit_linear_solve(X, &b.vector, tol, 0.0, rank,
                                      c, &rnorm, &snorm, work);
-      if (status)
+      if (status) {
         return status;
+}
 
       *chisq = rnorm * rnorm;
 
       /* variance-covariance matrix cov = s2 * (Q S^-1) (Q S^-1)^T */
       {
         const size_t p = X->size2;
-        size_t i, j;
+        size_t i;
+        size_t j;
         gsl_matrix_view QSI = gsl_matrix_submatrix(work->QSI, 0, 0, p, p);
         gsl_vector_view D = gsl_vector_subvector(work->D, 0, p);
 
@@ -114,7 +119,7 @@ gsl_multifit_wlinear_tsvd (const gsl_matrix * X,
               {
                 gsl_vector_view row_j = gsl_matrix_row (&QSI.matrix, j);
                 double d_j = gsl_vector_get (&D.vector, j);
-                double s;
+                double s = NAN;
 
                 gsl_blas_ddot (&row_i.vector, &row_j.vector, &s);
 
