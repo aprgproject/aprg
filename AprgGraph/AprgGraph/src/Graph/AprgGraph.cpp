@@ -265,7 +265,7 @@ void AprgGraph::drawEquationWithXSubstitution(Equation const& equation, uint32_t
         Equation const substitutedEquation(substitution.performSubstitutionTo(equation));
         OneEquationOneVariableEqualitySolver solver;
         SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(substitutedEquation));
-        AlbaNumbers const acceptedValues(solutionSet.getAcceptedValues());
+        AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
         for (AlbaNumber const& acceptedValue : acceptedValues) {
             points.emplace_back(xValue, acceptedValue.getDouble());
         }
@@ -282,7 +282,7 @@ void AprgGraph::drawEquationWithYSubstitution(Equation const& equation, uint32_t
         Equation const substitutedEquation(substitution.performSubstitutionTo(equation));
         OneEquationOneVariableEqualitySolver solver;
         SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(substitutedEquation));
-        AlbaNumbers const acceptedValues(solutionSet.getAcceptedValues());
+        AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
         for (AlbaNumber const& acceptedValue : acceptedValues) {
             points.emplace_back(acceptedValue.getDouble(), yValue);
         }

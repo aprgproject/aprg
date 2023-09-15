@@ -30,15 +30,15 @@ TEST(AprgGraphTest, DISABLED_BitmapGraph24Bits) {
     graph.drawEllipse(Ellipse(Point(0, 0), 15, 10), 0x0000FFFF);
     graph.drawHyperbola(Hyperbola(Point(0, 0), 10, 7.5), 0x0000FFFF);
 
-    Term polynomialTermInX(buildTermIfPossible("x^4 +- 2*x^3 - 7*x^2 + 10*x + 10"));
-    Term polynomialTermInY(buildTermIfPossible("y^4 - y^3 - y^2 - 2*y - 6"));
+    Term const polynomialTermInX(buildTermIfPossible("x^4 +- 2*x^3 - 7*x^2 + 10*x + 10"));
+    Term const polynomialTermInY(buildTermIfPossible("y^4 - y^3 - y^2 - 2*y - 6"));
     graph.drawTermWithXYSubstitution(polynomialTermInX, 0x0055A1BA);
     graph.drawTermWithXYSubstitution(polynomialTermInY, 0x00A1BA55);
 
-    Equation equation1(buildEquationIfPossible("x*y - x^2 + 1 = 0"));
-    Equation equation2(buildEquationIfPossible("x^2 - 2*x*y + y^2 + 2*x - 3*y + 2 = 0"));
-    Equation equation3(buildEquationIfPossible("y^2 - x - 2 = 0"));
-    Equation equation4(buildEquationIfPossible("(x^2 + 9)/(x-2) = y"));
+    Equation const equation1(buildEquationIfPossible("x*y - x^2 + 1 = 0"));
+    Equation const equation2(buildEquationIfPossible("x^2 - 2*x*y + y^2 + 2*x - 3*y + 2 = 0"));
+    Equation const equation3(buildEquationIfPossible("y^2 - x - 2 = 0"));
+    Equation const equation4(buildEquationIfPossible("(x^2 + 9)/(x-2) = y"));
     graph.drawEquationWithXYSubstitution(equation1, 0x0000A1BA);
     graph.drawEquationWithXYSubstitution(equation2, 0x00A1BA00);
     graph.drawEquationWithXYSubstitution(equation3, 0x00A100BA);
@@ -58,7 +58,7 @@ TEST(AprgGraphTest, DISABLED_TemporaryTest) {
     AprgGraph graph(graphOutputFile.getFullPath(), BitmapXY(800, 450), BitmapDoubleXY(50, 50));
     graph.drawGrid(BitmapDoubleXY(static_cast<double>(5), static_cast<double>(5)));
 
-    Equation equation(buildEquationIfPossible("x^x = y"));
+    Equation const equation(buildEquationIfPossible("x^x = y"));
     graph.drawEquationWithXYSubstitution(equation, 0x0000A1BA);
 
     graph.saveChangesToBitmapFile();
