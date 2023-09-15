@@ -14,13 +14,13 @@ using MousePosition = AlbaXY<int>;
 
 class AlbaWindowsUserAutomation {
 public:
-    void doDoubleLeftClick() const;
-    void doLeftClickAt(MousePosition const& position) const;
+    static void doDoubleLeftClick();
+    static void doLeftClickAt(MousePosition const& position);
     void doDoubleLeftClickAt(MousePosition const& position) const;
-    void doRightClickAt(MousePosition const& position) const;
-    void typeCharacter(char const character) const;
+    static void doRightClickAt(MousePosition const& position);
+    static void typeCharacter(char const character);
     void typeString(std::string_view const& stringToType) const;
-    void saveBitmapOnScreen(std::string_view const& filePath) const;
+    static void saveBitmapOnScreen(std::string_view const& filePath);
     [[nodiscard]] static MousePosition getMousePosition();
     [[nodiscard]] static std::string getClassNameOfForegroundWindow();
     [[nodiscard]] static std::string getStringFromClipboard();

@@ -13,12 +13,12 @@ using namespace std;
 
 namespace alba {
 
-void AlbaWindowsUserAutomation::doDoubleLeftClick() const {
+void AlbaWindowsUserAutomation::doDoubleLeftClick() {
     doLeftClick();
     doLeftClick();
 }
 
-void AlbaWindowsUserAutomation::doLeftClickAt(MousePosition const& position) const {
+void AlbaWindowsUserAutomation::doLeftClickAt(MousePosition const& position) {
     setMousePosition(position);
     doLeftClick();
 }
@@ -28,12 +28,12 @@ void AlbaWindowsUserAutomation::doDoubleLeftClickAt(MousePosition const& positio
     doDoubleLeftClick();
 }
 
-void AlbaWindowsUserAutomation::doRightClickAt(MousePosition const& position) const {
+void AlbaWindowsUserAutomation::doRightClickAt(MousePosition const& position) {
     setMousePosition(position);
     doRightClick();
 }
 
-void AlbaWindowsUserAutomation::typeCharacter(char const character) const { typeKey(convertToVirtualKey(character)); }
+void AlbaWindowsUserAutomation::typeCharacter(char const character) { typeKey(convertToVirtualKey(character)); }
 
 void AlbaWindowsUserAutomation::typeString(string_view const& stringToType) const {
     for (char const character : stringToType) {
@@ -41,7 +41,7 @@ void AlbaWindowsUserAutomation::typeString(string_view const& stringToType) cons
     }
 }
 
-void AlbaWindowsUserAutomation::saveBitmapOnScreen(string_view const& filePath) const {
+void AlbaWindowsUserAutomation::saveBitmapOnScreen(string_view const& filePath) {
     // Note: the difference on partially capturing the screen is negligible
     typeKey(VK_SNAPSHOT);
     saveBitmapFromClipboard(filePath);
