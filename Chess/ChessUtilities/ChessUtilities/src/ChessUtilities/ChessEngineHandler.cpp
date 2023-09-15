@@ -15,9 +15,7 @@ namespace alba::chess {
 
 namespace {
 
-using CallBackData = struct _mydata {
-    ChessEngineHandler* epointer;
-};
+using CallBackData = struct _mydata { ChessEngineHandler* epointer; };
 
 using PointerToCallBackData = CallBackData*;
 
