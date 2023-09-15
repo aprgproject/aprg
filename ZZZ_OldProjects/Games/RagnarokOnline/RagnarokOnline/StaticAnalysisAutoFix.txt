@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [011]
-2023-09-11T23:12:49
+StaticAnalysisJobIdentifier: [20]
+2023-09-15T19:35:49
 D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Time\AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
@@ -9,171 +9,23 @@ D:/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp:23:
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:205:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:208:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:270:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:251:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:28:13: warning: variable 'item' of type 'Item' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:28:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:29:13: warning: variable 'bestPrice' of type 'double' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:29:20: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:49:5: warning: variable 'monster' of type 'Monster' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:49:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:52:13: warning: variable 'item' of type 'Item' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:52:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:53:13: warning: variable 'fixedItemName' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:53:20: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:54:13: warning: variable 'bestPrice' of type 'double' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:54:20: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:55:13: warning: variable 'itemPotentialZeny' of type 'double' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:55:20: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:81:12: warning: Value stored to 'result' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:81:12: note: Value stored to 'result' during its initialization is never read
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:82:5: warning: variable 'fixedItemName' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:82:12: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:83:5: warning: variable 'npcPrice' of type 'double' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:83:12: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:84:5: warning: variable 'talonRoBuyingPrice' of type 'double' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:84:12: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:85:5: warning: variable 'talonRoSellingPrice' of type 'double' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:85:12: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:130:13: warning: variable 'monster' of type 'Monster' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:130:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:177:9: warning: variable 'isMapAcceptable' of type 'bool' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:177:14: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:183:17: warning: variable 'monster' of type 'Monster' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:183:25: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:219:13: warning: variable 'averageJobExperience' of type 'double' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:219:20: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:219:73: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:221:17: warning: variable 'monster' of type 'Monster' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:221:25: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MonsterRaceAnalyzer.cpp:61:9: warning: variable 'discrepancy' of type 'int' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MonsterRaceAnalyzer.cpp:61:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MonsterRaceAnalyzer.cpp:139:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MonsterRaceAnalyzer.cpp:139:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MonsterRaceAnalyzer.cpp:145:9: warning: variable 'line' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MonsterRaceAnalyzer.cpp:145:16: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MonsterRaceAnalyzer.cpp:150:13: warning: variable 'limit' of type 'int' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MonsterRaceAnalyzer.cpp:150:17: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MonsterRaceAnalyzer.cpp:158:13: warning: variable 'limit' of type 'int' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MonsterRaceAnalyzer.cpp:158:17: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:283:5: warning: variable 'directoryPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:283:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:293:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:293:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:305:9: warning: variable 'line' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:305:16: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:332:17: warning: variable 'value' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:332:24: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:412:25: warning: variable 'value' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:412:32: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:420:25: warning: variable 'monsterName' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:420:32: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:422:25: warning: variable 'monsterRate' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:422:32: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:435:5: warning: variable 'directoryPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:435:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:445:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:445:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:453:9: warning: variable 'line' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:453:16: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:482:17: warning: variable 'value' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:482:24: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:537:49: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:539:47: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:541:47: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:543:46: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:545:46: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:547:48: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:549:46: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:551:48: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:553:47: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:555:48: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:561:21: warning: variable 'slot' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:561:28: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:567:21: warning: variable 'dropRate' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:567:28: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:586:21: warning: variable 'value' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:586:28: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:595:25: warning: variable 'value' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:595:32: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:616:5: warning: variable 'directoryPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:616:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:626:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:626:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:633:9: warning: variable 'line' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:633:16: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:666:21: warning: variable 'wholeMonsterString' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:666:28: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:668:21: warning: variable 'wholeSpawnString' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:668:28: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:690:5: warning: variable 'directoryPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:690:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:700:5: warning: variable 'directoryPathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:700:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:710:5: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:710:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:715:9: warning: variable 'line' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:715:16: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:719:17: warning: variable 'itemString' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:719:24: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:722:17: warning: variable 'priceString' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:722:24: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:724:17: warning: variable 'numberString' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:724:24: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:734:25: warning: variable 'newTotalNumber' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:734:34: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:735:25: warning: variable 'newAveragePrice' of type 'double' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:735:32: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:746:25: warning: variable 'newTotalNumber' of type 'unsigned int' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:746:34: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:747:25: warning: variable 'newAveragePrice' of type 'double' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:747:32: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:763:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:763:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:769:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:769:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:775:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:775:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:781:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:781:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:787:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:787:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:794:9: warning: variable 'fixedItemName' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:794:16: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:822:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:822:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:829:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:829:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:837:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:837:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:861:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:861:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:910:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:910:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:918:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:918:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:926:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:926:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:932:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:932:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:938:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:938:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:944:5: warning: variable 'reader' of type 'AlbaStreamParameterReader' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:944:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\tst\MonsterRaceAnalyzer_unit.cpp:22:5: warning: variable 'analyzer' of type 'MonsterRaceAnalyzer' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\tst\MonsterRaceAnalyzer_unit.cpp:22:25: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\tst\MonsterRaceAnalyzer_unit.cpp:24:5: warning: variable 'currentConfiguration' of type 'RaceConfiguration' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\tst\MonsterRaceAnalyzer_unit.cpp:24:23: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\tst\MonsterRaceAnalyzer_unit.cpp:35:5: warning: variable 'analyzer' of type 'MonsterRaceAnalyzer' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\tst\MonsterRaceAnalyzer_unit.cpp:35:25: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\tst\MonsterRaceAnalyzer_unit.cpp:36:5: warning: variable 'currentConfiguration' of type 'RaceConfiguration' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\tst\MonsterRaceAnalyzer_unit.cpp:36:23: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\tst\RetrieveShopDataFromTalonRo_unit.cpp:28:5: warning: variable 'filePath' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\tst\RetrieveShopDataFromTalonRo_unit.cpp:28:12: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\tst\RetrieveShopDataFromTalonRo_unit.cpp:37:5: warning: variable 'filePath' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\tst\RetrieveShopDataFromTalonRo_unit.cpp:37:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:73:12: warning: Value stored to 'result' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:73:12: note: Value stored to 'result' during its initialization is never read
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\MapAnalyzer.cpp:211:79: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:527:49: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:529:47: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:531:47: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:533:46: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:535:46: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:537:48: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:539:46: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:541:48: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:543:47: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\Games\RagnarokOnline\RagnarokOnline\src\RagnarokOnline.cpp:545:48: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 DONE!
