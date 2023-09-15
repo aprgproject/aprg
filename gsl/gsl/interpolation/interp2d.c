@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_math.h>
@@ -36,7 +37,7 @@ gsl_interp2d *
 gsl_interp2d_alloc(const gsl_interp2d_type * T, const size_t xsize,
                    const size_t ysize)
 {
-  gsl_interp2d * interp;
+  gsl_interp2d * interp = NULL;
 
   if (xsize < T->min_size || ysize < T->min_size)
     {
@@ -77,8 +78,9 @@ gsl_interp2d_free (gsl_interp2d * interp)
 {
   RETURN_IF_NULL(interp);
 
-  if (interp->type->free)
+  if (interp->type->free) {
     interp->type->free(interp->state);
+}
 
   free(interp);
 } /* gsl_interp2d_free() */
@@ -87,7 +89,7 @@ int
 gsl_interp2d_init (gsl_interp2d * interp, const double xarr[], const double yarr[],
                    const double zarr[], const size_t xsize, const size_t ysize)
 {
-  size_t i;
+  size_t i = 0;
 
   if (xsize != interp->xsize || ysize != interp->ysize)
     {
@@ -180,7 +182,7 @@ gsl_interp2d_eval (const gsl_interp2d * interp, const double xarr[],
                    const double x, const double y,
                    gsl_interp_accel * xa, gsl_interp_accel * ya)
 {
-  double z;
+  double z = NAN;
   int status = gsl_interp2d_eval_e(interp, xarr, yarr, zarr, x, y, xa, ya, &z);
   DISCARD_STATUS(status)
   return z;
@@ -196,7 +198,7 @@ gsl_interp2d_eval_extrap (const gsl_interp2d * interp,
                           gsl_interp_accel * xa,
                           gsl_interp_accel * ya)
 {
-  double z;
+  double z = NAN;
   int status =
     interp2d_eval_extrap(interp->type->eval, interp,
                          xarr, yarr, zarr, x, y, xa, ya, &z);
@@ -246,7 +248,7 @@ gsl_interp2d_eval_deriv_x (const gsl_interp2d * interp, const double xarr[],
                            const double x, const double y,
                            gsl_interp_accel * xa, gsl_interp_accel * ya)
 {
-  double z;
+  double z = NAN;
   int status = gsl_interp2d_eval_deriv_x_e(interp, xarr, yarr, zarr, x, y, xa, ya, &z);
   DISCARD_STATUS(status)
   return z;
@@ -268,7 +270,7 @@ gsl_interp2d_eval_deriv_y (const gsl_interp2d * interp, const double xarr[],
                            const double x, const double y,
                            gsl_interp_accel * xa, gsl_interp_accel * ya)
 {
-  double z;
+  double z = NAN;
   int status = gsl_interp2d_eval_deriv_y_e(interp, xarr, yarr, zarr, x, y, xa, ya, &z);
   DISCARD_STATUS(status)
   return z;
@@ -290,7 +292,7 @@ gsl_interp2d_eval_deriv_xx (const gsl_interp2d * interp, const double xarr[],
                             const double x, const double y,
                             gsl_interp_accel * xa, gsl_interp_accel * ya)
 {
-  double z;
+  double z = NAN;
   int status = gsl_interp2d_eval_deriv_xx_e(interp, xarr, yarr, zarr, x, y, xa, ya, &z);
   DISCARD_STATUS(status)
   return z;
@@ -312,7 +314,7 @@ gsl_interp2d_eval_deriv_yy (const gsl_interp2d * interp, const double xarr[],
                             const double x, const double y,
                             gsl_interp_accel * xa, gsl_interp_accel * ya)
 {
-  double z;
+  double z = NAN;
   int status = gsl_interp2d_eval_deriv_yy_e(interp, xarr, yarr, zarr, x, y, xa, ya, &z);
   DISCARD_STATUS(status)
   return z;
@@ -334,7 +336,7 @@ gsl_interp2d_eval_deriv_xy (const gsl_interp2d * interp, const double xarr[],
                             const double x, const double y,
                             gsl_interp_accel * xa, gsl_interp_accel * ya)
 {
-  double z;
+  double z = NAN;
   int status = gsl_interp2d_eval_deriv_xy_e(interp, xarr, yarr, zarr, x, y, xa, ya, &z);
   DISCARD_STATUS(status)
   return z;

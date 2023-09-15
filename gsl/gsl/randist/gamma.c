@@ -51,7 +51,7 @@ gsl_ran_gamma_knuth (const gsl_rng * r, const double a, const double b)
     {
       return b * gsl_ran_gamma_int (r, na);
     }
-  else if (na == 0)
+  if (na == 0)
     {
       return b * gamma_frac (r, a);
     }
@@ -96,10 +96,10 @@ gamma_large (const gsl_rng * r, const double a)
      faster one, we are told, can be found in: J. H. Ahrens and
      U. Dieter, Computing 12 (1974) 223-246.  */
 
-  double sqa;
-  double x;
-  double y;
-  double v;
+  double sqa = NAN;
+  double x = NAN;
+  double y = NAN;
+  double v = NAN;
   sqa = sqrt (2 * a - 1);
   do
     {
@@ -122,11 +122,11 @@ gamma_frac (const gsl_rng * r, const double a)
   /* This is exercise 16 from Knuth; see page 135, and the solution is
      on page 551.  */
 
-  double p;
-  double q;
-  double x;
-  double u;
-  double v;
+  double p = NAN;
+  double q = NAN;
+  double x = NAN;
+  double u = NAN;
+  double v = NAN;
 
   if (a == 0) {
     return 0;
@@ -163,9 +163,9 @@ gsl_ran_gamma_pdf (const double x, const double a, const double b)
     }
   if (x == 0)
     {
-      if (a == 1)
+      if (a == 1) {
         return 1/b ;
-      else
+      } 
         return 0 ;
     }
   else if (a == 1)
@@ -174,7 +174,7 @@ gsl_ran_gamma_pdf (const double x, const double a, const double b)
     }
   else 
     {
-      double p;
+      double p = NAN;
       double lngamma = gsl_sf_lngamma (a);
       p = exp ((a - 1) * log (x/b) - x/b - lngamma)/b;
       return p;
@@ -208,9 +208,9 @@ gsl_ran_gamma (const gsl_rng * r, const double a, const double b)
     }
 
   {
-    double x;
-    double v;
-    double u;
+    double x = NAN;
+    double v = NAN;
+    double u = NAN;
     double d = a - 1.0 / 3.0;
     double c = (1.0 / 3.0) / sqrt (d);
 

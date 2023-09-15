@@ -49,7 +49,7 @@ static double legendre_Pmm(int m, double x)
     double p_mm = 1.0;
     double root_factor = sqrt(1.0-x)*sqrt(1.0+x);
     double fact_coeff = 1.0;
-    int i;
+    int i = 0;
     for(i=1; i<=m; i++)
     {
       p_mm *= -fact_coeff * root_factor;
@@ -335,7 +335,7 @@ gsl_sf_legendre_Plm_e(const int l, const int m, const double x, gsl_sf_result * 
       result->err = err_amp * 2.0 * GSL_DBL_EPSILON * fabs(p_mmp1);
       return GSL_SUCCESS;
     }
-    else{
+    
       /* upward recurrence: (l-m) P(l,m) = (2l-1) z P(l-1,m) - (l+m-1) P(l-2,m)
        * start at P(m,m), P(m+1,m)
        */
@@ -355,7 +355,7 @@ gsl_sf_legendre_Plm_e(const int l, const int m, const double x, gsl_sf_result * 
       result->err = err_amp * (0.5*(l-m) + 1.0) * GSL_DBL_EPSILON * fabs(p_ell);
 
       return GSL_SUCCESS;
-    }
+   
   }
 }
 
@@ -396,10 +396,10 @@ gsl_sf_legendre_sphPlm_e(const int l, int m, const double x, gsl_sf_result * res
     double sr = NAN;
     const double sgn = ( GSL_IS_ODD(m) ? -1.0 : 1.0);
     const double y_mmp1_factor = x * sqrt(2.0*m + 3.0);
-    double y_mm;
-    double y_mm_err;
-    double y_mmp1;
-    double y_mmp1_err;
+    double y_mm = NAN;
+    double y_mm_err = NAN;
+    double y_mmp1 = NAN;
+    double y_mmp1_err = NAN;
     gsl_sf_log_1plusx_e(-x*x, &lncirc);
     gsl_sf_lnpoch_e(m, 0.5, &lnpoch);  /* Gamma(m+1/2)/Gamma(m) */
     lnpre_val = -0.25*M_LNPI + 0.5 * (lnpoch.val + m*lncirc.val);
@@ -426,7 +426,7 @@ gsl_sf_legendre_sphPlm_e(const int l, int m, const double x, gsl_sf_result * res
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(y_mmp1);
       return GSL_SUCCESS;
     }
-    else{
+    
       double y_ell = 0.0;
       double y_ell_err = 0.0;
       int ell;
@@ -450,7 +450,7 @@ gsl_sf_legendre_sphPlm_e(const int l, int m, const double x, gsl_sf_result * res
       result->err  = y_ell_err + (0.5*(l-m) + 1.0) * GSL_DBL_EPSILON * fabs(y_ell);
 
       return GSL_SUCCESS;
-    }
+   
   }
 }
 
@@ -497,7 +497,7 @@ gsl_sf_legendre_Plm_array(const int lmax, const int m, const double x, double * 
       result_array[1] = p_mmp1;
       return GSL_SUCCESS;
     }
-    else {
+    
       double p_ellm2 = p_mm;
       double p_ellm1 = p_mmp1;
       double p_ell = 0.0;
@@ -514,7 +514,7 @@ gsl_sf_legendre_Plm_array(const int lmax, const int m, const double x, double * 
       }
 
       return GSL_SUCCESS;
-    }
+   
   }
 }
 
@@ -582,7 +582,8 @@ gsl_sf_legendre_Plm_deriv_array(
           const double diff_a = 1.0 + x;
           const double diff_b = 1.0 - x;
           result_deriv_array[0] = - m * x / (diff_a * diff_b) * result_array[0];
-          if(lmax-m >= 1) result_deriv_array[1] = (2.0 * m + 1.0) * (x * result_deriv_array[0] + result_array[0]);
+          if(lmax-m >= 1) { result_deriv_array[1] = (2.0 * m + 1.0) * (x * result_deriv_array[0] + result_array[0]);
+}
           for(ell = m+2; ell <= lmax; ell++)
           {
             result_deriv_array[ell-m] = - (ell * x * result_array[ell-m] - (ell+m) * result_array[ell-1-m]) / (diff_a * diff_b);
@@ -644,8 +645,8 @@ gsl_sf_legendre_sphPlm_array(const int lmax, int m, const double x, double * res
       return GSL_SUCCESS;
     }
     else{
-      double y_ell;
-      int ell;
+      double y_ell = NAN;
+      int ell = 0;
 
       result_array[0] = y_mm;
       result_array[1] = y_mmp1;
@@ -728,7 +729,8 @@ gsl_sf_legendre_sphPlm_deriv_array(
         const double diff_a = 1.0 + x;
         const double diff_b = 1.0 - x;
         result_deriv_array[0] = - m * x / (diff_a * diff_b) * result_array[0];
-        if(lmax-m >= 1) result_deriv_array[1] = sqrt(2.0 * m + 3.0) * (x * result_deriv_array[0] + result_array[0]);
+        if(lmax-m >= 1) { result_deriv_array[1] = sqrt(2.0 * m + 3.0) * (x * result_deriv_array[0] + result_array[0]);
+}
         for(ell = m+2; ell <= lmax; ell++)
         {
           const double c1 = sqrt(((2.0*ell+1.0)/(2.0*ell-1.0)) * ((double)(ell-m)/(double)(ell+m)));
@@ -737,10 +739,10 @@ gsl_sf_legendre_sphPlm_deriv_array(
         return GSL_SUCCESS;
      
     }
-    else
-    {
+    
+    
       return stat_array;
-    }
+   
   }
 }
 

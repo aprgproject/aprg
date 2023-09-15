@@ -88,8 +88,8 @@ gsl_poly_complex_solve_quadratic (double a, double b, double c,
 
       return 2;
     }
-  else
-    {
+  
+    
       double s = fabs (0.5 * sqrt (-disc) / a);
 
       GSL_REAL (*z0) = -0.5 * b / a;
@@ -99,5 +99,5 @@ gsl_poly_complex_solve_quadratic (double a, double b, double c,
       GSL_IMAG (*z1) = s;
 
       return 2;
-    }
+   
 }

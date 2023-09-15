@@ -39,10 +39,10 @@ gsl_integration_qaws (gsl_function * f,
                       gsl_integration_workspace * workspace,
                       double *result, double *abserr)
 {
-  double area;
-  double errsum;
-  double result0;
-  double abserr0;
+  double area = NAN;
+  double errsum = NAN;
+  double result0 = NAN;
+  double abserr0 = NAN;
   double tolerance = NAN;
   size_t iteration = 0;
   int roundoff_type1 = 0;
@@ -75,12 +75,12 @@ gsl_integration_qaws (gsl_function * f,
   /* perform the first integration */
 
   {
-    double area1;
-    double area2;
-    double error1;
-    double error2;
-    int err_reliable1;
-    int err_reliable2;
+    double area1 = NAN;
+    double area2 = NAN;
+    double error1 = NAN;
+    double error2 = NAN;
+    int err_reliable1 = 0;
+    int err_reliable2 = 0;
     double a1 = a;
     double b1 = 0.5 * (a + b);
     double a2 = b1;
@@ -133,22 +133,22 @@ gsl_integration_qaws (gsl_function * f,
 
   do
     {
-      double a1;
-      double b1;
-      double a2;
-      double b2;
-      double a_i;
-      double b_i;
-      double r_i;
-      double e_i;
+      double a1 = NAN;
+      double b1 = NAN;
+      double a2 = NAN;
+      double b2 = NAN;
+      double a_i = NAN;
+      double b_i = NAN;
+      double r_i = NAN;
+      double e_i = NAN;
       double area1 = 0;
       double area2 = 0;
       double area12 = 0;
       double error1 = 0;
       double error2 = 0;
       double error12 = 0;
-      int err_reliable1;
-      int err_reliable2;
+      int err_reliable1 = 0;
+      int err_reliable2 = 0;
 
       /* Bisect the subinterval with the largest error estimate */
 

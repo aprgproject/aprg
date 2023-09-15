@@ -24,6 +24,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_exp.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -45,8 +46,8 @@ exprel_n_CF(const double N, const double x, gsl_sf_result * result)
   double b1 = 1.0;
   double a2 = -x;
   double b2 = N+1;
-  double an;
-  double bn;
+  double an = NAN;
+  double bn = NAN;
 
   double fn = NAN;
 
@@ -157,7 +158,7 @@ int gsl_sf_exp_mult_e(const double x, const double y, gsl_sf_result * result)
     result->err = (2.0 + fabs(x)) * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     const double ly  = log(ay);
     const double lnr = x + ly;
 
@@ -179,7 +180,7 @@ int gsl_sf_exp_mult_e(const double x, const double y, gsl_sf_result * result)
       result->err += 2.0 * GSL_DBL_EPSILON * (M + N + 1.0) * fabs(result->val);
       return GSL_SUCCESS;
     }
-  }
+ 
 }
 
 
@@ -202,7 +203,7 @@ int gsl_sf_exp_mult_e10_e(const double x, const double y, gsl_sf_result_e10 * re
     result->e10 = 0;
     return GSL_SUCCESS;
   }
-  else {
+  
     const double ly  = log(ay);
     const double l10_val = (x + ly)/M_LN10;
 
@@ -225,7 +226,7 @@ int gsl_sf_exp_mult_e10_e(const double x, const double y, gsl_sf_result_e10 * re
 
       return GSL_SUCCESS;
     }
-  }
+ 
 }
 
 
@@ -249,7 +250,7 @@ int gsl_sf_exp_mult_err_e(const double x, const double dx,
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     const double ly  = log(ay);
     const double lnr = x + ly;
 
@@ -273,7 +274,7 @@ int gsl_sf_exp_mult_err_e(const double x, const double dx,
       result->err += eMN * eab * fabs(dx);
       return GSL_SUCCESS;
     }
-  }
+ 
 }
 
 
@@ -299,7 +300,7 @@ int gsl_sf_exp_mult_err_e10_e(const double x, const double dx,
     result->e10 = 0;
     return GSL_SUCCESS;
   }
-  else {
+  
     const double ly  = log(ay);
     const double l10_val = (x + ly)/M_LN10;
 
@@ -322,7 +323,7 @@ int gsl_sf_exp_mult_err_e10_e(const double x, const double dx,
 
       return GSL_SUCCESS;
     }
-  }
+ 
 }
 
 
@@ -340,7 +341,7 @@ int gsl_sf_expm1_e(const double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(x < cut) {
+  if(x < cut) {
     result->val = x * (1.0 + 0.5*x*(1.0 + x/3.0*(1.0 + 0.25*x*(1.0 + 0.2*x))));
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
@@ -370,7 +371,7 @@ int gsl_sf_exprel_e(const double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(x < cut) {
+  if(x < cut) {
     result->val = (1.0 + 0.5*x*(1.0 + x/3.0*(1.0 + 0.25*x*(1.0 + 0.2*x))));
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
@@ -400,7 +401,7 @@ int gsl_sf_exprel_2_e(double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(x < cut) {
+  if(x < cut) {
     result->val = (1.0 + 1.0/3.0*x*(1.0 + 0.25*x*(1.0 + 0.2*x*(1.0 + 1.0/6.0*x))));
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
@@ -472,23 +473,23 @@ gsl_sf_exprel_n_e(const int N, const double x, gsl_sf_result * result)
        */
       double ln_x = log(x);
       gsl_sf_result lnf_N;
-      double lg_N;
-      double lnpre_val;
-      double lnpre_err;
+      double lg_N = NAN;
+      double lnpre_val = NAN;
+      double lnpre_err = NAN;
       gsl_sf_lnfact_e(N, &lnf_N);    /* log(N!)       */
       lg_N  = lnf_N.val - log(N);       /* log(Gamma(N)) */
       lnpre_val  = x + lnf_N.val - N*ln_x;
       lnpre_err  = GSL_DBL_EPSILON * (fabs(x) + fabs(lnf_N.val) + fabs(N*ln_x));
       lnpre_err += lnf_N.err;
       if(lnpre_val < GSL_LOG_DBL_MAX - 5.0) {
-        int stat_eG;
+        int stat_eG = 0;
         gsl_sf_result bigG_ratio;
         gsl_sf_result pre;
         int stat_ex = gsl_sf_exp_err_e(lnpre_val, lnpre_err, &pre);
         double ln_bigG_ratio_pre = -x + (N-1)*ln_x - lg_N;
         double bigGsum = 1.0;
         double term = 1.0;
-        int k;
+        int k = 0;
         for(k=1; k<N; k++) {
           term *= (N-k)/x;
           bigGsum += term;
@@ -501,11 +502,11 @@ gsl_sf_exprel_n_e(const int N, const double x, gsl_sf_result * result)
           result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
           return stat_ex;
         }
-        else {
+        
           result->val = 0.0;
           result->err = 0.0;
           return stat_eG;
-        }
+       
       }
       else {
         OVERFLOW_ERROR(result);
@@ -521,7 +522,7 @@ gsl_sf_exprel_n_e(const int N, const double x, gsl_sf_result * result)
        */
       double sum  = 1.0;
       double term = 1.0;
-      int k;
+      int k = 0;
       for(k=1; k<N; k++) {
         term *= (N-k)/x;
         sum  += term;

@@ -26,6 +26,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_poly.h>
+#include <math.h>
 
 /*
  * This module implements a 2D subspace trust region subproblem method,
@@ -391,11 +392,11 @@ subspace2D_preloop(const void * vtrust_state, void * vstate)
       const size_t p = state->p;
       size_t i = 0;
       gsl_matrix_view JQ = gsl_matrix_submatrix(state->JQ, 0, 0, state->n, GSL_MIN(2, p));
-      double B00;
-      double B10;
-      double B11;
-      double g0;
-      double g1;
+      double B00 = NAN;
+      double B10 = NAN;
+      double B11 = NAN;
+      double g0 = NAN;
+      double g1 = NAN;
 
       /* compute subg */
       gsl_vector_memcpy(state->workp, trust_state->g);
@@ -520,8 +521,8 @@ subspace2D_step(const void * vtrust_state, const double delta,
            */
           for (i = 0; i < 4; ++i)
             {
-              double cost;
-              double normx;
+              double cost = NAN;
+              double normx = NAN;
 
               /*fprintf(stderr, "root: %.12e + %.12e i\n",
                       z[2*i], z[2*i+1]);*/

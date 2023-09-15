@@ -75,8 +75,8 @@ gsl_ran_wishart (const gsl_rng * r,
       /* result: X = L A A^T L^T */
 
       size_t d = L->size1;
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* insure the upper part of A is zero before filling its lower part */
       gsl_matrix_set_zero(work);
@@ -157,12 +157,12 @@ gsl_ran_wishart_log_pdf (const gsl_matrix * X,
   else
     {
       size_t d = L->size1;
-      size_t i;
+      size_t i = 0;
       int status = 0;
-      double log_mv_Ga;
-      double log_det_V;
-      double log_det_X;
-      double tr_Vinv_X;
+      double log_mv_Ga = NAN;
+      double log_det_V = NAN;
+      double log_det_X = NAN;
+      double tr_Vinv_X = NAN;
 
       /* compute the log of the multivariate Gamma */
       log_mv_Ga = d * (d-1) * 0.25 * log(M_PI);

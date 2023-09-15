@@ -45,7 +45,10 @@ gsl_ran_tdist (const gsl_rng * r, const double nu)
     }
   
     
-      double Y1, Y2, Z, t;
+      double Y1;
+      double Y2;
+      double Z;
+      double t;
       do
         {
           Y1 = gsl_ran_ugaussian (r);

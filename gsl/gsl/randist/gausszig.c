@@ -166,11 +166,11 @@ static const double wtab[128] = {
 double
 gsl_ran_gaussian_ziggurat (const gsl_rng * r, const double sigma)
 {
-  unsigned long int i;
-  unsigned long int j;
+  unsigned long int i = 0;
+  unsigned long int j = 0;
   int sign = 0;
-  double x;
-  double y;
+  double x = NAN;
+  double y = NAN;
 
   const unsigned long int range = r->type->max - r->type->min;
   const unsigned long int offset = r->type->min;
@@ -207,9 +207,9 @@ gsl_ran_gaussian_ziggurat (const gsl_rng * r, const double sigma)
 
       if (i < 127)
         {
-          double y0;
-          double y1;
-          double U1;
+          double y0 = NAN;
+          double y1 = NAN;
+          double U1 = NAN;
           y0 = ytab[i];
           y1 = ytab[i + 1];
           U1 = gsl_rng_uniform (r);
@@ -217,8 +217,8 @@ gsl_ran_gaussian_ziggurat (const gsl_rng * r, const double sigma)
         }
       else
         {
-          double U1;
-          double U2;
+          double U1 = NAN;
+          double U2 = NAN;
           U1 = 1.0 - gsl_rng_uniform (r);
           U2 = gsl_rng_uniform (r);
           x = PARAM_R - log (U1) / PARAM_R;

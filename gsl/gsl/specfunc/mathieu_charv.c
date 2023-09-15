@@ -20,6 +20,7 @@
 /* Author:  L. Johnson */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -36,10 +37,10 @@ static double solve_cubic(double c2, double c1, double c0);
 static double ceer(int order, double qq, double aa, int nterms)
 {
 
-  double term;
-  double term1;
-  int ii;
-  int n1;
+  double term = NAN;
+  double term1 = NAN;
+  int ii = 0;
+  int n1 = 0;
   
 
   if (order == 0) {
@@ -77,10 +78,10 @@ static double ceer(int order, double qq, double aa, int nterms)
 
 static double ceor(int order, double qq, double aa, int nterms)
 {
-  double term;
-  double term1;
-  int ii;
-  int n1;
+  double term = NAN;
+  double term1 = NAN;
+  int ii = 0;
+  int n1 = 0;
 
   term = qq;
   n1 = (int)((float)order/2.0 - 0.5);
@@ -102,10 +103,10 @@ static double ceor(int order, double qq, double aa, int nterms)
 
 static double seer(int order, double qq, double aa, int nterms)
 {
-  double term;
-  double term1;
-  int ii;
-  int n1;
+  double term = NAN;
+  double term1 = NAN;
+  int ii = 0;
+  int n1 = 0;
 
   term = 0.0;
   n1 = order/2 - 1;
@@ -127,10 +128,10 @@ static double seer(int order, double qq, double aa, int nterms)
 
 static double seor(int order, double qq, double aa, int nterms)
 {
-  double term;
-  double term1;
-  int ii;
-  int n1;
+  double term = NAN;
+  double term1 = NAN;
+  int ii = 0;
+  int n1 = 0;
 
 
   term = -1.0*qq;
@@ -161,16 +162,16 @@ static double seor(int order, double qq, double aa, int nterms)
 static double asymptotic(int order, double qq)
 {
   double asymp = NAN;
-  double nn;
-  double n2;
-  double n4;
-  double n6;
-  double hh;
-  double ah;
-  double ah2;
-  double ah3;
-  double ah4;
-  double ah5;
+  double nn = NAN;
+  double n2 = NAN;
+  double n4 = NAN;
+  double n6 = NAN;
+  double hh = NAN;
+  double ah = NAN;
+  double ah2 = NAN;
+  double ah3 = NAN;
+  double ah4 = NAN;
+  double ah5 = NAN;
 
 
   /* Set up temporary variables to simplify the readability. */
@@ -201,11 +202,11 @@ static double asymptotic(int order, double qq)
 /* Solve the cubic x^3 + c2*x^2 + c1*x + c0 = 0 */
 static double solve_cubic(double c2, double c1, double c0)
 {
-  double qq;
-  double rr;
-  double ww;
-  double ss;
-  double tt;
+  double qq = NAN;
+  double rr = NAN;
+  double ww = NAN;
+  double ss = NAN;
+  double tt = NAN;
 
   
   qq = (3*c1 - c2*c2)/9;
@@ -234,9 +235,9 @@ static double solve_cubic(double c2, double c1, double c0)
 static double approx_c(int order, double qq)
 {
   double approx = NAN;
-  double c0;
-  double c1;
-  double c2;
+  double c0 = NAN;
+  double c1 = NAN;
+  double c2 = NAN;
 
 
   if (order < 0)
@@ -330,9 +331,9 @@ static double approx_c(int order, double qq)
 static double approx_s(int order, double qq)
 {
   double approx = NAN;
-  double c0;
-  double c1;
-  double c2;
+  double c0 = NAN;
+  double c1 = NAN;
+  double c2 = NAN;
 
   
   if (order < 1)
@@ -413,20 +414,20 @@ static double approx_s(int order, double qq)
 
 int gsl_sf_mathieu_a_e(int order, double qq, gsl_sf_result *result)
 {
-  int even_odd;
+  int even_odd = 0;
   int nterms = 50;
-  int ii;
+  int ii = 0;
   int counter = 0;
   int maxcount = 1000;
   int dir = 0;  /* step direction for new search */
-  double a1;
-  double a2;
-  double fa;
-  double fa1;
-  double dela;
-  double aa_orig;
+  double a1 = NAN;
+  double a2 = NAN;
+  double fa = NAN;
+  double fa1 = NAN;
+  double dela = NAN;
+  double aa_orig = NAN;
   double da = 0.025;
-  double aa;
+  double aa = NAN;
   double aa_approx = NAN;  /* current approximation for solution */
 
 
@@ -556,20 +557,20 @@ int gsl_sf_mathieu_a_e(int order, double qq, gsl_sf_result *result)
 
 int gsl_sf_mathieu_b_e(int order, double qq, gsl_sf_result *result)
 {
-  int even_odd;
+  int even_odd = 0;
   int nterms = 50;
-  int ii;
+  int ii = 0;
   int counter = 0;
   int maxcount = 1000;
   int dir = 0;  /* step direction for new search */
-  double a1;
-  double a2;
-  double fa;
-  double fa1;
-  double dela;
-  double aa_orig;
+  double a1 = NAN;
+  double a2 = NAN;
+  double fa = NAN;
+  double fa1 = NAN;
+  double dela = NAN;
+  double aa_orig = NAN;
   double da = 0.025;
-  double aa;
+  double aa = NAN;
   double aa_approx = NAN;  /* current approximation for solution */
 
 
@@ -790,8 +791,8 @@ int gsl_sf_mathieu_a_array(int order_min, int order_max, double qq, gsl_sf_mathi
   unsigned int even_order = work->even_order;
   unsigned int odd_order = work->odd_order;
   unsigned int extra_values = work->extra_values;
-  unsigned int ii;
-  unsigned int jj;
+  unsigned int ii = 0;
+  unsigned int jj = 0;
   int status = 0;
   double *tt = work->tt;
   double *dd = work->dd;
@@ -902,8 +903,8 @@ int gsl_sf_mathieu_b_array(int order_min, int order_max, double qq, gsl_sf_mathi
   unsigned int even_order = work->even_order-1;
   unsigned int odd_order = work->odd_order;
   unsigned int extra_values = work->extra_values;
-  unsigned int ii;
-  unsigned int jj;
+  unsigned int ii = 0;
+  unsigned int jj = 0;
   double *zz = work->zz;
   double *bb = work->bb;
   gsl_matrix_view mat;

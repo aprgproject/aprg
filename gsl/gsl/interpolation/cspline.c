@@ -258,8 +258,8 @@ cspline_eval (const void * vstate,
 {
   const cspline_state_t *state = (const cspline_state_t *) vstate;
 
-  double x_lo;
-  double x_hi;
+  double x_lo = NAN;
+  double x_hi = NAN;
   double dx = NAN;
   size_t index = 0;
   
@@ -282,9 +282,9 @@ cspline_eval (const void * vstate,
       const double y_hi = y_array[index + 1];
       const double dy = y_hi - y_lo;
       double delx = x - x_lo;
-      double b_i;
-      double c_i;
-      double d_i; 
+      double b_i = NAN;
+      double c_i = NAN;
+      double d_i = NAN; 
       coeff_calc(state->c, dy, dx, index,  &b_i, &c_i, &d_i);
       *y = y_lo + delx * (b_i + delx * (c_i + delx * d_i));
       return GSL_SUCCESS;
@@ -307,8 +307,8 @@ cspline_eval_deriv (const void * vstate,
 {
   const cspline_state_t *state = (const cspline_state_t *) vstate;
 
-  double x_lo;
-  double x_hi;
+  double x_lo = NAN;
+  double x_hi = NAN;
   double dx = NAN;
   size_t index = 0;
   
@@ -331,9 +331,9 @@ cspline_eval_deriv (const void * vstate,
       const double y_hi = y_array[index + 1];
       const double dy = y_hi - y_lo;
       double delx = x - x_lo;
-      double b_i;
-      double c_i;
-      double d_i; 
+      double b_i = NAN;
+      double c_i = NAN;
+      double d_i = NAN; 
       coeff_calc(state->c, dy, dx, index,  &b_i, &c_i, &d_i);
       *dydx = b_i + delx * (2.0 * c_i + 3.0 * d_i * delx);
       return GSL_SUCCESS;
@@ -356,8 +356,8 @@ cspline_eval_deriv2 (const void * vstate,
 {
   const cspline_state_t *state = (const cspline_state_t *) vstate;
 
-  double x_lo;
-  double x_hi;
+  double x_lo = NAN;
+  double x_hi = NAN;
   double dx = NAN;
   size_t index = 0;
   
@@ -380,9 +380,9 @@ cspline_eval_deriv2 (const void * vstate,
       const double y_hi = y_array[index + 1];
       const double dy = y_hi - y_lo;
       double delx = x - x_lo;
-      double b_i;
-      double c_i;
-      double d_i;
+      double b_i = NAN;
+      double c_i = NAN;
+      double d_i = NAN;
       coeff_calc(state->c, dy, dx, index,  &b_i, &c_i, &d_i);
       *y_pp = 2.0 * c_i + 6.0 * d_i * delx;
       return GSL_SUCCESS;
@@ -405,9 +405,9 @@ cspline_eval_integ (const void * vstate,
 {
   const cspline_state_t *state = (const cspline_state_t *) vstate;
 
-  size_t i;
-  size_t index_a;
-  size_t index_b;
+  size_t i = 0;
+  size_t index_a = 0;
+  size_t index_b = 0;
   
   if (acc != 0)
     {
@@ -431,9 +431,9 @@ cspline_eval_integ (const void * vstate,
     const double dx = x_hi - x_lo;
     const double dy = y_hi - y_lo;
     if(dx != 0.0) {
-      double b_i;
-      double c_i;
-      double d_i; 
+      double b_i = NAN;
+      double c_i = NAN;
+      double d_i = NAN; 
       coeff_calc(state->c, dy, dx, i,  &b_i, &c_i, &d_i);
       
       if (i == index_a || i == index_b)

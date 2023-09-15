@@ -285,12 +285,12 @@ gsl_integration_glfixed (const gsl_function *f,
   const double * const x = t->x;
   const double * const w = t->w;
   const int n = t->n;
-  double A;
-  double B;
-  double Ax;
-  double s;
-  int i;
-  int m;
+  double A = NAN;
+  double B = NAN;
+  double Ax = NAN;
+  double s = NAN;
+  int i = 0;
+  int m = 0;
 
   m = (n + 1) >> 1;
   A = 0.5 * (b - a);
@@ -383,24 +383,24 @@ static double ltbl[1024] = {0.00000000000000000000, 0.00000000000000000000, 0.50
 static void 
 gauss_legendre_tbl(int n, double* x, double* w, double eps)
 {
-  double x0;
-  double x1;
-  double dx; /* Abscissas */
-  double w0;
-  double w1;
-  double dw; /* Weights */
-  double P0;
-  double P_1;
-  double P_2; /* Legendre polynomial values */
+  double x0 = NAN;
+  double x1 = NAN;
+  double dx = NAN; /* Abscissas */
+  double w0 = NAN;
+  double w1 = NAN;
+  double dw = NAN; /* Weights */
+  double P0 = NAN;
+  double P_1 = NAN;
+  double P_2 = NAN; /* Legendre polynomial values */
   double dpdx = NAN;   /* Legendre polynomial derivative */
-  int i;
-  int j;
-  int k;
-  int m;   /* Iterators */
-  double t0;
-  double t1;
-  double t2;
-  double t3;
+  int i = 0;
+  int j = 0;
+  int k = 0;
+  int m = 0;   /* Iterators */
+  double t0 = NAN;
+  double t1 = NAN;
+  double t2 = NAN;
+  double t3 = NAN;
 
   m = (n + 1) >> 1;
 

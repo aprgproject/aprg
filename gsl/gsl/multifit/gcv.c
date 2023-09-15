@@ -380,9 +380,9 @@ gcv_func(double lambda, void * params)
   const size_t p = S->size;
   size_t i = 0;
   double lambda_sq = lambda * lambda;
-  double G;
-  double d;
-  double norm;
+  double G = NAN;
+  double d = NAN;
+  double norm = NAN;
   double sumf = 0.0;
 
   /* compute workp = 1 - filter_factors */

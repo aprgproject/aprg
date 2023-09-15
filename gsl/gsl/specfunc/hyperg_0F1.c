@@ -127,14 +127,14 @@ gsl_sf_hyperg_0F1_e(double c, double x, gsl_sf_result * result)
       result->err = 0.0;
       return stat_J;
     }
-    else {
+    
       const double tl = log(-x)*0.5*(1.0-c);
       double ln_pre_val = lg_c.val + tl;
       double ln_pre_err = lg_c.err + 2.0 * GSL_DBL_EPSILON * fabs(tl);
       return gsl_sf_exp_mult_err_e(ln_pre_val, ln_pre_err,
                                       sgn*Jcm1.val, Jcm1.err,
                                       result);
-    }
+   
   }
   else if(x == 0.0) {
     result->val = 1.0;
@@ -157,14 +157,14 @@ gsl_sf_hyperg_0F1_e(double c, double x, gsl_sf_result * result)
       result->err = 0.0;
       return stat_I;
     }
-    else {
+    
       const double tl = log(x)*0.5*(1.0-c);
       const double ln_pre_val = lg_c.val + tl;
       const double ln_pre_err = lg_c.err + 2.0 * GSL_DBL_EPSILON * fabs(tl);
       return gsl_sf_exp_mult_err_e(ln_pre_val, ln_pre_err,
                                       sgn*Icm1.val, Icm1.err,
                                       result);
-    }
+   
   }
 }
 

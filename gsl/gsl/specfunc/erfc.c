@@ -258,8 +258,8 @@ log_erfc_asymptotic(double x)
 int gsl_sf_erfc_e(double x, gsl_sf_result * result)
 {
   const double ax = fabs(x);
-  double e_val;
-  double e_err;
+  double e_val = NAN;
+  double e_err = NAN;
 
   /* CHECK_POINTER(result) */
 
@@ -346,14 +346,14 @@ int gsl_sf_log_erfc_e(double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     gsl_sf_result result_erfc;
     gsl_sf_erfc_e(x, &result_erfc);
     result->val  = log(result_erfc.val);
     result->err  = fabs(result_erfc.err / result_erfc.val);
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 

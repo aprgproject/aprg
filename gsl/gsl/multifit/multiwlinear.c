@@ -24,6 +24,7 @@
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_linalg.h>
+#include <math.h>
 
 #include "linear_common.c"
 
@@ -77,8 +78,8 @@ gsl_multifit_wlinear_tsvd (const gsl_matrix * X,
   else
     {
       int status = 0;
-      double rnorm;
-      double snorm;
+      double rnorm = NAN;
+      double snorm = NAN;
       gsl_matrix_view A = gsl_matrix_submatrix(work->A, 0, 0, n, p);
       gsl_vector_view b = gsl_vector_subvector(work->t, 0, n);
 
@@ -105,8 +106,8 @@ gsl_multifit_wlinear_tsvd (const gsl_matrix * X,
       /* variance-covariance matrix cov = s2 * (Q S^-1) (Q S^-1)^T */
       {
         const size_t p = X->size2;
-        size_t i;
-        size_t j;
+        size_t i = 0;
+        size_t j = 0;
         gsl_matrix_view QSI = gsl_matrix_submatrix(work->QSI, 0, 0, p, p);
         gsl_vector_view D = gsl_vector_subvector(work->D, 0, p);
 

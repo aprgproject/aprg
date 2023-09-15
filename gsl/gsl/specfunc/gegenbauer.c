@@ -115,7 +115,7 @@ gsl_sf_gegenpoly_n_e(int n, double lambda, double x, gsl_sf_result * result)
       return GSL_SUCCESS;
     }
     
-      int k;
+      int k = 0;
       gsl_sf_result g2;
       gsl_sf_result g3;
       int stat_g2 = gsl_sf_gegenpoly_2_e(lambda, x, &g2);

@@ -24,6 +24,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_log.h>
 #include <gsl/gsl_sf_trig.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -182,8 +183,8 @@ gsl_sf_sin_e(double x, gsl_sf_result * result)
       double sgn_result = sgn_x;
       double y = floor(abs_x/(0.25*M_PI));
       int octant = y - ldexp(floor(ldexp(y,-3)),3);
-      int stat_cs;
-      double z;
+      int stat_cs = 0;
+      double z = NAN;
 
       if(GSL_IS_ODD(octant)) {
         octant += 1;
@@ -254,8 +255,8 @@ gsl_sf_cos_e(double x, gsl_sf_result * result)
       double sgn_result = 1.0;
       double y = floor(abs_x/(0.25*M_PI));
       int octant = y - ldexp(floor(ldexp(y,-3)),3);
-      int stat_cs;
-      double z;
+      int stat_cs = 0;
+      double z = NAN;
 
       if(GSL_IS_ODD(octant)) {
         octant += 1;
@@ -331,9 +332,9 @@ gsl_sf_hypot_e(const double x, const double y, gsl_sf_result * result)
       result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_SUCCESS;
     }
-    else {
+    
       OVERFLOW_ERROR(result);
-    }
+   
  
 }
 
@@ -346,8 +347,8 @@ gsl_sf_complex_sin_e(const double zr, const double zi,
   /* CHECK_POINTER(szi) */
 
   if(fabs(zi) < 1.0) {
-    double ch_m1;
-    double sh;
+    double ch_m1 = NAN;
+    double sh = NAN;
     sinh_series(zi, &sh);
     cosh_m1_series(zi, &ch_m1);
     szr->val = sin(zr)*(ch_m1 + 1.0);
@@ -366,9 +367,9 @@ gsl_sf_complex_sin_e(const double zr, const double zi,
     szi->err = 2.0 * GSL_DBL_EPSILON * fabs(szi->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     OVERFLOW_ERROR_2(szr, szi);
-  }
+ 
 }
 
 
@@ -380,8 +381,8 @@ gsl_sf_complex_cos_e(const double zr, const double zi,
   /* CHECK_POINTER(czi) */
 
   if(fabs(zi) < 1.0) {
-    double ch_m1;
-    double sh;
+    double ch_m1 = NAN;
+    double sh = NAN;
     sinh_series(zi, &sh);
     cosh_m1_series(zi, &ch_m1);
     czr->val =  cos(zr)*(ch_m1 + 1.0);
@@ -400,9 +401,9 @@ gsl_sf_complex_cos_e(const double zr, const double zi,
     czi->err = 2.0 * GSL_DBL_EPSILON * fabs(czi->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     OVERFLOW_ERROR_2(czr,czi);
-  }
+ 
 }
 
 
@@ -481,11 +482,11 @@ int gsl_sf_lncosh_e(const double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     result->val = -M_LN2 + fabs(x);
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 
@@ -706,7 +707,7 @@ int gsl_sf_sinc_e(double x, gsl_sf_result * result)
       result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_SUCCESS;
     }
-    else {
+    
       /* Large arguments must be handled separately.
        */
       const double r = M_PI*ax;
@@ -715,7 +716,7 @@ int gsl_sf_sinc_e(double x, gsl_sf_result * result)
       result->val = s.val/r;
       result->err = s.err/r + 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return stat_s;
-    }
+   
   }
 }
 

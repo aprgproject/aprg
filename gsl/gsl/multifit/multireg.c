@@ -805,8 +805,8 @@ gsl_multifit_linear_lcurve (const gsl_vector * y,
       int status = GSL_SUCCESS;
       const size_t p = work->p;
 
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       gsl_matrix_view A = gsl_matrix_submatrix(work->A, 0, 0, n, p);
       gsl_vector_view S = gsl_vector_subvector(work->S, 0, p);
@@ -941,14 +941,14 @@ gsl_multifit_linear_lcurvature (const gsl_vector * y,
           double dphi_i = 0.0;
           double psi_i = 0.0;
           double dpsi_i = 0.0;
-          double deta_i;
-          double ddeta_i;
-          double drho_i;
-          double ddrho_i;
-          double dlogeta_i;
-          double ddlogeta_i;
-          double dlogrho_i;
-          double ddlogrho_i;
+          double deta_i = NAN;
+          double ddeta_i = NAN;
+          double drho_i = NAN;
+          double ddrho_i = NAN;
+          double dlogeta_i = NAN;
+          double ddlogeta_i = NAN;
+          double dlogrho_i = NAN;
+          double ddlogrho_i = NAN;
           double kappa_i = NAN;
           size_t j = 0;
 
@@ -1027,10 +1027,10 @@ gsl_multifit_linear_lcorner(const gsl_vector *rho,
     {
       int s = GSL_SUCCESS;
       size_t i = 0;
-      double x1;
-      double y1;      /* first point of triangle on L-curve */
-      double x2;
-      double y2;      /* second point of triangle on L-curve */
+      double x1 = NAN;
+      double y1 = NAN;      /* first point of triangle on L-curve */
+      double x2 = NAN;
+      double y2 = NAN;      /* second point of triangle on L-curve */
       double rmin = -1.0; /* minimum radius of curvature */
 
       /* initial values */
@@ -1132,10 +1132,10 @@ gsl_multifit_linear_lcorner2(const gsl_vector *reg_param,
     {
       int s = GSL_SUCCESS;
       size_t i = 0;
-      double x1;
-      double y1;      /* first point of triangle on L-curve */
-      double x2;
-      double y2;      /* second point of triangle on L-curve */
+      double x1 = NAN;
+      double y1 = NAN;      /* first point of triangle on L-curve */
+      double x2 = NAN;
+      double y2 = NAN;      /* second point of triangle on L-curve */
       double rmin = -1.0; /* minimum radius of curvature */
 
       /* initial values */
@@ -1227,8 +1227,8 @@ gsl_multifit_linear_Lk(const size_t p, const size_t k, gsl_matrix *L)
     {
       double c_data[GSL_MULTIFIT_MAXK];
       gsl_vector_view cv = gsl_vector_view_array(c_data, k + 1);
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* zeroth derivative */
       if (k == 0)
@@ -1316,8 +1316,8 @@ gsl_multifit_linear_Lsobolev(const size_t p, const size_t kmax,
   else
     {
       int s = 0;
-      size_t j;
-      size_t k;
+      size_t j = 0;
+      size_t k = 0;
       gsl_vector_view d = gsl_matrix_diagonal(L);
       const double alpha0 = gsl_vector_get(alpha, 0);
 

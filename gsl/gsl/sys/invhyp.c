@@ -42,10 +42,10 @@ gsl_acosh (const double x)
     {
       return 0;
     }
-  else
-    {
+  
+    
       return GSL_NAN;
-    }
+   
 }
 
 double
@@ -95,8 +95,8 @@ gsl_atanh (const double x)
     {
       return s * 0.5 * log1p (2 * a + 2 * a * a / (1 - a));
     }
-  else
-    {
+  
+    
       return x;
-    }
+   
 }

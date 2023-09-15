@@ -313,10 +313,10 @@ dogleg_double_step(const void * vtrust_state, const double delta,
         }
       else
         {
-          double t;
-          double u;
-          double v;
-          double c;
+          double t = NAN;
+          double u = NAN;
+          double v = NAN;
+          double c = NAN;
 
           /* compute: u = ||D^{-1} g||^2 / ||J D^{-2} g||^2 */
           v = state->norm_Dinvg / state->norm_JDinv2g;
@@ -443,9 +443,9 @@ dogleg_beta(const double t, const double delta,
             const gsl_vector * diag, dogleg_state_t * state)
 {
   double beta = NAN;
-  double a;
-  double b;
-  double c;
+  double a = NAN;
+  double b = NAN;
+  double c = NAN;
 
   /* compute: workp = t*dx_gn - dx_sd */
   scaled_addition(t, state->dx_gn, -1.0, state->dx_sd, state->workp);

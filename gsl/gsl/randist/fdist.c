@@ -52,7 +52,7 @@ gsl_ran_fdist_pdf (const double x, const double nu1, const double nu2)
     }
   
     
-      double p;
+      double p = NAN;
       double lglg = (nu1 / 2) * log (nu1) + (nu2 / 2) * log (nu2) ;
 
       double lg12 = gsl_sf_lngamma ((nu1 + nu2) / 2);

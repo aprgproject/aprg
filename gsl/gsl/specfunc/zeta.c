@@ -168,7 +168,7 @@ riemann_zeta_sgt0(double s, gsl_sf_result * result)
     result->err = c.err / (s - 1.0) + GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     double f2 = 1.0 - pow(2.0,-s);
     double f3 = 1.0 - pow(3.0,-s);
     double f5 = 1.0 - pow(5.0,-s);
@@ -176,7 +176,7 @@ riemann_zeta_sgt0(double s, gsl_sf_result * result)
     result->val = 1.0/(f2*f3*f5*f7);
     result->err = 3.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 
@@ -747,8 +747,8 @@ int gsl_sf_hzeta_e(const double s, const double q, gsl_sf_result * result)
        */
       const int jmax = 12;
       const int kmax = 10;
-      int j;
-      int k;
+      int j = 0;
+      int k = 0;
       const double pmax  = pow(kmax + q, -s);
       double scp = s;
       double pcp = pmax / (kmax + q);
@@ -835,7 +835,7 @@ int gsl_sf_zeta_e(const double s, gsl_sf_result * result)
       result->err += GSL_DBL_EPSILON * (fabs(s)+2.0) * fabs(result->val);
       return GSL_ERROR_SELECT_2(stat_g, stat_zoms);
     }
-    else {
+    
       /* The actual zeta function may or may not
        * overflow here. But we have no easy way
        * to calculate it when the prefactor(s)
@@ -847,7 +847,7 @@ int gsl_sf_zeta_e(const double s, gsl_sf_result * result)
        * then just give up.
        */
       OVERFLOW_ERROR(result);
-    }
+   
   }
 }
 
@@ -867,9 +867,9 @@ int gsl_sf_zeta_int_e(const int n, gsl_sf_result * result)
       result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_SUCCESS;
     }
-    else {
+    
       return gsl_sf_zeta_e((double)n, result);
-    }
+   
   }
   else if(n == 1){
     DOMAIN_ERROR(result);
@@ -899,10 +899,10 @@ int gsl_sf_zetam1_e(const double s, gsl_sf_result * result)
   {
     return riemann_zeta_minus_1_intermediate_s(s, result);
   }
-  else
-  {
+  
+  
     return riemann_zeta_minus1_large_s(s, result);
-  }
+ 
 }
 
 
@@ -919,11 +919,11 @@ int gsl_sf_zetam1_int_e(const int n, gsl_sf_result * result)
       result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_SUCCESS;
     }
-    else {
+    
       /* could use gsl_sf_zetam1_e here but subtracting 1 makes no difference
          for such large values, so go straight to the result */
       return gsl_sf_zeta_e((double)n, result);  
-    }
+   
   }
   else if(n == 1){
     DOMAIN_ERROR(result);
@@ -951,7 +951,7 @@ int gsl_sf_eta_int_e(int n, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     /* n < 0 */
 
     if(!GSL_IS_ODD(n)) {
@@ -975,7 +975,7 @@ int gsl_sf_eta_int_e(int n, gsl_sf_result * result)
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_ERROR_SELECT_3(stat_m, stat_p, stat_z);
     }
-  }
+ 
 }
 
 
@@ -999,7 +999,7 @@ int gsl_sf_eta_e(const double s, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     gsl_sf_result z;
     gsl_sf_result p;
     int stat_z = gsl_sf_zeta_e(s, &z);
@@ -1008,7 +1008,7 @@ int gsl_sf_eta_e(const double s, gsl_sf_result * result)
     result->err  = fabs(p.err * (M_LN2*(1.0-s)) * z.val) + z.err * fabs(p.val);
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_ERROR_SELECT_3(stat_m, stat_p, stat_z);
-  }
+ 
 }
 
 

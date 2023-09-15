@@ -54,8 +54,8 @@ forward_jac(const double h, const gsl_vector *x, const gsl_vector *wts,
             gsl_multifit_nlinear_fdf *fdf, const gsl_vector *f, gsl_matrix *J)
 {
   int status = 0;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   double delta = NAN;
 
   for (j = 0; j < fdf->p; ++j)
@@ -113,8 +113,8 @@ center_jac(const double h, const gsl_vector *x, const gsl_vector *wts,
            gsl_multifit_nlinear_fdf *fdf, gsl_matrix *J, gsl_vector *work)
 {
   int status = 0;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   double delta = NAN;
 
   for (j = 0; j < fdf->p; ++j)

@@ -23,6 +23,7 @@
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 /*
 fdfvv()
@@ -80,8 +81,8 @@ fdfvv(const double h, const gsl_vector *x, const gsl_vector *v,
       double fi = gsl_vector_get(f, i);    /* f_i(x) */
       double fip = gsl_vector_get(fvv, i); /* f_i(x + h*v) */
       gsl_vector_const_view row = gsl_matrix_const_row(J, i);
-      double u;
-      double fvvi;
+      double u = NAN;
+      double fvvi = NAN;
 
       /* compute u = sum_{ij} J_{ij} D v_j */
       gsl_blas_ddot(&row.vector, v, &u);

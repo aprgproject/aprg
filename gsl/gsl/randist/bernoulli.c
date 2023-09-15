@@ -54,8 +54,8 @@ gsl_ran_bernoulli_pdf (const unsigned int k, double p)
     {
       return p ;
     }
-  else
-    {
+  
+    
       return 0 ;
-    }
+   
 }

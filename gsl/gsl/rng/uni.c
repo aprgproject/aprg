@@ -161,12 +161,12 @@ uni_get_double (void *vstate)
 static void
 uni_set (void *vstate, unsigned long int s)
 {
-  unsigned int i;
-  unsigned int seed;
-  unsigned int k0;
-  unsigned int k1;
-  unsigned int j0;
-  unsigned int j1;
+  unsigned int i = 0;
+  unsigned int seed = 0;
+  unsigned int k0 = 0;
+  unsigned int k1 = 0;
+  unsigned int j0 = 0;
+  unsigned int j1 = 0;
 
   uni_state_t *state = (uni_state_t *) vstate;
 

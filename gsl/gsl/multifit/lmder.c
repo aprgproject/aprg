@@ -77,20 +77,20 @@ static int
 lmder_alloc (void *vstate, size_t n, size_t p)
 {
   lmder_state_t *state = (lmder_state_t *) vstate;
-  gsl_matrix *r;
-  gsl_matrix *J;
-  gsl_vector *tau;
-  gsl_vector *diag;
-  gsl_vector *qtf;
-  gsl_vector *newton;
-  gsl_vector *gradient;
-  gsl_vector *x_trial;
-  gsl_vector *f_trial;
-  gsl_vector *df;
-  gsl_vector *sdiag;
-  gsl_vector *rptdx;
-  gsl_vector *w;
-  gsl_vector *work1;
+  gsl_matrix *r = NULL;
+  gsl_matrix *J = NULL;
+  gsl_vector *tau = NULL;
+  gsl_vector *diag = NULL;
+  gsl_vector *qtf = NULL;
+  gsl_vector *newton = NULL;
+  gsl_vector *gradient = NULL;
+  gsl_vector *x_trial = NULL;
+  gsl_vector *f_trial = NULL;
+  gsl_vector *df = NULL;
+  gsl_vector *sdiag = NULL;
+  gsl_vector *rptdx = NULL;
+  gsl_vector *w = NULL;
+  gsl_vector *work1 = NULL;
   gsl_permutation *perm = NULL;
 
   J = gsl_matrix_alloc (n, p);

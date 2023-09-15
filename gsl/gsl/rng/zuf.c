@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_rng.h>
 
@@ -87,15 +88,15 @@ zuf_set (void *vstate, unsigned long int s)
   long int ij = 1802;
 
   /* Local variables */
-  long int i;
-  long int j;
-  long int k;
-  long int l;
-  long int m;
-  double x;
-  double y;
-  long int ii;
-  long int jj;
+  long int i = 0;
+  long int j = 0;
+  long int k = 0;
+  long int l = 0;
+  long int m = 0;
+  double x = NAN;
+  double y = NAN;
+  long int ii = 0;
+  long int jj = 0;
 
   zuf_state_t *state = (zuf_state_t *) vstate;
 

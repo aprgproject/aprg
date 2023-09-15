@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_integration.h>
@@ -200,14 +201,14 @@ qags (const gsl_function * f,
       double *result, double *abserr,
       gsl_integration_rule * q)
 {
-  double area;
-  double errsum;
-  double res_ext;
-  double err_ext;
-  double result0;
-  double abserr0;
-  double resabs0;
-  double resasc0;
+  double area = NAN;
+  double errsum = NAN;
+  double res_ext = NAN;
+  double err_ext = NAN;
+  double result0 = NAN;
+  double abserr0 = NAN;
+  double resabs0 = NAN;
+  double resasc0 = NAN;
   double tolerance = NAN;
 
   double ertest = 0;
@@ -299,24 +300,24 @@ qags (const gsl_function * f,
   do
     {
       size_t current_level = 0;
-      double a1;
-      double b1;
-      double a2;
-      double b2;
-      double a_i;
-      double b_i;
-      double r_i;
-      double e_i;
+      double a1 = NAN;
+      double b1 = NAN;
+      double a2 = NAN;
+      double b2 = NAN;
+      double a_i = NAN;
+      double b_i = NAN;
+      double r_i = NAN;
+      double e_i = NAN;
       double area1 = 0;
       double area2 = 0;
       double area12 = 0;
       double error1 = 0;
       double error2 = 0;
       double error12 = 0;
-      double resasc1;
-      double resasc2;
-      double resabs1;
-      double resabs2;
+      double resasc1 = NAN;
+      double resasc2 = NAN;
+      double resabs1 = NAN;
+      double resabs2 = NAN;
       double last_e_i = NAN;
 
       /* Bisect the subinterval with the largest error estimate */

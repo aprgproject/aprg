@@ -161,11 +161,11 @@ uni32_get_double (void *vstate)
 static void
 uni32_set (void *vstate, unsigned long int s)
 {
-  long int seed;
-  long int k0;
-  long int k1;
-  long int j0;
-  long int j1;
+  long int seed = 0;
+  long int k0 = 0;
+  long int k1 = 0;
+  long int j0 = 0;
+  long int j1 = 0;
   int i = 0;
 
   uni32_state_t *state = (uni32_state_t *) vstate;

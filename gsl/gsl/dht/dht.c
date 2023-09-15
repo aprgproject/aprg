@@ -125,8 +125,8 @@ gsl_dht_init(gsl_dht * t, double nu, double xmax)
     GSL_ERROR ("nu is negative", GSL_EDOM);
   }
   else {
-    size_t n;
-    size_t m;
+    size_t n = 0;
+    size_t m = 0;
     int stat_bz = GSL_SUCCESS;
     int stat_J  = 0;
     double jN = NAN;

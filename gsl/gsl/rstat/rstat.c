@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gsl/gsl_math.h>
@@ -70,10 +71,10 @@ int
 gsl_rstat_add(const double x, gsl_rstat_workspace *w)
 {
   double delta = x - w->mean;
-  double delta_n;
-  double delta_nsq;
-  double term1;
-  double n;
+  double delta_n = NAN;
+  double delta_nsq = NAN;
+  double term1 = NAN;
+  double n = NAN;
 
   /* update min and max */
   if (w->n == 0)

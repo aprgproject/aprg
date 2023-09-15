@@ -24,6 +24,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_pow_int.h>
 #include <gsl/gsl_sf_elljac.h>
+#include <math.h>
 
 
 /* GJ: See [Thompson, Atlas for Computing Mathematical Functions] */
@@ -64,10 +65,10 @@ gsl_sf_elljac_e(double u, double m, double * sn, double * cn, double * dn)
     double nu[16];
     double c[16];
     double d[16];
-    double sin_umu;
-    double cos_umu;
-    double t;
-    double r;
+    double sin_umu = NAN;
+    double cos_umu = NAN;
+    double t = NAN;
+    double r = NAN;
     int n = 0;
 
     mu[0] = 1.0;

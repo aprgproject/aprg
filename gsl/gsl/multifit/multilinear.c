@@ -25,6 +25,7 @@
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_linalg.h>
+#include <math.h>
 
 #include "linear_common.c"
 
@@ -93,7 +94,7 @@ gsl_multifit_linear_tsvd (const gsl_matrix * X,
     {
       int status = 0;
       double rnorm = 0.0;
-      double snorm;
+      double snorm = NAN;
 
       /* compute balanced SVD */
       status = gsl_multifit_linear_bsvd (X, work);
@@ -110,8 +111,8 @@ gsl_multifit_linear_tsvd (const gsl_matrix * X,
       {
         double r2 = rnorm * rnorm;
         double s2 = r2 / (double)(n - *rank);
-        size_t i;
-        size_t j;
+        size_t i = 0;
+        size_t j = 0;
         gsl_matrix_view QSI = gsl_matrix_submatrix(work->QSI, 0, 0, p, p);
         gsl_vector_view D = gsl_vector_subvector(work->D, 0, p);
 
@@ -212,8 +213,8 @@ gsl_multifit_linear_est (const gsl_vector * x,
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
       double var = 0;
       
       gsl_blas_ddot(x, c, y);       /* y = x.c */
@@ -350,8 +351,8 @@ multifit_linear_svd (const gsl_matrix * X,
 
       /* compute reciprocal condition number rcond = smin / smax */
       {
-        double smin;
-        double smax;
+        double smin = NAN;
+        double smax = NAN;
         gsl_vector_minmax(&S.vector, &smin, &smax);
         work->rcond = smin / smax;
       }

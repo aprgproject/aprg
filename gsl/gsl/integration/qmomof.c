@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_integration.h>
 #include <gsl/gsl_errno.h>
@@ -184,9 +185,9 @@ compute_moments (double par, double *chebmo)
       /* compute the moments as the solution of a boundary value
          problem using the asyptotic expansion as an endpoint */
       
-      double an2;
-      double ass;
-      double asap;
+      double an2 = NAN;
+      double ass = NAN;
+      double asap = NAN;
       double an = 6;
       size_t k = 0;
 
@@ -252,9 +253,9 @@ compute_moments (double par, double *chebmo)
          problem using the asyptotic expansion as an endpoint */
 
       size_t k = 0;
-      double an2;
-      double ass;
-      double asap;
+      double an2 = NAN;
+      double ass = NAN;
+      double asap = NAN;
       double an = 5;
 
       for (k = 0; k < noeq - 1; k++)

@@ -86,9 +86,9 @@ covar_QRPT (gsl_matrix * r, gsl_permutation * perm,
 
   double tolr = epsrel * fabs(gsl_matrix_get(r, 0, 0));
   const size_t n = r->size2;
-  size_t i;
-  size_t j;
-  size_t k;
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
   size_t kmax = 0;
 
   for (k = 0 ; k < n ; k++)

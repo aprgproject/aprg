@@ -110,9 +110,9 @@ gsl_ran_landau_pdf(const double x)
       -0.1845568670E1, -0.4284640743E1
     };
 
-  double U;
-  double V;
-  double DENLAN;
+  double U = NAN;
+  double V = NAN;
+  double DENLAN = NAN;
 
   V = x;
   if (V < -5.5)
@@ -520,10 +520,10 @@ gsl_ran_landau(const gsl_rng * r)
       44.912465, 46.769077, 48.792279, 51.005773, 53.437996,
       56.123356, 59.103894
     };
-  double X;
-  double U;
-  double V;
-  double RANLAN;
+  double X = NAN;
+  double U = NAN;
+  double V = NAN;
+  double RANLAN = NAN;
   int I = 0;
 
   X = gsl_rng_uniform_pos(r);

@@ -75,14 +75,16 @@ gsl_frexp (const double x, int *e)
     
       double ex = ceil (log (fabs (x)) / M_LN2);
       int ei = (int) ex;
-      double f;
+      double f = NAN;
 
       /* Prevent underflow and overflow of 2**(-ei) */
-      if (ei < DBL_MIN_EXP)
+      if (ei < DBL_MIN_EXP) {
         ei = DBL_MIN_EXP;
+}
 
-      if (ei > -DBL_MIN_EXP)
+      if (ei > -DBL_MIN_EXP) {
         ei = -DBL_MIN_EXP;
+}
 
       f = x * pow (2.0, -ei);
 

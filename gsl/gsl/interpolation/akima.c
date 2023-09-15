@@ -310,9 +310,9 @@ akima_eval_integ (const void * vstate,
 {
   const akima_state_t *state = (const akima_state_t *) vstate;
 
-  size_t i;
-  size_t index_a;
-  size_t index_b;
+  size_t i = 0;
+  size_t index_a = 0;
+  size_t index_b = 0;
 
   if (acc != 0)
     {

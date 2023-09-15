@@ -104,7 +104,7 @@ gsl_sf_bessel_Jnupos_e(const double nu, const double x, gsl_sf_result * result)
      */
     return gsl_sf_bessel_Jnu_asympx_e(nu, x, result);
   }
-  else {
+  
     /* -1/2 <= mu <= 1/2 */
     int N = (int)(nu + 0.5);
     double mu = nu - N;
@@ -170,7 +170,7 @@ gsl_sf_bessel_Jnupos_e(const double nu, const double x, gsl_sf_result * result)
 
       return GSL_ERROR_SELECT_2(stat_CF2, stat_CF1);
     }
-  }
+ 
 }
 
 int

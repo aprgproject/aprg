@@ -382,8 +382,8 @@ hyperg_2F1_reflect(const double a, const double b, const double c,
     double sgn_2 = NAN;
     gsl_sf_result F1;
     gsl_sf_result F2;
-    double d1;
-    double d2;
+    double d1 = NAN;
+    double d2 = NAN;
     gsl_sf_result lng_c;
     gsl_sf_result lng_ad2;
     gsl_sf_result lng_bd2;
@@ -536,16 +536,26 @@ hyperg_2F1_reflect(const double a, const double b, const double c,
   
     /* d not an integer */
 
-    gsl_sf_result pre1, pre2;
-    double sgn1, sgn2;
-    gsl_sf_result F1, F2;
-    int status_F1, status_F2;
+    gsl_sf_result pre1;
+    gsl_sf_result pre2;
+    double sgn1;
+    double sgn2;
+    gsl_sf_result F1;
+    gsl_sf_result F2;
+    int status_F1;
+    int status_F2;
 
     /* These gamma functions appear in the denominator, so we
      * catch their harmless domain errors and set the terms to zero.
      */
-    gsl_sf_result ln_g1ca,  ln_g1cb,  ln_g2a,  ln_g2b;
-    double sgn_g1ca, sgn_g1cb, sgn_g2a, sgn_g2b;
+    gsl_sf_result ln_g1ca;
+    gsl_sf_result ln_g1cb;
+    gsl_sf_result ln_g2a;
+    gsl_sf_result ln_g2b;
+    double sgn_g1ca;
+    double sgn_g1cb;
+    double sgn_g2a;
+    double sgn_g2b;
     int stat_1ca = gsl_sf_lngamma_sgn_e(c-a, &ln_g1ca, &sgn_g1ca);
     int stat_1cb = gsl_sf_lngamma_sgn_e(c-b, &ln_g1cb, &sgn_g1cb);
     int stat_2a  = gsl_sf_lngamma_sgn_e(a, &ln_g2a, &sgn_g2a);
@@ -553,8 +563,12 @@ hyperg_2F1_reflect(const double a, const double b, const double c,
     int ok1 = (stat_1ca == GSL_SUCCESS && stat_1cb == GSL_SUCCESS);
     int ok2 = (stat_2a  == GSL_SUCCESS && stat_2b  == GSL_SUCCESS);
     
-    gsl_sf_result ln_gc,  ln_gd,  ln_gmd;
-    double sgn_gc, sgn_gd, sgn_gmd;
+    gsl_sf_result ln_gc;
+    gsl_sf_result ln_gd;
+    gsl_sf_result ln_gmd;
+    double sgn_gc;
+    double sgn_gd;
+    double sgn_gmd;
     gsl_sf_lngamma_sgn_e( c, &ln_gc,  &sgn_gc);
     gsl_sf_lngamma_sgn_e( d, &ln_gd,  &sgn_gd);
     gsl_sf_lngamma_sgn_e(-d, &ln_gmd, &sgn_gmd);
@@ -618,11 +632,13 @@ hyperg_2F1_reflect(const double a, const double b, const double c,
     result->err += 2.0 * GSL_DBL_EPSILON * (fabs(pre1.val*F1.val) + fabs(pre2.val*F2.val));
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
 
-    if (status_F1)
+    if (status_F1) {
       return status_F1;
+}
 
-    if (status_F2)
+    if (status_F2) {
       return status_F2;
+}
 
     return GSL_SUCCESS;
  
@@ -669,9 +685,9 @@ gsl_sf_hyperg_2F1_e(double a, double b, const double c,
     gsl_sf_result lngamcab;
     gsl_sf_result lngamca;
     gsl_sf_result lngamcb;
-    double lngamc_sgn;
-    double lngamca_sgn;
-    double lngamcb_sgn;
+    double lngamc_sgn = NAN;
+    double lngamca_sgn = NAN;
+    double lngamcb_sgn = NAN;
     int status = 0;
     int stat1 = gsl_sf_lngamma_sgn_e (c, &lngamc, &lngamc_sgn);
     int stat2 = gsl_sf_lngamma_e (c - a - b, &lngamcab);
@@ -734,22 +750,22 @@ gsl_sf_hyperg_2F1_e(double a, double b, const double c,
     if(x < 0.5) {
       return hyperg_2F1_series(a, b, c, x, result);
     }
-    else {
+    
       if(fabs(c) > 10.0) {
         return hyperg_2F1_series(a, b, c, x, result);
       }
       else {
         return hyperg_2F1_reflect(a, b, c, x, result);
       }
-    }
+   
   }
   else {
     /* Either a or b or both large.
      * Introduce some new variables ap,bp so that bp is
      * the larger in magnitude.
      */
-    double ap;
-    double bp; 
+    double ap = NAN;
+    double bp = NAN; 
     if(fabs(a) > fabs(b)) {
       bp = a;
       ap = b;
@@ -813,9 +829,9 @@ gsl_sf_hyperg_2F1_conj_e(const double aR, const double aI, const double c,
     if(x < -0.25) {
       return hyperg_2F1_conj_luke(aR, aI, c, x, result);
     }
-    else {
+    
       return hyperg_2F1_conj_series(aR, aI, c, x, result);
-    }
+   
   }
   else {
     if(x < 0.0) {
@@ -855,8 +871,16 @@ gsl_sf_hyperg_2F1_renorm_e(const double a, const double b, const double c,
     
       /* 2F1 does not terminate early enough, so something survives */
       /* [Abramowitz+Stegun, 15.1.2] */
-      gsl_sf_result g1, g2, g3, g4, g5;
-      double s1, s2, s3, s4, s5;
+      gsl_sf_result g1;
+      gsl_sf_result g2;
+      gsl_sf_result g3;
+      gsl_sf_result g4;
+      gsl_sf_result g5;
+      double s1;
+      double s2;
+      double s3;
+      double s4;
+      double s5;
       int stat = 0;
       stat += gsl_sf_lngamma_sgn_e(a-c+1, &g1, &s1);
       stat += gsl_sf_lngamma_sgn_e(b-c+1, &g2, &s2);
@@ -915,9 +939,11 @@ gsl_sf_hyperg_2F1_conj_renorm_e(const double aR, const double aI, const double c
     
       /* 2F1 does not terminate early enough, so something survives */
       /* [Abramowitz+Stegun, 15.1.2] */
-      gsl_sf_result g1, g2;
+      gsl_sf_result g1;
+      gsl_sf_result g2;
       gsl_sf_result g3;
-      gsl_sf_result a1, a2;
+      gsl_sf_result a1;
+      gsl_sf_result a2;
       int stat = 0;
       stat += gsl_sf_lngamma_complex_e(aR-c+1, aI, &g1, &a1);
       stat += gsl_sf_lngamma_complex_e(aR, aI, &g2, &a2);

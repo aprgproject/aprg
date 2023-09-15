@@ -28,6 +28,7 @@
 #include <gsl/gsl_sf_pow_int.h>
 #include <gsl/gsl_sf_psi.h>
 #include <gsl/gsl_sf_gamma.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -97,10 +98,10 @@ pochrel_smallx(const double a, const double x, gsl_sf_result * result)
     const double bp   = (  (a < -0.5) ? 1.0-a-x : a );
     const int    incr = ( (bp < 10.0) ? 11.0-bp : 0 );
     const double b    = bp + incr;
-    double dpoch1;
+    double dpoch1 = NAN;
     gsl_sf_result dexprl;
-    int stat_dexprl;
-    int i;
+    int stat_dexprl = 0;
+    int i = 0;
 
     double var    = b + 0.5*(x-1.0);
     double alnvar = log(var);
@@ -114,7 +115,8 @@ pochrel_smallx(const double a, const double x, gsl_sf_result * result)
       const double rho  = 0.5 * (x + 1.0);
       double term = var2;
       double gbern[24];
-      int k, j;
+      int k;
+      int j;
 
       gbern[1] = 1.0;
       gbern[2] = -rho/12.0;
@@ -164,7 +166,7 @@ pochrel_smallx(const double a, const double x, gsl_sf_result * result)
       result->err = 2.0 * GSL_DBL_EPSILON * (fabs(incr) + 1.0) * fabs(result->val);
       return GSL_SUCCESS;
     }
-    else {
+    
       /*
        C WE HAVE DPOCH1(BP,X), BUT A IS LT -0.5.  WE THEREFORE USE A
        C REFLECTION FORMULA TO OBTAIN DPOCH1(A,X).
@@ -178,7 +180,7 @@ pochrel_smallx(const double a, const double x, gsl_sf_result * result)
       result->err  = (fabs(dpoch1*x) + 1.0) * GSL_DBL_EPSILON * (fabs(t1) + fabs(t2));
       result->err += 2.0 * GSL_DBL_EPSILON * (fabs(incr) + 1.0) * fabs(result->val);
       return GSL_SUCCESS;
-    }    
+       
  
 }
 
@@ -219,7 +221,7 @@ lnpoch_pos(const double a, const double x, gsl_sf_result * result)
       return GSL_ERROR_SELECT_2(stat_1, stat_2);
    
   }
-  else if(absx < 0.1*a && a > 15.0) {
+  if(absx < 0.1*a && a > 15.0) {
     /* Be careful about the implied subtraction.
      * Note that both a+x and and a must be
      * large here since a is not small
@@ -311,7 +313,7 @@ gsl_sf_lnpoch_sgn_e(const double a, const double x,
     *sgn = 1.0;
     return lnpoch_pos(a, x, result);
   }
-  else if (a <= 0 && a == floor(a)) {
+  if (a <= 0 && a == floor(a)) {
     /* Special cases for infinite denominator Gamma(a) */
     if (a + x < 0  && x == floor(x)) {
       /* Handle the case where both a and a+x are negative integers. */
@@ -400,18 +402,18 @@ gsl_sf_poch_e(const double a, const double x, gsl_sf_result * result)
     return GSL_SUCCESS;
   } 
     gsl_sf_result lnpoch;
-    double sgn;
+    double sgn = NAN;
     int stat_lnpoch = gsl_sf_lnpoch_sgn_e(a, x, &lnpoch, &sgn);
     if (lnpoch.val == GSL_NEGINF) {
       result->val = 0;
       result->err = 0;
       return stat_lnpoch;
-    } else {
+    } 
       int stat_exp    = gsl_sf_exp_err_e(lnpoch.val, lnpoch.err, result);
       result->val *= sgn;
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_ERROR_SELECT_2(stat_exp, stat_lnpoch);
-    }
+   
  
 }
 

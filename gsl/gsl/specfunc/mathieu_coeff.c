@@ -34,8 +34,8 @@
 static void backward_recurse_c(double aa, double qq, double xx, double *ff,
                                double *gx, int even_odd, int ni)
 {
-  int ii;
-  int nn;
+  int ii = 0;
+  int nn = 0;
   double g1 = NAN;
 
 
@@ -69,8 +69,8 @@ static void backward_recurse_c(double aa, double qq, double xx, double *ff,
 static void backward_recurse_s(double aa, double qq, double xx, double *ff,
                                double *gx, int even_odd, int ni)
 {
-  int ii;
-  int nn;
+  int ii = 0;
+  int nn = 0;
   double g1 = NAN;
 
 
@@ -100,21 +100,21 @@ static void backward_recurse_s(double aa, double qq, double xx, double *ff,
 
 int gsl_sf_mathieu_a_coeff(int order, double qq, double aa, double coeff[])
 {
-  int ni;
-  int nn;
-  int ii;
-  int even_odd;
-  double eps;
-  double g1;
-  double g2;
-  double x1;
-  double x2;
-  double e1;
-  double e2;
-  double de;
-  double xh;
-  double sum;
-  double ratio;
+  int ni = 0;
+  int nn = 0;
+  int ii = 0;
+  int even_odd = 0;
+  double eps = NAN;
+  double g1 = NAN;
+  double g2 = NAN;
+  double x1 = NAN;
+  double x2 = NAN;
+  double e1 = NAN;
+  double e2 = NAN;
+  double de = NAN;
+  double xh = NAN;
+  double sum = NAN;
+  double ratio = NAN;
   double ff[GSL_SF_MATHIEU_COEFF];
 
 
@@ -249,21 +249,21 @@ int gsl_sf_mathieu_a_coeff(int order, double qq, double aa, double coeff[])
 
 int gsl_sf_mathieu_b_coeff(int order, double qq, double aa, double coeff[])
 {
-  int ni;
-  int nn;
-  int ii;
-  int even_odd;
-  double eps;
-  double g1;
-  double g2;
-  double x1;
-  double x2;
-  double e1;
-  double e2;
-  double de;
-  double xh;
-  double sum;
-  double ratio;
+  int ni = 0;
+  int nn = 0;
+  int ii = 0;
+  int even_odd = 0;
+  double eps = NAN;
+  double g1 = NAN;
+  double g2 = NAN;
+  double x1 = NAN;
+  double x2 = NAN;
+  double e1 = NAN;
+  double e2 = NAN;
+  double de = NAN;
+  double xh = NAN;
+  double sum = NAN;
+  double ratio = NAN;
   double ff[GSL_SF_MATHIEU_COEFF];
 
 

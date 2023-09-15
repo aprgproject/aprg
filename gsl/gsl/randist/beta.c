@@ -35,10 +35,10 @@ gsl_ran_beta (const gsl_rng * r, const double a, const double b)
 {
   if ( (a <= 1.0) && (b <= 1.0) )
     {
-      double U;
-      double V;
-      double X;
-      double Y;
+      double U = NAN;
+      double V = NAN;
+      double X = NAN;
+      double Y = NAN;
       while (1)
         {
           U = gsl_rng_uniform_pos(r);
@@ -80,7 +80,7 @@ gsl_ran_beta_pdf (const double x, const double a, const double b)
     }
   
     
-      double p;
+      double p = NAN;
 
       double gab = gsl_sf_lngamma (a + b);
       double ga = gsl_sf_lngamma (a);

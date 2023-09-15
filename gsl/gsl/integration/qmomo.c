@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_integration.h>
 #include <gsl/gsl_errno.h>
@@ -128,8 +129,8 @@ initialise (double * ri, double * rj, double * rg, double * rh,
 
   size_t i = 0;
   
-  double an;
-  double anm1;
+  double an = NAN;
+  double anm1 = NAN;
 
   ri[0] = r_alpha / alpha_p1;
   ri[1] = ri[0] * alpha / alpha_p2;

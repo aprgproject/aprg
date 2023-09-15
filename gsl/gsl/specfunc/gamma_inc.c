@@ -51,7 +51,7 @@ gamma_inc_D(const double a, const double x, gsl_sf_result * result)
   
     gsl_sf_result gstar;
     gsl_sf_result ln_term;
-    double term1;
+    double term1 = NAN;
     if (x < 0.5*a) {
       double u = x/a;   
       double ln_u = log(u);
@@ -207,8 +207,8 @@ gamma_inc_Q_asymp_unif(const double a, const double x, gsl_sf_result * result)
   gsl_sf_result erfc;
 
   double R = NAN;
-  double c0;
-  double c1;
+  double c0 = NAN;
+  double c1 = NAN;
 
   /* This used to say erfc(eta*M_SQRT2*rta), which is wrong.
    * The sqrt(2) is in the denominator. Oops.

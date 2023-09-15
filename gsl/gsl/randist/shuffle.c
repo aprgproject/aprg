@@ -83,7 +83,7 @@ int
 gsl_ran_choose (const gsl_rng * r, void * dest, size_t k, void * src, 
                  size_t n, size_t size)
 {
-  size_t i;
+  size_t i = 0;
   size_t j = 0;
 
   /* Choose k out of n items, return an array x[] of the k items.
@@ -113,7 +113,7 @@ void
 gsl_ran_sample (const gsl_rng * r, void * dest, size_t k, void * src, 
                 size_t n, size_t size)
 {
-  size_t i;
+  size_t i = 0;
   size_t j = 0;
 
   /* Choose k out of n items, with replacement */

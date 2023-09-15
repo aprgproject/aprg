@@ -86,8 +86,8 @@ rand48_advance (void *vstate)
 static unsigned long int 
 rand48_get (void *vstate)
 {
-  unsigned long int x1;
-  unsigned long int x2;
+  unsigned long int x1 = 0;
+  unsigned long int x2 = 0;
 
   rand48_state_t *state = (rand48_state_t *) vstate;
   rand48_advance (state) ;

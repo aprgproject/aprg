@@ -76,10 +76,10 @@ static inline unsigned long
 taus113_get (void *vstate)
 {
   taus113_state_t *state = (taus113_state_t *) vstate;
-  unsigned long b1;
-  unsigned long b2;
-  unsigned long b3;
-  unsigned long b4;
+  unsigned long b1 = 0;
+  unsigned long b2 = 0;
+  unsigned long b3 = 0;
+  unsigned long b4 = 0;
 
   b1 = ((((state->z1 << 6UL) & MASK) ^ state->z1) >> 13UL);
   state->z1 = ((((state->z1 & 4294967294UL) << 18UL) & MASK) ^ b1);

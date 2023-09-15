@@ -27,6 +27,7 @@
 #include <gsl/gsl_sf_exp.h>
 #include <gsl/gsl_sf_pow_int.h>
 #include <gsl/gsl_sf_legendre.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -49,8 +50,8 @@ legendreQ_CF1_xgt1(int ell, double a, double b, double x, double * result)
   double b1 = (2.0*(ell+1.0+a) + 1.0) * x;
   double An = b1*Anm1 + a1*Anm2;
   double Bn = b1*Bnm1 + a1*Bnm2;
-  double an;
-  double bn;
+  double an = NAN;
+  double bn = NAN;
   double fn = An/Bn;
 
   while(n < maxiter) {
@@ -108,8 +109,8 @@ legendre_Ql_asymp_unif(const double ell, const double x, gsl_sf_result * result)
     double th  = acos(x);
     gsl_sf_result Y0;
     gsl_sf_result Y1;
-    int stat_Y0;
-    int stat_Y1;
+    int stat_Y0 = 0;
+    int stat_Y1 = 0;
     int stat_m = 0;
     double pre = NAN;
     double B00 = NAN;
@@ -143,12 +144,14 @@ legendre_Ql_asymp_unif(const double ell, const double x, gsl_sf_result * result)
   
     double u   = ell + 0.5;
     double xi  = acosh(x);
-    gsl_sf_result K0_scaled, K1_scaled;
-    int stat_K0, stat_K1;
-    int stat_e;
-    double pre;
-    double B00;
-    double sum;
+    gsl_sf_result K0_scaled;
+    gsl_sf_result K1_scaled;
+    int stat_K0;
+    int stat_K1;
+    int stat_e = 0;
+    double pre = NAN;
+    double B00 = NAN;
+    double sum = NAN;
 
     /* B00 = -1/8 (1 - xi coth(xi) / xi^2
      * pre = sqrt(xi/sinh(xi))

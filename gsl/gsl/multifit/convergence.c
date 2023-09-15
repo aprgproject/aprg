@@ -22,6 +22,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_multifit_nlin.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 static double scaled_infnorm(const gsl_vector *x, const gsl_vector *g);
 
@@ -49,9 +50,9 @@ gsl_multifit_fdfsolver_test (const gsl_multifit_fdfsolver * s,
                              const double ftol, int *info)
 {
   int status = 0;
-  double gnorm;
-  double fnorm;
-  double phi;
+  double gnorm = NAN;
+  double fnorm = NAN;
+  double phi = NAN;
 
   *info = 0;
 

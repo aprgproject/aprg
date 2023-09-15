@@ -188,7 +188,7 @@ dilog_xge0(const double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * M_PI*M_PI/6.0;
     return GSL_SUCCESS;
   }
-  else if(x > 0.5) {
+  if(x > 0.5) {
     gsl_sf_result ser;
     const int stat_ser = dilog_series_2(1.0-x, &ser);
     const double log_x = log(x);
@@ -607,7 +607,8 @@ gsl_sf_complex_dilog_xy_e(
     const double x_tmp =  x/r2;
     const double y_tmp = -y/r2;
     /* const double r_tmp = 1.0/r; */
-    gsl_sf_result result_re_tmp, result_im_tmp;
+    gsl_sf_result result_re_tmp;
+    gsl_sf_result result_im_tmp;
 
     const int stat_dilog =
       dilogc_unitdisk(x_tmp, y_tmp, &result_re_tmp, &result_im_tmp);

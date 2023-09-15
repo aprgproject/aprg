@@ -131,8 +131,8 @@ polynomial_integ (const void *vstate, const double xa[], const double ya[],
                   double *result)
 {
   const polynomial_state_t *state = (const polynomial_state_t *) vstate;
-  size_t i;
-  double sum;
+  size_t i = 0;
+  double sum = NAN;
 
   gsl_poly_dd_taylor (state->coeff, 0.0, state->d, xa, size, state->work);
 

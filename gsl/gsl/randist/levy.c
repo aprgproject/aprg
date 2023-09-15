@@ -44,10 +44,10 @@
 double
 gsl_ran_levy (const gsl_rng * r, const double c, const double alpha)
 {
-  double u;
-  double v;
-  double t;
-  double s;
+  double u = NAN;
+  double v = NAN;
+  double t = NAN;
+  double s = NAN;
 
   u = M_PI * (gsl_rng_uniform_pos (r) - 0.5);
 
@@ -105,9 +105,9 @@ double
 gsl_ran_levy_skew (const gsl_rng * r, const double c, 
                    const double alpha, const double beta)
 {
-  double V;
-  double W;
-  double X;
+  double V = NAN;
+  double W = NAN;
+  double X = NAN;
 
   if (beta == 0)  /* symmetric case */
     {

@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gsl/gsl_errno.h>
@@ -115,8 +116,8 @@ static void
 Vinvfx (const double *fx, double *c, const int d)
 {
 
-  int i;
-  int j;
+  int i = 0;
+  int j = 0;
 
   switch (d)
     {
@@ -170,9 +171,9 @@ downdate (double *c, int n, int d, int *nans, int nnans)
 
   static const int bidx[4] = { 0, 6, 16, 34 };
   double b_new[34];
-  double alpha;
-  int i;
-  int j;
+  double alpha = NAN;
+  int i = 0;
+  int j = 0;
 
   for (i = 0; i <= n + 1; i++) {
     b_new[i] = bee[bidx[d] + i];
@@ -218,28 +219,28 @@ gsl_integration_cquad (const gsl_function * f, double a, double b,
   static const int ndiv_max = 20;
 
   /* Actual variables (as opposed to constants above). */
-  double m;
-  double h;
-  double temp;
-  double igral;
-  double err;
-  double igral_final;
-  double err_final;
-  double err_excess;
-  int nivals;
+  double m = NAN;
+  double h = NAN;
+  double temp = NAN;
+  double igral = NAN;
+  double err = NAN;
+  double igral_final = NAN;
+  double err_final = NAN;
+  double err_excess = NAN;
+  int nivals = 0;
   int neval = 0;
-  int i;
-  int j;
-  int d;
-  int split;
-  int t;
-  int nnans;
+  int i = 0;
+  int j = 0;
+  int d = 0;
+  int split = 0;
+  int t = 0;
+  int nnans = 0;
   int nans[32];
-  gsl_integration_cquad_ival *iv;
-  gsl_integration_cquad_ival *ivl;
-  gsl_integration_cquad_ival *ivr;
-  double nc;
-  double ncdiff;
+  gsl_integration_cquad_ival *iv = NULL;
+  gsl_integration_cquad_ival *ivl = NULL;
+  gsl_integration_cquad_ival *ivr = NULL;
+  double nc = NAN;
+  double ncdiff = NAN;
 
   /* Check the input arguments. */
   if (f == NULL) {

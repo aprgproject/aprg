@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_rng.h>
 
@@ -64,11 +65,11 @@ static inline void increment_state (ranlxd_state_t * state);
 static inline void
 increment_state (ranlxd_state_t * state)
 {
-  int k;
-  int kmax;
-  double y1;
-  double y2;
-  double y3;
+  int k = 0;
+  int kmax = 0;
+  double y1 = NAN;
+  double y2 = NAN;
+  double y3 = NAN;
 
   double *xdbl = state->xdbl;
   double carry = state->carry;
@@ -176,14 +177,14 @@ ranlxd_set_lux (void *vstate, unsigned long int s, unsigned int luxury)
 {
   ranlxd_state_t *state = (ranlxd_state_t *) vstate;
 
-  int ibit;
-  int jbit;
-  int i;
-  int k;
-  int l;
+  int ibit = 0;
+  int jbit = 0;
+  int i = 0;
+  int k = 0;
+  int l = 0;
   int xbit[31];
-  double x;
-  double y;
+  double x = NAN;
+  double y = NAN;
 
   long int seed = 0;
 

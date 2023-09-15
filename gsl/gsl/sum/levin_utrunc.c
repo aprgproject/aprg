@@ -61,8 +61,8 @@ gsl_sum_levin_utrunc_minmax (const double *array,
       w->terms_used = 1;
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       const double SMALL = 0.01;
       const size_t nmax = GSL_MAX (max_terms, array_size) - 1;
       double trunc_n = 0.0, trunc_nm1 = 0.0;
@@ -153,7 +153,7 @@ gsl_sum_levin_utrunc_minmax (const double *array,
           w->terms_used = n;
           return GSL_SUCCESS;
         }
-    }
+   
 }
 
 int
@@ -178,8 +178,8 @@ gsl_sum_levin_utrunc_step (const double term,
       w->q_num[0] = 1.0;
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       double factor = 1.0;
       double ratio = (double) n / (n + 1.0);
       int j;
@@ -198,5 +198,5 @@ gsl_sum_levin_utrunc_step (const double term,
 
       *sum_accel = w->q_num[0] / w->q_den[0];
       return GSL_SUCCESS;
-    }
+   
 }

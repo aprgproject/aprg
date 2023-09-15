@@ -78,10 +78,10 @@ gsl_poly_solve_quadratic (double a, double b, double c,
         *x1 = -0.5 * b / a ;
         return 2 ;
       }
-    else
-      {
+    
+      
         return 0;
-      }
+     
   }
 }
 

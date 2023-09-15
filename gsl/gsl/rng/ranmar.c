@@ -135,8 +135,8 @@ ranmar_set (void *vstate, unsigned long int s)
   int k = (kl / 169) % 178 + 1 ;
   int l = (kl % 169) ;
 
-  int a;
-  int b;
+  int a = 0;
+  int b = 0;
   
   for (a = 0; a < 97; a++)
     {

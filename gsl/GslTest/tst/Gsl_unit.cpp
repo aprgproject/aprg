@@ -60,15 +60,17 @@ double function2ToIntegrate(double const inputValue, void *parameters) {
 }
 
 double func(const size_t n, double x[], void *params) {
-    const double alpha = *(double *)params;
+    const double alpha = *static_cast<double *>(params);
     gsl_sort(x, 1, n);
     return gsl_stats_trmean_from_sorted_data(alpha, x, 1, n);
 }
 
 double val_func(void *ntuple_data, void *params) {
     (void)(params); /* avoid unused parameter warning */
-    struct data *data = (struct data *)ntuple_data;
-    double x, y, z;
+    auto *data = static_cast<struct data *>(ntuple_data);
+    double x;
+    double y;
+    double z;
     x = data->x;
     y = data->y;
     z = data->z;
@@ -76,14 +78,18 @@ double val_func(void *ntuple_data, void *params) {
 }
 
 int sel_func(void *ntuple_data, void *params) {
-    struct data *data = (struct data *)ntuple_data;
-    double x, y, z, E2, scale;
-    scale = *(double *)params;
+    auto *data = static_cast<struct data *>(ntuple_data);
+    double x;
+    double y;
+    double z;
+    double E2;
+    double scale;
+    scale = *static_cast<double *>(params);
     x = data->x;
     y = data->y;
     z = data->z;
     E2 = x * x + y * y + z * z;
-    return E2 > scale;
+    return static_cast<int>(E2 > scale);
 }
 
 TEST(GslTest, GettingTheBesselFunctionInGslWorks) {
@@ -464,7 +470,7 @@ TEST(GslTest, UsingAQuasiRandomGeneratorInGslWorks) {
 TEST(GslTest, UsingARandomGeneratorWithPoissonDistributionWorks) {
     // The following program demonstrates the use of a random number generator to produce variates from a distribution.
     // It prints 10 samples from the Poisson distribution with a mean of 3.
-    double mu = 3.0;
+    double const mu = 3.0;
     gsl_rng_env_setup();
     const gsl_rng_type *randomGeneratorType = gsl_rng_default;
     gsl_rng *randomGenerator = gsl_rng_alloc(randomGeneratorType);
@@ -480,13 +486,15 @@ TEST(GslTest, UsingARandomGeneratorWithPoissonDistributionWorks) {
 TEST(GslTest, UsingARandomGeneratorWithTwoDimensionsWorks) {
     // This demonstrates the use of a random number generator to produce variates from a distribution.
     // It prints 10 samples from the Poisson distribution with a mean of 3.
-    double x = 0, y = 0;
+    double x = 0;
+    double y = 0;
     gsl_rng_env_setup();
     const gsl_rng_type *randomGeneratorType = gsl_rng_default;
     gsl_rng *randomGenerator = gsl_rng_alloc(randomGeneratorType);
     int const NUMBER_OF_ITEMS = 10;
     for (int index = 0; index < NUMBER_OF_ITEMS; ++index) {
-        double dx = 0, dy = 0;
+        double dx = 0;
+        double dy = 0;
         gsl_ran_dir_2d(randomGenerator, &dx, &dy);
         x += dx;
         y += dy;
@@ -501,11 +509,11 @@ TEST(GslTest, GettingPdfAnCdfWorks) {
     // This computes the upper and lower cumulative distribution functions for the standard normal distribution at x
     // = 2.
     double x = 2.0;
-    double P = gsl_cdf_ugaussian_P(x);
+    double const P = gsl_cdf_ugaussian_P(x);
     cout << "prob(x < " << x << ") = " << P << "\n";
     EXPECT_DOUBLE_EQ(0.97724986805182079, P);
 
-    double Q = gsl_cdf_ugaussian_Q(x);
+    double const Q = gsl_cdf_ugaussian_Q(x);
     cout << "prob(x > " << x << ") = " << Q << "\n";
     EXPECT_DOUBLE_EQ(0.022750131948179212, Q);
 
@@ -522,19 +530,19 @@ TEST(GslTest, GettingStatisticsWorks) {
     // This is a basic example of how to use the statistical functions
     array<double, 5> values = {17.2, 18.1, 16.5, 18.3, 12.6};
 
-    double mean = gsl_stats_mean(values.data(), 1, 5);
+    double const mean = gsl_stats_mean(values.data(), 1, 5);
     cout << "The sample mean is " << mean << "\n";
     EXPECT_DOUBLE_EQ(16.539999999999999, mean);
 
-    double variance = gsl_stats_variance(values.data(), 1, 5);
+    double const variance = gsl_stats_variance(values.data(), 1, 5);
     cout << "The estimated variance is " << variance << "\n";
     EXPECT_DOUBLE_EQ(5.373, variance);
 
-    double largest = gsl_stats_max(values.data(), 1, 5);
+    double const largest = gsl_stats_max(values.data(), 1, 5);
     cout << "The largest value is " << largest << "\n";
     EXPECT_DOUBLE_EQ(18.3, largest);
 
-    double smallest = gsl_stats_min(values.data(), 1, 5);
+    double const smallest = gsl_stats_min(values.data(), 1, 5);
     cout << "The smallest value is " << smallest << "\n";
     EXPECT_DOUBLE_EQ(12.6, smallest);
 }
@@ -544,22 +552,22 @@ TEST(GslTest, GettingStatisticsInSortedDAtaWorks) {
     array<double, 5> values = {17.2, 18.1, 16.5, 18.3, 12.6};
     gsl_sort(values.data(), 1, 5);
 
-    double median = gsl_stats_median_from_sorted_data(values.data(), 1, 5);
+    double const median = gsl_stats_median_from_sorted_data(values.data(), 1, 5);
     cout << "The median is " << median << "\n";
     EXPECT_DOUBLE_EQ(17.199999999999999, median);
 
-    double upperq = gsl_stats_quantile_from_sorted_data(values.data(), 1, 5, 0.75);
+    double const upperq = gsl_stats_quantile_from_sorted_data(values.data(), 1, 5, 0.75);
     cout << "The upper quartile is " << upperq << "\n";
     EXPECT_DOUBLE_EQ(18.100000000000001, upperq);
 
-    double lowerq = gsl_stats_quantile_from_sorted_data(values.data(), 1, 5, 0.25);
+    double const lowerq = gsl_stats_quantile_from_sorted_data(values.data(), 1, 5, 0.25);
     cout << "The lower quartile is " << lowerq << "\n";
     EXPECT_DOUBLE_EQ(16.5, lowerq);
 }
 
 TEST(GslTest, GettingRunningStatisticsWorks) {
     // This is a basic example of how to use the running statistical functions
-    array<double, 5> values = {17.2, 18.1, 16.5, 18.3, 12.6};
+    array<double, 5> const values = {17.2, 18.1, 16.5, 18.3, 12.6};
 
     gsl_rstat_workspace *runningStatistics = gsl_rstat_alloc();
 
@@ -568,43 +576,43 @@ TEST(GslTest, GettingRunningStatisticsWorks) {
         gsl_rstat_add(value, runningStatistics);
     }
 
-    double mean = gsl_rstat_mean(runningStatistics);
+    double const mean = gsl_rstat_mean(runningStatistics);
     cout << "The sample mean is " << mean << "\n";
     EXPECT_DOUBLE_EQ(16.539999999999999, mean);
 
-    double variance = gsl_rstat_variance(runningStatistics);
+    double const variance = gsl_rstat_variance(runningStatistics);
     cout << "The estimated variance is " << variance << "\n";
     EXPECT_DOUBLE_EQ(5.3729999999999984, variance);
 
-    double largest = gsl_rstat_max(runningStatistics);
+    double const largest = gsl_rstat_max(runningStatistics);
     cout << "The largest value is " << largest << "\n";
     EXPECT_DOUBLE_EQ(18.300000000000001, largest);
 
-    double smallest = gsl_rstat_min(runningStatistics);
+    double const smallest = gsl_rstat_min(runningStatistics);
     cout << "The smallest value is " << smallest << "\n";
     EXPECT_DOUBLE_EQ(12.6, smallest);
 
-    double median = gsl_rstat_median(runningStatistics);
+    double const median = gsl_rstat_median(runningStatistics);
     cout << "The median is " << median << "\n";
     EXPECT_DOUBLE_EQ(17.199999999999999, median);
 
-    double sd = gsl_rstat_sd(runningStatistics);
+    double const sd = gsl_rstat_sd(runningStatistics);
     cout << "The standard deviation is " << sd << "\n";
     EXPECT_DOUBLE_EQ(2.3179732526498227, sd);
 
-    double sdMean = gsl_rstat_sd_mean(runningStatistics);
+    double const sdMean = gsl_rstat_sd_mean(runningStatistics);
     cout << "The standard devation of the mean is " << sdMean << "\n";
     EXPECT_DOUBLE_EQ(1.0366291525902596, sdMean);
 
-    double skew = gsl_rstat_skew(runningStatistics);
+    double const skew = gsl_rstat_skew(runningStatistics);
     cout << "The skew is " << skew << "\n";
     EXPECT_DOUBLE_EQ(-0.82905750003696543, skew);
 
-    double rms = gsl_rstat_rms(runningStatistics);
+    double const rms = gsl_rstat_rms(runningStatistics);
     cout << "The root mean square is " << rms << "\n";
     EXPECT_DOUBLE_EQ(16.669433103738111, rms);
 
-    double kurtosis = gsl_rstat_kurtosis(runningStatistics);
+    double const kurtosis = gsl_rstat_kurtosis(runningStatistics);
     cout << "The kurtosis " << kurtosis << "\n";
     EXPECT_DOUBLE_EQ(-1.2217029020861698, kurtosis);
 
@@ -630,10 +638,10 @@ TEST(GslTest, GettingMovingStatisticsWorks) {
     gsl_vector *xmin = gsl_vector_alloc(N);
     gsl_vector *xmax = gsl_vector_alloc(N);
     gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
-    size_t i;
+    size_t i = 0;
     for (i = 0; i < N; ++i) {
-        double xi = cos(4.0 * M_PI * i / (double)N);
-        double ei = gsl_ran_gaussian(r, 0.1);
+        double const xi = cos(4.0 * M_PI * i / static_cast<double>(N));
+        double const ei = gsl_ran_gaussian(r, 0.1);
         gsl_vector_set(x, i, xi + ei);
     }
     /* compute moving statistics */
@@ -669,14 +677,16 @@ TEST(GslTest, GettingMovingStatisticsWorksOnGaussianRandomVariates) {
     gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
     gsl_movstat_workspace *w = gsl_movstat_alloc(K);
     size_t idx = 0;
-    size_t i;
+    size_t i = 0;
     for (i = 0; i < N; ++i) {
-        double gi = gsl_ran_gaussian(r, sigma[idx]);
-        double u = gsl_rng_uniform(r);
-        double outlier = (u < 0.01) ? 15.0 * GSL_SIGN(gi) : 0.0;
-        double xi = gi + outlier;
+        double const gi = gsl_ran_gaussian(r, sigma[idx]);
+        double const u = gsl_rng_uniform(r);
+        double const outlier = (u < 0.01) ? 15.0 * GSL_SIGN(gi) : 0.0;
+        double const xi = gi + outlier;
         gsl_vector_set(x, i, xi);
-        if (i == N_sigma[idx] - 1) ++idx;
+        if (i == N_sigma[idx] - 1) {
+            ++idx;
+        }
     }
     /* compute moving statistics */
     gsl_movstat_mad(GSL_MOVSTAT_END_TRUNCATE, x, xmedian, xmad, w);
@@ -692,7 +702,9 @@ TEST(GslTest, GettingMovingStatisticsWorksOnGaussianRandomVariates) {
         printf(
             "%zu %f %f %f %f %f %f %f\n", i, gsl_vector_get(x, i), sigma[idx], gsl_vector_get(xmad, i),
             gsl_vector_get(xiqr, i), gsl_vector_get(xSn, i), gsl_vector_get(xQn, i), gsl_vector_get(xsd, i));
-        if (i == N_sigma[idx] - 1) ++idx;
+        if (i == N_sigma[idx] - 1) {
+            ++idx;
+        }
     }
     gsl_vector_free(x);
     gsl_vector_free(xmedian);
@@ -718,12 +730,12 @@ TEST(GslTest, GettingMovingStatisticsWorksOnUserDefinedMovingWindow) {
     gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
     gsl_movstat_workspace *w = gsl_movstat_alloc(K);
     gsl_movstat_function F;
-    size_t i;
+    size_t i = 0;
     double sum = 0.0;
     /* generate input signal */
     for (i = 0; i < N; ++i) {
-        double ui = gsl_ran_gaussian(r, 1.0);
-        double outlier = (gsl_rng_uniform(r) < 0.01) ? 10.0 * GSL_SIGN(ui) : 0.0;
+        double const ui = gsl_ran_gaussian(r, 1.0);
+        double const outlier = (gsl_rng_uniform(r) < 0.01) ? 10.0 * GSL_SIGN(ui) : 0.0;
         sum += ui;
         gsl_vector_set(x, i, sum + outlier);
     }
@@ -733,8 +745,8 @@ TEST(GslTest, GettingMovingStatisticsWorksOnUserDefinedMovingWindow) {
     gsl_movstat_apply(GSL_MOVSTAT_END_PADVALUE, &F, x, y, w);
     /* print results */
     for (i = 0; i < N; ++i) {
-        double xi = gsl_vector_get(x, i);
-        double yi = gsl_vector_get(y, i);
+        double const xi = gsl_vector_get(x, i);
+        double const yi = gsl_vector_get(y, i);
         printf("%f %f\n", xi, yi);
     }
     gsl_vector_free(x);
@@ -764,14 +776,17 @@ TEST(GslTest, GettingRunningStatisticsForQuantileWorks) {
 
     // exact values
     gsl_sort(values.data(), 1, values.size());
-    double exactFor25 = gsl_stats_quantile_from_sorted_data(values.data(), 1, static_cast<int>(values.size()), 0.25);
-    double exactFor50 = gsl_stats_quantile_from_sorted_data(values.data(), 1, static_cast<int>(values.size()), 0.5);
-    double exactFor75 = gsl_stats_quantile_from_sorted_data(values.data(), 1, static_cast<int>(values.size()), 0.75);
+    double const exactFor25 =
+        gsl_stats_quantile_from_sorted_data(values.data(), 1, static_cast<int>(values.size()), 0.25);
+    double const exactFor50 =
+        gsl_stats_quantile_from_sorted_data(values.data(), 1, static_cast<int>(values.size()), 0.5);
+    double const exactFor75 =
+        gsl_stats_quantile_from_sorted_data(values.data(), 1, static_cast<int>(values.size()), 0.75);
 
     // estimated values
-    double actualFor25 = gsl_rstat_quantile_get(workspaceFor25);
-    double actualFor50 = gsl_rstat_quantile_get(workspaceFor50);
-    double actualFor75 = gsl_rstat_quantile_get(workspaceFor75);
+    double const actualFor25 = gsl_rstat_quantile_get(workspaceFor25);
+    double const actualFor50 = gsl_rstat_quantile_get(workspaceFor50);
+    double const actualFor75 = gsl_rstat_quantile_get(workspaceFor75);
     cout << "0.25 quartile: exact = " << exactFor25 << ", estimated = " << actualFor25
          << ", error = " << (actualFor25 - exactFor25) / exactFor25 << "\n";
     cout << "0.50 quartile: exact = " << exactFor50 << ", estimated = " << actualFor50
@@ -801,11 +816,11 @@ TEST(GslTest, GaussianFilterWorksInExample1) {
     gsl_vector *k3 = gsl_vector_alloc(K);     /* Gaussian kernel for alpha3 */
     gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
     gsl_filter_gaussian_workspace *gauss_p = gsl_filter_gaussian_alloc(K);
-    size_t i;
+    size_t i = 0;
     double sum = 0.0;
     /* generate input signal */
     for (i = 0; i < N; ++i) {
-        double ui = gsl_ran_gaussian(r, 1.0);
+        double const ui = gsl_ran_gaussian(r, 1.0);
         sum += ui;
         gsl_vector_set(x, i, sum);
     }
@@ -819,18 +834,18 @@ TEST(GslTest, GaussianFilterWorksInExample1) {
     gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha[2], 0, x, y3, gauss_p);
     /* print kernels */
     for (i = 0; i < K; ++i) {
-        double k1i = gsl_vector_get(k1, i);
-        double k2i = gsl_vector_get(k2, i);
-        double k3i = gsl_vector_get(k3, i);
+        double const k1i = gsl_vector_get(k1, i);
+        double const k2i = gsl_vector_get(k2, i);
+        double const k3i = gsl_vector_get(k3, i);
         printf("%e %e %e\n", k1i, k2i, k3i);
     }
     printf("\n\n");
     /* print filter results */
     for (i = 0; i < N; ++i) {
-        double xi = gsl_vector_get(x, i);
-        double y1i = gsl_vector_get(y1, i);
-        double y2i = gsl_vector_get(y2, i);
-        double y3i = gsl_vector_get(y3, i);
+        double const xi = gsl_vector_get(x, i);
+        double const y1i = gsl_vector_get(y1, i);
+        double const y2i = gsl_vector_get(y2, i);
+        double const y3i = gsl_vector_get(y3, i);
         printf("%.12e %.12e %.12e %.12e\n", xi, y1i, y2i, y3i);
     }
     gsl_vector_free(x);
@@ -858,11 +873,11 @@ TEST(GslTest, GaussianFilterWorksInExample2) {
     gsl_vector *d2y = gsl_vector_alloc(N); /* second derivative filtered vector */
     gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
     gsl_filter_gaussian_workspace *gauss_p = gsl_filter_gaussian_alloc(K);
-    size_t i;
+    size_t i = 0;
     /* generate input signal */
     for (i = 0; i < N; ++i) {
-        double xi = (i > N / 2) ? 0.5 : 0.0;
-        double ei = gsl_ran_gaussian(r, 0.1);
+        double const xi = (i > N / 2) ? 0.5 : 0.0;
+        double const ei = gsl_ran_gaussian(r, 0.1);
         gsl_vector_set(x, i, xi + ei);
     }
     /* apply filters */
@@ -871,18 +886,19 @@ TEST(GslTest, GaussianFilterWorksInExample2) {
     gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha, 2, x, d2y, gauss_p);
     /* print results */
     for (i = 0; i < N; ++i) {
-        double xi = gsl_vector_get(x, i);
-        double yi = gsl_vector_get(y, i);
-        double dyi = gsl_vector_get(dy, i);
-        double d2yi = gsl_vector_get(d2y, i);
-        double dxi;
+        double const xi = gsl_vector_get(x, i);
+        double const yi = gsl_vector_get(y, i);
+        double const dyi = gsl_vector_get(dy, i);
+        double const d2yi = gsl_vector_get(d2y, i);
+        double dxi = NAN;
         /* compute finite difference of x vector */
-        if (i == 0)
+        if (i == 0) {
             dxi = gsl_vector_get(x, i + 1) - xi;
-        else if (i == N - 1)
+        } else if (i == N - 1) {
             dxi = gsl_vector_get(x, i) - gsl_vector_get(x, i - 1);
-        else
+        } else {
             dxi = 0.5 * (gsl_vector_get(x, i + 1) - gsl_vector_get(x, i - 1));
+        }
         printf("%.12e %.12e %.12e %.12e %.12e\n", xi, yi, dxi, dyi, d2yi);
     }
     gsl_vector_free(x);
@@ -910,13 +926,13 @@ TEST(GslTest, MedianFilterWorksInSquareWaveSignalExample) {
     gsl_vector *y_rmedian = gsl_vector_alloc(N); /* recursive median filtered␣
     ,!output */
     gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
-    size_t i;
+    size_t i = 0;
     /* generate input signal */
     for (i = 0; i < N; ++i) {
-        double ti = (double)i / (N - 1.0);
-        double tmp = sin(2.0 * M_PI * f * ti);
-        double xi = (tmp >= 0.0) ? 1.0 : -1.0;
-        double ei = gsl_ran_gaussian(r, 0.1);
+        double const ti = static_cast<double>(i) / (N - 1.0);
+        double const tmp = sin(2.0 * M_PI * f * ti);
+        double const xi = (tmp >= 0.0) ? 1.0 : -1.0;
+        double const ei = gsl_ran_gaussian(r, 0.1);
         gsl_vector_set(t, i, ti);
         gsl_vector_set(x, i, xi + ei);
     }
@@ -924,10 +940,10 @@ TEST(GslTest, MedianFilterWorksInSquareWaveSignalExample) {
     gsl_filter_rmedian(GSL_FILTER_END_PADVALUE, x, y_rmedian, rmedian_p);
     /* print results */
     for (i = 0; i < N; ++i) {
-        double ti = gsl_vector_get(t, i);
-        double xi = gsl_vector_get(x, i);
-        double medi = gsl_vector_get(y_median, i);
-        double rmedi = gsl_vector_get(y_rmedian, i);
+        double const ti = gsl_vector_get(t, i);
+        double const xi = gsl_vector_get(x, i);
+        double const medi = gsl_vector_get(y_median, i);
+        double const rmedi = gsl_vector_get(y_rmedian, i);
         printf("%f %f %f %f\n", ti, xi, medi, rmedi);
     }
     gsl_vector_free(t);
@@ -955,25 +971,25 @@ TEST(GslTest, ImpulseDetectionFilterWorksInSquareWaveSignalExample) {
     gsl_vector_int *ioutlier = gsl_vector_int_alloc(N); /* outlier detected? */
     gsl_filter_impulse_workspace *w = gsl_filter_impulse_alloc(K);
     gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
-    size_t noutlier;
-    size_t i;
+    size_t noutlier = 0;
+    size_t i = 0;
     /* generate input signal */
     for (i = 0; i < N; ++i) {
-        double xi = 10.0 * sin(2.0 * M_PI * i / (double)N);
-        double ei = gsl_ran_gaussian(r, 2.0);
-        double u = gsl_rng_uniform(r);
-        double outlier = (u < 0.01) ? 15.0 * GSL_SIGN(ei) : 0.0;
+        double const xi = 10.0 * sin(2.0 * M_PI * i / static_cast<double>(N));
+        double const ei = gsl_ran_gaussian(r, 2.0);
+        double const u = gsl_rng_uniform(r);
+        double const outlier = (u < 0.01) ? 15.0 * GSL_SIGN(ei) : 0.0;
         gsl_vector_set(x, i, xi + ei + outlier);
     }
     /* apply impulse detection filter */
     gsl_filter_impulse(GSL_FILTER_END_TRUNCATE, GSL_FILTER_SCALE_QN, t, x, y, xmedian, xsigma, &noutlier, ioutlier, w);
     /* print results */
     for (i = 0; i < N; ++i) {
-        double xi = gsl_vector_get(x, i);
-        double yi = gsl_vector_get(y, i);
-        double xmedi = gsl_vector_get(xmedian, i);
-        double xsigmai = gsl_vector_get(xsigma, i);
-        int outlier = gsl_vector_int_get(ioutlier, i);
+        double const xi = gsl_vector_get(x, i);
+        double const yi = gsl_vector_get(y, i);
+        double const xmedi = gsl_vector_get(xmedian, i);
+        double const xsigmai = gsl_vector_get(xsigma, i);
+        int const outlier = gsl_vector_int_get(ioutlier, i);
         printf("%zu %f %f %f %f %d\n", i, xi, yi, xmedi + t * xsigmai, xmedi - t * xsigmai, outlier);
     }
     gsl_vector_free(x);
@@ -990,9 +1006,10 @@ TEST(GslTest, DISABLED_OneDimensionalHistogramWorks) {
     // program takes three arguments, specifying the upper and lower bounds of the histogram and the number of bins. It
     // then reads numbers from stdin, one line at a time, and adds them to the histogram. When there is no more data to
     // read it prints out the accumulated histogram using gsl_histogram_fprintf().
-    double minimumValue = -100, maximumValue = 100;
-    size_t n = 10;
-    double x;
+    double minimumValue = -100;
+    double maximumValue = 100;
+    size_t const n = 10;
+    double x = NAN;
     gsl_histogram *h = gsl_histogram_alloc(n);
     gsl_histogram_set_ranges_uniform(h, minimumValue, maximumValue);
     while (fscanf(stdin, "%lg", &x) == 1) {
@@ -1008,8 +1025,8 @@ TEST(GslTest, TwoDimensionalHistogramWorks) {
     // Then a few sample points are added to the histogram, at (0.3,0.3) with a height of 1, at (0.8,0.1) with a height
     // of 5 and at (0.7,0.9) with a height of 0.5. This histogram with three events is used to generate a random sample
     // of 1000 simulated events, which are printed out.
-    const gsl_rng_type *T;
-    gsl_rng *r;
+    const gsl_rng_type *T = nullptr;
+    gsl_rng *r = nullptr;
     gsl_histogram2d *h = gsl_histogram2d_alloc(10, 10);
     gsl_histogram2d_set_ranges_uniform(h, 0.0, 1.0, 0.0, 1.0);
     gsl_histogram2d_accumulate(h, 0.3, 0.3, 1);
@@ -1019,13 +1036,14 @@ TEST(GslTest, TwoDimensionalHistogramWorks) {
     T = gsl_rng_default;
     r = gsl_rng_alloc(T);
     {
-        int i;
+        int i = 0;
         gsl_histogram2d_pdf *p = gsl_histogram2d_pdf_alloc(h->nx, h->ny);
         gsl_histogram2d_pdf_init(p, h);
         for (i = 0; i < 1000; i++) {
-            double x, y;
-            double u = gsl_rng_uniform(r);
-            double v = gsl_rng_uniform(r);
+            double x;
+            double y;
+            double const u = gsl_rng_uniform(r);
+            double const v = gsl_rng_uniform(r);
             gsl_histogram2d_pdf_sample(p, u, v, &x, &y);
             printf("%g %g\n", x, y);
         }

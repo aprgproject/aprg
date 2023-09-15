@@ -33,6 +33,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gsl/gsl_math.h>
@@ -56,7 +57,7 @@ static double steffen_copysign(const double x, const double y);
 static void *
 steffen_alloc (size_t size)
 {
-  steffen_state_t *state;
+  steffen_state_t *state = NULL;
   
   state = (steffen_state_t *) calloc (1, sizeof (steffen_state_t));
   
@@ -112,7 +113,7 @@ steffen_init (void * vstate, const double x_array[],
               const double y_array[], size_t size)
 {
   steffen_state_t *state = (steffen_state_t *) vstate;
-  size_t i;
+  size_t i = 0;
   double *a = state->a;
   double *b = state->b;
   double *c = state->c;
@@ -133,7 +134,7 @@ steffen_init (void * vstate, const double x_array[],
      from 1 to N-2 (0 to size - 2 inclusive) */
   for (i = 1; i < (size - 1); i++)
     {
-      double pi;
+      double pi = NAN;
 
       /* equation 6 in the paper */
       double hi = (x_array[i+1] - x_array[i]);
@@ -185,20 +186,25 @@ steffen_free (void * vstate)
 
   RETURN_IF_NULL(state);
 
-  if (state->a)
+  if (state->a) {
     free (state->a);
+}
 
-  if (state->b)
+  if (state->b) {
     free (state->b);
+}
 
-  if (state->c)
+  if (state->c) {
     free (state->c);
+}
 
-  if (state->d)
+  if (state->d) {
     free (state->d);
+}
 
-  if (state->y_prime)
+  if (state->y_prime) {
     free (state->y_prime);
+}
 
   free (state);
 }
@@ -210,7 +216,7 @@ steffen_eval (const void * vstate,
 {
   const steffen_state_t *state = (const steffen_state_t *) vstate;
 
-  size_t index;
+  size_t index = 0;
   
   if (a != 0)
     {
@@ -244,7 +250,7 @@ steffen_eval_deriv (const void * vstate,
 {
   const steffen_state_t *state = (const steffen_state_t *) vstate;
 
-  size_t index;
+  size_t index = 0;
 
   /* DISCARD_POINTER(y_array); /\* prevent warning about unused parameter *\/ */
   
@@ -278,7 +284,7 @@ steffen_eval_deriv2 (const void * vstate,
 {
   const steffen_state_t *state = (const steffen_state_t *) vstate;
 
-  size_t index;
+  size_t index = 0;
 
   /* DISCARD_POINTER(y_array); /\* prevent warning about unused parameter *\/ */
 
@@ -312,7 +318,9 @@ steffen_eval_integ (const void * vstate,
   
   const steffen_state_t *state = (const steffen_state_t *) vstate;
 
-  size_t i, index_a, index_b;
+  size_t i;
+  size_t index_a;
+  size_t index_b;
 
   /* Find the data points in the x_array that are nearest to the desired */
   /* a and b integration boundaries. */
@@ -364,8 +372,9 @@ steffen_eval_integ (const void * vstate,
 static double
 steffen_copysign(const double x, const double y)
 {
-  if ((x < 0 && y > 0) || (x > 0 && y < 0))
+  if ((x < 0 && y > 0) || (x > 0 && y < 0)) {
     return -x;
+}
 
   return x;
 }

@@ -38,13 +38,13 @@ gsl_integration_qawf (gsl_function * f,
                       gsl_integration_qawo_table * wf,
                       double *result, double *abserr)
 {
-  double area;
-  double errsum;
-  double res_ext;
-  double err_ext;
-  double correc;
+  double area = NAN;
+  double errsum = NAN;
+  double res_ext = NAN;
+  double err_ext = NAN;
+  double correc = NAN;
   double total_error = 0.0;
-  double truncation_error;
+  double truncation_error = NAN;
 
   size_t ktmin = 0;
   size_t iteration = 0;
@@ -56,8 +56,8 @@ gsl_integration_qawf (gsl_function * f,
 
   const double p = 0.9;
   double factor = 1;
-  double initial_eps;
-  double eps;
+  double initial_eps = NAN;
+  double eps = NAN;
   int error_type = 0;
 
   /* Initialize results */
@@ -128,10 +128,10 @@ gsl_integration_qawf (gsl_function * f,
 
   for (iteration = 0; iteration < limit; iteration++)
     {
-      double area1;
-      double error1;
-      double reseps;
-      double erreps;
+      double area1 = NAN;
+      double error1 = NAN;
+      double reseps = NAN;
+      double erreps = NAN;
 
       double a1 = a + iteration * cycle;
       double b1 = a1 + cycle;

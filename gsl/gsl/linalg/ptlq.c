@@ -436,8 +436,8 @@ gsl_linalg_PTLQ_update (gsl_matrix * Q, gsl_matrix * L,
     }
   
     
-      size_t j;
-      size_t k;
+      size_t j = 0;
+      size_t k = 0;
       const size_t N = Q->size1;
       const size_t M = Q->size2;
       double w0 = NAN;
@@ -451,8 +451,8 @@ gsl_linalg_PTLQ_update (gsl_matrix * Q, gsl_matrix * L,
 
       for (k = M - 1; k > 0; k--)
         {
-          double c;
-          double s;
+          double c = NAN;
+          double s = NAN;
           double wk = gsl_vector_get (w, k);
           double wkm1 = gsl_vector_get (w, k - 1);
 
@@ -478,8 +478,8 @@ gsl_linalg_PTLQ_update (gsl_matrix * Q, gsl_matrix * L,
 
       for (k = 1; k < N; k++)
         {
-          double c;
-          double s;
+          double c = NAN;
+          double s = NAN;
           double diag = gsl_matrix_get (L, k - 1, k - 1);
           double offdiag = gsl_matrix_get (L, k - 1, k );
 

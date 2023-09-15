@@ -19,6 +19,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
@@ -60,20 +61,20 @@ gsl_siman_solve (const gsl_rng * r, void *x0_p, gsl_siman_Efunc_t Ef,
                  size_t element_size,
                  gsl_siman_params_t params)
 {
-  void *x;
-  void *new_x;
-  void *best_x;
-  double E;
-  double new_E;
-  double best_E;
+  void *x = NULL;
+  void *new_x = NULL;
+  void *best_x = NULL;
+  double E = NAN;
+  double new_E = NAN;
+  double best_E = NAN;
   int i = 0;
-  double T;
-  double T_factor;
+  double T = NAN;
+  double T_factor = NAN;
   int n_evals = 1;
   int n_iter = 0;
-  int n_accepts;
-  int n_rejects;
-  int n_eless;
+  int n_accepts = 0;
+  int n_rejects = 0;
+  int n_eless = 0;
 
   /* this function requires that either the dynamic functions (copy,
      copy_constructor and destrcutor) are passed, or that an element
@@ -198,14 +199,14 @@ gsl_siman_solve_many (const gsl_rng * r, void *x0_p, gsl_siman_Efunc_t Ef,
                       gsl_siman_params_t params)
 {
   /* the new set of trial points, and their energies and probabilities */
-  void *x;
-  void *new_x;
-  double *energies;
-  double *probs;
-  double *sum_probs;
+  void *x = NULL;
+  void *new_x = NULL;
+  double *energies = NULL;
+  double *probs = NULL;
+  double *sum_probs = NULL;
   double Ex = NAN;                    /* energy of the chosen point */
-  double T;
-  double T_factor;           /* the temperature and a step multiplier */
+  double T = NAN;
+  double T_factor = NAN;           /* the temperature and a step multiplier */
   int i = 0;
   double u = NAN;                     /* throw the die to choose a new "x" */
   int n_iter = 0;

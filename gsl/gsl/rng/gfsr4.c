@@ -95,8 +95,8 @@ static void
 gfsr4_set (void *vstate, unsigned long int s)
 {
   gfsr4_state_t *state = (gfsr4_state_t *) vstate;
-  int i;
-  int j;
+  int i = 0;
+  int j = 0;
   /* Masks for turning on the diagonal bit and turning off the
      leftmost bits */
   unsigned long int msb = 0x80000000UL;

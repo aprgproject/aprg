@@ -136,8 +136,8 @@ static int sobol_init(void * state, unsigned int dimension)
 {
   sobol_state_t * s_state = (sobol_state_t *) state;
   unsigned int i_dim = 0;
-  int j;
-  int k;
+  int j = 0;
+  int k = 0;
   int ell = 0;
 
   if(dimension < 1 || dimension > SOBOL_MAX_DIMENSION) {

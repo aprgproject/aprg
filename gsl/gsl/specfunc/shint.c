@@ -76,7 +76,7 @@ int gsl_sf_Shi_e(const double x, gsl_sf_result * result)
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     gsl_sf_result result_Ei;
     gsl_sf_result result_E1;
     int status_Ei = gsl_sf_expint_Ei_e(x, &result_Ei);
@@ -93,7 +93,7 @@ int gsl_sf_Shi_e(const double x, gsl_sf_result * result)
     else {
       return GSL_SUCCESS;
     }
-  }
+ 
 }
 
 

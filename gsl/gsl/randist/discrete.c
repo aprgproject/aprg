@@ -141,6 +141,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdio.h>              /* used for NULL, also fprintf(stderr,...) */
 #include <stdlib.h>             /* used for malloc's */
 #include <math.h>
@@ -213,18 +214,18 @@ static void free_stack(gsl_stack_t *s)
 gsl_ran_discrete_t *
 gsl_ran_discrete_preproc(size_t Kevents, const double *ProbArray)
 {
-    size_t k;
-    size_t b;
-    size_t s;
+    size_t k = 0;
+    size_t b = 0;
+    size_t s = 0;
     gsl_ran_discrete_t *g = NULL;
-    size_t nBigs;
-    size_t nSmalls;
+    size_t nBigs = 0;
+    size_t nSmalls = 0;
     gsl_stack_t *Bigs = NULL;
     gsl_stack_t *Smalls = NULL;
     double *E = NULL;
     double pTotal = 0.0;
-    double mean;
-    double d;
+    double mean = NAN;
+    double d = NAN;
     
     if (Kevents < 1) {
       /* Could probably treat Kevents=1 as a special case */
@@ -361,8 +362,8 @@ size_t
 gsl_ran_discrete(const gsl_rng *r, const gsl_ran_discrete_t *g)
 {
     size_t c=0;
-    double u;
-    double f;
+    double u = NAN;
+    double f = NAN;
     u = gsl_rng_uniform(r);
 #if KNUTH_CONVENTION
     c = (u*(g->K));
@@ -395,9 +396,9 @@ void gsl_ran_discrete_free(gsl_ran_discrete_t *g)
 double
 gsl_ran_discrete_pdf(size_t k, const gsl_ran_discrete_t *g)
 {
-    size_t i;
-    size_t K;
-    double f;
+    size_t i = 0;
+    size_t K = 0;
+    double f = NAN;
     double p=0;
     K= g->K;
     if (k>K) { return 0;

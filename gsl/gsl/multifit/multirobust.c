@@ -679,9 +679,9 @@ robust_robsigma(const gsl_vector *r, const double s,
   const size_t n = w->n;
   const size_t p = w->p;
   const double st = s * tune;
-  double a;
-  double b;
-  double lambda;
+  double a = NAN;
+  double b = NAN;
+  double lambda = NAN;
 
   /* compute u = r / sqrt(1 - h) / st */
   gsl_vector_memcpy(w->workn, r);
@@ -767,8 +767,8 @@ robust_covariance(const double sigma, gsl_matrix *cov,
   int status = 0;
   const size_t p = w->p;
   const double s2 = sigma * sigma;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   gsl_matrix *QSI = w->QSI;
   gsl_vector *D = w->D;
 

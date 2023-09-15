@@ -33,11 +33,11 @@
 double
 gsl_ran_lognormal (const gsl_rng * r, const double zeta, const double sigma)
 {
-  double u;
-  double v;
-  double r2;
-  double normal;
-  double z;
+  double u = NAN;
+  double v = NAN;
+  double r2 = NAN;
+  double normal = NAN;
+  double z = NAN;
 
   do
     {

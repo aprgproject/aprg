@@ -339,8 +339,8 @@ normal_lcurve(gsl_vector * reg_param, gsl_vector * rho,
 {
   normal_state_t *state = (normal_state_t *) vstate;
   int status = 0;
-  double smin;
-  double smax; /* minimum/maximum singular values */
+  double smin = NAN;
+  double smax = NAN; /* minimum/maximum singular values */
   size_t i = 0;
 
   if (state->eigen == 0)
@@ -371,8 +371,8 @@ normal_lcurve(gsl_vector * reg_param, gsl_vector * rho,
   for (i = 0; i < reg_param->size; ++i)
     {
       double lambda = gsl_vector_get(reg_param, i);
-      double rnorm;
-      double snorm;
+      double rnorm = NAN;
+      double snorm = NAN;
 
       status = normal_solve_system(lambda, state->c, state);
       if (status) {

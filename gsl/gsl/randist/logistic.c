@@ -31,8 +31,8 @@
 double
 gsl_ran_logistic (const gsl_rng * r, const double a)
 {
-  double x;
-  double z;
+  double x = NAN;
+  double z = NAN;
 
   do
     {

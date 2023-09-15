@@ -26,6 +26,7 @@
 #include <gsl/gsl_sf_exp.h>
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_sf_laguerre.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -91,8 +92,8 @@ laguerre_n_cp(const int n, const double a, const double x, gsl_sf_result * resul
   gsl_sf_result lnfact;
   gsl_sf_result lg1;
   gsl_sf_result lg2;
-  double s1;
-  double s2;
+  double s1 = NAN;
+  double s2 = NAN;
   int stat_f = gsl_sf_lnfact_e(n, &lnfact);
   int stat_g1 = gsl_sf_lngamma_sgn_e(a+1.0+n, &lg1, &s1);
   int stat_g2 = gsl_sf_lngamma_sgn_e(a+1.0, &lg2, &s2);
@@ -160,11 +161,11 @@ laguerre_n_poly_safe(const int n, const double a, const double x, gsl_sf_result 
     result->err = 0.0;
     return stat_tc;
   }
-  else {
+  
     result->val = 0.0;
     result->err = 0.0;
     return stat_tc;
-  }
+ 
 }
 
 
@@ -221,7 +222,7 @@ gsl_sf_laguerre_3_e(const double a, const double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     double c0 = (3.0+a)*(2.0+a)*(1.0+a) / 6.0;
     double c1 = -c0 * 3.0 / (1.0+a);
     double c2 = -1.0/(2.0+a);
@@ -232,7 +233,7 @@ gsl_sf_laguerre_3_e(const double a, const double x, gsl_sf_result * result)
     result->err  = 2.0 * GSL_DBL_EPSILON * (fabs(c0) + 2.0 * fabs(c1*x) * result->err);
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 

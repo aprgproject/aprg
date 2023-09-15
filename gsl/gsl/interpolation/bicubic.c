@@ -40,7 +40,7 @@ static void bicubic_free (void * vstate);
 static void *
 bicubic_alloc(size_t xsize, size_t ysize)
 {
-  bicubic_state_t *state;
+  bicubic_state_t *state = NULL;
   
   state = calloc(1, sizeof (bicubic_state_t));
 
@@ -83,14 +83,17 @@ bicubic_free (void * vstate)
 
   RETURN_IF_NULL(state);
 
-  if (state->zx)
+  if (state->zx) {
     free (state->zx);
+}
 
-  if (state->zy)
+  if (state->zy) {
     free (state->zy);
+}
 
-  if (state->zxy)
+  if (state->zxy) {
     free (state->zxy);
+}
 
   free (state);
 } /* bicubic_free() */
@@ -102,10 +105,11 @@ bicubic_init(void * vstate, const double xa[], const double ya[],
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
   gsl_interp_accel *acc = gsl_interp_accel_alloc();
-  gsl_spline *spline;
-  gsl_vector *x;
-  gsl_vector *y;
-  size_t i, j;
+  gsl_spline *spline = NULL;
+  gsl_vector *x = NULL;
+  gsl_vector *y = NULL;
+  size_t i;
+  size_t j;
 
   x = gsl_vector_alloc(xsize);
   y = gsl_vector_alloc(xsize);
@@ -182,34 +186,62 @@ bicubic_eval(const void * vstate, const double xarr[], const double yarr[],
 {
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
-  double xmin, xmax, ymin, ymax;
-  double zminmin, zminmax, zmaxmin, zmaxmax;
-  double zxminmin, zxminmax, zxmaxmin, zxmaxmax;
-  double zyminmin, zyminmax, zymaxmin, zymaxmax;
-  double zxyminmin, zxyminmax, zxymaxmin, zxymaxmax;
+  double xmin;
+  double xmax;
+  double ymin;
+  double ymax;
+  double zminmin;
+  double zminmax;
+  double zmaxmin;
+  double zmaxmax;
+  double zxminmin;
+  double zxminmax;
+  double zxmaxmin;
+  double zxmaxmax;
+  double zyminmin;
+  double zyminmax;
+  double zymaxmin;
+  double zymaxmax;
+  double zxyminmin;
+  double zxyminmax;
+  double zxymaxmin;
+  double zxymaxmax;
 
-  double dx, dy;   /* size of the grid cell */
-  double dt, du;
+  double dx;
+  double dy;   /* size of the grid cell */
+  double dt;
+  double du;
 
   /*
    * t and u are the positions within the grid cell at which we are computing
    * the interpolation, in units of grid cell size
    */
-  double t, u;
-  double t0, t1, t2, t3, u0, u1, u2, u3;
-  double v;
-  size_t xi, yi;
+  double t;
+  double u;
+  double t0;
+  double t1;
+  double t2;
+  double t3;
+  double u0;
+  double u1;
+  double u2;
+  double u3;
+  double v = NAN;
+  size_t xi;
+  size_t yi;
 
   /* first compute the indices into the data arrays where we are interpolating */
-  if (xa != NULL)
+  if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
-  else
+  } else {
     xi = gsl_interp_bsearch(xarr, x, 0, xsize - 1);
+}
 
-  if (ya != NULL)
+  if (ya != NULL) {
     yi = gsl_interp_accel_find(ya, yarr, ysize, y);
-  else
+  } else {
     yi = gsl_interp_bsearch(yarr, y, 0, ysize - 1);
+}
 
   /* find the minimum and maximum values on the grid cell in each dimension */
   xmin = xarr[xi];
@@ -293,33 +325,60 @@ bicubic_deriv_x(const void * vstate, const double xarr[], const double yarr[],
 {
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
-  double xmin, xmax, ymin, ymax;
-  double zminmin, zminmax, zmaxmin, zmaxmax;
-  double zxminmin, zxminmax, zxmaxmin, zxmaxmax;
-  double zyminmin, zyminmax, zymaxmin, zymaxmax;
-  double zxyminmin, zxyminmax, zxymaxmin, zxymaxmax;
-  double dx, dy; /* size of the grid cell */
-  double dt, du;
+  double xmin;
+  double xmax;
+  double ymin;
+  double ymax;
+  double zminmin;
+  double zminmax;
+  double zmaxmin;
+  double zmaxmax;
+  double zxminmin;
+  double zxminmax;
+  double zxmaxmin;
+  double zxmaxmax;
+  double zyminmin;
+  double zyminmax;
+  double zymaxmin;
+  double zymaxmax;
+  double zxyminmin;
+  double zxyminmax;
+  double zxymaxmin;
+  double zxymaxmax;
+  double dx;
+  double dy; /* size of the grid cell */
+  double dt;
+  double du;
 
   /*
    * t and u are the positions within the grid cell at which we are computing
    * the interpolation, in units of grid cell size
    */
-  double t, u;
-  double t0, t1, t2, u0, u1, u2, u3;
-  double v;
-  size_t xi, yi;
+  double t;
+  double u;
+  double t0;
+  double t1;
+  double t2;
+  double u0;
+  double u1;
+  double u2;
+  double u3;
+  double v = NAN;
+  size_t xi;
+  size_t yi;
 
   /* first compute the indices into the data arrays where we are interpolating */
-  if (xa != NULL)
+  if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
-  else
+  } else {
     xi = gsl_interp_bsearch(xarr, x, 0, xsize - 1);
+}
 
-  if (ya != NULL)
+  if (ya != NULL) {
     yi = gsl_interp_accel_find(ya, yarr, ysize, y);
-  else
+  } else {
     yi = gsl_interp_bsearch(yarr, y, 0, ysize - 1);
+}
 
   /* find the minimum and maximum values on the grid cell in each dimension */
   xmin = xarr[xi];
@@ -398,31 +457,58 @@ bicubic_deriv_y(const void * vstate, const double xarr[], const double yarr[],
 {
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
-  double xmin, xmax, ymin, ymax;
-  double zminmin, zminmax, zmaxmin, zmaxmax;
-  double zxminmin, zxminmax, zxmaxmin, zxmaxmax;
-  double zyminmin, zyminmax, zymaxmin, zymaxmax;
-  double zxyminmin, zxyminmax, zxymaxmin, zxymaxmax;
+  double xmin;
+  double xmax;
+  double ymin;
+  double ymax;
+  double zminmin;
+  double zminmax;
+  double zmaxmin;
+  double zmaxmax;
+  double zxminmin;
+  double zxminmax;
+  double zxmaxmin;
+  double zxmaxmax;
+  double zyminmin;
+  double zyminmax;
+  double zymaxmin;
+  double zymaxmax;
+  double zxyminmin;
+  double zxyminmax;
+  double zxymaxmin;
+  double zxymaxmax;
   /* dx and dy are the size of the grid cell */
-  double dx, dy;
-  double dt, du;
+  double dx;
+  double dy;
+  double dt;
+  double du;
   /* t and u are the positions within the grid cell at which we are
    * computing the interpolation, in units of grid cell size */
-  double t, u;
-  double t0, t1, t2, t3, u0, u1, u2;
-  double v;
-  size_t xi, yi;
+  double t;
+  double u;
+  double t0;
+  double t1;
+  double t2;
+  double t3;
+  double u0;
+  double u1;
+  double u2;
+  double v = NAN;
+  size_t xi;
+  size_t yi;
 
   /* first compute the indices into the data arrays where we are interpolating */
-  if (xa != NULL)
+  if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
-  else
+  } else {
     xi = gsl_interp_bsearch(xarr, x, 0, xsize - 1);
+}
 
-  if (ya != NULL)
+  if (ya != NULL) {
     yi = gsl_interp_accel_find(ya, yarr, ysize, y);
-  else
+  } else {
     yi = gsl_interp_bsearch(yarr, y, 0, ysize - 1);
+}
 
   /* find the minimum and maximum values on the grid cell in each dimension */
   xmin = xarr[xi];
@@ -501,34 +587,60 @@ bicubic_deriv_xx(const void * vstate, const double xarr[], const double yarr[],
 {
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
-  double xmin, xmax, ymin, ymax;
-  double zminmin, zminmax, zmaxmin, zmaxmax;
-  double zxminmin, zxminmax, zxmaxmin, zxmaxmax;
-  double zyminmin, zyminmax, zymaxmin, zymaxmax;
-  double zxyminmin, zxyminmax, zxymaxmin, zxymaxmax;
+  double xmin;
+  double xmax;
+  double ymin;
+  double ymax;
+  double zminmin;
+  double zminmax;
+  double zmaxmin;
+  double zmaxmax;
+  double zxminmin;
+  double zxminmax;
+  double zxmaxmin;
+  double zxmaxmax;
+  double zyminmin;
+  double zyminmax;
+  double zymaxmin;
+  double zymaxmax;
+  double zxyminmin;
+  double zxyminmax;
+  double zxymaxmin;
+  double zxymaxmax;
 
-  double dx, dy; /* size of the grid cell */
-  double dt, du;
+  double dx;
+  double dy; /* size of the grid cell */
+  double dt;
+  double du;
 
   /*
    * t and u are the positions within the grid cell at which we are computing
    * the interpolation, in units of grid cell size
    */
-  double t, u;
-  double t0, t1, u0, u1, u2, u3;
-  double v;
-  size_t xi, yi;
+  double t;
+  double u;
+  double t0;
+  double t1;
+  double u0;
+  double u1;
+  double u2;
+  double u3;
+  double v = NAN;
+  size_t xi;
+  size_t yi;
 
   /* first compute the indices into the data arrays where we are interpolating */
-  if (xa != NULL)
+  if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
-  else
+  } else {
     xi = gsl_interp_bsearch(xarr, x, 0, xsize - 1);
+}
 
-  if (ya != NULL)
+  if (ya != NULL) {
     yi = gsl_interp_accel_find(ya, yarr, ysize, y);
-  else
+  } else {
     yi = gsl_interp_bsearch(yarr, y, 0, ysize - 1);
+}
 
   /* find the minimum and maximum values on the grid cell in each dimension */
   xmin = xarr[xi];
@@ -598,34 +710,60 @@ bicubic_deriv_xy(const void * vstate, const double xarr[], const double yarr[],
 {
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
-  double xmin, xmax, ymin, ymax;
-  double zminmin, zminmax, zmaxmin, zmaxmax;
-  double zxminmin, zxminmax, zxmaxmin, zxmaxmax;
-  double zyminmin, zyminmax, zymaxmin, zymaxmax;
-  double zxyminmin, zxyminmax, zxymaxmin, zxymaxmax;
+  double xmin;
+  double xmax;
+  double ymin;
+  double ymax;
+  double zminmin;
+  double zminmax;
+  double zmaxmin;
+  double zmaxmax;
+  double zxminmin;
+  double zxminmax;
+  double zxmaxmin;
+  double zxmaxmax;
+  double zyminmin;
+  double zyminmax;
+  double zymaxmin;
+  double zymaxmax;
+  double zxyminmin;
+  double zxyminmax;
+  double zxymaxmin;
+  double zxymaxmax;
 
-  double dx, dy; /* size of the grid cell */
-  double dt, du;
+  double dx;
+  double dy; /* size of the grid cell */
+  double dt;
+  double du;
 
   /*
    * t and u are the positions within the grid cell at which we are computing
    * the interpolation, in units of grid cell size
    */
-  double t, u;
-  double t0, t1, t2, u0, u1, u2;
-  double v;
-  size_t xi, yi;
+  double t;
+  double u;
+  double t0;
+  double t1;
+  double t2;
+  double u0;
+  double u1;
+  double u2;
+  double v = NAN;
+  size_t xi;
+  size_t yi;
 
   /* first compute the indices into the data arrays where we are interpolating */
-  if (xa != NULL)
+  if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
-  else
+  } else {
     xi = gsl_interp_bsearch(xarr, x, 0, xsize - 1);
+}
 
-  if (ya != NULL)
+  if (ya != NULL) {
     yi = gsl_interp_accel_find(ya, yarr, ysize, y);
-  else
+  } else {
     yi = gsl_interp_bsearch(yarr, y, 0, ysize - 1);
+}
 
   /* find the minimum and maximum values on the grid cell in each dimension */
   xmin = xarr[xi];
@@ -697,34 +835,60 @@ bicubic_deriv_yy(const void * vstate, const double xarr[], const double yarr[],
 {
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
-  double xmin, xmax, ymin, ymax;
-  double zminmin, zminmax, zmaxmin, zmaxmax;
-  double zxminmin, zxminmax, zxmaxmin, zxmaxmax;
-  double zyminmin, zyminmax, zymaxmin, zymaxmax;
-  double zxyminmin, zxyminmax, zxymaxmin, zxymaxmax;
+  double xmin;
+  double xmax;
+  double ymin;
+  double ymax;
+  double zminmin;
+  double zminmax;
+  double zmaxmin;
+  double zmaxmax;
+  double zxminmin;
+  double zxminmax;
+  double zxmaxmin;
+  double zxmaxmax;
+  double zyminmin;
+  double zyminmax;
+  double zymaxmin;
+  double zymaxmax;
+  double zxyminmin;
+  double zxyminmax;
+  double zxymaxmin;
+  double zxymaxmax;
 
-  double dx, dy; /* size of the grid cell */
-  double dt, du;
+  double dx;
+  double dy; /* size of the grid cell */
+  double dt;
+  double du;
 
   /*
    * t and u are the positions within the grid cell at which we are computing
    * the interpolation, in units of grid cell size
    */
-  double t, u;
-  double t0, t1, t2, t3, u0, u1;
-  double v;
-  size_t xi, yi;
+  double t;
+  double u;
+  double t0;
+  double t1;
+  double t2;
+  double t3;
+  double u0;
+  double u1;
+  double v = NAN;
+  size_t xi;
+  size_t yi;
 
   /* first compute the indices into the data arrays where we are interpolating */
-  if (xa != NULL)
+  if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
-  else
+  } else {
     xi = gsl_interp_bsearch(xarr, x, 0, xsize - 1);
+}
 
-  if (ya != NULL)
+  if (ya != NULL) {
     yi = gsl_interp_accel_find(ya, yarr, ysize, y);
-  else
+  } else {
     yi = gsl_interp_bsearch(yarr, y, 0, ysize - 1);
+}
 
   /* find the minimum and maximum values on the grid cell in each dimension */
   xmin = xarr[xi];

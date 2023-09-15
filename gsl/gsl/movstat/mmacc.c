@@ -94,8 +94,8 @@ static int
 mmacc_insert(const mmacc_type_t x, void * vstate)
 {
   mmacc_state_t * state = (mmacc_state_t *) vstate;
-  int head;
-  int tail;
+  int head = 0;
+  int tail = 0;
 
   if (state->k == 0)
     {

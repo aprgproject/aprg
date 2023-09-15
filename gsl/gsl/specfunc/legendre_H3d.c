@@ -109,9 +109,9 @@ legendre_H3d_series(const int ell, const double lambda, const double eta,
   double sum_err = 0.0;
   gsl_sf_result lnsheta;
   double lnN = NAN;
-  double lnpre_val;
-  double lnpre_err;
-  double lnprepow;
+  double lnpre_val = NAN;
+  double lnpre_err = NAN;
+  double lnprepow = NAN;
   int stat_e = 0;
   int n = 0;
 
@@ -410,11 +410,12 @@ gsl_sf_legendre_H3d_e(const int ell, const double lambda, const double eta,
       return stat_P;
     }
     
-      double lnN;
+      double lnN = NAN;
       gsl_sf_result lnsh;
-      double ln_abslam;
-      double lnpre_val, lnpre_err;
-      int stat_e;
+      double ln_abslam = NAN;
+      double lnpre_val;
+      double lnpre_err;
+      int stat_e = 0;
       gsl_sf_lnsinh_e(eta, &lnsh);
       legendre_H3d_lnnorm(ell, lambda, &lnN);
       ln_abslam = log(abs_lam);
@@ -441,11 +442,12 @@ gsl_sf_legendre_H3d_e(const int ell, const double lambda, const double eta,
       return stat_P;
     }
     
-      double lnN;
+      double lnN = NAN;
       gsl_sf_result lnsh;
-      double ln_abslam;
-      double lnpre_val, lnpre_err;
-      int stat_e;
+      double ln_abslam = NAN;
+      double lnpre_val;
+      double lnpre_err;
+      int stat_e = 0;
       gsl_sf_lnsinh_e(eta, &lnsh);
       legendre_H3d_lnnorm(ell, lambda, &lnN);
       ln_abslam = log(abs_lam);

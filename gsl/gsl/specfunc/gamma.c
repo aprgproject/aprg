@@ -27,6 +27,7 @@
 #include <gsl/gsl_sf_psi.h>
 #include <gsl/gsl_sf_trig.h>
 #include <gsl/gsl_sf_gamma.h>
+#include <math.h>
 
 #include "error.h"
 #include "check.h"
@@ -665,10 +666,10 @@ lngamma_lanczos_complex(double zr, double zi, gsl_sf_result * yr, gsl_sf_result 
   gsl_sf_result log1_i;
   gsl_sf_result logAg_r;
   gsl_sf_result logAg_i;
-  double Ag_r;
-  double Ag_i;
-  double yi_tmp_val;
-  double yi_tmp_err;
+  double Ag_r = NAN;
+  double Ag_i = NAN;
+  double yi_tmp_val = NAN;
+  double yi_tmp_err = NAN;
 
   zr -= 1.0; /* Lanczos writes z! instead of Gamma(z) */
 
@@ -708,8 +709,8 @@ lngamma_lanczos(double x, gsl_sf_result * result)
 {
   int k = 0;
   double Ag = NAN;
-  double term1;
-  double term2;
+  double term1 = NAN;
+  double term2 = NAN;
 
   x -= 1.0; /* Lanczos writes z! instead of Gamma(z) */
 
@@ -817,13 +818,13 @@ lngamma_sgn_sing(int N, double eps, gsl_sf_result * lng, double * sgn)
      * double-precision for |eps| < 0.02
      */
     double aeps = fabs(eps);
-    double c1;
-    double c2;
-    double c3;
-    double c4;
-    double c5;
-    double c6;
-    double c7;
+    double c1 = NAN;
+    double c2 = NAN;
+    double c3 = NAN;
+    double c4 = NAN;
+    double c5 = NAN;
+    double c6 = NAN;
+    double c7 = NAN;
     double lng_ser = NAN;
     gsl_sf_result c0;
     gsl_sf_result psi_0;
@@ -1046,7 +1047,7 @@ gamma_xgthalf(const double x, gsl_sf_result * result)
     result->err = GSL_DBL_EPSILON * result->val;
     return GSL_SUCCESS;
   }    
-  else if(fabs(x - 1.0) < 0.01) {
+  if(fabs(x - 1.0) < 0.01) {
     /* Use series for Gamma[1+eps] - 1/(1+eps).
      */
     const double eps = x - 1.0;
@@ -1147,7 +1148,7 @@ int gsl_sf_lngamma_e(double x, gsl_sf_result * result)
     result->err *= 1.0/(GSL_DBL_EPSILON + fabs(x - 2.0));
     return stat;
   }
-  else if(x >= 0.5) {
+  if(x >= 0.5) {
     return lngamma_lanczos(x, result);
   }
   else if(x == 0.0) {
@@ -1212,7 +1213,7 @@ int gsl_sf_lngamma_sgn_e(double x, gsl_sf_result * result_lg, double * sgn)
     *sgn = 1.0;
     return stat;
   }
-  else if(x >= 0.5) {
+  if(x >= 0.5) {
     *sgn = 1.0;
     return lngamma_lanczos(x, result_lg);
   }
@@ -1372,14 +1373,14 @@ gsl_sf_gammainv_e(const double x, gsl_sf_result * result)
     return GSL_SUCCESS;
   } if(x < 0.5) {
     gsl_sf_result lng;
-    double sgn;
+    double sgn = NAN;
     int stat_lng = gsl_sf_lngamma_sgn_e(x, &lng, &sgn);
     if(stat_lng == GSL_EDOM) {
       result->val = 0.0;
       result->err = 0.0;
       return GSL_SUCCESS;
     }
-    else if(stat_lng != GSL_SUCCESS) {
+    if(stat_lng != GSL_SUCCESS) {
       result->val = 0.0;
       result->err = 0.0;
       return stat_lng;
@@ -1503,9 +1504,9 @@ int gsl_sf_fact_e(const unsigned int n, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     OVERFLOW_ERROR(result);
-  }
+ 
 }
 
 
@@ -1523,9 +1524,9 @@ int gsl_sf_doublefact_e(const unsigned int n, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     OVERFLOW_ERROR(result);
-  }
+ 
 }
 
 
@@ -1561,13 +1562,13 @@ int gsl_sf_lndoublefact_e(const unsigned int n, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val) + lg.err;
     return GSL_SUCCESS;
   }
-  else {
+  
     gsl_sf_result lg;
     gsl_sf_lngamma_e(0.5*n+1.0, &lg);
     result->val = 0.5*n*M_LN2 + lg.val;
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val) + lg.err;
     return GSL_SUCCESS;
-  }
+ 
 }
 
 

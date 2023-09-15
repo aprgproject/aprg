@@ -128,7 +128,7 @@ gsl_sf_lambert_W0_e(double x, gsl_sf_result * result)
     result->err =  sqrt(-q);
     return GSL_EDOM;
   }
-  else if(q == 0.0) {
+  if(q == 0.0) {
     result->val = -1.0;
     result->err =  GSL_DBL_EPSILON; /* cannot error is zero, maybe q == 0 by "accident" */
     return GSL_SUCCESS;
@@ -174,7 +174,7 @@ gsl_sf_lambert_Wm1_e(double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else {
+  
     static const unsigned int MAX_ITERS = 32;
     const double one_over_E = 1.0/M_E;
     const double q = x + one_over_E;
@@ -212,7 +212,7 @@ gsl_sf_lambert_Wm1_e(double x, gsl_sf_result * result)
     }
 
     return halley_iteration(x, w, MAX_ITERS, result);
-  }
+ 
 }
 
 

@@ -28,8 +28,8 @@ int
 gsl_poly_dd_init (double dd[], const double xa[], const double ya[],
                   size_t size)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   /* Newton's divided differences */
 
@@ -56,8 +56,8 @@ gsl_poly_dd_taylor (double c[], double xp,
                     const double dd[], const double xa[], size_t size,
                     double w[])
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   for (i = 0; i < size; i++)
     {
@@ -109,8 +109,8 @@ gsl_poly_dd_hermite_init (double dd[], double za[], const double xa[], const dou
                           const double dya[], const size_t size)
 {
   const size_t N = 2 * size;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   /* Hermite divided differences */
 

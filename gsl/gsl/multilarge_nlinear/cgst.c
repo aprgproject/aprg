@@ -25,6 +25,7 @@
 #include <gsl/gsl_multilarge_nlinear.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 /*
  * This module contains an implementation of the Steihaug-Toint
@@ -213,9 +214,9 @@ cgst_step(const void * vtrust_state, const double delta,
   const gsl_vector * diag = trust_state->diag;
   const gsl_multilarge_nlinear_parameters * params = trust_state->params;
   gsl_multilarge_nlinear_fdf * fdf = trust_state->fdf;
-  double alpha;
-  double beta;
-  double u;
+  double alpha = NAN;
+  double beta = NAN;
+  double u = NAN;
   double norm_Jd = NAN;   /* || J D^{-1} d_i || */
   double norm_r = NAN;    /* || r_i || */
   double norm_rp1 = NAN;  /* || r_{i+1} || */
@@ -362,12 +363,12 @@ static double
 cgst_calc_tau(const gsl_vector * p, const gsl_vector * d,
               const double delta)
 {
-  double norm_p;
-  double norm_d;
-  double u;
-  double t1;
-  double t2;
-  double tau;
+  double norm_p = NAN;
+  double norm_d = NAN;
+  double u = NAN;
+  double t1 = NAN;
+  double t2 = NAN;
+  double tau = NAN;
 
   norm_p = gsl_blas_dnrm2(p);
   norm_d = gsl_blas_dnrm2(d);

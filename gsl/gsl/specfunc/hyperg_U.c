@@ -29,6 +29,7 @@
 #include <gsl/gsl_sf_laguerre.h>
 #include <gsl/gsl_sf_pow_int.h>
 #include <gsl/gsl_sf_hyperg.h>
+#include <math.h>
 
 #include "error.h"
 #include "hyperg.h"
@@ -82,8 +83,8 @@ hyperg_U_CF1(const double a, const double b, const int N, const double x,
   double b1 =  (b - 2.0*a - x - 2.0*(N+1));
   double An = b1*Anm1 + a1*Anm2;
   double Bn = b1*Bnm1 + a1*Bnm2;
-  double an;
-  double bn;
+  double an = NAN;
+  double bn = NAN;
   double fn = An/Bn;
 
   while(n < maxiter) {
@@ -174,9 +175,9 @@ d9chu(const double a, const double b, const double x, gsl_sf_result * result)
     int j = 0;
     double c2 = NAN;
     double d1z = NAN;
-    double g1;
-    double g2;
-    double g3;
+    double g1 = NAN;
+    double g2 = NAN;
+    double g3 = NAN;
     double x2i1 = 2*i - 3;
     ct1   = x2i1/(x2i1-2.0);
     anbn += x2i1 + sab;
@@ -301,7 +302,7 @@ hyperg_U_finite_sum(int N, double a, double b, double x, double xeps,
       result->err = 0.0;
       return GSL_SUCCESS;
     }
-    else {
+    
       gsl_sf_result gbm1;
       gsl_sf_result gamr;
       int stat_gbm1;
@@ -344,7 +345,7 @@ hyperg_U_finite_sum(int N, double a, double b, double x, double xeps,
         result->err = 0.0;
         return stat_gbm1;
       }
-    }
+   
  
 }
 
@@ -725,7 +726,7 @@ double bint = ( b < 0.0 ? ceil(b-0.5) : floor(b+0.5) );
      */
     gsl_sf_result sum;
     int stat_sum = hyperg_U_finite_sum(N, a, b, x, xeps, &sum);
-    int stat_inf;
+    int stat_inf = 0;
 
     /* Evaluate infinite sum. */
     if(fabs(xeps-1.0) > 0.5 ) {
@@ -764,7 +765,7 @@ hyperg_U_small_ab(const double a, const double b, const double x, gsl_sf_result 
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else if(ASYMP_EVAL_OK(a,b,x)) {
+  if(ASYMP_EVAL_OK(a,b,x)) {
     double p = pow(x, -a);
     gsl_sf_result asymp;
     int stat_asymp = hyperg_zaU_asymp(a, b, x, &asymp);
@@ -799,9 +800,9 @@ hyperg_U_small_a_bgt0(const double a, const double b, const double x,
           || (b >  500.0 && x < 0.50 * fabs(b))
     ) {
     int stat = gsl_sf_hyperg_U_large_b_e(a, b, x, result, ln_multiplier);
-    if(stat == GSL_EOVRFLW)
+    if(stat == GSL_EOVRFLW) {
       return GSL_SUCCESS;
-    else
+    } 
       return stat;
   }
   else if(b > 15.0) {
@@ -815,8 +816,8 @@ hyperg_U_small_a_bgt0(const double a, const double b, const double x,
     int stat_1 = hyperg_U_small_ab(a, b0+1.0, x, &r_Ub);
     double Ubm1 = r_Ubm1.val;
     double Ub   = r_Ub.val;
-    double Ubp1;
-    double bp;
+    double Ubp1 = NAN;
+    double bp = NAN;
 
     for(bp = b0+1.0; bp<b-0.1; bp += 1.0) {
       Ubp1 = ((1.0+a-bp)*Ubm1 + (bp+x-1.0)*Ub)/x;
@@ -883,7 +884,7 @@ hyperg_U_int_bge1(const int a, const int b, const double x,
     result->e10  = 0;
     return GSL_SUCCESS;
   }
-  else if(b == a + 1) {
+  if(b == a + 1) {
     /* U(a,a+1,x) = x^(-a)
      */
     return gsl_sf_exp_e10_e(-a*log(x), result);
@@ -1203,7 +1204,7 @@ hyperg_U_bge1(const double a, const double b, const double x,
   }
   else if(fabs(a) <= 1.0) {
     gsl_sf_result rU;
-    double ln_multiplier;
+    double ln_multiplier = NAN;
     int stat_U = hyperg_U_small_a_bgt0(a, b, x, &rU, &ln_multiplier);
     int stat_e = gsl_sf_exp_mult_err_e10_e(ln_multiplier, 2.0*GSL_DBL_EPSILON*fabs(ln_multiplier), rU.val, rU.err, result);
     return GSL_ERROR_SELECT_2(stat_U, stat_e);
@@ -1223,17 +1224,18 @@ hyperg_U_bge1(const double a, const double b, const double x,
     const double a0 = a - floor(a) - 1.0;
     const double b0 = b - floor(b) + 1.0;
     int scale_count = 0;
-    double lm_0, lm_1;
-    double lm_max;
+    double lm_0;
+    double lm_1;
+    double lm_max = NAN;
     gsl_sf_result r_Uap1;
     gsl_sf_result r_Ua;
     int stat_0 = hyperg_U_small_a_bgt0(a0+1.0, b0, x, &r_Uap1, &lm_0);
     int stat_1 = hyperg_U_small_a_bgt0(a0,     b0, x, &r_Ua,   &lm_1);
-    int stat_e;
+    int stat_e = 0;
     double Uap1 = r_Uap1.val;
     double Ua   = r_Ua.val;
-    double Uam1;
-    double ap;
+    double Uam1 = NAN;
+    double ap = NAN;
     lm_max = GSL_MAX(lm_0, lm_1);
     Uap1 *= exp(lm_0-lm_max);
     Ua   *= exp(lm_1-lm_max);
@@ -1273,8 +1275,8 @@ hyperg_U_bge1(const double a, const double b, const double x,
 
       double Ubm1 = Ua;                                 /* U(a,b0)   */
       double Ub   = (a*(b0-a-1.0)*Uap1 + (a+x)*Ua)/x;   /* U(a,b0+1) */
-      double Ubp1;
-      double bp;
+      double Ubp1 = NAN;
+      double bp = NAN;
       for(bp=b0+1.0; bp<b-0.1; bp += 1.0) {
         Ubp1 = ((1.0+a-bp)*Ubm1 + (bp+x-1.0)*Ub)/x;
         Ubm1 = Ub;
@@ -1304,19 +1306,21 @@ hyperg_U_bge1(const double a, const double b, const double x,
     int scale_count = 0;
     const double a0 = a - floor(a);
     const double scale_factor = GSL_SQRT_DBL_MAX;
-    double lnscale;
-    double lm_0, lm_1, lm_max;
+    double lnscale = NAN;
+    double lm_0;
+    double lm_1;
+    double lm_max;
     gsl_sf_result r_Uam1;
     gsl_sf_result r_Ua;
     int stat_0 = hyperg_U_small_a_bgt0(a0-1.0, b, x, &r_Uam1, &lm_0);
     int stat_1 = hyperg_U_small_a_bgt0(a0,     b, x, &r_Ua,   &lm_1);
-    int stat_e;
+    int stat_e = 0;
     gsl_sf_result lnm;
     gsl_sf_result y;
     double Uam1 = r_Uam1.val;
     double Ua   = r_Ua.val;
-    double Uap1;
-    double ap;
+    double Uap1 = NAN;
+    double ap = NAN;
     lm_max = GSL_MAX(lm_0, lm_1);
     Uam1 *= exp(lm_0-lm_max);
     Ua   *= exp(lm_1-lm_max);
@@ -1349,19 +1353,19 @@ hyperg_U_bge1(const double a, const double b, const double x,
       int scale_count = 0;
       gsl_sf_result lnm;
       gsl_sf_result y;
-      double lnscale;
-      double lm_0;
-      double Uap1;
-      double Ua;
-      double Uam1;
+      double lnscale = NAN;
+      double lm_0 = NAN;
+      double Uap1 = NAN;
+      double Ua = NAN;
+      double Uam1 = NAN;
       gsl_sf_result U0;
-      double ap;
-      double ru;
-      double r;
-      int CF1_count;
+      double ap = NAN;
+      double ru = NAN;
+      double r = NAN;
+      int CF1_count = 0;
       int stat_CF1 = hyperg_U_CF1(a, b, 0, x, &ru, &CF1_count);
-      int stat_U0;
-      int stat_e;
+      int stat_U0 = 0;
+      int stat_e = 0;
       r = ru/a;
       Ua   = GSL_SQRT_DBL_MIN;
       Uap1 = r * Ua;
@@ -1383,7 +1387,7 @@ hyperg_U_bge1(const double a, const double b, const double x,
       stat_e = gsl_sf_exp_mult_err_e10_e(lnm.val, lnm.err, y.val, y.err, result);
       return GSL_ERROR_SELECT_3(stat_e, stat_U0, stat_CF1);
     }
-    else {
+    
       /* Recurse backward to near the b=2a+x line, then
        * forward from a near zero to get the normalization.
        */
@@ -1461,7 +1465,7 @@ hyperg_U_bge1(const double a, const double b, const double x,
       y.err = 2.0 * GSL_DBL_EPSILON * (fabs(a-a0) + CF1_count + 1.0) * fabs(y.val);
       stat_e = gsl_sf_exp_mult_err_e10_e(lnm.val, lnm.err, y.val, y.err, result);
       return GSL_ERROR_SELECT_3(stat_e, stat_bck, stat_for);
-    }
+   
   }
 }
 
@@ -1534,9 +1538,9 @@ hyperg_U_negx (const double a, const double b, const double x, gsl_sf_result_e10
 {
   gsl_sf_result r1;
   gsl_sf_result r2;
-  int stat_1;
-  int stat_2;
-  int status;
+  int stat_1 = 0;
+  int stat_2 = 0;
+  int status = 0;
   int a_int = (a == floor(a));
   int b_int = (b == floor(b));
 
@@ -1689,7 +1693,7 @@ gsl_sf_hyperg_U_int_e10_e(const int a, const int b, const double x,
       double ln_x = log(x);
       int ap = 1 + a - b;
       int bp = 2 - b;
-      int stat_e;
+      int stat_e = 0;
       int stat_U = hyperg_U_int_bge1(ap, bp, x, &U);
       double ln_pre_val = (1.0-b)*ln_x;
       double ln_pre_err = 2.0 * GSL_DBL_EPSILON * (fabs(b)+1.0) * fabs(ln_x);

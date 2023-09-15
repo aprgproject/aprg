@@ -20,6 +20,7 @@
 /* Author:  L. Johnson */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gsl/gsl_math.h>
@@ -30,22 +31,22 @@
 int gsl_sf_mathieu_Mc_e(int kind, int order, double qq, double zz,
                       gsl_sf_result *result)
 {
-  int even_odd;
-  int kk;
-  int status;
+  int even_odd = 0;
+  int kk = 0;
+  int status = 0;
   double maxerr = 1e-14;
-  double amax;
+  double amax = NAN;
   double pi = M_PI;
-  double fn;
-  double factor;
+  double fn = NAN;
+  double factor = NAN;
   double coeff[GSL_SF_MATHIEU_COEFF];
-  double fc;
-  double j1c;
-  double z2c;
-  double j1pc;
-  double z2pc;
-  double u1;
-  double u2;
+  double fc = NAN;
+  double j1c = NAN;
+  double z2c = NAN;
+  double j1pc = NAN;
+  double z2pc = NAN;
+  double u1 = NAN;
+  double u2 = NAN;
   gsl_sf_result aa;
 
 
@@ -150,24 +151,24 @@ int gsl_sf_mathieu_Mc_e(int kind, int order, double qq, double zz,
 int gsl_sf_mathieu_Ms_e(int kind, int order, double qq, double zz,
                       gsl_sf_result *result)
 {
-  int even_odd;
-  int kk;
-  int status;
+  int even_odd = 0;
+  int kk = 0;
+  int status = 0;
   double maxerr = 1e-14;
-  double amax;
+  double amax = NAN;
   double pi = M_PI;
-  double fn;
-  double factor;
+  double fn = NAN;
+  double factor = NAN;
   double coeff[GSL_SF_MATHIEU_COEFF];
-  double fc;
-  double j1c;
-  double z2c;
-  double j1mc;
-  double z2mc;
-  double j1pc;
-  double z2pc;
-  double u1;
-  double u2;
+  double fc = NAN;
+  double j1c = NAN;
+  double z2c = NAN;
+  double j1mc = NAN;
+  double z2mc = NAN;
+  double j1pc = NAN;
+  double z2pc = NAN;
+  double u1 = NAN;
+  double u2 = NAN;
   gsl_sf_result aa;
 
 
@@ -285,23 +286,23 @@ int gsl_sf_mathieu_Mc_array(int kind, int nmin, int nmax, double qq,
                             double zz, gsl_sf_mathieu_workspace *work,
                             double result_array[])
 {
-  int even_odd;
-  int order;
-  int ii;
-  int kk;
-  int status;
+  int even_odd = 0;
+  int order = 0;
+  int ii = 0;
+  int kk = 0;
+  int status = 0;
   double maxerr = 1e-14;
-  double amax;
+  double amax = NAN;
   double pi = M_PI;
-  double fn;
+  double fn = NAN;
   double coeff[GSL_SF_MATHIEU_COEFF];
-  double fc;
-  double j1c;
-  double z2c;
-  double j1pc;
-  double z2pc;
-  double u1;
-  double u2;
+  double fc = NAN;
+  double j1c = NAN;
+  double z2c = NAN;
+  double j1pc = NAN;
+  double z2pc = NAN;
+  double u1 = NAN;
+  double u2 = NAN;
   double *aa = work->aa;
 
 
@@ -406,25 +407,25 @@ int gsl_sf_mathieu_Ms_array(int kind, int nmin, int nmax, double qq,
                             double zz, gsl_sf_mathieu_workspace *work,
                             double result_array[])
 {
-  int even_odd;
-  int order;
-  int ii;
-  int kk;
-  int status;
+  int even_odd = 0;
+  int order = 0;
+  int ii = 0;
+  int kk = 0;
+  int status = 0;
   double maxerr = 1e-14;
-  double amax;
+  double amax = NAN;
   double pi = M_PI;
-  double fn;
+  double fn = NAN;
   double coeff[GSL_SF_MATHIEU_COEFF];
-  double fc;
-  double j1c;
-  double z2c;
-  double j1mc;
-  double z2mc;
-  double j1pc;
-  double z2pc;
-  double u1;
-  double u2;
+  double fc = NAN;
+  double j1c = NAN;
+  double z2c = NAN;
+  double j1mc = NAN;
+  double z2mc = NAN;
+  double j1pc = NAN;
+  double z2pc = NAN;
+  double u1 = NAN;
+  double u2 = NAN;
   double *bb = work->bb;
 
 

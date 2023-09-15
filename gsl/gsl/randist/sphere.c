@@ -29,9 +29,9 @@ gsl_ran_dir_2d (const gsl_rng * r, double *x, double *y)
    * 2.55 calls to the RNG, instead of one for the direct
    * trigonometric method.  */
 
-  double u;
-  double v;
-  double s;
+  double u = NAN;
+  double v = NAN;
+  double s = NAN;
   do
     {
       u = -1 + 2 * gsl_rng_uniform (r);
@@ -67,8 +67,8 @@ gsl_ran_dir_2d_trig_method (const gsl_rng * r, double *x, double *y)
 void
 gsl_ran_dir_3d (const gsl_rng * r, double *x, double *y, double *z)
 {
-  double s;
-  double a;
+  double s = NAN;
+  double a = NAN;
 
   /* This is a variant of the algorithm for computing a random point
    * on the unit sphere; the algorithm is suggested in Knuth, v2,

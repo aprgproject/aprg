@@ -61,8 +61,8 @@ gsl_sum_levin_u_minmax (const double *array, const size_t array_size,
       w->terms_used = 1;
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       const double SMALL = 0.01;
       const size_t nmax = GSL_MAX (max_terms, array_size) - 1;
       double noise_n = 0.0, noise_nm1 = 0.0;
@@ -178,7 +178,7 @@ gsl_sum_levin_u_minmax (const double *array, const size_t array_size,
           w->terms_used = n;
           return GSL_SUCCESS;
         }
-    }
+   
 }
 
 
@@ -206,11 +206,11 @@ gsl_sum_levin_u_step (const double term, const size_t n, const size_t nmax,
     }
   
     
-      double result;
+      double result = NAN;
       double factor = 1.0;
       double ratio = (double) n / (n + 1.0);
-      unsigned int i;
-      int j;
+      unsigned int i = 0;
+      int j = 0;
 
       w->sum_plain += term;
 

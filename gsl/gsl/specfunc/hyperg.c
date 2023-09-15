@@ -27,6 +27,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_exp.h>
 #include <gsl/gsl_sf_gamma.h>
+#include <math.h>
 
 #include "error.h"
 #include "hyperg.h"
@@ -49,8 +50,8 @@ gsl_sf_hyperg_1F1_series_e(const double a, const double b, const double x,
   double sum_err = 0.0;
 
   while(abs_del/fabs(sum_val) > 0.25*GSL_DBL_EPSILON) {
-    double u;
-    double abs_u;
+    double u = NAN;
+    double abs_u = NAN;
 
     if(bn == 0.0) {
       DOMAIN_ERROR(result);
@@ -183,12 +184,12 @@ gsl_sf_hyperg_U_large_b_e(const double a, const double b, const double x,
     gsl_sf_result lg_a;      double sgn_a = NAN;
     gsl_sf_result M1;
     gsl_sf_result M2;
-    double lnpre1_val;
-    double lnpre2_val;
-    double lnpre1_err;
-    double lnpre2_err;
-    double sgpre1;
-    double sgpre2;
+    double lnpre1_val = NAN;
+    double lnpre2_val = NAN;
+    double lnpre1_err = NAN;
+    double lnpre2_err = NAN;
+    double sgpre1 = NAN;
+    double sgpre2 = NAN;
     gsl_sf_hyperg_1F1_large_b_e(    a,     b, x, &M1);
     gsl_sf_hyperg_1F1_large_b_e(1.0-a, 2.0-b, x, &M2);
 

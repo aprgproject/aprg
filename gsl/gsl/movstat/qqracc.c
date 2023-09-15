@@ -26,6 +26,7 @@
 #include <gsl/gsl_movstat.h>
 #include <gsl/gsl_sort.h>
 #include <gsl/gsl_statistics.h>
+#include <math.h>
 
 typedef double qqracc_type_t;
 typedef qqracc_type_t ringbuf_type_t;
@@ -93,8 +94,8 @@ qqracc_get(void * params, qqracc_type_t * result, const void * vstate)
   const qqracc_state_t * state = (const qqracc_state_t *) vstate;
   double q = *(double *) params;
   size_t n = ringbuf_copy(state->window, state->rbuf);
-  double quant1;
-  double quant2;
+  double quant1 = NAN;
+  double quant2 = NAN;
 
   gsl_sort(state->window, 1, n);
 

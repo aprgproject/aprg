@@ -28,6 +28,7 @@
 #include <gsl/gsl_sf_pow_int.h>
 #include <gsl/gsl_sf_zeta.h>
 #include <gsl/gsl_sf_fermi_dirac.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -868,11 +869,11 @@ fd_nint(const int j, const double x, gsl_sf_result * result)
     GSL_ERROR ("error", GSL_EUNIMPL);
   }
   else {
-    double a;
-    double p;
-    double f;
-    int i;
-    int k;
+    double a = NAN;
+    double p = NAN;
+    double f = NAN;
+    int i = 0;
+    int k = 0;
     int n = -(j+1);
 
     qcoeff[1] = 1.0;
@@ -935,19 +936,20 @@ fd_neg(const double j, const double x, gsl_sf_result * result)
     double ex   = exp(x);
     double term = ex;
     double sum  = term;
-    int n;
+    int n = 0;
     for(n=2; n<100; n++) {
       double rat = (n-1.0)/n;
       double p   = pow(rat, j+1.0);
       term *= -ex * p;
       sum  += term;
-      if(fabs(term/sum) < GSL_DBL_EPSILON) break;
+      if(fabs(term/sum) < GSL_DBL_EPSILON) { break;
+}
     }
     result->val = sum;
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(sum);
     return GSL_SUCCESS;
   }
-  else {
+  
     double s = 0.0;
     double xn = x;
     double ex  = -exp(x);
@@ -973,7 +975,7 @@ fd_neg(const double j, const double x, gsl_sf_result * result)
       GSL_ERROR ("error", GSL_EMAXITER);
     else
       return GSL_SUCCESS;
-  }
+ 
 }
 
 
@@ -1399,7 +1401,7 @@ int gsl_sf_fermi_dirac_int_e(const int j, const double x, gsl_sf_result * result
   if (j == -1) {
     return gsl_sf_fermi_dirac_m1_e(x, result);
   }
-  else if(j == 0) {
+  if(j == 0) {
     return gsl_sf_fermi_dirac_0_e(x, result);
   }
   else if(j == 1) {

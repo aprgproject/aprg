@@ -797,7 +797,7 @@ gsl_sf_airy_Bi_deriv_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * r
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     const double sqrtx = sqrt(x);
     const double z = 16.0/(x*sqrtx) - 1.0;
     const double s = sqrt(sqrtx);
@@ -807,7 +807,7 @@ gsl_sf_airy_Bi_deriv_scaled_e(const double x, gsl_mode_t mode, gsl_sf_result * r
     result->err  = s * result_c0.err;
     result->err += GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 
@@ -858,9 +858,9 @@ gsl_sf_airy_Bi_deriv_e(const double x, gsl_mode_t mode, gsl_sf_result * result)
                                           result);
     return GSL_ERROR_SELECT_2(stat_e, stat_b);
   }
-  else {
+  
     OVERFLOW_ERROR(result);
-  }
+ 
 }
 
 /*-*-*-*-*-*-*-*-*-* Functions w/ Natural Prototypes *-*-*-*-*-*-*-*-*-*-*/

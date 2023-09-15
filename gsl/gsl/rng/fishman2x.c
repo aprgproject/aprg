@@ -64,8 +64,8 @@ ran_get (void *vstate)
 {
   ran_state_t *state = (ran_state_t *) vstate;
 
-  long int y;
-  long int r;
+  long int y = 0;
+  long int r = 0;
 
   r = RRR_F * (state->x / QQQ_F);
   y = AAA_F * (state->x % QQQ_F) - r;

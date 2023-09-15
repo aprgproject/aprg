@@ -69,10 +69,10 @@ mrg_get (void *vstate)
 {
   mrg_state_t *state = (mrg_state_t *) vstate;
 
-  long int p1;
-  long int h1;
-  long int p5;
-  long int h5;
+  long int p1 = 0;
+  long int h1 = 0;
+  long int p5 = 0;
+  long int h5 = 0;
 
   h5 = state->x5 / q5;
   p5 = a5 * (state->x5 - h5 * q5) - h5 * r5;

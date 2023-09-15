@@ -20,6 +20,7 @@
 /* Author:  G. Jungman
  */
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gsl/gsl_errno.h>
@@ -42,10 +43,10 @@ linear_eval (const void * vstate,
              gsl_interp_accel * a,
              double *y)
 {
-  double x_lo;
-  double x_hi;
-  double y_lo;
-  double y_hi;
+  double x_lo = NAN;
+  double x_hi = NAN;
+  double y_lo = NAN;
+  double y_hi = NAN;
   double dx = NAN;
   size_t index = 0;
   
@@ -85,10 +86,10 @@ linear_eval_deriv (const void * vstate,
                    gsl_interp_accel * a,
                    double *dydx)
 {
-  double x_lo;
-  double x_hi;
-  double y_lo;
-  double y_hi;
+  double x_lo = NAN;
+  double x_hi = NAN;
+  double y_lo = NAN;
+  double y_hi = NAN;
   double dx = NAN;
   double dy = NAN;
   size_t index = 0;
@@ -144,9 +145,9 @@ linear_eval_integ (const void * vstate,
                    double a, double b,
                    double * result)
 {
-  size_t i;
-  size_t index_a;
-  size_t index_b;
+  size_t i = 0;
+  size_t index_a = 0;
+  size_t index_b = 0;
   
   if (acc != 0)
     {

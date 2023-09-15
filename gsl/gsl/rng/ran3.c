@@ -79,10 +79,10 @@ static void
 ran3_set (void *vstate, unsigned long int s)
 {
   ran3_state_t *state = (ran3_state_t *) vstate;
-  int i;
-  int i1;
-  long int j;
-  long int k;
+  int i = 0;
+  int i1 = 0;
+  long int j = 0;
+  long int k = 0;
 
   if (s == 0) {
     s = 1;      /* default seed is 1 */

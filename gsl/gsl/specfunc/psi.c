@@ -437,7 +437,7 @@ psi_x(const double x, gsl_sf_result * result)
       result->err += GSL_DBL_EPSILON * fabs(result->val);
       return GSL_SUCCESS;
     }
-    else if(x < 1.0) { /* x = v */
+    if(x < 1.0) { /* x = v */
       const double t1 = 1.0/x;
       cheb_eval_e(&psi_cs, 2.0*x-1.0, &result_c);
       
@@ -571,7 +571,8 @@ psi_n_xg0(const int n, const double x, gsl_sf_result * result)
     int stat_e  = gsl_sf_exp_mult_err_e(ln_nf.val, ln_nf.err,
                                            hzeta.val, hzeta.err,
                                            result);
-    if(GSL_IS_EVEN(n)) result->val = -result->val;
+    if(GSL_IS_EVEN(n)) { result->val = -result->val;
+}
     return GSL_ERROR_SELECT_3(stat_e, stat_nf, stat_hz);
  
 }
@@ -644,7 +645,7 @@ gsl_sf_psi_1piy_e(const double y, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * (fabs(lny) + fabs(sum));
     return GSL_SUCCESS;
   }
-  else if(ay > 1.0){
+  if(ay > 1.0){
     const double y2 = ay*ay;
     const double x  = (2.0*ay - 11.0)/9.0;
     const double v  = y2*(1.0/(1.0+y2) + 0.5/(4.0+y2));
@@ -780,7 +781,7 @@ int gsl_sf_psi_n_e(const int n, const double x, gsl_sf_result * result)
   {
     return gsl_sf_psi_1_e(x, result);
   }
-  else if(n < 0 || x <= 0.0) {
+  if(n < 0 || x <= 0.0) {
     DOMAIN_ERROR(result);
   }
   else {
@@ -825,10 +826,10 @@ gsl_sf_complex_psi_e(
       result_im->val -= M_PI * GSL_IMAG(cotzpi);
       return ret_val;
     }
-    else
-    {
+    
+    
       GSL_ERROR("singularity", GSL_EDOM);
-    }
+   
  
 }
 

@@ -26,6 +26,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_permutation.h>
+#include <math.h>
 
 /*
  * This module contains an implementation of the Levenberg-Marquardt
@@ -258,8 +259,8 @@ lm_step(const void * vtrust_state, const double delta,
 
   if (state->accel)
     {
-      double anorm;
-      double vnorm;
+      double anorm = NAN;
+      double vnorm = NAN;
 
       /* compute geodesic acceleration */
       status = gsl_multilarge_nlinear_eval_fvv(params->h_fvv,
@@ -329,8 +330,8 @@ lm_preduction(const void * vtrust_state, const gsl_vector * dx,
   const double norm_Dp = scaled_enorm(diag, p);
   const double normf = gsl_blas_dnrm2(trust_state->f);
   const double mu = *(trust_state->mu);
-  double u;
-  double v;
+  double u = NAN;
+  double v = NAN;
 
   (void)dx;
 

@@ -79,8 +79,9 @@ gsl_ran_hypergeometric (const gsl_rng * r, unsigned int n1, unsigned int n2,
           if (b * u < a)
             {
               k++ ;
-              if (k == n1)
+              if (k == n1) {
                 return n1 - k ;
+}
               a-- ;
             }
           b-- ;
@@ -110,8 +111,8 @@ gsl_ran_hypergeometric_pdf (const unsigned int k,
     {
       return 0 ;
     }
-  else 
-    {
+  
+    
       double p;
       
       double c1 = gsl_sf_lnchoose(n1,k);
@@ -121,5 +122,5 @@ gsl_ran_hypergeometric_pdf (const unsigned int k,
       p = exp(c1 + c2 - c3) ;
 
       return p;
-    }
+   
 }

@@ -25,12 +25,12 @@ int
 gsl_poly_eval_derivs (const double c[], const size_t lenc, const double x,
                       double res[], const size_t lenres)
 {
-  size_t i;
-  size_t n;
-  size_t nmax;
-  size_t k;
-  size_t l;
-  size_t lmax;
+  size_t i = 0;
+  size_t n = 0;
+  size_t nmax = 0;
+  size_t k = 0;
+  size_t l = 0;
+  size_t lmax = 0;
 
   for (i = 0, n = 0, nmax = 0; i < lenres; i++)
     {

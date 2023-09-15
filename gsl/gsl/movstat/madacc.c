@@ -23,6 +23,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <math.h>
 #include <gsl/gsl_math.h>
@@ -123,8 +124,8 @@ madacc_medmad(void * params, madacc_type_t * result, const void * vstate)
       const double scale = *(double *) params;
       const int n = ringbuf_n(state->rbuf);
       int i = 0;
-      double median;
-      double mad;
+      double median = NAN;
+      double mad = NAN;
 
       /* compute median of current window */
       status = (state->medacc->get)(NULL, &median, state->median_state);

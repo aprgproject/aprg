@@ -45,12 +45,12 @@ gsl_sf_hyperg_2F0_e(const double a, const double b, const double x, gsl_sf_resul
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else {
+  
     /* Use asymptotic series. ??
      */
     /* return hyperg_2F0_series(a, b, x, -1, result, &prec); */
     DOMAIN_ERROR(result);
-  }
+ 
 }
 
 /*-*-*-*-*-*-*-*-*-* Functions w/ Natural Prototypes *-*-*-*-*-*-*-*-*-*-*/

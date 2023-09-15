@@ -64,7 +64,7 @@ gsl_ran_exppow (const gsl_rng * r, const double a, const double b)
           return -z;
        
     }
-  else if (b == 1)
+  if (b == 1)
     {
       /* Laplace distribution */
       return gsl_ran_laplace (r, a);

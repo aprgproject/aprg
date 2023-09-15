@@ -98,9 +98,9 @@ gsl_ran_binomial (const gsl_rng * rng, double p, unsigned int n)
 {
   int ix = 0;                       /* return value */
   int flipped = 0;
-  double q;
-  double s;
-  double np;
+  double q = NAN;
+  double s = NAN;
+  double np = NAN;
 
   if (n == 0) {
     return 0;
@@ -209,10 +209,10 @@ gsl_ran_binomial (const gsl_rng * rng, double p, unsigned int n)
       double p3 = p2 + c / lambda_l;
       double p4 = p3 + c / lambda_r;
 
-      double var;
-      double accept;
-      double u;
-      double v;              /* random variates */
+      double var = NAN;
+      double accept = NAN;
+      double u = NAN;
+      double v = NAN;              /* random variates */
 
     TryAgain:
 

@@ -37,20 +37,32 @@ bilinear_eval(const void * state, const double xarr[], const double yarr[],
               double x, double y, gsl_interp_accel * xa,
               gsl_interp_accel * ya, double * z)
 {
-  double xmin, xmax, ymin, ymax, zminmin, zminmax, zmaxmin, zmaxmax;
-  double dx, dy;
-  double t, u;
-  size_t xi, yi;
+  double xmin;
+  double xmax;
+  double ymin;
+  double ymax;
+  double zminmin;
+  double zminmax;
+  double zmaxmin;
+  double zmaxmax;
+  double dx;
+  double dy;
+  double t;
+  double u;
+  size_t xi;
+  size_t yi;
 
-  if (xa != NULL)
+  if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
-  else
+  } else {
     xi = gsl_interp_bsearch(xarr, x, 0, xsize - 1);
+}
 
-  if (ya != NULL)
+  if (ya != NULL) {
     yi = gsl_interp_accel_find(ya, yarr, ysize, y);
-  else
+  } else {
     yi = gsl_interp_bsearch(yarr, y, 0, ysize - 1);
+}
 
   xmin = xarr[xi];
   xmax = xarr[xi + 1];
@@ -75,20 +87,32 @@ bilinear_deriv_x(const void * state, const double xarr[],
                  size_t xsize, size_t ysize, double x, double y,
                  gsl_interp_accel * xa, gsl_interp_accel * ya, double * z_p)
 {
-  double xmin, xmax, ymin, ymax, zminmin, zminmax, zmaxmin, zmaxmax;
-  double dx, dy;
-  double dt, u;
-  size_t xi, yi;
+  double xmin;
+  double xmax;
+  double ymin;
+  double ymax;
+  double zminmin;
+  double zminmax;
+  double zmaxmin;
+  double zmaxmax;
+  double dx;
+  double dy;
+  double dt;
+  double u;
+  size_t xi;
+  size_t yi;
 
-  if (xa != NULL)
+  if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
-  else
+  } else {
     xi = gsl_interp_bsearch(xarr, x, 0, xsize - 1);
+}
 
-  if (ya != NULL)
+  if (ya != NULL) {
     yi = gsl_interp_accel_find(ya, yarr, ysize, y);
-  else
+  } else {
     yi = gsl_interp_bsearch(yarr, y, 0, ysize - 1);
+}
 
   xmin = xarr[xi];
   xmax = xarr[xi + 1];
@@ -113,20 +137,32 @@ bilinear_deriv_y(const void * state, const double xarr[],
                  size_t xsize, size_t ysize, double x, double y,
                  gsl_interp_accel * xa, gsl_interp_accel * ya, double * z_p)
 {
-  double xmin, xmax, ymin, ymax, zminmin, zminmax, zmaxmin, zmaxmax;
-  double dx, dy;
-  double t, du;
-  size_t xi, yi;
+  double xmin;
+  double xmax;
+  double ymin;
+  double ymax;
+  double zminmin;
+  double zminmax;
+  double zmaxmin;
+  double zmaxmax;
+  double dx;
+  double dy;
+  double t;
+  double du;
+  size_t xi;
+  size_t yi;
 
-  if (xa != NULL)
+  if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
-  else
+  } else {
     xi = gsl_interp_bsearch(xarr, x, 0, xsize - 1);
+}
 
-  if (ya != NULL)
+  if (ya != NULL) {
     yi = gsl_interp_accel_find(ya, yarr, ysize, y);
-  else
+  } else {
     yi = gsl_interp_bsearch(yarr, y, 0, ysize - 1);
+}
 
   xmin = xarr[xi];
   xmax = xarr[xi + 1];
@@ -161,20 +197,32 @@ bilinear_derivxy(const void * state, const double xarr[],
                  size_t xsize, size_t ysize, double x, double y,
                  gsl_interp_accel * xa, gsl_interp_accel * ya, double * z_pp)
 {
-  double xmin, xmax, ymin, ymax, zminmin, zminmax, zmaxmin, zmaxmax;
-  double dx, dy;
-  double dt, du;
-  size_t xi, yi;
+  double xmin;
+  double xmax;
+  double ymin;
+  double ymax;
+  double zminmin;
+  double zminmax;
+  double zmaxmin;
+  double zmaxmax;
+  double dx;
+  double dy;
+  double dt;
+  double du;
+  size_t xi;
+  size_t yi;
 
-  if (xa != NULL)
+  if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
-  else
+  } else {
     xi = gsl_interp_bsearch(xarr, x, 0, xsize - 1);
+}
 
-  if (ya != NULL)
+  if (ya != NULL) {
     yi = gsl_interp_accel_find(ya, yarr, ysize, y);
-  else
+  } else {
     yi = gsl_interp_bsearch(yarr, y, 0, ysize - 1);
+}
 
   xmin = xarr[xi];
   xmax = xarr[xi + 1];

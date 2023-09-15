@@ -24,6 +24,7 @@
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_multifit_nlin.h>
 #include <gsl/gsl_multilarge_nlinear.h>
+#include <math.h>
 
 static double scaled_infnorm(const gsl_vector *x, const gsl_vector *g);
 
@@ -51,9 +52,9 @@ gsl_multilarge_nlinear_test (const double xtol, const double gtol,
                              const gsl_multilarge_nlinear_workspace * w)
 {
   int status = 0;
-  double gnorm;
-  double fnorm;
-  double phi;
+  double gnorm = NAN;
+  double fnorm = NAN;
+  double phi = NAN;
 
   *info = 0;
 

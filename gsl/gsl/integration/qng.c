@@ -38,12 +38,12 @@ gsl_integration_qng (const gsl_function *f,
   double fv3[5];
   double fv4[5];
   double savfun[21];  /* array of function values which have been computed */
-  double res10;
-  double res21;
-  double res43;
-  double res87;    /* 10, 21, 43 and 87 point results */
-  double result_kronrod;
-  double err ; 
+  double res10 = NAN;
+  double res21 = NAN;
+  double res43 = NAN;
+  double res87 = NAN;    /* 10, 21, 43 and 87 point results */
+  double result_kronrod = NAN;
+  double err = NAN ; 
   double resabs = NAN; /* approximation to the integral of abs(f) */
   double resasc = NAN; /* approximation to the integral of abs(f-i/(b-a)) */
 

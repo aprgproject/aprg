@@ -23,6 +23,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_multifit_nlinear.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 static int test_delta (const gsl_vector * dx, const gsl_vector * x, 
                        double epsabs, double epsrel);
@@ -52,9 +53,9 @@ gsl_multifit_nlinear_test (const double xtol, const double gtol,
                            const gsl_multifit_nlinear_workspace * w)
 {
   int status = 0;
-  double gnorm;
-  double fnorm;
-  double phi;
+  double gnorm = NAN;
+  double fnorm = NAN;
+  double phi = NAN;
 
   *info = 0;
 

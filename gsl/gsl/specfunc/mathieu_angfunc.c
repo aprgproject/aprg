@@ -20,6 +20,7 @@
 /* Author:  L. Johnson */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -29,13 +30,13 @@
 
 int gsl_sf_mathieu_ce_e(int order, double qq, double zz, gsl_sf_result *result)
 {
-  int even_odd;
-  int ii;
-  int status;
+  int even_odd = 0;
+  int ii = 0;
+  int status = 0;
   double coeff[GSL_SF_MATHIEU_COEFF];
-  double norm;
-  double fn;
-  double factor;
+  double norm = NAN;
+  double fn = NAN;
+  double factor = NAN;
   gsl_sf_result aa;
 
 
@@ -121,13 +122,13 @@ int gsl_sf_mathieu_ce_e(int order, double qq, double zz, gsl_sf_result *result)
 
 int gsl_sf_mathieu_se_e(int order, double qq, double zz, gsl_sf_result *result)
 {
-  int even_odd;
-  int ii;
-  int status;
+  int even_odd = 0;
+  int ii = 0;
+  int status = 0;
   double coeff[GSL_SF_MATHIEU_COEFF];
-  double norm;
-  double fn;
-  double factor;
+  double norm = NAN;
+  double fn = NAN;
+  double factor = NAN;
   gsl_sf_result aa;
 
 
@@ -216,14 +217,14 @@ int gsl_sf_mathieu_ce_array(int nmin, int nmax, double qq, double zz,
                             gsl_sf_mathieu_workspace *work,
                             double result_array[])
 {
-  int even_odd;
-  int order;
-  int ii;
-  int jj;
-  int status;
+  int even_odd = 0;
+  int order = 0;
+  int ii = 0;
+  int jj = 0;
+  int status = 0;
   double coeff[GSL_SF_MATHIEU_COEFF];
   double *aa = work->aa;
-  double norm;
+  double norm = NAN;
   
 
   /* Initialize the result array to zeroes. */
@@ -302,14 +303,14 @@ int gsl_sf_mathieu_se_array(int nmin, int nmax, double qq, double zz,
                             gsl_sf_mathieu_workspace *work,
                             double result_array[])
 {
-  int even_odd;
-  int order;
-  int ii;
-  int jj;
-  int status;
+  int even_odd = 0;
+  int order = 0;
+  int ii = 0;
+  int jj = 0;
+  int status = 0;
   double coeff[GSL_SF_MATHIEU_COEFF];
   double *bb = work->bb;
-  double norm;
+  double norm = NAN;
   
 
   /* Initialize the result array to zeroes. */

@@ -74,7 +74,7 @@ gsl_poly_solve_cubic (double a, double b, double c,
         }
       return 3 ;
     }
-  else if (R2 < Q3)
+  if (R2 < Q3)
     {
       double sgnR = (R >= 0 ? 1 : -1);
       double ratio = sgnR * sqrt (R2 / Q3);

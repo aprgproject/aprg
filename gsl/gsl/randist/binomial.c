@@ -35,9 +35,9 @@
 unsigned int
 gsl_ran_binomial_knuth (const gsl_rng * r, double p, unsigned int n)
 {
-  unsigned int i;
-  unsigned int a;
-  unsigned int b;
+  unsigned int i = 0;
+  unsigned int a = 0;
+  unsigned int b = 0;
   unsigned int k = 0;
 
   while (n > 10)        /* This parameter is tunable */
@@ -82,7 +82,7 @@ gsl_ran_binomial_pdf (const unsigned int k, const double p,
     }
   
     
-      double P;
+      double P = NAN;
 
       if (p == 0) 
         {

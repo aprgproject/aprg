@@ -93,8 +93,8 @@ static void poly_multiply(
   int pc[], int  * pc_degree
   )
 {
-  int j;
-  int k;
+  int j = 0;
+  int k = 0;
   int pt[NIED2_MAX_DEGREE+1];
   int pt_degree = pa_degree + pb_degree;
 
@@ -142,9 +142,9 @@ static void calculate_v(
   /* int ph_degree = *pb_degree; */
   int bigm = *pb_degree;      /* m from section 3.3 */
   int m = 0;                      /* m from section 2.3 */
-  int r;
-  int k;
-  int kj;
+  int r = 0;
+  int k = 0;
+  int kj = 0;
 
   for(k=0; k<=NIED2_MAX_DEGREE; k++) {
     ph[k] = pb[k];
@@ -229,8 +229,8 @@ static void calculate_cj(nied2_state_t * ns, unsigned int dimension)
   for(i_dim=0; i_dim<dimension; i_dim++) {
 
     const int poly_index = i_dim + 1;
-    int j;
-    int k;
+    int j = 0;
+    int k = 0;
 
     /* Niederreiter (page 56, after equation (7), defines two
      * variables Q and U.  We do not need Q explicitly, but we

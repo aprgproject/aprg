@@ -465,7 +465,7 @@ static void
 trust_trial_step(const gsl_vector * x, const gsl_vector * dx,
                  gsl_vector * x_trial)
 {
-  size_t i;
+  size_t i = 0;
   size_t N = x->size;
 
   for (i = 0; i < N; i++)

@@ -50,7 +50,7 @@ gsl_ran_logarithmic (const gsl_rng * r, const double p)
           double x = 1 + log(v)/log(q) ;
           return x ;
         }
-      else if (v <= q)
+      if (v <= q)
         {
           return 2;
         }

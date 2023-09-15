@@ -45,7 +45,7 @@ gsl_ran_erlang_pdf (const double x, const double a, const double n)
     }
   
     
-      double p;
+      double p = NAN;
       double lngamma = gsl_sf_lngamma (n);
 
       p = exp ((n - 1) * log (x/a) - x/a - lngamma) / a;
