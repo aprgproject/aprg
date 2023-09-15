@@ -1,485 +1,50 @@
-StaticAnalysisJobIdentifier: [011]
-2023-09-11T17:49:09
-[35m2023-09-11T17:49:45[0m | [33mBuildAndRun.sh:28[0m | The current path is [/d/a/aprg/aprg/DesignPatterns/DesignPatterns].
-[35m2023-09-11T17:49:45[0m | [33mBuildAndRun.sh:29[0m | The scriptPath is [/d/a/aprg/aprg/AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh].
-[35m2023-09-11T17:49:45[0m | [33mBuildAndRun.sh:30[0m | The scriptOption is [buildOnOneCore].
-[35m2023-09-11T17:49:45[0m | [33mBuildAndRun.sh:31[0m | The buildDirectoryName is [StaticAnalyzersBuild].
-[35m2023-09-11T17:49:45[0m | [33mBuildAndRun.sh:32[0m | The argument1 is [Debug] and argument2 is [].
-[35m2023-09-11T17:49:45[0m | [33mBuildAndRun.sh:33[0m | The immediateDirectoryName is [DesignPatterns].
-[35m2023-09-11T17:49:45[0m | [33mBuildAndRun.sh:84[0m | The buildType is [Debug].
-[35m2023-09-11T17:49:45[0m | [33mBuildAndRun.sh:85[0m | The numberOfCores is [2].
-[35m2023-09-11T17:49:45[0m | [33mBuildAndRun.sh:68[0m | The build path is [/d/a/aprg/aprg/DesignPatterns/StaticAnalyzersBuild] and the output of [ls -la --color=auto]:
-total 181
-drwxr-xr-x 1 runneradmin 197121      0 Sep 11 17:49 .
-drwxr-xr-x 1 runneradmin 197121      0 Sep 11 17:49 ..
--rw-r--r-- 1 runneradmin 197121  18031 Sep 11 17:49 CMakeCache.txt
-drwxr-xr-x 1 runneradmin 197121      0 Sep 11 17:49 CMakeFiles
--rw-r--r-- 1 runneradmin 197121    562 Sep 11 17:49 CTestTestfile.cmake
--rw-r--r-- 1 runneradmin 197121 148391 Sep 11 17:49 build.ninja
--rw-r--r-- 1 runneradmin 197121   2292 Sep 11 17:49 cmake_install.cmake
-[1/70] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc.obj
-In file included from D:/a/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:
-D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
-  __try {
-  ^
-1 warning generated.
-[2/70] Building CXX object CMakeFiles/gtest.dir/D_/a/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc.obj
-[3/70] Linking CXX static library gtest.lib
-[4/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaContainerHelper.cpp.obj
-[5/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/File/AlbaFileReader.cpp.obj
-[6/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Angle/AlbaAngle.cpp.obj
-[7/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/ComplexNumberHelpers.cpp.obj
-[8/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/ComputationHelpers.cpp.obj
-[9/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/FactorAndMulitplesHelpers.cpp.obj
-[10/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/PowerHelpers.cpp.obj
-[11/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/PrecisionHelpers.cpp.obj
-[12/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/StatisticsHelpers.cpp.obj
-[13/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/AlbaComplexNumber.cpp.obj
-[14/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/AlbaNumber.cpp.obj
-[15/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberInterval.cpp.obj
-[16/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberIntervalEndpoint.cpp.obj
-[17/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/Interval/AlbaNumberIntervalHelpers.cpp.obj
-[18/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Ratio/AlbaRatio.cpp.obj
-[19/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Memory/AlbaMemoryBuffer.cpp.obj
-[20/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/PathHandler/AlbaPathHandler.cpp.obj
-[21/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/PathHandler/AlbaWebPathHandler.cpp.obj
-[22/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Print/AlbaPrintFunctions.cpp.obj
-[23/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/AlbaOldRandomizer.cpp.obj
-[24/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaCombinedEntropySource.cpp.obj
-[25/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaEntropySourceBasedOnTime.cpp.obj
-[26/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamBitReader.cpp.obj
-[27/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamBitWriter.cpp.obj
-[28/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterReader.cpp.obj
-[29/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterWriter.cpp.obj
-[30/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/String/AlbaStringHelper.cpp.obj
-[31/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaDateTime.cpp.obj
-[32/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaDateTimeHelper.cpp.obj
-[33/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp.obj
+StaticAnalysisJobIdentifier: [20]
+2023-09-15T14:11:12
+D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Time\AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
-    struct tm const localTime = *localtime(&currentTimeT);
-                                 ^
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
-        _CRT_INSECURE_DEPRECATE(localtime_s)
-        ^
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
-        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
-                                                      ^
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
-                                              ^
 D:/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
-    struct tm const localTime = *localtime(&currentTimeT);
-                                 ^
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
-        _CRT_INSECURE_DEPRECATE(localtime_s)
-        ^
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
-        #define _CRT_INSECURE_DEPRECATE(_Replacement) _CRT_DEPRECATE_TEXT(    \
-                                                      ^
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-#define _CRT_DEPRECATE_TEXT(_Text) __declspec(deprecated(_Text))
-                                              ^
-1 warning generated.
-[34/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimer.cpp.obj
-[35/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/AlbaUserInterface.cpp.obj
-[36/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp.obj
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:205:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-int DisplayTablePrinter::getVerticalBorderLength() const { return m_verticalBorder.length(); }
-                                                                  ^
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:208:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-    return ((m_maxLengthAtColumn.size() + 1) * getVerticalBorderLength()) + m_totalColumnLength;
-           ^
-[37/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Utility/AlbaScopeGuard.cpp.obj
-[38/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/BaseFileReaderTest.cpp.obj
-[39/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/FileUtilities.cpp.obj
-[40/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/PathHandler/AlbaWindowsPathHandler.cpp.obj
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-    int const length = fullPath.length();
-                       ^
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-        int const indexWithSlashCharacter = fullPath.find_first_of(m_slashCharacterString, index);
-                                            ^
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:270:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-    int const index = m_directory.find_first_of(m_slashCharacterString + ":");
-                      ^
-[41/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Time/AlbaWindowsTimeHelper.cpp.obj
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:251:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-    return AlbaDateTime(
-           ^
-[42/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Time/AlbaWindowsTimer.cpp.obj
-[43/70] Building CXX object CMakeFiles/APRG_COMMON.dir/D_/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows/Common/Windows/AlbaWindowsHelper.cpp.obj
-[44/70] Linking CXX static library APRG_COMMON.lib
-[45/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/AbstractFactory/AbstractFactory_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\AbstractFactory/AbstractFactory.hpp:9:7: warning: class 'ProductA' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class ProductA {
-      ^
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\AbstractFactory/AbstractFactory.hpp:33:7: warning: class 'ProductB' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class ProductB {
-      ^
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\AbstractFactory/AbstractFactory.hpp:56:7: warning: class 'AbstractFactory' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class AbstractFactory {
-      ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\AbstractFactory\AbstractFactory_unit.cpp:10:5: warning: variable 'factoryX' of type 'std::unique_ptr<AbstractFactory>' can be declared 'const' [misc-const-correctness]
-    std::unique_ptr<AbstractFactory> factoryX = make_unique<ConcreteFactoryX>();
-    ^
-                                     const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\AbstractFactory\AbstractFactory_unit.cpp:10:38: note: FIX-IT applied suggested code changes
-    std::unique_ptr<AbstractFactory> factoryX = make_unique<ConcreteFactoryX>();
-                                     ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\AbstractFactory\AbstractFactory_unit.cpp:11:5: warning: variable 'factoryY' of type 'std::unique_ptr<AbstractFactory>' can be declared 'const' [misc-const-correctness]
-    std::unique_ptr<AbstractFactory> factoryY = make_unique<ConcreteFactoryY>();
-    ^
-                                     const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\AbstractFactory\AbstractFactory_unit.cpp:11:38: note: FIX-IT applied suggested code changes
-    std::unique_ptr<AbstractFactory> factoryY = make_unique<ConcreteFactoryY>();
-                                     ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\AbstractFactory\AbstractFactory_unit.cpp:13:5: warning: variable 'productAX' of type 'std::unique_ptr<ProductA>' can be declared 'const' [misc-const-correctness]
-    std::unique_ptr<ProductA> productAX = factoryX->createProductA();
-    ^
-                              const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\AbstractFactory\AbstractFactory_unit.cpp:13:31: note: FIX-IT applied suggested code changes
-    std::unique_ptr<ProductA> productAX = factoryX->createProductA();
-                              ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\AbstractFactory\AbstractFactory_unit.cpp:14:5: warning: variable 'productBX' of type 'std::unique_ptr<ProductB>' can be declared 'const' [misc-const-correctness]
-    std::unique_ptr<ProductB> productBX = factoryX->createProductB();
-    ^
-                              const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\AbstractFactory\AbstractFactory_unit.cpp:14:31: note: FIX-IT applied suggested code changes
-    std::unique_ptr<ProductB> productBX = factoryX->createProductB();
-                              ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\AbstractFactory\AbstractFactory_unit.cpp:18:5: warning: variable 'productAY' of type 'std::unique_ptr<ProductA>' can be declared 'const' [misc-const-correctness]
-    std::unique_ptr<ProductA> productAY = factoryY->createProductA();
-    ^
-                              const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\AbstractFactory\AbstractFactory_unit.cpp:18:31: note: FIX-IT applied suggested code changes
-    std::unique_ptr<ProductA> productAY = factoryY->createProductA();
-                              ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\AbstractFactory\AbstractFactory_unit.cpp:19:5: warning: variable 'productBY' of type 'std::unique_ptr<ProductB>' can be declared 'const' [misc-const-correctness]
-    std::unique_ptr<ProductB> productBY = factoryY->createProductB();
-    ^
-                              const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\AbstractFactory\AbstractFactory_unit.cpp:19:31: note: FIX-IT applied suggested code changes
-    std::unique_ptr<ProductB> productBY = factoryY->createProductB();
-                              ^
-[46/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Adapter/ClassAdapter_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Adapter/ClassAdapter.hpp:7:7: warning: class 'Target' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Target {
-      ^
-[47/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Adapter/ObjectAdapter_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Adapter/ObjectAdapter.hpp:7:7: warning: class 'Target' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Target {
-      ^
-[48/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Bridge/Bridge_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Bridge/Bridge.hpp:8:7: warning: class 'Implementor' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Implementor {
-      ^
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Bridge/Bridge.hpp:31:7: warning: class 'Abstraction' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Abstraction {
-      ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Bridge\Bridge_unit.cpp:13:5: warning: variable 'abstraction1' of type 'unique_ptr<Abstraction>' can be declared 'const' [misc-const-correctness]
-    unique_ptr<Abstraction> abstraction1 = std::make_unique<RefinedAbstraction>(move(implementatorA));
-    ^
-                            const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Bridge\Bridge_unit.cpp:13:29: note: FIX-IT applied suggested code changes
-    unique_ptr<Abstraction> abstraction1 = std::make_unique<RefinedAbstraction>(move(implementatorA));
-                            ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Bridge\Bridge_unit.cpp:13:81: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-    unique_ptr<Abstraction> abstraction1 = std::make_unique<RefinedAbstraction>(move(implementatorA));
-                                                                                ^
-                                                                                std::
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Bridge\Bridge_unit.cpp:13:81: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Bridge\Bridge_unit.cpp:16:5: warning: variable 'abstraction2' of type 'unique_ptr<Abstraction>' can be declared 'const' [misc-const-correctness]
-    unique_ptr<Abstraction> abstraction2 = std::make_unique<RefinedAbstraction>(move(implementatorB));
-    ^
-                            const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Bridge\Bridge_unit.cpp:16:29: note: FIX-IT applied suggested code changes
-    unique_ptr<Abstraction> abstraction2 = std::make_unique<RefinedAbstraction>(move(implementatorB));
-                            ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Bridge\Bridge_unit.cpp:16:81: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-    unique_ptr<Abstraction> abstraction2 = std::make_unique<RefinedAbstraction>(move(implementatorB));
-                                                                                ^
-                                                                                std::
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Bridge\Bridge_unit.cpp:16:81: note: FIX-IT applied suggested code changes
-[49/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Builder/Builder_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Builder/Builder.hpp:25:7: warning: class 'Builder' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Builder {
-      ^
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Builder/Builder.hpp:60:69: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-    explicit Director(std::unique_ptr<Builder> builder) : m_builder(move(builder)) {}
-                                                                    ^
-                                                                    std::
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Builder/Builder.hpp:60:69: note: FIX-IT applied suggested code changes
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Builder/Builder.hpp:61:69: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-    void setBuilder(std::unique_ptr<Builder> builder) { m_builder = move(builder); }
-                                                                    ^
-                                                                    std::
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Builder/Builder.hpp:61:69: note: FIX-IT applied suggested code changes
-[50/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/ChainOfResponsibility/ChainOfResponsibility_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\ChainOfResponsibility/ChainOfResponsibility.hpp:9:7: warning: class 'Handler' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Handler {
-      ^
-[51/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Command/Command_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Command/Command.hpp:21:7: warning: class 'Command' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Command {
-      ^
-[52/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Composite/Composite_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Composite/Composite.hpp:10:7: warning: class 'Component' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Component {
-      ^
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Composite/Composite.hpp:39:87: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-    void add(std::unique_ptr<Component> component) override { m_children.emplace_back(move(component)); }
-                                                                                      ^
-                                                                                      std::
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Composite/Composite.hpp:39:87: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Composite\Composite_unit.cpp:13:5: warning: variable 'topComposite' of type 'unique_ptr<Component>' can be declared 'const' [misc-const-correctness]
-    unique_ptr<Component> topComposite(make_unique<Composite>());
-    ^
-                          const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Composite\Composite_unit.cpp:13:27: note: FIX-IT applied suggested code changes
-    unique_ptr<Component> topComposite(make_unique<Composite>());
-                          ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Composite\Composite_unit.cpp:20:23: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-    topComposite->add(move(composite1));
-                      ^
-                      std::
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Composite\Composite_unit.cpp:20:23: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Composite\Composite_unit.cpp:21:23: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-    topComposite->add(move(composite2));
-                      ^
-                      std::
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Composite\Composite_unit.cpp:21:23: note: FIX-IT applied suggested code changes
-[53/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Decorator/Decorator_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Decorator/Decorator.hpp:9:7: warning: class 'Component' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Component {
-      ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Decorator\Decorator_unit.cpp:11:63: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-    auto coreComponentWithA = make_unique<ConcreteDecoratorA>(move(coreComponent));
-                                                              ^
-                                                              std::
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Decorator\Decorator_unit.cpp:11:63: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Decorator\Decorator_unit.cpp:12:67: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-    auto coreComponentWithAAndB = make_unique<ConcreteDecoratorB>(move(coreComponentWithA));
-                                                                  ^
-                                                                  std::
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Decorator\Decorator_unit.cpp:12:67: note: FIX-IT applied suggested code changes
-[54/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Facade/Facade_unit.cpp.obj
-[55/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/FactoryMethod/FactoryMethod_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\FactoryMethod/FactoryMethod.hpp:9:7: warning: class 'Product' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Product {
-      ^
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\FactoryMethod/FactoryMethod.hpp:35:7: warning: class 'Creator' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Creator {
-      ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\FactoryMethod\FactoryMethod_unit.cpp:10:5: warning: variable 'creatorA' of type 'unique_ptr<Creator>' can be declared 'const' [misc-const-correctness]
-    unique_ptr<Creator> creatorA(make_unique<ConcreteCreatorA>());
-    ^
-                        const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\FactoryMethod\FactoryMethod_unit.cpp:10:25: note: FIX-IT applied suggested code changes
-    unique_ptr<Creator> creatorA(make_unique<ConcreteCreatorA>());
-                        ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\FactoryMethod\FactoryMethod_unit.cpp:11:5: warning: variable 'product1' of type 'std::unique_ptr<Product>' can be declared 'const' [misc-const-correctness]
-    std::unique_ptr<Product> product1 = creatorA->createProduct();
-    ^
-                             const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\FactoryMethod\FactoryMethod_unit.cpp:11:30: note: FIX-IT applied suggested code changes
-    std::unique_ptr<Product> product1 = creatorA->createProduct();
-                             ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\FactoryMethod\FactoryMethod_unit.cpp:14:5: warning: variable 'creatorB' of type 'unique_ptr<Creator>' can be declared 'const' [misc-const-correctness]
-    unique_ptr<Creator> creatorB(make_unique<ConcreteCreatorB>());
-    ^
-                        const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\FactoryMethod\FactoryMethod_unit.cpp:14:25: note: FIX-IT applied suggested code changes
-    unique_ptr<Creator> creatorB(make_unique<ConcreteCreatorB>());
-                        ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\FactoryMethod\FactoryMethod_unit.cpp:15:5: warning: variable 'product2' of type 'std::unique_ptr<Product>' can be declared 'const' [misc-const-correctness]
-    std::unique_ptr<Product> product2 = creatorB->createProduct();
-    ^
-                             const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\FactoryMethod\FactoryMethod_unit.cpp:15:30: note: FIX-IT applied suggested code changes
-    std::unique_ptr<Product> product2 = creatorB->createProduct();
-                             ^
-[56/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Flyweight/Flyweight_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Flyweight/Flyweight.hpp:10:7: warning: class 'Flyweight' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Flyweight {
-      ^
-[57/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Interpreter/Interpreter_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Interpreter/Interpreter.hpp:23:7: warning: class 'AbstractExpression' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class AbstractExpression {
-      ^
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Interpreter/Interpreter.hpp:52:25: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-        : m_leftPointer(move(leftPointer)), m_rightPointer(move(rightPointer)) {}
-                        ^
-                        std::
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Interpreter/Interpreter.hpp:52:25: note: FIX-IT applied suggested code changes
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Interpreter/Interpreter.hpp:52:60: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-        : m_leftPointer(move(leftPointer)), m_rightPointer(move(rightPointer)) {}
-                                                           ^
-                                                           std::
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Interpreter/Interpreter.hpp:52:60: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Interpreter\Interpreter_unit.cpp:14:54: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-    auto aPlusB = make_unique<NonterminalExpression>(move(a), move(b));
-                                                     ^
-                                                     std::
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Interpreter\Interpreter_unit.cpp:14:54: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Interpreter\Interpreter_unit.cpp:14:63: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-    auto aPlusB = make_unique<NonterminalExpression>(move(a), move(b));
-                                                              ^
-                                                              std::
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Interpreter\Interpreter_unit.cpp:14:63: note: FIX-IT applied suggested code changes
-[58/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Iterator/Iterator_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Iterator/Iterator.hpp:13:7: warning: class 'Aggregate' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Aggregate {
-      ^
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Iterator/Iterator.hpp:40:7: warning: class 'Iterator' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Iterator {
-      ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Iterator\Iterator_unit.cpp:10:5: warning: variable 'size' of type 'int' can be declared 'const' [misc-const-correctness]
-    int size = 5;
-    ^
-        const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Iterator\Iterator_unit.cpp:10:9: note: FIX-IT applied suggested code changes
-    int size = 5;
-        ^
-[59/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Mediator/Mediator_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Mediator/Mediator.hpp:12:7: warning: class 'Colleague' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Colleague {
-      ^
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Mediator/Mediator.hpp:34:7: warning: class 'Mediator' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Mediator {
-      ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Mediator\Mediator_unit.cpp:12:5: warning: variable 'mediatorPointer' of type 'unique_ptr<Mediator>' can be declared 'const' [misc-const-correctness]
-    unique_ptr<Mediator> mediatorPointer = make_unique<ConcreteMediator>();
-    ^
-                         const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Mediator\Mediator_unit.cpp:12:26: note: FIX-IT applied suggested code changes
-    unique_ptr<Mediator> mediatorPointer = make_unique<ConcreteMediator>();
-                         ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Mediator\Mediator_unit.cpp:13:5: warning: variable 'colleaguePointer1' of type 'unique_ptr<Colleague>' can be declared 'const' [misc-const-correctness]
-    unique_ptr<Colleague> colleaguePointer1 = make_unique<ConcreteColleague>(*mediatorPointer, 1);
-    ^
-                          const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Mediator\Mediator_unit.cpp:13:27: note: FIX-IT applied suggested code changes
-    unique_ptr<Colleague> colleaguePointer1 = make_unique<ConcreteColleague>(*mediatorPointer, 1);
-                          ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Mediator\Mediator_unit.cpp:14:5: warning: variable 'colleaguePointer2' of type 'unique_ptr<Colleague>' can be declared 'const' [misc-const-correctness]
-    unique_ptr<Colleague> colleaguePointer2 = make_unique<ConcreteColleague>(*mediatorPointer, 2);
-    ^
-                          const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Mediator\Mediator_unit.cpp:14:27: note: FIX-IT applied suggested code changes
-    unique_ptr<Colleague> colleaguePointer2 = make_unique<ConcreteColleague>(*mediatorPointer, 2);
-                          ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Mediator\Mediator_unit.cpp:15:5: warning: variable 'colleaguePointer3' of type 'unique_ptr<Colleague>' can be declared 'const' [misc-const-correctness]
-    unique_ptr<Colleague> colleaguePointer3 = make_unique<ConcreteColleague>(*mediatorPointer, 3);
-    ^
-                          const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Mediator\Mediator_unit.cpp:15:27: note: FIX-IT applied suggested code changes
-    unique_ptr<Colleague> colleaguePointer3 = make_unique<ConcreteColleague>(*mediatorPointer, 3);
-                          ^
-[60/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Memento/Memento_unit.cpp.obj
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Memento\Memento_unit.cpp:16:5: warning: variable 'originator3' of type 'Originator' can be declared 'const' [misc-const-correctness]
-    Originator originator3 = caretaker.undoAndGetLastOriginator();
-    ^
-               const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Memento\Memento_unit.cpp:16:16: note: FIX-IT applied suggested code changes
-    Originator originator3 = caretaker.undoAndGetLastOriginator();
-               ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Memento\Memento_unit.cpp:17:5: warning: variable 'originator2' of type 'Originator' can be declared 'const' [misc-const-correctness]
-    Originator originator2 = caretaker.undoAndGetLastOriginator();
-    ^
-               const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Memento\Memento_unit.cpp:17:16: note: FIX-IT applied suggested code changes
-    Originator originator2 = caretaker.undoAndGetLastOriginator();
-               ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Memento\Memento_unit.cpp:18:5: warning: variable 'originator1' of type 'Originator' can be declared 'const' [misc-const-correctness]
-    Originator originator1 = caretaker.undoAndGetLastOriginator();
-    ^
-               const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Memento\Memento_unit.cpp:18:16: note: FIX-IT applied suggested code changes
-    Originator originator1 = caretaker.undoAndGetLastOriginator();
-               ^
-[61/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/NullObject/NullObject_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\NullObject/NullObject.hpp:9:7: warning: class 'AbstractObject' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class AbstractObject {
-      ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\NullObject\NullObject_unit.cpp:10:5: warning: variable 'realObject' of type 'std::unique_ptr<AbstractObject>' can be declared 'const' [misc-const-correctness]
-    std::unique_ptr<AbstractObject> realObject(make_unique<RealObject>());
-    ^
-                                    const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\NullObject\NullObject_unit.cpp:10:37: note: FIX-IT applied suggested code changes
-    std::unique_ptr<AbstractObject> realObject(make_unique<RealObject>());
-                                    ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\NullObject\NullObject_unit.cpp:13:5: warning: variable 'nullObject' of type 'std::unique_ptr<AbstractObject>' can be declared 'const' [misc-const-correctness]
-    std::unique_ptr<AbstractObject> nullObject(make_unique<NullObject>());
-    ^
-                                    const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\NullObject\NullObject_unit.cpp:13:37: note: FIX-IT applied suggested code changes
-    std::unique_ptr<AbstractObject> nullObject(make_unique<NullObject>());
-                                    ^
-[62/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Observer/Observer_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Observer/Observer.hpp:11:7: warning: class 'Observer' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Observer {
-      ^
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Observer/Observer.hpp:37:7: warning: class 'Subject' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Subject {
-      ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Observer\Observer_unit.cpp:16:5: warning: variable 'subject' of type 'std::unique_ptr<Subject>' can be declared 'const' [misc-const-correctness]
-    std::unique_ptr<Subject> subject = make_unique<ConcreteSubject>();
-    ^
-                             const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Observer\Observer_unit.cpp:16:30: note: FIX-IT applied suggested code changes
-    std::unique_ptr<Subject> subject = make_unique<ConcreteSubject>();
-                             ^
-[63/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Prototype/Prototype_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Prototype/Prototype.hpp:9:7: warning: class 'Prototype' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Prototype {
-      ^
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Prototype/Prototype.hpp:40:30: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-            m_types[index] = move(prototype);
-                             ^
-                             std::
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Prototype/Prototype.hpp:40:30: note: FIX-IT applied suggested code changes
-[64/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Proxy/Proxy_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Proxy/Proxy.hpp:9:7: warning: class 'Subject' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Subject {
-      ^
-[65/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Singleton/Singleton_unit.cpp.obj
 D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Singleton\Singleton_unit.cpp:10:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-    Singleton::getInstance().tellSomething();
-    ^
 D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\Singleton\Singleton_unit.cpp:14:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-    Singleton::getInstance().tellSomething();
-    ^
-[66/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/State/State_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\State/State.hpp:9:7: warning: class 'State' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class State {
-      ^
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\State/State.hpp:36:75: warning: unqualified call to 'std::move' [clang-diagnostic-unqualified-std-cast-call]
-    void setState(std::unique_ptr<State> statePointer) { m_statePointer = move(statePointer); }
-                                                                          ^
-                                                                          std::
-D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\State/State.hpp:36:75: note: FIX-IT applied suggested code changes
-[67/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Strategy/Strategy_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Strategy/Strategy.hpp:8:7: warning: class 'Strategy' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Strategy {
-      ^
-[68/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/TemplateMethod/TemplateMethod_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\TemplateMethod/TemplateMethod.hpp:7:7: warning: class 'AbstractClass' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class AbstractClass {
-      ^
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\TemplateMethod\TemplateMethod_unit.cpp:12:5: warning: variable 'pointer' of type 'unique_ptr<AbstractClass>' can be declared 'const' [misc-const-correctness]
-    unique_ptr<AbstractClass> pointer = make_unique<ConcreteClass>();
-    ^
-                              const 
-D:\a\aprg\aprg\DesignPatterns\DesignPatterns\tst\TemplateMethod\TemplateMethod_unit.cpp:12:31: note: FIX-IT applied suggested code changes
-    unique_ptr<AbstractClass> pointer = make_unique<ConcreteClass>();
-                              ^
-[69/70] Building CXX object CMakeFiles/DesignPatterns.dir/tst/Visitor/Visitor_unit.cpp.obj
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Visitor/Visitor.hpp:12:7: warning: class 'Visitor' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Visitor {
-      ^
 D:/a/aprg/aprg/DesignPatterns/DesignPatterns/src\Visitor/Visitor.hpp:40:7: warning: class 'Element' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
-class Element {
-      ^
-[70/70] Linking CXX executable DesignPatterns.exe
-[35m2023-09-11T18:01:00[0m | [33mBuildAndRun.sh:218[0m | The script [BuildAndRun.sh] for [buildOnOneCore] is finished.
 DONE!
