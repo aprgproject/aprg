@@ -16,10 +16,10 @@ public:
     void run();
 
 private:
-    [[nodiscard]] std::string getClipboardFormattedData() const;
+    [[nodiscard]] static std::string getClipboardFormattedData();
     [[nodiscard]] std::string getFrequenciesStringForExcel() const;
     [[nodiscard]] bool isRunningFinishedInClipboardData(std::string const& clipboardData) const;
-    void exitIfSpecialKeyIsPressed();
+    static void exitIfSpecialKeyIsPressed();
     void updateExcelFile(unsigned int const freqUsageBits);
     void setupFesterEnvironmentInMatlab();
     void editCellInExcelWithNewFrequencies(MousePosition const& excelCellPosition);
