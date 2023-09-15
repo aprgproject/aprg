@@ -664,7 +664,7 @@ double GetCPUCyclesPerSecond(CPUInfo::Scaling scaling) {
 #elif defined BENCHMARK_OS_WINDOWS
     // In NT, read MHz from the registry. If we fail to do so or we're in win9x
     // then make a crude estimate.
-    DWORD data;
+    DWORD data = 0;
     DWORD data_size = sizeof(data);
     if (IsWindowsXPOrGreater() && SUCCEEDED(SHGetValueA(
                                       HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", "~MHz",

@@ -115,8 +115,9 @@ double ProcessCPUUsage() {
   FILETIME kernel_time;
   FILETIME user_time;
   if (GetProcessTimes(proc, &creation_time, &exit_time, &kernel_time,
-                      &user_time))
+                      &user_time) != 0) {
     return MakeTime(kernel_time, user_time);
+}
   DiagnoseAndExit("GetProccessTimes() failed");
 #elif defined(BENCHMARK_OS_EMSCRIPTEN)
   // clock_gettime(CLOCK_PROCESS_CPUTIME_ID, ...) returns 0 on Emscripten.
@@ -184,7 +185,7 @@ double ThreadCPUUsage() {
 std::string LocalDateTimeString() {
   // Write the local time in RFC3339 format yyyy-mm-ddTHH:MM:SS+/-HH:MM.
   using Clock = std::chrono::system_clock;
-  std::time_t now = Clock::to_time_t(Clock::now());
+  std::time_t const now = Clock::to_time_t(Clock::now());
   const std::size_t kTzOffsetLen = 6;
   const std::size_t kTimestampLen = 19;
 
