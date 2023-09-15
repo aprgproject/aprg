@@ -23,7 +23,7 @@ void AlbaWindowsUserAutomation::doLeftClickAt(MousePosition const& position) {
     doLeftClick();
 }
 
-void AlbaWindowsUserAutomation::doDoubleLeftClickAt(MousePosition const& position) const {
+void AlbaWindowsUserAutomation::doDoubleLeftClickAt(MousePosition const& position) {
     setMousePosition(position);
     doDoubleLeftClick();
 }
@@ -35,7 +35,7 @@ void AlbaWindowsUserAutomation::doRightClickAt(MousePosition const& position) {
 
 void AlbaWindowsUserAutomation::typeCharacter(char const character) { typeKey(convertToVirtualKey(character)); }
 
-void AlbaWindowsUserAutomation::typeString(string_view const& stringToType) const {
+void AlbaWindowsUserAutomation::typeString(string_view const& stringToType) {
     for (char const character : stringToType) {
         typeCharacter(character);
     }

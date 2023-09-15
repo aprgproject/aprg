@@ -68,10 +68,10 @@ private:
     [[nodiscard]] NextMove createNextMove(Move const& move, Variation const& variation) const;
     [[nodiscard]] NextMoves getNextMovesFromCalculation() const;
     [[nodiscard]] std::string getNameOfBookMove(Move const& move, Book::LineDetail const& lineDetail) const;
-    [[nodiscard]] std::string getDisplayableString(NextMove const& nextMove) const;
-    [[nodiscard]] std::string getDisplayableString(MovesSequence const& movesSequence) const;
+    [[nodiscard]] static std::string getDisplayableString(NextMove const& nextMove);
+    [[nodiscard]] static std::string getDisplayableString(MovesSequence const& movesSequence);
     [[nodiscard]] stringHelper::strings getNextMovesString(NextMoves const& nextMoves, int const startIndex) const;
-    [[nodiscard]] stringHelper::strings getBookMovesString(BookMoves const& bookMoves) const;
+    [[nodiscard]] static stringHelper::strings getBookMovesString(BookMoves const& bookMoves);
     void printARowOfMovesSequence(MovesSequence const& movesSequence) const;
     void setMovesSequenceOnGrid(DisplayTable& grid, MovesSequence const& movesSequence, int const rowSize) const;
     void printHeadersForNextMoves(
@@ -79,16 +79,15 @@ private:
     void printHeadersForBookMoves(BookMoves const& bookMoves) const;
     void printHeadersForBestLine(MovesSequence const& movesSequence, stringHelper::strings const& suffixHeaders) const;
 
-    void printHeaders(
-        stringHelper::strings const& prefixHeaders, stringHelper::strings const& suffixHeaders,
-        int const rowSize) const;
+    static void printHeaders(
+        stringHelper::strings const& prefixHeaders, stringHelper::strings const& suffixHeaders, int const rowSize);
 
     void printHorizontalBorder() const;
-    void setBoardOnGrid(DisplayTable& grid, Board const& board, int const xOffset) const;
+    static void setBoardOnGrid(DisplayTable& grid, Board const& board, int const xOffset);
 
-    void setMoveOnGrid(
+    static void setMoveOnGrid(
         DisplayTable& grid, Board const& board, Move const& move, int const xOffset, int const moveNumber,
-        std::optional<char> const& firstChar) const;
+        std::optional<char> const& firstChar);
 
     void fillMovesFromBook(BookMoves& bookMoves) const;
     void fillNextMovesFromCalculation(NextMoves& nextMoves) const;

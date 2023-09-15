@@ -79,7 +79,8 @@ HumanScoreGenerator::Score HumanScoreGenerator::getMoveTypePart(Move const& move
     }
     if (isCastlingMove(pieceAtStart, move)) {
         return 4;  // prioritize checks to be castling
-    } else if (isDevelopingMove(pieceAtStart, move)) {
+    }
+    if (isDevelopingMove(pieceAtStart, move)) {
         return 3;  // prioritize developing moves
     } else if (isCheck(pieceAtEnd)) {
         return 2;  // prioritize checks to be human
@@ -109,7 +110,8 @@ int HumanScoreGenerator::getScoreLevelDistance() const {
     }
     if (m_bestScore > LOWER_LIMIT_FOR_SLIGHTLY_BETTER) {
         return SCORE_LEVEL_DISTANCE_WHEN_SLIGHTLY_BETTER;
-    } else if (m_bestScore > LOWER_LIMIT_FOR_EQUAL) {
+    }
+    if (m_bestScore > LOWER_LIMIT_FOR_EQUAL) {
         return SCORE_LEVEL_DISTANCE_WHEN_EQUAL;
     } else if (m_bestScore > LOWER_LIMIT_FOR_SLIGHTLY_WORSE) {
         return SCORE_LEVEL_DISTANCE_WHEN_SLIGHTLY_WORSE;
@@ -118,7 +120,7 @@ int HumanScoreGenerator::getScoreLevelDistance() const {
     }
 }
 
-bool HumanScoreGenerator::isSameValueExchange(Piece const pieceAtStart, Piece const pieceAtEnd) const {
+bool HumanScoreGenerator::isSameValueExchange(Piece const pieceAtStart, Piece const pieceAtEnd) {
     return isACaptureMove(pieceAtStart, pieceAtEnd) &&
            getValueOfPieceType(pieceAtStart.getType()) == getValueOfPieceType(pieceAtEnd.getType());
 }

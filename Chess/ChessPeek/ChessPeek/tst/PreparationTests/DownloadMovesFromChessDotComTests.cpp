@@ -311,19 +311,19 @@ void trackKeyPressForDownloadMovesFromChessDotCom() {
 
 void clickWindow() {
     AlbaLocalUserAutomation const userAutomation;
-    userAutomation.doLeftClickAt(MousePosition(3750, 550));
+    alba::AlbaLocalUserAutomation::doLeftClickAt(MousePosition(3750, 550));
 }
 
 void gotoWebPage(string const& url) {
     AlbaLocalUserAutomation const userAutomation;
-    userAutomation.performKeyCombination({VK_CONTROL}, {'L'});
+    alba::AlbaLocalUserAutomation::performKeyCombination({VK_CONTROL}, {'L'});
 
     alba::AlbaLocalUserAutomation::setStringToClipboard(url);
     alba::AlbaLocalUserAutomation::sleep(1000);
 
-    userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
+    alba::AlbaLocalUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
 
-    userAutomation.typeKey(VK_RETURN);
+    alba::AlbaLocalUserAutomation::typeKey(VK_RETURN);
     alba::AlbaLocalUserAutomation::sleep(500);
 }
 
@@ -344,19 +344,19 @@ void deleteWebPageUntilItsDeleted(string const& htmlFile) {
 
 void saveWebPage(string const& htmlFile) {
     AlbaLocalUserAutomation const userAutomation;
-    userAutomation.performKeyCombination({VK_CONTROL}, {'S'});
+    alba::AlbaLocalUserAutomation::performKeyCombination({VK_CONTROL}, {'S'});
 
     alba::AlbaLocalUserAutomation::setStringToClipboard(htmlFile);
     alba::AlbaLocalUserAutomation::sleep(1000);
 
-    userAutomation.performKeyCombination({VK_CONTROL}, {'V'});
+    alba::AlbaLocalUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
 
-    userAutomation.typeKey(VK_RETURN);
+    alba::AlbaLocalUserAutomation::typeKey(VK_RETURN);
 }
 
 void typeEnter() {
     AlbaLocalUserAutomation const userAutomation;
-    userAutomation.typeKey(VK_RETURN);
+    alba::AlbaLocalUserAutomation::typeKey(VK_RETURN);
 }
 
 void saveWebPageUntilItsDeleted(string const& htmlFile) {
@@ -378,7 +378,7 @@ void saveWebPageUntilItsDeleted(string const& htmlFile) {
 
 void clickReset() {
     AlbaLocalUserAutomation const userAutomation;
-    userAutomation.doLeftClickAt(MousePosition(3426, 952));
+    alba::AlbaLocalUserAutomation::doLeftClickAt(MousePosition(3426, 952));
 }
 
 void savePageInfoToDataFile(strings const& currentLine, string const& dataFile, WebPageInfo const& pageInfo) {

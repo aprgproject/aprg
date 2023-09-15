@@ -198,11 +198,11 @@ string ResultPrinter::getNameOfBookMove(Move const& move, Book::LineDetail const
     return result;
 }
 
-string ResultPrinter::getDisplayableString(NextMove const& nextMove) const {
+string ResultPrinter::getDisplayableString(NextMove const& nextMove) {
     return getDisplayableString(nextMove.mateValue, nextMove.engineScore, nextMove.humanScore);
 }
 
-string ResultPrinter::getDisplayableString(MovesSequence const& movesSequence) const {
+string ResultPrinter::getDisplayableString(MovesSequence const& movesSequence) {
     return getDisplayableString(movesSequence.mateValue, movesSequence.engineScore, movesSequence.humanScore);
 }
 
@@ -219,7 +219,7 @@ strings ResultPrinter::getNextMovesString(NextMoves const& nextMoves, int const 
     return result;
 }
 
-strings ResultPrinter::getBookMovesString(BookMoves const& bookMoves) const {
+strings ResultPrinter::getBookMovesString(BookMoves const& bookMoves) {
     strings result;
     int const rowSize = min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(bookMoves.size()));
     result.reserve(rowSize);
@@ -299,7 +299,7 @@ void ResultPrinter::printHeadersForBestLine(MovesSequence const& movesSequence, 
     }
 }
 
-void ResultPrinter::printHeaders(strings const& prefixHeaders, strings const& suffixHeaders, int const rowSize) const {
+void ResultPrinter::printHeaders(strings const& prefixHeaders, strings const& suffixHeaders, int const rowSize) {
     if (!prefixHeaders.empty() || !suffixHeaders.empty()) {
         bool isFirst = true;
         for (int i = 0; i < rowSize; ++i) {
@@ -323,7 +323,7 @@ void ResultPrinter::printHeaders(strings const& prefixHeaders, strings const& su
 
 void ResultPrinter::printHorizontalBorder() const { cout << m_horizontalBorder << "\n"; }
 
-void ResultPrinter::setBoardOnGrid(DisplayTable& grid, Board const& board, int const xOffset) const {
+void ResultPrinter::setBoardOnGrid(DisplayTable& grid, Board const& board, int const xOffset) {
     for (CoordinateDataType y = 0; y < Board::CHESS_SIDE_SIZE; ++y) {
         for (CoordinateDataType x = 0; x < Board::CHESS_SIDE_SIZE; ++x) {
             Piece const piece(board.getPieceAt(Coordinate(x, y)));
@@ -335,7 +335,7 @@ void ResultPrinter::setBoardOnGrid(DisplayTable& grid, Board const& board, int c
 
 void ResultPrinter::setMoveOnGrid(
     DisplayTable& grid, Board const& board, Move const& move, int const xOffset, int const moveNumber,
-    optional<char> const& firstChar) const {
+    optional<char> const& firstChar) {
     Piece const piece(board.getPieceAt(move.first));
     grid.getCellReferenceAt(move.first.getX() + xOffset, move.first.getY())
         .setText(getDisplayableStringForABoardCell(piece, moveNumber, firstChar));

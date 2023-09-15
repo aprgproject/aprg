@@ -53,7 +53,7 @@ private:
     [[nodiscard]] Score getPiecePart(Move const& move) const;
     [[nodiscard]] int getDistanceToKing(Coordinate const& coordinate) const;
     [[nodiscard]] int getScoreLevelDistance() const;
-    [[nodiscard]] bool isSameValueExchange(Piece const pieceAtStart, Piece const pieceAtEnd) const;
+    [[nodiscard]] static bool isSameValueExchange(Piece const pieceAtStart, Piece const pieceAtEnd);
     [[nodiscard]] bool isDevelopingMove(Piece const pieceAtStart, Move const& move) const;
     [[nodiscard]] static Score getHumanScoreOfPiece(PieceType const pieceType);
     [[nodiscard]] static bool isACaptureMove(Piece const pieceAtStart, Piece const pieceAtEnd);

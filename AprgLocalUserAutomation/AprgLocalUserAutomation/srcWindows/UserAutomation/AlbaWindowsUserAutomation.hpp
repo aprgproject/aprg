@@ -16,10 +16,10 @@ class AlbaWindowsUserAutomation {
 public:
     static void doDoubleLeftClick();
     static void doLeftClickAt(MousePosition const& position);
-    void doDoubleLeftClickAt(MousePosition const& position) const;
+    static void doDoubleLeftClickAt(MousePosition const& position);
     static void doRightClickAt(MousePosition const& position);
     static void typeCharacter(char const character);
-    void typeString(std::string_view const& stringToType) const;
+    static void typeString(std::string_view const& stringToType);
     static void saveBitmapOnScreen(std::string_view const& filePath);
     [[nodiscard]] static MousePosition getMousePosition();
     [[nodiscard]] static std::string getClassNameOfForegroundWindow();
