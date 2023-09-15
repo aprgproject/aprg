@@ -399,10 +399,10 @@ void CPlusPlusReorganizer::addItemIfNeeded(int const startIndex, int const endIn
                     break;
                 }
                 case Purpose::GatherInformation: {
-                    string functionSignature(getFunctionSignature(content));
+                    string const functionSignature(getFunctionSignature(content));
                     if (!functionSignature.empty()) {
                         m_headerInformation.functionSignatures.emplace_back(functionSignature);
-                        string functionName(getFunctionName(functionSignature));
+                        string const functionName(getFunctionName(functionSignature));
                         if (!functionName.empty()) {
                             m_headerInformation.functionNamePatterns.emplace_back(Pattern{M(functionName), M("(")});
                             m_headerInformation.functionNamePatterns.emplace_back(Pattern{M(functionName), M("<")});

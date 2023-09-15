@@ -72,7 +72,7 @@ Terms CPlusPlusReorganizeItems::getReorganizedTermsInClassDeclaration() const {
         bool const isAccessControl = sortItem.itemType == ItemType::AccessControl;
         bool const isMultilineItem = isMultiLine(sortItem.numberOfLines) || isAccessControl;
         bool const shouldPreventNewLine = (isFirst && isAccessControl) || isPreviousAnAccessControl;
-        bool placeNewLineBeforeItem = !shouldPreventNewLine && (isMultilineItem || isPreviousAMultilineItem);
+        bool const placeNewLineBeforeItem = !shouldPreventNewLine && (isMultilineItem || isPreviousAMultilineItem);
         if (placeNewLineBeforeItem) {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
@@ -109,7 +109,7 @@ Terms CPlusPlusReorganizeItems::getReorganizedTermsInNamespace() const {
     for (SortItem const& sortItem : sortedItems) {
         string const& item(m_data.items[sortItem.itemsIndex]);
         bool const isMultilineItem = isMultiLine(sortItem.numberOfLines);
-        bool placeNewLineBeforeItem = isMultilineItem || isPreviousAMultilineItem;
+        bool const placeNewLineBeforeItem = isMultilineItem || isPreviousAMultilineItem;
         if (placeNewLineBeforeItem) {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
@@ -142,11 +142,12 @@ Terms CPlusPlusReorganizeItems::getReorganizedTermsInTopLevelScope() const {
         string const& item(m_data.items[sortItem.itemsIndex]);
         bool const isMultilineItem =
             isMultiLine(sortItem.numberOfLines) || sortItem.itemSubType == ItemSubType::PragmaMacro;
-        bool isAGroupItem = sortItem.itemType == ItemType::Macro || sortItem.itemType == ItemType::UsingKeyword;
-        bool shouldSeparateGroups =
+        bool const isAGroupItem = sortItem.itemType == ItemType::Macro || sortItem.itemType == ItemType::UsingKeyword;
+        bool const shouldSeparateGroups =
             sortItem.hasComment || ((isAGroupItem || isPreviousAGroupItem) &&
                                     getGroupType(sortItem.itemType) != getGroupType(previousItemType));
-        bool placeNewLineBeforeItem = !isFirst && (isMultilineItem || isPreviousAMultilineItem || shouldSeparateGroups);
+        bool const placeNewLineBeforeItem =
+            !isFirst && (isMultilineItem || isPreviousAMultilineItem || shouldSeparateGroups);
         if (placeNewLineBeforeItem) {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
@@ -423,7 +424,7 @@ void CPlusPlusReorganizeItems::saveDetailsForTest(SortItem& sortItem, Terms cons
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        int patternIndex =
+        int const patternIndex =
             getPatternIndexOfAMatchBySearchingForward(termIndex, terms, m_data.headerFunctionNamePatterns);
         isFound = patternIndex >= 0;
         if (isFound) {

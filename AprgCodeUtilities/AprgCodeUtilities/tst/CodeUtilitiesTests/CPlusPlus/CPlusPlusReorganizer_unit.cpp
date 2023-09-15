@@ -142,9 +142,9 @@ TEST(CPlusPlusReorganizerTest, DISABLED_ActualProcessDirectoryTest) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaConfigurationHolderWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaConfigurationHolder.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaConfigurationHolder.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaConfigurationHolder.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaConfigurationHolder.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaConfigurationHolder.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaConfigurationHolder.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
 
     reorganizer.processHeaderFile(afterHeaderFilePath);
@@ -154,10 +154,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaConfigurationHolderWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaBitManipulationClassDefinitionWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaBitManipulationClassDefinition.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaBitManipulationClassDefinition.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY
-                                  R"(/ReorganizerTests/Expected/AlbaBitManipulationClassDefinition.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY
+                                      R"(/ReorganizerTests/Before/AlbaBitManipulationClassDefinition.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY
+                                     R"(/ReorganizerTests/After/AlbaBitManipulationClassDefinition.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY
+                                        R"(/ReorganizerTests/Expected/AlbaBitManipulationClassDefinition.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
 
     reorganizer.processHeaderFile(afterHeaderFilePath);
@@ -167,9 +169,9 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaBitManipulationClassDefinitionWorks
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaDebugWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaDebug.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaDebug.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaDebug.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaDebug.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaDebug.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaDebug.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
 
     reorganizer.processHeaderFile(afterHeaderFilePath);
@@ -179,9 +181,9 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaDebugWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaOptionalWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaOptional.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaOptional.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaOptional.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaOptional.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaOptional.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaOptional.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
 
     reorganizer.processHeaderFile(afterHeaderFilePath);
@@ -191,9 +193,9 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaOptionalWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaBitConstantsWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaBitConstants.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaBitConstants.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaBitConstants.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaBitConstants.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaBitConstants.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaBitConstants.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
 
     reorganizer.processHeaderFile(afterHeaderFilePath);
@@ -203,9 +205,9 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaBitConstantsWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaLocalPathHandlerWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaLocalPathHandler.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaLocalPathHandler.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaLocalPathHandler.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaLocalPathHandler.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaLocalPathHandler.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaLocalPathHandler.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
 
     reorganizer.processHeaderFile(afterHeaderFilePath);
@@ -215,9 +217,9 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaLocalPathHandlerWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaValueRangeWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaValueRange.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaValueRange.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaValueRange.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaValueRange.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaValueRange.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaValueRange.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
 
     reorganizer.processHeaderFile(afterHeaderFilePath);
@@ -227,9 +229,9 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaValueRangeWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaMatrixWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaMatrix.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaMatrix.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaMatrix.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaMatrix.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaMatrix.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaMatrix.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
 
     reorganizer.processHeaderFile(afterHeaderFilePath);
@@ -239,9 +241,9 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaMatrixWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaBitUtilitiesBuiltInWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaBitUtilitiesBuiltIn.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaBitUtilitiesBuiltIn.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaBitUtilitiesBuiltIn.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaBitUtilitiesBuiltIn.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaBitUtilitiesBuiltIn.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaBitUtilitiesBuiltIn.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
 
     reorganizer.processHeaderFile(afterHeaderFilePath);
@@ -251,9 +253,9 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaBitUtilitiesBuiltInWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaXYZWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaXYZ.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaXYZ.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaXYZ.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaXYZ.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaXYZ.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaXYZ.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
 
     reorganizer.processHeaderFile(afterHeaderFilePath);
@@ -263,12 +265,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaXYZWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaMacrosUnitTestWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaMacros.hpp)");
-    string beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaMacros_unit.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaMacros.hpp)");
-    string afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaMacros_unit.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaMacros.hpp)");
-    string expectedUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaMacros_unit.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaMacros.hpp)");
+    string const beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaMacros_unit.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaMacros.hpp)");
+    string const afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaMacros_unit.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaMacros.hpp)");
+    string const expectedUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaMacros_unit.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeUnitTestFilePath, afterUnitTestFilePath);
 
@@ -281,12 +283,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaMacrosUnitTestWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaSingletonUnitTestWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaSingleton.hpp)");
-    string beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaSingleton_unit.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaSingleton.hpp)");
-    string afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaSingleton_unit.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaSingleton.hpp)");
-    string expectedUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaSingleton_unit.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaSingleton.hpp)");
+    string const beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaSingleton_unit.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaSingleton.hpp)");
+    string const afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaSingleton_unit.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaSingleton.hpp)");
+    string const expectedUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaSingleton_unit.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeUnitTestFilePath, afterUnitTestFilePath);
 
@@ -299,14 +301,17 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaSingletonUnitTestWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaFundamentalOperationsCounterUnitTestWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaFundamentalOperationsCounter.hpp)");
-    string beforeUnitTestFilePath(TEST_DIRECTORY
-                                  R"(/ReorganizerTests/Before/AlbaFundamentalOperationsCounter_unit.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaFundamentalOperationsCounter.hpp)");
-    string afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaFundamentalOperationsCounter_unit.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaFundamentalOperationsCounter.hpp)");
-    string expectedUnitTestFilePath(TEST_DIRECTORY
-                                    R"(/ReorganizerTests/Expected/AlbaFundamentalOperationsCounter_unit.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY
+                                      R"(/ReorganizerTests/Before/AlbaFundamentalOperationsCounter.hpp)");
+    string const beforeUnitTestFilePath(TEST_DIRECTORY
+                                        R"(/ReorganizerTests/Before/AlbaFundamentalOperationsCounter_unit.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaFundamentalOperationsCounter.hpp)");
+    string const afterUnitTestFilePath(TEST_DIRECTORY
+                                       R"(/ReorganizerTests/After/AlbaFundamentalOperationsCounter_unit.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY
+                                        R"(/ReorganizerTests/Expected/AlbaFundamentalOperationsCounter.hpp)");
+    string const expectedUnitTestFilePath(TEST_DIRECTORY
+                                          R"(/ReorganizerTests/Expected/AlbaFundamentalOperationsCounter_unit.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeUnitTestFilePath, afterUnitTestFilePath);
 
@@ -319,12 +324,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaFundamentalOperationsCounterUnitTes
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaContainerHelperWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaContainerHelper.hpp)");
-    string beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaContainerHelper.cpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaContainerHelper.hpp)");
-    string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaContainerHelper.cpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaContainerHelper.hpp)");
-    string expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaContainerHelper.cpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaContainerHelper.hpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaContainerHelper.cpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaContainerHelper.hpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaContainerHelper.cpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaContainerHelper.hpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaContainerHelper.cpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeImplementationFilePath, afterImplementationFilePath);
 
@@ -337,12 +342,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaContainerHelperWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaNumberWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaNumber.hpp)");
-    string beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaNumber.cpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaNumber.hpp)");
-    string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaNumber.cpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaNumber.hpp)");
-    string expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaNumber.cpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaNumber.hpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaNumber.cpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaNumber.hpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaNumber.cpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaNumber.hpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaNumber.cpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeImplementationFilePath, afterImplementationFilePath);
 
@@ -355,12 +360,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaNumberWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaUserInterfaceWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaUserInterface.hpp)");
-    string beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaUserInterface.cpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaUserInterface.hpp)");
-    string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaUserInterface.cpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaUserInterface.hpp)");
-    string expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaUserInterface.cpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaUserInterface.hpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaUserInterface.cpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaUserInterface.hpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaUserInterface.cpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaUserInterface.hpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaUserInterface.cpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeImplementationFilePath, afterImplementationFilePath);
 
@@ -373,12 +378,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaUserInterfaceWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeCPlusPlusTokenizerWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/CPlusPlusTokenizer.hpp)");
-    string beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/CPlusPlusTokenizer.cpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/CPlusPlusTokenizer.hpp)");
-    string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/CPlusPlusTokenizer.cpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/CPlusPlusTokenizer.hpp)");
-    string expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/CPlusPlusTokenizer.cpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/CPlusPlusTokenizer.hpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/CPlusPlusTokenizer.cpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/CPlusPlusTokenizer.hpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/CPlusPlusTokenizer.cpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/CPlusPlusTokenizer.hpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/CPlusPlusTokenizer.cpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeImplementationFilePath, afterImplementationFilePath);
 
@@ -391,12 +396,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeCPlusPlusTokenizerWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeBtsLogPrintWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/BtsLogPrint.hpp)");
-    string beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/BtsLogPrint.cpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/BtsLogPrint.hpp)");
-    string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/BtsLogPrint.cpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/BtsLogPrint.hpp)");
-    string expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/BtsLogPrint.cpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/BtsLogPrint.hpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/BtsLogPrint.cpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/BtsLogPrint.hpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/BtsLogPrint.cpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/BtsLogPrint.hpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/BtsLogPrint.cpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeImplementationFilePath, afterImplementationFilePath);
 
@@ -409,12 +414,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeBtsLogPrintWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeTermRaiseToTermsWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/TermRaiseToTerms.hpp)");
-    string beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/TermRaiseToTerms.cpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/TermRaiseToTerms.hpp)");
-    string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/TermRaiseToTerms.cpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/TermRaiseToTerms.hpp)");
-    string expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/TermRaiseToTerms.cpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/TermRaiseToTerms.hpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/TermRaiseToTerms.cpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/TermRaiseToTerms.hpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/TermRaiseToTerms.cpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/TermRaiseToTerms.hpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/TermRaiseToTerms.cpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeImplementationFilePath, afterImplementationFilePath);
 
@@ -427,15 +432,15 @@ TEST(CPlusPlusReorganizerTest, ReorganizeTermRaiseToTermsWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaStringHelperUnitTestWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaStringHelper.hpp)");
-    string beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaStringHelper.cpp)");
-    string beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaStringHelper_unit.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaStringHelper.hpp)");
-    string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaStringHelper.cpp)");
-    string afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaStringHelper_unit.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaStringHelper.hpp)");
-    string expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaStringHelper.cpp)");
-    string expectedUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaStringHelper_unit.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaStringHelper.hpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaStringHelper.cpp)");
+    string const beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaStringHelper_unit.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaStringHelper.hpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaStringHelper.cpp)");
+    string const afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaStringHelper_unit.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaStringHelper.hpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaStringHelper.cpp)");
+    string const expectedUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaStringHelper_unit.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeImplementationFilePath, afterImplementationFilePath);
     copyFile(beforeUnitTestFilePath, afterUnitTestFilePath);
@@ -451,15 +456,15 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaStringHelperUnitTestWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaFileReaderUnitTestWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaFileReader.hpp)");
-    string beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaFileReader.cpp)");
-    string beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaFileReader_unit.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaFileReader.hpp)");
-    string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaFileReader.cpp)");
-    string afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaFileReader_unit.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaFileReader.hpp)");
-    string expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaFileReader.cpp)");
-    string expectedUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaFileReader_unit.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaFileReader.hpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaFileReader.cpp)");
+    string const beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaFileReader_unit.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaFileReader.hpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaFileReader.cpp)");
+    string const afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaFileReader_unit.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaFileReader.hpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaFileReader.cpp)");
+    string const expectedUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaFileReader_unit.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeImplementationFilePath, afterImplementationFilePath);
     copyFile(beforeUnitTestFilePath, afterUnitTestFilePath);
@@ -475,17 +480,21 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaFileReaderUnitTestWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaWindowsScreenMonitoringUnitTestWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaWindowsScreenMonitoring.hpp)");
-    string beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaWindowsScreenMonitoring.cpp)");
-    string beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaWindowsScreenMonitoring_unit.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaWindowsScreenMonitoring.hpp)");
-    string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaWindowsScreenMonitoring.cpp)");
-    string afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaWindowsScreenMonitoring_unit.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaWindowsScreenMonitoring.hpp)");
-    string expectedImplementationFilePath(TEST_DIRECTORY
-                                          R"(/ReorganizerTests/Expected/AlbaWindowsScreenMonitoring.cpp)");
-    string expectedUnitTestFilePath(TEST_DIRECTORY
-                                    R"(/ReorganizerTests/Expected/AlbaWindowsScreenMonitoring_unit.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaWindowsScreenMonitoring.hpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY
+                                              R"(/ReorganizerTests/Before/AlbaWindowsScreenMonitoring.cpp)");
+    string const beforeUnitTestFilePath(TEST_DIRECTORY
+                                        R"(/ReorganizerTests/Before/AlbaWindowsScreenMonitoring_unit.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaWindowsScreenMonitoring.hpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY
+                                             R"(/ReorganizerTests/After/AlbaWindowsScreenMonitoring.cpp)");
+    string const afterUnitTestFilePath(TEST_DIRECTORY
+                                       R"(/ReorganizerTests/After/AlbaWindowsScreenMonitoring_unit.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaWindowsScreenMonitoring.hpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY
+                                                R"(/ReorganizerTests/Expected/AlbaWindowsScreenMonitoring.cpp)");
+    string const expectedUnitTestFilePath(TEST_DIRECTORY
+                                          R"(/ReorganizerTests/Expected/AlbaWindowsScreenMonitoring_unit.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeImplementationFilePath, afterImplementationFilePath);
     copyFile(beforeUnitTestFilePath, afterUnitTestFilePath);
@@ -501,15 +510,15 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaWindowsScreenMonitoringUnitTestWork
 
 TEST(CPlusPlusReorganizerTest, ReorganizeLimitsAtInfinityUnitTestWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/LimitsAtInfinity.hpp)");
-    string beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/LimitsAtInfinity.cpp)");
-    string beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/LimitsAtInfinity_unit.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/LimitsAtInfinity.hpp)");
-    string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/LimitsAtInfinity.cpp)");
-    string afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/LimitsAtInfinity_unit.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/LimitsAtInfinity.hpp)");
-    string expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/LimitsAtInfinity.cpp)");
-    string expectedUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/LimitsAtInfinity_unit.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/LimitsAtInfinity.hpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/LimitsAtInfinity.cpp)");
+    string const beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/LimitsAtInfinity_unit.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/LimitsAtInfinity.hpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/LimitsAtInfinity.cpp)");
+    string const afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/LimitsAtInfinity_unit.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/LimitsAtInfinity.hpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/LimitsAtInfinity.cpp)");
+    string const expectedUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/LimitsAtInfinity_unit.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeImplementationFilePath, afterImplementationFilePath);
     copyFile(beforeUnitTestFilePath, afterUnitTestFilePath);
@@ -525,15 +534,17 @@ TEST(CPlusPlusReorganizerTest, ReorganizeLimitsAtInfinityUnitTestWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeCommonFunctionLibraryUnitTestWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/CommonFunctionLibrary.hpp)");
-    string beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/CommonFunctionLibrary.cpp)");
-    string beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/CommonFunctionLibrary_unit.hpp)");
-    string afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/CommonFunctionLibrary.hpp)");
-    string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/CommonFunctionLibrary.cpp)");
-    string afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/CommonFunctionLibrary_unit.hpp)");
-    string expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/CommonFunctionLibrary.hpp)");
-    string expectedImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/CommonFunctionLibrary.cpp)");
-    string expectedUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/CommonFunctionLibrary_unit.hpp)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/CommonFunctionLibrary.hpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/CommonFunctionLibrary.cpp)");
+    string const beforeUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/CommonFunctionLibrary_unit.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/CommonFunctionLibrary.hpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/CommonFunctionLibrary.cpp)");
+    string const afterUnitTestFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/CommonFunctionLibrary_unit.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/CommonFunctionLibrary.hpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY
+                                                R"(/ReorganizerTests/Expected/CommonFunctionLibrary.cpp)");
+    string const expectedUnitTestFilePath(TEST_DIRECTORY
+                                          R"(/ReorganizerTests/Expected/CommonFunctionLibrary_unit.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
     copyFile(beforeImplementationFilePath, afterImplementationFilePath);
     copyFile(beforeUnitTestFilePath, afterUnitTestFilePath);
@@ -549,12 +560,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeCommonFunctionLibraryUnitTestWorks) {
 
 TEST(CPlusPlusReorganizerTest, ReorganizeDownloadMovesFromChessDotComTestsWorks) {
     CPlusPlusReorganizer reorganizer;
-    string beforeImplementationFilePath(TEST_DIRECTORY
-                                        R"(/ReorganizerTests/Before/DownloadMovesFromChessDotComTests.cpp)");
-    string afterImplementationFilePath(TEST_DIRECTORY
-                                       R"(/ReorganizerTests/After/DownloadMovesFromChessDotComTests.cpp)");
-    string expectedImplementationFilePath(TEST_DIRECTORY
-                                          R"(/ReorganizerTests/Expected/DownloadMovesFromChessDotComTests.cpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY
+                                              R"(/ReorganizerTests/Before/DownloadMovesFromChessDotComTests.cpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY
+                                             R"(/ReorganizerTests/After/DownloadMovesFromChessDotComTests.cpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY
+                                                R"(/ReorganizerTests/Expected/DownloadMovesFromChessDotComTests.cpp)");
     copyFile(beforeImplementationFilePath, afterImplementationFilePath);
 
     reorganizer.processImplementationFile("", afterImplementationFilePath);
@@ -566,11 +577,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeBenchmarkTestsWorks) {
     CPlusPlusReorganizer reorganizer;
 
     {
-        string beforeImplementationFilePath(TEST_DIRECTORY
-                                            R"(/ReorganizerTests/Before/AlbaNumberPerformanceTests.cpp)");
-        string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaNumberPerformanceTests.cpp)");
-        string expectedImplementationFilePath(TEST_DIRECTORY
-                                              R"(/ReorganizerTests/Expected/AlbaNumberPerformanceTests.cpp)");
+        string const beforeImplementationFilePath(TEST_DIRECTORY
+                                                  R"(/ReorganizerTests/Before/AlbaNumberPerformanceTests.cpp)");
+        string const afterImplementationFilePath(TEST_DIRECTORY
+                                                 R"(/ReorganizerTests/After/AlbaNumberPerformanceTests.cpp)");
+        string const expectedImplementationFilePath(TEST_DIRECTORY
+                                                    R"(/ReorganizerTests/Expected/AlbaNumberPerformanceTests.cpp)");
         copyFile(beforeImplementationFilePath, afterImplementationFilePath);
 
         reorganizer.processImplementationFile("", afterImplementationFilePath);
@@ -579,12 +591,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeBenchmarkTestsWorks) {
     }
 
     {
-        string beforeImplementationFilePath(TEST_DIRECTORY
-                                            R"(/ReorganizerTests/Before/BitBuiltInFunctionsPerformanceTests.cpp)");
-        string afterImplementationFilePath(TEST_DIRECTORY
-                                           R"(/ReorganizerTests/After/BitBuiltInFunctionsPerformanceTests.cpp)");
-        string expectedImplementationFilePath(TEST_DIRECTORY
-                                              R"(/ReorganizerTests/Expected/BitBuiltInFunctionsPerformanceTests.cpp)");
+        string const beforeImplementationFilePath(
+            TEST_DIRECTORY R"(/ReorganizerTests/Before/BitBuiltInFunctionsPerformanceTests.cpp)");
+        string const afterImplementationFilePath(TEST_DIRECTORY
+                                                 R"(/ReorganizerTests/After/BitBuiltInFunctionsPerformanceTests.cpp)");
+        string const expectedImplementationFilePath(
+            TEST_DIRECTORY R"(/ReorganizerTests/Expected/BitBuiltInFunctionsPerformanceTests.cpp)");
         copyFile(beforeImplementationFilePath, afterImplementationFilePath);
 
         reorganizer.processImplementationFile("", afterImplementationFilePath);
@@ -593,12 +605,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeBenchmarkTestsWorks) {
     }
 
     {
-        string beforeImplementationFilePath(TEST_DIRECTORY
-                                            R"(/ReorganizerTests/Before/NumberOfOnesPerformanceTests.cpp)");
-        string afterImplementationFilePath(TEST_DIRECTORY
-                                           R"(/ReorganizerTests/After/NumberOfOnesPerformanceTests.cpp)");
-        string expectedImplementationFilePath(TEST_DIRECTORY
-                                              R"(/ReorganizerTests/Expected/NumberOfOnesPerformanceTests.cpp)");
+        string const beforeImplementationFilePath(TEST_DIRECTORY
+                                                  R"(/ReorganizerTests/Before/NumberOfOnesPerformanceTests.cpp)");
+        string const afterImplementationFilePath(TEST_DIRECTORY
+                                                 R"(/ReorganizerTests/After/NumberOfOnesPerformanceTests.cpp)");
+        string const expectedImplementationFilePath(TEST_DIRECTORY
+                                                    R"(/ReorganizerTests/Expected/NumberOfOnesPerformanceTests.cpp)");
         copyFile(beforeImplementationFilePath, afterImplementationFilePath);
 
         reorganizer.processImplementationFile("", afterImplementationFilePath);
@@ -607,11 +619,12 @@ TEST(CPlusPlusReorganizerTest, ReorganizeBenchmarkTestsWorks) {
     }
 
     {
-        string beforeImplementationFilePath(TEST_DIRECTORY
-                                            R"(/ReorganizerTests/Before/RandomizerPerformanceTests.cpp)");
-        string afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/RandomizerPerformanceTests.cpp)");
-        string expectedImplementationFilePath(TEST_DIRECTORY
-                                              R"(/ReorganizerTests/Expected/RandomizerPerformanceTests.cpp)");
+        string const beforeImplementationFilePath(TEST_DIRECTORY
+                                                  R"(/ReorganizerTests/Before/RandomizerPerformanceTests.cpp)");
+        string const afterImplementationFilePath(TEST_DIRECTORY
+                                                 R"(/ReorganizerTests/After/RandomizerPerformanceTests.cpp)");
+        string const expectedImplementationFilePath(TEST_DIRECTORY
+                                                    R"(/ReorganizerTests/Expected/RandomizerPerformanceTests.cpp)");
         copyFile(beforeImplementationFilePath, afterImplementationFilePath);
 
         reorganizer.processImplementationFile("", afterImplementationFilePath);
