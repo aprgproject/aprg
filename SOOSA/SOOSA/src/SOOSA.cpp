@@ -241,8 +241,7 @@ Line SOOSA::findVerticalLineUsingStartingLine(
                 consecutiveBlackPixels.setEndValue(static_cast<double>(x));
             } else if (!consecutiveBlackPixels.isEmpty()) {
                 // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
-                samples.emplace_back(
-                    TwoDimensionSample{consecutiveBlackPixels.getMidpointValue(), static_cast<double>(y)});
+                samples.emplace_back(consecutiveBlackPixels.getMidpointValue(), static_cast<double>(y));
                 break;
             }
         }
@@ -464,8 +463,7 @@ SOOSA::TwoDimensionSamples SOOSA::getSamplesInHorizontalLine(
                 consecutiveBlackPixels.setEndValue(static_cast<double>(y));
             } else if (!consecutiveBlackPixels.isEmpty()) {
                 // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
-                samples.emplace_back(
-                    TwoDimensionSample{static_cast<double>(x), consecutiveBlackPixels.getMidpointValue()});
+                samples.emplace_back(static_cast<double>(x), consecutiveBlackPixels.getMidpointValue());
                 break;
             }
         }
