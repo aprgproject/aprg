@@ -58,7 +58,7 @@ namespace CapturingGlobalVariablesWorks {
 
 namespace {
 int g = 10;
-}
+}  // namespace
 
 TEST(LambdaExamplesTest, CapturingGlobalVariablesWorks) {
     auto kitten = [=]() { return g + 1; };
