@@ -129,7 +129,7 @@ public:
         uint16_t const years, uint8_t const months, uint8_t const days, uint8_t const hours, uint8_t const minutes,
         uint8_t const seconds, uint32_t const microseconds);
 
-    void reorganizeValues();  // NOTE: AlbaDateTime class needs to be manually reorganized (if needed) since the
+    void reorganizeValues();  // NOTE: AlbaDateTime class needs to be manually reorganized (if needed)
     AlbaHourMinuteSecond& getHourMinutesSecondReference();
     AlbaYearMonthDay& getYearMonthDayReference();
     uint32_t& getMicroSecondsReference();
