@@ -61,7 +61,7 @@ LibrarySystemTime convertTimeInformationToSystemTime(
     time_t const timeUntilSeconds = mktime(&timeInformation);
     if (timeUntilSeconds != -1) {
         // mktime returns -1 if cannot be represented
-        return system_clock::from_time_t(timeUntilSeconds) + nanosecondsDuration;
+        return system_clock::from_time_t(timeUntilSeconds) + duration_cast<system_clock::duration>(nanosecondsDuration);
     }
     return {};
 }
