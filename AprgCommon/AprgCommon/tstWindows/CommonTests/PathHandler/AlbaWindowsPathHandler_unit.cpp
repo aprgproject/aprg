@@ -56,7 +56,7 @@ TEST(AlbaWindowsPathHandler, FullPathWithOnlyDirectoryGivenJumbledSlashes) {
 }
 
 TEST(AlbaWindowsPathHandler, FullPathWithOnlyDirectoryGivenJumbledSlashesWithDirectoryDoesNotExists) {
-    PathHandler const pathHandler(APRG_DIR R"(\////AprgCommon\\\\/AprgCommon/tst\DirectoryDoesNotExists\)");
+    PathHandler const pathHandler(getAprgPath() + R"(\////AprgCommon\\\\/AprgCommon/tst\DirectoryDoesNotExists\)");
     EXPECT_EQ(getAprgRootPath(), pathHandler.getDriveOrRoot());
     EXPECT_EQ(
         fixPath(getAprgPath() + R"(AprgCommon\AprgCommon\tst\DirectoryDoesNotExists\)"), pathHandler.getDirectory());

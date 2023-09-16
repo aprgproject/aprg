@@ -9,6 +9,24 @@ using namespace std::filesystem;
 
 namespace alba {
 
+namespace {
+using StringType = path::string_type;
+using CharacterType = StringType::value_type;
+StringType slashString(1, static_cast<CharacterType>('/'));
+StringType backSlashString(1, static_cast<CharacterType>('\\'));
+StringType pathSlashString(1, static_cast<CharacterType>(path::preferred_separator));
+
+void replaceAll(StringType& mainText, StringType const& targetStr, StringType const& replacementStr) {
+    auto const targetStrLength = targetStr.length();
+    auto const replacementStrLength = replacementStr.length();
+    auto index = mainText.find(targetStr);
+    while (index != std::string::npos) {
+        mainText.replace(index, targetStrLength, replacementStr);
+        index = mainText.find(targetStr, index + replacementStrLength);
+    }
+}
+}  // namespace
+
 AlbaLocalPathHandlerStd::AlbaLocalPathHandlerStd(LocalPath const& path) : m_path(fixPath(path)) {}
 AlbaLocalPathHandlerStd::AlbaLocalPathHandlerStd(LocalPath&& path) : m_path(fixPath(path)) {}
 AlbaDateTime AlbaLocalPathHandlerStd::getLastModifiedDateTime() const {
@@ -198,9 +216,13 @@ AlbaLocalPathHandlerStd AlbaLocalPathHandlerStd::createPathHandlerForDetectedPat
 }
 
 AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::fixPath(LocalPath const& path) {
-    LocalPath fixedPath(path.root_path());
+    auto pathString(path.native());
+    replaceAll(pathString, slashString, pathSlashString);
+    replaceAll(pathString, backSlashString, pathSlashString);
+    LocalPath replacedStringPath(pathString);
+    LocalPath fixedPath(replacedStringPath.root_path());
     bool isLastASlash(false);
-    for (LocalPath const& subPath : path) {
+    for (LocalPath const& subPath : replacedStringPath) {
         if (subPath.has_filename()) {
             fixedPath /= subPath;
             isLastASlash = false;
@@ -210,7 +232,7 @@ AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::fixPath(LocalPath co
     }
     fixedPath.make_preferred();
     fixedPath = fixedPath.lexically_normal();
-    if (isLastASlash || (path.has_filename() && is_directory(path))) {
+    if (isLastASlash || (path.has_filename() && is_directory(fixedPath))) {
         fixedPath /= "";
     }
     return fixedPath;

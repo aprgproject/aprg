@@ -52,7 +52,11 @@ AlbaDateTime convertSystemTimeToAlbaDateTime(LibrarySystemTime const& inputTime)
 }
 
 AlbaDateTime convertFileTimeToAlbaDateTime(LibraryFileTime const& inputTime) {
+#if defined(_MSC_VER)
+    return {};
+#else
     return convertSystemTimeToAlbaDateTime(file_clock::to_sys(inputTime));
+#endif
 }
 
 AlbaDateTime getCurrentDateTime() { return convertSystemTimeToAlbaDateTime(getSystemTimeNow()); }

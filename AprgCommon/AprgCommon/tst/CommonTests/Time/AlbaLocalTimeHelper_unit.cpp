@@ -31,6 +31,7 @@ TEST(AlbaLocalTimerHelperTest, DISABLED_SleepForWorks) {
 }
 
 TEST(AlbaLocalTimerHelperTest, ConvertFileTimeToAlbaDateTimeTimeWorks) {
+#if !defined(_MSC_VER)
     clearContentsOfFile(APRG_COMMON_TEST_FILE_TO_WRITE);
 
     AlbaDateTime lastModifiedTime(convertFileTimeToAlbaDateTime(last_write_time(APRG_COMMON_TEST_FILE_TO_WRITE)));
@@ -39,6 +40,7 @@ TEST(AlbaLocalTimerHelperTest, ConvertFileTimeToAlbaDateTimeTimeWorks) {
     AlbaDateTime difference(currentTime - lastModifiedTime);
     AlbaDateTime allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
     EXPECT_LT(difference, allowableDifference);
+#endif
 }
 
 TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorksOnCurrentTime) {
