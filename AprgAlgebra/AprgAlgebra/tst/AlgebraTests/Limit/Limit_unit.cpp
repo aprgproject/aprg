@@ -18,52 +18,52 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricExample) {
-    Term oneOverX(createExpressionIfPossible({1, "/", "x"}));
-    Term termToTest(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
+    Term const oneOverX(createExpressionIfPossible({1, "/", "x"}));
+    Term const termToTest(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
 
     Term newTerm;
     Term limitValue;
     calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", ALBA_NUMBER_POSITIVE_INFINITY);
 
-    string stringToExpect("((1[x^2] + 1)*cos((1/x))/1[x^2])");
+    string const stringToExpect("((1[x^2] + 1)*cos((1/x))/1[x^2])");
     EXPECT_EQ(Term(1), limitValue);
     EXPECT_EQ(stringToExpect, convertToString(newTerm));
 }
 
 TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingLogarithmicAndExponentialExample) {
-    Term insideLogarithm(createExpressionIfPossible({2, "+", getEAsATerm(), "^", "x"}));
-    Term numerator(ln(insideLogarithm));
-    Term denominator(Monomial(3, {{"x", 1}}));
-    Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const insideLogarithm(createExpressionIfPossible({2, "+", getEAsATerm(), "^", "x"}));
+    Term const numerator(ln(insideLogarithm));
+    Term const denominator(Monomial(3, {{"x", 1}}));
+    Term const termToTest(createExpressionIfPossible({numerator, "/", denominator}));
 
     Term newTerm;
     Term limitValue;
     calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", ALBA_NUMBER_POSITIVE_INFINITY);
 
-    string stringToExpect("(1/3)");
+    string const stringToExpect("(1/3)");
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 3)), limitValue);
     EXPECT_EQ(stringToExpect, convertToString(newTerm));
 }
 
 TEST(LimitTest, CalculateTermAndLimitUsingLhopitalsRuleWorksUsingTrigonometricExample2) {
-    Term xSquared(Monomial(1, {{"x", 2}}));
-    Term termToTestPart1(createExpressionIfPossible({1, "/", xSquared}));
-    Term termToTestPart2(createExpressionIfPossible({1, "/", xSquared, "/", sec("x")}));
-    Term termToTest(createExpressionIfPossible({termToTestPart1, "-", termToTestPart2}));
+    Term const xSquared(Monomial(1, {{"x", 2}}));
+    Term const termToTestPart1(createExpressionIfPossible({1, "/", xSquared}));
+    Term const termToTestPart2(createExpressionIfPossible({1, "/", xSquared, "/", sec("x")}));
+    Term const termToTest(createExpressionIfPossible({termToTestPart1, "-", termToTestPart2}));
 
     Term newTerm;
     Term limitValue;
     calculateTermAndLimitUsingLhopitalsRule(newTerm, limitValue, termToTest, "x", 0);
 
-    string stringToExpect("((sec(x)^2)/(2+(1[x^2]*(sec(x)^2))+(2[x]*tan(x))))");
+    string const stringToExpect("((sec(x)^2)/(2+(1[x^2]*(sec(x)^2))+(2[x]*tan(x))))");
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), limitValue);
     EXPECT_EQ(stringToExpect, convertToString(newTerm));
 }
 
 TEST(LimitTest, GetLimitAtAValueByApproachTypeWorksForPolynomialOverPolynomial) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-5, {})});
-    Term polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-5, {})});
+    Term const polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_EQ(
         AlbaNumber(10),
@@ -77,33 +77,33 @@ TEST(LimitTest, GetLimitAtAValueByApproachTypeWorksForPolynomialOverPolynomial) 
 }
 
 TEST(LimitTest, GetLimitAtAValueInBothSidesWorksForPolynomialOverPolynomial) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-5, {})});
-    Term polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-5, {})});
+    Term const polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_EQ(AlbaNumber(10), getLimitAtAValueInBothSides(polynomialOverPolynomialTerm, "x", 5));
 }
 
 TEST(LimitTest, GetLimitAtAValueInThePositiveSideWorksForPolynomialOverPolynomial) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-5, {})});
-    Term polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-5, {})});
+    Term const polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_EQ(AlbaNumber(10), getLimitAtAValueInThePositiveSide(polynomialOverPolynomialTerm, "x", 5));
 }
 
 TEST(LimitTest, GetLimitAtAValueInTheNegativeSideWorksForPolynomialOverPolynomial) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-5, {})});
-    Term polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-5, {})});
+    Term const polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_EQ(AlbaNumber(10), getLimitAtAValueInTheNegativeSide(polynomialOverPolynomialTerm, "x", 5));
 }
 
 TEST(LimitTest, GetLimitAtAValueByIterationAndLinearInterpolationWorksForPolynomialOverPolynomial) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-5, {})});
-    Term polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-5, {})});
+    Term const polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_EQ(
         AlbaNumber(10), getLimitAtAValueByIterationAndLinearInterpolation(polynomialOverPolynomialTerm, "x", 5, 6, 10));
@@ -112,8 +112,8 @@ TEST(LimitTest, GetLimitAtAValueByIterationAndLinearInterpolationWorksForPolynom
 }
 
 TEST(LimitTest, GetLimitAtAValueUsingTrendOfValuesWorks) {
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
-    Term constantOverPolynomialTerm(createExpressionIfPossible({3, "/", denominator}));
+    Term const denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
+    Term const constantOverPolynomialTerm(createExpressionIfPossible({3, "/", denominator}));
 
     EXPECT_EQ(
         ALBA_NUMBER_POSITIVE_INFINITY, getLimitAtAValueUsingTrendOfValues(constantOverPolynomialTerm, "x", 2, 3, 4));
@@ -132,47 +132,47 @@ TEST(LimitTest, GetValueUsingLinearInterpolationWorks) {
 }
 
 TEST(LimitTest, GetLimitWorksOnSingleVariable) {
-    Term termToVerify(getLimit("x", "x", 5));
+    Term const termToVerify(getLimit("x", "x", 5));
 
     EXPECT_EQ(Term(5), termToVerify);
 }
 
 TEST(LimitTest, GetLimitWithMultipleVariablesWithDifferentApproachesWorksOnExample1) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 4}}), Monomial(-1, {{"y", 4}})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})});
-    Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Polynomial{Monomial(1, {{"x", 4}}), Monomial(-1, {{"y", 4}})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})});
+    Term const termToTest(createExpressionIfPossible({numerator, "/", denominator}));
     SubstitutionsOfVariablesToTerms substitutions;
-    substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", "x"}});
-    substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", Monomial(1, {{"x", 2}})}});
+    substitutions.emplace_back({"y", "x"});
+    substitutions.emplace_back({"y", Monomial(1, {{"x", 2}})});
 
-    Term termToVerify(getLimitWithMultipleVariablesWithDifferentApproaches(termToTest, "x", 0, substitutions));
+    Term const termToVerify(getLimitWithMultipleVariablesWithDifferentApproaches(termToTest, "x", 0, substitutions));
 
     EXPECT_EQ(Term(0), termToVerify);
 }
 
 TEST(LimitTest, GetLimitWithMultipleVariablesWithDifferentApproachesWorksOnExample2) {
-    Term numerator(Monomial(1, {{"x", 1}, {"y", 1}}));
-    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})});
-    Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Monomial(1, {{"x", 1}, {"y", 1}}));
+    Term const denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})});
+    Term const termToTest(createExpressionIfPossible({numerator, "/", denominator}));
     SubstitutionsOfVariablesToTerms substitutions;
-    substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", "x"}});
-    substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", Monomial(1, {{"x", 2}})}});
+    substitutions.emplace_back({"y", "x"});
+    substitutions.emplace_back({"y", Monomial(1, {{"x", 2}})});
 
-    Term termToVerify(getLimitWithMultipleVariablesWithDifferentApproaches(termToTest, "x", 0, substitutions));
+    Term const termToVerify(getLimitWithMultipleVariablesWithDifferentApproaches(termToTest, "x", 0, substitutions));
 
     EXPECT_TRUE(isNan(termToVerify));
 }
 
 TEST(LimitTest, GetLimitUsingLhopitalsRuleWorks) {
-    Term oneMinusEToTheX(createExpressionIfPossible({1, "-", getEAsATerm(), "^", "x"}));
-    Term oneOverX(createExpressionIfPossible({1, "/", "x"}));
-    Term termToTest1("x");
-    Term termToTest2(createExpressionIfPossible({"x", "/", oneMinusEToTheX}));
-    Term termToTest3(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
+    Term const oneMinusEToTheX(createExpressionIfPossible({1, "-", getEAsATerm(), "^", "x"}));
+    Term const oneOverX(createExpressionIfPossible({1, "/", "x"}));
+    Term const termToTest1("x");
+    Term const termToTest2(createExpressionIfPossible({"x", "/", oneMinusEToTheX}));
+    Term const termToTest3(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
 
-    Term termToVerify1(getLimitUsingLhopitalsRule(termToTest1, "x", 5));
-    Term termToVerify2(getLimitUsingLhopitalsRule(termToTest2, "x", 0));
-    Term termToVerify3(getLimitUsingLhopitalsRule(termToTest3, "x", ALBA_NUMBER_POSITIVE_INFINITY));
+    Term const termToVerify1(getLimitUsingLhopitalsRule(termToTest1, "x", 5));
+    Term const termToVerify2(getLimitUsingLhopitalsRule(termToTest2, "x", 0));
+    Term const termToVerify3(getLimitUsingLhopitalsRule(termToTest3, "x", ALBA_NUMBER_POSITIVE_INFINITY));
 
     EXPECT_EQ(Term(5), termToVerify1);
     EXPECT_EQ(Term(-1), termToVerify2);
@@ -180,43 +180,43 @@ TEST(LimitTest, GetLimitUsingLhopitalsRuleWorks) {
 }
 
 TEST(LimitTest, GetTermUsingLhopitalsRuleWorks) {
-    Term oneMinusEToTheX(createExpressionIfPossible({1, "-", getEAsATerm(), "^", "x"}));
-    Term oneOverX(createExpressionIfPossible({1, "/", "x"}));
-    Term termToTest1("x");
-    Term termToTest2(createExpressionIfPossible({"x", "/", oneMinusEToTheX}));
-    Term termToTest3(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
+    Term const oneMinusEToTheX(createExpressionIfPossible({1, "-", getEAsATerm(), "^", "x"}));
+    Term const oneOverX(createExpressionIfPossible({1, "/", "x"}));
+    Term const termToTest1("x");
+    Term const termToTest2(createExpressionIfPossible({"x", "/", oneMinusEToTheX}));
+    Term const termToTest3(createExpressionIfPossible({sin(oneOverX), "/", arctan(oneOverX)}));
 
-    Term termToVerify1(getTermUsingLhopitalsRule(termToTest1, "x", 5));
-    Term termToVerify2(getTermUsingLhopitalsRule(termToTest2, "x", 0));
-    Term termToVerify3(getTermUsingLhopitalsRule(termToTest3, "x", ALBA_NUMBER_POSITIVE_INFINITY));
+    Term const termToVerify1(getTermUsingLhopitalsRule(termToTest1, "x", 5));
+    Term const termToVerify2(getTermUsingLhopitalsRule(termToTest2, "x", 0));
+    Term const termToVerify3(getTermUsingLhopitalsRule(termToTest3, "x", ALBA_NUMBER_POSITIVE_INFINITY));
 
-    string stringToExpect1("x");
-    string stringToExpect2("(-1/((e)^x))");
-    string stringToExpect3("((1[x^2] + 1)*cos((1/x))/1[x^2])");
+    string const stringToExpect1("x");
+    string const stringToExpect2("(-1/((e)^x))");
+    string const stringToExpect3("((1[x^2] + 1)*cos((1/x))/1[x^2])");
     EXPECT_EQ(stringToExpect1, convertToString(termToVerify1));
     EXPECT_EQ(stringToExpect2, convertToString(termToVerify2));
     EXPECT_EQ(stringToExpect3, convertToString(termToVerify3));
 }
 
 TEST(LimitTest, GetLimitAtAValueOrInfinityWorks) {
-    Term termToTest1(Polynomial{Monomial(4, {{"x", 1}}), Monomial(-7, {})});
-    Term termToTest2(createExpressionIfPossible({1, "/", "x"}));
+    Term const termToTest1(Polynomial{Monomial(4, {{"x", 1}}), Monomial(-7, {})});
+    Term const termToTest2(createExpressionIfPossible({1, "/", "x"}));
 
     EXPECT_EQ(Term(5), getLimitAtAValueOrInfinity(termToTest1, "x", 3));
     EXPECT_EQ(Term(0), getLimitAtAValueOrInfinity(termToTest2, "x", ALBA_NUMBER_POSITIVE_INFINITY));
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksWhichDoesNotResultToConstant) {
-    Term polynomialTerm(Polynomial{Monomial(4, {{"x", 1}, {"y", 2}}), Monomial(-7, {})});
+    Term const polynomialTerm(Polynomial{Monomial(4, {{"x", 1}, {"y", 2}}), Monomial(-7, {})});
 
-    Term expectedTermWithY(Polynomial{Monomial(12, {{"y", 2}}), Monomial(-7, {})});
+    Term const expectedTermWithY(Polynomial{Monomial(12, {{"y", 2}}), Monomial(-7, {})});
     EXPECT_EQ(expectedTermWithY, getLimitAtAValue(polynomialTerm, "x", 3, LimitAtAValueApproachType::BothSides));
     EXPECT_EQ(expectedTermWithY, getLimitAtAValue(polynomialTerm, "x", 3, LimitAtAValueApproachType::PositiveSide));
     EXPECT_EQ(expectedTermWithY, getLimitAtAValue(polynomialTerm, "x", 3, LimitAtAValueApproachType::NegativeSide));
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksForPolynomial) {
-    Term polynomialTerm(Polynomial{Monomial(4, {{"x", 1}}), Monomial(-7, {})});
+    Term const polynomialTerm(Polynomial{Monomial(4, {{"x", 1}}), Monomial(-7, {})});
 
     EXPECT_EQ(Term(5), getLimitAtAValue(polynomialTerm, "x", 3, LimitAtAValueApproachType::BothSides));
     EXPECT_EQ(Term(5), getLimitAtAValue(polynomialTerm, "x", 3, LimitAtAValueApproachType::PositiveSide));
@@ -224,9 +224,9 @@ TEST(LimitTest, GetLimitAtAValueWorksForPolynomial) {
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksForConstantOverPolynomial) {
-    Term numerator(3);
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
-    Term constantOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(3);
+    Term const denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
+    Term const constantOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_TRUE(isNan(getLimitAtAValue(constantOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::BothSides)));
     EXPECT_EQ(
@@ -238,10 +238,10 @@ TEST(LimitTest, GetLimitAtAValueWorksForConstantOverPolynomial) {
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksForConstantOverPolynomialSquared) {
-    Term numerator(3);
-    Term polynomialTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
-    Term denominator(createExpressionIfPossible({polynomialTerm, "^", 2}));
-    Term constantOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(3);
+    Term const polynomialTerm(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
+    Term const denominator(createExpressionIfPossible({polynomialTerm, "^", 2}));
+    Term const constantOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_EQ(
         getPositiveInfinityAsATerm(),
@@ -255,9 +255,9 @@ TEST(LimitTest, GetLimitAtAValueWorksForConstantOverPolynomialSquared) {
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomial) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-5, {})});
-    Term polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-25, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-5, {})});
+    Term const polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_EQ(Term(10), getLimitAtAValue(polynomialOverPolynomialTerm, "x", 5, LimitAtAValueApproachType::BothSides));
     EXPECT_EQ(
@@ -267,10 +267,10 @@ TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomial) {
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomialWithDiscontinuityAtOneTwoThree) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-2, {{"x", 2}})});
-    Term denominator(
+    Term const numerator(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-2, {{"x", 2}})});
+    Term const denominator(
         Polynomial{Monomial(1, {{"x", 3}}), Monomial(-6, {{"x", 2}}), Monomial(11, {{"x", 1}}), Monomial(-6, {})});
-    Term polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_TRUE(isNan(getLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::BothSides)));
     EXPECT_EQ(
@@ -281,9 +281,9 @@ TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomialWithDiscontinuit
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomialWithEqualDegreeButNoCommonFactors) {
-    Term numerator(Polynomial{Monomial(2, {{"x", 2}}), Monomial(5, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-3, {{"x", 1}}), Monomial(2, {})});
-    Term polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Polynomial{Monomial(2, {{"x", 2}}), Monomial(5, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-3, {{"x", 1}}), Monomial(2, {})});
+    Term const polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_TRUE(isNan(getLimitAtAValue(polynomialOverPolynomialTerm, "x", 2, LimitAtAValueApproachType::BothSides)));
     EXPECT_EQ(
@@ -295,9 +295,9 @@ TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomialWithEqualDegreeB
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomialWithFractionalValues) {
-    Term numerator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(-2, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-4, {})});
-    Term polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Polynomial{Monomial(1, {{"x", AlbaNumber::createFraction(1, 2)}}), Monomial(-2, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-4, {})});
+    Term const polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_EQ(Term(0.25), getLimitAtAValue(polynomialOverPolynomialTerm, "x", 4, LimitAtAValueApproachType::BothSides));
     EXPECT_EQ(
@@ -307,7 +307,7 @@ TEST(LimitTest, GetLimitAtAValueWorksForPolynomialOverPolynomialWithFractionalVa
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksForSignumFunction) {
-    Term signumFunctionTerm(sgn("x"));
+    Term const signumFunctionTerm(sgn("x"));
 
     EXPECT_TRUE(isNan(getLimitAtAValue(signumFunctionTerm, "x", 0, LimitAtAValueApproachType::BothSides)));
     EXPECT_EQ(Term(1), getLimitAtAValue(signumFunctionTerm, "x", 0, LimitAtAValueApproachType::PositiveSide));
@@ -315,7 +315,7 @@ TEST(LimitTest, GetLimitAtAValueWorksForSignumFunction) {
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksForAbsoluteValueFunction) {
-    Term absoluteValueFunction(Functions::abs("x"));
+    Term const absoluteValueFunction(Functions::abs("x"));
 
     EXPECT_EQ(Term(0), getLimitAtAValue(absoluteValueFunction, "x", 0, LimitAtAValueApproachType::BothSides));
     EXPECT_EQ(Term(0), getLimitAtAValue(absoluteValueFunction, "x", 0, LimitAtAValueApproachType::PositiveSide));
@@ -323,9 +323,9 @@ TEST(LimitTest, GetLimitAtAValueWorksForAbsoluteValueFunction) {
 }
 
 TEST(LimitTest, GetLimitAtAValueWorksForASpecifiedFunction) {
-    Function functionToTest("functionToTest", Term("x"), [](AlbaNumber const& number) {
+    Function const functionToTest("functionToTest", Term("x"), [](AlbaNumber const& number) {
         AlbaNumber result;
-        AlbaNumber numberSquared(number ^ 2);
+        AlbaNumber const numberSquared(number ^ 2);
         if (number > 1) {
             result = numberSquared + 2;
         } else if (number < 1) {
@@ -335,7 +335,7 @@ TEST(LimitTest, GetLimitAtAValueWorksForASpecifiedFunction) {
         }
         return result;
     });
-    Term functionTermToTest(functionToTest);
+    Term const functionTermToTest(functionToTest);
 
     EXPECT_EQ(Term(3), getLimitAtAValue(functionTermToTest, "x", 1, LimitAtAValueApproachType::BothSides));
     EXPECT_EQ(Term(3), getLimitAtAValue(functionTermToTest, "x", 1, LimitAtAValueApproachType::PositiveSide));
@@ -345,10 +345,10 @@ TEST(LimitTest, GetLimitAtAValueWorksForASpecifiedFunction) {
 TEST(
     LimitTest,
     SimplifyAndGetLimitAtAValueWorksForPolynomialOverPolynomialWithDiscontinuityAtOneTwoThreeAndCancelsProblematicFactors) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-2, {{"x", 2}})});
-    Term denominator(
+    Term const numerator(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-2, {{"x", 2}})});
+    Term const denominator(
         Polynomial{Monomial(1, {{"x", 3}}), Monomial(-6, {{"x", 2}}), Monomial(11, {{"x", 1}}), Monomial(-6, {})});
-    Term polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const polynomialOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_EQ(
         Term(-4),
@@ -367,29 +367,29 @@ TEST(LimitTest, GetLimitAtInfinityWorks) {
 }
 
 TEST(LimitTest, GetObliqueAsymptoteWorksAsResultIsEmptyWhenItsALine) {
-    Term termToTest(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
+    Term const termToTest(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})});
 
     EXPECT_EQ(Term(), getObliqueAsymptote(termToTest));
 }
 
 TEST(LimitTest, GetObliqueAsymptoteWorksAsResultIsEmptyWhenDegreeOfDenominatorIsGreater) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(3, {})});
-    Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(3, {})});
+    Term const termToTest(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_EQ(Term(), getObliqueAsymptote(termToTest));
 }
 
 TEST(LimitTest, GetObliqueAsymptoteWorksWhenThereIsAnObliqueAsymptote) {
-    Term numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(3, {})});
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {})});
-    Term termToTest(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(3, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {})});
+    Term const termToTest(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_EQ(Term(Polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {})}), getObliqueAsymptote(termToTest));
 }
 
 TEST(LimitTest, IsAlmostEqualForLimitIterationWorks) {
-    AlbaNumber::ScopeConfigurationObject scopeConfigurationObject;
+    AlbaNumber::ScopeConfigurationObject const scopeConfigurationObject;
     AlbaNumber::ScopeConfigurationObject::setInThisScopeTheTolerancesToZero();
 
     EXPECT_TRUE(isAlmostEqualForLimitIteration(AlbaNumber(0), AlbaNumber(0)));
@@ -406,28 +406,29 @@ TEST(LimitTest, IsAlmostEqualForLimitCheckingWorks) {
 }
 
 TEST(LimitTest, HasVerticalAsymptoteAtValueWorks) {
-    Term numerator(3);
-    Term denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
-    Term constantOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator(3);
+    Term const denominator(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-2, {})});
+    Term const constantOverPolynomialTerm(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_FALSE(hasVerticalAsymptoteAtValue("x", "x", 2));
     EXPECT_TRUE(hasVerticalAsymptoteAtValue(constantOverPolynomialTerm, "x", 2));
 }
 
 TEST(LimitTest, HasHorizontalAsymptoteAtValueWorks) {
-    Term numerator("x");
-    Term denominatorInSquareRoot(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {})});
-    Term denominator(createExpressionIfPossible({denominatorInSquareRoot, "^", AlbaNumber::createFraction(1, 2)}));
-    Term term(createExpressionIfPossible({numerator, "/", denominator}));
+    Term const numerator("x");
+    Term const denominatorInSquareRoot(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {})});
+    Term const denominator(
+        createExpressionIfPossible({denominatorInSquareRoot, "^", AlbaNumber::createFraction(1, 2)}));
+    Term const term(createExpressionIfPossible({numerator, "/", denominator}));
 
     EXPECT_FALSE(hasHorizontalAsymptoteAtValue(term, "x", 3));
     EXPECT_TRUE(hasHorizontalAsymptoteAtValue(term, "x", 1));
 }
 
 TEST(LimitTest, IsSqueezeTheoremSatisfiedWorks) {
-    Term f(buildTermIfPossible("-4*(x-2)^2 + 3"));
-    Term g(buildTermIfPossible("(x-2)*(x^2 - 4*x + 7)/(x-2)"));
-    Term h(buildTermIfPossible("4*(x-2)^2 + 3"));
+    Term const f(buildTermIfPossible("-4*(x-2)^2 + 3"));
+    Term const g(buildTermIfPossible("(x-2)*(x^2 - 4*x + 7)/(x-2)"));
+    Term const h(buildTermIfPossible("4*(x-2)^2 + 3"));
 
     EXPECT_FALSE(isSqueezeTheoremSatisfied(h, g, f, "x", 1));
     EXPECT_TRUE(isSqueezeTheoremSatisfied(h, g, f, "x", 2));
