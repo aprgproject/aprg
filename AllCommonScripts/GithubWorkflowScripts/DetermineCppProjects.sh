@@ -33,12 +33,12 @@ if [[ "$scriptOption" == "checkGit" ]]; then
     detectGitChanges
     cppProjects="$cppProjectsFromGit"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from git changes: [$cppProjects]"
-elif [[ "$scriptOption" == "checkUserInput" ]]; then
+elif [[ "$scriptOption" == "checkUserInputWithSingleOutput" || "$scriptOption" == "checkUserInputWithMultipleOutput" ]]; then
     userInput="$firstArgument"
     scriptPrint "$scriptName" "$LINENO" "Searching C/C++ projects based from user input: [$userInput]..."
     cppProjectsFound=""
     source "$scriptDirectory/FindCppProjectsFromUserInput.sh"
-    findCppProjects "$userInput"
+    findCppProjects "$scriptOption" "$userInput"
     cppProjects="$cppProjectsFound"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from user input: [$cppProjects]"
 elif [[ "$scriptOption" == "checkStaticAnalysisFiles" ]]; then
@@ -52,6 +52,9 @@ elif [[ "$scriptOption" == "checkStaticAnalysisFiles" ]]; then
     findCppProjectsForStaticAnalysis "$staticAnalysisJobIdentifier" "$staticAnalysisFilename"
     cppProjects="$cppProjectsFound"
     scriptPrint "$scriptName" "$LINENO" "The C/C++ projects based from static analysis: [$cppProjects]"
+else
+    scriptPrint "$scriptName" "$LINENO" "The script option [$scriptOption] is not found."
+    exit 1
 fi
 
 # Save environment variables in Github Workflow

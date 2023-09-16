@@ -67,8 +67,8 @@ jobs:
             echo "User input is empty, [checkStaticAnalysisFiles] is set as argument to script."
             "$determineCppProjectsPath" checkStaticAnalysisFiles "$staticAnalysisJobId" "${{ env.staticAnalysisFilename }}"
           else
-            echo "User input is not empty, [checkUserInput] is set as argument to script."
-            "$determineCppProjectsPath" checkUserInput "${{ inputs.cppProjects }}"
+            echo "User input is not empty, [checkUserInputWithSingleOutput] is set as argument to script."
+            "$determineCppProjectsPath" checkUserInputWithSingleOutput "${{ inputs.cppProjects }}"
           fi
           
           
