@@ -32,7 +32,6 @@ AlbaDateTime convertSystemTimeToAlbaDateTime(LibrarySystemTime const& inputTime)
     // int year = static_cast<int>(ymd.year());
     // unsigned month = static_cast<unsigned>(ymd.month());
     // unsigned day = static_cast<unsigned>(ymd.day());
-
     time_t const currentTimeT = system_clock::to_time_t(inputTime);
     tm localTimeValues{};
 #ifdef OS_WINDOWS

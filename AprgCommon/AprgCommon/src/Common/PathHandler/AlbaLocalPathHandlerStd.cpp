@@ -3,15 +3,13 @@
 #include <Common/Debug/AlbaDebug.hpp>
 
 using namespace std;
-using namespace filesystem;
+using namespace std::filesystem;
 
 namespace alba {
 
 AlbaLocalPathHandlerStd::AlbaLocalPathHandlerStd(LocalPath const& path) : m_path(fixPath(path)) {}
 AlbaLocalPathHandlerStd::AlbaLocalPathHandlerStd(LocalPath&& path) : m_path(fixPath(path)) {}
-
 AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getPath() const { return m_path; }
-
 AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getRoot() const { return m_path.root_name(); }
 
 AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getDirectory() const {
@@ -22,7 +20,6 @@ AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getDirectory() const
 }
 
 AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getFile() const { return m_path.filename(); }
-
 AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getFilenameOnly() const { return m_path.stem(); }
 
 AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getExtension() const {
@@ -59,8 +56,30 @@ bool AlbaLocalPathHandlerStd::isNamedSocket() const { return is_socket(m_path); 
 bool AlbaLocalPathHandlerStd::isRelativePath() const { return m_path.is_relative(); }
 bool AlbaLocalPathHandlerStd::isAbsolutePath() const { return m_path.is_absolute(); }
 
-void AlbaLocalPathHandlerStd::input(LocalPath const& path) { m_path = fixPath(path); }
+void AlbaLocalPathHandlerStd::findFilesAndDirectoriesOneDepth(
+    PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
+    // NOLINTNEXTLINE(readability-suspicious-call-argument)
+    findFilesAndDirectories(m_path, 1, directoryFunction, fileFunction);
+}
 
+void AlbaLocalPathHandlerStd::findFilesAndDirectoriesMultipleDepth(
+    int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
+    // NOLINTNEXTLINE(readability-suspicious-call-argument)
+    findFilesAndDirectories(m_path, depth, directoryFunction, fileFunction);
+}
+
+void AlbaLocalPathHandlerStd::findFilesAndDirectoriesUnlimitedDepth(
+    PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
+    for (directory_entry const& directoryEntry : recursive_directory_iterator(m_path)) {
+        if (directoryEntry.is_directory()) {
+            directoryFunction(directoryEntry.path() / "");
+        } else {
+            fileFunction(directoryEntry.path());
+        }
+    }
+}
+
+void AlbaLocalPathHandlerStd::input(LocalPath const& path) { m_path = fixPath(path); }
 void AlbaLocalPathHandlerStd::input(LocalPath&& path) { m_path = fixPath(path); }
 
 bool AlbaLocalPathHandlerStd::createDirectoriesAndIsSuccessful() {
@@ -159,47 +178,8 @@ bool AlbaLocalPathHandlerStd::renameDirectoryAndIsSuccessful(LocalPath const& ne
     return true;
 }
 
-void AlbaLocalPathHandlerStd::findFilesAndDirectoriesOneDepth(
-    PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
-    // NOLINTNEXTLINE(readability-suspicious-call-argument)
-    findFilesAndDirectories(m_path, 1, directoryFunction, fileFunction);
-}
-
-void AlbaLocalPathHandlerStd::findFilesAndDirectoriesMultipleDepth(
-    int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
-    // NOLINTNEXTLINE(readability-suspicious-call-argument)
-    findFilesAndDirectories(m_path, depth, directoryFunction, fileFunction);
-}
-
-void AlbaLocalPathHandlerStd::findFilesAndDirectoriesUnlimitedDepth(
-    PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
-    for (directory_entry const& directoryEntry : recursive_directory_iterator(m_path)) {
-        if (directoryEntry.is_directory()) {
-            directoryFunction(directoryEntry.path() / "");
-        } else {
-            fileFunction(directoryEntry.path());
-        }
-    }
-}
-
 AlbaLocalPathHandlerStd AlbaLocalPathHandlerStd::createPathHandlerForDetectedPath() {
     return AlbaLocalPathHandlerStd{current_path()};
-}
-
-void AlbaLocalPathHandlerStd::findFilesAndDirectories(
-    LocalPath const& currentDirectory, int const depth, PathFunction const& directoryFunction,
-    PathFunction const& fileFunction) {
-    if (depth == 0) {
-        return;
-    }
-    for (directory_entry const& directoryEntry : directory_iterator(currentDirectory)) {
-        if (directoryEntry.is_directory()) {
-            directoryFunction(directoryEntry.path() / "");
-            findFilesAndDirectories(directoryEntry.path(), depth - 1, directoryFunction, fileFunction);
-        } else {
-            fileFunction(directoryEntry.path());
-        }
-    }
 }
 
 AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::fixPath(LocalPath const& path) {
@@ -219,6 +199,22 @@ AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::fixPath(LocalPath co
         fixedPath /= "";
     }
     return fixedPath;
+}
+
+void AlbaLocalPathHandlerStd::findFilesAndDirectories(
+    LocalPath const& currentDirectory, int const depth, PathFunction const& directoryFunction,
+    PathFunction const& fileFunction) {
+    if (depth == 0) {
+        return;
+    }
+    for (directory_entry const& directoryEntry : directory_iterator(currentDirectory)) {
+        if (directoryEntry.is_directory()) {
+            directoryFunction(directoryEntry.path() / "");
+            findFilesAndDirectories(directoryEntry.path(), depth - 1, directoryFunction, fileFunction);
+        } else {
+            fileFunction(directoryEntry.path());
+        }
+    }
 }
 
 }  // namespace alba

@@ -16,6 +16,7 @@ using namespace std::filesystem;
 namespace alba {
 
 namespace {
+
 using LocalPath = AlbaLocalPathHandlerStd::LocalPath;
 using SetOfLocalPaths = std::set<LocalPath>;
 constexpr char SLASH_CHARACTER = static_cast<char>(path::preferred_separator);
@@ -26,6 +27,7 @@ LocalPath convertToPath(LocalPath const path) {
     return getCorrectPathWithoutDoublePeriod<SLASH_CHARACTER>(
         getCorrectPathWithReplacedSlashCharacters<SLASH_CHARACTER>(path.string()));
 }
+
 }  // namespace
 
 TEST(AlbaLocalPathHandlerStdTest, EmptyPathWorks) {
@@ -111,52 +113,6 @@ TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryAndFileExtensionOnlyGiven
     EXPECT_EQ(".zxcvbnm12345", pathHandler.getFile());
     EXPECT_EQ(".zxcvbnm12345", pathHandler.getFilenameOnly());
     EXPECT_TRUE(pathHandler.getExtension().empty());
-}
-
-TEST(
-    AlbaLocalPathHandlerStdTest,
-    FullPathWithDirectoryAndFileNoFileExtensionGivenWithNumbersAndSpecialCharactersTwoTimes) {
-    AlbaLocalPathHandlerStd pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)");
-    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)", pathHandler.getPath());
-    EXPECT_TRUE(pathHandler.getRoot().empty());
-    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\)", pathHandler.getDirectory());
-    EXPECT_EQ("76543.txt", pathHandler.getFile());
-    EXPECT_EQ("76543", pathHandler.getFilenameOnly());
-    EXPECT_EQ("txt", pathHandler.getExtension());
-
-    pathHandler.input(R"(e:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\.zxcvbnm12345)");
-    EXPECT_EQ(R"(e:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\.zxcvbnm12345)", pathHandler.getPath());
-    EXPECT_EQ("e:", pathHandler.getRoot());
-    EXPECT_EQ(R"(e:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\)", pathHandler.getDirectory());
-    EXPECT_EQ(".zxcvbnm12345", pathHandler.getFile());
-    EXPECT_EQ(".zxcvbnm12345", pathHandler.getFilenameOnly());
-    EXPECT_EQ("", pathHandler.getExtension());
-}
-
-TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryAndFileDoublePeriodInPath) {
-    AlbaLocalPathHandlerStd pathHandler(getAprgDirectory() + R"(..\dir\file.txt)");
-    EXPECT_EQ(convertToPath(getAprgDirectory() + R"(..\dir\file.txt)"), pathHandler.getPath());
-    EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
-    EXPECT_EQ(convertToPath(getAprgDirectory() + R"(..\dir\)"), pathHandler.getDirectory());
-    EXPECT_EQ("file.txt", pathHandler.getFile());
-    EXPECT_EQ("file", pathHandler.getFilenameOnly());
-    EXPECT_EQ("txt", pathHandler.getExtension());
-
-    pathHandler.input(getAprgDirectory() + R"(dir\..\..\file.txt)");
-    EXPECT_EQ(convertToPath(getAprgDirectory() + R"(..\file.txt)"), pathHandler.getPath());
-    EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
-    EXPECT_EQ(convertToPath(getAprgDirectory() + R"(dir\..\..\)"), pathHandler.getDirectory());
-    EXPECT_EQ("file.txt", pathHandler.getFile());
-    EXPECT_EQ("file", pathHandler.getFilenameOnly());
-    EXPECT_EQ("txt", pathHandler.getExtension());
-
-    pathHandler.input(getAprgDirectory() + R"(dir\..\dir2\dir3\..\file.txt)");
-    EXPECT_EQ(convertToPath(getAprgDirectory() + R"(dir2\file.txt)"), pathHandler.getPath());
-    EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
-    EXPECT_EQ(convertToPath(getAprgDirectory() + R"(dir2\)"), pathHandler.getDirectory());
-    EXPECT_EQ("file.txt", pathHandler.getFile());
-    EXPECT_EQ("file", pathHandler.getFilenameOnly());
-    EXPECT_EQ("txt", pathHandler.getExtension());
 }
 
 TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryAndFileActualLocalDirectory) {
@@ -349,6 +305,68 @@ TEST(AlbaLocalPathHandlerStdTest, ReInputDirectoryThatIsToBeRenamedActualLocalDi
     EXPECT_TRUE(pathHandler.doesExist());
 }
 
+TEST(
+    AlbaLocalPathHandlerStdTest,
+    FullPathWithDirectoryAndFileNoFileExtensionGivenWithNumbersAndSpecialCharactersTwoTimes) {
+    AlbaLocalPathHandlerStd pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)");
+    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)", pathHandler.getPath());
+    EXPECT_TRUE(pathHandler.getRoot().empty());
+    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\)", pathHandler.getDirectory());
+    EXPECT_EQ("76543.txt", pathHandler.getFile());
+    EXPECT_EQ("76543", pathHandler.getFilenameOnly());
+    EXPECT_EQ("txt", pathHandler.getExtension());
+
+    pathHandler.input(R"(e:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\.zxcvbnm12345)");
+    EXPECT_EQ(R"(e:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\.zxcvbnm12345)", pathHandler.getPath());
+    EXPECT_EQ("e:", pathHandler.getRoot());
+    EXPECT_EQ(R"(e:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\)", pathHandler.getDirectory());
+    EXPECT_EQ(".zxcvbnm12345", pathHandler.getFile());
+    EXPECT_EQ(".zxcvbnm12345", pathHandler.getFilenameOnly());
+    EXPECT_EQ("", pathHandler.getExtension());
+}
+
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryAndFileDoublePeriodInPath) {
+    AlbaLocalPathHandlerStd pathHandler(getAprgDirectory() + R"(..\dir\file.txt)");
+    EXPECT_EQ(convertToPath(getAprgDirectory() + R"(..\dir\file.txt)"), pathHandler.getPath());
+    EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
+    EXPECT_EQ(convertToPath(getAprgDirectory() + R"(..\dir\)"), pathHandler.getDirectory());
+    EXPECT_EQ("file.txt", pathHandler.getFile());
+    EXPECT_EQ("file", pathHandler.getFilenameOnly());
+    EXPECT_EQ("txt", pathHandler.getExtension());
+
+    pathHandler.input(getAprgDirectory() + R"(dir\..\..\file.txt)");
+    EXPECT_EQ(convertToPath(getAprgDirectory() + R"(..\file.txt)"), pathHandler.getPath());
+    EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
+    EXPECT_EQ(convertToPath(getAprgDirectory() + R"(dir\..\..\)"), pathHandler.getDirectory());
+    EXPECT_EQ("file.txt", pathHandler.getFile());
+    EXPECT_EQ("file", pathHandler.getFilenameOnly());
+    EXPECT_EQ("txt", pathHandler.getExtension());
+
+    pathHandler.input(getAprgDirectory() + R"(dir\..\dir2\dir3\..\file.txt)");
+    EXPECT_EQ(convertToPath(getAprgDirectory() + R"(dir2\file.txt)"), pathHandler.getPath());
+    EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
+    EXPECT_EQ(convertToPath(getAprgDirectory() + R"(dir2\)"), pathHandler.getDirectory());
+    EXPECT_EQ("file.txt", pathHandler.getFile());
+    EXPECT_EQ("file", pathHandler.getFilenameOnly());
+    EXPECT_EQ("txt", pathHandler.getExtension());
+}
+
+TEST(AlbaLocalPathHandlerStdTest, FileSizeTestFileIsNotExisting) {
+    AlbaLocalPathHandlerStd pathHandler("This path does not exist");
+
+    EXPECT_EQ("This path does not exist", pathHandler.getPath());
+    ASSERT_FALSE(pathHandler.doesExist());
+    EXPECT_EQ(0U, pathHandler.getFileSize());
+}
+
+TEST(AlbaLocalPathHandlerStdTest, FileSizeTestFileIsExisting) {
+    AlbaLocalPathHandlerStd pathHandler(ALBA_COMMON_SIZE_TEST_FILE);
+
+    EXPECT_EQ(ALBA_COMMON_SIZE_TEST_FILE, pathHandler.getPath());
+    ASSERT_TRUE(pathHandler.doesExist());
+    EXPECT_EQ(5000U, pathHandler.getFileSize());
+}
+
 TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryFindFileAndDirectoryOneDepth) {
     AlbaLocalPathHandlerStd const pathHandler(getAprgDirectory() + R"(AprgCommon\FilesForTests\DirectoryTest\)");
     EXPECT_EQ(convertToPath(getAprgDirectory() + R"(AprgCommon\FilesForTests\DirectoryTest\)"), pathHandler.getPath());
@@ -473,22 +491,6 @@ TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryFindFileAndDirectoryUnlim
     EXPECT_EQ(
         convertToPath(getAprgDirectory() + R"(AprgCommon\FilesForTests\DirectoryTest\DIR6\SUBDIR1\)"),
         *(itDirectories++));
-}
-
-TEST(AlbaLocalPathHandlerStdTest, FileSizeTestFileIsNotExisting) {
-    AlbaLocalPathHandlerStd pathHandler("This path does not exist");
-
-    EXPECT_EQ("This path does not exist", pathHandler.getPath());
-    ASSERT_FALSE(pathHandler.doesExist());
-    EXPECT_EQ(0U, pathHandler.getFileSize());
-}
-
-TEST(AlbaLocalPathHandlerStdTest, FileSizeTestFileIsExisting) {
-    AlbaLocalPathHandlerStd pathHandler(ALBA_COMMON_SIZE_TEST_FILE);
-
-    EXPECT_EQ(ALBA_COMMON_SIZE_TEST_FILE, pathHandler.getPath());
-    ASSERT_TRUE(pathHandler.doesExist());
-    EXPECT_EQ(5000U, pathHandler.getFileSize());
 }
 
 TEST(AlbaLocalPathHandlerStdTest, SetCurrentDirectoryFromDetectedLocalPath) {
