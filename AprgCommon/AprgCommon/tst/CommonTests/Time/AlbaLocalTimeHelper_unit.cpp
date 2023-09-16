@@ -72,7 +72,8 @@ TEST(AlbaLocalTimerHelperTest, ConvertTimeInformationToSystemTimeWorks) {
 
     LibrarySystemTime systemTime(convertTimeInformationToSystemTime(timeInformation, chrono::nanoseconds(777'777'777)));
 
-    EXPECT_EQ(833829731777777777, systemTime.time_since_epoch().count());
+    auto expectedDuration = duration_cast<chrono::system_clock::duration>(chrono::nanoseconds(833829731777777777));
+    EXPECT_EQ(expectedDuration, systemTime.time_since_epoch());
 }
 
 TEST(AlbaLocalTimerHelperTest, ConvertAlbaDateTimeToSystemTimeWorks) {
@@ -80,7 +81,8 @@ TEST(AlbaLocalTimerHelperTest, ConvertAlbaDateTimeToSystemTimeWorks) {
 
     LibrarySystemTime const systemTime(convertAlbaDateTimeToSystemTime(inputTime));
 
-    EXPECT_EQ(632951095666666000, systemTime.time_since_epoch().count());
+    auto expectedDuration = duration_cast<chrono::system_clock::duration>(chrono::nanoseconds(632951095666666000));
+    EXPECT_EQ(expectedDuration, systemTime.time_since_epoch());
 }
 
 TEST(AlbaLocalTimerHelperTest, GetCurrentDateTimeWorks) {
