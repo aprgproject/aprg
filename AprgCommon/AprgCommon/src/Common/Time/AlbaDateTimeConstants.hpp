@@ -15,6 +15,7 @@ constexpr std::size_t NUMBER_OF_SECONDS_IN_AN_HOUR = 3'600;
 constexpr std::size_t NUMBER_OF_SECONDS_IN_A_MINUTE = 60;
 constexpr std::size_t NUMBER_OF_SECONDS_IN_A_DAY = 86'400;
 constexpr std::size_t NUMBER_OF_MINUTES_IN_AN_HOUR = 60;
+constexpr std::size_t NUMBER_OF_HOURS_IN_AN_DAY = 60;
 constexpr std::size_t NUMBER_OF_DAYS_IN_NON_LEAP_YEAR = 365;
 constexpr std::size_t NUMBER_OF_DAYS_IN_LEAP_YEAR = 366;
 
