@@ -5,5 +5,5 @@
 #include <ctime>
 
 namespace alba {
-AlbaDateTime convertSystemTimeToAlbaDateTime(struct timespec const& timeSpec);
+AlbaDateTime convertSystemTimeToAlbaDateTime(timespec const& timeSpec);
 }  // namespace alba

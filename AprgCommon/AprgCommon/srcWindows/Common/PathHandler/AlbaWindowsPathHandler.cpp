@@ -38,9 +38,9 @@ void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const
                     convertToAnotherBasicStringVariant<string, wstring>(partialDirectoryPathHandler.getFullPath())
                         .c_str(),
                     nullptr) == 0) {
-                cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-                cout << "Path: [" << partialDirectoryPathHandler.getFullPath() << "]\n";
-                cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+                cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+                cerr << "Path: [" << partialDirectoryPathHandler.getFullPath() << "]\n";
+                cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
             }
         }
         index = indexWithSlashCharacter + 1;
@@ -87,9 +87,9 @@ AlbaDateTime AlbaWindowsPathHandler::getFileCreationTime() {
         FileTimeToSystemTime(&(attributeData.ftCreationTime), &fileCreationTimeInSystemTime);
         fileCreationTime = convertSystemTimeToAlbaDateTime(fileCreationTimeInSystemTime);
     } else {
-        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-        cout << "Path:" << getFullPath() << "\n";
-        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+        cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+        cerr << "Path:" << getFullPath() << "\n";
+        cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
     }
     return fileCreationTime;
 }
@@ -103,9 +103,9 @@ double AlbaWindowsPathHandler::getFileSizeEstimate() {
         fileSizeEstimate =
             static_cast<double>(attributeData.nFileSizeHigh) * 0x100'000'000 + attributeData.nFileSizeLow;
     } else {
-        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-        cout << "Path:" << getFullPath() << "\n";
-        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+        cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+        cerr << "Path:" << getFullPath() << "\n";
+        cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
     }
     return fileSizeEstimate;
 }
@@ -116,9 +116,9 @@ bool AlbaWindowsPathHandler::deleteFile() {
         isSuccessful =
             static_cast<bool>(DeleteFileW(convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str()));
         if (!isSuccessful) {
-            cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-            cout << "Path: [" << getFullPath() << "]\n";
-            cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+            cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+            cerr << "Path: [" << getFullPath() << "]\n";
+            cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
         } else {
             reInput();
         }
@@ -132,9 +132,9 @@ bool AlbaWindowsPathHandler::deleteDirectoryWithoutFilesAndDirectories() {
         isSuccessful = static_cast<bool>(
             RemoveDirectoryW(convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str()));
         if (!isSuccessful) {
-            cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-            cout << "Path: [" << getFullPath() << "]\n";
-            cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+            cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+            cerr << "Path: [" << getFullPath() << "]\n";
+            cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
         } else {
             reInput();
         }
@@ -149,10 +149,10 @@ bool AlbaWindowsPathHandler::copyToNewFile(string_view const newFilePath) {
             convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(),
             convertToAnotherBasicStringVariant<string_view, wstring>(newFilePath).c_str(), 0));
         if (!isSuccessful) {
-            cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-            cout << "Path: [" << getFullPath() << "]\n";
-            cout << "newFilePath: [" << newFilePath << "]\n";
-            cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+            cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+            cerr << "Path: [" << getFullPath() << "]\n";
+            cerr << "newFilePath: [" << newFilePath << "]\n";
+            cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
         } else {
             reInput();
         }
@@ -168,10 +168,10 @@ bool AlbaWindowsPathHandler::renameFile(string_view const newFileName) {
             convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(),
             convertToAnotherBasicStringVariant<string, wstring>(newPath).c_str()));
         if (!isSuccessful) {
-            cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-            cout << "Path: [" << getFullPath() << "]\n";
-            cout << "newFileName: [" << newFileName << "]\n";
-            cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+            cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+            cerr << "Path: [" << getFullPath() << "]\n";
+            cerr << "newFileName: [" << newFileName << "]\n";
+            cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
         } else {
             input(newPath);
         }
@@ -189,10 +189,10 @@ bool AlbaWindowsPathHandler::renameImmediateDirectory(string_view const newDirec
             convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(),
             convertToAnotherBasicStringVariant<string, wstring>(newPathHandler.getFullPath()).c_str()));
         if (!isSuccessful) {
-            cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-            cout << "Path: [" << getFullPath() << "]\n";
-            cout << "newDirectoryName: [" << newDirectoryName << "]\n";
-            cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+            cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+            cerr << "Path: [" << getFullPath() << "]\n";
+            cerr << "newDirectoryName: [" << newDirectoryName << "]\n";
+            cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
         } else {
             input(newPathHandler.getFullPath());
         }
@@ -268,8 +268,8 @@ string AlbaWindowsPathHandler::getCurrentDetectedPath() {
     if (GetModuleFileNameW(nullptr, currentPathFromWindowsWideCharArray, MAX_PATH) != 0U) {
         result = convertToAnotherBasicStringVariant<wstring, string>(wstring(currentPathFromWindowsWideCharArray));
     } else {
-        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+        cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+        cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
     }
     return result;
 }

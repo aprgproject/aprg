@@ -1,10 +1,10 @@
 #pragma once
 
+#include <Common/PathHandler/PathType.hpp>
+
 #include <string>
 
 namespace alba {
-
-enum class PathType { Empty, Directory, File };
 
 class AlbaPathHandler {
 public:
