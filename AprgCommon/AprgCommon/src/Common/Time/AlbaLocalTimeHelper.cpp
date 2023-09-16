@@ -41,7 +41,7 @@ AlbaDateTime convertSystemTimeToAlbaDateTime(LibrarySystemTime const& inputTime)
         localTimeValues = {};
     }
 #else
-    localtime_r(&currentTimeT, &localTime);  // POSIX version
+    localtime_r(&currentTimeT, &localTimeValues);  // POSIX version
 #endif
     auto microseconds = time_point_cast<chrono::microseconds>(inputTime).time_since_epoch().count() %
                         NUMBER_OF_MICROSECONDS_IN_A_SECOND;
