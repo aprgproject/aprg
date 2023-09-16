@@ -11,4 +11,9 @@ void clearContentsOfFile(string_view const path) {
     fileStream.close();
 }
 
+void createEmptyFile(string_view const path) {
+    ofstream fileStream(path.data());
+    fileStream.close();
+}
+
 }  // namespace alba

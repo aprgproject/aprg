@@ -12,6 +12,7 @@ using LibrarySteadyTime = std::chrono::time_point<std::chrono::steady_clock>;
 void sleepFor(size_t const milliSeconds);
 void sleepUntil(AlbaDateTime const& awakeTime);
 AlbaDateTime convertSystemTimeToAlbaDateTime(LibrarySystemTime const& inputTime);
+AlbaDateTime convertFileTimeToAlbaDateTime(LibraryFileTime const& inputTime);
 AlbaDateTime getCurrentDateTime();
 LibrarySteadyTime getSteadyTimeNow();
 LibrarySystemTime getSystemTimeNow();

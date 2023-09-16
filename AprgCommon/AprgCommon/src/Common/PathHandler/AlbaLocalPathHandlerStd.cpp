@@ -1,6 +1,8 @@
 #include "AlbaLocalPathHandlerStd.hpp"
 
-#include <Common/Debug/AlbaDebug.hpp>
+#include <Common/Time/AlbaLocalTimeHelper.hpp>
+
+#include <iostream>
 
 using namespace std;
 using namespace std::filesystem;
@@ -9,6 +11,18 @@ namespace alba {
 
 AlbaLocalPathHandlerStd::AlbaLocalPathHandlerStd(LocalPath const& path) : m_path(fixPath(path)) {}
 AlbaLocalPathHandlerStd::AlbaLocalPathHandlerStd(LocalPath&& path) : m_path(fixPath(path)) {}
+AlbaDateTime AlbaLocalPathHandlerStd::getLastModifiedDateTime() const {
+    try {
+        if (doesExist()) {
+            file_time_type fileTime = last_write_time(m_path);
+            return convertFileTimeToAlbaDateTime(fileTime);
+        }
+        cerr << "Path does not exist while getting modified date time: [" << m_path << "]\n";
+    } catch (exception const& capturedException) {
+        cerr << "Error getting file size: [" << capturedException.what() << "]\n";
+    }
+    return {};
+}
 AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getPath() const { return m_path; }
 AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getRoot() const { return m_path.root_name(); }
 
@@ -79,10 +93,11 @@ void AlbaLocalPathHandlerStd::findFilesAndDirectoriesUnlimitedDepth(
     }
 }
 
+void AlbaLocalPathHandlerStd::clear() { m_path.clear(); }
 void AlbaLocalPathHandlerStd::input(LocalPath const& path) { m_path = fixPath(path); }
 void AlbaLocalPathHandlerStd::input(LocalPath&& path) { m_path = fixPath(path); }
 
-bool AlbaLocalPathHandlerStd::createDirectoriesAndIsSuccessful() {
+bool AlbaLocalPathHandlerStd::createDirectoriesAndIsSuccessful() const {
     try {
         create_directories(m_path);
     } catch (exception const& capturedException) {
@@ -92,7 +107,7 @@ bool AlbaLocalPathHandlerStd::createDirectoriesAndIsSuccessful() {
     return true;
 }
 
-bool AlbaLocalPathHandlerStd::deleteDirectoryAndIsSuccessful() {
+bool AlbaLocalPathHandlerStd::deleteDirectoryAndIsSuccessful() const {
     try {
         remove_all(m_path.parent_path());
     } catch (exception const& capturedException) {
@@ -102,7 +117,7 @@ bool AlbaLocalPathHandlerStd::deleteDirectoryAndIsSuccessful() {
     return true;
 }
 
-bool AlbaLocalPathHandlerStd::deleteAllDirectoryContentsAndIsSuccessful() {
+bool AlbaLocalPathHandlerStd::deleteAllDirectoryContentsAndIsSuccessful() const {
     try {
         for (directory_entry const& directoryEntry : directory_iterator(m_path.parent_path())) {
             if (directoryEntry.is_directory()) {

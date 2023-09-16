@@ -13,7 +13,7 @@ public:
     using PathFunction = std::function<void(LocalPath const&)>;
     explicit AlbaLocalPathHandlerStd(LocalPath const& path);
     explicit AlbaLocalPathHandlerStd(LocalPath&& path);
-    [[nodiscard]] AlbaDateTime getFileCreationTime() const;
+    [[nodiscard]] AlbaDateTime getLastModifiedDateTime() const;
     [[nodiscard]] LocalPath getPath() const;
     [[nodiscard]] LocalPath getRoot() const;
     [[nodiscard]] LocalPath getDirectory() const;
@@ -36,11 +36,12 @@ public:
         int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
     void findFilesAndDirectoriesUnlimitedDepth(
         PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
+    void clear();
     void input(LocalPath const& path);
     void input(LocalPath&& path);
-    bool createDirectoriesAndIsSuccessful();           // do tests
-    bool deleteDirectoryAndIsSuccessful();             // do tests
-    bool deleteAllDirectoryContentsAndIsSuccessful();  // do tests
+    bool createDirectoriesAndIsSuccessful() const;
+    bool deleteDirectoryAndIsSuccessful() const;
+    bool deleteAllDirectoryContentsAndIsSuccessful() const;
     bool deleteFileAndIsSuccessful();
     bool copyFileToAndIsSuccessful(LocalPath const& destination);
     bool renameFileAndIsSuccessful(LocalPath const& newFileName);

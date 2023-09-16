@@ -15,4 +15,10 @@ using LibrarySteadyTime = std::chrono::time_point<std::chrono::steady_clock>;
 // The time points of this clock cannot decrease as physical time moves forward and the time between ticks of this clock
 // is constant. This clock is not related to wall clock time (for example, it can be time since last reboot), and is
 // most suitable for measuring intervals.
+using LibraryFileTime = std::chrono::time_point<std::chrono::file_clock>;
+// From [https://en.cppreference.com/w/cpp/chrono/file_clock]:
+// Class std::chrono::file_clock represents a file clock.
+// std::chrono::file_clock is an alias for the clock used for std::filesystem::file_time_type.
+// Its epoch is unspecified.
+// file_clock meets the TrivialClock requirements.
 }  // namespace alba

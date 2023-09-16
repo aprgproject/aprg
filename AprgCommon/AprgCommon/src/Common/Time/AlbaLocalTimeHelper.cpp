@@ -51,6 +51,10 @@ AlbaDateTime convertSystemTimeToAlbaDateTime(LibrarySystemTime const& inputTime)
     return result;
 }
 
+AlbaDateTime convertFileTimeToAlbaDateTime(LibraryFileTime const& inputTime) {
+    return convertSystemTimeToAlbaDateTime(file_clock::to_sys(inputTime));
+}
+
 AlbaDateTime getCurrentDateTime() { return convertSystemTimeToAlbaDateTime(getSystemTimeNow()); }
 LibrarySteadyTime getSteadyTimeNow() { return steady_clock::now(); }
 LibrarySystemTime getSystemTimeNow() { return system_clock::now(); }
