@@ -14,7 +14,7 @@ AlbaLocalPathHandlerStd::AlbaLocalPathHandlerStd(LocalPath&& path) : m_path(fixP
 AlbaDateTime AlbaLocalPathHandlerStd::getLastModifiedDateTime() const {
     try {
         if (doesExist()) {
-            file_time_type fileTime = last_write_time(m_path);
+            file_time_type const fileTime = last_write_time(m_path);
             return convertFileTimeToAlbaDateTime(fileTime);
         }
         cerr << "Path does not exist while getting modified date time: [" << m_path << "]\n";
@@ -167,7 +167,7 @@ bool AlbaLocalPathHandlerStd::renameFileAndIsSuccessful(LocalPath const& newFile
             cerr << "File does not exist during rename: [" << m_path << "]\n";
             return false;
         }
-        LocalPath newPath(m_path.parent_path() / newFileName);
+        LocalPath const newPath(m_path.parent_path() / newFileName);
         rename(m_path, newPath);
         input(newPath);
     } catch (exception const& capturedException) {
@@ -183,7 +183,7 @@ bool AlbaLocalPathHandlerStd::renameDirectoryAndIsSuccessful(LocalPath const& ne
             cerr << "Directory does not exist during rename: [" << m_path << "]\n";
             return false;
         }
-        LocalPath newPath(m_path.parent_path().parent_path() / newDirectoryName);
+        LocalPath const newPath(m_path.parent_path().parent_path() / newDirectoryName);
         rename(m_path, newPath);
         input(newPath);
     } catch (exception const& capturedException) {

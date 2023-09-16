@@ -54,9 +54,7 @@ TEST(AlbaLinuxPathHandlerTest, FullPathWithOnlyDirectoryGivenJumbledSlashes) {
 
 TEST(AlbaLinuxPathHandlerTest, FullPathWithOnlyDirectoryGivenJumbledSlashesWithDirectoryDoesNotExists) {
     PathHandler pathHandler(APRG_DIR R"(\////AprgCommon\\\\/AprgCommon/tst\DirectoryDoesNotExists\)");
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon\AprgCommon\tst\DirectoryDoesNotExists\)"),
-        pathHandler.getDirectory());
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon\AprgCommon\tst\DirectoryDoesNotExists\)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
     EXPECT_TRUE(pathHandler.getExtension().empty());
@@ -99,8 +97,7 @@ TEST(AlbaLinuxPathHandlerTest, FullPathWithDirectoryAndFileExtensionOnlyGivenWit
     EXPECT_EQ(PathType::File, pathHandler.getPathType());
 }
 
-TEST(
-    PathHandlerTest, FullPathWithDirectoryAndFileNoFileExtensionGivenWithNumbersAndSpecialCharactersTwoTimes) {
+TEST(PathHandlerTest, FullPathWithDirectoryAndFileNoFileExtensionGivenWithNumbersAndSpecialCharactersTwoTimes) {
     PathHandler pathHandler(R"(/APRG12345/Aprg!@#$%Common/Aprg1111Common/tst/76543.txt)");
     EXPECT_EQ(R"(/APRG12345/Aprg!@#$%Common/Aprg1111Common/tst/)", pathHandler.getDirectory());
     EXPECT_EQ("76543.txt", pathHandler.getFile());
@@ -157,8 +154,7 @@ TEST(AlbaLinuxPathHandlerTest, FileSizeTestFileIsExisting) {
 
 TEST(AlbaLinuxPathHandlerTest, FullPathWithDirectoryAndFileActualLocalDirectory) {
     PathHandler pathHandler(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/File1.log)");
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
     EXPECT_EQ("File1.log", pathHandler.getFile());
     EXPECT_EQ("File1", pathHandler.getFilenameOnly());
     EXPECT_EQ("log", pathHandler.getExtension());
@@ -225,15 +221,11 @@ TEST(AlbaLinuxPathHandlerTest, FullPathWithDirectoryFindFileAndDirectoryMultiple
     pathHandler.findFilesAndDirectoriesMultipleDepth("*.*", listOfFiles, listOfDirectory, 2);
     ASSERT_EQ(10U, listOfFiles.size());
     auto itFiles = begin(listOfFiles);
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR1/File1.log)"), *(itFiles++));
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR2/File2.txt)"), *(itFiles++));
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR1/File1.log)"), *(itFiles++));
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR2/File2.txt)"), *(itFiles++));
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR3/File3)"), *(itFiles++));
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR4/File4.mp3)"), *(itFiles++));
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR5/File5.avi)"), *(itFiles++));
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR4/File4.mp3)"), *(itFiles++));
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR5/File5.avi)"), *(itFiles++));
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/File1.log)"), *(itFiles++));
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/File2.txt)"), *(itFiles++));
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/File3)"), *(itFiles++));
@@ -247,8 +239,7 @@ TEST(AlbaLinuxPathHandlerTest, FullPathWithDirectoryFindFileAndDirectoryMultiple
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR4/)"), *(itDirectories++));
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR5/)"), *(itDirectories++));
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR6/)"), *(itDirectories++));
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR6/SUBDIR1/)"), *(itDirectories++));
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR6/SUBDIR1/)"), *(itDirectories++));
 }
 
 TEST(AlbaLinuxPathHandlerTest, FullPathWithDirectoryFindFileAndDirectoryUnlimitedDepth) {
@@ -261,18 +252,12 @@ TEST(AlbaLinuxPathHandlerTest, FullPathWithDirectoryFindFileAndDirectoryUnlimite
     pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectory);
     ASSERT_EQ(11U, listOfFiles.size());
     auto itFiles = begin(listOfFiles);
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR1/File1.log)"), *(itFiles++));
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR2/File2.txt)"), *(itFiles++));
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR1/File1.log)"), *(itFiles++));
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR2/File2.txt)"), *(itFiles++));
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR3/File3)"), *(itFiles++));
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR4/File4.mp3)"), *(itFiles++));
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR5/File5.avi)"), *(itFiles++));
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR6/SUBDIR1/File6.jpg)"),
-        *(itFiles++));
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR4/File4.mp3)"), *(itFiles++));
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR5/File5.avi)"), *(itFiles++));
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR6/SUBDIR1/File6.jpg)"), *(itFiles++));
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/File1.log)"), *(itFiles++));
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/File2.txt)"), *(itFiles++));
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/File3)"), *(itFiles++));
@@ -286,8 +271,7 @@ TEST(AlbaLinuxPathHandlerTest, FullPathWithDirectoryFindFileAndDirectoryUnlimite
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR4/)"), *(itDirectories++));
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR5/)"), *(itDirectories++));
     EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR6/)"), *(itDirectories++));
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR6/SUBDIR1/)"), *(itDirectories++));
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR6/SUBDIR1/)"), *(itDirectories++));
 }
 
 TEST(AlbaLinuxPathHandlerTest, FullPathWithDirectoryFindFileAndDirectoryUnlimitedDepthWithWildCard) {
@@ -309,8 +293,7 @@ TEST(AlbaLinuxPathHandlerTest, ReInputFileThatIsToBeDeletedActualLocalDirectory)
     ofstream fileToBeDeleted(pathHandler.getFullPath());
     fileToBeDeleted.close();
     pathHandler.reInput();
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
     EXPECT_EQ("FileToBeDeleted.log", pathHandler.getFile());
     EXPECT_EQ("FileToBeDeleted", pathHandler.getFilenameOnly());
     EXPECT_EQ("log", pathHandler.getExtension());
@@ -319,8 +302,7 @@ TEST(AlbaLinuxPathHandlerTest, ReInputFileThatIsToBeDeletedActualLocalDirectory)
 
     EXPECT_TRUE(pathHandler.deleteFile());
 
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
     EXPECT_EQ("FileToBeDeleted.log", pathHandler.getFile());
     EXPECT_EQ("FileToBeDeleted", pathHandler.getFilenameOnly());
     EXPECT_EQ("log", pathHandler.getExtension());
@@ -334,8 +316,7 @@ TEST(AlbaLinuxPathHandlerTest, FileIsCopiedToNewFileActualLocalDirectory) {
     ofstream fileToBeDeleted(pathHandler.getFullPath());
     fileToBeDeleted.close();
     pathHandler.reInput();
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
     EXPECT_EQ("FileToBeCopied.log", pathHandler.getFile());
     EXPECT_EQ("FileToBeCopied", pathHandler.getFilenameOnly());
     EXPECT_EQ("log", pathHandler.getExtension());
@@ -345,9 +326,7 @@ TEST(AlbaLinuxPathHandlerTest, FileIsCopiedToNewFileActualLocalDirectory) {
     EXPECT_TRUE(pathHandler.copyToNewFile(pathHandler.getDirectory() + pathOfCopiedFile));
 
     PathHandler pathHandlerOfCopiedFile(pathHandler.getDirectory() + pathOfCopiedFile);
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"),
-        pathHandlerOfCopiedFile.getDirectory());
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandlerOfCopiedFile.getDirectory());
     EXPECT_EQ("CopiedFile.log", pathHandlerOfCopiedFile.getFile());
     EXPECT_EQ("CopiedFile", pathHandlerOfCopiedFile.getFilenameOnly());
     EXPECT_EQ("log", pathHandlerOfCopiedFile.getExtension());
@@ -363,8 +342,7 @@ TEST(AlbaLinuxPathHandlerTest, ReInputFileThatIsToBeRenamedActualLocalDirectory)
     ofstream fileToBeRenamed(pathHandler.getFullPath());
     fileToBeRenamed.close();
     pathHandler.reInput();
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
     EXPECT_EQ("FileToBeRenamed.log", pathHandler.getFile());
     EXPECT_EQ("FileToBeRenamed", pathHandler.getFilenameOnly());
     EXPECT_EQ("log", pathHandler.getExtension());
@@ -373,8 +351,7 @@ TEST(AlbaLinuxPathHandlerTest, ReInputFileThatIsToBeRenamedActualLocalDirectory)
 
     EXPECT_TRUE(pathHandler.renameFile("RenamedFile.txt"));
 
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/)"), pathHandler.getDirectory());
     EXPECT_EQ("RenamedFile.txt", pathHandler.getFile());
     EXPECT_EQ("RenamedFile", pathHandler.getFilenameOnly());
     EXPECT_EQ("txt", pathHandler.getExtension());
@@ -388,8 +365,7 @@ TEST(AlbaLinuxPathHandlerTest, ReInputDirectoryThatIsToBeRenamedActualLocalDirec
     string const pathOfDirectoryToBeRenamed(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR1)");
 
     PathHandler pathHandler(pathOfDirectoryToBeRenamed);
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR1/)"), pathHandler.getDirectory());
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR1/)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
     EXPECT_TRUE(pathHandler.getExtension().empty());
@@ -399,8 +375,7 @@ TEST(AlbaLinuxPathHandlerTest, ReInputDirectoryThatIsToBeRenamedActualLocalDirec
     EXPECT_TRUE(pathHandler.renameImmediateDirectory("RenamedDirectory"));
 
     EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/RenamedDirectory/)"),
-        pathHandler.getDirectory());
+        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/RenamedDirectory/)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
     EXPECT_TRUE(pathHandler.getExtension().empty());
@@ -409,8 +384,7 @@ TEST(AlbaLinuxPathHandlerTest, ReInputDirectoryThatIsToBeRenamedActualLocalDirec
 
     EXPECT_TRUE(pathHandler.renameImmediateDirectory("DIR1"));
 
-    EXPECT_EQ(
-        fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR1/)"), pathHandler.getDirectory());
+    EXPECT_EQ(fixPath(APRG_DIR R"(\AprgCommon/FilesForTests/DirectoryTest/DIR1/)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
     EXPECT_TRUE(pathHandler.getExtension().empty());
