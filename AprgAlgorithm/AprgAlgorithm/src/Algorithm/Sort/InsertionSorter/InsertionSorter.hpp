@@ -9,6 +9,19 @@
 #include <iterator>
 #include <utility>
 
+int seh_filter(unsigned int code, struct _EXCEPTION_POINTERS* exceptionPtrs) {
+    std::cout << "SEH exception caught with code 0x" << std::hex << code << std::dec << std::endl;
+
+    if (exceptionPtrs) {
+        // Print additional information about the exception
+        std::cout << "Exception Address: " << exceptionPtrs->ExceptionRecord->ExceptionAddress << std::endl;
+        std::cout << "Exception Flags: " << exceptionPtrs->ExceptionRecord->ExceptionFlags << std::endl;
+        std::cout << "Exception Record: " << exceptionPtrs->ExceptionRecord << std::endl;
+        // ... Print other relevant information from exceptionPtrs as needed
+    }
+    return EXCEPTION_EXECUTE_HANDLER;
+}
+
 namespace alba::algorithm {
 
 template <typename Values>
@@ -24,17 +37,8 @@ public:
                     continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                     // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
                 }
-            } __except (
-                code = GetExceptionCode(), exceptionPtrs = GetExceptionInformation(), EXCEPTION_EXECUTE_HANDLER) {
-                std::cout << "SEH exception caught with code 0x" << std::hex << code << std::dec << std::endl;
-
-                if (exceptionPtrs) {
-                    // Print additional information about the exception
-                    std::cout << "Exception Address: " << exceptionPtrs->ExceptionRecord->ExceptionAddress << std::endl;
-                    std::cout << "Exception Flags: " << exceptionPtrs->ExceptionRecord->ExceptionFlags << std::endl;
-                    std::cout << "Exception Record: " << exceptionPtrs->ExceptionRecord << std::endl;
-                    // ... Print other relevant information from exceptionPtrs as needed
-                }
+            } __except (seh_filter(GetExceptionCode(), GetExceptionInformation())) {
+                // Terminate program
             }
         }
     }
