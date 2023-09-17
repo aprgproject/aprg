@@ -53,7 +53,8 @@ TEST(AlbaLinuxPathHandlerTest, FullPathWithOnlyDirectoryGivenJumbledSlashes) {
 
 TEST(AlbaLinuxPathHandlerTest, FullPathWithOnlyDirectoryGivenJumbledSlashesWithDirectoryDoesNotExists) {
     PathHandler pathHandler(getAprgPath() + R"(\////AprgCommon\\\\/AprgCommon/tst\DirectoryDoesNotExists\)");
-    EXPECT_EQ(fixPath(getAprgPath() + R"(\AprgCommon\AprgCommon\tst\DirectoryDoesNotExists\)"), pathHandler.getDirectory());
+    EXPECT_EQ(
+        fixPath(getAprgPath() + R"(\AprgCommon\AprgCommon\tst\DirectoryDoesNotExists\)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
     EXPECT_TRUE(pathHandler.getExtension().empty());
@@ -373,8 +374,7 @@ TEST(AlbaLinuxPathHandlerTest, ReInputDirectoryThatIsToBeRenamedActualLocalDirec
 
     EXPECT_TRUE(pathHandler.renameImmediateDirectory("RenamedDirectory"));
 
-    EXPECT_EQ(
-        fixPath(getAprgTestDirectory() + R"(/DirectoryTest/RenamedDirectory/)"), pathHandler.getDirectory());
+    EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(/DirectoryTest/RenamedDirectory/)"), pathHandler.getDirectory());
     EXPECT_TRUE(pathHandler.getFile().empty());
     EXPECT_TRUE(pathHandler.getFilenameOnly().empty());
     EXPECT_TRUE(pathHandler.getExtension().empty());

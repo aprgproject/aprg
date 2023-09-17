@@ -91,7 +91,7 @@ TEST(SignMutatorTest, MutateMonomialWorks) {
 
     mutator.mutateMonomial(monomial);
 
-    Monomial monomialToExpect(1, {});
+    Monomial const monomialToExpect(1, {});
     EXPECT_EQ(monomialToExpect, monomial);
 }
 
@@ -109,8 +109,8 @@ TEST(SignMutatorTest, MutatePolynomialWorks) {
     mutator.mutatePolynomial(polynomial3);
     mutator.mutatePolynomial(polynomial4);
 
-    Polynomial polynomiaToExpect2{Monomial(-1, {})};
-    Polynomial polynomiaToExpect3{Monomial(1, {})};
+    Polynomial const polynomiaToExpect2{Monomial(-1, {})};
+    Polynomial const polynomiaToExpect3{Monomial(1, {})};
     EXPECT_TRUE(isNan(polynomial1));
     EXPECT_EQ(polynomiaToExpect2, polynomial2);
     EXPECT_EQ(polynomiaToExpect3, polynomial3);
@@ -131,9 +131,9 @@ TEST(SignMutatorTest, MutateExpressionWorksOnAdditionAndSubtraction) {
     mutator.mutateExpression(expression3);
     mutator.mutateExpression(expression4);
 
-    Expression expressionToExpect1(createOrCopyExpressionFromATerm(1));
-    Expression expressionToExpect2(createOrCopyExpressionFromATerm(-1));
-    Expression expressionToExpect4(createOrCopyExpressionFromATerm(1));
+    Expression const expressionToExpect1(createOrCopyExpressionFromATerm(1));
+    Expression const expressionToExpect2(createOrCopyExpressionFromATerm(-1));
+    Expression const expressionToExpect4(createOrCopyExpressionFromATerm(1));
     EXPECT_EQ(expressionToExpect1, expression1);
     EXPECT_EQ(expressionToExpect2, expression2);
     EXPECT_TRUE(isNan(expression3));
@@ -150,8 +150,8 @@ TEST(SignMutatorTest, MutateExpressionWorksOnMultiplicationAndDivision) {
     mutator.mutateExpression(expression1);
     mutator.mutateExpression(expression2);
 
-    Expression expressionToExpect1(createOrCopyExpressionFromATerm(-1));
-    Expression expressionToExpect2(createOrCopyExpressionFromATerm(-1));
+    Expression const expressionToExpect1(createOrCopyExpressionFromATerm(-1));
+    Expression const expressionToExpect2(createOrCopyExpressionFromATerm(-1));
     EXPECT_EQ(expressionToExpect1, expression1);
     EXPECT_EQ(expressionToExpect2, expression2);
 }
@@ -172,11 +172,11 @@ TEST(SignMutatorTest, MutateExpressionWorksOnRaiseToPower) {
     mutator.mutateExpression(expression4);
     mutator.mutateExpression(expression5);
 
-    Expression expressionToExpect1(createOrCopyExpressionFromATerm(1));
-    Expression expressionToExpect2(createOrCopyExpressionFromATerm(1));
-    Expression expressionToExpect3(createOrCopyExpressionFromATerm(1));
-    Expression expressionToExpect4(createOrCopyExpressionFromATerm(1));
-    Expression expressionToExpect5(createOrCopyExpressionFromATerm(-1));
+    Expression const expressionToExpect1(createOrCopyExpressionFromATerm(1));
+    Expression const expressionToExpect2(createOrCopyExpressionFromATerm(1));
+    Expression const expressionToExpect3(createOrCopyExpressionFromATerm(1));
+    Expression const expressionToExpect4(createOrCopyExpressionFromATerm(1));
+    Expression const expressionToExpect5(createOrCopyExpressionFromATerm(-1));
     EXPECT_EQ(expressionToExpect1, expression1);
     EXPECT_EQ(expressionToExpect2, expression2);
     EXPECT_EQ(expressionToExpect3, expression3);
@@ -191,7 +191,7 @@ TEST(SignMutatorTest, MutateFunctionWorks) {
 
     mutator.mutateFunction(functionObject);
 
-    Function functionToExpect(sin("a"));
+    Function const functionToExpect(sin("a"));
     EXPECT_EQ(functionToExpect, functionObject);
 }
 

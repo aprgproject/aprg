@@ -9,15 +9,15 @@ namespace alba::algebra {
 
 TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateEquationWorks) {
     RemoveMonomialsWithNegativeExponentMutator mutator("x");
-    Term leftHandTerm(Monomial(34, {{"x", 5}}));
-    Term rightHandTerm(Monomial(41, {{"x", -6}}));
+    Term const leftHandTerm(Monomial(34, {{"x", 5}}));
+    Term const rightHandTerm(Monomial(41, {{"x", -6}}));
     Equation equation(leftHandTerm, "=", rightHandTerm);
 
     mutator.mutateEquation(equation);
 
-    Term expectedLeftHandTerm(Monomial(34, {{"x", 5}}));
-    Term expectedRightHandTerm(0);
-    Equation expectedEquation(expectedLeftHandTerm, "=", expectedRightHandTerm);
+    Term const expectedLeftHandTerm(Monomial(34, {{"x", 5}}));
+    Term const expectedRightHandTerm(0);
+    Equation const expectedEquation(expectedLeftHandTerm, "=", expectedRightHandTerm);
     EXPECT_EQ(expectedEquation, equation);
 }
 
@@ -73,8 +73,8 @@ TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateMonomialWorks) {
     mutator.mutateMonomial(monomial1);
     mutator.mutateMonomial(monomial2);
 
-    Monomial expectedMonomial1(34, {{"x", -5}, {"y", 6}});
-    Monomial expectedMonomial2(0, {});
+    Monomial const expectedMonomial1(34, {{"x", -5}, {"y", 6}});
+    Monomial const expectedMonomial2(0, {});
     EXPECT_EQ(expectedMonomial1, monomial1);
     EXPECT_EQ(expectedMonomial2, monomial2);
 }
@@ -85,7 +85,7 @@ TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutatePolynomialWorks) {
 
     mutator.mutatePolynomial(polynomial);
 
-    Polynomial expectedPolynomial{Monomial(75, {{"x", 14}}), Monomial(643, {{"y", 8}})};
+    Polynomial const expectedPolynomial{Monomial(75, {{"x", 14}}), Monomial(643, {{"y", 8}})};
     EXPECT_EQ(expectedPolynomial, polynomial);
 }
 
@@ -95,7 +95,7 @@ TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateExpressionWorks) {
 
     mutator.mutateExpression(expression);
 
-    Expression expectedExpression(Term(678));
+    Expression const expectedExpression(Term(678));
     EXPECT_EQ(expectedExpression, expression);
 }
 
@@ -107,7 +107,7 @@ TEST(RemoveMonomialsWithNegativeExponentMutatorTest, MutateFunctionWorks) {
 
     mutator.mutateFunction(functionObject);
 
-    Function expectedFunction(
+    Function const expectedFunction(
         "functionName", Term(4516), [](AlbaNumber const& number) -> AlbaNumber { return number; });
     EXPECT_EQ(expectedFunction, functionObject);
 }

@@ -9,15 +9,15 @@ namespace alba::algebra {
 
 TEST(DegreeOnlyMutatorTest, MutateEquationWorks) {
     DegreeOnlyMutator mutator("x");
-    Term leftHandTerm(Monomial(34, {{"x", 5}}));
-    Term rightHandTerm(Monomial(41, {{"y", 6}}));
+    Term const leftHandTerm(Monomial(34, {{"x", 5}}));
+    Term const rightHandTerm(Monomial(41, {{"y", 6}}));
     Equation equation(leftHandTerm, "=", rightHandTerm);
 
     mutator.mutateEquation(equation);
 
-    Term expectedLeftHandTerm(Monomial(1, {{"x", 5}}));
-    Term expectedRightHandTerm(1);
-    Equation expectedEquation(expectedLeftHandTerm, "=", expectedRightHandTerm);
+    Term const expectedLeftHandTerm(Monomial(1, {{"x", 5}}));
+    Term const expectedRightHandTerm(1);
+    Equation const expectedEquation(expectedLeftHandTerm, "=", expectedRightHandTerm);
     EXPECT_EQ(expectedEquation, equation);
 }
 
@@ -47,7 +47,7 @@ TEST(DegreeOnlyMutatorTest, MutateFunctionWorks) {
 
     mutator.mutateFunction(functionObject);
 
-    Function expectedFunction(
+    Function const expectedFunction(
         "functionName", Term(Monomial(1, {{"x", 10}})), [](AlbaNumber const& number) -> AlbaNumber { return number; });
     EXPECT_EQ(expectedFunction, functionObject);
 }
@@ -75,7 +75,7 @@ TEST(DegreeOnlyMutatorTest, MutateTermWorks) {
     EXPECT_EQ(Term(Monomial(1, {{"x", 5}})), monomialTerm);
     EXPECT_EQ(Term(Monomial(1, {{"x", 7}})), polynomialTerm);
     EXPECT_EQ(Term(Monomial(1, {{"x", 9}})), expressionTerm);
-    Term expectedFunctionTerm(Function(
+    Term const expectedFunctionTerm(Function(
         "functionName", Term(Monomial(1, {{"x", 10}})), [](AlbaNumber const& number) -> AlbaNumber { return number; }));
     EXPECT_EQ(expectedFunctionTerm, functionTerm);
 }
@@ -86,7 +86,7 @@ TEST(DegreeOnlyMutatorTest, MutateMonomialWorks) {
 
     mutator.mutateMonomial(monomial);
 
-    Monomial expectedMonomial(1, {{"x", 5}});
+    Monomial const expectedMonomial(1, {{"x", 5}});
     EXPECT_EQ(expectedMonomial, monomial);
 }
 
@@ -96,7 +96,7 @@ TEST(DegreeOnlyMutatorTest, MutatePolynomialWorks) {
 
     mutator.mutatePolynomial(polynomial);
 
-    Polynomial expectedPolynomial{Monomial(1, {{"x", 7}})};
+    Polynomial const expectedPolynomial{Monomial(1, {{"x", 7}})};
     EXPECT_EQ(expectedPolynomial, polynomial);
 }
 
@@ -106,18 +106,18 @@ TEST(DegreeOnlyMutatorTest, MutateExpressionWorks) {
 
     mutator.mutateExpression(expression);
 
-    Expression expectedExpression(Term(Monomial(1, {{"x", 9}})));
+    Expression const expectedExpression(Term(Monomial(1, {{"x", 9}})));
     EXPECT_EQ(expectedExpression, expression);
 }
 
 TEST(DegreeOnlyMutatorTest, MutateExpressionWorksWhenRaiseToPowerFractionalExponent) {
     DegreeOnlyMutator mutator("x");
-    Term base(Polynomial{Monomial(516, {{"x", 16}}), Monomial(643, {{"y", 8}})});
+    Term const base(Polynomial{Monomial(516, {{"x", 16}}), Monomial(643, {{"y", 8}})});
     Expression expression(createExpressionIfPossible({base, "^", AlbaNumber::createFraction(3, 4)}));
 
     mutator.mutateExpression(expression);
 
-    Expression expectedExpression(Term(Monomial(1, {{"x", 12}})));
+    Expression const expectedExpression(Term(Monomial(1, {{"x", 12}})));
     EXPECT_EQ(expectedExpression, expression);
 }
 

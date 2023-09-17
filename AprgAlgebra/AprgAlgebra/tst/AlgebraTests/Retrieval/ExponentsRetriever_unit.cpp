@@ -19,8 +19,8 @@ TEST(ExponentsRetrieverTest, RetrieveFromMonomialWorks) {
 
 TEST(ExponentsRetrieverTest, RetrieveFromEquationsWorks) {
     ExponentsRetriever retriever;
-    Equation equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
-    Equation equation2(Monomial(95, {{"x", 7}}), "=", Monomial(18, {{"y", 8}}));
+    Equation const equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
+    Equation const equation2(Monomial(95, {{"x", 7}}), "=", Monomial(18, {{"y", 8}}));
 
     retriever.retrieveFromEquations({equation1, equation2});
 
@@ -35,9 +35,9 @@ TEST(ExponentsRetrieverTest, RetrieveFromEquationsWorks) {
 
 TEST(ExponentsRetrieverTest, RetrieveFromEquationWorks) {
     ExponentsRetriever retriever;
-    Term leftHandTerm(Monomial(34, {{"x", 5}}));
-    Term rightHandTerm(Monomial(41, {{"y", 6}}));
-    Equation equation(leftHandTerm, "=", rightHandTerm);
+    Term const leftHandTerm(Monomial(34, {{"x", 5}}));
+    Term const rightHandTerm(Monomial(41, {{"y", 6}}));
+    Equation const equation(leftHandTerm, "=", rightHandTerm);
 
     retriever.retrieveFromEquation(equation);
 
@@ -50,7 +50,7 @@ TEST(ExponentsRetrieverTest, RetrieveFromEquationWorks) {
 
 TEST(ExponentsRetrieverTest, RetrieveFromTermWorks) {
     ExponentsRetriever retriever;
-    Function functionObject(
+    Function const functionObject(
         "functionName", Term(createExpressionIfPossible({4516, "+", Monomial(7895, {{"x", 10}})})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
 
@@ -115,7 +115,7 @@ TEST(ExponentsRetrieverTest, RetrieveFromExpressionWorks) {
 
 TEST(ExponentsRetrieverTest, RetrieveFromFunctionWorks) {
     ExponentsRetriever retriever;
-    Function functionObject(
+    Function const functionObject(
         "functionName", Term(createExpressionIfPossible({4516, "+", Monomial(7895, {{"x", 10}})})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
 
@@ -130,8 +130,8 @@ TEST(ExponentsRetrieverTest, RetrieveFromFunctionWorks) {
 TEST(ExponentsRetrieverTest, RetrieveFromPolynomialsWorks) {
     ExponentsRetriever retriever;
     Polynomials polynomials;
-    polynomials.emplace_back(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
-    polynomials.emplace_back(Polynomial{Monomial(587, {{"x", 9}}), Monomial(975, {{"y", 10}})});
+    polynomials.emplace_back(Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}}));
+    polynomials.emplace_back(Monomial(587, {{"x", 9}}), Monomial(975, {{"y", 10}}));
 
     retriever.retrieveFromPolynomials(polynomials);
 

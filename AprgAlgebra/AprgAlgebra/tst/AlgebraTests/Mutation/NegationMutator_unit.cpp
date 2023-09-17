@@ -15,7 +15,7 @@ TEST(NegationMutatorTest, MutatePolynomialWorks) {
 
     mutator.mutatePolynomial(polynomial);
 
-    Polynomial polynomiaToExpect{Monomial(-9, {{"a", 1}}), Monomial(-11, {{"b", 1}})};
+    Polynomial const polynomiaToExpect{Monomial(-9, {{"a", 1}}), Monomial(-11, {{"b", 1}})};
     EXPECT_EQ(polynomiaToExpect, polynomial);
 }
 
@@ -35,12 +35,12 @@ TEST(NegationMutatorTest, MutateTermWorks) {
     mutator.mutateTerm(term5);
     mutator.mutateTerm(term6);
 
-    Term termToExpect1(-5);
-    Term termToExpect2(Monomial(-1, {{"a", 1}}));
-    Term termToExpect3(Monomial(-7, {{"a", 1}}));
-    Term termToExpect4(Polynomial{Monomial(-9, {{"a", 1}}), Monomial(-11, {{"b", 1}})});
-    Term termToExpect5(createExpressionIfPossible({-1, "*", "a", "^", "b"}));
-    Term termToExpect6(createExpressionIfPossible({-1, "*", sin("a")}));
+    Term const termToExpect1(-5);
+    Term const termToExpect2(Monomial(-1, {{"a", 1}}));
+    Term const termToExpect3(Monomial(-7, {{"a", 1}}));
+    Term const termToExpect4(Polynomial{Monomial(-9, {{"a", 1}}), Monomial(-11, {{"b", 1}})});
+    Term const termToExpect5(createExpressionIfPossible({-1, "*", "a", "^", "b"}));
+    Term const termToExpect6(createExpressionIfPossible({-1, "*", sin("a")}));
     EXPECT_EQ(termToExpect1, term1);
     EXPECT_EQ(termToExpect2, term2);
     EXPECT_EQ(termToExpect3, term3);
@@ -55,7 +55,7 @@ TEST(NegationMutatorTest, MutateConstantWorks) {
 
     mutator.mutateConstant(constant);
 
-    Constant constantToExpect(-5);
+    Constant const constantToExpect(-5);
     EXPECT_EQ(constantToExpect, constant);
 }
 
@@ -65,7 +65,7 @@ TEST(NegationMutatorTest, MutateVariableWorks) {
 
     mutator.mutateVariable(variable);
 
-    Variable variableToExpect("a");
+    Variable const variableToExpect("a");
     EXPECT_EQ(variableToExpect, variable);
 }
 
@@ -75,7 +75,7 @@ TEST(NegationMutatorTest, MutateMonomialWorks) {
 
     mutator.mutateMonomial(monomial);
 
-    Monomial monomialToExpect(-7, {{"a", 1}});
+    Monomial const monomialToExpect(-7, {{"a", 1}});
     EXPECT_EQ(monomialToExpect, monomial);
 }
 
@@ -85,7 +85,7 @@ TEST(NegationMutatorTest, MutateExpressionWorks) {
 
     mutator.mutateExpression(expression);
 
-    Expression expressionToExpect(createExpressionIfPossible({-1, "*", "a", "^", "b"}));
+    Expression const expressionToExpect(createExpressionIfPossible({-1, "*", "a", "^", "b"}));
     EXPECT_EQ(expressionToExpect, expression);
 }
 
@@ -95,7 +95,7 @@ TEST(NegationMutatorTest, MutateFunctionWorks) {
 
     mutator.mutateFunction(functionObject);
 
-    Function functionToExpect(sin("a"));
+    Function const functionToExpect(sin("a"));
     EXPECT_EQ(functionToExpect, functionObject);
 }
 

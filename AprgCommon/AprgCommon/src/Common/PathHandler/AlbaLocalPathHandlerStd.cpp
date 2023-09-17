@@ -219,7 +219,7 @@ AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::fixPath(LocalPath co
     auto pathString(path.native());
     replaceAll(pathString, slashString, pathSlashString);
     replaceAll(pathString, backSlashString, pathSlashString);
-    LocalPath replacedStringPath(pathString);
+    LocalPath const replacedStringPath(pathString);
     LocalPath fixedPath(replacedStringPath.root_path());
     bool isLastASlash(false);
     for (LocalPath const& subPath : replacedStringPath) {

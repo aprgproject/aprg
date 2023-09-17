@@ -13,8 +13,8 @@ namespace alba::algebra {
 TEST(AccumulateOperationsTest, AccumulateAndDoOperationOnTermDetailsWorks) {
     Term termToTest1(45);
     Term termToTest2(45);
-    TermWithDetails termWithDetails1(Term(25), TermAssociationType::Positive);
-    TermWithDetails termWithDetails2(Term(25), TermAssociationType::Negative);
+    TermWithDetails const termWithDetails1(Term(25), TermAssociationType::Positive);
+    TermWithDetails const termWithDetails2(Term(25), TermAssociationType::Negative);
 
     accumulateAndDoOperationOnTermDetails(termToTest1, OperatorLevel::AdditionAndSubtraction, termWithDetails1);
     accumulateAndDoOperationOnTermDetails(termToTest2, OperatorLevel::AdditionAndSubtraction, termWithDetails2);
@@ -25,27 +25,27 @@ TEST(AccumulateOperationsTest, AccumulateAndDoOperationOnTermDetailsWorks) {
 
 TEST(AccumulateOperationsTest, AccumulateTermsForAdditionAndSubtractionWorks) {
     Term termToTest(0);
-    Term xToTheY(createExpressionIfPossible({"x", "^", "y"}));
-    Term term1(createExpressionIfPossible({11, "*", xToTheY}));
-    Term term2(createExpressionIfPossible({13, "*", xToTheY}));
-    Term term3(0);
-    TermsWithDetails termsWithDetails{
+    Term const xToTheY(createExpressionIfPossible({"x", "^", "y"}));
+    Term const term1(createExpressionIfPossible({11, "*", xToTheY}));
+    Term const term2(createExpressionIfPossible({13, "*", xToTheY}));
+    Term const term3(0);
+    TermsWithDetails const termsWithDetails{
         TermWithDetails(term1, TermAssociationType::Negative), TermWithDetails(term2, TermAssociationType::Positive),
         TermWithDetails(term3, TermAssociationType::Negative)};
 
     accumulateTermsForAdditionAndSubtraction(termToTest, termsWithDetails);
 
-    Term termToExpectPart1(createExpressionIfPossible({-11, "*", xToTheY}));
-    Term termToExpectPart2(createExpressionIfPossible({13, "*", xToTheY}));
-    Term termToExpect(createExpressionIfPossible({termToExpectPart1, "+", termToExpectPart2}));
+    Term const termToExpectPart1(createExpressionIfPossible({-11, "*", xToTheY}));
+    Term const termToExpectPart2(createExpressionIfPossible({13, "*", xToTheY}));
+    Term const termToExpect(createExpressionIfPossible({termToExpectPart1, "+", termToExpectPart2}));
     EXPECT_EQ(termToExpect, termToTest);
 }
 
 TEST(AccumulateOperationsTest, AccumulateTermsForAdditionAndSubtractionWorksWithEmptyTermAtTheStart) {
     Term termToTest;
-    Term term1;
-    Term term2(0);
-    TermsWithDetails termsWithDetails{
+    Term const term1;
+    Term const term2(0);
+    TermsWithDetails const termsWithDetails{
         TermWithDetails(term1, TermAssociationType::Positive), TermWithDetails(term2, TermAssociationType::Positive)};
 
     accumulateTermsForAdditionAndSubtraction(termToTest, termsWithDetails);
@@ -55,10 +55,10 @@ TEST(AccumulateOperationsTest, AccumulateTermsForAdditionAndSubtractionWorksWith
 
 TEST(AccumulateOperationsTest, AccumulateTermsForAdditionAndSubtractionWorksWithNan) {
     Term termToTest;
-    Term term1(1);
-    Term term2(2);
-    Term term3(ALBA_NUMBER_NOT_A_NUMBER);
-    TermsWithDetails termsWithDetails{
+    Term const term1(1);
+    Term const term2(2);
+    Term const term3(ALBA_NUMBER_NOT_A_NUMBER);
+    TermsWithDetails const termsWithDetails{
         TermWithDetails(term1, TermAssociationType::Positive), TermWithDetails(term2, TermAssociationType::Positive),
         TermWithDetails(term3, TermAssociationType::Positive)};
 
@@ -69,25 +69,25 @@ TEST(AccumulateOperationsTest, AccumulateTermsForAdditionAndSubtractionWorksWith
 
 TEST(AccumulateOperationsTest, AccumulateTermsForMultiplicationAndDivisionWorks) {
     Term termToTest(1);
-    Term xToTheY(createExpressionIfPossible({"x", "^", "y"}));
-    Term term1(createExpressionIfPossible({11, "*", xToTheY}));
-    Term term2(createExpressionIfPossible({13, "*", xToTheY}));
-    Term term3(1);
-    TermsWithDetails termsWithDetails{
+    Term const xToTheY(createExpressionIfPossible({"x", "^", "y"}));
+    Term const term1(createExpressionIfPossible({11, "*", xToTheY}));
+    Term const term2(createExpressionIfPossible({13, "*", xToTheY}));
+    Term const term3(1);
+    TermsWithDetails const termsWithDetails{
         TermWithDetails(term1, TermAssociationType::Negative), TermWithDetails(term2, TermAssociationType::Positive),
         TermWithDetails(term3, TermAssociationType::Negative)};
 
     accumulateTermsForMultiplicationAndDivision(termToTest, termsWithDetails);
 
-    Term termToExpect(createExpressionIfPossible({1, "/", 11, "/", xToTheY, "*", 13, "*", xToTheY}));
+    Term const termToExpect(createExpressionIfPossible({1, "/", 11, "/", xToTheY, "*", 13, "*", xToTheY}));
     EXPECT_EQ(termToExpect, termToTest);
 }
 
 TEST(AccumulateOperationsTest, AccumulateTermsForMultiplicationAndDivisionWorksWithEmptyTermAtTheStart) {
     Term termToTest;
-    Term term1;
-    Term term2(1);
-    TermsWithDetails termsWithDetails{
+    Term const term1;
+    Term const term2(1);
+    TermsWithDetails const termsWithDetails{
         TermWithDetails(term1, TermAssociationType::Positive), TermWithDetails(term2, TermAssociationType::Positive)};
 
     accumulateTermsForMultiplicationAndDivision(termToTest, termsWithDetails);
@@ -97,27 +97,27 @@ TEST(AccumulateOperationsTest, AccumulateTermsForMultiplicationAndDivisionWorksW
 
 TEST(AccumulateOperationsTest, AccumulateTermsForRaiseToPowerWorks) {
     Term termToTest(1);
-    Term xToTheY(createExpressionIfPossible({"x", "^", "y"}));
-    Term term1(createExpressionIfPossible({11, "*", xToTheY}));
-    Term term2(createExpressionIfPossible({13, "*", xToTheY}));
-    Term term3(1);
-    TermsWithDetails termsWithDetails{
+    Term const xToTheY(createExpressionIfPossible({"x", "^", "y"}));
+    Term const term1(createExpressionIfPossible({11, "*", xToTheY}));
+    Term const term2(createExpressionIfPossible({13, "*", xToTheY}));
+    Term const term3(1);
+    TermsWithDetails const termsWithDetails{
         TermWithDetails(term1, TermAssociationType::Negative), TermWithDetails(term2, TermAssociationType::Positive),
         TermWithDetails(term3, TermAssociationType::Negative)};
 
     accumulateTermsForRaiseToPower(termToTest, termsWithDetails);
 
-    Term termToExpectPart1(createExpressionIfPossible({11, "*", xToTheY}));
-    Term termToExpectPart2(createExpressionIfPossible({13, "*", xToTheY}));
-    Term termToExpect(createExpressionIfPossible({termToExpectPart1, "^", termToExpectPart2}));
+    Term const termToExpectPart1(createExpressionIfPossible({11, "*", xToTheY}));
+    Term const termToExpectPart2(createExpressionIfPossible({13, "*", xToTheY}));
+    Term const termToExpect(createExpressionIfPossible({termToExpectPart1, "^", termToExpectPart2}));
     EXPECT_EQ(termToExpect, termToTest);
 }
 
 TEST(AccumulateOperationsTest, AccumulateTermsForRaiseToPowerWorksWithEmptyTermAtTheStart) {
     Term termToTest;
-    Term term1;
-    Term term2(1);
-    TermsWithDetails termsWithDetails{
+    Term const term1;
+    Term const term2(1);
+    TermsWithDetails const termsWithDetails{
         TermWithDetails(term1, TermAssociationType::Positive), TermWithDetails(term2, TermAssociationType::Positive)};
 
     accumulateTermsForRaiseToPower(termToTest, termsWithDetails);
