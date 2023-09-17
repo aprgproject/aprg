@@ -3,25 +3,8 @@
 #include <Algorithm/Sort/BaseSorter.hpp>
 #include <Common/Debug/AlbaDebug.hpp>
 
-#include <windows.h>
-
-#include <exception>
-#include <iostream>
 #include <iterator>
 #include <utility>
-
-int seh_filter(unsigned int code, struct _EXCEPTION_POINTERS* exceptionPtrs) {
-    std::cout << "SEH exception caught with code 0x" << std::hex << code << std::dec << std::endl;
-
-    if (exceptionPtrs) {
-        // Print additional information about the exception
-        std::cout << "Exception Address: " << exceptionPtrs->ExceptionRecord->ExceptionAddress << std::endl;
-        std::cout << "Exception Flags: " << exceptionPtrs->ExceptionRecord->ExceptionFlags << std::endl;
-        std::cout << "Exception Record: " << exceptionPtrs->ExceptionRecord << std::endl;
-        // ... Print other relevant information from exceptionPtrs as needed
-    }
-    return EXCEPTION_EXECUTE_HANDLER;
-}
 
 namespace alba::algorithm {
 
@@ -33,13 +16,9 @@ public:
 
     void sort(Values& valuesToSort) const override {
         if (!valuesToSort.empty()) {
-            __try {
-                for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
-                    continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
-                    // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
-                }
-            } __except (seh_filter(GetExceptionCode(), GetExceptionInformation())) {
-                // Terminate program
+            for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
+                continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
+                // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
             }
         }
     }
@@ -47,24 +26,17 @@ public:
 private:
     void continuouslySwapBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {
         auto rItLow = std::make_reverse_iterator(insertIt);  // make_reverse_iterator moves it by one
-        auto rItHigh = std::prev(rItLow);                    // move it back to original place (same as insertIt)
+        auto rItHigh = std::prev(rItLow);                    // move it back to original place (same as insert It)
         // so final the stiuation here is rItLow < rItHigh and insertIt
         ALBA_DBG_PRINT(valuesToSort);
         ALBA_DBG_PRINT(*rItLow, *rItHigh);
-        for (; rItLow != valuesToSort.rend();) {
-            if (*rItLow <= *rItHigh) {
-                break;
-            }
+        for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
+            ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
             std::swap(*rItLow, *rItHigh);
             ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
-            ++rItLow;
-            ALBA_DBG_PRINT(*rItLow, *rItHigh);
-            ++rItHigh;
-            ALBA_DBG_PRINT(*rItLow, *rItHigh);
         }
-        ALBA_DBG_PRINT(*rItLow, *rItHigh);
     }
 
     void continuouslyCopyBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {
