@@ -66,9 +66,15 @@ static int
 broyden_alloc (void *vstate, size_t n)
 {
   broyden_state_t *state = (broyden_state_t *) vstate;
-  gsl_vector *v, *w, *y, *fnew, *x_trial, *p;
-  gsl_permutation *perm;
-  gsl_matrix *m, *H;
+  gsl_vector *v;
+  gsl_vector *w;
+  gsl_vector *y;
+  gsl_vector *fnew;
+  gsl_vector *x_trial;
+  gsl_vector *p;
+  gsl_permutation *perm = NULL;
+  gsl_matrix *m;
+  gsl_matrix *H;
 
   m = gsl_matrix_calloc (n, n);
 
@@ -202,7 +208,9 @@ static int
 broyden_set (void *vstate, gsl_multiroot_function * function, gsl_vector * x, gsl_vector * f, gsl_vector * dx)
 {
   broyden_state_t *state = (broyden_state_t *) vstate;
-  size_t i, j, n = function->n;
+  size_t i;
+  size_t j;
+  size_t n = function->n;
   int signum = 0;
 
   GSL_MULTIROOT_FN_EVAL (function, x, f);
@@ -211,9 +219,11 @@ broyden_set (void *vstate, gsl_multiroot_function * function, gsl_vector * x, gs
   gsl_linalg_LU_decomp (state->lu, state->permutation, &signum);
   gsl_linalg_LU_invert (state->lu, state->permutation, state->H);
 
-  for (i = 0; i < n; i++)
-    for (j = 0; j < n; j++)
+  for (i = 0; i < n; i++) {
+    for (j = 0; j < n; j++) {
       gsl_matrix_set(state->H,i,j,-gsl_matrix_get(state->H,i,j));
+}
+}
 
   for (i = 0; i < n; i++)
     {
@@ -230,7 +240,10 @@ broyden_iterate (void *vstate, gsl_multiroot_function * function, gsl_vector * x
 {
   broyden_state_t *state = (broyden_state_t *) vstate;
 
-  double phi0, phi1, t, lambda;
+  double phi0;
+  double phi1;
+  double t;
+  double lambda;
 
   gsl_matrix *H = state->H;
   gsl_vector *p = state->p;
@@ -242,7 +255,9 @@ broyden_iterate (void *vstate, gsl_multiroot_function * function, gsl_vector * x
   gsl_matrix *lu = state->lu;
   gsl_permutation *perm = state->permutation;
 
-  size_t i, j, iter;
+  size_t i;
+  size_t j;
+  size_t iter;
 
   size_t n = function->n;
 
@@ -302,9 +317,11 @@ new_step:
       
       gsl_multiroot_fdjacobian (function, x, f, GSL_SQRT_DBL_EPSILON, lu);
       
-      for (i = 0; i < n; i++)
-        for (j = 0; j < n; j++)
+      for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
           gsl_matrix_set(lu,i,j,-gsl_matrix_get(lu,i,j));
+}
+}
       
       gsl_linalg_LU_decomp (lu, perm, &signum);
       gsl_linalg_LU_invert (lu, perm, H);

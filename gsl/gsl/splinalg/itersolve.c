@@ -30,7 +30,7 @@ gsl_splinalg_itersolve *
 gsl_splinalg_itersolve_alloc(const gsl_splinalg_itersolve_type *T,
                              const size_t n, const size_t m)
 {
-  gsl_splinalg_itersolve *w;
+  gsl_splinalg_itersolve *w = NULL;
 
   w = calloc(1, sizeof(gsl_splinalg_itersolve));
   if (w == NULL)
@@ -58,8 +58,9 @@ gsl_splinalg_itersolve_free(gsl_splinalg_itersolve *w)
 {
   RETURN_IF_NULL(w);
 
-  if (w->state)
+  if (w->state) {
     w->type->free(w->state);
+}
 
   free(w);
 }

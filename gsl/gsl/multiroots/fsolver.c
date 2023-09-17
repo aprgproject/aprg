@@ -27,9 +27,9 @@ gsl_multiroot_fsolver *
 gsl_multiroot_fsolver_alloc (const gsl_multiroot_fsolver_type * T,
                                      size_t n)
 {
-  int status;
+  int status = 0;
 
-  gsl_multiroot_fsolver * s;
+  gsl_multiroot_fsolver * s = NULL;
 
   s = (gsl_multiroot_fsolver *) malloc (sizeof (gsl_multiroot_fsolver));
 

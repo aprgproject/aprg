@@ -109,8 +109,8 @@ bicubic_init(void * vstate, const double xa[], const double ya[],
   gsl_spline *spline = NULL;
   gsl_vector *x = NULL;
   gsl_vector *y = NULL;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   x = gsl_vector_alloc(xsize);
   y = gsl_vector_alloc(xsize);
@@ -187,49 +187,49 @@ bicubic_eval(const void * vstate, const double xarr[], const double yarr[],
 {
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
-  double xmin;
-  double xmax;
-  double ymin;
-  double ymax;
-  double zminmin;
-  double zminmax;
-  double zmaxmin;
-  double zmaxmax;
-  double zxminmin;
-  double zxminmax;
-  double zxmaxmin;
-  double zxmaxmax;
-  double zyminmin;
-  double zyminmax;
-  double zymaxmin;
-  double zymaxmax;
-  double zxyminmin;
-  double zxyminmax;
-  double zxymaxmin;
-  double zxymaxmax;
+  double xmin = NAN;
+  double xmax = NAN;
+  double ymin = NAN;
+  double ymax = NAN;
+  double zminmin = NAN;
+  double zminmax = NAN;
+  double zmaxmin = NAN;
+  double zmaxmax = NAN;
+  double zxminmin = NAN;
+  double zxminmax = NAN;
+  double zxmaxmin = NAN;
+  double zxmaxmax = NAN;
+  double zyminmin = NAN;
+  double zyminmax = NAN;
+  double zymaxmin = NAN;
+  double zymaxmax = NAN;
+  double zxyminmin = NAN;
+  double zxyminmax = NAN;
+  double zxymaxmin = NAN;
+  double zxymaxmax = NAN;
 
-  double dx;
-  double dy;   /* size of the grid cell */
-  double dt;
-  double du;
+  double dx = NAN;
+  double dy = NAN;   /* size of the grid cell */
+  double dt = NAN;
+  double du = NAN;
 
   /*
    * t and u are the positions within the grid cell at which we are computing
    * the interpolation, in units of grid cell size
    */
-  double t;
-  double u;
-  double t0;
-  double t1;
-  double t2;
-  double t3;
-  double u0;
-  double u1;
-  double u2;
-  double u3;
+  double t = NAN;
+  double u = NAN;
+  double t0 = NAN;
+  double t1 = NAN;
+  double t2 = NAN;
+  double t3 = NAN;
+  double u0 = NAN;
+  double u1 = NAN;
+  double u2 = NAN;
+  double u3 = NAN;
   double v = NAN;
-  size_t xi;
-  size_t yi;
+  size_t xi = 0;
+  size_t yi = 0;
 
   /* first compute the indices into the data arrays where we are interpolating */
   if (xa != NULL) {
@@ -326,47 +326,47 @@ bicubic_deriv_x(const void * vstate, const double xarr[], const double yarr[],
 {
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
-  double xmin;
-  double xmax;
-  double ymin;
-  double ymax;
-  double zminmin;
-  double zminmax;
-  double zmaxmin;
-  double zmaxmax;
-  double zxminmin;
-  double zxminmax;
-  double zxmaxmin;
-  double zxmaxmax;
-  double zyminmin;
-  double zyminmax;
-  double zymaxmin;
-  double zymaxmax;
-  double zxyminmin;
-  double zxyminmax;
-  double zxymaxmin;
-  double zxymaxmax;
-  double dx;
-  double dy; /* size of the grid cell */
-  double dt;
-  double du;
+  double xmin = NAN;
+  double xmax = NAN;
+  double ymin = NAN;
+  double ymax = NAN;
+  double zminmin = NAN;
+  double zminmax = NAN;
+  double zmaxmin = NAN;
+  double zmaxmax = NAN;
+  double zxminmin = NAN;
+  double zxminmax = NAN;
+  double zxmaxmin = NAN;
+  double zxmaxmax = NAN;
+  double zyminmin = NAN;
+  double zyminmax = NAN;
+  double zymaxmin = NAN;
+  double zymaxmax = NAN;
+  double zxyminmin = NAN;
+  double zxyminmax = NAN;
+  double zxymaxmin = NAN;
+  double zxymaxmax = NAN;
+  double dx = NAN;
+  double dy = NAN; /* size of the grid cell */
+  double dt = NAN;
+  double du = NAN;
 
   /*
    * t and u are the positions within the grid cell at which we are computing
    * the interpolation, in units of grid cell size
    */
-  double t;
-  double u;
-  double t0;
-  double t1;
-  double t2;
-  double u0;
-  double u1;
-  double u2;
-  double u3;
+  double t = NAN;
+  double u = NAN;
+  double t0 = NAN;
+  double t1 = NAN;
+  double t2 = NAN;
+  double u0 = NAN;
+  double u1 = NAN;
+  double u2 = NAN;
+  double u3 = NAN;
   double v = NAN;
-  size_t xi;
-  size_t yi;
+  size_t xi = 0;
+  size_t yi = 0;
 
   /* first compute the indices into the data arrays where we are interpolating */
   if (xa != NULL) {
@@ -458,45 +458,45 @@ bicubic_deriv_y(const void * vstate, const double xarr[], const double yarr[],
 {
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
-  double xmin;
-  double xmax;
-  double ymin;
-  double ymax;
-  double zminmin;
-  double zminmax;
-  double zmaxmin;
-  double zmaxmax;
-  double zxminmin;
-  double zxminmax;
-  double zxmaxmin;
-  double zxmaxmax;
-  double zyminmin;
-  double zyminmax;
-  double zymaxmin;
-  double zymaxmax;
-  double zxyminmin;
-  double zxyminmax;
-  double zxymaxmin;
-  double zxymaxmax;
+  double xmin = NAN;
+  double xmax = NAN;
+  double ymin = NAN;
+  double ymax = NAN;
+  double zminmin = NAN;
+  double zminmax = NAN;
+  double zmaxmin = NAN;
+  double zmaxmax = NAN;
+  double zxminmin = NAN;
+  double zxminmax = NAN;
+  double zxmaxmin = NAN;
+  double zxmaxmax = NAN;
+  double zyminmin = NAN;
+  double zyminmax = NAN;
+  double zymaxmin = NAN;
+  double zymaxmax = NAN;
+  double zxyminmin = NAN;
+  double zxyminmax = NAN;
+  double zxymaxmin = NAN;
+  double zxymaxmax = NAN;
   /* dx and dy are the size of the grid cell */
-  double dx;
-  double dy;
-  double dt;
-  double du;
+  double dx = NAN;
+  double dy = NAN;
+  double dt = NAN;
+  double du = NAN;
   /* t and u are the positions within the grid cell at which we are
    * computing the interpolation, in units of grid cell size */
-  double t;
-  double u;
-  double t0;
-  double t1;
-  double t2;
-  double t3;
-  double u0;
-  double u1;
-  double u2;
+  double t = NAN;
+  double u = NAN;
+  double t0 = NAN;
+  double t1 = NAN;
+  double t2 = NAN;
+  double t3 = NAN;
+  double u0 = NAN;
+  double u1 = NAN;
+  double u2 = NAN;
   double v = NAN;
-  size_t xi;
-  size_t yi;
+  size_t xi = 0;
+  size_t yi = 0;
 
   /* first compute the indices into the data arrays where we are interpolating */
   if (xa != NULL) {
@@ -588,47 +588,47 @@ bicubic_deriv_xx(const void * vstate, const double xarr[], const double yarr[],
 {
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
-  double xmin;
-  double xmax;
-  double ymin;
-  double ymax;
-  double zminmin;
-  double zminmax;
-  double zmaxmin;
-  double zmaxmax;
-  double zxminmin;
-  double zxminmax;
-  double zxmaxmin;
-  double zxmaxmax;
-  double zyminmin;
-  double zyminmax;
-  double zymaxmin;
-  double zymaxmax;
-  double zxyminmin;
-  double zxyminmax;
-  double zxymaxmin;
-  double zxymaxmax;
+  double xmin = NAN;
+  double xmax = NAN;
+  double ymin = NAN;
+  double ymax = NAN;
+  double zminmin = NAN;
+  double zminmax = NAN;
+  double zmaxmin = NAN;
+  double zmaxmax = NAN;
+  double zxminmin = NAN;
+  double zxminmax = NAN;
+  double zxmaxmin = NAN;
+  double zxmaxmax = NAN;
+  double zyminmin = NAN;
+  double zyminmax = NAN;
+  double zymaxmin = NAN;
+  double zymaxmax = NAN;
+  double zxyminmin = NAN;
+  double zxyminmax = NAN;
+  double zxymaxmin = NAN;
+  double zxymaxmax = NAN;
 
-  double dx;
-  double dy; /* size of the grid cell */
-  double dt;
-  double du;
+  double dx = NAN;
+  double dy = NAN; /* size of the grid cell */
+  double dt = NAN;
+  double du = NAN;
 
   /*
    * t and u are the positions within the grid cell at which we are computing
    * the interpolation, in units of grid cell size
    */
-  double t;
-  double u;
-  double t0;
-  double t1;
-  double u0;
-  double u1;
-  double u2;
-  double u3;
+  double t = NAN;
+  double u = NAN;
+  double t0 = NAN;
+  double t1 = NAN;
+  double u0 = NAN;
+  double u1 = NAN;
+  double u2 = NAN;
+  double u3 = NAN;
   double v = NAN;
-  size_t xi;
-  size_t yi;
+  size_t xi = 0;
+  size_t yi = 0;
 
   /* first compute the indices into the data arrays where we are interpolating */
   if (xa != NULL) {
@@ -711,47 +711,47 @@ bicubic_deriv_xy(const void * vstate, const double xarr[], const double yarr[],
 {
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
-  double xmin;
-  double xmax;
-  double ymin;
-  double ymax;
-  double zminmin;
-  double zminmax;
-  double zmaxmin;
-  double zmaxmax;
-  double zxminmin;
-  double zxminmax;
-  double zxmaxmin;
-  double zxmaxmax;
-  double zyminmin;
-  double zyminmax;
-  double zymaxmin;
-  double zymaxmax;
-  double zxyminmin;
-  double zxyminmax;
-  double zxymaxmin;
-  double zxymaxmax;
+  double xmin = NAN;
+  double xmax = NAN;
+  double ymin = NAN;
+  double ymax = NAN;
+  double zminmin = NAN;
+  double zminmax = NAN;
+  double zmaxmin = NAN;
+  double zmaxmax = NAN;
+  double zxminmin = NAN;
+  double zxminmax = NAN;
+  double zxmaxmin = NAN;
+  double zxmaxmax = NAN;
+  double zyminmin = NAN;
+  double zyminmax = NAN;
+  double zymaxmin = NAN;
+  double zymaxmax = NAN;
+  double zxyminmin = NAN;
+  double zxyminmax = NAN;
+  double zxymaxmin = NAN;
+  double zxymaxmax = NAN;
 
-  double dx;
-  double dy; /* size of the grid cell */
-  double dt;
-  double du;
+  double dx = NAN;
+  double dy = NAN; /* size of the grid cell */
+  double dt = NAN;
+  double du = NAN;
 
   /*
    * t and u are the positions within the grid cell at which we are computing
    * the interpolation, in units of grid cell size
    */
-  double t;
-  double u;
-  double t0;
-  double t1;
-  double t2;
-  double u0;
-  double u1;
-  double u2;
+  double t = NAN;
+  double u = NAN;
+  double t0 = NAN;
+  double t1 = NAN;
+  double t2 = NAN;
+  double u0 = NAN;
+  double u1 = NAN;
+  double u2 = NAN;
   double v = NAN;
-  size_t xi;
-  size_t yi;
+  size_t xi = 0;
+  size_t yi = 0;
 
   /* first compute the indices into the data arrays where we are interpolating */
   if (xa != NULL) {
@@ -836,47 +836,47 @@ bicubic_deriv_yy(const void * vstate, const double xarr[], const double yarr[],
 {
   bicubic_state_t *state = (bicubic_state_t *) vstate;
 
-  double xmin;
-  double xmax;
-  double ymin;
-  double ymax;
-  double zminmin;
-  double zminmax;
-  double zmaxmin;
-  double zmaxmax;
-  double zxminmin;
-  double zxminmax;
-  double zxmaxmin;
-  double zxmaxmax;
-  double zyminmin;
-  double zyminmax;
-  double zymaxmin;
-  double zymaxmax;
-  double zxyminmin;
-  double zxyminmax;
-  double zxymaxmin;
-  double zxymaxmax;
+  double xmin = NAN;
+  double xmax = NAN;
+  double ymin = NAN;
+  double ymax = NAN;
+  double zminmin = NAN;
+  double zminmax = NAN;
+  double zmaxmin = NAN;
+  double zmaxmax = NAN;
+  double zxminmin = NAN;
+  double zxminmax = NAN;
+  double zxmaxmin = NAN;
+  double zxmaxmax = NAN;
+  double zyminmin = NAN;
+  double zyminmax = NAN;
+  double zymaxmin = NAN;
+  double zymaxmax = NAN;
+  double zxyminmin = NAN;
+  double zxyminmax = NAN;
+  double zxymaxmin = NAN;
+  double zxymaxmax = NAN;
 
-  double dx;
-  double dy; /* size of the grid cell */
-  double dt;
-  double du;
+  double dx = NAN;
+  double dy = NAN; /* size of the grid cell */
+  double dt = NAN;
+  double du = NAN;
 
   /*
    * t and u are the positions within the grid cell at which we are computing
    * the interpolation, in units of grid cell size
    */
-  double t;
-  double u;
-  double t0;
-  double t1;
-  double t2;
-  double t3;
-  double u0;
-  double u1;
+  double t = NAN;
+  double u = NAN;
+  double t0 = NAN;
+  double t1 = NAN;
+  double t2 = NAN;
+  double t3 = NAN;
+  double u0 = NAN;
+  double u1 = NAN;
   double v = NAN;
-  size_t xi;
-  size_t yi;
+  size_t xi = 0;
+  size_t yi = 0;
 
   /* first compute the indices into the data arrays where we are interpolating */
   if (xa != NULL) {

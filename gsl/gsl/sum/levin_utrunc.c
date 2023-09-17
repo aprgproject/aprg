@@ -24,6 +24,7 @@
 #include <gsl/gsl_test.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sum.h>
+#include <math.h>
 
 int
 gsl_sum_levin_utrunc_accel (const double *array,
@@ -65,15 +66,18 @@ gsl_sum_levin_utrunc_minmax (const double *array,
     
       const double SMALL = 0.01;
       const size_t nmax = GSL_MAX (max_terms, array_size) - 1;
-      double trunc_n = 0.0, trunc_nm1 = 0.0;
-      double actual_trunc_n = 0.0, actual_trunc_nm1 = 0.0;
-      double result_n = 0.0, result_nm1 = 0.0;
-      size_t n;
+      double trunc_n = 0.0;
+      double trunc_nm1 = 0.0;
+      double actual_trunc_n = 0.0;
+      double actual_trunc_nm1 = 0.0;
+      double result_n = 0.0;
+      double result_nm1 = 0.0;
+      size_t n = 0;
       int better = 0;
       int before = 0;
       int converging = 0;
       double least_trunc = GSL_DBL_MAX;
-      double result_least_trunc;
+      double result_least_trunc = NAN;
 
       /* Calculate specified minimum number of terms. No convergence
          tests are made, and no truncation information is stored. */
@@ -128,8 +132,9 @@ gsl_sum_levin_utrunc_minmax (const double *array,
                   result_least_trunc = result_n;
                 }
 
-              if (fabs (trunc_n / result_n) < 10.0 * GSL_MACH_EPS)
+              if (fabs (trunc_n / result_n) < 10.0 * GSL_MACH_EPS) {
                 break;
+}
             }
         }
 
@@ -143,8 +148,8 @@ gsl_sum_levin_utrunc_minmax (const double *array,
           w->terms_used = n;
           return GSL_SUCCESS;
         }
-      else
-        {
+      
+        
           /* Never reached the convergence region. Use the last
              calculated values. */
 
@@ -152,7 +157,7 @@ gsl_sum_levin_utrunc_minmax (const double *array,
           *abserr_trunc = trunc_n;
           w->terms_used = n;
           return GSL_SUCCESS;
-        }
+       
    
 }
 
@@ -182,7 +187,7 @@ gsl_sum_levin_utrunc_step (const double term,
     
       double factor = 1.0;
       double ratio = (double) n / (n + 1.0);
-      int j;
+      int j = 0;
 
       w->sum_plain += term;
       w->q_den[n] = 1.0 / (term * (n + 1.0) * (n + 1.0));

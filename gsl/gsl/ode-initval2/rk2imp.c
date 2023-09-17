@@ -278,7 +278,7 @@ rk2imp_apply (void *vstate, size_t dim, double t, double h,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < dim; i++)
         {
@@ -448,8 +448,9 @@ rk2imp_apply (void *vstate, size_t dim, double t, double h,
     int s = modnewton1_solve ((void *) esol, A, c, t, h / 2.0, y,
                               sys, YZ, errlev);
 
-    if (s != GSL_SUCCESS)
+    if (s != GSL_SUCCESS) {
       return s;
+}
   }
 
   {
@@ -514,7 +515,7 @@ rk2imp_apply (void *vstate, size_t dim, double t, double h,
   /* Error estimation */
 
   {
-    size_t i;
+    size_t i = 0;
     for (i = 0; i < dim; i++)
       {
         yerr[i] = ODEIV_ERR_SAFETY * 0.5 *

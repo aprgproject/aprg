@@ -34,7 +34,7 @@ double
 gsl_cdf_gumbel1_Q (const double x, const double a, const double b)
 {
   double u = a * x - log (b);
-  double Q;
+  double Q = NAN;
   double P = exp (-exp (-u));
 
   if (P < 0.5)

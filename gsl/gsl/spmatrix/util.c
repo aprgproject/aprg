@@ -49,7 +49,7 @@ void
 gsl_spmatrix_cumsum(const size_t n, int * c)
 {
   int sum = 0;
-  size_t k;
+  size_t k = 0;
 
   for (k = 0; k < n; ++k)
     {

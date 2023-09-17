@@ -46,8 +46,8 @@ static int
 newton_alloc (void * vstate, size_t n)
 {
   newton_state_t * state = (newton_state_t *) vstate;
-  gsl_permutation * p;
-  gsl_matrix * m;
+  gsl_permutation * p = NULL;
+  gsl_matrix * m = NULL;
 
   m = gsl_matrix_calloc (n,n);
   
@@ -77,7 +77,8 @@ newton_set (void * vstate, gsl_multiroot_function_fdf * FDF, gsl_vector * x, gsl
 {
   newton_state_t * state = (newton_state_t *) vstate;
 
-  size_t i, n = FDF->n ;
+  size_t i;
+  size_t n = FDF->n ;
 
   state = 0 ; /* avoid warnings about unused parameters */
 
@@ -96,9 +97,9 @@ newton_iterate (void * vstate, gsl_multiroot_function_fdf * fdf, gsl_vector * x,
 {
   newton_state_t * state = (newton_state_t *) vstate;
   
-  int signum;
+  int signum = 0;
 
-  size_t i;
+  size_t i = 0;
 
   size_t n = fdf->n ;
 
@@ -109,8 +110,9 @@ newton_iterate (void * vstate, gsl_multiroot_function_fdf * fdf, gsl_vector * x,
   {
     int status = gsl_linalg_LU_solve (state->lu, state->permutation, f, dx);
 
-    if (status)
+    if (status) {
       return status;
+}
   }   
       
   for (i = 0; i < n; i++)

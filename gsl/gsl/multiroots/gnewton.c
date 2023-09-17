@@ -53,9 +53,10 @@ static int
 gnewton_alloc (void * vstate, size_t n)
 {
   gnewton_state_t * state = (gnewton_state_t *) vstate;
-  gsl_vector * d, * x_trial ;
-  gsl_permutation * p;
-  gsl_matrix * m;
+  gsl_vector * d;
+  gsl_vector * x_trial ;
+  gsl_permutation * p = NULL;
+  gsl_matrix * m = NULL;
 
   m = gsl_matrix_calloc (n,n);
   
@@ -110,7 +111,8 @@ static int
 gnewton_set (void * vstate, gsl_multiroot_function_fdf * FDF, gsl_vector * x, gsl_vector * f, gsl_matrix * J, gsl_vector * dx)
 {
   gnewton_state_t * state = (gnewton_state_t *) vstate;
-  size_t i, n = FDF->n ;
+  size_t i;
+  size_t n = FDF->n ;
 
   GSL_MULTIROOT_FN_EVAL_F_DF (FDF, x, f, J);
 
@@ -129,10 +131,12 @@ gnewton_iterate (void * vstate, gsl_multiroot_function_fdf * fdf, gsl_vector * x
 {
   gnewton_state_t * state = (gnewton_state_t *) vstate;
   
-  int signum ;
-  double t, phi0, phi1;
+  int signum = 0 ;
+  double t;
+  double phi0;
+  double phi1;
 
-  size_t i;
+  size_t i = 0;
 
   size_t n = fdf->n ;
 
@@ -142,8 +146,9 @@ gnewton_iterate (void * vstate, gsl_multiroot_function_fdf * fdf, gsl_vector * x
 
   {
     int status = gsl_linalg_LU_solve (state->lu, state->permutation, f, state->d);
-    if (status)
+    if (status) {
       return status;
+}
   }
 
   t = 1;

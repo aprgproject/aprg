@@ -37,8 +37,10 @@ gsl_multiroot_fdjacobian (gsl_multiroot_function * F,
     }
 
   {
-    size_t i,j;
-    gsl_vector *x1, *f1;
+    size_t i;
+    size_t j;
+    gsl_vector *x1;
+    gsl_vector *f1;
 
     x1 = gsl_vector_alloc (n);
 
@@ -104,8 +106,8 @@ gsl_multiroot_fdjacobian (gsl_multiroot_function * F,
     gsl_vector_free (f1);
   }
 
-  if (status)
+  if (status) {
     return status;
-  else
+  } 
     return GSL_SUCCESS;
 }

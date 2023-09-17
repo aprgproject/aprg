@@ -130,8 +130,8 @@ rk2imp_step (double *y, rk2imp_state_t *state,
   double *Y1 = state->Y1;
   double *ytmp = state->ytmp;
   int max_iter=3;
-  int nu;
-  size_t i;
+  int nu = 0;
+  size_t i = 0;
 
   /* iterative solution of Y1 = y0 + h/2 * f(t + h/2, Y1) 
      Y1 should include initial values at call.
@@ -179,7 +179,7 @@ rk2imp_apply (void *vstate,
 {
   rk2imp_state_t *state = (rk2imp_state_t *) vstate;
 
-  size_t i;
+  size_t i = 0;
 
   double *Y1 = state->Y1;
   double *y0 = state->y0;

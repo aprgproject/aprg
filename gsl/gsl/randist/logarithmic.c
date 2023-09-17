@@ -54,10 +54,10 @@ gsl_ran_logarithmic (const gsl_rng * r, const double p)
         {
           return 2;
         }
-      else
-        {
+      
+        
           return 1 ;
-        }
+       
    
 }
 

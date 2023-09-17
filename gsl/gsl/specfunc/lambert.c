@@ -133,7 +133,7 @@ gsl_sf_lambert_W0_e(double x, gsl_sf_result * result)
     result->err =  GSL_DBL_EPSILON; /* cannot error is zero, maybe q == 0 by "accident" */
     return GSL_SUCCESS;
   }
-  else if(q < 1.0e-03) {
+  if(q < 1.0e-03) {
     /* series near -1/E in sqrt(q) */
     const double r = sqrt(q);
     result->val = series_eval(r);
@@ -178,7 +178,7 @@ gsl_sf_lambert_Wm1_e(double x, gsl_sf_result * result)
     static const unsigned int MAX_ITERS = 32;
     const double one_over_E = 1.0/M_E;
     const double q = x + one_over_E;
-    double w;
+    double w = NAN;
 
     if (q < 0.0) {
       /* As in the W0 branch above, return some reasonable answer anyway. */

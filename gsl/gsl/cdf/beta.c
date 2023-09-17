@@ -28,7 +28,7 @@
 double
 gsl_cdf_beta_P (const double x, const double a, const double b)
 {
-  double P;
+  double P = NAN;
 
   if (x <= 0.0 )
     {
@@ -48,7 +48,7 @@ gsl_cdf_beta_P (const double x, const double a, const double b)
 double
 gsl_cdf_beta_Q (const double x, const double a, const double b)
 {
-  double Q;
+  double Q = NAN;
 
   if ( x >= 1.0)
     {

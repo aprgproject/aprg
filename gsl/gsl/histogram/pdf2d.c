@@ -30,8 +30,8 @@ gsl_histogram2d_pdf_sample (const gsl_histogram2d_pdf * p,
                             double r1, double r2,
                             double *x, double *y)
 {
-  size_t k;
-  int status;
+  size_t k = 0;
+  int status = 0;
 
 /* Wrap the exclusive top of the bin down to the inclusive bottom of
    the bin. Since this is a single point it should not affect the
@@ -68,7 +68,7 @@ gsl_histogram2d_pdf_alloc (const size_t nx, const size_t ny)
 {
   const size_t n = nx * ny;
 
-  gsl_histogram2d_pdf *p;
+  gsl_histogram2d_pdf *p = NULL;
 
   if (n == 0)
     {
@@ -126,7 +126,7 @@ gsl_histogram2d_pdf_alloc (const size_t nx, const size_t ny)
 int
 gsl_histogram2d_pdf_init (gsl_histogram2d_pdf * p, const gsl_histogram2d * h)
 {
-  size_t i;
+  size_t i = 0;
   const size_t nx = p->nx;
   const size_t ny = p->ny;
   const size_t n = nx * ny;
@@ -156,7 +156,8 @@ gsl_histogram2d_pdf_init (gsl_histogram2d_pdf * p, const gsl_histogram2d * h)
     }
 
   {
-    double mean = 0, sum = 0;
+    double mean = 0;
+    double sum = 0;
 
     for (i = 0; i < n; i++)
       {

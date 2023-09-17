@@ -119,7 +119,7 @@ gsl_odeiv_evolve_apply (gsl_odeiv_evolve * e,
 {
   const double t0 = *t;
   double h0 = *h;
-  int step_status;
+  int step_status = 0;
   int final_step = 0;
   double dt = t1 - t0;  /* remaining time, possibly less than h */
 

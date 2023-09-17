@@ -271,7 +271,7 @@ rk4imp_apply (void *vstate, size_t dim, double t, double h,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < dim; i++)
         {
@@ -321,7 +321,7 @@ rk4imp_apply (void *vstate, size_t dim, double t, double h,
   }
 
   {
-    size_t j;
+    size_t j = 0;
 
     for (j = 0; j < RK4IMP_STAGE; j++)
       {
@@ -368,7 +368,7 @@ rk4imp_apply (void *vstate, size_t dim, double t, double h,
   }
 
   {
-    size_t j;
+    size_t j = 0;
 
     for (j = 0; j < RK4IMP_STAGE; j++)
       {
@@ -384,8 +384,9 @@ rk4imp_apply (void *vstate, size_t dim, double t, double h,
   {
     int s = rksubs (ytmp, h / 2.0, y, fYZ, b, RK4IMP_STAGE, dim);
 
-    if (s != GSL_SUCCESS)
+    if (s != GSL_SUCCESS) {
       return s;
+}
   }
 
   /* Save original y values in case of error */
@@ -405,7 +406,7 @@ rk4imp_apply (void *vstate, size_t dim, double t, double h,
   }
 
   {
-    size_t j;
+    size_t j = 0;
 
     for (j = 0; j < RK4IMP_STAGE; j++)
       {
@@ -439,7 +440,7 @@ rk4imp_apply (void *vstate, size_t dim, double t, double h,
   /* Error estimation */
 
   {
-    size_t i;
+    size_t i = 0;
     for (i = 0; i < dim; i++)
       {
         yerr[i] = ODEIV_ERR_SAFETY * 0.5 *

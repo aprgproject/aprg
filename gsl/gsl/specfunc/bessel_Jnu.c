@@ -24,6 +24,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_bessel.h>
 #include <gsl/gsl_sf_sincos_pi.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -111,21 +112,22 @@ gsl_sf_bessel_Jnupos_e(const double nu, const double x, gsl_sf_result * result)
 
     /* Determine the J ratio at nu.
      */
-    double Jnup1_Jnu;
-    double sgn_Jnu;
+    double Jnup1_Jnu = NAN;
+    double sgn_Jnu = NAN;
     const int stat_CF1 = gsl_sf_bessel_J_CF1(nu, x, &Jnup1_Jnu, &sgn_Jnu);
 
     if(x < 2.0) {
       /* Determine Y_mu, Y_mup1 directly and recurse forward to nu.
        * Then use the CF1 information to solve for J_nu and J_nup1.
        */
-      gsl_sf_result Y_mu, Y_mup1;
+      gsl_sf_result Y_mu;
+      gsl_sf_result Y_mup1;
       const int stat_mu = gsl_sf_bessel_Y_temme(mu, x, &Y_mu, &Y_mup1);
       
       double Ynm1 = Y_mu.val;
       double Yn   = Y_mup1.val;
       double Ynp1 = 0.0;
-      int n;
+      int n = 0;
       for(n=1; n<N; n++) {
         Ynp1 = 2.0*(mu+n)/x * Yn - Ynm1;
         Ynm1 = Yn;
@@ -136,7 +138,7 @@ gsl_sf_bessel_Jnupos_e(const double nu, const double x, gsl_sf_result * result)
       result->err = GSL_DBL_EPSILON * (N + 2.0) * fabs(result->val);
       return GSL_ERROR_SELECT_2(stat_mu, stat_CF1);
     }
-    else {
+    
       /* Recurse backward from nu to mu, determining the J ratio
        * at mu. Use this together with a Steed method CF2 to
        * determine the actual J_mu, and thus obtain the normalization.
@@ -169,7 +171,7 @@ gsl_sf_bessel_Jnupos_e(const double nu, const double x, gsl_sf_result * result)
       result->err = 2.0 * GSL_DBL_EPSILON * (N + 2.0) * fabs(result->val);
 
       return GSL_ERROR_SELECT_2(stat_CF2, stat_CF1);
-    }
+   
  
 }
 

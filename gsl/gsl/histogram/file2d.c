@@ -28,13 +28,15 @@ gsl_histogram2d_fread (FILE * stream, gsl_histogram2d * h)
 {
   int status = gsl_block_raw_fread (stream, h->xrange, h->nx + 1, 1);
 
-  if (status)
+  if (status) {
     return status;
+}
 
   status = gsl_block_raw_fread (stream, h->yrange, h->ny + 1, 1);
 
-  if (status)
+  if (status) {
     return status;
+}
 
   status = gsl_block_raw_fread (stream, h->bin, h->nx * h->ny, 1);
 
@@ -46,13 +48,15 @@ gsl_histogram2d_fwrite (FILE * stream, const gsl_histogram2d * h)
 {
   int status = gsl_block_raw_fwrite (stream, h->xrange, h->nx + 1, 1);
 
-  if (status)
+  if (status) {
     return status;
+}
 
   status = gsl_block_raw_fwrite (stream, h->yrange, h->ny + 1, 1);
 
-  if (status)
+  if (status) {
     return status;
+}
 
   status = gsl_block_raw_fwrite (stream, h->bin, h->nx * h->ny, 1);
   return status;
@@ -62,10 +66,11 @@ int
 gsl_histogram2d_fprintf (FILE * stream, const gsl_histogram2d * h,
                          const char *range_format, const char *bin_format)
 {
-  size_t i, j;
+  size_t i;
+  size_t j;
   const size_t nx = h->nx;
   const size_t ny = h->ny;
-  int status;
+  int status = 0;
 
   for (i = 0; i < nx; i++)
     {
@@ -155,10 +160,12 @@ gsl_histogram2d_fprintf (FILE * stream, const gsl_histogram2d * h,
 int
 gsl_histogram2d_fscanf (FILE * stream, gsl_histogram2d * h)
 {
-  size_t i, j;
+  size_t i;
+  size_t j;
   const size_t nx = h->nx;
   const size_t ny = h->ny;
-  double xupper, yupper;
+  double xupper;
+  double yupper;
 
   for (i = 0; i < nx; i++)
     {

@@ -47,13 +47,14 @@ inv_cornish_fisher (double z, double nu)
 double
 gsl_cdf_tdist_Pinv (const double P, const double nu)
 {
-  double x, ptail;
+  double x;
+  double ptail;
 
   if (P == 1.0)
     {
       return GSL_POSINF;
     }
-  else if (P == 0.0)
+  if (P == 0.0)
     {
       return GSL_NEGINF;
     }
@@ -63,7 +64,7 @@ gsl_cdf_tdist_Pinv (const double P, const double nu)
       x = tan (M_PI * (P - 0.5));
       return x;
     }
-  else if (nu == 2.0)
+  if (nu == 2.0)
     {
       x = (2 * P - 1) / sqrt (2 * P * (1 - P));
       return x;
@@ -100,15 +101,17 @@ gsl_cdf_tdist_Pinv (const double P, const double nu)
     }
 
   {
-    double dP, phi;
+    double dP;
+    double phi;
     unsigned int n = 0;
 
   start:
     dP = P - gsl_cdf_tdist_P (x, nu);
     phi = gsl_ran_tdist_pdf (x, nu);
 
-    if (dP == 0.0 || n++ > 32)
+    if (dP == 0.0 || n++ > 32) {
       goto end;
+}
 
     {
       double lambda = dP / phi;
@@ -122,15 +125,17 @@ gsl_cdf_tdist_Pinv (const double P, const double nu)
           step += step1;
         }
 
-      if (P > 0.5 && x + step < 0)
+      if (P > 0.5 && x + step < 0) {
         x /= 2;
-      else if (P < 0.5 && x + step > 0)
+      } else if (P < 0.5 && x + step > 0) {
         x /= 2;
-      else
+      } else {
         x += step;
+}
 
-      if (fabs (step) > 1e-10 * fabs (x))
+      if (fabs (step) > 1e-10 * fabs (x)) {
         goto start;
+}
     }
     
   end:
@@ -146,13 +151,14 @@ gsl_cdf_tdist_Pinv (const double P, const double nu)
 double
 gsl_cdf_tdist_Qinv (const double Q, const double nu)
 {
-  double x, qtail;
+  double x;
+  double qtail;
 
   if (Q == 0.0)
     {
       return GSL_POSINF;
     }
-  else if (Q == 1.0)
+  if (Q == 1.0)
     {
       return GSL_NEGINF;
     }
@@ -162,7 +168,7 @@ gsl_cdf_tdist_Qinv (const double Q, const double nu)
       x = tan (M_PI * (0.5 - Q));
       return x;
     }
-  else if (nu == 2.0)
+  if (nu == 2.0)
     {
       x = (1 - 2 * Q) / sqrt (2 * Q * (1 - Q));
       return x;
@@ -199,15 +205,17 @@ gsl_cdf_tdist_Qinv (const double Q, const double nu)
     }
 
   {
-    double dQ, phi;
+    double dQ;
+    double phi;
     unsigned int n = 0;
 
   start:
     dQ = Q - gsl_cdf_tdist_Q (x, nu);
     phi = gsl_ran_tdist_pdf (x, nu);
 
-    if (dQ == 0.0 || n++ > 32)
+    if (dQ == 0.0 || n++ > 32) {
       goto end;
+}
 
     {
       double lambda = - dQ / phi;
@@ -221,15 +229,17 @@ gsl_cdf_tdist_Qinv (const double Q, const double nu)
           step += step1;
         }
 
-      if (Q < 0.5 && x + step < 0)
+      if (Q < 0.5 && x + step < 0) {
         x /= 2;
-      else if (Q > 0.5 && x + step > 0)
+      } else if (Q > 0.5 && x + step > 0) {
         x /= 2;
-      else
+      } else {
         x += step;
+}
 
-      if (fabs (step) > 1e-10 * fabs (x))
+      if (fabs (step) > 1e-10 * fabs (x)) {
         goto start;
+}
     }
   }
 

@@ -25,7 +25,7 @@ gsl_multimin_fminimizer *
 gsl_multimin_fminimizer_alloc (const gsl_multimin_fminimizer_type * T,
                                size_t n)
 {
-  int status;
+  int status = 0;
 
   gsl_multimin_fminimizer *s =
     (gsl_multimin_fminimizer *) malloc (sizeof (gsl_multimin_fminimizer));

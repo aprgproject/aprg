@@ -346,7 +346,7 @@ int gsl_sf_expm1_e(const double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   } 
-  else if(x < GSL_LOG_DBL_MAX) {
+  if(x < GSL_LOG_DBL_MAX) {
     result->val = exp(x) - 1.0;
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
@@ -376,7 +376,7 @@ int gsl_sf_exprel_e(const double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   } 
-  else if(x < GSL_LOG_DBL_MAX) {
+  if(x < GSL_LOG_DBL_MAX) {
     result->val = (exp(x) - 1.0)/x;
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
@@ -406,7 +406,7 @@ int gsl_sf_exprel_2_e(double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   } 
-  else if(x < GSL_LOG_DBL_MAX) {
+  if(x < GSL_LOG_DBL_MAX) {
     result->val = 2.0*(exp(x) - 1.0 - x)/(x*x);
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
@@ -508,9 +508,9 @@ gsl_sf_exprel_n_e(const int N, const double x, gsl_sf_result * result)
           return stat_eG;
        
       }
-      else {
+      
         OVERFLOW_ERROR(result);
-      }
+     
     }
     else if(x > -10.0*N) {
       return exprel_n_CF(N, x, result);

@@ -356,7 +356,8 @@ msadams_calccoeffs (const size_t ord, const size_t ordwait,
     }
   else
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
       double hsum = h;
       double st1 = 0.0;         /* sum term coefficients */
       double st2 = 0.0;
@@ -506,7 +507,8 @@ msadams_corrector (void *vstate, const gsl_odeiv2_system * sys,
      system is solved by functional iteration.
    */
 
-  size_t mi, i;
+  size_t mi;
+  size_t i;
   const size_t max_iter = 3;    /* Maximum number of iterations */
   double convrate = 1.0;        /* convergence rate */
   double stepnorm = 0.0;        /* norm of correction step */
@@ -670,7 +672,7 @@ msadams_eval_order (gsl_vector * abscor, gsl_vector * tempvec,
      or current+1). Order which maximizes the step length is selected.
    */
 
-  size_t i;
+  size_t i = 0;
 
   /* step size estimates at current order, order-1 and order+1 */
   double ordest = 0.0;
@@ -791,7 +793,7 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
   double ordp2coeff = 0.0;
   double errcoeff = 0.0;        /* error coefficient */
 
-  int deltaord;
+  int deltaord = 0;
 
 #ifdef DEBUG
   {
@@ -916,7 +918,7 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < dim; i++)
         {
@@ -949,7 +951,7 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
 
   if (state->ni == 0)
     {
-      size_t i;
+      size_t i = 0;
 
       DBL_ZERO_MEMSET (z, (MSADAMS_MAX_ORD + 1) * dim);
 
@@ -1004,7 +1006,8 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
   if (deltaord == -1)
     {
       double hsum = 0.0;
-      size_t i, j;
+      size_t i;
+      size_t j;
 
       /* Calculate coefficients used in adjustment to l */
 
@@ -1030,11 +1033,12 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
 
       /* Scale Nordsieck matrix */
 
-      for (i = 2; i < ord + 1; i++)
+      for (i = 2; i < ord + 1; i++) {
         for (j = 0; j < dim; j++)
           {
             z[i * dim + j] += -l[i] * z[(ord + 1) * dim + j];
           }
+}
 
 #ifdef DEBUG
       printf ("-- order decrease detected, Nordsieck modified\n");
@@ -1045,7 +1049,8 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
 
   if (state->ni > 0 && h != hprev[0])
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
       const double hrel = h / hprev[0];
       double coeff = hrel;
 
@@ -1074,14 +1079,18 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
   /* Carry out the prediction step */
 
   {
-    size_t i, j, k;
+    size_t i;
+    size_t j;
+    size_t k;
 
-    for (i = 1; i < ord + 1; i++)
-      for (j = ord; j > i - 1; j--)
+    for (i = 1; i < ord + 1; i++) {
+      for (j = ord; j > i - 1; j--) {
         for (k = 0; k < dim; k++)
           {
             z[(j - 1) * dim + k] += z[j * dim + k];
           }
+}
+}
 
 #ifdef DEBUG
     {
@@ -1098,7 +1107,7 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
 
   /* Calculate correction step to abscor */
   {
-    int s;
+    int s = 0;
     s = msadams_corrector (vstate, sys, t, h, dim, z, errlev, l, errcoeff,
                            abscor, relcor, ytmp, ytmp2);
     if (s != GSL_SUCCESS)
@@ -1110,13 +1119,15 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
   {
     /* Add accepted final correction step to Nordsieck matrix */
 
-    size_t i, j;
+    size_t i;
+    size_t j;
 
-    for (i = 0; i < ord + 1; i++)
+    for (i = 0; i < ord + 1; i++) {
       for (j = 0; j < dim; j++)
         {
           z[i * dim + j] += l[i] * gsl_vector_get (abscor, j);
         }
+}
 
 #ifdef DEBUG
     {
@@ -1181,7 +1192,7 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
 
   /* Scale abscor with errlev for later use in norm calculations */
   {
-    size_t i;
+    size_t i = 0;
 
     for (i = 0; i < dim; i++)
       {
@@ -1195,7 +1206,7 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
 
   if (state->ordwait == 1 && ord < MSADAMS_MAX_ORD)
     {
-      size_t i;
+      size_t i = 0;
 
       state->ordp1coeffprev = ordp1coeff;
       state->ordm1coeff = ordm1coeff;
@@ -1218,7 +1229,7 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
 
   /* Save information about current step in state and update counters */
   {
-    size_t i;
+    size_t i = 0;
 
     state->ordprev = ord;
 

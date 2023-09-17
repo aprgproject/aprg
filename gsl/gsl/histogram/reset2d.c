@@ -24,7 +24,7 @@
 void
 gsl_histogram2d_reset (gsl_histogram2d * h)
 {
-  size_t i;
+  size_t i = 0;
   const size_t nx = h->nx;
   const size_t ny = h->ny;
 

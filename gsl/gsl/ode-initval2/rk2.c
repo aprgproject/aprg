@@ -107,7 +107,7 @@ rk2_apply (void *vstate,
 {
   rk2_state_t *state = (rk2_state_t *) vstate;
 
-  size_t i;
+  size_t i = 0;
 
   double *const k1 = state->k1;
   double *const k2 = state->k2;

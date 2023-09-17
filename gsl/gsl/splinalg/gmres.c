@@ -27,6 +27,7 @@
 #include <gsl/gsl_spmatrix.h>
 #include <gsl/gsl_spblas.h>
 #include <gsl/gsl_splinalg.h>
+#include <math.h>
 
 /*
  * The code in this module is based on the Householder GMRES
@@ -74,7 +75,7 @@ Return: pointer to workspace
 static void *
 gmres_alloc(const size_t n, const size_t m)
 {
-  gmres_state_t *state;
+  gmres_state_t *state = NULL;
 
   if (n == 0)
     {
@@ -91,10 +92,11 @@ gmres_alloc(const size_t n, const size_t m)
   state->n = n;
 
   /* compute size of Krylov subspace */
-  if (m == 0)
+  if (m == 0) {
     state->m = GSL_MIN(n, 10);
-  else
+  } else {
     state->m = GSL_MIN(n, m);
+}
 
   state->r = gsl_vector_alloc(n);
   if (!state->r)
@@ -142,23 +144,29 @@ gmres_free(void *vstate)
 {
   gmres_state_t *state = (gmres_state_t *) vstate;
 
-  if (state->r)
+  if (state->r) {
     gsl_vector_free(state->r);
+}
 
-  if (state->H)
+  if (state->H) {
     gsl_matrix_free(state->H);
+}
 
-  if (state->tau)
+  if (state->tau) {
     gsl_vector_free(state->tau);
+}
 
-  if (state->y)
+  if (state->y) {
     gsl_vector_free(state->y);
+}
 
-  if (state->c)
+  if (state->c) {
     free(state->c);
+}
 
-  if (state->s)
+  if (state->s) {
     free(state->s);
+}
 
   free(state);
 } /* gmres_free() */
@@ -221,9 +229,10 @@ gmres_iterate(const gsl_spmatrix *A, const gsl_vector *b,
       const size_t maxit = state->m;
       const double normb = gsl_blas_dnrm2(b); /* ||b|| */
       const double reltol = tol * normb;      /* tol*||b|| */
-      double normr;                           /* ||r|| */
-      size_t m, k;
-      double tau;                             /* householder scalar */
+      double normr = NAN;                           /* ||r|| */
+      size_t m;
+      size_t k;
+      double tau = NAN;                             /* householder scalar */
       gsl_matrix *H = state->H;               /* Hessenberg matrix */
       gsl_vector *r = state->r;               /* residual vector */
       gsl_vector *w = state->y;               /* least squares RHS */
@@ -263,7 +272,8 @@ gmres_iterate(const gsl_spmatrix *A, const gsl_vector *b,
       for (m = 1; m <= maxit; ++m)
         {
           size_t j = m - 1; /* C indexing */
-          double c, s;      /* Givens rotation */
+          double c;
+          double s;      /* Givens rotation */
 
           /* v_m */
           gsl_vector_view vm = gsl_matrix_column(H, m);
@@ -365,8 +375,9 @@ gmres_iterate(const gsl_spmatrix *A, const gsl_vector *b,
        */
 
       /* rewind m if we exceeded maxit iterations */
-      if (m > maxit)
+      if (m > maxit) {
         m--;
+}
 
       /* Step 3a: solve triangular system R_m y_m = w, in place */
       Rm = gsl_matrix_submatrix(H, 0, 1, m, m);
@@ -403,10 +414,11 @@ gmres_iterate(const gsl_spmatrix *A, const gsl_vector *b,
       gsl_spblas_dgemv(CblasNoTrans, -1.0, A, x, 1.0, r);
       normr = gsl_blas_dnrm2(r);
 
-      if (normr <= reltol)
+      if (normr <= reltol) {
         status = GSL_SUCCESS;  /* converged */
-      else
+      } else {
         status = GSL_CONTINUE; /* not yet converged */
+}
 
       /* store residual norm */
       state->normr = normr;

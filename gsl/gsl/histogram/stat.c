@@ -41,7 +41,7 @@ double
 gsl_histogram_mean (const gsl_histogram * h)
 {
   const size_t n = h->n;
-  size_t i;
+  size_t i = 0;
 
   /* Compute the bin-weighted arithmetic mean M of a histogram using the
      recurrence relation
@@ -73,7 +73,7 @@ double
 gsl_histogram_sigma (const gsl_histogram * h)
 {
   const size_t n = h->n;
-  size_t i;
+  size_t i = 0;
 
   long double wvariance = 0 ;
   long double wmean = 0;
@@ -129,11 +129,12 @@ gsl_histogram_sum(const gsl_histogram * h)
 {
   double sum=0;
   size_t i=0;
-  size_t n;
+  size_t n = 0;
   n=h->n;
 
-  while(i < n)
+  while(i < n) {
     sum += h->bin[i++];
+}
 
   return sum;
 }

@@ -177,8 +177,9 @@ rk2simp_step (double *y, rk2simp_state_t * state,
   double *Y1 = state->Y1;
   double *ytmp = state->ytmp;
 
-  size_t i;
-  int s, ps;
+  size_t i = 0;
+  int s;
+  int ps;
 
   gsl_matrix_view J = gsl_matrix_view_array (state->dfdy, dim, dim);
 
@@ -254,7 +255,7 @@ rk2simp_apply (void *vstate, size_t dim, double t, double h,
 {
   rk2simp_state_t *state = (rk2simp_state_t *) vstate;
 
-  size_t i;
+  size_t i = 0;
 
   double *y0 = state->y0;
   double *y0_orig = state->y0_orig;

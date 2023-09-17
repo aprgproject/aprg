@@ -162,12 +162,17 @@ conjugate_fr_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
   double pnorm = state->pnorm;
   double g0norm = state->g0norm;
 
-  double fa = *f, fb, fc;
-  double dir;
-  double stepa = 0.0, stepb, stepc = state->step, tol = state->tol;
+  double fa = *f;
+  double fb;
+  double fc;
+  double dir = NAN;
+  double stepa = 0.0;
+  double stepb;
+  double stepc = state->step;
+  double tol = state->tol;
 
-  double g1norm;
-  double pg;
+  double g1norm = NAN;
+  double pg = NAN;
 
   if (pnorm == 0.0 || g0norm == 0.0)
     {

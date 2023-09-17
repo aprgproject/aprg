@@ -113,7 +113,7 @@ gsl_ran_hypergeometric_pdf (const unsigned int k,
     }
   
     
-      double p;
+      double p = NAN;
       
       double c1 = gsl_sf_lnchoose(n1,k);
       double c2 = gsl_sf_lnchoose(n2,t-k);

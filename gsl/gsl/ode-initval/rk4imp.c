@@ -162,8 +162,8 @@ rk4imp_step (double *y, rk4imp_state_t *state,
 
   const double ir3 = 1.0 / M_SQRT3;
   const int iter_steps = 3;
-  int nu;
-  size_t i;
+  int nu = 0;
+  size_t i = 0;
 
   double *const k1nu = state->k1nu;
   double *const k2nu = state->k2nu;
@@ -229,7 +229,7 @@ rk4imp_apply (void *vstate,
 {
   rk4imp_state_t *state = (rk4imp_state_t *) vstate;
 
-  size_t i;
+  size_t i = 0;
 
   double *y0 = state->y0;
   double *y0_orig = state->y0_orig;

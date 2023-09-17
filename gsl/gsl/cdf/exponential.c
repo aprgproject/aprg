@@ -35,12 +35,12 @@ gsl_cdf_exponential_P (const double x, const double mu)
     {
       return 0;
     }
-  else
-    {
+  
+    
       double P = -expm1 (-x / mu);
 
       return P;
-    }
+   
 }
 
 double
@@ -50,10 +50,10 @@ gsl_cdf_exponential_Q (const double x, const double mu)
     {
       return 1;
     }
-  else
-    {
+  
+    
       double Q = exp (-x / mu);
 
       return Q;
-    }
+   
 }

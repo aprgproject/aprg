@@ -59,8 +59,10 @@ nmsimplex_move_corner (const double coeff, const nmsimplex_state_t * state,
 
   gsl_matrix *x1 = state->x1;
 
-  size_t i, j;
-  double newval, mp;
+  size_t i;
+  size_t j;
+  double newval;
+  double mp;
 
   for (j = 0; j < x1->size2; j++)
     {
@@ -96,8 +98,9 @@ nmsimplex_contract_by_best (nmsimplex_state_t * state, size_t best,
   gsl_matrix *x1 = state->x1;
   gsl_vector *y1 = state->y1;
 
-  size_t i, j;
-  double newval;
+  size_t i;
+  size_t j;
+  double newval = NAN;
 
   int status = GSL_SUCCESS;
 
@@ -139,8 +142,9 @@ nmsimplex_calc_center (const nmsimplex_state_t * state, gsl_vector * mp)
 
   gsl_matrix *x1 = state->x1;
 
-  size_t i, j;
-  double val;
+  size_t i;
+  size_t j;
+  double val = NAN;
 
   for (j = 0; j < x1->size2; j++)
     {
@@ -169,7 +173,7 @@ nmsimplex_size (nmsimplex_state_t * state)
   gsl_vector *mp = state->ws2;
 
   gsl_matrix *x1 = state->x1;
-  size_t i;
+  size_t i = 0;
 
   double ss = 0.0;
 
@@ -238,9 +242,9 @@ nmsimplex_set (void *vstate, gsl_multimin_function * f,
                const gsl_vector * x,
                double *size, const gsl_vector * step_size)
 {
-  int status;
-  size_t i;
-  double val;
+  int status = 0;
+  size_t i = 0;
+  double val = NAN;
 
   nmsimplex_state_t *state = (nmsimplex_state_t *) vstate;
 
@@ -328,11 +332,16 @@ nmsimplex_iterate (void *vstate, gsl_multimin_function * f,
   gsl_matrix *x1 = state->x1;
 
   size_t n = y1->size;
-  size_t i;
-  size_t hi, s_hi, lo;
-  double dhi, ds_hi, dlo;
-  int status;
-  double val, val2;
+  size_t i = 0;
+  size_t hi;
+  size_t s_hi;
+  size_t lo;
+  double dhi;
+  double ds_hi;
+  double dlo;
+  int status = 0;
+  double val;
+  double val2;
 
 
   if (xc->size != x->size)

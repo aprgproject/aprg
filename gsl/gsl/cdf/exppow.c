@@ -45,11 +45,11 @@ gsl_cdf_exppow_P (const double x, const double a, const double b)
       double P = 0.5 * gsl_sf_gamma_inc_Q (1.0 / b, pow (-u, b));
       return P;
     }
-  else
-    {
+  
+    
       double P = 0.5 * (1.0 + gsl_sf_gamma_inc_P (1.0 / b, pow (u, b)));
       return P;
-    }
+   
 }
 
 double
@@ -62,9 +62,9 @@ gsl_cdf_exppow_Q (const double x, const double a, const double b)
       double Q = 0.5 * (1.0 + gsl_sf_gamma_inc_P (1.0 / b, pow (-u, b)));
       return Q;
     }
-  else
-    {
+  
+    
       double Q = 0.5 * gsl_sf_gamma_inc_Q (1.0 / b, pow (u, b));
       return Q;
-    }
+   
 }

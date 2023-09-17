@@ -34,7 +34,7 @@ static void dwt_step (const gsl_wavelet * w, double *a, size_t stride, size_t n,
 static int
 binary_logn (const size_t n)
 {
-  size_t ntest;
+  size_t ntest = 0;
   size_t logn = 0;
   size_t k = 1;
 
@@ -58,11 +58,16 @@ static void
 dwt_step (const gsl_wavelet * w, double *a, size_t stride, size_t n,
           gsl_wavelet_direction dir, gsl_wavelet_workspace * work)
 {
-  double ai, ai1;
-  size_t i, ii;
-  size_t jf;
-  size_t k;
-  size_t n1, ni, nh, nmod;
+  double ai;
+  double ai1;
+  size_t i;
+  size_t ii;
+  size_t jf = 0;
+  size_t k = 0;
+  size_t n1;
+  size_t ni;
+  size_t nh;
+  size_t nmod;
 
   for (i = 0; i < work->n; i++)
     {
@@ -79,7 +84,8 @@ dwt_step (const gsl_wavelet * w, double *a, size_t stride, size_t n,
     {
       for (ii = 0, i = 0; i < n; i += 2, ii++)
         {
-          double h = 0, g = 0;
+          double h = 0;
+          double g = 0;
 
           ni = i + nmod;
           
@@ -121,7 +127,7 @@ gsl_wavelet_transform (const gsl_wavelet * w,
                        gsl_wavelet_direction dir, 
                        gsl_wavelet_workspace * work)
 {
-  size_t i;
+  size_t i = 0;
 
   if (work->n < n)
     {
@@ -189,7 +195,7 @@ gsl_wavelet2d_transform (const gsl_wavelet * w,
                          size_t size2, gsl_wavelet_direction dir,
                          gsl_wavelet_workspace * work)
 {
-  size_t i;
+  size_t i = 0;
 
   if (size1 != size2)
     {
@@ -243,7 +249,8 @@ gsl_wavelet2d_nstransform (const gsl_wavelet * w,
                            size_t size2, gsl_wavelet_direction dir,
                            gsl_wavelet_workspace * work)
 {
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   if (size1 != size2)
     {

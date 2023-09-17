@@ -25,7 +25,7 @@
 gsl_histogram *
 gsl_histogram_alloc (size_t n)
 {
-  gsl_histogram *h;
+  gsl_histogram *h = NULL;
 
   if (n == 0)
     {
@@ -70,7 +70,7 @@ gsl_histogram_alloc (size_t n)
 static void
 make_uniform (double range[], size_t n, double xmin, double xmax)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i <= n; i++)
     {
@@ -84,7 +84,7 @@ gsl_histogram *
 gsl_histogram_calloc_uniform (const size_t n, const double xmin,
                               const double xmax)
 {
-  gsl_histogram *h;
+  gsl_histogram *h = NULL;
 
   if (xmin >= xmax)
     {
@@ -114,7 +114,7 @@ gsl_histogram_calloc (size_t n)
     }
 
   {
-    size_t i;
+    size_t i = 0;
 
     for (i = 0; i < n + 1; i++)
       {
@@ -147,7 +147,7 @@ gsl_histogram_free (gsl_histogram * h)
 int 
 gsl_histogram_set_ranges_uniform (gsl_histogram * h, double xmin, double xmax)
 {
-  size_t i;
+  size_t i = 0;
   const size_t n = h->n;
 
   if (xmin >= xmax)
@@ -172,7 +172,7 @@ gsl_histogram_set_ranges_uniform (gsl_histogram * h, double xmin, double xmax)
 int 
 gsl_histogram_set_ranges (gsl_histogram * h, const double range[], size_t size)
 {
-  size_t i;
+  size_t i = 0;
   const size_t n = h->n;
 
   if (size != (n+1))

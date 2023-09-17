@@ -41,13 +41,14 @@
 #include <gsl/gsl_sf_gamma.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
+#include <math.h>
 
 #include "beta_inc.c"
 
 static double
 poly_eval (const double c[], unsigned int n, double x)
 {
-  unsigned int i;
+  unsigned int i = 0;
   double y = c[0] * x;
 
   for (i = 1; i < n; i++)
@@ -126,8 +127,9 @@ cornish_fisher (double t, double n)
   y = (y / b) + p1;
   y = (y / b) + p0;
 
-  if (t < 0)
+  if (t < 0) {
     y *= -1;
+}
 
   return y;
 }
@@ -178,7 +180,7 @@ normal_approx (const double x, const double nu)
 double
 gsl_cdf_tdist_P (const double x, const double nu)
 {
-  double P;
+  double P = NAN;
 
   double x2 = x * x;
 
@@ -226,7 +228,7 @@ gsl_cdf_tdist_P (const double x, const double nu)
 double
 gsl_cdf_tdist_Q (const double x, const double nu)
 {
-  double Q;
+  double Q = NAN;
 
   double x2 = x * x;
 

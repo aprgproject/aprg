@@ -37,7 +37,7 @@ driver_alloc (const gsl_odeiv2_system * sys, const double hstart,
      another function.
    */
 
-  gsl_odeiv2_driver *state;
+  gsl_odeiv2_driver *state = NULL;
 
   if (sys == NULL)
     {
@@ -407,7 +407,7 @@ gsl_odeiv2_driver_apply_fixed_step (gsl_odeiv2_driver * d, double *t,
    * contains the values after the last successful step.
    */
 
-  unsigned long int i;
+  unsigned long int i = 0;
   d->n = 0;
 
   /* Evolution loop */
@@ -481,14 +481,17 @@ gsl_odeiv2_driver_reset_hstart (gsl_odeiv2_driver * d, const double hstart)
 void
 gsl_odeiv2_driver_free (gsl_odeiv2_driver * state)
 {
-  if (state->c)
+  if (state->c) {
     gsl_odeiv2_control_free (state->c);
+}
 
-  if (state->e)
+  if (state->e) {
     gsl_odeiv2_evolve_free (state->e);
+}
 
-  if (state->s)
+  if (state->s) {
     gsl_odeiv2_step_free (state->s);
+}
 
   free (state);
 }

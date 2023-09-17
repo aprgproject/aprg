@@ -93,7 +93,7 @@ gsl_ntuple_open (char *filename, void *ntuple_data, size_t size)
 int
 gsl_ntuple_write (gsl_ntuple * ntuple)
 {
-  size_t nwrite;
+  size_t nwrite = 0;
 
   nwrite = fwrite (ntuple->ntuple_data, ntuple->size,
                    1, ntuple->file);
@@ -122,7 +122,7 @@ gsl_ntuple_bookdata (gsl_ntuple * ntuple)
 int
 gsl_ntuple_read (gsl_ntuple * ntuple)
 {
-  size_t nread;
+  size_t nread = 0;
 
   nread = fread (ntuple->ntuple_data, ntuple->size, 1, ntuple->file);
 
@@ -153,7 +153,7 @@ gsl_ntuple_project (gsl_histogram * h, gsl_ntuple * ntuple,
                     gsl_ntuple_value_fn * value_func, 
                     gsl_ntuple_select_fn * select_func)
 {
-  size_t nread;
+  size_t nread = 0;
 
   do
     {

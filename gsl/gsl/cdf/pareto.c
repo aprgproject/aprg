@@ -25,7 +25,7 @@
 double
 gsl_cdf_pareto_P (const double x, const double a, const double b)
 {
-  double P;
+  double P = NAN;
 
   if (x < b)
     {
@@ -42,7 +42,7 @@ gsl_cdf_pareto_P (const double x, const double a, const double b)
 double
 gsl_cdf_pareto_Q (const double x, const double a, const double b)
 {
-  double Q;
+  double Q = NAN;
 
   if (x < b)
     {

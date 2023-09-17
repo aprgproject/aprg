@@ -208,12 +208,17 @@ vector_bfgs_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
   double pnorm = state->pnorm;
   double g0norm = state->g0norm;
 
-  double fa = *f, fb, fc;
-  double dir;
-  double stepa = 0.0, stepb, stepc = state->step, tol = state->tol;
+  double fa = *f;
+  double fb;
+  double fc;
+  double dir = NAN;
+  double stepa = 0.0;
+  double stepb;
+  double stepc = state->step;
+  double tol = state->tol;
 
-  double g1norm;
-  double pg;
+  double g1norm = NAN;
+  double pg = NAN;
 
   if (pnorm == 0.0 || g0norm == 0.0)
     {
@@ -287,7 +292,12 @@ vector_bfgs_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
       gsl_vector *dx0 = state->dx0;
       gsl_vector *dg0 = state->dg0;
 
-      double dxg, dgg, dxdg, dgnorm, A, B;
+      double dxg;
+      double dgg;
+      double dxdg;
+      double dgnorm;
+      double A;
+      double B;
 
       /* dx0 = x - x0 */
       gsl_vector_memcpy (dx0, x);

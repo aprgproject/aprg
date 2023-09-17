@@ -89,11 +89,11 @@ get_del (double x, double rational)
 static double
 gauss_small (const double x)
 {
-  unsigned int i;
+  unsigned int i = 0;
   double result = 0.0;
-  double xsq;
-  double xnum;
-  double xden;
+  double xsq = NAN;
+  double xnum = NAN;
+  double xden = NAN;
 
   const double a[5] = {
     2.2352520354606839287,
@@ -130,12 +130,12 @@ gauss_small (const double x)
 static double
 gauss_medium (const double x)
 {
-  unsigned int i;
+  unsigned int i = 0;
   double temp = 0.0;
   double result = 0.0;
-  double xnum;
-  double xden;
-  double absx;
+  double xnum = NAN;
+  double xden = NAN;
+  double absx = NAN;
 
   const double c[9] = {
     0.39894151208813466764,
@@ -184,13 +184,13 @@ gauss_medium (const double x)
 static double
 gauss_large (const double x)
 {
-  int i;
-  double result;
-  double xsq;
-  double temp;
-  double xnum;
-  double xden;
-  double absx;
+  int i = 0;
+  double result = NAN;
+  double xsq = NAN;
+  double temp = NAN;
+  double xnum = NAN;
+  double xden = NAN;
+  double absx = NAN;
 
   const double p[6] = {
     0.21589853405795699,
@@ -230,7 +230,7 @@ gauss_large (const double x)
 double
 gsl_cdf_ugaussian_P (const double x)
 {
-  double result;
+  double result = NAN;
   double absx = fabs (x);
 
   if (absx < GAUSS_EPSILON)
@@ -238,7 +238,7 @@ gsl_cdf_ugaussian_P (const double x)
       result = 0.5;
       return result;
     }
-  else if (absx < 0.66291)
+  if (absx < 0.66291)
     {
       result = 0.5 + gauss_small (x);
       return result;
@@ -280,7 +280,7 @@ gsl_cdf_ugaussian_P (const double x)
 double
 gsl_cdf_ugaussian_Q (const double x)
 {
-  double result;
+  double result = NAN;
   double absx = fabs (x);
 
   if (absx < GAUSS_EPSILON)
@@ -288,7 +288,7 @@ gsl_cdf_ugaussian_Q (const double x)
       result = 0.5;
       return result;
     }
-  else if (absx < 0.66291)
+  if (absx < 0.66291)
     {
       result = gauss_small (x);
 

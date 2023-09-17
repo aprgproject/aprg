@@ -25,6 +25,7 @@
  * [Numer. Math., 41, 373 (1983)]
  */
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gsl/gsl_math.h>
@@ -83,7 +84,7 @@ bsimp_state_t;
 static void
 compute_weights (const double y[], double w[], size_t dim)
 {
-  size_t i;
+  size_t i = 0;
   for (i = 0; i < dim; i++)
     {
       double u = fabs (y[i]);
@@ -104,7 +105,8 @@ bsimp_deuf_kchoice (double eps, size_t dimension)
   double a_work[SEQUENCE_COUNT];
   double alpha[SEQUENCE_MAX][SEQUENCE_MAX];
 
-  int i, k;
+  int i;
+  int k;
 
   a_work[0] = bd_sequence[0] + 1.0;
 
@@ -133,8 +135,9 @@ bsimp_deuf_kchoice (double eps, size_t dimension)
 
   for (k = 0; k < SEQUENCE_MAX - 1; k++)
     {
-      if (a_work[k + 2] > a_work[k + 1] * alpha[k][k + 1])
+      if (a_work[k + 2] > a_work[k + 1] * alpha[k][k + 1]) {
         break;
+}
     }
 
   return k;
@@ -148,7 +151,8 @@ poly_extrap (gsl_matrix * d,
              const double y_i[],
              double y_0[], double y_0_err[], double work[], const size_t dim)
 {
-  size_t j, k;
+  size_t j;
+  size_t k;
 
   DBL_MEMCPY (y_0_err, y_i, dim);
   DBL_MEMCPY (y_0, y_i, dim);
@@ -222,7 +226,7 @@ bsimp_step_local (void *vstate,
   const double h = h_total / n_step;
   double t = t0 + h;
 
-  double sum;
+  double sum = NAN;
 
   /* This is the factor sigma referred to in equation 3.4 of the
      paper.  A relative change in y exceeding sigma indicates a
@@ -231,9 +235,11 @@ bsimp_step_local (void *vstate,
 
   const double max_sum = 100.0 * dim;
 
-  int signum, status;
-  size_t i, j;
-  size_t n_inter;
+  int signum;
+  int status;
+  size_t i;
+  size_t j;
+  size_t n_inter = 0;
 
   /* Calculate the matrix for the linear system. */
   for (i = 0; i < dim; i++)
@@ -413,7 +419,8 @@ bsimp_apply (void *vstate,
   gsl_matrix *dfdy = state->dfdy;
 
   const double t_local = t;
-  size_t i, k;
+  size_t i;
+  size_t k;
 
   if (h + t_local == t_local)
     {
@@ -481,7 +488,7 @@ bsimp_apply (void *vstate,
           break;
         }
 
-      else if (status != GSL_SUCCESS)
+      if (status != GSL_SUCCESS)
         {
           return status;
         }

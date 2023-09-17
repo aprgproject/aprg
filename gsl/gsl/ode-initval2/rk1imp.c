@@ -260,7 +260,7 @@ rk1imp_apply (void *vstate, size_t dim, double t, double h,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < dim; i++)
         {
@@ -321,8 +321,9 @@ rk1imp_apply (void *vstate, size_t dim, double t, double h,
   {
     int s = rksubs (y_onestep, h, y, fYZ, b, RK1IMP_STAGE, dim);
 
-    if (s != GSL_SUCCESS)
+    if (s != GSL_SUCCESS) {
       return s;
+}
   }
 
   /* Error estimation by step doubling */
@@ -359,8 +360,9 @@ rk1imp_apply (void *vstate, size_t dim, double t, double h,
   {
     int s = rksubs (ytmp, h / 2.0, y, fYZ, b, RK1IMP_STAGE, dim);
 
-    if (s != GSL_SUCCESS)
+    if (s != GSL_SUCCESS) {
       return s;
+}
   }
 
   /* Save original y values in case of error */
@@ -407,7 +409,7 @@ rk1imp_apply (void *vstate, size_t dim, double t, double h,
   /* Error estimation */
 
   {
-    size_t i;
+    size_t i = 0;
     for (i = 0; i < dim; i++)
       {
         yerr[i] = ODEIV_ERR_SAFETY * 0.5 * fabs (y_twostep[i] - y_onestep[i]);

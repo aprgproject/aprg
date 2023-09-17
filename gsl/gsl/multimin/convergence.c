@@ -20,11 +20,12 @@
 #include <config.h>
 #include <gsl/gsl_multimin.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 int
 gsl_multimin_test_gradient (const gsl_vector *g, double epsabs)
 {
-  double norm;
+  double norm = NAN;
 
   if (epsabs < 0.0)
     {

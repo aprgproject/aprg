@@ -48,9 +48,11 @@ gsl_min_fminimizer_set (gsl_min_fminimizer * s,
                         gsl_function * f, 
                         double x_minimum, double x_lower, double x_upper)
 {
-  int status ;
+  int status = 0 ;
 
-  double f_minimum, f_lower, f_upper;
+  double f_minimum;
+  double f_lower;
+  double f_upper;
 
   status = compute_f_values (f, x_minimum, &f_minimum, 
                              x_lower, &f_lower,  

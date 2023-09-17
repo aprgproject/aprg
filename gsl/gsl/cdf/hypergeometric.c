@@ -53,9 +53,10 @@ static double
 lower_tail (const unsigned int k, const unsigned int n1,
             const unsigned int n2, const unsigned int t)
 {
-  double relerr;
+  double relerr = NAN;
   int i = k;
-  double s, P;
+  double s;
+  double P;
 
   s = gsl_ran_hypergeometric_pdf (i, n1, n2, t);
   P = s;
@@ -67,8 +68,9 @@ lower_tail (const unsigned int k, const unsigned int n1,
       s *= factor;
       P += s;
       relerr = s / P;
-      if (relerr < GSL_DBL_EPSILON)
+      if (relerr < GSL_DBL_EPSILON) {
         break;
+}
       i--;
     }
 
@@ -79,9 +81,10 @@ static double
 upper_tail (const unsigned int k, const unsigned int n1,
             const unsigned int n2, const unsigned int t)
 {
-  double relerr;
+  double relerr = NAN;
   unsigned int i = k + 1;
-  double s, Q;
+  double s;
+  double Q;
   
   s = gsl_ran_hypergeometric_pdf (i, n1, n2, t);
   Q = s;
@@ -93,8 +96,9 @@ upper_tail (const unsigned int k, const unsigned int n1,
       s *= factor;
       Q += s;
       relerr = s / Q;
-      if (relerr < GSL_DBL_EPSILON)
+      if (relerr < GSL_DBL_EPSILON) {
         break;
+}
       i++;
     }
 
@@ -112,7 +116,7 @@ gsl_cdf_hypergeometric_P (const unsigned int k,
                           const unsigned int n1,
                           const unsigned int n2, const unsigned int t)
 {
-  double P;
+  double P = NAN;
 
   if (t > (n1 + n2))
     {
@@ -151,7 +155,7 @@ gsl_cdf_hypergeometric_Q (const unsigned int k,
                           const unsigned int n1,
                           const unsigned int n2, const unsigned int t)
 {
-  double Q;
+  double Q = NAN;
 
   if (t > (n1 + n2))
     {

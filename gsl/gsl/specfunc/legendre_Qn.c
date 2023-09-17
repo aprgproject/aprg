@@ -146,8 +146,8 @@ legendre_Ql_asymp_unif(const double ell, const double x, gsl_sf_result * result)
     double xi  = acosh(x);
     gsl_sf_result K0_scaled;
     gsl_sf_result K1_scaled;
-    int stat_K0;
-    int stat_K1;
+    int stat_K0 = 0;
+    int stat_K1 = 0;
     int stat_e = 0;
     double pre = NAN;
     double B00 = NAN;

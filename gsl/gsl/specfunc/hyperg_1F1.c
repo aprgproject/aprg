@@ -388,7 +388,7 @@ hyperg_1F1_1(const double b, const double x, gsl_sf_result * result)
       return stat_s;
     } if (fabs(x) < fabs(b) && fabs(x) < sqrt(fabs(b)) * fabs(b-x)) {
       return hyperg_1F1_largebx(1.0, b, x, result);
-    } else if (fabs(x) > fabs(b)) {
+    } if (fabs(x) > fabs(b)) {
       return hyperg_1F1_1_series(b, x, result);
     } else {
       return hyperg_1F1_large2bm4a(1.0, b, x, result);
@@ -446,7 +446,7 @@ hyperg_1F1_renorm_b0(const double a, const double x, gsl_sf_result * result)
     result->err = 0.0;
     return GSL_SUCCESS;
   }
-  else {
+  
     /* eta < 0 */
     double root_eta = sqrt(-eta);
     gsl_sf_result J1;
@@ -469,7 +469,7 @@ hyperg_1F1_renorm_b0(const double a, const double x, gsl_sf_result * result)
       result->err =  ex.err;
       return stat_e;
    
-  }
+ 
   
 }
 
@@ -742,7 +742,7 @@ hyperg_1F1_small_a_bgt0(const double a, const double b, const double x, gsl_sf_r
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else if(b >= 1.4*ax) {
+  if(b >= 1.4*ax) {
     return gsl_sf_hyperg_1F1_series_e(a, b, x, result);
   }
   else if(x > 0.0) {
@@ -957,7 +957,7 @@ hyperg_1F1_ab_posint(const int a, const int b, const double x, gsl_sf_result * r
                                           result);
     return GSL_ERROR_SELECT_2(stat_e, stat_K);
   }
-  else if(a == b + 1) {
+  if(a == b + 1) {
     gsl_sf_result ex;
     int stat_e = gsl_sf_exp_e(x, &ex);
     result->val  = ex.val * (1.0 + x/b);
@@ -1455,7 +1455,7 @@ hyperg_1F1_ab_pos(const double a, const double b,
      */
     return hyperg_1F1_asymp_posx(a, b, x, result);
   }
-  else if(fabs(b-a) <= 1.0) {
+  if(fabs(b-a) <= 1.0) {
     /* Directly handle b near a.
      */
     return hyperg_1F1_beps_bgt0(a-b, b, x, result);  /* a = b + eps */
@@ -1751,7 +1751,7 @@ hyperg_1F1_ab_neg(const double a, const double b, const double x,
                                       result);
     return GSL_ERROR_SELECT_2(stat_e, stat_K);
   }
-  else if(   x < -30.0
+  if(   x < -30.0
           && GSL_MAX_DBL(fabs(a),1.0)*GSL_MAX_DBL(fabs(1.0+a-b),1.0) < 0.99*fabs(x)
     ) {
     /* Large negative x asymptotic.
@@ -1952,7 +1952,7 @@ gsl_sf_hyperg_1F1_e(const double a, const double b, const double x,
                                             result);
       return GSL_ERROR_SELECT_2(stat_e, stat_K);
     }
-    else if(a < 0.0 && fabs(x) < 2*GSL_LOG_DBL_MAX) {
+    if(a < 0.0 && fabs(x) < 2*GSL_LOG_DBL_MAX) {
       /* Use Kummer to reduce it to the generic positive case.
        * Note that b > a, strictly, since we already trapped b = a.
        * Also b-(b-a)=a, and a is not a negative integer here,
@@ -2009,9 +2009,9 @@ gsl_sf_hyperg_1F1_e(const double a, const double b, const double x,
                                             result);
       return GSL_ERROR_SELECT_2(stat_e, stat_K);
     }
-    else {
+    
       return hyperg_1F1_ab_neg(a, b, x, result);
-    }
+   
   }
 }
 

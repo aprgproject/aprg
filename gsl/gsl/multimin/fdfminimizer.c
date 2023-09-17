@@ -25,7 +25,7 @@ gsl_multimin_fdfminimizer *
 gsl_multimin_fdfminimizer_alloc (const gsl_multimin_fdfminimizer_type * T,
                                  size_t n)
 {
-  int status;
+  int status = 0;
 
   gsl_multimin_fdfminimizer *s =
     (gsl_multimin_fdfminimizer *) malloc (sizeof (gsl_multimin_fdfminimizer));

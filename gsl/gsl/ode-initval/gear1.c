@@ -113,8 +113,8 @@ gear1_step (double *y, gear1_state_t *state,
   */
 
   const int iter_steps = 3;
-  int nu;
-  size_t i;
+  int nu = 0;
+  size_t i = 0;
   double *y0 = state->y0;
   double *k = state->k;
 
@@ -155,7 +155,7 @@ gear1_apply(void * vstate,
 {
   gear1_state_t *state = (gear1_state_t *) vstate;
 
-  size_t i;
+  size_t i = 0;
 
   double *y0 = state->y0;
   double *y0_orig = state->y0_orig;

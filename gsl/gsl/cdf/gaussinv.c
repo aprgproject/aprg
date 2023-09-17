@@ -98,7 +98,9 @@ tail (double r)
 double
 gsl_cdf_ugaussian_Pinv (const double P)
 {
-  double r, x, pp;
+  double r;
+  double x;
+  double pp;
 
   double dP = P - 0.5;
 
@@ -106,7 +108,7 @@ gsl_cdf_ugaussian_Pinv (const double P)
     {
       return GSL_POSINF;
     }
-  else if (P == 0.0)
+  if (P == 0.0)
     {
       return GSL_NEGINF;
     }
@@ -135,17 +137,19 @@ gsl_cdf_ugaussian_Pinv (const double P)
     {
       return -x;
     }
-  else
-    {
+  
+    
       return x;
-    }
+   
 
 }
 
 double
 gsl_cdf_ugaussian_Qinv (const double Q)
 {
-  double r, x, pp;
+  double r;
+  double x;
+  double pp;
 
   double dQ = Q - 0.5;
 
@@ -153,7 +157,7 @@ gsl_cdf_ugaussian_Qinv (const double Q)
     {
       return GSL_NEGINF;
     }
-  else if (Q == 0.0)
+  if (Q == 0.0)
     {
       return GSL_POSINF;
     }
@@ -182,10 +186,10 @@ gsl_cdf_ugaussian_Qinv (const double Q)
     {
       return x;
     }
-  else
-    {
+  
+    
       return -x;
-    }
+   
 }
 
 

@@ -23,6 +23,7 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sf_bessel.h>
+#include <math.h>
 
 #include "error.h"
 
@@ -65,12 +66,12 @@ gsl_sf_bessel_In_scaled_e(int n, const double x, gsl_sf_result * result)
   if(n < 150 && ax < 1e7) {
     gsl_sf_result I0_scaled;
     int stat_I0 = gsl_sf_bessel_I0_scaled_e(ax, &I0_scaled);
-    double rat;
+    double rat = NAN;
     int stat_CF1 = gsl_sf_bessel_I_CF1_ser((double)n, ax, &rat);
     double Ikp1 = rat * GSL_SQRT_DBL_MIN;
     double Ik   = GSL_SQRT_DBL_MIN;
-    double Ikm1;
-    int k;
+    double Ikm1 = NAN;
+    int k = 0;
     for(k=n; k >= 1; k--) {
       Ikm1 = Ikp1 + 2.0*k/ax * Ik;
       Ikp1 = Ik;
@@ -79,10 +80,11 @@ gsl_sf_bessel_In_scaled_e(int n, const double x, gsl_sf_result * result)
     result->val  = I0_scaled.val * (GSL_SQRT_DBL_MIN / Ik);
     result->err  = I0_scaled.err * (GSL_SQRT_DBL_MIN / Ik);
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
-    if(x < 0.0 && GSL_IS_ODD(n)) result->val = -result->val;
+    if(x < 0.0 && GSL_IS_ODD(n)) { result->val = -result->val;
+}
     return GSL_ERROR_SELECT_2(stat_I0, stat_CF1);
   }
-  else if( GSL_MIN( 0.29/(n*n), 0.5/(n*n + x*x) ) < 0.5*GSL_ROOT3_DBL_EPSILON) {
+  if( GSL_MIN( 0.29/(n*n), 0.5/(n*n + x*x) ) < 0.5*GSL_ROOT3_DBL_EPSILON) {
     int stat_as = gsl_sf_bessel_Inu_scaled_asymp_unif_e((double)n, ax, result);
     if(x < 0.0 && GSL_IS_ODD(n)) result->val = -result->val;
     return stat_as;

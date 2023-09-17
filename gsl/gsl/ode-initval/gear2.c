@@ -138,8 +138,8 @@ gear2_step (double *y, gear2_state_t * state,
    */
 
   const int iter_steps = 3;
-  int nu;
-  size_t i;
+  int nu = 0;
+  size_t i = 0;
   double *y0 = state->y0;
   double *yim1 = state->yim1;
   double *k = state->k;
@@ -191,7 +191,7 @@ gear2_apply (void *vstate,
        * which can occur when the adaptive driver is attempting to find
        * an appropriate step-size on its first iteration */
 
-      int status;
+      int status = 0;
       DBL_MEMCPY (state->yim1, y, dim);
 
       status =
@@ -207,8 +207,8 @@ gear2_apply (void *vstate,
 
       return status;
     }
-  else
-    {
+  
+    
       /* We have a previous y value in the buffer, and the step
        * sizes match, so we go ahead with the Gear step.
        */
@@ -294,7 +294,7 @@ gear2_apply (void *vstate,
       state->last_h = h;
 
       return 0;
-    }
+   
 }
 
 static int

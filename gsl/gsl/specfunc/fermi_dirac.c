@@ -955,15 +955,16 @@ fd_neg(const double j, const double x, gsl_sf_result * result)
     double ex  = -exp(x);
     double enx = -ex;
     double f = 0.0;
-    double f_previous;
-    int jterm;
+    double f_previous = NAN;
+    int jterm = 0;
     for(jterm=0; jterm<=itmax; jterm++) {
       double p = pow(jterm+1.0, j+1.0);
       double term = enx/p;
       f_previous = f;
       fd_whiz(term, jterm, qnum, qden, &f, &s);
       xn += x;
-      if(fabs(f-f_previous) < fabs(f)*2.0*GSL_DBL_EPSILON || xn < GSL_LOG_DBL_MIN) break;
+      if(fabs(f-f_previous) < fabs(f)*2.0*GSL_DBL_EPSILON || xn < GSL_LOG_DBL_MIN) { break;
+}
       enx *= ex;
     }
 
@@ -971,10 +972,11 @@ fd_neg(const double j, const double x, gsl_sf_result * result)
     result->err  = fabs(f-f_previous);
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(f);
 
-    if(jterm == itmax)
+    if(jterm == itmax) {
       GSL_ERROR ("error", GSL_EMAXITER);
-    else
+    } else {
       return GSL_SUCCESS;
+}
  
 }
 
@@ -1404,7 +1406,7 @@ int gsl_sf_fermi_dirac_int_e(const int j, const double x, gsl_sf_result * result
   if(j == 0) {
     return gsl_sf_fermi_dirac_0_e(x, result);
   }
-  else if(j == 1) {
+  if(j == 1) {
     return gsl_sf_fermi_dirac_1_e(x, result);
   }
   else if(j == 2) {

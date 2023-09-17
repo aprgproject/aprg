@@ -52,7 +52,7 @@ gsl_ran_weibull_pdf (const double x, const double a, const double b)
       } 
         return 0 ;
     }
-  else if (b == 1)
+  if (b == 1)
     {
       return exp(-x/a)/a ;
     }

@@ -58,9 +58,9 @@
 double
 gsl_cdf_binomial_P (const unsigned int k, const double p, const unsigned int n)
 {
-  double P;
-  double a;
-  double b;
+  double P = NAN;
+  double a = NAN;
+  double b = NAN;
 
   if (p > 1.0 || p < 0.0)
     {
@@ -84,9 +84,9 @@ gsl_cdf_binomial_P (const unsigned int k, const double p, const unsigned int n)
 double
 gsl_cdf_binomial_Q (const unsigned int k, const double p, const unsigned int n)
 {
-  double Q;
-  double a;
-  double b;
+  double Q = NAN;
+  double a = NAN;
+  double b = NAN;
 
   if (p > 1.0 || p < 0.0)
     {

@@ -183,7 +183,8 @@ static void *
 rk8pd_alloc (size_t dim)
 {
   rk8pd_state_t *state = (rk8pd_state_t *) malloc (sizeof (rk8pd_state_t));
-  int i, j;
+  int i;
+  int j;
 
   if (state == 0)
     {
@@ -240,7 +241,7 @@ rk8pd_apply (void *vstate,
 {
   rk8pd_state_t *state = (rk8pd_state_t *) vstate;
 
-  size_t i;
+  size_t i = 0;
 
   double *const ytmp = state->ytmp;
   double *const y0 = state->y0;
@@ -276,8 +277,9 @@ rk8pd_apply (void *vstate,
         }
     }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] = y[i] + b21 * h * k1[i];
+}
 
   /* k2 step */
   {
@@ -289,8 +291,9 @@ rk8pd_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] = y[i] + h * (b3[0] * k1[i] + b3[1] * k2[i]);
+}
 
   /* k3 step */
   {
@@ -302,8 +305,9 @@ rk8pd_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] = y[i] + h * (b4[0] * k1[i] + b4[2] * k3[i]);
+}
 
   /* k4 step */
   {
@@ -315,8 +319,9 @@ rk8pd_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] = y[i] + h * (b5[0] * k1[i] + b5[2] * k3[i] + b5[3] * k4[i]);
+}
 
   /* k5 step */
   {
@@ -328,8 +333,9 @@ rk8pd_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] = y[i] + h * (b6[0] * k1[i] + b6[3] * k4[i] + b6[4] * k5[i]);
+}
 
   /* k6 step */
   {
@@ -341,10 +347,11 @@ rk8pd_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] =
       y[i] + h * (b7[0] * k1[i] + b7[3] * k4[i] + b7[4] * k5[i] +
                   b7[5] * k6[i]);
+}
 
   /* k7 step */
   {
@@ -356,10 +363,11 @@ rk8pd_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] =
       y[i] + h * (b8[0] * k1[i] + b8[3] * k4[i] + b8[4] * k5[i] +
                   b8[5] * k6[i] + b8[6] * k7[i]);
+}
 
   /* k8 step */
   {
@@ -371,10 +379,11 @@ rk8pd_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] =
       y[i] + h * (b9[0] * k1[i] + b9[3] * k4[i] + b9[4] * k5[i] +
                   b9[5] * k6[i] + b9[6] * k7[i] + b9[7] * k8[i]);
+}
 
   /* k9 step */
   {
@@ -386,11 +395,12 @@ rk8pd_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] =
       y[i] + h * (b10[0] * k1[i] + b10[3] * k4[i] + b10[4] * k5[i] +
                   b10[5] * k6[i] + b10[6] * k7[i] + b10[7] * k8[i] +
                   b10[8] * k9[i]);
+}
 
   /* k10 step */
   {
@@ -402,11 +412,12 @@ rk8pd_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] =
       y[i] + h * (b11[0] * k1[i] + b11[3] * k4[i] + b11[4] * k5[i] +
                   b11[5] * k6[i] + b11[6] * k7[i] + b11[7] * k8[i] +
                   b11[8] * k9[i] + b11[9] * k10[i]);
+}
 
   /* k11 step */
   {
@@ -418,11 +429,12 @@ rk8pd_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] =
       y[i] + h * (b12[0] * k1[i] + b12[3] * k4[i] + b12[4] * k5[i] +
                   b12[5] * k6[i] + b12[6] * k7[i] + b12[7] * k8[i] +
                   b12[8] * k9[i] + b12[9] * k10[i] + b12[10] * k11[i]);
+}
 
   /* k12 step */
   {
@@ -434,12 +446,13 @@ rk8pd_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] =
       y[i] + h * (b13[0] * k1[i] + b13[3] * k4[i] + b13[4] * k5[i] +
                   b13[5] * k6[i] + b13[6] * k7[i] + b13[7] * k8[i] +
                   b13[8] * k9[i] + b13[9] * k10[i] + b13[10] * k11[i] +
                   b13[11] * k12[i]);
+}
 
   /* k13 step */
   {
@@ -496,7 +509,7 @@ rk8pd_reset (void *vstate, size_t dim)
 {
   rk8pd_state_t *state = (rk8pd_state_t *) vstate;
 
-  int i;
+  int i = 0;
 
   for (i = 0; i < 13; i++)
     {
@@ -521,7 +534,7 @@ static void
 rk8pd_free (void *vstate)
 {
   rk8pd_state_t *state = (rk8pd_state_t *) vstate;
-  int i;
+  int i = 0;
 
   for (i = 0; i < 13; i++)
     {

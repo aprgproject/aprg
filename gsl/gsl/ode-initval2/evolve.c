@@ -120,7 +120,7 @@ gsl_odeiv2_evolve_apply (gsl_odeiv2_evolve * e,
 {
   const double t0 = *t;
   double h0 = *h;
-  int step_status;
+  int step_status = 0;
   int final_step = 0;
   double dt = t1 - t0;          /* remaining time, possibly less than h */
 
@@ -310,7 +310,7 @@ gsl_odeiv2_evolve_apply_fixed_step (gsl_odeiv2_evolve * e,
                                     double *t, const double h, double y[])
 {
   const double t0 = *t;
-  int step_status;
+  int step_status = 0;
 
   if (e->dimension != step->dimension)
     {

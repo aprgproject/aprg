@@ -61,13 +61,18 @@ gsl_spblas_dgemv(const CBLAS_TRANSPOSE_t TransA, const double alpha,
     }
   else
     {
-      size_t j;
-      size_t incX, incY;
-      size_t lenX, lenY;
-      double *X, *Y;
-      double *Ad;
-      int *Ap, *Ai, *Aj;
-      int p;
+      size_t j = 0;
+      size_t incX;
+      size_t incY;
+      size_t lenX;
+      size_t lenY;
+      double *X;
+      double *Y;
+      double *Ad = NULL;
+      int *Ap;
+      int *Ai;
+      int *Aj;
+      int p = 0;
 
       if (TransA == CblasNoTrans)
         {
@@ -104,8 +109,9 @@ gsl_spblas_dgemv(const CBLAS_TRANSPOSE_t TransA, const double alpha,
             }
         }
 
-      if (alpha == 0.0)
+      if (alpha == 0.0) {
         return GSL_SUCCESS;
+}
 
       /* form y := alpha*op(A)*x + y */
       Ap = A->p;

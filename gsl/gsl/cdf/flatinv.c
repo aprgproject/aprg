@@ -19,17 +19,18 @@
 
 #include <config.h>
 #include <gsl/gsl_cdf.h>
+#include <math.h>
 
 double
 gsl_cdf_flat_Pinv (const double P, const double a, const double b)
 {
-  double x;
+  double x = NAN;
 
   if (P == 1.0)
     {
       return b;
     }
-  else if (P == 0.0)
+  if (P == 0.0)
     {
       return a;
     }
@@ -42,13 +43,13 @@ gsl_cdf_flat_Pinv (const double P, const double a, const double b)
 double
 gsl_cdf_flat_Qinv (const double Q, const double a, const double b)
 {
-  double x;
+  double x = NAN;
 
   if (Q == 0.0)
     {
       return b;
     }
-  else if (Q == 1.0)
+  if (Q == 1.0)
     {
       return a;
     }

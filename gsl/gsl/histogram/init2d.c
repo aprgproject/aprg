@@ -26,7 +26,7 @@
 gsl_histogram2d *
 gsl_histogram2d_alloc (const size_t nx, const size_t ny)
 {
-  gsl_histogram2d *h;
+  gsl_histogram2d *h = NULL;
 
   if (nx == 0)
     {
@@ -90,7 +90,7 @@ gsl_histogram2d_alloc (const size_t nx, const size_t ny)
 static void
 make_uniform (double range[], size_t n, double xmin, double xmax)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i <= n; i++)
     {
@@ -105,7 +105,7 @@ gsl_histogram2d_calloc_uniform (const size_t nx, const size_t ny,
                                 const double xmin, const double xmax,
                                 const double ymin, const double ymax)
 {
-  gsl_histogram2d *h;
+  gsl_histogram2d *h = NULL;
 
   if (xmin >= xmax)
     {
@@ -133,7 +133,7 @@ gsl_histogram2d_calloc_uniform (const size_t nx, const size_t ny,
 gsl_histogram2d *
 gsl_histogram2d_calloc (const size_t nx, const size_t ny)
 {
-  gsl_histogram2d *h;
+  gsl_histogram2d *h = NULL;
 
   if (nx == 0)
     {
@@ -189,7 +189,7 @@ gsl_histogram2d_calloc (const size_t nx, const size_t ny)
     }
 
   {
-    size_t i;
+    size_t i = 0;
 
     for (i = 0; i < nx + 1; i++)
       {
@@ -230,8 +230,9 @@ gsl_histogram2d_set_ranges_uniform (gsl_histogram2d * h,
                                     double xmin, double xmax,
                                     double ymin, double ymax)
 {
-  size_t i;
-  const size_t nx = h->nx, ny = h->ny;
+  size_t i = 0;
+  const size_t nx = h->nx;
+  const size_t ny = h->ny;
 
   if (xmin >= xmax)
     {
@@ -263,8 +264,9 @@ gsl_histogram2d_set_ranges (gsl_histogram2d * h,
                             const double xrange[], size_t xsize,
                             const double yrange[], size_t ysize)
 {
-  size_t i;
-  const size_t nx = h->nx, ny = h->ny;
+  size_t i = 0;
+  const size_t nx = h->nx;
+  const size_t ny = h->ny;
 
   if (xsize != (nx + 1))
     {

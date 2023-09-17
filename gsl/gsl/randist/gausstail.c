@@ -55,9 +55,9 @@ gsl_ran_gaussian_tail (const gsl_rng * r, const double a, const double sigma)
        * and the solution, p586.)
        */
 
-      double u;
-      double v;
-      double x;
+      double u = NAN;
+      double v = NAN;
+      double x = NAN;
 
       do
         {
@@ -83,8 +83,8 @@ gsl_ran_gaussian_tail_pdf (const double x, const double a, const double sigma)
     }
   
     
-      double N;
-      double p;
+      double N = NAN;
+      double p = NAN;
       double u = x / sigma ;
 
       double f = gsl_sf_erfc (a / (sqrt (2.0) * sigma));

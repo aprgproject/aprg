@@ -38,6 +38,7 @@
 */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_multimin.h>
@@ -76,7 +77,7 @@ try_corner_move (const double coeff,
 
   gsl_matrix *x1 = state->x1;
   const size_t P = x1->size1;
-  double newval;
+  double newval = NAN;
 
   /* xc = (1-coeff)*(P/(P-1)) * center(all) + ((P*coeff-1)/(P-1))*x_corner */
   {
@@ -113,7 +114,7 @@ update_point (nmsimplex_state_t * state, size_t i,
   /* Update size: S2' = S2 + (2/P) * (x_orig - c).delta + (P-1)*(delta/P)^2 */
   {
     double d = gsl_blas_dnrm2 (state->delta);
-    double xmcd;
+    double xmcd = NAN;
     gsl_blas_ddot (state->xmc, state->delta, &xmcd);
     state->S2 += (2.0 / P) * xmcd + ((P - 1.0) / P) * (d * d / P);
   }
@@ -145,8 +146,9 @@ contract_by_best (nmsimplex_state_t * state, size_t best,
   gsl_matrix *x1 = state->x1;
   gsl_vector *y1 = state->y1;
 
-  size_t i, j;
-  double newval;
+  size_t i;
+  size_t j;
+  double newval = NAN;
 
   int status = GSL_SUCCESS;
 
@@ -192,7 +194,7 @@ compute_center (const nmsimplex_state_t * state, gsl_vector * center)
 
   gsl_matrix *x1 = state->x1;
   const size_t P = x1->size1;
-  size_t i;
+  size_t i = 0;
 
   gsl_vector_set_zero (center);
 
@@ -222,13 +224,13 @@ compute_size (nmsimplex_state_t * state, const gsl_vector * center)
   gsl_vector *s = state->ws1;
   gsl_matrix *x1 = state->x1;
   const size_t P = x1->size1;
-  size_t i;
+  size_t i = 0;
 
   double ss = 0.0;
 
   for (i = 0; i < P; i++)
     {
-      double t;
+      double t = NAN;
       gsl_matrix_get_row (s, x1, i);
       gsl_blas_daxpy (-1.0, center, s);
       t = gsl_blas_dnrm2 (s);
@@ -345,9 +347,9 @@ nmsimplex_set (void *vstate, gsl_multimin_function * f,
 	       const gsl_vector * x,
 	       double *size, const gsl_vector * step_size)
 {
-  int status;
-  size_t i;
-  double val;
+  int status = 0;
+  size_t i = 0;
+  double val = NAN;
 
   nmsimplex_state_t *state = (nmsimplex_state_t *) vstate;
 
@@ -431,11 +433,16 @@ nmsimplex_iterate (void *vstate, gsl_multimin_function * f,
   gsl_matrix *x1 = state->x1;
 
   const size_t n = y1->size;
-  size_t i;
-  size_t hi, s_hi, lo;
-  double dhi, ds_hi, dlo;
-  int status;
-  double val, val2;
+  size_t i = 0;
+  size_t hi;
+  size_t s_hi;
+  size_t lo;
+  double dhi;
+  double ds_hi;
+  double dlo;
+  int status = 0;
+  double val;
+  double val2;
 
   if (xc->size != x->size)
     {
@@ -584,8 +591,9 @@ nmsimplex_set_rand (void *vstate, gsl_multimin_function * f,
 		    const gsl_vector * x,
 		    double *size, const gsl_vector * step_size)
 {
-  size_t i, j;
-  double val;
+  size_t i;
+  size_t j;
+  double val = NAN;
 
   nmsimplex_state_t *state = (nmsimplex_state_t *) vstate;
 
@@ -628,7 +636,8 @@ nmsimplex_set_rand (void *vstate, gsl_multimin_function * f,
     for (i = 0; i < x->size; i++)
       {
         double s = ran_unif (&seed);
-        if (s > 0.5) gsl_matrix_set (&m.matrix, i, i, -1.0);
+        if (s > 0.5) { gsl_matrix_set (&m.matrix, i, i, -1.0);
+}
       }
 
     /* apply random rotations */
@@ -638,7 +647,8 @@ nmsimplex_set_rand (void *vstate, gsl_multimin_function * f,
 	  {
 	    /* rotate columns i and j by a random angle */
 	    double angle = 2.0 * M_PI * ran_unif (&seed);
-	    double c = cos (angle), s = sin (angle);
+	    double c = cos (angle);
+	    double s = sin (angle);
 	    gsl_vector_view c_i = gsl_matrix_column (&m.matrix, i);
 	    gsl_vector_view c_j = gsl_matrix_column (&m.matrix, j);
 	    gsl_blas_drot (&c_i.vector, &c_j.vector, c, s);

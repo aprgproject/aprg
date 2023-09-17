@@ -21,6 +21,7 @@
 
 #include <config.h>
 
+#include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -53,7 +54,7 @@ brent_init (void *vstate, gsl_function * f, double x_minimum, double f_minimum, 
   double v = x_lower + golden * (x_upper - x_lower);
   double w = v;
 
-  double f_vw;
+  double f_vw = NAN;
 
   x_minimum = 0 ;  /* avoid warnings about unused varibles */
   f_minimum = 0 ;
@@ -85,7 +86,8 @@ brent_iterate (void *vstate, gsl_function * f, double *x_minimum, double * f_min
   const double z = *x_minimum;
   double d = state->e;
   double e = state->d;
-  double u, f_u;
+  double u;
+  double f_u;
   const double v = state->v;
   const double w = state->w;
   const double f_v = state->f_v;
@@ -99,7 +101,9 @@ brent_iterate (void *vstate, gsl_function * f, double *x_minimum, double * f_min
 
   const double tolerance =  GSL_SQRT_DBL_EPSILON * fabs (z);
 
-  double p = 0, q = 0, r = 0;
+  double p = 0;
+  double q = 0;
+  double r = 0;
 
   const double midpoint = 0.5 * (x_left + x_right);
 
@@ -179,8 +183,8 @@ brent_iterate (void *vstate, gsl_function * f, double *x_minimum, double * f_min
       *f_minimum = f_u;
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       if (u < z)
         {
           *x_lower = u;
@@ -206,7 +210,7 @@ brent_iterate (void *vstate, gsl_function * f, double *x_minimum, double * f_min
           state->f_v = f_u;
           return GSL_SUCCESS;
         }
-    }
+   
 
   return GSL_SUCCESS;
 }

@@ -39,7 +39,7 @@ gsl_histogram2d_memcpy (gsl_histogram2d * dest, const gsl_histogram2d * src)
 {
   size_t nx = src->nx;
   size_t ny = src->ny;
-  size_t i;
+  size_t i = 0;
   if (dest->nx != src->nx || dest->ny != src->ny)
     {
       GSL_ERROR ("histograms have different sizes, cannot copy",
@@ -75,8 +75,8 @@ gsl_histogram2d_clone (const gsl_histogram2d * src)
 {
   size_t nx = src->nx;
   size_t ny = src->ny;
-  size_t i;
-  gsl_histogram2d *h;
+  size_t i = 0;
+  gsl_histogram2d *h = NULL;
 
   h = gsl_histogram2d_calloc_range (nx, ny, src->xrange, src->yrange);
 

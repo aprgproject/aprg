@@ -84,7 +84,9 @@ steffenson_iterate (void * vstate, gsl_function_fdf * fdf, double * root)
 {
   steffenson_state_t * state = (steffenson_state_t *) vstate;
   
-  double x_new, f_new, df_new;
+  double x_new;
+  double f_new;
+  double df_new;
 
   double x_1 = state->x_1 ;
   double x = state->x ;
@@ -120,10 +122,11 @@ steffenson_iterate (void * vstate, gsl_function_fdf * fdf, double * root)
       double u = (x - x_1) ;
       double v = (x_new - 2 * x + x_1);
 
-      if (v == 0)
+      if (v == 0) {
         *root = x_new;  /* avoid division by zero */
-      else
+      } else {
         *root = x_1 - u * u / v ;  /* accelerated value */
+}
     }
 
   if (!gsl_finite (df_new))

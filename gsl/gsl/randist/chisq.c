@@ -51,7 +51,7 @@ gsl_ran_chisq_pdf (const double x, const double nu)
         }
       
         
-          double p;
+          double p = NAN;
           double lngamma = gsl_sf_lngamma (nu / 2);
 
           p = exp ((nu / 2 - 1) * log (x/2) - x/2 - lngamma) / 2;

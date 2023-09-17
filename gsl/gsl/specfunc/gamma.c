@@ -1062,7 +1062,7 @@ gamma_xgthalf(const double x, gsl_sf_result * result)
     result->err = GSL_DBL_EPSILON;
     return GSL_SUCCESS;
   }
-  else if(fabs(x - 2.0) < 0.01) {
+  if(fabs(x - 2.0) < 0.01) {
     /* Use series for Gamma[1 + eps].
      */
     const double eps = x - 2.0;
@@ -1151,7 +1151,7 @@ int gsl_sf_lngamma_e(double x, gsl_sf_result * result)
   if(x >= 0.5) {
     return lngamma_lanczos(x, result);
   }
-  else if(x == 0.0) {
+  if(x == 0.0) {
     DOMAIN_ERROR(result);
   }
   else if(fabs(x) < 0.02) {
@@ -1217,7 +1217,7 @@ int gsl_sf_lngamma_sgn_e(double x, gsl_sf_result * result_lg, double * sgn)
     *sgn = 1.0;
     return lngamma_lanczos(x, result_lg);
   }
-  else if(x == 0.0) {
+  if(x == 0.0) {
     *sgn = 0.0;
     DOMAIN_ERROR(result_lg);
   }
@@ -1385,9 +1385,9 @@ gsl_sf_gammainv_e(const double x, gsl_sf_result * result)
       result->err = 0.0;
       return stat_lng;
     }
-    else {
+    
       return gsl_sf_exp_mult_err_e(-lng.val, lng.err, sgn, 0.0, result);
-    }
+   
   }
   else {
     gsl_sf_result g;

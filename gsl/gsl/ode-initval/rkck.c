@@ -189,7 +189,7 @@ rkck_apply (void *vstate,
 {
   rkck_state_t *state = (rkck_state_t *) vstate;
 
-  size_t i;
+  size_t i = 0;
 
   double *const k1 = state->k1;
   double *const k2 = state->k2;
@@ -217,8 +217,9 @@ rkck_apply (void *vstate,
 	}
     }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] = y[i] + b21 * h * k1[i];
+}
 
   /* k2 step */
   {
@@ -230,8 +231,9 @@ rkck_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] = y[i] + h * (b3[0] * k1[i] + b3[1] * k2[i]);
+}
 
   /* k3 step */
   {
@@ -243,8 +245,9 @@ rkck_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] = y[i] + h * (b4[0] * k1[i] + b4[1] * k2[i] + b4[2] * k3[i]);
+}
 
   /* k4 step */
   {
@@ -256,10 +259,11 @@ rkck_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] =
       y[i] + h * (b5[0] * k1[i] + b5[1] * k2[i] + b5[2] * k3[i] +
                   b5[3] * k4[i]);
+}
 
   /* k5 step */
   {
@@ -271,10 +275,11 @@ rkck_apply (void *vstate,
       }
   }
 
-  for (i = 0; i < dim; i++)
+  for (i = 0; i < dim; i++) {
     ytmp[i] =
       y[i] + h * (b6[0] * k1[i] + b6[1] * k2[i] + b6[2] * k3[i] +
                   b6[3] * k4[i] + b6[4] * k5[i]);
+}
 
   /* k6 step and final sum */
   {

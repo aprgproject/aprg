@@ -97,15 +97,17 @@ gsl_poly_complex_solve_cubic (double a, double b, double c,
 
       /* Sort r0, r1, r2 into increasing order */
 
-      if (r0 > r1)
+      if (r0 > r1) {
         SWAP (r0, r1);
+}
 
       if (r1 > r2)
         {
           SWAP (r1, r2);
 
-          if (r0 > r1)
+          if (r0 > r1) {
             SWAP (r0, r1);
+}
         }
 
       GSL_REAL (*z0) = r0;
@@ -119,8 +121,8 @@ gsl_poly_complex_solve_cubic (double a, double b, double c,
 
       return 3;
     }
-  else
-    {
+  
+    
       double sgnR = (R >= 0 ? 1 : -1);
       double A = -sgnR * pow (fabs (R) + sqrt (R2 - Q3), 1.0 / 3.0);
       double B = Q / A;
@@ -149,5 +151,5 @@ gsl_poly_complex_solve_cubic (double a, double b, double c,
         }
 
       return 3;
-    }
+   
 }

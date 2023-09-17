@@ -57,22 +57,34 @@ gsl_monte_miser_integrate (gsl_monte_function * f,
                            gsl_monte_miser_state * state,
                            double *result, double *abserr)
 {
-  size_t n, estimate_calls, calls_l, calls_r;
+  size_t n;
+  size_t estimate_calls;
+  size_t calls_l;
+  size_t calls_r;
   const size_t min_calls = state->min_calls;
-  size_t i;
-  size_t i_bisect;
-  int found_best;
+  size_t i = 0;
+  size_t i_bisect = 0;
+  int found_best = 0;
 
-  double res_est = 0, err_est = 0;
-  double res_r = 0, err_r = 0, res_l = 0, err_l = 0;
-  double xbi_l, xbi_m, xbi_r, s;
+  double res_est = 0;
+  double err_est = 0;
+  double res_r = 0;
+  double err_r = 0;
+  double res_l = 0;
+  double err_l = 0;
+  double xbi_l;
+  double xbi_m;
+  double xbi_r;
+  double s;
 
-  double vol;
-  double weight_l, weight_r;
+  double vol = NAN;
+  double weight_l;
+  double weight_r;
 
   double *x = state->x;
   double *xmid = state->xmid;
-  double *sigma_l = state->sigma_l, *sigma_r = state->sigma_r;
+  double *sigma_l = state->sigma_l;
+  double *sigma_r = state->sigma_r;
 
   if (dim != state->dim)
     {
@@ -109,7 +121,8 @@ gsl_monte_miser_integrate (gsl_monte_function * f,
 
   if (calls < state->min_calls_per_bisection)
     {
-      double m = 0.0, q = 0.0;
+      double m = 0.0;
+      double q = 0.0;
 
       if (calls < 2)
         {
@@ -247,7 +260,7 @@ gsl_monte_miser_integrate (gsl_monte_function * f,
      some new memory for each recursive call */
 
   {
-    int status;
+    int status = 0;
 
     double *xu_tmp = (double *) malloc (dim * sizeof (double));
 
@@ -277,7 +290,7 @@ gsl_monte_miser_integrate (gsl_monte_function * f,
   /* Compute the integral for the right hand side of the bisection */
 
   {
-    int status;
+    int status = 0;
 
     double *xl_tmp = (double *) malloc (dim * sizeof (double));
 
@@ -597,7 +610,8 @@ estimate_corrmc (gsl_monte_function * f,
                  double *result, double *abserr,
                  const double xmid[], double sigma_l[], double sigma_r[])
 {
-  size_t i, n;
+  size_t i;
+  size_t n;
   
   double *x = state->x;
   double *fsum_l = state->fsum_l;
@@ -607,7 +621,8 @@ estimate_corrmc (gsl_monte_function * f,
   size_t *hits_l = state->hits_l;
   size_t *hits_r = state->hits_r;
 
-  double m = 0.0, q = 0.0; 
+  double m = 0.0;
+  double q = 0.0; 
   double vol = 1.0;
 
   for (i = 0; i < dim; i++)
@@ -621,7 +636,7 @@ estimate_corrmc (gsl_monte_function * f,
 
   for (n = 0; n < calls; n++)
     {
-      double fval;
+      double fval = NAN;
       
       unsigned int j = (n/2) % dim;
       unsigned int side = (n % 2);

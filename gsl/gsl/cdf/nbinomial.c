@@ -33,9 +33,9 @@
 double
 gsl_cdf_negative_binomial_P (const unsigned int k, const double p, const double n)
 {
-  double P;
-  double a;
-  double b;
+  double P = NAN;
+  double a = NAN;
+  double b = NAN;
 
   if (p > 1.0 || p < 0.0)
     {
@@ -47,7 +47,7 @@ gsl_cdf_negative_binomial_P (const unsigned int k, const double p, const double 
       CDF_ERROR ("n < 0", GSL_EDOM);
     }
 
-  a = (double) n;
+  a = n;
   b = (double) k + 1.0;
   P = gsl_cdf_beta_P (p, a, b);
 
@@ -61,9 +61,9 @@ gsl_cdf_negative_binomial_P (const unsigned int k, const double p, const double 
 double
 gsl_cdf_negative_binomial_Q (const unsigned int k, const double p, const double n)
 {
-  double Q;
-  double a;
-  double b;
+  double Q = NAN;
+  double a = NAN;
+  double b = NAN;
 
   if (p > 1.0 || p < 0.0)
     {
@@ -75,7 +75,7 @@ gsl_cdf_negative_binomial_Q (const unsigned int k, const double p, const double 
       CDF_ERROR ("n < 0", GSL_EDOM);
     }
 
-  a = (double) n;
+  a = n;
   b = (double) k + 1.0;
   Q = gsl_cdf_beta_Q (p, a, b);
 

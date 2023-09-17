@@ -35,6 +35,7 @@
 
 #include <array>
 #include <iterator>
+#include <math.h>
 #include <vector>
 
 using namespace alba::mathHelper;
@@ -68,9 +69,9 @@ double func(const size_t n, double x[], void *params) {
 double val_func(void *ntuple_data, void *params) {
     (void)(params); /* avoid unused parameter warning */
     auto *data = static_cast<struct data *>(ntuple_data);
-    double x;
-    double y;
-    double z;
+    double x = NAN;
+    double y = NAN;
+    double z = NAN;
     x = data->x;
     y = data->y;
     z = data->z;
@@ -79,11 +80,11 @@ double val_func(void *ntuple_data, void *params) {
 
 int sel_func(void *ntuple_data, void *params) {
     auto *data = static_cast<struct data *>(ntuple_data);
-    double x;
-    double y;
-    double z;
-    double E2;
-    double scale;
+    double x = NAN;
+    double y = NAN;
+    double z = NAN;
+    double E2 = NAN;
+    double scale = NAN;
     scale = *static_cast<double *>(params);
     x = data->x;
     y = data->y;
@@ -1006,8 +1007,8 @@ TEST(GslTest, DISABLED_OneDimensionalHistogramWorks) {
     // program takes three arguments, specifying the upper and lower bounds of the histogram and the number of bins. It
     // then reads numbers from stdin, one line at a time, and adds them to the histogram. When there is no more data to
     // read it prints out the accumulated histogram using gsl_histogram_fprintf().
-    double minimumValue = -100;
-    double maximumValue = 100;
+    double const minimumValue = -100;
+    double const maximumValue = 100;
     size_t const n = 10;
     double x = NAN;
     gsl_histogram *h = gsl_histogram_alloc(n);
@@ -1040,8 +1041,8 @@ TEST(GslTest, TwoDimensionalHistogramWorks) {
         gsl_histogram2d_pdf *p = gsl_histogram2d_pdf_alloc(h->nx, h->ny);
         gsl_histogram2d_pdf_init(p, h);
         for (i = 0; i < 1000; i++) {
-            double x;
-            double y;
+            double x = NAN;
+            double y = NAN;
             double const u = gsl_rng_uniform(r);
             double const v = gsl_rng_uniform(r);
             gsl_histogram2d_pdf_sample(p, u, v, &x, &y);

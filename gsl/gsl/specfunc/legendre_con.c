@@ -929,7 +929,7 @@ gsl_sf_conicalP_1_e(const double lambda, const double x, gsl_sf_result * result)
         return GSL_ERROR_SELECT_2(stat_K, stat_E);
      
     }
-    else {
+    
       if(x-1.0 < GSL_SQRT_DBL_EPSILON) {
         double err_amp = GSL_MAX_DBL(1.0, 1.0/(GSL_DBL_EPSILON + fabs(1.0-x)));
         result->val = -0.25/M_SQRT2 * sqrt(x-1.0) * (1.0 - 5.0/16.0 * (x-1.0));
@@ -949,7 +949,7 @@ gsl_sf_conicalP_1_e(const double lambda, const double x, gsl_sf_result * result)
         result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
         return GSL_ERROR_SELECT_2(stat_K, stat_E);
      
-    }
+   
   }
   else if(   (x <= 0.0 && lambda < 1000.0)
           || (x <  0.1 && lambda < 17.0)

@@ -21,6 +21,7 @@
 #include <config.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_bspline.h>
+#include <math.h>
 
 /*
  * This module contains routines related to calculating B-splines.
@@ -62,7 +63,7 @@ gsl_bspline_alloc (const size_t k, const size_t nbreak)
     }
   else
     {
-      gsl_bspline_workspace *w;
+      gsl_bspline_workspace *w = NULL;
 
       w = calloc (1, sizeof (gsl_bspline_workspace));
 
@@ -147,23 +148,29 @@ gsl_bspline_free (gsl_bspline_workspace * w)
 {
   RETURN_IF_NULL (w);
 
-  if (w->knots)
+  if (w->knots) {
     gsl_vector_free (w->knots);
+}
 
-  if (w->deltal)
+  if (w->deltal) {
     gsl_vector_free (w->deltal);
+}
 
-  if (w->deltar)
+  if (w->deltar) {
     gsl_vector_free (w->deltar);
+}
 
-  if (w->B)
+  if (w->B) {
     gsl_vector_free (w->B);
+}
 
-  if (w->A)
+  if (w->A) {
     gsl_matrix_free(w->A);
+}
 
-  if (w->dB)
+  if (w->dB) {
     gsl_matrix_free(w->dB);
+}
 
   free (w);
 } /* gsl_bspline_free() */
@@ -229,10 +236,11 @@ gsl_bspline_knots (const gsl_vector * breakpts, gsl_bspline_workspace * w)
     }
   else
     {
-      size_t i; /* looping */
+      size_t i = 0; /* looping */
 
-      for (i = 0; i < w->k; i++)
+      for (i = 0; i < w->k; i++) {
         gsl_vector_set (w->knots, i, gsl_vector_get (breakpts, 0));
+}
 
       for (i = 1; i < w->l; i++)
         {
@@ -240,8 +248,9 @@ gsl_bspline_knots (const gsl_vector * breakpts, gsl_bspline_workspace * w)
           gsl_vector_get (breakpts, i));
         }
 
-      for (i = w->n; i < w->n + w->k; i++)
+      for (i = w->n; i < w->n + w->k; i++) {
         gsl_vector_set (w->knots, i, gsl_vector_get (breakpts, w->l));
+}
 
       return GSL_SUCCESS;
     }
@@ -274,14 +283,15 @@ int
 gsl_bspline_knots_uniform (const double a, const double b,
                            gsl_bspline_workspace * w)
 {
-  size_t i;     /* looping */
-  double delta; /* interval spacing */
-  double x;
+  size_t i = 0;     /* looping */
+  double delta = NAN; /* interval spacing */
+  double x = NAN;
 
   delta = (b - a) / (double) w->l;
 
-  for (i = 0; i < w->k; i++)
+  for (i = 0; i < w->k; i++) {
     gsl_vector_set (w->knots, i, a);
+}
 
   x = a + delta;
   for (i = 0; i < w->l - 1; i++)
@@ -290,8 +300,9 @@ gsl_bspline_knots_uniform (const double a, const double b,
       x += delta;
     }
 
-  for (i = w->n; i < w->n + w->k; i++)
+  for (i = w->n; i < w->n + w->k; i++) {
     gsl_vector_set (w->knots, i, b);
+}
 
   return GSL_SUCCESS;
 } /* gsl_bspline_knots_uniform() */
@@ -323,25 +334,29 @@ gsl_bspline_eval (const double x, gsl_vector * B, gsl_bspline_workspace * w)
     }
   else
     {
-      size_t i;			/* looping */
-      size_t istart;		/* first non-zero spline for x */
-      size_t iend;		/* last non-zero spline for x, knot for x */
-      int error;		/* error handling */
+      size_t i = 0;			/* looping */
+      size_t istart = 0;		/* first non-zero spline for x */
+      size_t iend = 0;		/* last non-zero spline for x, knot for x */
+      int error = 0;		/* error handling */
 
       /* find all non-zero B_i(x) values */
       error = gsl_bspline_eval_nonzero (x, w->B, &istart, &iend, w);
-      if (error)
+      if (error) {
         return error;
+}
 
       /* store values in appropriate part of given vector */
-      for (i = 0; i < istart; i++)
+      for (i = 0; i < istart; i++) {
         gsl_vector_set (B, i, 0.0);
+}
 
-      for (i = istart; i <= iend; i++)
+      for (i = istart; i <= iend; i++) {
         gsl_vector_set (B, i, gsl_vector_get (w->B, i - istart));
+}
 
-      for (i = iend + 1; i < w->n; i++)
+      for (i = iend + 1; i < w->n; i++) {
         gsl_vector_set (B, i, 0.0);
+}
 
       return GSL_SUCCESS;
     }
@@ -385,15 +400,16 @@ gsl_bspline_eval_nonzero (const double x, gsl_vector * Bk, size_t * istart,
     }
   else
     {
-      size_t i;			/* spline index */
-      size_t j;			/* looping */
+      size_t i = 0;			/* spline index */
+      size_t j = 0;			/* looping */
       int flag = 0;		/* interval search flag */
       int error = 0;		/* error flag */
 
       i = bspline_find_interval (x, &flag, w);
       error = bspline_process_interval_for_eval (x, &i, flag, w);
-      if (error)
+      if (error) {
         return error;
+}
 
       *istart = i - w->k + 1;
       *iend = i;
@@ -443,29 +459,33 @@ gsl_bspline_deriv_eval (const double x, const size_t nderiv,
     }
   else
     {
-      size_t i;			/* looping */
-      size_t j;			/* looping */
-      size_t istart;		/* first non-zero spline for x */
-      size_t iend;		/* last non-zero spline for x, knot for x */
-      int error;		/* error handling */
+      size_t i = 0;			/* looping */
+      size_t j = 0;			/* looping */
+      size_t istart = 0;		/* first non-zero spline for x */
+      size_t iend = 0;		/* last non-zero spline for x, knot for x */
+      int error = 0;		/* error handling */
 
       /* find all non-zero d^j/dx^j B_i(x) values */
       error =
         gsl_bspline_deriv_eval_nonzero (x, nderiv, w->dB, &istart, &iend, w);
-      if (error)
+      if (error) {
         return error;
+}
 
       /* store values in appropriate part of given matrix */
       for (j = 0; j <= nderiv; j++)
         {
-          for (i = 0; i < istart; i++)
+          for (i = 0; i < istart; i++) {
           gsl_matrix_set (dB, i, j, 0.0);
+}
 
-          for (i = istart; i <= iend; i++)
+          for (i = istart; i <= iend; i++) {
             gsl_matrix_set (dB, i, j, gsl_matrix_get (w->dB, i - istart, j));
+}
 
-          for (i = iend + 1; i < w->n; i++)
+          for (i = iend + 1; i < w->n; i++) {
             gsl_matrix_set (dB, i, j, 0.0);
+}
         }
 
       return GSL_SUCCESS;
@@ -529,16 +549,17 @@ gsl_bspline_deriv_eval_nonzero (const double x, const size_t nderiv,
     }
   else
     {
-      size_t i;			/* spline index */
-      size_t j;			/* looping */
+      size_t i = 0;			/* spline index */
+      size_t j = 0;			/* looping */
       int flag = 0;		/* interval search flag */
       int error = 0;		/* error flag */
-      size_t min_nderivk;
+      size_t min_nderivk = 0;
 
       i = bspline_find_interval (x, &flag, w);
       error = bspline_process_interval_for_eval (x, &i, flag, w);
-      if (error)
+      if (error) {
         return error;
+}
 
       *istart = i - w->k + 1;
       *iend = i;
@@ -551,8 +572,9 @@ gsl_bspline_deriv_eval_nonzero (const double x, const size_t nderiv,
       min_nderivk = GSL_MIN_INT (nderiv, w->k - 1);
       for (j = min_nderivk + 1; j <= nderiv; j++)
         {
-          for (i = 0; i < w->k; i++)
+          for (i = 0; i < w->k; i++) {
             gsl_matrix_set (dB, i, j, 0.0);
+}
         }
 
       return GSL_SUCCESS;
@@ -587,7 +609,7 @@ Notes: The error conditions are reported as follows:
 static inline size_t
 bspline_find_interval (const double x, int *flag, gsl_bspline_workspace * w)
 {
-  size_t i;
+  size_t i = 0;
 
   if (x < gsl_vector_get (w->knots, 0))
     {
@@ -606,18 +628,21 @@ bspline_find_interval (const double x, int *flag, gsl_bspline_workspace * w)
 	  GSL_ERROR ("knots vector is not increasing", GSL_EINVAL);
 	}
 
-      if (ti <= x && x < tip1)
+      if (ti <= x && x < tip1) {
 	break;
+}
 
       if (ti < x && x == tip1 && tip1 == gsl_vector_get (w->knots, w->k + w->l
-							 - 1))
+							 - 1)) {
 	break;
+}
     }
 
-  if (i == w->k + w->l - 1)
+  if (i == w->k + w->l - 1) {
     *flag = 1;
-  else
+  } else {
     *flag = 0;
+}
 
   return i;
 }				/* bspline_find_interval() */
@@ -749,9 +774,9 @@ bspline_pppack_bsplvb (const gsl_vector * t,
                        gsl_vector * deltal,
                        gsl_vector * deltar, gsl_vector * biatx)
 {
-  size_t i;			/* looping */
-  double saved;
-  double term;
+  size_t i = 0;			/* looping */
+  double saved = NAN;
+  double term = NAN;
 
   if (index == 1)
     {
@@ -837,10 +862,21 @@ bspline_pppack_bsplvd (const gsl_vector * t,
                        gsl_matrix * a,
                        gsl_matrix * dbiatx, const size_t nderiv)
 {
-  int i, ideriv, il, j, jlow, jp1mid, kmm, ldummy, m, mhigh;
-  double factor, fkmm, sum;
+  int i;
+  int ideriv;
+  int il;
+  int j;
+  int jlow;
+  int jp1mid;
+  int kmm;
+  int ldummy;
+  int m;
+  int mhigh;
+  double factor;
+  double fkmm;
+  double sum;
 
-  size_t bsplvb_j;
+  size_t bsplvb_j = 0;
   gsl_vector_view dbcol = gsl_matrix_column (dbiatx, 0);
 
   mhigh = GSL_MIN_INT (nderiv, k - 1);

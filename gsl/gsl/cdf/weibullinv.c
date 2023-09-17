@@ -25,13 +25,13 @@
 double
 gsl_cdf_weibull_Pinv (const double P, const double a, const double b)
 {
-  double x;
+  double x = NAN;
 
   if (P == 1.0)
     {
       return GSL_POSINF;
     }
-  else if (P == 0.0)
+  if (P == 0.0)
     {
       return 0.0;
     }
@@ -44,13 +44,13 @@ gsl_cdf_weibull_Pinv (const double P, const double a, const double b)
 double
 gsl_cdf_weibull_Qinv (const double Q, const double a, const double b)
 {
-  double x;
+  double x = NAN;
 
   if (Q == 0.0)
     {
       return GSL_POSINF;
     }
-  else if (Q == 1.0)
+  if (Q == 1.0)
     {
       return 0.0;
     }

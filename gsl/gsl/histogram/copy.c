@@ -39,7 +39,7 @@ int
 gsl_histogram_memcpy (gsl_histogram * dest, const gsl_histogram * src)
 {
   size_t n = src->n;
-  size_t i;
+  size_t i = 0;
 
   if (dest->n != src->n)
     {
@@ -70,8 +70,8 @@ gsl_histogram *
 gsl_histogram_clone (const gsl_histogram * src)
 {
   size_t n = src->n;
-  size_t i;
-  gsl_histogram *h;
+  size_t i = 0;
+  gsl_histogram *h = NULL;
 
   h = gsl_histogram_calloc_range (n, src->range);
 

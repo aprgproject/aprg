@@ -22,14 +22,15 @@
 #include <gsl/gsl_cdf.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
+#include <math.h>
 
 #include "error.h"
 
 double
 gsl_cdf_fdist_Pinv (const double P, const double nu1, const double nu2)
 {
-  double result;
-  double y;
+  double result = NAN;
+  double y = NAN;
 
   if (P < 0.0)
     {
@@ -67,8 +68,8 @@ gsl_cdf_fdist_Pinv (const double P, const double nu1, const double nu2)
 double
 gsl_cdf_fdist_Qinv (const double Q, const double nu1, const double nu2)
 {
-  double result;
-  double y;
+  double result = NAN;
+  double y = NAN;
 
   if (Q < 0.0)
     {

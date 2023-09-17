@@ -39,7 +39,8 @@ gsl_histogram2d_accumulate (gsl_histogram2d * h,
   const size_t nx = h->nx;
   const size_t ny = h->ny;
 
-  size_t i = 0, j = 0;
+  size_t i = 0;
+  size_t j = 0;
 
   int status = find2d (h->nx, h->xrange, h->ny, h->yrange, x, y, &i, &j);
 

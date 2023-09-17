@@ -50,7 +50,8 @@ brent_init (void * vstate, gsl_function * f, double * root, double x_lower, doub
 {
   brent_state_t * state = (brent_state_t *) vstate;
 
-  double f_lower, f_upper ;
+  double f_lower;
+  double f_upper ;
 
   *root = 0.5 * (x_lower + x_upper) ;
 
@@ -83,13 +84,19 @@ brent_iterate (void * vstate, gsl_function * f, double * root, double * x_lower,
 {
   brent_state_t * state = (brent_state_t *) vstate;
 
-  double tol, m;
+  double tol;
+  double m;
 
   int ac_equal = 0;
 
-  double a = state->a, b = state->b, c = state->c;
-  double fa = state->fa, fb = state->fb, fc = state->fc;
-  double d = state->d, e = state->e;
+  double a = state->a;
+  double b = state->b;
+  double c = state->c;
+  double fa = state->fa;
+  double fb = state->fb;
+  double fc = state->fc;
+  double d = state->d;
+  double e = state->e;
   
   if ((fb < 0 && fc < 0) || (fb > 0 && fc > 0))
     {
@@ -148,7 +155,9 @@ brent_iterate (void * vstate, gsl_function * f, double * root, double * x_lower,
     }
   else
     {
-      double p, q, r;   /* use inverse cubic interpolation */
+      double p;
+      double q;
+      double r;   /* use inverse cubic interpolation */
       double s = fb / fa;
       
       if (ac_equal)

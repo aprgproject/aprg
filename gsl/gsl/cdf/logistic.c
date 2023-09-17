@@ -25,7 +25,7 @@
 double
 gsl_cdf_logistic_P (const double x, const double a)
 {
-  double P;
+  double P = NAN;
   double u = x / a;
 
   if (u >= 0)
@@ -43,7 +43,7 @@ gsl_cdf_logistic_P (const double x, const double a)
 double
 gsl_cdf_logistic_Q (const double x, const double a)
 {
-  double Q;
+  double Q = NAN;
   double u = x / a;
 
   if (u >= 0)

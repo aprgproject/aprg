@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdio.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_block.h>
@@ -28,8 +29,9 @@ gsl_histogram_fread (FILE * stream, gsl_histogram * h)
 {
   int status = gsl_block_raw_fread (stream, h->range, h->n + 1, 1);
 
-  if (status)
+  if (status) {
     return status;
+}
 
   status = gsl_block_raw_fread (stream, h->bin, h->n, 1);
   return status;
@@ -40,8 +42,9 @@ gsl_histogram_fwrite (FILE * stream, const gsl_histogram * h)
 {
   int status = gsl_block_raw_fwrite (stream, h->range, h->n + 1, 1);
 
-  if (status)
+  if (status) {
     return status;
+}
 
   status = gsl_block_raw_fwrite (stream, h->bin, h->n, 1);
   return status;
@@ -51,7 +54,7 @@ int
 gsl_histogram_fprintf (FILE * stream, const gsl_histogram * h,
                        const char *range_format, const char *bin_format)
 {
-  size_t i;
+  size_t i = 0;
   const size_t n = h->n;
 
   for (i = 0; i < n; i++)
@@ -105,9 +108,9 @@ gsl_histogram_fprintf (FILE * stream, const gsl_histogram * h,
 int
 gsl_histogram_fscanf (FILE * stream, gsl_histogram * h)
 {
-  size_t i;
+  size_t i = 0;
   const size_t n = h->n;
-  double upper;
+  double upper = NAN;
 
   for (i = 0; i < n; i++)
     {

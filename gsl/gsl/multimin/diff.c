@@ -24,7 +24,8 @@ int
 gsl_multimin_diff (const gsl_multimin_function * f,
                    const gsl_vector * x, gsl_vector * g)
 {
-  size_t i, n = f->n;
+  size_t i;
+  size_t n = f->n;
 
   double h = GSL_SQRT_DBL_EPSILON;
 
@@ -35,12 +36,14 @@ gsl_multimin_diff (const gsl_multimin_function * f,
 
   for (i = 0; i < n; i++)
     {
-      double fl, fh;
+      double fl;
+      double fh;
   
       double xi = gsl_vector_get (x, i);
       double dx = fabs(xi) * h;
 
-      if (dx == 0.0) dx = h;
+      if (dx == 0.0) { dx = h;
+}
 
       gsl_vector_set (x1, i, xi + dx);
       fh = GSL_MULTIMIN_FN_EVAL(f, x1);

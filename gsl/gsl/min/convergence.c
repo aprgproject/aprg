@@ -31,16 +31,20 @@ gsl_min_test_interval (double x_lower, double x_upper, double epsabs, double eps
   const double abs_lower = fabs(lower) ;
   const double abs_upper = fabs(upper) ;
 
-  double min_abs, tolerance;
+  double min_abs;
+  double tolerance;
 
-  if (epsrel < 0.0)
+  if (epsrel < 0.0) {
     GSL_ERROR ("relative tolerance is negative", GSL_EBADTOL);
+}
   
-  if (epsabs < 0.0)
+  if (epsabs < 0.0) {
     GSL_ERROR ("absolute tolerance is negative", GSL_EBADTOL);
+}
 
-  if (lower > upper)
+  if (lower > upper) {
     GSL_ERROR ("lower bound larger than upper_bound", GSL_EINVAL);
+}
 
   if ((lower > 0 && upper > 0) || (lower < 0 && upper < 0)) 
     {
@@ -53,8 +57,9 @@ gsl_min_test_interval (double x_lower, double x_upper, double epsabs, double eps
 
   tolerance = epsabs + epsrel * min_abs  ;
   
-  if (fabs(upper - lower) < tolerance)
+  if (fabs(upper - lower) < tolerance) {
     return GSL_SUCCESS;
+}
   
   return GSL_CONTINUE ;
 }

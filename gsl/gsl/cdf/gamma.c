@@ -30,7 +30,7 @@
 double
 gsl_cdf_gamma_P (const double x, const double a, const double b)
 {
-  double P;
+  double P = NAN;
   double y = x / b;
 
   if (x <= 0.0)
@@ -53,7 +53,7 @@ gsl_cdf_gamma_P (const double x, const double a, const double b)
 double
 gsl_cdf_gamma_Q (const double x, const double a, const double b)
 {
-  double Q;
+  double Q = NAN;
   double y = x / b;
 
   if (x <= 0.0)

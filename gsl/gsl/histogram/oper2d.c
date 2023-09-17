@@ -52,7 +52,7 @@ gsl_histogram2d_equal_bins_p (const gsl_histogram2d * h1,
       return 0;
     }
   {
-    size_t i;
+    size_t i = 0;
     /* init ranges */
     for (i = 0; i <= (h1->nx); i++)
       {
@@ -80,7 +80,7 @@ gsl_histogram2d_equal_bins_p (const gsl_histogram2d * h1,
 int 
 gsl_histogram2d_add (gsl_histogram2d * h1, const gsl_histogram2d * h2)
 {
-  size_t i;
+  size_t i = 0;
 
   if (!gsl_histogram2d_equal_bins_p (h1, h2))
     {
@@ -103,7 +103,7 @@ gsl_histogram2d_add (gsl_histogram2d * h1, const gsl_histogram2d * h2)
 int 
 gsl_histogram2d_sub (gsl_histogram2d * h1, const gsl_histogram2d * h2)
 {
-  size_t i;
+  size_t i = 0;
 
   if (!gsl_histogram2d_equal_bins_p (h1, h2))
     {
@@ -126,7 +126,7 @@ gsl_histogram2d_sub (gsl_histogram2d * h1, const gsl_histogram2d * h2)
 int 
 gsl_histogram2d_mul (gsl_histogram2d * h1, const gsl_histogram2d * h2)
 {
-  size_t i;
+  size_t i = 0;
 
   if (!gsl_histogram2d_equal_bins_p (h1, h2))
     {
@@ -149,7 +149,7 @@ gsl_histogram2d_mul (gsl_histogram2d * h1, const gsl_histogram2d * h2)
 int 
 gsl_histogram2d_div (gsl_histogram2d * h1, const gsl_histogram2d * h2)
 {
-  size_t i;
+  size_t i = 0;
 
   if (!gsl_histogram2d_equal_bins_p (h1, h2))
     {
@@ -172,7 +172,7 @@ gsl_histogram2d_div (gsl_histogram2d * h1, const gsl_histogram2d * h2)
 int 
 gsl_histogram2d_scale (gsl_histogram2d * h, double scale)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < (h->nx) * (h->ny); i++)
     {
@@ -190,7 +190,7 @@ gsl_histogram2d_scale (gsl_histogram2d * h, double scale)
 int 
 gsl_histogram2d_shift (gsl_histogram2d * h, double shift)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < (h->nx) * (h->ny); i++)
     {

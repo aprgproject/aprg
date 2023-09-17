@@ -22,6 +22,7 @@
 #include <gsl/gsl_test.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_sum.h>
+#include <math.h>
 
 int
 gsl_sum_levin_u_accel (const double *array, const size_t array_size,
@@ -65,19 +66,23 @@ gsl_sum_levin_u_minmax (const double *array, const size_t array_size,
     
       const double SMALL = 0.01;
       const size_t nmax = GSL_MAX (max_terms, array_size) - 1;
-      double noise_n = 0.0, noise_nm1 = 0.0;
-      double trunc_n = 0.0, trunc_nm1 = 0.0;
-      double actual_trunc_n = 0.0, actual_trunc_nm1 = 0.0;
-      double result_n = 0.0, result_nm1 = 0.0;
+      double noise_n = 0.0;
+      double noise_nm1 = 0.0;
+      double trunc_n = 0.0;
+      double trunc_nm1 = 0.0;
+      double actual_trunc_n = 0.0;
+      double actual_trunc_nm1 = 0.0;
+      double result_n = 0.0;
+      double result_nm1 = 0.0;
       double variance = 0;
-      size_t n;
-      unsigned int i;
+      size_t n = 0;
+      unsigned int i = 0;
       int better = 0;
       int before = 0;
       int converging = 0;
       double least_trunc = GSL_DBL_MAX;
       double least_trunc_noise = GSL_DBL_MAX;
-      double least_trunc_result;
+      double least_trunc_result = NAN;
 
       /* Calculate specified minimum number of terms.  No convergence
          tests are made, and no truncation information is stored.  */
@@ -149,11 +154,13 @@ gsl_sum_levin_u_minmax (const double *array, const size_t array_size,
                   least_trunc_noise = noise_n;
                 }
 
-              if (noise_n > trunc_n / 3.0)
+              if (noise_n > trunc_n / 3.0) {
                 break;
+}
 
-              if (trunc_n < 10.0 * GSL_MACH_EPS * fabs (result_n))
+              if (trunc_n < 10.0 * GSL_MACH_EPS * fabs (result_n)) {
                 break;
+}
             }
 
         }
@@ -168,8 +175,8 @@ gsl_sum_levin_u_minmax (const double *array, const size_t array_size,
           w->terms_used = n;
           return GSL_SUCCESS;
         }
-      else
-        {
+      
+        
           /* Never reached the convergence region.  Use the last
              calculated values.  */
 
@@ -177,7 +184,7 @@ gsl_sum_levin_u_minmax (const double *array, const size_t array_size,
           *abserr = GSL_MAX_DBL (trunc_n, noise_n);
           w->terms_used = n;
           return GSL_SUCCESS;
-        }
+       
    
 }
 

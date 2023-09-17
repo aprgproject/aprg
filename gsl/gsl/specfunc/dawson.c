@@ -265,9 +265,9 @@ gsl_sf_dawson_e(double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * result->val;
     return GSL_SUCCESS;
   }
-  else {
+  
     UNDERFLOW_ERROR(result);
-  }
+ 
 }
 
 

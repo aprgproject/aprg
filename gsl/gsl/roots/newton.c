@@ -67,7 +67,9 @@ newton_iterate (void * vstate, gsl_function_fdf * fdf, double * root)
 {
   newton_state_t * state = (newton_state_t *) vstate;
   
-  double root_new, f_new, df_new;
+  double root_new;
+  double f_new;
+  double df_new;
 
   if (state->df == 0.0)
     {

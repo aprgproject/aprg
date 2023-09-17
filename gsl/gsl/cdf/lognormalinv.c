@@ -25,13 +25,14 @@
 double
 gsl_cdf_lognormal_Pinv (const double P, const double zeta, const double sigma)
 {
-  double x, u;
+  double x;
+  double u;
 
   if (P == 1.0)
     {
       return GSL_POSINF;
     }
-  else if (P == 0.0)
+  if (P == 0.0)
     {
       return 0.0;
     }
@@ -46,13 +47,14 @@ gsl_cdf_lognormal_Pinv (const double P, const double zeta, const double sigma)
 double
 gsl_cdf_lognormal_Qinv (const double Q, const double zeta, const double sigma)
 {
-  double x, u;
+  double x;
+  double u;
 
   if (Q == 0.0)
     {
       return GSL_POSINF;
     }
-  else if (Q == 1.0)
+  if (Q == 1.0)
     {
       return 0.0;
     }

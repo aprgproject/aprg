@@ -871,7 +871,7 @@ int gsl_sf_zeta_int_e(const int n, gsl_sf_result * result)
       return gsl_sf_zeta_e((double)n, result);
    
   }
-  else if(n == 1){
+  if(n == 1){
     DOMAIN_ERROR(result);
   }
   else if(n <= ZETA_POS_TABLE_NMAX){
@@ -925,7 +925,7 @@ int gsl_sf_zetam1_int_e(const int n, gsl_sf_result * result)
       return gsl_sf_zeta_e((double)n, result);  
    
   }
-  else if(n == 1){
+  if(n == 1){
     DOMAIN_ERROR(result);
   }
   else if(n <= ZETA_POS_TABLE_NMAX){
@@ -960,7 +960,7 @@ int gsl_sf_eta_int_e(int n, gsl_sf_result * result)
       result->err = 0.0;
       return GSL_SUCCESS;
     }
-    else if(n > -ETA_NEG_TABLE_NMAX) {
+    if(n > -ETA_NEG_TABLE_NMAX) {
       result->val = eta_neg_int_table[-(n+1)/2];
       result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_SUCCESS;

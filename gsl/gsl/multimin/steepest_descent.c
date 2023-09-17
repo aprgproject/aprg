@@ -25,6 +25,7 @@
 #include <gsl/gsl_multimin.h>
 #include <gsl/gsl_blas_types.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 typedef struct
 {
@@ -106,8 +107,9 @@ steepest_descent_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
   gsl_vector *g1 = state->g1;
 
   double f0 = *f;
-  double f1;
-  double step = state->step, tol = state->tol;
+  double f1 = NAN;
+  double step = state->step;
+  double tol = state->tol;
 
   int failed = 0;
 
@@ -147,10 +149,11 @@ trial:
       goto trial;
     }
 
-  if (failed)
+  if (failed) {
     step *= tol;
-  else
+  } else {
     step *= 2.0;
+}
 
   state->step = step;
 

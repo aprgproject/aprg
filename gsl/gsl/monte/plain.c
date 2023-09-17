@@ -36,9 +36,12 @@ gsl_monte_plain_integrate (const gsl_monte_function * f,
                            gsl_monte_plain_state * state,
                            double *result, double *abserr)
 {
-  double vol, m = 0, q = 0;
+  double vol;
+  double m = 0;
+  double q = 0;
   double *x = state->x;
-  size_t n, i;
+  size_t n;
+  size_t i;
 
   if (dim != state->dim)
     {
@@ -133,7 +136,7 @@ gsl_monte_plain_alloc (size_t dim)
 int
 gsl_monte_plain_init (gsl_monte_plain_state * s)
 {
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < s->dim; i++)
     {

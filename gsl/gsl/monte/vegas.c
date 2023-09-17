@@ -113,8 +113,11 @@ gsl_monte_vegas_integrate (gsl_monte_function * f,
                            gsl_monte_vegas_state * state,
                            double *result, double *abserr)
 {
-  double cum_int, cum_sig;
-  size_t i, k, it;
+  double cum_int;
+  double cum_sig;
+  size_t i;
+  size_t k;
+  size_t it;
 
   if (dim != state->dim)
     {
@@ -218,9 +221,12 @@ gsl_monte_vegas_integrate (gsl_monte_function * f,
 
   for (it = 0; it < state->iterations; it++)
     {
-      double intgrl = 0.0, intgrl_sq = 0.0;
+      double intgrl = 0.0;
+      double intgrl_sq = 0.0;
       double tss = 0.0;
-      double wgt, var, sig;
+      double wgt;
+      double var;
+      double sig;
       size_t calls_per_box = state->calls_per_box;
       double jacbin = state->jac;
       double *x = state->x;
@@ -233,13 +239,14 @@ gsl_monte_vegas_integrate (gsl_monte_function * f,
       
       do
         {
-          volatile double m = 0, q = 0;
+          volatile double m = 0;
+          volatile double q = 0;
           double f_sq_sum = 0.0;
 
           for (k = 0; k < calls_per_box; k++)
             {
-              volatile double fval;
-              double bin_vol;
+              volatile double fval = NAN;
+              double bin_vol = NAN;
 
               random_point (x, bin, &bin_vol, state->box, xl, xu, state, r);
 
@@ -559,7 +566,7 @@ gsl_monte_vegas_params_set (gsl_monte_vegas_state * s, const gsl_monte_vegas_par
 static void
 init_box_coord (gsl_monte_vegas_state * s, coord box[])
 {
-  size_t i;
+  size_t i = 0;
 
   size_t dim = s->dim;
 
@@ -597,7 +604,7 @@ change_box_coord (gsl_monte_vegas_state * s, coord box[])
 static void
 init_grid (gsl_monte_vegas_state * s, double xl[], double xu[], size_t dim)
 {
-  size_t j;
+  size_t j = 0;
 
   double vol = 1.0;
 
@@ -620,7 +627,8 @@ init_grid (gsl_monte_vegas_state * s, double xl[], double xu[], size_t dim)
 static void
 reset_grid_values (gsl_monte_vegas_state * s)
 {
-  size_t i, j;
+  size_t i;
+  size_t j;
 
   size_t dim = s->dim;
   size_t bins = s->bins;
@@ -637,7 +645,7 @@ reset_grid_values (gsl_monte_vegas_state * s)
 static void
 accumulate_distribution (gsl_monte_vegas_state * s, coord bin[], double y)
 {
-  size_t j;
+  size_t j = 0;
   size_t dim = s->dim;
 
   for (j = 0; j < dim; j++)
@@ -658,7 +666,7 @@ random_point (double x[], coord bin[], double *bin_vol,
 
   double vol = 1.0;
 
-  size_t j;
+  size_t j = 0;
 
   size_t dim = s->dim;
   size_t bins = s->bins;
@@ -675,7 +683,8 @@ random_point (double x[], coord bin[], double *bin_vol,
 
       int k = z;
 
-      double y, bin_width;
+      double y;
+      double bin_width;
 
       bin[j] = k;
 
@@ -702,7 +711,8 @@ random_point (double x[], coord bin[], double *bin_vol,
 static void
 resize_grid (gsl_monte_vegas_state * s, unsigned int bins)
 {
-  size_t j, k;
+  size_t j;
+  size_t k;
   size_t dim = s->dim;
 
   /* weight is ratio of bin sizes */
@@ -711,7 +721,7 @@ resize_grid (gsl_monte_vegas_state * s, unsigned int bins)
 
   for (j = 0; j < dim; j++)
     {
-      double xold;
+      double xold = NAN;
       double xnew = 0;
       double dw = 0;
       int i = 1;
@@ -743,13 +753,16 @@ resize_grid (gsl_monte_vegas_state * s, unsigned int bins)
 static void
 refine_grid (gsl_monte_vegas_state * s)
 {
-  size_t i, j, k;
+  size_t i;
+  size_t j;
+  size_t k;
   size_t dim = s->dim;
   size_t bins = s->bins;
 
   for (j = 0; j < dim; j++)
     {
-      double grid_tot_j, tot_weight;
+      double grid_tot_j;
+      double tot_weight;
       double * weight = s->weight;
 
       double oldg = VALUE (s, 0, j);
@@ -795,7 +808,7 @@ refine_grid (gsl_monte_vegas_state * s)
       {
         double pts_per_bin = tot_weight / bins;
 
-        double xold;
+        double xold = NAN;
         double xnew = 0;
         double dw = 0;
         i = 1;
@@ -828,11 +841,12 @@ static void
 print_lim (gsl_monte_vegas_state * state,
            double xl[], double xu[], unsigned long dim)
 {
-  unsigned long j;
+  unsigned long j = 0;
 
   fprintf (state->ostream, "The limits of integration are:\n");
-  for (j = 0; j < dim; ++j)
+  for (j = 0; j < dim; ++j) {
     fprintf (state->ostream, "\nxl[%lu]=%f    xu[%lu]=%f", j, xl[j], j, xu[j]);
+}
   fprintf (state->ostream, "\n");
   fflush (state->ostream);
 }
@@ -875,10 +889,12 @@ print_res (gsl_monte_vegas_state * state,
 static void
 print_dist (gsl_monte_vegas_state * state, unsigned long dim)
 {
-  unsigned long i, j;
+  unsigned long i;
+  unsigned long j;
   int p = state->verbose;
-  if (p < 1)
+  if (p < 1) {
     return;
+}
 
   for (j = 0; j < dim; ++j)
     {
@@ -901,10 +917,12 @@ print_dist (gsl_monte_vegas_state * state, unsigned long dim)
 static void
 print_grid (gsl_monte_vegas_state * state, unsigned long dim)
 {
-  unsigned long i, j;
+  unsigned long i;
+  unsigned long j;
   int p = state->verbose;
-  if (p < 1)
+  if (p < 1) {
     return;
+}
 
   for (j = 0; j < dim; ++j)
     {
@@ -913,8 +931,9 @@ print_grid (gsl_monte_vegas_state * state, unsigned long dim)
       for (i = 0; i <= state->bins; i++)
         {
           fprintf (state->ostream, "%11.2e", COORD (state, i, j));
-          if (i % 5 == 4)
+          if (i % 5 == 4) {
             fprintf (state->ostream, "\n");
+}
         }
       fprintf (state->ostream, "\n");
     }

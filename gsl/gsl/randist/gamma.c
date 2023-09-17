@@ -55,10 +55,10 @@ gsl_ran_gamma_knuth (const gsl_rng * r, const double a, const double b)
     {
       return b * gamma_frac (r, a);
     }
-  else
-    {
+  
+    
       return b * (gsl_ran_gamma_int (r, na) + gamma_frac (r, a - na)) ;
-    }
+   
 }
 
 double
@@ -168,7 +168,7 @@ gsl_ran_gamma_pdf (const double x, const double a, const double b)
       } 
         return 0 ;
     }
-  else if (a == 1)
+  if (a == 1)
     {
       return exp(-x/b)/b ;
     }

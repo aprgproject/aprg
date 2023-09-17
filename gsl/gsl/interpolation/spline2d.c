@@ -29,8 +29,8 @@
 gsl_spline2d *
 gsl_spline2d_alloc(const gsl_interp2d_type * T, size_t xsize, size_t ysize)
 {
-  double * array_mem;
-  gsl_spline2d * interp;
+  double * array_mem = NULL;
+  gsl_spline2d * interp = NULL;
 
   if (xsize < T->min_size || ysize < T->min_size)
     {
@@ -98,16 +98,18 @@ gsl_spline2d_free(gsl_spline2d * interp)
 {
   RETURN_IF_NULL(interp);
 
-  if (interp->interp_object.type->free)
+  if (interp->interp_object.type->free) {
     interp->interp_object.type->free(interp->interp_object.state);
+}
 
   /*
    * interp->xarr points to the beginning of one contiguous block of memory
    * that holds interp->xarr, interp->yarr, and interp->zarr. So it all gets
    * freed with one call. cf. gsl_spline2d_alloc() implementation
    */
-  if (interp->xarr)
+  if (interp->xarr) {
     free(interp->xarr);
+}
 
   free(interp);
 } /* gsl_spline2d_free() */

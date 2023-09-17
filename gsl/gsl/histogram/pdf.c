@@ -27,8 +27,8 @@
 double
 gsl_histogram_pdf_sample (const gsl_histogram_pdf * p, double r)
 {
-  size_t i;
-  int status;
+  size_t i = 0;
+  int status = 0;
 
 /* Wrap the exclusive top of the bin down to the inclusive bottom of
    the bin. Since this is a single point it should not affect the
@@ -56,7 +56,7 @@ gsl_histogram_pdf_sample (const gsl_histogram_pdf * p, double r)
 gsl_histogram_pdf *
 gsl_histogram_pdf_alloc (const size_t n)
 {
-  gsl_histogram_pdf *p;
+  gsl_histogram_pdf *p = NULL;
 
   if (n == 0)
     {
@@ -101,7 +101,7 @@ gsl_histogram_pdf_alloc (const size_t n)
 int 
 gsl_histogram_pdf_init (gsl_histogram_pdf * p, const gsl_histogram * h)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = p->n;
 
   if (n != h->n)
@@ -124,7 +124,8 @@ gsl_histogram_pdf_init (gsl_histogram_pdf * p, const gsl_histogram * h)
     }
 
   {
-    double mean = 0, sum = 0;
+    double mean = 0;
+    double sum = 0;
 
     for (i = 0; i < n; i++)
       {

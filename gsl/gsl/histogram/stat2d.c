@@ -47,8 +47,9 @@ gsl_histogram2d_sum (const gsl_histogram2d * h)
   double sum = 0;
   size_t i = 0;
 
-  while (i < n)
+  while (i < n) {
     sum += h->bin[i++];
+}
 
   return sum;
 }
@@ -58,8 +59,8 @@ gsl_histogram2d_xmean (const gsl_histogram2d * h)
 {
   const size_t nx = h->nx;
   const size_t ny = h->ny;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   /* Compute the bin-weighted arithmetic mean M of a histogram using the
      recurrence relation
@@ -80,8 +81,9 @@ gsl_histogram2d_xmean (const gsl_histogram2d * h)
       for (j = 0; j < ny; j++)
         {
           double wij = h->bin[i * ny + j];
-          if (wij > 0)
+          if (wij > 0) {
             wi += wij;
+}
         }
       if (wi > 0)
         {
@@ -98,8 +100,8 @@ gsl_histogram2d_ymean (const gsl_histogram2d * h)
 {
   const size_t nx = h->nx;
   const size_t ny = h->ny;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   /* Compute the bin-weighted arithmetic mean M of a histogram using the
      recurrence relation
@@ -120,8 +122,9 @@ gsl_histogram2d_ymean (const gsl_histogram2d * h)
       for (i = 0; i < nx; i++)
         {
           double wij = h->bin[i * ny + j];
-          if (wij > 0)
+          if (wij > 0) {
             wj += wij;
+}
         }
 
       if (wj > 0)
@@ -140,8 +143,8 @@ gsl_histogram2d_xsigma (const gsl_histogram2d * h)
   const double xmean = gsl_histogram2d_xmean (h);
   const size_t nx = h->nx;
   const size_t ny = h->ny;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   /* Compute the bin-weighted arithmetic mean M of a histogram using the
      recurrence relation
@@ -162,8 +165,9 @@ gsl_histogram2d_xsigma (const gsl_histogram2d * h)
       for (j = 0; j < ny; j++)
         {
           double wij = h->bin[i * ny + j];
-          if (wij > 0)
+          if (wij > 0) {
             wi += wij;
+}
         }
 
       if (wi > 0)
@@ -185,8 +189,8 @@ gsl_histogram2d_ysigma (const gsl_histogram2d * h)
   const double ymean = gsl_histogram2d_ymean (h);
   const size_t nx = h->nx;
   const size_t ny = h->ny;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   /* Compute the bin-weighted arithmetic mean M of a histogram using the
      recurrence relation
@@ -207,8 +211,9 @@ gsl_histogram2d_ysigma (const gsl_histogram2d * h)
       for (i = 0; i < nx; i++)
         {
           double wij = h->bin[i * ny + j];
-          if (wij > 0)
+          if (wij > 0) {
             wj += wij;
+}
         }
       if (wj > 0)
         {
@@ -230,8 +235,8 @@ gsl_histogram2d_cov (const gsl_histogram2d * h)
   const double ymean = gsl_histogram2d_ymean (h);
   const size_t nx = h->nx;
   const size_t ny = h->ny;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   /* Compute the bin-weighted arithmetic mean M of a histogram using the
      recurrence relation

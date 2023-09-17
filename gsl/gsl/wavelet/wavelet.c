@@ -25,7 +25,7 @@
 gsl_wavelet *
 gsl_wavelet_alloc (const gsl_wavelet_type * T, size_t k)
 {
-  int status;
+  int status = 0;
 
   gsl_wavelet *w = (gsl_wavelet *) malloc (sizeof (gsl_wavelet));
 
@@ -96,7 +96,7 @@ gsl_wavelet_print (const gsl_wavelet * w)
 gsl_wavelet_workspace *
 gsl_wavelet_workspace_alloc (size_t n)
 {
-  gsl_wavelet_workspace *work;
+  gsl_wavelet_workspace *work = NULL;
 
   if (n == 0)
     {

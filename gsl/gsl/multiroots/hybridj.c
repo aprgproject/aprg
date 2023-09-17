@@ -70,9 +70,20 @@ static int
 hybridj_alloc (void *vstate, size_t n)
 {
   hybridj_state_t *state = (hybridj_state_t *) vstate;
-  gsl_matrix *q, *r;
-  gsl_vector *tau, *diag, *qtf, *newton, *gradient, *x_trial, *f_trial,
-   *df, *qtdf, *rdx, *w, *v;
+  gsl_matrix *q;
+  gsl_matrix *r;
+  gsl_vector *tau;
+  gsl_vector *diag;
+  gsl_vector *qtf;
+  gsl_vector *newton;
+  gsl_vector *gradient;
+  gsl_vector *x_trial;
+  gsl_vector *f_trial;
+  gsl_vector *df;
+  gsl_vector *qtdf;
+  gsl_vector *rdx;
+  gsl_vector *w;
+  gsl_vector *v;
 
   q = gsl_matrix_calloc (n, n);
 
@@ -345,10 +356,11 @@ hybridj_set_impl (void *vstate, gsl_multiroot_function_fdf * fdf, gsl_vector * x
 
   /* Store column norms in diag */
 
-  if (scale)
+  if (scale) {
     compute_diag (J, diag);
-  else
+  } else {
     gsl_vector_set_all (diag, 1.0);
+}
 
   /* Set delta to factor |D x| or to factor if |D x| is zero */
 
@@ -396,10 +408,16 @@ hybridj_iterate_impl (void *vstate, gsl_multiroot_function_fdf * fdf, gsl_vector
   gsl_vector *w = state->w;
   gsl_vector *v = state->v;
 
-  double prered, actred;
-  double pnorm, fnorm1, fnorm1p;
-  double ratio;
-  double p1 = 0.1, p5 = 0.5, p001 = 0.001, p0001 = 0.0001;
+  double prered;
+  double actred;
+  double pnorm;
+  double fnorm1;
+  double fnorm1p;
+  double ratio = NAN;
+  double p1 = 0.1;
+  double p5 = 0.5;
+  double p001 = 0.001;
+  double p0001 = 0.0001;
 
   /* Compute qtf = Q^T f */
 
@@ -478,10 +496,12 @@ hybridj_iterate_impl (void *vstate, gsl_multiroot_function_fdf * fdf, gsl_vector
       state->ncfail = 0;
       state->ncsuc++;
 
-      if (ratio >= p5 || state->ncsuc > 1)
+      if (ratio >= p5 || state->ncsuc > 1) {
         state->delta = GSL_MAX (state->delta, pnorm / p5);
-      if (fabs (ratio - 1) <= p1)
+}
+      if (fabs (ratio - 1) <= p1) {
         state->delta = pnorm / p5;
+}
     }
 
   /* Test for successful iteration */
@@ -497,11 +517,13 @@ hybridj_iterate_impl (void *vstate, gsl_multiroot_function_fdf * fdf, gsl_vector
   /* Determine the progress of the iteration */
 
   state->nslow1++;
-  if (actred >= p001)
+  if (actred >= p001) {
     state->nslow1 = 0;
+}
 
-  if (actred >= p1)
+  if (actred >= p1) {
     state->nslow2 = 0;
+}
 
   if (state->ncfail == 2)
     {
@@ -518,14 +540,16 @@ hybridj_iterate_impl (void *vstate, gsl_multiroot_function_fdf * fdf, gsl_vector
 
       if (state->iter == 1)
         {
-          if (scale)
+          if (scale) {
             compute_diag (J, diag);
+}
           state->delta = compute_delta (diag, x);
         }
       else
         {
-          if (scale)
+          if (scale) {
             update_diag (J, diag);
+}
         }
 
       /* Factorize J into QR decomposition */

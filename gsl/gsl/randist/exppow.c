@@ -69,7 +69,7 @@ gsl_ran_exppow (const gsl_rng * r, const double a, const double b)
       /* Laplace distribution */
       return gsl_ran_laplace (r, a);
     }
-  else if (b < 2)
+  if (b < 2)
     {
       /* Use laplace distribution for rejection method, from Tadikamalla */
 

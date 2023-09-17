@@ -56,6 +56,7 @@
 /*----------------------------------------------------------------------------*/
 #include <config.h>
 
+#include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -139,8 +140,9 @@ quad_golden_iterate (void *vstate, gsl_function * f, double *x_minimum,
 
   double quad_step_size = prev_stored_step;
   
-  double x_trial;
-  double x_eval, f_eval;
+  double x_trial = NAN;
+  double x_eval;
+  double f_eval;
 
   double x_midpoint = 0.5 * (x_l + x_u);
   double tol = REL_ERR_VAL * fabs (x_m) + ABS_ERR_VAL; /* total error tolerance */
@@ -156,8 +158,9 @@ quad_golden_iterate (void *vstate, gsl_function * f, double *x_minimum,
 
       if (fabs (c2) > GSL_DBL_EPSILON)	/* if( c2 != 0 ) */
 	{
-	  if (c2 > 0.0)
+	  if (c2 > 0.0) {
 	    c1 = -c1;
+}
 
 	  c2 = fabs (c2);
 
@@ -194,7 +197,8 @@ quad_golden_iterate (void *vstate, gsl_function * f, double *x_minimum,
            (x_small != x_prev_small && x_small > x_m && x_prev_small > x_m))
     {
       /* Take safeguarded function comparison step */
-      double outside_interval, inside_interval;
+      double outside_interval;
+      double inside_interval;
 
       if (x_small < x_m)
 	{
@@ -217,7 +221,7 @@ quad_golden_iterate (void *vstate, gsl_function * f, double *x_minimum,
 
       {
         double step = inside_interval;
-        double scale_factor;
+        double scale_factor = NAN;
 
         if (fabs (outside_interval) < fabs (inside_interval))
           {
@@ -237,7 +241,7 @@ quad_golden_iterate (void *vstate, gsl_function * f, double *x_minimum,
   else
     {
       /* Take golden section step */
-      double step;
+      double step = NAN;
 
       if (x_m < x_midpoint)
         {

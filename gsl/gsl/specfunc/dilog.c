@@ -201,7 +201,7 @@ dilog_xge0(const double x, gsl_sf_result * result)
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return stat_ser;
   }
-  else if(x > 0.25) {
+  if(x > 0.25) {
     return dilog_series_2(x, result);
   }
   else if(x > 0.0) {

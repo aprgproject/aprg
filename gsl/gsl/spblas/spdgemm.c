@@ -65,10 +65,11 @@ gsl_spblas_dgemm(const double alpha, const gsl_spmatrix *A,
       double *Bd = B->data;
       int *w = A->work.work_int;      /* workspace of length M */
       double *x = C->work.work_atomic; /* workspace of length M */
-      int *Cp, *Ci;
-      double *Cd;
-      size_t j;
-      int p;
+      int *Cp;
+      int *Ci;
+      double *Cd = NULL;
+      size_t j = 0;
+      int p = 0;
       size_t nz = 0;
 
       if (C->nzmax < A->nz + B->nz)
@@ -81,8 +82,9 @@ gsl_spblas_dgemm(const double alpha, const gsl_spmatrix *A,
         }
 
       /* initialize workspace to 0 */
-      for (j = 0; j < M; ++j)
+      for (j = 0; j < M; ++j) {
         w[j] = 0;
+}
 
       Cp = C->p;
       Ci = C->i;
@@ -110,8 +112,9 @@ gsl_spblas_dgemm(const double alpha, const gsl_spmatrix *A,
               nz = gsl_spblas_scatter(A, Bi[p], Bd[p], w, x, (int) (j + 1), C, nz);
             }
 
-          for (p = Cp[j]; p < (int) nz; ++p)
+          for (p = Cp[j]; p < (int) nz; ++p) {
             Cd[p] = x[Ci[p]];
+}
         }
 
       Cp[N] = nz;
@@ -157,7 +160,7 @@ gsl_spblas_scatter(const gsl_spmatrix *A, const size_t j, const double alpha,
                    int *w, double *x, const int mark, gsl_spmatrix *C,
                    size_t nz)
 {
-  int p;
+  int p = 0;
   int *Ai = A->i;
   int *Ap = A->p;
   double *Ad = A->data;

@@ -48,8 +48,8 @@
 double
 gsl_cdf_poisson_P (const unsigned int k, const double mu)
 {
-  double P;
-  double a;
+  double P = NAN;
+  double a = NAN;
 
   if (mu <= 0.0)
     {
@@ -69,8 +69,8 @@ gsl_cdf_poisson_P (const unsigned int k, const double mu)
 double
 gsl_cdf_poisson_Q (const unsigned int k, const double mu)
 {
-  double Q;
-  double a;
+  double Q = NAN;
+  double a = NAN;
 
   if (mu <= 0.0)
     {

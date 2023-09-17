@@ -29,13 +29,13 @@
 double
 gsl_cdf_gamma_Pinv (const double P, const double a, const double b)
 {
-  double x;
+  double x = NAN;
 
   if (P == 1.0)
     {
       return GSL_POSINF;
     }
-  else if (P == 0.0)
+  if (P == 0.0)
     {
       return 0.0;
     }
@@ -74,15 +74,18 @@ gsl_cdf_gamma_Pinv (const double P, const double a, const double b)
    */
 
   {
-    double lambda, dP, phi;
+    double lambda;
+    double dP;
+    double phi;
     unsigned int n = 0;
 
   start:
     dP = P - gsl_cdf_gamma_P (x, a, 1.0);
     phi = gsl_ran_gamma_pdf (x, a, 1.0);
 
-    if (dP == 0.0 || n++ > 32)
+    if (dP == 0.0 || n++ > 32) {
       goto end;
+}
 
     lambda = dP / GSL_MAX (2 * fabs (dP / x), phi);
 
@@ -91,18 +94,20 @@ gsl_cdf_gamma_Pinv (const double P, const double a, const double b)
       double step1 = -((a - 1) / x - 1) * lambda * lambda / 4.0;
 
       double step = step0;
-      if (fabs (step1) < 0.5 * fabs (step0))
+      if (fabs (step1) < 0.5 * fabs (step0)) {
         step += step1;
+}
 
-      if (x + step > 0)
+      if (x + step > 0) {
         x += step;
-      else
+      } else
         {
           x /= 2.0;
         }
 
-      if (fabs (step0) > 1e-10 * x || fabs(step0 * phi) > 1e-10 * P)
+      if (fabs (step0) > 1e-10 * x || fabs(step0 * phi) > 1e-10 * P) {
         goto start;
+}
     }
 
   end:
@@ -118,13 +123,13 @@ gsl_cdf_gamma_Pinv (const double P, const double a, const double b)
 double
 gsl_cdf_gamma_Qinv (const double Q, const double a, const double b)
 {
-  double x;
+  double x = NAN;
 
   if (Q == 1.0)
     {
       return 0.0;
     }
-  else if (Q == 0.0)
+  if (Q == 0.0)
     {
       return GSL_POSINF;
     }
@@ -157,15 +162,18 @@ gsl_cdf_gamma_Qinv (const double Q, const double a, const double b)
    */
 
   {
-    double lambda, dQ, phi;
+    double lambda;
+    double dQ;
+    double phi;
     unsigned int n = 0;
 
   start:
     dQ = Q - gsl_cdf_gamma_Q (x, a, 1.0);
     phi = gsl_ran_gamma_pdf (x, a, 1.0);
 
-    if (dQ == 0.0 || n++ > 32)
+    if (dQ == 0.0 || n++ > 32) {
       goto end;
+}
 
     lambda = -dQ / GSL_MAX (2 * fabs (dQ / x), phi);
 
@@ -174,18 +182,20 @@ gsl_cdf_gamma_Qinv (const double Q, const double a, const double b)
       double step1 = -((a - 1) / x - 1) * lambda * lambda / 4.0;
 
       double step = step0;
-      if (fabs (step1) < 0.5 * fabs (step0))
+      if (fabs (step1) < 0.5 * fabs (step0)) {
         step += step1;
+}
 
-      if (x + step > 0)
+      if (x + step > 0) {
         x += step;
-      else
+      } else
         {
           x /= 2.0;
         }
 
-      if (fabs (step0) > 1e-10 * x)
+      if (fabs (step0) > 1e-10 * x) {
         goto start;
+}
     }
 
   }

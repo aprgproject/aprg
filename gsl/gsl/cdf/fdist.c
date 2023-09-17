@@ -35,7 +35,7 @@
 double
 gsl_cdf_fdist_P (const double x, const double nu1, const double nu2)
 {
-  double P;
+  double P = NAN;
   double r = nu2 / nu1;
 
   if (x < r)
@@ -61,7 +61,7 @@ gsl_cdf_fdist_P (const double x, const double nu1, const double nu2)
 double
 gsl_cdf_fdist_Q (const double x, const double nu1, const double nu2)
 {
-  double Q;
+  double Q = NAN;
   double r = nu2 / nu1;
 
   if (x < r)

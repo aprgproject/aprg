@@ -184,7 +184,7 @@ bool AlbaLocalPathHandlerStd::copyDirectoryToAndIsSuccessful(LocalPath const& de
             return false;
         }
         for (directory_entry const& directoryEntry : recursive_directory_iterator(m_path)) {
-            LocalPath destinationEntry = destination / relative(directoryEntry, m_path);
+            LocalPath const destinationEntry = destination / relative(directoryEntry, m_path);
             if (directoryEntry.is_directory()) {
                 create_directories(destinationEntry);
             } else {

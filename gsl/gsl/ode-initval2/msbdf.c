@@ -44,6 +44,7 @@
 */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gsl/gsl_math.h>
@@ -546,10 +547,11 @@ msbdf_calccoeffs (const size_t ord, const size_t ordwait,
     }
   else
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
       double hsum = h;
       double coeff1 = -1.0;
-      double x;
+      double x = NAN;
 
       /* Calculate the actual polynomial coefficients (l) */
 
@@ -704,7 +706,7 @@ msbdf_update (void *vstate, const size_t dim, gsl_matrix * dfdy, double *dfdt,
 #ifdef DEBUG
       printf ("-- update M, gamma=%.5e\n", gamma);
 #endif
-      size_t i;
+      size_t i = 0;
       gsl_matrix_memcpy (M, dfdy);
       gsl_matrix_scale (M, -gamma);
 
@@ -714,7 +716,7 @@ msbdf_update (void *vstate, const size_t dim, gsl_matrix * dfdy, double *dfdt,
         }
 
       {
-        int signum;
+        int signum = 0;
         int s = gsl_linalg_LU_decomp (M, p, &signum);
         
         if (s != GSL_SUCCESS)
@@ -749,7 +751,8 @@ msbdf_corrector (void *vstate, const gsl_odeiv2_system * sys,
      system M = I - gamma * dfdy = -G is solved by Newton iteration.
    */
 
-  size_t mi, i;
+  size_t mi;
+  size_t i;
   const size_t max_iter = 3;    /* Maximum number of iterations */
   double convrate = 1.0;        /* convergence rate */
   double stepnorm = 0.0;        /* norm of correction step */
@@ -966,7 +969,7 @@ msbdf_eval_order (gsl_vector * abscorscaled, gsl_vector * tempvec,
      or current+1). Order which maximizes the step length is selected.
    */
 
-  size_t i;
+  size_t i = 0;
 
   /* step size estimates at current order, order-1 and order+1 */
   double ordest = 0.0;
@@ -1057,7 +1060,7 @@ msbdf_check_no_order_decrease (size_t const ordprev[])
      array. Used in stability enhancement.
    */
 
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < MSBDF_MAX_ORD - 1; i++)
     {
@@ -1077,7 +1080,7 @@ msbdf_check_step_size_decrease (double const hprev[])
      step size history array. Used in stability enhancement.
    */
 
-  size_t i;
+  size_t i = 0;
   double max = fabs (hprev[0]);
   const double min = fabs (hprev[0]);
   const double decrease_limit = 0.5;
@@ -1134,7 +1137,7 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
   double gamma = 0.0;           /* gamma coefficient */
 
   const size_t max_failcount = 3;
-  size_t i;
+  size_t i = 0;
 
 #ifdef DEBUG
   {
@@ -1263,7 +1266,7 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
     }
   else
     {
-      size_t i;
+      size_t i = 0;
 
       for (i = 0; i < dim; i++)
         {
@@ -1296,7 +1299,7 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
 
   if (state->ni == 0)
     {
-      size_t i;
+      size_t i = 0;
 
       DBL_ZERO_MEMSET (z, (MSBDF_MAX_ORD + 1) * dim);
 
@@ -1370,7 +1373,8 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
     {
       if (ord > 2)
         {
-          size_t i, j;
+          size_t i;
+          size_t j;
           double hsum = h;
           double coeff1 = -1.0;
           double coeff2 = 1.0;
@@ -1411,11 +1415,12 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
                 z[ord * dim + i] = c * gsl_vector_get (abscor, i);
               }
           }
-          for (i = 2; i < ord; i++)
+          for (i = 2; i < ord; i++) {
             for (j = 0; j < dim; j++)
               {
                 z[i * dim + j] += l[i] * z[ord * dim + j];
               }
+}
         }
       else
         {
@@ -1433,7 +1438,8 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
 
   if (deltaord == -1)
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
       double hsum = 0.0;
 
       /* Calculate coefficients used in adjustment to l */
@@ -1455,11 +1461,12 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
 
       /* Scale Nordsieck matrix */
 
-      for (i = 2; i < ord + 1; i++)
+      for (i = 2; i < ord + 1; i++) {
         for (j = 0; j < dim; j++)
           {
             z[i * dim + j] += -l[i] * z[(ord + 1) * dim + j];
           }
+}
 
 #ifdef DEBUG
       printf ("-- order decrease detected, Nordsieck modified\n");
@@ -1470,7 +1477,8 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
 
   if (state->ni > 0 && h != hprev[0])
     {
-      size_t i, j;
+      size_t i;
+      size_t j;
       const double hrel = h / hprev[0];
       double coeff = hrel;
 
@@ -1499,14 +1507,18 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
   /* Carry out the prediction step */
 
   {
-    size_t i, j, k;
+    size_t i;
+    size_t j;
+    size_t k;
 
-    for (i = 1; i < ord + 1; i++)
-      for (j = ord; j > i - 1; j--)
+    for (i = 1; i < ord + 1; i++) {
+      for (j = ord; j > i - 1; j--) {
         for (k = 0; k < dim; k++)
           {
             z[(j - 1) * dim + k] += z[j * dim + k];
           }
+}
+}
 
 #ifdef DEBUG
     {
@@ -1523,7 +1535,7 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
 
   /* Calculate correction step to abscor */
   {
-    int s;
+    int s = 0;
     s = msbdf_corrector (vstate, sys, t, h, dim, z, errlev, l, errcoeff,
                          abscor, relcor, ytmp, ytmp2,
                          state->dfdy, state->dfdt, state->M,
@@ -1541,13 +1553,15 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
   {
     /* Add accepted final correction step to Nordsieck matrix */
 
-    size_t i, j;
+    size_t i;
+    size_t j;
 
-    for (i = 0; i < ord + 1; i++)
+    for (i = 0; i < ord + 1; i++) {
       for (j = 0; j < dim; j++)
         {
           z[i * dim + j] += l[i] * gsl_vector_get (abscor, j);
         }
+}
 
 #ifdef DEBUG
     {
@@ -1621,7 +1635,7 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
      in order evaluation in msbdf_eval_order
    */
   {
-    size_t i;
+    size_t i = 0;
 
     for (i = 0; i < dim; i++)
       {
@@ -1636,7 +1650,7 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
 
   if (state->ordwait == 1 && ord < MSBDF_MAX_ORD)
     {
-      size_t i;
+      size_t i = 0;
 
       state->ordp1coeffprev = ordp1coeff;
 
@@ -1669,7 +1683,7 @@ msbdf_apply (void *vstate, size_t dim, double t, double h,
   
   /* Save information about current step in state and update counters */
   {
-    size_t i;
+    size_t i = 0;
     
     for (i = MSBDF_MAX_ORD - 1; i > 0; i--)
       {
@@ -1723,7 +1737,7 @@ static int
 msbdf_reset (void *vstate, size_t dim)
 {
   msbdf_state_t *state = (msbdf_state_t *) vstate;
-  size_t i;
+  size_t i = 0;
 
   state->ni = 0;
   state->ord = 1;

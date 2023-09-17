@@ -162,12 +162,17 @@ conjugate_pr_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
   double pnorm = state->pnorm;
   double g0norm = state->g0norm;
 
-  double fa = *f, fb, fc;
-  double dir;
-  double stepa = 0.0, stepb, stepc = state->step, tol = state->tol;
+  double fa = *f;
+  double fb;
+  double fc;
+  double dir = NAN;
+  double stepa = 0.0;
+  double stepb;
+  double stepc = state->step;
+  double tol = state->tol;
 
-  double g1norm;
-  double pg;
+  double g1norm = NAN;
+  double pg = NAN;
 
   if (pnorm == 0.0 || g0norm == 0.0)
     {
@@ -235,7 +240,8 @@ conjugate_pr_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
     {
       /* p' = g1 - beta * p */
 
-      double g0g1, beta;
+      double g0g1;
+      double beta;
 
       gsl_blas_daxpy (-1.0, gradient, g0); /* g0' = g0 - g1 */
       gsl_blas_ddot(g0, gradient, &g0g1);  /* g1g0 = (g0-g1).g1 */

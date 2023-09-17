@@ -146,7 +146,7 @@ gsl_sf_bessel_Yn_e(int n, const double x, gsl_sf_result * result)
       result->val *= sign;
       return status;
     }
-    else {
+    
       double two_over_x = 2.0/x;
       gsl_sf_result r_by;
       gsl_sf_result r_bym;
@@ -167,7 +167,7 @@ gsl_sf_bessel_Yn_e(int n, const double x, gsl_sf_result * result)
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
 
       return GSL_ERROR_SELECT_2(stat_1, stat_0);
-    }
+   
  
 }
 

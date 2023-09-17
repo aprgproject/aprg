@@ -64,13 +64,19 @@ int
 gsl_deriv_central (const gsl_function * f, double x, double h,
                    double *result, double *abserr)
 {
-  double r_0, round, trunc, error;
+  double r_0;
+  double round;
+  double trunc;
+  double error;
   central_deriv (f, x, h, &r_0, &round, &trunc);
   error = round + trunc;
 
   if (round < trunc && (round > 0 && trunc > 0))
     {
-      double r_opt, round_opt, trunc_opt, error_opt;
+      double r_opt;
+      double round_opt;
+      double trunc_opt;
+      double error_opt;
 
       /* Compute an optimised stepsize to minimize the total error,
          using the scaling of the truncation error (O(h^2)) and
@@ -138,13 +144,19 @@ int
 gsl_deriv_forward (const gsl_function * f, double x, double h,
                    double *result, double *abserr)
 {
-  double r_0, round, trunc, error;
+  double r_0;
+  double round;
+  double trunc;
+  double error;
   forward_deriv (f, x, h, &r_0, &round, &trunc);
   error = round + trunc;
 
   if (round < trunc && (round > 0 && trunc > 0))
     {
-      double r_opt, round_opt, trunc_opt, error_opt;
+      double r_opt;
+      double round_opt;
+      double trunc_opt;
+      double error_opt;
 
       /* Compute an optimised stepsize to minimize the total error,
          using the scaling of the estimated truncation error (O(h)) and

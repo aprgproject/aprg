@@ -447,10 +447,10 @@ psi_x(const double x, gsl_sf_result * result)
       result->err += GSL_DBL_EPSILON * fabs(result->val);
       return GSL_SUCCESS;
     }
-    else { /* x = 1 + v */
+    /* x = 1 + v */
       const double v = x - 1.0;
       return cheb_eval_e(&psi_cs, 2.0*v-1.0, result);
-    }
+   
   }
 }
 
@@ -658,7 +658,7 @@ gsl_sf_psi_1piy_e(const double y, gsl_sf_result * result)
     result->err *= 5.0; /* FIXME: losing a digit somewhere... maybe at x=... ? */
     return GSL_SUCCESS;
   }
-  else {
+  
     /* [Abramowitz+Stegun, 6.3.17]
      *
      * -M_EULER + y^2 Sum[1/n 1/(n^2 + y^2), {n,1,M}]
@@ -690,7 +690,7 @@ gsl_sf_psi_1piy_e(const double y, gsl_sf_result * result)
     result->err  = GSL_DBL_EPSILON * (M_EULER + fabs(v));
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
-  }
+ 
 }
 
 
@@ -792,7 +792,8 @@ int gsl_sf_psi_n_e(const int n, const double x, gsl_sf_result * result)
     int stat_e  = gsl_sf_exp_mult_err_e(ln_nf.val, ln_nf.err,
                                            hzeta.val, hzeta.err,
                                            result);
-    if(GSL_IS_EVEN(n)) result->val = -result->val;
+    if(GSL_IS_EVEN(n)) { result->val = -result->val;
+}
     return GSL_ERROR_SELECT_3(stat_e, stat_nf, stat_hz);
   }
 }

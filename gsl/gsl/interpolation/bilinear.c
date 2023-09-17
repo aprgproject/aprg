@@ -21,6 +21,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_interp.h>
 #include <gsl/gsl_interp2d.h>
+#include <math.h>
 
 #define IDX2D(i, j, xsize, ysize) ((j) * (xsize) + (i))
 
@@ -37,20 +38,20 @@ bilinear_eval(const void * state, const double xarr[], const double yarr[],
               double x, double y, gsl_interp_accel * xa,
               gsl_interp_accel * ya, double * z)
 {
-  double xmin;
-  double xmax;
-  double ymin;
-  double ymax;
-  double zminmin;
-  double zminmax;
-  double zmaxmin;
-  double zmaxmax;
-  double dx;
-  double dy;
-  double t;
-  double u;
-  size_t xi;
-  size_t yi;
+  double xmin = NAN;
+  double xmax = NAN;
+  double ymin = NAN;
+  double ymax = NAN;
+  double zminmin = NAN;
+  double zminmax = NAN;
+  double zmaxmin = NAN;
+  double zmaxmax = NAN;
+  double dx = NAN;
+  double dy = NAN;
+  double t = NAN;
+  double u = NAN;
+  size_t xi = 0;
+  size_t yi = 0;
 
   if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
@@ -87,20 +88,20 @@ bilinear_deriv_x(const void * state, const double xarr[],
                  size_t xsize, size_t ysize, double x, double y,
                  gsl_interp_accel * xa, gsl_interp_accel * ya, double * z_p)
 {
-  double xmin;
-  double xmax;
-  double ymin;
-  double ymax;
-  double zminmin;
-  double zminmax;
-  double zmaxmin;
-  double zmaxmax;
-  double dx;
-  double dy;
-  double dt;
-  double u;
-  size_t xi;
-  size_t yi;
+  double xmin = NAN;
+  double xmax = NAN;
+  double ymin = NAN;
+  double ymax = NAN;
+  double zminmin = NAN;
+  double zminmax = NAN;
+  double zmaxmin = NAN;
+  double zmaxmax = NAN;
+  double dx = NAN;
+  double dy = NAN;
+  double dt = NAN;
+  double u = NAN;
+  size_t xi = 0;
+  size_t yi = 0;
 
   if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
@@ -137,20 +138,20 @@ bilinear_deriv_y(const void * state, const double xarr[],
                  size_t xsize, size_t ysize, double x, double y,
                  gsl_interp_accel * xa, gsl_interp_accel * ya, double * z_p)
 {
-  double xmin;
-  double xmax;
-  double ymin;
-  double ymax;
-  double zminmin;
-  double zminmax;
-  double zmaxmin;
-  double zmaxmax;
-  double dx;
-  double dy;
-  double t;
-  double du;
-  size_t xi;
-  size_t yi;
+  double xmin = NAN;
+  double xmax = NAN;
+  double ymin = NAN;
+  double ymax = NAN;
+  double zminmin = NAN;
+  double zminmax = NAN;
+  double zmaxmin = NAN;
+  double zmaxmax = NAN;
+  double dx = NAN;
+  double dy = NAN;
+  double t = NAN;
+  double du = NAN;
+  size_t xi = 0;
+  size_t yi = 0;
 
   if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);
@@ -197,20 +198,20 @@ bilinear_derivxy(const void * state, const double xarr[],
                  size_t xsize, size_t ysize, double x, double y,
                  gsl_interp_accel * xa, gsl_interp_accel * ya, double * z_pp)
 {
-  double xmin;
-  double xmax;
-  double ymin;
-  double ymax;
-  double zminmin;
-  double zminmax;
-  double zmaxmin;
-  double zmaxmax;
-  double dx;
-  double dy;
-  double dt;
-  double du;
-  size_t xi;
-  size_t yi;
+  double xmin = NAN;
+  double xmax = NAN;
+  double ymin = NAN;
+  double ymax = NAN;
+  double zminmin = NAN;
+  double zminmax = NAN;
+  double zmaxmin = NAN;
+  double zmaxmax = NAN;
+  double dx = NAN;
+  double dy = NAN;
+  double dt = NAN;
+  double du = NAN;
+  size_t xi = 0;
+  size_t yi = 0;
 
   if (xa != NULL) {
     xi = gsl_interp_accel_find(xa, xarr, xsize, x);

@@ -345,7 +345,8 @@ int gsl_sf_Si_e(const double x, gsl_sf_result * result)
     result->val  = 0.5 * M_PI - f.val*cos(ax) - g.val*sin(ax);
     result->err  = f.err + g.err;
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
-    if(x < 0.0) result->val = -result->val;
+    if(x < 0.0) { result->val = -result->val;
+}
     return GSL_SUCCESS;
  
 }

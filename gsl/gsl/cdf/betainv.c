@@ -48,7 +48,9 @@
 static double 
 bisect (double x, double P, double a, double b, double xtol, double Ptol)
 {
-  double x0 = 0, x1 = 1, Px;
+  double x0 = 0;
+  double x1 = 1;
+  double Px;
 
   while (fabs(x1 - x0) > xtol) {
     Px = gsl_cdf_beta_P (x, a, b);
@@ -56,7 +58,7 @@ bisect (double x, double P, double a, double b, double xtol, double Ptol)
       /* return as soon as approximation is good enough, including on
          the first iteration */
       return x;  
-    } else if (Px < P) {
+    } if (Px < P) {
       x0 = x;
     } else if (Px > P) {
       x1 = x;
@@ -70,7 +72,8 @@ bisect (double x, double P, double a, double b, double xtol, double Ptol)
 double
 gsl_cdf_beta_Pinv (const double P, const double a, const double b)
 {
-  double x, mean;
+  double x;
+  double mean;
 
   if (P < 0.0 || P > 1.0)
     {
@@ -120,8 +123,9 @@ gsl_cdf_beta_Pinv (const double P, const double a, const double b)
         x = mean;
       }
 
-      if (x > mean)
+      if (x > mean) {
         x = mean;
+}
     }
   else
     {
@@ -133,15 +137,18 @@ gsl_cdf_beta_Pinv (const double P, const double a, const double b)
   x = bisect (x, P, a, b, 0.01, 0.01);
 
   {
-    double lambda, dP, phi;
+    double lambda;
+    double dP;
+    double phi;
     unsigned int n = 0;
 
   start:
     dP = P - gsl_cdf_beta_P (x, a, b);
     phi = gsl_ran_beta_pdf (x, a, b);
 
-    if (dP == 0.0 || n++ > 64)
+    if (dP == 0.0 || n++ > 64) {
       goto end;
+}
 
     lambda = dP / GSL_MAX (2 * fabs (dP / x), phi);
 
@@ -170,8 +177,9 @@ gsl_cdf_beta_Pinv (const double P, const double a, const double b)
           x = sqrt (x) * sqrt (mean);   /* try a new starting point */
         }
 
-      if (fabs (step0) > 1e-10 * x)
+      if (fabs (step0) > 1e-10 * x) {
         goto start;
+}
     }
 
   end:
@@ -218,8 +226,8 @@ gsl_cdf_beta_Qinv (const double Q, const double a, const double b)
     {
       return gsl_cdf_beta_Pinv (1 - Q, a, b);
     }
-  else
-    {
+  
+    
       return 1 - gsl_cdf_beta_Pinv (Q, b, a);
-    };
+   ;
 }

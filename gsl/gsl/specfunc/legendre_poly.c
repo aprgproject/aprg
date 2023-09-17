@@ -343,7 +343,7 @@ gsl_sf_legendre_Plm_e(const int l, const int m, const double x, gsl_sf_result * 
       double p_ellm2 = p_mm;
       double p_ellm1 = p_mmp1;
       double p_ell = 0.0;
-      int ell;
+      int ell = 0;
 
       for(ell=m+2; ell <= l; ell++){
         p_ell = (x*(2*ell-1)*p_ellm1 - (ell+m-1)*p_ellm2) / (ell-m);
@@ -429,7 +429,7 @@ gsl_sf_legendre_sphPlm_e(const int l, int m, const double x, gsl_sf_result * res
     
       double y_ell = 0.0;
       double y_ell_err = 0.0;
-      int ell;
+      int ell = 0;
 
       /* Compute Y_l^m, l > m+1, upward recursion on l. */
       for(ell=m+2; ell <= l; ell++){
@@ -501,7 +501,7 @@ gsl_sf_legendre_Plm_array(const int lmax, const int m, const double x, double * 
       double p_ellm2 = p_mm;
       double p_ellm1 = p_mmp1;
       double p_ell = 0.0;
-      int ell;
+      int ell = 0;
 
       result_array[0] = p_mm;
       result_array[1] = p_mmp1;

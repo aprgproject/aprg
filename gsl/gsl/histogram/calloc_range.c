@@ -34,8 +34,8 @@
 gsl_histogram *
 gsl_histogram_calloc_range (size_t n, double *range)
 {
-  size_t i;
-  gsl_histogram *h;
+  size_t i = 0;
+  gsl_histogram *h = NULL;
 
   /* check arguments */
 

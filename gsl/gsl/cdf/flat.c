@@ -25,7 +25,7 @@
 double
 gsl_cdf_flat_P (const double x, const double a, const double b)
 {
-  double P;
+  double P = NAN;
 
   if (x < a)
     {
@@ -46,7 +46,7 @@ gsl_cdf_flat_P (const double x, const double a, const double b)
 double
 gsl_cdf_flat_Q (const double x, const double a, const double b)
 {
-  double Q;
+  double Q = NAN;
 
   if (x < a)
     {

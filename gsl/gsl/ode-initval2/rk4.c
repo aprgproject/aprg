@@ -129,7 +129,7 @@ rk4_step (double *y, const rk4_state_t * state,
    */
   double *k = state->k;
 
-  size_t i;
+  size_t i = 0;
 
   /* k1 step */
 
@@ -202,7 +202,7 @@ rk4_apply (void *vstate,
 {
   rk4_state_t *state = (rk4_state_t *) vstate;
 
-  size_t i;
+  size_t i = 0;
 
   double *const k = state->k;
   double *const k1 = state->k1;

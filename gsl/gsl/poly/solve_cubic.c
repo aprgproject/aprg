@@ -86,25 +86,27 @@ gsl_poly_solve_cubic (double a, double b, double c,
       
       /* Sort *x0, *x1, *x2 into increasing order */
 
-      if (*x0 > *x1)
+      if (*x0 > *x1) {
         SWAP(*x0, *x1) ;
+}
       
       if (*x1 > *x2)
         {
           SWAP(*x1, *x2) ;
           
-          if (*x0 > *x1)
+          if (*x0 > *x1) {
             SWAP(*x0, *x1) ;
+}
         }
       
       return 3;
     }
-  else
-    {
+  
+    
       double sgnR = (R >= 0 ? 1 : -1);
       double A = -sgnR * pow (fabs (R) + sqrt (R2 - Q3), 1.0/3.0);
       double B = Q / A ;
       *x0 = A + B - a / 3;
       return 1;
-    }
+   
 }

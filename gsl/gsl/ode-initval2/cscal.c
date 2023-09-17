@@ -99,7 +99,7 @@ sc_control_hadjust (void *vstate, size_t dim, unsigned int ord,
   const double h_old = *h;
 
   double rmax = DBL_MIN;
-  size_t i;
+  size_t i = 0;
 
   for (i = 0; i < dim; i++)
     {
@@ -116,14 +116,15 @@ sc_control_hadjust (void *vstate, size_t dim, unsigned int ord,
          than scaling suggests (for better accuracy) */
       double r = S / pow (rmax, 1.0 / ord);
 
-      if (r < 0.2)
+      if (r < 0.2) {
         r = 0.2;
+}
 
       *h = r * h_old;
 
       return GSL_ODEIV_HADJ_DEC;
     }
-  else if (rmax < 0.5)
+  if (rmax < 0.5)
     {
       /* increase step, no more than factor of maxscale */
       double r = S / pow (rmax, 1.0 / (ord + 1.0));

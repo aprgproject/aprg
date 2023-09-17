@@ -24,6 +24,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_min.h>
 #include <gsl/gsl_machine.h>
+#include <math.h>
 
 #include "min.h"
 
@@ -43,10 +44,10 @@ gsl_min_find_bracket(gsl_function *f,double *x_minimum,double * f_minimum,
    */
   volatile double f_left = *f_lower;
   volatile double f_right = *f_upper;
-  volatile double f_center;
+  volatile double f_center = NAN;
   double x_left = *x_lower;
   double x_right= *x_upper; 
-  double x_center;
+  double x_center = NAN;
   const double golden = 0.3819660;      /* golden = (3 - sqrt(5))/2 */
   size_t nb_eval = 0;
   
@@ -84,7 +85,7 @@ gsl_min_find_bracket(gsl_function *f,double *x_minimum,double * f_minimum,
               printf("\n");*/
               return GSL_SUCCESS;
             }
-          else if (f_center > f_right)
+          if (f_center > f_right)
             {
               x_left = x_center;
               f_left = f_center;

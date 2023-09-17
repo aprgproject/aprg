@@ -86,7 +86,7 @@ int gsl_sf_bessel_Jn_e(int n, double x, gsl_sf_result * result)
       result->val *= sign;
       return status;
     }
-    else if(n > 50) {
+    if(n > 50) {
       int status = gsl_sf_bessel_Jnu_asymp_Olver_e((double)n, x, result);
       result->val *= sign;
       return status;

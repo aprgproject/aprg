@@ -57,15 +57,16 @@ gsl_bspline_knots_greville (const gsl_vector *abscissae,
 {
   /* Limited function: see https://savannah.gnu.org/bugs/index.php?34361 */
 
-  int s;
+  int s = 0;
 
   /* Check incoming arguments satisfy mandatory algorithmic assumptions */
-  if (w->k < 2)
+  if (w->k < 2) {
     GSL_ERROR ("w->k must be at least 2", GSL_EINVAL);
-  else if (abscissae->size < 2)
+  } else if (abscissae->size < 2) {
     GSL_ERROR ("abscissae->size must be at least 2", GSL_EINVAL);
-  else if (w->nbreak != abscissae->size - w->k + 2)
+  } else if (w->nbreak != abscissae->size - w->k + 2) {
     GSL_ERROR ("w->nbreak must equal abscissae->size - w->k + 2", GSL_EINVAL);
+}
 
   if (w->nbreak == 2)
     {
@@ -76,10 +77,14 @@ gsl_bspline_knots_greville (const gsl_vector *abscissae,
     }
   else
     {
-      double * storage;
+      double * storage = NULL;
       gsl_matrix_view A;
-      gsl_vector_view tau, b, x, r;
-      size_t i, j;
+      gsl_vector_view tau;
+      gsl_vector_view b;
+      gsl_vector_view x;
+      gsl_vector_view r;
+      size_t i;
+      size_t j;
 
       /* Constants derived from the B-spline workspace and abscissae details */
       const size_t km2    = w->k - 2;
@@ -89,8 +94,9 @@ gsl_bspline_knots_greville (const gsl_vector *abscissae,
 
       /* Allocate working storage and prepare multiple, zero-filled views */
       storage = (double *) calloc (M*N + 2*N + 2*M, sizeof (double));
-      if (storage == 0)
+      if (storage == 0) {
         GSL_ERROR ("failed to allocate working storage", GSL_ENOMEM);
+}
       A   = gsl_matrix_view_array (storage, M, N);
       tau = gsl_vector_view_array (storage + M*N,             N);
       b   = gsl_vector_view_array (storage + M*N + N,         M);
@@ -108,13 +114,16 @@ gsl_bspline_knots_greville (const gsl_vector *abscissae,
        *       0,      0,      0,      0,      1  ]
        * but only center formed as first/last breakpoint is known.
        */
-      for (j = 0; j < N; ++j)
-        for (i = 0; i <= km2; ++i)
+      for (j = 0; j < N; ++j) {
+        for (i = 0; i <= km2; ++i) {
           gsl_matrix_set (&A.matrix, i+j, j, invkm1);
+}
+}
 
       /* Copy interior collocation points from abscissae into b */
-      for (i = 0; i < M; ++i)
+      for (i = 0; i < M; ++i) {
         gsl_vector_set (&b.vector, i, gsl_vector_get (abscissae, i+1));
+}
 
       /* Adjust b to account for constraint columns not stored in A */
       for (i = 0; i < km2; ++i)
@@ -155,11 +164,12 @@ gsl_bspline_knots_greville (const gsl_vector *abscissae,
   /* Provided as a fit quality metric which may be monitored by callers */
   if (!s && abserr)
     {
-      size_t i;
+      size_t i = 0;
       *abserr = 0;
-      for (i = 1; i < abscissae->size - 1; ++i)
+      for (i = 1; i < abscissae->size - 1; ++i) {
         *abserr += fabs (   gsl_bspline_greville_abscissa (i, w)
                           - gsl_vector_get (abscissae, i) );
+}
     }
 
   return s;
