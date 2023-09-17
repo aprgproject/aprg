@@ -24,10 +24,9 @@ public:
                     continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                     // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
                 }
-            } __except (EXCEPTION_EXECUTE_HANDLER) {
-                std::cout << "SEH exception caught with code 0x" << std::hex << GetExceptionCode() << std::dec
-                          << std::endl;
-                PEXCEPTION_POINTERS exceptionPtrs = GetExceptionInformation();
+            } __except (
+                code = GetExceptionCode(), exceptionPtrs = GetExceptionInformation(), EXCEPTION_EXECUTE_HANDLER) {
+                std::cout << "SEH exception caught with code 0x" << std::hex << code << std::dec << std::endl;
 
                 if (exceptionPtrs) {
                     // Print additional information about the exception
