@@ -164,6 +164,7 @@ jobs:
   buildAndTest:
     name: Test ${{ matrix.project }} on ${{ matrix.configurationName }}
     needs: determineCppProjects
+    if: needs.determineCppProjects.outputs.projectsToBuild != '[]'
     runs-on: ${{ startsWith(matrix.configurationName, 'Windows') && 'windows-latest' || startsWith(matrix.configurationName, 'Ubuntu') && 'ubuntu-latest' || 'macos-latest'}} # ternary operator
     strategy:
       fail-fast: false
