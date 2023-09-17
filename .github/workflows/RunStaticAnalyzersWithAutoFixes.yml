@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       staticAnalysisJobId: ${{ steps.idOfGetJobIdStep.outputs.STATIC_ANALYSIS_JOB_ID }}
-      projectToBuild: ${{ fromJSON(steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES) }}
+      projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
       windowsOnlyProjects: ${{ steps.idOfGetCppProjectStep.outputs.APRG_WINDOWS_ONLY_PROJECTS }}
       linuxOnlyProjects: ${{ steps.idOfGetCppProjectStep.outputs.APRG_LINUX_ONLY_PROJECTS }}
     steps:
@@ -73,10 +73,14 @@ jobs:
           
           
   runStaticAnalyzersOnCppProjects:
-    name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] on ${{ needs.determineCppProjects.outputs.projectToBuild }} | Run Static Analyzers with Auto Fixes
-    if: needs.determineCppProjects.outputs.projectToBuild != ''
+    name: JobId[${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}] on ${{ matrix.project }} | Run Static Analyzers with Auto Fixes
     needs: determineCppProjects
-    runs-on: ${{ contains(fromJSON(needs.determineCppProjects.outputs.windowsOnlyProjects), needs.determineCppProjects.outputs.projectToBuild) && 'windows-latest' || contains(fromJSON(needs.determineCppProjects.outputs.linuxOnlyProjects), needs.determineCppProjects.outputs.projectToBuild) && 'ubuntu-latest' || 'windows-latest' }} # ternary operator
+    if: needs.determineCppProjects.outputs.projectsToBuild != '[]'
+    runs-on: ${{ contains(fromJSON(needs.determineCppProjects.outputs.windowsOnlyProjects), matrix.project) && 'windows-latest' || contains(fromJSON(needs.determineCppProjects.outputs.linuxOnlyProjects), matrix.project) && 'ubuntu-latest' || 'windows-latest' }} # ternary operator
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
     permissions:
       contents: write
     steps:
@@ -86,7 +90,8 @@ jobs:
         run: |
           echo "github.event_name: [${{ github.event_name }}]"
           echo "github.event.action: [${{ github.event.action }}]"
-          echo "c/c++ next project: [${{ needs.determineCppProjects.outputs.projectToBuild }}]"
+          echo "c/c++ projects: [${{ needs.determineCppProjects.outputs.projectsToBuild }}]"
+          echo "c/c++ next project: [${{ matrix.project }}]"
           echo "windows only projects: [${{ needs.determineCppProjects.outputs.windowsOnlyProjects }}]"
           echo "linus only projects: [${{ needs.determineCppProjects.outputs.linuxOnlyProjects }}]"
           echo "operating system: [${{ runner.os }}]"
@@ -161,7 +166,7 @@ jobs:
           echo "staticAnalysisScriptPath: [$staticAnalysisScriptPath]"
           chmod +x "$staticAnalysisScriptPath"
           # 19800 seconds translates to 5 hours and 30 minutes
-          timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ needs.determineCppProjects.outputs.projectToBuild }}" 
+          timeout 19800 "$staticAnalysisScriptPath" "${{ needs.determineCppProjects.outputs.staticAnalysisJobId }}" "${{ env.staticAnalysisFilename }}" "${{ matrix.project }}" 
             
       - name: Run clang format
         shell: bash
