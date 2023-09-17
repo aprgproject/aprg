@@ -142,8 +142,10 @@ TEST(LimitTest, GetLimitWithMultipleVariablesWithDifferentApproachesWorksOnExamp
     Term const denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})});
     Term const termToTest(createExpressionIfPossible({numerator, "/", denominator}));
     SubstitutionsOfVariablesToTerms substitutions;
-    substitutions.emplace_back({"y", "x"});
-    substitutions.emplace_back({"y", Monomial(1, {{"x", 2}})});
+    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
+    substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", "x"}});
+    substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", Monomial(1, {{"x", 2}})}});
+    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
 
     Term const termToVerify(getLimitWithMultipleVariablesWithDifferentApproaches(termToTest, "x", 0, substitutions));
 
@@ -155,8 +157,10 @@ TEST(LimitTest, GetLimitWithMultipleVariablesWithDifferentApproachesWorksOnExamp
     Term const denominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})});
     Term const termToTest(createExpressionIfPossible({numerator, "/", denominator}));
     SubstitutionsOfVariablesToTerms substitutions;
-    substitutions.emplace_back({"y", "x"});
-    substitutions.emplace_back({"y", Monomial(1, {{"x", 2}})});
+    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
+    substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", "x"}});
+    substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", Monomial(1, {{"x", 2}})}});
+    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
 
     Term const termToVerify(getLimitWithMultipleVariablesWithDifferentApproaches(termToTest, "x", 0, substitutions));
 
