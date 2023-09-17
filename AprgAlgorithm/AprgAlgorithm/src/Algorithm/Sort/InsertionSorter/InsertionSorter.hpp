@@ -24,10 +24,9 @@ public:
                     continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                     // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
                 }
+            } __except (EXCEPTION_EXECUTE_HANDLER) {
+                std::cout << "Executing SEH __except block\n";
             }
-        }
-        __except (EXCEPTION_EXECUTE_HANDLER) {
-            std::cout << "Executing SEH __except block\n";
         }
     }
 
