@@ -137,7 +137,7 @@ TEST(CPlusPlusReorganizerTest, DISABLED_ActualProcessAprgDirectoryTest) {
 }
 
 TEST(CPlusPlusReorganizerTest, DISABLED_ActualProcessDirectoryTest) {
-    processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities)");
+    processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgCommon\AprgCommon)");
 }
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaConfigurationHolderWorks) {

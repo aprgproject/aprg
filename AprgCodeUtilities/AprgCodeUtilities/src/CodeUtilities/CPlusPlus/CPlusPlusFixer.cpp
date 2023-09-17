@@ -3,31 +3,15 @@
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/TermUtilities.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
-#include <Common/Print/AlbaLogPrints.hpp>
 
-#include <fstream>
 #include <iostream>
 
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
 using namespace std;
 
-namespace alba::CodeUtilities::CPlusPlusFixer {
+namespace alba::CodeUtilities {
 
-void processAprgDirectory(string const& aprgPath) {
-    AlbaLocalPathHandler const aprgPathHandler(aprgPath);
-    ALBA_INF_PRINT1(cout, aprgPath);
-    ListOfPaths directories;
-    ListOfPaths files;
-    aprgPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
-    for (auto const& file : files) {
-        AlbaLocalPathHandler const filePathHandler(file);
-        if (filePathHandler.getFile() == "CppProjectIndicatorFile.txt") {
-            processDirectory(filePathHandler.getDirectory());
-        }
-    }
-}
-
-void processPath(string const& path) {
+void CPlusPlusFixer::processPath(string const& path) {
     AlbaLocalPathHandler const pathHandler(path);
     if (pathHandler.isFoundInLocalSystem()) {
         if (pathHandler.isDirectory()) {
@@ -38,8 +22,8 @@ void processPath(string const& path) {
     }
 }
 
-void processDirectory(string const& path) {
-    AlbaLocalPathHandler const directoryPathHandler(path);
+void CPlusPlusFixer::processDirectory(string const& directory) {
+    AlbaLocalPathHandler const directoryPathHandler(directory);
     ListOfPaths directories;
     ListOfPaths files;
     directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
@@ -51,173 +35,178 @@ void processDirectory(string const& path) {
     }
 }
 
-void processFile(string const& path) {
-    Terms terms(getTermsFromFile(path));
-    fixTerms(terms);
-    writeAllTerms(path, terms);
+void CPlusPlusFixer::processFile(string const& file) {
+    m_currentFile = file;
+    m_currentTerms = getTermsFromFile(file);
+    fixTerms();
+    writeAllTerms(file, m_currentTerms);
 }
 
-void fixTerms(Terms& terms) {
-    combinePrimitiveTypes(terms);
-    // fixPostFixIncrementDecrement(terms);
-    // fixConstReferenceOrder(terms);
-    // fixCStyleStaticCast(terms);
-    // fixNoConstPassByValue(terms);
-    fixCommentsPositionOfBraces(terms);
+void CPlusPlusFixer::fixTerms() {
+    combinePrimitiveTypes();
+    // fixPostFixIncrementDecrement();
+    // fixConstReferenceOrder();
+    // fixCStyleStaticCast();
+    // fixNoConstPassByValue();
+    fixCommentsPositionOfBraces();
 }
 
-void fixPostFixIncrementDecrement(Terms& terms) {
-    fixPostFixIncrementDecrement(terms, "++");
-    fixPostFixIncrementDecrement(terms, "--");
+void CPlusPlusFixer::fixPostFixIncrementDecrement() {
+    fixPostFixIncrementDecrement("++");
+    fixPostFixIncrementDecrement("--");
 }
 
-void fixPostFixIncrementDecrement(Terms& terms, string const& crementOperator) {
-    fixPostFixIncrementDecrementInLine(terms, crementOperator);
-    fixPostFixIncrementDecrementInForLoop(terms, crementOperator);
+void CPlusPlusFixer::fixPostFixIncrementDecrement(string const& crementOperator) {
+    fixPostFixIncrementDecrementInLine(crementOperator);
+    fixPostFixIncrementDecrementInForLoop(crementOperator);
 }
 
-void fixPostFixIncrementDecrementInLine(Terms& terms, string const& crementOperator) {
-    findTermsAndSwapAt(terms, {{M("{"), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
-    findTermsAndSwapAt(terms, {{M("}"), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
-    findTermsAndSwapAt(terms, {{M(";"), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
-    findTermsAndSwapAt(terms, {{M(","), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
-    findTermsAndSwapAt(terms, {{M(";"), M(TermType::Identifier), M(crementOperator), M(",")}}, 1, 2);
-    findTermsAndSwapAt(terms, {{M(";"), M(TermType::Identifier), M(crementOperator), M(")")}}, 1, 2);
+void CPlusPlusFixer::fixPostFixIncrementDecrementInLine(string const& crementOperator) {
+    findTermsAndSwapAt({{M("{"), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
+    findTermsAndSwapAt({{M("}"), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
+    findTermsAndSwapAt({{M(";"), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
+    findTermsAndSwapAt({{M(","), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
+    findTermsAndSwapAt({{M(";"), M(TermType::Identifier), M(crementOperator), M(",")}}, 1, 2);
+    findTermsAndSwapAt({{M(";"), M(TermType::Identifier), M(crementOperator), M(")")}}, 1, 2);
 }
 
-void fixPostFixIncrementDecrementInForLoop(Terms& terms, string const& crementOperator) {
-    findTermsAndCheckForLoopAndSwapAt(terms, {{M(","), M(TermType::Identifier), M(crementOperator), M(")")}}, 1, 2);
-    findTermsAndCheckForLoopAndSwapAt(terms, {{M(","), M(TermType::Identifier), M(crementOperator), M(",")}}, 1, 2);
+void CPlusPlusFixer::fixPostFixIncrementDecrementInForLoop(string const& crementOperator) {
+    findTermsAndCheckForLoopAndSwapAt({{M(","), M(TermType::Identifier), M(crementOperator), M(")")}}, 1, 2);
+    findTermsAndCheckForLoopAndSwapAt({{M(","), M(TermType::Identifier), M(crementOperator), M(",")}}, 1, 2);
 }
 
-void fixConstReferenceOrder(Terms& terms) {
-    fixConstReferenceOrder(terms, M(TermType::Identifier));
-    fixConstReferenceOrder(terms, M(TermType::PrimitiveType));
-    fixConstReferenceOrder(terms, M("auto"));
+void CPlusPlusFixer::fixConstReferenceOrder() {
+    fixConstReferenceOrder(M(TermType::Identifier));
+    fixConstReferenceOrder(M(TermType::PrimitiveType));
+    fixConstReferenceOrder(M("auto"));
 }
 
-void fixConstReferenceOrder(Terms& terms, TermMatcher const& typeMatcher) {
-    findTermsAndSwapAt(terms, {{M("{"), M("const"), typeMatcher, M("&")}}, 1, 2);
-    findTermsAndSwapAt(terms, {{M("}"), M("const"), typeMatcher, M("&")}}, 1, 2);
-    findTermsAndSwapAt(terms, {{M(";"), M("const"), typeMatcher, M("&")}}, 1, 2);
-    findTermsAndSwapAt(terms, {{M("("), M("const"), typeMatcher, M("&")}}, 1, 2);
-    findTermsAndSwapAt(terms, {{M(","), M("const"), typeMatcher, M("&")}}, 1, 2);
+void CPlusPlusFixer::fixConstReferenceOrder(TermMatcher const& typeMatcher) {
+    findTermsAndSwapAt({{M("{"), M("const"), typeMatcher, M("&")}}, 1, 2);
+    findTermsAndSwapAt({{M("}"), M("const"), typeMatcher, M("&")}}, 1, 2);
+    findTermsAndSwapAt({{M(";"), M("const"), typeMatcher, M("&")}}, 1, 2);
+    findTermsAndSwapAt({{M("("), M("const"), typeMatcher, M("&")}}, 1, 2);
+    findTermsAndSwapAt({{M(","), M("const"), typeMatcher, M("&")}}, 1, 2);
 }
 
-void fixCStyleStaticCast(Terms& terms) { fixCStyleStaticCast(terms, M(TermType::PrimitiveType)); }
+void CPlusPlusFixer::fixCStyleStaticCast() { fixCStyleStaticCast(M(TermType::PrimitiveType)); }
 
-void fixCStyleStaticCast(Terms& terms, TermMatcher const& typeMatcher) {
+void CPlusPlusFixer::fixCStyleStaticCast(TermMatcher const& typeMatcher) {
     Patterns const searchPatterns{{M(TermType::Operator), M("("), typeMatcher, M(")"), M(MatcherType::NotAWhiteSpace)}};
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(m_currentTerms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
-            if (terms[hitIndexes[4]].getContent() != "=") {
-                changeTerm(terms[hitIndexes[1]], TermType::Aggregate, "static_cast<");
-                changeTerm(terms[hitIndexes[3]], TermType::Aggregate, ">(");
-                ALBA_INF_PRINT3(cout, terms[hitIndexes[0]], terms[hitIndexes[1]], terms[hitIndexes[2]]);
+            if (m_currentTerms[hitIndexes[4]].getContent() != "=") {
+                changeTerm(m_currentTerms[hitIndexes[1]], TermType::Aggregate, "static_cast<");
+                changeTerm(m_currentTerms[hitIndexes[3]], TermType::Aggregate, ">(");
+                cout << "Fixed file: [" << m_currentFile << "] converted to static_cast at: ["
+                     << getLocatorString(m_currentTerms, hitIndexes[1]) << "]\n";
             }
         }
     }
 }
 
-void fixNoConstPassByValue(Terms& terms) {
-    fixNoConstPassByValue(terms, M(MatcherType::IdentifierAndNotAScreamingSnakeCase));
-    fixNoConstPassByValue(terms, M(TermType::PrimitiveType));
+void CPlusPlusFixer::fixNoConstPassByValue() {
+    fixNoConstPassByValue(M(MatcherType::IdentifierAndNotAScreamingSnakeCase));
+    fixNoConstPassByValue(M(TermType::PrimitiveType));
 }
 
-void fixNoConstPassByValue(Terms& terms, TermMatcher const& typeMatcher) {
-    fixNoConstPassByValue(terms, {{M("("), typeMatcher, M(TermType::Identifier), M(")")}});
-    fixNoConstPassByValue(terms, {{M("("), typeMatcher, M(TermType::Identifier), M(",")}});
-    fixNoConstPassByValue(terms, {{M(","), typeMatcher, M(TermType::Identifier), M(",")}});
-    fixNoConstPassByValue(terms, {{M(","), typeMatcher, M(TermType::Identifier), M(")")}});
-    fixNoConstPassByValue(terms, {{M("::"), typeMatcher, M(TermType::Identifier), M(",")}});
-    fixNoConstPassByValue(terms, {{M("::"), typeMatcher, M(TermType::Identifier), M(")")}});
+void CPlusPlusFixer::fixNoConstPassByValue(TermMatcher const& typeMatcher) {
+    fixNoConstPassByValue({{M("("), typeMatcher, M(TermType::Identifier), M(")")}});
+    fixNoConstPassByValue({{M("("), typeMatcher, M(TermType::Identifier), M(",")}});
+    fixNoConstPassByValue({{M(","), typeMatcher, M(TermType::Identifier), M(",")}});
+    fixNoConstPassByValue({{M(","), typeMatcher, M(TermType::Identifier), M(")")}});
+    fixNoConstPassByValue({{M("::"), typeMatcher, M(TermType::Identifier), M(",")}});
+    fixNoConstPassByValue({{M("::"), typeMatcher, M(TermType::Identifier), M(")")}});
 }
 
-void fixNoConstPassByValue(Terms& terms, Patterns const& searchPatterns) {
+void CPlusPlusFixer::fixNoConstPassByValue(Patterns const& searchPatterns) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(m_currentTerms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
-            terms.insert(terms.begin() + hitIndexes[2], Term(TermType::Identifier, "const "));
-            ALBA_INF_PRINT4(
-                cout, terms[hitIndexes[0]], terms[hitIndexes[1]], terms[hitIndexes[2]], terms[hitIndexes[3]]);
+            m_currentTerms.insert(m_currentTerms.begin() + hitIndexes[2], Term(TermType::Identifier, "const "));
+            cout << "Fixed file: [" << m_currentFile << "] added const at: ["
+                 << getLocatorString(m_currentTerms, hitIndexes[2]) << "]\n";
         }
     }
 }
 
-void fixCommentsPositionOfBraces(Terms& terms) {
+void CPlusPlusFixer::fixCommentsPositionOfBraces() {
     Patterns const searchPatterns{{M(MatcherType::Comment), M("{")}};
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(m_currentTerms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
-            std::swap(terms[hitIndexes[0]], terms[hitIndexes[1]]);
-            Term const nextTermAfterComment = terms[hitIndexes[1] + 1];
+            std::swap(m_currentTerms[hitIndexes[0]], m_currentTerms[hitIndexes[1]]);
+            Term const nextTermAfterComment = m_currentTerms[hitIndexes[1] + 1];
             if (!hasNewLine(nextTermAfterComment)) {
-                terms.insert(terms.begin() + hitIndexes[1] + 1, Term(TermType::WhiteSpace, "\n"));
+                m_currentTerms.insert(m_currentTerms.begin() + hitIndexes[1] + 1, Term(TermType::WhiteSpace, "\n"));
             }
-            ALBA_INF_PRINT2(cout, terms[hitIndexes[0]], terms[hitIndexes[1]]);
+            cout << "Fixed file: [" << m_currentFile << "] fixed comment position at: ["
+                 << getLocatorString(m_currentTerms, hitIndexes[1]) << "]\n";
         }
     }
 }
 
-void findTermsAndSwapAt(Terms& terms, Patterns const& searchPatterns, int const index1, int const index2) {
+void CPlusPlusFixer::findTermsAndSwapAt(Patterns const& searchPatterns, int const index1, int const index2) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(m_currentTerms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
-            std::swap(terms[hitIndexes[index1]], terms[hitIndexes[index2]]);
-            ALBA_INF_PRINT2(cout, terms[hitIndexes[index1]], terms[hitIndexes[index2]]);
+            std::swap(m_currentTerms[hitIndexes[index1]], m_currentTerms[hitIndexes[index2]]);
+            cout << "Fixed file: [" << m_currentFile << "] swapped at: ["
+                 << getLocatorString(m_currentTerms, hitIndexes[index1]) << "]\n";
         }
     }
 }
 
-void findTermsAndCheckForLoopAndSwapAt(
-    Terms& terms, Patterns const& searchPatterns, int const index1, int const index2) {
+void CPlusPlusFixer::findTermsAndCheckForLoopAndSwapAt(
+    Patterns const& searchPatterns, int const index1, int const index2) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(m_currentTerms, termIndex, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
             Patterns const forLoopPatterns{{M("for"), M("(")}, {M(";")}, {M("{")}, {M("}")}};
-            Indexes forLoopHitIndexes = searchBackwardsForPatterns(terms, hitIndexes.front(), forLoopPatterns);
-            if (forLoopHitIndexes.size() == 2 && terms[forLoopHitIndexes[0]].getContent() == "for" &&
-                terms[forLoopHitIndexes[1]].getContent() == "(") {
-                std::swap(terms[hitIndexes[index1]], terms[hitIndexes[index2]]);
-                ALBA_INF_PRINT2(cout, terms[hitIndexes[index1]], terms[hitIndexes[index2]]);
+            Indexes forLoopHitIndexes = searchBackwardsForPatterns(m_currentTerms, hitIndexes.front(), forLoopPatterns);
+            if (forLoopHitIndexes.size() == 2 && m_currentTerms[forLoopHitIndexes[0]].getContent() == "for" &&
+                m_currentTerms[forLoopHitIndexes[1]].getContent() == "(") {
+                std::swap(m_currentTerms[hitIndexes[index1]], m_currentTerms[hitIndexes[index2]]);
+                cout << "Fixed file: [" << m_currentFile << "] swapped at: ["
+                     << getLocatorString(m_currentTerms, hitIndexes[index1]) << "]\n";
             }
         }
     }
 }
 
-void combinePrimitiveTypes(Terms& terms) {
+void CPlusPlusFixer::combinePrimitiveTypes() {
     int termIndex = 0;
     bool isFound(true);
     Patterns const primitiveTypesPatterns{{M(TermType::PrimitiveType), M(TermType::PrimitiveType)}};
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, primitiveTypesPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(m_currentTerms, termIndex, primitiveTypesPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.front();
-            combineTermsInPlace(terms, TermType::PrimitiveType, hitIndexes[0], hitIndexes[1]);
+            combineTermsInPlace(m_currentTerms, TermType::PrimitiveType, hitIndexes[0], hitIndexes[1]);
         }
     }
 }
 
-}  // namespace alba::CodeUtilities::CPlusPlusFixer
+}  // namespace alba::CodeUtilities

@@ -1,4 +1,4 @@
-#include <CodeUtilities/CPlusPlus/CPlusPlusFixer.hpp>
+#include <CodeUtilities/CPlusPlus/CPlusPlusFinder.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <gtest/gtest.h>
@@ -9,7 +9,7 @@ namespace alba::CodeUtilities {
 
 namespace {
 void processAprgDirectory(string const& aprgPath) {
-    CPlusPlusFixer fixer;
+    CPlusPlusFinder finder;
     AlbaLocalPathHandler const aprgPathHandler(aprgPath);
     ListOfPaths directories;
     ListOfPaths files;
@@ -17,20 +17,17 @@ void processAprgDirectory(string const& aprgPath) {
     for (auto const& file : files) {
         AlbaLocalPathHandler const filePathHandler(file);
         if (filePathHandler.getFile() == "CppProjectIndicatorFile.txt") {
-            fixer.processDirectory(filePathHandler.getDirectory());
+            finder.processDirectory(filePathHandler.getDirectory());
         }
     }
 }
 }  // namespace
 
-TEST(CPlusPlusFixerTest, DISABLED_AprgDirectoryTest) {
-    processAprgDirectory(R"(F:\Branches\aprg_project\aprg_semi_clean\aprg)");
-}
+TEST(CPlusPlusFinderTest, DISABLED_AprgDirectoryTest) { processAprgDirectory(R"(F:\Branches\aprg_project\aprg\aprg)"); }
 
-TEST(CPlusPlusFixerTest, DISABLED_PathTest) {
-    CPlusPlusFixer fixer;
-    fixer.processPath(
-        R"(F:\Branches\aprg_project\aprg_semi_clean\aprg\AprgAlgebra\AprgAlgebra\src\Algebra\Solution\Solver\MultipleLinearEquations\LinearEquationsEqualitySolver.cpp)");
+TEST(CPlusPlusFinderTest, PathTest) {
+    CPlusPlusFinder finder;
+    finder.processPath(R"(F:\Branches\aprg_project\aprg\aprg\AprgAlgebra\AprgAlgebra\)");
 }
 
 }  // namespace alba::CodeUtilities
