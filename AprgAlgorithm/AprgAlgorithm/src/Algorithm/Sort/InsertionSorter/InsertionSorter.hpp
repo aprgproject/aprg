@@ -25,7 +25,17 @@ public:
                     // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
                 }
             } __except (EXCEPTION_EXECUTE_HANDLER) {
-                std::cout << "Executing SEH __except block\n";
+                std::cout << "SEH exception caught with code 0x" << std::hex << GetExceptionCode() << std::dec
+                          << std::endl;
+                PEXCEPTION_POINTERS exceptionPtrs = GetExceptionInformation();
+
+                if (exceptionPtrs) {
+                    // Print additional information about the exception
+                    std::cout << "Exception Address: " << exceptionPtrs->ExceptionRecord->ExceptionAddress << std::endl;
+                    std::cout << "Exception Flags: " << exceptionPtrs->ExceptionRecord->ExceptionFlags << std::endl;
+                    std::cout << "Exception Record: " << exceptionPtrs->ExceptionRecord << std::endl;
+                    // ... Print other relevant information from exceptionPtrs as needed
+                }
             }
         }
     }
