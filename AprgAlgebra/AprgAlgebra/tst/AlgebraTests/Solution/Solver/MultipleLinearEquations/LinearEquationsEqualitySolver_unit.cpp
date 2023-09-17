@@ -159,12 +159,14 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor3Polynomials) {
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
+    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
     polynomials.emplace_back(
-        Monomial(2, {{"x", 1}}), Monomial(-1, {{"y", 1}}), Monomial(1, {{"z", 1}}), Monomial(-8, {}));
+        Polynomial{Monomial(2, {{"x", 1}}), Monomial(-1, {{"y", 1}}), Monomial(1, {{"z", 1}}), Monomial(-8, {})});
     polynomials.emplace_back(
-        Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(3, {{"z", 1}}), Monomial(-9, {}));
+        Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(3, {{"z", 1}}), Monomial(-9, {})});
     polynomials.emplace_back(
-        Monomial(4, {{"x", 1}}), Monomial(1, {{"y", 1}}), Monomial(-2, {{"z", 1}}), Monomial(-1, {}));
+        Polynomial{Monomial(4, {{"x", 1}}), Monomial(1, {{"y", 1}}), Monomial(-2, {{"z", 1}}), Monomial(-1, {})});
+    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
 
     MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
