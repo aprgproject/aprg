@@ -35,6 +35,12 @@ public:
     [[nodiscard]] bool isNamedSocket() const;
     [[nodiscard]] bool isRelativePath() const;
     [[nodiscard]] bool isAbsolutePath() const;
+    [[nodiscard]] bool createDirectoriesAndIsSuccessful() const;
+    [[nodiscard]] bool deleteDirectoryAndIsSuccessful() const;
+    [[nodiscard]] bool deleteAllDirectoryContentsAndIsSuccessful() const;
+    [[nodiscard]] bool deleteFileAndIsSuccessful() const;
+    [[nodiscard]] bool copyFileToAndIsSuccessful(LocalPath const& destination) const;
+    [[nodiscard]] bool copyDirectoryToAndIsSuccessful(LocalPath const& destination) const;
     void findFilesAndDirectoriesOneDepth(PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
     void findFilesAndDirectoriesMultipleDepth(
         int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
@@ -43,12 +49,6 @@ public:
     void clear();
     void input(LocalPath const& path);
     void input(LocalPath&& path);
-    [[nodiscard]] bool createDirectoriesAndIsSuccessful() const;
-    [[nodiscard]] bool deleteDirectoryAndIsSuccessful() const;
-    [[nodiscard]] bool deleteAllDirectoryContentsAndIsSuccessful() const;
-    [[nodiscard]] bool deleteFileAndIsSuccessful() const;
-    [[nodiscard]] bool copyFileToAndIsSuccessful(LocalPath const& destination) const;
-    [[nodiscard]] bool copyDirectoryToAndIsSuccessful(LocalPath const& destination) const;
     bool renameFileAndIsSuccessful(LocalPath const& newFileName);
     bool renameDirectoryAndIsSuccessful(LocalPath const& newDirectoryName);
     [[nodiscard]] static AlbaLocalPathHandlerStd createPathHandlerForDetectedPath();

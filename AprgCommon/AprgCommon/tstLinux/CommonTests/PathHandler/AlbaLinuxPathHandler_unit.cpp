@@ -13,6 +13,7 @@ using namespace std;
 namespace alba {
 
 namespace {
+
 using PathHandler = AlbaLinuxPathHandler;
 constexpr char SLASH_CHARACTER = static_cast<char>('/');
 string getAprgPath() { return APRG_DIR R"(\)"; }
@@ -22,6 +23,7 @@ string fixPath(string const& path) {
     return getCorrectPathWithoutDoublePeriod<SLASH_CHARACTER>(
         getCorrectPathWithReplacedSlashCharacters<SLASH_CHARACTER>(path));
 }
+
 }  // namespace
 
 TEST(AlbaLinuxPathHandlerTest, EmptyPathWorks) {

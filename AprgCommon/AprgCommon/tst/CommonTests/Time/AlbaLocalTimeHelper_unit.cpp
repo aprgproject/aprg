@@ -11,8 +11,8 @@
 using namespace alba::AlbaDateTimeConstants;
 using namespace alba::stringHelper;
 using namespace std;
-using namespace std::filesystem;
 using namespace std::chrono;
+using namespace std::filesystem;
 
 namespace alba {
 
@@ -30,15 +30,15 @@ TEST(AlbaLocalTimerHelperTest, DISABLED_SleepForWorks) {
     EXPECT_EQ(4321U, timer.getElapsedTimeInMilliseconds());
 }
 
-TEST(AlbaLocalTimerHelperTest, ConvertFileTimeToAlbaDateTimeTimeWorks) {
-    clearContentsOfFile(APRG_COMMON_TEST_FILE_TO_WRITE);
+TEST(AlbaLocalTimerHelperTest, DISABLED_SleepUntilWorks) {
+    // this is unstable because time varies
+    AlbaDateTime const inputTime(2021, 9, 13, 3, 17, 0, 0);
+    AlbaLocalTimer timer;
 
-    AlbaDateTime lastModifiedTime(convertFileTimeToAlbaDateTime(last_write_time(APRG_COMMON_TEST_FILE_TO_WRITE)));
+    sleepUntil(inputTime);
 
-    AlbaDateTime currentTime(getCurrentDateTime());
-    AlbaDateTime difference(currentTime - lastModifiedTime);
-    AlbaDateTime allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
-    EXPECT_LT(difference, allowableDifference);
+    timer.stopTimer();
+    EXPECT_EQ(0U, timer.getElapsedTimeInMilliseconds());
 }
 
 TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorksOnCurrentTime) {
@@ -51,6 +51,32 @@ TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorksOnCurrentTime
     EXPECT_LT(difference, allowableDifference);
     // EXPECT_EQ(" 1 * 2023-09-16 20:03:14.090847", convertToString(time1));
     // EXPECT_EQ(" 1 * 2023-09-16 20:03:14.106822", convertToString(time2));
+}
+
+TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorks) {
+    tm timeInformation{};  // dont brace initialize values
+    timeInformation.tm_sec = 11;
+    timeInformation.tm_min = 22;
+    timeInformation.tm_hour = 3;
+    timeInformation.tm_mday = 4;
+    timeInformation.tm_mon = 5;
+    timeInformation.tm_year = 96;
+    LibrarySystemTime systemTime(convertTimeInformationToSystemTime(timeInformation, nanoseconds(777'777'777)));
+
+    AlbaDateTime const currentTime(convertSystemTimeToAlbaDateTime(systemTime));
+
+    EXPECT_EQ(" 1 * 1996-06-04 03:22:11.777777", convertToString(currentTime));
+}
+
+TEST(AlbaLocalTimerHelperTest, ConvertFileTimeToAlbaDateTimeTimeWorks) {
+    clearContentsOfFile(APRG_COMMON_TEST_FILE_TO_WRITE);
+
+    AlbaDateTime lastModifiedTime(convertFileTimeToAlbaDateTime(last_write_time(APRG_COMMON_TEST_FILE_TO_WRITE)));
+
+    AlbaDateTime currentTime(getCurrentDateTime());
+    AlbaDateTime difference(currentTime - lastModifiedTime);
+    AlbaDateTime allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
+    EXPECT_LT(difference, allowableDifference);
 }
 
 TEST(AlbaLocalTimerHelperTest, GetCurrentDateTimeWorks) {
@@ -87,32 +113,6 @@ TEST(AlbaLocalTimerHelperTest, ConvertSinceEpochTimeToAlbaDateTimeWorksForSystem
     EXPECT_LT(difference, allowableDifference);
     // EXPECT_EQ(" 1 * 0053-09-14 12:03:14.138281", convertToString(time1));
     // EXPECT_EQ(" 1 * 0053-09-14 12:03:14.1534223", convertToString(time2));
-}
-
-TEST(AlbaLocalTimerHelperTest, DISABLED_SleepUntilWorks) {
-    // this is unstable because time varies
-    AlbaDateTime const inputTime(2021, 9, 13, 3, 17, 0, 0);
-    AlbaLocalTimer timer;
-
-    sleepUntil(inputTime);
-
-    timer.stopTimer();
-    EXPECT_EQ(0U, timer.getElapsedTimeInMilliseconds());
-}
-
-TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorks) {
-    tm timeInformation{};  // dont brace initialize values
-    timeInformation.tm_sec = 11;
-    timeInformation.tm_min = 22;
-    timeInformation.tm_hour = 3;
-    timeInformation.tm_mday = 4;
-    timeInformation.tm_mon = 5;
-    timeInformation.tm_year = 96;
-    LibrarySystemTime systemTime(convertTimeInformationToSystemTime(timeInformation, nanoseconds(777'777'777)));
-
-    AlbaDateTime const currentTime(convertSystemTimeToAlbaDateTime(systemTime));
-
-    EXPECT_EQ(" 1 * 1996-06-04 03:22:11.777777", convertToString(currentTime));
 }
 
 TEST(AlbaLocalTimerHelperTest, ConvertTimeInformationToSystemTimeWorks) {

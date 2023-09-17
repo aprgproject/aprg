@@ -10,6 +10,7 @@ using namespace std::filesystem;
 namespace alba {
 
 namespace {
+
 using StringType = path::string_type;
 using CharacterType = StringType::value_type;
 StringType slashString(1, static_cast<CharacterType>('/'));
@@ -25,10 +26,12 @@ void replaceAll(StringType& mainText, StringType const& targetStr, StringType co
         index = mainText.find(targetStr, index + replacementStrLength);
     }
 }
+
 }  // namespace
 
 AlbaLocalPathHandlerStd::AlbaLocalPathHandlerStd(LocalPath const& path) : m_path(fixPath(path)) {}
 AlbaLocalPathHandlerStd::AlbaLocalPathHandlerStd(LocalPath&& path) : m_path(fixPath(path)) {}
+
 AlbaDateTime AlbaLocalPathHandlerStd::getLastModifiedDateTime() const {
     try {
         if (doesExist()) {
@@ -41,6 +44,7 @@ AlbaDateTime AlbaLocalPathHandlerStd::getLastModifiedDateTime() const {
     }
     return {};
 }
+
 AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getPath() const { return m_path; }
 AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getRoot() const { return m_path.root_name(); }
 
@@ -108,33 +112,6 @@ bool AlbaLocalPathHandlerStd::isNamedPipe() const { return is_fifo(m_path); }
 bool AlbaLocalPathHandlerStd::isNamedSocket() const { return is_socket(m_path); }
 bool AlbaLocalPathHandlerStd::isRelativePath() const { return m_path.is_relative(); }
 bool AlbaLocalPathHandlerStd::isAbsolutePath() const { return m_path.is_absolute(); }
-
-void AlbaLocalPathHandlerStd::findFilesAndDirectoriesOneDepth(
-    PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
-    // NOLINTNEXTLINE(readability-suspicious-call-argument)
-    findFilesAndDirectories(m_path, 1, directoryFunction, fileFunction);
-}
-
-void AlbaLocalPathHandlerStd::findFilesAndDirectoriesMultipleDepth(
-    int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
-    // NOLINTNEXTLINE(readability-suspicious-call-argument)
-    findFilesAndDirectories(m_path, depth, directoryFunction, fileFunction);
-}
-
-void AlbaLocalPathHandlerStd::findFilesAndDirectoriesUnlimitedDepth(
-    PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
-    for (directory_entry const& directoryEntry : recursive_directory_iterator(m_path)) {
-        if (directoryEntry.is_directory()) {
-            directoryFunction(directoryEntry.path() / "");
-        } else {
-            fileFunction(directoryEntry.path());
-        }
-    }
-}
-
-void AlbaLocalPathHandlerStd::clear() { m_path.clear(); }
-void AlbaLocalPathHandlerStd::input(LocalPath const& path) { m_path = fixPath(path); }
-void AlbaLocalPathHandlerStd::input(LocalPath&& path) { m_path = fixPath(path); }
 
 bool AlbaLocalPathHandlerStd::createDirectoriesAndIsSuccessful() const {
     try {
@@ -220,6 +197,33 @@ bool AlbaLocalPathHandlerStd::copyDirectoryToAndIsSuccessful(LocalPath const& de
     }
     return true;
 }
+
+void AlbaLocalPathHandlerStd::findFilesAndDirectoriesOneDepth(
+    PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
+    // NOLINTNEXTLINE(readability-suspicious-call-argument)
+    findFilesAndDirectories(m_path, 1, directoryFunction, fileFunction);
+}
+
+void AlbaLocalPathHandlerStd::findFilesAndDirectoriesMultipleDepth(
+    int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
+    // NOLINTNEXTLINE(readability-suspicious-call-argument)
+    findFilesAndDirectories(m_path, depth, directoryFunction, fileFunction);
+}
+
+void AlbaLocalPathHandlerStd::findFilesAndDirectoriesUnlimitedDepth(
+    PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
+    for (directory_entry const& directoryEntry : recursive_directory_iterator(m_path)) {
+        if (directoryEntry.is_directory()) {
+            directoryFunction(directoryEntry.path() / "");
+        } else {
+            fileFunction(directoryEntry.path());
+        }
+    }
+}
+
+void AlbaLocalPathHandlerStd::clear() { m_path.clear(); }
+void AlbaLocalPathHandlerStd::input(LocalPath const& path) { m_path = fixPath(path); }
+void AlbaLocalPathHandlerStd::input(LocalPath&& path) { m_path = fixPath(path); }
 
 bool AlbaLocalPathHandlerStd::renameFileAndIsSuccessful(LocalPath const& newFileName) {
     try {
