@@ -13,7 +13,7 @@ namespace alba::algebra::DomainAndRange {
 
 TEST(DomainAndRangeTest, AppendTransitionValuesWorks) {
     AlbaNumbersSet collectedValues;
-    AlbaNumbersSet sortedValues{5, 9.25};
+    AlbaNumbersSet const sortedValues{5, 9.25};
 
     appendTransitionValues(collectedValues, sortedValues, [](AlbaNumber const& number) { return (number - 6) ^ 0.5; });
 
@@ -23,16 +23,16 @@ TEST(DomainAndRangeTest, AppendTransitionValuesWorks) {
 }
 
 TEST(DomainAndRangeTest, GetTransitionValueWorks) {
-    AlbaNumber actualTransitionValue = getTransitionValue(
+    AlbaNumber const actualTransitionValue = getTransitionValue(
         AlbaNumber(9.25), AlbaNumber(5), [](AlbaNumber const& number) { return (number - 6) ^ 0.5; });
 
     EXPECT_EQ(AlbaNumber(6), actualTransitionValue);
 }
 
 TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunction) {
-    AlbaNumbers values{5, 9.25};
+    AlbaNumbers const values{5, 9.25};
 
-    SolutionSet actualDomain =
+    SolutionSet const actualDomain =
         calculateDomainUsingTransitionValues(values, [](AlbaNumber const& number) { return (number - 6) ^ 0.5; });
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
@@ -41,9 +41,9 @@ TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunction) 
 }
 
 TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunctionWithNanValues) {
-    AlbaNumbers values{3};
+    AlbaNumbers const values{3};
 
-    SolutionSet actualDomain = calculateDomainUsingTransitionValues(
+    SolutionSet const actualDomain = calculateDomainUsingTransitionValues(
         values, [](AlbaNumber const& number) { return (number == 3) ? ALBA_NUMBER_NOT_A_NUMBER : number; });
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
@@ -53,11 +53,11 @@ TEST(DomainAndRangeTest, CalculateDomainUsingTransitionValuesWorksWithFunctionWi
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithValues) {
-    AlbaNumbers values{1.3, 9.25};
-    Polynomial polynomial{Monomial(4, {}), Monomial(-1, {{"x", 2}})};
-    Expression expression(createExpressionIfPossible({polynomial, "^", AlbaNumber::createFraction(1, 2)}));
+    AlbaNumbers const values{1.3, 9.25};
+    Polynomial const polynomial{Monomial(4, {}), Monomial(-1, {{"x", 2}})};
+    Expression const expression(createExpressionIfPossible({polynomial, "^", AlbaNumber::createFraction(1, 2)}));
 
-    SolutionSet actualDomain = calculateDomainForTermWithOneVariable(values, expression);
+    SolutionSet const actualDomain = calculateDomainForTermWithOneVariable(values, expression);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -65,7 +65,7 @@ TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithV
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithConstant) {
-    SolutionSet actualDomain = calculateDomainForTermWithOneVariable(5);
+    SolutionSet const actualDomain = calculateDomainForTermWithOneVariable(5);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -73,10 +73,10 @@ TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithConstant)
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTerm) {
-    Polynomial polynomial{Monomial(4, {}), Monomial(-1, {{"x", 2}})};
-    Expression expression(createExpressionIfPossible({polynomial, "^", AlbaNumber::createFraction(1, 2)}));
+    Polynomial const polynomial{Monomial(4, {}), Monomial(-1, {{"x", 2}})};
+    Expression const expression(createExpressionIfPossible({polynomial, "^", AlbaNumber::createFraction(1, 2)}));
 
-    SolutionSet actualDomain = calculateDomainForTermWithOneVariable(expression);
+    SolutionSet const actualDomain = calculateDomainForTermWithOneVariable(expression);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -84,10 +84,10 @@ TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTerm) {
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithExample1) {
-    Polynomial polynomial{Monomial(1, {{"x", 2}}), Monomial(-2, {{"x", 1}})};
-    Expression expression(createExpressionIfPossible({polynomial, "^", AlbaNumber::createFraction(1, 2)}));
+    Polynomial const polynomial{Monomial(1, {{"x", 2}}), Monomial(-2, {{"x", 1}})};
+    Expression const expression(createExpressionIfPossible({polynomial, "^", AlbaNumber::createFraction(1, 2)}));
 
-    SolutionSet actualDomain = calculateDomainForTermWithOneVariable(expression);
+    SolutionSet const actualDomain = calculateDomainForTermWithOneVariable(expression);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(2U, acceptedIntervals.size());
@@ -96,11 +96,11 @@ TEST(DomainAndRangeTest, CalculateDomainForTermWithOneVariableWorksWithTermWithE
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquationWithValues) {
-    Polynomial polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
-    Equation equation(polynomialLeft, "=", 36);
-    AlbaNumbers numbers{3.3, 9.9};
+    Polynomial const polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
+    Equation const equation(polynomialLeft, "=", 36);
+    AlbaNumbers const numbers{3.3, 9.9};
 
-    SolutionSet actualDomain = calculateDomainForEquation("x", numbers, equation);
+    SolutionSet const actualDomain = calculateDomainForEquation("x", numbers, equation);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -108,10 +108,10 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquationWithValues) 
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquation) {
-    Polynomial polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
-    Equation equation(polynomialLeft, "=", 36);
+    Polynomial const polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
+    Equation const equation(polynomialLeft, "=", 36);
 
-    SolutionSet actualDomain = calculateDomainForEquation("x", equation);
+    SolutionSet const actualDomain = calculateDomainForEquation("x", equation);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -119,9 +119,9 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquation) {
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquationUsingExample1) {
-    Equation equation("y", "=", Monomial(1, {{"x", 2}}));
+    Equation const equation("y", "=", Monomial(1, {{"x", 2}}));
 
-    SolutionSet actualDomain = calculateDomainForEquation("x", equation);
+    SolutionSet const actualDomain = calculateDomainForEquation("x", equation);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -129,11 +129,11 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithEquationUsingExample
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithSquareRootOfQuadratic) {
-    Polynomial quadratic{Monomial(9, {}), Monomial(-1, {{"x", 2}})};
-    Expression expression(createExpressionIfPossible({quadratic, "^", AlbaNumber::createFraction(1, 2)}));
-    Equation equation(expression, "=", "y");
+    Polynomial const quadratic{Monomial(9, {}), Monomial(-1, {{"x", 2}})};
+    Expression const expression(createExpressionIfPossible({quadratic, "^", AlbaNumber::createFraction(1, 2)}));
+    Equation const equation(expression, "=", "y");
 
-    SolutionSet actualDomain = calculateDomainForEquation("x", equation);
+    SolutionSet const actualDomain = calculateDomainForEquation("x", equation);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -141,12 +141,12 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithSquareRootOfQuadrati
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWith2AbsoluteValues) {
-    Function absoluteValueOfX(Functions::abs(createExpressionIfPossible({"x"})));
-    Function absoluteValueOfY(Functions::abs(createExpressionIfPossible({"y"})));
-    Expression leftHandExpression(createExpressionIfPossible({absoluteValueOfX, "+", absoluteValueOfY}));
-    Equation equation(leftHandExpression, "=", 1);
+    Function const absoluteValueOfX(Functions::abs(createExpressionIfPossible({"x"})));
+    Function const absoluteValueOfY(Functions::abs(createExpressionIfPossible({"y"})));
+    Expression const leftHandExpression(createExpressionIfPossible({absoluteValueOfX, "+", absoluteValueOfY}));
+    Equation const equation(leftHandExpression, "=", 1);
 
-    SolutionSet actualDomain = calculateDomainForEquation("x", equation);
+    SolutionSet const actualDomain = calculateDomainForEquation("x", equation);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -154,10 +154,10 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWith2AbsoluteValues) {
 }
 
 TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithXToTheXIsWrong) {
-    Expression leftHandExpression(createExpressionIfPossible({"x", "^", "x", "-", 823543}));
-    Equation equation(leftHandExpression, "=", "y");
+    Expression const leftHandExpression(createExpressionIfPossible({"x", "^", "x", "-", 823543}));
+    Equation const equation(leftHandExpression, "=", "y");
 
-    SolutionSet actualDomain = calculateDomainForEquation("x", equation);
+    SolutionSet const actualDomain = calculateDomainForEquation("x", equation);
 
     AlbaNumberIntervals acceptedIntervals(actualDomain.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -167,11 +167,11 @@ TEST(DomainAndRangeTest, CalculateDomainForEquationWorksWithXToTheXIsWrong) {
 }
 
 TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquationWithValues) {
-    Polynomial polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
-    Equation equation(polynomialLeft, "=", 36);
-    AlbaNumbers numbers{3.3, 9.9};
+    Polynomial const polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
+    Equation const equation(polynomialLeft, "=", 36);
+    AlbaNumbers const numbers{3.3, 9.9};
 
-    SolutionSet actualRange = calculateRangeForEquation("x", numbers, equation);
+    SolutionSet const actualRange = calculateRangeForEquation("x", numbers, equation);
 
     AlbaNumberIntervals acceptedIntervals(actualRange.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -179,10 +179,10 @@ TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquationWithValues) {
 }
 
 TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquation) {
-    Polynomial polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
-    Equation equation(polynomialLeft, "=", 36);
+    Polynomial const polynomialLeft{Monomial(1, {{"x", 2}}), Monomial(1, {{"y", 2}})};
+    Equation const equation(polynomialLeft, "=", 36);
 
-    SolutionSet actualRange = calculateRangeForEquation("x", equation);
+    SolutionSet const actualRange = calculateRangeForEquation("x", equation);
 
     AlbaNumberIntervals acceptedIntervals(actualRange.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -190,9 +190,9 @@ TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquation) {
 }
 
 TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquationUsingExample1) {
-    Equation equation("y", "=", Monomial(1, {{"x", 2}}));
+    Equation const equation("y", "=", Monomial(1, {{"x", 2}}));
 
-    SolutionSet actualRange = calculateRangeForEquation("x", equation);
+    SolutionSet const actualRange = calculateRangeForEquation("x", equation);
 
     AlbaNumberIntervals acceptedIntervals(actualRange.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -200,12 +200,12 @@ TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWithEquationUsingExample1
 }
 
 TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWith2AbsoluteValues) {
-    Function absoluteValueOfX(Functions::abs(createExpressionIfPossible({"x"})));
-    Function absoluteValueOfY(Functions::abs(createExpressionIfPossible({"y"})));
-    Expression leftHandExpression(createExpressionIfPossible({absoluteValueOfX, "+", absoluteValueOfY}));
-    Equation equation(leftHandExpression, "=", 1);
+    Function const absoluteValueOfX(Functions::abs(createExpressionIfPossible({"x"})));
+    Function const absoluteValueOfY(Functions::abs(createExpressionIfPossible({"y"})));
+    Expression const leftHandExpression(createExpressionIfPossible({absoluteValueOfX, "+", absoluteValueOfY}));
+    Equation const equation(leftHandExpression, "=", 1);
 
-    SolutionSet actualRange = calculateRangeForEquation("x", equation);
+    SolutionSet const actualRange = calculateRangeForEquation("x", equation);
 
     AlbaNumberIntervals acceptedIntervals(actualRange.getAcceptedIntervals());
     ASSERT_EQ(1U, acceptedIntervals.size());
@@ -213,8 +213,8 @@ TEST(DomainAndRangeTest, CalculateRangeForEquationWorksWith2AbsoluteValues) {
 }
 
 TEST(DomainAndRangeTest, IsOneToOneWorks) {
-    Equation equation1("y", "=", Monomial(1, {{"x", 2}}));
-    Equation equation2("y", "=", Monomial(1, {{"x", 3}}));
+    Equation const equation1("y", "=", Monomial(1, {{"x", 2}}));
+    Equation const equation2("y", "=", Monomial(1, {{"x", 3}}));
 
     EXPECT_FALSE(isOneToOne("x", equation1));
     EXPECT_TRUE(isOneToOne("x", equation2));

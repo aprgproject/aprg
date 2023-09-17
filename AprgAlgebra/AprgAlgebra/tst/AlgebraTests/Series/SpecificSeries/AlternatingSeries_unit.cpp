@@ -8,19 +8,19 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(AlternatingSeriesTest, IsSummationModelValidWorks) {
-    Term numerator(1);
-    Term denominator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(1, {})});
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    AlternatingSeries series(formula, "n");
+    Term const numerator(1);
+    Term const denominator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(1, {})});
+    Term const formula(createExpressionIfPossible({numerator, "/", denominator}));
+    AlternatingSeries const series(formula, "n");
 
     EXPECT_FALSE(series.isSummationModelValid());
 }
 
 TEST(AlternatingSeriesTest, GetValueAtIndexWorks) {
-    Term numerator(1);
-    Term denominator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(1, {})});
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    AlternatingSeries series(formula, "n");
+    Term const numerator(1);
+    Term const denominator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(1, {})});
+    Term const formula(createExpressionIfPossible({numerator, "/", denominator}));
+    AlternatingSeries const series(formula, "n");
 
     EXPECT_EQ(Term(1), series.getValueAtIndex(0));
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), series.getValueAtIndex(1));
@@ -29,10 +29,10 @@ TEST(AlternatingSeriesTest, GetValueAtIndexWorks) {
 }
 
 TEST(AlternatingSeriesTest, GetRemainderAtIndexWorks) {
-    Term numerator(1);
-    Term denominator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(1, {})});
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    AlternatingSeries series(formula, "n");
+    Term const numerator(1);
+    Term const denominator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(1, {})});
+    Term const formula(createExpressionIfPossible({numerator, "/", denominator}));
+    AlternatingSeries const series(formula, "n");
 
     EXPECT_EQ(Term(1), series.getRemainderAtIndex(0));
     EXPECT_EQ(Term(AlbaNumber::createFraction(1, 2)), series.getRemainderAtIndex(1));
@@ -41,10 +41,10 @@ TEST(AlternatingSeriesTest, GetRemainderAtIndexWorks) {
 }
 
 TEST(AlternatingSeriesTest, IsConvergentWorks) {
-    Term numerator(1);
-    Term denominator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(1, {})});
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    AlternatingSeries series(formula, "n");
+    Term const numerator(1);
+    Term const denominator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(1, {})});
+    Term const formula(createExpressionIfPossible({numerator, "/", denominator}));
+    AlternatingSeries const series(formula, "n");
 
     EXPECT_TRUE(series.isConvergent());
 }

@@ -8,21 +8,21 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(GeometricSeriesTest, ConstructionWorksUsingFirstTermAndCommonDifference) {
-    GeometricSeries series(-8, AlbaNumber::createFraction(-1, 2));
+    GeometricSeries const series(-8, AlbaNumber::createFraction(-1, 2));
 
     EXPECT_EQ(Term(-8), series.getValueAtIndex(0));
     EXPECT_EQ(Term(0.015625), series.getValueAtIndex(9));
 }
 
 TEST(GeometricSeriesTest, ConstructionWorksUsing2ValuesAndCount) {
-    GeometricSeries series(4, 1, -2, 2);
+    GeometricSeries const series(4, 1, -2, 2);
 
     EXPECT_EQ(Term(-8), series.getValueAtIndex(0));
     EXPECT_EQ(Term(0.015625), series.getValueAtIndex(9));
 }
 
 TEST(GeometricSeriesTest, GetValueAtIndexWorks) {
-    GeometricSeries series(-15, 2);
+    GeometricSeries const series(-15, 2);
 
     EXPECT_EQ(Term(-15), series.getValueAtIndex(0));
     EXPECT_EQ(Term(-30), series.getValueAtIndex(1));
@@ -30,7 +30,7 @@ TEST(GeometricSeriesTest, GetValueAtIndexWorks) {
 }
 
 TEST(GeometricSeriesTest, GetSumWorks) {
-    GeometricSeries series(1, 4);
+    GeometricSeries const series(1, 4);
 
     EXPECT_EQ(Term(21845), series.getSum(0, 7));
     EXPECT_EQ(Term(21844), series.getSum(1, 7));
@@ -38,19 +38,19 @@ TEST(GeometricSeriesTest, GetSumWorks) {
 }
 
 TEST(GeometricSeriesTest, GetSumIsEqualToFormulaInUtilities) {
-    GeometricSeries series(1, 4);
+    GeometricSeries const series(1, 4);
 
-    Term sumFromSeries(series.getSum(0, 7));
-    Term sumFromFormula(getSumOfGeometricSeriesUsingFirstValueAndCommonMultiplier(1, 4, 8));
+    Term const sumFromSeries(series.getSum(0, 7));
+    Term const sumFromFormula(getSumOfGeometricSeriesUsingFirstValueAndCommonMultiplier(1, 4, 8));
 
     EXPECT_EQ(sumFromSeries, sumFromFormula);
 }
 
 TEST(GeometricSeriesTest, IsConvergentWorks) {
     // Geometric diverges when less than one
-    GeometricSeries seriesWithMultiplierLessThanOne(1, AlbaNumber::createFraction(1, 2));
-    GeometricSeries seriesWithMultiplierEqualsToOne(1, 1);
-    GeometricSeries seriesWithMultiplierMoreThanOne(1, 2);
+    GeometricSeries const seriesWithMultiplierLessThanOne(1, AlbaNumber::createFraction(1, 2));
+    GeometricSeries const seriesWithMultiplierEqualsToOne(1, 1);
+    GeometricSeries const seriesWithMultiplierMoreThanOne(1, 2);
 
     EXPECT_TRUE(seriesWithMultiplierLessThanOne.isConvergent());
     EXPECT_TRUE(seriesWithMultiplierEqualsToOne.isConvergent());
@@ -68,8 +68,8 @@ TEST(GeometricSeriesTest, GetInfiniteSumWorks) {
 TEST(GeometricSeriesTest, GetInfiniteSumIsEqualToFormulaInUtilities) {
     GeometricSeries series(AlbaNumber::createFraction(1, 2), AlbaNumber::createFraction(1, 2));
 
-    Term sumFromSeries(series.getInfiniteSumStartingFrom(2));
-    Term sumFromFormula(getInfiniteSumOfGeometricSeriesIfCommonMultiplierIsFractional(
+    Term const sumFromSeries(series.getInfiniteSumStartingFrom(2));
+    Term const sumFromFormula(getInfiniteSumOfGeometricSeriesIfCommonMultiplierIsFractional(
         AlbaNumber::createFraction(1, 8), AlbaNumber::createFraction(1, 2)));
 
     EXPECT_EQ(sumFromSeries, sumFromFormula);

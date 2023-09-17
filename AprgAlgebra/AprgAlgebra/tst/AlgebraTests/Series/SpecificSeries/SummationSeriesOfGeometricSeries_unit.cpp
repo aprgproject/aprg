@@ -8,9 +8,9 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(SummationSeriesOfGeometricSeriesTest, IsConvergentWorks) {
-    SummationSeriesOfGeometricSeries seriesWithMultiplierLessThanOne(1, AlbaNumber::createFraction(1, 2));
-    SummationSeriesOfGeometricSeries seriesWithMultiplierEqualsToOne(1, 1);
-    SummationSeriesOfGeometricSeries seriesWithMultiplierMoreThanOne(1, 2);
+    SummationSeriesOfGeometricSeries const seriesWithMultiplierLessThanOne(1, AlbaNumber::createFraction(1, 2));
+    SummationSeriesOfGeometricSeries const seriesWithMultiplierEqualsToOne(1, 1);
+    SummationSeriesOfGeometricSeries const seriesWithMultiplierMoreThanOne(1, 2);
 
     EXPECT_TRUE(seriesWithMultiplierLessThanOne.isSummationModelValid());
     EXPECT_TRUE(seriesWithMultiplierEqualsToOne.isSummationModelValid());

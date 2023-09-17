@@ -7,9 +7,9 @@ namespace alba::algebra {
 
 TEST(SingleVariableNameRetrieverTest, RetrieveFromEquationsWorks) {
     SingleVariableNameRetriever retriever;
-    Equation equation1("1", "=", "1");
-    Equation equation2("0", "=", "0");
-    Equation equation3("2", "!=", "g");
+    Equation const equation1("1", "=", "1");
+    Equation const equation2("0", "=", "0");
+    Equation const equation3("2", "!=", "g");
 
     retriever.retrieveFromEquations(Equations{equation1, equation2, equation3});
 
@@ -21,9 +21,9 @@ TEST(SingleVariableNameRetrieverTest, RetrieveFromEquationsWorks) {
 
 TEST(SingleVariableNameRetrieverTest, RetrieveFromEquationWorks) {
     SingleVariableNameRetriever retriever;
-    Term leftHandTerm(Monomial(34, {{"x", 5}}));
-    Term rightHandTerm(Monomial(41, {{"y", 6}}));
-    Equation equation(leftHandTerm, "=", rightHandTerm);
+    Term const leftHandTerm(Monomial(34, {{"x", 5}}));
+    Term const rightHandTerm(Monomial(41, {{"y", 6}}));
+    Equation const equation(leftHandTerm, "=", rightHandTerm);
 
     retriever.retrieveFromEquation(equation);
 
@@ -35,7 +35,7 @@ TEST(SingleVariableNameRetrieverTest, RetrieveFromEquationWorks) {
 
 TEST(SingleVariableNameRetrieverTest, RetrieveFromTermWorks) {
     SingleVariableNameRetriever retriever;
-    Function functionObject(
+    Function const functionObject(
         "functionName", Term(createExpressionIfPossible({"a", "^", 2})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
 
@@ -109,7 +109,7 @@ TEST(SingleVariableNameRetrieverTest, RetrieveFromExpressionWorks) {
 
 TEST(SingleVariableNameRetrieverTest, RetrieveFromFunctionWorks) {
     SingleVariableNameRetriever retriever;
-    Function functionObject(
+    Function const functionObject(
         "functionName", Term(createExpressionIfPossible({4516, "+", Monomial(7895, {{"x", 10}})})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
 

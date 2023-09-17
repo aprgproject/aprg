@@ -11,16 +11,16 @@ using namespace std;
 namespace alba::algebra::Simplification {
 
 TEST(SimplificationUtilitiesTest, SimplifyTermToACommonDenominatorWorks) {
-    Term denominator1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})});
-    Term denominator2(Polynomial{Monomial(-1, {{"x", 1}}), Monomial(3, {})});
-    Term firstTerm(createExpressionIfPossible({1, "/", denominator1}));
-    Term secondTerm(createExpressionIfPossible({1, "/", denominator2}));
+    Term const denominator1(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {})});
+    Term const denominator2(Polynomial{Monomial(-1, {{"x", 1}}), Monomial(3, {})});
+    Term const firstTerm(createExpressionIfPossible({1, "/", denominator1}));
+    Term const secondTerm(createExpressionIfPossible({1, "/", denominator2}));
 
     Term termToTest(createExpressionIfPossible({firstTerm, "+", secondTerm}));
     simplifyTermToACommonDenominator(termToTest);
 
-    Term expectedDenominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-1, {{"x", 1}}), Monomial(-6, {})});
-    Term expectedTerm(createExpressionIfPossible({-5, "/", expectedDenominator}));
+    Term const expectedDenominator(Polynomial{Monomial(1, {{"x", 2}}), Monomial(-1, {{"x", 1}}), Monomial(-6, {})});
+    Term const expectedTerm(createExpressionIfPossible({-5, "/", expectedDenominator}));
     EXPECT_EQ(expectedTerm, termToTest);
 }
 
@@ -39,7 +39,7 @@ TEST(SimplificationUtilitiesTest, SimplifyAndCopyTermsAndChangeOperatorLevelIfNe
 
 TEST(
     SimplificationUtilitiesTest, SimplifyAndCopyTermsAndChangeOperatorLevelIfNeededWorksForOneTermWithManyExpressions) {
-    Term oneTerm(createExpressionInAnExpression(
+    Term const oneTerm(createExpressionInAnExpression(
         createExpressionInAnExpression(createAndWrapExpressionFromATerm(Monomial(5, {{}})))));
     TermsWithDetails inputTermWithDetails;
     inputTermWithDetails.emplace_back(oneTerm, TermAssociationType::Positive);
@@ -56,10 +56,10 @@ TEST(
 TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorks) {
     Expression expression(createExpressionIfPossible(tokenizeToTerms("((4)/(x+2))+((x+3)/(x*x-4))+((2*x+1)/(x-2))")));
 
-    bool didItOccurOnTopLevelExpression =
+    bool const didItOccurOnTopLevelExpression =
         simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(expression);
 
-    Expression expressionToExpect(createExpressionIfPossible(
+    Expression const expressionToExpect(createExpressionIfPossible(
         {Polynomial{Monomial(2, {{"x", 2}}), Monomial(10, {{"x", 1}}), Monomial(-3, {})}, "/",
          Polynomial{Monomial(1, {{"x", 2}}), Monomial(-4, {})}}));
     EXPECT_EQ(expressionToExpect, expression);
@@ -69,10 +69,10 @@ TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorks) {
 TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorksOnExponentPlusPolynomialDenominator) {
     Expression expression(createExpressionIfPossible(tokenizeToTerms("2^x+((1)/(x+2))")));
 
-    bool didItOccurOnTopLevelExpression =
+    bool const didItOccurOnTopLevelExpression =
         simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(expression);
 
-    string stringToExpect("((1+(x*(2^x))+(2^(1[x] + 1)))/(1[x] + 2))");
+    string const stringToExpect("((1+(x*(2^x))+(2^(1[x] + 1)))/(1[x] + 2))");
     EXPECT_EQ(stringToExpect, convertToString(expression));
     EXPECT_TRUE(didItOccurOnTopLevelExpression);
 }
@@ -80,12 +80,12 @@ TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorksOnExponentPlu
 TEST(SimplificationUtilitiesTest, SimplifyToACommonDenominatorWorksOnExponentWithFractionExpressions) {
     Expression expression(createExpressionIfPossible(tokenizeToTerms("2^(((1)/(x+2))+((1)/(x-2)))")));
 
-    bool didItOccurOnTopLevelExpression =
+    bool const didItOccurOnTopLevelExpression =
         simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(expression);
 
-    Polynomial polynomialToExpect{Monomial(1, {{"x", 2}}), Monomial(-4, {})};
-    Expression subExpression(createExpressionIfPossible({Monomial(2, {{"x", 1}}), "/", polynomialToExpect}));
-    Expression expressionToExpect(createExpressionIfPossible({2, "^", subExpression}));
+    Polynomial const polynomialToExpect{Monomial(1, {{"x", 2}}), Monomial(-4, {})};
+    Expression const subExpression(createExpressionIfPossible({Monomial(2, {{"x", 1}}), "/", polynomialToExpect}));
+    Expression const expressionToExpect(createExpressionIfPossible({2, "^", subExpression}));
     EXPECT_EQ(expressionToExpect, expression);
     EXPECT_FALSE(didItOccurOnTopLevelExpression);
 }

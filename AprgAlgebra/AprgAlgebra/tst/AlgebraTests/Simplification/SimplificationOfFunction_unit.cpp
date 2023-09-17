@@ -13,8 +13,8 @@ TEST(SimplificationOfFunctionTest, SimplifyWorksOnAbsoluteValueExpressionWithPos
 
     simplification.simplify();
 
-    Function actualEquation(simplification.getFunction());
-    Function expectedFunction(Functions::abs(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {{"y", 1}})}));
+    Function const actualEquation(simplification.getFunction());
+    Function const expectedFunction(Functions::abs(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {{"y", 1}})}));
     EXPECT_EQ(expectedFunction, actualEquation);
 }
 
@@ -24,8 +24,8 @@ TEST(SimplificationOfFunctionTest, SimplifyWorksOnAbsoluteValueExpressionWithNeg
 
     simplification.simplify();
 
-    Function actualEquation(simplification.getFunction());
-    Function expectedFunction(Functions::abs(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {{"y", 1}})}));
+    Function const actualEquation(simplification.getFunction());
+    Function const expectedFunction(Functions::abs(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-1, {{"y", 1}})}));
     EXPECT_EQ(expectedFunction, actualEquation);
 }
 

@@ -12,10 +12,10 @@ TEST(
     LinearDiophantineEquationSolverTest,
     CalculateSolutionAndReturnSolutionSetWorksAsDoesNotFindASolutionForNonEqualityEquation) {
     LinearDiophantineEquationSolver solver;
-    Polynomial polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {{"y", 1}})};
-    Equation equation(polynomial, ">", 4);
+    Polynomial const polynomial{Monomial(1, {{"x", 1}}), Monomial(1, {{"y", 1}})};
+    Equation const equation(polynomial, ">", 4);
 
-    MultipleVariableSolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(equation));
+    MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(equation));
 
     EXPECT_FALSE(solver.isSolved());
     EXPECT_FALSE(solver.isACompleteSolution());
@@ -24,10 +24,10 @@ TEST(
 
 TEST(LinearDiophantineEquationSolverTest, CalculateSolutionAndReturnSolutionSetWorksForThreeMonomials) {
     LinearDiophantineEquationSolver solver;
-    Polynomial polynomial{Monomial(39, {{"x", 1}}), Monomial(15, {{"y", 1}})};
-    Equation equation(polynomial, "=", 12);
+    Polynomial const polynomial{Monomial(39, {{"x", 1}}), Monomial(15, {{"y", 1}})};
+    Equation const equation(polynomial, "=", 12);
 
-    MultipleVariableSolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(equation));
+    MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(equation));
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_FALSE(solver.isACompleteSolution());

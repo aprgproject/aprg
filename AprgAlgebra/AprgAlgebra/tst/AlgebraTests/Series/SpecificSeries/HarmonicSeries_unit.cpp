@@ -7,13 +7,13 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(HarmonicSeriesTest, IsSummationModelValidWorks) {
-    HarmonicSeries series;
+    HarmonicSeries const series;
 
     EXPECT_FALSE(series.isSummationModelValid());
 }
 
 TEST(HarmonicSeriesTest, GetValueAtIndexWorks) {
-    HarmonicSeries series;
+    HarmonicSeries const series;
 
     EXPECT_EQ(Term(1), series.getValueAtIndex(0));
     EXPECT_EQ(Term(AlbaNumber::createFraction(3, 2)), series.getValueAtIndex(1));

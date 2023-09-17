@@ -77,7 +77,7 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAcceptedValue) {
     SolutionSet solutionSet;
     solutionSet.addAcceptedValue(2);
 
-    AlbaNumbers addedValuesToCheck{1};
+    AlbaNumbers const addedValuesToCheck{1};
     AlbaNumbers valuesThatAreNotAccepted{1, 2};
     solutionSet.determineAndAddAcceptedIntervals(addedValuesToCheck, [&](AlbaNumber const& numberToCheck) {
         return find(valuesThatAreNotAccepted.cbegin(), valuesThatAreNotAccepted.cend(), numberToCheck) ==
@@ -95,7 +95,7 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithRejectedValue) {
     SolutionSet solutionSet;
     solutionSet.addRejectedValue(2);
 
-    AlbaNumbers addedValuesToCheck{1};
+    AlbaNumbers const addedValuesToCheck{1};
     AlbaNumbers valuesThatAreNotAccepted{1, 2};
     solutionSet.determineAndAddAcceptedIntervals(addedValuesToCheck, [&](AlbaNumber const& numberToCheck) {
         return find(valuesThatAreNotAccepted.cbegin(), valuesThatAreNotAccepted.cend(), numberToCheck) ==
@@ -136,7 +136,7 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithOnePoint) {
 TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithRedundantInfinities) {
     SolutionSet solutionSet;
 
-    AlbaNumbers addedValuesToCheck{
+    AlbaNumbers const addedValuesToCheck{
         1, ALBA_NUMBER_POSITIVE_INFINITY, ALBA_NUMBER_NEGATIVE_INFINITY, ALBA_NUMBER_POSITIVE_INFINITY,
         ALBA_NUMBER_NEGATIVE_INFINITY};
     AlbaNumbers valuesThatAreNotAccepted{1};
@@ -170,7 +170,7 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAllKindOfInterval
 TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAllConnectedIntervalsCombined) {
     SolutionSet solutionSet;
 
-    AlbaNumbers addedValuesToCheck{1, 2, 3};
+    AlbaNumbers const addedValuesToCheck{1, 2, 3};
     AlbaNumbers valuesThatAreNotAccepted{2};
     solutionSet.determineAndAddAcceptedIntervals(addedValuesToCheck, [&](AlbaNumber const& numberToCheck) {
         return find(valuesThatAreNotAccepted.cbegin(), valuesThatAreNotAccepted.cend(), numberToCheck) ==
@@ -186,7 +186,7 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksWithAllConnectedInter
 TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksAndNotAcceptedIntervalsNotIncluded) {
     SolutionSet solutionSet;
 
-    AlbaNumbers addedValuesToCheck{1, 2};
+    AlbaNumbers const addedValuesToCheck{1, 2};
     AlbaNumbers valuesThatAreNotAccepted{1, 1.5, 2};
     solutionSet.determineAndAddAcceptedIntervals(addedValuesToCheck, [&](AlbaNumber const& numberToCheck) {
         return find(valuesThatAreNotAccepted.cbegin(), valuesThatAreNotAccepted.cend(), numberToCheck) ==
@@ -200,7 +200,7 @@ TEST(SolutionSetTest, DetermineAndAddAcceptedIntervalsWorksAndNotAcceptedInterva
 }
 
 TEST(SolutionSetTest, IsEmptyWorks) {
-    SolutionSet solutionSet1;
+    SolutionSet const solutionSet1;
     SolutionSet solutionSet2;
     SolutionSet solutionSet3;
     SolutionSet solutionSet4;
