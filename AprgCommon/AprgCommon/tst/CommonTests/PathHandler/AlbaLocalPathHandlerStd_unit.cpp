@@ -38,7 +38,7 @@ LocalPath fixPath(LocalPath const& path) {
 }
 }  // namespace
 
-TEST(AlbaLocalPathHandlerStd, GetLastModifiedDateTimeWorks) {
+TEST(AlbaLocalPathHandlerStdTest, GetLastModifiedDateTimeWorks) {
     PathHandler const pathHandler(APRG_COMMON_TEST_FILE_TO_WRITE);
     createEmptyFile(pathHandler.getPath().string());
 
@@ -50,7 +50,7 @@ TEST(AlbaLocalPathHandlerStd, GetLastModifiedDateTimeWorks) {
     EXPECT_LT(difference, allowableDifference);
 }
 
-TEST(AlbaLocalPathHandlerStd, EmptyPathWorks) {
+TEST(AlbaLocalPathHandlerStdTest, EmptyPathWorks) {
     PathHandler const pathHandler("");
     EXPECT_TRUE(pathHandler.getPath().empty());
     EXPECT_TRUE(pathHandler.getRoot().empty());
@@ -60,7 +60,7 @@ TEST(AlbaLocalPathHandlerStd, EmptyPathWorks) {
     EXPECT_TRUE(pathHandler.getExtension().empty());
 }
 
-TEST(AlbaLocalPathHandlerStd, ClearWorks) {
+TEST(AlbaLocalPathHandlerStdTest, ClearWorks) {
     PathHandler pathHandler(getAprgTestDirectory());
 
     pathHandler.clear();
@@ -73,7 +73,7 @@ TEST(AlbaLocalPathHandlerStd, ClearWorks) {
     EXPECT_TRUE(pathHandler.getExtension().empty());
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithOnlyDirectoryGivenWindowsStyleInput) {
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithOnlyDirectoryGivenWindowsStyleInput) {
     PathHandler pathHandler(getAprgTestDirectory());
     EXPECT_EQ(fixPath(getAprgTestDirectory()), pathHandler.getPath());
     EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
@@ -83,7 +83,7 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithOnlyDirectoryGivenWindowsStyleInput) {
     EXPECT_TRUE(pathHandler.getExtension().empty());
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithOnlyDirectoryGivenJumbledSlashes) {
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithOnlyDirectoryGivenJumbledSlashes) {
     PathHandler const pathHandler(getAprgPath() + R"(////AprgCommon\\\\\FilesForTests\)");
     EXPECT_EQ(fixPath(getAprgTestDirectory()), pathHandler.getPath());
     EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
@@ -93,7 +93,7 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithOnlyDirectoryGivenJumbledSlashes) {
     EXPECT_TRUE(pathHandler.getExtension().empty());
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithOnlyDirectoryGivenJumbledSlashesWithDirectoryDoesNotExists) {
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithOnlyDirectoryGivenJumbledSlashesWithDirectoryDoesNotExists) {
     PathHandler const pathHandler(APRG_DIR R"(\////AprgCommon\\\\/AprgCommon/tst\DirectoryDoesNotExists\)");
     EXPECT_EQ(fixPath(getAprgPath() + R"(AprgCommon\AprgCommon\tst\DirectoryDoesNotExists\)"), pathHandler.getPath());
     EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
@@ -104,7 +104,7 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithOnlyDirectoryGivenJumbledSlashesWithDi
     EXPECT_TRUE(pathHandler.getExtension().empty());
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithOnlyDirectoryGivenWithNumbersAndSpecialCharacters) {
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithOnlyDirectoryGivenWithNumbersAndSpecialCharacters) {
     PathHandler const pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\)");
     EXPECT_EQ(fixPath(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\)"), pathHandler.getPath());
     EXPECT_TRUE(pathHandler.getRoot().empty());
@@ -114,7 +114,7 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithOnlyDirectoryGivenWithNumbersAndSpecia
     EXPECT_TRUE(pathHandler.getExtension().empty());
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryAndFileGivenWithNumbersAndSpecialCharacters) {
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryAndFileGivenWithNumbersAndSpecialCharacters) {
     PathHandler const pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\zxcvbnm12345.txt)");
     EXPECT_EQ(
         fixPath(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\zxcvbnm12345.txt)"), pathHandler.getPath());
@@ -125,7 +125,7 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryAndFileGivenWithNumbersAndSpe
     EXPECT_EQ("txt", pathHandler.getExtension());
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryAndFileNoFileExtensionGivenWithNumbersAndSpecialCharacters) {
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryAndFileNoFileExtensionGivenWithNumbersAndSpecialCharacters) {
     PathHandler const pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\zxcvbnm12345.)");
     EXPECT_EQ(fixPath(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\zxcvbnm12345.)"), pathHandler.getPath());
     EXPECT_TRUE(pathHandler.getRoot().empty());
@@ -135,7 +135,7 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryAndFileNoFileExtensionGivenWi
     EXPECT_TRUE(pathHandler.getExtension().empty());
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryAndFileExtensionOnlyGivenWithNumbersAndSpecialCharacters) {
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryAndFileExtensionOnlyGivenWithNumbersAndSpecialCharacters) {
     PathHandler const pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\.zxcvbnm12345)");
     EXPECT_EQ(fixPath(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\AprgCommon\tst\.zxcvbnm12345)"), pathHandler.getPath());
     EXPECT_TRUE(pathHandler.getRoot().empty());
@@ -145,7 +145,7 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryAndFileExtensionOnlyGivenWith
     EXPECT_TRUE(pathHandler.getExtension().empty());
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryAndFileActualLocalDirectory) {
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryAndFileActualLocalDirectory) {
     PathHandler pathHandler(getAprgTestDirectory() + R"(\DirectoryTest\File1.log)");
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\File1.log)"), pathHandler.getPath());
     EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
@@ -183,7 +183,7 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryAndFileActualLocalDirectory) 
     EXPECT_TRUE(pathHandler.doesExist());
 }
 
-TEST(AlbaLocalPathHandlerStd, ReInputFileThatIsToBeDeletedActualLocalDirectory) {
+TEST(AlbaLocalPathHandlerStdTest, ReInputFileThatIsToBeDeletedActualLocalDirectory) {
     LocalPath const pathOfFileToBeDeleted(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\FileToBeDeleted.log)"));
     createEmptyFile(fixPath(pathOfFileToBeDeleted).string());
 
@@ -207,7 +207,31 @@ TEST(AlbaLocalPathHandlerStd, ReInputFileThatIsToBeDeletedActualLocalDirectory) 
     EXPECT_FALSE(pathHandler.doesExist());
 }
 
-TEST(AlbaLocalPathHandlerStd, FileIsCopiedToNewFileActualLocalDirectory) {
+TEST(AlbaLocalPathHandlerStdTest, CopyDirectoryAndIsSuccessfulWorks) {
+    PathHandler const pathHandler(getAprgTestDirectory() + R"(\CopyDirectory\)");
+    EXPECT_TRUE(
+        PathHandler(getAprgTestDirectory() + R"(\CopyDirectory\DIR1\DIR2\DIR3\)").createDirectoriesAndIsSuccessful());
+    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\CopyDirectory\FILE0.txt)").string());
+    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\CopyDirectory\DIR1\FILE1.txt)").string());
+    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\CopyDirectory\DIR1\DIR2\FILE2.txt)").string());
+    ASSERT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CopyDirectory\)").isExistingDirectory());
+    PathHandler const destinationHandler(getAprgTestDirectory() + R"(\CopiedDirectory\)");
+
+    EXPECT_TRUE(pathHandler.copyDirectoryToAndIsSuccessful(destinationHandler.getPath()));
+
+    EXPECT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CopiedDirectory\)").isExistingDirectory());
+    EXPECT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CopiedDirectory\DIR1\)").isExistingDirectory());
+    EXPECT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CopiedDirectory\DIR1\DIR2\)").isExistingDirectory());
+    EXPECT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CopiedDirectory\DIR1\DIR2\DIR3\)").isExistingDirectory());
+    EXPECT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CopiedDirectory\FILE0.txt)").isExistingFile());
+    EXPECT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CopiedDirectory\DIR1\FILE1.txt)").isExistingFile());
+    EXPECT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CopiedDirectory\DIR1\DIR2\FILE2.txt)").isExistingFile());
+
+    EXPECT_TRUE(pathHandler.deleteDirectoryAndIsSuccessful());
+    EXPECT_TRUE(destinationHandler.deleteDirectoryAndIsSuccessful());
+}
+
+TEST(AlbaLocalPathHandlerStdTest, FileIsCopiedToNewFileActualLocalDirectory) {
     LocalPath const pathOfFileToBeCopied(getAprgTestDirectory() + R"(\DirectoryTest\FileToBeCopied.log)");
     string const pathOfCopiedFile("CopiedFile.log");
     createEmptyFile(fixPath(pathOfFileToBeCopied).string());
@@ -236,7 +260,7 @@ TEST(AlbaLocalPathHandlerStd, FileIsCopiedToNewFileActualLocalDirectory) {
     EXPECT_TRUE(pathHandlerOfCopiedFile.deleteFileAndIsSuccessful());
 }
 
-TEST(AlbaLocalPathHandlerStd, ReInputFileThatIsToBeRenamedActualLocalDirectory) {
+TEST(AlbaLocalPathHandlerStdTest, ReInputFileThatIsToBeRenamedActualLocalDirectory) {
     LocalPath const pathOfFileToBeRenamed(getAprgTestDirectory() + R"(\DirectoryTest\FileToBeRenamed.log)");
     createEmptyFile(fixPath(pathOfFileToBeRenamed).string());
 
@@ -262,7 +286,7 @@ TEST(AlbaLocalPathHandlerStd, ReInputFileThatIsToBeRenamedActualLocalDirectory) 
     EXPECT_TRUE(pathHandler.deleteFileAndIsSuccessful());
 }
 
-TEST(AlbaLocalPathHandlerStd, ReInputDirectoryThatIsToBeRenamedActualLocalDirectory) {
+TEST(AlbaLocalPathHandlerStdTest, ReInputDirectoryThatIsToBeRenamedActualLocalDirectory) {
     LocalPath const pathOfDirectoryToBeRenamed(getAprgTestDirectory() + R"(\DirectoryTest\DIR1)");
 
     PathHandler pathHandler(pathOfDirectoryToBeRenamed);
@@ -295,7 +319,9 @@ TEST(AlbaLocalPathHandlerStd, ReInputDirectoryThatIsToBeRenamedActualLocalDirect
     EXPECT_TRUE(pathHandler.doesExist());
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryAndFileNoFileExtensionGivenWithNumbersAndSpecialCharactersTwoTimes) {
+TEST(
+    AlbaLocalPathHandlerStdTest,
+    FullPathWithDirectoryAndFileNoFileExtensionGivenWithNumbersAndSpecialCharactersTwoTimes) {
     PathHandler pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)");
     EXPECT_EQ(fixPath(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)"), pathHandler.getPath());
     EXPECT_TRUE(pathHandler.getRoot().empty());
@@ -313,7 +339,7 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryAndFileNoFileExtensionGivenWi
     EXPECT_EQ("", pathHandler.getExtension());
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryAndFileDoublePeriodInPath) {
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryAndFileDoublePeriodInPath) {
     PathHandler pathHandler(getAprgPath() + R"(..\dir\file.txt)");
     EXPECT_EQ(fixPath(getAprgPath() + R"(..\dir\file.txt)"), pathHandler.getPath());
     EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
@@ -339,7 +365,7 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryAndFileDoublePeriodInPath) {
     EXPECT_EQ("txt", pathHandler.getExtension());
 }
 
-TEST(AlbaLocalPathHandlerStd, FileSizeTestFileIsNotExisting) {
+TEST(AlbaLocalPathHandlerStdTest, FileSizeTestFileIsNotExisting) {
     PathHandler pathHandler("This path does not exist");
 
     EXPECT_EQ("This path does not exist", pathHandler.getPath());
@@ -347,7 +373,7 @@ TEST(AlbaLocalPathHandlerStd, FileSizeTestFileIsNotExisting) {
     EXPECT_EQ(0U, pathHandler.getFileSize());
 }
 
-TEST(AlbaLocalPathHandlerStd, FileSizeTestFileIsExisting) {
+TEST(AlbaLocalPathHandlerStdTest, FileSizeTestFileIsExisting) {
     PathHandler pathHandler(ALBA_COMMON_SIZE_TEST_FILE);
 
     EXPECT_EQ(fixPath(ALBA_COMMON_SIZE_TEST_FILE), pathHandler.getPath());
@@ -355,7 +381,7 @@ TEST(AlbaLocalPathHandlerStd, FileSizeTestFileIsExisting) {
     EXPECT_EQ(5000U, pathHandler.getFileSize());
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryFindFileAndDirectoryOneDepth) {
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryFindFileAndDirectoryOneDepth) {
     PathHandler const pathHandler(getAprgTestDirectory() + R"(\DirectoryTest\)");
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\)"), pathHandler.getPath());
     ASSERT_TRUE(pathHandler.doesExist());
@@ -382,7 +408,7 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryFindFileAndDirectoryOneDepth)
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\DIR6\)"), *(itDirectories++));
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryFindFileAndDirectoryMultipleDepthTwo) {
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryFindFileAndDirectoryMultipleDepthTwo) {
     PathHandler const pathHandler(getAprgTestDirectory() + R"(\DirectoryTest\)");
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\)"), pathHandler.getPath());
     ASSERT_TRUE(pathHandler.doesExist());
@@ -415,7 +441,7 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryFindFileAndDirectoryMultipleD
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\DIR6\SUBDIR1\)"), *(itDirectories++));
 }
 
-TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryFindFileAndDirectoryUnlimitedDepth) {
+TEST(AlbaLocalPathHandlerStdTest, FullPathWithDirectoryFindFileAndDirectoryUnlimitedDepth) {
     PathHandler const pathHandler(getAprgTestDirectory() + R"(\DirectoryTest\)");
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\)"), pathHandler.getPath());
     ASSERT_TRUE(pathHandler.doesExist());
@@ -449,15 +475,15 @@ TEST(AlbaLocalPathHandlerStd, FullPathWithDirectoryFindFileAndDirectoryUnlimited
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\DIR6\SUBDIR1\)"), *(itDirectories++));
 }
 
-TEST(AlbaLocalPathHandlerStd, CreatePathHandlerForDetectedPathWorks) {
+TEST(AlbaLocalPathHandlerStdTest, CreatePathHandlerForDetectedPathWorks) {
     PathHandler const pathHandler(PathHandler::createPathHandlerForDetectedPath());
 
     EXPECT_FALSE(pathHandler.getPath().empty());
     EXPECT_TRUE(pathHandler.doesExist());
 }
 
-TEST(AlbaLocalPathHandlerStd, CreateDirectoriesAndIsSuccessfulWorks) {
-    PathHandler const pathHandler(getAprgTestDirectory() + R"(\CreateDirectory\DIR1\DIR2\DIR3\)");
+TEST(AlbaLocalPathHandlerStdTest, CreateDirectoriesAndIsSuccessfulWorks) {
+    PathHandler const pathHandler(getAprgTestDirectory() + R"(\CreateDirectory\DIR1\DIR2\DIR3\File)");
     ASSERT_FALSE(PathHandler(getAprgTestDirectory() + R"(\CreateDirectory\)").isExistingDirectory());
 
     EXPECT_TRUE(pathHandler.createDirectoriesAndIsSuccessful());
@@ -466,13 +492,14 @@ TEST(AlbaLocalPathHandlerStd, CreateDirectoriesAndIsSuccessfulWorks) {
     EXPECT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CreateDirectory\DIR1\)").isExistingDirectory());
     EXPECT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CreateDirectory\DIR1\DIR2\)").isExistingDirectory());
     EXPECT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CreateDirectory\DIR1\DIR2\DIR3\)").isExistingDirectory());
+    EXPECT_FALSE(PathHandler(getAprgTestDirectory() + R"(\CreateDirectory\DIR1\DIR2\DIR3\File)").doesExist());
 
     ASSERT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CreateDirectory\)").isExistingDirectory());
     EXPECT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CreateDirectory\)").deleteDirectoryAndIsSuccessful());
     EXPECT_FALSE(PathHandler(getAprgTestDirectory() + R"(\CreateDirectory\)").isExistingDirectory());
 }
 
-TEST(AlbaLocalPathHandlerStd, DeleteDirectoryAndIsSuccessfulWorks) {
+TEST(AlbaLocalPathHandlerStdTest, DeleteDirectoryAndIsSuccessfulWorks) {
     PathHandler const pathHandler(getAprgTestDirectory() + R"(\DeleteDirectory\)");
     EXPECT_TRUE(
         PathHandler(getAprgTestDirectory() + R"(\DeleteDirectory\DIR1\DIR2\DIR3\)").createDirectoriesAndIsSuccessful());
@@ -486,7 +513,7 @@ TEST(AlbaLocalPathHandlerStd, DeleteDirectoryAndIsSuccessfulWorks) {
     EXPECT_FALSE(PathHandler(getAprgTestDirectory() + R"(\DeleteDirectory\)").isExistingDirectory());
 }
 
-TEST(AlbaLocalPathHandlerStd, DeleteAllDirectoryContentsAndIsSuccessfulWorks) {
+TEST(AlbaLocalPathHandlerStdTest, DeleteAllDirectoryContentsAndIsSuccessfulWorks) {
     PathHandler const pathHandler(getAprgTestDirectory() + R"(\DeleteContents\)");
     EXPECT_TRUE(
         PathHandler(getAprgTestDirectory() + R"(\DeleteContents\DIR1\DIR2\DIR3\)").createDirectoriesAndIsSuccessful());
@@ -502,38 +529,89 @@ TEST(AlbaLocalPathHandlerStd, DeleteAllDirectoryContentsAndIsSuccessfulWorks) {
     pathHandler.findFilesAndDirectoriesUnlimitedDepth(
         [&](LocalPath const&) { ++numberOfItems; }, [&](LocalPath const&) { ++numberOfItems; });
     EXPECT_EQ(0, numberOfItems);
+
+    EXPECT_TRUE(pathHandler.deleteDirectoryAndIsSuccessful());
 }
 
-TEST(AlbaLocalPathHandlerStd, DoesExistWorks) {
+TEST(AlbaLocalPathHandlerStdTest, DoesExistWorks) {
     EXPECT_FALSE(PathHandler("").doesExist());
+    EXPECT_TRUE(PathHandler(getAprgPath()).doesExist());
     EXPECT_TRUE(PathHandler(getAprgTestDirectory()).doesExist());
     EXPECT_TRUE(PathHandler(APRG_COMMON_EMPTY_TEST_FILE).doesExist());
 }
 
-TEST(AlbaLocalPathHandlerStd, IsExistingDirectoryWorks) {
+TEST(AlbaLocalPathHandlerStdTest, IsExistingDirectoryWorks) {
     EXPECT_FALSE(PathHandler("").isExistingDirectory());
+    EXPECT_TRUE(PathHandler(getAprgPath()).isExistingDirectory());
     EXPECT_TRUE(PathHandler(getAprgTestDirectory()).isExistingDirectory());
     EXPECT_FALSE(PathHandler(APRG_COMMON_EMPTY_TEST_FILE).isExistingDirectory());
 }
 
-TEST(AlbaLocalPathHandlerStd, IsExistingFileWorks) {
+TEST(AlbaLocalPathHandlerStdTest, IsExistingFileWorks) {
     EXPECT_FALSE(PathHandler("").isExistingFile());
+    EXPECT_FALSE(PathHandler(getAprgPath()).isExistingFile());
     EXPECT_FALSE(PathHandler(getAprgTestDirectory()).isExistingFile());
     EXPECT_TRUE(PathHandler(APRG_COMMON_EMPTY_TEST_FILE).isExistingFile());
 }
 
-TEST(AlbaLocalPathHandlerStd, IsRelativePathWorks) {
+TEST(AlbaLocalPathHandlerStdTest, IsRelativePathWorks) {
     EXPECT_TRUE(PathHandler("").isRelativePath());
+    EXPECT_FALSE(PathHandler(getAprgPath()).isRelativePath());
     EXPECT_FALSE(PathHandler(getAprgTestDirectory()).isRelativePath());
     EXPECT_FALSE(PathHandler(APRG_COMMON_EMPTY_TEST_FILE).isRelativePath());
     EXPECT_TRUE(PathHandler("a/b").isRelativePath());
 }
 
-TEST(AlbaLocalPathHandlerStd, IsAbsolutePathWorks) {
+TEST(AlbaLocalPathHandlerStdTest, IsAbsolutePathWorks) {
     EXPECT_FALSE(PathHandler("").isAbsolutePath());
+    EXPECT_TRUE(PathHandler(getAprgPath()).isAbsolutePath());
     EXPECT_TRUE(PathHandler(getAprgTestDirectory()).isAbsolutePath());
     EXPECT_TRUE(PathHandler(APRG_COMMON_EMPTY_TEST_FILE).isAbsolutePath());
     EXPECT_FALSE(PathHandler("a/b").isAbsolutePath());
+}
+
+TEST(AlbaLocalPathHandlerStdTest, GetRelativePathFromWorks) {
+    PathHandler pathHandler(getAprgTestDirectory());
+
+    EXPECT_EQ(fixPath(""), pathHandler.getRelativePathFrom(""));
+    EXPECT_EQ(fixPath(R"(AprgCommon\FilesForTests)"), pathHandler.getRelativePathFrom(fixPath(getAprgPath())));
+    EXPECT_EQ(fixPath(R"(.)"), pathHandler.getRelativePathFrom(fixPath(getAprgTestDirectory())));
+    EXPECT_EQ(fixPath(R"(..\..)"), pathHandler.getRelativePathFrom(fixPath(APRG_COMMON_EMPTY_TEST_FILE)));
+    EXPECT_EQ(fixPath(""), pathHandler.getRelativePathFrom(fixPath("a/b")));
+}
+
+TEST(AlbaLocalPathHandlerStdTest, GetRelativePathToWorks) {
+    PathHandler pathHandler(getAprgTestDirectory());
+
+    EXPECT_EQ(fixPath(""), pathHandler.getRelativePathTo(""));
+    EXPECT_EQ(fixPath(R"(..\..)"), pathHandler.getRelativePathTo(fixPath(getAprgPath())));
+    EXPECT_EQ(fixPath(R"(.)"), pathHandler.getRelativePathTo(fixPath(getAprgTestDirectory())));
+    EXPECT_EQ(
+        fixPath(R"(FileReaderTest\EmptyFile.txt)"),
+        pathHandler.getRelativePathTo(fixPath(APRG_COMMON_EMPTY_TEST_FILE)));
+    EXPECT_EQ(fixPath(""), pathHandler.getRelativePathTo(fixPath("a/b")));
+}
+
+TEST(AlbaLocalPathHandlerStdTest, GetProximatePathFromWorks) {
+    PathHandler pathHandler(getAprgTestDirectory());
+
+    EXPECT_EQ(fixPath(getAprgPath() + R"(AprgCommon\FilesForTests)"), pathHandler.getProximatePathFrom(""));
+    EXPECT_EQ(fixPath(R"(AprgCommon\FilesForTests)"), pathHandler.getProximatePathFrom(fixPath(getAprgPath())));
+    EXPECT_EQ(fixPath(R"(.)"), pathHandler.getProximatePathFrom(fixPath(getAprgTestDirectory())));
+    EXPECT_EQ(fixPath(R"(..\..)"), pathHandler.getProximatePathFrom(fixPath(APRG_COMMON_EMPTY_TEST_FILE)));
+    EXPECT_EQ(fixPath(getAprgPath() + R"(AprgCommon\FilesForTests)"), pathHandler.getProximatePathFrom(fixPath("a/b")));
+}
+
+TEST(AlbaLocalPathHandlerStdTest, GetProximatePathToWorks) {
+    PathHandler pathHandler(getAprgTestDirectory());
+
+    EXPECT_EQ(fixPath(""), pathHandler.getProximatePathTo(""));
+    EXPECT_EQ(fixPath(R"(..\..)"), pathHandler.getProximatePathTo(fixPath(getAprgPath())));
+    EXPECT_EQ(fixPath(R"(.)"), pathHandler.getProximatePathTo(fixPath(getAprgTestDirectory())));
+    EXPECT_EQ(
+        fixPath(R"(FileReaderTest\EmptyFile.txt)"),
+        pathHandler.getProximatePathTo(fixPath(APRG_COMMON_EMPTY_TEST_FILE)));
+    EXPECT_EQ(fixPath(R"(a\b)"), pathHandler.getProximatePathTo(fixPath("a/b")));
 }
 
 }  // namespace alba

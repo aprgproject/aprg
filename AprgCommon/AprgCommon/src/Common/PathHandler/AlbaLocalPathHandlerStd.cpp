@@ -65,6 +65,27 @@ AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getExtension() const
     return extension;
 }
 
+// "relative" is a function that computes the relative path from one path to another.
+// It takes two path arguments, the first being the "from" path and the second being the "to" path.
+// It then computes the relative path from the "from" path to the "to" path.
+AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getRelativePathFrom(LocalPath const& source) const {
+    return relative(m_path, source);
+}
+
+AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getRelativePathTo(LocalPath const& destination) const {
+    return relative(destination, m_path);
+}
+
+// "proximate" is a convenience function that computes the shortest relative path between two paths.
+// It takes two path arguments, similar to "relative", and returns the shortest relative path between those two paths.
+AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getProximatePathFrom(LocalPath const& source) const {
+    return proximate(m_path, source);
+}
+
+AlbaLocalPathHandlerStd::LocalPath AlbaLocalPathHandlerStd::getProximatePathTo(LocalPath const& destination) const {
+    return proximate(destination, m_path);
+}
+
 uintmax_t AlbaLocalPathHandlerStd::getFileSize() const {
     try {
         if (isExistingFile()) {
@@ -117,7 +138,7 @@ void AlbaLocalPathHandlerStd::input(LocalPath&& path) { m_path = fixPath(path); 
 
 bool AlbaLocalPathHandlerStd::createDirectoriesAndIsSuccessful() const {
     try {
-        create_directories(m_path);
+        create_directories(m_path.parent_path());
     } catch (exception const& capturedException) {
         cerr << "Error while creating directories: [" << capturedException.what() << "]\n";
         return false;
@@ -151,7 +172,7 @@ bool AlbaLocalPathHandlerStd::deleteAllDirectoryContentsAndIsSuccessful() const 
     return true;
 }
 
-bool AlbaLocalPathHandlerStd::deleteFileAndIsSuccessful() {
+bool AlbaLocalPathHandlerStd::deleteFileAndIsSuccessful() const {
     try {
         if (!isExistingFile()) {
             cerr << "File does not exist during deletion: [" << m_path << "]\n";
@@ -165,7 +186,7 @@ bool AlbaLocalPathHandlerStd::deleteFileAndIsSuccessful() {
     return true;
 }
 
-bool AlbaLocalPathHandlerStd::copyFileToAndIsSuccessful(LocalPath const& destination) {
+bool AlbaLocalPathHandlerStd::copyFileToAndIsSuccessful(LocalPath const& destination) const {
     try {
         if (!isExistingFile()) {
             cerr << "File does not exist during copy: [" << m_path << "]\n";
@@ -174,6 +195,27 @@ bool AlbaLocalPathHandlerStd::copyFileToAndIsSuccessful(LocalPath const& destina
         copy_file(m_path, destination);
     } catch (exception const& capturedException) {
         cerr << "Error copying file: [" << capturedException.what() << "]\n";
+        return false;
+    }
+    return true;
+}
+
+bool AlbaLocalPathHandlerStd::copyDirectoryToAndIsSuccessful(LocalPath const& destination) const {
+    try {
+        if (!isExistingDirectory()) {
+            cerr << "Directory does not exist during copy: [" << m_path << "]\n";
+            return false;
+        }
+        for (directory_entry const& directoryEntry : recursive_directory_iterator(m_path)) {
+            LocalPath destinationEntry = destination / relative(directoryEntry, m_path);
+            if (directoryEntry.is_directory()) {
+                create_directories(destinationEntry);
+            } else {
+                copy_file(directoryEntry, destinationEntry);
+            }
+        }
+    } catch (exception const& capturedException) {
+        cerr << "Error copying directory: [" << capturedException.what() << "]\n";
         return false;
     }
     return true;

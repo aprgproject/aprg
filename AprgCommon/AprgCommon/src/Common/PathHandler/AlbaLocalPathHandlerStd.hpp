@@ -20,6 +20,10 @@ public:
     [[nodiscard]] LocalPath getFile() const;
     [[nodiscard]] LocalPath getFilenameOnly() const;
     [[nodiscard]] LocalPath getExtension() const;
+    [[nodiscard]] LocalPath getRelativePathFrom(LocalPath const& source) const;
+    [[nodiscard]] LocalPath getRelativePathTo(LocalPath const& destination) const;
+    [[nodiscard]] LocalPath getProximatePathFrom(LocalPath const& source) const;
+    [[nodiscard]] LocalPath getProximatePathTo(LocalPath const& destination) const;
     [[nodiscard]] uintmax_t getFileSize() const;
     [[nodiscard]] bool doesExist() const;
     [[nodiscard]] bool isExistingDirectory() const;
@@ -39,11 +43,12 @@ public:
     void clear();
     void input(LocalPath const& path);
     void input(LocalPath&& path);
-    bool createDirectoriesAndIsSuccessful() const;
-    bool deleteDirectoryAndIsSuccessful() const;
-    bool deleteAllDirectoryContentsAndIsSuccessful() const;
-    bool deleteFileAndIsSuccessful();
-    bool copyFileToAndIsSuccessful(LocalPath const& destination);
+    [[nodiscard]] bool createDirectoriesAndIsSuccessful() const;
+    [[nodiscard]] bool deleteDirectoryAndIsSuccessful() const;
+    [[nodiscard]] bool deleteAllDirectoryContentsAndIsSuccessful() const;
+    [[nodiscard]] bool deleteFileAndIsSuccessful() const;
+    [[nodiscard]] bool copyFileToAndIsSuccessful(LocalPath const& destination) const;
+    [[nodiscard]] bool copyDirectoryToAndIsSuccessful(LocalPath const& destination) const;
     bool renameFileAndIsSuccessful(LocalPath const& newFileName);
     bool renameDirectoryAndIsSuccessful(LocalPath const& newDirectoryName);
     [[nodiscard]] static AlbaLocalPathHandlerStd createPathHandlerForDetectedPath();
