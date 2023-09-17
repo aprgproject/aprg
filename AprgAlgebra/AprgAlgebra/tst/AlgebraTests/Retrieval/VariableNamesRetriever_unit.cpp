@@ -136,8 +136,10 @@ TEST(VariableNamesRetrieverTest, RetrieveFromFunctionWorks) {
 TEST(VariableNamesRetrieverTest, RetrieveFromPolynomialsWorks) {
     VariableNamesRetriever retriever;
     Polynomials polynomials;
+    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
     polynomials.emplace_back(Polynomial{Monomial(516, {{"a", 7}}), Monomial(643, {{"b", 8}})});
     polynomials.emplace_back(Polynomial{Monomial(587, {{"x", 9}}), Monomial(975, {{"y", 10}})});
+    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
 
     retriever.retrieveFromPolynomials(polynomials);
 

@@ -91,7 +91,9 @@ TEST(
     CalculateSolutionAndReturnSolutionSetWorksAsDoesNotFindASolutionForNonLinearEquation) {
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
+    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
     polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-4, {})});
+    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
 
     MultipleVariableSolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
@@ -105,7 +107,9 @@ TEST(
     CalculateSolutionAndReturnSolutionSetWorksAsDoesNotFindASolutionWhenEquationNumberDoesNotMatchVariableNumber) {
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
+    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
     polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(-4, {})});
+    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
 
     MultipleVariableSolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
@@ -117,7 +121,9 @@ TEST(
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor1Polynomial) {
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
+    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
     polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-4, {})});
+    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
 
     MultipleVariableSolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
@@ -132,8 +138,10 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor2Polynomials) {
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
+    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
     polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(-4, {})});
     polynomials.emplace_back(Polynomial{Monomial(3, {{"x", 1}}), Monomial(-2, {{"y", 1}}), Monomial(12, {})});
+    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
 
     MultipleVariableSolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
