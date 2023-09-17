@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Algorithm/Sort/BaseSorter.hpp>
+#include <Common/Debug/AlbaDebug.hpp>
 
 #include <windows.h>
 
@@ -34,7 +35,7 @@ public:
         if (!valuesToSort.empty()) {
             __try {
                 for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
-                    // continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
+                    continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                     // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
                 }
             } __except (seh_filter(GetExceptionCode(), GetExceptionInformation())) {
@@ -46,11 +47,15 @@ public:
 private:
     void continuouslySwapBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {
         auto rItLow = std::make_reverse_iterator(insertIt);  // make_reverse_iterator moves it by one
-        auto rItHigh = std::prev(rItLow);                    // move it back to original place (same as insert It)
+        auto rItHigh = std::prev(rItLow);                    // move it back to original place (same as insertIt)
         // so final the stiuation here is rItLow < rItHigh and insertIt
+        ALBA_DBG_PRINT(*rItLow, *rItHigh);
         for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
+            ALBA_DBG_PRINT(*rItLow, *rItHigh);
             std::swap(*rItLow, *rItHigh);
+            ALBA_DBG_PRINT(*rItLow, *rItHigh);
         }
+        ALBA_DBG_PRINT(*rItLow, *rItHigh);
     }
 
     void continuouslyCopyBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {
