@@ -39,7 +39,6 @@ LocalPath fixPath(LocalPath const& path) {
 }  // namespace
 
 TEST(AlbaLocalPathHandlerStd, GetLastModifiedDateTimeWorks) {
-#if !defined(_MSC_VER)
     PathHandler const pathHandler(APRG_COMMON_TEST_FILE_TO_WRITE);
     createEmptyFile(pathHandler.getPath().string());
 
@@ -49,7 +48,6 @@ TEST(AlbaLocalPathHandlerStd, GetLastModifiedDateTimeWorks) {
     AlbaDateTime difference(currentTime - lastModifiedTime);
     AlbaDateTime allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
     EXPECT_LT(difference, allowableDifference);
-#endif
 }
 
 TEST(AlbaLocalPathHandlerStd, EmptyPathWorks) {

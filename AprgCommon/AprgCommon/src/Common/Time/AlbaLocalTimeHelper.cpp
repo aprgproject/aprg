@@ -53,7 +53,7 @@ AlbaDateTime convertSystemTimeToAlbaDateTime(LibrarySystemTime const& inputTime)
 
 AlbaDateTime convertFileTimeToAlbaDateTime(LibraryFileTime const& inputTime) {
 #if defined(_MSC_VER)
-    return {};
+    return convertSystemTimeToAlbaDateTime(utc_clock::to_sys(file_clock::to_utc(inputTime)));
 #else
     return convertSystemTimeToAlbaDateTime(file_clock::to_sys(inputTime));
 #endif

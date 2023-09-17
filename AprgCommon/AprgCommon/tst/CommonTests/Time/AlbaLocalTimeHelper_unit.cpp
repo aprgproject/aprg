@@ -1,3 +1,4 @@
+#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/Time/AlbaLocalTimeHelper.hpp>
 #include <Common/Time/AlbaLocalTimer.hpp>
@@ -31,7 +32,6 @@ TEST(AlbaLocalTimerHelperTest, DISABLED_SleepForWorks) {
 }
 
 TEST(AlbaLocalTimerHelperTest, ConvertFileTimeToAlbaDateTimeTimeWorks) {
-#if !defined(_MSC_VER)
     clearContentsOfFile(APRG_COMMON_TEST_FILE_TO_WRITE);
 
     AlbaDateTime lastModifiedTime(convertFileTimeToAlbaDateTime(last_write_time(APRG_COMMON_TEST_FILE_TO_WRITE)));
@@ -39,8 +39,11 @@ TEST(AlbaLocalTimerHelperTest, ConvertFileTimeToAlbaDateTimeTimeWorks) {
     AlbaDateTime currentTime(getCurrentDateTime());
     AlbaDateTime difference(currentTime - lastModifiedTime);
     AlbaDateTime allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
+    ALBA_DBG_PRINT1(lastModifiedTime);
+    ALBA_DBG_PRINT1(currentTime);
+    ALBA_DBG_PRINT1(difference);
+    ALBA_DBG_PRINT1(allowableDifference);
     EXPECT_LT(difference, allowableDifference);
-#endif
 }
 
 TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorksOnCurrentTime) {
