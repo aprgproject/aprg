@@ -2,6 +2,10 @@
 
 #include <Algorithm/Sort/BaseSorter.hpp>
 
+#include <windows.h>
+
+#include <exception>
+#include <iostream>
 #include <iterator>
 #include <utility>
 
@@ -15,11 +19,15 @@ public:
 
     void sort(Values& valuesToSort) const override {
         if (!valuesToSort.empty()) {
-            auto insertIt = std::next(valuesToSort.begin());
-            for (; insertIt != valuesToSort.end(); ++insertIt) {
-                continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
-                // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
+            __try {
+                for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
+                    continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
+                    // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
+                }
             }
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER) {
+            std::cout << "Executing SEH __except block\n";
         }
     }
 
