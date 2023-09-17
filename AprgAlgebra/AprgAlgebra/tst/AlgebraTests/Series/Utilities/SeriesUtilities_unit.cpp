@@ -10,14 +10,14 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(SeriesUtilitiesTest, PerformLimitComparisonTestWorks) {
-    Term numerator1(1);
-    Term denominator1(Monomial(1, {{"n", AlbaNumber::createFraction(1, 2)}}));
-    Term formula1(createExpressionIfPossible({numerator1, "/", denominator1}));
-    SeriesBasedOnSummation series1(formula1, "n");
-    Term numerator2(1);
-    Term denominator2("n");
-    Term formula2(createExpressionIfPossible({numerator2, "/", denominator2}));
-    SeriesBasedOnSummation series2(formula2, "n");
+    Term const numerator1(1);
+    Term const denominator1(Monomial(1, {{"n", AlbaNumber::createFraction(1, 2)}}));
+    Term const formula1(createExpressionIfPossible({numerator1, "/", denominator1}));
+    SeriesBasedOnSummation const series1(formula1, "n");
+    Term const numerator2(1);
+    Term const denominator2("n");
+    Term const formula2(createExpressionIfPossible({numerator2, "/", denominator2}));
+    SeriesBasedOnSummation const series2(formula2, "n");
 
     bool isConvergent(false);
     bool isDivergent(false);
@@ -28,10 +28,10 @@ TEST(SeriesUtilitiesTest, PerformLimitComparisonTestWorks) {
 }
 
 TEST(SeriesUtilitiesTest, PerformIntegralTestWorksOnPSeriesWithPowerIsOneHalf) {
-    Term numerator(1);
-    Term denominator(Monomial(1, {{"n", AlbaNumber::createFraction(1, 2)}}));
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    SeriesBasedOnSummation series(formula, "n");
+    Term const numerator(1);
+    Term const denominator(Monomial(1, {{"n", AlbaNumber::createFraction(1, 2)}}));
+    Term const formula(createExpressionIfPossible({numerator, "/", denominator}));
+    SeriesBasedOnSummation const series(formula, "n");
 
     bool isConvergent(false);
     bool isDivergent(false);
@@ -42,10 +42,10 @@ TEST(SeriesUtilitiesTest, PerformIntegralTestWorksOnPSeriesWithPowerIsOneHalf) {
 }
 
 TEST(SeriesUtilitiesTest, PerformIntegralTestWorksOnPSeriesWithPowerIsTwo) {
-    Term numerator(1);
-    Term denominator(Monomial(1, {{"n", 2}}));
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    SeriesBasedOnSummation series(formula, "n");
+    Term const numerator(1);
+    Term const denominator(Monomial(1, {{"n", 2}}));
+    Term const formula(createExpressionIfPossible({numerator, "/", denominator}));
+    SeriesBasedOnSummation const series(formula, "n");
 
     bool isConvergent(false);
     bool isDivergent(false);
@@ -56,10 +56,10 @@ TEST(SeriesUtilitiesTest, PerformIntegralTestWorksOnPSeriesWithPowerIsTwo) {
 }
 
 TEST(SeriesUtilitiesTest, PerformRatioTestWorksWhenConvergent) {
-    Term numerator("n");
-    Term denominator(createExpressionIfPossible({2, "^", "n"}));
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    SeriesBasedOnSummation series(formula, "n");
+    Term const numerator("n");
+    Term const denominator(createExpressionIfPossible({2, "^", "n"}));
+    Term const formula(createExpressionIfPossible({numerator, "/", denominator}));
+    SeriesBasedOnSummation const series(formula, "n");
 
     bool isConvergent(false);
     bool isDivergent(false);
@@ -70,10 +70,10 @@ TEST(SeriesUtilitiesTest, PerformRatioTestWorksWhenConvergent) {
 }
 
 TEST(SeriesUtilitiesTest, PerformRatioTestWorksWhenConvergentOrDivergent) {
-    Term numerator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(2, {})});
-    Term denominator(Polynomial{Monomial(1, {{"n", 2}}), Monomial(1, {{"n", 1}})});
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    SeriesBasedOnSummation series(formula, "n");
+    Term const numerator(Polynomial{Monomial(1, {{"n", 1}}), Monomial(2, {})});
+    Term const denominator(Polynomial{Monomial(1, {{"n", 2}}), Monomial(1, {{"n", 1}})});
+    Term const formula(createExpressionIfPossible({numerator, "/", denominator}));
+    SeriesBasedOnSummation const series(formula, "n");
 
     bool isConvergent(false);
     bool isDivergent(false);
@@ -84,12 +84,12 @@ TEST(SeriesUtilitiesTest, PerformRatioTestWorksWhenConvergentOrDivergent) {
 }
 
 TEST(SeriesUtilitiesTest, PerformRootTestWorks) {
-    Term exponentNumerator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
-    Term exponentDenominator(Polynomial{Monomial(2, {{"n", 1}})});
-    Term numerator(createExpressionIfPossible({3, "^", exponentNumerator}));
-    Term denominator(createExpressionIfPossible({"n", "^", exponentDenominator}));
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    SeriesBasedOnSummation series(formula, "n");
+    Term const exponentNumerator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
+    Term const exponentDenominator(Polynomial{Monomial(2, {{"n", 1}})});
+    Term const numerator(createExpressionIfPossible({3, "^", exponentNumerator}));
+    Term const denominator(createExpressionIfPossible({"n", "^", exponentDenominator}));
+    Term const formula(createExpressionIfPossible({numerator, "/", denominator}));
+    SeriesBasedOnSummation const series(formula, "n");
 
     bool isConvergent(false);
     bool isDivergent(false);
@@ -100,13 +100,13 @@ TEST(SeriesUtilitiesTest, PerformRootTestWorks) {
 }
 
 TEST(SeriesUtilitiesTest, GetEToTheXPowerSeriesWorks) {
-    PowerSeries series(getEToTheXPowerSeries());
+    PowerSeries const series(getEToTheXPowerSeries());
 
-    string stringToExpect1("1");
-    string stringToExpect2("(1[x] + 1)");
-    string stringToExpect3("((1/2)[x^2] + 1[x] + 1)");
-    string stringToExpect4("((1/6)[x^3] + (1/2)[x^2] + 1[x] + 1)");
-    string stringToExpect5("(1/factorial(n)*(x^n))");
+    string const stringToExpect1("1");
+    string const stringToExpect2("(1[x] + 1)");
+    string const stringToExpect3("((1/2)[x^2] + 1[x] + 1)");
+    string const stringToExpect4("((1/6)[x^3] + (1/2)[x^2] + 1[x] + 1)");
+    string const stringToExpect5("(1/factorial(n)*(x^n))");
     EXPECT_FALSE(series.isSummationModelValid());
     EXPECT_EQ(stringToExpect1, convertToString(series.getValueAtIndex(0)));
     EXPECT_EQ(stringToExpect2, convertToString(series.getValueAtIndex(1)));
@@ -120,29 +120,30 @@ TEST(SeriesUtilitiesTest, GetSumOfArithmeticSeriesUsingFirstAndLastTermWorksWith
 }
 
 TEST(SeriesUtilitiesTest, GetSumOfArithmeticSeriesUsingFirstAndLastTermWorksWithExample1) {
-    Term firstTerm(1);
-    Term lastTerm("n");
-    Term count("n");
+    Term const firstTerm(1);
+    Term const lastTerm("n");
+    Term const count("n");
 
-    Term expectedSum(Polynomial{Monomial(AlbaNumber(1) / 2, {{"n", 2}}), Monomial(AlbaNumber(1) / 2, {{"n", 1}})});
+    Term const expectedSum(
+        Polynomial{Monomial(AlbaNumber(1) / 2, {{"n", 2}}), Monomial(AlbaNumber(1) / 2, {{"n", 1}})});
     EXPECT_EQ(expectedSum, getSumOfArithmeticSeriesUsingFirstAndLastTerm(firstTerm, lastTerm, count));
 }
 
 TEST(SeriesUtilitiesTest, GetSumOfArithmeticSeriesUsingFirstAndLastTermWorksWithExample2) {
-    Term firstTerm(4);
-    Term lastTerm(Monomial(4, {{"n", 1}}));
-    Term count("n");
+    Term const firstTerm(4);
+    Term const lastTerm(Monomial(4, {{"n", 1}}));
+    Term const count("n");
 
-    Term expectedSum(Polynomial{Monomial(2, {{"n", 2}}), Monomial(2, {{"n", 1}})});
+    Term const expectedSum(Polynomial{Monomial(2, {{"n", 2}}), Monomial(2, {{"n", 1}})});
     EXPECT_EQ(expectedSum, getSumOfArithmeticSeriesUsingFirstAndLastTerm(firstTerm, lastTerm, count));
 }
 
 TEST(SeriesUtilitiesTest, GetSumOfArithmeticSeriesUsingFirstAndLastTermWorksWithExample3) {
-    Term firstTerm(1);
-    Term lastTerm(Polynomial{Monomial(3, {{"n", 1}}), Monomial(-2, {})});
-    Term count(Polynomial{Monomial(1, {{"n", 1}}), Monomial(-1, {})});
+    Term const firstTerm(1);
+    Term const lastTerm(Polynomial{Monomial(3, {{"n", 1}}), Monomial(-2, {})});
+    Term const count(Polynomial{Monomial(1, {{"n", 1}}), Monomial(-1, {})});
 
-    Term expectedSum(
+    Term const expectedSum(
         Polynomial{Monomial(AlbaNumber(3) / 2, {{"n", 2}}), Monomial(-2, {{"n", 1}}), Monomial(AlbaNumber(1) / 2, {})});
     EXPECT_EQ(expectedSum, getSumOfArithmeticSeriesUsingFirstAndLastTerm(firstTerm, lastTerm, count));
 }
@@ -157,54 +158,54 @@ TEST(SeriesUtilitiesTest, GetInfiniteSumOfGeometricSeriesIfCommonMultiplierIsFra
 }
 
 TEST(SeriesUtilitiesTest, IsAxiomOfCompletenessTrueWorks) {
-    Term numerator("n");
-    Term denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    SeriesBasedOnFormula series(formula, "n");
+    Term const numerator("n");
+    Term const denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
+    Term const formula(createExpressionIfPossible({numerator, "/", denominator}));
+    SeriesBasedOnFormula const series(formula, "n");
 
     EXPECT_TRUE(isAxiomOfCompletenessTrue(series));
 }
 
 TEST(SeriesUtilitiesTest, IsBoundedMonotonicSeriesConvergentWorks) {
-    Term numerator("n");
-    Term denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    SeriesBasedOnFormula series(formula, "n");
+    Term const numerator("n");
+    Term const denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
+    Term const formula(createExpressionIfPossible({numerator, "/", denominator}));
+    SeriesBasedOnFormula const series(formula, "n");
 
     EXPECT_TRUE(isBoundedMonotonicSeriesConvergent(series));
 }
 
 TEST(SeriesUtilitiesTest, IsConvergentMonotonicSeriesBoundedWorks) {
-    Term numerator("n");
-    Term denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
-    Term formula(createExpressionIfPossible({numerator, "/", denominator}));
-    SeriesBasedOnFormula series(formula, "n");
+    Term const numerator("n");
+    Term const denominator(Polynomial{Monomial(2, {{"n", 1}}), Monomial(1, {})});
+    Term const formula(createExpressionIfPossible({numerator, "/", denominator}));
+    SeriesBasedOnFormula const series(formula, "n");
 
     EXPECT_TRUE(isConvergentMonotonicSeriesBounded(series));
 }
 
 TEST(SeriesUtilitiesTest, IsConvergentUsingComparisonTestWorks) {
-    Term numeratorToTest(4);
-    Term denominatorToTest(createExpressionIfPossible({3, "^", "n", "^", 1}));
-    Term formulaToTest(createExpressionIfPossible({numeratorToTest, "/", denominatorToTest}));
-    SeriesBasedOnSummation seriesToTest(formulaToTest, "n");
-    Term convergentNumerator(4);
-    Term convergentDenominator(createExpressionIfPossible({3, "^", "n"}));
-    Term convergentFormula(createExpressionIfPossible({convergentNumerator, "/", convergentDenominator}));
-    SeriesBasedOnSummation convergentSeries(convergentFormula, "n");
+    Term const numeratorToTest(4);
+    Term const denominatorToTest(createExpressionIfPossible({3, "^", "n", "^", 1}));
+    Term const formulaToTest(createExpressionIfPossible({numeratorToTest, "/", denominatorToTest}));
+    SeriesBasedOnSummation const seriesToTest(formulaToTest, "n");
+    Term const convergentNumerator(4);
+    Term const convergentDenominator(createExpressionIfPossible({3, "^", "n"}));
+    Term const convergentFormula(createExpressionIfPossible({convergentNumerator, "/", convergentDenominator}));
+    SeriesBasedOnSummation const convergentSeries(convergentFormula, "n");
 
     EXPECT_TRUE(isConvergentUsingComparisonTest(seriesToTest, convergentSeries, 10));
 }
 
 TEST(SeriesUtilitiesTest, IsDivergentUsingComparisonTestWorks) {
-    Term numeratorToTest(1);
-    Term denominatorToTest(Monomial(1, {{"n", AlbaNumber::createFraction(1, 2)}}));
-    Term formulaToTest(createExpressionIfPossible({numeratorToTest, "/", denominatorToTest}));
-    SeriesBasedOnSummation seriesToTest(formulaToTest, "n");
-    Term divergentNumerator(1);
-    Term divergentDenominator("n");
-    Term divergentFormula(createExpressionIfPossible({divergentNumerator, "/", divergentDenominator}));
-    SeriesBasedOnSummation divergentSeries(divergentFormula, "n");
+    Term const numeratorToTest(1);
+    Term const denominatorToTest(Monomial(1, {{"n", AlbaNumber::createFraction(1, 2)}}));
+    Term const formulaToTest(createExpressionIfPossible({numeratorToTest, "/", denominatorToTest}));
+    SeriesBasedOnSummation const seriesToTest(formulaToTest, "n");
+    Term const divergentNumerator(1);
+    Term const divergentDenominator("n");
+    Term const divergentFormula(createExpressionIfPossible({divergentNumerator, "/", divergentDenominator}));
+    SeriesBasedOnSummation const divergentSeries(divergentFormula, "n");
 
     EXPECT_TRUE(isDivergentUsingComparisonTest(seriesToTest, divergentSeries, 10));
 }

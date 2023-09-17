@@ -11,22 +11,22 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(PowerSeriesTest, IsSummationModelValidWorks) {
-    Term multiplier("n");
-    PowerSeries series(multiplier, "n", "x", 2);
+    Term const multiplier("n");
+    PowerSeries const series(multiplier, "n", "x", 2);
 
     EXPECT_FALSE(series.isSummationModelValid());
 }
 
 TEST(PowerSeriesTest, GetRadiusOfConvergenceWorks) {
-    Term multiplier("n");
-    PowerSeries series(multiplier, "n", "x", 2);
+    Term const multiplier("n");
+    PowerSeries const series(multiplier, "n", "x", 2);
 
     EXPECT_EQ(AlbaNumber(1), series.getRadiusOfConvergence());
 }
 
 TEST(PowerSeriesTest, GetIntervalsOfConvergenceWorks) {
-    Term multiplier("n");
-    PowerSeries series(multiplier, "n", "x", 2);
+    Term const multiplier("n");
+    PowerSeries const series(multiplier, "n", "x", 2);
 
     AlbaNumberIntervals expectedIntervals(series.getIntervalsOfConvergence());
     ASSERT_EQ(1U, expectedIntervals.size());
@@ -34,22 +34,22 @@ TEST(PowerSeriesTest, GetIntervalsOfConvergenceWorks) {
 }
 
 TEST(PowerSeriesTest, DifferentiateWorks) {
-    Term multiplier("n");
+    Term const multiplier("n");
     PowerSeries series(multiplier, "n", "x", 2);
 
     series.differentiate();
 
-    string stringToExpect("(1[n^2]*((1[x] + -2)^(1[n] + -1)))");
+    string const stringToExpect("(1[n^2]*((1[x] + -2)^(1[n] + -1)))");
     EXPECT_EQ(stringToExpect, convertToString(series.getFormulaForEachTermInSummation()));
 }
 
 TEST(PowerSeriesTest, IntegrateWorks) {
-    Term multiplier("n");
+    Term const multiplier("n");
     PowerSeries series(multiplier, "n", "x", 2);
 
     series.integrate();
 
-    string stringToExpect("(n*((1[x] + -2)^(1[n] + 1))/(1[n] + 1))");
+    string const stringToExpect("(n*((1[x] + -2)^(1[n] + 1))/(1[n] + 1))");
     EXPECT_EQ(stringToExpect, convertToString(series.getFormulaForEachTermInSummation()));
 }
 

@@ -30,9 +30,9 @@ TEST(VariableNamesRetrieverTest, RetrieveFromMonomialWorks) {
 
 TEST(VariableNamesRetrieverTest, RetrieveFromEquationsWorks) {
     VariableNamesRetriever retriever;
-    Equation equation1("a", "=", "b");
-    Equation equation2("x", "=", "y");
-    Equation equation3("r", "!=", "p");
+    Equation const equation1("a", "=", "b");
+    Equation const equation2("x", "=", "y");
+    Equation const equation3("r", "!=", "p");
 
     retriever.retrieveFromEquations(Equations{equation1, equation2, equation3});
 
@@ -49,9 +49,9 @@ TEST(VariableNamesRetrieverTest, RetrieveFromEquationsWorks) {
 
 TEST(VariableNamesRetrieverTest, RetrieveFromEquationWorks) {
     VariableNamesRetriever retriever;
-    Term leftHandTerm(Monomial(34, {{"x", 5}}));
-    Term rightHandTerm(Monomial(41, {{"y", 6}}));
-    Equation equation(leftHandTerm, "=", rightHandTerm);
+    Term const leftHandTerm(Monomial(34, {{"x", 5}}));
+    Term const rightHandTerm(Monomial(41, {{"y", 6}}));
+    Equation const equation(leftHandTerm, "=", rightHandTerm);
 
     retriever.retrieveFromEquation(equation);
 
@@ -64,7 +64,7 @@ TEST(VariableNamesRetrieverTest, RetrieveFromEquationWorks) {
 
 TEST(VariableNamesRetrieverTest, RetrieveFromTermWorks) {
     VariableNamesRetriever retriever;
-    Function functionObject(
+    Function const functionObject(
         "functionName", Term(createExpressionIfPossible({"a", "^", 2})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
 
@@ -121,7 +121,7 @@ TEST(VariableNamesRetrieverTest, RetrieveFromExpressionWorks) {
 
 TEST(VariableNamesRetrieverTest, RetrieveFromFunctionWorks) {
     VariableNamesRetriever retriever;
-    Function functionObject(
+    Function const functionObject(
         "functionName", Term(createExpressionIfPossible({4516, "+", Monomial(7895, {{"x", 10}})})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
 

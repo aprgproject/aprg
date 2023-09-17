@@ -12,7 +12,7 @@ TEST(SimplificationOfExpressionTest, ShouldSimplifyToACommonDenominatorWorks) {
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
             SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldSimplifyToACommonDenominator = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyToACommonDenominator());
@@ -26,7 +26,7 @@ TEST(SimplificationOfExpressionTest, ShouldSimplifyWithEvenExponentsCancellation
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
             SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase());
@@ -40,7 +40,7 @@ TEST(SimplificationOfExpressionTest, ShouldSimplifyByCombiningRadicalsInMultipli
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
             SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision());
@@ -54,7 +54,7 @@ TEST(SimplificationOfExpressionTest, ShouldSimplifyByCheckingPolynomialRaiseToAn
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
             SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt());
@@ -68,7 +68,7 @@ TEST(SimplificationOfExpressionTest, ShouldSimplifyByRationalizingNumeratorWorks
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
             SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldSimplifyByRationalizingNumerator = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyByRationalizingNumerator());
@@ -82,7 +82,7 @@ TEST(SimplificationOfExpressionTest, ShouldSimplifyByRationalizingDenominatorWor
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
             SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldSimplifyByRationalizingDenominator = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyByRationalizingDenominator());
@@ -96,7 +96,7 @@ TEST(SimplificationOfExpressionTest, ShouldSimplifyBySubstitutingExpressionAndFu
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
             SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyBySubstitutingExpressionAndFunctionsToVariables());
@@ -110,7 +110,7 @@ TEST(SimplificationOfExpressionTest, ShouldSimplifyToFactorsWorks) {
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
             SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldSimplifyToFactors = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         EXPECT_TRUE(SimplificationOfExpression::shouldSimplifyToFactors());
@@ -124,7 +124,7 @@ TEST(SimplificationOfExpressionTest, ShouldNotFactorizeIfItWouldYieldToPolynomia
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
             SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         EXPECT_TRUE(SimplificationOfExpression::shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue());
@@ -138,7 +138,7 @@ TEST(SimplificationOfExpressionTest, ShouldNotSimplifyByDistributingConstantExpo
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
             SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldNotSimplifyByDistributingConstantExponentToEachBase = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         EXPECT_TRUE(SimplificationOfExpression::shouldNotSimplifyByDistributingConstantExponentToEachBase());
@@ -152,7 +152,7 @@ TEST(SimplificationOfExpressionTest, ShouldPerformDebugWorks) {
         SimplificationOfExpression::ConfigurationDetails configurationDetails(
             SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());
         configurationDetails.shouldPerformDebug = true;
-        SimplificationOfExpression::ScopeObject scopeObject;
+        SimplificationOfExpression::ScopeObject const scopeObject;
         scopeObject.setInThisScopeThisConfiguration(configurationDetails);
 
         EXPECT_TRUE(SimplificationOfExpression::shouldPerformDebug());

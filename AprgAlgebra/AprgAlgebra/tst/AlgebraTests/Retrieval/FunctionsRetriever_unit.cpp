@@ -15,15 +15,15 @@ TEST(FunctionsRetrieverTest, RetrieveFromPolynomialWorks) {
 }
 
 TEST(FunctionsRetrieverTest, RetrieveFromFunctionWorks) {
-    FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject) {
+    FunctionsRetriever::FunctionCondition const conditionThatWillMatch = [](Function const& functionObject) {
         return functionObject.getFunctionName() == "functionName";
     };
-    FunctionsRetriever::FunctionCondition conditionThatWillNotMatch = [](Function const& functionObject) {
+    FunctionsRetriever::FunctionCondition const conditionThatWillNotMatch = [](Function const& functionObject) {
         return functionObject.getFunctionName() == "WillNotMatch";
     };
     FunctionsRetriever retriever1(conditionThatWillMatch);
     FunctionsRetriever retriever2(conditionThatWillNotMatch);
-    Function functionObject(
+    Function const functionObject(
         "functionName", Term(createExpressionIfPossible({"x", "^", "y"})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
 
@@ -39,8 +39,8 @@ TEST(FunctionsRetrieverTest, RetrieveFromFunctionWorks) {
 
 TEST(FunctionsRetrieverTest, RetrieveFromEquationsWorks) {
     FunctionsRetriever retriever([](Function const&) { return false; });
-    Equation equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
-    Equation equation2(Monomial(95, {{"x", 7}}), "=", Monomial(18, {{"y", 8}}));
+    Equation const equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
+    Equation const equation2(Monomial(95, {{"x", 7}}), "=", Monomial(18, {{"y", 8}}));
 
     retriever.retrieveFromEquations({equation1, equation2});
 
@@ -49,20 +49,20 @@ TEST(FunctionsRetrieverTest, RetrieveFromEquationsWorks) {
 }
 
 TEST(FunctionsRetrieverTest, RetrieveFromEquationWorks) {
-    FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject) {
+    FunctionsRetriever::FunctionCondition const conditionThatWillMatch = [](Function const& functionObject) {
         return functionObject.getFunctionName() == "functionName";
     };
-    FunctionsRetriever::FunctionCondition conditionThatWillNotMatch = [](Function const& functionObject) {
+    FunctionsRetriever::FunctionCondition const conditionThatWillNotMatch = [](Function const& functionObject) {
         return functionObject.getFunctionName() == "WillNotMatch";
     };
     FunctionsRetriever retriever1(conditionThatWillMatch);
     FunctionsRetriever retriever2(conditionThatWillNotMatch);
-    Function functionObject(
+    Function const functionObject(
         "functionName", Term(createExpressionIfPossible({"x", "^", "y"})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
-    Term leftHandTerm(functionObject);
-    Term rightHandTerm(1);
-    Equation equation(leftHandTerm, "=", rightHandTerm);
+    Term const leftHandTerm(functionObject);
+    Term const rightHandTerm(1);
+    Equation const equation(leftHandTerm, "=", rightHandTerm);
 
     retriever1.retrieveFromEquation(equation);
     retriever2.retrieveFromEquation(equation);
@@ -75,10 +75,10 @@ TEST(FunctionsRetrieverTest, RetrieveFromEquationWorks) {
 }
 
 TEST(FunctionsRetrieverTest, RetrieveFromTermWorks) {
-    FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject) {
+    FunctionsRetriever::FunctionCondition const conditionThatWillMatch = [](Function const& functionObject) {
         return functionObject.getFunctionName() == "functionName";
     };
-    FunctionsRetriever::FunctionCondition conditionThatWillNotMatch = [](Function const& functionObject) {
+    FunctionsRetriever::FunctionCondition const conditionThatWillNotMatch = [](Function const& functionObject) {
         return functionObject.getFunctionName() == "WillNotMatch";
     };
     FunctionsRetriever retriever1(conditionThatWillMatch);
@@ -87,13 +87,13 @@ TEST(FunctionsRetrieverTest, RetrieveFromTermWorks) {
     FunctionsRetriever retriever4(conditionThatWillNotMatch);
     FunctionsRetriever retriever5(conditionThatWillMatch);
     FunctionsRetriever retriever6(conditionThatWillNotMatch);
-    Function functionObject(
+    Function const functionObject(
         "functionName", Term(createExpressionIfPossible({"x", "^", "y"})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
-    Expression expression(createExpressionIfPossible({1, "+", functionObject}));
-    Term constantTerm(4756);
-    Term expressionTerm(expression);
-    Term functionTerm(functionObject);
+    Expression const expression(createExpressionIfPossible({1, "+", functionObject}));
+    Term const constantTerm(4756);
+    Term const expressionTerm(expression);
+    Term const functionTerm(functionObject);
 
     retriever1.retrieveFromTerm(constantTerm);
     retriever2.retrieveFromTerm(constantTerm);
@@ -146,18 +146,18 @@ TEST(FunctionsRetrieverTest, RetrieveFromMonomialWorks) {
 }
 
 TEST(FunctionsRetrieverTest, RetrieveFromExpressionWorks) {
-    FunctionsRetriever::FunctionCondition conditionThatWillMatch = [](Function const& functionObject) {
+    FunctionsRetriever::FunctionCondition const conditionThatWillMatch = [](Function const& functionObject) {
         return functionObject.getFunctionName() == "functionName";
     };
-    FunctionsRetriever::FunctionCondition conditionThatWillNotMatch = [](Function const& functionObject) {
+    FunctionsRetriever::FunctionCondition const conditionThatWillNotMatch = [](Function const& functionObject) {
         return functionObject.getFunctionName() == "WillNotMatch";
     };
     FunctionsRetriever retriever1(conditionThatWillMatch);
     FunctionsRetriever retriever2(conditionThatWillNotMatch);
-    Function functionObject(
+    Function const functionObject(
         "functionName", Term(createExpressionIfPossible({"x", "^", "y"})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
-    Expression expression(createExpressionIfPossible({1, "+", functionObject}));
+    Expression const expression(createExpressionIfPossible({1, "+", functionObject}));
 
     retriever1.retrieveFromExpression(expression);
     retriever2.retrieveFromExpression(expression);

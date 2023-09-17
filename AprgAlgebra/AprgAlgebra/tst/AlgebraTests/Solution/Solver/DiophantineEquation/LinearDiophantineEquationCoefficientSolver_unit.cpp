@@ -11,7 +11,7 @@ using SolutionStatus = LinearDiophantineEquationCoefficientSolver::SolutionStatu
 }  // namespace
 
 TEST(LinearDiophantineEquationCoefficientSolverTest, WorksWhenAAndBAreZero) {
-    LinearDiophantineEquationCoefficientSolver solver(0, 0, 12);
+    LinearDiophantineEquationCoefficientSolver const solver(0, 0, 12);
 
     EXPECT_FALSE(solver.isSolved());
     EXPECT_EQ(SolutionStatus::NoSolution, solver.getSolutionStatus());
@@ -20,7 +20,7 @@ TEST(LinearDiophantineEquationCoefficientSolverTest, WorksWhenAAndBAreZero) {
 }
 
 TEST(LinearDiophantineEquationCoefficientSolverTest, WorksWhenCIsZero) {
-    LinearDiophantineEquationCoefficientSolver solver(39, 15, 0);
+    LinearDiophantineEquationCoefficientSolver const solver(39, 15, 0);
 
     EXPECT_FALSE(solver.isSolved());
     EXPECT_EQ(SolutionStatus::InfiniteSolutions, solver.getSolutionStatus());
@@ -29,7 +29,7 @@ TEST(LinearDiophantineEquationCoefficientSolverTest, WorksWhenCIsZero) {
 }
 
 TEST(LinearDiophantineEquationCoefficientSolverTest, WorksWhenAAndBAndCAreZero) {
-    LinearDiophantineEquationCoefficientSolver solver(0, 0, 0);
+    LinearDiophantineEquationCoefficientSolver const solver(0, 0, 0);
 
     EXPECT_FALSE(solver.isSolved());
     EXPECT_EQ(SolutionStatus::InfiniteSolutions, solver.getSolutionStatus());
@@ -38,7 +38,7 @@ TEST(LinearDiophantineEquationCoefficientSolverTest, WorksWhenAAndBAndCAreZero) 
 }
 
 TEST(LinearDiophantineEquationCoefficientSolverTest, WorksWhenAreNonIntegers) {
-    LinearDiophantineEquationCoefficientSolver solver(1.2, 3.4, 5.6);
+    LinearDiophantineEquationCoefficientSolver const solver(1.2, 3.4, 5.6);
 
     EXPECT_FALSE(solver.isSolved());
     EXPECT_EQ(SolutionStatus::CannotBeSolved, solver.getSolutionStatus());
@@ -47,7 +47,7 @@ TEST(LinearDiophantineEquationCoefficientSolverTest, WorksWhenAreNonIntegers) {
 }
 
 TEST(LinearDiophantineEquationCoefficientSolverTest, WorksWhenCIsNotDivisibleWithGcfOfAAndB) {
-    LinearDiophantineEquationCoefficientSolver solver(39, 15, 13);
+    LinearDiophantineEquationCoefficientSolver const solver(39, 15, 13);
 
     EXPECT_FALSE(solver.isSolved());
     EXPECT_EQ(SolutionStatus::CannotBeSolved, solver.getSolutionStatus());
@@ -56,7 +56,7 @@ TEST(LinearDiophantineEquationCoefficientSolverTest, WorksWhenCIsNotDivisibleWit
 }
 
 TEST(LinearDiophantineEquationCoefficientSolverTest, WorksOnExample1) {
-    LinearDiophantineEquationCoefficientSolver solver(39, 15, 12);
+    LinearDiophantineEquationCoefficientSolver const solver(39, 15, 12);
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_EQ(SolutionStatus::Solved, solver.getSolutionStatus());
@@ -65,7 +65,7 @@ TEST(LinearDiophantineEquationCoefficientSolverTest, WorksOnExample1) {
 }
 
 TEST(LinearDiophantineEquationCoefficientSolverTest, WorksOnExample2) {
-    LinearDiophantineEquationCoefficientSolver solver(47, 30, 1);
+    LinearDiophantineEquationCoefficientSolver const solver(47, 30, 1);
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_EQ(SolutionStatus::Solved, solver.getSolutionStatus());
@@ -74,7 +74,7 @@ TEST(LinearDiophantineEquationCoefficientSolverTest, WorksOnExample2) {
 }
 
 TEST(LinearDiophantineEquationCoefficientSolverTest, GetAnotherXValueAndGetAnotherYValueWorksOnExample1) {
-    LinearDiophantineEquationCoefficientSolver solver(39, 15, 12);
+    LinearDiophantineEquationCoefficientSolver const solver(39, 15, 12);
 
     EXPECT_EQ(8, solver.getAnotherXValue(0));
     EXPECT_EQ(-20, solver.getAnotherYValue(0));

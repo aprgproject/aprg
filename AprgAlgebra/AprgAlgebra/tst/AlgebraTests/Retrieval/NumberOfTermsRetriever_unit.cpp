@@ -39,7 +39,7 @@ TEST(NumberOfTermsRetrieverTest, RetrieveFromExpressionWorks) {
 
 TEST(NumberOfTermsRetrieverTest, RetrieveFromFunctionWorks) {
     NumberOfTermsRetriever retriever;
-    Function functionObject(
+    Function const functionObject(
         "functionName", Term(createExpressionIfPossible({4516, "+", Monomial(7895, {{"x", 10}})})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
 
@@ -50,8 +50,8 @@ TEST(NumberOfTermsRetrieverTest, RetrieveFromFunctionWorks) {
 
 TEST(NumberOfTermsRetrieverTest, RetrieveFromEquationsWorks) {
     NumberOfTermsRetriever retriever;
-    Equation equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
-    Equation equation2(Monomial(95, {{"x", 7}}), "=", Monomial(18, {{"y", 8}}));
+    Equation const equation1(Monomial(34, {{"x", 5}}), "=", Monomial(41, {{"y", 6}}));
+    Equation const equation2(Monomial(95, {{"x", 7}}), "=", Monomial(18, {{"y", 8}}));
 
     retriever.retrieveFromEquations({equation1, equation2});
 
@@ -60,9 +60,9 @@ TEST(NumberOfTermsRetrieverTest, RetrieveFromEquationsWorks) {
 
 TEST(NumberOfTermsRetrieverTest, RetrieveFromEquationWorks) {
     NumberOfTermsRetriever retriever;
-    Term leftHandTerm(Monomial(34, {{"x", 5}}));
-    Term rightHandTerm(Monomial(41, {{"y", 6}}));
-    Equation equation(leftHandTerm, "=", rightHandTerm);
+    Term const leftHandTerm(Monomial(34, {{"x", 5}}));
+    Term const rightHandTerm(Monomial(41, {{"y", 6}}));
+    Equation const equation(leftHandTerm, "=", rightHandTerm);
 
     retriever.retrieveFromEquation(equation);
 
@@ -71,7 +71,7 @@ TEST(NumberOfTermsRetrieverTest, RetrieveFromEquationWorks) {
 
 TEST(NumberOfTermsRetrieverTest, RetrieveFromTermWorks) {
     NumberOfTermsRetriever retriever;
-    Function functionObject(
+    Function const functionObject(
         "functionName", Term(createExpressionIfPossible({"a", "^", 2})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
 
