@@ -34,7 +34,7 @@ public:
         if (!valuesToSort.empty()) {
             __try {
                 for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
-                    continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
+                    // continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                     // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
                 }
             } __except (seh_filter(GetExceptionCode(), GetExceptionInformation())) {
