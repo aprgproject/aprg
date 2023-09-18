@@ -170,31 +170,32 @@ void PidSimulator::calculateAndGenerateOutputImage() {
     cout << "max list:[" << xLeftMax << ", " << xRightMax << ", " << yBottomMax << ", " << yTopMax << "]\n";
 
     AlbaLocalPathHandler const detectedPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
-    AlbaLocalPathHandler defaultFile(detectedPath.getDirectory() + R"(Default24Bit.bmp)");
+    AlbaLocalPathHandler defaultFile(detectedPath.getDirectory() / R"(Default24Bit.bmp)");
     cout << "defaultFile:[" << defaultFile.getPath() << "]\n";
     if (defaultFile.doesExist()) {
-        AlbaLocalPathHandler graphOutputFile(defaultFile.getDirectory() + R"(\graph.bmp)");
+        AlbaLocalPathHandler graphOutputFile(defaultFile.getDirectory() / R"(\graph.bmp)");
         cout << "graphOutputFile:[" << graphOutputFile.getPath() << "]\n";
-        graphOutputFile.deleteFile();
-        defaultFile.copyToNewFile(graphOutputFile.getPath());
+        if (graphOutputFile.deleteFileAndIsSuccessful() &&
+            defaultFile.copyFileToAndIsSuccessful(graphOutputFile.getPath())) {
+            Bitmap const bitmap(graphOutputFile.getPath());
+            BitmapConfiguration const configuration(bitmap.getConfiguration());
+            calculateMagnificationAndOffset(
+                xLeftMax, xRightMax, yBottomMax, yTopMax, configuration.getBitmapWidth(),
+                configuration.getBitmapHeight());
+            cout << "offset:[" << m_xOffsetToGraph << ", " << m_yOffsetToGraph << "] magnification:["
+                 << m_xMagnificationToGraph << ", " << m_yMagnificationToGraph << "]\n";
 
-        Bitmap const bitmap(graphOutputFile.getPath());
-        BitmapConfiguration const configuration(bitmap.getConfiguration());
-        calculateMagnificationAndOffset(
-            xLeftMax, xRightMax, yBottomMax, yTopMax, configuration.getBitmapWidth(), configuration.getBitmapHeight());
-        cout << "offset:[" << m_xOffsetToGraph << ", " << m_yOffsetToGraph << "] magnification:["
-             << m_xMagnificationToGraph << ", " << m_yMagnificationToGraph << "]\n";
-
-        AprgGraph graph(
-            graphOutputFile.getPath(), BitmapXY(m_xOffsetToGraph, m_yOffsetToGraph),
-            BitmapDoubleXY(m_xMagnificationToGraph, m_yMagnificationToGraph));
-        graph.drawGrid(BitmapDoubleXY(m_xGridInterval, m_yGridInterval));
-        graph.drawContinuousPoints(targetSeries, 0x00444444);
-        graph.drawContinuousPoints(inputDemandSeries, 0x000000FF);
-        graph.drawContinuousPoints(pseudoMaxTxPowerSeries, 0x0000FF00);
-        graph.drawContinuousPoints(tcomReceivedPowerFromMachsSeries, 0x00FF0000);
-        // Remove adjusted demand //graph.drawContinuousPoints(adjustedDemandSeries, 0x00008888);
-        graph.saveChangesToBitmapFile();
+            AprgGraph graph(
+                graphOutputFile.getPath(), BitmapXY(m_xOffsetToGraph, m_yOffsetToGraph),
+                BitmapDoubleXY(m_xMagnificationToGraph, m_yMagnificationToGraph));
+            graph.drawGrid(BitmapDoubleXY(m_xGridInterval, m_yGridInterval));
+            graph.drawContinuousPoints(targetSeries, 0x00444444);
+            graph.drawContinuousPoints(inputDemandSeries, 0x000000FF);
+            graph.drawContinuousPoints(pseudoMaxTxPowerSeries, 0x0000FF00);
+            graph.drawContinuousPoints(tcomReceivedPowerFromMachsSeries, 0x00FF0000);
+            // Remove adjusted demand //graph.drawContinuousPoints(adjustedDemandSeries, 0x00008888);
+            graph.saveChangesToBitmapFile();
+        }
     } else {
         cout << "The default bitmap file was not found. The default file location:  [" << defaultFile.getPath()
              << "]\n";
