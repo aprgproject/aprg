@@ -30,14 +30,11 @@ void FileDestructor::renameDirectoriesUnderneath(path const& directoryPath) cons
 void FileDestructor::destroyFilesAndDirectories(path const& destroyPath) {
     cout << "Destroying files in: [" << destroyPath << "]\n";
     AlbaLocalPathHandler const pathHandler(destroyPath);
-    pathHandler.findFilesAndDirectoriesUnlimitedDepth(
-        [&](AlbaLocalPathHandler::LocalPath const& directoryPath) {
-            cout << "Destroying directory: [" << directoryPath << "]\n";
-            if (AlbaLocalPathHandler(directoryPath).deleteDirectoryAndIsSuccessful()) {
-                cout << "Destroyed directory: [" << directoryPath << "]\n";
-            }
-        },
-        [&](AlbaLocalPathHandler::LocalPath const& filePath) { destroyFile(filePath); });
+    if (pathHandler.isExistingDirectory()) {
+        pathHandler.deleteDirectoryAndIsSuccessful();
+    } else {
+        pathHandler.deleteFileAndIsSuccessful();
+    }
 }
 
 void FileDestructor::renameDirectory(path const& directoryPath) {
