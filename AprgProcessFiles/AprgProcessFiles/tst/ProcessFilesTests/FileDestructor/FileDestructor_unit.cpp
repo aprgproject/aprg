@@ -21,6 +21,8 @@ void createAFileInDirectory(path const& directory) {
 
 void retrieveNumberOfFilesAndDirectoriesFromPath(
     AlbaLocalPathHandler& pathHandler, unsigned int& numberOfFiles, unsigned int& numberOfDirectories) {
+    numberOfFiles = 0;
+    numberOfDirectories = 0;
     pathHandler.findFilesAndDirectoriesUnlimitedDepth(
         [&](AlbaLocalPathHandler::LocalPath const&) { ++numberOfDirectories; },
         [&](AlbaLocalPathHandler::LocalPath const&) { ++numberOfFiles; });
@@ -40,8 +42,6 @@ TEST(SampleTest, DestroyOneFileTest) {
 
     fileDestructor.destroy(pathHandler.getPath());
 
-    numberOfFiles = 0;
-    numberOfDirectories = 0;
     retrieveNumberOfFilesAndDirectoriesFromPath(pathHandler, numberOfFiles, numberOfDirectories);
     EXPECT_EQ(0U, numberOfFiles);
     EXPECT_EQ(0U, numberOfDirectories);
