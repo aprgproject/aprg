@@ -30,12 +30,13 @@ void retrieveNumberOfFilesAndDirectoriesFromPath(
 
 }  // namespace
 
-TEST(SampleTest, DestroyOneFileTest) {
+TEST(SampleTest, DestroyTest) {
     FileDestructor const fileDestructor;
     AlbaLocalPathHandler pathHandler(APRG_FILE_DESTRUCTION_TEST_DIRECTORY);
+    pathHandler.createDirectoriesAndIsSuccessful();
+    createAFileInDirectory(pathHandler.getPath());
     unsigned int numberOfFiles = 0;
     unsigned int numberOfDirectories = 0;
-    createAFileInDirectory(pathHandler.getPath());
     retrieveNumberOfFilesAndDirectoriesFromPath(pathHandler, numberOfFiles, numberOfDirectories);
     EXPECT_EQ(1U, numberOfFiles);
     EXPECT_EQ(0U, numberOfDirectories);
