@@ -270,11 +270,11 @@ TEST(AlbaLocalPathHandlerTest, FullPathWithDirectoryAndFileDoublePeriodInPath) {
     EXPECT_EQ("file", pathHandler.getFilenameOnly());
     EXPECT_EQ("txt", pathHandler.getExtension());
 
-    pathHandler.input(getAprgPath() + R"(dir\..\..\file.txt)");
-    EXPECT_EQ(fixPath(getAprgPath() + R"(..\file.txt)"), pathHandler.getPath());
+    pathHandler.input(getAprgPath() + R"(dir1\dir2\dir3\..\..\file.txt)");
+    EXPECT_EQ(fixPath(getAprgPath() + R"(dir1\file.txt)"), pathHandler.getPath());
     EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
-    EXPECT_EQ(fixPath(getAprgPath() + R"(dir\..\..\)"), pathHandler.getDirectory());
-    EXPECT_EQ((R"(aprg_temp)"), pathHandler.getDirectoryName());
+    EXPECT_EQ(fixPath(getAprgPath() + R"(dir1\)"), pathHandler.getDirectory());
+    EXPECT_EQ((R"(dir1)"), pathHandler.getDirectoryName());
     EXPECT_EQ("file.txt", pathHandler.getFile());
     EXPECT_EQ("file", pathHandler.getFilenameOnly());
     EXPECT_EQ("txt", pathHandler.getExtension());
