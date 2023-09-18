@@ -323,6 +323,25 @@ TEST(CPlusPlusReorganizerTest, ReorganizeAlbaFundamentalOperationsCounterUnitTes
     verifyFile(expectedUnitTestFilePath, afterUnitTestFilePath);
 }
 
+TEST(CPlusPlusReorganizerTest, ReorganizeAlbaCombineAndGrepFilesWorks) {
+    CPlusPlusReorganizer reorganizer;
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaCombineAndGrepFiles.hpp)");
+    string const beforeImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaCombineAndGrepFiles.cpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaCombineAndGrepFiles.hpp)");
+    string const afterImplementationFilePath(TEST_DIRECTORY R"(/ReorganizerTests/After/AlbaCombineAndGrepFiles.cpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Expected/AlbaCombineAndGrepFiles.hpp)");
+    string const expectedImplementationFilePath(TEST_DIRECTORY
+                                                R"(/ReorganizerTests/Expected/AlbaCombineAndGrepFiles.cpp)");
+    copyFile(beforeHeaderFilePath, afterHeaderFilePath);
+    copyFile(beforeImplementationFilePath, afterImplementationFilePath);
+
+    reorganizer.processHeaderFile(afterHeaderFilePath);
+    reorganizer.processImplementationFile(afterHeaderFilePath, afterImplementationFilePath);
+
+    verifyFile(expectedHeaderFilePath, afterHeaderFilePath);
+    verifyFile(expectedImplementationFilePath, afterImplementationFilePath);
+}
+
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaContainerHelperWorks) {
     CPlusPlusReorganizer reorganizer;
     string const beforeHeaderFilePath(TEST_DIRECTORY R"(/ReorganizerTests/Before/AlbaContainerHelper.hpp)");

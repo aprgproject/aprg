@@ -114,9 +114,12 @@ Terms CPlusPlusReorganizeItems::getReorganizedTermsInNamespace() const {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
         // stringstream commentStream;
+        // auto headerSignature = sortItem.headerIndex < static_cast<int>(m_data.headerFunctionSignatures.size())
+        //                            ? m_data.headerFunctionSignatures[sortItem.headerIndex]
+        //                            : "NO MAPPING";
         // commentStream << "/*BEGIN ADD (";
         // ALBA_INF_PRINT(
-        //     commentStream, sortItem.headerIndex, (sortItem.score), sortItem.functionReturnTypeName,
+        //     commentStream, sortItem.headerIndex, headerSignature, sortItem.score, sortItem.functionReturnTypeName,
         //     sortItem.functionIndexesUsed);
         // commentStream << ")*/";
         // terms.emplace_back(TermType::CommentMultiline, commentStream.str());
