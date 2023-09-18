@@ -28,9 +28,11 @@ public:
 
 private:
     [[nodiscard]] LocationsInFile getLocationsInFile(double const foundLocation, double const fileSize) const;
+
     void performCropForFile(
         std::filesystem::path const& inputFilePath, std::filesystem::path const& outputFilePath,
         double const foundLocation);
+
     void updateAfterOneIteration(double const percentage);
     double getLocationOfPrioritizedPrint(std::filesystem::path const& inputFilePath);
     bool m_isOutputFileWritten;

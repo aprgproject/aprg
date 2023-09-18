@@ -10,35 +10,6 @@ using namespace std;
 
 namespace alba::AlbaWindowsUserAutomation {
 
-TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeSmallLetterTest) {
-    for (char c = 'a'; c <= 'z'; ++c) {
-        typeCharacter(c);
-    }
-}
-
-TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeCapitalLetterTest) {
-    for (char c = 'A'; c <= 'Z'; ++c) {
-        typeCharacter(c);
-    }
-}
-
-TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeNumberTest) {
-    for (char c = '0'; c <= '9'; ++c) {
-        typeCharacter(c);
-    }
-}
-
-TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeString) {
-    typeString(R"(.......)");
-    // typeString(R"(`~!@#$%^&*()_+-=[]\{}|;':",./<>?)");
-}
-
-TEST(AlbaWindowsUserAutomationTest, DISABLED_SaveBitmapOnScreen) {
-    string const bitmapFilePath = APRG_DIR R"(\AprgLocalUserAutomation\FilesForTests\BitmapFromScreen.bmp)";
-
-    saveBitmapOnScreen(bitmapFilePath);
-}
-
 TEST(AlbaWindowsUserAutomationTest, DISABLED_ShowMousePositions) {
     while (1) {
         MousePosition const position(getMousePosition());
@@ -79,6 +50,35 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_IsLetterPressedTest) {
         }
         Sleep(100);
     }
+}
+
+TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeSmallLetterTest) {
+    for (char c = 'a'; c <= 'z'; ++c) {
+        typeCharacter(c);
+    }
+}
+
+TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeCapitalLetterTest) {
+    for (char c = 'A'; c <= 'Z'; ++c) {
+        typeCharacter(c);
+    }
+}
+
+TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeNumberTest) {
+    for (char c = '0'; c <= '9'; ++c) {
+        typeCharacter(c);
+    }
+}
+
+TEST(AlbaWindowsUserAutomationTest, DISABLED_TypeString) {
+    typeString(R"(.......)");
+    // typeString(R"(`~!@#$%^&*()_+-=[]\{}|;':",./<>?)");
+}
+
+TEST(AlbaWindowsUserAutomationTest, DISABLED_SaveBitmapOnScreen) {
+    string const bitmapFilePath = APRG_DIR R"(\AprgLocalUserAutomation\FilesForTests\BitmapFromScreen.bmp)";
+
+    saveBitmapOnScreen(bitmapFilePath);
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_SetMouseTest) {

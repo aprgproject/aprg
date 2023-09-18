@@ -50,41 +50,8 @@ void doOperation(InputFunction const& inputFunction) {
     inputFunction(input);
     SendInput(1, &input, sizeof(INPUT));
 }
+
 }  // namespace
-
-void doDoubleLeftClick() {
-    doLeftClick();
-    doLeftClick();
-}
-
-void doLeftClickAt(MousePosition const& position) {
-    setMousePosition(position);
-    doLeftClick();
-}
-
-void doDoubleLeftClickAt(MousePosition const& position) {
-    setMousePosition(position);
-    doDoubleLeftClick();
-}
-
-void doRightClickAt(MousePosition const& position) {
-    setMousePosition(position);
-    doRightClick();
-}
-
-void typeCharacter(char const character) { typeKey(convertToVirtualKey(character)); }
-
-void typeString(string_view const& stringToType) {
-    for (char const character : stringToType) {
-        typeCharacter(character);
-    }
-}
-
-void saveBitmapOnScreen(string_view const& filePath) {
-    // Note: the difference on partially capturing the screen is negligible
-    typeKey(VK_SNAPSHOT);
-    saveBitmapFromClipboard(filePath);
-}
 
 MousePosition getMousePosition() {
     MousePosition const position;
@@ -121,6 +88,40 @@ bool isKeyPressed(int const key) {
 }
 
 bool isLetterPressed(char const letter) { return isKeyPressed(::toupper(letter)); }
+
+void doDoubleLeftClick() {
+    doLeftClick();
+    doLeftClick();
+}
+
+void doLeftClickAt(MousePosition const& position) {
+    setMousePosition(position);
+    doLeftClick();
+}
+
+void doDoubleLeftClickAt(MousePosition const& position) {
+    setMousePosition(position);
+    doDoubleLeftClick();
+}
+
+void doRightClickAt(MousePosition const& position) {
+    setMousePosition(position);
+    doRightClick();
+}
+
+void typeCharacter(char const character) { typeKey(convertToVirtualKey(character)); }
+
+void typeString(string_view const& stringToType) {
+    for (char const character : stringToType) {
+        typeCharacter(character);
+    }
+}
+
+void saveBitmapOnScreen(string_view const& filePath) {
+    // Note: the difference on partially capturing the screen is negligible
+    typeKey(VK_SNAPSHOT);
+    saveBitmapFromClipboard(filePath);
+}
 
 void setMousePosition(MousePosition const& position) {
     long const screenWidth = GetSystemMetrics(SM_CXSCREEN) - 1;

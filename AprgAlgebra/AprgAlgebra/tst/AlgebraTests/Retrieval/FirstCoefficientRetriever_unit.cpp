@@ -100,7 +100,6 @@ TEST(FirstCoefficientRetrieverTest, RetrieveFromPolynomialsWorks) {
     polynomials.emplace_back(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
     polynomials.emplace_back(Polynomial{Monomial(587, {{"x", 9}}), Monomial(975, {{"y", 10}})});
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-
     retriever.retrieveFromPolynomials(polynomials);
 
     EXPECT_EQ(AlbaNumber(516), retriever.getFirstCoefficient());

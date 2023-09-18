@@ -8,6 +8,7 @@ using namespace std;
 namespace alba::CodeUtilities {
 
 namespace {
+
 void processAprgDirectory(string const& aprgPath) {
     CPlusPlusFinder finder;
     AlbaLocalPathHandler const aprgPathHandler(aprgPath);
@@ -20,6 +21,7 @@ void processAprgDirectory(string const& aprgPath) {
             }
         });
 }
+
 }  // namespace
 
 TEST(CPlusPlusFinderTest, DISABLED_AprgDirectoryTest) { processAprgDirectory(R"(F:\Branches\aprg_project\aprg\aprg)"); }

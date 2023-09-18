@@ -13,9 +13,11 @@ public:
     using SetOfPaths = std::set<std::filesystem::path>;
     explicit AprgFileExtractor(std::string const& condition);
     AprgFileExtractor();
+
     AprgFileExtractor(
         std::string const& condition, std::filesystem::path const& pathOf7zExecutable,
         std::filesystem::path const& pathOf7zTempFile);
+
     void copyRelativeFilePathsFromCompressedFile(
         std::filesystem::path const& filePathOfCompressedFile, SetOfPaths& files) const;
     // NOLINTNEXTLINE(modernize-use-nodiscard)

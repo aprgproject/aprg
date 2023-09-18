@@ -146,7 +146,6 @@ TEST(LimitTest, GetLimitWithMultipleVariablesWithDifferentApproachesWorksOnExamp
     substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", "x"}});
     substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", Monomial(1, {{"x", 2}})}});
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-
     Term const termToVerify(getLimitWithMultipleVariablesWithDifferentApproaches(termToTest, "x", 0, substitutions));
 
     EXPECT_EQ(Term(0), termToVerify);
@@ -161,7 +160,6 @@ TEST(LimitTest, GetLimitWithMultipleVariablesWithDifferentApproachesWorksOnExamp
     substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", "x"}});
     substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", Monomial(1, {{"x", 2}})}});
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-
     Term const termToVerify(getLimitWithMultipleVariablesWithDifferentApproaches(termToTest, "x", 0, substitutions));
 
     EXPECT_TRUE(isNan(termToVerify));

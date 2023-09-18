@@ -94,7 +94,6 @@ TEST(
     // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
     polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-4, {})});
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-
     MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
     EXPECT_FALSE(solver.isSolved());
@@ -110,7 +109,6 @@ TEST(
     // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
     polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(-4, {})});
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-
     MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
     EXPECT_FALSE(solver.isSolved());
@@ -124,7 +122,6 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
     polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-4, {})});
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-
     MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
     EXPECT_TRUE(solver.isSolved());
@@ -142,7 +139,6 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(-4, {})});
     polynomials.emplace_back(Polynomial{Monomial(3, {{"x", 1}}), Monomial(-2, {{"y", 1}}), Monomial(12, {})});
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-
     MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
     EXPECT_TRUE(solver.isSolved());
@@ -167,7 +163,6 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
     polynomials.emplace_back(
         Polynomial{Monomial(4, {{"x", 1}}), Monomial(1, {{"y", 1}}), Monomial(-2, {{"z", 1}}), Monomial(-1, {})});
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-
     MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
     EXPECT_TRUE(solver.isSolved());
