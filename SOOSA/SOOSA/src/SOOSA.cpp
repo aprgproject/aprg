@@ -131,15 +131,15 @@ void SOOSA::process() {
     AlbaLocalPathHandler const pathHandler(m_inputConfiguration.getPath());
 
     saveHeadersToCsvFile();
-    if (pathHandler.isDirectory()) {
-        processDirectory(pathHandler.getPath());
+    if (pathHandler.isExistingDirectory()) {
+        processDirectory(pathHandler.getPath().string());
     } else {
-        processFile(pathHandler.getPath());
-        saveDataToCsvFile(pathHandler.getPath());
+        processFile(pathHandler.getPath().string());
+        saveDataToCsvFile(pathHandler.getPath().string());
     }
 
     cout << "\n";
-    saveOutputHtmlFile(pathHandler.getPath());
+    saveOutputHtmlFile(pathHandler.getPath().string());
 }
 
 SOOSA::Answers SOOSA::getAnswersAtQuestion(
@@ -476,12 +476,12 @@ SOOSA::TwoDimensionSamples SOOSA::getSamplesInHorizontalLine(
 }
 
 string SOOSA::getCsvFilePath(string const& path) const {
-    return AlbaLocalPathHandler(path).getDirectory() + "PSS_Report_" + m_inputConfiguration.getArea() + "_" +
+    return AlbaLocalPathHandler(path).getDirectory().string() + "PSS_Report_" + m_inputConfiguration.getArea() + "_" +
            m_inputConfiguration.getPeriod() + ".csv";
 }
 
 string SOOSA::getReportHtmlFilePath(string const& path) const {
-    return AlbaLocalPathHandler(path).getDirectory() + "PSS_Report_" + m_inputConfiguration.getArea() + "_" +
+    return AlbaLocalPathHandler(path).getDirectory().string() + "PSS_Report_" + m_inputConfiguration.getArea() + "_" +
            m_inputConfiguration.getPeriod() + ".html";
 }
 
@@ -737,7 +737,7 @@ void SOOSA::saveHeadersToCsvFile() const {
 
 void SOOSA::saveOutputHtmlFile(string const& processedFilePath) const {
     AlbaLocalPathHandler basisHtmlPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
-    basisHtmlPath.input(basisHtmlPath.getDirectory() + "basis.html");
+    basisHtmlPath.input(basisHtmlPath.getDirectory() / "basis.html");
     ifstream htmlBasisFileStream(basisHtmlPath.getPath());
     if (htmlBasisFileStream.is_open()) {
         AlbaFileReader htmlBasisFileReader(htmlBasisFileStream);
@@ -845,14 +845,13 @@ SOOSA::CountToEndPointIndexesMultiMap SOOSA::getHeightPointsCountToEndPointIndex
 void SOOSA::processDirectory(string const& directoryPath) {
     cout << "processDirectory: [" << directoryPath << "]\n";
     AlbaLocalPathHandler const directoryPathToBeProcessed(directoryPath);
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    directoryPathToBeProcessed.findFilesAndDirectoriesUnlimitedDepth("*.bmp", listOfFiles, listOfDirectories);
-
-    for (string const& filePath : listOfFiles) {
-        processFile(filePath);
-        saveDataToCsvFile(filePath);
-    }
+    directoryPathToBeProcessed.findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            string filePathString(filePath.string());
+            processFile(filePathString);
+            saveDataToCsvFile(filePathString);
+        });
 }
 
 void SOOSA::processFile(string const& filePath) {

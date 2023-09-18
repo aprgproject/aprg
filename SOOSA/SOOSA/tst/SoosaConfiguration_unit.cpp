@@ -11,7 +11,7 @@ TEST(SoosaConfigurationTest, LoadConfigurationFromFileWorks) {
     AlbaLocalPathHandler fileForSoosa(APRG_DIR R"(\SOOSA\FilesForTests\SoosaConfigurationForUnitTest.txt)");
     SoosaConfiguration soosaConfiguration;
 
-    soosaConfiguration.loadConfigurationFromFile(fileForSoosa.getPath());
+    soosaConfiguration.loadConfigurationFromFile(fileForSoosa.getPath().string());
 
     // Line model parameters
     EXPECT_EQ(2, soosaConfiguration.getAcceptableLineDeviationForLineModelInPixels());
