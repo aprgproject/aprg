@@ -4,6 +4,7 @@
 #include <Common/File/AlbaFileReader.hpp>
 
 #include <cstdint>
+#include <filesystem>
 #include <string>
 
 namespace alba::AprgBitmap {
@@ -29,7 +30,7 @@ public:
     [[nodiscard]] BitmapXY getDownRightCornerPoint() const;
     [[nodiscard]] Colors getColorTable() const;
     [[nodiscard]] CompressedMethodType getCompressedMethodType() const;
-    [[nodiscard]] std::string getPath() const;
+    [[nodiscard]] std::filesystem::path getPath() const;
     [[nodiscard]] uint16_t getNumberOfBitsPerPixel() const;
     [[nodiscard]] uint32_t getPixelArrayAddress() const;
     [[nodiscard]] uint32_t getBitmapWidth() const;
@@ -84,7 +85,7 @@ private:
     uint32_t m_paddingForRowMemoryAlignment{0};
     uint32_t m_numberOfBytesPerRowInFile{0};
     uint32_t m_bitMaskForValue{0};
-    std::string m_path;
+    std::filesystem::path m_path;
     std::string m_signature;
     Colors m_colors;
 };

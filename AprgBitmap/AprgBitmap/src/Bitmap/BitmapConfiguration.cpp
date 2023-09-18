@@ -9,6 +9,7 @@
 
 using namespace alba::mathHelper;
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba::AprgBitmap {
 
@@ -17,14 +18,14 @@ BitmapXY BitmapConfiguration::getPointWithinTheBitmap(int const xCoordinate, int
 }
 
 BitmapXY BitmapConfiguration::getDownRightCornerPoint() const {
-    int const maxX = m_bitmapWidth == 0 ? 0 : m_bitmapWidth - 1;
-    int const maxY = m_bitmapHeight == 0 ? 0 : m_bitmapHeight - 1;
+    int const maxX = static_cast<int>(m_bitmapWidth == 0 ? 0 : m_bitmapWidth - 1);
+    int const maxY = static_cast<int>(m_bitmapHeight == 0 ? 0 : m_bitmapHeight - 1);
     return {maxX, maxY};
 }
 
 Colors BitmapConfiguration::getColorTable() const { return m_colors; }
 CompressedMethodType BitmapConfiguration::getCompressedMethodType() const { return m_compressionMethodType; }
-std::string BitmapConfiguration::getPath() const { return m_path; }
+path BitmapConfiguration::getPath() const { return m_path; }
 uint16_t BitmapConfiguration::getNumberOfBitsPerPixel() const { return m_numberOfBitsPerPixel; }
 uint32_t BitmapConfiguration::getPixelArrayAddress() const { return m_pixelArrayAddress; }
 uint32_t BitmapConfiguration::getBitmapWidth() const { return m_bitmapWidth; }
@@ -51,19 +52,19 @@ uint32_t BitmapConfiguration::getColorUsingPixelValue(uint32_t const pixelValue)
 }
 
 int BitmapConfiguration::getXCoordinateWithinTheBitmap(int const coordinate) const {
-    return getCoordinateWithinRange(coordinate, m_bitmapWidth);
+    return getCoordinateWithinRange(coordinate, static_cast<int>(m_bitmapWidth));
 }
 
 int BitmapConfiguration::getYCoordinateWithinTheBitmap(int const coordinate) const {
-    return getCoordinateWithinRange(coordinate, m_bitmapHeight);
+    return getCoordinateWithinRange(coordinate, static_cast<int>(m_bitmapHeight));
 }
 
 int BitmapConfiguration::convertPixelsToBytesRoundedToFloor(int const pixels) const {
-    return (pixels * m_numberOfBitsPerPixel) / AlbaBitConstants::BYTE_SIZE_IN_BITS;
+    return (pixels * m_numberOfBitsPerPixel) / static_cast<int>(AlbaBitConstants::BYTE_SIZE_IN_BITS);
 }
 
 int BitmapConfiguration::convertPixelsToBytesRoundedToCeil(int const pixels) const {
-    return ((pixels * m_numberOfBitsPerPixel) + AlbaBitConstants::BYTE_SIZE_IN_BITS - 1) /
+    return ((pixels * m_numberOfBitsPerPixel) + static_cast<int>(AlbaBitConstants::BYTE_SIZE_IN_BITS) - 1) /
            AlbaBitConstants::BYTE_SIZE_IN_BITS;
 }
 
@@ -88,8 +89,8 @@ int BitmapConfiguration::getEstimatedSquareSideInPixels(int const numberOfBytesT
     //+ side*(1+getMinimumNumberOfBytesForOnePixel())*AlbaBitConstants::BYTE_SIZE_IN_BITS
     //- numberOfBytesToRead*AlbaBitConstants::BYTE_SIZE_IN_BITS
     double const a = m_numberOfBitsPerPixel;
-    double const b = (1 + getMinimumNumberOfBytesForOnePixel()) * AlbaBitConstants::BYTE_SIZE_IN_BITS;
-    double const c = -1 * static_cast<int>(numberOfBytesToRead * AlbaBitConstants::BYTE_SIZE_IN_BITS);
+    double const b = (1 + getMinimumNumberOfBytesForOnePixel()) * static_cast<int>(AlbaBitConstants::BYTE_SIZE_IN_BITS);
+    double const c = -1 * numberOfBytesToRead * static_cast<int>(AlbaBitConstants::BYTE_SIZE_IN_BITS);
     int result(0);
     AlbaNumbers roots(getQuadraticRoots(RootType::RealRootsOnly, AlbaNumber(a), AlbaNumber(b), AlbaNumber(c)));
     if (!roots.empty()) {
@@ -216,7 +217,7 @@ void BitmapConfiguration::readColors(AlbaFileReader& fileReader) {
 }
 
 void BitmapConfiguration::calculateOtherValuesAfterReading() {
-    m_numberOfBytesForDataInRow = convertPixelsToBytesRoundedToCeil(m_bitmapWidth);
+    m_numberOfBytesForDataInRow = convertPixelsToBytesRoundedToCeil(static_cast<int>(m_bitmapWidth));
     m_paddingForRowMemoryAlignment = (4 - (m_numberOfBytesForDataInRow % 4)) % 4;
     m_numberOfBytesPerRowInFile = m_numberOfBytesForDataInRow + m_paddingForRowMemoryAlignment;
     m_bitMaskForValue = AlbaBitValueUtilities<uint32_t>::generateOnesWithNumberOfBits(m_numberOfBitsPerPixel);
