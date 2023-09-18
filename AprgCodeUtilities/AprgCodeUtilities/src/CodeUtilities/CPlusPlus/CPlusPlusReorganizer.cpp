@@ -13,49 +13,49 @@
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
 using namespace alba::stringHelper;
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba::CodeUtilities {
 
-void CPlusPlusReorganizer::processDirectory(string const& directory) {
+void CPlusPlusReorganizer::processDirectory(path const& directory) {
     AlbaLocalPathHandler const directoryPathHandler(directory);
-    ListOfPaths directories;
-    ListOfPaths files;
-    directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
     unordered_map<string, CppFiles> filenameToFilesMap;
-    for (auto const& file : files) {
-        AlbaLocalPathHandler const filePathHandler(file);
-        string filenameOnly(filePathHandler.getFilenameOnly());
-        if (isImplementationFileExtension(filePathHandler.getExtension()) &&
-            isStringFoundNotCaseSensitive(filenameOnly, "_unit")) {
-            replaceAllAndReturnIfFound(filenameOnly, "_unit", "");
-            CppFiles& cppFiles(filenameToFilesMap[filenameOnly]);
-            cppFiles.testFile = filePathHandler.getPath();
-            cppFiles.isTestFileProcessed = false;
-        } else {
-            CppFiles& cppFiles(filenameToFilesMap[filenameOnly]);
-            if (isHeaderFileExtension(filePathHandler.getExtension())) {
-                cppFiles.headerFile = filePathHandler.getPath();
-                cppFiles.isHeaderFileProcessed = false;
-            } else if (isImplementationFileExtension(filePathHandler.getExtension())) {
-                cppFiles.implementationFile = filePathHandler.getPath();
-                cppFiles.isImplementationFileProcessed = false;
+    directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            AlbaLocalPathHandler const filePathHandler(filePath);
+            string filenameOnly(filePathHandler.getFilenameOnly().string());
+            if (isImplementationFileExtension(filePathHandler.getExtension().string()) &&
+                isStringFoundNotCaseSensitive(filenameOnly, "_unit")) {
+                replaceAllAndReturnIfFound(filenameOnly, "_unit", "");
+                CppFiles& cppFiles(filenameToFilesMap[filenameOnly]);
+                cppFiles.testFile = filePathHandler.getPath();
+                cppFiles.isTestFileProcessed = false;
+            } else {
+                CppFiles& cppFiles(filenameToFilesMap[filenameOnly]);
+                if (isHeaderFileExtension(filePathHandler.getExtension().string())) {
+                    cppFiles.headerFile = filePathHandler.getPath();
+                    cppFiles.isHeaderFileProcessed = false;
+                } else if (isImplementationFileExtension(filePathHandler.getExtension().string())) {
+                    cppFiles.implementationFile = filePathHandler.getPath();
+                    cppFiles.isImplementationFileProcessed = false;
+                }
             }
-        }
-        CppFiles& cppFiles(filenameToFilesMap[filenameOnly]);
-        if (!cppFiles.isHeaderFileProcessed && !cppFiles.headerFile.empty()) {
-            processHeaderFile(cppFiles.headerFile);
-            cppFiles.isHeaderFileProcessed = true;
-        }
-        if (!cppFiles.isImplementationFileProcessed && !cppFiles.headerFile.empty() &&
-            !cppFiles.implementationFile.empty()) {
-            processImplementationFile(cppFiles.headerFile, cppFiles.implementationFile);
-            cppFiles.isImplementationFileProcessed = true;
-        }
-        if (!cppFiles.isTestFileProcessed && !cppFiles.headerFile.empty() && !cppFiles.testFile.empty()) {
-            processImplementationFile(cppFiles.headerFile, cppFiles.testFile);
-            cppFiles.isTestFileProcessed = true;
-        }
-    }
+            CppFiles& cppFiles(filenameToFilesMap[filenameOnly]);
+            if (!cppFiles.isHeaderFileProcessed && !cppFiles.headerFile.empty()) {
+                processHeaderFile(cppFiles.headerFile);
+                cppFiles.isHeaderFileProcessed = true;
+            }
+            if (!cppFiles.isImplementationFileProcessed && !cppFiles.headerFile.empty() &&
+                !cppFiles.implementationFile.empty()) {
+                processImplementationFile(cppFiles.headerFile, cppFiles.implementationFile);
+                cppFiles.isImplementationFileProcessed = true;
+            }
+            if (!cppFiles.isTestFileProcessed && !cppFiles.headerFile.empty() && !cppFiles.testFile.empty()) {
+                processImplementationFile(cppFiles.headerFile, cppFiles.testFile);
+                cppFiles.isTestFileProcessed = true;
+            }
+        });
     cout << "Processing unprocessed files:\n";
     for (auto const& filenameToFiles : filenameToFilesMap) {
         CppFiles const& cppFiles(filenameToFiles.second);
@@ -71,12 +71,12 @@ void CPlusPlusReorganizer::processDirectory(string const& directory) {
     }
 }
 
-void CPlusPlusReorganizer::processHeaderFile(string const& headerFile) {
+void CPlusPlusReorganizer::processHeaderFile(path const& headerFile) {
     ALBA_INF_PRINT1(cout, headerFile);
     reorganizeFile(headerFile);
 }
 
-void CPlusPlusReorganizer::processImplementationFile(string const& headerFile, string const& implementationFile) {
+void CPlusPlusReorganizer::processImplementationFile(path const& headerFile, path const& implementationFile) {
     ALBA_INF_PRINT2(cout, headerFile, implementationFile);
     m_headerInformation = {};
     gatherInformationFromFile(headerFile);
@@ -186,7 +186,7 @@ int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
     return endIndex;
 }
 
-void CPlusPlusReorganizer::reorganizeFile(string const& file) {
+void CPlusPlusReorganizer::reorganizeFile(path const& file) {
     m_purpose = Purpose::Reorganize;
     AlbaLocalPathHandler const filePathHandler(file);
     if (filePathHandler.doesExist()) {
@@ -195,7 +195,7 @@ void CPlusPlusReorganizer::reorganizeFile(string const& file) {
         // command += filePathHandler.getPath();
         // command += "\"";
         // system(command.c_str());
-        m_fileType = getFileType(filePathHandler.getExtension());
+        m_fileType = getFileType(filePathHandler.getExtension().string());
         m_terms = getTermsFromFile(filePathHandler.getPath());
         processTerms();
         writeAllTerms(filePathHandler.getPath(), m_terms);
@@ -204,7 +204,7 @@ void CPlusPlusReorganizer::reorganizeFile(string const& file) {
     }
 }
 
-void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
+void CPlusPlusReorganizer::gatherInformationFromFile(path const& file) {
     m_purpose = Purpose::GatherInformation;
     AlbaLocalPathHandler const filePathHandler(file);
     if (filePathHandler.doesExist()) {
@@ -213,7 +213,7 @@ void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
         // command += filePathHandler.getPath();
         // command += "\"";
         // system(command.c_str());
-        m_fileType = getFileType(filePathHandler.getExtension());
+        m_fileType = getFileType(filePathHandler.getExtension().string());
         m_terms = getTermsFromFile(filePathHandler.getPath());
         processTerms();
     } else {

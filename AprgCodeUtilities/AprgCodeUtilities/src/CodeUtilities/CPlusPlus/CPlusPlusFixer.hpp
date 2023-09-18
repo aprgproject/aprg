@@ -2,14 +2,16 @@
 
 #include <CodeUtilities/Common/CommonTypes.hpp>
 
+#include <filesystem>
+
 namespace alba::CodeUtilities {
 
 class CPlusPlusFixer {
 public:
     CPlusPlusFixer() = default;
-    void processPath(std::string const& path);
-    void processDirectory(std::string const& directory);
-    void processFile(std::string const& file);
+    void processPath(std::filesystem::path const& path);
+    void processDirectory(std::filesystem::path const& directory);
+    void processFile(std::filesystem::path const& file);
 
 private:
     void fixTerms();
@@ -30,7 +32,7 @@ private:
     void combinePrimitiveTypes();
 
 private:
-    std::string m_currentFile;
+    std::filesystem::path m_currentFile;
     Terms m_currentTerms;
 };
 

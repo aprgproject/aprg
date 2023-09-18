@@ -10,10 +10,11 @@
 
 using namespace alba::stringHelper;
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba::CodeUtilities::CPlusPlusUtilities {
 
-void writeAllTerms(string const& path, Terms const& terms) {
+void writeAllTerms(path const& path, Terms const& terms) {
     AlbaLocalPathHandler const filePathHandler(path);
     ofstream outputStream(filePathHandler.getPath(), ios::binary);
     for (Term const& term : terms) {
@@ -27,7 +28,7 @@ CppFileType getFileType(string const& extension) {
                                             : CppFileType::Unknown;
 }
 
-Terms getTermsFromFile(string const& path) {
+Terms getTermsFromFile(path const& path) {
     Terms result;
     CPlusPlusTokenizer tokenizer(result);
     AlbaLocalPathHandler const filePathHandler(path);

@@ -8,34 +8,34 @@
 
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba::CodeUtilities {
 
-void CPlusPlusFinder::processPath(string const& path) {
+void CPlusPlusFinder::processPath(path const& path) {
     AlbaLocalPathHandler const pathHandler(path);
     if (pathHandler.doesExist()) {
-        if (pathHandler.isDirectory()) {
+        if (pathHandler.isExistingDirectory()) {
             processDirectory(path);
-        } else if (pathHandler.isFile()) {
+        } else {
             processFile(path);
         }
     }
 }
 
-void CPlusPlusFinder::processDirectory(string const& directory) {
+void CPlusPlusFinder::processDirectory(path const& directory) {
     AlbaLocalPathHandler const directoryPathHandler(directory);
-    ListOfPaths directories;
-    ListOfPaths files;
-    directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
-    for (auto const& file : files) {
-        AlbaLocalPathHandler const filePathHandler(file);
-        if (isCppFileExtension(filePathHandler.getExtension())) {
-            processFile(file);
-        }
-    }
+    directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            AlbaLocalPathHandler const filePathHandler(filePath);
+            if (isCppFileExtension(filePathHandler.getExtension().string())) {
+                processFile(filePathHandler.getPath());
+            }
+        });
 }
 
-void CPlusPlusFinder::processFile(string const& file) {
+void CPlusPlusFinder::processFile(path const& file) {
     m_currentFile = file;
     m_currentTerms = getTermsFromFile(file);
     findTerms();

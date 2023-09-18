@@ -4,10 +4,12 @@
 #include <CodeUtilities/Common/Term.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
+#include <filesystem>
+
 namespace alba::CodeUtilities::CPlusPlusUtilities {
-void writeAllTerms(std::string const& path, Terms const& terms);
+void writeAllTerms(std::filesystem::path const& path, Terms const& terms);
 CppFileType getFileType(std::string const& extension);
-Terms getTermsFromFile(std::string const& path);
+Terms getTermsFromFile(std::filesystem::path const& path);
 Terms getTermsFromString(std::string const& code);
 std::string getFunctionSignature(std::string const& functionText);
 std::string getFunctionName(std::string const& functionSignature);

@@ -4,6 +4,8 @@
 #include <CodeUtilities/Common/CommonTypes.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
+#include <filesystem>
+
 namespace alba::CodeUtilities {
 
 class CPlusPlusReorganizer {
@@ -25,18 +27,19 @@ public:
     };
 
     struct CppFiles {
-        std::string headerFile;
-        std::string implementationFile;
-        std::string testFile;
+        std::filesystem::path headerFile;
+        std::filesystem::path implementationFile;
+        std::filesystem::path testFile;
         bool isHeaderFileProcessed;
         bool isImplementationFileProcessed;
         bool isTestFileProcessed;
     };
 
     CPlusPlusReorganizer() = default;
-    void processDirectory(std::string const& directory);
-    void processHeaderFile(std::string const& headerFile);
-    void processImplementationFile(std::string const& headerFile, std::string const& implementationFile);
+    void processDirectory(std::filesystem::path const& directory);
+    void processHeaderFile(std::filesystem::path const& headerFile);
+    void processImplementationFile(
+        std::filesystem::path const& headerFile, std::filesystem::path const& implementationFile);
 
 private:
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
@@ -45,8 +48,8 @@ private:
     [[nodiscard]] stringHelper::strings getScopeNames() const;
     [[nodiscard]] stringHelper::strings getSavedSignatures() const;
     [[nodiscard]] int getIndexAtSameLineComment(int const index) const;
-    void reorganizeFile(std::string const& file);
-    void gatherInformationFromFile(std::string const& file);
+    void reorganizeFile(std::filesystem::path const& file);
+    void gatherInformationFromFile(std::filesystem::path const& file);
     void processTerms();
     void processMacro(int& nextIndex, int const macroStartIndex);
     void processSemiColon(int& nextIndex, int const endIndex);
