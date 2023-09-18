@@ -36,12 +36,12 @@ gsl_monte_plain_integrate (const gsl_monte_function * f,
                            gsl_monte_plain_state * state,
                            double *result, double *abserr)
 {
-  double vol;
+  double vol = NAN;
   double m = 0;
   double q = 0;
   double *x = state->x;
-  size_t n;
-  size_t i;
+  size_t n = 0;
+  size_t i = 0;
 
   if (dim != state->dim)
     {

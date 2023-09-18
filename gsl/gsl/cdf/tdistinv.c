@@ -47,8 +47,8 @@ inv_cornish_fisher (double z, double nu)
 double
 gsl_cdf_tdist_Pinv (const double P, const double nu)
 {
-  double x;
-  double ptail;
+  double x = NAN;
+  double ptail = NAN;
 
   if (P == 1.0)
     {
@@ -101,8 +101,8 @@ gsl_cdf_tdist_Pinv (const double P, const double nu)
     }
 
   {
-    double dP;
-    double phi;
+    double dP = NAN;
+    double phi = NAN;
     unsigned int n = 0;
 
   start:
@@ -151,8 +151,8 @@ gsl_cdf_tdist_Pinv (const double P, const double nu)
 double
 gsl_cdf_tdist_Qinv (const double Q, const double nu)
 {
-  double x;
-  double qtail;
+  double x = NAN;
+  double qtail = NAN;
 
   if (Q == 0.0)
     {
@@ -205,8 +205,8 @@ gsl_cdf_tdist_Qinv (const double Q, const double nu)
     }
 
   {
-    double dQ;
-    double phi;
+    double dQ = NAN;
+    double phi = NAN;
     unsigned int n = 0;
 
   start:

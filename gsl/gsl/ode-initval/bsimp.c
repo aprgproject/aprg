@@ -104,8 +104,8 @@ bsimp_deuf_kchoice (double eps, size_t dimension)
   double a_work[SEQUENCE_COUNT];
   double alpha[SEQUENCE_MAX][SEQUENCE_MAX];
 
-  int i;
-  int k;
+  int i = 0;
+  int k = 0;
 
   a_work[0] = bd_sequence[0] + 1.0;
 
@@ -150,8 +150,8 @@ poly_extrap (gsl_matrix * d,
              const double y_i[],
              double y_0[], double y_0_err[], double work[], const size_t dim)
 {
-  size_t j;
-  size_t k;
+  size_t j = 0;
+  size_t k = 0;
 
   DBL_MEMCPY (y_0_err, y_i, dim);
   DBL_MEMCPY (y_0, y_i, dim);
@@ -235,10 +235,10 @@ bsimp_step_local (void *vstate,
 
   const double max_sum = 100.0 * dim;
 
-  int signum;
-  int status;
-  size_t i;
-  size_t j;
+  int signum = 0;
+  int status = 0;
+  size_t i = 0;
+  size_t j = 0;
   size_t n_inter = 0;
 
   /* Calculate the matrix for the linear system. */
@@ -417,8 +417,8 @@ bsimp_apply (void *vstate,
   gsl_matrix *dfdy = state->dfdy;
 
   const double t_local = t;
-  size_t i;
-  size_t k;
+  size_t i = 0;
+  size_t k = 0;
 
   if (h + t_local == t_local)
     {

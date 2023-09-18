@@ -24,6 +24,7 @@
 #include <config.h>
 #include <gsl/gsl_multimin.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 #include "directional_minimize.c"
 
@@ -163,11 +164,11 @@ conjugate_pr_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
   double g0norm = state->g0norm;
 
   double fa = *f;
-  double fb;
-  double fc;
+  double fb = NAN;
+  double fc = NAN;
   double dir = NAN;
   double stepa = 0.0;
-  double stepb;
+  double stepb = NAN;
   double stepc = state->step;
   double tol = state->tol;
 
@@ -240,8 +241,8 @@ conjugate_pr_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
     {
       /* p' = g1 - beta * p */
 
-      double g0g1;
-      double beta;
+      double g0g1 = NAN;
+      double beta = NAN;
 
       gsl_blas_daxpy (-1.0, gradient, g0); /* g0' = g0 - g1 */
       gsl_blas_ddot(g0, gradient, &g0g1);  /* g1g0 = (g0-g1).g1 */

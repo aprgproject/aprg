@@ -356,8 +356,8 @@ msadams_calccoeffs (const size_t ord, const size_t ordwait,
     }
   else
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
       double hsum = h;
       double st1 = 0.0;         /* sum term coefficients */
       double st2 = 0.0;
@@ -507,8 +507,8 @@ msadams_corrector (void *vstate, const gsl_odeiv2_system * sys,
      system is solved by functional iteration.
    */
 
-  size_t mi;
-  size_t i;
+  size_t mi = 0;
+  size_t i = 0;
   const size_t max_iter = 3;    /* Maximum number of iterations */
   double convrate = 1.0;        /* convergence rate */
   double stepnorm = 0.0;        /* norm of correction step */
@@ -1006,8 +1006,8 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
   if (deltaord == -1)
     {
       double hsum = 0.0;
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* Calculate coefficients used in adjustment to l */
 
@@ -1049,8 +1049,8 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
 
   if (state->ni > 0 && h != hprev[0])
     {
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
       const double hrel = h / hprev[0];
       double coeff = hrel;
 
@@ -1079,9 +1079,9 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
   /* Carry out the prediction step */
 
   {
-    size_t i;
-    size_t j;
-    size_t k;
+    size_t i = 0;
+    size_t j = 0;
+    size_t k = 0;
 
     for (i = 1; i < ord + 1; i++) {
       for (j = ord; j > i - 1; j--) {
@@ -1119,8 +1119,8 @@ msadams_apply (void *vstate, size_t dim, double t, double h,
   {
     /* Add accepted final correction step to Nordsieck matrix */
 
-    size_t i;
-    size_t j;
+    size_t i = 0;
+    size_t j = 0;
 
     for (i = 0; i < ord + 1; i++) {
       for (j = 0; j < dim; j++)

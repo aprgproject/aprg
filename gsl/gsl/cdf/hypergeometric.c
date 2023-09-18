@@ -55,8 +55,8 @@ lower_tail (const unsigned int k, const unsigned int n1,
 {
   double relerr = NAN;
   int i = k;
-  double s;
-  double P;
+  double s = NAN;
+  double P = NAN;
 
   s = gsl_ran_hypergeometric_pdf (i, n1, n2, t);
   P = s;
@@ -83,8 +83,8 @@ upper_tail (const unsigned int k, const unsigned int n1,
 {
   double relerr = NAN;
   unsigned int i = k + 1;
-  double s;
-  double Q;
+  double s = NAN;
+  double Q = NAN;
   
   s = gsl_ran_hypergeometric_pdf (i, n1, n2, t);
   Q = s;

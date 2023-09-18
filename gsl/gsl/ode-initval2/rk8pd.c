@@ -183,8 +183,8 @@ static void *
 rk8pd_alloc (size_t dim)
 {
   rk8pd_state_t *state = (rk8pd_state_t *) malloc (sizeof (rk8pd_state_t));
-  int i;
-  int j;
+  int i = 0;
+  int j = 0;
 
   if (state == 0)
     {

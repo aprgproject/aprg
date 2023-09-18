@@ -30,6 +30,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_cdf.h>
+#include <math.h>
 
 #include "rat_eval.h"
 
@@ -98,9 +99,9 @@ tail (double r)
 double
 gsl_cdf_ugaussian_Pinv (const double P)
 {
-  double r;
-  double x;
-  double pp;
+  double r = NAN;
+  double x = NAN;
+  double pp = NAN;
 
   double dP = P - 0.5;
 
@@ -147,9 +148,9 @@ gsl_cdf_ugaussian_Pinv (const double P)
 double
 gsl_cdf_ugaussian_Qinv (const double Q)
 {
-  double r;
-  double x;
-  double pp;
+  double r = NAN;
+  double x = NAN;
+  double pp = NAN;
 
   double dQ = Q - 0.5;
 

@@ -74,9 +74,9 @@ gsl_cdf_gamma_Pinv (const double P, const double a, const double b)
    */
 
   {
-    double lambda;
-    double dP;
-    double phi;
+    double lambda = NAN;
+    double dP = NAN;
+    double phi = NAN;
     unsigned int n = 0;
 
   start:
@@ -162,9 +162,9 @@ gsl_cdf_gamma_Qinv (const double Q, const double a, const double b)
    */
 
   {
-    double lambda;
-    double dQ;
-    double phi;
+    double lambda = NAN;
+    double dQ = NAN;
+    double phi = NAN;
     unsigned int n = 0;
 
   start:

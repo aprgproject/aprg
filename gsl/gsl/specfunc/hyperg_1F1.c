@@ -390,9 +390,9 @@ hyperg_1F1_1(const double b, const double x, gsl_sf_result * result)
       return hyperg_1F1_largebx(1.0, b, x, result);
     } if (fabs(x) > fabs(b)) {
       return hyperg_1F1_1_series(b, x, result);
-    } else {
+    } 
       return hyperg_1F1_large2bm4a(1.0, b, x, result);
-    }
+   
   }
   else {
     /* x <= 0 and b not large compared to |x|
@@ -745,7 +745,7 @@ hyperg_1F1_small_a_bgt0(const double a, const double b, const double x, gsl_sf_r
   if(b >= 1.4*ax) {
     return gsl_sf_hyperg_1F1_series_e(a, b, x, result);
   }
-  else if(x > 0.0) {
+  if(x > 0.0) {
     if(x > 100.0 && abs_bma*abs_oma < 0.5*x) {
       return hyperg_1F1_asymp_posx(a, b, x, result);
     }
@@ -966,7 +966,7 @@ hyperg_1F1_ab_posint(const int a, const int b, const double x, gsl_sf_result * r
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return stat_e;
   }
-  else if(a == b + 2) {
+  if(a == b + 2) {
     gsl_sf_result ex;
     int stat_e = gsl_sf_exp_e(x, &ex);
     double poly  = (1.0 + x/b*(2.0 + x/(b+1.0)));
@@ -1461,7 +1461,7 @@ hyperg_1F1_ab_pos(const double a, const double b,
     return hyperg_1F1_beps_bgt0(a-b, b, x, result);  /* a = b + eps */
   }
 
-  else if(b > a && b >= 2*a + x) {
+  if(b > a && b >= 2*a + x) {
     /* Use the Gautschi CF series, then
      * recurse backward to a near 0 for normalization.
      * This will work for either sign of x.
@@ -1759,7 +1759,7 @@ hyperg_1F1_ab_neg(const double a, const double b, const double x,
      */
     return hyperg_1F1_asymp_negx(a, b, x, result);
   }
-  else if(   x > 100.0
+  if(   x > 100.0
           && GSL_MAX_DBL(fabs(bma),1.0)*GSL_MAX_DBL(fabs(1.0-a),1.0) < 0.99*fabs(x)
     ) {
     /* Large positive x asymptotic.
@@ -1965,7 +1965,7 @@ gsl_sf_hyperg_1F1_e(const double a, const double b, const double x,
                                             result);
       return GSL_ERROR_SELECT_2(stat_e, stat_K);
     }
-    else if (a > 0) {
+    if (a > 0) {
       /* a > 0.0 */
       return hyperg_1F1_ab_pos(a, b, x, result);
     } else {

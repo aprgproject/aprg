@@ -219,8 +219,8 @@ gear2_apply (void *vstate,
       double *const yim1 = state->yim1;
       double *y_onestep = state->y_onestep;
 
-      int s;
-      size_t i;
+      int s = 0;
+      size_t i = 0;
 
       /* initialization */
       DBL_MEMCPY (y0, y, dim);

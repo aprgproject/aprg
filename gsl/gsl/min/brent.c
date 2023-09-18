@@ -86,8 +86,8 @@ brent_iterate (void *vstate, gsl_function * f, double *x_minimum, double * f_min
   const double z = *x_minimum;
   double d = state->e;
   double e = state->d;
-  double u;
-  double f_u;
+  double u = NAN;
+  double f_u = NAN;
   const double v = state->v;
   const double w = state->w;
   const double f_v = state->f_v;
@@ -204,7 +204,7 @@ brent_iterate (void *vstate, gsl_function * f, double *x_minimum, double * f_min
           state->f_w = f_u;
           return GSL_SUCCESS;
         }
-      else if (f_u <= f_v || v == z || v == w)
+      if (f_u <= f_v || v == z || v == w)
         {
           state->v = u;
           state->f_v = f_u;

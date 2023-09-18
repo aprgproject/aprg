@@ -204,7 +204,7 @@ dilog_xge0(const double x, gsl_sf_result * result)
   if(x > 0.25) {
     return dilog_series_2(x, result);
   }
-  else if(x > 0.0) {
+  if(x > 0.0) {
     return dilog_series_1(x, result);
   }
   else {

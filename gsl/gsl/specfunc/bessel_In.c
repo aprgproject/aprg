@@ -86,10 +86,11 @@ gsl_sf_bessel_In_scaled_e(int n, const double x, gsl_sf_result * result)
   }
   if( GSL_MIN( 0.29/(n*n), 0.5/(n*n + x*x) ) < 0.5*GSL_ROOT3_DBL_EPSILON) {
     int stat_as = gsl_sf_bessel_Inu_scaled_asymp_unif_e((double)n, ax, result);
-    if(x < 0.0 && GSL_IS_ODD(n)) result->val = -result->val;
+    if(x < 0.0 && GSL_IS_ODD(n)) { result->val = -result->val;
+}
     return stat_as;
   }
-  else {
+  
     const int nhi = 2 + (int) (1.2 / GSL_ROOT6_DBL_EPSILON);
     gsl_sf_result r_Ikp1;
     gsl_sf_result r_Ik;
@@ -108,7 +109,7 @@ gsl_sf_bessel_In_scaled_e(int n, const double x, gsl_sf_result * result)
     result->err = Ik * (r_Ikp1.err/r_Ikp1.val + r_Ik.err/r_Ik.val);
     if(x < 0.0 && GSL_IS_ODD(n)) result->val = -result->val;
     return GSL_ERROR_SELECT_2(stat_a1, stat_a2);
-  }
+ 
 }
 
 

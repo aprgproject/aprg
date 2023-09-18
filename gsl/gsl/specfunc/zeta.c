@@ -965,7 +965,7 @@ int gsl_sf_eta_int_e(int n, gsl_sf_result * result)
       result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_SUCCESS;
     }
-    else {
+    
       gsl_sf_result z;
       gsl_sf_result p;
       int stat_z = gsl_sf_zeta_int_e(n, &z);
@@ -974,7 +974,7 @@ int gsl_sf_eta_int_e(int n, gsl_sf_result * result)
       result->err  = fabs(p.err * (M_LN2*(1.0-n)) * z.val) + z.err * fabs(p.val);
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return GSL_ERROR_SELECT_3(stat_m, stat_p, stat_z);
-    }
+   
  
 }
 

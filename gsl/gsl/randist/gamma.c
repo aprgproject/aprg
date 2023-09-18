@@ -172,13 +172,13 @@ gsl_ran_gamma_pdf (const double x, const double a, const double b)
     {
       return exp(-x/b)/b ;
     }
-  else 
-    {
+  
+    
       double p = NAN;
       double lngamma = gsl_sf_lngamma (a);
       p = exp ((a - 1) * log (x/b) - x/b - lngamma)/b;
       return p;
-    }
+   
 }
 
 

@@ -19,6 +19,7 @@
 
 #include <config.h>
 
+#include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -66,15 +67,15 @@ static int
 broyden_alloc (void *vstate, size_t n)
 {
   broyden_state_t *state = (broyden_state_t *) vstate;
-  gsl_vector *v;
-  gsl_vector *w;
-  gsl_vector *y;
-  gsl_vector *fnew;
-  gsl_vector *x_trial;
-  gsl_vector *p;
+  gsl_vector *v = NULL;
+  gsl_vector *w = NULL;
+  gsl_vector *y = NULL;
+  gsl_vector *fnew = NULL;
+  gsl_vector *x_trial = NULL;
+  gsl_vector *p = NULL;
   gsl_permutation *perm = NULL;
-  gsl_matrix *m;
-  gsl_matrix *H;
+  gsl_matrix *m = NULL;
+  gsl_matrix *H = NULL;
 
   m = gsl_matrix_calloc (n, n);
 
@@ -208,8 +209,8 @@ static int
 broyden_set (void *vstate, gsl_multiroot_function * function, gsl_vector * x, gsl_vector * f, gsl_vector * dx)
 {
   broyden_state_t *state = (broyden_state_t *) vstate;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   size_t n = function->n;
   int signum = 0;
 
@@ -240,10 +241,10 @@ broyden_iterate (void *vstate, gsl_multiroot_function * function, gsl_vector * x
 {
   broyden_state_t *state = (broyden_state_t *) vstate;
 
-  double phi0;
-  double phi1;
-  double t;
-  double lambda;
+  double phi0 = NAN;
+  double phi1 = NAN;
+  double t = NAN;
+  double lambda = NAN;
 
   gsl_matrix *H = state->H;
   gsl_vector *p = state->p;
@@ -255,9 +256,9 @@ broyden_iterate (void *vstate, gsl_multiroot_function * function, gsl_vector * x
   gsl_matrix *lu = state->lu;
   gsl_permutation *perm = state->permutation;
 
-  size_t i;
-  size_t j;
-  size_t iter;
+  size_t i = 0;
+  size_t j = 0;
+  size_t iter = 0;
 
   size_t n = function->n;
 

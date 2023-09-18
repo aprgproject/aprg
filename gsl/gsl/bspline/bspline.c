@@ -862,19 +862,19 @@ bspline_pppack_bsplvd (const gsl_vector * t,
                        gsl_matrix * a,
                        gsl_matrix * dbiatx, const size_t nderiv)
 {
-  int i;
-  int ideriv;
-  int il;
-  int j;
-  int jlow;
-  int jp1mid;
-  int kmm;
-  int ldummy;
-  int m;
-  int mhigh;
-  double factor;
-  double fkmm;
-  double sum;
+  int i = 0;
+  int ideriv = 0;
+  int il = 0;
+  int j = 0;
+  int jlow = 0;
+  int jp1mid = 0;
+  int kmm = 0;
+  int ldummy = 0;
+  int m = 0;
+  int mhigh = 0;
+  double factor = NAN;
+  double fkmm = NAN;
+  double sum = NAN;
 
   size_t bsplvb_j = 0;
   gsl_vector_view dbcol = gsl_matrix_column (dbiatx, 0);

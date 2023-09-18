@@ -126,21 +126,23 @@ std_control_hadjust (void *vstate, size_t dim, unsigned int ord,
       /* increase step, no more than factor of 5 */
       double r = S / pow (rmax, 1.0 / (ord + 1.0));
 
-      if (r > 5.0)
+      if (r > 5.0) {
         r = 5.0;
+}
 
-      if (r < 1.0)              /* don't allow any decrease caused by S<1 */
+      if (r < 1.0) {              /* don't allow any decrease caused by S<1 */
         r = 1.0;
+}
 
       *h = r * h_old;
 
       return GSL_ODEIV_HADJ_INC;
     }
-  else
-    {
+  
+    
       /* no change */
       return GSL_ODEIV_HADJ_NIL;
-    }
+   
 }
 
 static int

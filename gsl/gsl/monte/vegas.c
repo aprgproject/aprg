@@ -113,11 +113,11 @@ gsl_monte_vegas_integrate (gsl_monte_function * f,
                            gsl_monte_vegas_state * state,
                            double *result, double *abserr)
 {
-  double cum_int;
-  double cum_sig;
-  size_t i;
-  size_t k;
-  size_t it;
+  double cum_int = NAN;
+  double cum_sig = NAN;
+  size_t i = 0;
+  size_t k = 0;
+  size_t it = 0;
 
   if (dim != state->dim)
     {
@@ -224,9 +224,9 @@ gsl_monte_vegas_integrate (gsl_monte_function * f,
       double intgrl = 0.0;
       double intgrl_sq = 0.0;
       double tss = 0.0;
-      double wgt;
-      double var;
-      double sig;
+      double wgt = NAN;
+      double var = NAN;
+      double sig = NAN;
       size_t calls_per_box = state->calls_per_box;
       double jacbin = state->jac;
       double *x = state->x;
@@ -627,8 +627,8 @@ init_grid (gsl_monte_vegas_state * s, double xl[], double xu[], size_t dim)
 static void
 reset_grid_values (gsl_monte_vegas_state * s)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   size_t dim = s->dim;
   size_t bins = s->bins;
@@ -683,8 +683,8 @@ random_point (double x[], coord bin[], double *bin_vol,
 
       int k = z;
 
-      double y;
-      double bin_width;
+      double y = NAN;
+      double bin_width = NAN;
 
       bin[j] = k;
 
@@ -711,8 +711,8 @@ random_point (double x[], coord bin[], double *bin_vol,
 static void
 resize_grid (gsl_monte_vegas_state * s, unsigned int bins)
 {
-  size_t j;
-  size_t k;
+  size_t j = 0;
+  size_t k = 0;
   size_t dim = s->dim;
 
   /* weight is ratio of bin sizes */
@@ -753,16 +753,16 @@ resize_grid (gsl_monte_vegas_state * s, unsigned int bins)
 static void
 refine_grid (gsl_monte_vegas_state * s)
 {
-  size_t i;
-  size_t j;
-  size_t k;
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
   size_t dim = s->dim;
   size_t bins = s->bins;
 
   for (j = 0; j < dim; j++)
     {
-      double grid_tot_j;
-      double tot_weight;
+      double grid_tot_j = NAN;
+      double tot_weight = NAN;
       double * weight = s->weight;
 
       double oldg = VALUE (s, 0, j);
@@ -889,8 +889,8 @@ print_res (gsl_monte_vegas_state * state,
 static void
 print_dist (gsl_monte_vegas_state * state, unsigned long dim)
 {
-  unsigned long i;
-  unsigned long j;
+  unsigned long i = 0;
+  unsigned long j = 0;
   int p = state->verbose;
   if (p < 1) {
     return;
@@ -917,8 +917,8 @@ print_dist (gsl_monte_vegas_state * state, unsigned long dim)
 static void
 print_grid (gsl_monte_vegas_state * state, unsigned long dim)
 {
-  unsigned long i;
-  unsigned long j;
+  unsigned long i = 0;
+  unsigned long j = 0;
   int p = state->verbose;
   if (p < 1) {
     return;

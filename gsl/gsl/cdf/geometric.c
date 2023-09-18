@@ -32,9 +32,9 @@
 double
 gsl_cdf_geometric_P (const unsigned int k, const double p)
 {
-  double P;
-  double a;
-  double q;
+  double P = NAN;
+  double a = NAN;
+  double q = NAN;
 
   if (p > 1.0 || p < 0.0)
     {
@@ -64,9 +64,9 @@ gsl_cdf_geometric_P (const unsigned int k, const double p)
 double
 gsl_cdf_geometric_Q (const unsigned int k, const double p)
 {
-  double Q;
-  double a;
-  double q;
+  double Q = NAN;
+  double a = NAN;
+  double q = NAN;
 
   if (p > 1.0 || p < 0.0)
     {

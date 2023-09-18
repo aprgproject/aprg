@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdio.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_block.h>
@@ -66,8 +67,8 @@ int
 gsl_histogram2d_fprintf (FILE * stream, const gsl_histogram2d * h,
                          const char *range_format, const char *bin_format)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   const size_t nx = h->nx;
   const size_t ny = h->ny;
   int status = 0;
@@ -160,12 +161,12 @@ gsl_histogram2d_fprintf (FILE * stream, const gsl_histogram2d * h,
 int
 gsl_histogram2d_fscanf (FILE * stream, gsl_histogram2d * h)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   const size_t nx = h->nx;
   const size_t ny = h->ny;
-  double xupper;
-  double yupper;
+  double xupper = NAN;
+  double yupper = NAN;
 
   for (i = 0; i < nx; i++)
     {
