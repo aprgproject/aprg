@@ -641,4 +641,16 @@ TEST(AlbaLocalPathHandlerTest, IsAbsolutePathWorks) {
     EXPECT_FALSE(PathHandler("a/b").isAbsolutePath());
 }
 
+TEST(AlbaLocalPathHandlerTest, MoveUpADirectoryWorks) {
+    PathHandler pathHandler(getAprgTestDirectory() + R"(DIR1\DIR2\DIR3\)");
+
+    EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DIR1\DIR2\DIR3\)"), pathHandler.getPath());
+    pathHandler.moveUpADirectory();
+    EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DIR1\DIR2\)"), pathHandler.getPath());
+    pathHandler.moveUpADirectory();
+    EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DIR1\)"), pathHandler.getPath());
+    pathHandler.moveUpADirectory();
+    EXPECT_EQ(fixPath(getAprgTestDirectory()), pathHandler.getPath());
+}
+
 }  // namespace alba

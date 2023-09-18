@@ -236,7 +236,7 @@ void AlbaLocalPathHandler::clear() { m_path.clear(); }
 void AlbaLocalPathHandler::input(LocalPath const& path) { m_path = fixPath(path); }
 void AlbaLocalPathHandler::input(LocalPath&& path) { m_path = fixPath(path); }
 
-void AlbaLocalPathHandler::moveUpADirectory() { input(m_path.parent_path().parent_path()); }
+void AlbaLocalPathHandler::moveUpADirectory() { input(m_path.parent_path().parent_path() / ""); }
 
 bool AlbaLocalPathHandler::renameFileAndIsSuccessful(LocalPath const& newFileName) {
     try {
