@@ -14,21 +14,12 @@ namespace {
 using StringType = path::string_type;
 using CharacterType = StringType::value_type;
 
-constexpr std::array<CharacterType, 2> SLASH_STRING = {
-    static_cast<CharacterType>('/'), static_cast<CharacterType>('\0')};
-constexpr std::array<CharacterType, 2> BACK_SLASH_STRING = {
-    static_cast<CharacterType>('\\'), static_cast<CharacterType>('\0')};
-constexpr std::array<CharacterType, 2> PREFERRED_SLASH_STRING = {
-    static_cast<CharacterType>(path::preferred_separator), static_cast<CharacterType>('\0')};
+constexpr CharacterType SLASH_STRING = static_cast<CharacterType>('/');
+constexpr CharacterType BACK_SLASH_STRING = static_cast<CharacterType>('\\');
+constexpr CharacterType PREFERRED_SLASH_STRING = static_cast<CharacterType>(path::preferred_separator);
 
-void replaceAll(StringType& mainText, StringType const& targetStr, StringType const& replacementStr) {
-    auto const targetStrLength = targetStr.length();
-    auto const replacementStrLength = replacementStr.length();
-    auto index = mainText.find(targetStr);
-    while (index != std::string::npos) {
-        mainText.replace(index, targetStrLength, replacementStr);
-        index = mainText.find(targetStr, index + replacementStrLength);
-    }
+void replaceAllSlashes(StringType& mainText, CharacterType const& targetSlash, CharacterType const& replacementSlash) {
+    replace(mainText.begin(), mainText.end(), targetSlash, replacementSlash);
 }
 
 }  // namespace
@@ -285,8 +276,8 @@ AlbaLocalPathHandler AlbaLocalPathHandler::createPathHandlerForDetectedPath() {
 
 AlbaLocalPathHandler::LocalPath AlbaLocalPathHandler::fixPath(LocalPath const& path) {
     auto pathString(path.native());
-    replaceAll(pathString, SLASH_STRING.data(), PREFERRED_SLASH_STRING.data());
-    replaceAll(pathString, BACK_SLASH_STRING.data(), PREFERRED_SLASH_STRING.data());
+    replaceAllSlashes(pathString, SLASH_STRING, PREFERRED_SLASH_STRING);
+    replaceAllSlashes(pathString, BACK_SLASH_STRING, PREFERRED_SLASH_STRING);
     LocalPath const replacedStringPath(pathString);
     LocalPath fixedPath(replacedStringPath.root_path());
     bool isLastASlash(false);
