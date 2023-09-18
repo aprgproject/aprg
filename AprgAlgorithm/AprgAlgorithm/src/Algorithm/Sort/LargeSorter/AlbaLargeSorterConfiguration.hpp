@@ -24,10 +24,11 @@ struct AlbaLargeSorterConfiguration {
           m_maximumNumberOfObjectsInMemory(maximumNumberOfObjectsInMemory),
           m_maximumFileStreams(maximumFileStreams) {}
 
-    AlbaLargeSorterConfiguration(
-        AlbaLargeSorterConfiguration const& sorterConfiguration, std::string const& directoryForBlocks)
-        : AlbaLargeSorterConfiguration(sorterConfiguration) {
-        m_directoryForBlocks = getFixedPath(directoryForBlocks);
+    // perfect forwarding
+    template <typename ConfigurationType, typename StringType>
+    AlbaLargeSorterConfiguration(ConfigurationType&& sorterConfiguration, StringType&& directoryForBlocks)
+        : AlbaLargeSorterConfiguration(std::forward<ConfigurationType>(sorterConfiguration)) {
+        m_directoryForBlocks = getFixedPath(std::forward<StringType>(directoryForBlocks));
     }
 
     [[nodiscard]] std::string getFilePathWithBlockNumber(int const blockNumber) const {
@@ -37,25 +38,19 @@ struct AlbaLargeSorterConfiguration {
     }
 
     [[nodiscard]] bool isConfigurationValid() const {
-        if (m_minimumNumberOfObjectsPerBlock <= 0) {
-            return false;
-        }
-        if (m_maximumNumberOfObjectsPerBlock <= m_minimumNumberOfObjectsPerBlock) {
+        if (m_minimumNumberOfObjectsPerBlock <= 0 ||
+            m_maximumNumberOfObjectsPerBlock <= m_minimumNumberOfObjectsPerBlock) {
             return false;
         }
         AlbaLocalPathHandler directoryPath(m_directoryForBlocks);
-        directoryPath.createDirectoriesForNonExisitingDirectories();
-        directoryPath.reInput();
-        if (!directoryPath.doesExist()) {
-            return false;
-        }
-        if (!directoryPath.isDirectory()) {
+        directoryPath.createDirectoriesAndIsSuccessful();
+        if (!directoryPath.isExistingDirectory()) {
             return false;
         }
         return true;
     }
 
-    static std::string getFixedPath(std::string const& path) { return AlbaLocalPathHandler(path).getPath(); }
+    static std::string getFixedPath(std::string const& path) { return AlbaLocalPathHandler(path).getPath().string(); }
     std::string m_directoryForBlocks;
     int m_minimumNumberOfObjectsPerBlock;
     int m_maximumNumberOfObjectsPerBlock;

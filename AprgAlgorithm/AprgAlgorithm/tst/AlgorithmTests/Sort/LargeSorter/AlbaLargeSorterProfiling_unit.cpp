@@ -19,7 +19,7 @@ namespace alba::algorithm {
 TEST(AlbaLargeSorterProfileTest, DISABLED_FirstTest) {
     int stringSize(200);
     AlbaLargeSorterConfiguration sorterConfiguration;
-    sorterConfiguration.m_directoryForBlocks = AlbaLocalPathHandler(ALBA_LARGE_SORTER_BLOCK_DIR).getPath();
+    sorterConfiguration.m_directoryForBlocks = AlbaLocalPathHandler(ALBA_LARGE_SORTER_BLOCK_DIR).getPath().string();
     sorterConfiguration.m_minimumNumberOfObjectsPerBlock = 1000;
     sorterConfiguration.m_maximumNumberOfObjectsPerBlock = 10000;
     sorterConfiguration.m_maximumNumberOfObjectsInMemory = 100000;

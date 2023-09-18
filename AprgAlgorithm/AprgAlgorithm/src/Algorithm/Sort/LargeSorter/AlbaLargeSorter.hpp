@@ -139,13 +139,13 @@ private:
     }
 
     void createTempDirectories() {
-        AlbaLocalPathHandler(m_configuration.m_directoryForBlocks).createDirectoriesForNonExisitingDirectories();
+        AlbaLocalPathHandler(m_configuration.m_directoryForBlocks).createDirectoriesAndIsSuccessful();
     }
 
     void deleteTempFilesAndDirectories() {
         AlbaLocalPathHandler temporaryLocalDirectory(m_configuration.m_directoryForBlocks);
         if (temporaryLocalDirectory.doesExist()) {
-            temporaryLocalDirectory.deleteInnerFilesAndDirectories();
+            temporaryLocalDirectory.deleteAllDirectoryContentsAndIsSuccessful();
         }
     }
 
