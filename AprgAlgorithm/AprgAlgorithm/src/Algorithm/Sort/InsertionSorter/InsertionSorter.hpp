@@ -19,7 +19,7 @@ public:
             ALBA_DBG_PRINT(valuesToSort);
             for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
                 ALBA_DBG_PRINT(valuesToSort);
-                // continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
+                continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                 // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
                 ALBA_DBG_PRINT(valuesToSort);
             }
@@ -34,19 +34,13 @@ private:
         // so final the stiuation here is rItLow < rItHigh and insertIt
         ALBA_DBG_PRINT(valuesToSort);
         ALBA_DBG_PRINT(*rItLow, *rItHigh);
-        if (*rItLow == "spongebob" && *rItHigh == "patrick") {
-            return;
-        }
-        for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
+        /*for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
             ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
-            if (*rItLow == "spongebob" && *rItHigh == "patrick") {
-                break;
-            }
             std::swap(*rItLow, *rItHigh);
             ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
-        }
+        }*/
         ALBA_DBG_PRINT(valuesToSort);
     }
 
