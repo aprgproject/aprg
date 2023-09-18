@@ -15,8 +15,8 @@ public:
         std::filesystem::path const& outputFilePath, std::string const& fileCondition,
         std::string const& lineCondition);
 
-    void processDirectory(std::filesystem::path const& path);
-    void processFile(std::filesystem::path const& path);
+    void processDirectory(std::filesystem::path const& directoryPath);
+    void processFile(std::filesystem::path const& filePath);
 
 private:
     AlbaLocalPathHandler m_pathHandler;
