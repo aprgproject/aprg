@@ -28,32 +28,33 @@ BtsLogSorter::BtsLogSorter(BtsLogSorterConfiguration const& configuration)
       m_pathOfAllTempFiles(configuration.m_pathOfTempFiles),
       m_pathOfCurrentTempFiles(
           AlbaLocalPathHandler(configuration.m_pathOfTempFiles + R"(\)" + stringHelper::getRandomAlphaNumericString(30))
-              .getPath()),
+              .getPath()
+              .string()),
       m_sorterWithPcTime(AlbaLargeSorterConfiguration(
           configuration.m_configurationWithPcTime,
-          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\BlocksWithPcTime\)").getPath())),
+          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\BlocksWithPcTime\)").getPath().string())),
       m_sorterWithoutPcTime(AlbaLargeSorterConfiguration(
           configuration.m_configurationWithoutPcTime,
-          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\BlocksWithoutPcTime\)").getPath())),
+          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\BlocksWithoutPcTime\)").getPath().string())),
       m_directoryOfLogsWithoutPcTime(
-          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\LogsWithoutPcTime\)").getPath()),
-      m_pathOfStartupLog(AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\StartupLog\Startup.log)").getPath()) {
+          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\LogsWithoutPcTime\)").getPath().string()),
+      m_pathOfStartupLog(
+          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\StartupLog\Startup.log)").getPath().string()) {
     deleteTempFilesAndDirectoriesOfOneDayOld();
     createTempDirectories();
 }
 
 void BtsLogSorter::processDirectory(string const& directoryPath) {
     cout << "processDirectory: " << directoryPath << "\n";
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    AlbaLocalPathHandler(directoryPath).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    ProgressCounters::totalSizeToBeReadForCombine = getTotalSizeToBeRead(listOfFiles);
-    for (string const& filePath : listOfFiles) {
-        AlbaLocalPathHandler const filePathHandler(filePath);
-        if (m_acceptedFilesGrepEvaluator.evaluate(filePathHandler.getFile())) {
-            processFile(filePathHandler.getPath());
-        }
-    }
+    AlbaLocalPathHandler(directoryPath)
+        .findFilesAndDirectoriesUnlimitedDepth(
+            [](AlbaLocalPathHandler::LocalPath const&) {},
+            [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+                AlbaLocalPathHandler const filePathHandler(filePath);
+                if (m_acceptedFilesGrepEvaluator.evaluate(filePathHandler.getFile().string())) {
+                    processFile(filePathHandler.getPath().string());
+                }
+            });
 }
 
 void BtsLogSorter::processFile(string const& filePath) {
@@ -67,11 +68,11 @@ void BtsLogSorter::processFile(string const& filePath) {
     while (fileReader.isNotFinished()) {
         string const lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
         if (!m_isFilterOn || m_filterGrepEvaluator.evaluate(lineInFile)) {
-            processLineInFile(filePathHandler.getFile(), lineInFile);
+            processLineInFile(filePathHandler.getFile().string(), lineInFile);
         }
         ProgressCounters::totalSizeReadForCombine = previousTotalSize + fileReader.getCurrentLocation();
     }
-    ProgressCounters::totalSizeReadForCombine = previousTotalSize + filePathHandler.getFileSizeEstimate();
+    ProgressCounters::totalSizeReadForCombine = previousTotalSize + filePathHandler.getFileSize();
 }
 
 void BtsLogSorter::processLineInFile(string const& filename, string const& lineInFile) {
@@ -100,34 +101,33 @@ double BtsLogSorter::getTotalSizeToBeRead(set<string> const& listOfFiles) {
     double totalFileSize(0);
     for (string const& filePath : listOfFiles) {
         AlbaLocalPathHandler filePathHandler(filePath);
-        if (m_acceptedFilesGrepEvaluator.evaluate(filePathHandler.getFile())) {
-            totalFileSize += filePathHandler.getFileSizeEstimate();
+        if (m_acceptedFilesGrepEvaluator.evaluate(filePathHandler.getFile().string())) {
+            totalFileSize += filePathHandler.getFileSize();
         }
     }
     return totalFileSize;
 }
 
 void BtsLogSorter::createTempDirectories() const {
-    AlbaLocalPathHandler(m_directoryOfLogsWithoutPcTime).createDirectoriesForNonExisitingDirectories();
-    AlbaLocalPathHandler(m_pathOfStartupLog).createDirectoriesForNonExisitingDirectories();
+    AlbaLocalPathHandler(m_directoryOfLogsWithoutPcTime).createDirectoriesAndIsSuccessful();
+    AlbaLocalPathHandler(m_pathOfStartupLog).createDirectoriesAndIsSuccessful();
 }
 
 void BtsLogSorter::deleteTempFilesAndDirectoriesOfOneDayOld() const {
     AlbaLocalPathHandler const tempFileAndDirectoryPathHandler(m_pathOfAllTempFiles);
-    ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;
-    tempFileAndDirectoryPathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);
     AlbaDateTime const currentTime(getCurrentDateTime());
     AlbaDateTime const oneDay(0, 0, 1, 0, 0, 0, 0);
-    for (string const& directoryPath : listOfDirectories) {
-        AlbaLocalPathHandler temporaryDirectoryPathHandler(directoryPath);
-        AlbaDateTime const fileCreationTime(temporaryDirectoryPathHandler.getFileCreationTime());
-        AlbaDateTime const difference = currentTime - fileCreationTime;
-        if (difference > oneDay) {
-            cout << "Difference: [" << difference << "] deleted temporaryPath:" << directoryPath << "\n";
-            temporaryDirectoryPathHandler.deleteDirectoryWithFilesAndDirectories();
-        }
-    }
+    tempFileAndDirectoryPathHandler.findFilesAndDirectoriesOneDepth(
+        [&](AlbaLocalPathHandler::LocalPath const& directoryPath) {
+            AlbaLocalPathHandler temporaryDirectoryPathHandler(directoryPath);
+            AlbaDateTime const fileCreationTime(temporaryDirectoryPathHandler.getLastModifiedDateTime());
+            AlbaDateTime const difference = currentTime - fileCreationTime;
+            if (difference > oneDay) {
+                cout << "Difference: [" << difference << "] deleted temporaryPath:" << directoryPath << "\n";
+                temporaryDirectoryPathHandler.deleteDirectoryAndIsSuccessful();
+            }
+        },
+        [](AlbaLocalPathHandler::LocalPath const&) {});
 }
 
 void BtsLogSorter::deleteStartupLog() const { deleteFilesInDirectory(m_pathOfStartupLog); }
@@ -160,7 +160,7 @@ void BtsLogSorter::addStartupLogsOnSorterWithPcTime() {
     m_startupLogStreamOptional.reset();
     BtsPrintReaderWithRollback printReader;
     printReader.openIfNeeded(m_pathOfStartupLog);
-    double const fileSize(AlbaLocalPathHandler(m_pathOfStartupLog).getFileSizeEstimate());
+    double const fileSize(AlbaLocalPathHandler(m_pathOfStartupLog).getFileSize());
     while (printReader.isGood()) {
         BtsLogPrint const startupLogPrint(printReader.getPrint());
         if (!startupLogPrint.isEmpty()) {
@@ -260,13 +260,13 @@ void BtsLogSorter::writeLastPrint(ofstream& outputLogFileStream) {
 }
 
 void BtsLogSorter::deleteFilesInDirectory(string const& directoryOfLogs) {
-    AlbaLocalPathHandler(directoryOfLogs).deleteFilesInDirectory();
+    AlbaLocalPathHandler(directoryOfLogs).deleteAllDirectoryContentsAndIsSuccessful();
 }
 
 string BtsLogSorter::getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
     string const& directory, string const& hardwareAddress) {
     string const filename = hardwareAddress.empty() ? "NoHardwareAddress" : hardwareAddress;
-    return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getPath();
+    return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getPath().string();
 }
 
 }  // namespace wcdmaToolsBackend
