@@ -34,13 +34,17 @@ private:
         // so final the stiuation here is rItLow < rItHigh and insertIt
         ALBA_DBG_PRINT(valuesToSort);
         ALBA_DBG_PRINT(*rItLow, *rItHigh);
-        for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
+        for (; rItLow != valuesToSort.rend(); ++rItLow) {
+            ALBA_DBG_PRINT(valuesToSort);
+            ALBA_DBG_PRINT(*rItLow, *rItHigh);
+        }
+        /*for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
             ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
             // std::swap(*rItLow, *rItHigh);
             ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
-        }
+        }*/
         ALBA_DBG_PRINT(valuesToSort);
     }
 
