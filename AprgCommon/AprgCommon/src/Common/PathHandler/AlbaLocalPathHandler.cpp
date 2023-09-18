@@ -13,9 +13,13 @@ namespace {
 
 using StringType = path::string_type;
 using CharacterType = StringType::value_type;
-StringType const slashString(1, static_cast<CharacterType>('/'));
-StringType const backSlashString(1, static_cast<CharacterType>('\\'));
-StringType const pathSlashString(1, static_cast<CharacterType>(path::preferred_separator));
+
+constexpr std::array<CharacterType, 2> SLASH_STRING = {
+    static_cast<CharacterType>('/'), static_cast<CharacterType>('\0')};
+constexpr std::array<CharacterType, 2> BACK_SLASH_STRING = {
+    static_cast<CharacterType>('\\'), static_cast<CharacterType>('\0')};
+constexpr std::array<CharacterType, 2> PREFERRED_SLASH_STRING = {
+    static_cast<CharacterType>(path::preferred_separator), static_cast<CharacterType>('\0')};
 
 void replaceAll(StringType& mainText, StringType const& targetStr, StringType const& replacementStr) {
     auto const targetStrLength = targetStr.length();
@@ -281,8 +285,8 @@ AlbaLocalPathHandler AlbaLocalPathHandler::createPathHandlerForDetectedPath() {
 
 AlbaLocalPathHandler::LocalPath AlbaLocalPathHandler::fixPath(LocalPath const& path) {
     auto pathString(path.native());
-    replaceAll(pathString, slashString, pathSlashString);
-    replaceAll(pathString, backSlashString, pathSlashString);
+    replaceAll(pathString, SLASH_STRING.data(), PREFERRED_SLASH_STRING.data());
+    replaceAll(pathString, BACK_SLASH_STRING.data(), PREFERRED_SLASH_STRING.data());
     LocalPath const replacedStringPath(pathString);
     LocalPath fixedPath(replacedStringPath.root_path());
     bool isLastASlash(false);
