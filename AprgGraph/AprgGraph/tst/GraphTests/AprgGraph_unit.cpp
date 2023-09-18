@@ -20,8 +20,8 @@ namespace alba {
 TEST(AprgGraphTest, DISABLED_BitmapGraph24Bits) {
     AlbaLocalPathHandler defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);
     AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
-    graphOutputFile.deleteFile();
-    defaultFile.copyToNewFile(graphOutputFile.getPath());
+    EXPECT_TRUE(graphOutputFile.deleteFileAndIsSuccessful());
+    EXPECT_TRUE(defaultFile.copyFileToAndIsSuccessful(graphOutputFile.getPath()));
 
     AprgGraph graph(graphOutputFile.getPath(), BitmapXY(800, 450), BitmapDoubleXY(50, 50));
     graph.drawGrid(BitmapDoubleXY(static_cast<double>(5), static_cast<double>(5)));
@@ -52,8 +52,8 @@ TEST(AprgGraphTest, DISABLED_BitmapGraph24Bits) {
 TEST(AprgGraphTest, DISABLED_TemporaryTest) {
     AlbaLocalPathHandler defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);
     AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
-    graphOutputFile.deleteFile();
-    defaultFile.copyToNewFile(graphOutputFile.getPath());
+    EXPECT_TRUE(graphOutputFile.deleteFileAndIsSuccessful());
+    EXPECT_TRUE(defaultFile.copyFileToAndIsSuccessful(graphOutputFile.getPath()));
 
     AprgGraph graph(graphOutputFile.getPath(), BitmapXY(800, 450), BitmapDoubleXY(50, 50));
     graph.drawGrid(BitmapDoubleXY(static_cast<double>(5), static_cast<double>(5)));

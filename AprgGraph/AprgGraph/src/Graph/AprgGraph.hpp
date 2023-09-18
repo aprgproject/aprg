@@ -12,6 +12,7 @@
 #include <Geometry/TwoDimensions/Constructs/Line.hpp>
 #include <Geometry/TwoDimensions/Constructs/Point.hpp>
 
+#include <filesystem>
 #include <functional>
 #include <string>
 
@@ -25,7 +26,7 @@ public:
     using FunctionWithDoubles = std::function<double(double)>;
 
     AprgGraph(
-        std::string const& bitmapPath, AprgBitmap::BitmapXY const& originInBitmap,
+        std::filesystem::path const& bitmapPath, AprgBitmap::BitmapXY const& originInBitmap,
         AprgBitmap::BitmapDoubleXY const& magnification);
 
     void drawPoint(TwoDimensions::Point const& point, uint32_t const color);
@@ -60,7 +61,7 @@ private:
     void drawEquationWithXSubstitution(algebra::Equation const& equation, uint32_t const color);
     void drawEquationWithYSubstitution(algebra::Equation const& equation, uint32_t const color);
     bool isBitmapPointInTheBitmap(TwoDimensions::Point const& bitmapPoint);
-    static std::string getBitmapFilePathOfCharacter(char const character);
+    static std::filesystem::path getBitmapFilePathOfCharacter(char const character);
     AprgBitmap::Bitmap m_bitmap;
     AprgBitmap::BitmapSnippet m_bitmapSnippet;
     AprgBitmap::BitmapXY m_originInBitmap;
