@@ -44,10 +44,10 @@ void CPlusPlusFixer::processFile(path const& file) {
 
 void CPlusPlusFixer::fixTerms() {
     combinePrimitiveTypes();
-    // fixPostFixIncrementDecrement();
-    // fixConstReferenceOrder();
-    // fixCStyleStaticCast();
-    // fixNoConstPassByValue();
+    fixPostFixIncrementDecrement();
+    fixConstReferenceOrder();
+    fixCStyleStaticCast();
+    fixNoConstPassByValue();
     fixCommentsPositionOfBraces();
 }
 
