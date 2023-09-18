@@ -16,10 +16,10 @@ namespace aprgWebCrawler {
 void OneDownloadPerPageCrawler::retrieveLinksForGuroManga(AlbaWebPathHandler const& webLinkPathHandler) {
     AlbaLocalPathHandler downloadPathHandler(m_webCrawler.getDownloadDirectory() + R"(\temp.html)");
     downloadFileWithDefaultSettings(webLinkPathHandler, downloadPathHandler);
-    ifstream htmlFileStream(downloadPathHandler.getFullPath());
+    ifstream htmlFileStream(downloadPathHandler.getPath());
     if (!htmlFileStream.is_open()) {
         cout << "Cannot open html file.\n";
-        cout << "File to read:" << downloadPathHandler.getFullPath() << "\n";
+        cout << "File to read:" << downloadPathHandler.getPath() << "\n";
     } else {
         bool isDivClassImage(false);
         string title;

@@ -13,42 +13,42 @@
 using namespace alba::stringHelper;
 using namespace std;
 
-namespace alba {
+namespace alba::AlbaWindowsUserAutomation {
 
 TEST(RealAutomationTest, DISABLED_TraverseTalonRoShops) {
     // DISABLED_
-    AlbaWindowsUserAutomation const userAutomation;
+
     // AlbaLocalPathHandler itemDatabaseFolder(R"(C:\Users\detectivemark7\Desktop\RO\TalonRO\BuyingShops\)");
     AlbaLocalPathHandler const itemDatabaseFolder(R"(C:\Users\detectivemark7\Desktop\RO\TalonRO\SellingShops\)");
 
-    alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(2368, 52));
+    doLeftClickAt(MousePosition(2368, 52));
 
     // string talonRoPath(R"(https://panel.talonro.com/whobuy/)");
     string const talonRoPath(R"(https://panel.talonro.com/whosell/)");
-    alba::AlbaWindowsUserAutomation::typeKey(VK_DELETE);
-    alba::AlbaWindowsUserAutomation::setStringToClipboard(talonRoPath);
-    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
-    alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
+    typeKey(VK_DELETE);
+    setStringToClipboard(talonRoPath);
+    performKeyCombination({VK_CONTROL}, {'V'});
+    typeKey(VK_RETURN);
 
-    alba::AlbaWindowsUserAutomation::sleep(3000);
+    sleep(3000);
 
     for (int page = 1; page <= 1000; ++page) {
-        alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'S'});
-        alba::AlbaWindowsUserAutomation::sleep(2000);
+        performKeyCombination({VK_CONTROL}, {'S'});
+        sleep(2000);
 
         stringstream fileName;
         fileName << "page_" << page << ".html";
-        AlbaLocalPathHandler const filePathHandler(itemDatabaseFolder.getFullPath() + fileName.str());
-        alba::AlbaWindowsUserAutomation::setStringToClipboard(filePathHandler.getFullPath());
-        alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
-        alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-        alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-        alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-        alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
+        AlbaLocalPathHandler const filePathHandler(itemDatabaseFolder.getPath() / fileName.str());
+        setStringToClipboard(filePathHandler.getPath().string());
+        performKeyCombination({VK_CONTROL}, {'V'});
+        typeKey(VK_RETURN);
+        typeKey(VK_RETURN);
+        typeKey(VK_RETURN);
+        typeKey(VK_RETURN);
 
-        alba::AlbaWindowsUserAutomation::sleep(2000);
+        sleep(2000);
 
-        ifstream savedWebPage(filePathHandler.getFullPath());
+        ifstream savedWebPage(filePathHandler.getPath());
         AlbaFileReader fileReader(savedWebPage);
         fileReader.setMaxBufferSize(100000);
         bool isNextDisabled(false);
@@ -62,43 +62,42 @@ TEST(RealAutomationTest, DISABLED_TraverseTalonRoShops) {
         if (isNextDisabled) {
             break;
         }
-        alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(3398, 514));
-        alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(2368, 52));
-        alba::AlbaWindowsUserAutomation::sleep(2000);
+        doLeftClickAt(MousePosition(3398, 514));
+        doLeftClickAt(MousePosition(2368, 52));
+        sleep(2000);
     }
 }
 
 TEST(RealAutomationTest, DISABLED_TraverseDatabaseOnRms) {
-    AlbaWindowsUserAutomation const userAutomation;
     AlbaLocalPathHandler const itemDatabaseFolder(
         R"(C:\Users\detectivemark7\Desktop\RO\RMS\MonsterDatabaseTraversal\)");
 
     for (char letter = 'a'; letter <= 'z'; ++letter) {
         for (int pageNumber = 1; pageNumber <= 100; ++pageNumber) {
-            alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(2368, 52));
+            doLeftClickAt(MousePosition(2368, 52));
 
             stringstream rmsPath;
             rmsPath << R"(https://ratemyserver.net/index.php?page=mob_db&list=1&letter=)" << letter << R"(&page_num=)"
                     << pageNumber;
-            alba::AlbaWindowsUserAutomation::typeKey(VK_DELETE);
-            alba::AlbaWindowsUserAutomation::setStringToClipboard(rmsPath.str());
-            alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
-            alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
+            typeKey(VK_DELETE);
+            setStringToClipboard(rmsPath.str());
+            performKeyCombination({VK_CONTROL}, {'V'});
+            typeKey(VK_RETURN);
 
-            alba::AlbaWindowsUserAutomation::sleep(3000);
+            sleep(3000);
 
-            alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'S'});
+            performKeyCombination({VK_CONTROL}, {'S'});
             stringstream fileName;
             fileName << "monsterWithLetter_" << letter << "_pageNumber_" << pageNumber << ".html";
-            AlbaLocalPathHandler const filePathHandler(itemDatabaseFolder.getFullPath() + fileName.str());
-            alba::AlbaWindowsUserAutomation::setStringToClipboard(filePathHandler.getFullPath());
-            alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
-            alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-            alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-            alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-            alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
+            AlbaLocalPathHandler const filePathHandler(itemDatabaseFolder.getPath() / fileName.str());
+            setStringToClipboard(filePathHandler.getPath().string());
+            performKeyCombination({VK_CONTROL}, {'V'});
+            typeKey(VK_RETURN);
+            typeKey(VK_RETURN);
+            typeKey(VK_RETURN);
+            typeKey(VK_RETURN);
 
-            ifstream savedWebPage(filePathHandler.getFullPath());
+            ifstream savedWebPage(filePathHandler.getPath());
             AlbaFileReader fileReader(savedWebPage);
             bool isNextPageTextFound(false);
             while (fileReader.isNotFinished()) {
@@ -116,90 +115,87 @@ TEST(RealAutomationTest, DISABLED_TraverseDatabaseOnRms) {
 }
 
 TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
-    AlbaWindowsUserAutomation const userAutomation;
     AlbaLocalPathHandler const mp3FilesPathHandler(R"(N:\MUSIC\111_DoAutomationHere)");
 
     while (1) {
-        if (alba::AlbaWindowsUserAutomation::isLetterPressed('s')) {
+        if (isLetterPressed('s')) {
             // s for start
-            ListOfPaths filePaths;
-            ListOfPaths directoryPaths;
-            mp3FilesPathHandler.findFilesAndDirectoriesOneDepth("*.*", filePaths, directoryPaths);
+            mp3FilesPathHandler.findFilesAndDirectoriesOneDepth(
+                [](AlbaLocalPathHandler::LocalPath const&) {},
+                [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+                    AlbaLocalPathHandler filePathHandler(filePath);
+                    if (filePathHandler.getExtension() == "mp3" && filePathHandler.getFileSize() < 100000000) {
+                        // 100MB
+                        // close previous file
+                        performKeyCombination({VK_CONTROL}, {'W'});
+                        sleep(1000);
+                        typeKey(VK_RIGHT);
+                        typeKey(VK_RETURN);
+                        sleep(2000);
 
-            for (string const& filePath : filePaths) {
-                AlbaLocalPathHandler filePathHandler(filePath);
-                if (filePathHandler.getExtension() == "mp3" && filePathHandler.getFileSizeEstimate() < 100000000) {
-                    // 100MB
-                    // close previous file
-                    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'W'});
-                    alba::AlbaWindowsUserAutomation::sleep(1000);
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RIGHT);
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-                    alba::AlbaWindowsUserAutomation::sleep(2000);
+                        // open file
+                        performKeyCombination({VK_CONTROL}, {'O'});
+                        sleep(1000);
 
-                    // open file
-                    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'O'});
-                    alba::AlbaWindowsUserAutomation::sleep(1000);
+                        // paste file name
+                        setStringToClipboard(filePathHandler.getFile().string());
+                        performKeyCombination({VK_CONTROL}, {'V'});
 
-                    // paste file name
-                    alba::AlbaWindowsUserAutomation::setStringToClipboard(filePathHandler.getFile());
-                    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
+                        // type enter key
+                        typeKey(VK_RETURN);
 
-                    // type enter key
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
+                        // wait for the file to load
+                        sleep(10000);
 
-                    // wait for the file to load
-                    alba::AlbaWindowsUserAutomation::sleep(10000);
+                        // select all track
+                        performKeyCombination({VK_CONTROL}, {'A'});
 
-                    // select all track
-                    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'A'});
+                        // click effect
+                        doDoubleLeftClickAt(MousePosition(344, 33));
 
-                    // click effect
-                    userAutomation.doDoubleLeftClickAt(MousePosition(344, 33));
+                        // click normalization
+                        doDoubleLeftClickAt(MousePosition(433, 443));
 
-                    // click normalization
-                    userAutomation.doDoubleLeftClickAt(MousePosition(433, 443));
+                        // type enter key
+                        typeKey(VK_RETURN);
 
-                    // type enter key
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
+                        // wait for normalization process
+                        sleep(10000);
 
-                    // wait for normalization process
-                    alba::AlbaWindowsUserAutomation::sleep(10000);
+                        // export
+                        performKeyCombination({VK_CONTROL, VK_SHIFT}, {'E'});
+                        sleep(2000);
 
-                    // export
-                    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL, VK_SHIFT}, {'E'});
-                    alba::AlbaWindowsUserAutomation::sleep(2000);
+                        // type enter key multiple times
+                        sleep(1000);
+                        typeKey(VK_RETURN);  // save
+                        sleep(1000);
+                        typeKey('Y');  // yes to replace
+                        sleep(1000);
+                        doDoubleLeftClickAt(MousePosition(1074, 687));  // click ok
+                        typeKey(VK_RIGHT);                              // type right to avoid stop button
+                                                                        // wait for export process
+                        sleep(15000);
 
-                    // type enter key multiple times
-                    alba::AlbaWindowsUserAutomation::sleep(1000);
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);  // save
-                    alba::AlbaWindowsUserAutomation::sleep(1000);
-                    alba::AlbaWindowsUserAutomation::typeKey('Y');  // yes to replace
-                    alba::AlbaWindowsUserAutomation::sleep(1000);
-                    userAutomation.doDoubleLeftClickAt(MousePosition(1074, 687));  // click ok
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RIGHT);            // type right to avoid stop button
-                                                                                   // wait for export process
-                    alba::AlbaWindowsUserAutomation::sleep(15000);
+                        // type enter key multiple times to ensure everything is closed
+                        typeKey(VK_RETURN);
+                        typeKey(VK_RETURN);
+                        typeKey(VK_RETURN);
+                        typeKey(VK_RETURN);
+                        typeKey(VK_RETURN);
 
-                    // type enter key multiple times to ensure everything is closed
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
+                        // close file
+                        performKeyCombination({VK_CONTROL}, {'W'});
+                        sleep(1000);
+                        typeKey(VK_RIGHT);
+                        typeKey(VK_RETURN);
+                        sleep(2000);
 
-                    // close file
-                    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'W'});
-                    alba::AlbaWindowsUserAutomation::sleep(1000);
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RIGHT);
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-                    alba::AlbaWindowsUserAutomation::sleep(2000);
-
-                    // break;
-                } else {
-                    cout << "Ignored file: " << filePath << ": size: " << filePathHandler.getFileSizeEstimate() << "\n";
-                }
-            }
+                        // break;
+                    } else {
+                        cout << "Ignored file: " << filePath << ": size: " << filePathHandler.getFileSize() << "\n";
+                    }
+                });
             break;
         }
         Sleep(100);
@@ -207,44 +203,41 @@ TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
 }
 
 TEST(RealAutomationTest, DISABLED_DownloadFacebookImagesFromFirefox) {
-    AlbaWindowsUserAutomation const userAutomation;
-
     while (true) {
         ALBA_INF_PRINT1(cout, "next image");
-        alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'L'});
-        alba::AlbaWindowsUserAutomation::sleep(1000);
+        performKeyCombination({VK_CONTROL}, {'L'});
+        sleep(1000);
 
-        alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'C'});
-        alba::AlbaWindowsUserAutomation::sleep(1000);
+        performKeyCombination({VK_CONTROL}, {'C'});
+        sleep(1000);
 
         ALBA_INF_PRINT1(cout, "check for exit");
-        string const url = alba::AlbaWindowsUserAutomation::getStringFromClipboard();
-        if (alba::AlbaWindowsUserAutomation::isLetterPressed('a') ||
+        string const url = getStringFromClipboard();
+        if (isLetterPressed('a') ||
             url == R"(https://www.facebook.com/photo?fbid=10227411012716536&set=t.100000122270987)") {
             exit(0);
         }
 
-        alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(3377, 116));
-        alba::AlbaWindowsUserAutomation::sleep(1000);
-        alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(3377, 116));
-        alba::AlbaWindowsUserAutomation::sleep(1000);
+        doLeftClickAt(MousePosition(3377, 116));
+        sleep(1000);
+        doLeftClickAt(MousePosition(3377, 116));
+        sleep(1000);
 
         ALBA_INF_PRINT1(cout, "clicks");
-        alba::AlbaWindowsUserAutomation::doRightClickAt(MousePosition(2740, 592));
-        alba::AlbaWindowsUserAutomation::sleep(1000);
-        alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(2794, 643));
-        alba::AlbaWindowsUserAutomation::sleep(3000);
-        alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
-        alba::AlbaWindowsUserAutomation::sleep(1000);
-        alba::AlbaWindowsUserAutomation::typeKey('Y');
-        alba::AlbaWindowsUserAutomation::sleep(1000);
-        alba::AlbaWindowsUserAutomation::typeKey(VK_RIGHT);
-        alba::AlbaWindowsUserAutomation::sleep(5000);
+        doRightClickAt(MousePosition(2740, 592));
+        sleep(1000);
+        doLeftClickAt(MousePosition(2794, 643));
+        sleep(3000);
+        typeKey(VK_RETURN);
+        sleep(1000);
+        typeKey('Y');
+        sleep(1000);
+        typeKey(VK_RIGHT);
+        sleep(5000);
     }
 }
 
 TEST(RealAutomationTest, DISABLED_GetOutputFromChatGpt) {
-    AlbaWindowsUserAutomation const userAutomation;
     ifstream commitMessagesStream(R"(F:\Branches\aprg_test\Migrate\git_old_repo\commitMessagesNoQuotations.txt)");
     ofstream newCommitMessagesStream(
         R"(F:\Branches\aprg_test\Migrate\git_old_repo\newCommitMessages.txt)", ios_base::app);
@@ -259,11 +252,11 @@ TEST(RealAutomationTest, DISABLED_GetOutputFromChatGpt) {
         "line and maintain line ordering):\r\n";
     string requestToChatGpt = requestHeader;
 
-    alba::AlbaWindowsUserAutomation::sleep(3000);
+    sleep(3000);
 
     while (commitMessagesReader.isNotFinished()) {
         // PAUSE for stop
-        if (alba::AlbaWindowsUserAutomation::isLetterPressed(VK_PAUSE)) {
+        if (isLetterPressed(VK_PAUSE)) {
             break;
         }
         string const line(commitMessagesReader.getLineAndIgnoreWhiteSpaces());
@@ -279,40 +272,40 @@ TEST(RealAutomationTest, DISABLED_GetOutputFromChatGpt) {
                 ALBA_INF_PRINT1(cout, lineCount);
                 int retries = 0;
                 string fromClipboard;
-                while (!alba::AlbaWindowsUserAutomation::isLetterPressed(VK_PAUSE)) {
+                while (!isLetterPressed(VK_PAUSE)) {
                     ++retries;
                     ALBA_INF_PRINT1(cout, retries);
                     if (retries > 10) {
-                        alba::AlbaWindowsUserAutomation::typeKey(VK_F5);
-                        alba::AlbaWindowsUserAutomation::sleep(10000);
+                        typeKey(VK_F5);
+                        sleep(10000);
                     } else if (retries > 3) {
-                        alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(2030, 110));
-                        alba::AlbaWindowsUserAutomation::sleep(2000);
+                        doLeftClickAt(MousePosition(2030, 110));
+                        sleep(2000);
                     }
 
                     // Click at Chat GPT text box
-                    alba::AlbaWindowsUserAutomation::setStringToClipboard(requestToChatGpt);
-                    alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(2990, 955));
-                    alba::AlbaWindowsUserAutomation::sleep(2000);
+                    setStringToClipboard(requestToChatGpt);
+                    doLeftClickAt(MousePosition(2990, 955));
+                    sleep(2000);
 
                     // Select All
-                    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'A'});
-                    alba::AlbaWindowsUserAutomation::sleep(2000);
+                    performKeyCombination({VK_CONTROL}, {'A'});
+                    sleep(2000);
 
                     // Paste
-                    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
-                    alba::AlbaWindowsUserAutomation::sleep(2000);
+                    performKeyCombination({VK_CONTROL}, {'V'});
+                    sleep(2000);
 
                     // Select All
-                    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'A'});
-                    alba::AlbaWindowsUserAutomation::sleep(2000);
+                    performKeyCombination({VK_CONTROL}, {'A'});
+                    sleep(2000);
 
                     // Double check if text is really on the text box
-                    alba::AlbaWindowsUserAutomation::setStringToClipboard("");
-                    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'C'});
-                    alba::AlbaWindowsUserAutomation::sleep(2000);
+                    setStringToClipboard("");
+                    performKeyCombination({VK_CONTROL}, {'C'});
+                    sleep(2000);
 
-                    fromClipboard = alba::AlbaWindowsUserAutomation::getStringFromClipboard();
+                    fromClipboard = getStringFromClipboard();
 
                     ALBA_INF_PRINT1(cout, requestToChatGpt);
                     ALBA_INF_PRINT1(cout, fromClipboard);
@@ -321,20 +314,20 @@ TEST(RealAutomationTest, DISABLED_GetOutputFromChatGpt) {
                     }
 
                     // Send request to chat gpt by pressing enter
-                    alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
+                    typeKey(VK_RETURN);
 
                     // Wait for chat gpt
-                    alba::AlbaWindowsUserAutomation::sleep(20000);
+                    sleep(20000);
 
                     // Clear clipboard, press copy button
-                    alba::AlbaWindowsUserAutomation::setStringToClipboard("");
+                    setStringToClipboard("");
                     for (int yClick = 100; yClick <= 400; yClick += 5) {
-                        alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(3345, yClick));
+                        doLeftClickAt(MousePosition(3345, yClick));
                     }
-                    alba::AlbaWindowsUserAutomation::sleep(2000);
+                    sleep(2000);
 
                     // Save output to file
-                    string outputOfChatGpt = alba::AlbaWindowsUserAutomation::getStringFromClipboard();
+                    string outputOfChatGpt = getStringFromClipboard();
                     ALBA_INF_PRINT1(cout, outputOfChatGpt);
                     if (outputOfChatGpt.empty()) {
                         continue;
@@ -354,4 +347,4 @@ TEST(RealAutomationTest, DISABLED_GetOutputFromChatGpt) {
     }
 }
 
-}  // namespace alba
+}  // namespace alba::AlbaWindowsUserAutomation

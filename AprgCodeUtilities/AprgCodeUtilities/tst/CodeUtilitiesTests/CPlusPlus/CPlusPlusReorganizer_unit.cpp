@@ -46,25 +46,25 @@ void runFormatterInDirectory(string const& directoryPath) {
     for (auto const& file : files) {
         AlbaLocalPathHandler const filePathHandler(file);
         if (isCppFileExtension(filePathHandler.getExtension())) {
-            runFormatter(filePathHandler.getFullPath());
+            runFormatter(filePathHandler.getPath());
         }
     }
 }
 
-void clearFile(string const& file) { ofstream const expectedFileStream(AlbaLocalPathHandler(file).getFullPath()); }
+void clearFile(string const& file) { ofstream const expectedFileStream(AlbaLocalPathHandler(file).getPath()); }
 
 void copyFile(string const& source, string const& destination) {
     AlbaLocalPathHandler sourcePathHandler(source);
     AlbaLocalPathHandler const destinationPathHandler(destination);
-    clearFile(destinationPathHandler.getFullPath());
-    sourcePathHandler.copyToNewFile(destinationPathHandler.getFullPath());
+    clearFile(destinationPathHandler.getPath());
+    sourcePathHandler.copyToNewFile(destinationPathHandler.getPath());
 }
 
 void verifyFile(string const& expectedFile, string const& testFile) {
     AlbaLocalPathHandler const expectedFilePathHandler(expectedFile);
     AlbaLocalPathHandler const testFilePathHandler(testFile);
-    ifstream expectedFileStream(expectedFilePathHandler.getFullPath());
-    ifstream testFileStream(testFilePathHandler.getFullPath());
+    ifstream expectedFileStream(expectedFilePathHandler.getPath());
+    ifstream testFileStream(testFilePathHandler.getPath());
     AlbaFileReader expectedFileReader(expectedFileStream);
     AlbaFileReader testFileReader(testFileStream);
     bool isDifferenceFound(false);
@@ -87,7 +87,7 @@ void verifyFile(string const& expectedFile, string const& testFile) {
             cout << "---> EXPECTED: [" << lineInExpectedFile << "]\n";
             cout << "---> ACTUAL:   [" << lineInTestFile << "]\n\n";
             isDifferenceFound = true;
-            runDiffForTwoFiles(expectedFilePathHandler.getFullPath(), testFilePathHandler.getFullPath());
+            runDiffForTwoFiles(expectedFilePathHandler.getPath(), testFilePathHandler.getPath());
             break;
         }
         lines.emplace_back(lineInExpectedFile);

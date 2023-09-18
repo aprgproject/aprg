@@ -14,7 +14,7 @@ TEST(ScreenMonitoringTest, DISABLED_ScreenCaptureCanBeSavedAsBitmap) {
     screenMonitoring.capturePixelsFromScreen();
 
     AlbaLocalPathHandler const outputFileForWhite(APRG_DIR R"(\Chess\ChessPeek\Files\ScreeMonitoringTest.bmp)");
-    Bitmap const outputBitmap(outputFileForWhite.getFullPath());
+    Bitmap const outputBitmap(outputFileForWhite.getPath());
     BitmapSnippet outputSnippet(outputBitmap.getSnippetReadFromFileWholeBitmap());
 
     BitmapXY const topLeftCorner = outputSnippet.getTopLeftCorner();

@@ -2,17 +2,17 @@
 
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
+#include <filesystem>
+
 namespace alba {
 
 class FileDestructor {
 public:
     FileDestructor();
     void destroy() const;
-    void destroy(std::string const& path) const;
-    void renameDirectoriesUnderneath(std::string const& directoryPath) const;
-    static void destroyFilesAndDirectories(std::string const& filePath);
-    static void renameDirectory(std::string const& directoryPath);
-    static void destroyFile(std::string const& filePath);
+    void destroy(std::filesystem::path const& path) const;
+    void renameDirectoriesUnderneath(std::filesystem::path const& directoryPath) const;
+    static void renameDirectory(std::filesystem::path const& directoryPath);
 
 private:
     AlbaLocalPathHandler m_pathToDestroy;

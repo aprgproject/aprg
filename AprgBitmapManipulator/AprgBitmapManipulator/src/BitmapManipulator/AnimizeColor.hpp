@@ -1,5 +1,6 @@
 #pragma once
 
+#include <filesystem>
 #include <map>
 #include <string>
 
@@ -18,9 +19,9 @@ public:
     [[nodiscard]] uint32_t getNewColor(uint32_t const originalColor) const;
     [[nodiscard]] double getNewLightness(double const originalValue) const;
     [[nodiscard]] double getNewSaturation(double const originalValue) const;
-    void gatherStatistics(std::string const& bitmapPath);
+    void gatherStatistics(std::filesystem::path const& filePath);
     void calculateNewValues();
-    void saveColorData(std::string const& path);
+    void saveColorData(std::filesystem::path const& filePath);
 
 private:
     [[nodiscard]] double getNewValue(ColorDataMap const& colorDataMap, double const originalValue) const;
@@ -33,6 +34,6 @@ private:
     ColorDataMap m_saturationData;
 };
 
-void gatherAndSaveDataInAnimizeColor(std::string const& bitmapPath);
+void gatherAndSaveDataInAnimizeColor(std::filesystem::path const& filePath);
 
 }  // namespace alba::AprgBitmap

@@ -9,6 +9,7 @@
 using namespace alba::AprgBitmap;
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba::AprgBitmap {
 
@@ -27,8 +28,8 @@ double AnimizeColor::getNewSaturation(double const originalValue) const {
     return getNewValue(m_saturationData, originalValue);
 }
 
-void AnimizeColor::gatherStatistics(string const& bitmapPath) {
-    Bitmap const bitmap(bitmapPath);
+void AnimizeColor::gatherStatistics(path const& filePath) {
+    Bitmap const bitmap(filePath);
     BitmapSnippet const canvas(bitmap.getSnippetReadFromFileWholeBitmap());
     canvas.traverse([&](BitmapXY const&, int const color) {
         HueSaturationLightnessData const hslData(convertColorToHueSaturationLightnessData(color));
@@ -42,8 +43,8 @@ void AnimizeColor::calculateNewValues() {
     calculateNewValues(m_saturationData);
 }
 
-void AnimizeColor::saveColorData(string const& path) {
-    ofstream colorDataFileStream(path);
+void AnimizeColor::saveColorData(path const& filePath) {
+    ofstream colorDataFileStream(filePath);
 
     colorDataFileStream << "lightness, newLightness\n";
     for (ValueAndColorDataPair const lightnessCountPair : m_lightnessData) {
@@ -109,15 +110,15 @@ void AnimizeColor::addCountToValue(ColorDataMap& colorDataMap, double const valu
     }
 }
 
-void gatherAndSaveDataInAnimizeColor(string const& bitmapPath) {
-    AlbaLocalPathHandler const bitmapPathHandler(bitmapPath);
+void gatherAndSaveDataInAnimizeColor(path const& filePath) {
+    AlbaLocalPathHandler const bitmapPathHandler(filePath);
     AlbaLocalPathHandler const colorDataPathHandler(
-        bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_AnimizeColorData.csv)");
+        bitmapPathHandler.getDirectory() / bitmapPathHandler.getFilenameOnly() / R"(_AnimizeColorData.csv)");
 
     AnimizeColor statistics;
-    statistics.gatherStatistics(bitmapPathHandler.getFullPath());
+    statistics.gatherStatistics(bitmapPathHandler.getPath());
     statistics.calculateNewValues();
-    statistics.saveColorData(colorDataPathHandler.getFullPath());
+    statistics.saveColorData(colorDataPathHandler.getPath());
 }
 
 AnimizeColor::AnimizeColor() = default;

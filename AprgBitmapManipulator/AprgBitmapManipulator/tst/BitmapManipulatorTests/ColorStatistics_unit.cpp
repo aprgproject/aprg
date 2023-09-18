@@ -12,7 +12,7 @@ namespace alba::AprgBitmap {
 TEST(ColorStatisticsTest, DISABLED_GatherAndSaveStatistics) {
     AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
 
-    gatherAndSaveColorStatistics(bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\JohnMayerDark.bmp)");
+    gatherAndSaveColorStatistics(bitmapDirectory.getDirectory() / R"(NonAnimeBitmaps\JohnMayerDark.bmp)");
 }
 
 }  // namespace alba::AprgBitmap

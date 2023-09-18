@@ -53,7 +53,7 @@ void StartupLogAnalyzer::clear() { m_processingAndMessagingTotalDelay = 0; }
 
 void StartupLogAnalyzer::saveDataToCsv(string const& csvPath) {
     AlbaLocalPathHandler const outputFileHandler(csvPath);
-    ofstream outputFileStream(outputFileHandler.getFullPath());
+    ofstream outputFileStream(outputFileHandler.getPath());
     saveDataTimeToCsv(
         outputFileStream, m_firstDspToBecomeAvailableTimeDescriptionString, m_firstDspToBecomeAvailableTime);
     saveDataTimeToCsv(outputFileStream, m_allDspsBecomeAvailableTimeDescriptionString, m_allDspsBecomeAvailableTime);
@@ -102,7 +102,7 @@ void StartupLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBt
     clear();
 
     m_btsLogPathHandler.input(pathOfBtsSortedLog);
-    ifstream inputLogFileStream(m_btsLogPathHandler.getFullPath());
+    ifstream inputLogFileStream(m_btsLogPathHandler.getPath());
 
     cout.precision(20);
     AlbaFileReader fileReader(inputLogFileStream);

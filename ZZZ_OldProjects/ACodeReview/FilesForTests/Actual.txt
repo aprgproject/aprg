@@ -24,8 +24,8 @@ TermTranslator::TermTranslator(string const& fileName, ListOfTerms& listOfTerms)
 {
     AlbaWindowsPathHandler pathHandler;
     pathHandler.input(fileName);
-    cout<<"TermTranslator::constructor| ReadFile: "<<pathHandler.getFullPath()<<"\n";
-    if(pathHandler.isFoundInLocalSystem() && pathHandler.isFile())
+    cout<<"TermTranslator::constructor| ReadFile: "<<pathHandler.getPath()<<"\n";
+    if(pathHandler.doesExist() && pathHandler.isFile())
     {
         if(m_fileStream.is_open())
         {
@@ -33,13 +33,13 @@ TermTranslator::TermTranslator(string const& fileName, ListOfTerms& listOfTerms)
         }
         else
         {
-            cout<<"TermTranslator::constructor| Cannot read cmake file: ["<<pathHandler.getFullPath()<<"]."<<"\n";
+            cout<<"TermTranslator::constructor| Cannot read cmake file: ["<<pathHandler.getPath()<<"]."<<"\n";
             cout<<"TermTranslator::constructor| Problem in FileI/O!"<<"\n";
         }
     }
     else
     {
-        cout<<"TermTranslator::constructor| Cannot read cmake file: ["<<pathHandler.getFullPath()<<"]."<<"\n";
+        cout<<"TermTranslator::constructor| Cannot read cmake file: ["<<pathHandler.getPath()<<"]."<<"\n";
         cout<<"TermTranslator::constructor| File does not exist!"<<"\n";
     }
 }

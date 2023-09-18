@@ -32,8 +32,8 @@ void UserInterface::askUserForMainDetails() {
 
 void UserInterface::askUserForFormDetails() {
     AlbaLocalPathHandler formDetailsDirectoryPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
-    formDetailsDirectoryPath.input(formDetailsDirectoryPath.getDirectory() + "FormDetails/");
-    saveFormDetailsFromFormDetailPath(askUserForPathOfFormDetailToRead(formDetailsDirectoryPath.getFullPath()));
+    formDetailsDirectoryPath.input(formDetailsDirectoryPath.getDirectory() / "FormDetails/");
+    saveFormDetailsFromFormDetailPath(askUserForPathOfFormDetailToRead(formDetailsDirectoryPath.getPath().string()));
 }
 
 void UserInterface::saveFormDetailsFromFormDetailPath(string const& formDetailsFilePath) {
@@ -57,18 +57,17 @@ void UserInterface::saveFormDetailsFromFormDetailPath(string const& formDetailsF
 
 string UserInterface::askUserForPathOfFormDetailToRead(string const& formDetailsDirectoryPath) {
     AlbaLocalPathHandler formDetailsPathHandler(formDetailsDirectoryPath);
-
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
     AlbaUserInterface::Choices<int> choices;
     int choice(0);
 
-    formDetailsPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
+    formDetailsPathHandler.findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            AlbaLocalPathHandler filePathHandler(filePath);
+            cout << "Choice " << choice << " :: " << filePathHandler.getFile() << "\n";
+            choices.emplace(choice++, filePathHandler.getPath().string());
+        });
 
-    for (string const& formDetailsFile : listOfFiles) {
-        cout << "Choice " << choice << " :: " << AlbaLocalPathHandler(formDetailsFile).getFile() << "\n";
-        choices.emplace(choice++, AlbaLocalPathHandler(formDetailsFile).getFullPath());
-    }
     auto chosenChoice(m_userInterface.displayQuestionAndChoicesAndGetNumberAnswer("Select formDetails:", choices));
     cout << "Chosen choice: " << chosenChoice << "\n";
 

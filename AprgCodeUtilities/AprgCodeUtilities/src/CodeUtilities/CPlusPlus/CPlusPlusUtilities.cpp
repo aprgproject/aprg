@@ -15,7 +15,7 @@ namespace alba::CodeUtilities::CPlusPlusUtilities {
 
 void writeAllTerms(string const& path, Terms const& terms) {
     AlbaLocalPathHandler const filePathHandler(path);
-    ofstream outputStream(filePathHandler.getFullPath(), ios::binary);
+    ofstream outputStream(filePathHandler.getPath(), ios::binary);
     for (Term const& term : terms) {
         outputStream << term.getContent();
     }
@@ -31,7 +31,7 @@ Terms getTermsFromFile(string const& path) {
     Terms result;
     CPlusPlusTokenizer tokenizer(result);
     AlbaLocalPathHandler const filePathHandler(path);
-    ifstream inputStream(filePathHandler.getFullPath());
+    ifstream inputStream(filePathHandler.getPath());
     AlbaFileReader fileReader(inputStream);
     while (fileReader.isNotFinished()) {
         tokenizer.processCode(fileReader.getLine());

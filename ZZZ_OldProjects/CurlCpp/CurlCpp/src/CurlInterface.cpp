@@ -11,7 +11,7 @@ namespace CurlInterface {
 
 template <DownloadType... configTypes>
 bool download(AlbaWebPathHandler const& webPath, AlbaLocalPathHandler const& windowsPath) {
-    return downloadFile(webPath.getFullPath(), windowsPath.getFullPath(), OutputFileType::Default, [](curl_easy& easy) {
+    return downloadFile(webPath.getPath(), windowsPath.getPath(), OutputFileType::Default, [](curl_easy& easy) {
         addToCurlEasy<configTypes...>(easy);
     });
 }
@@ -19,13 +19,13 @@ bool download(AlbaWebPathHandler const& webPath, AlbaLocalPathHandler const& win
 template <DownloadType... configTypes>
 bool downloadUntilSuccessful(AlbaWebPathHandler const& webPath, AlbaLocalPathHandler const& windowsPath) {
     return downloadFileUntilSuccessful(
-        webPath.getFullPath(), windowsPath.getFullPath(), OutputFileType::Default,
+        webPath.getPath(), windowsPath.getPath(), OutputFileType::Default,
         [](curl_easy& easy) { addToCurlEasy<configTypes...>(easy); });
 }
 
 template <DownloadType... configTypes>
 bool downloadBinaryFile(AlbaWebPathHandler const& webPath, AlbaLocalPathHandler const& windowsPath) {
-    return downloadFile(webPath.getFullPath(), windowsPath.getFullPath(), OutputFileType::Binary, [](curl_easy& easy) {
+    return downloadFile(webPath.getPath(), windowsPath.getPath(), OutputFileType::Binary, [](curl_easy& easy) {
         addToCurlEasy<configTypes...>(easy);
     });
 }
@@ -33,7 +33,7 @@ bool downloadBinaryFile(AlbaWebPathHandler const& webPath, AlbaLocalPathHandler 
 template <DownloadType... configTypes>
 bool downloadBinaryFileUntilSuccessful(AlbaWebPathHandler const& webPath, AlbaLocalPathHandler const& windowsPath) {
     return downloadFileUntilSuccessful(
-        webPath.getFullPath(), windowsPath.getFullPath(), OutputFileType::Binary,
+        webPath.getPath(), windowsPath.getPath(), OutputFileType::Binary,
         [](curl_easy& easy) { addToCurlEasy<configTypes...>(easy); });
 }
 
@@ -41,7 +41,7 @@ template <DownloadType... configTypes>
 bool downloadBinaryFileWithFiniteNumberOfTries(
     AlbaWebPathHandler const& webPath, AlbaLocalPathHandler const& windowsPath, int const totalNumberOfTries) {
     return downloadFileWithFiniteNumberOfTries(
-        webPath.getFullPath(), windowsPath.getFullPath(), OutputFileType::Binary, totalNumberOfTries,
+        webPath.getPath(), windowsPath.getPath(), OutputFileType::Binary, totalNumberOfTries,
         [](curl_easy& easy) { addToCurlEasy<configTypes...>(easy); });
 }
 

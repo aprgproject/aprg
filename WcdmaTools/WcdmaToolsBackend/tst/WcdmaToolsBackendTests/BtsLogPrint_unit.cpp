@@ -241,7 +241,7 @@ TEST(BtsLogPrintTest, SyslogAndSnapshotPrintRuntimeComparisonTest) {
 TEST(BtsLogPrintTest, DISABLED_InputStreamWorks) {
     ifstream inputFileStream(
         AlbaLocalPathHandler(APRG_DIR R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ProblemFiles\BLOCK_701.txt)")
-            .getFullPath());
+            .getPath());
     int count(0);
     while (inputFileStream.good()) {
         BtsLogPrint logPrint;

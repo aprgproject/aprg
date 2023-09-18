@@ -65,14 +65,14 @@ ostream& operator<<(ostream& out, TestObject const& testObject) {
 
 TEST(AlbaLargeSorterTest, ObjectsCanBeSavedAndLoadFromFile) {
     AlbaLocalPathHandler const localPathHandler(ALBA_LARGE_SORTER_TEST_FILE);
-    ofstream outputTestFile(localPathHandler.getFullPath());
+    ofstream outputTestFile(localPathHandler.getPath());
     outputTestFile << TestObject(0, 0, '0', "") << "\n";
     outputTestFile << TestObject(1, 1.1, 'a', "firstString") << "\n";
     outputTestFile << TestObject(2000, 1.222, 'b', "secondString") << "\n";
     outputTestFile << TestObject(333333, 3.3, 'c', "thirdString") << "\n";
     outputTestFile.close();
 
-    ifstream inputTestFile(localPathHandler.getFullPath());
+    ifstream inputTestFile(localPathHandler.getPath());
     TestObject testObject;
     inputTestFile >> testObject;
     EXPECT_EQ(0, testObject.valueInteger);
@@ -223,7 +223,7 @@ TEST(AlbaLargeSorterTest, CacheWorksAsItsContainerReferenceCanFetched) {
 }
 
 TEST(AlbaLargeSorterTest, FileHandlerWorksAsFileAreWrittenAtTheEndAgainAfterRelease) {
-    AlbaLocalPathHandler(ALBA_LARGE_SORTER_TEST_FILE).deleteFile();
+    ASSERT_TRUE(AlbaLocalPathHandler(ALBA_LARGE_SORTER_TEST_FILE).deleteFileAndIsSuccessful());
 
     DataBlockFileHandler<int> fileHandler;
     fileHandler.openFileIfNeeded(ALBA_LARGE_SORTER_TEST_FILE);
@@ -238,9 +238,9 @@ TEST(AlbaLargeSorterTest, FileHandlerWorksAsFileAreWrittenAtTheEndAgainAfterRele
     fileHandler.releaseFileStream();
 
     AlbaLocalPathHandler const inputPathHandler(ALBA_LARGE_SORTER_TEST_FILE);
-    ASSERT_TRUE(inputPathHandler.isFoundInLocalSystem());
+    ASSERT_TRUE(inputPathHandler.doesExist());
     int valueFromFile = 0;
-    ifstream inputTestFile(inputPathHandler.getFullPath());
+    ifstream inputTestFile(inputPathHandler.getPath());
     ASSERT_TRUE(inputTestFile.is_open());
     inputTestFile >> valueFromFile;
     EXPECT_EQ(1, valueFromFile);
@@ -301,39 +301,41 @@ TEST(AlbaLargeSorterTest, PrimitiveDataTypesForBlocksAreCreatedWhenBlocksWhenMem
         largeSorter.add(inputValue);
     }
 
-    int integerInFile = 0;
-    ifstream inputTestFile0(
-        AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_1.txt)").getFullPath());
-    ifstream inputTestFile1(
-        AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_2.txt)").getFullPath());
-    ifstream inputTestFile2(
-        AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_3.txt)").getFullPath());
-    ifstream inputTestFile3(
-        AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_4.txt)").getFullPath());
-    ASSERT_TRUE(inputTestFile0.is_open());
-    inputTestFile0 >> integerInFile;
-    EXPECT_EQ(0, integerInFile);
-    inputTestFile0 >> integerInFile;
-    EXPECT_EQ(1, integerInFile);
-    inputTestFile0 >> integerInFile;
-    EXPECT_EQ(2, integerInFile);
-    ASSERT_TRUE(inputTestFile1.is_open());
-    inputTestFile1 >> integerInFile;
-    EXPECT_EQ(3, integerInFile);
-    inputTestFile1 >> integerInFile;
-    EXPECT_EQ(4, integerInFile);
-    inputTestFile1 >> integerInFile;
-    EXPECT_EQ(5, integerInFile);
-    ASSERT_TRUE(inputTestFile2.is_open());
-    inputTestFile2 >> integerInFile;
-    EXPECT_EQ(6, integerInFile);
-    inputTestFile2 >> integerInFile;
-    EXPECT_EQ(7, integerInFile);
-    inputTestFile2 >> integerInFile;
-    EXPECT_EQ(8, integerInFile);
-    ASSERT_TRUE(inputTestFile3.is_open());
-    inputTestFile3 >> integerInFile;
-    EXPECT_EQ(9, integerInFile);
+    {
+        int integerInFile = 0;
+        ifstream inputTestFile0(
+            AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_1.txt)").getPath());
+        ifstream inputTestFile1(
+            AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_2.txt)").getPath());
+        ifstream inputTestFile2(
+            AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_3.txt)").getPath());
+        ifstream inputTestFile3(
+            AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_4.txt)").getPath());
+        ASSERT_TRUE(inputTestFile0.is_open());
+        inputTestFile0 >> integerInFile;
+        EXPECT_EQ(0, integerInFile);
+        inputTestFile0 >> integerInFile;
+        EXPECT_EQ(1, integerInFile);
+        inputTestFile0 >> integerInFile;
+        EXPECT_EQ(2, integerInFile);
+        ASSERT_TRUE(inputTestFile1.is_open());
+        inputTestFile1 >> integerInFile;
+        EXPECT_EQ(3, integerInFile);
+        inputTestFile1 >> integerInFile;
+        EXPECT_EQ(4, integerInFile);
+        inputTestFile1 >> integerInFile;
+        EXPECT_EQ(5, integerInFile);
+        ASSERT_TRUE(inputTestFile2.is_open());
+        inputTestFile2 >> integerInFile;
+        EXPECT_EQ(6, integerInFile);
+        inputTestFile2 >> integerInFile;
+        EXPECT_EQ(7, integerInFile);
+        inputTestFile2 >> integerInFile;
+        EXPECT_EQ(8, integerInFile);
+        ASSERT_TRUE(inputTestFile3.is_open());
+        inputTestFile3 >> integerInFile;
+        EXPECT_EQ(9, integerInFile);
+    }
     int expectedValue = 0;
     largeSorter.sortThenDoFunctionThenReleaseAllObjects(
         [&expectedValue](int const& actualValue) { EXPECT_EQ(expectedValue++, actualValue); });
@@ -342,14 +344,11 @@ TEST(AlbaLargeSorterTest, PrimitiveDataTypesForBlocksAreCreatedWhenBlocksWhenMem
 
 TEST(AlbaLargeSorterTest, FilesForBlocksAreDeletedAfterFileForBlocksAreCreated) {
     AlbaLocalPathHandler const directoryPathHandler(ALBA_LARGE_SORTER_BLOCK_DIR);
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        AlbaLocalPathHandler(filePath).deleteFile();
-    }
-    listOfFiles.clear();
-    listOfDirectories.clear();
+    directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            EXPECT_TRUE(AlbaLocalPathHandler(filePath).deleteFileAndIsSuccessful());
+        });
 
     AlbaLargeSorter<int> largeSorter(AlbaLargeSorterConfiguration(ALBA_LARGE_SORTER_BLOCK_DIR, 3, 10, 0, 200));
 
@@ -361,9 +360,9 @@ TEST(AlbaLargeSorterTest, FilesForBlocksAreDeletedAfterFileForBlocksAreCreated) 
     largeSorter.sortThenDoFunctionThenReleaseAllObjects(
         [&expectedValue](int const& actualValue) { EXPECT_EQ(expectedValue++, actualValue); });
     EXPECT_EQ(200, expectedValue);
-    directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    EXPECT_TRUE(listOfFiles.empty());
-    EXPECT_TRUE(listOfDirectories.empty());
+    directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) { EXPECT_TRUE(false); },
+        [](AlbaLocalPathHandler::LocalPath const&) { EXPECT_TRUE(false); });
 }
 
 TEST(AlbaLargeSorterTest, PrimitiveDataTypesAreSortedWhenBlocksAreCreated) {

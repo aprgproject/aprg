@@ -17,7 +17,7 @@ AlbaPathHandler::AlbaPathHandler(string_view const path, string_view const slash
     setPath(path);
 }
 
-string AlbaPathHandler::getFullPath() const { return m_directory + m_file; }
+string AlbaPathHandler::getPath() const { return m_directory + m_file; }
 string AlbaPathHandler::getDirectory() const { return m_directory; }
 
 void AlbaPathHandler::clear() {
@@ -54,7 +54,7 @@ void AlbaPathHandler::input(string_view const path) {
 }
 
 void AlbaPathHandler::reInput() {
-    string const previousFullPath(getFullPath());
+    string const previousFullPath(getPath());
     clear();
     save(previousFullPath);
 }

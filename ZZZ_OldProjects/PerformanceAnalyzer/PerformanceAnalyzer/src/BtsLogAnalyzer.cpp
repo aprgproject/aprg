@@ -44,7 +44,7 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
     clear();
 
     m_btsLogPathHandler.input(pathOfBtsSortedLog);
-    ifstream inputLogFileStream(m_btsLogPathHandler.getFullPath());
+    ifstream inputLogFileStream(m_btsLogPathHandler.getPath());
     initializeMessageQueueingTimeFileStream();
     initializeRlSetupTimeFileStream();
     initializeRlSetupPerSecondFileStream();
@@ -68,20 +68,22 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
 
 void BtsLogAnalyzer::initializeMessageQueueingTimeFileStream() {
     AlbaLocalPathHandler const messageQueueingTimeFilePathHandler(
-        m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_MessageQueueingTime.csv");
+        m_btsLogPathHandler.getDirectory().string() + m_btsLogPathHandler.getFilenameOnly().string() +
+        "_MessageQueueingTime.csv");
     messageQueueingTimeFileStreamOptional.emplace();
     ofstream& messageQueueingTimeFileStream(messageQueueingTimeFileStreamOptional.value());
-    messageQueueingTimeFileStream.open(messageQueueingTimeFilePathHandler.getFullPath());
+    messageQueueingTimeFileStream.open(messageQueueingTimeFilePathHandler.getPath());
     messageQueueingTimeFileStream.precision(20);
     messageQueueingTimeFileStream << "QueueingTime,LogPrint\n";
 }
 
 void BtsLogAnalyzer::initializeRlSetupTimeFileStream() {
     AlbaLocalPathHandler const rlSetupTimeFilePathHandler(
-        m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_RlSetupTime.csv");
+        m_btsLogPathHandler.getDirectory().string() + m_btsLogPathHandler.getFilenameOnly().string() +
+        "_RlSetupTime.csv");
     rlSetupTimeFileStreamOptional.emplace();
     ofstream& rlSetupTimeFileStream(rlSetupTimeFileStreamOptional.value());
-    rlSetupTimeFileStream.open(rlSetupTimeFilePathHandler.getFullPath());
+    rlSetupTimeFileStream.open(rlSetupTimeFilePathHandler.getPath());
     rlSetupTimeFileStream.precision(20);
     rlSetupTimeFileStream << "CrnccId,NbccId,TransactionId,Latency(microseconds),BB_2_RL_SETUP_REQ_MSG,BB_2_RL_SETUP_"
                              "ACK_MSG,TC_TRANSPORT_BEARER_REGISTER_MSG,TC_TRANSPORT_BEARER_REGISTER_RESP_MSG\n";
@@ -89,10 +91,11 @@ void BtsLogAnalyzer::initializeRlSetupTimeFileStream() {
 
 void BtsLogAnalyzer::initializeRlDeletionTimeFileStream() {
     AlbaLocalPathHandler const rlDeletionTimeFilePathHandler(
-        m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_RlDeletionTime.csv");
+        m_btsLogPathHandler.getDirectory().string() + m_btsLogPathHandler.getFilenameOnly().string() +
+        "_RlDeletionTime.csv");
     rlDeletionTimeFileStreamOptional.emplace();
     ofstream& rlDeletionTimeFileStream(rlDeletionTimeFileStreamOptional.value());
-    rlDeletionTimeFileStream.open(rlDeletionTimeFilePathHandler.getFullPath());
+    rlDeletionTimeFileStream.open(rlDeletionTimeFilePathHandler.getPath());
     rlDeletionTimeFileStream.precision(20);
     rlDeletionTimeFileStream
         << "CrnccId,NbccId,TransactionId,Latency(microseconds),BB_2_RL_SETUP_REQ_MSG,BB_2_RL_SETUP_ACK_MSG,TC_"
@@ -101,10 +104,11 @@ void BtsLogAnalyzer::initializeRlDeletionTimeFileStream() {
 
 void BtsLogAnalyzer::initializeRlSetupPerSecondFileStream() {
     AlbaLocalPathHandler const rlSetupPerSecondFilePathHandler(
-        m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_RlSetupPerSecond.csv");
+        m_btsLogPathHandler.getDirectory().string() + m_btsLogPathHandler.getFilenameOnly().string() +
+        "_RlSetupPerSecond.csv");
     rlSetupPerSecondFileStreamOptional.emplace();
     ofstream& rlSetupPerSecondFileStream(rlSetupPerSecondFileStreamOptional.value());
-    rlSetupPerSecondFileStream.open(rlSetupPerSecondFilePathHandler.getFullPath());
+    rlSetupPerSecondFileStream.open(rlSetupPerSecondFilePathHandler.getPath());
     rlSetupPerSecondFileStream.precision(20);
     rlSetupPerSecondFileStream << "Time,Number Of RL setup in a second\n";
 }
@@ -329,8 +333,8 @@ void BtsLogAnalyzer::initializeDataDumpOfAllDspsForR2() {
 }
 
 void BtsLogAnalyzer::initializeDataDumpOfOneDsp(string const& fileName) {
-    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory() + fileName + ".csv");
-    ofstream dspDataFileStream(dspDataPathHandler.getFullPath());
+    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory().string() + fileName + ".csv");
+    ofstream dspDataFileStream(dspDataPathHandler.getPath());
     dspDataFileStream << "BtsTime,";
     dspDataFileStream << "availableUlCEs,availableDlCEs,";
     dspDataFileStream << "rakeState,rachHand,rakeLoad,";
@@ -340,8 +344,9 @@ void BtsLogAnalyzer::initializeDataDumpOfOneDsp(string const& fileName) {
 }
 
 void BtsLogAnalyzer::initializeTotalUsersAndCfsDump() {
-    AlbaLocalPathHandler const totalUsersAndCfsFileHandler(m_btsLogPathHandler.getDirectory() + "TotalUsersAndCfs.csv");
-    ofstream totalUsersAndCfsFileStream(totalUsersAndCfsFileHandler.getFullPath());
+    AlbaLocalPathHandler const totalUsersAndCfsFileHandler(
+        m_btsLogPathHandler.getDirectory().string() + "TotalUsersAndCfs.csv");
+    ofstream totalUsersAndCfsFileStream(totalUsersAndCfsFileHandler.getPath());
     totalUsersAndCfsFileStream << "BtsTime,";
     totalUsersAndCfsFileStream << "TotalCfs,";
     totalUsersAndCfsFileStream << "TotalR99Users,";
@@ -351,14 +356,14 @@ void BtsLogAnalyzer::initializeTotalUsersAndCfsDump() {
 
 void BtsLogAnalyzer::initializeSaveAllUsersAndCfsDump() {
     AlbaLocalPathHandler const totalUsersAndCfsFileHandler(
-        m_btsLogPathHandler.getDirectory() + "SaveAllUsersAndCfs.csv");
-    ofstream totalUsersAndCfsFileStream(totalUsersAndCfsFileHandler.getFullPath());
+        m_btsLogPathHandler.getDirectory().string() + "SaveAllUsersAndCfs.csv");
+    ofstream totalUsersAndCfsFileStream(totalUsersAndCfsFileHandler.getPath());
     totalUsersAndCfsFileStream << "Time,Address,hsupaCFs,totalCfs,dchUsers,hsupaUsers\n";
 }
 
 void BtsLogAnalyzer::saveDataDumpOfOneDsp(string const& fileName, DspData const& dspData, BtsLogPrint const& logPrint) {
-    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory() + fileName + ".csv");
-    ofstream dspDataFileStream(dspDataPathHandler.getFullPath(), std::ios::ate | std::ios::app);
+    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory().string() + fileName + ".csv");
+    ofstream dspDataFileStream(dspDataPathHandler.getPath(), std::ios::ate | std::ios::app);
     dspDataFileStream << logPrint.getBtsTime().getEquivalentStringBtsTimeFormat() << ",";
     dspDataFileStream << dspData.availableUlCEs << "," << dspData.availableDlCEs << ",";
     dspDataFileStream << dspData.rakeState << "," << dspData.rachHand << "," << dspData.rakeLoad << ",";
@@ -368,8 +373,8 @@ void BtsLogAnalyzer::saveDataDumpOfOneDsp(string const& fileName, DspData const&
 }
 
 void BtsLogAnalyzer::saveTotalUsersAndCfs(BtsLogPrint const& logPrint) {
-    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory() + "TotalUsersAndCfs.csv");
-    ofstream totalCfsFileStream(dspDataPathHandler.getFullPath(), std::ios::ate | std::ios::app);
+    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory().string() + "TotalUsersAndCfs.csv");
+    ofstream totalCfsFileStream(dspDataPathHandler.getPath(), std::ios::ate | std::ios::app);
     unsigned int totalCfs(0);
     unsigned int totalR99Users(0);
     unsigned int totalHsupaUsers(0);
@@ -386,8 +391,9 @@ void BtsLogAnalyzer::saveTotalUsersAndCfs(BtsLogPrint const& logPrint) {
 }
 
 void BtsLogAnalyzer::saveAllUsersAndCfs(BtsLogPrint const& logPrint) {
-    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory() + "SaveAllUsersAndCfs.csv");
-    ofstream totalUsersAndCfsFileStream(dspDataPathHandler.getFullPath(), std::ios::ate | std::ios::app);
+    AlbaLocalPathHandler const dspDataPathHandler(
+        m_btsLogPathHandler.getDirectory().string() + "SaveAllUsersAndCfs.csv");
+    ofstream totalUsersAndCfsFileStream(dspDataPathHandler.getPath(), std::ios::ate | std::ios::app);
     totalUsersAndCfsFileStream << logPrint.getBtsTime().getEquivalentStringBtsTimeFormat() << ",";
     unsigned int totalCfs(0);
     for (DspDataPair const& dspDataPair : m_dspDataMap) {

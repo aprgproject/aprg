@@ -6,6 +6,7 @@
 #include <fstream>
 
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba {
 
@@ -19,12 +20,12 @@ AlbaGrepFile::AlbaGrepFile(string const& lineCondition, UpdateFunctionWithPercen
 
 bool AlbaGrepFile::isOutputFileWritten() const { return m_isOutputFileWritten; }
 
-void AlbaGrepFile::processFile(string const& inputFilePath, string const& outputFilePath) {
+void AlbaGrepFile::processFile(path const& inputFilePath, path const& outputFilePath) {
     m_isOutputFileWritten = false;
     AlbaLocalPathHandler const inputPathHandler(inputFilePath);
     AlbaLocalPathHandler const outputPathHandler(outputFilePath);
-    ifstream inputFileStream(inputPathHandler.getFullPath());
-    ofstream outputFileStream(outputPathHandler.getFullPath());
+    ifstream inputFileStream(inputPathHandler.getPath());
+    ofstream outputFileStream(outputPathHandler.getPath());
     AlbaFileReader fileReader(inputFileStream);
     double const sizeOfFile = fileReader.getFileSize();
     while (fileReader.isNotFinished()) {

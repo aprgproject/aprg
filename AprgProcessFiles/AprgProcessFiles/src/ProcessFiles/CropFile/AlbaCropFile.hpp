@@ -2,6 +2,7 @@
 
 #include <GrepStringEvaluator/AlbaGrepStringEvaluator.hpp>
 
+#include <filesystem>
 #include <functional>
 #include <optional>
 #include <string>
@@ -23,14 +24,15 @@ public:
         UpdateFunctionWithPercentage const& updateFunctionAfterOneIteration);
 
     [[nodiscard]] bool isOutputFileWritten() const;
-    void processFile(std::string const& inputFilePath, std::string const& outputFilePath);
+    void processFile(std::filesystem::path const& inputFilePath, std::filesystem::path const& outputFilePath);
 
 private:
     [[nodiscard]] LocationsInFile getLocationsInFile(double const foundLocation, double const fileSize) const;
     void performCropForFile(
-        std::string const& inputFilePath, std::string const& outputFilePath, double const foundLocation);
+        std::filesystem::path const& inputFilePath, std::filesystem::path const& outputFilePath,
+        double const foundLocation);
     void updateAfterOneIteration(double const percentage);
-    double getLocationOfPrioritizedPrint(std::string const& inputFilePath);
+    double getLocationOfPrioritizedPrint(std::filesystem::path const& inputFilePath);
     bool m_isOutputFileWritten;
     double m_cropSize;
     AlbaGrepStringEvaluator m_prioritizedLineEvaluator;

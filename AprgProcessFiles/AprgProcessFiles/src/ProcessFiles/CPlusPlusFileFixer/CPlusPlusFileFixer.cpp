@@ -2,6 +2,7 @@
 
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
+#include <Common/PathHandler/AlbaPathHandler.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>
@@ -11,6 +12,7 @@
 
 using namespace alba::stringHelper;
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba {
 
@@ -90,26 +92,27 @@ set<string> const listOfWindowsHeaders{
 
 }  // namespace
 
-void CPlusPlusFileFixer::processDirectory(string const& path) {
+void CPlusPlusFileFixer::processDirectory(path const& path) {
     set<string> listOfFiles;
     set<string> listOfDirectories;
-    AlbaLocalPathHandler(path).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        AlbaLocalPathHandler const filePathHandler(filePath);
-        if (!isPathIgnored(filePath)) {
-            if ("cpp" == filePathHandler.getExtension() || "hpp" == filePathHandler.getExtension()) {
-                processFile(filePathHandler.getFullPath());
+    AlbaLocalPathHandler(path).findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            AlbaLocalPathHandler const filePathHandler(filePath);
+            if (!isPathIgnored(filePathHandler.getPath().string())) {
+                if ("cpp" == filePathHandler.getExtension() || "hpp" == filePathHandler.getExtension()) {
+                    processFile(filePathHandler.getPath());
+                }
             }
-        }
-    }
+        });
 }
 
-void CPlusPlusFileFixer::processFile(string const& path) {
+void CPlusPlusFileFixer::processFile(path const& path) {
     // cout<<"ProcessFile: "<<path<<"\n";
     clear();
-    checkFile(path);
-    fix(path);
-    writeFile(path);
+    checkFile(path.string());
+    fix(path.string());
+    writeFile(path.string());
 }
 
 void CPlusPlusFileFixer::notifyIfAlbaDebugHeaderExistInProductionCode(string const& path) const {
@@ -129,7 +132,7 @@ void CPlusPlusFileFixer::notifyIfIostreamHeaderExistInProductionCode(string cons
         (find(m_headerListFromAngleBrackets.cbegin(), m_headerListFromAngleBrackets.cend(), string("iostream")) !=
          m_headerListFromAngleBrackets.end());
     // bool isCpp = filePathHandler.getExtension() == "cpp";
-    bool const isUnitTest = isStringFoundCaseSensitive(filePathHandler.getFile(), "_unit.cpp");
+    bool const isUnitTest = isStringFoundCaseSensitive(filePathHandler.getFile().string(), "_unit.cpp");
     if (isIostreamFound && !isUnitTest) {
         // && !isCpp) // !isUnitTest)
         cout << "CHECK THIS: iostream found in:[" << path << "].\n";
@@ -202,7 +205,7 @@ void CPlusPlusFileFixer::checkFile(string const& path) {
 
 void CPlusPlusFileFixer::readContentsFromFile(string const& path) {
     AlbaLocalPathHandler const filePathHandler(path);
-    ifstream inputLogFileStream(filePathHandler.getFullPath());
+    ifstream inputLogFileStream(filePathHandler.getPath());
     AlbaFileReader fileReader(inputLogFileStream);
     bool isOnHeaderPart(true);
     while (fileReader.isNotFinished()) {
@@ -230,9 +233,8 @@ void CPlusPlusFileFixer::readLineWithSharpInclude(string const& line, string con
         AlbaLocalPathHandler const filePathHandler(path);
         AlbaPathHandler const headerFromAngleBracketsPathHandler(headerFromAngleBrackets, "/");
         if (headerFromAngleBracketsPathHandler.getFilenameOnly() == filePathHandler.getFilenameOnly() &&
-            isStringFoundCaseSensitive(filePathHandler.getFullPath(), headerFromAngleBrackets)) {
-            addHeaderFileFromQuotations(filePathHandler.getFile());
-
+            isStringFoundCaseSensitive(filePathHandler.getPath().string(), headerFromAngleBrackets)) {
+            addHeaderFileFromQuotations(filePathHandler.getFile().string());
         } else {
             addHeaderFileFromAngleBrackets(headerFromAngleBrackets);
         }
@@ -326,17 +328,17 @@ void CPlusPlusFileFixer::fixSmallUToCapitalUInNumbers() {
 
 void CPlusPlusFileFixer::addHeaderFileFromAngleBrackets(string const& header) {
     AlbaPathHandler const headerPathHandler(header, "/");
-    m_headerListFromAngleBrackets.emplace_back(headerPathHandler.getFullPath());
+    m_headerListFromAngleBrackets.emplace_back(headerPathHandler.getPath());
 }
 
 void CPlusPlusFileFixer::addHeaderFileFromQuotations(string const& header) {
     AlbaPathHandler const headerPathHandler(header, "/");
-    m_headerListFromQuotations.emplace(headerPathHandler.getFullPath());
+    m_headerListFromQuotations.emplace(headerPathHandler.getPath());
 }
 
 void CPlusPlusFileFixer::writeFile(string const& path) {
     AlbaLocalPathHandler const filePathHandler(path);
-    ofstream outputLogFileStream(filePathHandler.getFullPath());
+    ofstream outputLogFileStream(filePathHandler.getPath());
     if (m_isPragmaOnceFound) {
         outputLogFileStream << "#pragma once\n";
         outputLogFileStream << "\n";

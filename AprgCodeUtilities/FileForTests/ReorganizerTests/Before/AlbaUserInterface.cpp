@@ -19,8 +19,8 @@ string AlbaUserInterface::getFilePathInput() {
     while (true) {
         string const pathString(getUserInput());
         AlbaLocalPathHandler const filePath(pathString);
-        if (filePath.isFoundInLocalSystem() && filePath.isFile()) {
-            return filePath.getFullPath();
+        if (filePath.doesExist() && filePath.isFile()) {
+            return filePath.getPath();
         }
         cout << "File not found\n";
     }

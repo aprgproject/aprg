@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <filesystem>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -41,8 +42,8 @@ public:
     // Sets the sample rate for the audio file. If you use the save() function, this sample rate will be used
     void setSampleRate(int const newSampleRate);
     std::vector<DataType>& getSamplesReferenceAtChannel(int const channelIndex);
-    bool load(std::string const& filePath);
-    bool save(std::string const& filePath, AudioFormat format = AudioFormat::Wave);
+    bool load(std::filesystem::path const& filePath);
+    bool save(std::filesystem::path const& filePath, AudioFormat format = AudioFormat::Wave);
     // Set the audio buffer for this Audio by copying samples from another buffer.
     // @Returns true if the buffer was copied successfully.
     bool setAudioBuffer(AudioBuffer& newBuffer);
@@ -80,10 +81,10 @@ private:
     int getAiffSampleRate(std::vector<uint8_t>& dataBuffer, int const sampleRateStartIndex);
     bool decodeWaveFile(std::vector<uint8_t>& dataBuffer);
     bool decodeAiffFile(std::vector<uint8_t>& dataBuffer);
-    bool saveToWaveFile(std::string const& filePath);
-    bool saveToAiffFile(std::string const& filePath);
+    bool saveToWaveFile(std::filesystem::path const& filePath);
+    bool saveToAiffFile(std::filesystem::path const& filePath);
     bool tenByteMatch(std::vector<uint8_t>& v1, int const startIndex1, std::vector<uint8_t>& v2, int const startIndex2);
-    bool writeDataToFile(std::vector<uint8_t>& dataBuffer, std::string const& filePath);
+    bool writeDataToFile(std::vector<uint8_t>& dataBuffer, std::filesystem::path const& filePath);
     AudioFormat audioFileFormat{AudioFormat::NotLoaded};
     int sampleRate{44100};
     int bitDepth{16};

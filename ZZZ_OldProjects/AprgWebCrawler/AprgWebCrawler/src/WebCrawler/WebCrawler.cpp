@@ -28,7 +28,7 @@ WebCrawler::WebCrawler(string const& downloadDirectory, string const& temporaryF
       m_downloadDirectoryPathHandler(downloadDirectory + R"(\)"),
       m_memoryCardPathHandler(downloadDirectory + R"(\MemoryCard.txt)"),
       m_importantLinksPathHandler(downloadDirectory + R"(\ImportantLinks.txt)") {
-    if (m_memoryCardPathHandler.isFoundInLocalSystem() && m_memoryCardPathHandler.isFile()) {
+    if (m_memoryCardPathHandler.doesExist() && m_memoryCardPathHandler.isFile()) {
         loadMemoryCard();
     }
 }
@@ -38,8 +38,8 @@ WebCrawler::WebCrawler(string const& workingDirectory, string const& webLink, st
       m_state(CrawlState::Unknown),
       m_temporaryFilePath(temporaryFilePath),
       m_downloadDirectoryPathHandler(workingDirectory + R"(\)" + getNewDirectoryNameFromWeblink(webLink) + R"(\)"),
-      m_memoryCardPathHandler(m_downloadDirectoryPathHandler.getFullPath() + R"(\MemoryCard.txt)"),
-      m_importantLinksPathHandler(m_downloadDirectoryPathHandler.getFullPath() + R"(\ImportantLinks.txt)") {
+      m_memoryCardPathHandler(m_downloadDirectoryPathHandler.getPath() + R"(\MemoryCard.txt)"),
+      m_importantLinksPathHandler(m_downloadDirectoryPathHandler.getPath() + R"(\ImportantLinks.txt)") {
     m_webLinks.push_back(webLink);
     m_memoryCardPathHandler.createDirectoriesForNonExisitingDirectories();
     saveMemoryCard();
@@ -169,8 +169,8 @@ void WebCrawler::modifyWebLink(string const& webLink, int index) { m_webLinks[in
 void WebCrawler::removeWebLink(int index) { m_webLinks.erase(m_webLinks.begin() + index); }
 
 bool WebCrawler::isValid() const {
-    return m_downloadDirectoryPathHandler.isFoundInLocalSystem() && m_downloadDirectoryPathHandler.isDirectory() &&
-           m_memoryCardPathHandler.isFoundInLocalSystem() && m_memoryCardPathHandler.isFile() && isModeUnrecognized() &&
+    return m_downloadDirectoryPathHandler.doesExist() && m_downloadDirectoryPathHandler.isDirectory() &&
+           m_memoryCardPathHandler.doesExist() && m_memoryCardPathHandler.isFile() && isModeUnrecognized() &&
            !isWebLinksEmpty() && isWebLinksValid();
 }
 
@@ -189,7 +189,7 @@ bool WebCrawler::isOnCurrentDownloadFinishedCrawlState() const {
 }
 
 void WebCrawler::saveMemoryCard() const {
-    ofstream memoryCardStream(m_memoryCardPathHandler.getFullPath());
+    ofstream memoryCardStream(m_memoryCardPathHandler.getPath());
     if (memoryCardStream.is_open()) {
         memoryCardStream << getCrawlModeString() << "\n";
         memoryCardStream << getCrawlStateString() << "\n";
@@ -207,7 +207,7 @@ void WebCrawler::saveStateToMemoryCard(CrawlState state) {
 }
 
 void WebCrawler::loadMemoryCard() {
-    ifstream memoryCardStream(m_memoryCardPathHandler.getFullPath());
+    ifstream memoryCardStream(m_memoryCardPathHandler.getPath());
     if (memoryCardStream.is_open()) {
         AlbaFileReader memoryCardReader(memoryCardStream);
         while (memoryCardReader.isNotFinished()) {
@@ -220,35 +220,35 @@ void WebCrawler::loadMemoryCard() {
             } else if (CrawlState::Empty != possibleState) {
                 setCrawlState(possibleState);
             } else if (!webPathHandler.isEmpty()) {
-                m_webLinks.push_back(webPathHandler.getFullPath());
+                m_webLinks.push_back(webPathHandler.getPath());
             }
         }
     }
 }
 
 void WebCrawler::saveImportantLink(string const& link) const {
-    ofstream importantLinkFileStream(m_importantLinksPathHandler.getFullPath(), ofstream::app);
+    ofstream importantLinkFileStream(m_importantLinksPathHandler.getPath(), ofstream::app);
     if (importantLinkFileStream.is_open()) {
         importantLinkFileStream << link << "\n";
     }
 }
 
 void WebCrawler::printStatus() const {
-    if (!m_downloadDirectoryPathHandler.isFoundInLocalSystem()) {
-        cout << "Working directory: [" << m_downloadDirectoryPathHandler.getFullPath() << "] is not found\n";
+    if (!m_downloadDirectoryPathHandler.doesExist()) {
+        cout << "Working directory: [" << m_downloadDirectoryPathHandler.getPath() << "] is not found\n";
     } else if (!m_downloadDirectoryPathHandler.isDirectory()) {
-        cout << "Working directory: [" << m_downloadDirectoryPathHandler.getFullPath() << "] is not a directory\n";
-    } else if (!m_memoryCardPathHandler.isFoundInLocalSystem()) {
-        cout << "Memory card: [" << m_downloadDirectoryPathHandler.getFullPath() << "] is not found\n";
+        cout << "Working directory: [" << m_downloadDirectoryPathHandler.getPath() << "] is not a directory\n";
+    } else if (!m_memoryCardPathHandler.doesExist()) {
+        cout << "Memory card: [" << m_downloadDirectoryPathHandler.getPath() << "] is not found\n";
     } else if (!m_memoryCardPathHandler.isFile()) {
-        cout << "Memory card: [" << m_downloadDirectoryPathHandler.getFullPath() << "] is not a file\n";
+        cout << "Memory card: [" << m_downloadDirectoryPathHandler.getPath() << "] is not a file\n";
     } else if (isWebLinksEmpty()) {
         cout << "There are no web links in memory card\n";
     } else if (!isWebLinksValid()) {
         cout << "Web links are not valid\n";
         for (string const& webLink : m_webLinks) {
             AlbaWebPathHandler webPathHandler(webLink);
-            cout << "Url: [" << webPathHandler.getFullPath() << "] isEmpty: " << webPathHandler.isEmpty()
+            cout << "Url: [" << webPathHandler.getPath() << "] isEmpty: " << webPathHandler.isEmpty()
                  << " hasProtocol: " << webPathHandler.hasProtocol() << "\n";
         }
     } else if (isModeUnrecognized()) {

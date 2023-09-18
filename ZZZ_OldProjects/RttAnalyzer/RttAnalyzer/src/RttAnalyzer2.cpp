@@ -14,14 +14,14 @@ void RttAnalyzer2::saveTitle2() { m_outputLogStream << "fileName,dateTime,maxPos
 
 void RttAnalyzer2::processFile2(string const& file) {
     AlbaLocalPathHandler const pathHandler(file);
-    ifstream logStream(pathHandler.getFullPath());
+    ifstream logStream(pathHandler.getPath());
 
     if (logStream.is_open()) {
         AlbaFileReader logFileReader(logStream);
 
         while (logFileReader.isNotFinished()) {
             string const lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
-            processLine2(pathHandler.getFile(), lineInFile);
+            processLine2(pathHandler.getFile().string(), lineInFile);
         }
     }
 }
@@ -40,10 +40,10 @@ void RttAnalyzer2::processLine2(string const& fileName, string const& line) {
 
 void RttAnalyzer2::processFile(string const& file) {
     AlbaLocalPathHandler pathHandler(file);
-    ifstream logStream(pathHandler.getFullPath());
-    ofstream outputLogStream(pathHandler.getDirectory() + "BtsLogRtt.csv");
-    pathHandler.input(pathHandler.getDirectory() + pathHandler.getFilenameOnly() + ".csv");
-    ofstream const collectedRttDetails(pathHandler.getFullPath());
+    ifstream logStream(pathHandler.getPath());
+    ofstream outputLogStream(pathHandler.getDirectory() / "BtsLogRtt.csv");
+    pathHandler.input(pathHandler.getDirectory().string() + pathHandler.getFilenameOnly().string() + ".csv");
+    ofstream const collectedRttDetails(pathHandler.getPath());
 
     if (logStream.is_open()) {
         AlbaFileReader logFileReader(logStream);
@@ -67,10 +67,10 @@ void RttAnalyzer2::processLine(ofstream& outputFile, string const& line) {
 
 void RttAnalyzer2::processFile3(string const& file) {
     AlbaLocalPathHandler pathHandler(file);
-    ifstream logStream(pathHandler.getFullPath());
-    ofstream outputLogStream(pathHandler.getDirectory() + "PeakPosCx8FromUeLogs.csv");
-    pathHandler.input(pathHandler.getDirectory() + pathHandler.getFilenameOnly() + ".csv");
-    ofstream const collectedRttDetails(pathHandler.getFullPath());
+    ifstream logStream(pathHandler.getPath());
+    ofstream outputLogStream(pathHandler.getDirectory() / "PeakPosCx8FromUeLogs.csv");
+    pathHandler.input(pathHandler.getDirectory().string() + pathHandler.getFilenameOnly().string() + ".csv");
+    ofstream const collectedRttDetails(pathHandler.getPath());
 
     outputLogStream << "peak_pos_cx8\n";
 

@@ -1,42 +1,70 @@
 #pragma once
 
-#if defined(OS_LINUX)
-#include <Common/PathHandler/AlbaLinuxPathHandler.hpp>
-#elif defined(OS_WINDOWS)  // you could also use __has_include as well
-#include <Common/PathHandler/AlbaWindowsPathHandler.hpp>
-#else
-static_assert(false, "The operating system is not supported.");
-#endif
-#include <Common/PathHandler/PathContantsAndTypes.hpp>
+#include <Common/Time/AlbaDateTime.hpp>
 
+#include <filesystem>
 #include <functional>
-#include <set>
-#include <string>
 
 namespace alba {
 
-#if defined(OS_LINUX)
-class AlbaLocalPathHandler : public AlbaLinuxPathHandler
-#elif defined(OS_WINDOWS)
-class AlbaLocalPathHandler : public AlbaWindowsPathHandler
-#endif
-
-{
+class AlbaLocalPathHandler {
 public:
-#if defined(OS_LINUX)
-    template <typename... ArgumentTypes>
-    explicit AlbaLocalPathHandler(ArgumentTypes&&... arguments)
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay)
-        : AlbaLinuxPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
-#elif defined(OS_WINDOWS)
-    template <typename... ArgumentTypes>
-    explicit AlbaLocalPathHandler(ArgumentTypes&&... arguments)
-        // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay)
-        : AlbaWindowsPathHandler(std::forward<ArgumentTypes>(arguments)...) {}
-#endif
+    using LocalPath = std::filesystem::path;
+    using PathFunction = std::function<void(LocalPath const&)>;
+    explicit AlbaLocalPathHandler(LocalPath const& path);
+    explicit AlbaLocalPathHandler(LocalPath&& path);
+    [[nodiscard]] AlbaDateTime getLastModifiedDateTime() const;
+    [[nodiscard]] LocalPath getPath() const;
+    [[nodiscard]] LocalPath getRoot() const;
+    [[nodiscard]] LocalPath getDirectory() const;
+    [[nodiscard]] LocalPath getDirectoryName() const;
+    [[nodiscard]] LocalPath getFile() const;
+    [[nodiscard]] LocalPath getFilenameOnly() const;
+    [[nodiscard]] LocalPath getExtension() const;
+    [[nodiscard]] LocalPath getRelativePathFrom(LocalPath const& source) const;
+    [[nodiscard]] LocalPath getRelativePathTo(LocalPath const& destination) const;
+    [[nodiscard]] LocalPath getProximatePathFrom(LocalPath const& source) const;
+    [[nodiscard]] LocalPath getProximatePathTo(LocalPath const& destination) const;
+    [[nodiscard]] uintmax_t getFileSize() const;
+    [[nodiscard]] bool doesExist() const;
+    [[nodiscard]] bool isExistingDirectory() const;
+    [[nodiscard]] bool isExistingFile() const;
+    [[nodiscard]] bool isSymbolicLink() const;
+    [[nodiscard]] bool isBlockDevice() const;
+    [[nodiscard]] bool isCharacterDevice() const;
+    [[nodiscard]] bool isNamedPipe() const;
+    [[nodiscard]] bool isNamedSocket() const;
+    [[nodiscard]] bool isRelativePath() const;
+    [[nodiscard]] bool isAbsolutePath() const;
+    // NOLINTBEGIN(modernize-use-nodiscard)
+    bool createDirectoriesAndIsSuccessful() const;
+    bool deleteDirectoryAndIsSuccessful() const;
+    bool deleteAllDirectoryContentsAndIsSuccessful() const;
+    bool deleteFileAndIsSuccessful() const;
+    bool copyFileToAndIsSuccessful(LocalPath const& destination) const;
+    bool copyDirectoryToAndIsSuccessful(LocalPath const& destination) const;
+    // NOLINTEND(modernize-use-nodiscard)
+    void findFilesAndDirectoriesOneDepth(PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
+    void findFilesAndDirectoriesMultipleDepth(
+        int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
+    void findFilesAndDirectoriesUnlimitedDepth(
+        PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
+    void clear();
+    void input(LocalPath const& path);
+    void input(LocalPath&& path);
+    void moveUpADirectory();
+    bool renameFileAndIsSuccessful(LocalPath const& newFileName);
+    bool renameDirectoryAndIsSuccessful(LocalPath const& newDirectoryName);
+    [[nodiscard]] static AlbaLocalPathHandler createPathHandlerForDetectedPath();
 
-    // rule of zero
-    // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
+private:
+    [[nodiscard]] static LocalPath fixPath(LocalPath const& path);
+
+    static void findFilesAndDirectories(
+        LocalPath const& currentDirectory, int const depth, PathFunction const& directoryFunction,
+        PathFunction const& fileFunction);
+
+    LocalPath m_path;
 };
 
 }  // namespace alba

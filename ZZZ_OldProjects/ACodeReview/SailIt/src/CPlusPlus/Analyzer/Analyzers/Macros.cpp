@@ -197,7 +197,7 @@ void TermAnalyzer::copyDatabaseOfIncludeFile(Looper const& startLooper, string c
         SailIt& sailIt = m_optionalSailIt.get();
         FileDirectoryDatabase& fileDirectoryDatabase = sailIt.getFileDirectoryDatabaseReference();
         if (fileDirectoryDatabase.isFileIncluded(m_baseDirectory, includeFileName)) {
-            string fullPath = fileDirectoryDatabase.getFullPathOfFile(m_baseDirectory, includeFileName);
+            string fullPath = fileDirectoryDatabase.getPathOfFile(m_baseDirectory, includeFileName);
             sailIt.addCPlusPlusDatabaseReferenceForThisFileIfNeeded(fullPath);
             CPlusPlusDatabase& copyThis = sailIt.getCPlusPlusDatabaseReferenceForThisFile(fullPath);
             for (auto const& type : copyThis.getTypesReference()) {

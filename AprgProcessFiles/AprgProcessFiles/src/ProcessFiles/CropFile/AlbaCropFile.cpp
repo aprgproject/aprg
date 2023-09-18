@@ -7,6 +7,7 @@
 #include <iostream>
 
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba {
 
@@ -23,14 +24,14 @@ AlbaCropFile::AlbaCropFile(
 
 bool AlbaCropFile::isOutputFileWritten() const { return m_isOutputFileWritten; }
 
-void AlbaCropFile::processFile(string const& inputFilePath, string const& outputFilePath) {
+void AlbaCropFile::processFile(path const& inputFilePath, path const& outputFilePath) {
     m_isOutputFileWritten = false;
     AlbaLocalPathHandler const inputPathHandler(inputFilePath);
     AlbaLocalPathHandler const outputPathHandler(outputFilePath);
 
-    double const foundLocation(getLocationOfPrioritizedPrint(inputPathHandler.getFullPath()));
+    double const foundLocation(getLocationOfPrioritizedPrint(inputPathHandler.getPath()));
     if (foundLocation >= 0) {
-        performCropForFile(inputPathHandler.getFullPath(), outputPathHandler.getFullPath(), foundLocation);
+        performCropForFile(inputPathHandler.getPath(), outputPathHandler.getPath(), foundLocation);
     } else {
         cout << "CropFile: Crop process did not proceed. Prioritized line not found."
              << "\n";
@@ -61,7 +62,7 @@ AlbaCropFile::LocationsInFile AlbaCropFile::getLocationsInFile(
 }
 
 void AlbaCropFile::performCropForFile(
-    string const& inputFilePath, string const& outputFilePath, double const foundLocation) {
+    path const& inputFilePath, path const& outputFilePath, double const foundLocation) {
     ifstream inputFileStream(inputFilePath);
     ofstream outputFileStream(outputFilePath);
 
@@ -92,7 +93,7 @@ void AlbaCropFile::updateAfterOneIteration(double const percentage) {
     }
 }
 
-double AlbaCropFile::getLocationOfPrioritizedPrint(string const& inputFilePath) {
+double AlbaCropFile::getLocationOfPrioritizedPrint(path const& inputFilePath) {
     double foundLocation(-1);
     ifstream inputFileStream(inputFilePath);
     AlbaFileReader fileReader(inputFileStream);

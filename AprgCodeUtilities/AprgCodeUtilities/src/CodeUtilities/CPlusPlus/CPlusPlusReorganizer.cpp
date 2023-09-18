@@ -29,15 +29,15 @@ void CPlusPlusReorganizer::processDirectory(string const& directory) {
             isStringFoundNotCaseSensitive(filenameOnly, "_unit")) {
             replaceAllAndReturnIfFound(filenameOnly, "_unit", "");
             CppFiles& cppFiles(filenameToFilesMap[filenameOnly]);
-            cppFiles.testFile = filePathHandler.getFullPath();
+            cppFiles.testFile = filePathHandler.getPath();
             cppFiles.isTestFileProcessed = false;
         } else {
             CppFiles& cppFiles(filenameToFilesMap[filenameOnly]);
             if (isHeaderFileExtension(filePathHandler.getExtension())) {
-                cppFiles.headerFile = filePathHandler.getFullPath();
+                cppFiles.headerFile = filePathHandler.getPath();
                 cppFiles.isHeaderFileProcessed = false;
             } else if (isImplementationFileExtension(filePathHandler.getExtension())) {
-                cppFiles.implementationFile = filePathHandler.getFullPath();
+                cppFiles.implementationFile = filePathHandler.getPath();
                 cppFiles.isImplementationFileProcessed = false;
             }
         }
@@ -189,35 +189,35 @@ int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
 void CPlusPlusReorganizer::reorganizeFile(string const& file) {
     m_purpose = Purpose::Reorganize;
     AlbaLocalPathHandler const filePathHandler(file);
-    if (filePathHandler.isFoundInLocalSystem()) {
-        // ALBA_INF_PRINT(cout, filePathHandler.getFullPath());
+    if (filePathHandler.doesExist()) {
+        // ALBA_INF_PRINT(cout, filePathHandler.getPath());
         // string command("cat \"");
-        // command += filePathHandler.getFullPath();
+        // command += filePathHandler.getPath();
         // command += "\"";
         // system(command.c_str());
         m_fileType = getFileType(filePathHandler.getExtension());
-        m_terms = getTermsFromFile(filePathHandler.getFullPath());
+        m_terms = getTermsFromFile(filePathHandler.getPath());
         processTerms();
-        writeAllTerms(filePathHandler.getFullPath(), m_terms);
+        writeAllTerms(filePathHandler.getPath(), m_terms);
     } else {
-        cout << "File not found: [" << filePathHandler.getFullPath() << "]\n";
+        cout << "File not found: [" << filePathHandler.getPath() << "]\n";
     }
 }
 
 void CPlusPlusReorganizer::gatherInformationFromFile(string const& file) {
     m_purpose = Purpose::GatherInformation;
     AlbaLocalPathHandler const filePathHandler(file);
-    if (filePathHandler.isFoundInLocalSystem()) {
-        // ALBA_INF_PRINT(cout, filePathHandler.getFullPath());
+    if (filePathHandler.doesExist()) {
+        // ALBA_INF_PRINT(cout, filePathHandler.getPath());
         // string command("cat \"");
-        // command += filePathHandler.getFullPath();
+        // command += filePathHandler.getPath();
         // command += "\"";
         // system(command.c_str());
         m_fileType = getFileType(filePathHandler.getExtension());
-        m_terms = getTermsFromFile(filePathHandler.getFullPath());
+        m_terms = getTermsFromFile(filePathHandler.getPath());
         processTerms();
     } else {
-        cout << "File not found: [" << filePathHandler.getFullPath() << "]\n";
+        cout << "File not found: [" << filePathHandler.getPath() << "]\n";
     }
 }
 

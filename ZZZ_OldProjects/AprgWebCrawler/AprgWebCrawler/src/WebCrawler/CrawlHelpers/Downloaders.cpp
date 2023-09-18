@@ -50,7 +50,7 @@ DownloadType::MozillaFireFox>(fileToDownloadWebPathHandler, downloadPathHandler)
 bool Downloaders::downloadFileWithDefaultSettings(
     AlbaWebPathHandler const& fileToDownloadWebPathHandler, AlbaLocalPathHandler const& downloadPathHandler) {
     AutomatedFirefoxBrowser::getInstance().downloadFileWithDefaultSettings(
-        fileToDownloadWebPathHandler.getFullPath(), downloadPathHandler.getFullPath());
+        fileToDownloadWebPathHandler.getPath(), downloadPathHandler.getPath());
     return true;
 }
 

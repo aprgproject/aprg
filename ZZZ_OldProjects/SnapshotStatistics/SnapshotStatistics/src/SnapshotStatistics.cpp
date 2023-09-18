@@ -37,23 +37,22 @@ void SnapshotStatistics::addFileSizeForSnapshot(
 void SnapshotStatistics::extractFilesInSnapshot(string const& snapshotPath) {
     cout << "processFileOrDirectory snapshotPath: " << snapshotPath << "\n";
     AlbaLocalPathHandler snapshotPathHandler(snapshotPath);
-    m_fileExtractor.extractOnceForAllFiles(snapshotPathHandler.getFullPath());
-    snapshotPathHandler.input(getSnapshotDirectory(snapshotPathHandler.getFullPath()) + R"(\BTSLogFiles.zip)");
-    m_fileExtractor.extractOnceForAllFiles(snapshotPathHandler.getFullPath());
+    m_fileExtractor.extractOnceForAllFiles(snapshotPathHandler.getPath());
+    snapshotPathHandler.input(getSnapshotDirectory(snapshotPathHandler.getPath().string()) + R"(\BTSLogFiles.zip)");
+    m_fileExtractor.extractOnceForAllFiles(snapshotPathHandler.getPath());
 }
 
 void SnapshotStatistics::fetchFileSizesForSnapshot(string const& snapshotPath) {
     // cout<<"fetchStatistics snapshotPath: "<<snapshotPath<<"\n";
     AlbaLocalPathHandler const snapshotDirectoryPathHandler(getSnapshotDirectory(snapshotPath));
-    ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;
-    snapshotDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        AlbaLocalPathHandler filePathHandler(filePath);
-        addFileSizeForSnapshot(
-            filePathHandler.getFile(), snapshotDirectoryPathHandler.getImmediateDirectoryName(),
-            filePathHandler.getFileSizeEstimate());
-    }
+    snapshotDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            AlbaLocalPathHandler filePathHandler(filePath);
+            addFileSizeForSnapshot(
+                filePathHandler.getFile().string(), snapshotDirectoryPathHandler.getDirectoryName().string(),
+                static_cast<double>(filePathHandler.getFileSize()));
+        });
 }
 
 void SnapshotStatistics::saveFileListForSnapshot(string const& outputPath) {
@@ -853,7 +852,7 @@ void SnapshotStatistics::initializeFileGroups() {
 
 string SnapshotStatistics::getSnapshotDirectory(string const& snapshotPath) {
     AlbaLocalPathHandler const snapshotPathHandler(snapshotPath);
-    return snapshotPathHandler.getDirectory() + R"(\)" + snapshotPathHandler.getFilenameOnly();
+    return snapshotPathHandler.getDirectory().string() + R"(\)" + snapshotPathHandler.getFilenameOnly().string();
 }
 
 double SnapshotStatistics::convertFileSizeToDouble(string const& fileSizeInString) {

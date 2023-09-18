@@ -251,7 +251,7 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWorksWithInputHasZeroInDigitF
     QuineMcCluskeyForTest quineMcCluskey;
     AlbaLocalPathHandler const pathOfNewAlgorithm(
         APRG_DIR R"(\AprgBooleanAlgebra\FilesForTests\QuineMcKluskeyTest\HasZeroInDigitForByte.txt)");
-    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());
+    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getPath());
     AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
     while (algorithmResultsReader.isNotFinished()) {
         string const lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());
@@ -342,7 +342,7 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWithInputHasLogarithmBase2For
     QuineMcCluskeyForTest qm2;
     AlbaLocalPathHandler const pathOfNewAlgorithm(
         APRG_DIR R"(\AprgBooleanAlgebra\FilesForTests\QuineMcKluskeyTest\LogarithmBase2ForByte.txt)");
-    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());
+    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getPath());
     AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
     while (algorithmResultsReader.isNotFinished()) {
         string const lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());
@@ -381,7 +381,7 @@ TEST(QuineMcCluskeyTest, DISABLED_GetInputsFromFileWithInputHasZeroesStartingFro
     QuineMcCluskeyForTest qm3;
     AlbaLocalPathHandler const pathOfNewAlgorithm(
         APRG_DIR R"(\AprgBooleanAlgebra\FilesForTests\QuineMcKluskeyTest\ZeroesStartingFromMsb.txt)");
-    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getFullPath());
+    ifstream algorithmResultsFileStream(pathOfNewAlgorithm.getPath());
     AlbaFileReader algorithmResultsReader(algorithmResultsFileStream);
     while (algorithmResultsReader.isNotFinished()) {
         string const lineInFile(algorithmResultsReader.getLineAndIgnoreWhiteSpaces());

@@ -15,7 +15,7 @@ using namespace std;
 TEST(FileDirectoryDatabaseTest, DISABLED_ActualTest) {}
 
 TEST(FileDirectoryDatabaseTest, FilesAndDirectoriesAreRecognizedWhenAdded) {
-    string directory(AlbaLocalPathHandler(MT_FILE_READER_TEST_DIRECTORY).getFullPath());
+    string directory(AlbaLocalPathHandler(MT_FILE_READER_TEST_DIRECTORY).getPath());
     FileDirectoryDatabase fileDirectoryDatabase;
     fileDirectoryDatabase.allowNonExistentDirectories();
     fileDirectoryDatabase.addFileOrDirectory(directory + "file3.hpp");
@@ -49,7 +49,7 @@ TEST(FileDirectoryDatabaseTest, FilesAndDirectoriesAreRecognizedWhenAdded) {
 }
 
 TEST(FileDirectoryDatabaseTest, FullPathOfFilesAreFound) {
-    string directory(AlbaLocalPathHandler(MT_FILE_READER_TEST_DIRECTORY).getFullPath());
+    string directory(AlbaLocalPathHandler(MT_FILE_READER_TEST_DIRECTORY).getPath());
     FileDirectoryDatabase fileDirectoryDatabase;
     fileDirectoryDatabase.allowNonExistentDirectories();
     fileDirectoryDatabase.addFileOrDirectory(directory + "file3.hpp");
@@ -59,10 +59,10 @@ TEST(FileDirectoryDatabaseTest, FullPathOfFilesAreFound) {
     fileDirectoryDatabase.addFileOrDirectory(directory + "file2.hpp");
     fileDirectoryDatabase.addFileOrDirectory(directory + "file5.hpp");
 
-    EXPECT_PATH_EQ(fileDirectoryDatabase.getFullPathOfFile(directory, "file1.hpp"), directory + "file1.hpp");
-    EXPECT_PATH_EQ(fileDirectoryDatabase.getFullPathOfFile(directory, "file2.hpp"), directory + "file2.hpp");
-    EXPECT_PATH_EQ(fileDirectoryDatabase.getFullPathOfFile(directory, "file3.hpp"), directory + "file3.hpp");
-    EXPECT_PATH_EQ(fileDirectoryDatabase.getFullPathOfFile("", "file4.hpp"), directory + "file4.hpp");
-    EXPECT_PATH_EQ(fileDirectoryDatabase.getFullPathOfFile("", "file5.hpp"), directory + "file5.hpp");
-    EXPECT_PATH_EQ(fileDirectoryDatabase.getFullPathOfFile("", "file6.hpp"), directory + "file6.hpp");
+    EXPECT_PATH_EQ(fileDirectoryDatabase.getPathOfFile(directory, "file1.hpp"), directory + "file1.hpp");
+    EXPECT_PATH_EQ(fileDirectoryDatabase.getPathOfFile(directory, "file2.hpp"), directory + "file2.hpp");
+    EXPECT_PATH_EQ(fileDirectoryDatabase.getPathOfFile(directory, "file3.hpp"), directory + "file3.hpp");
+    EXPECT_PATH_EQ(fileDirectoryDatabase.getPathOfFile("", "file4.hpp"), directory + "file4.hpp");
+    EXPECT_PATH_EQ(fileDirectoryDatabase.getPathOfFile("", "file5.hpp"), directory + "file5.hpp");
+    EXPECT_PATH_EQ(fileDirectoryDatabase.getPathOfFile("", "file6.hpp"), directory + "file6.hpp");
 }

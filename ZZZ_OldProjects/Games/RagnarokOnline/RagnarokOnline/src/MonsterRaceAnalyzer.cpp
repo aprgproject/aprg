@@ -55,7 +55,7 @@ void MonsterRaceAnalyzer::showNextPossibleWinners(RaceConfiguration const& curre
 
 void MonsterRaceAnalyzer::readPreviousRaceDatabase() {
     AlbaLocalPathHandler const filePathHandler(R"(C:\Users\detec\OneDrive\Desktop\Games\RO\MonsterRacingDatabase.txt)");
-    ifstream fileStream(filePathHandler.getFullPath());
+    ifstream fileStream(filePathHandler.getPath());
     AlbaFileReader fileReader(fileStream);
     PreviousRace previousRace{};
     RacePlaceType racePlaceType{RacePlaceType::Unknown};

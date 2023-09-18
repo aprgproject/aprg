@@ -7,7 +7,10 @@
 #include <atomic>
 #include <thread>
 
+using namespace alba::AlbaLocalUserAutomation;
 using namespace std;
+
+namespace alba::chess::ChessPeek {
 
 namespace {
 
@@ -16,16 +19,13 @@ static atomic_bool currentlyPrinting = false;
 bool shouldStillRun = true;  // USE ESCAPE KEY TO CLEANLY SHUTDOWN
 
 void trackKeyPress() {
-    alba::AlbaLocalUserAutomation const userAutomation;
     while (shouldStillRun) {
-        shouldStillRun = !alba::AlbaLocalUserAutomation::isKeyPressed(VK_ESCAPE);
+        shouldStillRun = !isKeyPressed(VK_ESCAPE);
         Sleep(100);
     }
 }
 
 }  // namespace
-
-namespace alba::chess::ChessPeek {
 
 ChessPeek::ChessPeek()
     : m_configuration(Configuration::Type::ChessDotComVersus),

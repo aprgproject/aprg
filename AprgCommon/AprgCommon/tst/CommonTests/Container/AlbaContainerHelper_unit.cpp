@@ -26,7 +26,7 @@ TEST_F(AlbaContainerHelperReaderTest, SaveContentsToStreamWorksForAVectorOfInteg
     saveContentsToStream(testFileWriteStream, temporaryArray, StreamFormat::File);
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
     AlbaFileReader fileReader(testFileReadStream);
     ASSERT_TRUE(testFileReadStream.good());
@@ -48,7 +48,7 @@ TEST_F(AlbaContainerHelperReaderTest, SaveContentsToStreamWorksForAnArrayOfInteg
     saveContentsToStream(testFileWriteStream, temporaryVector, StreamFormat::File);
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
     AlbaFileReader fileReader(testFileReadStream);
     ASSERT_TRUE(testFileReadStream.good());
@@ -70,7 +70,7 @@ TEST_F(AlbaContainerHelperReaderTest, SaveContentsToStreamWorksForASetOfIntegers
     saveContentsToStream(testFileWriteStream, temporarySet, StreamFormat::File);
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
     AlbaFileReader fileReader(testFileReadStream);
     ASSERT_TRUE(testFileReadStream.good());
@@ -95,7 +95,7 @@ TEST_F(AlbaContainerHelperReaderTest, SaveContentsToStreamWorksForAMapOfIntegers
     saveContentsToStream(testFileWriteStream, temporaryMap, StreamFormat::File);
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
     AlbaFileReader fileReader(testFileReadStream);
     ASSERT_TRUE(testFileReadStream.good());
@@ -118,7 +118,7 @@ TEST_F(AlbaContainerHelperReaderTest, FetrieveContentsFromStreamWorksForAVectorO
     testFileWriteStream << "-43735\n";
     testFileWriteStream << "23234\n";
     testFileWriteStream.close();
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
 
     retrieveContentsFromStream(testFileReadStream, temporaryArray);
@@ -139,7 +139,7 @@ TEST_F(AlbaContainerHelperReaderTest, FetrieveContentsFromStreamWorksForAnArrayO
     testFileWriteStream << "-43735\n";
     testFileWriteStream << "23234\n";
     testFileWriteStream.close();
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
 
     retrieveContentsFromStream(testFileReadStream, temporaryVector);
@@ -159,7 +159,7 @@ TEST_F(AlbaContainerHelperReaderTest, FetrieveContentsFromStreamWorksForASetOfIn
     testFileWriteStream << "-43735\n";
     testFileWriteStream << "23234\n";
     testFileWriteStream.close();
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
 
     retrieveContentsFromStream(testFileReadStream, temporarySet);
@@ -179,7 +179,7 @@ TEST_F(AlbaContainerHelperReaderTest, FetrieveContentsFromStreamWorksForAMapOfIn
     testFileWriteStream << "3\n";
     testFileWriteStream << "4\n";
     testFileWriteStream.close();
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
 
     retrieveContentsFromStream(testFileReadStream, temporaryMap);

@@ -19,11 +19,11 @@ namespace alba {
 
 AlbaWindowsPathHandler::AlbaWindowsPathHandler(string_view const path) : AlbaPathHandler(R"(\)") { setPath(path); }
 string AlbaWindowsPathHandler::getDriveOrRoot() const { return m_driveOrRoot; }
-bool AlbaWindowsPathHandler::isFoundInLocalSystem() const { return m_foundInLocalSystem; }
+bool AlbaWindowsPathHandler::doesExist() const { return m_foundInLocalSystem; }
 bool AlbaWindowsPathHandler::isRelativePath() const { return m_relativePath; }
 
 void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const {
-    string const fullPath(getFullPath());
+    string const fullPath(getPath());
     int index = 0;
     int const length = fullPath.length();
     while (index < length) {
@@ -33,13 +33,13 @@ void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const
         }
         string const partialDirectory(fullPath.substr(0, indexWithSlashCharacter + 1));
         AlbaWindowsPathHandler const partialDirectoryPathHandler(partialDirectory);
-        if (!partialDirectoryPathHandler.isFoundInLocalSystem()) {
+        if (!partialDirectoryPathHandler.doesExist()) {
             if (CreateDirectoryW(
-                    convertToAnotherBasicStringVariant<string, wstring>(partialDirectoryPathHandler.getFullPath())
+                    convertToAnotherBasicStringVariant<string, wstring>(partialDirectoryPathHandler.getPath())
                         .c_str(),
                     nullptr) == 0) {
                 cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-                cerr << "Path: [" << partialDirectoryPathHandler.getFullPath() << "]\n";
+                cerr << "Path: [" << partialDirectoryPathHandler.getPath() << "]\n";
                 cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
             }
         }
@@ -81,14 +81,14 @@ AlbaDateTime AlbaWindowsPathHandler::getFileCreationTime() {
     AlbaDateTime fileCreationTime;
     WIN32_FILE_ATTRIBUTE_DATA attributeData;
     if (GetFileAttributesExW(
-            convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(), GetFileExInfoStandard,
+            convertToAnotherBasicStringVariant<string, wstring>(getPath()).c_str(), GetFileExInfoStandard,
             &attributeData) != 0) {
         SYSTEMTIME fileCreationTimeInSystemTime;
         FileTimeToSystemTime(&(attributeData.ftCreationTime), &fileCreationTimeInSystemTime);
         fileCreationTime = convertSystemTimeToAlbaDateTime(fileCreationTimeInSystemTime);
     } else {
         cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-        cerr << "Path:" << getFullPath() << "\n";
+        cerr << "Path:" << getPath() << "\n";
         cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
     }
     return fileCreationTime;
@@ -98,13 +98,13 @@ double AlbaWindowsPathHandler::getFileSizeEstimate() {
     double fileSizeEstimate(0);
     WIN32_FILE_ATTRIBUTE_DATA attributeData;
     if (GetFileAttributesExW(
-            convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(), GetFileExInfoStandard,
+            convertToAnotherBasicStringVariant<string, wstring>(getPath()).c_str(), GetFileExInfoStandard,
             &attributeData) != 0) {
         fileSizeEstimate =
             static_cast<double>(attributeData.nFileSizeHigh) * 0x100'000'000 + attributeData.nFileSizeLow;
     } else {
         cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-        cerr << "Path:" << getFullPath() << "\n";
+        cerr << "Path:" << getPath() << "\n";
         cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
     }
     return fileSizeEstimate;
@@ -114,10 +114,10 @@ bool AlbaWindowsPathHandler::deleteFile() {
     bool isSuccessful(false);
     if (isFile()) {
         isSuccessful =
-            static_cast<bool>(DeleteFileW(convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str()));
+            static_cast<bool>(DeleteFileW(convertToAnotherBasicStringVariant<string, wstring>(getPath()).c_str()));
         if (!isSuccessful) {
             cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-            cerr << "Path: [" << getFullPath() << "]\n";
+            cerr << "Path: [" << getPath() << "]\n";
             cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
         } else {
             reInput();
@@ -130,10 +130,10 @@ bool AlbaWindowsPathHandler::deleteDirectoryWithoutFilesAndDirectories() {
     bool isSuccessful(false);
     if (isDirectory()) {
         isSuccessful = static_cast<bool>(
-            RemoveDirectoryW(convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str()));
+            RemoveDirectoryW(convertToAnotherBasicStringVariant<string, wstring>(getPath()).c_str()));
         if (!isSuccessful) {
             cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-            cerr << "Path: [" << getFullPath() << "]\n";
+            cerr << "Path: [" << getPath() << "]\n";
             cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
         } else {
             reInput();
@@ -146,11 +146,11 @@ bool AlbaWindowsPathHandler::copyToNewFile(string_view const newFilePath) {
     bool isSuccessful(false);
     if (isFile()) {
         isSuccessful = static_cast<bool>(CopyFileW(
-            convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(),
+            convertToAnotherBasicStringVariant<string, wstring>(getPath()).c_str(),
             convertToAnotherBasicStringVariant<string_view, wstring>(newFilePath).c_str(), 0));
         if (!isSuccessful) {
             cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-            cerr << "Path: [" << getFullPath() << "]\n";
+            cerr << "Path: [" << getPath() << "]\n";
             cerr << "newFilePath: [" << newFilePath << "]\n";
             cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
         } else {
@@ -165,11 +165,11 @@ bool AlbaWindowsPathHandler::renameFile(string_view const newFileName) {
     if (isFile()) {
         string const newPath(m_directory + string(newFileName));
         isSuccessful = static_cast<bool>(MoveFileW(
-            convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(),
+            convertToAnotherBasicStringVariant<string, wstring>(getPath()).c_str(),
             convertToAnotherBasicStringVariant<string, wstring>(newPath).c_str()));
         if (!isSuccessful) {
             cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-            cerr << "Path: [" << getFullPath() << "]\n";
+            cerr << "Path: [" << getPath() << "]\n";
             cerr << "newFileName: [" << newFileName << "]\n";
             cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
         } else {
@@ -182,19 +182,19 @@ bool AlbaWindowsPathHandler::renameFile(string_view const newFileName) {
 bool AlbaWindowsPathHandler::renameImmediateDirectory(string_view const newDirectoryName) {
     bool isSuccessful(false);
     if (isDirectory()) {
-        AlbaWindowsPathHandler newPathHandler(getFullPath());
+        AlbaWindowsPathHandler newPathHandler(getPath());
         newPathHandler.goUp();
         newPathHandler.input(newPathHandler.getDirectory() + m_slashCharacterString + string(newDirectoryName));
         isSuccessful = static_cast<bool>(MoveFileW(
-            convertToAnotherBasicStringVariant<string, wstring>(getFullPath()).c_str(),
-            convertToAnotherBasicStringVariant<string, wstring>(newPathHandler.getFullPath()).c_str()));
+            convertToAnotherBasicStringVariant<string, wstring>(getPath()).c_str(),
+            convertToAnotherBasicStringVariant<string, wstring>(newPathHandler.getPath()).c_str()));
         if (!isSuccessful) {
             cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-            cerr << "Path: [" << getFullPath() << "]\n";
+            cerr << "Path: [" << getPath() << "]\n";
             cerr << "newDirectoryName: [" << newDirectoryName << "]\n";
             cerr << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
         } else {
-            input(newPathHandler.getFullPath());
+            input(newPathHandler.getPath());
         }
     }
     return isSuccessful;

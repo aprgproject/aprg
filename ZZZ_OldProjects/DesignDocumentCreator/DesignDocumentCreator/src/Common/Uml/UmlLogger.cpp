@@ -60,8 +60,8 @@ void UmlLogger::logNote(string const& note) {
 void UmlLogger::saveUmlLogsToFile(string const& filePath) {
     AlbaLocalPathHandler pathHandler(filePath);
     pathHandler.createDirectoriesForNonExisitingDirectories();
-    ofstream outputFile(pathHandler.getFullPath());
-    cout << "Uml logs saved to file: " << pathHandler.getFullPath() << "\n";
+    ofstream outputFile(pathHandler.getPath());
+    cout << "Uml logs saved to file: " << pathHandler.getPath() << "\n";
     if (outputFile.is_open()) {
         outputFile << getUmlLogsForStart() << "\n";
         outputFile << m_umlLogBuffer.str() << "\n";

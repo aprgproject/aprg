@@ -254,21 +254,21 @@ void WcdmaToolsConfiguration::determineVariousLocationsBasedOnCurrentLocation() 
     currentLocalPathHandler.goUp();
 
     AlbaLocalPathHandler sevenZipPathHandler(currentLocalPathHandler.getDirectory() + R"(\7z32\7z.exe)");
-    locationOf7zExecutable = sevenZipPathHandler.getFullPath();
+    locationOf7zExecutable = sevenZipPathHandler.getPath();
 
     AlbaLocalPathHandler configurationFilePathHandler(
         currentLocalPathHandler.getDirectory() + R"(\configuration\configuration.txt)");
     configurationFilePathHandler.createDirectoriesForNonExisitingDirectories();
-    configurationFileLocation = configurationFilePathHandler.getFullPath();
+    configurationFileLocation = configurationFilePathHandler.getPath();
 
     AlbaLocalPathHandler defaultConfigurationFilePathHandler(
         currentLocalPathHandler.getDirectory() + R"(\configuration\defaultConfiguration.txt)");
     defaultConfigurationFilePathHandler.createDirectoriesForNonExisitingDirectories();
-    defaultConfigurationFileLocation = defaultConfigurationFilePathHandler.getFullPath();
+    defaultConfigurationFileLocation = defaultConfigurationFilePathHandler.getPath();
 
     AlbaLocalPathHandler temporaryFilePathHandler(currentLocalPathHandler.getDirectory() + R"(\temporaryFiles\)");
     temporaryFilePathHandler.input(temporaryFilePathHandler.getDriveOrRoot() + R"(:\Temp\)");
-    btsLogSorterConfiguration.m_pathOfTempFiles = temporaryFilePathHandler.getFullPath();
+    btsLogSorterConfiguration.m_pathOfTempFiles = temporaryFilePathHandler.getPath();
     temporaryFilePathHandler.createDirectoriesForNonExisitingDirectories();
 
     cout << "locationOf7zExecutable: [" << locationOf7zExecutable << "]\n";

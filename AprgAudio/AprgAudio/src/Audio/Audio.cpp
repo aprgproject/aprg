@@ -8,6 +8,7 @@
 #include <unordered_map>
 
 using namespace std;
+using namespace std::filesystem;
 
 namespace {
 
@@ -166,8 +167,8 @@ void Audio<DataType>::setSampleRate(int const newSampleRate) {
 }
 
 template <class DataType>
-bool Audio<DataType>::load(string const& filePath) {
-    ifstream file(AlbaLocalPathHandler(filePath).getFullPath(), ios::binary);
+bool Audio<DataType>::load(std::filesystem::path const& filePath) {
+    ifstream file(AlbaLocalPathHandler(filePath).getPath(), ios::binary);
 
     // check the file exists
     if (!file.good()) {
@@ -433,20 +434,20 @@ void Audio<DataType>::addSampleRateToAiffData(vector<uint8_t>& dataBuffer, int c
 }
 
 template <class DataType>
-bool Audio<DataType>::save(string const& filePath, AudioFormat const format) {
+bool Audio<DataType>::save(path const& filePath, AudioFormat const format) {
     AlbaLocalPathHandler const filePathHandler(filePath);
     if (format == AudioFormat::Wave) {
-        return saveToWaveFile(filePathHandler.getFullPath());
+        return saveToWaveFile(filePathHandler.getPath());
     }
     if (format == AudioFormat::Aiff) {
-        return saveToAiffFile(filePathHandler.getFullPath());
+        return saveToAiffFile(filePathHandler.getPath());
     }
 
     return false;
 }
 
 template <class DataType>
-bool Audio<DataType>::saveToWaveFile(string const& filePath) {
+bool Audio<DataType>::saveToWaveFile(path const& filePath) {
     vector<uint8_t> dataBuffer;
 
     auto dataChunkSize = static_cast<int32_t>(getNumberOfSamplesPerChannel() * (getNumberOfChannels() * bitDepth / 8));
@@ -516,7 +517,7 @@ bool Audio<DataType>::saveToWaveFile(string const& filePath) {
 }
 
 template <class DataType>
-bool Audio<DataType>::saveToAiffFile(string const& filePath) {
+bool Audio<DataType>::saveToAiffFile(path const& filePath) {
     vector<uint8_t> dataBuffer;
 
     int32_t const numberBytesPerSample = bitDepth / 8;
@@ -585,7 +586,7 @@ bool Audio<DataType>::saveToAiffFile(string const& filePath) {
 }
 
 template <class DataType>
-bool Audio<DataType>::writeDataToFile(vector<uint8_t>& dataBuffer, string const& filePath) {
+bool Audio<DataType>::writeDataToFile(vector<uint8_t>& dataBuffer, path const& filePath) {
     ofstream outputFile(filePath, ios::binary);
 
     if (outputFile.is_open()) {

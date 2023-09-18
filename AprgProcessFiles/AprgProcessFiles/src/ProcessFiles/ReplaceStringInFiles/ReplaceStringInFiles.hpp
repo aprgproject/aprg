@@ -2,6 +2,7 @@
 
 #include <Common/String/AlbaStringHelper.hpp>
 
+#include <filesystem>
 #include <string>
 
 namespace alba {
@@ -13,13 +14,15 @@ public:
     ReplaceStringInFiles() = default;
     [[nodiscard]] static std::string getCPlusPlusStylePrintFromC(std::string const& inputString);
     static void replaceStringWithStringOnDirectories(
-        std::string const& inputDirectory, std::string const& outputDirectory, StringPairs const& replacePairs);
+        std::filesystem::path const& inputDirectory, std::filesystem::path const& outputDirectory,
+        StringPairs const& replacePairs);
     static void replaceStringWithStringOnFile(
-        std::string const& inputFilePath, std::string const& outputFilePath, StringPairs const& replacePairs);
+        std::filesystem::path const& inputFilePath, std::filesystem::path const& outputFilePath,
+        StringPairs const& replacePairs);
     static void replaceCToCPlusPlusStylePrintOnDirectories(
-        std::string const& inputDirectory, std::string const& outputDirectory);
+        std::filesystem::path const& inputDirectory, std::filesystem::path const& outputDirectory);
     static void replaceCToCPlusPlusStylePrintOnFile(
-        std::string const& inputFilePath, std::string const& outputFilePath);
+        std::filesystem::path const& inputFilePath, std::filesystem::path const& outputFilePath);
 
 private:
     [[nodiscard]] static std::string constructCPlusPlusPrint(
@@ -30,7 +33,7 @@ private:
     static void appendCharacterToResult(std::string& result, bool& isOnStringLiteral, char const c);
     static void appendParameterToResult(std::string& result, bool& isOnStringLiteral, std::string const& parameter);
     static std::string getNewPrintStreamBasedFromOldPrintFunction(std::string const& printFunction);
-    static bool isCOrCPlusPlusFile(std::string const& extension);
+    static bool isCOrCPlusPlusFile(std::string const& extensionString);
     static bool hasPrintInLine(std::string const& line);
     static bool hasEndOfPrintInLine(std::string const& line);
 };

@@ -9,7 +9,7 @@ namespace alba {
 class AlbaWebPathHandler : public AlbaPathHandler {
 public:
     explicit AlbaWebPathHandler(std::string_view const path);
-    [[nodiscard]] std::string getFullPath() const override;
+    [[nodiscard]] std::string getPath() const override;
     [[nodiscard]] std::string getDirectory() const override;
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     void clear() override;

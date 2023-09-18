@@ -22,14 +22,13 @@ private:
     static void exitIfSpecialKeyIsPressed();
     void updateExcelFile(unsigned int const freqUsageBits);
     void setupFesterEnvironmentInMatlab();
-    void editCellInExcelWithNewFrequencies(MousePosition const& excelCellPosition);
+    void editCellInExcelWithNewFrequencies(AlbaLocalUserAutomation::MousePosition const& excelCellPosition);
     void runFesterFunctionInMatlab();
     void saveDataToOutputFile(std::string const& clipboardData);
     void updateFrequenciesBasedFreqUsageBits(unsigned int const freqUsageBits);
     static bool isRunningInClipboardData(std::string const& clipboardData);
     std::ofstream m_outputStream;
     Frequencies m_frequencies;
-    AlbaWindowsUserAutomation m_userAutomation;
     bool m_retryCurrentFrequencies{false};
 };
 

@@ -42,15 +42,14 @@ TEST(SnapshotStatisticsTest, DISABLED_SnapshotFilesRel2) {
 
     AlbaLocalPathHandler const localPathHandler(
         R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\AP_1_RESULTS)");
-    ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;
-    localPathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        AlbaLocalPathHandler const localPathHandler(filePath);
-        if (localPathHandler.getExtension() == "zip") {
-            statistics.fetchFileSizesForSnapshot(localPathHandler.getFullPath());
-        }
-    }
+    localPathHandler.findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            AlbaLocalPathHandler const localPathHandler(filePath);
+            if (localPathHandler.getExtension() == "zip") {
+                statistics.fetchFileSizesForSnapshot(localPathHandler.getPath().string());
+            }
+        });
     statistics.saveFileListForSnapshot(
         R"(C:\Work\CP\Features\CNI-31516\LogsForStatistics\CNI 31516_AP_REL2\results\outputFileSizes.csv)");
 

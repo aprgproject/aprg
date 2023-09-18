@@ -40,7 +40,7 @@ void writeTextWithSpaces(ofstream& writeStream) {
 }
 
 TEST_F(AlbaFileReaderTest, ConstructorsWorks) {
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader1(testFileReadStream);
@@ -50,7 +50,7 @@ TEST_F(AlbaFileReaderTest, ConstructorsWorks) {
 }
 
 TEST_F(AlbaFileReaderTest, SetAndGetBufferSizeWorks) {
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -63,7 +63,7 @@ TEST_F(AlbaFileReaderTest, SkipLineWorksUsingVariousCharacters) {
     writeTextWithSpaces(testFileWriteStream);
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -82,7 +82,7 @@ TEST_F(AlbaFileReaderTest, GetLineWorksUsingVariousCharacters) {
     writeTextWithSpaces(testFileWriteStream);
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -117,7 +117,7 @@ TEST_F(AlbaFileReaderTest, GetLineAndIgnoreWhiteSpacesWorksUsingVariousCharacter
     writeTextWithSpaces(testFileWriteStream);
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -142,7 +142,7 @@ TEST_F(AlbaFileReaderTest, GetLineAndIgnoreWhiteSpacesWorksUsingVariousCharacter
 
 TEST_F(AlbaFileReaderTest, ReadLineWithSizeLimit) {
     AlbaLocalPathHandler commonSizeTestFileToRead(ALBA_COMMON_SIZE_TEST_FILE);
-    ifstream testFileReadStream(commonSizeTestFileToRead.getFullPath());
+    ifstream testFileReadStream(commonSizeTestFileToRead.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -162,7 +162,7 @@ TEST_F(AlbaFileReaderTest, ReadSingleCharacterFromBinaryFile) {
     testFileWriteStream << "123!@# \t\n";
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
+    ifstream testFileReadStream(testFilePathHandler.getPath(), ios::binary);
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -190,7 +190,7 @@ TEST_F(AlbaFileReaderTest, ReadMultipleCharacters) {
     testFileWriteStream << "123!@# \t\n";
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
+    ifstream testFileReadStream(testFilePathHandler.getPath(), ios::binary);
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -226,7 +226,7 @@ TEST_F(AlbaFileReaderTest, RequestToReadMultipleCharactersThatIsTheBeyondBufferS
     testFileWriteStream << "12345";
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
+    ifstream testFileReadStream(testFilePathHandler.getPath(), ios::binary);
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -256,7 +256,7 @@ TEST_F(AlbaFileReaderTest, ReadOneByteNumbers) {
     testFileWriteStream.put(static_cast<char>(0xBA));
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
+    ifstream testFileReadStream(testFilePathHandler.getPath(), ios::binary);
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -286,7 +286,7 @@ TEST_F(AlbaFileReaderTest, ReadTwoByteNumbers) {
     testFileWriteStream.put(static_cast<char>(0xBA));
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
+    ifstream testFileReadStream(testFilePathHandler.getPath(), ios::binary);
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -310,7 +310,7 @@ TEST_F(AlbaFileReaderTest, ReadFourByteNumbers) {
     testFileWriteStream.put(static_cast<char>(0xBA));
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
+    ifstream testFileReadStream(testFilePathHandler.getPath(), ios::binary);
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -332,7 +332,7 @@ TEST_F(AlbaFileReaderTest, ReadEightByteNumbers) {
     testFileWriteStream.put(static_cast<char>(0xBA));
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
+    ifstream testFileReadStream(testFilePathHandler.getPath(), ios::binary);
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -352,7 +352,7 @@ TEST_F(AlbaFileReaderTest, ReadSwappedTwoByteNumbers) {
     testFileWriteStream.put(static_cast<char>(0xBA));
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
+    ifstream testFileReadStream(testFilePathHandler.getPath(), ios::binary);
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -376,7 +376,7 @@ TEST_F(AlbaFileReaderTest, ReadSwappedFourByteNumbers) {
     testFileWriteStream.put(static_cast<char>(0xBA));
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
+    ifstream testFileReadStream(testFilePathHandler.getPath(), ios::binary);
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -398,7 +398,7 @@ TEST_F(AlbaFileReaderTest, ReadSwappedEightByteNumbers) {
     testFileWriteStream.put(static_cast<char>(0xBA));
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
+    ifstream testFileReadStream(testFilePathHandler.getPath(), ios::binary);
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);
@@ -418,7 +418,7 @@ TEST_F(AlbaFileReaderTest, FileContentsCanBeSavedInMemoryBuffer) {
     testFileWriteStream.put(static_cast<char>(0xBA));
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath(), ios::binary);
+    ifstream testFileReadStream(testFilePathHandler.getPath(), ios::binary);
     ASSERT_TRUE(testFileReadStream.is_open());
 
     AlbaFileReader fileReader(testFileReadStream);

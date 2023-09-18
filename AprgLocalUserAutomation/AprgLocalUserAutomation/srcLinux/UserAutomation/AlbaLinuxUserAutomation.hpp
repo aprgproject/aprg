@@ -4,7 +4,6 @@
 
 #include <string>
 
-namespace alba {
+namespace alba::AlbaLinuxUserAutomation {
 using MousePosition = AlbaXY<int>;
-class AlbaLinuxUserAutomation {};
-}  // namespace alba
+}  // namespace alba::AlbaLinuxUserAutomation

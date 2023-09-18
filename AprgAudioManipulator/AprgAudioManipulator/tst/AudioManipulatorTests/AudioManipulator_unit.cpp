@@ -11,8 +11,8 @@ namespace alba::AprgAudio {
 TEST(AudioManipulatorTest, DISABLED_AddSamplesWithValueWorks) {
     AlbaLocalPathHandler const audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
     AlbaLocalPathHandler const audioFilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");
-    AudioManipulator audioManipulator(audioFilePathHandler.getFullPath());
+        audioDirectoryPathHandler.getDirectory() / "AChannel_AOpeningSong_001.wav");
+    AudioManipulator audioManipulator(audioFilePathHandler.getPath());
 
     audioManipulator.addSamplesWithValue(100);
 
@@ -22,8 +22,8 @@ TEST(AudioManipulatorTest, DISABLED_AddSamplesWithValueWorks) {
 TEST(AudioManipulatorTest, DISABLED_MultiplySamplesWithValueWorks) {
     AlbaLocalPathHandler const audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
     AlbaLocalPathHandler const audioFilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");
-    AudioManipulator audioManipulator(audioFilePathHandler.getFullPath());
+        audioDirectoryPathHandler.getDirectory() / "AChannel_AOpeningSong_001.wav");
+    AudioManipulator audioManipulator(audioFilePathHandler.getPath());
 
     audioManipulator.multiplySamplesWithValue(0.30);
 

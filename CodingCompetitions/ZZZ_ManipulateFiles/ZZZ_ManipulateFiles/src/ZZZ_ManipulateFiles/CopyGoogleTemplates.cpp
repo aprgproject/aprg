@@ -29,7 +29,7 @@ void CopyGoogleTemplates::copyTemplatesForOneRound(
             newFilePath += newFile;
             AlbaLocalPathHandler newFilePathHandler(newFilePath);
             newFilePathHandler.createDirectoriesForNonExisitingDirectories();
-            replaceStringWithStringOnFile(originalFilePath, newFilePathHandler.getFullPath(), replacePairs);
+            replaceStringWithStringOnFile(originalFilePath, newFilePathHandler.getPath(), replacePairs);
         }
     }
 }

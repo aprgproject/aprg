@@ -19,18 +19,18 @@ namespace codeReview {
 CMakeReader::CMakeReader(string const& fileName, CMakeDatabase& fileDirectoryDatabase)
     : m_fileStream(fileName.c_str()), m_albaFileReader(m_fileStream), m_fileDirectoryDatabase(fileDirectoryDatabase) {
     AlbaLocalPathHandler pathHandler(fileName);
-    if (pathHandler.isFoundInLocalSystem() && pathHandler.isFile()) {
+    if (pathHandler.doesExist() && pathHandler.isFile()) {
         if (m_fileStream.is_open()) {
-            m_fullPathOfFile = pathHandler.getFullPath();
+            m_fullPathOfFile = pathHandler.getPath();
             addVariable("CMAKE_CURRENT_SOURCE_DIR", pathHandler.getDirectory());
-            m_fileDirectoryDatabase.setCMakeFileDirectoryPath(pathHandler.getFullPath());
+            m_fileDirectoryDatabase.setCMakeFileDirectoryPath(pathHandler.getPath());
             m_isFileValid = true;
         } else {
-            cout << "CMakeReader::constructor| Cannot read cmake file: [" << pathHandler.getFullPath() << "].\n";
+            cout << "CMakeReader::constructor| Cannot read cmake file: [" << pathHandler.getPath() << "].\n";
             cout << "CMakeReader::constructor| Problem in FileI/O!\n";
         }
     } else {
-        cout << "CMakeReader::constructor| Cannot read cmake file: [" << pathHandler.getFullPath() << "].\n";
+        cout << "CMakeReader::constructor| Cannot read cmake file: [" << pathHandler.getPath() << "].\n";
         cout << "CMakeReader::constructor| File does not exist!\n";
     }
 }
@@ -273,15 +273,15 @@ void CMakeReader::addCMakeDirectoryIfNeededAndDoOperation(
     if (pathHandler.isRelativePath()) {
         if (m_variableMap.find("CMAKE_CURRENT_SOURCE_DIR") != m_variableMap.end()) {
             for (string cMakeFileDirectory : m_variableMap.at("CMAKE_CURRENT_SOURCE_DIR")) {
-                AlbaLocalPathHandler pathHandlerWithCMake(cMakeFileDirectory + "\\" + pathHandler.getFullPath());
+                AlbaLocalPathHandler pathHandlerWithCMake(cMakeFileDirectory + "\\" + pathHandler.getPath());
                 // check if path exists before adding
-                operationForEachString(pathHandlerWithCMake.getFullPath());
+                operationForEachString(pathHandlerWithCMake.getPath());
             }
         } else {
-            operationForEachString(pathHandler.getFullPath());
+            operationForEachString(pathHandler.getPath());
         }
     } else {
-        operationForEachString(pathHandler.getFullPath());
+        operationForEachString(pathHandler.getPath());
     }
 }
 

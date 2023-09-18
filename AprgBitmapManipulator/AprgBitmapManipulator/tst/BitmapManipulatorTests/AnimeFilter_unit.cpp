@@ -13,28 +13,26 @@ namespace alba::AprgBitmap {
 
 TEST(AnimeFilterTest, DISABLED_AnimizeMultipleFilesTest) {
     AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
-    AlbaLocalPathHandler const inputDirectory(bitmapDirectory.getDirectory() + R"(AnimizeMultipleFilesTest\input2\)");
-    ListOfPaths inputSubDirectories;
-    ListOfPaths inputFiles;
-    inputDirectory.findFilesAndDirectoriesOneDepth("*.*", inputFiles, inputSubDirectories);
-
-    for (string const& inputFile : inputFiles) {
-        AlbaLocalPathHandler const inputFilePathHandler(inputFile);
-        AlbaLocalPathHandler const outputFilePathHandler(
-            bitmapDirectory.getDirectory() + R"(AnimizeMultipleFilesTest\output2\Out_)" +
-            inputFilePathHandler.getFile());
-        animize(inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
-        cout << "Finished: " << outputFilePathHandler.getFullPath() << "\n";
-    }
+    AlbaLocalPathHandler const inputDirectory(bitmapDirectory.getDirectory() / R"(AnimizeMultipleFilesTest\input2\)");
+    inputDirectory.findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            AlbaLocalPathHandler const inputFilePathHandler(filePath);
+            AlbaLocalPathHandler const outputFilePathHandler(
+                bitmapDirectory.getDirectory() / R"(AnimizeMultipleFilesTest\output2\Out_)" /
+                inputFilePathHandler.getFile());
+            animize(inputFilePathHandler.getPath(), outputFilePathHandler.getPath());
+            cout << "Finished: " << outputFilePathHandler.getPath() << "\n";
+        });
 }
 
 TEST(AnimeFilterTest, DISABLED_AnimizeSingleFileTest) {
     AlbaLocalPathHandler const bitmapDirectory(APRG_BITMAP_FILTERS_BITMAP_DIRECTORY);
     AlbaLocalPathHandler const inputFilePathHandler(
-        bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\GilmoreGirls.bmp)");
+        bitmapDirectory.getDirectory() / R"(NonAnimeBitmaps\GilmoreGirls.bmp)");
     AlbaLocalPathHandler const outputFilePathHandler(
-        bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\GilmoreGirls_Animized.bmp)");
-    animize(inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
+        bitmapDirectory.getDirectory() / R"(NonAnimeBitmaps\GilmoreGirls_Animized.bmp)");
+    animize(inputFilePathHandler.getPath(), outputFilePathHandler.getPath());
 }
 
 }  // namespace alba::AprgBitmap

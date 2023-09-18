@@ -20,7 +20,7 @@ void FileDirectoryDatabase::printFilesAndDirectories(ostream& outputStream) cons
 }
 
 bool FileDirectoryDatabase::isFileIncluded(string const& baseDirectory, string const& fileName) const {
-    string whereItShouldBePath(AlbaLocalPathHandler(baseDirectory + fileName).getFullPath());
+    string whereItShouldBePath(AlbaLocalPathHandler(baseDirectory + fileName).getPath());
     for (auto fullPathOfFileFromDatabase : m_files) {
         if (whereItShouldBePath == fullPathOfFileFromDatabase) {
             return true;
@@ -33,7 +33,7 @@ bool FileDirectoryDatabase::isFileIncluded(string const& baseDirectory, string c
 }
 
 bool FileDirectoryDatabase::isFileInFullPath(string const& fullPathFromDatabase, string const& fileName) {
-    string correctFileName(AlbaLocalPathHandler(string("\\") + fileName).getFullPath());
+    string correctFileName(AlbaLocalPathHandler(string("\\") + fileName).getPath());
     int correctFileNameLength = correctFileName.length();
     int fullPathFromDatabaseLength = fullPathFromDatabase.length();
     if (correctFileNameLength < fullPathFromDatabaseLength) {
@@ -45,12 +45,12 @@ bool FileDirectoryDatabase::isFileInFullPath(string const& fullPathFromDatabase,
     return false;
 }
 
-string FileDirectoryDatabase::getFullPathOfFile(string const& baseDirectory, string const& fileName) const {
+string FileDirectoryDatabase::getPathOfFile(string const& baseDirectory, string const& fileName) const {
     int count = 0;
     unsigned int levenshteinDistance = 0;
     int score = 0;
     string fullPathOfFirstFileFound;
-    string whereItShouldBePath(AlbaLocalPathHandler(baseDirectory + fileName).getFullPath());
+    string whereItShouldBePath(AlbaLocalPathHandler(baseDirectory + fileName).getPath());
     for (string fullPathOfFileFromDatabase : m_files) {
         if (whereItShouldBePath == fullPathOfFileFromDatabase) {
             return whereItShouldBePath;
@@ -71,7 +71,7 @@ string FileDirectoryDatabase::getFullPathOfFile(string const& baseDirectory, str
         }
     }
     if (count > 1) {
-        cout << "FileDirectoryDatabase::getFullPathOfFile| Warning: multiple files found for file: " << fileName
+        cout << "FileDirectoryDatabase::getPathOfFile| Warning: multiple files found for file: " << fileName
              << "\n";
         cout << "WhereItShouldBe:" << whereItShouldBePath << "\n";
         cout << "WhereItIs: " << fullPathOfFirstFileFound << "\n";
@@ -87,11 +87,11 @@ void FileDirectoryDatabase::allowNonExistentDirectories() { m_isNonExistentDirec
 
 void FileDirectoryDatabase::addFileOrDirectory(string const& fileOrDirectory) {
     AlbaLocalPathHandler pathHandler(fileOrDirectory);
-    if (m_isNonExistentDirectoriesAllowed || pathHandler.isFoundInLocalSystem()) {
+    if (m_isNonExistentDirectoriesAllowed || pathHandler.doesExist()) {
         if (pathHandler.isFile()) {
-            m_files.emplace(pathHandler.getFullPath());
+            m_files.emplace(pathHandler.getPath());
         } else if (pathHandler.isDirectory()) {
-            m_directories.emplace(pathHandler.getFullPath());
+            m_directories.emplace(pathHandler.getPath());
             pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", m_files, m_directories);
         }
     } else {

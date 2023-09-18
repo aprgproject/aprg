@@ -1,10 +1,11 @@
 #include "Bitmap.hpp"
 
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba::AprgBitmap {
 
-Bitmap::Bitmap(string const& path) { m_configuration.readBitmap(path); }
+Bitmap::Bitmap(path const& filePath) { m_configuration.readBitmap(filePath); }
 BitmapConfiguration Bitmap::getConfiguration() const { return m_configuration; }
 
 BitmapSnippet Bitmap::createColorFilledSnippetWithSizeOfWholeBitmap(uint8_t const colorByte) const {

@@ -3,6 +3,7 @@
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <cassert>
+#include <filesystem>
 #include <fstream>
 #include <optional>
 #include <string>
@@ -14,14 +15,14 @@ class DataBlockFileHandler {
 public:
     ~DataBlockFileHandler() {
         releaseFileStream();
-        AlbaLocalPathHandler(m_path).deleteFile();
+        AlbaLocalPathHandler(m_path).deleteFileAndIsSuccessful();
     }
 
-    void openFileIfNeeded(std::string const& path) {
+    void openFileIfNeeded(std::filesystem::path const& path) {
         if (!m_fileOptional) {
             AlbaLocalPathHandler const filePathHandler(path);
             // filePathHandler.createDirectoriesForNonExisitingDirectories(); //is this needed?
-            m_path = filePathHandler.getFullPath();
+            m_path = filePathHandler.getPath();
             m_fileOptional.emplace();
             std::ofstream& fileStream(m_fileOptional.value());
             fileStream.open(m_path, std::ios::ate | std::ios::app);
@@ -46,7 +47,7 @@ public:
     }
 
 private:
-    std::string m_path;
+    std::filesystem::path m_path;
     std::optional<std::ofstream> m_fileOptional;
 };
 
