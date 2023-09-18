@@ -271,12 +271,13 @@ void RagnarokOnline::printSellingShopItems() const {
 
 void RagnarokOnline::retrieveItemDataFromRmsWebpages(string const& directoryPathOfWebPages) {
     AlbaLocalPathHandler const directoryPathHandler(directoryPathOfWebPages);
-    ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;
-    directoryPathHandler.findFilesAndDirectoriesOneDepth("*.html", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        retrieveItemDataFromRmsWebPage(filePath);
-    }
+    directoryPathHandler.findFilesAndDirectoriesOneDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            if (filePath.extension() == ".html") {
+                retrieveItemDataFromRmsWebPage(filePath.string());
+            }
+        });
 }
 
 void RagnarokOnline::retrieveItemDataFromRmsWebPage(string const& filePathOfWebPage) {
@@ -423,12 +424,13 @@ void RagnarokOnline::retrieveItemDataFromRmsWebPage(string const& filePathOfWebP
 
 void RagnarokOnline::retrieveMonsterDataFromRmsWebpages(string const& directoryPathOfWebPages) {
     AlbaLocalPathHandler const directoryPathHandler(directoryPathOfWebPages);
-    ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;
-    directoryPathHandler.findFilesAndDirectoriesOneDepth("*.html", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        retrieveMonsterDataFromRmsWebPage(filePath);
-    }
+    directoryPathHandler.findFilesAndDirectoriesOneDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            if (filePath.extension() == ".html") {
+                retrieveMonsterDataFromRmsWebPage(filePath.string());
+            }
+        });
 }
 
 void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfWebPage) {
@@ -604,12 +606,13 @@ void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfW
 
 void RagnarokOnline::retrieveMapDataFromRmsWebpages(string const& directoryPathOfWebPages) {
     AlbaLocalPathHandler const directoryPathHandler(directoryPathOfWebPages);
-    ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;
-    directoryPathHandler.findFilesAndDirectoriesOneDepth("*.html", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        retrieveMapDataFromRmsWebPage(filePath);
-    }
+    directoryPathHandler.findFilesAndDirectoriesOneDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            if (filePath.extension() == ".html") {
+                retrieveMapDataFromRmsWebPage(filePath.string());
+            }
+        });
 }
 
 void RagnarokOnline::retrieveMapDataFromRmsWebPage(string const& filePathOfWebPage) {
@@ -678,22 +681,24 @@ void RagnarokOnline::retrieveMapDataFromRmsWebPage(string const& filePathOfWebPa
 
 void RagnarokOnline::retrieveBuyingShopDataFromTalonRoWebpages(string const& directoryPathOfWebPages) {
     AlbaLocalPathHandler const directoryPathHandler(directoryPathOfWebPages);
-    ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;
-    directoryPathHandler.findFilesAndDirectoriesOneDepth("*.html", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        retrieveShopDataFromTalonRoWebPage(filePath, ShopType::BuyingShop);
-    }
+    directoryPathHandler.findFilesAndDirectoriesOneDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            if (filePath.extension() == ".html") {
+                retrieveShopDataFromTalonRoWebPage(filePath.string(), ShopType::BuyingShop);
+            }
+        });
 }
 
 void RagnarokOnline::retrieveSellingShopDataFromTalonRoWebpages(string const& directoryPathOfWebPages) {
     AlbaLocalPathHandler const directoryPathHandler(directoryPathOfWebPages);
-    ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;
-    directoryPathHandler.findFilesAndDirectoriesOneDepth("*.html", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        retrieveShopDataFromTalonRoWebPage(filePath, ShopType::SellingShop);
-    }
+    directoryPathHandler.findFilesAndDirectoriesOneDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            if (filePath.extension() == ".html") {
+                retrieveShopDataFromTalonRoWebPage(filePath.string(), ShopType::SellingShop);
+            }
+        });
 }
 
 void RagnarokOnline::retrieveShopDataFromTalonRoWebPage(string const& filePathOfWebPage, ShopType const shopType) {
