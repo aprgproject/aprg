@@ -52,6 +52,7 @@ public:
     void clear();
     void input(LocalPath const& path);
     void input(LocalPath&& path);
+    void moveUpADirectory();
     bool renameFileAndIsSuccessful(LocalPath const& newFileName);
     bool renameDirectoryAndIsSuccessful(LocalPath const& newDirectoryName);
     [[nodiscard]] static AlbaLocalPathHandler createPathHandlerForDetectedPath();

@@ -13,9 +13,9 @@ namespace {
 
 using StringType = path::string_type;
 using CharacterType = StringType::value_type;
-StringType slashString(1, static_cast<CharacterType>('/'));
-StringType backSlashString(1, static_cast<CharacterType>('\\'));
-StringType pathSlashString(1, static_cast<CharacterType>(path::preferred_separator));
+StringType const slashString(1, static_cast<CharacterType>('/'));
+StringType const backSlashString(1, static_cast<CharacterType>('\\'));
+StringType const pathSlashString(1, static_cast<CharacterType>(path::preferred_separator));
 
 void replaceAll(StringType& mainText, StringType const& targetStr, StringType const& replacementStr) {
     auto const targetStrLength = targetStr.length();
@@ -240,6 +240,8 @@ void AlbaLocalPathHandler::findFilesAndDirectoriesUnlimitedDepth(
 void AlbaLocalPathHandler::clear() { m_path.clear(); }
 void AlbaLocalPathHandler::input(LocalPath const& path) { m_path = fixPath(path); }
 void AlbaLocalPathHandler::input(LocalPath&& path) { m_path = fixPath(path); }
+
+void AlbaLocalPathHandler::moveUpADirectory() { input(m_path.parent_path().parent_path()); }
 
 bool AlbaLocalPathHandler::renameFileAndIsSuccessful(LocalPath const& newFileName) {
     try {
