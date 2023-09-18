@@ -55,6 +55,10 @@ AlbaLocalPathHandler::LocalPath AlbaLocalPathHandler::getDirectory() const {
     return m_path;
 }
 
+AlbaLocalPathHandler::LocalPath AlbaLocalPathHandler::getDirectoryName() const {
+    return m_path.parent_path().filename();
+}
+
 AlbaLocalPathHandler::LocalPath AlbaLocalPathHandler::getFile() const { return m_path.filename(); }
 AlbaLocalPathHandler::LocalPath AlbaLocalPathHandler::getFilenameOnly() const { return m_path.stem(); }
 

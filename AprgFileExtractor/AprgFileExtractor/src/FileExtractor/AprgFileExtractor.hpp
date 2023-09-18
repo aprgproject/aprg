@@ -2,40 +2,41 @@
 
 #include <GrepStringEvaluator/AlbaGrepStringEvaluator.hpp>
 
+#include <filesystem>
 #include <set>
 #include <string>
 
 namespace alba {
 
 class AprgFileExtractor {
-    using SetOfFilePaths = std::set<std::string>;
-
 public:
+    using SetOfPaths = std::set<std::filesystem::path>;
     explicit AprgFileExtractor(std::string const& condition);
     AprgFileExtractor();
     AprgFileExtractor(
-        std::string const& condition, std::string const& pathOf7zExecutable, std::string const& pathOf7zTempFile);
+        std::string const& condition, std::filesystem::path const& pathOf7zExecutable,
+        std::filesystem::path const& pathOf7zTempFile);
     void copyRelativeFilePathsFromCompressedFile(
-        std::string const& filePathOfCompressedFile, SetOfFilePaths& files) const;
+        std::filesystem::path const& filePathOfCompressedFile, SetOfPaths& files) const;
     // NOLINTNEXTLINE(modernize-use-nodiscard)
-    std::string extractOnceForAllFiles(std::string const& filePathOfCompressedFile) const;
+    std::filesystem::path extractOnceForAllFiles(std::filesystem::path const& filePathOfCompressedFile) const;
     // NOLINTNEXTLINE(modernize-use-nodiscard)
-    std::string extractOneFile(
-        std::string const& filePathOfCompressedFile, std::string const& relativePathOfFile) const;
-    void extractAllRelevantFiles(std::string const& pathOfFileOrDirectory);
-    static bool isRecognizedCompressedFile(std::string const& extension);
+    std::filesystem::path extractOneFile(
+        std::filesystem::path const& filePathOfCompressedFile, std::filesystem::path const& relativePathOfFile) const;
+    void extractAllRelevantFiles(std::filesystem::path const& pathOfFileOrDirectory);
+    static bool isRecognizedCompressedFile(std::string const& extensionString);
 
 private:
-    void extractAllRelevantFilesInThisDirectory(std::string const& directoryPath);
-    void extractAllRelevantFilesInThisCompressedFile(std::string const& filePathOfCompressedFile);
-    void extractAllFilesRecursively(std::string const& filePathOfCompressedFile);
-    void extractAllRelevantFilesRecursively(std::string const& filePathOfCompressedFile);
+    void extractAllRelevantFilesInThisDirectory(std::filesystem::path const& directoryPath);
+    void extractAllRelevantFilesInThisCompressedFile(std::filesystem::path const& filePathOfCompressedFile);
+    void extractAllFilesRecursively(std::filesystem::path const& filePathOfCompressedFile);
+    void extractAllRelevantFilesRecursively(std::filesystem::path const& filePathOfCompressedFile);
     static void runInConsole(std::string const& command);
-    static bool isTheExtensionXzOrGzOrTar(std::string const& extension);
+    static bool isTheExtensionXzOrGzOrTar(std::string const& extensionString);
     AlbaGrepStringEvaluator m_grepEvaluator;
-    std::string m_pathOf7zExecutable;
-    std::string m_pathOf7zTempFile;
-    std::string m_nullDevice;
+    std::filesystem::path m_pathOf7zExecutable;
+    std::filesystem::path m_pathOf7zTempFile;
+    std::filesystem::path m_nullDevice;
 };
 
 }  // namespace alba

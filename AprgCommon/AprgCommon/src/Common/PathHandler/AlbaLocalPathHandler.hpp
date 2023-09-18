@@ -17,6 +17,7 @@ public:
     [[nodiscard]] LocalPath getPath() const;
     [[nodiscard]] LocalPath getRoot() const;
     [[nodiscard]] LocalPath getDirectory() const;
+    [[nodiscard]] LocalPath getDirectoryName() const;
     [[nodiscard]] LocalPath getFile() const;
     [[nodiscard]] LocalPath getFilenameOnly() const;
     [[nodiscard]] LocalPath getExtension() const;

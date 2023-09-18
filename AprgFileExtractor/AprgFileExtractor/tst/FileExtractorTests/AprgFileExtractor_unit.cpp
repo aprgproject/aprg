@@ -9,21 +9,22 @@ static_assert(false, "PATH_OF_7Z_TEMP_FILE is not set in cmake");
 #define PATH_OF_SAMPLE_ZIP_2 APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest2.zip)"
 
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba {
 
 namespace {
 
-void deleteAllFilesOnDirectory(string const& directoryPath) {
+void deleteAllFilesOnDirectory(path const& directoryPath) {
     AlbaLocalPathHandler const topDirectoryPathHandler(directoryPath);
-    set<string> files;
-    set<string> directories;
-    topDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
-    for (string const& file : files) {
-        AlbaLocalPathHandler filePathHandler(file);
-        filePathHandler.deleteFile();
-        filePathHandler.reInput();
-        ASSERT_FALSE(filePathHandler.doesExist());
+    if (topDirectoryPathHandler.isExistingDirectory()) {
+        topDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth(
+            [](AlbaLocalPathHandler::LocalPath const&) {},
+            [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+                AlbaLocalPathHandler filePathHandler(filePath);
+                EXPECT_TRUE(filePathHandler.deleteFileAndIsSuccessful());
+                ASSERT_FALSE(filePathHandler.doesExist());
+            });
     }
 }
 
@@ -36,7 +37,7 @@ int numberOfFilesAnalyzedForExtraction;
 
 TEST(AprgFileExtractorTest, ListOfFilesFromZipFileAreCorrectlyRetrieved) {
     AprgFileExtractor const fileExtractor;
-    set<string> files;
+    AprgFileExtractor::SetOfPaths files;
     fileExtractor.copyRelativeFilePathsFromCompressedFile(PATH_OF_SAMPLE_ZIP_1, files);
 
     ASSERT_EQ(11U, files.size());
@@ -73,7 +74,7 @@ TEST(AprgFileExtractorTest, AllFilesAreExtractedSuccessfully) {
     AlbaLocalPathHandler const directoryPathHandler(APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\)");
     deleteAllFilesOnDirectory(directoryPathHandler.getPath());
 
-    string const outputDirectoryPath = fileExtractor.extractOnceForAllFiles(PATH_OF_SAMPLE_ZIP_1);
+    path const outputDirectoryPath = fileExtractor.extractOnceForAllFiles(PATH_OF_SAMPLE_ZIP_1);
 
     EXPECT_EQ(directoryPathHandler.getPath(), outputDirectoryPath);
     AlbaLocalPathHandler outputFilePathHandler(APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\File1.log)");
@@ -97,10 +98,8 @@ TEST(AprgFileExtractorTest, OneFileIsExtractedSuccessfully) {
         APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\DirectoryTest\DIR1\File1.log)");
     deleteAllFilesOnDirectory(directoryPathHandler.getPath());
 
-    string const outputFilePath =
-        fileExtractor.extractOneFile(PATH_OF_SAMPLE_ZIP_1, relativeFilePathHandler.getPath());
+    path const outputFilePath = fileExtractor.extractOneFile(PATH_OF_SAMPLE_ZIP_1, relativeFilePathHandler.getPath());
     EXPECT_EQ(filePathHandler.getPath(), outputFilePath);
-    filePathHandler.reInput();
     EXPECT_TRUE(filePathHandler.doesExist());
     // deleteAllFilesOnDirectory(directoryPathHandler.getPath());
 }
