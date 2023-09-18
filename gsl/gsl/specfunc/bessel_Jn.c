@@ -100,7 +100,7 @@ int gsl_sf_bessel_Jn_e(int n, double x, gsl_sf_result * result)
       result->val *= sign;
       return status;      
     }
-    else {
+    
       double ans;
       double err;
       double ratio;
@@ -136,7 +136,7 @@ int gsl_sf_bessel_Jn_e(int n, double x, gsl_sf_result * result)
       result->val = sign * ans;
       result->err = fabs(err);
       return GSL_ERROR_SELECT_2(stat_CF1, stat_b);
-    }
+   
  
 }
 

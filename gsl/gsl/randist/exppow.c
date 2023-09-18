@@ -94,8 +94,8 @@ gsl_ran_exppow (const gsl_rng * r, const double a, const double b)
       /* Gaussian distribution */
       return gsl_ran_gaussian (r, a / sqrt (2.0));
     }
-  else
-    {
+  
+    
       /* Use gaussian for rejection method, from Tadikamalla */
 
       double x;
@@ -113,7 +113,7 @@ gsl_ran_exppow (const gsl_rng * r, const double a, const double b)
       while (log (u) > h);
 
       return a * x;
-    }
+   
 }
 
 double

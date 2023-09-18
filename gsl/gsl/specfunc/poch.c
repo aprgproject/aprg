@@ -341,7 +341,7 @@ gsl_sf_lnpoch_sgn_e(const double a, const double x,
       *sgn = 1;
       return GSL_SUCCESS;
    
-  } else if(a < 0.0 && a+x < 0.0) {
+  } if(a < 0.0 && a+x < 0.0) {
     /* Reduce to positive case using reflection.
      */
     double sin_1 = sin(M_PI * (1.0 - a));

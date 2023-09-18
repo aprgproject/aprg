@@ -207,12 +207,12 @@ dilog_xge0(const double x, gsl_sf_result * result)
   if(x > 0.0) {
     return dilog_series_1(x, result);
   }
-  else {
+  
     /* x == 0.0 */
     result->val = 0.0;
     result->err = 0.0;
     return GSL_SUCCESS;
-  }
+ 
 }
 
 
