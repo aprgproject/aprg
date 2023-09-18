@@ -47,6 +47,9 @@ private:
              ++rItLow, ++rItHigh) {
             ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
+            std::swap(*rItLow, *rItHigh);
+            ALBA_DBG_PRINT(valuesToSort);
+            ALBA_DBG_PRINT(*rItLow, *rItHigh);
         }
 
         // error happens here
