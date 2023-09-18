@@ -61,7 +61,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: github.head_ref
+          ref: ${{ github.event.inputs.branch || github.head_ref }}
         
       - name: Prepare for linting
         shell: bash
@@ -195,7 +195,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: github.head_ref
+          ref: ${{ github.event.inputs.branch || github.head_ref }}
           
       - name: Install dependencies on Windows
         shell: bash
