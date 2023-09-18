@@ -11,7 +11,7 @@ struct BaseFileReaderTest : public testing::Test {
     explicit BaseFileReaderTest(std::string_view const testFilePath);
     void SetUp() override;
     void TearDown() override;
-    void clearContentsOfTestFile();
+    void clearContentsOfTestFile() const;
     AlbaLocalPathHandler testFilePathHandler;
     std::ofstream testFileWriteStream;
 };
