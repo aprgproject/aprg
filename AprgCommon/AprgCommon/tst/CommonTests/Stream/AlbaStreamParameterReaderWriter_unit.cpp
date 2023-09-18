@@ -19,7 +19,7 @@ struct AlbaStreamParameterReaderTest : public BaseFileReaderTest {
 TEST_F(AlbaStreamParameterReaderTest, EmptyFileTest) {
     clearContentsOfTestFile();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
     AlbaStreamParameterReader const reader(testFileReadStream);
     ASSERT_TRUE(testFileReadStream.good());
@@ -40,7 +40,7 @@ TEST_F(AlbaStreamParameterReaderTest, SingleParameterTest) {
     writer.flush();
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
     AlbaStreamParameterReader const reader(testFileReadStream);
     ASSERT_TRUE(testFileReadStream.good());
@@ -59,7 +59,7 @@ TEST_F(AlbaStreamParameterReaderTest, VectorTest) {
     writer.flush();
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
     AlbaStreamParameterReader const reader(testFileReadStream);
     ASSERT_TRUE(testFileReadStream.good());
@@ -77,7 +77,7 @@ TEST_F(AlbaStreamParameterReaderTest, MapTest) {
     writer.flush();
     testFileWriteStream.close();
 
-    ifstream testFileReadStream(testFilePathHandler.getFullPath());
+    ifstream testFileReadStream(testFilePathHandler.getPath());
     ASSERT_TRUE(testFileReadStream.is_open());
     AlbaStreamParameterReader const reader(testFileReadStream);
     ASSERT_TRUE(testFileReadStream.good());

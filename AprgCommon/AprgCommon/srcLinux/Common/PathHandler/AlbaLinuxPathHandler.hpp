@@ -17,7 +17,7 @@ public:
     void clear() override;
     [[nodiscard]] AlbaDateTime getFileCreationTime() const;
     [[nodiscard]] double getFileSizeEstimate() const;
-    [[nodiscard]] bool isFoundInLocalSystem() const;
+    [[nodiscard]] bool doesExist() const;
     [[nodiscard]] bool isRelativePath() const;
     void createDirectoriesForNonExisitingDirectories() const;
     void findFilesAndDirectoriesOneDepth(

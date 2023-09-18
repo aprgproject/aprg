@@ -19,7 +19,7 @@ namespace alba {
 
 AlbaWindowsPathHandler::AlbaWindowsPathHandler(string_view const path) : AlbaPathHandler(R"(\)") { setPath(path); }
 string AlbaWindowsPathHandler::getDriveOrRoot() const { return m_driveOrRoot; }
-bool AlbaWindowsPathHandler::isFoundInLocalSystem() const { return m_foundInLocalSystem; }
+bool AlbaWindowsPathHandler::doesExist() const { return m_foundInLocalSystem; }
 bool AlbaWindowsPathHandler::isRelativePath() const { return m_relativePath; }
 
 void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const {
@@ -33,7 +33,7 @@ void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const
         }
         string const partialDirectory(fullPath.substr(0, indexWithSlashCharacter + 1));
         AlbaWindowsPathHandler const partialDirectoryPathHandler(partialDirectory);
-        if (!partialDirectoryPathHandler.isFoundInLocalSystem()) {
+        if (!partialDirectoryPathHandler.doesExist()) {
             if (CreateDirectoryW(
                     convertToAnotherBasicStringVariant<string, wstring>(partialDirectoryPathHandler.getFullPath())
                         .c_str(),

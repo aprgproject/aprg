@@ -51,7 +51,7 @@ double AlbaLinuxPathHandler::getFileSizeEstimate() const {
     return fileSize;
 }
 
-bool AlbaLinuxPathHandler::isFoundInLocalSystem() const { return m_foundInLocalSystem; }
+bool AlbaLinuxPathHandler::doesExist() const { return m_foundInLocalSystem; }
 bool AlbaLinuxPathHandler::isRelativePath() const { return m_relativePath; }
 
 void AlbaLinuxPathHandler::createDirectoriesForNonExisitingDirectories() const {
@@ -65,7 +65,7 @@ void AlbaLinuxPathHandler::createDirectoriesForNonExisitingDirectories() const {
         }
         string partialDirectory(fullPath.substr(0, indexWithSlashCharacter + 1));
         AlbaLinuxPathHandler partialDirectoryPathHandler(partialDirectory);
-        if (!partialDirectoryPathHandler.isFoundInLocalSystem()) {
+        if (!partialDirectoryPathHandler.doesExist()) {
             mkdir(partialDirectoryPathHandler.getFullPath().c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
         }
         index = indexWithSlashCharacter + 1;

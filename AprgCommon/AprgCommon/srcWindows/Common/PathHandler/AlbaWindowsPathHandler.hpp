@@ -14,7 +14,7 @@ public:
     explicit AlbaWindowsPathHandler(std::string_view const path);
     void clear() override;
     [[nodiscard]] std::string getDriveOrRoot() const;
-    [[nodiscard]] bool isFoundInLocalSystem() const;
+    [[nodiscard]] bool doesExist() const;
     [[nodiscard]] bool isRelativePath() const;
     void createDirectoriesForNonExisitingDirectories() const;
     void findFilesAndDirectoriesOneDepth(
