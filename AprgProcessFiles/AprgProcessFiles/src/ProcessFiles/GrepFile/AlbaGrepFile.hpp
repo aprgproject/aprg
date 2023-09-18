@@ -2,6 +2,7 @@
 
 #include <GrepStringEvaluator/AlbaGrepStringEvaluator.hpp>
 
+#include <filesystem>
 #include <functional>
 #include <optional>
 #include <string>
@@ -14,7 +15,7 @@ public:
     explicit AlbaGrepFile(std::string const& lineCondition);
     AlbaGrepFile(std::string const& lineCondition, UpdateFunctionWithPercentage const& function);
     [[nodiscard]] bool isOutputFileWritten() const;
-    void processFile(std::string const& inputFilePath, std::string const& outputFilePath);
+    void processFile(std::filesystem::path const& inputFilePath, std::filesystem::path const& outputFilePath);
     AlbaGrepStringEvaluator& getGrepEvaluator();
 
 private:

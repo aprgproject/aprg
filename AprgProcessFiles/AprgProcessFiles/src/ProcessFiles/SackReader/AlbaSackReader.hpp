@@ -5,6 +5,7 @@
 #include <GrepStringEvaluator/AlbaGrepStringEvaluator.hpp>
 #include <ProcessFiles/SackReader/AlbaSackReaderType.hpp>
 
+#include <filesystem>
 #include <map>
 #include <string>
 
@@ -36,15 +37,15 @@ public:
         AlbaSackReaderType type;
     };
 
-    explicit AlbaSackReader(std::string const& inputFilePath);
-    AlbaSackReader(std::string const& inputFilePath, std::string const& fileCondition);
+    explicit AlbaSackReader(std::filesystem::path const& inputFilePath);
+    AlbaSackReader(std::filesystem::path const& inputFilePath, std::string const& fileCondition);
     [[nodiscard]] AlbaSackReaderType getType(std::string const& typeName) const;
     void printAll() const;
     void process();
 
 private:
-    void processDirectory(std::string const& path);
-    void processFile(std::string const& path);
+    void processDirectory(std::filesystem::path const& directoryPath);
+    void processFile(std::filesystem::path const& filePath);
     void analyze(stringHelper::strings const& tokens);
     static void tokenize(stringHelper::strings& tokens, std::string const& line);
     static void combineWords(stringHelper::strings& tokens);

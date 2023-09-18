@@ -1,5 +1,6 @@
 #pragma once
 
+#include <filesystem>
 #include <set>
 #include <string>
 #include <vector>
@@ -8,8 +9,8 @@ namespace alba {
 
 class CPlusPlusFileFixer {
 public:
-    void processDirectory(std::string const& path);
-    void processFile(std::string const& path);
+    void processDirectory(std::filesystem::path const& directoryPath);
+    void processFile(std::filesystem::path const& filePath);
 
 private:
     void notifyIfAlbaDebugHeaderExistInProductionCode(std::string const& path) const;

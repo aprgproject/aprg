@@ -4,27 +4,26 @@
 
 #include <gtest/gtest.h>
 
+#include <filesystem>
 #include <fstream>
 
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba {
 
 namespace {
 
-void createAFileInDirectory(string const& directory) {
-    ofstream outputStream(directory + "SomeFile.txt");
+void createAFileInDirectory(path const& directory) {
+    ofstream outputStream(directory / "SomeFile.txt");
     outputStream << "some string\n";
 }
 
 void retrieveNumberOfFilesAndDirectoriesFromPath(
     AlbaLocalPathHandler& pathHandler, unsigned int& numberOfFiles, unsigned int& numberOfDirectories) {
-    pathHandler.reInput();
-    ListOfPaths files;
-    ListOfPaths directories;
-    pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
-    numberOfFiles = files.size();
-    numberOfDirectories = directories.size();
+    pathHandler.findFilesAndDirectoriesUnlimitedDepth(
+        [&](AlbaLocalPathHandler::LocalPath const&) { ++numberOfDirectories; },
+        [&](AlbaLocalPathHandler::LocalPath const&) { ++numberOfFiles; });
 }
 
 }  // namespace
@@ -41,6 +40,8 @@ TEST(SampleTest, DestroyOneFileTest) {
 
     fileDestructor.destroy(pathHandler.getPath());
 
+    numberOfFiles = 0;
+    numberOfDirectories = 0;
     retrieveNumberOfFilesAndDirectoriesFromPath(pathHandler, numberOfFiles, numberOfDirectories);
     EXPECT_EQ(0U, numberOfFiles);
     EXPECT_EQ(0U, numberOfDirectories);

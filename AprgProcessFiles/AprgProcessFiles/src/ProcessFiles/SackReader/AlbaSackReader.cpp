@@ -11,11 +11,12 @@
 #include <vector>
 
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba {
 
-AlbaSackReader::AlbaSackReader(string const& filePath) : m_inputPathHandler(filePath), m_fileEvaluator(string()) {}
-AlbaSackReader::AlbaSackReader(string const& filePath, string const& fileCondition)
+AlbaSackReader::AlbaSackReader(path const& filePath) : m_inputPathHandler(filePath), m_fileEvaluator(string()) {}
+AlbaSackReader::AlbaSackReader(path const& filePath, string const& fileCondition)
     : m_inputPathHandler(filePath), m_fileEvaluator(fileCondition) {}
 
 AlbaSackReaderType AlbaSackReader::getType(string const& typeName) const {
@@ -35,27 +36,25 @@ void AlbaSackReader::printAll() const {
 }
 
 void AlbaSackReader::process() {
-    if (m_inputPathHandler.isDirectory()) {
+    if (m_inputPathHandler.isExistingDirectory()) {
         processDirectory(m_inputPathHandler.getPath());
     } else {
         processFile(m_inputPathHandler.getPath());
     }
 }
 
-void AlbaSackReader::processDirectory(string const& path) {
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    AlbaLocalPathHandler(path).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        processFile(filePath);
-    }
+void AlbaSackReader::processDirectory(path const& directoryPath) {
+    AlbaLocalPathHandler(directoryPath)
+        .findFilesAndDirectoriesUnlimitedDepth(
+            [](AlbaLocalPathHandler::LocalPath const&) {},
+            [&](AlbaLocalPathHandler::LocalPath const& filePath) { processFile(filePath); });
 }
 
-void AlbaSackReader::processFile(string const& path) {
-    AlbaLocalPathHandler const filePathHandler(path);
+void AlbaSackReader::processFile(path const& filePath) {
+    AlbaLocalPathHandler const filePathHandler(filePath);
     stringHelper::strings tokens;
-    if (m_fileEvaluator.isInvalid() || m_fileEvaluator.evaluate(filePathHandler.getFile())) {
-        cout << "ProcessFile: " << path << "\n";
+    if (m_fileEvaluator.isInvalid() || m_fileEvaluator.evaluate(filePathHandler.getFile().string())) {
+        cout << "ProcessFile: " << filePath << "\n";
         ifstream inputLogFileStream(filePathHandler.getPath());
         AlbaFileReader fileReader(inputLogFileStream);
         while (fileReader.isNotFinished()) {

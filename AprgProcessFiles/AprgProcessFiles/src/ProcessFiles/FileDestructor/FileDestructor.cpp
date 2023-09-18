@@ -5,56 +5,49 @@
 #include <iostream>
 
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba {
 
 FileDestructor::FileDestructor() : m_pathToDestroy(AlbaLocalPathHandler::createPathHandlerForDetectedPath()) {}
 void FileDestructor::destroy() const { destroy(m_pathToDestroy.getPath()); }
 
-void FileDestructor::destroy(string const& path) const {
-    renameDirectoriesUnderneath(path);
-    destroyFilesAndDirectories(path);
+void FileDestructor::destroy(path const& destroyPath) const {
+    renameDirectoriesUnderneath(destroyPath);
+    destroyFilesAndDirectories(destroyPath);
 }
 
-void FileDestructor::renameDirectoriesUnderneath(string const& directoryPath) const {
+void FileDestructor::renameDirectoriesUnderneath(path const& directoryPath) const {
     AlbaLocalPathHandler const pathHandler(directoryPath);
-    ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;
-    pathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& directoryFromList : listOfDirectories) {
-        renameDirectory(directoryFromList);
-    }
-    listOfFiles.clear();
-    listOfDirectories.clear();
-    pathHandler.findFilesAndDirectoriesOneDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& directoryFromList : listOfDirectories) {
-        renameDirectoriesUnderneath(directoryFromList);
-    }
+    pathHandler.findFilesAndDirectoriesOneDepth(
+        [&](AlbaLocalPathHandler::LocalPath const& directory) { renameDirectory(directory); },
+        [](AlbaLocalPathHandler::LocalPath const&) {});
+    pathHandler.findFilesAndDirectoriesOneDepth(
+        [&](AlbaLocalPathHandler::LocalPath const& directory) { renameDirectoriesUnderneath(directory); },
+        [](AlbaLocalPathHandler::LocalPath const&) {});
 }
 
-void FileDestructor::destroyFilesAndDirectories(string const& path) {
-    cout << "Destroying files in: [" << path << "]\n";
-    AlbaLocalPathHandler const pathHandler(path);
-    ListOfPaths listOfFiles;
-    ListOfPaths listOfDirectories;
-    pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    listOfFiles.erase(pathHandler.getPath());
-    for (string const& filePath : listOfFiles) {
-        destroyFile(filePath);
-    }
-    for (string const& directoryPath : listOfDirectories) {
-        cout << "Destroying directories: [" << path << "]\n";
-        AlbaLocalPathHandler(directoryPath).deleteDirectoryWithFilesAndDirectories();
-    }
+void FileDestructor::destroyFilesAndDirectories(path const& destroyPath) {
+    cout << "Destroying files in: [" << destroyPath << "]\n";
+    AlbaLocalPathHandler const pathHandler(destroyPath);
+    pathHandler.findFilesAndDirectoriesUnlimitedDepth(
+        [&](AlbaLocalPathHandler::LocalPath const& directoryPath) {
+            cout << "Destroying directory: [" << directoryPath << "]\n";
+            if (AlbaLocalPathHandler(directoryPath).deleteDirectoryAndIsSuccessful()) {
+                cout << "Destroyed directory: [" << directoryPath << "]\n";
+            }
+        },
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) { destroyFile(filePath); });
 }
 
-void FileDestructor::renameDirectory(string const& directoryPath) {
+void FileDestructor::renameDirectory(path const& directoryPath) {
     cout << "Renaming directory: [" << directoryPath << "]\n";
     AlbaLocalPathHandler directoryPathHandler(directoryPath);
     unsigned int retries = 10;
     bool isNotSuccessful = true;
     while (retries > 0 && isNotSuccessful) {
-        isNotSuccessful = !directoryPathHandler.renameImmediateDirectory(stringHelper::getRandomAlphaNumericString(10));
+        isNotSuccessful =
+            !directoryPathHandler.renameDirectoryAndIsSuccessful(stringHelper::getRandomAlphaNumericString(10));
         if (!isNotSuccessful) {
             cout << "Renamed directory: [" << directoryPathHandler.getPath() << "]\n";
         }
@@ -62,20 +55,20 @@ void FileDestructor::renameDirectory(string const& directoryPath) {
     }
 }
 
-void FileDestructor::destroyFile(string const& filePath) {
+void FileDestructor::destroyFile(path const& filePath) {
     constexpr unsigned int MAX_CHARACTERS_ON_PATH = 100;
     cout << "Destroying File: [" << filePath << "]\n";
     AlbaLocalPathHandler filePathHandler(filePath);
     unsigned int retries = 10;
     bool isNotSuccessful = true;
     while (retries > 0 && isNotSuccessful) {
-        if (filePathHandler.getPath().length() > MAX_CHARACTERS_ON_PATH) {
-            isNotSuccessful = !filePathHandler.renameFile(stringHelper::getRandomAlphaNumericString(10));
+        if (filePathHandler.getPath().string().length() > MAX_CHARACTERS_ON_PATH) {
+            isNotSuccessful = !filePathHandler.renameFileAndIsSuccessful(stringHelper::getRandomAlphaNumericString(10));
             if (!isNotSuccessful) {
                 cout << "Renamed File: [" << filePathHandler.getPath() << "]\n";
             }
         }
-        isNotSuccessful = !filePathHandler.deleteFile();
+        isNotSuccessful = !filePathHandler.deleteFileAndIsSuccessful();
         if (!isNotSuccessful) {
             cout << "Destroyed File: [" << filePathHandler.getPath() << "]\n";
         }
