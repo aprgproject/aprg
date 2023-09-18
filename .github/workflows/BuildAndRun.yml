@@ -61,7 +61,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.inputs.branch == '' ? github.head_ref : github.event.inputs.branch }}
+          ref: github.head_ref
         
       - name: Prepare for linting
         shell: bash
@@ -149,7 +149,7 @@ jobs:
         id: idOfCheckout
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.inputs.branch == '' ? github.event.pull_request.head.sha : github.event.inputs.branch }}
+          ref: github.event.pull_request.head.sha
           fetch-depth: 2
           
       - name: Get C/C++ Projects from Git Diff and User Input
@@ -195,7 +195,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.inputs.branch == '' ? github.head_ref : github.event.inputs.branch }}
+          ref: github.head_ref
           
       - name: Install dependencies on Windows
         shell: bash
