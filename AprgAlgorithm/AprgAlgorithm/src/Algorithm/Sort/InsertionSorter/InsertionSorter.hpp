@@ -16,10 +16,14 @@ public:
 
     void sort(Values& valuesToSort) const override {
         if (!valuesToSort.empty()) {
+            ALBA_DBG_PRINT(valuesToSort);
             for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
+                ALBA_DBG_PRINT(valuesToSort);
                 continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                 // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
+                ALBA_DBG_PRINT(valuesToSort);
             }
+            ALBA_DBG_PRINT(valuesToSort);
         }
     }
 
@@ -33,10 +37,14 @@ private:
         for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
             ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
+            if (*rItLow != "sandy" && *rItHigh != "plankton") {
+                break;
+            }
             std::swap(*rItLow, *rItHigh);
             ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
         }
+        ALBA_DBG_PRINT(valuesToSort);
     }
 
     void continuouslyCopyBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {

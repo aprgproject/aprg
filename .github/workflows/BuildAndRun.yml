@@ -2,11 +2,17 @@ name: Build And Run Workflow
 
 on:
   push:
-    branches: [main]
+    branches:
+      - '*'
     paths:
       - '**'
   workflow_dispatch:
     inputs:
+      branch:
+        description: 'Branch'
+        type: string
+        required: true
+        default: 'main'
       cppProjects:
         description: 'C/C++ Project ("all" for all projects)'
         type: string
@@ -42,7 +48,7 @@ env:
   checkPythonScriptsRelativePath: "AllCommonScripts/ScriptsForPython/checkPythonScripts.sh"
   determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
   buildAndRunScriptRelativePath: "AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
-  buildType: ${{ inputs.cppCMakeBuildType != '' && inputs.cppCMakeBuildType || 'Debug'}} # ternary operator
+  buildType: ${{ inputs.cppCMakeBuildType || 'Debug'}} # default value
   buildDirectory: "GithubBuild"
   windowsEnvironmentScript: "C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
 
@@ -54,6 +60,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch || github.head_ref }} # default value
         
       - name: Prepare for linting
         shell: bash
@@ -141,7 +149,7 @@ jobs:
         id: idOfCheckout
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.inputs.branch || github.head_ref }} # default value
           fetch-depth: 2
           
       - name: Get C/C++ Projects from Git Diff and User Input
@@ -164,12 +172,13 @@ jobs:
   buildAndTest:
     name: Test ${{ matrix.project }} on ${{ matrix.configurationName }}
     needs: determineCppProjects
+    if: needs.determineCppProjects.outputs.projectsToBuild != '[]'
     runs-on: ${{ startsWith(matrix.configurationName, 'Windows') && 'windows-latest' || startsWith(matrix.configurationName, 'Ubuntu') && 'ubuntu-latest' || 'macos-latest'}} # ternary operator
     strategy:
       fail-fast: false
       matrix:
         project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
-        configurationName: ${{ fromJSON(inputs.cppBuildConfigurations != '' && inputs.cppBuildConfigurations || '["WindowsLatestMsvc", "WindowsLatestMingw", "WindowsLatestClang", "UbuntuLatestGcc", "UbuntuLatestClang"]') }}  # ternary operator
+        configurationName: ${{ fromJSON(inputs.cppBuildConfigurations || '["WindowsLatestMsvc", "WindowsLatestMingw", "WindowsLatestClang", "UbuntuLatestGcc", "UbuntuLatestClang"]') }}  # default value
         exclude: ${{ fromJSON(needs.determineCppProjects.outputs.excludedConfigurations) }}
         
     steps:
@@ -185,6 +194,8 @@ jobs:
           
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch || github.head_ref }} # default value
           
       - name: Install dependencies on Windows
         shell: bash
