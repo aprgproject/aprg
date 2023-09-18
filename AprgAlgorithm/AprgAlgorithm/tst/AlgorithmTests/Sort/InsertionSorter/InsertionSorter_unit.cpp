@@ -26,7 +26,7 @@ using StringsSorter = InsertionSorter<Strings>;
 using StabilityCheckObjectsSorter = InsertionSorter<StabilityCheckObjects>;
 }  // namespace
 
-/*TEST(InsertionSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
+TEST(InsertionSorterTest, SortWorksOnCharactersAndDoesNotCrashUsingEmptyExample) {
     CharactersSorter const sorter;
     testSortUsingEmptyExampleWithCharacters<CharactersSorter, Characters>(sorter);
 }
@@ -59,16 +59,16 @@ TEST(InsertionSorterTest, SortWorksOnPositiveAndNegativeIntegersUsingExample1) {
 TEST(InsertionSorterTest, SortWorksOnDoublesUsingExample1) {
     DoublesSorter const sorter;
     testSortUsingExample1WithDoubleValues<DoublesSorter, Doubles>(sorter);
-}*/
+}
 
 TEST(InsertionSorterTest, SortWorksOnStringsUsingExample1) {
     StringsSorter const sorter;
     testSortUsingExample1WithStrings<StringsSorter, Strings>(sorter);
 }
 
-/*TEST(InsertionSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
+TEST(InsertionSorterTest, SortWorksAsStableOnStabilityCheckObjectsUsingExample1) {
     StabilityCheckObjectsSorter const sorter;
     testSortAsStableUsingExample1WithStabilityCheckObjects<StabilityCheckObjectsSorter, StabilityCheckObjects>(sorter);
-}*/
+}
 
 }  // namespace alba::algorithm

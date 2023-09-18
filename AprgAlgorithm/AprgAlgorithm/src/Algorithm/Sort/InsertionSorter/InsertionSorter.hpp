@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Algorithm/Sort/BaseSorter.hpp>
-#include <Common/Debug/AlbaDebug.hpp>
 
 #include <iterator>
 #include <utility>
@@ -16,55 +15,42 @@ public:
 
     void sort(Values& valuesToSort) const override {
         if (!valuesToSort.empty()) {
-            ALBA_DBG_PRINT(valuesToSort);
             for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
-                ALBA_DBG_PRINT(valuesToSort);
-                continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
+                continuouslySwapBackIfStillOutOfOrderUsingForwardIterators(valuesToSort, insertIt);
+                // continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                 // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
-                ALBA_DBG_PRINT(valuesToSort);
             }
-            ALBA_DBG_PRINT(valuesToSort);
         }
     }
 
 private:
+    void continuouslySwapBackIfStillOutOfOrderUsingForwardIterators(
+        Values& valuesToSort, Iterator const insertIt) const {
+        Iterator itHigh = insertIt;
+        Iterator itLow = std::prev(itHigh);
+        while (true) {
+            if (*itLow <= *itHigh) {
+                break;
+            }
+            std::swap(*itLow, *itHigh);
+            if (itLow == valuesToSort.begin()) {
+                break;
+            }
+            --itLow;
+            --itHigh;
+        }
+    }
+
     void continuouslySwapBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {
+        // this has a problem on windows clang (clang msvc):
+        // xmemory(1353) : Assertion failed: ITERATOR LIST CORRUPTED!
+        // unknown file: error: SEH exception with code 0xc0000005 thrown in the test body.
         auto rItLow = std::make_reverse_iterator(insertIt);  // make_reverse_iterator moves it by one
         auto rItHigh = std::prev(rItLow);                    // move it back to original place (same as insert It)
         // so final the stiuation here is rItLow < rItHigh and insertIt
-        ALBA_DBG_PRINT(valuesToSort);
-        ALBA_DBG_PRINT(*rItLow, *rItHigh);
-        /*for (; rItLow != valuesToSort.rend(); ++rItLow) {
-            ALBA_DBG_PRINT(valuesToSort);
-            ALBA_DBG_PRINT(*rItLow, *rItHigh);
-        }*/
-        /*for (; rItLow != valuesToSort.rend(); ++rItLow, ++rItHigh) {
-            ALBA_DBG_PRINT(valuesToSort);
-            ALBA_DBG_PRINT(*rItLow, *rItHigh);
-        }*/
-
-        for (; rItLow != valuesToSort.rend() && rItHigh != valuesToSort.rend() && *rItLow > *rItHigh;
-             ++rItLow, ++rItHigh) {
-            ALBA_DBG_PRINT(valuesToSort);
-            ALBA_DBG_PRINT(*rItLow, *rItHigh);
+        for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
             std::swap(*rItLow, *rItHigh);
-            ALBA_DBG_PRINT(valuesToSort);
-            ALBA_DBG_PRINT(*rItLow, *rItHigh);
         }
-
-        // error happens here
-        /*for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
-            ALBA_DBG_PRINT(valuesToSort);
-            ALBA_DBG_PRINT(*rItLow, *rItHigh);
-        }*/
-        /*for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
-            ALBA_DBG_PRINT(valuesToSort);
-            ALBA_DBG_PRINT(*rItLow, *rItHigh);
-            // std::swap(*rItLow, *rItHigh);
-            ALBA_DBG_PRINT(valuesToSort);
-            ALBA_DBG_PRINT(*rItLow, *rItHigh);
-        }*/
-        ALBA_DBG_PRINT(valuesToSort);
     }
 
     void continuouslyCopyBackIfStillOutOfOrder(Values& valuesToSort, Iterator const insertIt) const {
