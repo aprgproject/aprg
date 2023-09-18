@@ -68,7 +68,8 @@ void BtsLogAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSor
 
 void BtsLogAnalyzer::initializeMessageQueueingTimeFileStream() {
     AlbaLocalPathHandler const messageQueueingTimeFilePathHandler(
-        m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_MessageQueueingTime.csv");
+        m_btsLogPathHandler.getDirectory().string() + m_btsLogPathHandler.getFilenameOnly().string() +
+        "_MessageQueueingTime.csv");
     messageQueueingTimeFileStreamOptional.emplace();
     ofstream& messageQueueingTimeFileStream(messageQueueingTimeFileStreamOptional.value());
     messageQueueingTimeFileStream.open(messageQueueingTimeFilePathHandler.getPath());
@@ -78,7 +79,8 @@ void BtsLogAnalyzer::initializeMessageQueueingTimeFileStream() {
 
 void BtsLogAnalyzer::initializeRlSetupTimeFileStream() {
     AlbaLocalPathHandler const rlSetupTimeFilePathHandler(
-        m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_RlSetupTime.csv");
+        m_btsLogPathHandler.getDirectory().string() + m_btsLogPathHandler.getFilenameOnly().string() +
+        "_RlSetupTime.csv");
     rlSetupTimeFileStreamOptional.emplace();
     ofstream& rlSetupTimeFileStream(rlSetupTimeFileStreamOptional.value());
     rlSetupTimeFileStream.open(rlSetupTimeFilePathHandler.getPath());
@@ -89,7 +91,8 @@ void BtsLogAnalyzer::initializeRlSetupTimeFileStream() {
 
 void BtsLogAnalyzer::initializeRlDeletionTimeFileStream() {
     AlbaLocalPathHandler const rlDeletionTimeFilePathHandler(
-        m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_RlDeletionTime.csv");
+        m_btsLogPathHandler.getDirectory().string() + m_btsLogPathHandler.getFilenameOnly().string() +
+        "_RlDeletionTime.csv");
     rlDeletionTimeFileStreamOptional.emplace();
     ofstream& rlDeletionTimeFileStream(rlDeletionTimeFileStreamOptional.value());
     rlDeletionTimeFileStream.open(rlDeletionTimeFilePathHandler.getPath());
@@ -101,7 +104,8 @@ void BtsLogAnalyzer::initializeRlDeletionTimeFileStream() {
 
 void BtsLogAnalyzer::initializeRlSetupPerSecondFileStream() {
     AlbaLocalPathHandler const rlSetupPerSecondFilePathHandler(
-        m_btsLogPathHandler.getDirectory() + m_btsLogPathHandler.getFilenameOnly() + "_RlSetupPerSecond.csv");
+        m_btsLogPathHandler.getDirectory().string() + m_btsLogPathHandler.getFilenameOnly().string() +
+        "_RlSetupPerSecond.csv");
     rlSetupPerSecondFileStreamOptional.emplace();
     ofstream& rlSetupPerSecondFileStream(rlSetupPerSecondFileStreamOptional.value());
     rlSetupPerSecondFileStream.open(rlSetupPerSecondFilePathHandler.getPath());
@@ -329,7 +333,7 @@ void BtsLogAnalyzer::initializeDataDumpOfAllDspsForR2() {
 }
 
 void BtsLogAnalyzer::initializeDataDumpOfOneDsp(string const& fileName) {
-    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory() + fileName + ".csv");
+    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory().string() + fileName + ".csv");
     ofstream dspDataFileStream(dspDataPathHandler.getPath());
     dspDataFileStream << "BtsTime,";
     dspDataFileStream << "availableUlCEs,availableDlCEs,";
@@ -340,7 +344,8 @@ void BtsLogAnalyzer::initializeDataDumpOfOneDsp(string const& fileName) {
 }
 
 void BtsLogAnalyzer::initializeTotalUsersAndCfsDump() {
-    AlbaLocalPathHandler const totalUsersAndCfsFileHandler(m_btsLogPathHandler.getDirectory() + "TotalUsersAndCfs.csv");
+    AlbaLocalPathHandler const totalUsersAndCfsFileHandler(
+        m_btsLogPathHandler.getDirectory().string() + "TotalUsersAndCfs.csv");
     ofstream totalUsersAndCfsFileStream(totalUsersAndCfsFileHandler.getPath());
     totalUsersAndCfsFileStream << "BtsTime,";
     totalUsersAndCfsFileStream << "TotalCfs,";
@@ -351,13 +356,13 @@ void BtsLogAnalyzer::initializeTotalUsersAndCfsDump() {
 
 void BtsLogAnalyzer::initializeSaveAllUsersAndCfsDump() {
     AlbaLocalPathHandler const totalUsersAndCfsFileHandler(
-        m_btsLogPathHandler.getDirectory() + "SaveAllUsersAndCfs.csv");
+        m_btsLogPathHandler.getDirectory().string() + "SaveAllUsersAndCfs.csv");
     ofstream totalUsersAndCfsFileStream(totalUsersAndCfsFileHandler.getPath());
     totalUsersAndCfsFileStream << "Time,Address,hsupaCFs,totalCfs,dchUsers,hsupaUsers\n";
 }
 
 void BtsLogAnalyzer::saveDataDumpOfOneDsp(string const& fileName, DspData const& dspData, BtsLogPrint const& logPrint) {
-    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory() + fileName + ".csv");
+    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory().string() + fileName + ".csv");
     ofstream dspDataFileStream(dspDataPathHandler.getPath(), std::ios::ate | std::ios::app);
     dspDataFileStream << logPrint.getBtsTime().getEquivalentStringBtsTimeFormat() << ",";
     dspDataFileStream << dspData.availableUlCEs << "," << dspData.availableDlCEs << ",";
@@ -368,7 +373,7 @@ void BtsLogAnalyzer::saveDataDumpOfOneDsp(string const& fileName, DspData const&
 }
 
 void BtsLogAnalyzer::saveTotalUsersAndCfs(BtsLogPrint const& logPrint) {
-    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory() + "TotalUsersAndCfs.csv");
+    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory().string() + "TotalUsersAndCfs.csv");
     ofstream totalCfsFileStream(dspDataPathHandler.getPath(), std::ios::ate | std::ios::app);
     unsigned int totalCfs(0);
     unsigned int totalR99Users(0);
@@ -386,7 +391,8 @@ void BtsLogAnalyzer::saveTotalUsersAndCfs(BtsLogPrint const& logPrint) {
 }
 
 void BtsLogAnalyzer::saveAllUsersAndCfs(BtsLogPrint const& logPrint) {
-    AlbaLocalPathHandler const dspDataPathHandler(m_btsLogPathHandler.getDirectory() + "SaveAllUsersAndCfs.csv");
+    AlbaLocalPathHandler const dspDataPathHandler(
+        m_btsLogPathHandler.getDirectory().string() + "SaveAllUsersAndCfs.csv");
     ofstream totalUsersAndCfsFileStream(dspDataPathHandler.getPath(), std::ios::ate | std::ios::app);
     totalUsersAndCfsFileStream << logPrint.getBtsTime().getEquivalentStringBtsTimeFormat() << ",";
     unsigned int totalCfs(0);

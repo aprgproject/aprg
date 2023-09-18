@@ -81,23 +81,23 @@ int PerformanceAnalyzer::UniqueUserId::getTransactionId(std::string const& lineI
 PerformanceAnalyzer::PerformanceAnalyzer() {
     // defautlvalues
     AlbaLocalPathHandler const pathHandler(R"(C:\temp\BtsSorter\)");
-    pathHandler.createDirectoriesForNonExisitingDirectories();
+    pathHandler.createDirectoriesAndIsSuccessful();
     m_sorterConfiguration.m_acceptedFilesGrepCondition =
         R"( ([syslog]&&[.log]) || [ccns.log] || [tcom.log] || (([startup]||[runtime]||[system])&&[.log]) || ([UDP]&&([.log]||[.txt])) )";
-    m_sorterConfiguration.m_pathOfTempFiles = pathHandler.getPath();
-    pathHandler.createDirectoriesForNonExisitingDirectories();
+    m_sorterConfiguration.m_pathOfTempFiles = pathHandler.getPath().string();
+    pathHandler.createDirectoriesAndIsSuccessful();
     m_sorterConfiguration.m_configurationWithPcTime.m_directoryForBlocks =
-        pathHandler.getPath() + R"(WithPcTimeBlocks\)";
+        pathHandler.getPath().string() + R"(WithPcTimeBlocks\)";
     AlbaLocalPathHandler(m_sorterConfiguration.m_configurationWithPcTime.m_directoryForBlocks)
-        .createDirectoriesForNonExisitingDirectories();
+        .createDirectoriesAndIsSuccessful();
     m_sorterConfiguration.m_configurationWithPcTime.m_minimumNumberOfObjectsPerBlock = 10000;
     m_sorterConfiguration.m_configurationWithPcTime.m_maximumNumberOfObjectsPerBlock = 100000;
     m_sorterConfiguration.m_configurationWithPcTime.m_maximumNumberOfObjectsInMemory = 200000;
     m_sorterConfiguration.m_configurationWithPcTime.m_maximumFileStreams = 50;
     m_sorterConfiguration.m_configurationWithoutPcTime.m_directoryForBlocks =
-        pathHandler.getPath() + R"(WithoutPcTimeBlocks\)";
+        pathHandler.getPath().string() + R"(WithoutPcTimeBlocks\)";
     AlbaLocalPathHandler(m_sorterConfiguration.m_configurationWithoutPcTime.m_directoryForBlocks)
-        .createDirectoriesForNonExisitingDirectories();
+        .createDirectoriesAndIsSuccessful();
     m_sorterConfiguration.m_configurationWithoutPcTime.m_minimumNumberOfObjectsPerBlock = 1000;
     m_sorterConfiguration.m_configurationWithoutPcTime.m_maximumNumberOfObjectsPerBlock = 100000;
     m_sorterConfiguration.m_configurationWithoutPcTime.m_maximumNumberOfObjectsInMemory = 200000;
@@ -109,12 +109,12 @@ string PerformanceAnalyzer::extract(string const& inputPath) const {
     AprgFileExtractor fileExtractor(m_extractGrepCondition);
     AlbaLocalPathHandler pathHandler(inputPath);
     string outputPath(inputPath);
-    if (pathHandler.isDirectory()) {
+    if (pathHandler.isExistingDirectory()) {
         fileExtractor.extractAllRelevantFiles(pathHandler.getPath());
-    } else if (alba::AprgFileExtractor::isRecognizedCompressedFile(pathHandler.getExtension())) {
+    } else if (alba::AprgFileExtractor::isRecognizedCompressedFile(pathHandler.getExtension().string())) {
         fileExtractor.extractAllRelevantFiles(pathHandler.getPath());
-        pathHandler.input(pathHandler.getDirectory() + R"(\)" + pathHandler.getFilenameOnly());
-        outputPath = pathHandler.getPath();
+        pathHandler.input(pathHandler.getDirectory() / pathHandler.getFilenameOnly());
+        outputPath = pathHandler.getPath().string();
     } else {
         cout << "Extraction step did not proceed. Current path: " << pathHandler.getPath() << "\n";
     }
@@ -126,12 +126,12 @@ string PerformanceAnalyzer::combineAndSort(string const& inputPath) const {
     cout << " (CombineAndSort) start | Input path: " << inputPath << "\n";
     AlbaLocalPathHandler pathHandler(inputPath);
     string outputPath(inputPath);
-    if (pathHandler.isDirectory()) {
+    if (pathHandler.isExistingDirectory()) {
         wcdmaToolsBackend::BtsLogSorter btsLogSorter(m_sorterConfiguration);
-        btsLogSorter.processDirectory(pathHandler.getDirectory());
-        pathHandler.goUp();
-        pathHandler.input(pathHandler.getDirectory() + R"(\sorted.log)");
-        outputPath = pathHandler.getPath();
+        btsLogSorter.processDirectory(pathHandler.getDirectory().string());
+        pathHandler.moveUpADirectory();
+        pathHandler.input(pathHandler.getDirectory().string() + R"(\sorted.log)");
+        outputPath = pathHandler.getPath().string();
         btsLogSorter.saveLogsToOutputFile(outputPath);
     } else {
         cout << "Combine and sort step did not proceed. Current path: " << pathHandler.getPath() << "\n";
@@ -1135,14 +1135,14 @@ void PerformanceAnalyzer::processFileForTraceLog(string const& traceLogPath) {
 
 void PerformanceAnalyzer::processDirectoryForTraceLog(string const& traceLogPath) {
     logLineInRawDataFile("StartTime,EndTime");
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    AlbaLocalPathHandler(traceLogPath).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        if (isStringFoundNotCaseSensitive(filePath, "trace")) {
-            processFileForTraceLog(AlbaLocalPathHandler(filePath).getPath());
-        }
-    }
+    AlbaLocalPathHandler(traceLogPath)
+        .findFilesAndDirectoriesUnlimitedDepth(
+            [](AlbaLocalPathHandler::LocalPath const&) {},
+            [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+                if (isStringFoundNotCaseSensitive(filePath.string(), "trace")) {
+                    processFileForTraceLog(AlbaLocalPathHandler(filePath).getPath().string());
+                }
+            });
 }
 
 int PerformanceAnalyzer::getDelayTimeInUs(BtsLogTime const& endTime, BtsLogTime const& startTime) {

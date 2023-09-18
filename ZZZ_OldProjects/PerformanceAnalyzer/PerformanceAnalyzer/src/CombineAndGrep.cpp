@@ -7,24 +7,22 @@
 #include <iostream>
 
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba {
 
-CombineAndGrep::CombineAndGrep(string const& outputFilePath, string const& grepString)
+CombineAndGrep::CombineAndGrep(path const& outputFilePath, string const& grepString)
     : m_outputFileStream(AlbaLocalPathHandler(outputFilePath).getPath()), m_grepString(grepString) {}
 
-void CombineAndGrep::processDirectory(string const& inputDirectoryPath) {
+void CombineAndGrep::processDirectory(path const& inputDirectoryPath) {
     AlbaLocalPathHandler const inputDirectoryPathHandler(inputDirectoryPath);
     cout << "processDirectory() inputDirectoryPath:" << inputDirectoryPath << "\n";
-    ListOfPaths files;
-    ListOfPaths directories;
-    inputDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
-    for (string const& file : files) {
-        processFile(file);
-    }
+    inputDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) { processFile(filePath); });
 }
 
-void CombineAndGrep::processFile(string const& inputFilePath) {
+void CombineAndGrep::processFile(path const& inputFilePath) {
     AlbaLocalPathHandler const inputFilePathHandler(inputFilePath);
     cout << "processFile() inputFilePath:" << inputFilePath << "\n";
     ifstream inputFileStream(inputFilePathHandler.getPath());
