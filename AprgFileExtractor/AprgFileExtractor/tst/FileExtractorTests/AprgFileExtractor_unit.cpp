@@ -38,7 +38,7 @@ int numberOfFilesAnalyzedForExtraction;
 TEST(AprgFileExtractorTest, ListOfFilesFromZipFileAreCorrectlyRetrieved) {
     AprgFileExtractor const fileExtractor;
     AprgFileExtractor::SetOfPaths files;
-    fileExtractor.copyRelativeFilePathsFromCompressedFile(PATH_OF_SAMPLE_ZIP_1, files);
+     fileExtractor.copyRelativeFilePathsFromCompressedFile(PATH_OF_SAMPLE_ZIP_1, files);
 
     ASSERT_EQ(11U, files.size());
     auto fileIterator = files.begin();

@@ -36,7 +36,7 @@ private:
     AlbaGrepStringEvaluator m_grepEvaluator;
     std::filesystem::path m_pathOf7zExecutable;
     std::filesystem::path m_pathOf7zTempFile;
-    std::filesystem::path m_nullDevice;
+    std::string m_nullDevice;
 };
 
 }  // namespace alba
