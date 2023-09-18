@@ -198,14 +198,6 @@ string ResultPrinter::getNameOfBookMove(Move const& move, Book::LineDetail const
     return result;
 }
 
-string ResultPrinter::getDisplayableString(NextMove const& nextMove) {
-    return getDisplayableString(nextMove.mateValue, nextMove.engineScore, nextMove.humanScore);
-}
-
-string ResultPrinter::getDisplayableString(MovesSequence const& movesSequence) {
-    return getDisplayableString(movesSequence.mateValue, movesSequence.engineScore, movesSequence.humanScore);
-}
-
 strings ResultPrinter::getNextMovesString(NextMoves const& nextMoves, int const startIndex) const {
     strings result;
     if (startIndex < static_cast<int>(nextMoves.size())) {
@@ -215,17 +207,6 @@ strings ResultPrinter::getNextMovesString(NextMoves const& nextMoves, int const 
             auto const& nextMove(nextMoves[startIndex + moveIndex]);
             result.emplace_back(formatToHeaderString(getDisplayableString(nextMove)));
         }
-    }
-    return result;
-}
-
-strings ResultPrinter::getBookMovesString(BookMoves const& bookMoves) {
-    strings result;
-    int const rowSize = min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(bookMoves.size()));
-    result.reserve(rowSize);
-    for (int moveIndex = 0; moveIndex < rowSize; ++moveIndex) {
-        auto const& bookMove(bookMoves[moveIndex]);
-        result.emplace_back(formatToHeaderString(getDisplayableString(bookMove)));
     }
     return result;
 }
@@ -299,49 +280,7 @@ void ResultPrinter::printHeadersForBestLine(MovesSequence const& movesSequence, 
     }
 }
 
-void ResultPrinter::printHeaders(strings const& prefixHeaders, strings const& suffixHeaders, int const rowSize) {
-    if (!prefixHeaders.empty() || !suffixHeaders.empty()) {
-        bool isFirst = true;
-        for (int i = 0; i < rowSize; ++i) {
-            if (isFirst) {
-                isFirst = false;
-            } else {
-                cout << SEPARATOR;
-            }
-            string headerString;
-            if (i < static_cast<int>(prefixHeaders.size())) {
-                headerString += prefixHeaders[i];
-            }
-            if (i < static_cast<int>(suffixHeaders.size())) {
-                headerString += suffixHeaders[i];
-            }
-            cout << "|" << formatToHeaderString(headerString) << "|";
-        }
-        cout << "\n";
-    }
-}
-
 void ResultPrinter::printHorizontalBorder() const { cout << m_horizontalBorder << "\n"; }
-
-void ResultPrinter::setBoardOnGrid(DisplayTable& grid, Board const& board, int const xOffset) {
-    for (CoordinateDataType y = 0; y < Board::CHESS_SIDE_SIZE; ++y) {
-        for (CoordinateDataType x = 0; x < Board::CHESS_SIDE_SIZE; ++x) {
-            Piece const piece(board.getPieceAt(Coordinate(x, y)));
-            grid.getCellReferenceAt(x + xOffset, y)
-                .setText(getDisplayableStringForABoardCell(piece, 0, optional<char>()));
-        }
-    }
-}
-
-void ResultPrinter::setMoveOnGrid(
-    DisplayTable& grid, Board const& board, Move const& move, int const xOffset, int const moveNumber,
-    optional<char> const& firstChar) {
-    Piece const piece(board.getPieceAt(move.first));
-    grid.getCellReferenceAt(move.first.getX() + xOffset, move.first.getY())
-        .setText(getDisplayableStringForABoardCell(piece, moveNumber, firstChar));
-    grid.getCellReferenceAt(move.second.getX() + xOffset, move.second.getY())
-        .setText(getDisplayableStringForABoardCell(piece, moveNumber + 1, firstChar));
-}
 
 void ResultPrinter::fillMovesFromBook(BookMoves& bookMoves) const {
     auto lineDetailOptional = m_book.getLine(m_engineBoardWithContext.getBoard());
@@ -443,6 +382,14 @@ ResultPrinter::ScorePair ResultPrinter::getBestAndWorstScores(Variations const& 
     return {};
 }
 
+string ResultPrinter::getDisplayableString(NextMove const& nextMove) {
+    return getDisplayableString(nextMove.mateValue, nextMove.engineScore, nextMove.humanScore);
+}
+
+string ResultPrinter::getDisplayableString(MovesSequence const& movesSequence) {
+    return getDisplayableString(movesSequence.mateValue, movesSequence.engineScore, movesSequence.humanScore);
+}
+
 string ResultPrinter::getDisplayableString(BookMove const& bookMove) {
     stringstream ss;
     ss << "(" << bookMove.winningPercentageInBook << "%) " << bookMove.nameOfLineInBook;
@@ -491,6 +438,17 @@ string ResultPrinter::getDisplayableStringForABoardCell(
     return result;
 }
 
+strings ResultPrinter::getBookMovesString(BookMoves const& bookMoves) {
+    strings result;
+    int const rowSize = min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(bookMoves.size()));
+    result.reserve(rowSize);
+    for (int moveIndex = 0; moveIndex < rowSize; ++moveIndex) {
+        auto const& bookMove(bookMoves[moveIndex]);
+        result.emplace_back(formatToHeaderString(getDisplayableString(bookMove)));
+    }
+    return result;
+}
+
 int ResultPrinter::getNumberOfColumnsOfGrid(int const numberOfBoards) {
     return numberOfBoards <= 0 ? 0 : (numberOfBoards * Board::CHESS_SIDE_SIZE) + numberOfBoards - 1;
 }
@@ -511,6 +469,48 @@ int ResultPrinter::getRowSizeForHalfMoves(int const numberOfHalfMoves) {
 
 int ResultPrinter::getRowSizeForFullMoves(int const numberOfFullMoves) {
     return min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(numberOfFullMoves));
+}
+
+void ResultPrinter::printHeaders(strings const& prefixHeaders, strings const& suffixHeaders, int const rowSize) {
+    if (!prefixHeaders.empty() || !suffixHeaders.empty()) {
+        bool isFirst = true;
+        for (int i = 0; i < rowSize; ++i) {
+            if (isFirst) {
+                isFirst = false;
+            } else {
+                cout << SEPARATOR;
+            }
+            string headerString;
+            if (i < static_cast<int>(prefixHeaders.size())) {
+                headerString += prefixHeaders[i];
+            }
+            if (i < static_cast<int>(suffixHeaders.size())) {
+                headerString += suffixHeaders[i];
+            }
+            cout << "|" << formatToHeaderString(headerString) << "|";
+        }
+        cout << "\n";
+    }
+}
+
+void ResultPrinter::setBoardOnGrid(DisplayTable& grid, Board const& board, int const xOffset) {
+    for (CoordinateDataType y = 0; y < Board::CHESS_SIDE_SIZE; ++y) {
+        for (CoordinateDataType x = 0; x < Board::CHESS_SIDE_SIZE; ++x) {
+            Piece const piece(board.getPieceAt(Coordinate(x, y)));
+            grid.getCellReferenceAt(x + xOffset, y)
+                .setText(getDisplayableStringForABoardCell(piece, 0, optional<char>()));
+        }
+    }
+}
+
+void ResultPrinter::setMoveOnGrid(
+    DisplayTable& grid, Board const& board, Move const& move, int const xOffset, int const moveNumber,
+    optional<char> const& firstChar) {
+    Piece const piece(board.getPieceAt(move.first));
+    grid.getCellReferenceAt(move.first.getX() + xOffset, move.first.getY())
+        .setText(getDisplayableStringForABoardCell(piece, moveNumber, firstChar));
+    grid.getCellReferenceAt(move.second.getX() + xOffset, move.second.getY())
+        .setText(getDisplayableStringForABoardCell(piece, moveNumber + 1, firstChar));
 }
 
 void ResultPrinter::setSeparatorsOnGrid(DisplayTable& grid, int const xOffset) {

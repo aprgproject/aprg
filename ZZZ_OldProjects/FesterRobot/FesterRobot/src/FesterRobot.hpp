@@ -16,16 +16,16 @@ public:
     void run();
 
 private:
-    [[nodiscard]] static std::string getClipboardFormattedData();
     [[nodiscard]] std::string getFrequenciesStringForExcel() const;
     [[nodiscard]] bool isRunningFinishedInClipboardData(std::string const& clipboardData) const;
-    static void exitIfSpecialKeyIsPressed();
     void updateExcelFile(unsigned int const freqUsageBits);
     void setupFesterEnvironmentInMatlab();
     void editCellInExcelWithNewFrequencies(AlbaLocalUserAutomation::MousePosition const& excelCellPosition);
     void runFesterFunctionInMatlab();
     void saveDataToOutputFile(std::string const& clipboardData);
     void updateFrequenciesBasedFreqUsageBits(unsigned int const freqUsageBits);
+    [[nodiscard]] static std::string getClipboardFormattedData();
+    static void exitIfSpecialKeyIsPressed();
     static bool isRunningInClipboardData(std::string const& clipboardData);
     std::ofstream m_outputStream;
     Frequencies m_frequencies;

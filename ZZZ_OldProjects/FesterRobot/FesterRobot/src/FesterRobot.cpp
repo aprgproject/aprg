@@ -42,12 +42,6 @@ void FesterRobot::run() {
     alba::AlbaWindowsUserAutomation::setMousePosition(MousePosition(ORIGIN));
 }
 
-string FesterRobot::getClipboardFormattedData() {
-    string clipboardData(alba::AlbaWindowsUserAutomation::getStringFromClipboard());
-    stringHelper::replaceAllAndReturnIfFound(clipboardData, "\r", "");
-    return clipboardData;
-}
-
 string FesterRobot::getFrequenciesStringForExcel() const {
     stringstream frequencyStream;
     for (int const frequency : m_frequencies) {
@@ -68,13 +62,6 @@ bool FesterRobot::isRunningFinishedInClipboardData(string const& clipboardData) 
     cout << "freqBandStringInLog: [" << freqBandStringInLog << "]\n";
     cout << "frequenciesStringForExcel: [" << frequenciesStringForExcel << "]\n";
     return freqBandStringInLog == frequenciesStringForExcel;
-}
-
-void FesterRobot::exitIfSpecialKeyIsPressed() {
-    if (alba::AlbaWindowsUserAutomation::isLetterPressed(VK_MENU)) {
-        alba::AlbaWindowsUserAutomation::setMousePosition(MousePosition(ORIGIN));
-        exit(0);
-    }
 }
 
 void FesterRobot::updateExcelFile(unsigned int const freqUsageBits) {
@@ -157,6 +144,19 @@ void FesterRobot::updateFrequenciesBasedFreqUsageBits(unsigned int const freqUsa
     }
     if ((freqUsageBits & 0x32) > 0) {
         m_frequencies.emplace_back(1800);
+    }
+}
+
+string FesterRobot::getClipboardFormattedData() {
+    string clipboardData(alba::AlbaWindowsUserAutomation::getStringFromClipboard());
+    stringHelper::replaceAllAndReturnIfFound(clipboardData, "\r", "");
+    return clipboardData;
+}
+
+void FesterRobot::exitIfSpecialKeyIsPressed() {
+    if (alba::AlbaWindowsUserAutomation::isLetterPressed(VK_MENU)) {
+        alba::AlbaWindowsUserAutomation::setMousePosition(MousePosition(ORIGIN));
+        exit(0);
     }
 }
 

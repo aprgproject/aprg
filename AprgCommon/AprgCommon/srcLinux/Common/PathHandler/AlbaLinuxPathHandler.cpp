@@ -33,8 +33,8 @@ AlbaDateTime AlbaLinuxPathHandler::getFileCreationTime() const {
         clock_gettime(CLOCK_REALTIME, &timeSpec);
         fileCreationTime = convertSystemTimeToAlbaDateTime(timeSpec);
     } else if (errno != 0) {
-        cerr << "Error in AlbaLinuxPathHandler::getFileCreationTime() path:[" << getPath()
-             << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
+        cerr << "Error in AlbaLinuxPathHandler::getFileCreationTime() path:[" << getPath() << "] 'stat' errno value:["
+             << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
     }
     return fileCreationTime;
 }
@@ -45,8 +45,8 @@ double AlbaLinuxPathHandler::getFileSizeEstimate() const {
     if (0 == stat(getPath().c_str(), &fileStatus)) {
         fileSize = static_cast<double>(fileStatus.st_size);
     } else if (errno != 0) {
-        cerr << "Error in AlbaLinuxPathHandler::getFileSizeEstimate() path:[" << getPath()
-             << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
+        cerr << "Error in AlbaLinuxPathHandler::getFileSizeEstimate() path:[" << getPath() << "] 'stat' errno value:["
+             << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
     }
     return fileSize;
 }
@@ -210,8 +210,8 @@ bool AlbaLinuxPathHandler::isPathADirectory(string_view const fileOrDirectoryNam
         if (0 == stat(fileOrDirectoryName.data(), &statBuffer)) {
             result = S_ISDIR(statBuffer.st_mode);
         } else if (errno != 0) {
-            cerr << "Error in AlbaLinuxPathHandler::isPathADirectory() path:[" << getPath()
-                 << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
+            cerr << "Error in AlbaLinuxPathHandler::isPathADirectory() path:[" << getPath() << "] 'stat' errno value:["
+                 << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
         }
     }
     return result;

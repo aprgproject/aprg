@@ -173,7 +173,6 @@ TEST(LimitTest, GetLimitWithMultipleVariablesWithDifferentApproachesWorksWhenItE
     substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", "x"}});
     substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", Monomial(1, {{"x", 2}})}});
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-
     EXPECT_TRUE(isContinuousAtWithMultipleVariablesWithDifferentApproaches(termToTest, "x", 0, substitutions));
 }
 
@@ -186,7 +185,6 @@ TEST(LimitTest, GetLimitWithMultipleVariablesWithDifferentApproachesWorksWhenDoe
     substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", "x"}});
     substitutions.emplace_back(SubstitutionOfVariablesToTerms{{"y", Monomial(1, {{"x", 2}})}});
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-
     EXPECT_FALSE(isContinuousAtWithMultipleVariablesWithDifferentApproaches(termToTest, "x", 0, substitutions));
 }
 

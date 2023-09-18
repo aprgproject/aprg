@@ -13,12 +13,15 @@ public:
     using StringPairs = std::vector<StringPair>;
     ReplaceStringInFiles() = default;
     [[nodiscard]] static std::string getCPlusPlusStylePrintFromC(std::string const& inputString);
+
     static void replaceStringWithStringOnDirectories(
         std::filesystem::path const& inputDirectory, std::filesystem::path const& outputDirectory,
         StringPairs const& replacePairs);
+
     static void replaceStringWithStringOnFile(
         std::filesystem::path const& inputFilePath, std::filesystem::path const& outputFilePath,
         StringPairs const& replacePairs);
+
     static void replaceCToCPlusPlusStylePrintOnDirectories(
         std::filesystem::path const& inputDirectory, std::filesystem::path const& outputDirectory);
     static void replaceCToCPlusPlusStylePrintOnFile(

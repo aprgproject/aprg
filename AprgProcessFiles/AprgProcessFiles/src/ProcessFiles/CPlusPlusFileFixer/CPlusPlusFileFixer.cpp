@@ -92,21 +92,6 @@ set<string> const listOfWindowsHeaders{
 
 }  // namespace
 
-void CPlusPlusFileFixer::processDirectory(path const& path) {
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    AlbaLocalPathHandler(path).findFilesAndDirectoriesUnlimitedDepth(
-        [](AlbaLocalPathHandler::LocalPath const&) {},
-        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
-            AlbaLocalPathHandler const filePathHandler(filePath);
-            if (!isPathIgnored(filePathHandler.getPath().string())) {
-                if ("cpp" == filePathHandler.getExtension() || "hpp" == filePathHandler.getExtension()) {
-                    processFile(filePathHandler.getPath());
-                }
-            }
-        });
-}
-
 void CPlusPlusFileFixer::processFile(path const& path) {
     // cout<<"ProcessFile: "<<path<<"\n";
     clear();
@@ -420,6 +405,21 @@ bool CPlusPlusFileFixer::isQtHeader(string const& header) {
         }
     }
     return result;
+}
+
+void CPlusPlusFileFixer::processDirectory(path const& path) {
+    set<string> listOfFiles;
+    set<string> listOfDirectories;
+    AlbaLocalPathHandler(path).findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            AlbaLocalPathHandler const filePathHandler(filePath);
+            if (!isPathIgnored(filePathHandler.getPath().string())) {
+                if ("cpp" == filePathHandler.getExtension() || "hpp" == filePathHandler.getExtension()) {
+                    processFile(filePathHandler.getPath());
+                }
+            }
+        });
 }
 
 }  // namespace alba

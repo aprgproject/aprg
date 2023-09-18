@@ -6,7 +6,7 @@ namespace alba::chess::ChessPeek {
 
 class DetailsOnTheEngine {
 public:
-    DetailsOnTheEngine();
+    DetailsOnTheEngine() = default;
     [[nodiscard]] BoardWithContext const& getBoardWithContext() const;
     void save(BoardWithContext const& boardWithContext);
 

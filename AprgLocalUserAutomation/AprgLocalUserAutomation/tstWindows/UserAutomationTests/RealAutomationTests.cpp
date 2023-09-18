@@ -17,7 +17,6 @@ namespace alba::AlbaWindowsUserAutomation {
 
 TEST(RealAutomationTest, DISABLED_TraverseTalonRoShops) {
     // DISABLED_
-
     // AlbaLocalPathHandler itemDatabaseFolder(R"(C:\Users\detectivemark7\Desktop\RO\TalonRO\BuyingShops\)");
     AlbaLocalPathHandler const itemDatabaseFolder(R"(C:\Users\detectivemark7\Desktop\RO\TalonRO\SellingShops\)");
 

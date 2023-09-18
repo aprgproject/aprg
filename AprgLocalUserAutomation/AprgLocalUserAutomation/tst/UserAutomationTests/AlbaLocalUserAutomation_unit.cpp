@@ -5,9 +5,7 @@
 using namespace std;
 
 namespace alba {
-
 TEST(AlbaLocalUserAutomation, DISABLED_SampleTest1) {
     // its better to test non OS specific behavior here
 }
-
 }  // namespace alba

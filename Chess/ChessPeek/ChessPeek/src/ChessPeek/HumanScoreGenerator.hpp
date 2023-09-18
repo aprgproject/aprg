@@ -53,9 +53,9 @@ private:
     [[nodiscard]] Score getPiecePart(Move const& move) const;
     [[nodiscard]] int getDistanceToKing(Coordinate const& coordinate) const;
     [[nodiscard]] int getScoreLevelDistance() const;
-    [[nodiscard]] static bool isSameValueExchange(Piece const pieceAtStart, Piece const pieceAtEnd);
     [[nodiscard]] bool isDevelopingMove(Piece const pieceAtStart, Move const& move) const;
     [[nodiscard]] static Score getHumanScoreOfPiece(PieceType const pieceType);
+    [[nodiscard]] static bool isSameValueExchange(Piece const pieceAtStart, Piece const pieceAtEnd);
     [[nodiscard]] static bool isACaptureMove(Piece const pieceAtStart, Piece const pieceAtEnd);
     [[nodiscard]] static bool isCastlingMove(Piece const pieceAtStart, Move const& move);
     [[nodiscard]] static bool isCheck(Piece const pieceAtEnd);

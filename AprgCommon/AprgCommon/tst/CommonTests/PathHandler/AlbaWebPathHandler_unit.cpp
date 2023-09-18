@@ -90,8 +90,7 @@ TEST(AlbaWebPathHandlerTest, ProtocolCanBeChanged) {
     pathHandler.setProtocolWithSymbols("https://");
     EXPECT_TRUE(pathHandler.hasProtocol());
     EXPECT_EQ("https", pathHandler.getProtocol());
-    EXPECT_EQ(
-        "https://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522", pathHandler.getPath());
+    EXPECT_EQ("https://a.mhcdn.net/store/manga/12114/001.0/compressed/r049.jpg?v=1354256522", pathHandler.getPath());
     EXPECT_EQ("https://a.mhcdn.net/store/manga/12114/001.0/compressed/", pathHandler.getDirectory());
     EXPECT_EQ("r049.jpg", pathHandler.getFile());
     EXPECT_EQ("r049", pathHandler.getFilenameOnly());

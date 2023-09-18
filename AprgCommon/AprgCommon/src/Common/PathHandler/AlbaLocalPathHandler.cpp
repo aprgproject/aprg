@@ -13,7 +13,6 @@ namespace {
 
 using StringType = path::string_type;
 using CharacterType = StringType::value_type;
-
 constexpr CharacterType SLASH_STRING = static_cast<CharacterType>('/');
 constexpr CharacterType BACK_SLASH_STRING = static_cast<CharacterType>('\\');
 constexpr CharacterType PREFERRED_SLASH_STRING = static_cast<CharacterType>(path::preferred_separator);
@@ -112,6 +111,41 @@ bool AlbaLocalPathHandler::isNamedSocket() const { return is_socket(m_path); }
 bool AlbaLocalPathHandler::isRelativePath() const { return m_path.is_relative(); }
 bool AlbaLocalPathHandler::isAbsolutePath() const { return m_path.is_absolute(); }
 
+void AlbaLocalPathHandler::findFilesAndDirectoriesOneDepth(
+    PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
+    try {
+        // NOLINTNEXTLINE(readability-suspicious-call-argument)
+        findFilesAndDirectories(m_path, 1, directoryFunction, fileFunction);
+    } catch (exception const& capturedException) {
+        cerr << "Error while finding files and directories: [" << capturedException.what() << "]\n";
+    }
+}
+
+void AlbaLocalPathHandler::findFilesAndDirectoriesMultipleDepth(
+    int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
+    try {
+        // NOLINTNEXTLINE(readability-suspicious-call-argument)
+        findFilesAndDirectories(m_path, depth, directoryFunction, fileFunction);
+    } catch (exception const& capturedException) {
+        cerr << "Error while finding files and directories: [" << capturedException.what() << "]\n";
+    }
+}
+
+void AlbaLocalPathHandler::findFilesAndDirectoriesUnlimitedDepth(
+    PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
+    try {
+        for (directory_entry const& directoryEntry : recursive_directory_iterator(m_path)) {
+            if (directoryEntry.is_directory()) {
+                directoryFunction(directoryEntry.path() / "");
+            } else {
+                fileFunction(directoryEntry.path());
+            }
+        }
+    } catch (exception const& capturedException) {
+        cerr << "Error while finding files and directories: [" << capturedException.what() << "]\n";
+    }
+}
+
 bool AlbaLocalPathHandler::createDirectoriesAndIsSuccessful() const {
     try {
         create_directories(m_path.parent_path());
@@ -197,45 +231,9 @@ bool AlbaLocalPathHandler::copyDirectoryToAndIsSuccessful(LocalPath const& desti
     return true;
 }
 
-void AlbaLocalPathHandler::findFilesAndDirectoriesOneDepth(
-    PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
-    try {
-        // NOLINTNEXTLINE(readability-suspicious-call-argument)
-        findFilesAndDirectories(m_path, 1, directoryFunction, fileFunction);
-    } catch (exception const& capturedException) {
-        cerr << "Error while finding files and directories: [" << capturedException.what() << "]\n";
-    }
-}
-
-void AlbaLocalPathHandler::findFilesAndDirectoriesMultipleDepth(
-    int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
-    try {
-        // NOLINTNEXTLINE(readability-suspicious-call-argument)
-        findFilesAndDirectories(m_path, depth, directoryFunction, fileFunction);
-    } catch (exception const& capturedException) {
-        cerr << "Error while finding files and directories: [" << capturedException.what() << "]\n";
-    }
-}
-
-void AlbaLocalPathHandler::findFilesAndDirectoriesUnlimitedDepth(
-    PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
-    try {
-        for (directory_entry const& directoryEntry : recursive_directory_iterator(m_path)) {
-            if (directoryEntry.is_directory()) {
-                directoryFunction(directoryEntry.path() / "");
-            } else {
-                fileFunction(directoryEntry.path());
-            }
-        }
-    } catch (exception const& capturedException) {
-        cerr << "Error while finding files and directories: [" << capturedException.what() << "]\n";
-    }
-}
-
 void AlbaLocalPathHandler::clear() { m_path.clear(); }
 void AlbaLocalPathHandler::input(LocalPath const& path) { m_path = fixPath(path); }
 void AlbaLocalPathHandler::input(LocalPath&& path) { m_path = fixPath(path); }
-
 void AlbaLocalPathHandler::moveUpADirectory() { input(m_path.parent_path().parent_path() / ""); }
 
 bool AlbaLocalPathHandler::renameFileAndIsSuccessful(LocalPath const& newFileName) {

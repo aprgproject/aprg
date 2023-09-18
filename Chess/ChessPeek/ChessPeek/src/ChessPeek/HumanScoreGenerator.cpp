@@ -120,11 +120,6 @@ int HumanScoreGenerator::getScoreLevelDistance() const {
     }
 }
 
-bool HumanScoreGenerator::isSameValueExchange(Piece const pieceAtStart, Piece const pieceAtEnd) {
-    return isACaptureMove(pieceAtStart, pieceAtEnd) &&
-           getValueOfPieceType(pieceAtStart.getType()) == getValueOfPieceType(pieceAtEnd.getType());
-}
-
 bool HumanScoreGenerator::isDevelopingMove(Piece const pieceAtStart, Move const& move) const {
     return PieceType::Pawn != pieceAtStart.getType() && PieceType::King != pieceAtStart.getType() &&
            getDistanceToKing(move.first) > getDistanceToKing(move.second);
@@ -162,6 +157,11 @@ HumanScoreGenerator::Score HumanScoreGenerator::getHumanScoreOfPiece(PieceType c
         }
     }
     return result;
+}
+
+bool HumanScoreGenerator::isSameValueExchange(Piece const pieceAtStart, Piece const pieceAtEnd) {
+    return isACaptureMove(pieceAtStart, pieceAtEnd) &&
+           getValueOfPieceType(pieceAtStart.getType()) == getValueOfPieceType(pieceAtEnd.getType());
 }
 
 bool HumanScoreGenerator::isACaptureMove(Piece const pieceAtStart, Piece const pieceAtEnd) {

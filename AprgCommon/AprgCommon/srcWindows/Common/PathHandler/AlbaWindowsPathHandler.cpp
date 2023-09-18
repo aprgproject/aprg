@@ -35,8 +35,7 @@ void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const
         AlbaWindowsPathHandler const partialDirectoryPathHandler(partialDirectory);
         if (!partialDirectoryPathHandler.doesExist()) {
             if (CreateDirectoryW(
-                    convertToAnotherBasicStringVariant<string, wstring>(partialDirectoryPathHandler.getPath())
-                        .c_str(),
+                    convertToAnotherBasicStringVariant<string, wstring>(partialDirectoryPathHandler.getPath()).c_str(),
                     nullptr) == 0) {
                 cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
                 cerr << "Path: [" << partialDirectoryPathHandler.getPath() << "]\n";
@@ -129,8 +128,8 @@ bool AlbaWindowsPathHandler::deleteFile() {
 bool AlbaWindowsPathHandler::deleteDirectoryWithoutFilesAndDirectories() {
     bool isSuccessful(false);
     if (isDirectory()) {
-        isSuccessful = static_cast<bool>(
-            RemoveDirectoryW(convertToAnotherBasicStringVariant<string, wstring>(getPath()).c_str()));
+        isSuccessful =
+            static_cast<bool>(RemoveDirectoryW(convertToAnotherBasicStringVariant<string, wstring>(getPath()).c_str()));
         if (!isSuccessful) {
             cerr << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
             cerr << "Path: [" << getPath() << "]\n";

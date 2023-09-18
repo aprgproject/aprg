@@ -17,13 +17,6 @@ AlbaCombineAndGrepFiles::AlbaCombineAndGrepFiles(
       m_fileEvaluator(fileCondition),
       m_lineEvaluator(lineCondition) {}
 
-void AlbaCombineAndGrepFiles::processDirectory(path const& directoryPath) {
-    AlbaLocalPathHandler(directoryPath)
-        .findFilesAndDirectoriesUnlimitedDepth(
-            [](AlbaLocalPathHandler::LocalPath const&) {},
-            [&](AlbaLocalPathHandler::LocalPath const& filePath) { processFile(filePath); });
-}
-
 void AlbaCombineAndGrepFiles::processFile(path const& filePath) {
     AlbaLocalPathHandler const filePathHandler(filePath);
     if (m_fileEvaluator.evaluate(filePathHandler.getFile().string())) {
@@ -37,6 +30,13 @@ void AlbaCombineAndGrepFiles::processFile(path const& filePath) {
             }
         }
     }
+}
+
+void AlbaCombineAndGrepFiles::processDirectory(path const& directoryPath) {
+    AlbaLocalPathHandler(directoryPath)
+        .findFilesAndDirectoriesUnlimitedDepth(
+            [](AlbaLocalPathHandler::LocalPath const&) {},
+            [&](AlbaLocalPathHandler::LocalPath const& filePath) { processFile(filePath); });
 }
 
 }  // namespace alba

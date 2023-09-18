@@ -36,6 +36,11 @@ public:
     [[nodiscard]] bool isNamedSocket() const;
     [[nodiscard]] bool isRelativePath() const;
     [[nodiscard]] bool isAbsolutePath() const;
+    void findFilesAndDirectoriesOneDepth(PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
+    void findFilesAndDirectoriesMultipleDepth(
+        int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
+    void findFilesAndDirectoriesUnlimitedDepth(
+        PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
     // NOLINTBEGIN(modernize-use-nodiscard)
     bool createDirectoriesAndIsSuccessful() const;
     bool deleteDirectoryAndIsSuccessful() const;
@@ -44,11 +49,6 @@ public:
     bool copyFileToAndIsSuccessful(LocalPath const& destination) const;
     bool copyDirectoryToAndIsSuccessful(LocalPath const& destination) const;
     // NOLINTEND(modernize-use-nodiscard)
-    void findFilesAndDirectoriesOneDepth(PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
-    void findFilesAndDirectoriesMultipleDepth(
-        int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
-    void findFilesAndDirectoriesUnlimitedDepth(
-        PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
     void clear();
     void input(LocalPath const& path);
     void input(LocalPath&& path);

@@ -8,6 +8,7 @@ using namespace std;
 namespace alba::CodeUtilities {
 
 namespace {
+
 void processAprgDirectory(string const& aprgPath) {
     CPlusPlusFixer fixer;
     AlbaLocalPathHandler const aprgPathHandler(aprgPath);
@@ -20,6 +21,7 @@ void processAprgDirectory(string const& aprgPath) {
             }
         });
 }
+
 }  // namespace
 
 TEST(CPlusPlusFixerTest, DISABLED_AprgDirectoryTest) {

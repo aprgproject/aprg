@@ -14,6 +14,7 @@ public:
     AlbaCombineAndGrepFiles(
         std::filesystem::path const& outputFilePath, std::string const& fileCondition,
         std::string const& lineCondition);
+
     void processDirectory(std::filesystem::path const& path);
     void processFile(std::filesystem::path const& path);
 
