@@ -30,12 +30,12 @@ double BtsLogAnalyzer::getComputedAverageDelay() const {
 }
 
 void BtsLogAnalyzer::processDirectoryForWireSharkDelay(string const& directoryPath) {
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
-    AlbaLocalPathHandler(directoryPath).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    for (string const& filePath : listOfFiles) {
-        processFileForWireSharkDelay(AlbaLocalPathHandler(filePath).getPath());
-    }
+    AlbaLocalPathHandler(directoryPath)
+        .findFilesAndDirectoriesUnlimitedDepth(
+            [](AlbaLocalPathHandler::LocalPath const&) {},
+            [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+                processFileForWireSharkDelay(AlbaLocalPathHandler(filePath).getPath().string());
+            });
 }
 
 void BtsLogAnalyzer::processFileForWireSharkDelay(string const& filePath) {
@@ -323,10 +323,10 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
-    ofstream grmFetchFileStream(filePathHandler.getDirectory() + R"(grmFetchFileStream.csv)");
-    ofstream grmProcessFileStream(filePathHandler.getDirectory() + R"(grmProcessFileStream.csv)");
-    ofstream messageDeliveryFileStream(filePathHandler.getDirectory() + R"(messageDeliveryFileStream.csv)");
-    ofstream rlSetupFileStream(filePathHandler.getDirectory() + R"(rlSetupFileStream.csv)");
+    ofstream grmFetchFileStream(filePathHandler.getDirectory() / R"(grmFetchFileStream.csv)");
+    ofstream grmProcessFileStream(filePathHandler.getDirectory() / R"(grmProcessFileStream.csv)");
+    ofstream messageDeliveryFileStream(filePathHandler.getDirectory() / R"(messageDeliveryFileStream.csv)");
+    ofstream rlSetupFileStream(filePathHandler.getDirectory() / R"(rlSetupFileStream.csv)");
     grmFetchFileStream << "crnccId,"
                        << "nbccId,"
                        << "transactionId,"
