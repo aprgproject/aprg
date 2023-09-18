@@ -25,6 +25,7 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_wavelet.h>
 #include <gsl/gsl_wavelet2d.h>
+#include <math.h>
 
 #define ELEMENT(a,stride,i) ((a)[(stride)*(i)])
 
@@ -58,16 +59,16 @@ static void
 dwt_step (const gsl_wavelet * w, double *a, size_t stride, size_t n,
           gsl_wavelet_direction dir, gsl_wavelet_workspace * work)
 {
-  double ai;
-  double ai1;
-  size_t i;
-  size_t ii;
+  double ai = NAN;
+  double ai1 = NAN;
+  size_t i = 0;
+  size_t ii = 0;
   size_t jf = 0;
   size_t k = 0;
-  size_t n1;
-  size_t ni;
-  size_t nh;
-  size_t nmod;
+  size_t n1 = 0;
+  size_t ni = 0;
+  size_t nh = 0;
+  size_t nmod = 0;
 
   for (i = 0; i < work->n; i++)
     {
@@ -249,8 +250,8 @@ gsl_wavelet2d_nstransform (const gsl_wavelet * w,
                            size_t size2, gsl_wavelet_direction dir,
                            gsl_wavelet_workspace * work)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
 
   if (size1 != size2)
     {

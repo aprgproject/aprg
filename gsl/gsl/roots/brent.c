@@ -21,6 +21,7 @@
 
 #include <config.h>
 
+#include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -50,8 +51,8 @@ brent_init (void * vstate, gsl_function * f, double * root, double x_lower, doub
 {
   brent_state_t * state = (brent_state_t *) vstate;
 
-  double f_lower;
-  double f_upper ;
+  double f_lower = NAN;
+  double f_upper = NAN ;
 
   *root = 0.5 * (x_lower + x_upper) ;
 
@@ -84,8 +85,8 @@ brent_iterate (void * vstate, gsl_function * f, double * root, double * x_lower,
 {
   brent_state_t * state = (brent_state_t *) vstate;
 
-  double tol;
-  double m;
+  double tol = NAN;
+  double m = NAN;
 
   int ac_equal = 0;
 
@@ -155,9 +156,9 @@ brent_iterate (void * vstate, gsl_function * f, double * root, double * x_lower,
     }
   else
     {
-      double p;
-      double q;
-      double r;   /* use inverse cubic interpolation */
+      double p = NAN;
+      double q = NAN;
+      double r = NAN;   /* use inverse cubic interpolation */
       double s = fb / fa;
       
       if (ac_equal)

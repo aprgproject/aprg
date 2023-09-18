@@ -65,8 +65,8 @@ gsl_histogram2d_max_bin (const gsl_histogram2d * h, size_t * imax_out, size_t * 
   const size_t ny = h->ny;
   size_t imax = 0;
   size_t jmax = 0;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   double max = h->bin[0 * ny + 0];
 
   for (i = 0; i < nx; i++)
@@ -120,8 +120,8 @@ gsl_histogram2d_min_bin (const gsl_histogram2d * h, size_t * imin_out, size_t * 
   const size_t ny = h->ny;
   size_t imin = 0;
   size_t jmin = 0;
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   double min = h->bin[0 * ny + 0];
 
   for (i = 0; i < nx; i++)

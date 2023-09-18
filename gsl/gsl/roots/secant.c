@@ -33,6 +33,7 @@
 
 #include <config.h>
 
+#include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -77,9 +78,9 @@ secant_iterate (void * vstate, gsl_function_fdf * fdf, double * root)
   const double f = state->f;
   const double df = state->df;
 
-  double x_new;
-  double f_new;
-  double df_new;
+  double x_new = NAN;
+  double f_new = NAN;
+  double df_new = NAN;
 
   if(f == 0.0)
   {

@@ -146,8 +146,8 @@ contract_by_best (nmsimplex_state_t * state, size_t best,
   gsl_matrix *x1 = state->x1;
   gsl_vector *y1 = state->y1;
 
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   double newval = NAN;
 
   int status = GSL_SUCCESS;
@@ -434,15 +434,15 @@ nmsimplex_iterate (void *vstate, gsl_multimin_function * f,
 
   const size_t n = y1->size;
   size_t i = 0;
-  size_t hi;
-  size_t s_hi;
-  size_t lo;
-  double dhi;
-  double ds_hi;
-  double dlo;
+  size_t hi = 0;
+  size_t s_hi = 0;
+  size_t lo = 0;
+  double dhi = NAN;
+  double ds_hi = NAN;
+  double dlo = NAN;
   int status = 0;
-  double val;
-  double val2;
+  double val = NAN;
+  double val2 = NAN;
 
   if (xc->size != x->size)
     {
@@ -591,8 +591,8 @@ nmsimplex_set_rand (void *vstate, gsl_multimin_function * f,
 		    const gsl_vector * x,
 		    double *size, const gsl_vector * step_size)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   double val = NAN;
 
   nmsimplex_state_t *state = (nmsimplex_state_t *) vstate;

@@ -1078,7 +1078,7 @@ gamma_xgthalf(const double x, gsl_sf_result * result)
     result->err = GSL_DBL_EPSILON;
     return GSL_SUCCESS;
   }
-  else if(x < 5.0) {
+  if(x < 5.0) {
     /* Exponentiating the logarithm is fine, as
      * long as the exponential is not so large
      * that it greatly amplifies the error.
@@ -1155,7 +1155,7 @@ int gsl_sf_lngamma_e(double x, gsl_sf_result * result)
     DOMAIN_ERROR(result);
   }
   else if(fabs(x) < 0.02) {
-    double sgn;
+    double sgn = NAN;
     return lngamma_sgn_0(x, result, &sgn);
   }
   else if(x > -0.5/(GSL_DBL_EPSILON*M_PI)) {
@@ -1178,7 +1178,7 @@ int gsl_sf_lngamma_e(double x, gsl_sf_result * result)
       else {
         int N = -(int)(x - 0.5);
         double eps = x + N;
-        double sgn;
+        double sgn = NAN;
         return lngamma_sgn_sing(N, eps, result, &sgn);
       }
     }
@@ -1389,7 +1389,7 @@ gsl_sf_gammainv_e(const double x, gsl_sf_result * result)
       return gsl_sf_exp_mult_err_e(-lng.val, lng.err, sgn, 0.0, result);
    
   }
-  else {
+  
     gsl_sf_result g;
     int stat_g = gamma_xgthalf(x, &g);
     if(stat_g == GSL_EOVRFLW) {
@@ -1402,7 +1402,7 @@ gsl_sf_gammainv_e(const double x, gsl_sf_result * result)
       CHECK_UNDERFLOW(result);
       return GSL_SUCCESS;
     }
-  }
+ 
 }
 
 

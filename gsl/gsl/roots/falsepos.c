@@ -33,6 +33,7 @@
 
 #include <config.h>
 
+#include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -59,8 +60,8 @@ falsepos_init (void * vstate, gsl_function * f, double * root, double x_lower, d
 {
   falsepos_state_t * state = (falsepos_state_t *) vstate;
 
-  double f_lower;
-  double f_upper ;
+  double f_lower = NAN;
+  double f_upper = NAN ;
 
   *root = 0.5 * (x_lower + x_upper);
 
@@ -84,10 +85,10 @@ falsepos_iterate (void * vstate, gsl_function * f, double * root, double * x_low
 {
   falsepos_state_t * state = (falsepos_state_t *) vstate;
 
-  double x_linear;
-  double f_linear;
-  double x_bisect;
-  double f_bisect;
+  double x_linear = NAN;
+  double f_linear = NAN;
+  double x_bisect = NAN;
+  double f_bisect = NAN;
 
   double x_left = *x_lower ;
   double x_right = *x_upper ;

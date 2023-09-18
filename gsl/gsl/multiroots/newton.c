@@ -77,7 +77,7 @@ newton_set (void * vstate, gsl_multiroot_function_fdf * FDF, gsl_vector * x, gsl
 {
   newton_state_t * state = (newton_state_t *) vstate;
 
-  size_t i;
+  size_t i = 0;
   size_t n = FDF->n ;
 
   state = 0 ; /* avoid warnings about unused parameters */

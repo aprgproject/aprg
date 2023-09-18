@@ -141,8 +141,8 @@ quad_golden_iterate (void *vstate, gsl_function * f, double *x_minimum,
   double quad_step_size = prev_stored_step;
   
   double x_trial = NAN;
-  double x_eval;
-  double f_eval;
+  double x_eval = NAN;
+  double f_eval = NAN;
 
   double x_midpoint = 0.5 * (x_l + x_u);
   double tol = REL_ERR_VAL * fabs (x_m) + ABS_ERR_VAL; /* total error tolerance */
@@ -197,8 +197,8 @@ quad_golden_iterate (void *vstate, gsl_function * f, double *x_minimum,
            (x_small != x_prev_small && x_small > x_m && x_prev_small > x_m))
     {
       /* Take safeguarded function comparison step */
-      double outside_interval;
-      double inside_interval;
+      double outside_interval = NAN;
+      double inside_interval = NAN;
 
       if (x_small < x_m)
 	{

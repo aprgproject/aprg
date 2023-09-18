@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
@@ -33,12 +34,12 @@ gsl_diff_backward (const gsl_function * f,
      size to get a very rough estimate of f''.  Use this to estimate
      the step size which will minimize the error in calculating f'. */
 
-  int i;
-  int k;
+  int i = 0;
+  int k = 0;
   double h = GSL_SQRT_DBL_EPSILON;
   double a[3];
   double d[3];
-  double a2;
+  double a2 = NAN;
 
   /* Algorithm based on description on pg. 204 of Conte and de Boor
      (CdB) - coefficients of Newton form of polynomial of degree 2. */
@@ -88,12 +89,12 @@ gsl_diff_forward (const gsl_function * f,
      size to get a very rough estimate of f''.  Use this to estimate
      the step size which will minimize the error in calculating f'. */
 
-  int i;
-  int k;
+  int i = 0;
+  int k = 0;
   double h = GSL_SQRT_DBL_EPSILON;
   double a[3];
   double d[3];
-  double a2;
+  double a2 = NAN;
 
   /* Algorithm based on description on pg. 204 of Conte and de Boor
      (CdB) - coefficients of Newton form of polynomial of degree 2. */
@@ -143,12 +144,12 @@ gsl_diff_central (const gsl_function * f,
      size to get a very rough estimate of f'''.  Use this to estimate
      the step size which will minimize the error in calculating f'. */
 
-  int i;
-  int k;
+  int i = 0;
+  int k = 0;
   double h = GSL_SQRT_DBL_EPSILON;
   double a[4];
   double d[4];
-  double a3;
+  double a3 = NAN;
 
   /* Algorithm based on description on pg. 204 of Conte and de Boor
      (CdB) - coefficients of Newton form of polynomial of degree 3. */

@@ -19,6 +19,7 @@
 
 #include <config.h>
 
+#include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -77,21 +78,21 @@ static int
 hybrid_alloc (void *vstate, size_t n)
 {
   hybrid_state_t *state = (hybrid_state_t *) vstate;
-  gsl_matrix *J;
-  gsl_matrix *q;
-  gsl_matrix *r;
-  gsl_vector *tau;
-  gsl_vector *diag;
-  gsl_vector *qtf;
-  gsl_vector *newton;
-  gsl_vector *gradient;
-  gsl_vector *x_trial;
-  gsl_vector *f_trial;
-  gsl_vector *df;
-  gsl_vector *qtdf;
-  gsl_vector *rdx;
-  gsl_vector *w;
-  gsl_vector *v;
+  gsl_matrix *J = NULL;
+  gsl_matrix *q = NULL;
+  gsl_matrix *r = NULL;
+  gsl_vector *tau = NULL;
+  gsl_vector *diag = NULL;
+  gsl_vector *qtf = NULL;
+  gsl_vector *newton = NULL;
+  gsl_vector *gradient = NULL;
+  gsl_vector *x_trial = NULL;
+  gsl_vector *f_trial = NULL;
+  gsl_vector *df = NULL;
+  gsl_vector *qtdf = NULL;
+  gsl_vector *rdx = NULL;
+  gsl_vector *w = NULL;
+  gsl_vector *v = NULL;
 
   J = gsl_matrix_calloc (n, n);
 
@@ -469,11 +470,11 @@ hybrid_iterate_impl (void *vstate, gsl_multiroot_function * func,
   gsl_vector *w = state->w;
   gsl_vector *v = state->v;
 
-  double prered;
-  double actred;
-  double pnorm;
-  double fnorm1;
-  double fnorm1p;
+  double prered = NAN;
+  double actred = NAN;
+  double pnorm = NAN;
+  double fnorm1 = NAN;
+  double fnorm1p = NAN;
   double ratio = NAN;
   double p1 = 0.1;
   double p5 = 0.5;

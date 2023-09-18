@@ -91,7 +91,7 @@ int gsl_sf_bessel_Jn_e(int n, double x, gsl_sf_result * result)
       result->val *= sign;
       return status;
     }
-    else if(x > 1000.0)
+    if(x > 1000.0)
     {
       /* We need this to avoid feeding large x to CF1; note that
        * due to the above check, we know that n <= 50.

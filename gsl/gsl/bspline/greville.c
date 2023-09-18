@@ -83,8 +83,8 @@ gsl_bspline_knots_greville (const gsl_vector *abscissae,
       gsl_vector_view b;
       gsl_vector_view x;
       gsl_vector_view r;
-      size_t i;
-      size_t j;
+      size_t i = 0;
+      size_t j = 0;
 
       /* Constants derived from the B-spline workspace and abscissae details */
       const size_t km2    = w->k - 2;

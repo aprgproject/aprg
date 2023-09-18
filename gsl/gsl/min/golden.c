@@ -22,6 +22,7 @@
 
 #include <config.h>
 
+#include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -78,8 +79,8 @@ goldensection_iterate (void * vstate, gsl_function * f, double * x_minimum, doub
   const double w_lower = (x_center - x_left);
   const double w_upper = (x_right - x_center);
 
-  double x_new;
-  double f_new;
+  double x_new = NAN;
+  double f_new = NAN;
 
   state = 0 ; /* avoid warning about unused parameters */
   
@@ -99,7 +100,7 @@ goldensection_iterate (void * vstate, gsl_function * f, double * x_minimum, doub
       *f_lower = f_new ;
       return GSL_SUCCESS;
     }
-  else if (x_new > x_center && f_new > f_min)
+  if (x_new > x_center && f_new > f_min)
     {
       *x_upper = x_new ;
       *f_upper = f_new ;

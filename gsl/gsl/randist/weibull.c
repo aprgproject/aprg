@@ -56,9 +56,9 @@ gsl_ran_weibull_pdf (const double x, const double a, const double b)
     {
       return exp(-x/a)/a ;
     }
-  else
-    {
+  
+    
       double p = (b/a) * exp (-pow (x/a, b) + (b - 1) * log (x/a));
       return p;
-    }
+   
 }

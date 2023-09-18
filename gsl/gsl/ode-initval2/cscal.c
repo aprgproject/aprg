@@ -130,21 +130,23 @@ sc_control_hadjust (void *vstate, size_t dim, unsigned int ord,
       double r = S / pow (rmax, 1.0 / (ord + 1.0));
       const double maxscale = 4.9;
 
-      if (r > maxscale)
+      if (r > maxscale) {
         r = maxscale;
+}
 
-      if (r < 1.0)              /* don't allow any decrease caused by S<1 */
+      if (r < 1.0) {              /* don't allow any decrease caused by S<1 */
         r = 1.0;
+}
 
       *h = r * h_old;
 
       return GSL_ODEIV_HADJ_INC;
     }
-  else
-    {
+  
+    
       /* no change */
       return GSL_ODEIV_HADJ_NIL;
-    }
+   
 }
 
 static int

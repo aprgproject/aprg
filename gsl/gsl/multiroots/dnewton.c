@@ -55,8 +55,8 @@ dnewton_alloc (void * vstate, size_t n)
 {
   dnewton_state_t * state = (dnewton_state_t *) vstate;
   gsl_permutation * p = NULL;
-  gsl_matrix * m;
-  gsl_matrix * J;
+  gsl_matrix * m = NULL;
+  gsl_matrix * J = NULL;
 
   m = gsl_matrix_calloc (n,n);
   
@@ -97,7 +97,7 @@ static int
 dnewton_set (void * vstate, gsl_multiroot_function * function, gsl_vector * x, gsl_vector * f, gsl_vector * dx)
 {
   dnewton_state_t * state = (dnewton_state_t *) vstate;
-  size_t i;
+  size_t i = 0;
   size_t n = function->n ;
   int status = 0;
 

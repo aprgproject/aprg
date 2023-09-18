@@ -25,8 +25,8 @@
 double
 gsl_cdf_lognormal_Pinv (const double P, const double zeta, const double sigma)
 {
-  double x;
-  double u;
+  double x = NAN;
+  double u = NAN;
 
   if (P == 1.0)
     {
@@ -47,8 +47,8 @@ gsl_cdf_lognormal_Pinv (const double P, const double zeta, const double sigma)
 double
 gsl_cdf_lognormal_Qinv (const double Q, const double zeta, const double sigma)
 {
-  double x;
-  double u;
+  double x = NAN;
+  double u = NAN;
 
   if (Q == 0.0)
     {

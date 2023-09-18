@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
@@ -64,19 +65,19 @@ int
 gsl_deriv_central (const gsl_function * f, double x, double h,
                    double *result, double *abserr)
 {
-  double r_0;
-  double round;
-  double trunc;
-  double error;
+  double r_0 = NAN;
+  double round = NAN;
+  double trunc = NAN;
+  double error = NAN;
   central_deriv (f, x, h, &r_0, &round, &trunc);
   error = round + trunc;
 
   if (round < trunc && (round > 0 && trunc > 0))
     {
-      double r_opt;
-      double round_opt;
-      double trunc_opt;
-      double error_opt;
+      double r_opt = NAN;
+      double round_opt = NAN;
+      double trunc_opt = NAN;
+      double error_opt = NAN;
 
       /* Compute an optimised stepsize to minimize the total error,
          using the scaling of the truncation error (O(h^2)) and
@@ -144,19 +145,19 @@ int
 gsl_deriv_forward (const gsl_function * f, double x, double h,
                    double *result, double *abserr)
 {
-  double r_0;
-  double round;
-  double trunc;
-  double error;
+  double r_0 = NAN;
+  double round = NAN;
+  double trunc = NAN;
+  double error = NAN;
   forward_deriv (f, x, h, &r_0, &round, &trunc);
   error = round + trunc;
 
   if (round < trunc && (round > 0 && trunc > 0))
     {
-      double r_opt;
-      double round_opt;
-      double trunc_opt;
-      double error_opt;
+      double r_opt = NAN;
+      double round_opt = NAN;
+      double trunc_opt = NAN;
+      double error_opt = NAN;
 
       /* Compute an optimised stepsize to minimize the total error,
          using the scaling of the estimated truncation error (O(h)) and

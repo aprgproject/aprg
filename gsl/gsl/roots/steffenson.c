@@ -34,6 +34,7 @@
 
 #include <config.h>
 
+#include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -84,9 +85,9 @@ steffenson_iterate (void * vstate, gsl_function_fdf * fdf, double * root)
 {
   steffenson_state_t * state = (steffenson_state_t *) vstate;
   
-  double x_new;
-  double f_new;
-  double df_new;
+  double x_new = NAN;
+  double f_new = NAN;
+  double df_new = NAN;
 
   double x_1 = state->x_1 ;
   double x = state->x ;

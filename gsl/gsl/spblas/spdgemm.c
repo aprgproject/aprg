@@ -65,8 +65,8 @@ gsl_spblas_dgemm(const double alpha, const gsl_spmatrix *A,
       double *Bd = B->data;
       int *w = A->work.work_int;      /* workspace of length M */
       double *x = C->work.work_atomic; /* workspace of length M */
-      int *Cp;
-      int *Ci;
+      int *Cp = NULL;
+      int *Ci = NULL;
       double *Cd = NULL;
       size_t j = 0;
       int p = 0;

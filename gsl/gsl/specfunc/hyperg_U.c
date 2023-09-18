@@ -830,10 +830,10 @@ hyperg_U_small_a_bgt0(const double a, const double b, const double x,
     *ln_multiplier = 0.0;
     return GSL_ERROR_SELECT_2(stat_0, stat_1);
   }
-  else {
+  
     *ln_multiplier = 0.0;
     return hyperg_U_small_ab(a, b, x, result);
-  }
+ 
 }
 
 
@@ -899,7 +899,7 @@ hyperg_U_int_bge1(const int a, const int b, const double x,
                                               result);
     return GSL_ERROR_SELECT_2(stat_e, stat_asymp);
   }
-  else if(SERIES_EVAL_OK(a,b,x) && 1 + a - b > 0) {
+  if(SERIES_EVAL_OK(a,b,x) && 1 + a - b > 0) {
     gsl_sf_result ser;
     const int stat_ser = hyperg_U_series(a, b, x, &ser);
     result->val = ser.val;
@@ -1436,8 +1436,8 @@ hyperg_U_bge1(const double a, const double b, const double x,
          */
         gsl_sf_result r_Uam1;
         gsl_sf_result r_Ua;
-        double lm_0;
-        double lm_1;
+        double lm_0 = NAN;
+        double lm_1 = NAN;
         int stat_0 = hyperg_U_small_a_bgt0(a0-1.0, b, x, &r_Uam1, &lm_0);
         int stat_1 = hyperg_U_small_a_bgt0(a0,     b, x, &r_Ua,   &lm_1);
         double Uam1 = r_Uam1.val;

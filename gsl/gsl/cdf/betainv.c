@@ -50,7 +50,7 @@ bisect (double x, double P, double a, double b, double xtol, double Ptol)
 {
   double x0 = 0;
   double x1 = 1;
-  double Px;
+  double Px = NAN;
 
   while (fabs(x1 - x0) > xtol) {
     Px = gsl_cdf_beta_P (x, a, b);
@@ -72,8 +72,8 @@ bisect (double x, double P, double a, double b, double xtol, double Ptol)
 double
 gsl_cdf_beta_Pinv (const double P, const double a, const double b)
 {
-  double x;
-  double mean;
+  double x = NAN;
+  double mean = NAN;
 
   if (P < 0.0 || P > 1.0)
     {
@@ -137,9 +137,9 @@ gsl_cdf_beta_Pinv (const double P, const double a, const double b)
   x = bisect (x, P, a, b, 0.01, 0.01);
 
   {
-    double lambda;
-    double dP;
-    double phi;
+    double lambda = NAN;
+    double dP = NAN;
+    double phi = NAN;
     unsigned int n = 0;
 
   start:

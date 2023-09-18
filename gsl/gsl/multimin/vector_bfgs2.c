@@ -29,6 +29,7 @@
 #include <config.h>
 #include <gsl/gsl_multimin.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 #include "linear_minimize.c"
 #include "linear_wrapper.c"
@@ -211,7 +212,7 @@ vector_bfgs2_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
 {
   vector_bfgs2_state_t *state = (vector_bfgs2_state_t *) vstate;
   double alpha = 0.0;
-  double alpha1;
+  double alpha1 = NAN;
   gsl_vector *x0 = state->x0;
   gsl_vector *g0 = state->g0;
   gsl_vector *p = state->p;
@@ -219,8 +220,8 @@ vector_bfgs2_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
   double g0norm = state->g0norm;
   double pnorm = state->pnorm;
   double delta_f = state->delta_f;
-  double pg;
-  double dir;
+  double pg = NAN;
+  double dir = NAN;
   int status = 0;
 
   double f0 = *f;
@@ -267,12 +268,12 @@ vector_bfgs2_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
     gsl_vector *dx0 = state->dx0;
     gsl_vector *dg0 = state->dg0;
 
-    double dxg;
-    double dgg;
-    double dxdg;
-    double dgnorm;
-    double A;
-    double B;
+    double dxg = NAN;
+    double dgg = NAN;
+    double dxdg = NAN;
+    double dgnorm = NAN;
+    double A = NAN;
+    double B = NAN;
 
     /* dx0 = x - x0 */
     gsl_vector_memcpy (dx0, x);

@@ -73,9 +73,9 @@ gsl_ran_exppow (const gsl_rng * r, const double a, const double b)
     {
       /* Use laplace distribution for rejection method, from Tadikamalla */
 
-      double x;
-      double h;
-      double u;
+      double x = NAN;
+      double h = NAN;
+      double u = NAN;
 
       double B = pow (1 / b, 1 / b);
 
@@ -89,7 +89,7 @@ gsl_ran_exppow (const gsl_rng * r, const double a, const double b)
 
       return a * x;
     }
-  else if (b == 2)
+  if (b == 2)
     {
       /* Gaussian distribution */
       return gsl_ran_gaussian (r, a / sqrt (2.0));

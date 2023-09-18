@@ -39,8 +39,8 @@ gsl_histogram2d_calloc_range (size_t nx, size_t ny,
                               double *xrange,
                               double *yrange)
 {
-  size_t i;
-  size_t j;
+  size_t i = 0;
+  size_t j = 0;
   gsl_histogram2d *h = NULL;
 
   /* check arguments */

@@ -57,10 +57,10 @@ gsl_monte_miser_integrate (gsl_monte_function * f,
                            gsl_monte_miser_state * state,
                            double *result, double *abserr)
 {
-  size_t n;
-  size_t estimate_calls;
-  size_t calls_l;
-  size_t calls_r;
+  size_t n = 0;
+  size_t estimate_calls = 0;
+  size_t calls_l = 0;
+  size_t calls_r = 0;
   const size_t min_calls = state->min_calls;
   size_t i = 0;
   size_t i_bisect = 0;
@@ -72,14 +72,14 @@ gsl_monte_miser_integrate (gsl_monte_function * f,
   double err_r = 0;
   double res_l = 0;
   double err_l = 0;
-  double xbi_l;
-  double xbi_m;
-  double xbi_r;
-  double s;
+  double xbi_l = NAN;
+  double xbi_m = NAN;
+  double xbi_r = NAN;
+  double s = NAN;
 
   double vol = NAN;
-  double weight_l;
-  double weight_r;
+  double weight_l = NAN;
+  double weight_r = NAN;
 
   double *x = state->x;
   double *xmid = state->xmid;
@@ -610,8 +610,8 @@ estimate_corrmc (gsl_monte_function * f,
                  double *result, double *abserr,
                  const double xmid[], double sigma_l[], double sigma_r[])
 {
-  size_t i;
-  size_t n;
+  size_t i = 0;
+  size_t n = 0;
   
   double *x = state->x;
   double *fsum_l = state->fsum_l;

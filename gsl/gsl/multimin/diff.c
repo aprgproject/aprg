@@ -19,12 +19,13 @@
 
 #include <config.h>
 #include <gsl/gsl_multimin.h>
+#include <math.h>
 
 int
 gsl_multimin_diff (const gsl_multimin_function * f,
                    const gsl_vector * x, gsl_vector * g)
 {
-  size_t i;
+  size_t i = 0;
   size_t n = f->n;
 
   double h = GSL_SQRT_DBL_EPSILON;
@@ -36,8 +37,8 @@ gsl_multimin_diff (const gsl_multimin_function * f,
 
   for (i = 0; i < n; i++)
     {
-      double fl;
-      double fh;
+      double fl = NAN;
+      double fh = NAN;
   
       double xi = gsl_vector_get (x, i);
       double dx = fabs(xi) * h;

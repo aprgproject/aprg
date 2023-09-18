@@ -143,18 +143,19 @@ gsl_sf_bessel_Jnupos_e(const double nu, const double x, gsl_sf_result * result)
        * at mu. Use this together with a Steed method CF2 to
        * determine the actual J_mu, and thus obtain the normalization.
        */
-      double Jmu;
-      double Jmup1_Jmu;
-      double sgn_Jmu;
-      double Jmuprime_Jmu;
-      double P, Q;
+      double Jmu = NAN;
+      double Jmup1_Jmu = NAN;
+      double sgn_Jmu = NAN;
+      double Jmuprime_Jmu = NAN;
+      double P;
+      double Q;
       const int stat_CF2 = gsl_sf_bessel_JY_steed_CF2(mu, x, &P, &Q);
-      double gamma;
+      double gamma = NAN;
  
       double Jnp1 = sgn_Jnu * GSL_SQRT_DBL_MIN * Jnup1_Jnu;
       double Jn   = sgn_Jnu * GSL_SQRT_DBL_MIN;
-      double Jnm1;
-      int n;
+      double Jnm1 = NAN;
+      int n = 0;
       for(n=N; n>0; n--) {
         Jnm1 = 2.0*(mu+n)/x * Jn - Jnp1;
         Jnp1 = Jn;

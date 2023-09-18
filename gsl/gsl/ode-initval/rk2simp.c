@@ -178,8 +178,8 @@ rk2simp_step (double *y, rk2simp_state_t * state,
   double *ytmp = state->ytmp;
 
   size_t i = 0;
-  int s;
-  int ps;
+  int s = 0;
+  int ps = 0;
 
   gsl_matrix_view J = gsl_matrix_view_array (state->dfdy, dim, dim);
 

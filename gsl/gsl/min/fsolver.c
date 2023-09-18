@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <gsl/gsl_errno.h>
@@ -50,9 +51,9 @@ gsl_min_fminimizer_set (gsl_min_fminimizer * s,
 {
   int status = 0 ;
 
-  double f_minimum;
-  double f_lower;
-  double f_upper;
+  double f_minimum = NAN;
+  double f_lower = NAN;
+  double f_upper = NAN;
 
   status = compute_f_values (f, x_minimum, &f_minimum, 
                              x_lower, &f_lower,  

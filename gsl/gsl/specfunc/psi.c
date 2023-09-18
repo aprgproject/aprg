@@ -29,6 +29,7 @@
 #include <gsl/gsl_sf_psi.h>
 #include <gsl/gsl_complex_math.h>
 
+#include <math.h>
 #include <stdio.h>
 
 #include "error.h"
@@ -678,9 +679,9 @@ gsl_sf_psi_1piy_e(const double y, gsl_sf_result * result)
     const double c6 = 2.9516743763500191289e-15;
     const double p  = c0 + y2 *(-c2 + y2*(c4 - y2*c6));
     double sum = 0.0;
-    double v;
+    double v = NAN;
     
-    int n;
+    int n = 0;
     for(n=1; n<=M; n++) {
       sum += 1.0/(n * (n*n + y*y));
     }

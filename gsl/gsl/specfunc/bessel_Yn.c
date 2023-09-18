@@ -154,8 +154,8 @@ gsl_sf_bessel_Yn_e(int n, const double x, gsl_sf_result * result)
       int stat_0 = gsl_sf_bessel_Y0_e(x, &r_bym);
       double bym = r_bym.val;
       double by  = r_by.val;
-      double byp;
-      int j;
+      double byp = NAN;
+      int j = 0;
 
       for(j=1; j<n; j++) { 
         byp = j*two_over_x*by - bym;

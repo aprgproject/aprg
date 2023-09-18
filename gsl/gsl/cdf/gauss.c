@@ -243,7 +243,7 @@ gsl_cdf_ugaussian_P (const double x)
       result = 0.5 + gauss_small (x);
       return result;
     }
-  else if (absx < SQRT32)
+  if (absx < SQRT32)
     {
       result = gauss_medium (x);
 
@@ -303,7 +303,7 @@ gsl_cdf_ugaussian_Q (const double x)
 
       return result;
     }
-  else if (absx < SQRT32)
+  if (absx < SQRT32)
     {
       result = gauss_medium (x);
 

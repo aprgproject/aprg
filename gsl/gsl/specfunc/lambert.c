@@ -140,7 +140,7 @@ gsl_sf_lambert_W0_e(double x, gsl_sf_result * result)
     result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return GSL_SUCCESS;
   }
-  else {
+  
     static const unsigned int MAX_ITERS = 10;
     double w;
 
@@ -159,7 +159,7 @@ gsl_sf_lambert_W0_e(double x, gsl_sf_result * result)
     }
 
     return halley_iteration(x, w, MAX_ITERS, result);
-  }
+ 
 }
 
 

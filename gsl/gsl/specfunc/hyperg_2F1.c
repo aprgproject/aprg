@@ -759,7 +759,7 @@ gsl_sf_hyperg_2F1_e(double a, double b, const double c,
      
    
   }
-  else {
+  
     /* Either a or b or both large.
      * Introduce some new variables ap,bp so that bp is
      * the larger in magnitude.
@@ -800,7 +800,7 @@ gsl_sf_hyperg_2F1_e(double a, double b, const double c,
     result->val = 0.0;
     result->err = 0.0;
     GSL_ERROR ("error", GSL_EUNIMPL);
-  }
+ 
 }
 
 

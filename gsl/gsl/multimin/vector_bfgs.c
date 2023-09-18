@@ -24,6 +24,7 @@
 #include <config.h>
 #include <gsl/gsl_multimin.h>
 #include <gsl/gsl_blas.h>
+#include <math.h>
 
 #include "directional_minimize.c"
 
@@ -209,11 +210,11 @@ vector_bfgs_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
   double g0norm = state->g0norm;
 
   double fa = *f;
-  double fb;
-  double fc;
+  double fb = NAN;
+  double fc = NAN;
   double dir = NAN;
   double stepa = 0.0;
-  double stepb;
+  double stepb = NAN;
   double stepc = state->step;
   double tol = state->tol;
 
@@ -292,12 +293,12 @@ vector_bfgs_iterate (void *vstate, gsl_multimin_function_fdf * fdf,
       gsl_vector *dx0 = state->dx0;
       gsl_vector *dg0 = state->dg0;
 
-      double dxg;
-      double dgg;
-      double dxdg;
-      double dgnorm;
-      double A;
-      double B;
+      double dxg = NAN;
+      double dgg = NAN;
+      double dxdg = NAN;
+      double dgnorm = NAN;
+      double A = NAN;
+      double B = NAN;
 
       /* dx0 = x - x0 */
       gsl_vector_memcpy (dx0, x);

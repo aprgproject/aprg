@@ -62,16 +62,16 @@ gsl_spblas_dgemv(const CBLAS_TRANSPOSE_t TransA, const double alpha,
   else
     {
       size_t j = 0;
-      size_t incX;
-      size_t incY;
-      size_t lenX;
-      size_t lenY;
-      double *X;
-      double *Y;
+      size_t incX = 0;
+      size_t incY = 0;
+      size_t lenX = 0;
+      size_t lenY = 0;
+      double *X = NULL;
+      double *Y = NULL;
       double *Ad = NULL;
-      int *Ap;
-      int *Ai;
-      int *Aj;
+      int *Ap = NULL;
+      int *Ai = NULL;
+      int *Aj = NULL;
       int p = 0;
 
       if (TransA == CblasNoTrans)

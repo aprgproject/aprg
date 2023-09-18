@@ -21,6 +21,7 @@
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_min.h>
+#include <math.h>
 
 int
 gsl_min_test_interval (double x_lower, double x_upper, double epsabs, double epsrel)
@@ -31,8 +32,8 @@ gsl_min_test_interval (double x_lower, double x_upper, double epsabs, double eps
   const double abs_lower = fabs(lower) ;
   const double abs_upper = fabs(upper) ;
 
-  double min_abs;
-  double tolerance;
+  double min_abs = NAN;
+  double tolerance = NAN;
 
   if (epsrel < 0.0) {
     GSL_ERROR ("relative tolerance is negative", GSL_EBADTOL);

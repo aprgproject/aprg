@@ -89,9 +89,9 @@ obtain_suggestion(const gsl_matrix * A, gsl_mode_t mode)
   } if(norm_A < 1.0) { return mvl_tab[mode_prec][2];
   } if(norm_A < 10.0) { return mvl_tab[mode_prec][3];
   } if(norm_A < 100.0) { return mvl_tab[mode_prec][4];
-  } if(norm_A < 1000.0) return mvl_tab[mode_prec][5];
-  else
-  {
+  } if(norm_A < 1000.0) { return mvl_tab[mode_prec][5];
+  } 
+  
     /* outside the table we simply increase the number
      * of squarings, bringing the reduced matrix into
      * the range of the table; this is obviously suboptimal,
@@ -103,7 +103,7 @@ obtain_suggestion(const gsl_matrix * A, gsl_mode_t mode)
     mvl_suggestion_t s = mvl_tab[mode][5];
     s.j += extra_i;
     return s;
-  }
+ 
 }
 
 

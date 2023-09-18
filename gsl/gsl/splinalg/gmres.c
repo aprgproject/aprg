@@ -230,8 +230,8 @@ gmres_iterate(const gsl_spmatrix *A, const gsl_vector *b,
       const double normb = gsl_blas_dnrm2(b); /* ||b|| */
       const double reltol = tol * normb;      /* tol*||b|| */
       double normr = NAN;                           /* ||r|| */
-      size_t m;
-      size_t k;
+      size_t m = 0;
+      size_t k = 0;
       double tau = NAN;                             /* householder scalar */
       gsl_matrix *H = state->H;               /* Hessenberg matrix */
       gsl_vector *r = state->r;               /* residual vector */
@@ -272,8 +272,8 @@ gmres_iterate(const gsl_spmatrix *A, const gsl_vector *b,
       for (m = 1; m <= maxit; ++m)
         {
           size_t j = m - 1; /* C indexing */
-          double c;
-          double s;      /* Givens rotation */
+          double c = NAN;
+          double s = NAN;      /* Givens rotation */
 
           /* v_m */
           gsl_vector_view vm = gsl_matrix_column(H, m);

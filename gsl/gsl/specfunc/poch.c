@@ -334,13 +334,13 @@ gsl_sf_lnpoch_sgn_e(const double a, const double x,
       double s = (fmod(-a, 2) == 0) ? 1 : -1;
       *sgn *= s;
       return stat;
-    } else {
+    } 
       /* Handle finite numerator, Gamma(a+x) for a+x != 0 or neg int */
       result->val = GSL_NEGINF;
       result->err = 0.0;
       *sgn = 1;
       return GSL_SUCCESS;
-    }
+   
   } else if(a < 0.0 && a+x < 0.0) {
     /* Reduce to positive case using reflection.
      */
@@ -367,8 +367,8 @@ gsl_sf_lnpoch_sgn_e(const double a, const double x,
      */
     gsl_sf_result lg_apn;
     gsl_sf_result lg_a;
-    double s_apn;
-    double s_a;
+    double s_apn = NAN;
+    double s_a = NAN;
     int stat_apn = gsl_sf_lngamma_sgn_e(a+x, &lg_apn, &s_apn);
     int stat_a   = gsl_sf_lngamma_sgn_e(a,   &lg_a,   &s_a);
     if(stat_apn == GSL_SUCCESS && stat_a == GSL_SUCCESS) {
