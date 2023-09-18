@@ -66,8 +66,7 @@ double func(const size_t n, double x[], void *params) {
     return gsl_stats_trmean_from_sorted_data(alpha, x, 1, n);
 }
 
-double val_func(void *ntuple_data, void *params) {
-    (void)(params); /* avoid unused parameter warning */
+double val_func(void *ntuple_data, void *) {
     auto *data = static_cast<struct data *>(ntuple_data);
     double x = NAN;
     double y = NAN;
@@ -1040,7 +1039,7 @@ TEST(GslTest, TwoDimensionalHistogramWorks) {
         int i = 0;
         gsl_histogram2d_pdf *p = gsl_histogram2d_pdf_alloc(h->nx, h->ny);
         gsl_histogram2d_pdf_init(p, h);
-        for (i = 0; i < 1000; i++) {
+        for (i = 0; i < 1000; ++i) {
             double x = NAN;
             double y = NAN;
             double const u = gsl_rng_uniform(r);
