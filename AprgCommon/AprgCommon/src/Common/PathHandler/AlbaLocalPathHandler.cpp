@@ -204,24 +204,36 @@ bool AlbaLocalPathHandler::copyDirectoryToAndIsSuccessful(LocalPath const& desti
 
 void AlbaLocalPathHandler::findFilesAndDirectoriesOneDepth(
     PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
-    // NOLINTNEXTLINE(readability-suspicious-call-argument)
-    findFilesAndDirectories(m_path, 1, directoryFunction, fileFunction);
+    try {
+        // NOLINTNEXTLINE(readability-suspicious-call-argument)
+        findFilesAndDirectories(m_path, 1, directoryFunction, fileFunction);
+    } catch (exception const& capturedException) {
+        cerr << "Error while finding files and directories: [" << capturedException.what() << "]\n";
+    }
 }
 
 void AlbaLocalPathHandler::findFilesAndDirectoriesMultipleDepth(
     int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
-    // NOLINTNEXTLINE(readability-suspicious-call-argument)
-    findFilesAndDirectories(m_path, depth, directoryFunction, fileFunction);
+    try {
+        // NOLINTNEXTLINE(readability-suspicious-call-argument)
+        findFilesAndDirectories(m_path, depth, directoryFunction, fileFunction);
+    } catch (exception const& capturedException) {
+        cerr << "Error while finding files and directories: [" << capturedException.what() << "]\n";
+    }
 }
 
 void AlbaLocalPathHandler::findFilesAndDirectoriesUnlimitedDepth(
     PathFunction const& directoryFunction, PathFunction const& fileFunction) const {
-    for (directory_entry const& directoryEntry : recursive_directory_iterator(m_path)) {
-        if (directoryEntry.is_directory()) {
-            directoryFunction(directoryEntry.path() / "");
-        } else {
-            fileFunction(directoryEntry.path());
+    try {
+        for (directory_entry const& directoryEntry : recursive_directory_iterator(m_path)) {
+            if (directoryEntry.is_directory()) {
+                directoryFunction(directoryEntry.path() / "");
+            } else {
+                fileFunction(directoryEntry.path());
+            }
         }
+    } catch (exception const& capturedException) {
+        cerr << "Error while finding files and directories: [" << capturedException.what() << "]\n";
     }
 }
 
