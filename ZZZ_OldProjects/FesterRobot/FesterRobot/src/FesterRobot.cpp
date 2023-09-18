@@ -12,6 +12,7 @@
 #define MATLAB_TITLE_BAR_COORDINATES 375, 14
 #define ORIGIN 0, 0
 
+using namespace alba::AlbaLocalUserAutomation;
 using namespace std;
 
 namespace alba {
