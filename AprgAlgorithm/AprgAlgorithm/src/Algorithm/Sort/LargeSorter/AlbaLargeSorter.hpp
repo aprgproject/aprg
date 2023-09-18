@@ -144,7 +144,7 @@ private:
 
     void deleteTempFilesAndDirectories() {
         AlbaLocalPathHandler temporaryLocalDirectory(m_configuration.m_directoryForBlocks);
-        if (temporaryLocalDirectory.isFoundInLocalSystem()) {
+        if (temporaryLocalDirectory.doesExist()) {
             temporaryLocalDirectory.deleteInnerFilesAndDirectories();
         }
     }

@@ -16,7 +16,7 @@ TEST(UtilitiesTest, RetrieveDeltasWorks) {
     AlbaLocalPathHandler const audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
     AlbaLocalPathHandler const audioFilePathHandler(
         audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");
-    AudioManipulator const audioManipulator(audioFilePathHandler.getFullPath());
+    AudioManipulator const audioManipulator(audioFilePathHandler.getPath());
 
     AudioInDouble const& audio(audioManipulator.getAudio());
     Samples deltaSamplesInChannel0;
@@ -30,8 +30,8 @@ TEST(UtilitiesTest, DISABLED_SearchForBestSampleIndexesWorksWithReplacingSamples
         audioDirectoryPathHandler.getDirectory() + "John Mayer-Neon.wav");
     AlbaLocalPathHandler const audioToSearchFilePathHandler(
         audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");  // AChannel_AOpeningSong_001
-    AudioManipulator audioToReplicateManipulator(audioToReplicateFilePathHandler.getFullPath());
-    AudioManipulator const audioToSearchManipulator(audioToSearchFilePathHandler.getFullPath());
+    AudioManipulator audioToReplicateManipulator(audioToReplicateFilePathHandler.getPath());
+    AudioManipulator const audioToSearchManipulator(audioToSearchFilePathHandler.getPath());
 
     AudioInDouble const& audioToReplicate(audioToReplicateManipulator.getAudio());
     AudioInDouble const& audioToSearch(audioToSearchManipulator.getAudio());
@@ -58,9 +58,9 @@ TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateSamplesWorks) {
         audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");
     AlbaLocalPathHandler const audioToChangeFilePathHandler(
         audioDirectoryPathHandler.getDirectory() + "John Mayer-Neon.wav");
-    AudioManipulator const audioToReplicateManipulator(audioToReplicateFilePathHandler.getFullPath());
-    AudioManipulator const audioToSearchManipulator(audioToSearchFilePathHandler.getFullPath());
-    AudioManipulator audioToChangeManipulator(audioToChangeFilePathHandler.getFullPath());
+    AudioManipulator const audioToReplicateManipulator(audioToReplicateFilePathHandler.getPath());
+    AudioManipulator const audioToSearchManipulator(audioToSearchFilePathHandler.getPath());
+    AudioManipulator audioToChangeManipulator(audioToChangeFilePathHandler.getPath());
     AudioInDouble const& audioToReplicate(audioToReplicateManipulator.getAudio());
     AudioInDouble const& audioToSearch(audioToSearchManipulator.getAudio());
     AudioInDouble& audioToChange(audioToChangeManipulator.getAudioReference());
@@ -85,8 +85,8 @@ TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateWorks) {
         audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");
     AlbaLocalPathHandler const audioToChangeFilePathHandler(audioDirectoryPathHandler.getDirectory() + "output.wav");
     searchAndTryToReplicate(
-        audioToChangeFilePathHandler.getFullPath(), audioToReplicateFilePathHandler.getFullPath(),
-        audioToSearchFilePathHandler.getFullPath(), true);
+        audioToChangeFilePathHandler.getPath(), audioToReplicateFilePathHandler.getPath(),
+        audioToSearchFilePathHandler.getPath(), true);
 }
 
 TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateTwoFilesWorks) {
@@ -100,11 +100,11 @@ TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateTwoFilesWorks) {
     AlbaLocalPathHandler const audioToChangeFilePathHandler(audioDirectoryPathHandler.getDirectory() + "output.wav");
 
     searchAndTryToReplicate(
-        audioToChangeFilePathHandler.getFullPath(), audioToReplicateFilePathHandler.getFullPath(),
-        audioToSearch1FilePathHandler.getFullPath(), true);
+        audioToChangeFilePathHandler.getPath(), audioToReplicateFilePathHandler.getPath(),
+        audioToSearch1FilePathHandler.getPath(), true);
     searchAndTryToReplicate(
-        audioToChangeFilePathHandler.getFullPath(), audioToReplicateFilePathHandler.getFullPath(),
-        audioToSearch2FilePathHandler.getFullPath(), false);
+        audioToChangeFilePathHandler.getPath(), audioToReplicateFilePathHandler.getPath(),
+        audioToSearch2FilePathHandler.getPath(), false);
 }
 
 }  // namespace alba::AprgAudio

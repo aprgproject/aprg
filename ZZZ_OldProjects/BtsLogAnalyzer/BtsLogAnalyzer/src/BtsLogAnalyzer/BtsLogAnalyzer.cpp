@@ -34,7 +34,7 @@ void BtsLogAnalyzer::processDirectoryForWireSharkDelay(string const& directoryPa
     set<string> listOfDirectories;
     AlbaLocalPathHandler(directoryPath).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
     for (string const& filePath : listOfFiles) {
-        processFileForWireSharkDelay(AlbaLocalPathHandler(filePath).getFullPath());
+        processFileForWireSharkDelay(AlbaLocalPathHandler(filePath).getPath());
     }
 }
 
@@ -90,7 +90,7 @@ void BtsLogAnalyzer::processFileForWireSharkDelay(string const& filePath) {
 
 void BtsLogAnalyzer::processFileForMsgQueuingTime(string const& filePath) {
     AlbaLocalPathHandler const filePathHandler(filePath);
-    cout << "processFile: " << filePathHandler.getFullPath() << "\n";
+    cout << "processFile: " << filePathHandler.getPath() << "\n";
 
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
@@ -119,7 +119,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForRlh(string const& filePath) {
     AlbaLocalPathHandler const filePathHandler(filePath);
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
-    cout << "processFile: " << filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open()
+    cout << "processFile: " << filePathHandler.getPath() << " isOpen: " << inputLogFileStream.is_open()
          << " fileReader: " << fileReader.isNotFinished() << "\n";
 
     m_outputStream << "crnccId,nbccId,transactionId,delay"
@@ -174,7 +174,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForRlh(string const& filePath) {
 
 void BtsLogAnalyzer::processFileForBtsDelayForRlDeletion(string const& filePath) {
     AlbaLocalPathHandler const filePathHandler(filePath);
-    cout << "processFile: " << filePathHandler.getFullPath() << "\n";
+    cout << "processFile: " << filePathHandler.getPath() << "\n";
 
     m_outputStream << "crnccId,nbccId,transactionId,delay"
                    << "\n";
@@ -230,7 +230,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForRlDeletion(string const& filePath)
 
 void BtsLogAnalyzer::processFileForBtsDelayForGrm(string const& filePath) {
     AlbaLocalPathHandler const filePathHandler(filePath);
-    cout << "processFile: " << filePathHandler.getFullPath() << "\n";
+    cout << "processFile: " << filePathHandler.getPath() << "\n";
 
     m_outputStream << "crnccId,nbccId,transactionId,delay"
                    << "\n";
@@ -291,7 +291,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForGrm(string const& filePath) {
 
 void BtsLogAnalyzer::processFileForToCountUsersWithTracing(string const& filePath) {
     AlbaLocalPathHandler const filePathHandler(filePath);
-    cout << "processFile: " << filePathHandler.getFullPath() << "\n";
+    cout << "processFile: " << filePathHandler.getPath() << "\n";
 
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
@@ -318,7 +318,7 @@ void BtsLogAnalyzer::processFileForToCountUsersWithTracing(string const& filePat
 
 void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePath) {
     AlbaLocalPathHandler const filePathHandler(filePath);
-    cout << "processFile: " << filePathHandler.getFullPath() << "\n";
+    cout << "processFile: " << filePathHandler.getPath() << "\n";
 
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);

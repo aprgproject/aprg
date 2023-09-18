@@ -98,7 +98,7 @@ void CPlusPlusFileFixer::processDirectory(string const& path) {
         AlbaLocalPathHandler const filePathHandler(filePath);
         if (!isPathIgnored(filePath)) {
             if ("cpp" == filePathHandler.getExtension() || "hpp" == filePathHandler.getExtension()) {
-                processFile(filePathHandler.getFullPath());
+                processFile(filePathHandler.getPath());
             }
         }
     }
@@ -202,7 +202,7 @@ void CPlusPlusFileFixer::checkFile(string const& path) {
 
 void CPlusPlusFileFixer::readContentsFromFile(string const& path) {
     AlbaLocalPathHandler const filePathHandler(path);
-    ifstream inputLogFileStream(filePathHandler.getFullPath());
+    ifstream inputLogFileStream(filePathHandler.getPath());
     AlbaFileReader fileReader(inputLogFileStream);
     bool isOnHeaderPart(true);
     while (fileReader.isNotFinished()) {
@@ -230,7 +230,7 @@ void CPlusPlusFileFixer::readLineWithSharpInclude(string const& line, string con
         AlbaLocalPathHandler const filePathHandler(path);
         AlbaPathHandler const headerFromAngleBracketsPathHandler(headerFromAngleBrackets, "/");
         if (headerFromAngleBracketsPathHandler.getFilenameOnly() == filePathHandler.getFilenameOnly() &&
-            isStringFoundCaseSensitive(filePathHandler.getFullPath(), headerFromAngleBrackets)) {
+            isStringFoundCaseSensitive(filePathHandler.getPath(), headerFromAngleBrackets)) {
             addHeaderFileFromQuotations(filePathHandler.getFile());
 
         } else {
@@ -326,17 +326,17 @@ void CPlusPlusFileFixer::fixSmallUToCapitalUInNumbers() {
 
 void CPlusPlusFileFixer::addHeaderFileFromAngleBrackets(string const& header) {
     AlbaPathHandler const headerPathHandler(header, "/");
-    m_headerListFromAngleBrackets.emplace_back(headerPathHandler.getFullPath());
+    m_headerListFromAngleBrackets.emplace_back(headerPathHandler.getPath());
 }
 
 void CPlusPlusFileFixer::addHeaderFileFromQuotations(string const& header) {
     AlbaPathHandler const headerPathHandler(header, "/");
-    m_headerListFromQuotations.emplace(headerPathHandler.getFullPath());
+    m_headerListFromQuotations.emplace(headerPathHandler.getPath());
 }
 
 void CPlusPlusFileFixer::writeFile(string const& path) {
     AlbaLocalPathHandler const filePathHandler(path);
-    ofstream outputLogFileStream(filePathHandler.getFullPath());
+    ofstream outputLogFileStream(filePathHandler.getPath());
     if (m_isPragmaOnceFound) {
         outputLogFileStream << "#pragma once\n";
         outputLogFileStream << "\n";

@@ -73,7 +73,7 @@ void AlbaWebPathHandler::splitPathToBeforeAndAfterProtocol(
 
 void AlbaWebPathHandler::setUrlParameters(string_view const urlParameters) { m_urlParameters = urlParameters; }
 
-string AlbaWebPathHandler::getFullPath() const {
+string AlbaWebPathHandler::getPath() const {
     return m_protocolWithSymbols + m_directory + m_file + m_urlParameters;
 }
 

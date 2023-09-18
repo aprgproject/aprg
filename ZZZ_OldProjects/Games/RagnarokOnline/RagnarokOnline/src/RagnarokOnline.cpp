@@ -281,7 +281,7 @@ void RagnarokOnline::retrieveItemDataFromRmsWebpages(string const& directoryPath
 
 void RagnarokOnline::retrieveItemDataFromRmsWebPage(string const& filePathOfWebPage) {
     AlbaLocalPathHandler const filePathHandler(filePathOfWebPage);
-    ifstream fileStream(filePathHandler.getFullPath());
+    ifstream fileStream(filePathHandler.getPath());
     AlbaFileReader fileReader(fileStream);
     fileReader.setMaxBufferSize(100000);
     bool isContextBoxEncountered(false);
@@ -433,7 +433,7 @@ void RagnarokOnline::retrieveMonsterDataFromRmsWebpages(string const& directoryP
 
 void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfWebPage) {
     AlbaLocalPathHandler const filePathHandler(filePathOfWebPage);
-    ifstream fileStream(filePathHandler.getFullPath());
+    ifstream fileStream(filePathHandler.getPath());
     AlbaFileReader fileReader(fileStream);
     fileReader.setMaxBufferSize(100000);
     bool isContextBoxEncountered(false);
@@ -614,7 +614,7 @@ void RagnarokOnline::retrieveMapDataFromRmsWebpages(string const& directoryPathO
 
 void RagnarokOnline::retrieveMapDataFromRmsWebPage(string const& filePathOfWebPage) {
     AlbaLocalPathHandler const filePathHandler(filePathOfWebPage);
-    ifstream fileStream(filePathHandler.getFullPath());
+    ifstream fileStream(filePathHandler.getPath());
     AlbaFileReader fileReader(fileStream);
     fileReader.setMaxBufferSize(100000);
     bool isContextBoxEncountered(false);
@@ -698,7 +698,7 @@ void RagnarokOnline::retrieveSellingShopDataFromTalonRoWebpages(string const& di
 
 void RagnarokOnline::retrieveShopDataFromTalonRoWebPage(string const& filePathOfWebPage, ShopType const shopType) {
     AlbaLocalPathHandler const filePathHandler(filePathOfWebPage);
-    ifstream fileStream(filePathHandler.getFullPath());
+    ifstream fileStream(filePathHandler.getPath());
     AlbaFileReader fileReader(fileStream);
     fileReader.setMaxBufferSize(100000);
     while (fileReader.isNotFinished()) {

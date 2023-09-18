@@ -23,8 +23,8 @@ TEST(AnimeFilterTest, DISABLED_AnimizeMultipleFilesTest) {
         AlbaLocalPathHandler const outputFilePathHandler(
             bitmapDirectory.getDirectory() + R"(AnimizeMultipleFilesTest\output2\Out_)" +
             inputFilePathHandler.getFile());
-        animize(inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
-        cout << "Finished: " << outputFilePathHandler.getFullPath() << "\n";
+        animize(inputFilePathHandler.getPath(), outputFilePathHandler.getPath());
+        cout << "Finished: " << outputFilePathHandler.getPath() << "\n";
     }
 }
 
@@ -34,7 +34,7 @@ TEST(AnimeFilterTest, DISABLED_AnimizeSingleFileTest) {
         bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\GilmoreGirls.bmp)");
     AlbaLocalPathHandler const outputFilePathHandler(
         bitmapDirectory.getDirectory() + R"(NonAnimeBitmaps\GilmoreGirls_Animized.bmp)");
-    animize(inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
+    animize(inputFilePathHandler.getPath(), outputFilePathHandler.getPath());
 }
 
 }  // namespace alba::AprgBitmap

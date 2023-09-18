@@ -29,15 +29,15 @@ extern int numberOfFilesAnalyzedForExtraction;
 
 AprgFileExtractor::AprgFileExtractor(string const& condition)
     : m_grepEvaluator(condition),
-      m_pathOf7zExecutable(AlbaLocalPathHandler(PATH_OF_7Z_EXECUTABLE).getFullPath()),
-      m_pathOf7zTempFile(AlbaLocalPathHandler(PATH_OF_7Z_TEMP_FILE).getFullPath()),
-      m_nullDevice(AlbaLocalPathHandler(NULL_DEVICE).getFullPath()) {}
+      m_pathOf7zExecutable(AlbaLocalPathHandler(PATH_OF_7Z_EXECUTABLE).getPath()),
+      m_pathOf7zTempFile(AlbaLocalPathHandler(PATH_OF_7Z_TEMP_FILE).getPath()),
+      m_nullDevice(AlbaLocalPathHandler(NULL_DEVICE).getPath()) {}
 
 AprgFileExtractor::AprgFileExtractor()
     : m_grepEvaluator(""),
-      m_pathOf7zExecutable(AlbaLocalPathHandler(PATH_OF_7Z_EXECUTABLE).getFullPath()),
-      m_pathOf7zTempFile(AlbaLocalPathHandler(PATH_OF_7Z_TEMP_FILE).getFullPath()),
-      m_nullDevice(AlbaLocalPathHandler(NULL_DEVICE).getFullPath()) {}
+      m_pathOf7zExecutable(AlbaLocalPathHandler(PATH_OF_7Z_EXECUTABLE).getPath()),
+      m_pathOf7zTempFile(AlbaLocalPathHandler(PATH_OF_7Z_TEMP_FILE).getPath()),
+      m_nullDevice(AlbaLocalPathHandler(NULL_DEVICE).getPath()) {}
 
 AprgFileExtractor::AprgFileExtractor(
     string const& condition, string const& pathOf7zExecutable, string const& pathOf7zTempFile)
@@ -46,7 +46,7 @@ AprgFileExtractor::AprgFileExtractor(
 void AprgFileExtractor::copyRelativeFilePathsFromCompressedFile(
     string const& filePathOfCompressedFile, SetOfFilePaths& files) const {
     AlbaLocalPathHandler const filePathHandler(filePathOfCompressedFile);
-    string const command = string(R"(")") + m_pathOf7zExecutable + R"(" l -slt ")" + filePathHandler.getFullPath() +
+    string const command = string(R"(")") + m_pathOf7zExecutable + R"(" l -slt ")" + filePathHandler.getPath() +
                            R"(" > ")" + m_pathOf7zTempFile + R"(")";
     runInConsole(command);
 
@@ -72,11 +72,11 @@ string AprgFileExtractor::extractOnceForAllFiles(string const& filePathOfCompres
     AlbaLocalPathHandler const outputPathHandler(
         compressedFilePathHandler.getDirectory() + R"(\)" + compressedFilePathHandler.getFilenameOnly() + R"(\)");
     string const command = string(R"(")") + m_pathOf7zExecutable + R"(" e -y -o")" + outputPathHandler.getDirectory() +
-                           R"(" ")" + compressedFilePathHandler.getFullPath() + R"(" > )" + m_nullDevice;
+                           R"(" ")" + compressedFilePathHandler.getPath() + R"(" > )" + m_nullDevice;
     runInConsole(command);
     cout << "extractAll: " << outputPathHandler.getImmediateDirectoryName() << R"(\)"
          << "\n";
-    return outputPathHandler.getFullPath();
+    return outputPathHandler.getPath();
 }
 
 string AprgFileExtractor::extractOneFile(
@@ -86,22 +86,22 @@ string AprgFileExtractor::extractOneFile(
         compressedFilePathHandler.getDirectory() + R"(\)" + compressedFilePathHandler.getFilenameOnly() + R"(\)" +
         relativePathOfFile);
     string const command = string(R"(")") + m_pathOf7zExecutable + R"(" e -y -o")" + outputPathHandler.getDirectory() +
-                           R"(" ")" + compressedFilePathHandler.getFullPath() + R"(" ")" + relativePathOfFile +
+                           R"(" ")" + compressedFilePathHandler.getPath() + R"(" ")" + relativePathOfFile +
                            R"(" > )" + m_nullDevice;
     runInConsole(command);
     cout << "extractOneFile: " << outputPathHandler.getFile() << "\n";
-    return outputPathHandler.getFullPath();
+    return outputPathHandler.getPath();
 }
 
 void AprgFileExtractor::extractAllRelevantFiles(string const& pathOfFileOrDirectory) {
     AlbaLocalPathHandler const fileOrDirectoryPathHandler(pathOfFileOrDirectory);
-    if (!fileOrDirectoryPathHandler.isFoundInLocalSystem()) {
+    if (!fileOrDirectoryPathHandler.doesExist()) {
         cout << "extractAllRelevantFiles: File or directory not found in local system.\n";
     }
     if (fileOrDirectoryPathHandler.isDirectory()) {
-        extractAllRelevantFilesInThisDirectory(fileOrDirectoryPathHandler.getFullPath());
+        extractAllRelevantFilesInThisDirectory(fileOrDirectoryPathHandler.getPath());
     } else {
-        extractAllRelevantFilesInThisCompressedFile(fileOrDirectoryPathHandler.getFullPath());
+        extractAllRelevantFilesInThisCompressedFile(fileOrDirectoryPathHandler.getPath());
     }
 }
 
@@ -122,7 +122,7 @@ void AprgFileExtractor::extractAllRelevantFilesInThisDirectory(string const& dir
     for (string const& filePath : listOfFiles) {
         AlbaLocalPathHandler const extractedPathHandler(filePath);
         if (isRecognizedCompressedFile(extractedPathHandler.getExtension())) {
-            extractAllRelevantFilesInThisCompressedFile(extractedPathHandler.getFullPath());
+            extractAllRelevantFilesInThisCompressedFile(extractedPathHandler.getPath());
         }
         ProgressCounters::numberOfFilesAnalyzedForExtraction++;
     }
@@ -141,7 +141,7 @@ void AprgFileExtractor::extractAllRelevantFilesInThisCompressedFile(string const
 
 void AprgFileExtractor::extractAllFilesRecursively(string const& filePathOfCompressedFile) {
     AlbaLocalPathHandler const extractedPathHandler(extractOnceForAllFiles(filePathOfCompressedFile));
-    extractAllRelevantFilesInThisDirectory(extractedPathHandler.getFullPath());
+    extractAllRelevantFilesInThisDirectory(extractedPathHandler.getPath());
 }
 
 void AprgFileExtractor::extractAllRelevantFilesRecursively(string const& filePathOfCompressedFile) {
@@ -153,7 +153,7 @@ void AprgFileExtractor::extractAllRelevantFilesRecursively(string const& filePat
         if (m_grepEvaluator.evaluate(filePathHandler.getFile())) {
             AlbaLocalPathHandler extractedPathHandler(extractOneFile(filePathOfCompressedFile, filePath));
             if (isRecognizedCompressedFile(extractedPathHandler.getExtension())) {
-                extractAllRelevantFilesInThisCompressedFile(extractedPathHandler.getFullPath());
+                extractAllRelevantFilesInThisCompressedFile(extractedPathHandler.getPath());
                 extractedPathHandler.deleteFile();
             }
         }

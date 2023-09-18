@@ -13,7 +13,7 @@ namespace alba::CodeUtilities {
 
 void CPlusPlusFixer::processPath(string const& path) {
     AlbaLocalPathHandler const pathHandler(path);
-    if (pathHandler.isFoundInLocalSystem()) {
+    if (pathHandler.doesExist()) {
         if (pathHandler.isDirectory()) {
             processDirectory(path);
         } else if (pathHandler.isFile()) {

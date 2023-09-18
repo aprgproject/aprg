@@ -54,7 +54,7 @@ TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForChessDotComVersus) {
         APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComVersus\ChessDotComVersus.bmp)");
 
     Configuration const configuration(Configuration::Type::ChessDotComVersus);
-    Bitmap const inputBitmap(inputFile.getFullPath());
+    Bitmap const inputBitmap(inputFile.getPath());
     BitmapSnippet const inputSnippet(inputBitmap.getSnippetReadFromFile(
         convertToBitmapXY(configuration.getTopLeftOfBoard()),
         convertToBitmapXY(configuration.getBottomRightOfBoard())));
@@ -68,7 +68,7 @@ TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForChessDotComPuzzle) {
         APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComPuzzle\ChessDotComPuzzle.bmp)");
 
     Configuration const configuration(Configuration::Type::ChessDotComPuzzle);
-    Bitmap const inputBitmap(inputFile.getFullPath());
+    Bitmap const inputBitmap(inputFile.getPath());
     BitmapSnippet const inputSnippet(inputBitmap.getSnippetReadFromFile(
         convertToBitmapXY(configuration.getTopLeftOfBoard()),
         convertToBitmapXY(configuration.getBottomRightOfBoard())));
@@ -82,7 +82,7 @@ TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForLichessVersus) {
                                          R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessVersus\LichessVersus.bmp)");
 
     Configuration const configuration(Configuration::Type::LichessVersus);
-    Bitmap const inputBitmap(inputFile.getFullPath());
+    Bitmap const inputBitmap(inputFile.getPath());
     BitmapSnippet const inputSnippet(inputBitmap.getSnippetReadFromFile(
         convertToBitmapXY(configuration.getTopLeftOfBoard()),
         convertToBitmapXY(configuration.getBottomRightOfBoard())));
@@ -96,7 +96,7 @@ TEST(BoardObserverTest, DISABLED_GetChessCellPieceWorksForLichessStream) {
                                          R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessStream\LichessStream.bmp)");
 
     Configuration const configuration(Configuration::Type::LichessStream);
-    Bitmap const inputBitmap(inputFile.getFullPath());
+    Bitmap const inputBitmap(inputFile.getPath());
     BitmapSnippet const inputSnippet(inputBitmap.getSnippetReadFromFile(
         convertToBitmapXY(configuration.getTopLeftOfBoard()),
         convertToBitmapXY(configuration.getBottomRightOfBoard())));

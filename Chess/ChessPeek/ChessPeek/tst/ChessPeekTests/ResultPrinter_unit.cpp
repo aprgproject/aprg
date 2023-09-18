@@ -11,7 +11,7 @@ namespace alba::chess::ChessPeek {
 TEST(ResultPrinterTest, PrintWorks) {
     AlbaLocalPathHandler const chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book const book;
-    // book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());  // comment out if needed
+    // book.loadDatabaseFrom(chessDotComBookDatabase.getPath());  // comment out if needed
     CalculationDetails calculationDetails{};
     BoardWithContext const boardWithContext(PieceColor::White, Board(BoardOrientation::BlackUpWhiteDown));
     Variation const variation1{0, 200, {"e2e4", "c7c5", "g1f3"}};

@@ -171,14 +171,14 @@ void PidSimulator::calculateAndGenerateOutputImage() {
 
     AlbaLocalPathHandler const detectedPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
     AlbaLocalPathHandler defaultFile(detectedPath.getDirectory() + R"(Default24Bit.bmp)");
-    cout << "defaultFile:[" << defaultFile.getFullPath() << "]\n";
-    if (defaultFile.isFoundInLocalSystem()) {
+    cout << "defaultFile:[" << defaultFile.getPath() << "]\n";
+    if (defaultFile.doesExist()) {
         AlbaLocalPathHandler graphOutputFile(defaultFile.getDirectory() + R"(\graph.bmp)");
-        cout << "graphOutputFile:[" << graphOutputFile.getFullPath() << "]\n";
+        cout << "graphOutputFile:[" << graphOutputFile.getPath() << "]\n";
         graphOutputFile.deleteFile();
-        defaultFile.copyToNewFile(graphOutputFile.getFullPath());
+        defaultFile.copyToNewFile(graphOutputFile.getPath());
 
-        Bitmap const bitmap(graphOutputFile.getFullPath());
+        Bitmap const bitmap(graphOutputFile.getPath());
         BitmapConfiguration const configuration(bitmap.getConfiguration());
         calculateMagnificationAndOffset(
             xLeftMax, xRightMax, yBottomMax, yTopMax, configuration.getBitmapWidth(), configuration.getBitmapHeight());
@@ -186,7 +186,7 @@ void PidSimulator::calculateAndGenerateOutputImage() {
              << m_xMagnificationToGraph << ", " << m_yMagnificationToGraph << "]\n";
 
         AprgGraph graph(
-            graphOutputFile.getFullPath(), BitmapXY(m_xOffsetToGraph, m_yOffsetToGraph),
+            graphOutputFile.getPath(), BitmapXY(m_xOffsetToGraph, m_yOffsetToGraph),
             BitmapDoubleXY(m_xMagnificationToGraph, m_yMagnificationToGraph));
         graph.drawGrid(BitmapDoubleXY(m_xGridInterval, m_yGridInterval));
         graph.drawContinuousPoints(targetSeries, 0x00444444);
@@ -196,7 +196,7 @@ void PidSimulator::calculateAndGenerateOutputImage() {
         // Remove adjusted demand //graph.drawContinuousPoints(adjustedDemandSeries, 0x00008888);
         graph.saveChangesToBitmapFile();
     } else {
-        cout << "The default bitmap file was not found. The default file location:  [" << defaultFile.getFullPath()
+        cout << "The default bitmap file was not found. The default file location:  [" << defaultFile.getPath()
              << "]\n";
     }
 }

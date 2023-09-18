@@ -40,11 +40,11 @@ void CMakeDatabase::printFilesAndDirectories() const {
 
 void CMakeDatabase::addFileOrDirectory(string const& fileOrDirectory) {
     AlbaLocalPathHandler pathHandler(fileOrDirectory);
-    if (m_isNonExistentDirectoriesAllowed || pathHandler.isFoundInLocalSystem()) {
+    if (m_isNonExistentDirectoriesAllowed || pathHandler.doesExist()) {
         if (pathHandler.isFile()) {
-            m_setOfFiles.emplace(pathHandler.getFullPath());
+            m_setOfFiles.emplace(pathHandler.getPath());
         } else if (pathHandler.isDirectory()) {
-            m_setOfDirectories.emplace(pathHandler.getFullPath());
+            m_setOfDirectories.emplace(pathHandler.getPath());
         }
 
     } else {
@@ -73,11 +73,11 @@ CMakeDatabase& CMakeDatabase::find_InnerDirection(
     AlbaLocalPathHandler pathHandler(stringPathIn);
     if (pathHandler.isFile()) {
         return findFile<RecursionDirectionType::Inner>(
-            pathHandler.getFullPath(), "*.*", isFoundResult, stringFullPathOut);
+            pathHandler.getPath(), "*.*", isFoundResult, stringFullPathOut);
     }
     if (pathHandler.isDirectory()) {
         return findDirectory<RecursionDirectionType::Inner>(
-            pathHandler.getFullPath(), isFoundResult, stringFullPathOut);
+            pathHandler.getPath(), isFoundResult, stringFullPathOut);
     }
     return (*this);
 }
@@ -88,11 +88,11 @@ CMakeDatabase& CMakeDatabase::find_OuterDirection(
     AlbaLocalPathHandler pathHandler(stringPathIn);
     if (pathHandler.isFile()) {
         return findFile<RecursionDirectionType::Outer>(
-            pathHandler.getFullPath(), "*.*", isFoundResult, stringFullPathOut);
+            pathHandler.getPath(), "*.*", isFoundResult, stringFullPathOut);
     }
     if (pathHandler.isDirectory()) {
         return findDirectory<RecursionDirectionType::Outer>(
-            pathHandler.getFullPath(), isFoundResult, stringFullPathOut);
+            pathHandler.getPath(), isFoundResult, stringFullPathOut);
     }
     return (*this);
 }

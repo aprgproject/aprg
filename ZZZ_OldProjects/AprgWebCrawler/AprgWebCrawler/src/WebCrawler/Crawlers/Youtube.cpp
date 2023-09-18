@@ -42,8 +42,8 @@ void Youtube::crawl(unsigned int const webLinkIndex) {
 
 bool Youtube::isYoutubeLink(AlbaWebPathHandler const& webLinkPathHandler) {
     bool result(true);
-    if (!isStringFoundInsideTheOtherStringNotCaseSensitive(webLinkPathHandler.getFullPath(), "youtube")) {
-        cout << "Not a youtube link : " << webLinkPathHandler.getFullPath() << "\n";
+    if (!isStringFoundInsideTheOtherStringNotCaseSensitive(webLinkPathHandler.getPath(), "youtube")) {
+        cout << "Not a youtube link : " << webLinkPathHandler.getPath() << "\n";
         m_webCrawler.saveStateToMemoryCard(CrawlState::LinksAreInvalid);
         result = false;
     }
@@ -53,12 +53,12 @@ bool Youtube::isYoutubeLink(AlbaWebPathHandler const& webLinkPathHandler) {
 void Youtube::downloadFile(AlbaWebPathHandler const& webLinkPathHandler) {
     AutomatedFirefoxBrowser& firefoxBrowser(AutomatedFirefoxBrowser::getInstance());
 
-    string ssYoutubeLink(webLinkPathHandler.getFullPath());
+    string ssYoutubeLink(webLinkPathHandler.getPath());
     stringHelper::replaceAllAndReturnIfFound(ssYoutubeLink, "youtube", "ssyoutube");
     AlbaWebPathHandler ssYoutubeLinkPathHandler(ssYoutubeLink);
 
     firefoxBrowser.createNewTab();
-    firefoxBrowser.openWebPathOnCurrentTab(ssYoutubeLinkPathHandler.getFullPath());
+    firefoxBrowser.openWebPathOnCurrentTab(ssYoutubeLinkPathHandler.getPath());
     AlbaLocalPathHandler localPathOfDownload(m_webCrawler.getDownloadDirectory());
 
     firefoxBrowser.doLeftClickAt(MousePosition(952, 506));

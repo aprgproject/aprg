@@ -9,7 +9,7 @@ using namespace std;
 namespace alba {
 
 FileDestructor::FileDestructor() : m_pathToDestroy(AlbaLocalPathHandler::createPathHandlerForDetectedPath()) {}
-void FileDestructor::destroy() const { destroy(m_pathToDestroy.getFullPath()); }
+void FileDestructor::destroy() const { destroy(m_pathToDestroy.getPath()); }
 
 void FileDestructor::destroy(string const& path) const {
     renameDirectoriesUnderneath(path);
@@ -38,7 +38,7 @@ void FileDestructor::destroyFilesAndDirectories(string const& path) {
     ListOfPaths listOfFiles;
     ListOfPaths listOfDirectories;
     pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
-    listOfFiles.erase(pathHandler.getFullPath());
+    listOfFiles.erase(pathHandler.getPath());
     for (string const& filePath : listOfFiles) {
         destroyFile(filePath);
     }
@@ -56,7 +56,7 @@ void FileDestructor::renameDirectory(string const& directoryPath) {
     while (retries > 0 && isNotSuccessful) {
         isNotSuccessful = !directoryPathHandler.renameImmediateDirectory(stringHelper::getRandomAlphaNumericString(10));
         if (!isNotSuccessful) {
-            cout << "Renamed directory: [" << directoryPathHandler.getFullPath() << "]\n";
+            cout << "Renamed directory: [" << directoryPathHandler.getPath() << "]\n";
         }
         --retries;
     }
@@ -69,15 +69,15 @@ void FileDestructor::destroyFile(string const& filePath) {
     unsigned int retries = 10;
     bool isNotSuccessful = true;
     while (retries > 0 && isNotSuccessful) {
-        if (filePathHandler.getFullPath().length() > MAX_CHARACTERS_ON_PATH) {
+        if (filePathHandler.getPath().length() > MAX_CHARACTERS_ON_PATH) {
             isNotSuccessful = !filePathHandler.renameFile(stringHelper::getRandomAlphaNumericString(10));
             if (!isNotSuccessful) {
-                cout << "Renamed File: [" << filePathHandler.getFullPath() << "]\n";
+                cout << "Renamed File: [" << filePathHandler.getPath() << "]\n";
             }
         }
         isNotSuccessful = !filePathHandler.deleteFile();
         if (!isNotSuccessful) {
-            cout << "Destroyed File: [" << filePathHandler.getFullPath() << "]\n";
+            cout << "Destroyed File: [" << filePathHandler.getPath() << "]\n";
         }
         --retries;
     }

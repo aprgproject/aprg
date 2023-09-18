@@ -89,7 +89,7 @@ void TopLogAnalyzer::putEntriesInMemReport(
 
 void TopLogAnalyzer::readTopLogsAndSaveToDatabase(std::string const& pathOfTopLog) {
     AlbaLocalPathHandler const topLogPathHandler(pathOfTopLog);
-    ifstream inputLogFileStream(topLogPathHandler.getFullPath());
+    ifstream inputLogFileStream(topLogPathHandler.getPath());
 
     AlbaFileReader fileReader(inputLogFileStream);
     DataEntry currentEntry;
@@ -118,7 +118,7 @@ void TopLogAnalyzer::generateCpuReport(std::string const& pathOfTopLog) {
     AlbaLocalPathHandler const topLogPathHandler(pathOfTopLog);
     AlbaLocalPathHandler const cpuReportFilePathHandler(
         topLogPathHandler.getDirectory() + topLogPathHandler.getFilenameOnly() + "_CpuReport.csv");
-    ofstream cpuReportFileStream(cpuReportFilePathHandler.getFullPath());
+    ofstream cpuReportFileStream(cpuReportFilePathHandler.getPath());
 
     stringHelper::strings const processNamesInReport(getProcessNamesForCpuReport());
     putHeadersInCpuReport(processNamesInReport, cpuReportFileStream);
@@ -129,7 +129,7 @@ void TopLogAnalyzer::generateMemReport(std::string const& pathOfTopLog) {
     AlbaLocalPathHandler const topLogPathHandler(pathOfTopLog);
     AlbaLocalPathHandler const cpuReportFilePathHandler(
         topLogPathHandler.getDirectory() + topLogPathHandler.getFilenameOnly() + "_MemReport.csv");
-    ofstream cpuReportFileStream(cpuReportFilePathHandler.getFullPath());
+    ofstream cpuReportFileStream(cpuReportFilePathHandler.getPath());
 
     stringHelper::strings const processNamesInReport(getProcessNamesForMemReport());
     putHeadersInMemReport(processNamesInReport, cpuReportFileStream);

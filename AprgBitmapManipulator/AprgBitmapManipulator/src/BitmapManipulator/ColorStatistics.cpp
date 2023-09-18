@@ -110,9 +110,9 @@ void gatherAndSaveColorStatistics(string const& bitmapPath) {
         bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_Statistics.txt)");
 
     AprgColorStatistics statistics;
-    statistics.gatherStatistics(bitmapPathHandler.getFullPath());
-    statistics.saveColorData(colorDataPathHandler.getFullPath());
-    statistics.saveColorStatistics(colorStatisticsPathHandler.getFullPath());
+    statistics.gatherStatistics(bitmapPathHandler.getPath());
+    statistics.saveColorData(colorDataPathHandler.getPath());
+    statistics.saveColorStatistics(colorStatisticsPathHandler.getPath());
 }
 
 }  // namespace alba::AprgBitmap

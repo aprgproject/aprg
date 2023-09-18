@@ -28,16 +28,16 @@ BtsLogSorter::BtsLogSorter(BtsLogSorterConfiguration const& configuration)
       m_pathOfAllTempFiles(configuration.m_pathOfTempFiles),
       m_pathOfCurrentTempFiles(
           AlbaLocalPathHandler(configuration.m_pathOfTempFiles + R"(\)" + stringHelper::getRandomAlphaNumericString(30))
-              .getFullPath()),
+              .getPath()),
       m_sorterWithPcTime(AlbaLargeSorterConfiguration(
           configuration.m_configurationWithPcTime,
-          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\BlocksWithPcTime\)").getFullPath())),
+          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\BlocksWithPcTime\)").getPath())),
       m_sorterWithoutPcTime(AlbaLargeSorterConfiguration(
           configuration.m_configurationWithoutPcTime,
-          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\BlocksWithoutPcTime\)").getFullPath())),
+          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\BlocksWithoutPcTime\)").getPath())),
       m_directoryOfLogsWithoutPcTime(
-          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\LogsWithoutPcTime\)").getFullPath()),
-      m_pathOfStartupLog(AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\StartupLog\Startup.log)").getFullPath()) {
+          AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\LogsWithoutPcTime\)").getPath()),
+      m_pathOfStartupLog(AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\StartupLog\Startup.log)").getPath()) {
     deleteTempFilesAndDirectoriesOfOneDayOld();
     createTempDirectories();
 }
@@ -51,7 +51,7 @@ void BtsLogSorter::processDirectory(string const& directoryPath) {
     for (string const& filePath : listOfFiles) {
         AlbaLocalPathHandler const filePathHandler(filePath);
         if (m_acceptedFilesGrepEvaluator.evaluate(filePathHandler.getFile())) {
-            processFile(filePathHandler.getFullPath());
+            processFile(filePathHandler.getPath());
         }
     }
 }
@@ -266,7 +266,7 @@ void BtsLogSorter::deleteFilesInDirectory(string const& directoryOfLogs) {
 string BtsLogSorter::getPathOfLogWithoutPcTimeBasedFromHardwareAddress(
     string const& directory, string const& hardwareAddress) {
     string const filename = hardwareAddress.empty() ? "NoHardwareAddress" : hardwareAddress;
-    return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getFullPath();
+    return AlbaLocalPathHandler(directory + R"(\)" + filename + R"(.log)").getPath();
 }
 
 }  // namespace wcdmaToolsBackend

@@ -140,8 +140,8 @@ D:/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows\Common/PathHandler/AlbaWindowsPa
     ^
     [[nodiscard]] 
 D:/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows\Common/PathHandler/AlbaWindowsPathHandler.hpp:27:5: note: FIX-IT applied suggested code changes
-D:/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows\Common/PathHandler/AlbaWindowsPathHandler.hpp:28:5: warning: function 'isFoundInLocalSystem' should be marked [[nodiscard]] [modernize-use-nodiscard]
-    bool isFoundInLocalSystem() const;
+D:/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows\Common/PathHandler/AlbaWindowsPathHandler.hpp:28:5: warning: function 'doesExist' should be marked [[nodiscard]] [modernize-use-nodiscard]
+    bool doesExist() const;
     ^
     [[nodiscard]] 
 D:/a/aprg/aprg/AprgCommon/AprgCommon/srcWindows\Common/PathHandler/AlbaWindowsPathHandler.hpp:28:5: note: FIX-IT applied suggested code changes

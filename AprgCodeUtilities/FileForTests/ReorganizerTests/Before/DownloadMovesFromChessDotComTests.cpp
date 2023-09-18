@@ -328,14 +328,14 @@ void gotoWebPage(string const& url) {
 
 void deleteWebPageUntilItsDeleted(string const& htmlFile) {
     AlbaLocalPathHandler htmlFileHandler(htmlFile);
-    while (htmlFileHandler.isFoundInLocalSystem()) {
+    while (htmlFileHandler.doesExist()) {
         if (!shouldStillRun) {
             exit(0);
         }
         htmlFileHandler.deleteFile();
         Sleep(100);
         htmlFileHandler.reInput();
-        if (htmlFileHandler.isFoundInLocalSystem()) {
+        if (htmlFileHandler.doesExist()) {
             cout << "File still not deleted. Deleting again. File: [" << htmlFile << "]" << endl;
         }
     }
@@ -360,7 +360,7 @@ void typeEnter() {
 
 void saveWebPageUntilItsDeleted(string const& htmlFile) {
     AlbaLocalPathHandler htmlFileHandler(htmlFile);
-    while (!htmlFileHandler.isFoundInLocalSystem()) {
+    while (!htmlFileHandler.doesExist()) {
         if (!shouldStillRun) {
             exit(0);
         }
@@ -369,7 +369,7 @@ void saveWebPageUntilItsDeleted(string const& htmlFile) {
         typeEnter();
         Sleep(500);
         htmlFileHandler.reInput();
-        if (!htmlFileHandler.isFoundInLocalSystem()) {
+        if (!htmlFileHandler.doesExist()) {
             cout << "File still doesnt exist. Saving web page again. File: [" << htmlFile << "]" << endl;
         }
     }
@@ -459,7 +459,7 @@ void doAllPagesRecursively(Paths const& paths) {
     thread trackKeyPressForDownloadMovesFromChessDotComThread(trackKeyPressForDownloadMovesFromChessDotCom);
     AlbaLocalPathHandler const chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
-    book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
+    book.loadDatabaseFrom(chessDotComBookDatabase.getPath());
 
     clickWindow();
     gotoWebPage(paths.url);
@@ -502,8 +502,8 @@ TEST(DownloadMovesFromChessDotComTest, DISABLED_DoAllPagesRecursivelyWorks) {
         APRG_DIR R"(\Chess\ChessPeek\Files\ChessDotComAutomation\ChessDotComLineNumber.txt)");
 
     doAllPagesRecursively(Paths{
-        explorerUrl.getFullPath(), tempHtmlFile.getFullPath(), dataFile.getFullPath(), linesFile.getFullPath(),
-        lineNumberFile.getFullPath()});
+        explorerUrl.getPath(), tempHtmlFile.getPath(), dataFile.getPath(), linesFile.getPath(),
+        lineNumberFile.getPath()});
 }
 
 }  // namespace alba::chess::ChessPeek

@@ -18,7 +18,7 @@ void WebCrawler::crawlForYoutube()
 {
     AlbaLocalPathHandler convertedYoutubeLinksPathHandler(m_downloadDirectoryPathHandler.getDirectory() +
 R"(\ConvertedYoutubeLinks.txt)"); convertedYoutubeLinksPathHandler.createDirectoriesForNonExisitingDirectories();
-    ofstream convertedYoutubeLinkStream(convertedYoutubeLinksPathHandler.getFullPath());
+    ofstream convertedYoutubeLinkStream(convertedYoutubeLinksPathHandler.getPath());
 
     for(string & webLink : m_webLinks)
     {
@@ -47,7 +47,7 @@ void WebCrawler::crawlForYoutube_old(string & webLink, ofstream& convertedYoutub
         {
             continue;
         }
-        convertedYoutubeLinkStream << ssYoutubeLinkPathHandler.getFullPath() << "\n" << flush;
+        convertedYoutubeLinkStream << ssYoutubeLinkPathHandler.getPath() << "\n" << flush;
         webLink.clear();
         setCrawlState(CrawlState::Active);
         saveMemoryCard();
@@ -97,16 +97,16 @@ downloadPathHandler.getFileSizeEstimate() <<" Invalid file. Retrying from the st
 LinksForYoutube WebCrawler::getLinkForYoutube(AlbaWebPathHandler const& webLinkPathHandler) const
 {
     LinksForYoutube links;
-    string ssYoutubeLink(webLinkPathHandler.getFullPath());
+    string ssYoutubeLink(webLinkPathHandler.getPath());
     stringHelper::replaceAllAndReturnIfFound(ssYoutubeLink, "youtube", "ssyoutube");
     AlbaWebPathHandler ssYoutubeLinkPathHandler(ssYoutubeLink);
     AlbaLocalPathHandler downloadPathHandler(m_downloadDirectoryPathHandler.getDirectory() + R"(\temp.html)");
     downloadFileUsingPhantomJs(ssYoutubeLinkPathHandler, downloadPathHandler);
-    ifstream htmlFileStream(downloadPathHandler.getFullPath());
+    ifstream htmlFileStream(downloadPathHandler.getPath());
     if(!htmlFileStream.is_open())
     {
         cout << "Cannot open html file.\n";
-        cout << "File to read:" << downloadPathHandler.getFullPath() << "\n";
+        cout << "File to read:" << downloadPathHandler.getPath() << "\n";
         return links;
     }
     AlbaFileReader htmlFileReader(htmlFileStream);

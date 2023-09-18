@@ -23,7 +23,7 @@ TEST(RealTest, DISABLED_UpdateTrunkFiles) {
         R"(D:\Specifications\OAM-TCOM-IFS\SackReaderExecution.txt)");
     AlbaLocalPathHandler databasePathHandler(SAVED_DATABASE_FILE);
 
-    // sackReader.loadDatabaseFromFile(databasePathHandler.getFullPath());
+    // sackReader.loadDatabaseFromFile(databasePathHandler.getPath());
 
     sackReader.gatherAllFiles();
     sackReader.readFilesNeededForIfs();
@@ -36,7 +36,7 @@ TEST(RealTest, DISABLED_UpdateTrunkFiles) {
         R"(D:\Specifications\OAM-TCOM-IFS\OAM_CPLANE_IFS_template.lyx)",
         R"(D:\Specifications\OAM-TCOM-IFS\OAM_CPLANE_IFS_TEST.lyx)");
 
-    sackReader.saveDatabaseToFile(databasePathHandler.getFullPath());
+    sackReader.saveDatabaseToFile(databasePathHandler.getPath());
 }
 
 }  // namespace alba

@@ -36,18 +36,18 @@ void StepHandler::execute(WcdmaToolsConfiguration const& configuration) const {
                                              configuration.isGrepStepOn + configuration.isCropStepOn;
     for (int step = 1; step < 5; step++) {
         currentPathHandler.reInput();
-        if (!currentPathHandler.isFoundInLocalSystem()) {
-            cout << currentPathHandler.getFullPath() << " is not found in local system\n";
+        if (!currentPathHandler.doesExist()) {
+            cout << currentPathHandler.getPath() << " is not found in local system\n";
             return;
         }
         if (1 == step && configuration.isExtractStepOn) {
-            currentPathHandler.input(executeExtractStep(configuration, currentPathHandler.getFullPath()));
+            currentPathHandler.input(executeExtractStep(configuration, currentPathHandler.getPath()));
         } else if (2 == step && configuration.isCombineAndSortStepOn) {
-            currentPathHandler.input(executeCombineAndSortStep(configuration, currentPathHandler.getFullPath()));
+            currentPathHandler.input(executeCombineAndSortStep(configuration, currentPathHandler.getPath()));
         } else if (3 == step && configuration.isGrepStepOn) {
-            currentPathHandler.input(executeGrepStep(configuration, currentPathHandler.getFullPath()));
+            currentPathHandler.input(executeGrepStep(configuration, currentPathHandler.getPath()));
         } else if (4 == step && configuration.isCropStepOn) {
-            currentPathHandler.input(executeCropStep(configuration, currentPathHandler.getFullPath()));
+            currentPathHandler.input(executeCropStep(configuration, currentPathHandler.getPath()));
         }
     }
 }
@@ -56,21 +56,21 @@ string StepHandler::executeExtractStep(WcdmaToolsConfiguration const& configurat
     cout << " (Extract) start | Input path: " << inputPath << "\n";
     AlbaLocalPathHandler tempFileFor7zPathHandler(getTempFileFor7zBasedOnLogSorter(configuration));
     tempFileFor7zPathHandler.createDirectoriesForNonExisitingDirectories();
-    cout << " (Extract) tempFileFor7z: " << tempFileFor7zPathHandler.getFullPath() << "\n";
+    cout << " (Extract) tempFileFor7z: " << tempFileFor7zPathHandler.getPath() << "\n";
     AprgFileExtractor fileExtractor(
         configuration.extractGrepCondition, configuration.locationOf7zExecutable,
-        tempFileFor7zPathHandler.getFullPath());
+        tempFileFor7zPathHandler.getPath());
     AlbaLocalPathHandler pathHandler(inputPath);
     string outputPath(inputPath);
-    cout << " (Extract) Extracting: " << pathHandler.getFullPath() << "\n";
+    cout << " (Extract) Extracting: " << pathHandler.getPath() << "\n";
     if (pathHandler.isDirectory()) {
-        fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());
+        fileExtractor.extractAllRelevantFiles(pathHandler.getPath());
     } else if (fileExtractor.isRecognizedCompressedFile(pathHandler.getExtension())) {
-        fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());
+        fileExtractor.extractAllRelevantFiles(pathHandler.getPath());
         pathHandler.input(pathHandler.getDirectory() + R"(\)" + pathHandler.getFilenameOnly());
-        outputPath = pathHandler.getFullPath();
+        outputPath = pathHandler.getPath();
     } else {
-        cout << "Extraction step did not proceed. Current path: " << pathHandler.getFullPath() << "\n";
+        cout << "Extraction step did not proceed. Current path: " << pathHandler.getPath() << "\n";
     }
     cout << " (Extract) done | Output path: " << outputPath << "\n";
     return outputPath;
@@ -90,10 +90,10 @@ string StepHandler::executeCombineAndSortStep(
         btsLogSorter.processDirectory(pathHandler.getDirectory());
         pathHandler.goUp();
         pathHandler.input(pathHandler.getDirectory() + R"(\)" + configuration.getSortedFileName());
-        outputPath = pathHandler.getFullPath();
+        outputPath = pathHandler.getPath();
         btsLogSorter.saveLogsToOutputFile(outputPath);
     } else {
-        cout << "Combine and sort step did not proceed. Current path: " << pathHandler.getFullPath() << "\n";
+        cout << "Combine and sort step did not proceed. Current path: " << pathHandler.getPath() << "\n";
     }
     cout << " (CombineAndSort) done | Output path: " << inputPath << "\n";
     return outputPath;
@@ -102,7 +102,7 @@ string StepHandler::executeCombineAndSortStep(
 string StepHandler::executeGrepStep(WcdmaToolsConfiguration const& configuration, string const& inputPath) const {
     cout << " (Grep) start | Input path: " << inputPath << "\n";
     AlbaLocalPathHandler inputPathHandler(inputPath);
-    string outputPath(inputPathHandler.getFullPath());
+    string outputPath(inputPathHandler.getPath());
     AlbaGrepFile::UpdateFunctionWithPercentage grepUpdateFunction = [&](double percentage) -> void {
         ProgressCounters::grepProcessProgress = percentage;
     };
@@ -114,12 +114,12 @@ string StepHandler::executeGrepStep(WcdmaToolsConfiguration const& configuration
     } else if (inputPathHandler.isFile()) {
         AlbaLocalPathHandler outputPathHandler(
             inputPathHandler.getDirectory() + R"(\)" + configuration.getGrepFileName());
-        grepFile.processFile(inputPathHandler.getFullPath(), outputPathHandler.getFullPath());
+        grepFile.processFile(inputPathHandler.getPath(), outputPathHandler.getPath());
         if (grepFile.isOutputFileWritten()) {
-            outputPath = outputPathHandler.getFullPath();
+            outputPath = outputPathHandler.getPath();
         }
     } else {
-        cout << "Grep step did not proceed. Current path: " << inputPathHandler.getFullPath() << "\n";
+        cout << "Grep step did not proceed. Current path: " << inputPathHandler.getPath() << "\n";
     }
     cout << " (Grep) done | Output path: " << outputPath << "\n";
     return outputPath;
@@ -128,7 +128,7 @@ string StepHandler::executeGrepStep(WcdmaToolsConfiguration const& configuration
 string StepHandler::executeCropStep(WcdmaToolsConfiguration const& configuration, string const& inputPath) const {
     cout << " (Crop) start | Input path: " << inputPath << "\n";
     AlbaLocalPathHandler inputPathHandler(inputPath);
-    string outputPath(inputPathHandler.getFullPath());
+    string outputPath(inputPathHandler.getPath());
     if (inputPathHandler.isFile()) {
         AlbaLocalPathHandler outputPathHandler(
             inputPathHandler.getDirectory() + R"(\)" + configuration.getCropFileName());
@@ -137,12 +137,12 @@ string StepHandler::executeCropStep(WcdmaToolsConfiguration const& configuration
         };
         AlbaCropFile cropFile(
             configuration.prioritizedLogCondition, configuration.cropSize * 1000000, cropUpdateFunction);
-        cropFile.processFile(inputPathHandler.getFullPath(), outputPathHandler.getFullPath());
+        cropFile.processFile(inputPathHandler.getPath(), outputPathHandler.getPath());
         if (cropFile.isOutputFileWritten()) {
-            outputPath = outputPathHandler.getFullPath();
+            outputPath = outputPathHandler.getPath();
         }
     } else {
-        cout << "Crop step did not proceed. Current path: " << inputPathHandler.getFullPath() << "\n";
+        cout << "Crop step did not proceed. Current path: " << inputPathHandler.getPath() << "\n";
     }
     cout << " (Crop) done | Output path: " << outputPath << "\n";
     return outputPath;

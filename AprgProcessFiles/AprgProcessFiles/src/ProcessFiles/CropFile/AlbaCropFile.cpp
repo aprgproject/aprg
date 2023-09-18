@@ -28,9 +28,9 @@ void AlbaCropFile::processFile(string const& inputFilePath, string const& output
     AlbaLocalPathHandler const inputPathHandler(inputFilePath);
     AlbaLocalPathHandler const outputPathHandler(outputFilePath);
 
-    double const foundLocation(getLocationOfPrioritizedPrint(inputPathHandler.getFullPath()));
+    double const foundLocation(getLocationOfPrioritizedPrint(inputPathHandler.getPath()));
     if (foundLocation >= 0) {
-        performCropForFile(inputPathHandler.getFullPath(), outputPathHandler.getFullPath(), foundLocation);
+        performCropForFile(inputPathHandler.getPath(), outputPathHandler.getPath(), foundLocation);
     } else {
         cout << "CropFile: Crop process did not proceed. Prioritized line not found."
              << "\n";

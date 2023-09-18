@@ -34,12 +34,12 @@ TEST(SampleTest, DestroyOneFileTest) {
     AlbaLocalPathHandler pathHandler(APRG_FILE_DESTRUCTION_TEST_DIRECTORY);
     unsigned int numberOfFiles = 0;
     unsigned int numberOfDirectories = 0;
-    createAFileInDirectory(pathHandler.getFullPath());
+    createAFileInDirectory(pathHandler.getPath());
     retrieveNumberOfFilesAndDirectoriesFromPath(pathHandler, numberOfFiles, numberOfDirectories);
     EXPECT_EQ(1U, numberOfFiles);
     EXPECT_EQ(0U, numberOfDirectories);
 
-    fileDestructor.destroy(pathHandler.getFullPath());
+    fileDestructor.destroy(pathHandler.getPath());
 
     retrieveNumberOfFilesAndDirectoriesFromPath(pathHandler, numberOfFiles, numberOfDirectories);
     EXPECT_EQ(0U, numberOfFiles);

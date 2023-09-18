@@ -125,12 +125,12 @@ void WcdmaTools::on_executeButton_clicked() {
 void WcdmaTools::on_actionOpenFile_triggered() {
     QString fileName = QFileDialog::getOpenFileName(
         this, tr("Open file"),
-        QString::fromStdString(AlbaLocalPathHandler(m_configuration.inputFileOrDirectory).getFullPath()),
+        QString::fromStdString(AlbaLocalPathHandler(m_configuration.inputFileOrDirectory).getPath()),
         tr("All Files (*)"));
     AlbaLocalPathHandler pathHandler(fileName.toStdString());
     if (!pathHandler.isEmpty()) {
-        m_configuration.inputFileOrDirectory = pathHandler.getFullPath();
-        ui->inputFileAndFolderTextBox->setText(QString::fromStdString(pathHandler.getFullPath()));
+        m_configuration.inputFileOrDirectory = pathHandler.getPath();
+        ui->inputFileAndFolderTextBox->setText(QString::fromStdString(pathHandler.getPath()));
     }
 }
 
@@ -141,8 +141,8 @@ void WcdmaTools::on_actionOpenFolder_triggered() {
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     AlbaLocalPathHandler pathHandler(directory.toStdString());
     if (!pathHandler.isEmpty()) {
-        m_configuration.inputFileOrDirectory = pathHandler.getFullPath();
-        ui->inputFileAndFolderTextBox->setText(QString::fromStdString(pathHandler.getFullPath()));
+        m_configuration.inputFileOrDirectory = pathHandler.getPath();
+        ui->inputFileAndFolderTextBox->setText(QString::fromStdString(pathHandler.getPath()));
     }
 }
 

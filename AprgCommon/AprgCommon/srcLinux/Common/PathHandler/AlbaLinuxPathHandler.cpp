@@ -28,12 +28,12 @@ AlbaLinuxPathHandler::AlbaLinuxPathHandler(string_view const path) : AlbaPathHan
 AlbaDateTime AlbaLinuxPathHandler::getFileCreationTime() const {
     struct stat fileStatus {};
     AlbaDateTime fileCreationTime;
-    if (0 == stat(getFullPath().c_str(), &fileStatus)) {
+    if (0 == stat(getPath().c_str(), &fileStatus)) {
         timespec timeSpec{};
         clock_gettime(CLOCK_REALTIME, &timeSpec);
         fileCreationTime = convertSystemTimeToAlbaDateTime(timeSpec);
     } else if (errno != 0) {
-        cerr << "Error in AlbaLinuxPathHandler::getFileCreationTime() path:[" << getFullPath()
+        cerr << "Error in AlbaLinuxPathHandler::getFileCreationTime() path:[" << getPath()
              << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
     }
     return fileCreationTime;
@@ -42,10 +42,10 @@ AlbaDateTime AlbaLinuxPathHandler::getFileCreationTime() const {
 double AlbaLinuxPathHandler::getFileSizeEstimate() const {
     struct stat fileStatus {};
     double fileSize(0);
-    if (0 == stat(getFullPath().c_str(), &fileStatus)) {
+    if (0 == stat(getPath().c_str(), &fileStatus)) {
         fileSize = static_cast<double>(fileStatus.st_size);
     } else if (errno != 0) {
-        cerr << "Error in AlbaLinuxPathHandler::getFileSizeEstimate() path:[" << getFullPath()
+        cerr << "Error in AlbaLinuxPathHandler::getFileSizeEstimate() path:[" << getPath()
              << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
     }
     return fileSize;
@@ -55,7 +55,7 @@ bool AlbaLinuxPathHandler::doesExist() const { return m_foundInLocalSystem; }
 bool AlbaLinuxPathHandler::isRelativePath() const { return m_relativePath; }
 
 void AlbaLinuxPathHandler::createDirectoriesForNonExisitingDirectories() const {
-    string fullPath(getFullPath());
+    string fullPath(getPath());
     size_t index = 0;
     auto length = static_cast<size_t>(fullPath.length());
     while (index < length) {
@@ -66,7 +66,7 @@ void AlbaLinuxPathHandler::createDirectoriesForNonExisitingDirectories() const {
         string partialDirectory(fullPath.substr(0, indexWithSlashCharacter + 1));
         AlbaLinuxPathHandler partialDirectoryPathHandler(partialDirectory);
         if (!partialDirectoryPathHandler.doesExist()) {
-            mkdir(partialDirectoryPathHandler.getFullPath().c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+            mkdir(partialDirectoryPathHandler.getPath().c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
         }
         index = indexWithSlashCharacter + 1;
     }
@@ -105,10 +105,10 @@ void AlbaLinuxPathHandler::deleteDirectoryWithFilesAndDirectories() {
 bool AlbaLinuxPathHandler::deleteFile() {
     bool isSuccessful(false);
     if (isFile()) {
-        int errorReturnValue = unlink(getFullPath().c_str());
+        int errorReturnValue = unlink(getPath().c_str());
         isSuccessful = errorReturnValue == 0;
         if (!isSuccessful) {
-            cerr << "Error in AlbaLinuxPathHandler::deleteFile() path:[" << getFullPath() << "] 'unlink' error value:["
+            cerr << "Error in AlbaLinuxPathHandler::deleteFile() path:[" << getPath() << "] 'unlink' error value:["
                  << errorReturnValue << "]\n";
         } else {
             reInput();
@@ -120,10 +120,10 @@ bool AlbaLinuxPathHandler::deleteFile() {
 bool AlbaLinuxPathHandler::deleteDirectoryWithoutFilesAndDirectories() {
     bool isSuccessful(false);
     if (isDirectory()) {
-        int errorReturnValue = rmdir(getFullPath().c_str());
+        int errorReturnValue = rmdir(getPath().c_str());
         isSuccessful = errorReturnValue == 0;
         if (!isSuccessful) {
-            cerr << "Error in AlbaLinuxPathHandler::deleteDirectoryWithoutFilesAndDirectories() path:[" << getFullPath()
+            cerr << "Error in AlbaLinuxPathHandler::deleteDirectoryWithoutFilesAndDirectories() path:[" << getPath()
                  << "] 'rmdir' error value:[" << errorReturnValue << "]\n";
         } else {
             reInput();
@@ -139,8 +139,8 @@ bool AlbaLinuxPathHandler::copyToNewFile(string_view const newFilePath) {
     bool isSuccessful(false);
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg,hicpp-vararg)
-    readFileDescriptor = open(getFullPath().c_str(), O_RDONLY);
-    if (0 == stat(getFullPath().c_str(), &statBuffer)) {
+    readFileDescriptor = open(getPath().c_str(), O_RDONLY);
+    if (0 == stat(getPath().c_str(), &statBuffer)) {
         int writeFileDescriptor{};
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg,hicpp-vararg)
         writeFileDescriptor = open(newFilePath.data(), O_WRONLY | O_CREAT, statBuffer.st_mode);
@@ -149,7 +149,7 @@ bool AlbaLinuxPathHandler::copyToNewFile(string_view const newFilePath) {
                 sendfile(writeFileDescriptor, readFileDescriptor, &offset, static_cast<size_t>(statBuffer.st_size)));
             isSuccessful = errorReturnValue != -1;
             if (!isSuccessful) {
-                cerr << "Error in AlbaLinuxPathHandler::copyToNewFile() path:[" << getFullPath() << "] newFilePath:["
+                cerr << "Error in AlbaLinuxPathHandler::copyToNewFile() path:[" << getPath() << "] newFilePath:["
                      << newFilePath << "] 'sendfile' error value:[" << errorReturnValue << "]\n";
             } else {
                 reInput();
@@ -157,7 +157,7 @@ bool AlbaLinuxPathHandler::copyToNewFile(string_view const newFilePath) {
         }
         close(writeFileDescriptor);
     } else if (errno != 0) {
-        cerr << "Error in AlbaLinuxPathHandler::copyToNewFile() path:[" << getFullPath() << "] 'stat' errno value:["
+        cerr << "Error in AlbaLinuxPathHandler::copyToNewFile() path:[" << getPath() << "] 'stat' errno value:["
              << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
     }
     close(readFileDescriptor);
@@ -168,10 +168,10 @@ bool AlbaLinuxPathHandler::renameFile(string_view const newFileName) {
     bool isSuccessful(false);
     if (isFile()) {
         string newPath(m_directory + string(newFileName));
-        int errorReturnValue = rename(getFullPath().c_str(), newPath.c_str());
+        int errorReturnValue = rename(getPath().c_str(), newPath.c_str());
         isSuccessful = errorReturnValue == 0;
         if (!isSuccessful) {
-            cerr << "Error in AlbaLinuxPathHandler::renameFile() path:[" << getFullPath() << "] newFileName:["
+            cerr << "Error in AlbaLinuxPathHandler::renameFile() path:[" << getPath() << "] newFileName:["
                  << newFileName << "] 'rename' error value:[" << errorReturnValue << "]\n";
         } else {
             input(newPath);
@@ -183,17 +183,17 @@ bool AlbaLinuxPathHandler::renameFile(string_view const newFileName) {
 bool AlbaLinuxPathHandler::renameImmediateDirectory(string_view const newDirectoryName) {
     bool isSuccessful(false);
     if (isDirectory()) {
-        AlbaLinuxPathHandler newPathHandler(getFullPath());
+        AlbaLinuxPathHandler newPathHandler(getPath());
         newPathHandler.goUp();
         newPathHandler.input(newPathHandler.getDirectory() + m_slashCharacterString + string(newDirectoryName));
-        int errorReturnValue = rename(getFullPath().c_str(), newPathHandler.getFullPath().c_str());
+        int errorReturnValue = rename(getPath().c_str(), newPathHandler.getPath().c_str());
         isSuccessful = errorReturnValue == 0;
         if (!isSuccessful) {
-            cerr << "Error in AlbaLinuxPathHandler::renameImmediateDirectory() path:[" << getFullPath()
+            cerr << "Error in AlbaLinuxPathHandler::renameImmediateDirectory() path:[" << getPath()
                  << "] newDirectoryName:[" << newDirectoryName << "] 'rename' error value:[" << errorReturnValue
                  << "]\n";
         } else {
-            input(newPathHandler.getFullPath());
+            input(newPathHandler.getPath());
         }
     }
     return isSuccessful;
@@ -210,7 +210,7 @@ bool AlbaLinuxPathHandler::isPathADirectory(string_view const fileOrDirectoryNam
         if (0 == stat(fileOrDirectoryName.data(), &statBuffer)) {
             result = S_ISDIR(statBuffer.st_mode);
         } else if (errno != 0) {
-            cerr << "Error in AlbaLinuxPathHandler::isPathADirectory() path:[" << getFullPath()
+            cerr << "Error in AlbaLinuxPathHandler::isPathADirectory() path:[" << getPath()
                  << "] 'stat' errno value:[" << errno << "] error message:[" << getErrorMessage(errno) << "]\n";
         }
     }

@@ -21,9 +21,9 @@ TEST(AprgGraphTest, DISABLED_BitmapGraph24Bits) {
     AlbaLocalPathHandler defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);
     AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
     graphOutputFile.deleteFile();
-    defaultFile.copyToNewFile(graphOutputFile.getFullPath());
+    defaultFile.copyToNewFile(graphOutputFile.getPath());
 
-    AprgGraph graph(graphOutputFile.getFullPath(), BitmapXY(800, 450), BitmapDoubleXY(50, 50));
+    AprgGraph graph(graphOutputFile.getPath(), BitmapXY(800, 450), BitmapDoubleXY(50, 50));
     graph.drawGrid(BitmapDoubleXY(static_cast<double>(5), static_cast<double>(5)));
     graph.drawLine(Line(1, 1, 1), 0x00FF0000);
     graph.drawCircle(Circle(Point(0, 0), 10), 0x000000FF);
@@ -53,9 +53,9 @@ TEST(AprgGraphTest, DISABLED_TemporaryTest) {
     AlbaLocalPathHandler defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);
     AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
     graphOutputFile.deleteFile();
-    defaultFile.copyToNewFile(graphOutputFile.getFullPath());
+    defaultFile.copyToNewFile(graphOutputFile.getPath());
 
-    AprgGraph graph(graphOutputFile.getFullPath(), BitmapXY(800, 450), BitmapDoubleXY(50, 50));
+    AprgGraph graph(graphOutputFile.getPath(), BitmapXY(800, 450), BitmapDoubleXY(50, 50));
     graph.drawGrid(BitmapDoubleXY(static_cast<double>(5), static_cast<double>(5)));
 
     Equation const equation(buildEquationIfPossible("x^x = y"));

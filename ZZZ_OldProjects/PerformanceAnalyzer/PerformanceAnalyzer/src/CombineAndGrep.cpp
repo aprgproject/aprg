@@ -11,7 +11,7 @@ using namespace std;
 namespace alba {
 
 CombineAndGrep::CombineAndGrep(string const& outputFilePath, string const& grepString)
-    : m_outputFileStream(AlbaLocalPathHandler(outputFilePath).getFullPath()), m_grepString(grepString) {}
+    : m_outputFileStream(AlbaLocalPathHandler(outputFilePath).getPath()), m_grepString(grepString) {}
 
 void CombineAndGrep::processDirectory(string const& inputDirectoryPath) {
     AlbaLocalPathHandler const inputDirectoryPathHandler(inputDirectoryPath);
@@ -27,7 +27,7 @@ void CombineAndGrep::processDirectory(string const& inputDirectoryPath) {
 void CombineAndGrep::processFile(string const& inputFilePath) {
     AlbaLocalPathHandler const inputFilePathHandler(inputFilePath);
     cout << "processFile() inputFilePath:" << inputFilePath << "\n";
-    ifstream inputFileStream(inputFilePathHandler.getFullPath());
+    ifstream inputFileStream(inputFilePathHandler.getPath());
     AlbaFileReader fileToRead(inputFileStream);
     while (fileToRead.isNotFinished()) {
         string const lineFromFile(fileToRead.getLineAndIgnoreWhiteSpaces());

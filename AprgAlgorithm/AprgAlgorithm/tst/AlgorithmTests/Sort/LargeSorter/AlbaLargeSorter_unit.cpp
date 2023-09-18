@@ -65,14 +65,14 @@ ostream& operator<<(ostream& out, TestObject const& testObject) {
 
 TEST(AlbaLargeSorterTest, ObjectsCanBeSavedAndLoadFromFile) {
     AlbaLocalPathHandler const localPathHandler(ALBA_LARGE_SORTER_TEST_FILE);
-    ofstream outputTestFile(localPathHandler.getFullPath());
+    ofstream outputTestFile(localPathHandler.getPath());
     outputTestFile << TestObject(0, 0, '0', "") << "\n";
     outputTestFile << TestObject(1, 1.1, 'a', "firstString") << "\n";
     outputTestFile << TestObject(2000, 1.222, 'b', "secondString") << "\n";
     outputTestFile << TestObject(333333, 3.3, 'c', "thirdString") << "\n";
     outputTestFile.close();
 
-    ifstream inputTestFile(localPathHandler.getFullPath());
+    ifstream inputTestFile(localPathHandler.getPath());
     TestObject testObject;
     inputTestFile >> testObject;
     EXPECT_EQ(0, testObject.valueInteger);
@@ -238,9 +238,9 @@ TEST(AlbaLargeSorterTest, FileHandlerWorksAsFileAreWrittenAtTheEndAgainAfterRele
     fileHandler.releaseFileStream();
 
     AlbaLocalPathHandler const inputPathHandler(ALBA_LARGE_SORTER_TEST_FILE);
-    ASSERT_TRUE(inputPathHandler.isFoundInLocalSystem());
+    ASSERT_TRUE(inputPathHandler.doesExist());
     int valueFromFile = 0;
-    ifstream inputTestFile(inputPathHandler.getFullPath());
+    ifstream inputTestFile(inputPathHandler.getPath());
     ASSERT_TRUE(inputTestFile.is_open());
     inputTestFile >> valueFromFile;
     EXPECT_EQ(1, valueFromFile);
@@ -303,13 +303,13 @@ TEST(AlbaLargeSorterTest, PrimitiveDataTypesForBlocksAreCreatedWhenBlocksWhenMem
 
     int integerInFile = 0;
     ifstream inputTestFile0(
-        AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_1.txt)").getFullPath());
+        AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_1.txt)").getPath());
     ifstream inputTestFile1(
-        AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_2.txt)").getFullPath());
+        AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_2.txt)").getPath());
     ifstream inputTestFile2(
-        AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_3.txt)").getFullPath());
+        AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_3.txt)").getPath());
     ifstream inputTestFile3(
-        AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_4.txt)").getFullPath());
+        AlbaLocalPathHandler(string(ALBA_LARGE_SORTER_BLOCK_DIR) + R"(\BLOCK_4.txt)").getPath());
     ASSERT_TRUE(inputTestFile0.is_open());
     inputTestFile0 >> integerInFile;
     EXPECT_EQ(0, integerInFile);

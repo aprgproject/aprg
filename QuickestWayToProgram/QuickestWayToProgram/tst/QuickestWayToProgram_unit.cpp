@@ -236,7 +236,7 @@ TEST(SampleTest, CountNumberOfLinesOnFiles) {
             !stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(filePathHandler.getDirectory(), "CImg") &&
             !stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(filePathHandler.getDirectory(), "curl") &&
             !stringHelper::isStringFoundInsideTheOtherStringCaseSensitive(filePathHandler.getDirectory(), "zlib128")) {
-            ifstream fileStream(filePathHandler.getFullPath());
+            ifstream fileStream(filePathHandler.getPath());
             AlbaFileReader fileReader(fileStream);
             while (fileReader.isNotFinished()) {
                 fileReader.getLine();
@@ -342,7 +342,7 @@ TEST(SampleTest, FindSourceFilesToAdjust_FileList) {
             if ((extensionInCapitals == "C" || extensionInCapitals == "CPP" || extensionInCapitals == "H" ||
                  extensionInCapitals == "HPP") &&
                 !(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
-                    filePathHandler.getFullPath(), "CP_LINUX")
+                    filePathHandler.getPath(), "CP_LINUX")
 
                       )) {
                 ifstream logStream(filePath);
@@ -397,11 +397,11 @@ TEST(SampleTest, FindSourceFilesToAdjust_FileList) {
             string extensionInCapitals(stringHelper::getStringWithCapitalLetters(filePathHandler.getExtension()));
             if ((extensionInCapitals == "C" || extensionInCapitals == "CPP") &&
                 !(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
-                      filePathHandler.getFullPath(), "CP_MEAS") ||
+                      filePathHandler.getPath(), "CP_MEAS") ||
                   stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
-                      filePathHandler.getFullPath(), "CP_LINUX") ||
+                      filePathHandler.getPath(), "CP_LINUX") ||
                   stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
-                      filePathHandler.getFullPath(), "CP_TOAM")
+                      filePathHandler.getPath(), "CP_TOAM")
 
                       )) {
                 AlbaLocalPathHandler headerFileWithH(
@@ -412,12 +412,12 @@ TEST(SampleTest, FindSourceFilesToAdjust_FileList) {
                     string(R"(#include ")") + filePathHandler.getFilenameOnly() + string(R"(.h")");
                 string headerIncludeWithHpp =
                     string(R"(#include ")") + filePathHandler.getFilenameOnly() + string(R"(.hpp")");
-                bool isHeaderFileWithH = headerFileWithH.isFoundInLocalSystem();
-                bool isHeaderFileWithHpp = headerFileWithHpp.isFoundInLocalSystem();
+                bool isHeaderFileWithH = headerFileWithH.doesExist();
+                bool isHeaderFileWithHpp = headerFileWithHpp.doesExist();
 
                 if (isHeaderFileWithH || isHeaderFileWithHpp)
                     // &&
-stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(filePathHandler.getFullPath(),
+stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(filePathHandler.getPath(),
 R"(CP_DMGR\src\messages\MessageHandler)"))
                 {
     ifstream logStream(filePath);
@@ -441,7 +441,7 @@ R"(CP_DMGR\src\messages\MessageHandler)"))
             // ALBA_INF_PRINT3(cout, stringToAnalyze, isHeaderFileWithHpp, headerIncludeWithHpp);
         }
         if (isHeaderIncludeWithQuotationsFound == false) {
-            ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
+            ALBA_INF_PRINT1(cout, filePathHandler.getPath());
         }
     }
 }
@@ -466,11 +466,11 @@ TEST(SampleTest, FindHeaderFilesToAdjust_FileList) {
             string extensionInCapitals(stringHelper::getStringWithCapitalLetters(filePathHandler.getExtension()));
             if ((extensionInCapitals == "H" || extensionInCapitals == "HPP") &&
                 !(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
-                      filePathHandler.getFullPath(), "CP_MEAS") ||
+                      filePathHandler.getPath(), "CP_MEAS") ||
                   stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
-                      filePathHandler.getFullPath(), "CP_LINUX") ||
+                      filePathHandler.getPath(), "CP_LINUX") ||
                   stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
-                      filePathHandler.getFullPath(), "CP_TOAM")
+                      filePathHandler.getPath(), "CP_TOAM")
 
                       )) {
                 ifstream logStream(filePath);
@@ -481,14 +481,14 @@ TEST(SampleTest, FindHeaderFilesToAdjust_FileList) {
                         string lineInFile(logFileReader.getLineAndIgnoreWhiteSpaces());
                         string stringToAnalyze(lineInFile);
                         if (stringToAnalyze == "#pragma once") {
-                            // ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
+                            // ALBA_INF_PRINT1(cout, filePathHandler.getPath());
                             // ALBA_INF_PRINT1(cout, stringToAnalyze);
                             isPragmaOnceFound = true;
                             break;
                         }
                     }
                     if (isPragmaOnceFound == false) {
-                        ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
+                        ALBA_INF_PRINT1(cout, filePathHandler.getPath());
                     }
                 }
             }
@@ -507,10 +507,10 @@ TEST(SampleTest, FindSourceFilesToAdjust_FromDirectory) {
         string extensionInCapitals(stringHelper::getStringWithCapitalLetters(filePathHandler.getExtension()));
         if ((extensionInCapitals == "H" || extensionInCapitals == "HPP") &&
             !(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
-                  filePathHandler.getFullPath(), "CP_MEAS") ||
+                  filePathHandler.getPath(), "CP_MEAS") ||
               stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
-                  filePathHandler.getFullPath(), "CP_LINUX") ||
-              stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(filePathHandler.getFullPath(), "CP_TOAM")
+                  filePathHandler.getPath(), "CP_LINUX") ||
+              stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(filePathHandler.getPath(), "CP_TOAM")
 
                   )) {
             ifstream logStream(file);
@@ -523,7 +523,7 @@ TEST(SampleTest, FindSourceFilesToAdjust_FromDirectory) {
 fw") || stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(stringToAnalyze, "using fw::")
                             )
                     {
-                        ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
+                        ALBA_INF_PRINT1(cout, filePathHandler.getPath());
                         ALBA_INF_PRINT1(cout, lineInFile);
                         cout << "\n";
                         break;
@@ -545,10 +545,10 @@ TEST(SampleTest, FindSourceFilesToAdjust_FromDirectory) {
         string extensionInCapitals(stringHelper::getStringWithCapitalLetters(filePathHandler.getExtension()));
         if ((extensionInCapitals == "C" || extensionInCapitals == "CPP") &&
             !(stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
-                  filePathHandler.getFullPath(), "CP_MEAS") ||
+                  filePathHandler.getPath(), "CP_MEAS") ||
               stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
-                  filePathHandler.getFullPath(), "CP_LINUX") ||
-              stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(filePathHandler.getFullPath(), "CP_TOAM")
+                  filePathHandler.getPath(), "CP_LINUX") ||
+              stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(filePathHandler.getPath(), "CP_TOAM")
 
                   )) {
             ifstream logStream(file);
@@ -567,7 +567,7 @@ TEST(SampleTest, FindSourceFilesToAdjust_FromDirectory) {
                     stringHelper::replaceAllAndReturnIfFound(stringToAnalyze, "fw::ObjectManager", "");
                     stringHelper::replaceAllAndReturnIfFound(stringToAnalyze, "using CommonLogger = fw::", "");
                     if (stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(stringToAnalyze, "fw::")) {
-                        ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
+                        ALBA_INF_PRINT1(cout, filePathHandler.getPath());
                         ALBA_INF_PRINT1(cout, lineInFile);
                         cout << "\n";
                         break;
@@ -594,7 +594,7 @@ TEST(SampleTest, FindNearEmptyFiles) {
                 !stringHelper::isStringFoundInsideTheOtherStringNotCaseSensitive(
                     filePathHandler.getFile(), "_cppc_sup") &&
                 filePathHandler.getFileSizeEstimate() < 50) {
-                ALBA_INF_PRINT1(cout, filePathHandler.getFullPath());
+                ALBA_INF_PRINT1(cout, filePathHandler.getPath());
             }
         }
     }
@@ -647,8 +647,8 @@ TEST(SampleTest, ExtractFilesAndCopyLogsForSctTests) {
     for (string const& file : files) {
         AlbaLocalPathHandler filePath(file);
         if (filePath.getExtension() == "zip") {
-            ALBA_INF_PRINT1(cout, filePath.getFullPath());
-            fileExtractor.extractAllRelevantFiles(filePath.getFullPath());
+            ALBA_INF_PRINT1(cout, filePath.getPath());
+            fileExtractor.extractAllRelevantFiles(filePath.getPath());
         }
     }
 
@@ -658,13 +658,13 @@ TEST(SampleTest, ExtractFilesAndCopyLogsForSctTests) {
     inputDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
     for (string const& file : files) {
         string newFilePath(file);
-        stringHelper::replaceAllAndReturnIfFound(newFilePath, inputDirectoryPathHandler.getFullPath(), "");
+        stringHelper::replaceAllAndReturnIfFound(newFilePath, inputDirectoryPathHandler.getPath(), "");
         newFilePath =
             stringHelper::getStringAfterThisString(stringHelper::getStringAfterThisString(newFilePath, R"(\)"), R"(\)");
         if (!newFilePath.empty()) {
-            AlbaLocalPathHandler newFilePathHandler(outputDirectoryPathHandler.getFullPath() + newFilePath);
+            AlbaLocalPathHandler newFilePathHandler(outputDirectoryPathHandler.getPath() + newFilePath);
             newFilePathHandler.createDirectoriesForNonExisitingDirectories();
-            AlbaLocalPathHandler(file).copyToNewFile(newFilePathHandler.getFullPath());
+            AlbaLocalPathHandler(file).copyToNewFile(newFilePathHandler.getPath());
         }
     }
 }
@@ -702,7 +702,7 @@ TEST(SampleTest, LrmDirectoriesToFind) {
 TEST(SampleTest, FormatPrints) {
     AlbaLocalPathHandler pathHandler(R"(C:\ZZZ_Logs\PR400441\LF_DSS_OFF\WholeLogsToAnalyze_NoTimeStamp.log)");
     ofstream formattedLogStream(R"(C:\ZZZ_Logs\PR400441\LF_DSS_OFF\WholeLogsToAnalyze_Sorted.log)");
-    ifstream logStream(pathHandler.getFullPath());
+    ifstream logStream(pathHandler.getPath());
 
     set<string> uniqueAndSortedStrings;
     if (logStream.is_open()) {
@@ -728,7 +728,7 @@ void saveMaxLengthString(string& finalPrint, unsigned int& maxLength, string con
 TEST(SampleTest, FormatPrints) {
     AlbaLocalPathHandler pathHandler(R"(C:\ZZZ_Logs\PR400441\SF_DSS_ON\WholeLogsToAnalyze.log)");
     ofstream formattedLogStream(R"(C:\ZZZ_Logs\PR400441\SF_DSS_ON\WholeLogsToAnalyze_NoTimeStamp.log)");
-    ifstream logStream(pathHandler.getFullPath());
+    ifstream logStream(pathHandler.getPath());
 
     if (logStream.is_open()) {
         AlbaFileReader logFileReader(logStream);
@@ -775,11 +775,11 @@ string getNearestLine(vector<string> const& lines, string const& lineInOriginal)
 
 TEST(SampleTest, LogComparePrints) {
     AlbaLocalPathHandler originalPathHandler(R"(C:\ZZZ_Logs\PR400441\LF_DSS_ON\24518_formatted.log)");
-    ifstream originalLogStream(originalPathHandler.getFullPath());
+    ifstream originalLogStream(originalPathHandler.getPath());
     AlbaLocalPathHandler log1PathHandler(R"(C:\ZZZ_Logs\PR400441\LF_DSS_OFF\24518_formatted.log)");
-    ifstream log1LogStream(log1PathHandler.getFullPath());
+    ifstream log1LogStream(log1PathHandler.getPath());
     AlbaLocalPathHandler log2LcgPathHandler(R"(C:\ZZZ_Logs\PR400441\SF_DSS_ON\24518_formatted.log)");
-    ifstream log2LcgLogStream(log2LcgPathHandler.getFullPath());
+    ifstream log2LcgLogStream(log2LcgPathHandler.getPath());
     ofstream resultsLogStream(R"(C:\ZZZ_Logs\PR381361\Compare\Results.log)");
 
     vector<string> linesInOriginal;
@@ -860,7 +860,7 @@ void saveMaxLengthString(string& finalPrint, unsigned int& maxLength, string con
 TEST(SampleTest, FormatPrints) {
     AlbaLocalPathHandler pathHandler(R"(C:\ZZZ_Logs\PR400441\LF_DSS_OFF\24518.log)");
     ofstream formattedLogStream(R"(C:\ZZZ_Logs\PR400441\LF_DSS_OFF\24518_formatted.log)");
-    ifstream logStream(pathHandler.getFullPath());
+    ifstream logStream(pathHandler.getPath());
 
     if (logStream.is_open()) {
         AlbaFileReader logFileReader(logStream);
@@ -930,7 +930,7 @@ TEST(SampleTest, Shit) {
 TEST(SampleTest, CounterOfCounts) {
     AlbaLocalPathHandler pathHandler(
         R"(H:\Logs\111_MessagePoolExhaustion\09_09_2018\TC_2_LRM_RL_SETUP_REQ_MSG_queue.log)");
-    ifstream queueLogStream(pathHandler.getFullPath());
+    ifstream queueLogStream(pathHandler.getPath());
 
     map<int, string> highestJumpsQueueLengths;
     map<int, string> highestJumpsMsgQueueingTimes;
@@ -990,7 +990,7 @@ TEST(SampleTest, CounterOfCounts) {
 TEST(SampleTest, MessageIdCounter) {
     AlbaLocalPathHandler pathHandler(
         R"(H:\Logs\111_MessagePoolExhaustion\09_09_2018\TC_2_LRM_RL_SETUP_REQ_MSG_queue.log)");
-    ifstream queueLogStream(pathHandler.getFullPath());
+    ifstream queueLogStream(pathHandler.getPath());
 
     map<unsigned int, unsigned int> lastMsgRcvdToCount;
     map<unsigned int, unsigned int> lastMsgSentToCount;
@@ -1101,7 +1101,7 @@ TEST(SampleTest, BindingToClassMethod) {
 
 TEST(SampleTest, CompareProfileToLogsInStreamRoutingPoC) {
     AlbaLocalPathHandler pathHandler(R"(D:\userdata\malba\Desktop\StreamPoC\GSM\WG1_5_GSM_v2.json)");
-    ifstream profileStream(pathHandler.getFullPath());
+    ifstream profileStream(pathHandler.getPath());
 
     map<unsigned int, string> ratTypeToAddressMap;
     if (profileStream.is_open()) {
@@ -1150,7 +1150,7 @@ TEST(SampleTest, CompareProfileToLogsInStreamRoutingPoC) {
 
 TEST(SampleTest, CompareProfileToLogsInStreamRoutingPoC) {
     AlbaLocalPathHandler pathHandler(R"(D:\userdata\malba\Desktop\StreamPoC\GSM\WG1_5_GSM_v2.json)");
-    ifstream profileStream(pathHandler.getFullPath());
+    ifstream profileStream(pathHandler.getPath());
 
     map<unsigned int, string> ratTypeToAddressMap;
     if (profileStream.is_open()) {
@@ -1196,7 +1196,7 @@ TEST(SampleTest, CompareProfileToLogsInStreamRoutingPoC) {
         }
     }
     AlbaLocalPathHandler murrkuLogsPathHandler(R"(D:\userdata\malba\Desktop\StreamPoC\GSM\analyzeMurkkuLogs.txt)");
-    ifstream murrkuLogsStream(murrkuLogsPathHandler.getFullPath());
+    ifstream murrkuLogsStream(murrkuLogsPathHandler.getPath());
 
     if (murrkuLogsStream.is_open()) {
         AlbaFileReader murrkuLogsFileReader(murrkuLogsStream);
@@ -1214,7 +1214,7 @@ TEST(SampleTest, CompareProfileToLogsInStreamRoutingPoC) {
 
 TEST(SampleTest, SaveGetDifferenceFromGreaterMultipleToCsv) {
     AlbaLocalPathHandler pathHandler(R"(C:\APRG\GetDifferenceFromGreaterMultipleGraph.txt)");
-    ofstream csvFile(pathHandler.getFullPath());
+    ofstream csvFile(pathHandler.getPath());
 
     csvFile << "size = [\n";
     for (unsigned int multiple = 0; multiple < 20; multiple++) {
@@ -1236,9 +1236,9 @@ TEST(SampleTest, MessageIds_test) {
         R"(D:\Branches\trunk\wbts_integration\I_Interface\Application_Env\Wn_Env\Bs_Env\Messages\MessageId_TcomDsp.h)");
     AlbaLocalPathHandler pathHandler3(R"(D:\ZZZ_Logs\PR212221\LRMJairus\MessageHistoryBeforeCorruption.txt)");
 
-    ifstream tcomTcomFile(pathHandler.getFullPath());
-    ifstream tcomDspile(pathHandler2.getFullPath());
-    ifstream messageMapFile(pathHandler3.getFullPath());
+    ifstream tcomTcomFile(pathHandler.getPath());
+    ifstream tcomDspile(pathHandler2.getPath());
+    ifstream messageMapFile(pathHandler3.getPath());
 
     map<unsigned int, string> messageIds;
     if (tcomTcomFile.is_open()) {
@@ -1349,7 +1349,7 @@ cout<<"beforeThisYear"<<(beforeThisYear/4)<<","<<(beforeThisYear/100)<<","<<(bef
 
 TEST(SampleTest, DateTimeAlgorithm) {
     AlbaLocalPathHandler pathHandler(R"(C:\APRG\DateMonthStudy2.csv)");
-    ofstream fileOutput(pathHandler.getFullPath());
+    ofstream fileOutput(pathHandler.getPath());
 
     fileOutput << "month,days\n";
 
@@ -1421,8 +1421,8 @@ TEST(SampleTest, DISABLED_ComparisonOfResultsOfTwoAlgorithms) {
     AlbaLocalPathHandler pathOfNewAlgorithm(R"(D:\userdata\malba\Desktop\Prontos\PR235148\NewResults.csv)");
     AlbaLocalPathHandler pathOfOldAlgorithm(R"(D:\userdata\malba\Desktop\Prontos\PR235148\OldResults.csv)");
 
-    ifstream newAlgoResultFile(pathOfNewAlgorithm.getFullPath());
-    ifstream oldAlgoResultFile(pathOfOldAlgorithm.getFullPath());
+    ifstream newAlgoResultFile(pathOfNewAlgorithm.getPath());
+    ifstream oldAlgoResultFile(pathOfOldAlgorithm.getPath());
     AlbaFileReader newAlgoReader(newAlgoResultFile);
     AlbaFileReader oldAlgoReader(oldAlgoResultFile);
 
@@ -1439,7 +1439,7 @@ TEST(SampleTest, DISABLED_ComparisonOfResultsOfTwoAlgorithms) {
 
 TEST(SampleTest, DISABLED_RlhNewLogic) {
     AlbaLocalPathHandler pathHandler(R"(D:\userdata\malba\Desktop\Prontos\PR235148\NewResults.csv)");
-    ofstream fileOutput(pathHandler.getFullPath());
+    ofstream fileOutput(pathHandler.getPath());
 
     fileOutput << "CurrentSfn,CalculatedSfn,ShiftedSfn\n";
     for (u32 currentSfn = 0; currentSfn <= 4096; currentSfn++) {
@@ -1452,7 +1452,7 @@ TEST(SampleTest, DISABLED_RlhNewLogic) {
 
 TEST(SampleTest, DISABLED_RlhOldLogic) {
     AlbaLocalPathHandler pathHandler(R"(D:\userdata\malba\Desktop\Prontos\PR235148\OldResults.csv)");
-    ofstream fileOutput(pathHandler.getFullPath());
+    ofstream fileOutput(pathHandler.getPath());
 
     fileOutput << "CurrentSfn,CalculatedSfn,ShiftedSfn\n";
     for (u32 currentSfn = 0; currentSfn <= 4096; currentSfn++) {
@@ -1490,10 +1490,10 @@ pathHandler(R"(D:\Branches\trunk\I_Interface\Private\SC_TCOM\Messages\MessageId_
         AlbaLocalPathHandler pathHandler3(R"(D:\userdata\malba\Desktop\SCTRoutes\Unedited\routeList_VM.xml)");
         AlbaLocalPathHandler pathHandler4(R"(D:\userdata\malba\Desktop\SCTRoutes\MessageId_comparison.csv)");
 
-        ifstream tcomTcomFile(pathHandler.getFullPath());
-        ifstream routeListFile(pathHandler3.getFullPath());
-        ofstream xmlFormattedFile(pathHandler2.getFullPath());
-        ofstream messageIdComparisonFile(pathHandler4.getFullPath());
+        ifstream tcomTcomFile(pathHandler.getPath());
+        ifstream routeListFile(pathHandler3.getPath());
+        ofstream xmlFormattedFile(pathHandler2.getPath());
+        ofstream messageIdComparisonFile(pathHandler4.getPath());
 
         xmlFormattedFile << "<messages>\n";
 
@@ -1576,8 +1576,8 @@ pathHandler(R"(D:\Branches\trunk\I_Interface\Private\SC_TCOM\Messages\MessageId_
         AlbaLocalPathHandler pathHandler2(
             R"(D:\W\ZZZ_Useless_Logs\RAN2861MegaplexerHang\WiresharkMegaPlexerDumpFixed.txt)");
 
-        ifstream wiresharkDumpFile(pathHandler.getFullPath());
-        ofstream wiresharkDumpFileFixed(pathHandler2.getFullPath(), ofstream::binary);
+        ifstream wiresharkDumpFile(pathHandler.getPath());
+        ofstream wiresharkDumpFileFixed(pathHandler2.getPath(), ofstream::binary);
         if (wiresharkDumpFile.is_open()) {
             AlbaFileReader wiresharkDumpFileReader(wiresharkDumpFile);
             while (wiresharkDumpFileReader.isNotFinished()) {
@@ -1623,7 +1623,7 @@ pathHandler(R"(D:\Branches\trunk\I_Interface\Private\SC_TCOM\Messages\MessageId_
     void checkTrace() {
         AlbaLocalPathHandler pathHandler(R"(D:\W\ZZZ_Useless_Logs\RAN2861_slow\PS
 NRT\1100_MegaPlexer\Ip_10.68.159.157_41786_544_160706_110531.codec.wtbin)");
-        ifstream megaplexerStream(pathHandler.getFullPath(), ifstream::binary);
+        ifstream megaplexerStream(pathHandler.getPath(), ifstream::binary);
         if (megaplexerStream.is_open()) {
             char fourBytes[4];
             megaplexerStream.read(fourBytes, 4);
@@ -1660,7 +1660,7 @@ NRT\1100_MegaPlexer\Ip_10.68.159.157_41786_544_160706_110531.codec.wtbin)");
         ListOfPaths directories;
         supplementaryDirectory.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
 
-        ofstream supplementaryHeaderFile(supplementaryHeaderFilePath.getFullPath());
+        ofstream supplementaryHeaderFile(supplementaryHeaderFilePath.getPath());
         for (string const& file : files) {
             AlbaLocalPathHandler filePath(file);
             supplementaryHeaderFile << "#include <" << filePath.getFile() << ">\n";
@@ -1671,11 +1671,11 @@ NRT\1100_MegaPlexer\Ip_10.68.159.157_41786_544_160706_110531.codec.wtbin)");
         AlbaLocalPathHandler currentDirectory(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
         AlbaLocalPathHandler featureSpecificDirectory(currentDirectory.getDirectory());
 
-        ifstream componentNameFile(featureSpecificDirectory.getFullPath() + "ComponentName.hpp");
-        ofstream addComponentFile(featureSpecificDirectory.getFullPath() + "AddComponent.hpp");
-        ofstream componentsIncludesFile(featureSpecificDirectory.getFullPath() + "ComponentsIncludes.hpp");
+        ifstream componentNameFile(featureSpecificDirectory.getPath() + "ComponentName.hpp");
+        ofstream addComponentFile(featureSpecificDirectory.getPath() + "AddComponent.hpp");
+        ofstream componentsIncludesFile(featureSpecificDirectory.getPath() + "ComponentsIncludes.hpp");
         ofstream convertToStringComponentNameFile(
-            featureSpecificDirectory.getFullPath() + "ConvertToStringComponentName.hpp");
+            featureSpecificDirectory.getPath() + "ConvertToStringComponentName.hpp");
 
         AlbaFileReader componentNameFileReader(componentNameFile);
         while (componentNameFileReader.isNotFinished()) {
@@ -1773,7 +1773,7 @@ NRT\1100_MegaPlexer\Ip_10.68.159.157_41786_544_160706_110531.codec.wtbin)");
 
     TEST(SampleTest, FindThoseIpAddresses) {
         AlbaLocalPathHandler fileToReadHandler(R"(D:\ZZZ_Logs\NSASampleSnapshots\SampleSnapshots\sorted.log)");
-        ifstream fileToReadStream(fileToReadHandler.getFullPath());
+        ifstream fileToReadStream(fileToReadHandler.getPath());
         AlbaFileReader fileToRead(fileToReadStream);
         ofstream ipAddressesFile(fileToReadHandler.getDirectory() + "IpAddresses.txt");
         ofstream ipAddressesFile25(fileToReadHandler.getDirectory() + "IpAddresses25.txt");

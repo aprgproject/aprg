@@ -115,9 +115,9 @@ void gatherAndSaveDataInAnimizeColor(string const& bitmapPath) {
         bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_AnimizeColorData.csv)");
 
     AnimizeColor statistics;
-    statistics.gatherStatistics(bitmapPathHandler.getFullPath());
+    statistics.gatherStatistics(bitmapPathHandler.getPath());
     statistics.calculateNewValues();
-    statistics.saveColorData(colorDataPathHandler.getFullPath());
+    statistics.saveColorData(colorDataPathHandler.getPath());
 }
 
 AnimizeColor::AnimizeColor() = default;

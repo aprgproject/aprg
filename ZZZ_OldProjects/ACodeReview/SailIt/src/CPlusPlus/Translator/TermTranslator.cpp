@@ -31,15 +31,15 @@ TermTranslator::TermTranslator(string const& fileName, Findings& findings, Deque
       m_stringOfPrimitiveTypes{PRIMITIVE_TYPES},
       m_stringOfIgnorableIdentifiers{CPLUSPLUS_IGNORABLE_IDENTIFIERS} {
     AlbaLocalPathHandler pathHandler(fileName);
-    if (pathHandler.isFoundInLocalSystem() && pathHandler.isFile()) {
+    if (pathHandler.doesExist() && pathHandler.isFile()) {
         if (m_fileStream.is_open()) {
             m_isFileValid = true;
         } else {
-            cout << "TermTranslator::constructor| Cannot read cmake file: [" << pathHandler.getFullPath() << "].\n";
+            cout << "TermTranslator::constructor| Cannot read cmake file: [" << pathHandler.getPath() << "].\n";
             cout << "TermTranslator::constructor| Problem in FileI/O!\n";
         }
     } else {
-        cout << "TermTranslator::constructor| Cannot read cmake file: [" << pathHandler.getFullPath() << "].\n";
+        cout << "TermTranslator::constructor| Cannot read cmake file: [" << pathHandler.getPath() << "].\n";
         cout << "TermTranslator::constructor| File does not exist!\n";
     }
 }

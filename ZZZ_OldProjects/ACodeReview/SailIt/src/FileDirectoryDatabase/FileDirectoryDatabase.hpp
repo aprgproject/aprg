@@ -12,7 +12,7 @@ class FileDirectoryDatabase {
 public:
     void printFilesAndDirectories(std::ostream& outputStream) const;
     [[nodiscard]] bool isFileIncluded(string const& baseDirectory, string const& fileName) const;
-    [[nodiscard]] string getFullPathOfFile(string const& baseDirectory, string const& fileName) const;
+    [[nodiscard]] string getPathOfFile(string const& baseDirectory, string const& fileName) const;
     SetOfFiles& getSetOfFilesReference();
     SetOfDirectories& getSetOfDirectoriesReference();
     [[nodiscard]] static bool isFileInFullPath(string const& fullPathFromDatabase, string const& fileName);

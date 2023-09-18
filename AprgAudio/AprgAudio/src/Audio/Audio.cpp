@@ -167,7 +167,7 @@ void Audio<DataType>::setSampleRate(int const newSampleRate) {
 
 template <class DataType>
 bool Audio<DataType>::load(string const& filePath) {
-    ifstream file(AlbaLocalPathHandler(filePath).getFullPath(), ios::binary);
+    ifstream file(AlbaLocalPathHandler(filePath).getPath(), ios::binary);
 
     // check the file exists
     if (!file.good()) {
@@ -436,10 +436,10 @@ template <class DataType>
 bool Audio<DataType>::save(string const& filePath, AudioFormat const format) {
     AlbaLocalPathHandler const filePathHandler(filePath);
     if (format == AudioFormat::Wave) {
-        return saveToWaveFile(filePathHandler.getFullPath());
+        return saveToWaveFile(filePathHandler.getPath());
     }
     if (format == AudioFormat::Aiff) {
-        return saveToAiffFile(filePathHandler.getFullPath());
+        return saveToAiffFile(filePathHandler.getPath());
     }
 
     return false;

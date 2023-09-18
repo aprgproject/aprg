@@ -47,8 +47,8 @@ void GoogleImages::crawl(unsigned int const webLinkIndex) {
 
 bool GoogleImages::checkIfGoogleImagesLink(AlbaWebPathHandler const& webLinkPathHandler) {
     bool result(true);
-    if (!isStringFoundInsideTheOtherStringNotCaseSensitive(webLinkPathHandler.getFullPath(), "youtube")) {
-        cout << "Not a youtube link : " << webLinkPathHandler.getFullPath() << "\n";
+    if (!isStringFoundInsideTheOtherStringNotCaseSensitive(webLinkPathHandler.getPath(), "youtube")) {
+        cout << "Not a youtube link : " << webLinkPathHandler.getPath() << "\n";
         m_webCrawler.saveStateToMemoryCard(CrawlState::LinksAreInvalid);
         result = false;
     }
@@ -57,17 +57,17 @@ bool GoogleImages::checkIfGoogleImagesLink(AlbaWebPathHandler const& webLinkPath
 
 void GoogleImages::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandler) {
     clearLinks();
-    string ssGoogleImagesLink(webLinkPathHandler.getFullPath());
+    string ssGoogleImagesLink(webLinkPathHandler.getPath());
     stringHelper::replaceAllAndReturnIfFound(ssGoogleImagesLink, "youtube", "ssyoutube");
     AlbaWebPathHandler ssGoogleImagesLinkPathHandler(ssGoogleImagesLink);
     AlbaLocalPathHandler downloadPathHandler(m_webCrawler.getTemporaryFilePath());
     downloadPathHandler.deleteFile();
     AutomatedFirefoxBrowser::getInstance().downloadFileWithDefaultSettings(
-        ssGoogleImagesLinkPathHandler.getFullPath(), downloadPathHandler.getFullPath());
-    ifstream htmlFileStream(downloadPathHandler.getFullPath());
+        ssGoogleImagesLinkPathHandler.getPath(), downloadPathHandler.getPath());
+    ifstream htmlFileStream(downloadPathHandler.getPath());
     if (!htmlFileStream.is_open()) {
         cout << "Cannot open html file.\n";
-        cout << "File to read:" << downloadPathHandler.getFullPath() << "\n";
+        cout << "File to read:" << downloadPathHandler.getPath() << "\n";
     } else {
         AlbaFileReader htmlFileReader(htmlFileStream);
         int isDownloadFound(false);
@@ -106,7 +106,7 @@ void GoogleImages::downloadFile(AlbaWebPathHandler const& webLinkPathHandler) {
     temporaryPath.input(temporaryPath.getDirectory());
     temporaryPath.findFilesAndDirectoriesOneDepth("*.*", files, directories);
     unsigned int initialNumberOfFiles(files.size());
-    // AutomatedFirefoxBrowser::getInstance().downloadLinkUsingMozillaFirefoxAndFdm(videoWebPathHandler.getFullPath());
+    // AutomatedFirefoxBrowser::getInstance().downloadLinkUsingMozillaFirefoxAndFdm(videoWebPathHandler.getPath());
     temporaryPath.findFilesAndDirectoriesOneDepth("*.*", files, directories);
     if (initialNumberOfFiles + 1 == files.size()) {
         cout << "Waiting for download to finish\n";

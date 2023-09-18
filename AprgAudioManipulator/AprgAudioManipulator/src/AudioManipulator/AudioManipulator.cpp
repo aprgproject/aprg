@@ -8,7 +8,7 @@ using namespace std;
 namespace alba::AprgAudio {
 
 AudioManipulator::AudioManipulator(std::string const& audioFilePath) : m_filePathHandler(audioFilePath) {
-    m_audio.load(m_filePathHandler.getFullPath());
+    m_audio.load(m_filePathHandler.getPath());
 }
 
 AudioInDouble const& AudioManipulator::getAudio() const { return m_audio; }
@@ -40,7 +40,7 @@ void AudioManipulator::multiplySamplesAtChannelWithValue(int const channelIndex,
 }
 
 void AudioManipulator::saveAudioIntoCurrentFile() {
-    saveAudioIntoFileWithFullFilePath(m_filePathHandler.getFullPath());
+    saveAudioIntoFileWithFullFilePath(m_filePathHandler.getPath());
 }
 
 void AudioManipulator::saveAudioIntoFileInTheSameDirectory(string const& filename) {
@@ -51,9 +51,9 @@ void AudioManipulator::saveAudioIntoFileWithFullFilePath(string const& newFilePa
     AlbaLocalPathHandler const newFilePathHandler(newFilePath);
     string const extension(getStringWithCapitalLetters(newFilePathHandler.getExtension()));
     if (extension == "WAV") {
-        m_audio.save(newFilePathHandler.getFullPath(), AudioFormat::Wave);
+        m_audio.save(newFilePathHandler.getPath(), AudioFormat::Wave);
     } else if (extension == "AIFF") {
-        m_audio.save(newFilePathHandler.getFullPath(), AudioFormat::Aiff);
+        m_audio.save(newFilePathHandler.getPath(), AudioFormat::Aiff);
     }
 }
 

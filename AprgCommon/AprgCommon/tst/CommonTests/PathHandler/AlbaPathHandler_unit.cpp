@@ -11,27 +11,27 @@ namespace alba {
 
 TEST(AlbaPathHandlerTest, GoUpUntilLastFolder) {
     AlbaPathHandler pathHandler(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)", R"(\)");
-    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)", pathHandler.getFullPath());
+    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\tst\76543.txt)", pathHandler.getPath());
     EXPECT_EQ(PathType::File, pathHandler.getPathType());
 
     pathHandler.goUp();
-    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\)", pathHandler.getFullPath());
+    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\Aprg1111Common\)", pathHandler.getPath());
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
 
     pathHandler.goUp();
-    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\)", pathHandler.getFullPath());
+    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\Aprg!@#$%Common\)", pathHandler.getPath());
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
 
     pathHandler.goUp();
-    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\)", pathHandler.getFullPath());
+    EXPECT_EQ(R"(APRG_DRIVE:\APRG12345\)", pathHandler.getPath());
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
 
     pathHandler.goUp();
-    EXPECT_EQ(R"(APRG_DRIVE:\)", pathHandler.getFullPath());
+    EXPECT_EQ(R"(APRG_DRIVE:\)", pathHandler.getPath());
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
 
     pathHandler.goUp();
-    EXPECT_EQ(R"(APRG_DRIVE:\)", pathHandler.getFullPath());
+    EXPECT_EQ(R"(APRG_DRIVE:\)", pathHandler.getPath());
     EXPECT_EQ(PathType::Directory, pathHandler.getPathType());
 }
 

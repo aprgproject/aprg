@@ -19,7 +19,7 @@ int main(int const argc, char *argv[]) {
         AlbaLocalPathHandler pathToProcess(getStringWithoutCharAtTheEnd(argumentsInMain[1], '"'));
 
         UserInterface ui;
-        ui.setPath(pathToProcess.getFullPath());
+        ui.setPath(pathToProcess.getPath());
         ui.askUserForMainDetails();
         ui.askUserForFormDetails();
 

@@ -14,7 +14,7 @@ using namespace std;
 namespace alba {
 
 SackReader::SackReader(string const& path, string const& pathOfLog) : m_path(path), m_pathOfLog(pathOfLog) {
-    m_path = AlbaLocalPathHandler(path).getFullPath();
+    m_path = AlbaLocalPathHandler(path).getPath();
 }
 
 string SackReader::getFileFullPath(string const& fileName) const { return m_database.getFileFullPath(fileName); }
@@ -28,7 +28,7 @@ void SackReader::gatherAllFiles() {
         AlbaLocalPathHandler filePathHandler(file);
         string extension(filePathHandler.getExtension());
         if ("c" == extension || "cpp" == extension || "h" == extension || "hpp" == extension || "sig" == extension) {
-            m_database.fileToPathMap.emplace(filePathHandler.getFile(), filePathHandler.getFullPath());
+            m_database.fileToPathMap.emplace(filePathHandler.getFile(), filePathHandler.getPath());
         }
     }
 }

@@ -206,7 +206,7 @@ TEST(BtsLogTimeTest, TheDataCanBeSavedToAndRetrieveFromFile) {
     string const pathOfTempFile(
         AlbaLocalPathHandler(
             APRG_DIR R"(\WcdmaTools\WcdmaToolsBackend\FilesForTests\ImportantTestingFiles\TempTestFiles\temp.txt)")
-            .getFullPath());
+            .getPath());
     {
         ofstream outputStream(pathOfTempFile);
         outputStream << sampleLogTime << "\n";

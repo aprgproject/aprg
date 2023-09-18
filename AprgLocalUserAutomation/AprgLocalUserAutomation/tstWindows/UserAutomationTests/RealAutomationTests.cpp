@@ -38,8 +38,8 @@ TEST(RealAutomationTest, DISABLED_TraverseTalonRoShops) {
 
         stringstream fileName;
         fileName << "page_" << page << ".html";
-        AlbaLocalPathHandler const filePathHandler(itemDatabaseFolder.getFullPath() + fileName.str());
-        alba::AlbaWindowsUserAutomation::setStringToClipboard(filePathHandler.getFullPath());
+        AlbaLocalPathHandler const filePathHandler(itemDatabaseFolder.getPath() + fileName.str());
+        alba::AlbaWindowsUserAutomation::setStringToClipboard(filePathHandler.getPath());
         alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
         alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
         alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
@@ -48,7 +48,7 @@ TEST(RealAutomationTest, DISABLED_TraverseTalonRoShops) {
 
         alba::AlbaWindowsUserAutomation::sleep(2000);
 
-        ifstream savedWebPage(filePathHandler.getFullPath());
+        ifstream savedWebPage(filePathHandler.getPath());
         AlbaFileReader fileReader(savedWebPage);
         fileReader.setMaxBufferSize(100000);
         bool isNextDisabled(false);
@@ -90,15 +90,15 @@ TEST(RealAutomationTest, DISABLED_TraverseDatabaseOnRms) {
             alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'S'});
             stringstream fileName;
             fileName << "monsterWithLetter_" << letter << "_pageNumber_" << pageNumber << ".html";
-            AlbaLocalPathHandler const filePathHandler(itemDatabaseFolder.getFullPath() + fileName.str());
-            alba::AlbaWindowsUserAutomation::setStringToClipboard(filePathHandler.getFullPath());
+            AlbaLocalPathHandler const filePathHandler(itemDatabaseFolder.getPath() + fileName.str());
+            alba::AlbaWindowsUserAutomation::setStringToClipboard(filePathHandler.getPath());
             alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
             alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
             alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
             alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
             alba::AlbaWindowsUserAutomation::typeKey(VK_RETURN);
 
-            ifstream savedWebPage(filePathHandler.getFullPath());
+            ifstream savedWebPage(filePathHandler.getPath());
             AlbaFileReader fileReader(savedWebPage);
             bool isNextPageTextFound(false);
             while (fileReader.isNotFinished()) {

@@ -59,10 +59,10 @@ void DoujinMoeCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandle
     clearLinks();
     AlbaLocalPathHandler downloadPathHandler(m_webCrawler.getDownloadDirectory() + R"(\temp.html)");
     downloadFileWithDefaultSettings(webLinkPathHandler, downloadPathHandler);
-    ifstream htmlFileStream(downloadPathHandler.getFullPath());
+    ifstream htmlFileStream(downloadPathHandler.getPath());
     if (!htmlFileStream.is_open()) {
         cout << "Cannot open html file.\n";
-        cout << "File to read:" << downloadPathHandler.getFullPath() << "\n";
+        cout << "File to read:" << downloadPathHandler.getPath() << "\n";
     } else {
         int state = 0;
         AlbaFileReader htmlFileReader(htmlFileStream);
@@ -82,13 +82,13 @@ void DoujinMoeCrawler::retrieveLinks(AlbaWebPathHandler const& webLinkPathHandle
                 if (isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<a href=")")) {
                     AlbaWebPathHandler innerLink(webLinkPathHandler);
                     innerLink.gotoLink(getStringInBetweenTwoStrings(lineInHtmlFile, R"(<a href=")", R"(")"));
-                    m_innerLinks.emplace_back(innerLink.getFullPath());
+                    m_innerLinks.emplace_back(innerLink.getPath());
                 }
             } else if (2 == state) {
                 if (isStringFoundInsideTheOtherStringCaseSensitive(lineInHtmlFile, R"(<djm file=")")) {
                     AlbaWebPathHandler imageLink(webLinkPathHandler);
                     imageLink.gotoLink(getStringInBetweenTwoStrings(lineInHtmlFile, R"(<djm file=")", R"(")"));
-                    m_imageLinks.emplace_back(imageLink.getFullPath());
+                    m_imageLinks.emplace_back(imageLink.getPath());
                 }
             }
         }
@@ -113,7 +113,7 @@ void DoujinMoeCrawler::downloadImages(AlbaWebPathHandler const& webLinkPathHandl
         imageWebPathHandler.gotoLink(imageLink);
         if (!imageWebPathHandler.isFile()) {
             cout << "Image link is not to a file.\n";
-            cout << "ImageWebPath : " << imageWebPathHandler.getFullPath() << "\n";
+            cout << "ImageWebPath : " << imageWebPathHandler.getPath() << "\n";
             m_webCrawler.saveStateToMemoryCard(CrawlState::DownloadedFileIsInvalid);
             return;
         }

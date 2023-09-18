@@ -48,7 +48,7 @@ TEST(SnapshotStatisticsTest, DISABLED_SnapshotFilesRel2) {
     for (string const& filePath : listOfFiles) {
         AlbaLocalPathHandler const localPathHandler(filePath);
         if (localPathHandler.getExtension() == "zip") {
-            statistics.fetchFileSizesForSnapshot(localPathHandler.getFullPath());
+            statistics.fetchFileSizesForSnapshot(localPathHandler.getPath());
         }
     }
     statistics.saveFileListForSnapshot(

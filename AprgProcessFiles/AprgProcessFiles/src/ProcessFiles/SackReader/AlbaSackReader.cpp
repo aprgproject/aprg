@@ -36,9 +36,9 @@ void AlbaSackReader::printAll() const {
 
 void AlbaSackReader::process() {
     if (m_inputPathHandler.isDirectory()) {
-        processDirectory(m_inputPathHandler.getFullPath());
+        processDirectory(m_inputPathHandler.getPath());
     } else {
-        processFile(m_inputPathHandler.getFullPath());
+        processFile(m_inputPathHandler.getPath());
     }
 }
 
@@ -56,7 +56,7 @@ void AlbaSackReader::processFile(string const& path) {
     stringHelper::strings tokens;
     if (m_fileEvaluator.isInvalid() || m_fileEvaluator.evaluate(filePathHandler.getFile())) {
         cout << "ProcessFile: " << path << "\n";
-        ifstream inputLogFileStream(filePathHandler.getFullPath());
+        ifstream inputLogFileStream(filePathHandler.getPath());
         AlbaFileReader fileReader(inputLogFileStream);
         while (fileReader.isNotFinished()) {
             string const line(fileReader.getLineAndIgnoreWhiteSpaces());

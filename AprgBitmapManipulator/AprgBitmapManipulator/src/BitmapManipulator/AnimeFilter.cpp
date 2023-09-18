@@ -16,7 +16,7 @@ void animize(string const& inputFile, string const& outputFile) {
     AlbaLocalTimer localTimer;
     AlbaLocalPathHandler const inputFilePathHandler(inputFile);
     AlbaLocalPathHandler const outputFilePathHandler(outputFile);
-    BitmapFilters bitmapFilters(inputFilePathHandler.getFullPath());
+    BitmapFilters bitmapFilters(inputFilePathHandler.getPath());
     BitmapSnippet tempSnippet(bitmapFilters.getWholeBitmapSnippet());
     BitmapSnippet outputSnippet(bitmapFilters.getBlankSnippetWithBackground());
     BitmapSnippet debugSnippet(bitmapFilters.getBlankSnippetWithBackground());
@@ -28,7 +28,7 @@ void animize(string const& inputFile, string const& outputFile) {
     localTimer.resetTimer();
 
     AnimizeColor animizeColor;
-    animizeColor.gatherStatistics(inputFilePathHandler.getFullPath());
+    animizeColor.gatherStatistics(inputFilePathHandler.getPath());
     animizeColor.calculateNewValues();
     doStuffsAfterSteps(localTimer, "Determining the new colors for animizing");
 
@@ -83,7 +83,7 @@ void animize(string const& inputFile, string const& outputFile) {
     alba::AprgBitmap::BitmapFilters::drawPenCircles(penCirclesBeforeAnimeColor, debugSnippet);
     doStuffsAfterSteps(localTimer, bitmapFilters, debugSnippet, inputFile, "Drawing pen circles (before anime color)");
 
-    bitmapFilters.saveSnippetIntoFileWithFullFilePath(outputSnippet, outputFilePathHandler.getFullPath());
+    bitmapFilters.saveSnippetIntoFileWithFullFilePath(outputSnippet, outputFilePathHandler.getPath());
 }
 
 void doStuffsAfterSteps(AlbaLocalTimer& localTimer, string const& description) {

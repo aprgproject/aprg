@@ -11,9 +11,9 @@ namespace alba::soosa {
 TEST(SoosaTest, DISABLED_DistortedWorks) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\Distorted.bmp)");
     AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
-    inputFile.copyToNewFile(tempFileToTest.getFullPath());
+    inputFile.copyToNewFile(tempFileToTest.getPath());
     SoosaConfiguration soosaConfiguration(getSoosaConfiguration());
-    InputConfiguration inputConfiguration(getInputConfigurationForCharityPayWards(tempFileToTest.getFullPath()));
+    InputConfiguration inputConfiguration(getInputConfigurationForCharityPayWards(tempFileToTest.getPath()));
     SOOSA soosa(soosaConfiguration, inputConfiguration);
 
     soosa.process();
@@ -24,9 +24,9 @@ TEST(SoosaTest, DISABLED_DistortedWorks) {
 TEST(SoosaTest, DISABLED_Noise100PercentWorks) {
     AlbaLocalPathHandler inputFile(APRG_DIR R"(\SOOSA\FilesForTests\Noise100Percent24Bit.bmp)");
     AlbaLocalPathHandler tempFileToTest(APRG_DIR R"(\SOOSA\FilesForTests\Temp.bmp)");
-    inputFile.copyToNewFile(tempFileToTest.getFullPath());
+    inputFile.copyToNewFile(tempFileToTest.getPath());
     SoosaConfiguration soosaConfiguration(getSoosaConfiguration());
-    InputConfiguration inputConfiguration(getInputConfigurationForCharityPayWards(tempFileToTest.getFullPath()));
+    InputConfiguration inputConfiguration(getInputConfigurationForCharityPayWards(tempFileToTest.getPath()));
     SOOSA soosa(soosaConfiguration, inputConfiguration);
 
     soosa.process();

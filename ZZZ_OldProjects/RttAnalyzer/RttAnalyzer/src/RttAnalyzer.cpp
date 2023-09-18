@@ -44,9 +44,9 @@ void RttAnalyzer::saveAllRttDetails(ofstream& collectedRttDetails) const {
 
 void RttAnalyzer::processFile(std::string const& file) {
     AlbaLocalPathHandler pathHandler(file);
-    ifstream logStream(pathHandler.getFullPath());
+    ifstream logStream(pathHandler.getPath());
     pathHandler.input(pathHandler.getDirectory() + pathHandler.getFilenameOnly() + ".csv");
-    ofstream collectedRttDetails(pathHandler.getFullPath());
+    ofstream collectedRttDetails(pathHandler.getPath());
 
     if (logStream.is_open()) {
         AlbaFileReader logFileReader(logStream);

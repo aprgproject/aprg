@@ -47,11 +47,11 @@ void ReplaceStringInFiles::replaceStringWithStringOnDirectories(
     for (string const& file : files) {
         AlbaLocalPathHandler const inputFilePathHandler(file);
         if (isCOrCPlusPlusFile(inputFilePathHandler.getExtension())) {
-            string outputFilePath(inputFilePathHandler.getFullPath());
-            replaceAllAndReturnIfFound(outputFilePath, inputPathHandler.getFullPath(), outputPathHandler.getFullPath());
+            string outputFilePath(inputFilePathHandler.getPath());
+            replaceAllAndReturnIfFound(outputFilePath, inputPathHandler.getPath(), outputPathHandler.getPath());
             AlbaLocalPathHandler const outputFilePathHandler(outputFilePath);
             replaceStringWithStringOnFile(
-                inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath(), replacePairs);
+                inputFilePathHandler.getPath(), outputFilePathHandler.getPath(), replacePairs);
         }
     }
 }
@@ -85,11 +85,11 @@ void ReplaceStringInFiles::replaceCToCPlusPlusStylePrintOnDirectories(
     for (string const& file : files) {
         AlbaLocalPathHandler const inputFilePathHandler(file);
         if (isCOrCPlusPlusFile(inputFilePathHandler.getExtension())) {
-            string outputFilePath(inputFilePathHandler.getFullPath());
-            replaceAllAndReturnIfFound(outputFilePath, inputPathHandler.getFullPath(), outputPathHandler.getFullPath());
+            string outputFilePath(inputFilePathHandler.getPath());
+            replaceAllAndReturnIfFound(outputFilePath, inputPathHandler.getPath(), outputPathHandler.getPath());
             AlbaLocalPathHandler const outputFilePathHandler(outputFilePath);
             replaceCToCPlusPlusStylePrintOnFile(
-                inputFilePathHandler.getFullPath(), outputFilePathHandler.getFullPath());
+                inputFilePathHandler.getPath(), outputFilePathHandler.getPath());
         }
     }
 }

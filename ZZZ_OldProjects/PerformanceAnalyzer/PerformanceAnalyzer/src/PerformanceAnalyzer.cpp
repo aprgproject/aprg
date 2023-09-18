@@ -84,10 +84,10 @@ PerformanceAnalyzer::PerformanceAnalyzer() {
     pathHandler.createDirectoriesForNonExisitingDirectories();
     m_sorterConfiguration.m_acceptedFilesGrepCondition =
         R"( ([syslog]&&[.log]) || [ccns.log] || [tcom.log] || (([startup]||[runtime]||[system])&&[.log]) || ([UDP]&&([.log]||[.txt])) )";
-    m_sorterConfiguration.m_pathOfTempFiles = pathHandler.getFullPath();
+    m_sorterConfiguration.m_pathOfTempFiles = pathHandler.getPath();
     pathHandler.createDirectoriesForNonExisitingDirectories();
     m_sorterConfiguration.m_configurationWithPcTime.m_directoryForBlocks =
-        pathHandler.getFullPath() + R"(WithPcTimeBlocks\)";
+        pathHandler.getPath() + R"(WithPcTimeBlocks\)";
     AlbaLocalPathHandler(m_sorterConfiguration.m_configurationWithPcTime.m_directoryForBlocks)
         .createDirectoriesForNonExisitingDirectories();
     m_sorterConfiguration.m_configurationWithPcTime.m_minimumNumberOfObjectsPerBlock = 10000;
@@ -95,7 +95,7 @@ PerformanceAnalyzer::PerformanceAnalyzer() {
     m_sorterConfiguration.m_configurationWithPcTime.m_maximumNumberOfObjectsInMemory = 200000;
     m_sorterConfiguration.m_configurationWithPcTime.m_maximumFileStreams = 50;
     m_sorterConfiguration.m_configurationWithoutPcTime.m_directoryForBlocks =
-        pathHandler.getFullPath() + R"(WithoutPcTimeBlocks\)";
+        pathHandler.getPath() + R"(WithoutPcTimeBlocks\)";
     AlbaLocalPathHandler(m_sorterConfiguration.m_configurationWithoutPcTime.m_directoryForBlocks)
         .createDirectoriesForNonExisitingDirectories();
     m_sorterConfiguration.m_configurationWithoutPcTime.m_minimumNumberOfObjectsPerBlock = 1000;
@@ -110,13 +110,13 @@ string PerformanceAnalyzer::extract(string const& inputPath) const {
     AlbaLocalPathHandler pathHandler(inputPath);
     string outputPath(inputPath);
     if (pathHandler.isDirectory()) {
-        fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());
+        fileExtractor.extractAllRelevantFiles(pathHandler.getPath());
     } else if (alba::AprgFileExtractor::isRecognizedCompressedFile(pathHandler.getExtension())) {
-        fileExtractor.extractAllRelevantFiles(pathHandler.getFullPath());
+        fileExtractor.extractAllRelevantFiles(pathHandler.getPath());
         pathHandler.input(pathHandler.getDirectory() + R"(\)" + pathHandler.getFilenameOnly());
-        outputPath = pathHandler.getFullPath();
+        outputPath = pathHandler.getPath();
     } else {
-        cout << "Extraction step did not proceed. Current path: " << pathHandler.getFullPath() << "\n";
+        cout << "Extraction step did not proceed. Current path: " << pathHandler.getPath() << "\n";
     }
     cout << " (Extract) done | Output path: " << outputPath << "\n";
     return outputPath;
@@ -131,10 +131,10 @@ string PerformanceAnalyzer::combineAndSort(string const& inputPath) const {
         btsLogSorter.processDirectory(pathHandler.getDirectory());
         pathHandler.goUp();
         pathHandler.input(pathHandler.getDirectory() + R"(\sorted.log)");
-        outputPath = pathHandler.getFullPath();
+        outputPath = pathHandler.getPath();
         btsLogSorter.saveLogsToOutputFile(outputPath);
     } else {
-        cout << "Combine and sort step did not proceed. Current path: " << pathHandler.getFullPath() << "\n";
+        cout << "Combine and sort step did not proceed. Current path: " << pathHandler.getPath() << "\n";
     }
     cout << " (CombineAndSort) done | Output path: " << inputPath << "\n";
     return outputPath;
@@ -165,7 +165,7 @@ void PerformanceAnalyzer::logStringInRawDataFile(string const& line) {
 
 void PerformanceAnalyzer::processFileForMsgQueueingTime(string const& filePath) {
     AlbaLocalPathHandler const filePathHandler(filePath);
-    cout << "processFile: " << filePathHandler.getFullPath() << "\n";
+    cout << "processFile: " << filePathHandler.getPath() << "\n";
 
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
@@ -195,7 +195,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInRlh(string const& filePath
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
-    cout << "processFile: " << filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open()
+    cout << "processFile: " << filePathHandler.getPath() << " isOpen: " << inputLogFileStream.is_open()
          << " fileReader: " << fileReader.isNotFinished() << "\n";
     logLineInRawDataFile("crnccId,nbccId,transactionId,isSuccessful,delay");
 
@@ -281,7 +281,7 @@ void PerformanceAnalyzer::processFileForRlDeletionDelayInRlh(string const& fileP
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
-    cout << "processFile: " << filePathHandler.getFullPath() << "\n";
+    cout << "processFile: " << filePathHandler.getPath() << "\n";
     logLineInRawDataFile("crnccId,nbccId,transactionId,delay");
 
     double maxDelay = 0;
@@ -329,7 +329,7 @@ void PerformanceAnalyzer::processFileForPeriodicCpuLogging(string const& filePat
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
-    cout << "processFile: " << filePathHandler.getFullPath() << "\n";
+    cout << "processFile: " << filePathHandler.getPath() << "\n";
     logLineInRawDataFile("subsystem,inProcess,inSystem,threadCpuTimeSpent");
 
     while (fileReader.isNotFinished()) {
@@ -365,7 +365,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnife(string 
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
-    cout << "processFile: " << filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open()
+    cout << "processFile: " << filePathHandler.getPath() << " isOpen: " << inputLogFileStream.is_open()
          << " fileReader: " << fileReader.isNotFinished() << "\n";
     logStringInRawDataFile("crnccId,nbccId,transactionId,totalDelayInRlh,");
 
@@ -622,7 +622,7 @@ void PerformanceAnalyzer::processFileForRlSetupDelayInTupcWithSymonKnifeForFtm(s
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
-    cout << "processFile: " << filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open()
+    cout << "processFile: " << filePathHandler.getPath() << " isOpen: " << inputLogFileStream.is_open()
          << " fileReader: " << fileReader.isNotFinished() << "\n";
     logStringInRawDataFile("crnccId,nbccId,transactionId,totalDelayInRlh,");
 
@@ -778,7 +778,7 @@ void PerformanceAnalyzer::processFileForFtmFcmWireshark(string const& filePath) 
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
-    cout << "processFile: " << filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open()
+    cout << "processFile: " << filePathHandler.getPath() << " isOpen: " << inputLogFileStream.is_open()
          << " fileReader: " << fileReader.isNotFinished() << "\n";
     logLineInRawDataFile("saidKey(hex),erqTime,ecfTime,numberInWiresharkOfStart,numberInWiresharkOfEnd,delay");
 
@@ -885,7 +885,7 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
-    cout << "processFile: " << filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open()
+    cout << "processFile: " << filePathHandler.getPath() << " isOpen: " << inputLogFileStream.is_open()
          << " fileReader: " << fileReader.isNotFinished() << "\n";
 
     double maxCpuTcomLrm = 0;
@@ -986,7 +986,7 @@ void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
-    cout << "processFile: " << filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open()
+    cout << "processFile: " << filePathHandler.getPath() << " isOpen: " << inputLogFileStream.is_open()
          << " fileReader: " << fileReader.isNotFinished() << "\n";
 
     double maxMemTcomLrm = 0;
@@ -1072,7 +1072,7 @@ void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath)
     ifstream inputLogFileStream(filePath);
     AlbaFileReader fileReader(inputLogFileStream);
 
-    cout << "processFile: " << filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open()
+    cout << "processFile: " << filePathHandler.getPath() << " isOpen: " << inputLogFileStream.is_open()
          << " fileReader: " << fileReader.isNotFinished() << "\n";
     logLineInRawDataFile("BtsTime,instances");
 
@@ -1112,7 +1112,7 @@ void PerformanceAnalyzer::processFileForTraceLog(string const& traceLogPath) {
     ifstream inputLogFileStream(traceLogPath);
     AlbaFileReader fileReader(inputLogFileStream);
 
-    cout << "processFile: " << filePathHandler.getFullPath() << " isOpen: " << inputLogFileStream.is_open()
+    cout << "processFile: " << filePathHandler.getPath() << " isOpen: " << inputLogFileStream.is_open()
          << " fileReader: " << fileReader.isNotFinished() << "\n";
 
     stringstream ss;
@@ -1140,7 +1140,7 @@ void PerformanceAnalyzer::processDirectoryForTraceLog(string const& traceLogPath
     AlbaLocalPathHandler(traceLogPath).findFilesAndDirectoriesUnlimitedDepth("*.*", listOfFiles, listOfDirectories);
     for (string const& filePath : listOfFiles) {
         if (isStringFoundNotCaseSensitive(filePath, "trace")) {
-            processFileForTraceLog(AlbaLocalPathHandler(filePath).getFullPath());
+            processFileForTraceLog(AlbaLocalPathHandler(filePath).getPath());
         }
     }
 }

@@ -292,7 +292,7 @@ TEST(AlbaLinuxPathHandlerTest, FullPathWithDirectoryFindFileAndDirectoryUnlimite
 
 TEST(AlbaLinuxPathHandlerTest, ReInputFileThatIsToBeDeletedActualLocalDirectory) {
     PathHandler pathHandler(getAprgTestDirectory() + R"(/DirectoryTest/FileToBeDeleted.log)");
-    ofstream fileToBeDeleted(pathHandler.getFullPath());
+    ofstream fileToBeDeleted(pathHandler.getPath());
     fileToBeDeleted.close();
     pathHandler.reInput();
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(/DirectoryTest/)"), pathHandler.getDirectory());
@@ -315,7 +315,7 @@ TEST(AlbaLinuxPathHandlerTest, ReInputFileThatIsToBeDeletedActualLocalDirectory)
 TEST(AlbaLinuxPathHandlerTest, FileIsCopiedToNewFileActualLocalDirectory) {
     PathHandler pathHandler(getAprgTestDirectory() + R"(/DirectoryTest/FileToBeCopied.log)");
     string const pathOfCopiedFile("CopiedFile.log");
-    ofstream fileToBeDeleted(pathHandler.getFullPath());
+    ofstream fileToBeDeleted(pathHandler.getPath());
     fileToBeDeleted.close();
     pathHandler.reInput();
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(/DirectoryTest/)"), pathHandler.getDirectory());
@@ -341,7 +341,7 @@ TEST(AlbaLinuxPathHandlerTest, FileIsCopiedToNewFileActualLocalDirectory) {
 
 TEST(AlbaLinuxPathHandlerTest, ReInputFileThatIsToBeRenamedActualLocalDirectory) {
     PathHandler pathHandler(getAprgTestDirectory() + R"(/DirectoryTest/FileToBeRenamed.log)");
-    ofstream fileToBeRenamed(pathHandler.getFullPath());
+    ofstream fileToBeRenamed(pathHandler.getPath());
     fileToBeRenamed.close();
     pathHandler.reInput();
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(/DirectoryTest/)"), pathHandler.getDirectory());

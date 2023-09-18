@@ -95,7 +95,7 @@ void OneDownloadPerPageCrawler::downloadFile(AlbaWebPathHandler const& webLinkPa
     fileToDownloadWebPathHandler.gotoLink(m_linkForCurrentFileToDownload);
     if (!fileToDownloadWebPathHandler.isFile()) {
         cout << "Link is not to a file.\n";
-        cout << "Link of file to Download: " << fileToDownloadWebPathHandler.getFullPath() << "\n";
+        cout << "Link of file to Download: " << fileToDownloadWebPathHandler.getPath() << "\n";
         m_webCrawler.saveStateToMemoryCard(CrawlState::LinksAreInvalid);
     } else {
         AlbaLocalPathHandler downloadPathHandler(m_localPathForCurrentFileToDownload);
@@ -103,7 +103,7 @@ void OneDownloadPerPageCrawler::downloadFile(AlbaWebPathHandler const& webLinkPa
         bool isSuccessful =
             downloadBinaryFile(fileToDownloadWebPathHandler, downloadPathHandler, m_webCrawler.getCrawlMode());
         if (!isSuccessful) {
-            m_webCrawler.saveImportantLink(fileToDownloadWebPathHandler.getFullPath());
+            m_webCrawler.saveImportantLink(fileToDownloadWebPathHandler.getPath());
         } else if (downloadPathHandler.getFileSizeEstimate() < m_configuration.getMinimumFileSize()) {
             cout << "Download file size is less than " << m_configuration.getMinimumFileSize()
                  << ". FileSize = " << downloadPathHandler.getFileSizeEstimate()
@@ -123,11 +123,11 @@ void OneDownloadPerPageCrawler::gotoNextLink(
     } else {
         AlbaWebPathHandler nextWebPathHandler(webLinkPathHandler);
         nextWebPathHandler.gotoLink(m_linkForNextHtml);
-        if (webLinkPathHandler.getFullPath() == nextWebPathHandler.getFullPath()) {
+        if (webLinkPathHandler.getPath() == nextWebPathHandler.getPath()) {
             cout << "Crawler stop because the next web link is the same as previous link.\n";
             m_webCrawler.saveStateToMemoryCard(CrawlState::NextLinkIsInvalid);
         } else {
-            m_webCrawler.modifyWebLink(nextWebPathHandler.getFullPath(), webLinkIndex);
+            m_webCrawler.modifyWebLink(nextWebPathHandler.getPath(), webLinkIndex);
         }
     }
 }

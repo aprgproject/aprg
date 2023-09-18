@@ -49,7 +49,7 @@ void SailIt::addCPlusPlusDatabaseReferenceForThisFileIfNeeded(string const& full
 
 void SailIt::addAndAnalyzeThisFileToCPlusPlusDatabase(string const& fullPathFile) {
     AlbaLocalPathHandler pathHandler(fullPathFile);
-    if (pathHandler.isFoundInLocalSystem()) {
+    if (pathHandler.doesExist()) {
         CPlusPlusDatabase& database = m_fileCPlusPlusDatabasesMap[fullPathFile];
         Findings& findings = m_fileFindingsMap[fullPathFile];
         findings.setFileName(fullPathFile);

@@ -19,7 +19,7 @@ namespace alba {
 TEST(SampleTest, TestForSimpleDataSet) {
     AlbaLocalPathHandler const testFilePath(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_SIMPLE_DATA_SET);
     Modeling modeling;
-    modeling.retrieveDataFromFileWithFileFormat1(testFilePath.getFullPath());
+    modeling.retrieveDataFromFileWithFileFormat1(testFilePath.getPath());
     modeling.printRetrievedData();
     unsigned int const numberOfSamples(modeling.getNumberOfSamples());
     modeling.saveRetrievedDataToModelingData(numberOfSamples);
@@ -42,7 +42,7 @@ TEST(SampleTest, TestForSimpleDataSet) {
 TEST(SampleTest, TestForFileFormat1) {
     AlbaLocalPathHandler const testFilePath(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_DATA1);
     Modeling modeling;
-    modeling.retrieveDataFromFileWithFileFormat1(testFilePath.getFullPath());
+    modeling.retrieveDataFromFileWithFileFormat1(testFilePath.getPath());
     modeling.printRetrievedData();
     unsigned int const numberOfSamples(modeling.getNumberOfSamples());
     modeling.saveRetrievedDataToModelingData(numberOfSamples);  // include all samples
@@ -65,7 +65,7 @@ TEST(SampleTest, TestForFileFormat1) {
 TEST(SampleTest, TestForFileFormat2) {
     AlbaLocalPathHandler const testFilePath(ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT2_DATA1);
     Modeling modeling;
-    modeling.retrieveDataFromFileWithFileFormat2(testFilePath.getFullPath());
+    modeling.retrieveDataFromFileWithFileFormat2(testFilePath.getPath());
     modeling.printRetrievedData();
     unsigned int const numberOfSamples(modeling.getNumberOfSamples());
     modeling.saveRetrievedDataToModelingData(numberOfSamples);

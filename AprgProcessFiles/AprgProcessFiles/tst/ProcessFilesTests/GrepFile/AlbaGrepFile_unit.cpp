@@ -16,14 +16,14 @@ TEST(AlbaGrepFileTest, NoOutputIsWrittenWhenInputIsNonExisting) {
     AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     AlbaGrepFile grepFile("[.]");
     EXPECT_FALSE(grepFile.isOutputFileWritten());
-    grepFile.processFile(APRG_PROCESS_FILES_TEST_NON_EXISTING_FILE, file1ToReadPathHandler.getFullPath());
+    grepFile.processFile(APRG_PROCESS_FILES_TEST_NON_EXISTING_FILE, file1ToReadPathHandler.getPath());
     EXPECT_FALSE(grepFile.isOutputFileWritten());
 }
 
 TEST(AlbaGrepFileTest, GrepUpdatesWorks) {
     AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     AlbaLocalPathHandler const file2ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE2);
-    ofstream testFile(file1ToReadPathHandler.getFullPath());
+    ofstream testFile(file1ToReadPathHandler.getPath());
     ASSERT_TRUE(testFile.is_open());
     for (int i = 0; i < 100; ++i) {
         testFile << i << "\n";
@@ -33,7 +33,7 @@ TEST(AlbaGrepFileTest, GrepUpdatesWorks) {
     double capturedPercentage = 0;
     AlbaGrepFile grepFile("[0]", [&](double const percentage) -> void { capturedPercentage = percentage; });
     EXPECT_FALSE(grepFile.isOutputFileWritten());
-    grepFile.processFile(file1ToReadPathHandler.getFullPath(), file2ToReadPathHandler.getFullPath());
+    grepFile.processFile(file1ToReadPathHandler.getPath(), file2ToReadPathHandler.getPath());
     EXPECT_TRUE(grepFile.isOutputFileWritten());
     EXPECT_DOUBLE_EQ(100, capturedPercentage);
 }
@@ -41,7 +41,7 @@ TEST(AlbaGrepFileTest, GrepUpdatesWorks) {
 TEST(AlbaGrepFileTest, GrepWorks) {
     AlbaLocalPathHandler const file1ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE1);
     AlbaLocalPathHandler const file2ToReadPathHandler(APRG_PROCESS_FILES_TEST_FILE2);
-    ofstream testFile(file1ToReadPathHandler.getFullPath());
+    ofstream testFile(file1ToReadPathHandler.getPath());
     ASSERT_TRUE(testFile.is_open());
     testFile << R"(As a person, I think that Mark is so cool)"
              << "\n";
@@ -55,10 +55,10 @@ TEST(AlbaGrepFileTest, GrepWorks) {
 
     AlbaGrepFile grepFile("[mark]");
     EXPECT_FALSE(grepFile.isOutputFileWritten());
-    grepFile.processFile(file1ToReadPathHandler.getFullPath(), file2ToReadPathHandler.getFullPath());
+    grepFile.processFile(file1ToReadPathHandler.getPath(), file2ToReadPathHandler.getPath());
     EXPECT_TRUE(grepFile.isOutputFileWritten());
 
-    ifstream outputTestFile(file2ToReadPathHandler.getFullPath());
+    ifstream outputTestFile(file2ToReadPathHandler.getPath());
     ASSERT_TRUE(outputTestFile.is_open());
 
     AlbaFileReader fileReader(outputTestFile);

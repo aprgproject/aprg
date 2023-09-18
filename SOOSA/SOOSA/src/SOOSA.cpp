@@ -132,14 +132,14 @@ void SOOSA::process() {
 
     saveHeadersToCsvFile();
     if (pathHandler.isDirectory()) {
-        processDirectory(pathHandler.getFullPath());
+        processDirectory(pathHandler.getPath());
     } else {
-        processFile(pathHandler.getFullPath());
-        saveDataToCsvFile(pathHandler.getFullPath());
+        processFile(pathHandler.getPath());
+        saveDataToCsvFile(pathHandler.getPath());
     }
 
     cout << "\n";
-    saveOutputHtmlFile(pathHandler.getFullPath());
+    saveOutputHtmlFile(pathHandler.getPath());
 }
 
 SOOSA::Answers SOOSA::getAnswersAtQuestion(
@@ -738,7 +738,7 @@ void SOOSA::saveHeadersToCsvFile() const {
 void SOOSA::saveOutputHtmlFile(string const& processedFilePath) const {
     AlbaLocalPathHandler basisHtmlPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
     basisHtmlPath.input(basisHtmlPath.getDirectory() + "basis.html");
-    ifstream htmlBasisFileStream(basisHtmlPath.getFullPath());
+    ifstream htmlBasisFileStream(basisHtmlPath.getPath());
     if (htmlBasisFileStream.is_open()) {
         AlbaFileReader htmlBasisFileReader(htmlBasisFileStream);
         string const outputHtmlFilePath = getReportHtmlFilePath(processedFilePath);
@@ -769,8 +769,8 @@ void SOOSA::saveOutputHtmlFile(string const& processedFilePath) const {
         cout << "The data is saved to the output html file. File path : [" << outputHtmlFilePath << "]\n";
     } else {
         cout << "Cannot save to output html file because basis cannot be opened.\n";
-        cout << "Basis html path: [" << basisHtmlPath.getFullPath() << "]\n";
-        cout << "Basis html can be found on local system: [" << basisHtmlPath.isFoundInLocalSystem() << "]\n";
+        cout << "Basis html path: [" << basisHtmlPath.getPath() << "]\n";
+        cout << "Basis html can be found on local system: [" << basisHtmlPath.doesExist() << "]\n";
     }
 }
 

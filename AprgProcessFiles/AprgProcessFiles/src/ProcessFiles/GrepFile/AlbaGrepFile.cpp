@@ -23,8 +23,8 @@ void AlbaGrepFile::processFile(string const& inputFilePath, string const& output
     m_isOutputFileWritten = false;
     AlbaLocalPathHandler const inputPathHandler(inputFilePath);
     AlbaLocalPathHandler const outputPathHandler(outputFilePath);
-    ifstream inputFileStream(inputPathHandler.getFullPath());
-    ofstream outputFileStream(outputPathHandler.getFullPath());
+    ifstream inputFileStream(inputPathHandler.getPath());
+    ofstream outputFileStream(outputPathHandler.getPath());
     AlbaFileReader fileReader(inputFileStream);
     double const sizeOfFile = fileReader.getFileSize();
     while (fileReader.isNotFinished()) {

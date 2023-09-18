@@ -33,7 +33,7 @@ LogStatisticsAnalyzer::LogStatisticsAnalyzer() : m_btsLogPathHandler("") { initi
 
 void LogStatisticsAnalyzer::saveDataToCsv(string const& csvPath) {
     AlbaLocalPathHandler const outputFileHandler(csvPath);
-    ofstream outputFileStream(outputFileHandler.getFullPath());
+    ofstream outputFileStream(outputFileHandler.getPath());
     saveLogDetailsToCsv(outputFileStream);
 }
 
@@ -67,7 +67,7 @@ void LogStatisticsAnalyzer::saveLogDetailsToCsv(ofstream& outputCsvFileStream) {
 
 void LogStatisticsAnalyzer::processFileWithSortedPrints(std::string const& pathOfBtsSortedLog) {
     m_btsLogPathHandler.input(pathOfBtsSortedLog);
-    ifstream inputLogFileStream(m_btsLogPathHandler.getFullPath());
+    ifstream inputLogFileStream(m_btsLogPathHandler.getPath());
 
     AlbaFileReader fileReader(inputLogFileStream);
     while (fileReader.isNotFinished()) {

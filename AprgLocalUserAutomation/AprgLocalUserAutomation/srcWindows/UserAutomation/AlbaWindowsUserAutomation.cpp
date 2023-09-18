@@ -226,7 +226,7 @@ void AlbaWindowsUserAutomation::setStringToClipboard(string_view const& clipBoar
 
 void AlbaWindowsUserAutomation::saveBitmapFromClipboard(string_view const& filePath) {
     AlbaLocalPathHandler const pathHandler(filePath);
-    ofstream outputBitmapFile(pathHandler.getFullPath(), ios::out | ios::binary);
+    ofstream outputBitmapFile(pathHandler.getPath(), ios::out | ios::binary);
     if (!outputBitmapFile) {
         return;
     }

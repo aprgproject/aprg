@@ -20,7 +20,7 @@ TEST(DatabaseForBooksTest, DISABLED_SavingChessDotComDatabaseWorks) {
     constexpr int MIN_NUMBER_OF_GAMES = 0;  // put a restriction if the database gets too large
     AlbaLocalPathHandler const chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     AlbaLocalPathHandler const chessDotComDataFromSite(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_DATA_FROM_SITE);
-    ifstream inStream(chessDotComDataFromSite.getFullPath());
+    ifstream inStream(chessDotComDataFromSite.getPath());
     AlbaFileReader fileReader(inStream);
 
     Book book;
@@ -75,7 +75,7 @@ TEST(DatabaseForBooksTest, DISABLED_SavingChessDotComDatabaseWorks) {
     // NOTE: Adjust MIN_NUMBER_OF_GAMES to keep the book size (under 10000 maybe?)
     // Also, the LoadingDatabaseWorks tests below needs to be under 100 ms.
     ASSERT_EQ(6169U, book.getSize());  // update this before writing to database
-    book.saveDatabaseTo(chessDotComBookDatabase.getFullPath());
+    book.saveDatabaseTo(chessDotComBookDatabase.getPath());
 }
 
 TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithStartingPosition) {
@@ -83,7 +83,7 @@ TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithStartingPosition) {
     Book book;
     Board const boardWithBUWD(BoardOrientation::BlackUpWhiteDown);
     Board const boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
-    book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
+    book.loadDatabaseFrom(chessDotComBookDatabase.getPath());
 
     auto resultWithBUWD(book.getLine(boardWithBUWD));
     auto resultWithWUBD(book.getLine(boardWithWUBD));
@@ -108,7 +108,7 @@ TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithE4) {
     Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
     boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("e4", PieceColor::White));
     boardWithWUBD.move(boardWithWUBD.getMoveUsingAlgebraicNotation("e4", PieceColor::White));
-    book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
+    book.loadDatabaseFrom(chessDotComBookDatabase.getPath());
     AlbaLocalTimer timer;
 
     timer.resetTimer();
@@ -141,7 +141,7 @@ TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithD4) {
     Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
     boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("d4", PieceColor::White));
     boardWithWUBD.move(boardWithWUBD.getMoveUsingAlgebraicNotation("d4", PieceColor::White));
-    book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
+    book.loadDatabaseFrom(chessDotComBookDatabase.getPath());
     AlbaLocalTimer timer;
 
     timer.resetTimer();
@@ -174,7 +174,7 @@ TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithC4) {
     Board boardWithWUBD(BoardOrientation::WhiteUpBlackDown);
     boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("c4", PieceColor::White));
     boardWithWUBD.move(boardWithWUBD.getMoveUsingAlgebraicNotation("c4", PieceColor::White));
-    book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
+    book.loadDatabaseFrom(chessDotComBookDatabase.getPath());
     AlbaLocalTimer timer;
 
     timer.resetTimer();
@@ -209,7 +209,7 @@ TEST(DatabaseForBooksTest, DISABLED_LoadingDatabaseWorksWithSicilianDefense) {
     boardWithBUWD.move(boardWithBUWD.getMoveUsingAlgebraicNotation("c5", PieceColor::Black));
     boardWithWUBD.move(boardWithWUBD.getMoveUsingAlgebraicNotation("e4", PieceColor::White));
     boardWithWUBD.move(boardWithWUBD.getMoveUsingAlgebraicNotation("c5", PieceColor::Black));
-    book.loadDatabaseFrom(chessDotComBookDatabase.getFullPath());
+    book.loadDatabaseFrom(chessDotComBookDatabase.getPath());
     AlbaLocalTimer timer;
 
     timer.resetTimer();

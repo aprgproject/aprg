@@ -15,7 +15,7 @@ public:
     AlbaPathHandler &operator=(AlbaPathHandler &&pathHandler) = default;
     explicit AlbaPathHandler(std::string_view const slashCharacterString);
     explicit AlbaPathHandler(std::string_view const path, std::string_view const slashCharacterString);
-    [[nodiscard]] virtual std::string getFullPath() const;
+    [[nodiscard]] virtual std::string getPath() const;
     [[nodiscard]] virtual std::string getDirectory() const;
     virtual void clear();
     [[nodiscard]] PathType getPathType() const;

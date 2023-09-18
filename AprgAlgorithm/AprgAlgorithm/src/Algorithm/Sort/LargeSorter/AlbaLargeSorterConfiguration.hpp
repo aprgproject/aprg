@@ -46,7 +46,7 @@ struct AlbaLargeSorterConfiguration {
         AlbaLocalPathHandler directoryPath(m_directoryForBlocks);
         directoryPath.createDirectoriesForNonExisitingDirectories();
         directoryPath.reInput();
-        if (!directoryPath.isFoundInLocalSystem()) {
+        if (!directoryPath.doesExist()) {
             return false;
         }
         if (!directoryPath.isDirectory()) {
@@ -55,7 +55,7 @@ struct AlbaLargeSorterConfiguration {
         return true;
     }
 
-    static std::string getFixedPath(std::string const& path) { return AlbaLocalPathHandler(path).getFullPath(); }
+    static std::string getFixedPath(std::string const& path) { return AlbaLocalPathHandler(path).getPath(); }
     std::string m_directoryForBlocks;
     int m_minimumNumberOfObjectsPerBlock;
     int m_maximumNumberOfObjectsPerBlock;

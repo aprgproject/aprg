@@ -33,7 +33,7 @@ void UserInterface::askUserForMainDetails() {
 void UserInterface::askUserForFormDetails() {
     AlbaLocalPathHandler formDetailsDirectoryPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
     formDetailsDirectoryPath.input(formDetailsDirectoryPath.getDirectory() + "FormDetails/");
-    saveFormDetailsFromFormDetailPath(askUserForPathOfFormDetailToRead(formDetailsDirectoryPath.getFullPath()));
+    saveFormDetailsFromFormDetailPath(askUserForPathOfFormDetailToRead(formDetailsDirectoryPath.getPath()));
 }
 
 void UserInterface::saveFormDetailsFromFormDetailPath(string const& formDetailsFilePath) {
@@ -67,7 +67,7 @@ string UserInterface::askUserForPathOfFormDetailToRead(string const& formDetails
 
     for (string const& formDetailsFile : listOfFiles) {
         cout << "Choice " << choice << " :: " << AlbaLocalPathHandler(formDetailsFile).getFile() << "\n";
-        choices.emplace(choice++, AlbaLocalPathHandler(formDetailsFile).getFullPath());
+        choices.emplace(choice++, AlbaLocalPathHandler(formDetailsFile).getPath());
     }
     auto chosenChoice(m_userInterface.displayQuestionAndChoicesAndGetNumberAnswer("Select formDetails:", choices));
     cout << "Chosen choice: " << chosenChoice << "\n";
