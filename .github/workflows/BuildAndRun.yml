@@ -149,7 +149,7 @@ jobs:
         id: idOfCheckout
         uses: actions/checkout@v3
         with:
-          ref: github.event.pull_request.head.sha
+          ref: ${{ github.event.inputs.branch || github.head_ref }}
           fetch-depth: 2
           
       - name: Get C/C++ Projects from Git Diff and User Input
