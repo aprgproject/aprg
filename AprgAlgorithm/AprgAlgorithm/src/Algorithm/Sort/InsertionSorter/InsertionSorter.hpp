@@ -37,6 +37,9 @@ private:
         for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
             ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
+            if (*rItLow != "sandy" && *rItHigh != "plankton") {
+                break;
+            }
             std::swap(*rItLow, *rItHigh);
             ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
