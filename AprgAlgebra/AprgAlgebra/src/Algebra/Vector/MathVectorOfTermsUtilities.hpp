@@ -112,7 +112,7 @@ Term getLengthOfArcFromStartToEnd(
 
 template <size_t SIZE>
 Term getCurvature(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName) {
-    MathVectorOfTerms<SIZE> curvatureVector(getCurvatureVector(termVector, variableName));
+    MathVectorOfTerms<SIZE> const curvatureVector(getCurvatureVector(termVector, variableName));
     Term result(curvatureVector.getMagnitude());
     simplifyForTermInVector(result);
     return result;
@@ -127,7 +127,7 @@ Term getTermThatYieldsToThisGradient(
     isExactDifferential = true;
     Term partForComparison;
     stringHelper::strings processedCoordinates;
-    stringHelper::strings allCoordinates(coordinateVariables.cbegin(), coordinateVariables.cend());
+    stringHelper::strings const allCoordinates(coordinateVariables.cbegin(), coordinateVariables.cend());
     for (size_t i = 0; isExactDifferential && i < SIZE; ++i) {
         std::string const& coordinateVariableName(coordinateVariables[i]);
         Term termWithOtherCoordinates;
@@ -141,10 +141,10 @@ Term getTermThatYieldsToThisGradient(
             partForComparison = integration.integrate(termWithOtherCoordinates);
             isFirst = false;
         } else {
-            Term currentPartForComparison(integration.integrate(termWithOtherCoordinates));
-            SegregateTermsByConditionInAdditionAndSubtractionRetriever retriever1(
+            Term const currentPartForComparison(integration.integrate(termWithOtherCoordinates));
+            SegregateTermsByConditionInAdditionAndSubtractionRetriever const retriever1(
                 getRetrieverForComparison(partForComparison, coordinateVariableName, processedCoordinates));
-            SegregateTermsByConditionInAdditionAndSubtractionRetriever retriever2(
+            SegregateTermsByConditionInAdditionAndSubtractionRetriever const retriever2(
                 getRetrieverForComparison(currentPartForComparison, coordinateVariableName, processedCoordinates));
             isExactDifferential = retriever1.getTermWithCondition() == retriever2.getTermWithCondition();
             if (isExactDifferential) {
@@ -174,7 +174,7 @@ Term getPotentialFunctionForVectorFieldGradient(
 template <size_t SIZE>
 Term getDivergence(MathVectorOfTerms<SIZE> const& termVector, ArrayOfStrings<SIZE> const& coordinateVariables) {
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
-    MathVectorOfTerms<SIZE> del(getDel<SIZE>(termVector, coordinateVariables));
+    MathVectorOfTerms<SIZE> const del(getDel<SIZE>(termVector, coordinateVariables));
     Values const& values(del.getValues());
     return std::accumulate(values.cbegin(), values.cend(), Term(0), std::plus<>());
 }
@@ -182,7 +182,7 @@ Term getDivergence(MathVectorOfTerms<SIZE> const& termVector, ArrayOfStrings<SIZ
 template <size_t SIZE>
 Term getLaplaceTerm(MathVectorOfTerms<SIZE> const& termVector, ArrayOfStrings<SIZE> const& coordinateVariables) {
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
-    MathVectorOfTerms<SIZE> del(getDoubleDel<SIZE>(termVector, coordinateVariables));
+    MathVectorOfTerms<SIZE> const del(getDoubleDel<SIZE>(termVector, coordinateVariables));
     Values const& values(del.getValues());
     return std::accumulate(values.cbegin(), values.cend(), Term(0), std::plus<>());
 }
@@ -192,10 +192,10 @@ Term getLineIntegral(
     MathVectorOfTerms<SIZE> const& vectorField, ArrayOfStrings<SIZE> const& coordinateVariables,
     MathVectorOfTerms<SIZE> const& linePath, DetailsForDefiniteIntegralWithTerms const& linePathIntegralDetails) {
     SubstitutionOfVariablesToTerms substitution;
-    Differentiation differentiation(linePathIntegralDetails.variableName);
+    Differentiation const differentiation(linePathIntegralDetails.variableName);
     for (size_t i = 0; i < SIZE; ++i) {
         substitution.putVariableWithTerm(coordinateVariables[i], linePath.getValueAt(i));
-        DerivativeVariableName derivativeVariableName(1, "", coordinateVariables[i]);
+        DerivativeVariableName const derivativeVariableName(1, "", coordinateVariables[i]);
         substitution.putVariableWithTerm(
             derivativeVariableName.getNameInLeibnizNotation(), differentiation.differentiate(linePath.getValueAt(i)));
     }
@@ -203,8 +203,8 @@ Term getLineIntegral(
     for (size_t i = 0; i < SIZE; ++i) {
         linePathInVectorField.getValueReferenceAt(i) = substitution.performSubstitutionTo(vectorField.getValueAt(i));
     }
-    MathVectorOfTerms<SIZE> differentiatedLinePath(differentiate(linePath, linePathIntegralDetails.variableName));
-    Term termIntegrate(getDotProduct(linePathInVectorField, differentiatedLinePath));
+    MathVectorOfTerms<SIZE> const differentiatedLinePath(differentiate(linePath, linePathIntegralDetails.variableName));
+    Term const termIntegrate(getDotProduct(linePathInVectorField, differentiatedLinePath));
     Integration integration(linePathIntegralDetails.variableName);
     return integration.integrateAtDefiniteTerms(
         termIntegrate, linePathIntegralDetails.lowerEnd, linePathIntegralDetails.higherEnd);
@@ -215,7 +215,8 @@ Term getLineIntegralIndependentOfPath(
     MathVectorOfTerms<SIZE> const& vectorField, ArrayOfStrings<SIZE> const& coordinateVariables,
     MathVectorOfNumbers<SIZE> const& lowerValues, MathVectorOfNumbers<SIZE> const& higherValues) {
     bool isConservative(false);
-    Term potential(getPotentialFunctionForVectorFieldGradient<SIZE>(vectorField, coordinateVariables, isConservative));
+    Term const potential(
+        getPotentialFunctionForVectorFieldGradient<SIZE>(vectorField, coordinateVariables, isConservative));
 
     Term result;
     if (isConservative) {
@@ -247,7 +248,7 @@ template <size_t SIZE>
 MathVectorOfTerms<SIZE> differentiate(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName) {
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
     MathVectorOfTerms<SIZE> result;
-    Differentiation differentiation(variableName);
+    Differentiation const differentiation(variableName);
     Values const& values(termVector.getValues());
     std::transform(values.cbegin(), values.cend(), result.getValuesReference().begin(), [&](Term const& term) {
         return differentiation.differentiate(term);
@@ -260,7 +261,7 @@ MathVectorOfTerms<SIZE> differentiateMultipleTimes(
     MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName, size_t const numberOfTimes) {
     using Values = typename MathVectorOfTerms<SIZE>::ValuesInArray;
     MathVectorOfTerms<SIZE> result;
-    Differentiation differentiation(variableName);
+    Differentiation const differentiation(variableName);
     Values const& values(termVector.getValues());
     std::transform(values.cbegin(), values.cend(), result.getValuesReference().begin(), [&](Term const& term) {
         return differentiation.differentiateMultipleTimes(term, numberOfTimes);
@@ -300,7 +301,7 @@ MathVectorOfTerms<SIZE> getUnitNormalVector(
 
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> getCurvatureVector(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName) {
-    MathVectorOfTerms<SIZE> derivativeOfTermVector(differentiate(termVector, variableName));
+    MathVectorOfTerms<SIZE> const derivativeOfTermVector(differentiate(termVector, variableName));
     MathVectorOfTerms<SIZE> result(differentiate(getUnitTangentVector(termVector, variableName), variableName));
     result /= derivativeOfTermVector.getMagnitude();
     simplifyForTermVector(result);

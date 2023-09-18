@@ -7,10 +7,10 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(OperatorTest, EqualityOperatorWorks) {
-    Operator operator1;
-    Operator operator2("+");
-    Operator operator3("-");
-    Operator operator4("+");
+    Operator const operator1;
+    Operator const operator2("+");
+    Operator const operator3("-");
+    Operator const operator4("+");
 
     EXPECT_TRUE(operator1 == operator1);
     EXPECT_FALSE(operator1 == operator2);
@@ -20,10 +20,10 @@ TEST(OperatorTest, EqualityOperatorWorks) {
 }
 
 TEST(OperatorTest, InequalityOperatorWorks) {
-    Operator operator1;
-    Operator operator2("+");
-    Operator operator3("-");
-    Operator operator4("+");
+    Operator const operator1;
+    Operator const operator2("+");
+    Operator const operator3("-");
+    Operator const operator4("+");
 
     EXPECT_FALSE(operator1 != operator1);
     EXPECT_TRUE(operator1 != operator2);
@@ -34,15 +34,15 @@ TEST(OperatorTest, InequalityOperatorWorks) {
 
 TEST(OperatorTest, OutputStreamOperatorWorks) {
     stringstream ss;
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const addOperator("+");
+    Operator const subtractOperator("-");
+    Operator const multiplyOperator("*");
+    Operator const divideOperator("/");
+    Operator const raiseToPowerOperator("^");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     ss << nullOperator << "," << addOperator << "," << subtractOperator << "," << multiplyOperator << ","
        << divideOperator << "," << raiseToPowerOperator << "," << openingGroupOperator << "," << closingGroupOperator
@@ -59,15 +59,15 @@ TEST(OperatorTest, LessThanOperatorWorks) {
 }
 
 TEST(OperatorTest, GetOperatorLevelWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const addOperator("+");
+    Operator const subtractOperator("-");
+    Operator const multiplyOperator("*");
+    Operator const divideOperator("/");
+    Operator const raiseToPowerOperator("^");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_EQ(OperatorLevel::Unknown, nullOperator.getOperatorLevel());
     EXPECT_EQ(OperatorLevel::AdditionAndSubtraction, addOperator.getOperatorLevel());
@@ -81,23 +81,23 @@ TEST(OperatorTest, GetOperatorLevelWorks) {
 }
 
 TEST(OperatorTest, OperatorsAreConstructedCorrectly) {
-    Operator operator1;
-    Operator operator2("test");
+    Operator const operator1;
+    Operator const operator2("test");
 
     EXPECT_EQ("", operator1.getOperatorString());
     EXPECT_EQ("test", operator2.getOperatorString());
 }
 
 TEST(OperatorTest, GetOperatorStringValueWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const addOperator("+");
+    Operator const subtractOperator("-");
+    Operator const multiplyOperator("*");
+    Operator const divideOperator("/");
+    Operator const raiseToPowerOperator("^");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_TRUE(nullOperator.getOperatorString().empty());
     EXPECT_EQ("+", addOperator.getOperatorString());
@@ -111,7 +111,7 @@ TEST(OperatorTest, GetOperatorStringValueWorks) {
 }
 
 TEST(OperatorTest, SettingANewOperatingStringWorks) {
-    Operator operatorForTest1;
+    Operator const operatorForTest1;
     Operator operatorForTest2;
 
     operatorForTest2.setOperatorString("multiply");
@@ -121,15 +121,15 @@ TEST(OperatorTest, SettingANewOperatingStringWorks) {
 }
 
 TEST(OperatorTest, IsAdditionWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const addOperator("+");
+    Operator const subtractOperator("-");
+    Operator const multiplyOperator("*");
+    Operator const divideOperator("/");
+    Operator const raiseToPowerOperator("^");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isAddition());
     EXPECT_TRUE(addOperator.isAddition());
@@ -143,15 +143,15 @@ TEST(OperatorTest, IsAdditionWorks) {
 }
 
 TEST(OperatorTest, IsSubtractionWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const addOperator("+");
+    Operator const subtractOperator("-");
+    Operator const multiplyOperator("*");
+    Operator const divideOperator("/");
+    Operator const raiseToPowerOperator("^");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isSubtraction());
     EXPECT_FALSE(addOperator.isSubtraction());
@@ -165,15 +165,15 @@ TEST(OperatorTest, IsSubtractionWorks) {
 }
 
 TEST(OperatorTest, IsMultiplicationWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const addOperator("+");
+    Operator const subtractOperator("-");
+    Operator const multiplyOperator("*");
+    Operator const divideOperator("/");
+    Operator const raiseToPowerOperator("^");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isMultiplication());
     EXPECT_FALSE(addOperator.isMultiplication());
@@ -187,15 +187,15 @@ TEST(OperatorTest, IsMultiplicationWorks) {
 }
 
 TEST(OperatorTest, IsDivisionWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const addOperator("+");
+    Operator const subtractOperator("-");
+    Operator const multiplyOperator("*");
+    Operator const divideOperator("/");
+    Operator const raiseToPowerOperator("^");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isDivision());
     EXPECT_FALSE(addOperator.isDivision());
@@ -209,15 +209,15 @@ TEST(OperatorTest, IsDivisionWorks) {
 }
 
 TEST(OperatorTest, IsRaiseToPowerWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const addOperator("+");
+    Operator const subtractOperator("-");
+    Operator const multiplyOperator("*");
+    Operator const divideOperator("/");
+    Operator const raiseToPowerOperator("^");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isRaiseToPower());
     EXPECT_FALSE(addOperator.isRaiseToPower());
@@ -231,15 +231,15 @@ TEST(OperatorTest, IsRaiseToPowerWorks) {
 }
 
 TEST(OperatorTest, IsAnOperatorThatCanPerformedWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const addOperator("+");
+    Operator const subtractOperator("-");
+    Operator const multiplyOperator("*");
+    Operator const divideOperator("/");
+    Operator const raiseToPowerOperator("^");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isAnOperatorThatCanPerformed());
     EXPECT_TRUE(addOperator.isAnOperatorThatCanPerformed());
@@ -253,15 +253,15 @@ TEST(OperatorTest, IsAnOperatorThatCanPerformedWorks) {
 }
 
 TEST(OperatorTest, IsOpeningGroupOperatorWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const addOperator("+");
+    Operator const subtractOperator("-");
+    Operator const multiplyOperator("*");
+    Operator const divideOperator("/");
+    Operator const raiseToPowerOperator("^");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isOpeningGroupOperator());
     EXPECT_FALSE(addOperator.isOpeningGroupOperator());
@@ -275,15 +275,15 @@ TEST(OperatorTest, IsOpeningGroupOperatorWorks) {
 }
 
 TEST(OperatorTest, IsClosingGroupOperatorWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const addOperator("+");
+    Operator const subtractOperator("-");
+    Operator const multiplyOperator("*");
+    Operator const divideOperator("/");
+    Operator const raiseToPowerOperator("^");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_FALSE(nullOperator.isClosingGroupOperator());
     EXPECT_FALSE(addOperator.isClosingGroupOperator());

@@ -9,15 +9,15 @@ using namespace alba::algebra::Functions;
 namespace alba::algebra {
 
 TEST(ConvertHelpersTest, ReverseWorks) {
-    Operator nullOperator;
-    Operator addOperator("+");
-    Operator subtractOperator("-");
-    Operator multiplyOperator("*");
-    Operator divideOperator("/");
-    Operator raiseToPowerOperator("^");
-    Operator openingGroupOperator("(");
-    Operator closingGroupOperator(")");
-    Operator invalidOperator("invalid");
+    Operator const nullOperator;
+    Operator const addOperator("+");
+    Operator const subtractOperator("-");
+    Operator const multiplyOperator("*");
+    Operator const divideOperator("/");
+    Operator const raiseToPowerOperator("^");
+    Operator const openingGroupOperator("(");
+    Operator const closingGroupOperator(")");
+    Operator const invalidOperator("invalid");
 
     EXPECT_TRUE(reverse(nullOperator).getOperatorString().empty());
     EXPECT_EQ("-", reverse(addOperator).getOperatorString());
@@ -31,10 +31,10 @@ TEST(ConvertHelpersTest, ReverseWorks) {
 }
 
 TEST(ConvertHelpersTest, SimplifyAndConvertMonomialToSimplestTermWorks) {
-    Term termToVerify1(simplifyAndConvertMonomialToSimplestTerm(Monomial()));
-    Term termToVerify2(simplifyAndConvertMonomialToSimplestTerm(Monomial(6, {})));
-    Term termToVerify3(simplifyAndConvertMonomialToSimplestTerm(Monomial(1, {{"x", 1}})));
-    Term termToVerify4(simplifyAndConvertMonomialToSimplestTerm(Monomial(10, {{"x", 0}})));
+    Term const termToVerify1(simplifyAndConvertMonomialToSimplestTerm(Monomial()));
+    Term const termToVerify2(simplifyAndConvertMonomialToSimplestTerm(Monomial(6, {})));
+    Term const termToVerify3(simplifyAndConvertMonomialToSimplestTerm(Monomial(1, {{"x", 1}})));
+    Term const termToVerify4(simplifyAndConvertMonomialToSimplestTerm(Monomial(10, {{"x", 0}})));
 
     ASSERT_EQ(TermType::Constant, termToVerify1.getTermType());
     EXPECT_DOUBLE_EQ(0, termToVerify1.getAsNumber().getDouble());
@@ -47,9 +47,9 @@ TEST(ConvertHelpersTest, SimplifyAndConvertMonomialToSimplestTermWorks) {
 }
 
 TEST(ConvertHelpersTest, SimplifyAndConvertPolynomialToSimplestTermWorks) {
-    Term termToVerify1(simplifyAndConvertPolynomialToSimplestTerm(Polynomial{}));
-    Term termToVerify2(simplifyAndConvertPolynomialToSimplestTerm(Polynomial{Monomial(6, {})}));
-    Term termToVerify3(
+    Term const termToVerify1(simplifyAndConvertPolynomialToSimplestTerm(Polynomial{}));
+    Term const termToVerify2(simplifyAndConvertPolynomialToSimplestTerm(Polynomial{Monomial(6, {})}));
+    Term const termToVerify3(
         simplifyAndConvertPolynomialToSimplestTerm(Polynomial{Monomial(6, {{"x", 1}}), Monomial(-6, {{"x", 1}})}));
 
     ASSERT_EQ(TermType::Constant, termToVerify1.getTermType());
@@ -61,16 +61,16 @@ TEST(ConvertHelpersTest, SimplifyAndConvertPolynomialToSimplestTermWorks) {
 }
 
 TEST(ConvertHelpersTest, SimplifyAndConvertExpressionToSimplestTermWorks) {
-    Expression expression1(createExpressionIfPossible({88}));
-    Expression expression2(createExpressionInAnExpression(expression1));
-    Expression expression3(createExpressionInAnExpression(expression2));
-    Expression expression4(createExpressionInAnExpression(expression3));
+    Expression const expression1(createExpressionIfPossible({88}));
+    Expression const expression2(createExpressionInAnExpression(expression1));
+    Expression const expression3(createExpressionInAnExpression(expression2));
+    Expression const expression4(createExpressionInAnExpression(expression3));
 
-    Term termToVerify1(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({})));
-    Term termToVerify2(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression1})));
-    Term termToVerify3(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression2})));
-    Term termToVerify4(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression3})));
-    Term termToVerify5(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression4})));
+    Term const termToVerify1(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({})));
+    Term const termToVerify2(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression1})));
+    Term const termToVerify3(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression2})));
+    Term const termToVerify4(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression3})));
+    Term const termToVerify5(simplifyAndConvertExpressionToSimplestTerm(createExpressionIfPossible({expression4})));
 
     ASSERT_EQ(TermType::Empty, termToVerify1.getTermType());
     ASSERT_EQ(TermType::Constant, termToVerify2.getTermType());
@@ -84,15 +84,15 @@ TEST(ConvertHelpersTest, SimplifyAndConvertExpressionToSimplestTermWorks) {
 }
 
 TEST(ConvertHelpersTest, SimplifyAndConvertFunctionToSimplestTermWorks) {
-    Function function1;
-    Function function2("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
-    Function function3(
+    Function const function1;
+    Function const function2("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
+    Function const function3(
         "functionName", Term(createExpressionIfPossible({5, "+", 5})),
         [](AlbaNumber const& number) -> AlbaNumber { return number; });
 
-    Term termToVerify1(simplifyAndConvertFunctionToSimplestTerm(function1));
-    Term termToVerify2(simplifyAndConvertFunctionToSimplestTerm(function2));
-    Term termToVerify3(simplifyAndConvertFunctionToSimplestTerm(function3));
+    Term const termToVerify1(simplifyAndConvertFunctionToSimplestTerm(function1));
+    Term const termToVerify2(simplifyAndConvertFunctionToSimplestTerm(function2));
+    Term const termToVerify3(simplifyAndConvertFunctionToSimplestTerm(function3));
 
     ASSERT_TRUE(termToVerify1.isFunction());
     EXPECT_EQ(function1, termToVerify1.getAsFunction());
@@ -101,10 +101,10 @@ TEST(ConvertHelpersTest, SimplifyAndConvertFunctionToSimplestTermWorks) {
 }
 
 TEST(ConvertHelpersTest, ConvertMonomialToSimplestTermWorks) {
-    Term termToVerify1(convertMonomialToSimplestTerm(Monomial()));
-    Term termToVerify2(convertMonomialToSimplestTerm(Monomial(6, {})));
-    Term termToVerify3(convertMonomialToSimplestTerm(Monomial(1, {{"x", 1}})));
-    Term termToVerify4(convertMonomialToSimplestTerm(Monomial(10, {{"x", 0}})));
+    Term const termToVerify1(convertMonomialToSimplestTerm(Monomial()));
+    Term const termToVerify2(convertMonomialToSimplestTerm(Monomial(6, {})));
+    Term const termToVerify3(convertMonomialToSimplestTerm(Monomial(1, {{"x", 1}})));
+    Term const termToVerify4(convertMonomialToSimplestTerm(Monomial(10, {{"x", 0}})));
 
     ASSERT_EQ(TermType::Constant, termToVerify1.getTermType());
     EXPECT_DOUBLE_EQ(0, termToVerify1.getAsNumber().getDouble());
@@ -113,49 +113,50 @@ TEST(ConvertHelpersTest, ConvertMonomialToSimplestTermWorks) {
     ASSERT_EQ(TermType::Variable, termToVerify3.getTermType());
     EXPECT_EQ("x", termToVerify3.getAsVariable().getVariableName());
     ASSERT_EQ(TermType::Monomial, termToVerify4.getTermType());
-    Monomial monomialToExpect(10, {{"x", 0}});
+    Monomial const monomialToExpect(10, {{"x", 0}});
     EXPECT_EQ(monomialToExpect, termToVerify4.getAsMonomial());
 }
 
 TEST(ConvertHelpersTest, ConvertPolynomialToSimplestTermWorks) {
-    Term termToVerify1(convertPolynomialToSimplestTerm(Polynomial{}));
-    Term termToVerify2(convertPolynomialToSimplestTerm(Polynomial{Monomial(6, {})}));
-    Term termToVerify3(convertPolynomialToSimplestTerm(Polynomial{Monomial(6, {{"x", 1}}), Monomial(-6, {{"x", 1}})}));
+    Term const termToVerify1(convertPolynomialToSimplestTerm(Polynomial{}));
+    Term const termToVerify2(convertPolynomialToSimplestTerm(Polynomial{Monomial(6, {})}));
+    Term const termToVerify3(
+        convertPolynomialToSimplestTerm(Polynomial{Monomial(6, {{"x", 1}}), Monomial(-6, {{"x", 1}})}));
 
     ASSERT_EQ(TermType::Constant, termToVerify1.getTermType());
     EXPECT_DOUBLE_EQ(0, termToVerify1.getAsNumber().getDouble());
     ASSERT_EQ(TermType::Constant, termToVerify2.getTermType());
     EXPECT_DOUBLE_EQ(6, termToVerify2.getAsNumber().getDouble());
     ASSERT_EQ(TermType::Polynomial, termToVerify3.getTermType());
-    Polynomial polynomialToExpect{Monomial(6, {{"x", 1}}), Monomial(-6, {{"x", 1}})};
+    Polynomial const polynomialToExpect{Monomial(6, {{"x", 1}}), Monomial(-6, {{"x", 1}})};
     EXPECT_EQ(polynomialToExpect, termToVerify3.getAsPolynomial());
 }
 
 TEST(ConvertHelpersTest, ConvertExpressionToSimplestTermWorks) {
-    Term termToVerify1(convertExpressionToSimplestTerm(createExpressionIfPossible({})));
-    Term termToVerify2(convertExpressionToSimplestTerm(createExpressionIfPossible({156})));
-    Term termToVerify3(convertExpressionToSimplestTerm(createExpressionIfPossible({Monomial(444, {})})));
-    Term termToVerify4(convertExpressionToSimplestTerm(createExpressionIfPossible({1, "/", Monomial(444, {})})));
+    Term const termToVerify1(convertExpressionToSimplestTerm(createExpressionIfPossible({})));
+    Term const termToVerify2(convertExpressionToSimplestTerm(createExpressionIfPossible({156})));
+    Term const termToVerify3(convertExpressionToSimplestTerm(createExpressionIfPossible({Monomial(444, {})})));
+    Term const termToVerify4(convertExpressionToSimplestTerm(createExpressionIfPossible({1, "/", Monomial(444, {})})));
 
     EXPECT_EQ(Term(), termToVerify1);
     EXPECT_EQ(Term(156), termToVerify2);
     EXPECT_EQ(Term(444), termToVerify3);
-    Term termToExpect4(createExpressionIfPossible({1, "/", Monomial(444, {})}));
+    Term const termToExpect4(createExpressionIfPossible({1, "/", Monomial(444, {})}));
     EXPECT_EQ(termToExpect4, termToVerify4);
 }
 
 TEST(ConvertHelpersTest, ConvertFunctionToSimplestTermWorks) {
-    Function function1;
-    Function function2("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
-    Function function3("functionName", Term("x"), [](AlbaNumber const& number) -> AlbaNumber { return number; });
-    Term multiplicationAndDivisionExpression(createExpressionIfPossible({"x", "*", "y", "/", "z"}));
+    Function const function1;
+    Function const function2("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
+    Function const function3("functionName", Term("x"), [](AlbaNumber const& number) -> AlbaNumber { return number; });
+    Term const multiplicationAndDivisionExpression(createExpressionIfPossible({"x", "*", "y", "/", "z"}));
 
-    Term termToVerify1(convertFunctionToSimplestTerm(function1));
-    Term termToVerify2(convertFunctionToSimplestTerm(function2));
-    Term termToVerify3(convertFunctionToSimplestTerm(function3));
-    Term termToVerify4(convertFunctionToSimplestTerm(ln(multiplicationAndDivisionExpression)));
+    Term const termToVerify1(convertFunctionToSimplestTerm(function1));
+    Term const termToVerify2(convertFunctionToSimplestTerm(function2));
+    Term const termToVerify3(convertFunctionToSimplestTerm(function3));
+    Term const termToVerify4(convertFunctionToSimplestTerm(ln(multiplicationAndDivisionExpression)));
 
-    Term termToExpect(createExpressionIfPossible({ln("x"), "+", ln("y"), "-", ln("z")}));
+    Term const termToExpect(createExpressionIfPossible({ln("x"), "+", ln("y"), "-", ln("z")}));
     ASSERT_TRUE(termToVerify1.isFunction());
     EXPECT_EQ(function1, termToVerify1.getAsFunction());
     EXPECT_EQ(Term(5), termToVerify2);

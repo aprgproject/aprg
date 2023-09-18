@@ -9,11 +9,11 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(PolynomialTest, EqualityOperatorWorks) {
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
-    Polynomial polynomial3{Monomial(6, {}), Monomial(68, {{"x", 2}, {"y", 3}, {"z", 4}})};
-    Polynomial polynomial4{Monomial(6, {})};
-    Polynomial polynomial5{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+    Polynomial const polynomial1;
+    Polynomial const polynomial2{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+    Polynomial const polynomial3{Monomial(6, {}), Monomial(68, {{"x", 2}, {"y", 3}, {"z", 4}})};
+    Polynomial const polynomial4{Monomial(6, {})};
+    Polynomial const polynomial5{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
 
     EXPECT_TRUE(polynomial1 == polynomial1);
     EXPECT_FALSE(polynomial1 == polynomial2);
@@ -25,9 +25,9 @@ TEST(PolynomialTest, EqualityOperatorWorks) {
 
 TEST(PolynomialTest, OutputStreamOperatorWorks) {
     stringstream ss;
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(6, {})};
-    Polynomial polynomial3{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+    Polynomial const polynomial1;
+    Polynomial const polynomial2{Monomial(6, {})};
+    Polynomial const polynomial3{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
 
     ss << polynomial1 << "," << polynomial2 << "," << polynomial3;
 
@@ -183,8 +183,8 @@ TEST(PolynomialTest, RaiseToUnsignedIntegerWorks) {
 }
 
 TEST(PolynomialTest, PolynomialsAreConstructedCorrectly) {
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+    Polynomial const polynomial1;
+    Polynomial const polynomial2{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
 
     Monomials const& monomials1(polynomial1.getMonomials());
     ASSERT_TRUE(monomials1.empty());
@@ -203,7 +203,7 @@ TEST(PolynomialTest, PolynomialsAreConstructedCorrectly) {
 }
 
 TEST(PolynomialTest, GetMonomialsWorks) {
-    Polynomial polynomial{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+    Polynomial const polynomial{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
 
     Monomials const& monomials(polynomial.getMonomials());
 
@@ -316,8 +316,8 @@ TEST(PolynomialTest, GetMonomialsReferenceWorks) {
 }
 
 TEST(PolynomialTest, IsEmptyWorks) {
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(6, {})};
+    Polynomial const polynomial1;
+    Polynomial const polynomial2{Monomial(6, {})};
 
     EXPECT_TRUE(polynomial1.isEmpty());
     EXPECT_FALSE(polynomial2.isEmpty());
@@ -338,15 +338,15 @@ TEST(PolynomialTest, ClearWorks) {
 }
 
 TEST(PolynomialTest, ConstructedPolynomialsHaveIsSimplifiedFlagNotSet) {
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+    Polynomial const polynomial1;
+    Polynomial const polynomial2{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
 
     EXPECT_FALSE(polynomial1.isSimplified());
     EXPECT_FALSE(polynomial2.isSimplified());
 }
 
 TEST(PolynomialTest, IsSimplifiedWorks) {
-    Polynomial polynomial1;
+    Polynomial const polynomial1;
     Polynomial polynomial2;
     polynomial2.setAsSimplified();
 
@@ -401,11 +401,11 @@ TEST(PolynomialTest, AddPolynomialWorks) {
 
 TEST(PolynomialTest, MultiplyPolynomialUsingExample1Works) {
     Polynomial polynomial1{Monomial(3, {{"x", 2}}), Monomial(-12, {{"x", 1}}), Monomial(-2, {})};
-    Polynomial polynomial2{Monomial(1, {{"x", 2}}), Monomial(4, {{"x", 1}}), Monomial(6, {})};
+    Polynomial const polynomial2{Monomial(1, {{"x", 2}}), Monomial(4, {{"x", 1}}), Monomial(6, {})};
 
     polynomial1.multiplyPolynomial(polynomial2);
 
-    Polynomial polynomialToExpect{
+    Polynomial const polynomialToExpect{
         Monomial(3, {{"x", 4}}), Monomial(0, {{"x", 3}}), Monomial(-32, {{"x", 2}}), Monomial(-80, {{"x", 1}}),
         Monomial(-12, {})};
     EXPECT_EQ(polynomialToExpect, polynomial1);

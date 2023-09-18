@@ -24,7 +24,7 @@ TEST(SummationTest, ExperimentalTest1) {
     Term formula(1);
     for (int i = 1; i < 10; ++i) {
         // continue to integrate for number of digits
-        Summation summation(formula, "x");
+        Summation const summation(formula, "x");
         formula = summation.getSummationModelWithUnknownConstant();
         formula = formula - Term("C");
     }
@@ -33,24 +33,24 @@ TEST(SummationTest, ExperimentalTest1) {
         "(4523/2268)[x^3] + (6515/2016)[x^2] + (7129/2520)[x] + 1)",
         convertToString(formula));
 
-    SubstitutionOfVariablesToValues substitution{{"x", 5}};
+    SubstitutionOfVariablesToValues const substitution{{"x", 5}};
     EXPECT_EQ("2002", convertToString(substitution.performSubstitutionTo(formula)));
 }
 
 TEST(SummationTest, ExperimentalTest2) {
-    Polynomial polynomial{
+    Polynomial const polynomial{
         Monomial(1, {{"R", 1}, {"C", 1}, {"s", 1}}), Monomial(-1, {{"R", 1}, {"s", 2}}),
         Monomial(-1, {{"C", 1}, {"s", 2}}), Monomial(1, {{"s", 3}})};
-    Summation summation(polynomial, "s");
+    Summation const summation(polynomial, "s");
 
     int r = 1000;
     int s = 500;
     int minOfRSMinus1(min(r, s) - 1);
-    Term summationFormula(summation.getSum(1, "minOfRSMinus1"));
-    Polynomials polynomials(factorizeAPolynomial(summationFormula.getAsPolynomial()));
-    SubstitutionOfVariablesToValues substitution{{"R", r}, {"C", s}, {"minOfRSMinus1", minOfRSMinus1}};
-    int64_t result = substitution.performSubstitutionTo(summationFormula).getAsNumber().getInteger();
-    int64_t display = result % 1000000007;
+    Term const summationFormula(summation.getSum(1, "minOfRSMinus1"));
+    Polynomials const polynomials(factorizeAPolynomial(summationFormula.getAsPolynomial()));
+    SubstitutionOfVariablesToValues const substitution{{"R", r}, {"C", s}, {"minOfRSMinus1", minOfRSMinus1}};
+    int64_t const result = substitution.performSubstitutionTo(summationFormula).getAsNumber().getInteger();
+    int64_t const display = result % 1000000007;
 
     for (Polynomial const& polynomial : polynomials) {
         cout << "Factor: " << polynomial << "\n";

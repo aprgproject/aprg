@@ -9,11 +9,11 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(MonomialTest, EqualityOperatorWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial3(-234, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial4(-54, {{"x", 6}});
-    Monomial monomial5(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial3(-234, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial4(-54, {{"x", 6}});
+    Monomial const monomial5(-54, {{"x", 6}, {"y", -1.25}});
 
     EXPECT_TRUE(monomial1 == monomial1);
     EXPECT_FALSE(monomial1 == monomial2);
@@ -24,11 +24,11 @@ TEST(MonomialTest, EqualityOperatorWorks) {
 }
 
 TEST(MonomialTest, InequalityOperatorWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial3(-234, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial4(-54, {{"x", 6}});
-    Monomial monomial5(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial3(-234, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial4(-54, {{"x", 6}});
+    Monomial const monomial5(-54, {{"x", 6}, {"y", -1.25}});
 
     EXPECT_FALSE(monomial1 != monomial1);
     EXPECT_TRUE(monomial1 != monomial2);
@@ -40,13 +40,13 @@ TEST(MonomialTest, InequalityOperatorWorks) {
 
 TEST(MonomialTest, OutputStreamOperatorWorks) {
     stringstream ss;
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial3(-54, {{"x", 6}});
-    Monomial monomial4(-54, {{"x", 1}});
-    Monomial monomial5(0, {{"x", 1}});
-    Monomial monomial6(1, {{"x", 1}});
-    Monomial monomial7(1, {});
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial3(-54, {{"x", 6}});
+    Monomial const monomial4(-54, {{"x", 1}});
+    Monomial const monomial5(0, {{"x", 1}});
+    Monomial const monomial6(1, {{"x", 1}});
+    Monomial const monomial7(1, {});
 
     ss << monomial1 << "," << monomial2 << "," << monomial3 << "," << monomial4 << "," << monomial5 << "," << monomial6
        << "," << monomial7;
@@ -108,18 +108,18 @@ TEST(MonomialTest, DivideMonomialWorks) {
 }
 
 TEST(MonomialTest, GetCoefficientWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y", -1.25}});
 
     EXPECT_DOUBLE_EQ(0, monomial1.getCoefficient().getDouble());
     EXPECT_DOUBLE_EQ(-54, monomial2.getCoefficient().getDouble());
 }
 
 TEST(MonomialTest, MonomialsAreConstructedCorrectly) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial::VariablesToExponentsMap variablesToExponents{{"i", -7}};
-    Monomial monomial3(23, variablesToExponents);
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial::VariablesToExponentsMap const variablesToExponents{{"i", -7}};
+    Monomial const monomial3(23, variablesToExponents);
 
     EXPECT_DOUBLE_EQ(0, monomial1.getCoefficient().getDouble());
     ASSERT_TRUE(monomial1.getVariablesToExponentsMap().empty());
@@ -243,7 +243,7 @@ TEST(MonomialTest, RaiseToPowerNumberWorks) {
 }
 
 TEST(MonomialTest, SettingANewConstantWorks) {
-    Monomial monomial1;
+    Monomial const monomial1;
     Monomial monomial2;
 
     monomial2.setConstant(512);
@@ -253,8 +253,8 @@ TEST(MonomialTest, SettingANewConstantWorks) {
 }
 
 TEST(MonomialTest, GetExponentForVariableWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y1", -1.25}});
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y1", -1.25}});
 
     EXPECT_DOUBLE_EQ(0, monomial1.getExponentForVariable("x").getDouble());
     EXPECT_DOUBLE_EQ(6, monomial2.getExponentForVariable("x").getDouble());
@@ -263,8 +263,8 @@ TEST(MonomialTest, GetExponentForVariableWorks) {
 }
 
 TEST(MonomialTest, GetVariablesToExponentsMapWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y", -1.25}});
 
     ASSERT_TRUE(monomial1.getVariablesToExponentsMap().empty());
     Monomial::VariablesToExponentsMap const& variableMap1(monomial2.getVariablesToExponentsMap());
@@ -319,10 +319,10 @@ TEST(MonomialTest, PuttingVariableWithExponentWorks) {
 }
 
 TEST(MonomialTest, ConstructedMonomialsHaveIsSimplifiedFlagNotSet) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial::VariablesToExponentsMap variablesToExponents{{"i", -7}};
-    Monomial monomial3(23, variablesToExponents);
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial::VariablesToExponentsMap const variablesToExponents{{"i", -7}};
+    Monomial const monomial3(23, variablesToExponents);
 
     EXPECT_FALSE(monomial1.isSimplified());
     EXPECT_FALSE(monomial2.isSimplified());
@@ -330,7 +330,7 @@ TEST(MonomialTest, ConstructedMonomialsHaveIsSimplifiedFlagNotSet) {
 }
 
 TEST(MonomialTest, IsSimplifiedWorks) {
-    Monomial monomial1;
+    Monomial const monomial1;
     Monomial monomial2;
     monomial2.setAsSimplified();
 
@@ -356,9 +356,9 @@ TEST(MonomialTest, ClearSimplifiedFlagWorks) {
 }
 
 TEST(MonomialTest, CombineVariableExponentMapByMultiplicationWorks) {
-    Monomial::VariablesToExponentsMap variableMap1{{"x", 7}, {"y", 8}};
-    Monomial::VariablesToExponentsMap variableMap2{{"x", 1}, {"y", -8}};
-    Monomial::VariablesToExponentsMap variableMap3{{"z", 5}};
+    Monomial::VariablesToExponentsMap const variableMap1{{"x", 7}, {"y", 8}};
+    Monomial::VariablesToExponentsMap const variableMap2{{"x", 1}, {"y", -8}};
+    Monomial::VariablesToExponentsMap const variableMap3{{"z", 5}};
 
     Monomial::VariablesToExponentsMap variableMapToVerify1(
         Monomial::combineVariableExponentMapByMultiplication(variableMap1, variableMap2));
@@ -375,9 +375,9 @@ TEST(MonomialTest, CombineVariableExponentMapByMultiplicationWorks) {
 }
 
 TEST(MonomialTest, CombineVariableExponentMapByDivisionWorks) {
-    Monomial::VariablesToExponentsMap variableMap1{{"x", 7}, {"y", 8}};
-    Monomial::VariablesToExponentsMap variableMap2{{"x", 1}, {"y", 8}};
-    Monomial::VariablesToExponentsMap variableMap3{{"z", 5}};
+    Monomial::VariablesToExponentsMap const variableMap1{{"x", 7}, {"y", 8}};
+    Monomial::VariablesToExponentsMap const variableMap2{{"x", 1}, {"y", 8}};
+    Monomial::VariablesToExponentsMap const variableMap3{{"z", 5}};
 
     Monomial::VariablesToExponentsMap variableMapToVerify1(
         Monomial::combineVariableExponentMapByDivision(variableMap1, variableMap2));

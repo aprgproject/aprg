@@ -15,26 +15,26 @@ namespace alba::algebra {
 
 TEST(AxisRotationTest, RotateTermByAngleWorks) {
     AxisRotation rotation("x", "y", ALBA_NUMBER_PI.getDouble(), false);
-    Term term1(5);
-    Term term2("x");
-    Term term3(Monomial(7, {{"x", 1}}));
-    Term term4(Polynomial{Monomial(9, {{"x", 1}}), Monomial(11, {{"y", 1}})});
-    Term term5(createExpressionIfPossible({"x", "^", "y"}));
-    Term term6(sin("x"));
+    Term const term1(5);
+    Term const term2("x");
+    Term const term3(Monomial(7, {{"x", 1}}));
+    Term const term4(Polynomial{Monomial(9, {{"x", 1}}), Monomial(11, {{"y", 1}})});
+    Term const term5(createExpressionIfPossible({"x", "^", "y"}));
+    Term const term6(sin("x"));
 
-    Term termToVerify1(rotation.rotateTermByAngle(term1));
-    Term termToVerify2(rotation.rotateTermByAngle(term2));
-    Term termToVerify3(rotation.rotateTermByAngle(term3));
-    Term termToVerify4(rotation.rotateTermByAngle(term4));
-    Term termToVerify5(rotation.rotateTermByAngle(term5));
-    Term termToVerify6(rotation.rotateTermByAngle(term6));
+    Term const termToVerify1(rotation.rotateTermByAngle(term1));
+    Term const termToVerify2(rotation.rotateTermByAngle(term2));
+    Term const termToVerify3(rotation.rotateTermByAngle(term3));
+    Term const termToVerify4(rotation.rotateTermByAngle(term4));
+    Term const termToVerify5(rotation.rotateTermByAngle(term5));
+    Term const termToVerify6(rotation.rotateTermByAngle(term6));
 
-    string stringToExpect1("5");
-    string stringToExpect2("-1[x]");
-    string stringToExpect3("-7[x]");
-    string stringToExpect4("(-9[x] + -11[y])");
-    string stringToExpect5("(-1[x]^-1[y])");
-    string stringToExpect6("sin(-1[x])");
+    string const stringToExpect1("5");
+    string const stringToExpect2("-1[x]");
+    string const stringToExpect3("-7[x]");
+    string const stringToExpect4("(-9[x] + -11[y])");
+    string const stringToExpect5("(-1[x]^-1[y])");
+    string const stringToExpect6("sin(-1[x])");
     EXPECT_EQ(stringToExpect1, convertToString(termToVerify1));
     EXPECT_EQ(stringToExpect2, convertToString(termToVerify2));
     EXPECT_EQ(stringToExpect3, convertToString(termToVerify3));
@@ -45,61 +45,61 @@ TEST(AxisRotationTest, RotateTermByAngleWorks) {
 
 TEST(AxisRotationTest, RotateConstantByAngleWorks) {
     AxisRotation rotation("x", "y", ALBA_NUMBER_PI.getDouble(), false);
-    Constant constant(5);
+    Constant const constant(5);
 
-    Term termToVerify(rotation.rotateConstantByAngle(constant));
+    Term const termToVerify(rotation.rotateConstantByAngle(constant));
 
-    string stringToExpect("5");
+    string const stringToExpect("5");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
 TEST(AxisRotationTest, RotateVariableByAngleWorks) {
     AxisRotation rotation("x", "y", ALBA_NUMBER_PI.getDouble(), false);
-    Variable variable("x");
+    Variable const variable("x");
 
-    Term termToVerify(rotation.rotateVariableByAngle(variable));
+    Term const termToVerify(rotation.rotateVariableByAngle(variable));
 
-    string stringToExpect("-1[x]");
+    string const stringToExpect("-1[x]");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
 TEST(AxisRotationTest, RotateMonomialByAngleWorks) {
     AxisRotation rotation("x", "y", ALBA_NUMBER_PI.getDouble(), false);
-    Monomial monomial(7, {{"x", 1}});
+    Monomial const monomial(7, {{"x", 1}});
 
-    Term termToVerify(rotation.rotateMonomialByAngle(monomial));
+    Term const termToVerify(rotation.rotateMonomialByAngle(monomial));
 
-    string stringToExpect("-7[x]");
+    string const stringToExpect("-7[x]");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
 TEST(AxisRotationTest, RotatePolynomialByAngleWorks) {
     AxisRotation rotation("x", "y", ALBA_NUMBER_PI.getDouble(), false);
-    Polynomial polynomial{Monomial(9, {{"x", 1}}), Monomial(11, {{"y", 1}})};
+    Polynomial const polynomial{Monomial(9, {{"x", 1}}), Monomial(11, {{"y", 1}})};
 
-    Term termToVerify(rotation.rotatePolynomialByAngle(polynomial));
+    Term const termToVerify(rotation.rotatePolynomialByAngle(polynomial));
 
-    string stringToExpect("(-9[x] + -11[y])");
+    string const stringToExpect("(-9[x] + -11[y])");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
 TEST(AxisRotationTest, RotateExpressionByAngleWorks) {
     AxisRotation rotation("x", "y", ALBA_NUMBER_PI.getDouble(), false);
-    Expression expression(createExpressionIfPossible({"x", "^", "y"}));
+    Expression const expression(createExpressionIfPossible({"x", "^", "y"}));
 
-    Term termToVerify(rotation.rotateExpressionByAngle(expression));
+    Term const termToVerify(rotation.rotateExpressionByAngle(expression));
 
-    string stringToExpect("(-1[x]^-1[y])");
+    string const stringToExpect("(-1[x]^-1[y])");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 
 TEST(AxisRotationTest, RotateFunctionByAngleWorks) {
     AxisRotation rotation("x", "y", ALBA_NUMBER_PI.getDouble(), false);
-    Function functionObject(sin("x"));
+    Function const functionObject(sin("x"));
 
-    Term termToVerify(rotation.rotateFunctionByAngle(functionObject));
+    Term const termToVerify(rotation.rotateFunctionByAngle(functionObject));
 
-    string stringToExpect("sin(-1[x])");
+    string const stringToExpect("sin(-1[x])");
     EXPECT_EQ(stringToExpect, convertToString(termToVerify));
 }
 

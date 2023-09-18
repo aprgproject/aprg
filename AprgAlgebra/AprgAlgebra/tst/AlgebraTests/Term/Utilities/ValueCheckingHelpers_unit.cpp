@@ -11,7 +11,7 @@ using namespace alba::algebra::Functions;
 namespace alba::algebra {
 
 TEST(ValueCheckingHelpersTest, IsValueSatisfyTheConditionWorksForTerm) {
-    Term termToTest(12345);
+    Term const termToTest(12345);
 
     EXPECT_TRUE(
         isValueSatisfyTheCondition(termToTest, [](AlbaNumber const& number) { return AlbaNumber(12345) == number; }));
@@ -20,7 +20,7 @@ TEST(ValueCheckingHelpersTest, IsValueSatisfyTheConditionWorksForTerm) {
 }
 
 TEST(ValueCheckingHelpersTest, IsValueSatisfyTheConditionWorksForConstant) {
-    Constant constant(12345);
+    Constant const constant(12345);
 
     EXPECT_TRUE(
         isValueSatisfyTheCondition(constant, [](AlbaNumber const& number) { return AlbaNumber(12345) == number; }));
@@ -29,8 +29,8 @@ TEST(ValueCheckingHelpersTest, IsValueSatisfyTheConditionWorksForConstant) {
 }
 
 TEST(ValueCheckingHelpersTest, IsValueSatisfyTheConditionWorksForMonomial) {
-    Monomial monomial1(Monomial(1, {{"x", 12345}}));
-    Monomial monomial2(Monomial(12345, {}));
+    Monomial const monomial1(Monomial(1, {{"x", 12345}}));
+    Monomial const monomial2(Monomial(12345, {}));
 
     EXPECT_FALSE(
         isValueSatisfyTheCondition(monomial1, [](AlbaNumber const& number) { return AlbaNumber(12345) == number; }));
@@ -43,8 +43,8 @@ TEST(ValueCheckingHelpersTest, IsValueSatisfyTheConditionWorksForMonomial) {
 }
 
 TEST(ValueCheckingHelpersTest, IsValueSatisfyTheConditionWorksForPolynomial) {
-    Polynomial polynomial1{Monomial(1, {}), Monomial(1, {{"x", 12345}})};
-    Polynomial polynomial2{Monomial(12345, {})};
+    Polynomial const polynomial1{Monomial(1, {}), Monomial(1, {{"x", 12345}})};
+    Polynomial const polynomial2{Monomial(12345, {})};
 
     EXPECT_FALSE(
         isValueSatisfyTheCondition(polynomial1, [](AlbaNumber const& number) { return AlbaNumber(12345) == number; }));
@@ -57,8 +57,8 @@ TEST(ValueCheckingHelpersTest, IsValueSatisfyTheConditionWorksForPolynomial) {
 }
 
 TEST(ValueCheckingHelpersTest, IsValueSatisfyTheConditionWorksForExpression) {
-    Expression expression1(createExpressionIfPossible({"x", "+", 12345}));
-    Expression expression2(createExpressionIfPossible({12345}));
+    Expression const expression1(createExpressionIfPossible({"x", "+", 12345}));
+    Expression const expression2(createExpressionIfPossible({12345}));
 
     EXPECT_FALSE(
         isValueSatisfyTheCondition(expression1, [](AlbaNumber const& number) { return AlbaNumber(12345) == number; }));
@@ -71,7 +71,7 @@ TEST(ValueCheckingHelpersTest, IsValueSatisfyTheConditionWorksForExpression) {
 }
 
 TEST(ValueCheckingHelpersTest, DoAnyNumbersSatisfyTheConditionWorksForTerm) {
-    Term termToTest(12345);
+    Term const termToTest(12345);
 
     EXPECT_TRUE(doAnyNumbersSatisfyTheCondition(
         termToTest, [](AlbaNumber const& number) { return AlbaNumber(12345) == number; }));
@@ -80,8 +80,8 @@ TEST(ValueCheckingHelpersTest, DoAnyNumbersSatisfyTheConditionWorksForTerm) {
 }
 
 TEST(ValueCheckingHelpersTest, DoAnyNumbersSatisfyTheConditionWorksForMonomial) {
-    Monomial monomial1(Monomial(1, {{"x", 12345}}));
-    Monomial monomial2(Monomial(12345, {{"x", 1}}));
+    Monomial const monomial1(Monomial(1, {{"x", 12345}}));
+    Monomial const monomial2(Monomial(12345, {{"x", 1}}));
 
     EXPECT_TRUE(doAnyNumbersSatisfyTheCondition(
         monomial1, [](AlbaNumber const& number) { return AlbaNumber(12345) == number; }));
@@ -94,8 +94,8 @@ TEST(ValueCheckingHelpersTest, DoAnyNumbersSatisfyTheConditionWorksForMonomial) 
 }
 
 TEST(ValueCheckingHelpersTest, DoAnyNumbersSatisfyTheConditionWorksForPolynomial) {
-    Polynomial polynomial1{Monomial(1, {}), Monomial(1, {{"x", 12345}})};
-    Polynomial polynomial2{Monomial(12345, {}), Monomial(1, {{"x", 1}})};
+    Polynomial const polynomial1{Monomial(1, {}), Monomial(1, {{"x", 12345}})};
+    Polynomial const polynomial2{Monomial(12345, {}), Monomial(1, {{"x", 1}})};
 
     EXPECT_TRUE(doAnyNumbersSatisfyTheCondition(
         polynomial1, [](AlbaNumber const& number) { return AlbaNumber(12345) == number; }));
@@ -108,7 +108,7 @@ TEST(ValueCheckingHelpersTest, DoAnyNumbersSatisfyTheConditionWorksForPolynomial
 }
 
 TEST(ValueCheckingHelpersTest, DoAnyNumbersSatisfyTheConditionWorksForExpression) {
-    Expression expression(createExpressionIfPossible({"x", "+", 12345}));
+    Expression const expression(createExpressionIfPossible({"x", "+", 12345}));
 
     EXPECT_TRUE(doAnyNumbersSatisfyTheCondition(
         expression, [](AlbaNumber const& number) { return AlbaNumber(12345) == number; }));
@@ -117,7 +117,7 @@ TEST(ValueCheckingHelpersTest, DoAnyNumbersSatisfyTheConditionWorksForExpression
 }
 
 TEST(ValueCheckingHelpersTest, DoAnyNumbersSatisfyTheConditionWorksForFunction) {
-    Function absoluteValueFunction(Functions::abs(createExpressionIfPossible({"x", "+", 12345})));
+    Function const absoluteValueFunction(Functions::abs(createExpressionIfPossible({"x", "+", 12345})));
 
     EXPECT_TRUE(doAnyNumbersSatisfyTheCondition(
         absoluteValueFunction, [](AlbaNumber const& number) { return AlbaNumber(12345) == number; }));
@@ -150,17 +150,17 @@ TEST(ValueCheckingHelpersTest, WillHaveNoEffectOnMultiplicationOrDivisionOrRaise
 }
 
 TEST(ValueCheckingHelpersTest, IsTheValueWorksWithTerm) {
-    Term term1;
-    Term term2(0);
-    Term term3(1);
-    Term term4(Variable("length"));
-    Term term5(Operator("+"));
-    Term term6(Monomial(0, {}));
-    Term term7(Monomial(1, {}));
-    Term term8(Polynomial{});
-    Term term9(Polynomial{Monomial(1, {})});
-    Term term10(Expression{});
-    Term term11(Function{});
+    Term const term1;
+    Term const term2(0);
+    Term const term3(1);
+    Term const term4(Variable("length"));
+    Term const term5(Operator("+"));
+    Term const term6(Monomial(0, {}));
+    Term const term7(Monomial(1, {}));
+    Term const term8(Polynomial{});
+    Term const term9(Polynomial{Monomial(1, {})});
+    Term const term10(Expression{});
+    Term const term11(Function{});
 
     EXPECT_FALSE(isTheValue(term1, 0));
     EXPECT_FALSE(isTheValue(term1, 1));
@@ -187,10 +187,10 @@ TEST(ValueCheckingHelpersTest, IsTheValueWorksWithTerm) {
 }
 
 TEST(ValueCheckingHelpersTest, IsTheValueWorksWithConstant) {
-    Constant constant1;
-    Constant constant2(0);
-    Constant constant3(1);
-    Constant constant4(23);
+    Constant const constant1;
+    Constant const constant2(0);
+    Constant const constant3(1);
+    Constant const constant4(23);
 
     EXPECT_TRUE(isTheValue(constant1, 0));
     EXPECT_FALSE(isTheValue(constant1, 1));
@@ -204,11 +204,11 @@ TEST(ValueCheckingHelpersTest, IsTheValueWorksWithConstant) {
 }
 
 TEST(ValueCheckingHelpersTest, IsTheValueWorksWithMonomial) {
-    Monomial monomial1;
-    Monomial monomial2(1, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial3(0, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial4(1, {});
-    Monomial monomial5(23, {});
+    Monomial const monomial1;
+    Monomial const monomial2(1, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial3(0, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial4(1, {});
+    Monomial const monomial5(23, {});
 
     EXPECT_TRUE(isTheValue(monomial1, 0));
     EXPECT_FALSE(isTheValue(monomial1, 1));
@@ -224,12 +224,12 @@ TEST(ValueCheckingHelpersTest, IsTheValueWorksWithMonomial) {
 }
 
 TEST(ValueCheckingHelpersTest, IsTheValueWorksWithPolynomial) {
-    Polynomial polynomial1;
-    Polynomial polynomial2{Monomial(6, {})};
-    Polynomial polynomial3{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
-    Polynomial polynomial4{Monomial(0, {{"x", 2}, {"y", 3}, {"z", 4}})};
-    Polynomial polynomial5{Monomial(1, {{"x", 2}})};
-    Polynomial polynomial6{Monomial(1, {})};
+    Polynomial const polynomial1;
+    Polynomial const polynomial2{Monomial(6, {})};
+    Polynomial const polynomial3{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})};
+    Polynomial const polynomial4{Monomial(0, {{"x", 2}, {"y", 3}, {"z", 4}})};
+    Polynomial const polynomial5{Monomial(1, {{"x", 2}})};
+    Polynomial const polynomial6{Monomial(1, {})};
 
     EXPECT_TRUE(isTheValue(polynomial1, 0));
     EXPECT_FALSE(isTheValue(polynomial1, 1));
@@ -416,7 +416,7 @@ TEST(ValueCheckingHelpersTest, HasNotANumberWorksForExpression) {
 }
 
 TEST(ValueCheckingHelpersTest, HasNotANumberWorksForFunction) {
-    Function absoluteValueFunction(Functions::abs(createExpressionIfPossible({5.12, "+", NAN})));
+    Function const absoluteValueFunction(Functions::abs(createExpressionIfPossible({5.12, "+", NAN})));
     EXPECT_TRUE(hasNan(absoluteValueFunction));
 }
 
@@ -448,7 +448,7 @@ TEST(ValueCheckingHelpersTest, HasNonFiniteNumbersForExpression) {
 }
 
 TEST(ValueCheckingHelpersTest, HasNonFiniteNumbersForFunction) {
-    Function absoluteValueFunction(Functions::abs(createExpressionIfPossible({5.12, "+", NAN})));
+    Function const absoluteValueFunction(Functions::abs(createExpressionIfPossible({5.12, "+", NAN})));
     EXPECT_TRUE(hasNonRealFiniteNumbers(absoluteValueFunction));
 }
 
@@ -458,7 +458,8 @@ TEST(ValueCheckingHelpersTest, HasZeroWorks) {
 }
 
 TEST(ValueCheckingHelpersTest, HasNegativeExponentsWithVariableWorks) {
-    Polynomial polynomial{Monomial(1, {{"a", 1}, {"b", 2}, {"c", 3}}), Monomial(1, {{"x", -4}, {"y", -5}, {"z", -6}})};
+    Polynomial const polynomial{
+        Monomial(1, {{"a", 1}, {"b", 2}, {"c", 3}}), Monomial(1, {{"x", -4}, {"y", -5}, {"z", -6}})};
 
     EXPECT_FALSE(hasNegativeExponentsWithVariable(polynomial, "a"));
     EXPECT_FALSE(hasNegativeExponentsWithVariable(polynomial, "b"));

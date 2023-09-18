@@ -14,7 +14,7 @@ namespace alba::algebra {
 TEST(OneEquationOneVariableEqualitySolverTest, NonEqualityOperatorsAreNotSolved) {
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation("x", "<", "x")));
+    SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation("x", "<", "x")));
 
     EXPECT_FALSE(solver.isSolved());
     EXPECT_FALSE(solver.isACompleteSolution());
@@ -24,7 +24,7 @@ TEST(OneEquationOneVariableEqualitySolverTest, NonEqualityOperatorsAreNotSolved)
 TEST(OneEquationOneVariableEqualitySolverTest, MultipleVariableEquationsAreNotSolved) {
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation("x", "=", "y")));
+    SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation("x", "=", "y")));
 
     EXPECT_FALSE(solver.isSolved());
     EXPECT_FALSE(solver.isACompleteSolution());
@@ -34,7 +34,7 @@ TEST(OneEquationOneVariableEqualitySolverTest, MultipleVariableEquationsAreNotSo
 TEST(OneEquationOneVariableEqualitySolverTest, EquationsThatAreAlwaysSatisfiedResultsInInfiniteRange) {
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation("x", "=", "x")));
+    SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation("x", "=", "x")));
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_TRUE(solver.isACompleteSolution());
@@ -46,7 +46,8 @@ TEST(OneEquationOneVariableEqualitySolverTest, EquationsThatAreAlwaysSatisfiedRe
 TEST(OneEquationOneVariableEqualitySolverTest, PolynomialAreSolvedCorrectly) {
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(Monomial(1, {{"x", 4}}), "=", 16)));
+    SolutionSet const solutionSet(
+        solver.calculateSolutionAndReturnSolutionSet(Equation(Monomial(1, {{"x", 4}}), "=", 16)));
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_TRUE(solver.isACompleteSolution());
@@ -54,12 +55,12 @@ TEST(OneEquationOneVariableEqualitySolverTest, PolynomialAreSolvedCorrectly) {
 }
 
 TEST(OneEquationOneVariableEqualitySolverTest, PolynomialOverPolynomialAreSolvedCorrectly) {
-    Polynomial numerator{Monomial(1, {{"x", 2}}), Monomial(-25, {})};
-    Polynomial denominator{Monomial(1, {{"x", 2}}), Monomial(-36, {})};
-    Expression expression(createExpressionIfPossible({numerator, "/", denominator}));
+    Polynomial const numerator{Monomial(1, {{"x", 2}}), Monomial(-25, {})};
+    Polynomial const denominator{Monomial(1, {{"x", 2}}), Monomial(-36, {})};
+    Expression const expression(createExpressionIfPossible({numerator, "/", denominator}));
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(expression, "=", 0)));
+    SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(expression, "=", 0)));
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_TRUE(solver.isACompleteSolution());
@@ -68,10 +69,10 @@ TEST(OneEquationOneVariableEqualitySolverTest, PolynomialOverPolynomialAreSolved
 }
 
 TEST(OneEquationOneVariableEqualitySolverTest, XToTheXAreSolvedCorrectly) {
-    Expression expression(createExpressionIfPossible({"x", "^", "x"}));
+    Expression const expression(createExpressionIfPossible({"x", "^", "x"}));
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(expression, "=", 823543)));
+    SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(expression, "=", 823543)));
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_FALSE(solver.isACompleteSolution());
@@ -79,10 +80,10 @@ TEST(OneEquationOneVariableEqualitySolverTest, XToTheXAreSolvedCorrectly) {
 }
 
 TEST(OneEquationOneVariableEqualitySolverTest, XToTheXWithNegativeSolutionAreNotSolved) {
-    Expression expression(createExpressionIfPossible({"x", "^", "x"}));
+    Expression const expression(createExpressionIfPossible({"x", "^", "x"}));
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(expression, "=", -823543)));
+    SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(expression, "=", -823543)));
 
     EXPECT_FALSE(solver.isSolved());
     EXPECT_FALSE(solver.isACompleteSolution());
@@ -90,10 +91,10 @@ TEST(OneEquationOneVariableEqualitySolverTest, XToTheXWithNegativeSolutionAreNot
 }
 
 TEST(OneEquationOneVariableEqualitySolverTest, AbsoluteValueFunctionsAreSolved) {
-    Term functionTerm(abs(createExpressionIfPossible({"x"})));
+    Term const functionTerm(abs(createExpressionIfPossible({"x"})));
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(functionTerm, "=", 526)));
+    SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(functionTerm, "=", 526)));
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_TRUE(solver.isACompleteSolution());
@@ -101,10 +102,10 @@ TEST(OneEquationOneVariableEqualitySolverTest, AbsoluteValueFunctionsAreSolved) 
 }
 
 TEST(OneEquationOneVariableEqualitySolverTest, AbsoluteValueFunctionWithInputExpressionAreSolved) {
-    Term functionTerm(abs(createExpressionIfPossible({"x", "+", 100})));
+    Term const functionTerm(abs(createExpressionIfPossible({"x", "+", 100})));
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(functionTerm, "=", 526)));
+    SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(functionTerm, "=", 526)));
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_TRUE(solver.isACompleteSolution());
@@ -112,11 +113,12 @@ TEST(OneEquationOneVariableEqualitySolverTest, AbsoluteValueFunctionWithInputExp
 }
 
 TEST(OneEquationOneVariableEqualitySolverTest, TwoAbsoluteValueFunctionsAreSolved) {
-    Term functionTerm1(abs(Polynomial{Monomial(2, {{"x", 1}}), Monomial(-1, {})}));
-    Term functionTerm2(abs(Polynomial{Monomial(4, {{"x", 1}}), Monomial(3, {})}));
+    Term const functionTerm1(abs(Polynomial{Monomial(2, {{"x", 1}}), Monomial(-1, {})}));
+    Term const functionTerm2(abs(Polynomial{Monomial(4, {{"x", 1}}), Monomial(3, {})}));
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(functionTerm1, "=", functionTerm2)));
+    SolutionSet const solutionSet(
+        solver.calculateSolutionAndReturnSolutionSet(Equation(functionTerm1, "=", functionTerm2)));
 
     AlbaNumbers acceptedValues(solutionSet.getAcceptedValues());
     ASSERT_EQ(2U, acceptedValues.size());
@@ -125,15 +127,15 @@ TEST(OneEquationOneVariableEqualitySolverTest, TwoAbsoluteValueFunctionsAreSolve
 }
 
 TEST(OneEquationOneVariableEqualitySolverTest, AdditionFractionsInEquationIsSolved) {
-    Polynomial polynomial1{Monomial(2, {{"x", 1}}), Monomial(5, {})};
-    Polynomial polynomial2{Monomial(5, {{"x", 1}})};
-    Polynomial polynomial3{Monomial(1, {{"x", 1}}), Monomial(-1, {})};
-    Expression expression1(createExpressionIfPossible({polynomial1, "/", 2}));
-    Expression expression2(createExpressionIfPossible({polynomial2, "/", polynomial3}));
-    Expression leftHandExpression(createExpressionIfPossible({expression1, "-", expression2}));
+    Polynomial const polynomial1{Monomial(2, {{"x", 1}}), Monomial(5, {})};
+    Polynomial const polynomial2{Monomial(5, {{"x", 1}})};
+    Polynomial const polynomial3{Monomial(1, {{"x", 1}}), Monomial(-1, {})};
+    Expression const expression1(createExpressionIfPossible({polynomial1, "/", 2}));
+    Expression const expression2(createExpressionIfPossible({polynomial2, "/", polynomial3}));
+    Expression const leftHandExpression(createExpressionIfPossible({expression1, "-", expression2}));
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(leftHandExpression, "=", "x")));
+    SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(leftHandExpression, "=", "x")));
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_TRUE(solver.isACompleteSolution());
@@ -141,14 +143,14 @@ TEST(OneEquationOneVariableEqualitySolverTest, AdditionFractionsInEquationIsSolv
 }
 
 TEST(OneEquationOneVariableEqualitySolverTest, SquareRootInEquationAreSolved) {
-    Polynomial polynomial1{Monomial(-5, {{"x", 1}}), Monomial(1, {})};
-    Polynomial polynomial2{Monomial(-1, {{"x", 1}}), Monomial(1, {})};
-    Expression expression1(createExpressionIfPossible({polynomial1, "^", AlbaNumber::createFraction(1, 2)}));
-    Expression expression2(createExpressionIfPossible({polynomial2, "^", AlbaNumber::createFraction(1, 2)}));
-    Expression expressionLeft(createExpressionIfPossible({expression1, "+", expression2}));
+    Polynomial const polynomial1{Monomial(-5, {{"x", 1}}), Monomial(1, {})};
+    Polynomial const polynomial2{Monomial(-1, {{"x", 1}}), Monomial(1, {})};
+    Expression const expression1(createExpressionIfPossible({polynomial1, "^", AlbaNumber::createFraction(1, 2)}));
+    Expression const expression2(createExpressionIfPossible({polynomial2, "^", AlbaNumber::createFraction(1, 2)}));
+    Expression const expressionLeft(createExpressionIfPossible({expression1, "+", expression2}));
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(expressionLeft, "=", 2)));
+    SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(expressionLeft, "=", 2)));
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_FALSE(solver.isACompleteSolution());
@@ -156,14 +158,14 @@ TEST(OneEquationOneVariableEqualitySolverTest, SquareRootInEquationAreSolved) {
 }
 
 TEST(OneEquationOneVariableEqualitySolverTest, RadicalOverRadicalInEquationAreSolved) {
-    Polynomial polynomial1{Monomial(1, {{"x", 1}}), Monomial(-2, {})};
-    Polynomial polynomial2{Monomial(1, {{"x", 1}}), Monomial(-3, {})};
-    Expression numerator(createExpressionIfPossible({polynomial1, "^", AlbaNumber::createFraction(1, 3)}));
-    Expression denominator(createExpressionIfPossible({polynomial2, "^", AlbaNumber::createFraction(1, 5)}));
-    Expression radicalOverRadical(createExpressionIfPossible({numerator, "/", denominator}));
+    Polynomial const polynomial1{Monomial(1, {{"x", 1}}), Monomial(-2, {})};
+    Polynomial const polynomial2{Monomial(1, {{"x", 1}}), Monomial(-3, {})};
+    Expression const numerator(createExpressionIfPossible({polynomial1, "^", AlbaNumber::createFraction(1, 3)}));
+    Expression const denominator(createExpressionIfPossible({polynomial2, "^", AlbaNumber::createFraction(1, 5)}));
+    Expression const radicalOverRadical(createExpressionIfPossible({numerator, "/", denominator}));
     OneEquationOneVariableEqualitySolver solver;
 
-    SolutionSet solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(radicalOverRadical, "=", 0)));
+    SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(Equation(radicalOverRadical, "=", 0)));
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_FALSE(solver.isACompleteSolution());

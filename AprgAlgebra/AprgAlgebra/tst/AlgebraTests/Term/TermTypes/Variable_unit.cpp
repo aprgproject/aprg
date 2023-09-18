@@ -7,10 +7,10 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(VariableTest, EqualityOperatorWorks) {
-    Variable variable1;
-    Variable variable2("x");
-    Variable variable3("power");
-    Variable variable4("x");
+    Variable const variable1;
+    Variable const variable2("x");
+    Variable const variable3("power");
+    Variable const variable4("x");
 
     EXPECT_TRUE(variable1 == variable1);
     EXPECT_FALSE(variable1 == variable2);
@@ -20,10 +20,10 @@ TEST(VariableTest, EqualityOperatorWorks) {
 }
 
 TEST(VariableTest, InequalityOperatorWorks) {
-    Variable variable1;
-    Variable variable2("x");
-    Variable variable3("power");
-    Variable variable4("x");
+    Variable const variable1;
+    Variable const variable2("x");
+    Variable const variable3("power");
+    Variable const variable4("x");
 
     EXPECT_FALSE(variable1 != variable1);
     EXPECT_TRUE(variable1 != variable2);
@@ -34,8 +34,8 @@ TEST(VariableTest, InequalityOperatorWorks) {
 
 TEST(VariableTest, OutputStreamOperatorWorks) {
     stringstream ss;
-    Variable variable1;
-    Variable variable2("time");
+    Variable const variable1;
+    Variable const variable2("time");
 
     ss << variable1 << "," << variable2;
 
@@ -50,8 +50,8 @@ TEST(VariableTest, LessThanOperatorWorks) {
 }
 
 TEST(VariableTest, VariablesAreConstructedCorrectly) {
-    Variable variable1;
-    Variable variable2("time");
+    Variable const variable1;
+    Variable const variable2("time");
 
     EXPECT_EQ("", variable1.getVariableName());
     EXPECT_EQ("time", variable2.getVariableName());

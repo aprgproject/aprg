@@ -15,9 +15,9 @@ TEST(StringHelpersTest, AddValueTermIfNotEmptyWorks) {
 }
 
 TEST(StringHelpersTest, BuildTermIfPossibleWorks) {
-    Term termToVerify(buildTermIfPossible("x^2*y^-3*z^4"));
+    Term const termToVerify(buildTermIfPossible("x^2*y^-3*z^4"));
 
-    Term termToExpect(Monomial(1, {{"x", 2}, {"y", -3}, {"z", 4}}));
+    Term const termToExpect(Monomial(1, {{"x", 2}, {"y", -3}, {"z", 4}}));
     EXPECT_EQ(termToExpect, termToVerify);
 }
 
@@ -73,7 +73,7 @@ TEST(StringHelpersTest, GetFirstStringIfNegativeAssociationWorks) {
 }
 
 TEST(StringHelpersTest, CreateVariableNameForSubstitutionWorks) {
-    Term term(Polynomial{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})});
+    Term const term(Polynomial{Monomial(6, {}), Monomial(-7, {{"x", 2}, {"y", 3}, {"z", 4}})});
 
     EXPECT_EQ("{(6 + -7[x^2][y^3][z^4])}", createVariableNameForSubstitution(term));
 }

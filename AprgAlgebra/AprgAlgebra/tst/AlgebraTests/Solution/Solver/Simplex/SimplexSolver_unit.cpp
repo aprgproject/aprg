@@ -13,9 +13,9 @@ TEST(SimplexSolverTest, SimplexWorksOnBrewersProblem) {
     constraints.emplace_back(Polynomial{Monomial(4, {{"A", 1}}), Monomial(4, {{"B", 1}})}, "<=", 160);
     constraints.emplace_back(Polynomial{Monomial(35, {{"A", 1}}), Monomial(20, {{"B", 1}})}, "<=", 1190);
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-    Polynomial objectiveFunction{Monomial(13, {{"A", 1}}), Monomial(23, {{"B", 1}})};
+    Polynomial const objectiveFunction{Monomial(13, {{"A", 1}}), Monomial(23, {{"B", 1}})};
 
-    SimplexSolver solver(constraints, objectiveFunction);
+    SimplexSolver const solver(constraints, objectiveFunction);
 
     Equations solutionEquations;
     // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
@@ -35,9 +35,9 @@ TEST(SimplexSolverTest, SimplexWorksOnExample1) {
     constraints.emplace_back(
         Polynomial{Monomial(-1, {{"A", 1}}), Monomial(-5, {{"B", 1}}), Monomial(-1, {{"C", 1}})}, ">=", -8);
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-    Polynomial objectiveFunction{Monomial(8, {{"A", 1}}), Monomial(10, {{"B", 1}}), Monomial(7, {{"C", 1}})};
+    Polynomial const objectiveFunction{Monomial(8, {{"A", 1}}), Monomial(10, {{"B", 1}}), Monomial(7, {{"C", 1}})};
 
-    SimplexSolver solver(constraints, objectiveFunction);
+    SimplexSolver const solver(constraints, objectiveFunction);
 
     Equations solutionEquations;
     // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
@@ -60,9 +60,9 @@ TEST(SimplexSolverTest, SimplexWorksOnBrewersProblemWithZeroEquation) {
     constraints.emplace_back(Polynomial{Monomial(4, {{"A", 1}}), Monomial(4, {{"B", 1}})}, "<=", 160);
     constraints.emplace_back(Polynomial{Monomial(35, {{"A", 1}}), Monomial(20, {{"B", 1}})}, "<=", 1190);
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-    Polynomial objectiveFunction{Monomial(13, {{"A", 1}}), Monomial(23, {{"B", 1}}), Monomial(100, {{"C", 1}})};
+    Polynomial const objectiveFunction{Monomial(13, {{"A", 1}}), Monomial(23, {{"B", 1}}), Monomial(100, {{"C", 1}})};
 
-    SimplexSolver solver(constraints, objectiveFunction);
+    SimplexSolver const solver(constraints, objectiveFunction);
 
     Equations solutionEquations;
     // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
@@ -83,9 +83,9 @@ TEST(SimplexSolverTest, SimplexWorksOnBrewersProblemWithEqualEquation) {
     constraints.emplace_back(Polynomial{Monomial(4, {{"A", 1}}), Monomial(4, {{"B", 1}})}, "<=", 160);
     constraints.emplace_back(Polynomial{Monomial(35, {{"A", 1}}), Monomial(20, {{"B", 1}})}, "<=", 1190);
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-    Polynomial objectiveFunction{Monomial(13, {{"A", 1}}), Monomial(23, {{"B", 1}}), Monomial(1, {{"C", 1}})};
+    Polynomial const objectiveFunction{Monomial(13, {{"A", 1}}), Monomial(23, {{"B", 1}}), Monomial(1, {{"C", 1}})};
 
-    SimplexSolver solver(constraints, objectiveFunction);
+    SimplexSolver const solver(constraints, objectiveFunction);
 
     Equations solutionEquations;
     // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
@@ -105,9 +105,9 @@ TEST(SimplexSolverTest, SimplexWorksOnBrewersProblemWithAdditionalObjectiveFunct
     constraints.emplace_back(Polynomial{Monomial(4, {{"A", 1}}), Monomial(4, {{"B", 1}})}, "<=", 160);
     constraints.emplace_back(Polynomial{Monomial(35, {{"A", 1}}), Monomial(20, {{"B", 1}})}, "<=", 1190);
     // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
-    Polynomial objectiveFunction{
+    Polynomial const objectiveFunction{
         Monomial(13, {{"A", 1}}), Monomial(23, {{"B", 1}}), Monomial(1, {{"C", 1}})};  // additional variable C
-    SimplexSolver solver(constraints, objectiveFunction);
+    SimplexSolver const solver(constraints, objectiveFunction);
 
     Equations solutionEquations;
     // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)

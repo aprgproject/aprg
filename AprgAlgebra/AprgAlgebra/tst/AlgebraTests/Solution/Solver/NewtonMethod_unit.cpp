@@ -9,14 +9,14 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(NewtonMethodTest, GetCurrentValueWorks) {
-    NewtonMethod::Function functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
-    NewtonMethod newtonMethod(5, functionToIterate);
+    NewtonMethod::Function const functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
+    NewtonMethod const newtonMethod(5, functionToIterate);
 
     EXPECT_EQ(AlbaNumber(5), newtonMethod.getCurrentValue());
 }
 
 TEST(NewtonMethodTest, RunMaxNumberOfIterationsOrUntilFinishedWorksWhenMaxIterationIsReached) {
-    NewtonMethod::Function functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
+    NewtonMethod::Function const functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
     NewtonMethod newtonMethod(16, functionToIterate);
 
     newtonMethod.runMaxNumberOfIterationsOrUntilFinished(4);
@@ -26,7 +26,7 @@ TEST(NewtonMethodTest, RunMaxNumberOfIterationsOrUntilFinishedWorksWhenMaxIterat
 }
 
 TEST(NewtonMethodTest, RunMaxNumberOfIterationsOrUntilFinishedWorksWhenMaxIterationIsNotReached) {
-    NewtonMethod::Function functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
+    NewtonMethod::Function const functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
     NewtonMethod newtonMethod(16, functionToIterate);
 
     newtonMethod.runMaxNumberOfIterationsOrUntilFinished(100);
@@ -36,7 +36,7 @@ TEST(NewtonMethodTest, RunMaxNumberOfIterationsOrUntilFinishedWorksWhenMaxIterat
 }
 
 TEST(NewtonMethodTest, RunMaxNumberOfIterationsOrUntilFinishedWorksForXToXForm) {
-    NewtonMethod::Function functionToIterate = [](AlbaNumber const& number) { return (number ^ number) - 256; };
+    NewtonMethod::Function const functionToIterate = [](AlbaNumber const& number) { return (number ^ number) - 256; };
     NewtonMethod newtonMethod(16, functionToIterate);
 
     newtonMethod.runMaxNumberOfIterationsOrUntilFinished(100);
@@ -46,7 +46,7 @@ TEST(NewtonMethodTest, RunMaxNumberOfIterationsOrUntilFinishedWorksForXToXForm) 
 }
 
 TEST(NewtonMethodTest, RunMaxNumberOfIterationsOrUntilFinishedWorks) {
-    NewtonMethod::Function functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
+    NewtonMethod::Function const functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
     NewtonMethod newtonMethod(16, functionToIterate);
 
     newtonMethod.runUntilFinished();
@@ -56,7 +56,7 @@ TEST(NewtonMethodTest, RunMaxNumberOfIterationsOrUntilFinishedWorks) {
 }
 
 TEST(NewtonMethodTest, RunOneIterationWorks) {
-    NewtonMethod::Function functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
+    NewtonMethod::Function const functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
     NewtonMethod newtonMethod(16, functionToIterate);
 
     newtonMethod.runOneIteration();
@@ -69,7 +69,9 @@ TEST(NewtonMethodTest, ConstructionWorks) {
 }
 
 TEST(NewtonMethodTest, RunMaxNumberOfIterationsOrUntilFinishedFailsToGetSolutionWithXToXForm) {
-    NewtonMethod::Function functionToIterate = [](AlbaNumber const& number) { return (number ^ number) + 823543; };
+    NewtonMethod::Function const functionToIterate = [](AlbaNumber const& number) {
+        return (number ^ number) + 823543;
+    };
     NewtonMethod newtonMethod(-16, functionToIterate);
 
     newtonMethod.runMaxNumberOfIterationsOrUntilFinished(100);
@@ -79,14 +81,14 @@ TEST(NewtonMethodTest, RunMaxNumberOfIterationsOrUntilFinishedFailsToGetSolution
 }
 
 TEST(NewtonMethodTest, GetNumberOfIterationsExecutedWorksWhenNoIterationsAreExecuted) {
-    NewtonMethod::Function functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
-    NewtonMethod newtonMethod(5, functionToIterate);
+    NewtonMethod::Function const functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
+    NewtonMethod const newtonMethod(5, functionToIterate);
 
     EXPECT_EQ(0, newtonMethod.getNumberOfIterationsExecuted());
 }
 
 TEST(NewtonMethodTest, GetNumberOfIterationsExecutedWorksWhenOneIterationIsExecuted) {
-    NewtonMethod::Function functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
+    NewtonMethod::Function const functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
     NewtonMethod newtonMethod(5, functionToIterate);
     newtonMethod.runOneIteration();
 
@@ -94,19 +96,19 @@ TEST(NewtonMethodTest, GetNumberOfIterationsExecutedWorksWhenOneIterationIsExecu
 }
 
 TEST(NewtonMethodTest, IsSolvedWorks) {
-    NewtonMethod::Function functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
-    NewtonMethod newtonMethod1(4, functionToIterate);
-    NewtonMethod newtonMethod2(16, functionToIterate);
+    NewtonMethod::Function const functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
+    NewtonMethod const newtonMethod1(4, functionToIterate);
+    NewtonMethod const newtonMethod2(16, functionToIterate);
 
     EXPECT_TRUE(newtonMethod1.isSolved());
     EXPECT_FALSE(newtonMethod2.isSolved());
 }
 
 TEST(NewtonMethodTest, IsFinishedWorks) {
-    NewtonMethod::Function functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
-    NewtonMethod newtonMethod1(4, functionToIterate);
-    NewtonMethod newtonMethod2(16, functionToIterate);
-    NewtonMethod newtonMethod3(ALBA_NUMBER_POSITIVE_INFINITY, functionToIterate);
+    NewtonMethod::Function const functionToIterate = [](AlbaNumber const& number) { return (number ^ 2) - 16; };
+    NewtonMethod const newtonMethod1(4, functionToIterate);
+    NewtonMethod const newtonMethod2(16, functionToIterate);
+    NewtonMethod const newtonMethod3(ALBA_NUMBER_POSITIVE_INFINITY, functionToIterate);
 
     EXPECT_TRUE(newtonMethod1.isFinished());
     EXPECT_FALSE(newtonMethod2.isFinished());

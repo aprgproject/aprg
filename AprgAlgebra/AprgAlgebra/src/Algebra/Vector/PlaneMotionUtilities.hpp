@@ -24,8 +24,8 @@ MathVectorOfTerms<SIZE> getInstantaneousAccelerationFromPath(
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> getTangentPartOfAcceleration(
     MathVectorOfTerms<SIZE> const& path, std::string const& variableName) {
-    Differentiation differentiation(variableName);
-    Term secondDerivativeOfPath(differentiation.differentiateMultipleTimes(path.getMagnitude(), 2));
+    Differentiation const differentiation(variableName);
+    Term const secondDerivativeOfPath(differentiation.differentiateMultipleTimes(path.getMagnitude(), 2));
     MathVectorOfTerms<SIZE> result(getUnitTangentVector(path, variableName));
     result *= secondDerivativeOfPath;
     simplifyForTermVector(result);
@@ -35,9 +35,9 @@ MathVectorOfTerms<SIZE> getTangentPartOfAcceleration(
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> getNormalPartOfAcceleration(
     MathVectorOfTerms<SIZE> const& path, std::string const& variableName) {
-    Differentiation differentiation(variableName);
-    Term firstDerivativeSquared(differentiation.differentiate(path.getMagnitude()) ^ 2);
-    Term curvature(getCurvature(path, variableName));
+    Differentiation const differentiation(variableName);
+    Term const firstDerivativeSquared(differentiation.differentiate(path.getMagnitude()) ^ 2);
+    Term const curvature(getCurvature(path, variableName));
     MathVectorOfTerms<SIZE> result(getUnitNormalVector(path, variableName));
     result *= firstDerivativeSquared;
     result *= curvature;

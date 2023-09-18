@@ -7,31 +7,31 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(TermOperatorsTest, UnaryPlusOperatorWorksWithEmptyTerm) {
-    Term term(+Term());
+    Term const term(+Term());
 
     EXPECT_EQ(Term(), term);
 }
 
 TEST(TermOperatorsTest, UnaryPlusOperatorWorks) {
-    Term term(+Term(6));
+    Term const term(+Term(6));
 
     EXPECT_EQ(Term(6), term);
 }
 
 TEST(TermOperatorsTest, UnaryMinusOperatorWorksWithEmptyTerm) {
-    Term term(-Term());
+    Term const term(-Term());
 
     EXPECT_EQ(Term(), term);
 }
 
 TEST(TermOperatorsTest, UnaryMinusOperatorWorks) {
-    Term term(-Term(6));
+    Term const term(-Term(6));
 
     EXPECT_EQ(Term(-6), term);
 }
 
 TEST(TermOperatorsTest, BinaryPlusOperatorWorks) {
-    Term term(Term(6) + Term(3));
+    Term const term(Term(6) + Term(3));
 
     EXPECT_EQ(Term(9), term);
 }
@@ -44,7 +44,7 @@ TEST(TermOperatorsTest, BinaryPlusAssignmentOperatorWorks) {
 }
 
 TEST(TermOperatorsTest, BinaryMinusOperatorWorks) {
-    Term term(Term(6) - Term(3));
+    Term const term(Term(6) - Term(3));
 
     EXPECT_EQ(Term(3), term);
 }
@@ -57,7 +57,7 @@ TEST(TermOperatorsTest, BinaryMinusAssignmentOperatorWorks) {
 }
 
 TEST(TermOperatorsTest, BinaryMultiplyOperatorWorks) {
-    Term term(Term(6) * Term(3));
+    Term const term(Term(6) * Term(3));
 
     EXPECT_EQ(Term(18), term);
 }
@@ -70,7 +70,7 @@ TEST(TermOperatorsTest, BinaryMultiplyAssignmentOperatorWorks) {
 }
 
 TEST(TermOperatorsTest, BinaryDivideOperatorWorks) {
-    Term term(Term(6) / Term(3));
+    Term const term(Term(6) / Term(3));
 
     EXPECT_EQ(Term(2), term);
 }
@@ -83,7 +83,7 @@ TEST(TermOperatorsTest, BinaryDivideAssignmentOperatorWorks) {
 }
 
 TEST(TermOperatorsTest, BinaryRaiseToPowerOperatorWorks) {
-    Term term(Term(6) ^ Term(2));
+    Term const term(Term(6) ^ Term(2));
 
     EXPECT_EQ(Term(36), term);
 }

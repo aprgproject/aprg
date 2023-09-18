@@ -5,13 +5,13 @@
 namespace alba::algebra {
 
 TEST(MonomialHelpersTest, GetDegreeWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y1", -1.25}});
-    Monomial monomial3(-54, {{"x", 1}});
-    Monomial monomial4(-54, {{"x", 2}});
-    Monomial monomial5(0, {{"x", 3}});
-    Monomial monomial6(1, {{"x", 4}});
-    Monomial monomial7(1, {});
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y1", -1.25}});
+    Monomial const monomial3(-54, {{"x", 1}});
+    Monomial const monomial4(-54, {{"x", 2}});
+    Monomial const monomial5(0, {{"x", 3}});
+    Monomial const monomial6(1, {{"x", 4}});
+    Monomial const monomial7(1, {});
 
     EXPECT_DOUBLE_EQ(0, getDegree(monomial1).getDouble());
     EXPECT_DOUBLE_EQ(4.75, getDegree(monomial2).getDouble());
@@ -23,15 +23,15 @@ TEST(MonomialHelpersTest, GetDegreeWorks) {
 }
 
 TEST(MonomialHelpersTest, GetMaxExponentWorks) {
-    Monomial monomial1;
-    Monomial monomial2(23, {});
-    Monomial monomial3(-23, {});
-    Monomial monomial4(-54, {{"x", 6}});
-    Monomial monomial5(-54, {{"x", -6}});
-    Monomial monomial6(-54, {{"x", 6}, {"y", 1.25}});
-    Monomial monomial7(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial8(-54, {{"x", -6}, {"y", 1.25}});
-    Monomial monomial9(-54, {{"x", -6}, {"y", -1.25}});
+    Monomial const monomial1;
+    Monomial const monomial2(23, {});
+    Monomial const monomial3(-23, {});
+    Monomial const monomial4(-54, {{"x", 6}});
+    Monomial const monomial5(-54, {{"x", -6}});
+    Monomial const monomial6(-54, {{"x", 6}, {"y", 1.25}});
+    Monomial const monomial7(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial8(-54, {{"x", -6}, {"y", 1.25}});
+    Monomial const monomial9(-54, {{"x", -6}, {"y", -1.25}});
 
     EXPECT_DOUBLE_EQ(0, getMaxExponent(monomial1).getDouble());
     EXPECT_DOUBLE_EQ(0, getMaxExponent(monomial2).getDouble());
@@ -45,7 +45,7 @@ TEST(MonomialHelpersTest, GetMaxExponentWorks) {
 }
 
 TEST(MonomialHelpersTest, GetGcfOfExponentsInMonomialWorks) {
-    Monomial monomial(
+    Monomial const monomial(
         1, {{"x", AlbaNumber::createFraction(1, 2)},
             {"y", AlbaNumber::createFraction(2, 7)},
             {"z", AlbaNumber::createFraction(9, 5)}});
@@ -82,32 +82,32 @@ TEST(MonomialHelpersTest, GetCommonSignInMonomialsWorks) {
 }
 
 TEST(MonomialHelpersTest, GetGcfMonomialInMonomialsWorks) {
-    Monomial monomialToVerify1(getGcfMonomialInMonomials({Monomial(2, {{"x", 3}}), Monomial(2, {{"x", 7}})}));
-    Monomial monomialToVerify2(getGcfMonomialInMonomials({Monomial(4, {{"x", 3}}), Monomial(8, {{"y", 7}})}));
-    Monomial monomialToVerify3(getGcfMonomialInMonomials({Monomial(1, {{"x", 1}}), Monomial(4, {{"x", 9}})}));
-    Monomial monomialToVerify4(
+    Monomial const monomialToVerify1(getGcfMonomialInMonomials({Monomial(2, {{"x", 3}}), Monomial(2, {{"x", 7}})}));
+    Monomial const monomialToVerify2(getGcfMonomialInMonomials({Monomial(4, {{"x", 3}}), Monomial(8, {{"y", 7}})}));
+    Monomial const monomialToVerify3(getGcfMonomialInMonomials({Monomial(1, {{"x", 1}}), Monomial(4, {{"x", 9}})}));
+    Monomial const monomialToVerify4(
         getGcfMonomialInMonomials({Monomial(AlbaNumber::createFraction(1, 4), {{"x", 1}}), Monomial(5, {})}));
-    Monomial monomialToVerify5(getGcfMonomialInMonomials({Monomial(0.33, {{"x", 1}}), Monomial(5, {{"x", -1}})}));
-    Monomial monomialToVerify6(getGcfMonomialInMonomials({Monomial(6, {}), Monomial(9, {})}));
-    Monomial monomialToVerify7(getGcfMonomialInMonomials({Monomial(-6, {}), Monomial(9, {})}));
-    Monomial monomialToVerify8(getGcfMonomialInMonomials({Monomial(6, {}), Monomial(-9, {})}));
-    Monomial monomialToVerify9(getGcfMonomialInMonomials({Monomial(1, {}), Monomial(1, {})}));
-    Monomial monomialToVerify10(getGcfMonomialInMonomials({Monomial(1, {}), Monomial(-1, {})}));
-    Monomial monomialToVerify11(getGcfMonomialInMonomials({Monomial(-1, {}), Monomial(1, {})}));
-    Monomial monomialToVerify12(getGcfMonomialInMonomials({Monomial(-1, {}), Monomial(-11, {})}));
+    Monomial const monomialToVerify5(getGcfMonomialInMonomials({Monomial(0.33, {{"x", 1}}), Monomial(5, {{"x", -1}})}));
+    Monomial const monomialToVerify6(getGcfMonomialInMonomials({Monomial(6, {}), Monomial(9, {})}));
+    Monomial const monomialToVerify7(getGcfMonomialInMonomials({Monomial(-6, {}), Monomial(9, {})}));
+    Monomial const monomialToVerify8(getGcfMonomialInMonomials({Monomial(6, {}), Monomial(-9, {})}));
+    Monomial const monomialToVerify9(getGcfMonomialInMonomials({Monomial(1, {}), Monomial(1, {})}));
+    Monomial const monomialToVerify10(getGcfMonomialInMonomials({Monomial(1, {}), Monomial(-1, {})}));
+    Monomial const monomialToVerify11(getGcfMonomialInMonomials({Monomial(-1, {}), Monomial(1, {})}));
+    Monomial const monomialToVerify12(getGcfMonomialInMonomials({Monomial(-1, {}), Monomial(-11, {})}));
 
-    Monomial monomialToExpect1(2, {{"x", 3}});
-    Monomial monomialToExpect2(4, {});
-    Monomial monomialToExpect3(1, {{"x", 1}});
-    Monomial monomialToExpect4(AlbaNumber::createFraction(1, 4), {});
-    Monomial monomialToExpect5(5, {{"x", -1}});
-    Monomial monomialToExpect6(3, {});
-    Monomial monomialToExpect7(-3, {});
-    Monomial monomialToExpect8(3, {});
-    Monomial monomialToExpect9(1, {});
-    Monomial monomialToExpect10(1, {});
-    Monomial monomialToExpect11(1, {});
-    Monomial monomialToExpect12(1, {});
+    Monomial const monomialToExpect1(2, {{"x", 3}});
+    Monomial const monomialToExpect2(4, {});
+    Monomial const monomialToExpect3(1, {{"x", 1}});
+    Monomial const monomialToExpect4(AlbaNumber::createFraction(1, 4), {});
+    Monomial const monomialToExpect5(5, {{"x", -1}});
+    Monomial const monomialToExpect6(3, {});
+    Monomial const monomialToExpect7(-3, {});
+    Monomial const monomialToExpect8(3, {});
+    Monomial const monomialToExpect9(1, {});
+    Monomial const monomialToExpect10(1, {});
+    Monomial const monomialToExpect11(1, {});
+    Monomial const monomialToExpect12(1, {});
     EXPECT_EQ(monomialToExpect1, monomialToVerify1);
     EXPECT_EQ(monomialToExpect2, monomialToVerify2);
     EXPECT_EQ(monomialToExpect3, monomialToVerify3);
@@ -123,20 +123,20 @@ TEST(MonomialHelpersTest, GetGcfMonomialInMonomialsWorks) {
 }
 
 TEST(MonomialHelpersTest, GetLcmMonomialInMonomialsWorks) {
-    Monomial monomialToVerify1(getLcmMonomialInMonomials({Monomial(2, {{"x", 3}}), Monomial(2, {{"x", 7}})}));
-    Monomial monomialToVerify2(getLcmMonomialInMonomials({Monomial(4, {{"x", 3}}), Monomial(8, {{"y", 7}})}));
-    Monomial monomialToVerify3(getLcmMonomialInMonomials({Monomial(1, {{"x", 1}}), Monomial(4, {})}));
-    Monomial monomialToVerify4(
+    Monomial const monomialToVerify1(getLcmMonomialInMonomials({Monomial(2, {{"x", 3}}), Monomial(2, {{"x", 7}})}));
+    Monomial const monomialToVerify2(getLcmMonomialInMonomials({Monomial(4, {{"x", 3}}), Monomial(8, {{"y", 7}})}));
+    Monomial const monomialToVerify3(getLcmMonomialInMonomials({Monomial(1, {{"x", 1}}), Monomial(4, {})}));
+    Monomial const monomialToVerify4(
         getLcmMonomialInMonomials({Monomial(AlbaNumber::createFraction(1, 4), {{"x", 1}}), Monomial(5, {})}));
-    Monomial monomialToVerify5(getLcmMonomialInMonomials({Monomial(0.33, {{"x", 1}}), Monomial(5, {{"x", -1}})}));
-    Monomial monomialToVerify6(getLcmMonomialInMonomials({Monomial(6, {}), Monomial(9, {})}));
+    Monomial const monomialToVerify5(getLcmMonomialInMonomials({Monomial(0.33, {{"x", 1}}), Monomial(5, {{"x", -1}})}));
+    Monomial const monomialToVerify6(getLcmMonomialInMonomials({Monomial(6, {}), Monomial(9, {})}));
 
-    Monomial monomialToExpect1(2, {{"x", 7}});
-    Monomial monomialToExpect2(8, {{"x", 3}, {"y", 7}});
-    Monomial monomialToExpect3(4, {{"x", 1}});
-    Monomial monomialToExpect4(5, {{"x", 1}});
-    Monomial monomialToExpect5(5, {{"x", 1}});
-    Monomial monomialToExpect6(18, {});
+    Monomial const monomialToExpect1(2, {{"x", 7}});
+    Monomial const monomialToExpect2(8, {{"x", 3}, {"y", 7}});
+    Monomial const monomialToExpect3(4, {{"x", 1}});
+    Monomial const monomialToExpect4(5, {{"x", 1}});
+    Monomial const monomialToExpect5(5, {{"x", 1}});
+    Monomial const monomialToExpect6(18, {});
     EXPECT_EQ(monomialToExpect1, monomialToVerify1);
     EXPECT_EQ(monomialToExpect2, monomialToVerify2);
     EXPECT_EQ(monomialToExpect3, monomialToVerify3);
@@ -146,10 +146,10 @@ TEST(MonomialHelpersTest, GetLcmMonomialInMonomialsWorks) {
 }
 
 TEST(MonomialHelpersTest, CompareMonomialsAndSaveMinimumExponentsForEachVariableWorks) {
-    Monomial monomial1(85, {{"a", -5}, {"b", 10}, {"x", 3}, {"y", 4}});
-    Monomial monomial2(356, {{"a", 10}, {"b", -5}, {"x", 5}, {"y", 2}});
+    Monomial const monomial1(85, {{"a", -5}, {"b", 10}, {"x", 3}, {"y", 4}});
+    Monomial const monomial2(356, {{"a", 10}, {"b", -5}, {"x", 5}, {"y", 2}});
 
-    Monomial monomialToVerify(compareMonomialsAndSaveMinimumExponentsForEachVariable(monomial1, monomial2));
+    Monomial const monomialToVerify(compareMonomialsAndSaveMinimumExponentsForEachVariable(monomial1, monomial2));
 
     EXPECT_DOUBLE_EQ(1, monomialToVerify.getCoefficient().getDouble());
     Monomial::VariablesToExponentsMap const& variableMapToVerify(monomialToVerify.getVariablesToExponentsMap());
@@ -161,10 +161,10 @@ TEST(MonomialHelpersTest, CompareMonomialsAndSaveMinimumExponentsForEachVariable
 }
 
 TEST(MonomialHelpersTest, CompareMonomialsAndSaveMaximumExponentsForEachVariableWorks) {
-    Monomial monomial1(85, {{"a", -5}, {"b", 10}, {"x", 3}, {"y", 4}});
-    Monomial monomial2(356, {{"a", 10}, {"b", -5}, {"x", 5}, {"y", 2}});
+    Monomial const monomial1(85, {{"a", -5}, {"b", 10}, {"x", 3}, {"y", 4}});
+    Monomial const monomial2(356, {{"a", 10}, {"b", -5}, {"x", 5}, {"y", 2}});
 
-    Monomial monomialToVerify(compareMonomialsAndSaveMaximumExponentsForEachVariable(monomial1, monomial2));
+    Monomial const monomialToVerify(compareMonomialsAndSaveMaximumExponentsForEachVariable(monomial1, monomial2));
 
     EXPECT_DOUBLE_EQ(1, monomialToVerify.getCoefficient().getDouble());
     Monomial::VariablesToExponentsMap const& variableMapToVerify(monomialToVerify.getVariablesToExponentsMap());
@@ -176,24 +176,24 @@ TEST(MonomialHelpersTest, CompareMonomialsAndSaveMaximumExponentsForEachVariable
 }
 
 TEST(MonomialHelpersTest, GetMonomialWithMinimumExponentsInMonomialsWorks) {
-    Monomial monomialToVerify1(
+    Monomial const monomialToVerify1(
         getMonomialWithMinimumExponentsInMonomials({Monomial(2, {{"x", 3}}), Monomial(2, {{"x", 7}})}));
-    Monomial monomialToVerify2(
+    Monomial const monomialToVerify2(
         getMonomialWithMinimumExponentsInMonomials({Monomial(4, {{"x", 3}}), Monomial(8, {{"y", 7}})}));
-    Monomial monomialToVerify3(
+    Monomial const monomialToVerify3(
         getMonomialWithMinimumExponentsInMonomials({Monomial(1, {{"x", 1}}), Monomial(4, {{"x", 9}})}));
-    Monomial monomialToVerify4(getMonomialWithMinimumExponentsInMonomials(
+    Monomial const monomialToVerify4(getMonomialWithMinimumExponentsInMonomials(
         {Monomial(AlbaNumber::createFraction(1, 4), {{"x", 1}}), Monomial(5, {})}));
-    Monomial monomialToVerify5(
+    Monomial const monomialToVerify5(
         getMonomialWithMinimumExponentsInMonomials({Monomial(0.33, {{"x", 1}}), Monomial(5, {{"x", -1}})}));
-    Monomial monomialToVerify6(getMonomialWithMinimumExponentsInMonomials({Monomial(6, {}), Monomial(9, {})}));
+    Monomial const monomialToVerify6(getMonomialWithMinimumExponentsInMonomials({Monomial(6, {}), Monomial(9, {})}));
 
-    Monomial monomialToExpect1(1, {{"x", 3}});
-    Monomial monomialToExpect2(1, {});
-    Monomial monomialToExpect3(1, {{"x", 1}});
-    Monomial monomialToExpect4(1, {});
-    Monomial monomialToExpect5(1, {{"x", -1}});
-    Monomial monomialToExpect6(1, {});
+    Monomial const monomialToExpect1(1, {{"x", 3}});
+    Monomial const monomialToExpect2(1, {});
+    Monomial const monomialToExpect3(1, {{"x", 1}});
+    Monomial const monomialToExpect4(1, {});
+    Monomial const monomialToExpect5(1, {{"x", -1}});
+    Monomial const monomialToExpect6(1, {});
     EXPECT_EQ(monomialToExpect1, monomialToVerify1);
     EXPECT_EQ(monomialToExpect2, monomialToVerify2);
     EXPECT_EQ(monomialToExpect3, monomialToVerify3);
@@ -203,23 +203,24 @@ TEST(MonomialHelpersTest, GetMonomialWithMinimumExponentsInMonomialsWorks) {
 }
 
 TEST(MonomialHelpersTest, GetMonomialWithMaximumExponentsInMonomialsWorks) {
-    Monomial monomialToVerify1(
+    Monomial const monomialToVerify1(
         getMonomialWithMaximumExponentsInMonomials({Monomial(2, {{"x", 3}}), Monomial(2, {{"x", 7}})}));
-    Monomial monomialToVerify2(
+    Monomial const monomialToVerify2(
         getMonomialWithMaximumExponentsInMonomials({Monomial(4, {{"x", 3}}), Monomial(8, {{"y", 7}})}));
-    Monomial monomialToVerify3(getMonomialWithMaximumExponentsInMonomials({Monomial(1, {{"x", 1}}), Monomial(4, {})}));
-    Monomial monomialToVerify4(getMonomialWithMaximumExponentsInMonomials(
+    Monomial const monomialToVerify3(
+        getMonomialWithMaximumExponentsInMonomials({Monomial(1, {{"x", 1}}), Monomial(4, {})}));
+    Monomial const monomialToVerify4(getMonomialWithMaximumExponentsInMonomials(
         {Monomial(AlbaNumber::createFraction(1, 4), {{"x", 1}}), Monomial(5, {})}));
-    Monomial monomialToVerify5(
+    Monomial const monomialToVerify5(
         getMonomialWithMaximumExponentsInMonomials({Monomial(0.33, {{"x", 1}}), Monomial(5, {{"x", -1}})}));
-    Monomial monomialToVerify6(getMonomialWithMaximumExponentsInMonomials({Monomial(6, {}), Monomial(9, {})}));
+    Monomial const monomialToVerify6(getMonomialWithMaximumExponentsInMonomials({Monomial(6, {}), Monomial(9, {})}));
 
-    Monomial monomialToExpect1(1, {{"x", 7}});
-    Monomial monomialToExpect2(1, {{"x", 3}, {"y", 7}});
-    Monomial monomialToExpect3(1, {{"x", 1}});
-    Monomial monomialToExpect4(1, {{"x", 1}});
-    Monomial monomialToExpect5(1, {{"x", 1}});
-    Monomial monomialToExpect6(1, {});
+    Monomial const monomialToExpect1(1, {{"x", 7}});
+    Monomial const monomialToExpect2(1, {{"x", 3}, {"y", 7}});
+    Monomial const monomialToExpect3(1, {{"x", 1}});
+    Monomial const monomialToExpect4(1, {{"x", 1}});
+    Monomial const monomialToExpect5(1, {{"x", 1}});
+    Monomial const monomialToExpect6(1, {});
     EXPECT_EQ(monomialToExpect1, monomialToVerify1);
     EXPECT_EQ(monomialToExpect2, monomialToVerify2);
     EXPECT_EQ(monomialToExpect3, monomialToVerify3);
@@ -229,13 +230,13 @@ TEST(MonomialHelpersTest, GetMonomialWithMaximumExponentsInMonomialsWorks) {
 }
 
 TEST(MonomialHelpersTest, GetFirstVariableNameFunctionWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x1", 6}, {"y1", -1.25}});
-    Monomial monomial3(-54, {{"x2", 6}});
-    Monomial monomial4(-54, {{"x3", 1}});
-    Monomial monomial5(0, {{"x4", 1}});
-    Monomial monomial6(1, {{"x5", 1}});
-    Monomial monomial7(1, {});
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x1", 6}, {"y1", -1.25}});
+    Monomial const monomial3(-54, {{"x2", 6}});
+    Monomial const monomial4(-54, {{"x3", 1}});
+    Monomial const monomial5(0, {{"x4", 1}});
+    Monomial const monomial6(1, {{"x5", 1}});
+    Monomial const monomial7(1, {});
 
     EXPECT_TRUE(getFirstVariableName(monomial1).empty());
     EXPECT_EQ("x1", getFirstVariableName(monomial2));
@@ -262,11 +263,11 @@ TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForTermsWorks) {
 }
 
 TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForBothMonomialsWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial3(100, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial4(100, {{"x", 5}, {"y", -1}});
-    Monomial monomial5(645, {{"i", 20}, {"y", 30}});
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial3(100, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial4(100, {{"x", 5}, {"y", -1}});
+    Monomial const monomial5(645, {{"i", 20}, {"y", 30}});
 
     EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial1, monomial1));
     EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial2, monomial2));
@@ -280,11 +281,11 @@ TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForBothMonomialsWork
 }
 
 TEST(MonomialHelpersTest, CanBeMergedByAdditionOrSubtractionForMonomialAndVariableWorks) {
-    Monomial monomial1;
-    Monomial monomial2(12, {{"x", 1}});
-    Monomial monomial3(34, {{"x", 1.25}});
-    Monomial monomial4(56, {{"x", 1}, {"y", 1}});
-    Variable variable("x");
+    Monomial const monomial1;
+    Monomial const monomial2(12, {{"x", 1}});
+    Monomial const monomial3(34, {{"x", 1.25}});
+    Monomial const monomial4(56, {{"x", 1}, {"y", 1}});
+    Variable const variable("x");
 
     EXPECT_FALSE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial1, variable));
     EXPECT_TRUE(canBeMergedInAMonomialByAdditionOrSubtraction(monomial2, variable));
@@ -318,9 +319,9 @@ TEST(MonomialHelpersTest, HasNegativeExponentsWorks) {
 }
 
 TEST(MonomialHelpersTest, IsConstantOnlyFunctionWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial3(23, {});
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial3(23, {});
 
     EXPECT_TRUE(isConstantOnly(monomial1));
     EXPECT_FALSE(isConstantOnly(monomial2));
@@ -328,13 +329,13 @@ TEST(MonomialHelpersTest, IsConstantOnlyFunctionWorks) {
 }
 
 TEST(MonomialHelpersTest, IsVariableOnlyFunctionWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial3(-54, {{"x", 6}});
-    Monomial monomial4(-54, {{"x", 1}});
-    Monomial monomial5(0, {{"x", 1}});
-    Monomial monomial6(1, {{"x", 1}, {"y", 1}});
-    Monomial monomial7(1, {{"x", 1}});
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial3(-54, {{"x", 6}});
+    Monomial const monomial4(-54, {{"x", 1}});
+    Monomial const monomial5(0, {{"x", 1}});
+    Monomial const monomial6(1, {{"x", 1}, {"y", 1}});
+    Monomial const monomial7(1, {{"x", 1}});
 
     EXPECT_FALSE(isVariableOnly(monomial1));
     EXPECT_FALSE(isVariableOnly(monomial2));
@@ -346,9 +347,9 @@ TEST(MonomialHelpersTest, IsVariableOnlyFunctionWorks) {
 }
 
 TEST(MonomialHelpersTest, HasASingleVariableWorks) {
-    Monomial monomial1;
-    Monomial monomial2(-54, {{"x", 6}, {"y", -1.25}});
-    Monomial monomial3(-54, {{"x", 6}});
+    Monomial const monomial1;
+    Monomial const monomial2(-54, {{"x", 6}, {"y", -1.25}});
+    Monomial const monomial3(-54, {{"x", 6}});
 
     EXPECT_FALSE(hasASingleVariable(monomial1));
     EXPECT_FALSE(hasASingleVariable(monomial2));

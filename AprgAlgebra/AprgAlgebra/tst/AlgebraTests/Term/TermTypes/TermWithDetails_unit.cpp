@@ -8,8 +8,8 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(TermWithDetailsTest, ConstructionWorks) {
-    TermWithDetails termWithDetails1(Term(10), TermAssociationType::Negative);
-    TermWithDetails termWithDetails2(termWithDetails1);
+    TermWithDetails const termWithDetails1(Term(10), TermAssociationType::Negative);
+    TermWithDetails const termWithDetails2(termWithDetails1);
 
     EXPECT_EQ(Term(10), getTermConstReferenceFromUniquePointer(termWithDetails1.baseTermPointer));
     EXPECT_EQ(TermAssociationType::Negative, termWithDetails1.association);
@@ -18,10 +18,10 @@ TEST(TermWithDetailsTest, ConstructionWorks) {
 }
 
 TEST(TermWithDetailsTest, EqualityOperatorWorks) {
-    TermWithDetails termWithDetails1(Term(10), TermAssociationType::Negative);
+    TermWithDetails const termWithDetails1(Term(10), TermAssociationType::Negative);
     TermWithDetails const& termWithDetails2(termWithDetails1);
-    TermWithDetails termWithDetails3(Term(20), TermAssociationType::Negative);
-    TermWithDetails termWithDetails4(Term(10), TermAssociationType::Positive);
+    TermWithDetails const termWithDetails3(Term(20), TermAssociationType::Negative);
+    TermWithDetails const termWithDetails4(Term(10), TermAssociationType::Positive);
 
     EXPECT_TRUE(termWithDetails1 == termWithDetails1);
     EXPECT_TRUE(termWithDetails1 == termWithDetails2);
@@ -30,10 +30,10 @@ TEST(TermWithDetailsTest, EqualityOperatorWorks) {
 }
 
 TEST(TermWithDetailsTest, InequalityOperatorWorks) {
-    TermWithDetails termWithDetails1(Term(10), TermAssociationType::Negative);
+    TermWithDetails const termWithDetails1(Term(10), TermAssociationType::Negative);
     TermWithDetails const& termWithDetails2(termWithDetails1);
-    TermWithDetails termWithDetails3(Term(20), TermAssociationType::Negative);
-    TermWithDetails termWithDetails4(Term(10), TermAssociationType::Positive);
+    TermWithDetails const termWithDetails3(Term(20), TermAssociationType::Negative);
+    TermWithDetails const termWithDetails4(Term(10), TermAssociationType::Positive);
 
     EXPECT_FALSE(termWithDetails1 != termWithDetails1);
     EXPECT_FALSE(termWithDetails1 != termWithDetails2);
@@ -42,10 +42,10 @@ TEST(TermWithDetailsTest, InequalityOperatorWorks) {
 }
 
 TEST(TermWithDetailsTest, LessThanOperatorWorks) {
-    TermWithDetails termWithDetails1(Term(10), TermAssociationType::Positive);
-    TermWithDetails termWithDetails2(Term(10), TermAssociationType::Negative);
-    TermWithDetails termWithDetails3(Term(9), TermAssociationType::Positive);
-    TermWithDetails termWithDetails4(Term(11), TermAssociationType::Positive);
+    TermWithDetails const termWithDetails1(Term(10), TermAssociationType::Positive);
+    TermWithDetails const termWithDetails2(Term(10), TermAssociationType::Negative);
+    TermWithDetails const termWithDetails3(Term(9), TermAssociationType::Positive);
+    TermWithDetails const termWithDetails4(Term(11), TermAssociationType::Positive);
 
     EXPECT_FALSE(termWithDetails1 < termWithDetails1);
     EXPECT_TRUE(termWithDetails1 < termWithDetails2);
@@ -55,24 +55,24 @@ TEST(TermWithDetailsTest, LessThanOperatorWorks) {
 }
 
 TEST(TermWithDetailsTest, GetAssociationPriorityWorks) {
-    TermWithDetails termWithDetails1(Term(10), TermAssociationType::Positive);
-    TermWithDetails termWithDetails2(Term(10), TermAssociationType::Negative);
+    TermWithDetails const termWithDetails1(Term(10), TermAssociationType::Positive);
+    TermWithDetails const termWithDetails2(Term(10), TermAssociationType::Negative);
 
     EXPECT_EQ(1, termWithDetails1.getAssociationPriority());
     EXPECT_EQ(2, termWithDetails2.getAssociationPriority());
 }
 
 TEST(TermWithDetailsTest, HasPositiveAssociationWorks) {
-    TermWithDetails termWithDetails1(Term(10), TermAssociationType::Positive);
-    TermWithDetails termWithDetails2(Term(10), TermAssociationType::Negative);
+    TermWithDetails const termWithDetails1(Term(10), TermAssociationType::Positive);
+    TermWithDetails const termWithDetails2(Term(10), TermAssociationType::Negative);
 
     EXPECT_TRUE(termWithDetails1.hasPositiveAssociation());
     EXPECT_FALSE(termWithDetails2.hasPositiveAssociation());
 }
 
 TEST(TermWithDetailsTest, HasNegativeAssociationWorks) {
-    TermWithDetails termWithDetails1(Term(10), TermAssociationType::Positive);
-    TermWithDetails termWithDetails2(Term(10), TermAssociationType::Negative);
+    TermWithDetails const termWithDetails1(Term(10), TermAssociationType::Positive);
+    TermWithDetails const termWithDetails2(Term(10), TermAssociationType::Negative);
 
     EXPECT_FALSE(termWithDetails1.hasNegativeAssociation());
     EXPECT_TRUE(termWithDetails2.hasNegativeAssociation());

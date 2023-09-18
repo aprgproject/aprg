@@ -7,7 +7,7 @@
 namespace alba::algebra {
 
 TEST(MonomialHelpersTest, SegregateMonomialsWithAndWithoutVariable) {
-    Monomials monomialsToSegregate(
+    Monomials const monomialsToSegregate(
         {Monomial(1, {{"x", 2}, {"y", 3}}), Monomial(4, {{"y", 5}, {"z", 6}}), Monomial(7, {{"x", 8}, {"z", 9}})});
 
     Monomials monomialWithVariable;
@@ -24,7 +24,7 @@ TEST(MonomialHelpersTest, SegregateMonomialsWithAndWithoutVariable) {
 TEST(SegregateHelpersTest, SegregateMonomialsAndNonMonomialsWorksForTerms) {
     Terms monomialTerms;
     Terms nonMonomialTerms;
-    Term termExpression(createExpressionIfPossible({"x", "^", "x"}));
+    Term const termExpression(createExpressionIfPossible({"x", "^", "x"}));
 
     segregateMonomialsAndNonMonomials({234, termExpression}, monomialTerms, nonMonomialTerms);
 
@@ -38,7 +38,7 @@ TEST(SegregateHelpersTest, SegregateMonomialsAndNonMonomialsWorksForTermsWithDet
     TermsWithAssociation termsWithAssociation;
     TermsWithDetails monomialTerms;
     TermsWithDetails nonMonomialTerms;
-    Term termExpression(createExpressionIfPossible({"x", "^", "x"}));
+    Term const termExpression(createExpressionIfPossible({"x", "^", "x"}));
     termsWithAssociation.putTermWithNegativeAssociation(Term(753));
     termsWithAssociation.putTermWithPositiveAssociation(termExpression);
 
@@ -57,7 +57,7 @@ TEST(SegregateHelpersTest, SegregateMonomialsAndNonMonomialsWorksForTermsWithDet
 TEST(SegregateHelpersTest, SegregatePolynomialAndNonPolynomialsWorks) {
     Terms polynomialTerms;
     Terms nonPolynomialTerms;
-    Term termExpression(createExpressionIfPossible({"x", "^", "x"}));
+    Term const termExpression(createExpressionIfPossible({"x", "^", "x"}));
 
     segregatePolynomialAndNonPolynomials({234, termExpression}, polynomialTerms, nonPolynomialTerms);
 
@@ -71,7 +71,7 @@ TEST(SegregateHelpersTest, SegregateNonExpressionsAndExpressionsWorks) {
     TermsWithAssociation termsWithAssociation;
     TermsWithDetails termsWithNonExpressions;
     TermsWithDetails termsWithExpressions;
-    Term termExpression(createExpressionIfPossible({"x", "^", "x"}));
+    Term const termExpression(createExpressionIfPossible({"x", "^", "x"}));
     termsWithAssociation.putTermWithNegativeAssociation(Term(753));
     termsWithAssociation.putTermWithPositiveAssociation(termExpression);
 

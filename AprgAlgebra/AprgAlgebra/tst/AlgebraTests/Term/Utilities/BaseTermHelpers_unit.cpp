@@ -9,7 +9,7 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(BaseTermHelpersTest, GetBaseTermConstReferenceFromTermWorks) {
-    Term originalTerm(7896);
+    Term const originalTerm(7896);
 
     BaseTerm const& baseTerm(getBaseTermConstReferenceFromTerm(originalTerm));
 
@@ -19,7 +19,7 @@ TEST(BaseTermHelpersTest, GetBaseTermConstReferenceFromTermWorks) {
 }
 
 TEST(BaseTermHelpersTest, GetBaseTermConstReferenceFromUniquePointerWorks) {
-    BaseTermUniquePointer uniquePointer(createBasePointer(Term(6415)));
+    BaseTermUniquePointer const uniquePointer(createBasePointer(Term(6415)));
 
     BaseTerm const& baseTerm(getBaseTermConstReferenceFromUniquePointer(uniquePointer));
 
@@ -33,16 +33,16 @@ TEST(BaseTermHelpersTest, GetBaseTermReferenceFromTermWorks) {
 
     BaseTerm& baseTerm(getBaseTermReferenceFromTerm(originalTerm));
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    Term& termToVerify(static_cast<Term&>(baseTerm));
+    Term const& termToVerify(static_cast<Term&>(baseTerm));
     originalTerm = Term(854);
 
     EXPECT_EQ(Term(854), termToVerify);
 }
 
 TEST(BaseTermHelpersTest, GetBaseTermReferenceFromUniquePointerWorks) {
-    BaseTermUniquePointer uniquePointer(createBasePointer(Term(6415)));
+    BaseTermUniquePointer const uniquePointer(createBasePointer(Term(6415)));
 
-    BaseTerm& baseTerm(getBaseTermReferenceFromUniquePointer(uniquePointer));
+    BaseTerm const& baseTerm(getBaseTermReferenceFromUniquePointer(uniquePointer));
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     Term const& termToVerify(static_cast<Term const&>(baseTerm));
@@ -50,29 +50,29 @@ TEST(BaseTermHelpersTest, GetBaseTermReferenceFromUniquePointerWorks) {
 }
 
 TEST(BaseTermHelpersTest, DuplicateUniquePointerWorks) {
-    BaseTermUniquePointer originalPointer(createBasePointer(Term(7896)));
+    BaseTermUniquePointer const originalPointer(createBasePointer(Term(7896)));
 
-    BaseTermUniquePointer duplicatedPointer(duplicateUniquePointer(originalPointer));
+    BaseTermUniquePointer const duplicatedPointer(duplicateUniquePointer(originalPointer));
 
     EXPECT_EQ(Term(7896), getTermConstReferenceFromUniquePointer(duplicatedPointer));
 }
 
 TEST(BaseTermHelpersTest, CreateBasePointerWorksForLValue) {
-    Term originalTerm(7896);
+    Term const originalTerm(7896);
 
-    BaseTermUniquePointer uniquePointer(createBasePointer(originalTerm));
+    BaseTermUniquePointer const uniquePointer(createBasePointer(originalTerm));
 
     EXPECT_EQ(Term(7896), getTermConstReferenceFromUniquePointer(uniquePointer));
 }
 
 TEST(BaseTermHelpersTest, CreateBasePointerWorksForRValue) {
-    BaseTermUniquePointer uniquePointer(createBasePointer(Term(7896)));
+    BaseTermUniquePointer const uniquePointer(createBasePointer(Term(7896)));
 
     EXPECT_EQ(Term(7896), getTermConstReferenceFromUniquePointer(uniquePointer));
 }
 
 TEST(BaseTermHelpersTest, GetTermConstReferenceFromUniquePointerWorks) {
-    BaseTermUniquePointer uniquePointer(createBasePointer(Term(9541)));
+    BaseTermUniquePointer const uniquePointer(createBasePointer(Term(9541)));
 
     Term const& termToVerify(getTermConstReferenceFromUniquePointer(uniquePointer));
 
@@ -90,7 +90,7 @@ TEST(BaseTermHelpersTest, GetTermReferenceFromUniquePointerWorks) {
 }
 
 TEST(BaseTermHelpersTest, GetTermConstReferenceFromBaseTermWorks) {
-    Term originalTerm(7896);
+    Term const originalTerm(7896);
 
     Term const& termToVerify(getTermConstReferenceFromBaseTerm(static_cast<BaseTerm const&>(originalTerm)));
 
@@ -100,7 +100,7 @@ TEST(BaseTermHelpersTest, GetTermConstReferenceFromBaseTermWorks) {
 TEST(BaseTermHelpersTest, GetTermReferenceFromBaseTermWorks) {
     Term originalTerm(7896);
 
-    Term& termToVerify(getTermReferenceFromBaseTerm(static_cast<BaseTerm&>(originalTerm)));
+    Term const& termToVerify(getTermReferenceFromBaseTerm(static_cast<BaseTerm&>(originalTerm)));
     originalTerm = Term(854);
 
     EXPECT_EQ(Term(854), termToVerify);

@@ -11,11 +11,11 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(TermTest, EqualityOperatorWorks) {
-    Term term1;
-    Term term2(Constant(5));
-    Term term3(Constant(10));
-    Term term4(Variable("length"));
-    Term term5(Constant(5));
+    Term const term1;
+    Term const term2(Constant(5));
+    Term const term3(Constant(10));
+    Term const term4(Variable("length"));
+    Term const term5(Constant(5));
 
     EXPECT_TRUE(term1 == term1);
     EXPECT_FALSE(term1 == term2);
@@ -26,11 +26,11 @@ TEST(TermTest, EqualityOperatorWorks) {
 }
 
 TEST(TermTest, InequalityOperatorWorks) {
-    Term term1;
-    Term term2(Constant(5));
-    Term term3(Constant(10));
-    Term term4(Variable("length"));
-    Term term5(Constant(5));
+    Term const term1;
+    Term const term2(Constant(5));
+    Term const term3(Constant(10));
+    Term const term4(Variable("length"));
+    Term const term5(Constant(5));
 
     EXPECT_FALSE(term1 != term1);
     EXPECT_TRUE(term1 != term2);
@@ -41,12 +41,12 @@ TEST(TermTest, InequalityOperatorWorks) {
 }
 
 TEST(TermTest, LessThanOperatorWorks) {
-    Term term1;
-    Term term2(Constant(10));
-    Term term3(Constant(9));
-    Term term4(Constant(11));
-    Term term5(Operator("+"));
-    Term term6(Variable("length"));
+    Term const term1;
+    Term const term2(Constant(10));
+    Term const term3(Constant(9));
+    Term const term4(Constant(11));
+    Term const term5(Operator("+"));
+    Term const term6(Variable("length"));
 
     EXPECT_FALSE(term1 < term1);
     EXPECT_FALSE(term2 < term2);
@@ -58,15 +58,15 @@ TEST(TermTest, LessThanOperatorWorks) {
 
 TEST(TermTest, OutputStreamOperatorWorks) {
     stringstream ss;
-    Term term1;
-    Term term2(0);
-    Term term3(Variable("length"));
-    Term term4(Operator("+"));
-    Term term5(Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}}));
-    Term term6(Polynomial{Monomial(3, {}), Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}})});
-    Term term7(createExpressionIfPossible({5, "+", "interest"}));
-    Function function1("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
-    Term term8(function1);
+    Term const term1;
+    Term const term2(0);
+    Term const term3(Variable("length"));
+    Term const term4(Operator("+"));
+    Term const term5(Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}}));
+    Term const term6(Polynomial{Monomial(3, {}), Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}})});
+    Term const term7(createExpressionIfPossible({5, "+", "interest"}));
+    Function const function1("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
+    Term const term8(function1);
 
     ss << term1 << "," << term2 << "," << term3 << "," << term4 << "," << term5 << "," << term6 << "," << term7 << ","
        << term8;
@@ -78,8 +78,8 @@ TEST(TermTest, OutputStreamOperatorWorks) {
 }
 
 TEST(TermTest, TermsAsExpressionsWorks) {
-    Term expressionTerm1(Expression{});
-    Term expressionTerm2(createExpressionIfPossible({5, "+", "interest"}));
+    Term const expressionTerm1(Expression{});
+    Term const expressionTerm2(createExpressionIfPossible({5, "+", "interest"}));
 
     // For expression1
     ASSERT_EQ(TermType::Expression, expressionTerm1.getTermType());
@@ -103,11 +103,11 @@ TEST(TermTest, TermsAsExpressionsWorks) {
 }
 
 TEST(TermTest, TermsAsFunctionsWorks) {
-    Function function1;
-    Function function2("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
-    Term functionTerm1(function1);
-    Term functionTerm2(function2);
-    Term functionTerm3("abs");
+    Function const function1;
+    Function const function2("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
+    Term const functionTerm1(function1);
+    Term const functionTerm2(function2);
+    Term const functionTerm3("abs");
 
     // For function1
     ASSERT_EQ(TermType::Function, functionTerm1.getTermType());
@@ -138,15 +138,15 @@ TEST(TermTest, TermsAsFunctionsCanBeChanged) {
 }
 
 TEST(TermTest, GetDebugStringWorks) {
-    Term term1;
-    Term term2(0);
-    Term term3(Variable("length"));
-    Term term4(Operator("+"));
-    Term term5(Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}}));
-    Term term6(Polynomial{Monomial(3, {}), Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}})});
-    Term term7(createExpressionIfPossible({5, "+", "interest"}));
-    Function function1("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
-    Term term8(function1);
+    Term const term1;
+    Term const term2(0);
+    Term const term3(Variable("length"));
+    Term const term4(Operator("+"));
+    Term const term5(Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}}));
+    Term const term6(Polynomial{Monomial(3, {}), Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}})});
+    Term const term7(createExpressionIfPossible({5, "+", "interest"}));
+    Function const function1("functionName", Term(5), [](AlbaNumber const& number) -> AlbaNumber { return number; });
+    Term const term8(function1);
 
     EXPECT_EQ("{EmptyTerm}{Empty}", term1.getDebugString());
     EXPECT_EQ("0{Constant}", term2.getDebugString());
@@ -164,7 +164,8 @@ TEST(TermTest, ClearWorks) {
     Term monomialTerm(Monomial(1475, {}));
     Term polynomialTerm(Polynomial{Monomial(1475, {})});
     Term expressionTerm(Expression{createExpressionIfPossible({1475})});
-    Function functionObject("functionName", Term(1475), [](AlbaNumber const& number) -> AlbaNumber { return number; });
+    Function const functionObject(
+        "functionName", Term(1475), [](AlbaNumber const& number) -> AlbaNumber { return number; });
     Term functionTerm(functionObject);
 
     constantTerm.clear();
@@ -188,7 +189,8 @@ TEST(TermTest, SimplifyWorks) {
     Term monomialTerm(Monomial(1475, {}));
     Term polynomialTerm(Polynomial{Monomial(1475, {})});
     Term expressionTerm(Expression{createExpressionIfPossible({1475})});
-    Function functionObject("functionName", Term(1475), [](AlbaNumber const& number) -> AlbaNumber { return number; });
+    Function const functionObject(
+        "functionName", Term(1475), [](AlbaNumber const& number) -> AlbaNumber { return number; });
     Term functionTerm(functionObject);
 
     constantTerm.simplify();
@@ -226,16 +228,16 @@ TEST(TermTest, SimplifyWorksAsSkippedWhenIsSimplifiedIsSet) {
 TEST(TermTest, CreateBasePointerByMoveWorks) {
     Term termToTest(6415);
 
-    BaseTermUniquePointer uniquePointerToVerify(termToTest.createBasePointerByMove());
+    BaseTermUniquePointer const uniquePointerToVerify(termToTest.createBasePointerByMove());
 
     EXPECT_EQ(Term(6415), getTermConstReferenceFromUniquePointer(uniquePointerToVerify));
 }
 
 TEST(TermTest, GetAsNumberWorks) {
-    Term constant1(4353);
-    Term constant2(-3248);
-    Term constant3(AlbaNumber::createFraction(3498, 3459));
-    Term constant4(-34.8767);
+    Term const constant1(4353);
+    Term const constant2(-3248);
+    Term const constant3(AlbaNumber::createFraction(3498, 3459));
+    Term const constant4(-34.8767);
 
     ASSERT_EQ(TermType::Constant, constant1.getTermType());
     EXPECT_DOUBLE_EQ(4353, constant1.getAsNumber().getDouble());
@@ -251,7 +253,7 @@ TEST(TermTest, GetAsNumberWorks) {
 }
 
 TEST(TermTest, AssignmentOperatorWorks) {
-    Term term1 = 2;
+    Term const term1 = 2;
     Term term2(5);
     term2 = 7;
     Term term3(8);
@@ -275,11 +277,11 @@ TEST(TermTest, TermsAsConstantsCanBeChanged) {
 }
 
 TEST(TermTest, TermsAsConstructedAsStringWorks) {
-    Term term1("");
-    Term term2("5xxx");
-    Term term3("+");
-    Term term4("power");
-    Term term5("x1");
+    Term const term1("");
+    Term const term2("5xxx");
+    Term const term3("+");
+    Term const term4("power");
+    Term const term5("x1");
 
     ASSERT_EQ(TermType::Empty, term1.getTermType());
 
@@ -297,10 +299,10 @@ TEST(TermTest, TermsAsConstructedAsStringWorks) {
 }
 
 TEST(TermTest, TermsAsConstantsWorks) {
-    Term constantTerm1(4353);
-    Term constantTerm2(-3248);
-    Term constantTerm3(AlbaNumber::createFraction(3498, 3459));
-    Term constantTerm4(-34.8767);
+    Term const constantTerm1(4353);
+    Term const constantTerm2(-3248);
+    Term const constantTerm3(AlbaNumber::createFraction(3498, 3459));
+    Term const constantTerm4(-34.8767);
 
     ASSERT_EQ(TermType::Constant, constantTerm1.getTermType());
     EXPECT_DOUBLE_EQ(4353, constantTerm1.getAsConstant().getNumber().getDouble());
@@ -325,9 +327,9 @@ TEST(TermTest, TermsAsExpressionsCanBeChanged) {
 }
 
 TEST(TermTest, TermsAsMonomialsWorks) {
-    Term monomialTerm1(Monomial(3, {}));
-    Term monomialTerm2(Monomial(1.5, {{"distance", 3.75}}));
-    Term monomialTerm3(Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}}));
+    Term const monomialTerm1(Monomial(3, {}));
+    Term const monomialTerm2(Monomial(1.5, {{"distance", 3.75}}));
+    Term const monomialTerm3(Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}}));
 
     ASSERT_EQ(TermType::Monomial, monomialTerm1.getTermType());
     EXPECT_DOUBLE_EQ(3, monomialTerm1.getAsMonomial().getCoefficient().getDouble());
@@ -380,10 +382,10 @@ TEST(TermTest, ClearAllInnerSimplifiedFlagsWorks) {
 }
 
 TEST(TermTest, TermsAsOperatorsWorks) {
-    Term operatorTerm1("+");
-    Term operatorTerm2("-");
-    Term operatorTerm3("*");
-    Term operatorTerm4("/");
+    Term const operatorTerm1("+");
+    Term const operatorTerm2("-");
+    Term const operatorTerm3("*");
+    Term const operatorTerm4("/");
 
     ASSERT_EQ(TermType::Operator, operatorTerm1.getTermType());
     EXPECT_EQ("+", operatorTerm1.getAsOperator().getOperatorString());
@@ -408,9 +410,9 @@ TEST(TermTest, TermsAsOperatorsCanBeChanged) {
 }
 
 TEST(TermTest, TermsAsPolynomialsWorks) {
-    Term polynomialTerm1(Polynomial{});
-    Term polynomialTerm2(Polynomial{Monomial(3, {})});
-    Term polynomialTerm3(Polynomial{Monomial(3, {}), Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}})});
+    Term const polynomialTerm1(Polynomial{});
+    Term const polynomialTerm2(Polynomial{Monomial(3, {})});
+    Term const polynomialTerm3(Polynomial{Monomial(3, {}), Monomial(-1.5, {{"distance", -3.75}, {"power", 4.5}})});
 
     // For polynomial1
     ASSERT_EQ(TermType::Polynomial, polynomialTerm1.getTermType());
@@ -456,19 +458,19 @@ TEST(TermTest, TermsAsPolynomialsCanBeChanged) {
     term.getAsPolynomialReference().addMonomial(Monomial(53, {}));
 
     ASSERT_EQ(TermType::Polynomial, term.getTermType());
-    Polynomial expectedPolynomial{Monomial(53, {})};
+    Polynomial const expectedPolynomial{Monomial(53, {})};
     EXPECT_EQ(expectedPolynomial, term.getAsPolynomial());
 }
 
 TEST(TermTest, GetTermTypeWorks) {
-    Term term1;
-    Term term2(0);
-    Term term3(Variable("length"));
-    Term term4(Operator("+"));
-    Term term5(Monomial(1, {}));
-    Term term6(Polynomial{});
-    Term term7(Expression{});
-    Term term8(Function{});
+    Term const term1;
+    Term const term2(0);
+    Term const term3(Variable("length"));
+    Term const term4(Operator("+"));
+    Term const term5(Monomial(1, {}));
+    Term const term6(Polynomial{});
+    Term const term7(Expression{});
+    Term const term8(Function{});
 
     EXPECT_EQ(TermType::Empty, term1.getTermType());
     EXPECT_EQ(TermType::Constant, term2.getTermType());
@@ -481,8 +483,8 @@ TEST(TermTest, GetTermTypeWorks) {
 }
 
 TEST(TermTest, TermsAsVariablesWorks) {
-    Term variableTerm1("x");
-    Term variableTerm2("power");
+    Term const variableTerm1("x");
+    Term const variableTerm2("power");
 
     ASSERT_EQ(TermType::Variable, variableTerm1.getTermType());
     EXPECT_EQ("x", variableTerm1.getAsVariable().getVariableName());
@@ -501,17 +503,17 @@ TEST(TermTest, TermsAsVariablesCanBeChanged) {
 }
 
 TEST(TermTest, IsEmptyWorks) {
-    Term term1;
-    Term term2(0);
-    Term term3(1);
-    Term term4(Variable("length"));
-    Term term5(Operator("+"));
-    Term term6(Monomial(0, {}));
-    Term term7(Monomial(1, {}));
-    Term term8(Polynomial{});
-    Term term9(Polynomial{Monomial(1, {})});
-    Term term10(Expression{});
-    Term term11(Function{});
+    Term const term1;
+    Term const term2(0);
+    Term const term3(1);
+    Term const term4(Variable("length"));
+    Term const term5(Operator("+"));
+    Term const term6(Monomial(0, {}));
+    Term const term7(Monomial(1, {}));
+    Term const term8(Polynomial{});
+    Term const term9(Polynomial{Monomial(1, {})});
+    Term const term10(Expression{});
+    Term const term11(Function{});
 
     EXPECT_TRUE(term1.isEmpty());
     EXPECT_FALSE(term2.isEmpty());
@@ -527,14 +529,14 @@ TEST(TermTest, IsEmptyWorks) {
 }
 
 TEST(TermTest, IsConstantWorks) {
-    Term term1;
-    Term term2(1);
-    Term term3(Variable("length"));
-    Term term4(Operator("+"));
-    Term term5(Monomial(1, {}));
-    Term term6(Polynomial{});
-    Term term7(Expression{});
-    Term term8(Function{});
+    Term const term1;
+    Term const term2(1);
+    Term const term3(Variable("length"));
+    Term const term4(Operator("+"));
+    Term const term5(Monomial(1, {}));
+    Term const term6(Polynomial{});
+    Term const term7(Expression{});
+    Term const term8(Function{});
 
     EXPECT_FALSE(term1.isConstant());
     EXPECT_TRUE(term2.isConstant());
@@ -547,14 +549,14 @@ TEST(TermTest, IsConstantWorks) {
 }
 
 TEST(TermTest, IsVariableWorks) {
-    Term term1;
-    Term term2(1);
-    Term term3(Variable("length"));
-    Term term4(Operator("+"));
-    Term term5(Monomial(1, {}));
-    Term term6(Polynomial{});
-    Term term7(Expression{});
-    Term term8(Function{});
+    Term const term1;
+    Term const term2(1);
+    Term const term3(Variable("length"));
+    Term const term4(Operator("+"));
+    Term const term5(Monomial(1, {}));
+    Term const term6(Polynomial{});
+    Term const term7(Expression{});
+    Term const term8(Function{});
 
     EXPECT_FALSE(term1.isVariable());
     EXPECT_FALSE(term2.isVariable());
@@ -567,14 +569,14 @@ TEST(TermTest, IsVariableWorks) {
 }
 
 TEST(TermTest, IsOperatorWorks) {
-    Term term1;
-    Term term2(1);
-    Term term3(Variable("length"));
-    Term term4(Operator("+"));
-    Term term5(Monomial(1, {}));
-    Term term6(Polynomial{});
-    Term term7(Expression{});
-    Term term8(Function{});
+    Term const term1;
+    Term const term2(1);
+    Term const term3(Variable("length"));
+    Term const term4(Operator("+"));
+    Term const term5(Monomial(1, {}));
+    Term const term6(Polynomial{});
+    Term const term7(Expression{});
+    Term const term8(Function{});
 
     EXPECT_FALSE(term1.isOperator());
     EXPECT_FALSE(term2.isOperator());
@@ -587,14 +589,14 @@ TEST(TermTest, IsOperatorWorks) {
 }
 
 TEST(TermTest, IsMonomialWorks) {
-    Term term1;
-    Term term2(1);
-    Term term3(Variable("length"));
-    Term term4(Operator("+"));
-    Term term5(Monomial(1, {}));
-    Term term6(Polynomial{});
-    Term term7(Expression{});
-    Term term8(Function{});
+    Term const term1;
+    Term const term2(1);
+    Term const term3(Variable("length"));
+    Term const term4(Operator("+"));
+    Term const term5(Monomial(1, {}));
+    Term const term6(Polynomial{});
+    Term const term7(Expression{});
+    Term const term8(Function{});
 
     EXPECT_FALSE(term1.isMonomial());
     EXPECT_FALSE(term2.isMonomial());
@@ -607,14 +609,14 @@ TEST(TermTest, IsMonomialWorks) {
 }
 
 TEST(TermTest, IsPolynomialWorks) {
-    Term term1;
-    Term term2(1);
-    Term term3(Variable("length"));
-    Term term4(Operator("+"));
-    Term term5(Monomial(1, {}));
-    Term term6(Polynomial{});
-    Term term7(Expression{});
-    Term term8(Function{});
+    Term const term1;
+    Term const term2(1);
+    Term const term3(Variable("length"));
+    Term const term4(Operator("+"));
+    Term const term5(Monomial(1, {}));
+    Term const term6(Polynomial{});
+    Term const term7(Expression{});
+    Term const term8(Function{});
 
     EXPECT_FALSE(term1.isPolynomial());
     EXPECT_FALSE(term2.isPolynomial());
@@ -627,14 +629,14 @@ TEST(TermTest, IsPolynomialWorks) {
 }
 
 TEST(TermTest, IsExpressionWorks) {
-    Term term1;
-    Term term2(1);
-    Term term3(Variable("length"));
-    Term term4(Operator("+"));
-    Term term5(Monomial(1, {}));
-    Term term6(Polynomial{});
-    Term term7(Expression{});
-    Term term8(Function{});
+    Term const term1;
+    Term const term2(1);
+    Term const term3(Variable("length"));
+    Term const term4(Operator("+"));
+    Term const term5(Monomial(1, {}));
+    Term const term6(Polynomial{});
+    Term const term7(Expression{});
+    Term const term8(Function{});
 
     EXPECT_FALSE(term1.isExpression());
     EXPECT_FALSE(term2.isExpression());
@@ -647,14 +649,14 @@ TEST(TermTest, IsExpressionWorks) {
 }
 
 TEST(TermTest, IsFunctionWorks) {
-    Term term1;
-    Term term2(1);
-    Term term3(Variable("length"));
-    Term term4(Operator("+"));
-    Term term5(Monomial(1, {}));
-    Term term6(Polynomial{});
-    Term term7(Expression{});
-    Term term8(Function{});
+    Term const term1;
+    Term const term2(1);
+    Term const term3(Variable("length"));
+    Term const term4(Operator("+"));
+    Term const term5(Monomial(1, {}));
+    Term const term6(Polynomial{});
+    Term const term7(Expression{});
+    Term const term8(Function{});
 
     EXPECT_FALSE(term1.isFunction());
     EXPECT_FALSE(term2.isFunction());
@@ -667,19 +669,19 @@ TEST(TermTest, IsFunctionWorks) {
 }
 
 TEST(TermTest, TermThatIsDefaultConstructedHasIsSimplifiedFlagNotSet) {
-    Term term;
+    Term const term;
 
     EXPECT_FALSE(term.isSimplified());
 }
 
 TEST(TermTest, TermThatIsConstructedWithTermTypeHasIsSimplifiedFlagNotSet) {
-    Term constantTerm(4353);
-    Term variableTerm("");
-    Term operatorTerm("+");
-    Term monomialTerm(Monomial{});
-    Term polynomialTerm(Polynomial{});
-    Term expressionTerm(Expression{});
-    Term functionTerm(Function{});
+    Term const constantTerm(4353);
+    Term const variableTerm("");
+    Term const operatorTerm("+");
+    Term const monomialTerm(Monomial{});
+    Term const polynomialTerm(Polynomial{});
+    Term const expressionTerm(Expression{});
+    Term const functionTerm(Function{});
 
     EXPECT_FALSE(constantTerm.isSimplified());
     EXPECT_FALSE(variableTerm.isSimplified());
@@ -691,7 +693,7 @@ TEST(TermTest, TermThatIsConstructedWithTermTypeHasIsSimplifiedFlagNotSet) {
 }
 
 TEST(TermTest, TermThatIsCopyConstructedHasIsSimplifiedFlagCopied) {
-    Term termWithSimplifiedNotSet;
+    Term const termWithSimplifiedNotSet;
     Term termWithSimplifiedSet;
     termWithSimplifiedSet.setAsSimplified();
 
@@ -700,7 +702,7 @@ TEST(TermTest, TermThatIsCopyConstructedHasIsSimplifiedFlagCopied) {
 }
 
 TEST(TermTest, TermThatIsAssignedHasIsSimplifiedFlagCopied) {
-    Term termWithSimplifiedNotSet;
+    Term const termWithSimplifiedNotSet;
     Term termWithSimplifiedSet;
     termWithSimplifiedSet.setAsSimplified();
     Term term1(1);
@@ -714,7 +716,7 @@ TEST(TermTest, TermThatIsAssignedHasIsSimplifiedFlagCopied) {
 }
 
 TEST(TermTest, IsSimplifiedWorks) {
-    Term term1;
+    Term const term1;
     Term term2;
     term2.setAsSimplified();
 
@@ -753,12 +755,12 @@ TEST(TermTest, SortWorks) {
     term4.sort();
     term5.sort();
 
-    Term expectTerm1;
-    Term expectTerm2(Polynomial{});
-    Term expectTerm3(Expression{});
-    Term expectTerm4(Polynomial{
+    Term const expectTerm1;
+    Term const expectTerm2(Polynomial{});
+    Term const expectTerm3(Expression{});
+    Term const expectTerm4(Polynomial{
         Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}}), Monomial(9, {{"x", 8}}), Monomial(100, {}), Monomial(10, {})});
-    Term expectTerm5(createExpressionIfPossible({1, "+", 4, "+", 5, "-", 2, "-", 3}));
+    Term const expectTerm5(createExpressionIfPossible({1, "+", 4, "+", 5, "-", 2, "-", 3}));
     EXPECT_EQ(expectTerm1, term1);
     EXPECT_EQ(expectTerm2, term2);
     EXPECT_EQ(expectTerm3, term3);

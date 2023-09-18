@@ -7,24 +7,24 @@
 namespace alba::algebra {
 
 TEST(CreateHelpersTest, CreateExpressionInExpressionWorks) {
-    Expression expression1(createExpressionIfPossible({254}));
-    Expression expression2(createExpressionIfPossible({4752}));
+    Expression const expression1(createExpressionIfPossible({254}));
+    Expression const expression2(createExpressionIfPossible({4752}));
 
-    Expression expressionToVerify1(createExpressionInAnExpression(expression1));
-    Expression expressionToVerify2(createExpressionInAnExpression(createExpressionInAnExpression(expression2)));
+    Expression const expressionToVerify1(createExpressionInAnExpression(expression1));
+    Expression const expressionToVerify2(createExpressionInAnExpression(createExpressionInAnExpression(expression2)));
 
-    Expression expressionToExpect1(getBaseTermConstReferenceFromTerm(expression1));
-    Expression expressionToExpect2(getBaseTermConstReferenceFromTerm(Expression(Term(expression2))));
+    Expression const expressionToExpect1(getBaseTermConstReferenceFromTerm(expression1));
+    Expression const expressionToExpect2(getBaseTermConstReferenceFromTerm(Expression(Term(expression2))));
     EXPECT_EQ(expressionToExpect1, expressionToVerify1);
     EXPECT_EQ(expressionToExpect2, expressionToVerify2);
 }
 
 TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplifyExpressionInAExpression) {
-    Expression expression1(createExpressionIfPossible({88}));
-    Expression expression2(createExpressionInAnExpression(expression1));
-    Expression expression3(createExpressionInAnExpression(expression2));
+    Expression const expression1(createExpressionIfPossible({88}));
+    Expression const expression2(createExpressionInAnExpression(expression1));
+    Expression const expression3(createExpressionInAnExpression(expression2));
 
-    Expression expressionToTest1(createExpressionIfPossible({expression3}));
+    Expression const expressionToTest1(createExpressionIfPossible({expression3}));
 
     EXPECT_EQ(OperatorLevel::Unknown, expressionToTest1.getCommonOperatorLevel());
     TermsWithDetails const& termsToVerify1(expressionToTest1.getTermsWithAssociation().getTermsWithDetails());
@@ -50,30 +50,30 @@ TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplifyExpressionInAEx
 }
 
 TEST(CreateHelpersTest, CreateAndWrapExpressionFromATermWorks) {
-    Expression expression1(createExpressionIfPossible({254}));
-    Expression expression2(createExpressionIfPossible({4752}));
+    Expression const expression1(createExpressionIfPossible({254}));
+    Expression const expression2(createExpressionIfPossible({4752}));
 
-    Expression expressionToVerify1(createAndWrapExpressionFromATerm(expression1));
-    Expression expressionToVerify2(createAndWrapExpressionFromATerm(4752));
+    Expression const expressionToVerify1(createAndWrapExpressionFromATerm(expression1));
+    Expression const expressionToVerify2(createAndWrapExpressionFromATerm(4752));
 
-    Expression expressionToExpect1(getBaseTermConstReferenceFromTerm(expression1));
+    Expression const expressionToExpect1(getBaseTermConstReferenceFromTerm(expression1));
     EXPECT_EQ(expressionToExpect1, expressionToVerify1);
     EXPECT_EQ(expression2, expressionToVerify2);
 }
 
 TEST(CreateHelpersTest, CreateOrCopyExpressionFromATermWorks) {
-    Expression expression1(createExpressionIfPossible({254}));
-    Expression expression2(createExpressionIfPossible({4752}));
+    Expression const expression1(createExpressionIfPossible({254}));
+    Expression const expression2(createExpressionIfPossible({4752}));
 
-    Expression expressionToVerify1(createOrCopyExpressionFromATerm(expression1));
-    Expression expressionToVerify2(createOrCopyExpressionFromATerm(4752));
+    Expression const expressionToVerify1(createOrCopyExpressionFromATerm(expression1));
+    Expression const expressionToVerify2(createOrCopyExpressionFromATerm(4752));
 
     EXPECT_EQ(expression1, expressionToVerify1);
     EXPECT_EQ(expression2, expressionToVerify2);
 }
 
 TEST(CreateHelpersTest, CreateExpressionIfPossibleWorks) {
-    Expression expressionToTest(
+    Expression const expressionToTest(
         createExpressionIfPossible({10, "/", Polynomial{Monomial(5, {}), Monomial(1, {{"x", 1}})}}));
 
     EXPECT_EQ(OperatorLevel::MultiplicationAndDivision, expressionToTest.getCommonOperatorLevel());
@@ -88,7 +88,7 @@ TEST(CreateHelpersTest, CreateExpressionIfPossibleWorks) {
 }
 
 TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplify) {
-    Expression expressionToTest(createExpressionIfPossible({7.625, "+", 2.375}));
+    Expression const expressionToTest(createExpressionIfPossible({7.625, "+", 2.375}));
 
     EXPECT_EQ(OperatorLevel::AdditionAndSubtraction, expressionToTest.getCommonOperatorLevel());
     TermsWithDetails const& termsToVerify(expressionToTest.getTermsWithAssociation().getTermsWithDetails());
@@ -102,7 +102,7 @@ TEST(CreateHelpersTest, CreateExpressionIfPossibleDoesNotSimplify) {
 }
 
 TEST(CreateHelpersTest, CreateExpressionIfPossibleReturnsEmptyIfListOfTermsAreWrong) {
-    Expression expressionToTest(createExpressionIfPossible({7.625, "+", "/", 2.375}));
+    Expression const expressionToTest(createExpressionIfPossible({7.625, "+", "/", 2.375}));
 
     EXPECT_EQ(OperatorLevel::Unknown, expressionToTest.getCommonOperatorLevel());
     TermsWithDetails const& termsToVerify(expressionToTest.getTermsWithAssociation().getTermsWithDetails());
@@ -131,43 +131,43 @@ TEST(CreateHelpersTest, CreatePolynomialIfPossibleWorks) {
 }
 
 TEST(CreateHelpersTest, CreateTermWithAdditionAndSubtractionTermsWithDetailsWorksWithMultipleTerms) {
-    TermsWithDetails termsWithDetails{
+    TermsWithDetails const termsWithDetails{
         {Term("x"), TermAssociationType::Positive},
         {Term("y"), TermAssociationType::Negative},
         {Term("z"), TermAssociationType::Positive}};
 
-    Term termToExpect(createTermWithAdditionAndSubtractionTermsWithDetails(termsWithDetails));
+    Term const termToExpect(createTermWithAdditionAndSubtractionTermsWithDetails(termsWithDetails));
 
-    Term termToVerify(createExpressionIfPossible({"x", "-", "y", "+", "z"}));
+    Term const termToVerify(createExpressionIfPossible({"x", "-", "y", "+", "z"}));
     EXPECT_EQ(termToVerify, termToExpect);
 }
 
 TEST(CreateHelpersTest, CreateTermWithMultiplicationAndDivisionTermsWithDetailsWorksWithMultipleTerms) {
-    TermsWithDetails termsWithDetails{
+    TermsWithDetails const termsWithDetails{
         {Term("x"), TermAssociationType::Positive},
         {Term("y"), TermAssociationType::Negative},
         {Term("z"), TermAssociationType::Positive}};
 
-    Term termToExpect(createTermWithMultiplicationAndDivisionTermsWithDetails(termsWithDetails));
+    Term const termToExpect(createTermWithMultiplicationAndDivisionTermsWithDetails(termsWithDetails));
 
-    Term termToVerify(createExpressionIfPossible({"x", "/", "y", "*", "z"}));
+    Term const termToVerify(createExpressionIfPossible({"x", "/", "y", "*", "z"}));
     EXPECT_EQ(termToVerify, termToExpect);
 }
 
 TEST(CreateHelpersTest, CreateTermWithRaiseToPowerTermsWithDetailsWorksWithMultipleTerms) {
-    TermsWithDetails termsWithDetails{
+    TermsWithDetails const termsWithDetails{
         {Term("x"), TermAssociationType::Positive},
         {Term("y"), TermAssociationType::Positive},
         {Term("z"), TermAssociationType::Positive}};
 
-    Term termToExpect(createTermWithRaiseToPowerTermsWithDetails(termsWithDetails));
+    Term const termToExpect(createTermWithRaiseToPowerTermsWithDetails(termsWithDetails));
 
-    Term termToVerify(createExpressionIfPossible({"x", "^", "y", "^", "z"}));
+    Term const termToVerify(createExpressionIfPossible({"x", "^", "y", "^", "z"}));
     EXPECT_EQ(termToVerify, termToExpect);
 }
 
 TEST(CreateHelpersTest, CreateSimplifiedExpressionIfPossibleWorks) {
-    Expression expressionToTest(createSimplifiedExpressionIfPossible({7.625, "+", 2.375}));
+    Expression const expressionToTest(createSimplifiedExpressionIfPossible({7.625, "+", 2.375}));
 
     EXPECT_EQ(OperatorLevel::Unknown, expressionToTest.getCommonOperatorLevel());
     TermsWithDetails const& termsToVerify(expressionToTest.getTermsWithAssociation().getTermsWithDetails());
@@ -178,7 +178,7 @@ TEST(CreateHelpersTest, CreateSimplifiedExpressionIfPossibleWorks) {
 }
 
 TEST(CreateHelpersTest, CreateSimplifiedExpressionIfPossibleReturnsEmptyIfListOfTermsAreWrong) {
-    Expression expressionToTest(createSimplifiedExpressionIfPossible({"+", "+", "+"}));
+    Expression const expressionToTest(createSimplifiedExpressionIfPossible({"+", "+", "+"}));
 
     EXPECT_EQ(OperatorLevel::Unknown, expressionToTest.getCommonOperatorLevel());
     TermsWithDetails const& termsToVerify(expressionToTest.getTermsWithAssociation().getTermsWithDetails());
@@ -186,19 +186,19 @@ TEST(CreateHelpersTest, CreateSimplifiedExpressionIfPossibleReturnsEmptyIfListOf
 }
 
 TEST(CreateHelpersTest, CreateFunctionWithEmptyInputExpressionWorks) {
-    Function absoluteValueFunction(createFunctionWithEmptyInputExpression("abs"));
+    Function const absoluteValueFunction(createFunctionWithEmptyInputExpression("abs"));
 
     EXPECT_EQ("abs", absoluteValueFunction.getFunctionName());
     EXPECT_TRUE(getTermConstReferenceFromBaseTerm(absoluteValueFunction.getInputTerm()).isEmpty());
 }
 
 TEST(CreateHelpersTest, CreateFunctionInAnFunctionWorks) {
-    Function absFunction(Functions::abs(-5));
-    Function absInAbsFunction(Functions::abs(absFunction));
-    Function absInAbsInAbsFunction(Functions::abs(absInAbsFunction));
+    Function const absFunction(Functions::abs(-5));
+    Function const absInAbsFunction(Functions::abs(absFunction));
+    Function const absInAbsInAbsFunction(Functions::abs(absInAbsFunction));
 
-    Function functionToVerify1(createFunctionInAnFunction(absFunction));
-    Function functionToVerify2(createFunctionInAnFunction(absInAbsFunction));
+    Function const functionToVerify1(createFunctionInAnFunction(absFunction));
+    Function const functionToVerify2(createFunctionInAnFunction(absInAbsFunction));
 
     EXPECT_EQ(absInAbsFunction, functionToVerify1);
     EXPECT_EQ(absInAbsInAbsFunction, functionToVerify2);
@@ -225,29 +225,29 @@ TEST(CreateHelpersTest, CreatePolynomialFromMonomialWorks) {
 }
 
 TEST(CreateHelpersTest, CreateTermWithAdditionAndSubtractionTermsWithDetailsWorksWithASingleTerm) {
-    TermsWithDetails termsWithDetails{{Term("x"), TermAssociationType::Positive}};
+    TermsWithDetails const termsWithDetails{{Term("x"), TermAssociationType::Positive}};
 
-    Term termToExpect(createTermWithAdditionAndSubtractionTermsWithDetails(termsWithDetails));
+    Term const termToExpect(createTermWithAdditionAndSubtractionTermsWithDetails(termsWithDetails));
 
-    Term termToVerify("x");
+    Term const termToVerify("x");
     EXPECT_EQ(termToVerify, termToExpect);
 }
 
 TEST(CreateHelpersTest, CreateTermWithMultiplicationAndDivisionTermsWithDetailsWorksWithASingleTerm) {
-    TermsWithDetails termsWithDetails{{Term("x"), TermAssociationType::Positive}};
+    TermsWithDetails const termsWithDetails{{Term("x"), TermAssociationType::Positive}};
 
-    Term termToExpect(createTermWithMultiplicationAndDivisionTermsWithDetails(termsWithDetails));
+    Term const termToExpect(createTermWithMultiplicationAndDivisionTermsWithDetails(termsWithDetails));
 
-    Term termToVerify("x");
+    Term const termToVerify("x");
     EXPECT_EQ(termToVerify, termToExpect);
 }
 
 TEST(CreateHelpersTest, CreateTermWithRaiseToPowerTermsWithDetailsWorksWithASingleTerm) {
-    TermsWithDetails termsWithDetails{{Term("x"), TermAssociationType::Positive}};
+    TermsWithDetails const termsWithDetails{{Term("x"), TermAssociationType::Positive}};
 
-    Term termToExpect(createTermWithRaiseToPowerTermsWithDetails(termsWithDetails));
+    Term const termToExpect(createTermWithRaiseToPowerTermsWithDetails(termsWithDetails));
 
-    Term termToVerify("x");
+    Term const termToVerify("x");
     EXPECT_EQ(termToVerify, termToExpect);
 }
 

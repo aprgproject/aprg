@@ -10,7 +10,7 @@ using namespace std;
 namespace alba::algebra {
 
 TEST(SubstitutionOfVariablesToValuesTest, GetValueForVariableWorks) {
-    SubstitutionOfVariablesToValues substitution({{"x", 1}, {"y", 2}});
+    SubstitutionOfVariablesToValues const substitution({{"x", 1}, {"y", 2}});
 
     EXPECT_EQ(AlbaNumber(1), substitution.getValueForVariable("x"));
     EXPECT_EQ(AlbaNumber(2), substitution.getValueForVariable("y"));
@@ -19,10 +19,10 @@ TEST(SubstitutionOfVariablesToValuesTest, GetValueForVariableWorks) {
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, ConstructionWorks) {
-    SubstitutionOfVariablesToValues substitution1;
-    SubstitutionOfVariablesToValues substitution2{{"x", 1}, {"y", 2}};
-    VariablesToValuesMap variableWithValues{{"x", 1}, {"y", 2}};
-    SubstitutionOfVariablesToValues substitution3{variableWithValues};
+    SubstitutionOfVariablesToValues const substitution1;
+    SubstitutionOfVariablesToValues const substitution2{{"x", 1}, {"y", 2}};
+    VariablesToValuesMap const variableWithValues{{"x", 1}, {"y", 2}};
+    SubstitutionOfVariablesToValues const substitution3{variableWithValues};
 
     EXPECT_TRUE(substitution1.isEmpty());
     EXPECT_EQ(2, substitution2.getSize());
@@ -78,114 +78,114 @@ TEST(SubstitutionOfVariablesToValuesTest, PutVariablesWithValueWorksWithSavingTh
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnVariable) {
-    SubstitutionOfVariablesToValues substitution({{"x", 2}});
-    Variable variable1;
-    Variable variable2("x");
-    Variable variable3("y");
+    SubstitutionOfVariablesToValues const substitution({{"x", 2}});
+    Variable const variable1;
+    Variable const variable2("x");
+    Variable const variable3("y");
 
-    Term verifyTerm1(substitution.performSubstitutionTo(variable1));
-    Term verifyTerm2(substitution.performSubstitutionTo(variable2));
-    Term verifyTerm3(substitution.performSubstitutionTo(variable3));
+    Term const verifyTerm1(substitution.performSubstitutionTo(variable1));
+    Term const verifyTerm2(substitution.performSubstitutionTo(variable2));
+    Term const verifyTerm3(substitution.performSubstitutionTo(variable3));
 
-    Term expectTerm1(Variable{});
-    Term expectTerm2(2);
-    Term expectTerm3("y");
+    Term const expectTerm1(Variable{});
+    Term const expectTerm2(2);
+    Term const expectTerm3("y");
     EXPECT_EQ(expectTerm1, verifyTerm1);
     EXPECT_EQ(expectTerm2, verifyTerm2);
     EXPECT_EQ(expectTerm3, verifyTerm3);
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnMonomial) {
-    SubstitutionOfVariablesToValues substitution({{"x", 2}});
-    Monomial monomial1;
-    Monomial monomial2(7, {{"x", 3}});
-    Monomial monomial3(11, {{"x", 3}, {"y", 4}});
+    SubstitutionOfVariablesToValues const substitution({{"x", 2}});
+    Monomial const monomial1;
+    Monomial const monomial2(7, {{"x", 3}});
+    Monomial const monomial3(11, {{"x", 3}, {"y", 4}});
 
-    Term verifyTerm1(substitution.performSubstitutionTo(monomial1));
-    Term verifyTerm2(substitution.performSubstitutionTo(monomial2));
-    Term verifyTerm3(substitution.performSubstitutionTo(monomial3));
+    Term const verifyTerm1(substitution.performSubstitutionTo(monomial1));
+    Term const verifyTerm2(substitution.performSubstitutionTo(monomial2));
+    Term const verifyTerm3(substitution.performSubstitutionTo(monomial3));
 
-    Term expectTerm1(0);
-    Term expectTerm2(56);
-    Term expectTerm3(Monomial(88, {{"y", 4}}));
+    Term const expectTerm1(0);
+    Term const expectTerm2(56);
+    Term const expectTerm3(Monomial(88, {{"y", 4}}));
     EXPECT_EQ(expectTerm1, verifyTerm1);
     EXPECT_EQ(expectTerm2, verifyTerm2);
     EXPECT_EQ(expectTerm3, verifyTerm3);
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnPolynomial) {
-    SubstitutionOfVariablesToValues substitution({{"x", 2}, {"y", 5}});
-    Polynomial polynomial1;
-    Polynomial polynomial2{
+    SubstitutionOfVariablesToValues const substitution({{"x", 2}, {"y", 5}});
+    Polynomial const polynomial1;
+    Polynomial const polynomial2{
         Monomial(100, {}), Monomial(5, {{"x", 2}, {"y", 3}, {"z", 4}}), Monomial(9, {{"x", 8}}), Monomial(10, {})};
-    Polynomial polynomial3{
+    Polynomial const polynomial3{
         Monomial(1, {{"y", 3}}), Monomial(1, {{"x", 1}, {"y", 2}}), Monomial(1, {{"x", 2}, {"y", 1}}),
         Monomial(5, {{"x", 3}})};
 
-    Term verifyTerm1(substitution.performSubstitutionTo(polynomial1));
-    Term verifyTerm2(substitution.performSubstitutionTo(polynomial2));
-    Term verifyTerm3(substitution.performSubstitutionTo(polynomial3));
+    Term const verifyTerm1(substitution.performSubstitutionTo(polynomial1));
+    Term const verifyTerm2(substitution.performSubstitutionTo(polynomial2));
+    Term const verifyTerm3(substitution.performSubstitutionTo(polynomial3));
 
-    Term expectTerm1(0);
-    Term expectTerm2(Polynomial{Monomial(2500, {{"z", 4}}), Monomial(2414, {})});
-    Term expectTerm3(235);
+    Term const expectTerm1(0);
+    Term const expectTerm2(Polynomial{Monomial(2500, {{"z", 4}}), Monomial(2414, {})});
+    Term const expectTerm3(235);
     EXPECT_EQ(expectTerm1, verifyTerm1);
     EXPECT_EQ(expectTerm2, verifyTerm2);
     EXPECT_EQ(expectTerm3, verifyTerm3);
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnExpression) {
-    SubstitutionOfVariablesToValues substitution({{"x", 2}, {"y", 5}});
-    Expression expression1;
-    Expression expression2(createExpressionIfPossible({"x", "^", "y"}));
+    SubstitutionOfVariablesToValues const substitution({{"x", 2}, {"y", 5}});
+    Expression const expression1;
+    Expression const expression2(createExpressionIfPossible({"x", "^", "y"}));
 
-    Term verifyTerm1(substitution.performSubstitutionTo(expression1));
-    Term verifyTerm2(substitution.performSubstitutionTo(expression2));
+    Term const verifyTerm1(substitution.performSubstitutionTo(expression1));
+    Term const verifyTerm2(substitution.performSubstitutionTo(expression2));
 
-    Term expectTerm1;
-    Term expectTerm2(32);
+    Term const expectTerm1;
+    Term const expectTerm2(32);
     EXPECT_EQ(expectTerm1, verifyTerm1);
     EXPECT_EQ(expectTerm2, verifyTerm2);
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnFunction) {
-    SubstitutionOfVariablesToValues substitution({{"x", -2}});
-    Function function1;
-    Function function2(abs("x"));
+    SubstitutionOfVariablesToValues const substitution({{"x", -2}});
+    Function const function1;
+    Function const function2(abs("x"));
 
-    Term verifyTerm1(substitution.performSubstitutionTo(function1));
-    Term verifyTerm2(substitution.performSubstitutionTo(function2));
+    Term const verifyTerm1(substitution.performSubstitutionTo(function1));
+    Term const verifyTerm2(substitution.performSubstitutionTo(function2));
 
-    Term expectTerm1(Function{});
-    Term expectTerm2(2);
+    Term const expectTerm1(Function{});
+    Term const expectTerm2(2);
     EXPECT_EQ(expectTerm1, verifyTerm1);
     EXPECT_EQ(expectTerm2, verifyTerm2);
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnTerm) {
-    SubstitutionOfVariablesToValues substitution({{"x", 2}, {"y", 5}});
-    Term term1;
-    Term term2("x");
-    Term term3(Monomial(7, {{"x", 3}}));
-    Term term4(Polynomial{
+    SubstitutionOfVariablesToValues const substitution({{"x", 2}, {"y", 5}});
+    Term const term1;
+    Term const term2("x");
+    Term const term3(Monomial(7, {{"x", 3}}));
+    Term const term4(Polynomial{
         Monomial(1, {{"y", 3}}), Monomial(1, {{"x", 1}, {"y", 2}}), Monomial(1, {{"x", 2}, {"y", 1}}),
         Monomial(5, {{"x", 3}})});
-    Term term5(createExpressionIfPossible({"x", "^", "y"}));
-    Term term6(10);
+    Term const term5(createExpressionIfPossible({"x", "^", "y"}));
+    Term const term6(10);
 
-    Term verifyTerm1(substitution.performSubstitutionTo(term1));
-    Term verifyTerm2(substitution.performSubstitutionTo(term2));
-    Term verifyTerm3(substitution.performSubstitutionTo(term3));
-    Term verifyTerm4(substitution.performSubstitutionTo(term4));
-    Term verifyTerm5(substitution.performSubstitutionTo(term5));
-    Term verifyTerm6(substitution.performSubstitutionTo(term6));
+    Term const verifyTerm1(substitution.performSubstitutionTo(term1));
+    Term const verifyTerm2(substitution.performSubstitutionTo(term2));
+    Term const verifyTerm3(substitution.performSubstitutionTo(term3));
+    Term const verifyTerm4(substitution.performSubstitutionTo(term4));
+    Term const verifyTerm5(substitution.performSubstitutionTo(term5));
+    Term const verifyTerm6(substitution.performSubstitutionTo(term6));
 
-    Term expectTerm1;
-    Term expectTerm2(2);
-    Term expectTerm3(56);
-    Term expectTerm4(235);
-    Term expectTerm5(32);
-    Term expectTerm6(10);
+    Term const expectTerm1;
+    Term const expectTerm2(2);
+    Term const expectTerm3(56);
+    Term const expectTerm4(235);
+    Term const expectTerm5(32);
+    Term const expectTerm6(10);
     EXPECT_EQ(expectTerm1, verifyTerm1);
     EXPECT_EQ(expectTerm2, verifyTerm2);
     EXPECT_EQ(expectTerm3, verifyTerm3);
@@ -195,64 +195,64 @@ TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionToWorksOnTerm) {
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionForExpressionWorks) {
-    SubstitutionOfVariablesToValues substitution({{"x", 2}, {"y", 5}});
-    Expression expression(createExpressionIfPossible({"x", "^", "y"}));
+    SubstitutionOfVariablesToValues const substitution({{"x", 2}, {"y", 5}});
+    Expression const expression(createExpressionIfPossible({"x", "^", "y"}));
 
-    Expression verifyExpression(substitution.performSubstitutionForExpression(expression));
+    Expression const verifyExpression(substitution.performSubstitutionForExpression(expression));
 
-    Expression expectExpression(createOrCopyExpressionFromATerm(32));
+    Expression const expectExpression(createOrCopyExpressionFromATerm(32));
     EXPECT_EQ(expectExpression, verifyExpression);
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionForFunctionWorks) {
-    SubstitutionOfVariablesToValues substitution({{"x", 2}, {"y", 5}});
-    Term subTerm(createExpressionIfPossible({"x", "^", "y"}));
-    Function functionToTest(abs(subTerm));
+    SubstitutionOfVariablesToValues const substitution({{"x", 2}, {"y", 5}});
+    Term const subTerm(createExpressionIfPossible({"x", "^", "y"}));
+    Function const functionToTest(abs(subTerm));
 
-    Function verifyFunction(substitution.performSubstitutionForFunction(functionToTest));
+    Function const verifyFunction(substitution.performSubstitutionForFunction(functionToTest));
 
-    Function expectExpression(abs(Term(32)));
+    Function const expectExpression(abs(Term(32)));
     EXPECT_EQ(expectExpression, verifyFunction);
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionForMonomialWorks) {
-    SubstitutionOfVariablesToValues substitution({{"x", 2}, {"y", 5}});
-    Monomial monomial(5, {{"x", 2}, {"y", 3}});
+    SubstitutionOfVariablesToValues const substitution({{"x", 2}, {"y", 5}});
+    Monomial const monomial(5, {{"x", 2}, {"y", 3}});
 
-    Monomial verifyMonomial(substitution.performSubstitutionForMonomial(monomial));
+    Monomial const verifyMonomial(substitution.performSubstitutionForMonomial(monomial));
 
-    Monomial expectMonomial(createMonomialFromNumber(2500));
+    Monomial const expectMonomial(createMonomialFromNumber(2500));
     EXPECT_EQ(expectMonomial, verifyMonomial);
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, PerformSubstitutionForPolynomialWorks) {
-    SubstitutionOfVariablesToValues substitution({{"x", 2}, {"y", 5}});
-    Polynomial polynomial{Monomial(5, {{"x", 2}, {"y", 3}}), Monomial(7, {{"x", 3}, {"y", 4}})};
+    SubstitutionOfVariablesToValues const substitution({{"x", 2}, {"y", 5}});
+    Polynomial const polynomial{Monomial(5, {{"x", 2}, {"y", 3}}), Monomial(7, {{"x", 3}, {"y", 4}})};
 
-    Polynomial verifyPolynomial(substitution.performSubstitutionForPolynomial(polynomial));
+    Polynomial const verifyPolynomial(substitution.performSubstitutionForPolynomial(polynomial));
 
-    Polynomial expectPolynomial(createPolynomialFromNumber(37500));
+    Polynomial const expectPolynomial(createPolynomialFromNumber(37500));
     EXPECT_EQ(expectPolynomial, verifyPolynomial);
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, GetSizeWorks) {
-    SubstitutionOfVariablesToValues substitution1;
-    SubstitutionOfVariablesToValues substitution2({{"x", 1}, {"y", 2}});
+    SubstitutionOfVariablesToValues const substitution1;
+    SubstitutionOfVariablesToValues const substitution2({{"x", 1}, {"y", 2}});
 
     EXPECT_EQ(0, substitution1.getSize());
     EXPECT_EQ(2, substitution2.getSize());
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, IsEmptyWorks) {
-    SubstitutionOfVariablesToValues substitution1;
-    SubstitutionOfVariablesToValues substitution2({{"x", 1}, {"y", 2}});
+    SubstitutionOfVariablesToValues const substitution1;
+    SubstitutionOfVariablesToValues const substitution2({{"x", 1}, {"y", 2}});
 
     EXPECT_TRUE(substitution1.isEmpty());
     EXPECT_FALSE(substitution2.isEmpty());
 }
 
 TEST(SubstitutionOfVariablesToValuesTest, IsVariableFoundWorks) {
-    SubstitutionOfVariablesToValues substitution({{"x", 1}, {"y", 2}});
+    SubstitutionOfVariablesToValues const substitution({{"x", 1}, {"y", 2}});
 
     EXPECT_TRUE(substitution.isVariableFound("x"));
     EXPECT_TRUE(substitution.isVariableFound("y"));
