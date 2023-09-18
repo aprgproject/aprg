@@ -131,7 +131,7 @@ typename Values::iterator partitionAndGetPartitionIteratorInOneDirection(
     typename Values::iterator const itLow, typename Values::iterator const itHighPlusOne) {
     auto pivotValue(*itLow);  // pivot value is at itLow
     auto partitionIt = itLow;
-    const auto& stopIt = itHighPlusOne;
+    auto const& stopIt = itHighPlusOne;
     for (auto compareIt = std::next(itLow); compareIt != stopIt; ++compareIt) {
         if (*compareIt <= pivotValue) {
             std::swap(*++partitionIt, *compareIt);

@@ -193,7 +193,7 @@ void CPlusPlusReorganizeItems::sortAlphabetically(SortItems& sortItems) const {
     int start = 0;
     int end = 0;
     ItemType itemTypeToSort = ItemType::Unknown;
-    for (; end < static_cast<int>(sortItems.size()); end++) {
+    for (; end < static_cast<int>(sortItems.size()); ++end) {
         SortItem const& currentSortItem(sortItems[end]);
         if (currentSortItem.shouldSortAlphabetically) {
             if (itemTypeToSort == ItemType::Unknown) {
@@ -550,7 +550,7 @@ bool CPlusPlusReorganizeItems::compareAlphabetically(string const& string1, stri
 void CPlusPlusReorganizeItems::sortByComparingItems(SortItems& sortItems) {
     int start = 0;
     int end = 0;
-    for (; end < static_cast<int>(sortItems.size()); end++) {
+    for (; end < static_cast<int>(sortItems.size()); ++end) {
         if (sortItems[end].isDivider) {
             sort(sortItems.begin() + start, sortItems.begin() + end);
             start = end + 1;
