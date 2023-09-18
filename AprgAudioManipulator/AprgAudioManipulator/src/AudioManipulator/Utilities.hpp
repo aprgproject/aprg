@@ -21,8 +21,8 @@ void searchAndTryToReplicateSamples(
     int const channelIndexInAudioToSearch, bool const alwaysPutNewValue);
 
 void searchAndTryToReplicate(
-    std::string const& filePathForAudioToChange, std::string const& filePathForAudioToReplicate,
-    std::string const& filePathForAudioToSearch, bool const alwaysPutNewValue);
+    std::filesystem::path const& filePathForAudioToChange, std::filesystem::path const& filePathForAudioToReplicate,
+    std::filesystem::path const& filePathForAudioToSearch, bool const alwaysPutNewValue);
 
 DoubleOptional compareDeltasAndGetDifference(
     Samples const& deltaSamples1, Samples const& deltaSamples2, double const multiplierToSample2,

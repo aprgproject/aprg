@@ -8,7 +8,7 @@ namespace alba::AprgAudio {
 
 class AudioManipulator {
 public:
-    explicit AudioManipulator(std::string const& audioFilePath);
+    explicit AudioManipulator(std::filesystem::path const& audioFilePath);
     [[nodiscard]] AudioInDouble const& getAudio() const;
     void addSamplesWithValue(double const value);
     void addSamplesAtChannelWithValue(int const channelIndex, double const value);
@@ -16,7 +16,7 @@ public:
     void multiplySamplesAtChannelWithValue(int const channelIndex, double const value);
     void saveAudioIntoCurrentFile();
     void saveAudioIntoFileInTheSameDirectory(std::string const& filename);
-    void saveAudioIntoFileWithFullFilePath(std::string const& newFilePath);
+    void saveAudioIntoFileWithFullFilePath(std::filesystem::path const& newFilePath);
     AudioInDouble& getAudioReference();
 
 private:

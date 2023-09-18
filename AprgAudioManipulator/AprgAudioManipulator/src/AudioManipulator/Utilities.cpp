@@ -10,6 +10,7 @@
 
 using namespace alba::mathHelper;
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba::AprgAudio {
 
@@ -91,8 +92,8 @@ void searchAndTryToReplicateSamples(
 }
 
 void searchAndTryToReplicate(
-    std::string const& filePathForAudioToChange, std::string const& filePathForAudioToReplicate,
-    std::string const& filePathForAudioToSearch, bool const alwaysPutNewValue) {
+    path const& filePathForAudioToChange, path const& filePathForAudioToReplicate, path const& filePathForAudioToSearch,
+    bool const alwaysPutNewValue) {
     AudioManipulator const audioToReplicateManipulator(filePathForAudioToReplicate);
     AudioManipulator const audioToSearchManipulator(filePathForAudioToSearch);
     AudioManipulator audioToChangeManipulator(filePathForAudioToChange);

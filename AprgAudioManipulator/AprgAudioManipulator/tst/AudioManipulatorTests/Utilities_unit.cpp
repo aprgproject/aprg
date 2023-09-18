@@ -15,7 +15,7 @@ namespace alba::AprgAudio {
 TEST(UtilitiesTest, RetrieveDeltasWorks) {
     AlbaLocalPathHandler const audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
     AlbaLocalPathHandler const audioFilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");
+        audioDirectoryPathHandler.getDirectory() / "AChannel_AOpeningSong_001.wav");
     AudioManipulator const audioManipulator(audioFilePathHandler.getPath());
 
     AudioInDouble const& audio(audioManipulator.getAudio());
@@ -27,9 +27,9 @@ TEST(UtilitiesTest, RetrieveDeltasWorks) {
 TEST(UtilitiesTest, DISABLED_SearchForBestSampleIndexesWorksWithReplacingSamples) {
     AlbaLocalPathHandler const audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
     AlbaLocalPathHandler const audioToReplicateFilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "John Mayer-Neon.wav");
+        audioDirectoryPathHandler.getDirectory() / "John Mayer-Neon.wav");
     AlbaLocalPathHandler const audioToSearchFilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");  // AChannel_AOpeningSong_001
+        audioDirectoryPathHandler.getDirectory() / "AChannel_AOpeningSong_001.wav");  // AChannel_AOpeningSong_001
     AudioManipulator audioToReplicateManipulator(audioToReplicateFilePathHandler.getPath());
     AudioManipulator const audioToSearchManipulator(audioToSearchFilePathHandler.getPath());
 
@@ -53,11 +53,11 @@ TEST(UtilitiesTest, DISABLED_SearchForBestSampleIndexesWorksWithReplacingSamples
 TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateSamplesWorks) {
     AlbaLocalPathHandler const audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
     AlbaLocalPathHandler const audioToReplicateFilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "John Mayer-Neon.wav");
+        audioDirectoryPathHandler.getDirectory() / "John Mayer-Neon.wav");
     AlbaLocalPathHandler const audioToSearchFilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");
+        audioDirectoryPathHandler.getDirectory() / "AChannel_AOpeningSong_001.wav");
     AlbaLocalPathHandler const audioToChangeFilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "John Mayer-Neon.wav");
+        audioDirectoryPathHandler.getDirectory() / "John Mayer-Neon.wav");
     AudioManipulator const audioToReplicateManipulator(audioToReplicateFilePathHandler.getPath());
     AudioManipulator const audioToSearchManipulator(audioToSearchFilePathHandler.getPath());
     AudioManipulator audioToChangeManipulator(audioToChangeFilePathHandler.getPath());
@@ -80,10 +80,10 @@ TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateSamplesWorks) {
 TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateWorks) {
     AlbaLocalPathHandler const audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
     AlbaLocalPathHandler const audioToReplicateFilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "John Mayer-Neon.wav");
+        audioDirectoryPathHandler.getDirectory() / "John Mayer-Neon.wav");
     AlbaLocalPathHandler const audioToSearchFilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");
-    AlbaLocalPathHandler const audioToChangeFilePathHandler(audioDirectoryPathHandler.getDirectory() + "output.wav");
+        audioDirectoryPathHandler.getDirectory() / "AChannel_AOpeningSong_001.wav");
+    AlbaLocalPathHandler const audioToChangeFilePathHandler(audioDirectoryPathHandler.getDirectory() / "output.wav");
     searchAndTryToReplicate(
         audioToChangeFilePathHandler.getPath(), audioToReplicateFilePathHandler.getPath(),
         audioToSearchFilePathHandler.getPath(), true);
@@ -92,12 +92,12 @@ TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateWorks) {
 TEST(UtilitiesTest, DISABLED_SearchAndTryToReplicateTwoFilesWorks) {
     AlbaLocalPathHandler const audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
     AlbaLocalPathHandler const audioToReplicateFilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "John Mayer-Neon.wav");
+        audioDirectoryPathHandler.getDirectory() / "John Mayer-Neon.wav");
     AlbaLocalPathHandler const audioToSearch1FilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "AChannel_AOpeningSong_001.wav");
+        audioDirectoryPathHandler.getDirectory() / "AChannel_AOpeningSong_001.wav");
     AlbaLocalPathHandler const audioToSearch2FilePathHandler(
-        audioDirectoryPathHandler.getDirectory() + "FullMetalAlchemistBrotherhood_AOpeningSong_003.wav");
-    AlbaLocalPathHandler const audioToChangeFilePathHandler(audioDirectoryPathHandler.getDirectory() + "output.wav");
+        audioDirectoryPathHandler.getDirectory() / "FullMetalAlchemistBrotherhood_AOpeningSong_003.wav");
+    AlbaLocalPathHandler const audioToChangeFilePathHandler(audioDirectoryPathHandler.getDirectory() / "output.wav");
 
     searchAndTryToReplicate(
         audioToChangeFilePathHandler.getPath(), audioToReplicateFilePathHandler.getPath(),
