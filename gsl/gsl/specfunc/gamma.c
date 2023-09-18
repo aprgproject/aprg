@@ -1089,7 +1089,7 @@ gamma_xgthalf(const double x, gsl_sf_result * result)
     result->err = result->val * (lg.err + 2.0 * GSL_DBL_EPSILON);
     return GSL_SUCCESS;
   }
-  else if(x < 10.0) {
+  if(x < 10.0) {
     /* This is a sticky area. The logarithm
      * is too large and the gammastar series
      * is not good.

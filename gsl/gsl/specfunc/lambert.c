@@ -142,7 +142,7 @@ gsl_sf_lambert_W0_e(double x, gsl_sf_result * result)
   }
   
     static const unsigned int MAX_ITERS = 10;
-    double w;
+    double w = NAN;
 
     if (x < 1.0) {
       /* obtain initial approximation from series near x=0;
@@ -155,7 +155,8 @@ gsl_sf_lambert_W0_e(double x, gsl_sf_result * result)
     else {
       /* obtain initial approximation from rough asymptotic */
       w = log(x);
-      if(x > 3.0) w -= log(w);
+      if(x > 3.0) { w -= log(w);
+}
     }
 
     return halley_iteration(x, w, MAX_ITERS, result);

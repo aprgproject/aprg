@@ -98,8 +98,8 @@ gsl_sf_bessel_In_scaled_e(int n, const double x, gsl_sf_result * result)
     int stat_a2 = gsl_sf_bessel_Inu_scaled_asymp_unif_e((double)nhi, ax, &r_Ik);
     double Ikp1 = r_Ikp1.val;
     double Ik   = r_Ik.val;
-    double Ikm1;
-    int k;
+    double Ikm1 = NAN;
+    int k = 0;
     for(k=nhi; k > n; k--) {
       Ikm1 = Ikp1 + 2.0*k/ax * Ik;
       Ikp1 = Ik;
@@ -107,7 +107,8 @@ gsl_sf_bessel_In_scaled_e(int n, const double x, gsl_sf_result * result)
     }
     result->val = Ik;
     result->err = Ik * (r_Ikp1.err/r_Ikp1.val + r_Ik.err/r_Ik.val);
-    if(x < 0.0 && GSL_IS_ODD(n)) result->val = -result->val;
+    if(x < 0.0 && GSL_IS_ODD(n)) { result->val = -result->val;
+}
     return GSL_ERROR_SELECT_2(stat_a1, stat_a2);
  
 }

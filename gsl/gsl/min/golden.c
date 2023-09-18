@@ -106,10 +106,10 @@ goldensection_iterate (void * vstate, gsl_function * f, double * x_minimum, doub
       *f_upper = f_new ;
       return GSL_SUCCESS;
     }
-  else
-    {
+  
+    
       return GSL_FAILURE;
-    }
+   
 }
 
 

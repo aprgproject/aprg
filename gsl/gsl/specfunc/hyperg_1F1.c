@@ -749,7 +749,7 @@ hyperg_1F1_small_a_bgt0(const double a, const double b, const double x, gsl_sf_r
     if(x > 100.0 && abs_bma*abs_oma < 0.5*x) {
       return hyperg_1F1_asymp_posx(a, b, x, result);
     }
-    else if(b < 5.0e+06) {
+    if(b < 5.0e+06) {
       /* Recurse backward on b from
        * a suitably high point.
        */
@@ -789,7 +789,7 @@ hyperg_1F1_small_a_bgt0(const double a, const double b, const double x, gsl_sf_r
     if(ax < 10.0 && b < 10.0) {
       return gsl_sf_hyperg_1F1_series_e(a, b, x, result);
     }
-    else if(ax >= 100.0 && GSL_MAX(abs_ap1mb,1.0) < 0.99*ax) {
+    if(ax >= 100.0 && GSL_MAX(abs_ap1mb,1.0) < 0.99*ax) {
       return hyperg_1F1_asymp_negx(a, b, x, result);
     }
     else {
@@ -976,7 +976,7 @@ hyperg_1F1_ab_posint(const int a, const int b, const double x, gsl_sf_result * r
     result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
     return stat_e;
   }
-  else if(b == 2*a) {
+  if(b == 2*a) {
     return hyperg_1F1_beq2a_pos(a, x, result);  /* 1F1(a,2a,x) */
   }
   else if(   ( b < 10 && a < 10 && ax < 5.0 )
@@ -1466,7 +1466,7 @@ hyperg_1F1_ab_pos(const double a, const double b,
      * recurse backward to a near 0 for normalization.
      * This will work for either sign of x.
      */ 
-    double rap;
+    double rap = NAN;
     int stat_CF1 = hyperg_1F1_CF1_p_ser(a, b, x, &rap);
     double ra = 1.0 + x/a * rap;
 
@@ -1474,10 +1474,10 @@ hyperg_1F1_ab_pos(const double a, const double b,
     double Map1 = ra * Ma;
     double Mnp1 = Map1;
     double Mn   = Ma;
-    double Mnm1;
+    double Mnm1 = NAN;
     gsl_sf_result Mn_true;
-    int stat_Mt;
-    double n;
+    int stat_Mt = 0;
+    double n = NAN;
     for(n=a; n>0.5; n -= 1.0) {
       Mnm1 = (n * Mnp1 - (2.0*n-b+x) * Mn) / (b-n);
       Mnp1 = Mn;
@@ -1491,7 +1491,7 @@ hyperg_1F1_ab_pos(const double a, const double b,
     result->err += 2.0 * GSL_DBL_EPSILON * (fabs(a)+1.0) * fabs(result->val);
     return GSL_ERROR_SELECT_2(stat_Mt, stat_CF1);
   }
-  else if(b > a && b < 2*a + x && b > x) {
+  if(b > a && b < 2*a + x && b > x) {
     /* Use the Gautschi series representation of
      * the continued fraction. Then recurse forward
      * to near the a=b line for normalization. This will
@@ -1767,7 +1767,7 @@ hyperg_1F1_ab_neg(const double a, const double b, const double x,
      */
     return hyperg_1F1_asymp_posx(a, b, x, result);
   }
-  else if(x > 0.0 && !(bma_integer && bma > 0.0)) {
+  if(x > 0.0 && !(bma_integer && bma > 0.0)) {
     return hyperg_1F1_U(a, b, x, result);
   }
   else {
@@ -1968,9 +1968,9 @@ gsl_sf_hyperg_1F1_e(const double a, const double b, const double x,
     if (a > 0) {
       /* a > 0.0 */
       return hyperg_1F1_ab_pos(a, b, x, result);
-    } else {
+    } 
       return gsl_sf_hyperg_1F1_series_e(a, b, x, result);
-    }
+   
   }
   else {
     /* b < 0.0 */

@@ -254,7 +254,7 @@ gsl_cdf_ugaussian_P (const double x)
 
       return result;
     }
-  else if (x > GAUSS_XUPPER)
+  if (x > GAUSS_XUPPER)
     {
       result = 1.0;
       return result;
@@ -314,7 +314,7 @@ gsl_cdf_ugaussian_Q (const double x)
 
       return result;
     }
-  else if (x > -(GAUSS_XLOWER))
+  if (x > -(GAUSS_XLOWER))
     {
       result = 0.0;
       return result;

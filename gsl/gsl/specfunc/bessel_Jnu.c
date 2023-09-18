@@ -147,8 +147,8 @@ gsl_sf_bessel_Jnupos_e(const double nu, const double x, gsl_sf_result * result)
       double Jmup1_Jmu = NAN;
       double sgn_Jmu = NAN;
       double Jmuprime_Jmu = NAN;
-      double P;
-      double Q;
+      double P = NAN;
+      double Q = NAN;
       const int stat_CF2 = gsl_sf_bessel_JY_steed_CF2(mu, x, &P, &Q);
       double gamma = NAN;
  

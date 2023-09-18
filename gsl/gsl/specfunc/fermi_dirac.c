@@ -1412,7 +1412,7 @@ int gsl_sf_fermi_dirac_int_e(const int j, const double x, gsl_sf_result * result
   if(j == 2) {
     return gsl_sf_fermi_dirac_2_e(x, result);
   }
-  else if(x < 0.0) {
+  if(x < 0.0) {
     return fd_neg(j, x, result);
   }
   else if(x == 0.0) {

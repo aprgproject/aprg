@@ -907,7 +907,7 @@ hyperg_U_int_bge1(const int a, const int b, const double x,
     result->e10 = 0;
     return stat_ser;
   }
-  else if(a < 0) {
+  if(a < 0) {
     /* Recurse backward from a = -1,0.
      */
     int scale_count = 0;
