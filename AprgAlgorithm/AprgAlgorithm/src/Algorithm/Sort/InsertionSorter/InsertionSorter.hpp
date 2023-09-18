@@ -38,7 +38,11 @@ private:
             ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
         }*/
-        for (; rItLow != valuesToSort.rend(); ++rItLow, ++rItHigh) {
+        /*for (; rItLow != valuesToSort.rend(); ++rItLow, ++rItHigh) {
+            ALBA_DBG_PRINT(valuesToSort);
+            ALBA_DBG_PRINT(*rItLow, *rItHigh);
+        }*/
+        for (; rItLow != valuesToSort.rend() && *rItLow > *rItHigh; ++rItLow, ++rItHigh) {
             ALBA_DBG_PRINT(valuesToSort);
             ALBA_DBG_PRINT(*rItLow, *rItHigh);
         }
