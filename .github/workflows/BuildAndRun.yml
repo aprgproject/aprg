@@ -8,6 +8,11 @@ on:
       - '**'
   workflow_dispatch:
     inputs:
+      branch:
+        description: 'Branch'
+        type: string
+        required: true
+        default: 'main'
       cppProjects:
         description: 'C/C++ Project ("all" for all projects)'
         type: string
@@ -55,6 +60,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch == '' ? github.ref : github.event.inputs.branch }}
         
       - name: Prepare for linting
         shell: bash
@@ -142,7 +149,7 @@ jobs:
         id: idOfCheckout
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.inputs.branch == '' ? github.event.pull_request.head.sha : github.event.inputs.branch }}
           fetch-depth: 2
           
       - name: Get C/C++ Projects from Git Diff and User Input
@@ -187,6 +194,8 @@ jobs:
           
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch == '' ? github.ref : github.event.inputs.branch }}
           
       - name: Install dependencies on Windows
         shell: bash
