@@ -19,7 +19,7 @@ public:
             ALBA_DBG_PRINT(valuesToSort);
             for (auto insertIt = std::next(valuesToSort.begin()); insertIt != valuesToSort.end(); ++insertIt) {
                 ALBA_DBG_PRINT(valuesToSort);
-                continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
+                // continuouslySwapBackIfStillOutOfOrder(valuesToSort, insertIt);  // swap implementation
                 // continuouslyCopyBackIfStillOutOfOrder(valuesToSort, insertIt);  // copy implementation
                 ALBA_DBG_PRINT(valuesToSort);
             }
