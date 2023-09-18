@@ -36,12 +36,14 @@ public:
     [[nodiscard]] bool isNamedSocket() const;
     [[nodiscard]] bool isRelativePath() const;
     [[nodiscard]] bool isAbsolutePath() const;
-    [[nodiscard]] bool createDirectoriesAndIsSuccessful() const;
-    [[nodiscard]] bool deleteDirectoryAndIsSuccessful() const;
-    [[nodiscard]] bool deleteAllDirectoryContentsAndIsSuccessful() const;
-    [[nodiscard]] bool deleteFileAndIsSuccessful() const;
-    [[nodiscard]] bool copyFileToAndIsSuccessful(LocalPath const& destination) const;
-    [[nodiscard]] bool copyDirectoryToAndIsSuccessful(LocalPath const& destination) const;
+    // NOLINTBEGIN(modernize-use-nodiscard)
+    bool createDirectoriesAndIsSuccessful() const;
+    bool deleteDirectoryAndIsSuccessful() const;
+    bool deleteAllDirectoryContentsAndIsSuccessful() const;
+    bool deleteFileAndIsSuccessful() const;
+    bool copyFileToAndIsSuccessful(LocalPath const& destination) const;
+    bool copyDirectoryToAndIsSuccessful(LocalPath const& destination) const;
+    // NOLINTEND(modernize-use-nodiscard)
     void findFilesAndDirectoriesOneDepth(PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
     void findFilesAndDirectoriesMultipleDepth(
         int const depth, PathFunction const& directoryFunction, PathFunction const& fileFunction) const;
