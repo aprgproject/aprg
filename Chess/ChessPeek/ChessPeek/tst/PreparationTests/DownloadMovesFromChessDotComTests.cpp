@@ -19,6 +19,7 @@
 #include <thread>
 #include <vector>
 
+using namespace alba::AlbaLocalUserAutomation;
 using namespace alba::stringHelper;
 using namespace std;
 
@@ -161,13 +162,13 @@ bool performMovesAndReturnIfValid(strings const& line) {
             int const endX = round(topLeft.getX() + (move.second.getX() + 0.5) * deltaX);
             int const endY = round(topLeft.getY() + (move.second.getY() + 0.5) * deltaY);
 
-            alba::AlbaLocalUserAutomation::setMousePosition(MousePosition(startX, startY));
-            alba::AlbaLocalUserAutomation::pressLeftButtonOnMouse();
-            alba::AlbaLocalUserAutomation::sleep(200);
-            alba::AlbaLocalUserAutomation::setMousePosition(MousePosition(endX, endY));
-            alba::AlbaLocalUserAutomation::sleep(200);
-            alba::AlbaLocalUserAutomation::releaseLeftButtonOnMouse();
-            alba::AlbaLocalUserAutomation::sleep(600);
+            setMousePosition(MousePosition(startX, startY));
+            pressLeftButtonOnMouse();
+            sleep(200);
+            setMousePosition(MousePosition(endX, endY));
+            sleep(200);
+            releaseLeftButtonOnMouse();
+            sleep(600);
 
             updatedBoard.move(move);
             currentColor = getOppositeColor(currentColor);
@@ -304,27 +305,23 @@ bool shouldIncludeLine(strings const& currentLine, Book const& book) {
 
 void trackKeyPressForDownloadMovesFromChessDotCom() {
     while (shouldStillRun) {
-        shouldStillRun = !alba::AlbaLocalUserAutomation::isKeyPressed(VK_NUMLOCK);
-        alba::AlbaLocalUserAutomation::sleep(100);
+        shouldStillRun = !isKeyPressed(VK_NUMLOCK);
+        sleep(100);
     }
 }
 
-void clickWindow() {
-    AlbaLocalUserAutomation const userAutomation;
-    alba::AlbaLocalUserAutomation::doLeftClickAt(MousePosition(3750, 550));
-}
+void clickWindow() { doLeftClickAt(MousePosition(3750, 550)); }
 
 void gotoWebPage(string const& url) {
-    AlbaLocalUserAutomation const userAutomation;
-    alba::AlbaLocalUserAutomation::performKeyCombination({VK_CONTROL}, {'L'});
+    performKeyCombination({VK_CONTROL}, {'L'});
 
-    alba::AlbaLocalUserAutomation::setStringToClipboard(url);
-    alba::AlbaLocalUserAutomation::sleep(1000);
+    setStringToClipboard(url);
+    sleep(1000);
 
-    alba::AlbaLocalUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
+    performKeyCombination({VK_CONTROL}, {'V'});
 
-    alba::AlbaLocalUserAutomation::typeKey(VK_RETURN);
-    alba::AlbaLocalUserAutomation::sleep(500);
+    typeKey(VK_RETURN);
+    sleep(500);
 }
 
 void deleteWebPageUntilItsDeleted(string const& htmlFile) {
@@ -333,9 +330,8 @@ void deleteWebPageUntilItsDeleted(string const& htmlFile) {
         if (!shouldStillRun) {
             exit(0);
         }
-        htmlFileHandler.deleteFile();
-        Sleep(100);
-        htmlFileHandler.reInput();
+        htmlFileHandler.deleteFileAndIsSuccessful();
+        sleep(100);
         if (htmlFileHandler.doesExist()) {
             cout << "File still not deleted. Deleting again. File: [" << htmlFile << "]" << endl;
         }
@@ -343,21 +339,17 @@ void deleteWebPageUntilItsDeleted(string const& htmlFile) {
 }
 
 void saveWebPage(string const& htmlFile) {
-    AlbaLocalUserAutomation const userAutomation;
-    alba::AlbaLocalUserAutomation::performKeyCombination({VK_CONTROL}, {'S'});
+    performKeyCombination({VK_CONTROL}, {'S'});
 
-    alba::AlbaLocalUserAutomation::setStringToClipboard(htmlFile);
-    alba::AlbaLocalUserAutomation::sleep(1000);
+    setStringToClipboard(htmlFile);
+    sleep(1000);
 
-    alba::AlbaLocalUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
+    performKeyCombination({VK_CONTROL}, {'V'});
 
-    alba::AlbaLocalUserAutomation::typeKey(VK_RETURN);
+    typeKey(VK_RETURN);
 }
 
-void typeEnter() {
-    AlbaLocalUserAutomation const userAutomation;
-    alba::AlbaLocalUserAutomation::typeKey(VK_RETURN);
-}
+void typeEnter() { typeKey(VK_RETURN); }
 
 void saveWebPageUntilItsDeleted(string const& htmlFile) {
     AlbaLocalPathHandler htmlFileHandler(htmlFile);
@@ -369,17 +361,13 @@ void saveWebPageUntilItsDeleted(string const& htmlFile) {
         clickWindow();
         typeEnter();
         Sleep(500);
-        htmlFileHandler.reInput();
         if (!htmlFileHandler.doesExist()) {
             cout << "File still doesnt exist. Saving web page again. File: [" << htmlFile << "]" << endl;
         }
     }
 }
 
-void clickReset() {
-    AlbaLocalUserAutomation const userAutomation;
-    alba::AlbaLocalUserAutomation::doLeftClickAt(MousePosition(3426, 952));
-}
+void clickReset() { doLeftClickAt(MousePosition(3426, 952)); }
 
 void savePageInfoToDataFile(strings const& currentLine, string const& dataFile, WebPageInfo const& pageInfo) {
     ofstream outStream(dataFile, ofstream::app);
@@ -460,7 +448,7 @@ void doAllPagesRecursively(Paths const& paths) {
     thread trackKeyPressForDownloadMovesFromChessDotComThread(trackKeyPressForDownloadMovesFromChessDotCom);
     AlbaLocalPathHandler const chessDotComBookDatabase(APRG_DIR CHESS_PEEK_CHESS_DOT_COM_BOOK_DATABASE);
     Book book;
-    book.loadDatabaseFrom(chessDotComBookDatabase.getPath());
+    book.loadDatabaseFrom(chessDotComBookDatabase.getPath().string());
 
     clickWindow();
     gotoWebPage(paths.url);
@@ -503,8 +491,8 @@ TEST(DownloadMovesFromChessDotComTest, DISABLED_DoAllPagesRecursivelyWorks) {
         APRG_DIR R"(\Chess\ChessPeek\Files\ChessDotComAutomation\ChessDotComLineNumber.txt)");
 
     doAllPagesRecursively(Paths{
-        explorerUrl.getPath(), tempHtmlFile.getPath(), dataFile.getPath(), linesFile.getPath(),
-        lineNumberFile.getPath()});
+        explorerUrl.getPath(), tempHtmlFile.getPath().string(), dataFile.getPath().string(),
+        linesFile.getPath().string(), lineNumberFile.getPath().string()});
 }
 
 }  // namespace alba::chess::ChessPeek

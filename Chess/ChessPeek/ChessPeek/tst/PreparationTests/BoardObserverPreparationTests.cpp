@@ -231,8 +231,8 @@ TEST(BoardObserverPreparationTest, DISABLED_FindImportantPoints_ForChessDotComVe
     AlbaLocalPathHandler const outputFileForBlack(
         APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComVersus\Black.bmp)");
     AlbaLocalPathHandler blankFile(APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\Blank.bmp)");
-    blankFile.copyToNewFile(outputFileForWhite.getPath());
-    blankFile.copyToNewFile(outputFileForBlack.getPath());
+    blankFile.copyFileToAndIsSuccessful(outputFileForWhite.getPath());
+    blankFile.copyFileToAndIsSuccessful(outputFileForBlack.getPath());
 
     Configuration const configuration(Configuration::Type::ChessDotComVersus);
     Bitmap const inputBitmap(inputFile.getPath());
@@ -276,8 +276,8 @@ TEST(BoardObserverPreparationTest, DISABLED_FindImportantPoints_ForChessDotComPu
     AlbaLocalPathHandler const outputFileForBlack(
         APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComPuzzle\Black.bmp)");
     AlbaLocalPathHandler blankFile(APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\Blank.bmp)");
-    blankFile.copyToNewFile(outputFileForWhite.getPath());
-    blankFile.copyToNewFile(outputFileForBlack.getPath());
+    blankFile.copyFileToAndIsSuccessful(outputFileForWhite.getPath());
+    blankFile.copyFileToAndIsSuccessful(outputFileForBlack.getPath());
 
     Configuration const configuration(Configuration::Type::ChessDotComPuzzle);
     Bitmap const inputBitmap(inputFile.getPath());
@@ -321,8 +321,8 @@ TEST(BoardObserverPreparationTest, DISABLED_FindImportantPoints_ForLichessVersus
     AlbaLocalPathHandler const outputFileForBlack(APRG_DIR
                                                   R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessVersus\Black.bmp)");
     AlbaLocalPathHandler blankFile(APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\Blank.bmp)");
-    blankFile.copyToNewFile(outputFileForWhite.getPath());
-    blankFile.copyToNewFile(outputFileForBlack.getPath());
+    blankFile.copyFileToAndIsSuccessful(outputFileForWhite.getPath());
+    blankFile.copyFileToAndIsSuccessful(outputFileForBlack.getPath());
 
     Configuration const configuration(Configuration::Type::LichessVersus);
     Bitmap const inputBitmap(inputFile.getPath());
@@ -366,8 +366,8 @@ TEST(BoardObserverPreparationTest, DISABLED_FindImportantPoints_ForLichessStream
     AlbaLocalPathHandler const outputFileForBlack(APRG_DIR
                                                   R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessStream\Black.bmp)");
     AlbaLocalPathHandler blankFile(APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\Blank.bmp)");
-    blankFile.copyToNewFile(outputFileForWhite.getPath());
-    blankFile.copyToNewFile(outputFileForBlack.getPath());
+    blankFile.copyFileToAndIsSuccessful(outputFileForWhite.getPath());
+    blankFile.copyFileToAndIsSuccessful(outputFileForBlack.getPath());
 
     Configuration const configuration(Configuration::Type::LichessVersus);
     Bitmap const inputBitmap(inputFile.getPath());
