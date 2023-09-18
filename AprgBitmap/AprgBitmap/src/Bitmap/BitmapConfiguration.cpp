@@ -136,9 +136,9 @@ bool BitmapConfiguration::isPositionWithinTheBitmap(int const x, int const y) co
     return x < static_cast<int>(m_bitmapWidth) && y < static_cast<int>(m_bitmapHeight) && x >= 0 && y >= 0;
 }
 
-void BitmapConfiguration::readBitmap(string const& path) {
+void BitmapConfiguration::readBitmap(path const& filePath) {
     // https://en.wikipedia.org/wiki/BMP_file_format
-    m_path = AlbaLocalPathHandler(path).getPath();
+    m_path = AlbaLocalPathHandler(filePath).getPath();
     ifstream inputStream(m_path, ios::binary);
 
     if (inputStream.is_open()) {

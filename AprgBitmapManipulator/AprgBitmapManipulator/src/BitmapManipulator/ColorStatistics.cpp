@@ -7,11 +7,12 @@
 
 using namespace alba::AprgBitmap::ColorUtilities;
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba::AprgBitmap {
 
-void AprgColorStatistics::gatherStatistics(string const& bitmapPath) {
-    Bitmap const bitmap(bitmapPath);
+void AprgColorStatistics::gatherStatistics(path const& filePath) {
+    Bitmap const bitmap(filePath);
     BitmapSnippet const canvas(bitmap.getSnippetReadFromFileWholeBitmap());
     canvas.traverse([&](BitmapXY const&, uint32_t const color) {
         double const colorIntensity(calculateColorIntensityDecimal(color));
@@ -40,8 +41,8 @@ void AprgColorStatistics::gatherStatistics(string const& bitmapPath) {
     });
 }
 
-void AprgColorStatistics::saveColorData(string const& path) {
-    ofstream colorDataFileStream(path);
+void AprgColorStatistics::saveColorData(path const& filePath) {
+    ofstream colorDataFileStream(filePath);
     auto colorIntensityIterator(colorIntensitySet.cbegin());
     auto hueDegreesIterator(hueDegreesSet.cbegin());
     auto saturationLightnessIterator(saturationLightnessSet.cbegin());
@@ -76,8 +77,8 @@ void AprgColorStatistics::saveColorData(string const& path) {
     }
 }
 
-void AprgColorStatistics::saveColorStatistics(string const& path) {
-    ofstream statisticsFileStream(path);
+void AprgColorStatistics::saveColorStatistics(path const& filePath) {
+    ofstream statisticsFileStream(filePath);
     OneDimensionStatistics colorIntensityStatistics(colorIntensitySamples);
     OneDimensionStatistics saturationLightnessStatistics(saturationLightnessSamples);
     OneDimensionStatistics lightnessStatistics(lightnessSamples);
@@ -102,12 +103,12 @@ void AprgColorStatistics::saveColorStatistics(string const& path) {
                          << " StdDev: " << luma709Statistics.getSampleStandardDeviation() << "\n";
 }
 
-void gatherAndSaveColorStatistics(string const& bitmapPath) {
-    AlbaLocalPathHandler const bitmapPathHandler(bitmapPath);
+void gatherAndSaveColorStatistics(path const& filePath) {
+    AlbaLocalPathHandler const bitmapPathHandler(filePath);
     AlbaLocalPathHandler const colorDataPathHandler(
-        bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_SortedColorData.csv)");
+        bitmapPathHandler.getDirectory() / bitmapPathHandler.getFilenameOnly() / R"(_SortedColorData.csv)");
     AlbaLocalPathHandler const colorStatisticsPathHandler(
-        bitmapPathHandler.getDirectory() + R"(\)" + bitmapPathHandler.getFilenameOnly() + R"(_Statistics.txt)");
+        bitmapPathHandler.getDirectory() / bitmapPathHandler.getFilenameOnly() / R"(_Statistics.txt)");
 
     AprgColorStatistics statistics;
     statistics.gatherStatistics(bitmapPathHandler.getPath());

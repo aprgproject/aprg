@@ -12,6 +12,7 @@
 #include <Geometry/TwoDimensions/Constructs/Point.hpp>
 
 #include <deque>
+#include <filesystem>
 #include <functional>
 #include <optional>
 
@@ -25,7 +26,7 @@ public:
     using PointAndColorPair = std::pair<BitmapXY, uint32_t>;
     using PenPointToPenCircleMap = std::map<BitmapXY, TwoDimensions::Circle>;
     using PenPointAndPenCirclePair = std::pair<BitmapXY, TwoDimensions::Circle>;
-    explicit BitmapFilters(std::string const& path);
+    explicit BitmapFilters(std::filesystem::path const& filePath);
     [[nodiscard]] BitmapSnippet getWholeBitmapSnippet() const;
     [[nodiscard]] BitmapSnippet getBlankSnippet(uint8_t const backgroundColorByte) const;
     [[nodiscard]] BitmapSnippet getBlankSnippetWithBackground() const;
@@ -45,8 +46,8 @@ public:
     // other draw functions
     void drawToFillGapsUsingBlur(BitmapSnippet& snippet, double const blurRadius);
     void drawNewColorForLabels(BitmapSnippet& snippet);
-    void saveSnippetIntoFileInTheSameDirectory(BitmapSnippet const& snippet, std::string const& filename);
-    void saveSnippetIntoFileWithFullFilePath(BitmapSnippet const& snippet, std::string const& fullFilePath);
+    void saveSnippetIntoFileInTheSameDirectory(BitmapSnippet const& snippet, std::filesystem::path const& filename);
+    void saveSnippetIntoFileWithFullFilePath(BitmapSnippet const& snippet, std::filesystem::path const& fullFilePath);
     void setBackgroundColor(uint32_t const backgroundColor);
     void gatherAndSaveColorDataAndStatistics();
 

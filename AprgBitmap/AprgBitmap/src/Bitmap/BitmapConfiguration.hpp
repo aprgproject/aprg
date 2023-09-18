@@ -57,7 +57,7 @@ public:
     [[nodiscard]] bool isCompressedMethodSupported() const;
     [[nodiscard]] bool isPositionWithinTheBitmap(BitmapXY const position) const;
     [[nodiscard]] bool isPositionWithinTheBitmap(int const x, int const y) const;
-    void readBitmap(std::string const& path);
+    void readBitmap(std::filesystem::path const& path);
     static BitmapXY getUpLeftCornerPoint();
     static int getCoordinateWithinRange(int const coordinate, int const maxLength);
 

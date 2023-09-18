@@ -9,10 +9,11 @@
 #include <sstream>
 
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba::AprgBitmap {
 
-void animize(string const& inputFile, string const& outputFile) {
+void animize(path const& inputFile, path const& outputFile) {
     AlbaLocalTimer localTimer;
     AlbaLocalPathHandler const inputFilePathHandler(inputFile);
     AlbaLocalPathHandler const outputFilePathHandler(outputFile);
@@ -93,7 +94,7 @@ void doStuffsAfterSteps(AlbaLocalTimer& localTimer, string const& description) {
 }
 
 void doStuffsAfterSteps(
-    AlbaLocalTimer& localTimer, BitmapFilters& bitmapFilters, BitmapSnippet const& snippet, string const& inputFilePath,
+    AlbaLocalTimer& localTimer, BitmapFilters& bitmapFilters, BitmapSnippet const& snippet, path const& inputFilePath,
     string const& description) {
     static int step = 1;
     localTimer.stopTimer();
@@ -102,7 +103,7 @@ void doStuffsAfterSteps(
     localTimer.resetTimer();
 }
 
-string getNewFilePath(string const& inputFilePath, int const step, string const& description) {
+path getNewFilePath(path const& inputFilePath, int const step, string const& description) {
     AlbaLocalPathHandler const inputFilePathHandler(inputFilePath);
     stringstream ss;
     ss << inputFilePathHandler.getDirectory() << inputFilePathHandler.getFilenameOnly() << "_Step" << step << "_("

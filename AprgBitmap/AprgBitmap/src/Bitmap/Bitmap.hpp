@@ -4,13 +4,14 @@
 #include <Bitmap/BitmapSnippet.hpp>
 #include <Bitmap/CommonTypes.hpp>
 
+#include <filesystem>
 #include <string>
 
 namespace alba::AprgBitmap {
 
 class Bitmap {
 public:
-    explicit Bitmap(std::string const& path);
+    explicit Bitmap(std::filesystem::path const& filePath);
     [[nodiscard]] BitmapConfiguration getConfiguration() const;
     [[nodiscard]] BitmapSnippet createColorFilledSnippetWithSizeOfWholeBitmap(
         uint8_t const colorByte) const;                                     // implement UT

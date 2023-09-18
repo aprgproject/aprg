@@ -2,6 +2,7 @@
 
 #include <Statistics/DataStatistics.hpp>
 
+#include <filesystem>>
 #include <set>
 #include <string>
 
@@ -10,9 +11,9 @@ namespace alba::AprgBitmap {
 class AprgColorStatistics {
 public:
     using OneDimensionStatistics = DataStatistics<1>;
-    void gatherStatistics(std::string const& bitmapPath);
-    void saveColorData(std::string const& path);
-    void saveColorStatistics(std::string const& path);
+    void gatherStatistics(std::filesystem::path const& filePath);
+    void saveColorData(std::filesystem::path const& filePath);
+    void saveColorStatistics(std::filesystem::path const& filePath);
 
 private:
     std::multiset<double> colorIntensitySet;
@@ -32,6 +33,6 @@ private:
     OneDimensionStatistics::Samples luma709Samples;
 };
 
-void gatherAndSaveColorStatistics(std::string const& bitmapPath);
+void gatherAndSaveColorStatistics(std::filesystem::path const& filePath);
 
 }  // namespace alba::AprgBitmap

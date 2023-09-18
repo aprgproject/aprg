@@ -14,6 +14,7 @@ using namespace alba::AprgBitmap::ColorUtilities;
 using namespace alba::mathHelper;
 using namespace alba::TwoDimensions;
 using namespace std;
+using namespace std::filesystem;
 
 namespace {
 constexpr int MAX_PEN_CIRCLE_RADIUS_COORDINATE = 5;
@@ -21,7 +22,7 @@ constexpr int MAX_PEN_CIRCLE_RADIUS_COORDINATE = 5;
 
 namespace alba::AprgBitmap {
 
-BitmapFilters::BitmapFilters(string const& path) : m_bitmap(path) {}
+BitmapFilters::BitmapFilters(path const& filePath) : m_bitmap(filePath) {}
 BitmapSnippet BitmapFilters::getWholeBitmapSnippet() const { return m_bitmap.getSnippetReadFromFileWholeBitmap(); }
 
 BitmapSnippet BitmapFilters::getBlankSnippet(uint8_t const backgroundColorByte) const {
@@ -144,17 +145,18 @@ void BitmapFilters::drawNewColorForLabels(BitmapSnippet& snippet) {
     });
 }
 
-void BitmapFilters::saveSnippetIntoFileInTheSameDirectory(BitmapSnippet const& snippet, string const& filename) {
+void BitmapFilters::saveSnippetIntoFileInTheSameDirectory(BitmapSnippet const& snippet, path const& filename) {
     AlbaLocalPathHandler const originalBitmapPathHandler(m_bitmap.getConfiguration().getPath());
-    saveSnippetIntoFileWithFullFilePath(snippet, originalBitmapPathHandler.getDirectory() + filename);
+    saveSnippetIntoFileWithFullFilePath(snippet, originalBitmapPathHandler.getDirectory() / filename);
 }
 
-void BitmapFilters::saveSnippetIntoFileWithFullFilePath(BitmapSnippet const& snippet, string const& fullFilePath) {
+void BitmapFilters::saveSnippetIntoFileWithFullFilePath(BitmapSnippet const& snippet, path const& fullFilePath) {
     AlbaLocalPathHandler originalBitmapPathHandler(m_bitmap.getConfiguration().getPath());
     AlbaLocalPathHandler const newFilePathHandler(fullFilePath);
-    originalBitmapPathHandler.copyToNewFile(newFilePathHandler.getPath());
-    Bitmap const newBitmap(newFilePathHandler.getPath());
-    newBitmap.setSnippetWriteToFile(snippet);
+    if (originalBitmapPathHandler.copyFileToAndIsSuccessful(newFilePathHandler.getPath())) {
+        Bitmap const newBitmap(newFilePathHandler.getPath());
+        newBitmap.setSnippetWriteToFile(snippet);
+    }
 }
 
 void BitmapFilters::setBackgroundColor(uint32_t const backgroundColor) { m_backgroundColor = backgroundColor; }
