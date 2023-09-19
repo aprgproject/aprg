@@ -779,9 +779,9 @@ hyperg_1F1_small_a_bgt0(const double a, const double b, const double x, gsl_sf_r
     }
     if (fabs(x) < fabs(b) && fabs(a*x) < sqrt(fabs(b)) * fabs(b-x)) {
       return hyperg_1F1_largebx(a, b, x, result);
-    } else {
+    } 
       return hyperg_1F1_large2bm4a(a, b, x, result);
-    }
+   
   }
   else {
     /* x < 0 and b not large compared to |x|
@@ -985,7 +985,7 @@ hyperg_1F1_ab_posint(const int a, const int b, const double x, gsl_sf_result * r
     ) {
     return gsl_sf_hyperg_1F1_series_e(a, b, x, result);
   }
-  else if(b > a && b >= 2*a + x) {
+  if(b > a && b >= 2*a + x) {
     /* Use the Gautschi CF series, then
      * recurse backward to a=0 for normalization.
      * This will work for either sign of x.
@@ -1535,11 +1535,11 @@ hyperg_1F1_ab_pos(const double a, const double b,
 
       double Mam1 = M0;
       double Ma   = M1;
-      double Map1;
-      double ap;
+      double Map1 = NAN;
+      double ap = NAN;
       double start_pair = fabs(M0) + fabs(M1);
       double minim_pair = GSL_DBL_MAX;
-      double pair_ratio;
+      double pair_ratio = NAN;
       double rat_0 = fabs(r_M0.err/r_M0.val);
       double rat_1 = fabs(r_M1.err/r_M1.val);
       for(ap=b+eps; ap<a-0.1; ap += 1.0) {
@@ -1555,7 +1555,7 @@ hyperg_1F1_ab_pos(const double a, const double b,
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(Ma);
       return GSL_ERROR_SELECT_2(stat_0, stat_1);
     }
-    else {
+    
       /* b > a
        * b < 2a + x 
        * b <= x
@@ -1589,7 +1589,7 @@ hyperg_1F1_ab_pos(const double a, const double b,
       result->err += 2.0 * (rat_0 + rat_1) * pair_ratio*pair_ratio * fabs(Mn);
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(Mn);
       return GSL_ERROR_SELECT_2(stat_0, stat_1);
-    }
+   
   }
   else {
     /* x < 0
@@ -1607,12 +1607,12 @@ hyperg_1F1_ab_pos(const double a, const double b,
       int stat_1 = hyperg_1F1_beps_bgt0(1.0-eps, a+eps-1.0, x, &r_Man);
       double Manp1 = r_Manp1.val;
       double Man   = r_Man.val;
-      double Manm1;
+      double Manm1 = NAN;
 
-      double n;
+      double n = NAN;
       double start_pair = fabs(Manp1) + fabs(Man);
       double minim_pair = GSL_DBL_MAX;
-      double pair_ratio;
+      double pair_ratio = NAN;
       double rat_0 = fabs(r_Manp1.err/r_Manp1.val);
       double rat_1 = fabs(r_Man.err/r_Man.val);
       for(n=a+eps-1.0; n>b+0.1; n -= 1.0) {
@@ -1635,7 +1635,7 @@ hyperg_1F1_ab_pos(const double a, const double b,
       result->err *= pair_ratio*pair_ratio + 1.0;
       return GSL_ERROR_SELECT_2(stat_0, stat_1);
     }
-    else {
+    
       /* Pick a0 such that b ~= 2a0 + x, then
        * recurse down in b from a0,a0 to determine
        * the values near the line b=2a+x. Then recurse
@@ -1702,7 +1702,7 @@ hyperg_1F1_ab_pos(const double a, const double b,
       result->val = Mn;
       result->err = (err_rat + GSL_DBL_EPSILON) * (fabs(b-a)+1.0) * fabs(Mn);
       return stat_a0;
-    }
+   
   }
 }
 
@@ -1779,10 +1779,10 @@ hyperg_1F1_ab_neg(const double a, const double b, const double x,
       result->val *= K_factor;
       result->err *= K_factor;
       return status;
-    } else {
+    } 
       int status = gsl_sf_hyperg_1F1_series_e(a, b, x, result);
       return status;
-    }
+   
 
     /* Sadness... */
     /* result->val = 0.0; */

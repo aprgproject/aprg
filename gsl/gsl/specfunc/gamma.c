@@ -1119,9 +1119,9 @@ gamma_xgthalf(const double x, gsl_sf_result * result)
     result->err = (x + 2.5) * GSL_DBL_EPSILON * result->val;
     return stat_gs;
   }
-  else {
+  
     OVERFLOW_ERROR(result);
-  }
+ 
 }
 
 

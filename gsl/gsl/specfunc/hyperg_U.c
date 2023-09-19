@@ -942,14 +942,14 @@ hyperg_U_int_bge1(const int a, const int b, const double x,
     gsl_sf_result r_Ua;
     gsl_sf_result lnm;
     gsl_sf_result y;
-    double lnscale;
-    double lm;
+    double lnscale = NAN;
+    double lm = NAN;
     int stat_1 = hyperg_U_small_a_bgt0(1.0, b, x, &r_Ua, &lm);  /* U(1,b,x) */
-    int stat_e;
+    int stat_e = 0;
     double Uam1 = 1.0;  /* U(0,b,x) */
     double Ua   = r_Ua.val;
-    double Uap1;
-    int ap;
+    double Uap1 = NAN;
+    int ap = 0;
 
     Uam1 *= exp(-lm);
 
@@ -969,7 +969,7 @@ hyperg_U_int_bge1(const int a, const int b, const double x,
     stat_e = gsl_sf_exp_mult_err_e10_e(lnm.val, lnm.err, y.val, y.err, result);
     return GSL_ERROR_SELECT_2(stat_e, stat_1);
   }
-  else {
+  
     if(b <= x) {
       /* Recurse backward either to the b=a+1 line
        * or to a=0, whichever we hit.
@@ -1156,7 +1156,7 @@ hyperg_U_int_bge1(const int a, const int b, const double x,
         return GSL_ERROR_SELECT_3(stat_e, stat_bck, stat_for);
       }
     }
-  }
+ 
 }
 
 

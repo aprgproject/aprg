@@ -264,15 +264,15 @@ gsl_cdf_ugaussian_P (const double x)
       result = 0.0;
       return result;
     }
-  else
-    {
+  
+    
       result = gauss_large (x);
 
       if (x > 0.0)
         {
           result = 1.0 - result;
         }
-    }
+   
 
   return result;
 }
@@ -324,8 +324,8 @@ gsl_cdf_ugaussian_Q (const double x)
       result = 1.0;
       return result;
     }
-  else
-    {
+  
+    
       result = gauss_large (x);
 
       if (x < 0.0)
@@ -333,7 +333,7 @@ gsl_cdf_ugaussian_Q (const double x)
           result = 1.0 - result;
         }
 
-    }
+   
 
   return result;
 }
