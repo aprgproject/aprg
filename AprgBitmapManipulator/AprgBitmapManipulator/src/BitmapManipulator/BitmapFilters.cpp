@@ -151,7 +151,7 @@ void BitmapFilters::saveSnippetIntoFileInTheSameDirectory(BitmapSnippet const& s
 }
 
 void BitmapFilters::saveSnippetIntoFileWithFullFilePath(BitmapSnippet const& snippet, path const& fullFilePath) {
-    AlbaLocalPathHandler originalBitmapPathHandler(m_bitmap.getConfiguration().getPath());
+    AlbaLocalPathHandler const originalBitmapPathHandler(m_bitmap.getConfiguration().getPath());
     AlbaLocalPathHandler const newFilePathHandler(fullFilePath);
     if (originalBitmapPathHandler.copyFileToAndIsSuccessful(newFilePathHandler.getPath())) {
         Bitmap const newBitmap(newFilePathHandler.getPath());
