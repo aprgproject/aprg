@@ -170,10 +170,10 @@ void PidSimulator::calculateAndGenerateOutputImage() {
     cout << "max list:[" << xLeftMax << ", " << xRightMax << ", " << yBottomMax << ", " << yTopMax << "]\n";
 
     AlbaLocalPathHandler const detectedPath(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
-    AlbaLocalPathHandler defaultFile(detectedPath.getDirectory() / R"(Default24Bit.bmp)");
+    AlbaLocalPathHandler const defaultFile(detectedPath.getDirectory() / R"(Default24Bit.bmp)");
     cout << "defaultFile:[" << defaultFile.getPath() << "]\n";
     if (defaultFile.doesExist()) {
-        AlbaLocalPathHandler graphOutputFile(defaultFile.getDirectory() / R"(\graph.bmp)");
+        AlbaLocalPathHandler const graphOutputFile(defaultFile.getDirectory() / R"(\graph.bmp)");
         cout << "graphOutputFile:[" << graphOutputFile.getPath() << "]\n";
         if (graphOutputFile.deleteFileAndIsSuccessful() &&
             defaultFile.copyFileToAndIsSuccessful(graphOutputFile.getPath())) {
