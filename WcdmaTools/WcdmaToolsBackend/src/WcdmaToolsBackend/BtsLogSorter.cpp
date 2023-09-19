@@ -59,7 +59,7 @@ void BtsLogSorter::processDirectory(string const& directoryPath) {
 
 void BtsLogSorter::processFile(string const& filePath) {
     openStartupLogsIfNeeded();
-    AlbaLocalPathHandler filePathHandler(filePath);
+    AlbaLocalPathHandler const filePathHandler(filePath);
     cout << "processFile: " << filePathHandler.getFile() << "\n";
 
     double const previousTotalSize(ProgressCounters::totalSizeReadForCombine);
@@ -100,7 +100,7 @@ void BtsLogSorter::saveLogsToOutputFile(string const& outputPath) {
 double BtsLogSorter::getTotalSizeToBeRead(set<string> const& listOfFiles) {
     double totalFileSize(0);
     for (string const& filePath : listOfFiles) {
-        AlbaLocalPathHandler filePathHandler(filePath);
+        AlbaLocalPathHandler const filePathHandler(filePath);
         if (m_acceptedFilesGrepEvaluator.evaluate(filePathHandler.getFile().string())) {
             totalFileSize += filePathHandler.getFileSize();
         }
@@ -119,7 +119,7 @@ void BtsLogSorter::deleteTempFilesAndDirectoriesOfOneDayOld() const {
     AlbaDateTime const oneDay(0, 0, 1, 0, 0, 0, 0);
     tempFileAndDirectoryPathHandler.findFilesAndDirectoriesOneDepth(
         [&](AlbaLocalPathHandler::LocalPath const& directoryPath) {
-            AlbaLocalPathHandler temporaryDirectoryPathHandler(directoryPath);
+            AlbaLocalPathHandler const temporaryDirectoryPathHandler(directoryPath);
             AlbaDateTime const fileCreationTime(temporaryDirectoryPathHandler.getLastModifiedDateTime());
             AlbaDateTime const difference = currentTime - fileCreationTime;
             if (difference > oneDay) {
