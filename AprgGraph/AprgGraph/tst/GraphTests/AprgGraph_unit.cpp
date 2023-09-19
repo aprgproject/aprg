@@ -18,8 +18,8 @@ using namespace std;
 namespace alba {
 
 TEST(AprgGraphTest, DISABLED_BitmapGraph24Bits) {
-    AlbaLocalPathHandler defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);
-    AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
+    AlbaLocalPathHandler const defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);
+    AlbaLocalPathHandler const graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
     EXPECT_TRUE(graphOutputFile.deleteFileAndIsSuccessful());
     EXPECT_TRUE(defaultFile.copyFileToAndIsSuccessful(graphOutputFile.getPath()));
 
@@ -50,8 +50,8 @@ TEST(AprgGraphTest, DISABLED_BitmapGraph24Bits) {
 }
 
 TEST(AprgGraphTest, DISABLED_TemporaryTest) {
-    AlbaLocalPathHandler defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);
-    AlbaLocalPathHandler graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
+    AlbaLocalPathHandler const defaultFile(APRG_GRAPH_24_BIT_DEFAULT_FILE);
+    AlbaLocalPathHandler const graphOutputFile(APRG_GRAPH_24_BIT_GRAPH_OUTPUT_FILE);
     EXPECT_TRUE(graphOutputFile.deleteFileAndIsSuccessful());
     EXPECT_TRUE(defaultFile.copyFileToAndIsSuccessful(graphOutputFile.getPath()));
 

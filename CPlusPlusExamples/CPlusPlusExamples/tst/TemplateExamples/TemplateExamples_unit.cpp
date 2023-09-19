@@ -702,8 +702,8 @@ struct myvec {
     explicit myvec(double) { cout << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n"; }
 };
 
-myvec(int)->myvec<double>;  // deduction guide
-myvec(double)->myvec<int>;  // deduction guide
+myvec(int) -> myvec<double>;  // deduction guide
+myvec(double) -> myvec<int>;  // deduction guide
 TEST(TemplateExamplesTest, TemplateDeductionGuidesWorksForCpp17) {
     myvec const v1(5);    // myvec(int) [with T = double]
     myvec const v2(5.1);  // myvec(double) [with T = int]
