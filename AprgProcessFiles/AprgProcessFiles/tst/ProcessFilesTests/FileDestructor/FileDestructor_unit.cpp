@@ -41,7 +41,7 @@ TEST(SampleTest, DestroyTest) {
     EXPECT_EQ(1U, numberOfFiles);
     EXPECT_EQ(0U, numberOfDirectories);
 
-    fileDestructor.destroy(pathHandler.getPath());
+    alba::FileDestructor::destroy(pathHandler.getPath());
 
     retrieveNumberOfFilesAndDirectoriesFromPath(pathHandler, numberOfFiles, numberOfDirectories);
     EXPECT_EQ(0U, numberOfFiles);

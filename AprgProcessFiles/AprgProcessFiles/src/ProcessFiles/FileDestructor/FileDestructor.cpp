@@ -12,7 +12,7 @@ namespace alba {
 FileDestructor::FileDestructor() : m_pathToDestroy(AlbaLocalPathHandler::createPathHandlerForDetectedPath()) {}
 void FileDestructor::destroy() const { destroy(m_pathToDestroy.getPath()); }
 
-void FileDestructor::destroy(path const& destroyPath) const {
+void FileDestructor::destroy(path const& destroyPath) {
     cout << "Destroying files in: [" << destroyPath << "]\n";
     AlbaLocalPathHandler const pathHandler(destroyPath);
     if (pathHandler.isExistingDirectory()) {

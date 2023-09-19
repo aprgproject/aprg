@@ -10,7 +10,7 @@ class FileDestructor {
 public:
     FileDestructor();
     void destroy() const;
-    void destroy(std::filesystem::path const& path) const;
+    static void destroy(std::filesystem::path const& path);
     void renameDirectoriesUnderneath(std::filesystem::path const& directoryPath) const;
     static void renameDirectory(std::filesystem::path const& directoryPath);
 

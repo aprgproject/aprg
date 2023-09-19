@@ -408,8 +408,8 @@ bool CPlusPlusFileFixer::isQtHeader(string const& header) {
 }
 
 void CPlusPlusFileFixer::processDirectory(path const& path) {
-    set<string> listOfFiles;
-    set<string> listOfDirectories;
+    set<string> const listOfFiles;
+    set<string> const listOfDirectories;
     AlbaLocalPathHandler(path).findFilesAndDirectoriesUnlimitedDepth(
         [](AlbaLocalPathHandler::LocalPath const&) {},
         [&](AlbaLocalPathHandler::LocalPath const& filePath) {
