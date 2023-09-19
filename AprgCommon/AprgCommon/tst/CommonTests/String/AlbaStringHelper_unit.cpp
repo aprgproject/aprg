@@ -564,7 +564,7 @@ TEST(BooleanStringTest, IsNumberTest) {
 TEST(UtilitiesStringTest, ConstructFileLocator) { EXPECT_FALSE(constructFileLocator(__FILE__, __LINE__).empty()); }
 
 TEST(UtilitiesStringTest, RandomString100Characters) {
-    constexpr size_t length=100;
+    constexpr size_t length = 100;
     EXPECT_EQ(length, getRandomAlphaNumericString(length).length());
 }
 

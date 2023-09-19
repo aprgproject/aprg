@@ -58,8 +58,8 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanc
 TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksWithRandomInput) {
     // Results: ~850ms
     int result(0);
-    constexpr int minValue=2;
-    constexpr int maxValue=2000;
+    constexpr int minValue = 2;
+    constexpr int maxValue = 2000;
     AlbaUniformNonDeterministicRandomizer<int> randomizer(minValue, maxValue);
     for (int iterations = 1; iterations < 10000000LL; ++iterations) {
         int const base = randomizer.getRandomValue();
@@ -72,8 +72,8 @@ TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmPerformanceTestWorksW
 TEST(LogarithmHelpersPerformanceTest, DISABLED_GetLogarithmForIntegersPerformanceTestWorksWithRandomInput) {
     // Results: ~790ms
     int result(0);
-    constexpr int minValue=2;
-    constexpr int maxValue=2000;
+    constexpr int minValue = 2;
+    constexpr int maxValue = 2000;
     AlbaUniformNonDeterministicRandomizer<int> randomizer(minValue, maxValue);
     for (int iterations = 1; iterations < 10000000LL; ++iterations) {
         int const base = randomizer.getRandomValue();

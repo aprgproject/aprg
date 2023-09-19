@@ -81,7 +81,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, GetRandomIntegerWorksAsUniformlyDis
     constexpr int customSeed(5);
     IntegerRandomizerForTest randomizer(minimumValue, maximumValue, customSeed);
     int const numberOfRandomValues(maximumValue - minimumValue + 1);
-    constexpr int iterations=1000;
+    constexpr int iterations = 1000;
     int const allowedDeviationCount(iterations / 10);
     vector<int> hitsForEachValue(numberOfRandomValues, 0);
 
@@ -128,7 +128,7 @@ TEST(AlbaUniformDeterministicRandomizerTest, GetRandomFloatingValueWorksAsUnifor
     FloatingPointRandomizerForTest randomizer(
         static_cast<double>(minimumValue), static_cast<double>(maximumValue), customSeed);
     int const numberOfRandomValues(maximumValue - minimumValue);  // number of integer values for floating point
-    constexpr int iterations=1000;
+    constexpr int iterations = 1000;
     int const allowedDeviationCount(iterations / 10);
     vector<int> hitsForEachValue(numberOfRandomValues, 0);
 

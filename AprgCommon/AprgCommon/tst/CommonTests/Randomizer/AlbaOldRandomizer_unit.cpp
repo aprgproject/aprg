@@ -36,7 +36,7 @@ TEST(AlbaOldRandomizerTest, GetRandomIntegerInUniformDistributionWorksAsUniforml
     constexpr int minimumValue(0);
     constexpr int maximumValue(9);
     int const numberOfRandomValues(maximumValue - minimumValue + 1);
-    constexpr int iterations=1000;
+    constexpr int iterations = 1000;
     int const allowedDeviation(iterations / 10);
     vector<int> hitsForEachValue(numberOfRandomValues, 0);
 

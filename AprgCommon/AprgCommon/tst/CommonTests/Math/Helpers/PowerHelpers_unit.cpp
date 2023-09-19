@@ -114,8 +114,8 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformance
 TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformanceTestWithRandomInput) {
     // Results: ~3.1s
     long long result(0);
-    constexpr int minValue=1;
-    constexpr int maxValue=2000;
+    constexpr int minValue = 1;
+    constexpr int maxValue = 2000;
     AlbaUniformNonDeterministicRandomizer<long long> randomizer(minValue, maxValue);
     for (long long iterations = 1; iterations < 10000000LL; ++iterations) {
         long long const base = randomizer.getRandomValue();
@@ -128,8 +128,8 @@ TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersPerformance
 TEST(PowerHelpersPerformanceTest, DISABLED_GetRaiseToPowerForIntegersUsingPowPerformanceTestWithRandomInput) {
     // Results: ~3.1s
     long long result(0);
-    constexpr int minValue=1;
-    constexpr int maxValue=2000;
+    constexpr int minValue = 1;
+    constexpr int maxValue = 2000;
     AlbaUniformNonDeterministicRandomizer<long long> randomizer(minValue, maxValue);
     for (long long iterations = 1; iterations < 10000000LL; ++iterations) {
         long long const base = randomizer.getRandomValue();

@@ -205,7 +205,7 @@ TEST(AlbaOptionalTest, OptionalSetConstReferenceWorks) {
     EXPECT_FALSE(static_cast<bool>(integerOptional1));
 
     // When
-    constexpr int newValue1=2222;
+    constexpr int newValue1 = 2222;
     integerOptional1.setConstReference(newValue1);
 
     // Then
@@ -214,7 +214,7 @@ TEST(AlbaOptionalTest, OptionalSetConstReferenceWorks) {
     EXPECT_EQ(2222, integerOptional1.get());
 
     // When
-    constexpr int newValue2=222222;
+    constexpr int newValue2 = 222222;
     integerOptional1.setConstReference(newValue2);
 
     // Then
