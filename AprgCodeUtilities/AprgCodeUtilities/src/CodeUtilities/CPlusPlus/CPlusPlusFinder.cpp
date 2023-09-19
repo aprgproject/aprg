@@ -12,17 +12,6 @@ using namespace std::filesystem;
 
 namespace alba::CodeUtilities {
 
-void CPlusPlusFinder::processPath(path const& path) {
-    AlbaLocalPathHandler const pathHandler(path);
-    if (pathHandler.doesExist()) {
-        if (pathHandler.isExistingDirectory()) {
-            processDirectory(path);
-        } else {
-            processFile(path);
-        }
-    }
-}
-
 void CPlusPlusFinder::processDirectory(path const& directory) {
     AlbaLocalPathHandler const directoryPathHandler(directory);
     directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth(
@@ -52,8 +41,8 @@ void CPlusPlusFinder::findTerms(Patterns const& searchPatterns) {
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
-            cout << "Found file: [" << m_currentFile << "] pattern found at: ["
-                 << getLocatorString(m_currentTerms, hitIndexes.front()) << "]\n";
+            cout << "Found file: [" << m_currentFile << "]\n";
+            cout << "Found pattern found at: [" << getLocatorString(m_currentTerms, hitIndexes.front()) << "]\n";
         }
     }
 }

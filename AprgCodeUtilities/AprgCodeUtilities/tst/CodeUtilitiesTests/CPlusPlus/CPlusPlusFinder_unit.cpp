@@ -26,9 +26,9 @@ void processAprgDirectory(string const& aprgPath) {
 
 TEST(CPlusPlusFinderTest, DISABLED_AprgDirectoryTest) { processAprgDirectory(R"(F:\Branches\aprg_project\aprg\aprg)"); }
 
-TEST(CPlusPlusFinderTest, DISABLED_PathTest) {
+TEST(CPlusPlusFinderTest, DISABLED_DirectoryTest) {
     CPlusPlusFinder finder;
-    finder.processPath(R"(F:\Branches\aprg_project\aprg\aprg\AprgAlgebra\AprgAlgebra\)");
+    finder.processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgAlgebra\AprgAlgebra\)");
 }
 
 }  // namespace alba::CodeUtilities

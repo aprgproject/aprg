@@ -1,0 +1,37 @@
+;
+
+// fixPostFixIncrementDecrement
+++variable;
+--variable;
+for(;;++variable1,++variable2,++variable3){}
+for(;;--variable1,--variable2,--variable3){}
+
+// fixConstReferenceOrder
+Type const & variable;
+unsigned int const & variable;
+auto const & variable;
+
+Type const variable = variable;
+constexpr unsigned int variable = variable;
+auto const variable = variable;
+
+Type const (variable);
+constexpr unsigned int (variable);
+auto const (variable);
+
+//fixConstReferenceOrder
+constexpr unsigned int variable = variable;
+constexpr unsigned int (variable);
+
+// fixCStyleStaticCast
+= static_cast<unsigned int>(variable;
++ static_cast<unsigned int>(variable;
+
+// fixNoConstPassByValue
+(unsigned int const variable1, unsigned int const variable2, unsigned int const variable3)
+(Type const variable1, Type const variable2, Type const variable3)
+
+//fixCommentsPositionOfBraces
+if {
+//Comment
+}
