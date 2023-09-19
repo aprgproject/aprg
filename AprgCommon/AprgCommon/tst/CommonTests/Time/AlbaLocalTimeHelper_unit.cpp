@@ -18,7 +18,7 @@ namespace alba {
 
 namespace {
 AlbaDateTime allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
-}
+}  // namespace
 
 TEST(AlbaLocalTimerHelperTest, DISABLED_SleepForWorks) {
     // this is unstable because its not precise
@@ -47,7 +47,7 @@ TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorksOnCurrentTime
 
     EXPECT_FALSE(time1.isEmpty());
     EXPECT_FALSE(time2.isEmpty());
-    AlbaDateTime difference(time1 - time2);
+    AlbaDateTime const difference(time1 - time2);
     EXPECT_LT(difference, allowableDifference);
     // EXPECT_EQ(" 1 * 2023-09-16 20:03:14.090847", convertToString(time1));
     // EXPECT_EQ(" 1 * 2023-09-16 20:03:14.106822", convertToString(time2));
@@ -61,7 +61,7 @@ TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorks) {
     timeInformation.tm_mday = 4;
     timeInformation.tm_mon = 5;
     timeInformation.tm_year = 96;
-    LibrarySystemTime systemTime(convertTimeInformationToSystemTime(timeInformation, nanoseconds(777'777'777)));
+    LibrarySystemTime const systemTime(convertTimeInformationToSystemTime(timeInformation, nanoseconds(777'777'777)));
 
     AlbaDateTime const currentTime(convertSystemTimeToAlbaDateTime(systemTime));
 
@@ -71,11 +71,11 @@ TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorks) {
 TEST(AlbaLocalTimerHelperTest, ConvertFileTimeToAlbaDateTimeTimeWorks) {
     clearContentsOfFile(APRG_COMMON_TEST_FILE_TO_WRITE);
 
-    AlbaDateTime lastModifiedTime(convertFileTimeToAlbaDateTime(last_write_time(APRG_COMMON_TEST_FILE_TO_WRITE)));
+    AlbaDateTime const lastModifiedTime(convertFileTimeToAlbaDateTime(last_write_time(APRG_COMMON_TEST_FILE_TO_WRITE)));
 
-    AlbaDateTime currentTime(getCurrentDateTime());
-    AlbaDateTime difference(currentTime - lastModifiedTime);
-    AlbaDateTime allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
+    AlbaDateTime const currentTime(getCurrentDateTime());
+    AlbaDateTime const difference(currentTime - lastModifiedTime);
+    AlbaDateTime const allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
     EXPECT_LT(difference, allowableDifference);
 }
 
@@ -85,7 +85,7 @@ TEST(AlbaLocalTimerHelperTest, GetCurrentDateTimeWorks) {
 
     EXPECT_FALSE(time1.isEmpty());
     EXPECT_FALSE(time2.isEmpty());
-    AlbaDateTime difference(time1 - time2);
+    AlbaDateTime const difference(time1 - time2);
     EXPECT_LT(difference, allowableDifference);
     // EXPECT_EQ(" 1 * 2023-09-16 20:03:14.107620", convertToString(time1));
     // EXPECT_EQ(" 1 * 2023-09-16 20:03:14.122168", convertToString(time2));
@@ -97,7 +97,7 @@ TEST(AlbaLocalTimerHelperTest, ConvertSinceEpochTimeToAlbaDateTimeWorksForSteady
 
     // EXPECT_FALSE(time1.isEmpty());
     // EXPECT_FALSE(time2.isEmpty());
-    AlbaDateTime difference(time1 - time2);
+    AlbaDateTime const difference(time1 - time2);
     EXPECT_LT(difference, allowableDifference);
     // EXPECT_EQ(" 1 * 0000-00-00 04:03:00.436885", convertToString(time1));
     // EXPECT_EQ(" 1 * 0000-00-00 04:03:00.452127", convertToString(time2));
@@ -109,7 +109,7 @@ TEST(AlbaLocalTimerHelperTest, ConvertSinceEpochTimeToAlbaDateTimeWorksForSystem
 
     EXPECT_FALSE(time1.isEmpty());
     EXPECT_FALSE(time2.isEmpty());
-    AlbaDateTime difference(time1 - time2);
+    AlbaDateTime const difference(time1 - time2);
     EXPECT_LT(difference, allowableDifference);
     // EXPECT_EQ(" 1 * 0053-09-14 12:03:14.138281", convertToString(time1));
     // EXPECT_EQ(" 1 * 0053-09-14 12:03:14.1534223", convertToString(time2));
@@ -124,7 +124,7 @@ TEST(AlbaLocalTimerHelperTest, ConvertTimeInformationToSystemTimeWorks) {
     timeInformation.tm_mon = 5;
     timeInformation.tm_year = 96;
 
-    LibrarySystemTime systemTime(convertTimeInformationToSystemTime(timeInformation, nanoseconds(777'777'777)));
+    LibrarySystemTime const systemTime(convertTimeInformationToSystemTime(timeInformation, nanoseconds(777'777'777)));
 
     auto durationSinceEpoch = systemTime.time_since_epoch();
     // EXPECT_EQ(9650U, duration_cast<days>(durationSinceEpoch).count());

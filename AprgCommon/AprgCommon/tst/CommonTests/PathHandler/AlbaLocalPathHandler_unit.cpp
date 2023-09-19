@@ -25,7 +25,7 @@ string getAprgPath() { return APRG_DIR R"(\)"; }
 string getAprgTestDirectory() { return APRG_DIR R"(\AprgCommon\FilesForTests\)"; }
 
 LocalPath getAprgRootPath() {
-    string aprgPath(getAprgPath());
+    string const aprgPath(getAprgPath());
     auto colonIndex = aprgPath.find_first_of(':', 0);
     if (colonIndex != string::npos) {
         return aprgPath.substr(0, colonIndex + 1);
@@ -44,11 +44,11 @@ TEST(AlbaLocalPathHandlerTest, GetLastModifiedDateTimeWorks) {
     PathHandler const pathHandler(APRG_COMMON_TEST_FILE_TO_WRITE);
     createEmptyFile(pathHandler.getPath().string());
 
-    AlbaDateTime lastModifiedTime(pathHandler.getLastModifiedDateTime());
+    AlbaDateTime const lastModifiedTime(pathHandler.getLastModifiedDateTime());
 
-    AlbaDateTime currentTime(getCurrentDateTime());
-    AlbaDateTime difference(currentTime - lastModifiedTime);
-    AlbaDateTime allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
+    AlbaDateTime const currentTime(getCurrentDateTime());
+    AlbaDateTime const difference(currentTime - lastModifiedTime);
+    AlbaDateTime const allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
     EXPECT_LT(difference, allowableDifference);
 }
 
@@ -68,7 +68,7 @@ TEST(AlbaLocalPathHandlerTest, FileIsCopiedToNewFileActualLocalDirectory) {
     string const pathOfCopiedFile("CopiedFile.log");
     createEmptyFile(fixPath(pathOfFileToBeCopied).string());
 
-    PathHandler pathHandler(pathOfFileToBeCopied);
+    PathHandler const pathHandler(pathOfFileToBeCopied);
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\FileToBeCopied.log)"), pathHandler.getPath());
     EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\)"), pathHandler.getDirectory());
@@ -80,7 +80,7 @@ TEST(AlbaLocalPathHandlerTest, FileIsCopiedToNewFileActualLocalDirectory) {
 
     EXPECT_TRUE(pathHandler.copyFileToAndIsSuccessful(pathHandler.getDirectory() / pathOfCopiedFile));
 
-    PathHandler pathHandlerOfCopiedFile(pathHandler.getDirectory() / pathOfCopiedFile);
+    PathHandler const pathHandlerOfCopiedFile(pathHandler.getDirectory() / pathOfCopiedFile);
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\CopiedFile.log)"), pathHandlerOfCopiedFile.getPath());
     EXPECT_EQ(getAprgRootPath(), pathHandlerOfCopiedFile.getRoot());
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\)"), pathHandlerOfCopiedFile.getDirectory());
@@ -126,7 +126,7 @@ TEST(AlbaLocalPathHandlerTest, ReInputFileThatIsToBeDeletedActualLocalDirectory)
     LocalPath const pathOfFileToBeDeleted(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\FileToBeDeleted.log)"));
     createEmptyFile(fixPath(pathOfFileToBeDeleted).string());
 
-    PathHandler pathHandler(pathOfFileToBeDeleted);
+    PathHandler const pathHandler(pathOfFileToBeDeleted);
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\FileToBeDeleted.log)"), pathHandler.getPath());
     EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\)"), pathHandler.getDirectory());
@@ -277,7 +277,7 @@ TEST(AlbaLocalPathHandlerTest, FullPathWithDirectoryAndFileDoublePeriodInPath) {
 }
 
 TEST(AlbaLocalPathHandlerTest, FullPathWithOnlyDirectoryGivenWindowsStyleInput) {
-    PathHandler pathHandler(getAprgTestDirectory());
+    PathHandler const pathHandler(getAprgTestDirectory());
     EXPECT_EQ(fixPath(getAprgTestDirectory()), pathHandler.getPath());
     EXPECT_EQ(getAprgRootPath(), pathHandler.getRoot());
     EXPECT_EQ(fixPath(getAprgTestDirectory()), pathHandler.getDirectory());
@@ -369,7 +369,7 @@ TEST(AlbaLocalPathHandlerTest, ClearWorks) {
 }
 
 TEST(AlbaLocalPathHandlerTest, FileSizeTestFileIsNotExisting) {
-    PathHandler pathHandler("This path does not exist");
+    PathHandler const pathHandler("This path does not exist");
 
     EXPECT_EQ("This path does not exist", pathHandler.getPath());
     ASSERT_FALSE(pathHandler.doesExist());
@@ -377,7 +377,7 @@ TEST(AlbaLocalPathHandlerTest, FileSizeTestFileIsNotExisting) {
 }
 
 TEST(AlbaLocalPathHandlerTest, FileSizeTestFileIsExisting) {
-    PathHandler pathHandler(ALBA_COMMON_SIZE_TEST_FILE);
+    PathHandler const pathHandler(ALBA_COMMON_SIZE_TEST_FILE);
 
     EXPECT_EQ(fixPath(ALBA_COMMON_SIZE_TEST_FILE), pathHandler.getPath());
     ASSERT_TRUE(pathHandler.doesExist());
@@ -522,7 +522,7 @@ TEST(AlbaLocalPathHandlerTest, MoveUpADirectoryWorks) {
 }
 
 TEST(AlbaLocalPathHandlerTest, GetRelativePathFromWorks) {
-    PathHandler pathHandler(getAprgTestDirectory());
+    PathHandler const pathHandler(getAprgTestDirectory());
 
     EXPECT_EQ(fixPath(""), pathHandler.getRelativePathFrom(""));
     EXPECT_EQ(fixPath(R"(AprgCommon\FilesForTests)"), pathHandler.getRelativePathFrom(fixPath(getAprgPath())));
@@ -532,7 +532,7 @@ TEST(AlbaLocalPathHandlerTest, GetRelativePathFromWorks) {
 }
 
 TEST(AlbaLocalPathHandlerTest, GetRelativePathToWorks) {
-    PathHandler pathHandler(getAprgTestDirectory());
+    PathHandler const pathHandler(getAprgTestDirectory());
 
     EXPECT_EQ(fixPath(""), pathHandler.getRelativePathTo(""));
     EXPECT_EQ(fixPath(R"(..\..)"), pathHandler.getRelativePathTo(fixPath(getAprgPath())));
@@ -544,7 +544,7 @@ TEST(AlbaLocalPathHandlerTest, GetRelativePathToWorks) {
 }
 
 TEST(AlbaLocalPathHandlerTest, GetProximatePathFromWorks) {
-    PathHandler pathHandler(getAprgTestDirectory());
+    PathHandler const pathHandler(getAprgTestDirectory());
 
     EXPECT_EQ(fixPath(getAprgPath() + R"(AprgCommon\FilesForTests)"), pathHandler.getProximatePathFrom(""));
     EXPECT_EQ(fixPath(R"(AprgCommon\FilesForTests)"), pathHandler.getProximatePathFrom(fixPath(getAprgPath())));
@@ -554,7 +554,7 @@ TEST(AlbaLocalPathHandlerTest, GetProximatePathFromWorks) {
 }
 
 TEST(AlbaLocalPathHandlerTest, GetProximatePathToWorks) {
-    PathHandler pathHandler(getAprgTestDirectory());
+    PathHandler const pathHandler(getAprgTestDirectory());
 
     EXPECT_EQ(fixPath(""), pathHandler.getProximatePathTo(""));
     EXPECT_EQ(fixPath(R"(..\..)"), pathHandler.getProximatePathTo(fixPath(getAprgPath())));
