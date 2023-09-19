@@ -1,0 +1,37 @@
+;
+
+// fixPostFixIncrementDecrement
+++variable;
+--variable;
+for(;;++variable1,++variable2,++variable3){}
+for(;;--variable1,--variable2,--variable3){}
+
+// fixConstReferenceOrder
+const Type & variable;
+const unsigned int & variable;
+const auto & variable;
+
+const Type variable = variable;
+const unsigned int variable = variable;
+const auto variable = variable;
+
+const Type (variable);
+const unsigned int (variable);
+const auto (variable);
+
+//fixConstReferenceOrder
+unsigned int const variable = variable;
+unsigned int const (variable);
+
+// fixCStyleStaticCast
+= (unsigned int)variable;
++ (unsigned int)variable;
+
+// fixNoConstPassByValue
+(unsigned int variable1, unsigned int variable2, unsigned int variable3)
+(Type variable1, Type variable2, Type variable3)
+
+//fixCommentsPositionOfBraces
+if //Comment
+{
+}

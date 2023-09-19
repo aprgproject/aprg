@@ -419,7 +419,7 @@ TEST(CPlusPlusTokenizerTest, CheckNumberWithCarat) {
 
     // ASSERT_EQ(terms.size(), 9U);
     auto termIterator = terms.begin();
-    EXPECT_EQ(*termIterator++, Term(TermType::Identifier, "uint64_t"));
+    EXPECT_EQ(*termIterator++, Term(TermType::PrimitiveType, "uint64_t"));
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
     EXPECT_EQ(*termIterator++, Term(TermType::Identifier, "ONE_THEN_ZERO_64_BITS"));
     EXPECT_EQ(*termIterator++, Term(TermType::WhiteSpace, " "));
