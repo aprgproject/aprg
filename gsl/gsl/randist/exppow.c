@@ -98,9 +98,9 @@ gsl_ran_exppow (const gsl_rng * r, const double a, const double b)
     
       /* Use gaussian for rejection method, from Tadikamalla */
 
-      double x;
-      double h;
-      double u;
+      double x = NAN;
+      double h = NAN;
+      double u = NAN;
 
       double B = pow (1 / b, 1 / b);
 

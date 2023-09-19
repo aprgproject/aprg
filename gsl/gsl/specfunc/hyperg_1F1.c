@@ -757,9 +757,9 @@ hyperg_1F1_small_a_bgt0(const double a, const double b, const double x, gsl_sf_r
       double bp = b + b_del;
       gsl_sf_result r_Mbp1;
       gsl_sf_result r_Mb;
-      double Mbp1;
-      double Mb;
-      double Mbm1;
+      double Mbp1 = NAN;
+      double Mb = NAN;
+      double Mbm1 = NAN;
       int stat_0 = gsl_sf_hyperg_1F1_series_e(a, bp+1.0, x, &r_Mbp1);
       int stat_1 = gsl_sf_hyperg_1F1_series_e(a, bp,     x, &r_Mb);
       const double err_rat = fabs(r_Mbp1.err/r_Mbp1.val) + fabs(r_Mb.err/r_Mb.val);
@@ -777,7 +777,7 @@ hyperg_1F1_small_a_bgt0(const double a, const double b, const double x, gsl_sf_r
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(Mb);
       return GSL_ERROR_SELECT_2(stat_0, stat_1);
     }
-    else if (fabs(x) < fabs(b) && fabs(a*x) < sqrt(fabs(b)) * fabs(b-x)) {
+    if (fabs(x) < fabs(b) && fabs(a*x) < sqrt(fabs(b)) * fabs(b-x)) {
       return hyperg_1F1_largebx(a, b, x, result);
     } else {
       return hyperg_1F1_large2bm4a(a, b, x, result);
@@ -792,9 +792,9 @@ hyperg_1F1_small_a_bgt0(const double a, const double b, const double x, gsl_sf_r
     if(ax >= 100.0 && GSL_MAX(abs_ap1mb,1.0) < 0.99*ax) {
       return hyperg_1F1_asymp_negx(a, b, x, result);
     }
-    else {
+    
       return hyperg_1F1_luke(a, b, x, result);
-    }
+   
   }
 }
 
@@ -979,7 +979,7 @@ hyperg_1F1_ab_posint(const int a, const int b, const double x, gsl_sf_result * r
   if(b == 2*a) {
     return hyperg_1F1_beq2a_pos(a, x, result);  /* 1F1(a,2a,x) */
   }
-  else if(   ( b < 10 && a < 10 && ax < 5.0 )
+  if(   ( b < 10 && a < 10 && ax < 5.0 )
           || ( b > a*ax )
           || ( b > a && ax < 5.0 )
     ) {
@@ -1499,15 +1499,15 @@ hyperg_1F1_ab_pos(const double a, const double b,
      * to check for b > x, which is relevant when x is positive.
      */
     gsl_sf_result Mn_true;
-    int stat_Mt;
-    double rap;
+    int stat_Mt = 0;
+    double rap = NAN;
     int stat_CF1 = hyperg_1F1_CF1_p_ser(a, b, x, &rap);
     double ra = 1.0 + x/a * rap;
     double Ma   = GSL_SQRT_DBL_MIN;
     double Mnm1 = Ma;
     double Mn   = ra * Mnm1;
-    double Mnp1;
-    double n;
+    double Mnp1 = NAN;
+    double n = NAN;
     for(n=a+1.0; n<b-0.5; n += 1.0) {
       Mnp1 = ((b-n)*Mnm1 + (2*n-b+x)*Mn)/n;
       Mnm1 = Mn;
@@ -1519,7 +1519,7 @@ hyperg_1F1_ab_pos(const double a, const double b,
     result->err += 2.0 * GSL_DBL_EPSILON * (fabs(b-a)+1.0) * fabs(result->val);
     return GSL_ERROR_SELECT_2(stat_Mt, stat_CF1);
   }
-  else if(x >= 0.0) {
+  if(x >= 0.0) {
 
     if(b < a) {
       /* Forward recursion on a from a=b+eps-1,b+eps.
@@ -1770,7 +1770,7 @@ hyperg_1F1_ab_neg(const double a, const double b, const double x,
   if(x > 0.0 && !(bma_integer && bma > 0.0)) {
     return hyperg_1F1_U(a, b, x, result);
   }
-  else {
+  
     /* FIXME:  if all else fails, try the series... BJG */
     if (x < 0.0) {
       /* Apply Kummer Transformation */
@@ -1788,7 +1788,7 @@ hyperg_1F1_ab_neg(const double a, const double b, const double x,
     /* result->val = 0.0; */
     /* result->err = 0.0; */
     /* GSL_ERROR ("error", GSL_EUNIMPL); */
-  }
+ 
 }
 
 

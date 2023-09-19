@@ -1415,7 +1415,7 @@ int gsl_sf_fermi_dirac_int_e(const int j, const double x, gsl_sf_result * result
   if(x < 0.0) {
     return fd_neg(j, x, result);
   }
-  else if(x == 0.0) {
+  if(x == 0.0) {
     return gsl_sf_eta_int_e(j+1, result);
   }
   else if(x < 1.5) {

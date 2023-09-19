@@ -1,11 +1,11 @@
-StaticAnalysisJobIdentifier: [20]
-2023-09-18T05:08:12
+StaticAnalysisJobIdentifier: [30]
+2023-09-19T08:26:28
 D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:251:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:250:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
 D:\a\aprg\aprg\AprgModeling\AprgModeling\src\AprgModeling\Modeling.cpp:162:55: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgModeling\AprgModeling\src\AprgModeling\Modeling.cpp:166:25: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
@@ -4656,38 +4656,31 @@ D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_I1.c:192:12: warning: Value stored to 's'
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_I1.c:192:12: note: Value stored to 's' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:73:12: warning: Value stored to 'Ikm1' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:73:12: note: Value stored to 'Ikm1' during its initialization is never read
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:101:12: warning: variable 'Ikm1' is not initialized [cppcoreguidelines-init-variables]
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:101:16: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:102:9: warning: variable 'k' is not initialized [cppcoreguidelines-init-variables]
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:102:10: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:110:33: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:110:33: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:110:61: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:152:12: warning: Value stored to 'Inm1' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:152:12: note: Value stored to 'Inm1' during its initialization is never read
+D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:101:12: warning: Value stored to 'Ikm1' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
+D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:101:12: note: Value stored to 'Ikm1' during its initialization is never read
+D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:153:12: warning: Value stored to 'Inm1' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
+D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_In.c:153:12: note: Value stored to 'Inm1' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Inu.c:64:12: warning: Value stored to 'K_nu' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Inu.c:64:12: note: Value stored to 'K_nu' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Inu.c:65:12: warning: Value stored to 'K_nup1' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Inu.c:65:12: note: Value stored to 'K_nup1' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Inu.c:66:12: warning: Value stored to 'K_num1' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Inu.c:66:12: note: Value stored to 'K_num1' during its initialization is never read
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:103:5: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:103:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:103:10: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:104:14: warning: variable 'ans' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:30:1: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:104:17: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:105:14: warning: variable 'err' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:105:17: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:106:14: warning: variable 'ratio' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:106:19: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:107:14: warning: variable 'sgn' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:107:17: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:108:11: warning: variable 'stat_b' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:108:17: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:114:14: warning: variable 'Jkm1' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:114:18: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:115:11: warning: variable 'k' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:115:12: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:174:12: warning: Value stored to 'Jnm1' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jn.c:174:12: note: Value stored to 'Jnm1' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jnu.c:146:14: warning: Value stored to 'Jmu' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
@@ -4698,10 +4691,6 @@ D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jnu.c:148:14: warning: Value stored to 's
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jnu.c:148:14: note: Value stored to 'sgn_Jmu' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jnu.c:149:14: warning: Value stored to 'Jmuprime_Jmu' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jnu.c:149:14: note: Value stored to 'Jmuprime_Jmu' during its initialization is never read
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jnu.c:150:14: warning: variable 'P' is not initialized [cppcoreguidelines-init-variables]
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jnu.c:150:15: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jnu.c:151:14: warning: variable 'Q' is not initialized [cppcoreguidelines-init-variables]
-D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jnu.c:151:15: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jnu.c:153:14: warning: Value stored to 'gamma' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jnu.c:153:14: note: Value stored to 'gamma' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\bessel_Jnu.c:157:14: warning: Value stored to 'Jnm1' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
@@ -5058,9 +5047,6 @@ D:\a\aprg\aprg\gsl\gsl\specfunc\dilog.c:90:12: warning: Value stored to 'ds' dur
 D:\a\aprg\aprg\gsl\gsl\specfunc\dilog.c:90:12: note: Value stored to 'ds' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\dilog.c:115:10: warning: Value stored to 't' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\dilog.c:115:10: note: Value stored to 't' during its initialization is never read
-D:\a\aprg\aprg\gsl\gsl\specfunc\dilog.c:210:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\specfunc\dilog.c:210:3: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\dilog.c:210:8: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\dilog.c:250:12: warning: Value stored to 'dr' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\dilog.c:250:12: note: Value stored to 'dr' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\dilog.c:251:12: warning: Value stored to 'di' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
@@ -5282,8 +5268,8 @@ D:\a\aprg\aprg\gsl\gsl\specfunc\fermi_dirac.c:1200:12: warning: Value stored to 
 D:\a\aprg\aprg\gsl\gsl\specfunc\fermi_dirac.c:1200:12: note: Value stored to 'del_val' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\fermi_dirac.c:1201:12: warning: Value stored to 'del_err' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\fermi_dirac.c:1201:12: note: Value stored to 'del_err' during its initialization is never read
-D:\a\aprg\aprg\gsl\gsl\specfunc\fermi_dirac.c:1415:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\specfunc\fermi_dirac.c:1415:3: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\specfunc\fermi_dirac.c:1418:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\gsl\gsl\specfunc\fermi_dirac.c:1418:3: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\fermi_dirac.c:1434:5: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\gsl\gsl\specfunc\gamma.c:43:8: warning: Excessive padding in 'struct (unnamed at D:\a\aprg\aprg\gsl\gsl\specfunc\gamma.c:43:8)' (8 padding bytes, where 0 is optimal). Optimal fields order: f, n, i, consider reordering the fields or adding explicit padding members [clang-analyzer-optin.performance.Padding]
@@ -5322,8 +5308,8 @@ D:\a\aprg\aprg\gsl\gsl\specfunc\gamma.c:827:12: warning: Value stored to 'c7' du
 D:\a\aprg\aprg\gsl\gsl\specfunc\gamma.c:827:12: note: Value stored to 'c7' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\gamma.c:828:12: warning: Value stored to 'lng_ser' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\gamma.c:828:12: note: Value stored to 'lng_ser' during its initialization is never read
-D:\a\aprg\aprg\gsl\gsl\specfunc\gamma.c:1092:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\specfunc\gamma.c:1092:3: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\specfunc\gamma.c:1106:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\gsl\gsl\specfunc\gamma.c:1106:3: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\gamma.c:1635:54: warning: taking the absolute value of unsigned type 'unsigned int' has no effect [clang-diagnostic-absolute-value]
 D:\a\aprg\aprg\gsl\gsl\specfunc\gamma.c:1635:54: note: remove the call to 'fabs' since unsigned values cannot be negative
 D:/a/aprg/aprg/gsl/gsl/specfunc/gamma.c:1635:54: warning: taking the absolute value of unsigned type 'unsigned int' has no effect [-Wabsolute-value]
@@ -5484,18 +5470,19 @@ D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:272:7: warning: Value stored to 'An
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:272:7: note: Value stored to 'Anm3' is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:273:7: warning: Value stored to 'Bnm3' is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:273:7: note: Value stored to 'Bnm3' is never read
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:752:5: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:752:5: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:760:14: warning: variable 'Mbp1' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:760:18: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:761:14: warning: variable 'Mb' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:761:16: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:762:14: warning: variable 'Mbm1' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:792:5: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:792:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:979:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:979:3: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:762:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:780:5: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:780:5: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:795:5: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:795:5: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:795:10: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:982:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:982:3: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:993:12: warning: variable 'rap' is not initialized [cppcoreguidelines-init-variables]
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1000:12: warning: variable 'Mnm1' is not initialized [cppcoreguidelines-init-variables]
@@ -5556,28 +5543,24 @@ D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1139:16: warning: variable 'Ma0nm1'
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1174:22: warning: using floating point absolute value function 'fabs' when argument is of integer type [clang-diagnostic-absolute-value]
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1174:22: note: use function 'abs' instead
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1469:12: warning: variable 'rap' is not initialized [cppcoreguidelines-init-variables]
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1469:15: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1477:12: warning: variable 'Mnm1' is not initialized [cppcoreguidelines-init-variables]
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1477:16: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1479:9: warning: variable 'stat_Mt' is not initialized [cppcoreguidelines-init-variables]
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1479:16: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1480:12: warning: variable 'n' is not initialized [cppcoreguidelines-init-variables]
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1480:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1477:12: warning: Value stored to 'Mnm1' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1477:12: note: Value stored to 'Mnm1' during its initialization is never read
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1480:12: warning: Value stored to 'n' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1480:12: note: Value stored to 'n' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1481:5: warning: Variable 'n' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1481:5: note: Variable 'n' with floating point type 'double' should not be used as a loop counter
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1494:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1494:3: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1502:9: warning: variable 'stat_Mt' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1502:16: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1503:12: warning: variable 'rap' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1503:15: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1509:12: warning: variable 'Mnp1' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1509:16: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1510:12: warning: variable 'n' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1510:13: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1511:5: warning: Variable 'n' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1511:5: note: Variable 'n' with floating point type 'double' should not be used as a loop counter
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1522:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1522:3: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1538:14: warning: variable 'Map1' is not initialized [cppcoreguidelines-init-variables]
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1539:14: warning: variable 'ap' is not initialized [cppcoreguidelines-init-variables]
@@ -5630,8 +5613,9 @@ D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1668:9: warning: Variable 'n' with 
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1668:9: note: Variable 'n' with floating point type 'double' should not be used as a loop counter
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1695:11: warning: Variable 'n' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1695:11: note: Variable 'n' with floating point type 'double' should not be used as a loop counter
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1770:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1770:3: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1773:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1773:3: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1773:8: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1782:7: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1822:41: warning: using floating point absolute value function 'fabs' when argument is of integer type [clang-diagnostic-absolute-value]
@@ -5650,9 +5634,6 @@ D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1826:66: warning: using floating po
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1826:66: note: use function 'abs' instead
 D:/a/aprg/aprg/AprgModeling/StaticAnalyzersBuild/gsl\gsl/gsl_minmax.h:94:38: note: expanded from macro 'GSL_MAX_DBL'
 D:/a/aprg/aprg/AprgModeling/StaticAnalyzersBuild/gsl\gsl/gsl_minmax.h:39:30: note: expanded from macro 'GSL_MAX'
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1971:7: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1971:7: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_1F1.c:1971:12: note: FIX-IT applied suggested code changes
 D:/a/aprg/aprg/gsl/gsl/specfunc/hyperg_1F1.c:1008:44: warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
 D:/a/aprg/aprg/gsl/gsl/specfunc/hyperg_1F1.c:1008:44: note: use function 'abs' instead
 D:/a/aprg/aprg/gsl/gsl/specfunc/hyperg_1F1.c:1039:45: warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
@@ -5799,16 +5780,16 @@ D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:902:6: warning: using floating point 
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:39:33: note: expanded from macro 'SERIES_EVAL_OK'
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:902:6: note: use function 'abs' instead
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:39:33: note: expanded from macro 'SERIES_EVAL_OK'
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:910:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:910:3: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:917:12: warning: variable 'lnscale' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:917:19: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:920:12: warning: variable 'Uam1' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:920:16: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:921:9: warning: variable 'ap' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:921:11: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:934:38: warning: using floating point absolute value function 'fabs' when argument is of integer type [clang-diagnostic-absolute-value]
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:934:38: note: use function 'abs' instead
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:937:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:937:3: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:945:12: warning: variable 'lnscale' is not initialized [cppcoreguidelines-init-variables]
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\gsl\gsl\specfunc\hyperg_U.c:946:12: warning: variable 'lm' is not initialized [cppcoreguidelines-init-variables]
@@ -6007,13 +5988,10 @@ D:\a\aprg\aprg\gsl\gsl\specfunc\laguerre.c:296:12: warning: Value stored to 'Lkp
 D:\a\aprg\aprg\gsl\gsl\specfunc\laguerre.c:296:12: note: Value stored to 'Lkp1' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:49:12: warning: Value stored to 'tol' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:49:12: note: Value stored to 'tol' during its initialization is never read
-D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:145:12: warning: variable 'w' is not initialized [cppcoreguidelines-init-variables]
-D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:145:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:158:18: warning: statement should be inside braces [hicpp-braces-around-statements,readability-braces-around-statements]
-D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:158:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:158:31: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:181:12: warning: Value stored to 'w' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
-D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:181:12: note: Value stored to 'w' during its initialization is never read
+D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:145:12: warning: Value stored to 'w' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
+D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:145:12: note: Value stored to 'w' during its initialization is never read
+D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:182:12: warning: Value stored to 'w' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
+D:\a\aprg\aprg\gsl\gsl\specfunc\lambert.c:182:12: note: Value stored to 'w' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\legendre_H3d.c:112:10: warning: Value stored to 'lnpre_val' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\legendre_H3d.c:112:10: note: Value stored to 'lnpre_val' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\specfunc\legendre_H3d.c:113:10: warning: Value stored to 'lnpre_err' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
@@ -6551,8 +6529,6 @@ D:\a\aprg\aprg\gsl\gsl\specfunc\poch.c:181:47: warning: using floating point abs
 D:\a\aprg\aprg\gsl\gsl\specfunc\poch.c:181:47: note: use function 'abs' instead
 D:\a\aprg\aprg\gsl\gsl\specfunc\poch.c:257:12: warning: Value stored to 'term2' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\specfunc\poch.c:257:12: note: Value stored to 'term2' during its initialization is never read
-D:\a\aprg\aprg\gsl\gsl\specfunc\poch.c:344:5: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\specfunc\poch.c:344:5: note: FIX-IT applied suggested code changes
 D:/a/aprg/aprg/gsl/gsl/specfunc/poch.c:166:46: warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
 D:/a/aprg/aprg/gsl/gsl/specfunc/poch.c:166:46: note: use function 'abs' instead
 D:/a/aprg/aprg/gsl/gsl/specfunc/poch.c:181:47: warning: using floating point absolute value function 'fabs' when argument is of integer type [-Wabsolute-value]
@@ -6857,15 +6833,12 @@ D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:77:14: warning: Value stored to 'h' duri
 D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:77:14: note: Value stored to 'h' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:78:14: warning: Value stored to 'u' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:78:14: note: Value stored to 'u' during its initialization is never read
-D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:97:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:97:3: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:98:5: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:101:14: warning: variable 'x' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:101:15: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:102:14: warning: variable 'h' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:102:15: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:103:14: warning: variable 'u' is not initialized [cppcoreguidelines-init-variables]
-note: this fix will not be applied because it overlaps with another fix
+D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:103:15: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:122:10: warning: Value stored to 'p' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\randist\exppow.c:122:10: note: Value stored to 'p' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\randist\fdist.c:55:14: warning: Value stored to 'p' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
@@ -9796,9 +9769,6 @@ D:\a\aprg\aprg\gsl\gsl\min\golden.c:61:3: warning: Value stored to 'f_upper' is 
 D:\a\aprg\aprg\gsl\gsl\min\golden.c:61:3: note: Value stored to 'f_upper' is never read
 D:\a\aprg\aprg\gsl\gsl\min\golden.c:82:10: warning: Value stored to 'x_new' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\min\golden.c:82:10: note: Value stored to 'x_new' during its initialization is never read
-D:\a\aprg\aprg\gsl\gsl\min\golden.c:109:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\min\golden.c:109:3: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\gsl\gsl\min\golden.c:110:5: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\min\brent.c:59:3: warning: Value stored to 'x_minimum' is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\min\brent.c:59:3: note: Value stored to 'x_minimum' is never read
 D:\a\aprg\aprg\gsl\gsl\min\brent.c:60:3: warning: Value stored to 'f_minimum' is never read [clang-analyzer-deadcode.DeadStores]
@@ -10178,12 +10148,12 @@ D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:193:10: warning: Value stored to 'absx' durin
 D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:193:10: note: Value stored to 'absx' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:233:10: warning: Value stored to 'result' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:233:10: note: Value stored to 'result' during its initialization is never read
-D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:257:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:257:3: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:262:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:262:3: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:283:10: warning: Value stored to 'result' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:283:10: note: Value stored to 'result' during its initialization is never read
-D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:317:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:317:3: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:322:3: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\gsl\gsl\cdf\gauss.c:322:3: note: FIX-IT applied suggested code changes
 D:\a\aprg\aprg\gsl\gsl\cdf\gaussinv.c:102:10: warning: Value stored to 'r' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
 D:\a\aprg\aprg\gsl\gsl\cdf\gaussinv.c:102:10: note: Value stored to 'r' during its initialization is never read
 D:\a\aprg\aprg\gsl\gsl\cdf\gaussinv.c:103:10: warning: Value stored to 'x' during its initialization is never read [clang-analyzer-deadcode.DeadStores]

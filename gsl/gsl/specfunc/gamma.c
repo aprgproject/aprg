@@ -1103,7 +1103,7 @@ gamma_xgthalf(const double x, gsl_sf_result * result)
     result->err += 2.0 * GSL_DBL_EPSILON * result->val;
     return GSL_SUCCESS;
   }
-  else if(x < GSL_SF_GAMMA_XMAX) {
+  if(x < GSL_SF_GAMMA_XMAX) {
     /* We do not want to exponentiate the logarithm
      * if x is large because of the inevitable
      * inflation of the error. So we carefully

@@ -914,11 +914,11 @@ hyperg_U_int_bge1(const int a, const int b, const double x,
     const double scale_factor = GSL_SQRT_DBL_MAX;
     gsl_sf_result lnm;
     gsl_sf_result y;
-    double lnscale;
+    double lnscale = NAN;
     double Uap1 = 1.0;     /* U(0,b,x)  */
     double Ua   = -b + x;  /* U(-1,b,x) */
-    double Uam1;
-    int ap;
+    double Uam1 = NAN;
+    int ap = 0;
 
     for(ap=-1; ap>a; ap--) {
       Uam1 = ap*(b-ap-1.0)*Uap1 + (x+2.0*ap-b)*Ua;
@@ -934,7 +934,7 @@ hyperg_U_int_bge1(const int a, const int b, const double x,
     y.err = 4.0 * GSL_DBL_EPSILON * (fabs(a)+1.0) * fabs(Ua);
     return gsl_sf_exp_mult_err_e10_e(lnm.val, lnm.err, y.val, y.err, result);
   }
-  else if(b >= 2.0*a + x) {
+  if(b >= 2.0*a + x) {
     /* Recurse forward from a = 0,1.
      */
     int scale_count = 0;

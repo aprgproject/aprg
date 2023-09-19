@@ -27,6 +27,7 @@
 #include "bessel_amp_phase.h"
 #include "bessel_olver.h"
 #include <gsl/gsl_sf_bessel.h>
+#include <math.h>
 
 
 
@@ -101,18 +102,18 @@ int gsl_sf_bessel_Jn_e(int n, double x, gsl_sf_result * result)
       return status;      
     }
     
-      double ans;
-      double err;
-      double ratio;
-      double sgn;
-      int stat_b;
+      double ans = NAN;
+      double err = NAN;
+      double ratio = NAN;
+      double sgn = NAN;
+      int stat_b = 0;
       int stat_CF1 = gsl_sf_bessel_J_CF1((double)n, x, &ratio, &sgn);
 
       /* backward recurrence */
       double Jkp1 = GSL_SQRT_DBL_MIN * ratio;
       double Jk   = GSL_SQRT_DBL_MIN;
-      double Jkm1;
-      int k;
+      double Jkm1 = NAN;
+      int k = 0;
 
       for(k=n; k>0; k--) {
         Jkm1 = 2.0*k/x * Jk - Jkp1;
