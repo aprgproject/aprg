@@ -198,7 +198,7 @@ string ResultPrinter::getNameOfBookMove(Move const& move, Book::LineDetail const
     return result;
 }
 
-strings ResultPrinter::getNextMovesString(NextMoves const& nextMoves, int const startIndex) const {
+strings ResultPrinter::getNextMovesString(NextMoves const& nextMoves, int const startIndex) {
     strings result;
     if (startIndex < static_cast<int>(nextMoves.size())) {
         int const rowSize = min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(nextMoves.size() - startIndex));

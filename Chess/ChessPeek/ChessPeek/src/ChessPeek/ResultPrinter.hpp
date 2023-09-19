@@ -68,7 +68,7 @@ private:
     [[nodiscard]] NextMove createNextMove(Move const& move, Variation const& variation) const;
     [[nodiscard]] NextMoves getNextMovesFromCalculation() const;
     [[nodiscard]] std::string getNameOfBookMove(Move const& move, Book::LineDetail const& lineDetail) const;
-    [[nodiscard]] stringHelper::strings getNextMovesString(NextMoves const& nextMoves, int const startIndex) const;
+    [[nodiscard]] static stringHelper::strings getNextMovesString(NextMoves const& nextMoves, int const startIndex);
     void printARowOfMovesSequence(MovesSequence const& movesSequence) const;
     void setMovesSequenceOnGrid(DisplayTable& grid, MovesSequence const& movesSequence, int const rowSize) const;
     void printHeadersForNextMoves(

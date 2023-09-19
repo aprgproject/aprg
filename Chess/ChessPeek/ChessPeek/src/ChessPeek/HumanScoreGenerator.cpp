@@ -82,7 +82,8 @@ HumanScoreGenerator::Score HumanScoreGenerator::getMoveTypePart(Move const& move
     }
     if (isDevelopingMove(pieceAtStart, move)) {
         return 3;  // prioritize developing moves
-    } else if (isCheck(pieceAtEnd)) {
+    }
+    if (isCheck(pieceAtEnd)) {
         return 2;  // prioritize checks to be human
     } else {
         return 1;
@@ -113,7 +114,8 @@ int HumanScoreGenerator::getScoreLevelDistance() const {
     }
     if (m_bestScore > LOWER_LIMIT_FOR_EQUAL) {
         return SCORE_LEVEL_DISTANCE_WHEN_EQUAL;
-    } else if (m_bestScore > LOWER_LIMIT_FOR_SLIGHTLY_WORSE) {
+    }
+    if (m_bestScore > LOWER_LIMIT_FOR_SLIGHTLY_WORSE) {
         return SCORE_LEVEL_DISTANCE_WHEN_SLIGHTLY_WORSE;
     } else {
         return SCORE_LEVEL_DISTANCE_WHEN_LOSING;

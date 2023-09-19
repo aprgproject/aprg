@@ -325,7 +325,7 @@ void gotoWebPage(string const& url) {
 }
 
 void deleteWebPageUntilItsDeleted(string const& htmlFile) {
-    AlbaLocalPathHandler htmlFileHandler(htmlFile);
+    AlbaLocalPathHandler const htmlFileHandler(htmlFile);
     while (htmlFileHandler.doesExist()) {
         if (!shouldStillRun) {
             exit(0);
@@ -352,7 +352,7 @@ void saveWebPage(string const& htmlFile) {
 void typeEnter() { typeKey(VK_RETURN); }
 
 void saveWebPageUntilItsDeleted(string const& htmlFile) {
-    AlbaLocalPathHandler htmlFileHandler(htmlFile);
+    AlbaLocalPathHandler const htmlFileHandler(htmlFile);
     while (!htmlFileHandler.doesExist()) {
         if (!shouldStillRun) {
             exit(0);
