@@ -12,16 +12,16 @@ unsigned int const & variable;
 auto const & variable;
 
 Type const variable = variable;
-constexpr unsigned int variable = variable;
+unsigned int const variable = variable;
 auto const variable = variable;
 
 Type const (variable);
-constexpr unsigned int (variable);
+unsigned int const (variable);
 auto const (variable);
 
-//fixConstReferenceOrder
-constexpr unsigned int variable = variable;
-constexpr unsigned int (variable);
+//fixConstToConstexpr
+constexpr unsigned int variable = 0;
+constexpr unsigned int variable=0;
 
 // fixCStyleStaticCast
 = static_cast<unsigned int>(variable;

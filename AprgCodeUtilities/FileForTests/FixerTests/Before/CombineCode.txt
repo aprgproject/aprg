@@ -19,9 +19,9 @@ const Type (variable);
 const unsigned int (variable);
 const auto (variable);
 
-//fixConstReferenceOrder
-unsigned int const variable = variable;
-unsigned int const (variable);
+//fixConstToConstexpr
+unsigned int const variable = 0;
+unsigned int const variable(0);
 
 // fixCStyleStaticCast
 = (unsigned int)variable;

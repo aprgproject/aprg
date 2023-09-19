@@ -6,10 +6,17 @@
 #include <gtest/gtest.h>
 
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba::CodeUtilities {
 
 namespace {
+
+void processDirectory(path const& directoryPath) {
+    CPlusPlusFixer fixer;
+    fixer.processDirectory(directoryPath);
+    runFormatterInDirectory(directoryPath);
+}
 
 void processAprgDirectory(string const& aprgPath) {
     CPlusPlusFixer fixer;
@@ -19,7 +26,7 @@ void processAprgDirectory(string const& aprgPath) {
         [&](AlbaLocalPathHandler::LocalPath const& filePath) {
             AlbaLocalPathHandler const filePathHandler(filePath);
             if (filePathHandler.getFile() == "CppProjectIndicatorFile.txt") {
-                fixer.processDirectory(filePathHandler.getDirectory());
+                processDirectory(filePathHandler.getDirectory());
             }
         });
 }
@@ -30,9 +37,9 @@ TEST(CPlusPlusFixerTest, DISABLED_AprgDirectoryTest) {
     processAprgDirectory(R"(F:\Branches\aprg_project\aprg_semi_clean\aprg)");
 }
 
-TEST(CPlusPlusFixerTest, DISABLED_DirectoryTest) {
+TEST(CPlusPlusFixerTest, DirectoryTest) {
     CPlusPlusFixer fixer;
-    fixer.processDirectory(R"(F:\Branches\aprg_project\aprg_semi_clean\aprg\AprgAlgebra\AprgAlgebra)");
+    fixer.processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgCommon\AprgCommon)");
 }
 
 TEST(CPlusPlusFixerTest, FixerWorksForCombineCodes) {

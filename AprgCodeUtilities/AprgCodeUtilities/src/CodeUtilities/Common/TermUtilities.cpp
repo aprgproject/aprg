@@ -144,6 +144,7 @@ string convertToString(TermType const type) {
         ALBA_MACROS_CASE_ENUM_STRING(TermType::CharacterLiteral)
         ALBA_MACROS_CASE_ENUM_STRING(TermType::CommentMultiline)
         ALBA_MACROS_CASE_ENUM_STRING(TermType::CommentSingleLine)
+        ALBA_MACROS_CASE_ENUM_STRING(TermType::Empty)
         ALBA_MACROS_CASE_ENUM_STRING(TermType::Identifier)
         ALBA_MACROS_CASE_ENUM_STRING(TermType::Keyword)
         ALBA_MACROS_CASE_ENUM_STRING(TermType::Macro)
@@ -164,6 +165,7 @@ string convertToString(MatcherType const type) {
         ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierWithPascalCase)
         ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierWithSnakeCase)
         ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierAndNotAScreamingSnakeCase)
+        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::Literal)
         ALBA_MACROS_CASE_ENUM_STRING(MatcherType::NotAWhiteSpace)
         ALBA_MACROS_CASE_ENUM_STRING(MatcherType::WhiteSpaceWithNewLine)
     }
@@ -222,6 +224,9 @@ bool isAMatch(MatcherType const matcherType, Term const& term) {
             return TermType::Identifier == term.getTermType() && isSnakeCase(term.getContent());
         case MatcherType::IdentifierAndNotAScreamingSnakeCase:
             return TermType::Identifier == term.getTermType() && !isScreamingSnakeCase(term.getContent());
+        case MatcherType::Literal:
+            return TermType::Boolean == term.getTermType() || TermType::CharacterLiteral == term.getTermType() ||
+                   TermType::Number == term.getTermType() || TermType::StringLiteral == term.getTermType();
         case MatcherType::NotAWhiteSpace:
             return !isWhiteSpace(term);
         case MatcherType::WhiteSpaceWithNewLine:
