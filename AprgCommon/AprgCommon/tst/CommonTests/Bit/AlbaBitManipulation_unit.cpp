@@ -86,8 +86,8 @@ TEST(AlbaBitManipulationTest, RotateBitToTheRightWithShiftValueWorks) {
 
 TEST(AlbaBitManipulationTest, ConcatenationBytesWorksWithArgumentsSizeLessThanResult) {
     // Given
-    const uint8_t byte1 = 0xA1;
-    const uint8_t byte2 = 0xBA;
+    constexpr uint8_t byte1 = 0xA1;
+    constexpr uint8_t byte2 = 0xBA;
 
     // When
     uint32_t const result = AlbaBitManipulation<uint32_t>::concatenateBytes(byte1, byte2);
@@ -98,8 +98,8 @@ TEST(AlbaBitManipulationTest, ConcatenationBytesWorksWithArgumentsSizeLessThanRe
 
 TEST(AlbaBitManipulationTest, ConcatenationBytesWorksWithArgumentsSameSizeAsResult) {
     // Given
-    const uint8_t byte1 = 0xA1;
-    const uint8_t byte2 = 0xBA;
+    constexpr uint8_t byte1 = 0xA1;
+    constexpr uint8_t byte2 = 0xBA;
 
     // When
     uint32_t const result = AlbaBitManipulation<uint32_t>::concatenateBytes(byte1, byte2, byte1, byte2);
@@ -110,8 +110,8 @@ TEST(AlbaBitManipulationTest, ConcatenationBytesWorksWithArgumentsSameSizeAsResu
 
 TEST(AlbaBitManipulationTest, ConcatenationNibblesWorksWithArgumentsSizeLessThanResult) {
     // Given
-    const uint8_t byte1 = 0xA1;
-    const uint8_t byte2 = 0xBA;
+    constexpr uint8_t byte1 = 0xA1;
+    constexpr uint8_t byte2 = 0xBA;
 
     // When
     uint32_t const result = AlbaBitManipulation<uint32_t>::concatenateNibbles(byte1, byte2);
@@ -122,8 +122,8 @@ TEST(AlbaBitManipulationTest, ConcatenationNibblesWorksWithArgumentsSizeLessThan
 
 TEST(AlbaBitManipulationTest, ConcatenationNibblesWorksWithArgumentsSameSizeAsResult) {
     // Given
-    const uint8_t byte1 = 0xA1;
-    const uint8_t byte2 = 0xBA;
+    constexpr uint8_t byte1 = 0xA1;
+    constexpr uint8_t byte2 = 0xBA;
 
     // When
     uint32_t const result =
@@ -135,7 +135,7 @@ TEST(AlbaBitManipulationTest, ConcatenationNibblesWorksWithArgumentsSameSizeAsRe
 
 TEST(AlbaBitManipulationTest, BytesAreSuccessfullyObtainedWhenU32IsUsed) {
     // Given
-    const uint32_t input = 0x12345678;
+    constexpr uint32_t input = 0x12345678;
 
     // When
     // Then
@@ -147,7 +147,7 @@ TEST(AlbaBitManipulationTest, BytesAreSuccessfullyObtainedWhenU32IsUsed) {
 
 TEST(AlbaBitManipulationTest, NibblesAreSuccessfullyObtainedWhenU32IsUsed) {
     // Given
-    const uint32_t input = 0x12345678;
+    constexpr uint32_t input = 0x12345678;
 
     // When
     // Then
@@ -163,7 +163,7 @@ TEST(AlbaBitManipulationTest, NibblesAreSuccessfullyObtainedWhenU32IsUsed) {
 
 TEST(AlbaBitManipulationTest, BitsAreSuccessfullyObtainedWhenU32IsUsed) {
     // Given
-    const uint32_t input = 0x12345678;
+    constexpr uint32_t input = 0x12345678;
 
     // When
     // Then
@@ -176,7 +176,7 @@ TEST(AlbaBitManipulationTest, BitsAreSuccessfullyObtainedWhenU32IsUsed) {
 
 TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedWhenU16IsUsed) {
     // Given
-    const uint16_t input = 0x1234;
+    constexpr uint16_t input = 0x1234;
 
     // When
     // Then
@@ -185,7 +185,7 @@ TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedWhenU16IsUsed) {
 
 TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedWhenU32IsUsed) {
     // Given
-    const uint32_t input = 0x12345678;
+    constexpr uint32_t input = 0x12345678;
 
     // When
     // Then
@@ -194,7 +194,7 @@ TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedWhenU32IsUsed) {
 
 TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedWhenU64IsUsed) {
     // Given
-    const uint64_t input = 0x1234'5678'9ABC'DEF0;
+    constexpr uint64_t input = 0x1234'5678'9ABC'DEF0;
 
     // When
     // Then
@@ -203,7 +203,7 @@ TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedWhenU64IsUsed) {
 
 TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedForTwoBytes) {
     // Given
-    const uint16_t input = 0x1234;
+    constexpr uint16_t input = 0x1234;
 
     // When
     // Then
@@ -212,7 +212,7 @@ TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedForTwoBytes) {
 
 TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedForFourBytes) {
     // Given
-    const uint32_t input = 0x1234'5678;
+    constexpr uint32_t input = 0x1234'5678;
 
     // When
     // Then
@@ -221,7 +221,7 @@ TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedForFourBytes) {
 
 TEST(AlbaBitManipulationTest, DataIsSuccessfullySwappedForEightBytes) {
     // Given
-    const uint64_t input = 0x1234'5678'9ABC'DEF0;
+    constexpr uint64_t input = 0x1234'5678'9ABC'DEF0;
 
     // When
     // Then

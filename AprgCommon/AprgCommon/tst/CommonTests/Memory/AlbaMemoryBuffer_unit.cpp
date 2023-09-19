@@ -218,7 +218,7 @@ TEST(AlbaMemoryBufferTest, ResizeWithAdditionalSizeAndReturnBeginOfAdditionalDat
 
 TEST(AlbaMemoryBufferTest, SaveObjectWorksOnPrimitiveTypes) {
     AlbaMemoryBuffer buffer;
-    int const input = 0x12345678;
+    constexpr int input = 0x12345678;
 
     buffer.saveObject<int>(input);
 

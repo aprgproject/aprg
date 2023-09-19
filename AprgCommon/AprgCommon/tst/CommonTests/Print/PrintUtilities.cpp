@@ -11,9 +11,9 @@ namespace alba {
 
 void performASimplePrintingTest(
     stringstream &ssToVerify, function<void(stringstream &, int, int, int)> const &printAction) {
-    int const singleParameter1 = 12;
-    int const singleParameter2 = 345;
-    int const singleParameter3 = 6789;
+    constexpr int singleParameter1 = 12;
+    constexpr int singleParameter2 = 345;
+    constexpr int singleParameter3 = 6789;
 
     printAction(ssToVerify, singleParameter1, singleParameter2, singleParameter3);
 
