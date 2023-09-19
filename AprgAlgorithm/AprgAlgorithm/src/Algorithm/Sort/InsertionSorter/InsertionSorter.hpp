@@ -27,7 +27,7 @@ private:
     void continuouslySwapBackIfStillOutOfOrderUsingForwardIterators(
         Values& valuesToSort, Iterator const insertIt) const {
         Iterator itHigh = insertIt;
-        Iterator itLow = std::prev(itHigh);
+        auto itLow = std::prev(itHigh);
         while (true) {
             if (*itLow <= *itHigh) {
                 break;

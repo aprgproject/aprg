@@ -42,7 +42,7 @@ struct AlbaLargeSorterConfiguration {
             m_maximumNumberOfObjectsPerBlock <= m_minimumNumberOfObjectsPerBlock) {
             return false;
         }
-        AlbaLocalPathHandler directoryPath(m_directoryForBlocks);
+        AlbaLocalPathHandler const directoryPath(m_directoryForBlocks);
         directoryPath.createDirectoriesAndIsSuccessful();
         if (!directoryPath.isExistingDirectory()) {
             return false;

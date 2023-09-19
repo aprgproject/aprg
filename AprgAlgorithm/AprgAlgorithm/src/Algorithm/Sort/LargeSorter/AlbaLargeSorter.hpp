@@ -143,7 +143,7 @@ private:
     }
 
     void deleteTempFilesAndDirectories() {
-        AlbaLocalPathHandler temporaryLocalDirectory(m_configuration.m_directoryForBlocks);
+        AlbaLocalPathHandler const temporaryLocalDirectory(m_configuration.m_directoryForBlocks);
         if (temporaryLocalDirectory.doesExist()) {
             temporaryLocalDirectory.deleteAllDirectoryContentsAndIsSuccessful();
         }
