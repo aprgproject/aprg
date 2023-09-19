@@ -55,7 +55,7 @@ void runFormatterInDirectory(path const& directoryPath) {
 void clearFile(path const& file) { ofstream const expectedFileStream(AlbaLocalPathHandler(file).getPath()); }
 
 void copyFile(string const& source, string const& destination) {
-    AlbaLocalPathHandler sourcePathHandler(source);
+    AlbaLocalPathHandler const sourcePathHandler(source);
     AlbaLocalPathHandler const destinationPathHandler(destination);
     clearFile(destinationPathHandler.getPath());
     destinationPathHandler.deleteFileAndIsSuccessful();
