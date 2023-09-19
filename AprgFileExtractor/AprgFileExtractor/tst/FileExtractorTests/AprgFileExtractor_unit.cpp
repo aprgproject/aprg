@@ -21,7 +21,7 @@ void deleteAllFilesOnDirectory(path const& directoryPath) {
         topDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth(
             [](AlbaLocalPathHandler::LocalPath const&) {},
             [&](AlbaLocalPathHandler::LocalPath const& filePath) {
-                AlbaLocalPathHandler filePathHandler(filePath);
+                AlbaLocalPathHandler const filePathHandler(filePath);
                 EXPECT_TRUE(filePathHandler.deleteFileAndIsSuccessful());
                 ASSERT_FALSE(filePathHandler.doesExist());
             });
@@ -94,7 +94,7 @@ TEST(AprgFileExtractorTest, OneFileIsExtractedSuccessfully) {
     AprgFileExtractor const fileExtractor;
     AlbaLocalPathHandler const directoryPathHandler(APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\)");
     AlbaLocalPathHandler const relativeFilePathHandler(R"(DirectoryTest\DIR1\File1.log)");
-    AlbaLocalPathHandler filePathHandler(
+    AlbaLocalPathHandler const filePathHandler(
         APRG_DIR R"(\AprgFileExtractor\FilesForTests\DirectoryTest\DirectoryTest\DIR1\File1.log)");
     deleteAllFilesOnDirectory(directoryPathHandler.getPath());
 
