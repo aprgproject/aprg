@@ -23,7 +23,7 @@ IncludeCategories:
     Priority:        3
     SortPriority:    0
 #Remaining headers
-  - Regex:           '^<(gtest|gmock|benchmark)/.*>'
+  - Regex:           '^<(gtest|gmock|benchmark|boost|gsl)/.*>'
     Priority:        2
     SortPriority:    0
 #Remaining headers
