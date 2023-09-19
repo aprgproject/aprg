@@ -103,15 +103,28 @@ void CPlusPlusFixer::fixConstReferenceOrder(TermMatcher const& typeMatcher) {
     findTermsAndSwapAt({{M(","), M("const"), typeMatcher, M("("), M(TermType::Identifier), M(")")}}, 1, 2);
 }
 
-void CPlusPlusFixer::fixConstToConstexpr() { fixConstToConstexpr(M(TermType::PrimitiveType)); }
-
-void CPlusPlusFixer::fixConstToConstexpr(TermMatcher const& typeMatcher) {
-    findTermsAndConvertToConstexpr({{M("{"), typeMatcher, M("const"), M(TermType::Identifier), M("=")}}, 1, 2);
-    findTermsAndConvertToConstexpr({{M("}"), typeMatcher, M("const"), M(TermType::Identifier), M("=")}}, 1, 2);
-    findTermsAndConvertToConstexpr({{M(";"), typeMatcher, M("const"), M(TermType::Identifier), M("=")}}, 1, 2);
-    findTermsAndConvertToConstexpr({{M("{"), typeMatcher, M("const"), M("("), M(TermType::Identifier), M(")")}}, 1, 2);
-    findTermsAndConvertToConstexpr({{M("}"), typeMatcher, M("const"), M("("), M(TermType::Identifier), M(")")}}, 1, 2);
-    findTermsAndConvertToConstexpr({{M(";"), typeMatcher, M("const"), M("("), M(TermType::Identifier), M(")")}}, 1, 2);
+void CPlusPlusFixer::fixConstToConstexpr() {
+    findTermsAndConvertToConstexpr(
+        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(MatcherType::Literal)}}, 1,
+        2, 0, 0);
+    findTermsAndConvertToConstexpr(
+        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(MatcherType::Literal)}}, 1,
+        2, 0, 0);
+    findTermsAndConvertToConstexpr(
+        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(MatcherType::Literal)}}, 1,
+        2, 0, 0);
+    findTermsAndConvertToConstexpr(
+        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(MatcherType::Literal),
+          M(")")}},
+        1, 2, 4, 6);
+    findTermsAndConvertToConstexpr(
+        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(MatcherType::Literal),
+          M(")")}},
+        1, 2, 4, 6);
+    findTermsAndConvertToConstexpr(
+        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(MatcherType::Literal),
+          M(")")}},
+        1, 2, 4, 6);
 }
 
 void CPlusPlusFixer::fixNoConstPassByValue() {
@@ -202,7 +215,8 @@ void CPlusPlusFixer::findTermsAndCheckForLoopAndSwapAt(
 }
 
 void CPlusPlusFixer::findTermsAndConvertToConstexpr(
-    Patterns const& searchPatterns, int const typeIndex, int const constIndex) {
+    Patterns const& searchPatterns, int const typeIndex, int const constIndex, int const openingParenthesisIndex,
+    int const closingParenthesisIndex) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
@@ -212,6 +226,11 @@ void CPlusPlusFixer::findTermsAndConvertToConstexpr(
             termIndex = hitIndexes.back();
             m_currentTerms[hitIndexes[constIndex]].setContent("constexpr");
             swap(m_currentTerms[hitIndexes[typeIndex]], m_currentTerms[hitIndexes[constIndex]]);
+            if (m_currentTerms[hitIndexes[openingParenthesisIndex]].getContent() == "(" &&
+                m_currentTerms[hitIndexes[closingParenthesisIndex]].getContent() == ")") {
+                m_currentTerms[hitIndexes[openingParenthesisIndex]].setContent("=");
+                m_currentTerms[hitIndexes[closingParenthesisIndex]].clear();
+            }
             cout << "Fixed file: [" << m_currentFile << "]\n";
             cout << "Swapped at: [" << getLocatorString(m_currentTerms, hitIndexes[typeIndex]) << "]\n";
         }

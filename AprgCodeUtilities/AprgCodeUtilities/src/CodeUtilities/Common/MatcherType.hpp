@@ -8,6 +8,7 @@ enum class MatcherType {
     IdentifierWithPascalCase,
     IdentifierWithSnakeCase,
     IdentifierAndNotAScreamingSnakeCase,
+    Literal,
     NotAWhiteSpace,
     WhiteSpaceWithNewLine
 };

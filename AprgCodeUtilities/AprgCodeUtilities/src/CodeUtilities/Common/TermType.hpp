@@ -9,6 +9,7 @@ enum class TermType {
     CharacterLiteral,
     CommentMultiline,
     CommentSingleLine,
+    Empty,
     Identifier,
     Keyword,
     Macro,

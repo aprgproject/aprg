@@ -22,7 +22,6 @@ private:
     void fixConstReferenceOrder();
     void fixConstReferenceOrder(TermMatcher const& typeMatcher);
     void fixConstToConstexpr();
-    void fixConstToConstexpr(TermMatcher const& typeMatcher);
     void fixNoConstPassByValue();
     void fixNoConstPassByValue(TermMatcher const& typeMatcher);
     void fixNoConstPassByValue(Patterns const& searchPatterns);
@@ -30,7 +29,9 @@ private:
     void fixCStyleStaticCast(TermMatcher const& typeMatcher);
     void findTermsAndSwapAt(Patterns const& searchPatterns, int const index1, int const index2);
     void findTermsAndCheckForLoopAndSwapAt(Patterns const& searchPatterns, int const index1, int const index2);
-    void findTermsAndConvertToConstexpr(Patterns const& searchPatterns, int const typeIndex, int const variableIndex);
+    void findTermsAndConvertToConstexpr(
+        Patterns const& searchPatterns, int const typeIndex, int const constIndex, int const openingParenthesisIndex,
+        int const closingParenthesisIndex);
     void fixCommentsPositionOfBraces();
     std::filesystem::path m_currentFile;
     Terms m_currentTerms;

@@ -17,7 +17,7 @@ public:
     [[nodiscard]] TermType getTermType() const;
     [[nodiscard]] std::string getContent() const;
     [[nodiscard]] std::string getTermTypeString() const;
-    void clearValueType();
+    void clear();
     void setTermType(TermType const termType);
     void setContent(std::string const& content);
     friend std::ostream& operator<<(std::ostream& out, Term const& term);
