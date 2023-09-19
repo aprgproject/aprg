@@ -24,9 +24,11 @@ void processAprgDirectory(string const& aprgPath) {
 
 }  // namespace
 
-TEST(CPlusPlusFinderTest, DISABLED_AprgDirectoryTest) { processAprgDirectory(R"(F:\Branches\aprg_project\aprg\aprg)"); }
+TEST(CPlusPlusFinderTest, DISABLED_ActualAprgDirectoryTest) {
+    processAprgDirectory(R"(F:\Branches\aprg_project\aprg\aprg)");
+}
 
-TEST(CPlusPlusFinderTest, DISABLED_DirectoryTest) {
+TEST(CPlusPlusFinderTest, DISABLED_ActualDirectoryTest) {
     CPlusPlusFinder finder;
     finder.processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgAlgebra\AprgAlgebra\)");
 }

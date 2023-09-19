@@ -11,27 +11,33 @@ const Type & variable;
 const unsigned int & variable;
 const auto & variable;
 
-const Type variable = variable;
-const unsigned int variable = variable;
-const auto variable = variable;
+const Type variable = nonLiteralValue;
+const unsigned int variable = nonLiteralValue;
+const auto variable = nonLiteralValue;
 
-const Type (variable);
-const unsigned int (variable);
-const auto (variable);
+const Type variable(nonLiteralValue);
+const unsigned int variable(nonLiteralValue);
+const auto variable(nonLiteralValue);
+
+// fixNoConstPassByValue
+function(unsigned int variable1, unsigned int variable2, unsigned int variable3){}
+function(Type variable1, Type variable2, Type variable3){}
 
 //fixConstToConstexpr
 unsigned int const variable = 0;
 unsigned int const variable(0);
 
-// fixCStyleStaticCast
-= (unsigned int)variable;
-+ (unsigned int)variable;
-
-// fixNoConstPassByValue
-(unsigned int variable1, unsigned int variable2, unsigned int variable3)
-(Type variable1, Type variable2, Type variable3)
+//fixCStylePrintf
+printf("variable1: [%d] variable2: [%0.0f] variable3: [%.*s]", variable1, variable2, variable3);
+printf("");
+printf("%zu %f %f %f %f\n", i, gsl_vector_get(x, i), gsl_vector_get(xmean, i), gsl_vector_get(xmin, i), gsl_vector_get(xmax, i));
+printf("%f %f %f %f\n", ti, xi, medi, rmedi);
 
 //fixCommentsPositionOfBraces
 if //Comment
 {
 }
+
+// fixCStyleStaticCast
+variable1 = (unsigned int)variable2;
+variable1 + (unsigned int)variable2;

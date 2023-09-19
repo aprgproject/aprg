@@ -11,28 +11,33 @@ Type const & variable;
 unsigned int const & variable;
 auto const & variable;
 
-Type const variable = variable;
-unsigned int const variable = variable;
-auto const variable = variable;
+Type const variable = nonLiteralValue;
+unsigned int const variable = nonLiteralValue;
+auto const variable = nonLiteralValue;
 
-Type const (variable);
-unsigned int const (variable);
-auto const (variable);
+const Type variable(nonLiteralValue);
+const unsigned int variable(nonLiteralValue);
+const auto variable(nonLiteralValue);
+
+// fixNoConstPassByValue
+function(unsigned int const variable1, unsigned int const variable2, unsigned int const variable3){}
+function(Type const variable1, Type const variable2, Type const variable3){}
 
 //fixConstToConstexpr
 constexpr unsigned int variable = 0;
 constexpr unsigned int variable=0;
-size_t variable(0);
 
-// fixCStyleStaticCast
-= static_cast<unsigned int>(variable;
-+ static_cast<unsigned int>(variable;
-
-// fixNoConstPassByValue
-(unsigned int const variable1, unsigned int const variable2, unsigned int const variable3)
-(Type const variable1, Type const variable2, Type const variable3)
+//fixCStylePrintf
+cout<<"variable1: ["<< variable1<<"] variable2: ["<< variable2<<"] variable3: ["<< variable3<<"]";
+cout<<"";
+cout<< i<<"u "<< gsl_vector_get(x, i)<<" "<< gsl_vector_get(xmean, i)<<" "<< gsl_vector_get(xmin, i)<<" "<< gsl_vector_get(xmax, i)<<"\n";
+cout<< ti<<" "<< xi<<" "<< medi<<" "<< rmedi<<"\n";
 
 //fixCommentsPositionOfBraces
 if {
 //Comment
 }
+
+// fixCStyleStaticCast
+variable1 = static_cast<unsigned int>(variable2;
+variable1 + static_cast<unsigned int>(variable2;
