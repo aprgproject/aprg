@@ -1,243 +1,35 @@
-StaticAnalysisJobIdentifier: [20]
-2023-09-15T08:32:22
+StaticAnalysisJobIdentifier: [30]
+2023-09-19T07:24:32
 D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Time\AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:251:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:250:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:16:33: warning: method 'doDoubleLeftClick' can be made static [readability-convert-member-functions-to-static]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:17:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:17:30: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:16:53: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:21:33: warning: method 'doLeftClickAt' can be made static [readability-convert-member-functions-to-static]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:18:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:18:55: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:21:78: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:31:33: warning: method 'doRightClickAt' can be made static [readability-convert-member-functions-to-static]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:20:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:20:56: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:31:79: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:36:33: warning: method 'typeCharacter' can be made static [readability-convert-member-functions-to-static]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:21:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:21:46: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:36:69: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:44:33: warning: method 'saveBitmapOnScreen' can be made static [readability-convert-member-functions-to-static]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:23:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation/AlbaWindowsUserAutomation.hpp:23:63: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:44:81: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:54:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:61:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:89:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:89:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:90:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:90:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:255:66: warning: narrowing conversion from 'unsigned long long' to signed type 'streamsize' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:16:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:16:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:23:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:23:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:30:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:30:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:43:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:43:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:48:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:60:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:67:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:129:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:129:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:130:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:130:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:294:66: warning: narrowing conversion from 'unsigned long long' to signed type 'streamsize' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:14:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
 note: this fix will not be applied because it overlaps with another fix
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:48:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:14:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
 note: this fix will not be applied because it overlaps with another fix
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:52:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:52:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:60:37: warning: unused variable 'userAutomation' [clang-diagnostic-unused-variable]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:65:37: warning: unused variable 'userAutomation' [clang-diagnostic-unused-variable]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:70:37: warning: unused variable 'userAutomation' [clang-diagnostic-unused-variable]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:71:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:32:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
 note: this fix will not be applied because it overlaps with another fix
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:71:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:32:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
 note: this fix will not be applied because it overlaps with another fix
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:84:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:44:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
 note: this fix will not be applied because it overlaps with another fix
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:84:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:44:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
 note: this fix will not be applied because it overlaps with another fix
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:86:32: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:86:32: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:99:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:99:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:106:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:106:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:107:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:107:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:108:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:108:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:109:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:109:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:114:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:114:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:119:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:119:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:123:37: warning: unused variable 'userAutomation' [clang-diagnostic-unused-variable]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:129:37: warning: unused variable 'userAutomation' [clang-diagnostic-unused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:14:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:21:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:28:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:42:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:47:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:60:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:65:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:70:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:83:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:96:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:105:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:113:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:118:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:123:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/AlbaWindowsUserAutomation_unit.cpp:129:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:24:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:24:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:28:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:28:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:30:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:30:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:31:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:31:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:36:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:36:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:43:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:43:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:44:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:44:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:45:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:45:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:46:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:46:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:47:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:47:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:65:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:65:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:66:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:66:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:67:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:67:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:78:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:78:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:83:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:83:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:85:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:85:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:86:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:86:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:90:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:90:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:95:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:95:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:96:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:96:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:97:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:97:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:98:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:98:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:99:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:99:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:122:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:119:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
 note: this fix will not be applied because it overlaps with another fix
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:122:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:119:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
 note: this fix will not be applied because it overlaps with another fix
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:123:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:123:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:134:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:134:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:136:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:136:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:137:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:137:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:141:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:141:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:146:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:146:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:149:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:149:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:155:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:155:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:164:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:164:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:170:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:170:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:175:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:175:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:177:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:177:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:180:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:180:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:185:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:185:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:186:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:186:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:187:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:187:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:188:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:188:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:189:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:189:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:192:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:192:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:194:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:194:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:195:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:195:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:214:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:214:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:217:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:217:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:222:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:222:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:227:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:227:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:229:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:229:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:233:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:233:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:235:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:235:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:237:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:237:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:239:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:239:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:241:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:241:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:255:5: warning: variable 'lineCountToStart' of type 'int' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:255:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:266:13: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:266:13: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:282:25: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:282:25: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:286:25: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:286:25: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:289:25: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:289:25: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:295:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:295:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:299:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:299:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:303:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:303:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:307:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:307:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:312:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:312:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:324:21: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:324:21: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:332:25: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:332:25: note: FIX-IT applied suggested code changes
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/RealAutomationTests.cpp:20:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/RealAutomationTests.cpp:72:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/RealAutomationTests.cpp:210:37: warning: unused variable 'userAutomation' [-Wunused-variable]
-D:/a/aprg/aprg/AprgLocalUserAutomation/AprgLocalUserAutomation/tstWindows/UserAutomationTests/RealAutomationTests.cpp:247:37: warning: unused variable 'userAutomation' [-Wunused-variable]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:125:21: warning: variable 'filePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:125:42: note: FIX-IT applied suggested code changes
 DONE!

@@ -122,7 +122,7 @@ TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
             mp3FilesPathHandler.findFilesAndDirectoriesOneDepth(
                 [](AlbaLocalPathHandler::LocalPath const&) {},
                 [&](AlbaLocalPathHandler::LocalPath const& filePath) {
-                    AlbaLocalPathHandler filePathHandler(filePath);
+                    AlbaLocalPathHandler const filePathHandler(filePath);
                     if (filePathHandler.getExtension() == "mp3" && filePathHandler.getFileSize() < 100000000) {
                         // 100MB
                         // close previous file
