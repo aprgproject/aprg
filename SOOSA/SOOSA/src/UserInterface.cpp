@@ -15,17 +15,17 @@ void UserInterface::setPath(string const& path) { m_savedConfiguration.setPath(p
 
 void UserInterface::askUserForMainDetails() {
     cout << "Enter area:\n";
-    string area(m_userInterface.getUserInput());
+    string const area(m_userInterface.getUserInput());
 
     cout << "Enter period:"
          << "\n";
-    string period(m_userInterface.getUserInput());
+    string const period(m_userInterface.getUserInput());
 
     cout << "Enter discharge:\n";
     auto discharge(m_userInterface.getNumberFromInput<double>());
 
     cout << "Enter minimum satisfactory score (inclusive):\n";
-    int minimumSatisfactoryScore(m_userInterface.getNumberFromInput<int>());
+    int const minimumSatisfactoryScore(m_userInterface.getNumberFromInput<int>());
 
     m_savedConfiguration.setMainParameters(area, period, discharge, minimumSatisfactoryScore);
 }
@@ -44,7 +44,7 @@ void UserInterface::saveFormDetailsFromFormDetailPath(string const& formDetailsF
 
     int columnNumber = 0;
     while (fileReader.isNotFinished()) {
-        string line(fileReader.getLineAndIgnoreWhiteSpaces());
+        string const line(fileReader.getLineAndIgnoreWhiteSpaces());
         if (!line.empty()) {
             if (line == "NEW_COLUMN") {
                 ++columnNumber;
@@ -56,14 +56,14 @@ void UserInterface::saveFormDetailsFromFormDetailPath(string const& formDetailsF
 }
 
 string UserInterface::askUserForPathOfFormDetailToRead(string const& formDetailsDirectoryPath) {
-    AlbaLocalPathHandler formDetailsPathHandler(formDetailsDirectoryPath);
+    AlbaLocalPathHandler const formDetailsPathHandler(formDetailsDirectoryPath);
     AlbaUserInterface::Choices<int> choices;
     int choice(0);
 
     formDetailsPathHandler.findFilesAndDirectoriesUnlimitedDepth(
         [](AlbaLocalPathHandler::LocalPath const&) {},
         [&](AlbaLocalPathHandler::LocalPath const& filePath) {
-            AlbaLocalPathHandler filePathHandler(filePath);
+            AlbaLocalPathHandler const filePathHandler(filePath);
             cout << "Choice " << choice << " :: " << filePathHandler.getFile() << "\n";
             choices.emplace(choice++, filePathHandler.getPath().string());
         });

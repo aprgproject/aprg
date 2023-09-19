@@ -848,7 +848,7 @@ void SOOSA::processDirectory(string const& directoryPath) {
     directoryPathToBeProcessed.findFilesAndDirectoriesUnlimitedDepth(
         [](AlbaLocalPathHandler::LocalPath const&) {},
         [&](AlbaLocalPathHandler::LocalPath const& filePath) {
-            string filePathString(filePath.string());
+            string const filePathString(filePath.string());
             processFile(filePathString);
             saveDataToCsvFile(filePathString);
         });

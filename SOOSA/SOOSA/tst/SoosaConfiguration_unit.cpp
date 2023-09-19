@@ -8,7 +8,7 @@ using namespace std;
 namespace alba::soosa {
 
 TEST(SoosaConfigurationTest, LoadConfigurationFromFileWorks) {
-    AlbaLocalPathHandler fileForSoosa(APRG_DIR R"(\SOOSA\FilesForTests\SoosaConfigurationForUnitTest.txt)");
+    AlbaLocalPathHandler const fileForSoosa(APRG_DIR R"(\SOOSA\FilesForTests\SoosaConfigurationForUnitTest.txt)");
     SoosaConfiguration soosaConfiguration;
 
     soosaConfiguration.loadConfigurationFromFile(fileForSoosa.getPath().string());

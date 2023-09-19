@@ -117,7 +117,7 @@ void SoosaConfiguration::readNamesAndValuesFromFile(string const& filePath) {
     if (inputFileStream.is_open()) {
         AlbaFileReader fileReader(inputFileStream);
         while (fileReader.isNotFinished()) {
-            string line(fileReader.getLineAndIgnoreWhiteSpaces());
+            string const line(fileReader.getLineAndIgnoreWhiteSpaces());
             if (!line.empty()) {
                 if (line.substr(0, 2) == "//") {
                     // do nothing if comment
