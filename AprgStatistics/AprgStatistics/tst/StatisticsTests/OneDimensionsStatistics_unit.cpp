@@ -13,13 +13,13 @@ using LocalSamples = OneDimensionsStatistics::Samples;
 
 TEST(OneDimensionsStatisticsTest, MinMaxValuesCanFetched) {
     LocalSamples samples;
-    samples.emplace_back(LocalSample{-100});
-    samples.emplace_back(LocalSample{-10});
-    samples.emplace_back(LocalSample{-1});
-    samples.emplace_back(LocalSample{1});
-    samples.emplace_back(LocalSample{10});
-    samples.emplace_back(LocalSample{100});
-    OneDimensionsStatistics::PairOfDoubles minMax(OneDimensionsStatistics::getMinMaxFromSamples(samples));
+    samples.emplace_back(-100);
+    samples.emplace_back(-10);
+    samples.emplace_back(-1);
+    samples.emplace_back(1);
+    samples.emplace_back(10);
+    samples.emplace_back(100);
+    OneDimensionsStatistics::PairOfDoubles const minMax(OneDimensionsStatistics::getMinMaxFromSamples(samples));
 
     EXPECT_EQ(-100, minMax.first);
     EXPECT_EQ(100, minMax.second);
