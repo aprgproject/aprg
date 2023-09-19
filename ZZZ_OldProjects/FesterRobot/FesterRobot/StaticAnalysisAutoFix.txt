@@ -1,60 +1,19 @@
-StaticAnalysisJobIdentifier: [20]
-2023-09-15T19:19:08
+StaticAnalysisJobIdentifier: [30]
+2023-09-19T20:10:26
 D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Time\AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:/a/aprg/aprg/AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp:23:34: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:251:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:250:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:54:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:61:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:89:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:89:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:90:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:90:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:255:66: warning: narrowing conversion from 'unsigned long long' to signed type 'streamsize' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:44:21: warning: method 'getClipboardFormattedData' can be made static [readability-convert-member-functions-to-static]
-D:/a/aprg/aprg/ZZZ_OldProjects/FesterRobot/FesterRobot/src/FesterRobot.hpp:19:19: note: FIX-IT applied suggested code changes
-D:/a/aprg/aprg/ZZZ_OldProjects/FesterRobot/FesterRobot/src/FesterRobot.hpp:19:59: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:44:49: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:72:19: warning: method 'exitIfSpecialKeyIsPressed' can be made static [readability-convert-member-functions-to-static]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:60:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:67:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:129:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:129:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:130:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:130:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:294:66: warning: narrowing conversion from 'unsigned long long' to signed type 'streamsize' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:74:19: warning: method 'setupFesterEnvironmentInMatlab' can be made static [readability-convert-member-functions-to-static]
 D:/a/aprg/aprg/ZZZ_OldProjects/FesterRobot/FesterRobot/src/FesterRobot.hpp:22:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:87:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:87:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:88:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:88:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:91:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:91:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:94:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:94:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:97:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:97:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:101:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:101:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:102:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:102:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:103:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:103:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:104:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:104:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:110:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:110:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:113:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:113:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:116:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:116:5: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:123:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:123:9: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:129:9: warning: static member accessed through instance [readability-static-accessed-through-instance]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:129:9: note: FIX-IT applied suggested code changes
-D:/a/aprg/aprg/ZZZ_OldProjects/FesterRobot/FesterRobot/src/FesterRobot.hpp:32:31: warning: private field 'm_userAutomation' is not used [-Wunused-private-field]
 DONE!

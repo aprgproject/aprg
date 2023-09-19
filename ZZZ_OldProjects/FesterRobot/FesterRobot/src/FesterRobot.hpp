@@ -19,7 +19,7 @@ private:
     [[nodiscard]] std::string getFrequenciesStringForExcel() const;
     [[nodiscard]] bool isRunningFinishedInClipboardData(std::string const& clipboardData) const;
     void updateExcelFile(unsigned int const freqUsageBits);
-    void setupFesterEnvironmentInMatlab();
+    static void setupFesterEnvironmentInMatlab();
     void editCellInExcelWithNewFrequencies(AlbaLocalUserAutomation::MousePosition const& excelCellPosition);
     void runFesterFunctionInMatlab();
     void saveDataToOutputFile(std::string const& clipboardData);
