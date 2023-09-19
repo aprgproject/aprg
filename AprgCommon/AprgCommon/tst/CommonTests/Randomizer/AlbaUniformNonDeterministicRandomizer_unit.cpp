@@ -66,7 +66,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorksAsNonDeterm
     constexpr int maximumValue(1000);
     IntegerRandomizerForTest randomizer1(minimumValue, maximumValue);
     IntegerRandomizerForTest randomizer2(minimumValue, maximumValue);
-    int const iterations(1000);
+    constexpr int iterations=1000;
     int const allowedDeviationCount(iterations / 10);
 
     int equalCount(0);
@@ -84,7 +84,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomIntegerWorksAsUniformly
     constexpr int maximumValue(9);
     IntegerRandomizerForTest randomizer(minimumValue, maximumValue);
     int const numberOfRandomValues(maximumValue - minimumValue + 1);
-    int const iterations(1000);
+    constexpr int iterations=1000;
     int const allowedDeviationCount(iterations / 10);
     vector<int> hitsForEachValue(numberOfRandomValues, 0);
 
@@ -117,7 +117,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorksAsNon
     constexpr double maximumValue(2300.25);
     FloatingPointRandomizerForTest randomizer1(minimumValue, maximumValue);
     FloatingPointRandomizerForTest randomizer2(minimumValue, maximumValue);
-    int const iterations(1000);
+    constexpr int iterations=1000;
     int const allowedDeviationCount(iterations / 10);
 
     int equalCount(0);
@@ -133,7 +133,7 @@ TEST(AlbaUniformNonDeterministicRandomizerTest, GetRandomFloatingValueWorksAsUni
     constexpr int maximumValue(9);
     FloatingPointRandomizerForTest randomizer(static_cast<double>(minimumValue), static_cast<double>(maximumValue));
     int const numberOfRandomValues(maximumValue - minimumValue);  // number of integer values for floating point
-    int const iterations(1000);
+    constexpr int iterations=1000;
     int const allowedDeviationCount(iterations / 10);
     vector<int> hitsForEachValue(numberOfRandomValues, 0);
 

@@ -564,7 +564,7 @@ TEST(BooleanStringTest, IsNumberTest) {
 TEST(UtilitiesStringTest, ConstructFileLocator) { EXPECT_FALSE(constructFileLocator(__FILE__, __LINE__).empty()); }
 
 TEST(UtilitiesStringTest, RandomString100Characters) {
-    size_t const length(100);
+    constexpr size_t length=100;
     EXPECT_EQ(length, getRandomAlphaNumericString(length).length());
 }
 
@@ -895,7 +895,7 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksWithLargeTargetLength)
     string const string1("   Mark is the no#1      guy in the  world.   ThisIsALongString");
     strings expectedStrings{"   Mark is", " the no#1 ", "     guy ", "in the  ", "world.   ", "ThisIsALongString"};
     strings actualStrings;
-    const int targetLength = 10;
+    constexpr int targetLength = 10;
 
     splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
 
@@ -910,7 +910,7 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthWorksLastLineIsIncluded) {
     string const string1("TupcIlm starts when its deployed on board 0x1011 (same with legacy Aalman)");
     strings expectedStrings{"TupcIlm starts when its deployed", " on board 0x1011 (same with ", "legacy Aalman)"};
     strings actualStrings;
-    const int targetLength = 30;
+    constexpr int targetLength = 30;
 
     splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
 
@@ -925,7 +925,7 @@ TEST(SplitStringTest, SplitLinesToAchieveTargetLengthCanBeSplitPerCharacter) {
     string const string1("   Mark is the no#1      ");
     strings expectedStrings{" ", " ", " ", "Mark", " ", "is", " ", "the", " ", "no#1", " ", " ", " ", " ", " ", " "};
     strings actualStrings;
-    const int targetLength = 1;
+    constexpr int targetLength = 1;
 
     splitLinesToAchieveTargetLength(actualStrings, string1, targetLength);
 

@@ -12,7 +12,7 @@ TEST(AlbaCombinedEntropySourceTest, DISABLED_OperatorWorksAsNonDeterministic) {
     // This does not work because checking source1 and source2 are too close to be different.
     AlbaCombinedEntropySource source1;
     AlbaCombinedEntropySource source2;
-    int const iterations(1000);
+    constexpr int iterations=1000;
     int const allowedDeviationCount(iterations / 10);
 
     int equalCount(0);

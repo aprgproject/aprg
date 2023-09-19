@@ -638,7 +638,7 @@ template <SplitStringType splitStringType>
 void splitToStrings(strings& listOfStrings, string_view const mainText, string_view const delimiters) {
     size_t startingIndexOfFind(0);
     size_t delimiterIndex = mainText.find_first_of(delimiters);
-    size_t const delimeterLength = 1;
+    constexpr size_t delimeterLength = 1;
     size_t const mainTextLength = mainText.length();
     while (isNotNpos(static_cast<int>(delimiterIndex))) {
         if (startingIndexOfFind != delimiterIndex) {

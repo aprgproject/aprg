@@ -49,7 +49,7 @@ TEST(AlbaPrintFunctionsTest, PrintStringAndShortenIfPossibleWorks) {
 
 TEST(AlbaPrintFunctionsTest, PrintParameterWithNameWorksWithItemsThatCanPrint) {
     stringstream ssToVerify;
-    int const integerToTest = 500;
+    constexpr int integerToTest = 500;
 
     printParameterWithName(ssToVerify, "name", integerToTest);
 
