@@ -107,37 +107,40 @@ void CPlusPlusFixer::fixConstReferenceOrder(TermMatcher const& typeMatcher) {
 
 void CPlusPlusFixer::fixConstToConstexpr() {
     findTermsAndConvertToConstexpr(
-        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(MatcherType::Literal)}}, 1,
-        2, 0, 0);
+        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(MatcherType::Literal),
+          M(";")}},
+        1, 2, 0, 0);
     findTermsAndConvertToConstexpr(
-        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(MatcherType::Literal)}}, 1,
-        2, 0, 0);
+        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(MatcherType::Literal),
+          M(";")}},
+        1, 2, 0, 0);
     findTermsAndConvertToConstexpr(
-        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(MatcherType::Literal)}}, 1,
-        2, 0, 0);
+        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(MatcherType::Literal),
+          M(";")}},
+        1, 2, 0, 0);
     findTermsAndConvertToConstexpr(
         {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(MatcherType::Literal),
-          M(")")}},
+          M(")"), M(";")}},
         1, 2, 4, 6);
     findTermsAndConvertToConstexpr(
         {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(MatcherType::Literal),
-          M(")")}},
+          M(")"), M(";")}},
         1, 2, 4, 6);
     findTermsAndConvertToConstexpr(
         {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(MatcherType::Literal),
-          M(")")}},
+          M(")"), M(";")}},
         1, 2, 4, 6);
     findTermsAndConvertToConstexpr(
         {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"), M(MatcherType::Literal),
-          M("}")}},
+          M("}"), M(";")}},
         1, 2, 4, 6);
     findTermsAndConvertToConstexpr(
         {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"), M(MatcherType::Literal),
-          M("}")}},
+          M("}"), M(";")}},
         1, 2, 4, 6);
     findTermsAndConvertToConstexpr(
         {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"), M(MatcherType::Literal),
-          M("}")}},
+          M("}"), M(";")}},
         1, 2, 4, 6);
 }
 
