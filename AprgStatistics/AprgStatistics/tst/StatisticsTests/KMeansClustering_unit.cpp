@@ -104,10 +104,8 @@ TEST(KMeansClusteringTestTwoDimensions, DataSampleCanBeAdded) {
 TEST(KMeansClusteringTestTwoDimensions, DataSamplesCanBeAdded) {
     LocalKMeans kMeans;
     LocalSamples samples;
-    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
-    samples.emplace_back(LocalSample{1, 1});
-    samples.emplace_back(LocalSample{2, 2});
-    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
+    samples.emplace_back(DataSampleInitializerList{1, 1});
+    samples.emplace_back(DataSampleInitializerList{2, 2});
     kMeans.addSamples(samples);
 
     LocalSamples result(kMeans.getSamples());

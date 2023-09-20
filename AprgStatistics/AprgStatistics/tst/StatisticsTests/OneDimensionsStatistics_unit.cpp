@@ -13,14 +13,12 @@ using LocalSamples = OneDimensionsStatistics::Samples;
 
 TEST(OneDimensionsStatisticsTest, MinMaxValuesCanFetched) {
     LocalSamples samples;
-    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
-    samples.emplace_back(LocalSample{-100});
-    samples.emplace_back(LocalSample{-10});
-    samples.emplace_back(LocalSample{-1});
-    samples.emplace_back(LocalSample{1});
-    samples.emplace_back(LocalSample{10});
-    samples.emplace_back(LocalSample{100});
-    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
+    samples.emplace_back(DataSampleInitializerList{-100});
+    samples.emplace_back(DataSampleInitializerList{-10});
+    samples.emplace_back(DataSampleInitializerList{-1});
+    samples.emplace_back(DataSampleInitializerList{1});
+    samples.emplace_back(DataSampleInitializerList{10});
+    samples.emplace_back(DataSampleInitializerList{100});
     OneDimensionsStatistics::PairOfDoubles const minMax(OneDimensionsStatistics::getMinMaxFromSamples(samples));
 
     EXPECT_EQ(-100, minMax.first);

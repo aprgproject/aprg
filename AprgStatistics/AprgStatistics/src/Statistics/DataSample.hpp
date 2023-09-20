@@ -11,6 +11,8 @@
 
 namespace alba {
 
+using DataSampleInitializerList = std::initializer_list<double>;
+
 template <int DIMENSIONS>
 class DataSample {
 public:
