@@ -11,7 +11,7 @@ namespace alba::soosa {
 double SoosaConfiguration::getRemovalRatioForLineModel() const { return m_removalRatioForLineModel; }
 double SoosaConfiguration::getBitmapWidthToBarWidthMultiplier() const { return m_bitmapWidthToBarWidthMultiplier; }
 
-double SoosaConfiguration::getLineBarWidthSearchInitialBlackPointsValue() const {
+int SoosaConfiguration::getLineBarWidthSearchInitialBlackPointsValue() const {
     return m_lineBarWidthSearchInitialBlackPointsValue;
 }
 

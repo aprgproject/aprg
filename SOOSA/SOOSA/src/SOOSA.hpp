@@ -47,7 +47,7 @@ public:
         [[nodiscard]] bool isStatusNoError() const;
         void setError(std::string const& error);
         void clearErrors();
-        static Status getInstance();
+        static Status& getInstance();
 
     private:
         alba::stringHelper::strings m_errors;

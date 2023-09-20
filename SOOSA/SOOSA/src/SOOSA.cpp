@@ -97,8 +97,8 @@ bool SOOSA::Status::isStatusNoError() const { return m_errors.empty(); }
 void SOOSA::Status::setError(string const& error) { m_errors.emplace_back(error); }
 void SOOSA::Status::clearErrors() { m_errors.clear(); }
 
-SOOSA::Status SOOSA::Status::getInstance() {
-    static Status const instance;
+SOOSA::Status& SOOSA::Status::getInstance() {
+    static Status instance;
     return instance;
 }
 
@@ -108,7 +108,7 @@ SOOSA::SOOSA(SoosaConfiguration const& soosaConfiguration, InputConfiguration co
 
       m_frequencyDatabase(m_inputConfiguration.getNumberOfQuestions(), m_soosaConfiguration.getNumberOfChoices()) {}
 
-int SOOSA::getNumberOfAnswers() const { return m_questionToAnswersMap.size(); }
+int SOOSA::getNumberOfAnswers() const { return static_cast<int>(m_questionToAnswersMap.size()); }
 
 int SOOSA::getAnswerToQuestion(int const questionIndex) const {
     int result(0);
@@ -156,8 +156,7 @@ SOOSA::Answers SOOSA::getAnswersAtQuestion(
     for (int choiceIndex = 0; choiceIndex < numberOfChoices; ++choiceIndex) {
         double const shadePercentage =
             getShadePercentage(snippet, leftPoint, rightPoint, radiusForChoiceChecking, choiceIndex);
-        // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
-        shadePercentagesSamples.emplace_back(OneDimensionSample{shadePercentage});
+        shadePercentagesSamples.emplace_back(DataSampleInitializerList{shadePercentage});
         shadePercentageToChoiceMap.emplace(shadePercentage, numberOfChoices - choiceIndex);
     }
 
@@ -180,7 +179,7 @@ SOOSA::DoubleCollection SOOSA::getAcceptableSquareErrorCollectionUsingRemovalRat
     ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const {
     DoubleCollection squareErrorCollection;
     int const retainSize = getRetainSizeInLineModel(
-        squareErrorToSampleMultimap.size(), m_soosaConfiguration.getRemovalRatioForLineModel());
+        static_cast<int>(squareErrorToSampleMultimap.size()), m_soosaConfiguration.getRemovalRatioForLineModel());
     int count = 0;
     for (auto const& squareErrorToSamplePair : squareErrorToSampleMultimap) {
         squareErrorCollection.addData(squareErrorToSamplePair.first);
@@ -240,10 +239,8 @@ Line SOOSA::findVerticalLineUsingStartingLine(
                 }
                 consecutiveBlackPixels.setEndValue(static_cast<double>(x));
             } else if (!consecutiveBlackPixels.isEmpty()) {
-                // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
                 samples.emplace_back(
-                    TwoDimensionSample{consecutiveBlackPixels.getMidpointValue(), static_cast<double>(y)});
-                // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
+                    DataSampleInitializerList{consecutiveBlackPixels.getMidpointValue(), static_cast<double>(y)});
                 break;
             }
         }
@@ -321,7 +318,7 @@ Point SOOSA::getCenterOfCircleForChoiceChecking(
         TwoDimensionStatistics blackPointStatistics(blackPointSamples);
         result = convertToPoint(blackPointStatistics.getMean());
         previousNumberOfBlackPoints = numberOfBlackPoints;
-        numberOfBlackPoints = blackPointSamples.size();
+        numberOfBlackPoints = static_cast<int>(blackPointSamples.size());
     }
     return result;
 }
@@ -413,7 +410,7 @@ SOOSA::RangeOfDoubles SOOSA::getMinMaxCriteriaForBar(PointAndWidthPairs const& p
         continueRemoval = firstSdOverMean > m_soosaConfiguration.getAcceptableSdOverMeanDeviationForLine() ||
                           secondSdOverMean > m_soosaConfiguration.getAcceptableSdOverMeanDeviationForBar();
         if (continueRemoval) {
-            int const sizeBefore = kMeansForWidths.getSamples().size();
+            int const sizeBefore = static_cast<int>(kMeansForWidths.getSamples().size());
             kMeansForWidths.clear();
             addAndRetainWidthsIfPossible(
                 kMeansForWidths, firstGroupStatistics, m_soosaConfiguration.getAcceptableSdOverMeanDeviationForLine());
@@ -464,10 +461,8 @@ SOOSA::TwoDimensionSamples SOOSA::getSamplesInHorizontalLine(
                 }
                 consecutiveBlackPixels.setEndValue(static_cast<double>(y));
             } else if (!consecutiveBlackPixels.isEmpty()) {
-                // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
                 samples.emplace_back(
-                    TwoDimensionSample{static_cast<double>(x), consecutiveBlackPixels.getMidpointValue()});
-                // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
+                    DataSampleInitializerList{static_cast<double>(x), consecutiveBlackPixels.getMidpointValue()});
                 break;
             }
         }
@@ -517,8 +512,8 @@ double SOOSA::getMaximumDistanceForBetweenBarHeights(double const previousHeight
 }
 
 int SOOSA::getMaximumLineAndBarWidth(BitmapSnippet const& snippet) const {
-    return m_soosaConfiguration.getBitmapWidthToBarWidthMultiplier() *
-           static_cast<int>(snippet.getConfiguration().getBitmapWidth());
+    return static_cast<int>(
+        m_soosaConfiguration.getBitmapWidthToBarWidthMultiplier() * snippet.getConfiguration().getBitmapWidth());
 }
 
 bool SOOSA::isBlackAt(BitmapSnippet const& snippet, BitmapXY const bitmapXy) const {
@@ -536,8 +531,8 @@ void SOOSA::removeFurthestSamplesUntilLineOrientationMatch(
     bool continueRemoval(true);
     while (continueRemoval) {
         LineModel const lineModel = calculateLineModelUsingLeastSquares(samples);
-        int const retainSize =
-            getRetainSizeInLineModel(samples.size(), m_soosaConfiguration.getRemovalRatioForLineModel());
+        int const retainSize = getRetainSizeInLineModel(
+            static_cast<int>(samples.size()), m_soosaConfiguration.getRemovalRatioForLineModel());
         samples.erase(samples.begin() + retainSize, samples.cend());
         bool const doesOrientationMatch = (LineOrientation::ConsideredVertical == lineOrientation)
                                               ? isConsideredVertical(lineModel.aCoefficient, lineModel.bCoefficient)
@@ -564,7 +559,7 @@ void SOOSA::removeErroneousSamplesInLine(TwoDimensionSamples& samples) const {
                           acceptableSquareErrorCollection.getMaximum() >= nonAllowableSquareErrorLimit;
 
         if (continueRemoval) {
-            int const sizeBefore = samples.size();
+            int const sizeBefore = static_cast<int>(samples.size());
             updateSamplesForLineModeling(
                 samples, squareErrorToSampleMultimap, acceptableSquareErrorCollection.getMaximum());
             continueRemoval = sizeBefore > static_cast<int>(samples.size());
@@ -587,7 +582,7 @@ void SOOSA::addAndRetainWidthsIfPossible(
         }
 
         int const retainSize = getRetainSizeInLineModel(
-            deviationToWidthMultimap.size(), m_soosaConfiguration.getRemovalRatioForLineAndBar());
+            static_cast<int>(deviationToWidthMultimap.size()), m_soosaConfiguration.getRemovalRatioForLineAndBar());
         int count(0);
         for (auto const& deviationAndWidthPair : deviationToWidthMultimap) {
             kMeansForWidths.addSample(OneDimensionSample{deviationAndWidthPair.second});
@@ -663,7 +658,7 @@ void SOOSA::removeBarPointsToGetConsistentHeight(
                 }
             }
             if (isFound) {
-                int const sizeBefore = kMeansForBarPoints.getSamples().size();
+                int const sizeBefore = static_cast<int>(kMeansForBarPoints.getSamples().size());
                 kMeansForBarPoints.clear();
                 addAndRetainBarPointsIfPossible(kMeansForBarPoints, listOfGroupOfBarPoints, indexToRemove);
                 continueRemoval = sizeBefore > static_cast<int>(kMeansForBarPoints.getSamples().size());
@@ -693,8 +688,8 @@ void SOOSA::addAndRetainBarPointsIfPossible(
 
             Points acceptedBarPoints;
 
-            int const retainSize =
-                getRetainSizeInLineModel(barPointsSamples.size(), m_soosaConfiguration.getRemovalRatioForBarHeight());
+            int const retainSize = getRetainSizeInLineModel(
+                static_cast<int>(barPointsSamples.size()), m_soosaConfiguration.getRemovalRatioForBarHeight());
             for (auto const& deviationAndPointPair : deviationToPointMultimap) {
                 acceptedBarPoints.emplace_back(deviationAndPointPair.second);
                 if (static_cast<int>(acceptedBarPoints.size()) >= retainSize) {
@@ -1006,8 +1001,7 @@ SOOSA::OneDimensionSamples SOOSA::getBarHeights(GroupOfTwoDimensionSamples const
     OneDimensionSamples barHeights;
     for (TwoDimensionSamples const& barPoints : groupOfBarPoints) {
         if (!barPoints.empty()) {
-            // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
-            barHeights.emplace_back(OneDimensionSample{getHeight(barPoints)});
+            barHeights.emplace_back(DataSampleInitializerList{getHeight(barPoints)});
         }
     }
     return barHeights;

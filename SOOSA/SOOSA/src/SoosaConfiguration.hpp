@@ -12,7 +12,7 @@ public:
     [[nodiscard]] double getRemovalRatioForLineModel() const;
     // Line and bar parameters
     [[nodiscard]] double getBitmapWidthToBarWidthMultiplier() const;
-    [[nodiscard]] double getLineBarWidthSearchInitialBlackPointsValue() const;
+    [[nodiscard]] int getLineBarWidthSearchInitialBlackPointsValue() const;
     [[nodiscard]] double getLineBarWidthSearchAcceptedRunningBlackRatio() const;
     [[nodiscard]] double getAcceptableDistanceOverWidthRatioFromWidthMidpoint() const;
     [[nodiscard]] double getAcceptableSdOverMeanDeviationForLine() const;
