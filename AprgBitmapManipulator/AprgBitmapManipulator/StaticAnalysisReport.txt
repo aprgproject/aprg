@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-20T04:55:57
+StaticAnalysisJobIdentifier: [41]
+2023-09-20T22:09:07
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:41:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:42:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
@@ -253,7 +253,7 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/BitmapFilters.hpp:131:32: warning: 0xFFFFFF is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.hpp:32:35: warning: 0.9 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.cpp:88:20: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorStatistics.cpp:65:22: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorStatistics.cpp:63:22: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.hpp:32:35: warning: 0.9 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/BitmapFilters.cpp:33:49: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/BitmapFilters.cpp:37:49: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
