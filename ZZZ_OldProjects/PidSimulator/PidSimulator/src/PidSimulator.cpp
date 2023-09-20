@@ -243,7 +243,7 @@ void PidSimulator::updateAllMaxWithBuffer(int& xLeftMax, int& xRightMax, int& yB
 }
 
 void PidSimulator::updateMaxWithBuffer(int& lowerValue, int& higherValue) {
-    const double hardBuffer = 5;
+    constexpr double hardBuffer = 5;
     int const difference = higherValue - lowerValue;
     double increase = static_cast<double>(difference) * 0.1;
     if (increase < hardBuffer) {
@@ -262,7 +262,7 @@ void PidSimulator::updateMaxPoints(
 }
 
 void PidSimulator::updateRightMax(int& xRightMax, int const xCoordinate) {
-    int const hardMax = 2000;
+    constexpr int hardMax = 2000;
     if (xCoordinate <= hardMax && xRightMax < xCoordinate) {
         xRightMax = xCoordinate;
     }
@@ -276,7 +276,7 @@ void PidSimulator::updateLeftMax(int& xLeftMax, int const xCoordinate) {
 }
 
 void PidSimulator::updateTopMax(int& yTopMax, int const yCoordinate) {
-    int const hardMax = 2000;
+    constexpr int hardMax = 2000;
     if (yCoordinate <= hardMax && yTopMax < yCoordinate) {
         yTopMax = yCoordinate;
     }

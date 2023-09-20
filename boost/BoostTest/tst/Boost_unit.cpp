@@ -1,5 +1,4 @@
 #include <boost/locale.hpp>
-
 #include <gtest/gtest.h>
 
 #include <ctime>

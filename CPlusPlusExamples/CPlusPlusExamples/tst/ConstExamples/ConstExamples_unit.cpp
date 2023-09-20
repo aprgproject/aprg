@@ -10,7 +10,7 @@ namespace alba {
 
 TEST(ConstExamplesTest, MutationWithConstInPrimitiveTypesDoesNotWork) {
     long a = 0;
-    long const b = 1;
+    constexpr long b = 1;
 
     ++a;
 
@@ -55,7 +55,7 @@ TEST(ConstExamplesTest, ConstCanBeAddedOnTopUsingPointers) {
     int const* p2 = p1;  // p2 points to "const"ant int, "const" is added on p2
     // int * p3 = p2; // Error because you cannot remove the "const"ness of p2
     int* const p4 = p1;  // p4 is a "const"ant pointer to int, const added to pointer
-    int const data2 = 2;
+    constexpr int data2 = 2;
     // int * p5 = p2; // Error because you cannot remove the "const"ness of data2
     cout << "To avoid warnings *p2: [" << *p2 << "] *p4: [" << *p4 << "] data2:[" << data2 << "]\n";
 
@@ -64,12 +64,12 @@ TEST(ConstExamplesTest, ConstCanBeAddedOnTopUsingPointers) {
 }
 
 TEST(ConstExamplesTest, ConstCanBeAddedOnTopUsingReferences) {
-    int const data1 = 1;
+    constexpr int data1 = 1;
     int const& r1 = data1;  // r1 refers to (mutable) int
     int const& r2 = r1;     // r2 refers to "const"ant int, "const" is added on r2
     // int & r3 = r2; // Error because you cannot remove the "const"ness of r2
     // int& const r4 = r1; // Error because there is no &const, because address of the reference cannot be moved
-    int const data2 = 2;
+    constexpr int data2 = 2;
     // int& r5 = r2; // Error because you cannot remove the "const"ness of data2
     cout << "To avoid warnings r2: [" << r2 << "] data2:[" << data2 << "]\n";
 
@@ -79,7 +79,7 @@ TEST(ConstExamplesTest, ConstCanBeAddedOnTopUsingReferences) {
 TEST(ConstExamplesTest, MutationWithConstInPrimitiveTypesInStructsDoesNotWork) {
     struct Foo {
         int a = 0;
-        int const b = 1;
+        constexpr int b = 1;
     };
 
     Foo f{};
