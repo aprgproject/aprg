@@ -8,7 +8,7 @@ namespace alba {
 
 TEST(Rand7FromRand5Test, GetRandomFrom0To6WorksAsUniformlyDistributed) {
     Rand7FromRand5 rand7FromRand5;
-    int const iterations(1000);
+    constexpr int iterations = 1000;
     int const allowedDeviationCount(iterations / 10);
     vector<int> hitsForEachValue(7, 0);
 

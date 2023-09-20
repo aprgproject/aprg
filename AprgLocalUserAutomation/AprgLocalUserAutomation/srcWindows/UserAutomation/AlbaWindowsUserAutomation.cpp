@@ -61,7 +61,7 @@ MousePosition getMousePosition() {
 }
 
 string getClassNameOfForegroundWindow() {
-    int const LENGTH = 1000;
+    constexpr int LENGTH = 1000;
     char className[LENGTH];
     GetClassName(GetForegroundWindow(), className, LENGTH);
     return string(className);
@@ -231,7 +231,7 @@ void performKeyCombination(vector<uint16_t> const& keys, std::vector<char> const
 
 void setForegroundWindowWithClassName(string_view const& className) {
     Sleep(2000);
-    int const LENGTH = 1000;
+    constexpr int LENGTH = 1000;
     char classNameTemp[LENGTH];
     GetClassName(GetForegroundWindow(), classNameTemp, LENGTH);
     cout << "ClassName:[" << classNameTemp << "]\n";

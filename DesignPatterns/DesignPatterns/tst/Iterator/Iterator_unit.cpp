@@ -7,7 +7,7 @@ using namespace std;
 namespace Iterator {
 
 TEST(IteratorTest, Test1) {
-    int const size = 5;
+    constexpr int size = 5;
     ConcreteAggregate aggregate(size);
 
     auto it = aggregate.createIterator();

@@ -18,7 +18,7 @@ TEST(DataStatisticsTest, StatisticsCanBeClearedAfterCalculation) {
     LocalSample const expectedSampleStandardDeviation{0, 0, 0};
     LocalSample const expectedPopulationVariance{0, 0, 0};
     LocalSample const expectedPopulationStandardDeviation{0, 0, 0};
-    double const expectedDispersion(0);
+    constexpr double expectedDispersion = 0;
 
     LocalSamples samples{LocalSample{1, 10, 100}, LocalSample{2, 20, 200}, LocalSample{3, 30, 300}};
     LocalStatistics localStatistics(samples);
@@ -57,7 +57,7 @@ TEST(DataStatisticsTest, StatisticsAreCorrectWhenSamplesAreEmpty) {
     LocalSample const expectedSampleStandardDeviation{0, 0, 0};
     LocalSample const expectedPopulationVariance{0, 0, 0};
     LocalSample const expectedPopulationStandardDeviation{0, 0, 0};
-    double const expectedDispersion(0);
+    constexpr double expectedDispersion = 0;
 
     LocalSamples const samples;
     LocalStatistics localStatistics(samples);

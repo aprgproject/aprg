@@ -263,7 +263,7 @@ void fWithDoubleRef(T&&) {
 // -> (N4606 13.3.3.1.4 [over.ics.ref]/3)
 TEST(TemplateExamplesTest, TemplateTypeDeductionWithAmpersandsWorks) {
     int i = 3;
-    const int ci = 4;
+    constexpr int ci = 4;
 
     f(i);                            // [with T = int]
     fWithRef(i);                     // [with T = int]

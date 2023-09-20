@@ -244,7 +244,7 @@ TEST(RealAutomationTest, DISABLED_GetOutputFromChatGpt) {
 
     constexpr int NUMBER_OF_LINES_TO_SEND = 20;
     int lineCount = 1;
-    int const lineCountToStart = 1641;
+    constexpr int lineCountToStart = 1641;
     int pendingNumberOfLines = 0;
     string const requestHeader =
         "improve each commit message (in each line) to be more professional and short (and dont put numbers per each "

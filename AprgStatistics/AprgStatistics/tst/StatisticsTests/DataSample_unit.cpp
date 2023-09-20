@@ -51,7 +51,7 @@ TEST(DataSampleTest, DataSamplesCanBeAddedTogether) {
 
 TEST(DataSampleTest, DataSamplesCanBeAddedWithSingleValue) {
     DataSample<5> const dataSample1{10, 20, 30, 40, 50};
-    int const singleValue = 1;
+    constexpr int singleValue = 1;
     DataSample<5> const actualResult = dataSample1 + singleValue;
     EXPECT_EQ(11U, actualResult.getValueAt(0));
     EXPECT_EQ(21U, actualResult.getValueAt(1));

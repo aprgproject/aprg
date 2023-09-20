@@ -20,7 +20,6 @@ TEST(MonteCarloTest, VerifyingMatrixExample) {
     MatrixForTest c(4, 2, {38, 44, 50, 56, 83, 98, 113, 128});
     MatrixForTest const x;
 
-    bool const isEqual(false);
 
     MonteCarloAlgorithm const verifyingMatrixAlgorithm = [&]() {
         // It turns out that we can solve the problem using a Monte Carlo algorithm whose time complexity is only O(n2).
@@ -41,6 +40,7 @@ TEST(MonteCarloTest, VerifyingMatrixExample) {
 
     performAMonteCarloAlgorithm(verifyingMatrixAlgorithm);
 
+    constexpr bool isEqual = false;
     EXPECT_TRUE(isEqual == isEqual);  // just to check something
 }
 

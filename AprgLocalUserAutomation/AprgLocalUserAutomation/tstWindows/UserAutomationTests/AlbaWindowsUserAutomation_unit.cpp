@@ -42,7 +42,7 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_IsKeyPressedTest) {
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_IsLetterPressedTest) {
     while (1) {
-        char const letter = 'q';
+        constexpr char letter = 'q';
         bool const isPressed = isLetterPressed(letter);
         cout << "letter: " << letter << " isPressed: " << isPressed << "\n";
         if (isPressed) {

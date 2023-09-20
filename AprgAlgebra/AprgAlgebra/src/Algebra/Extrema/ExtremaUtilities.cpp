@@ -289,14 +289,13 @@ bool willYieldToRelativeMinimumValue(
     AlbaNumberInterval const& openInterval) {
     // The function f is aid to have a relative minimum value at c if there exists an open interval containing c,
     // on which f is defined such that f(c) <= f(x) for all x in this interval
-    bool const result(false);
     if (openInterval.getLowerEndpoint().isOpen() && openInterval.getHigherEndpoint().isOpen()) {
         AlbaNumbers valuesUsedForChecking;
         putArbitiaryValuesFromInterval(valuesUsedForChecking, openInterval);
         return willYieldToExtremumValue(
             ExtremumType::Minimum, term, variableName, valueForEvaluation, valuesUsedForChecking);
     }
-    return result;
+    return false;
 }
 
 bool willYieldToRelativeMaximumValue(

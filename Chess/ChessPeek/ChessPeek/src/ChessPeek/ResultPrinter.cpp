@@ -228,12 +228,12 @@ void ResultPrinter::setMovesSequenceOnGrid(
     int const numberOfBoardDisplayColumns = static_cast<int>(grid.getMaxNumberOfColumns());
     int movesDisplayed = 0;
     int xOffset = 0;
-    bool const isUnSurePreMove = false;
 
     for (Move const& halfMove : movesSequence.halfMoves) {
         if (xOffset < numberOfBoardDisplayColumns) {
             analyzer.analyzeMove(halfMove);
             if (analyzer.getCurrentMoveColor() == m_engineBoardWithContext.getPlayerColor()) {
+                constexpr bool isUnSurePreMove = false;
                 optional<char> const firstChar = getFirstCharOfABoardCell(analyzer.canPreMove(), isUnSurePreMove);
 
                 setBoardOnGrid(grid, analyzerBoard, xOffset);
@@ -426,7 +426,7 @@ string ResultPrinter::getDisplayableStringForABoardCell(
     Piece const& piece, int const moveNumber, optional<char> const& firstChar) {
     string result(3, ' ');
     if (moveNumber != 0) {
-        char const moveNumberCharacter = '0' + static_cast<char>(moveNumber);
+        constexpr char moveNumberCharacter = '0' + static_cast<char>(moveNumber);
         if (firstChar) {
             result[0] = firstChar.value();
         } else {
