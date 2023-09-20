@@ -27,7 +27,6 @@ void CPlusPlusFixer::processDirectory(path const& directory) {
 
 void CPlusPlusFixer::processFile(path const& file) {
     m_currentFile = file;
-    cout << m_currentFile << "\n";
     m_terms = getTermsFromFile(file);
     fixTerms();
     writeAllTerms(file, m_terms);
