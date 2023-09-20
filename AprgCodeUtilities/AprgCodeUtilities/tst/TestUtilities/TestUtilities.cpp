@@ -54,8 +54,6 @@ void clearFile(path const& file) { ofstream const expectedFileStream(AlbaLocalPa
 void copyFile(string const& source, string const& destination) {
     AlbaLocalPathHandler const sourcePathHandler(source);
     AlbaLocalPathHandler const destinationPathHandler(destination);
-    clearFile(destinationPathHandler.getPath());
-    destinationPathHandler.deleteFileAndIsSuccessful();
     sourcePathHandler.copyFileToAndIsSuccessful(destinationPathHandler.getPath());
 }
 
@@ -122,9 +120,9 @@ void verifyFile(string const& expectedFile, string const& testFile) {
             cout << "\n";
         }
     }
-    // if (isDifferenceFound) {
-    //     runDiffForTwoFiles(expectedFilePathHandler.getPath(), testFilePathHandler.getPath());
-    // }
+    if (isDifferenceFound) {
+        runDiffForTwoFiles(expectedFilePathHandler.getPath(), testFilePathHandler.getPath());
+    }
 }
 
 }  // namespace alba::CodeUtilities
