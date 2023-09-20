@@ -1095,7 +1095,7 @@ TEST(GslTest, NTuplesWorks) {
         gsl_rng *r;
         struct data ntuple_row;
         int i;
-        gsl_ntuple *ntuple = gsl_ntuple_create("test.dat", &ntuple_row, sizeof(ntuple_row));
+        gsl_ntuple *ntuple = gsl_ntuple_create(const_cast<char *>("test.dat"), &ntuple_row, sizeof(ntuple_row));
         gsl_rng_env_setup();
         T = gsl_rng_default;
         r = gsl_rng_alloc(T);
@@ -1114,7 +1114,7 @@ TEST(GslTest, NTuplesWorks) {
         // The selected events are then histogrammed using their E2 values.
         // This analyses the ntuple data in the file test.dat. The analysis procedure is to compute the
         struct data ntuple_row;
-        gsl_ntuple *ntuple = gsl_ntuple_open("test.dat", &ntuple_row, sizeof(ntuple_row));
+        gsl_ntuple *ntuple = gsl_ntuple_open(const_cast<char *>("test.dat"), &ntuple_row, sizeof(ntuple_row));
         double lower = 1.5;
         gsl_ntuple_select_fn S;
         gsl_ntuple_value_fn V;
@@ -1172,18 +1172,18 @@ TEST(GslTest, MonteCarloRoutinesForIntegralWorks) {
         gsl_monte_plain_state *s = gsl_monte_plain_alloc(3);
         gsl_monte_plain_integrate(&G, xl, xu, 3, calls, r, s, &res, &err);
         gsl_monte_plain_free(s);
-        display_results("plain", res, err);
+        display_results(const_cast<char *>("plain"), res, err);
     }
     {
         gsl_monte_miser_state *s = gsl_monte_miser_alloc(3);
         gsl_monte_miser_integrate(&G, xl, xu, 3, calls, r, s, &res, &err);
         gsl_monte_miser_free(s);
-        display_results("miser", res, err);
+        display_results(const_cast<char *>("miser"), res, err);
     }
     {
         gsl_monte_vegas_state *s = gsl_monte_vegas_alloc(3);
         gsl_monte_vegas_integrate(&G, xl, xu, 3, 10000, r, s, &res, &err);
-        display_results("vegas warm-up", res, err);
+        display_results(const_cast<char *>("vegas warm-up"), res, err);
         cout << "converging...\n";
         do {
             gsl_monte_vegas_integrate(&G, xl, xu, 3, calls / 5, r, s, &res, &err);
@@ -1191,7 +1191,7 @@ TEST(GslTest, MonteCarloRoutinesForIntegralWorks) {
                  << "chisq/dof = %.1f\n"
                  << " sigma = " << res << " " << err << gsl_monte_vegas_chisq(s);
         } while (fabs(gsl_monte_vegas_chisq(s) - 1.0) > 0.5);
-        display_results("vegas final", res, err);
+        display_results(const_cast<char *>("vegas final"), res, err);
         gsl_monte_vegas_free(s);
     }
     gsl_rng_free(r);
