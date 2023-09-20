@@ -48,7 +48,7 @@ void SnapshotStatistics::fetchFileSizesForSnapshot(string const& snapshotPath) {
     snapshotDirectoryPathHandler.findFilesAndDirectoriesUnlimitedDepth(
         [](AlbaLocalPathHandler::LocalPath const&) {},
         [&](AlbaLocalPathHandler::LocalPath const& filePath) {
-            AlbaLocalPathHandler filePathHandler(filePath);
+            AlbaLocalPathHandler const filePathHandler(filePath);
             addFileSizeForSnapshot(
                 filePathHandler.getFile().string(), snapshotDirectoryPathHandler.getDirectoryName().string(),
                 static_cast<double>(filePathHandler.getFileSize()));
