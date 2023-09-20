@@ -95,6 +95,8 @@ void verifyFile(string const& expectedFile, string const& testFile) {
         cout << "test size: [" << testFileReader.getFileSize() << "]\n";
         cout << "expected current location: [" << expectedFileReader.getCurrentLocation() << "]\n";
         cout << "test current location: [" << testFileReader.getCurrentLocation() << "]\n";
+        cout << "expected filesystem size: [" << expectedFilePathHandler.getFileSize() << "]\n";
+        cout << "test filesystem size: [" << testFilePathHandler.getFileSize() << "]\n";
         if (expectedFileReader.isNotFinished() || testFileReader.isNotFinished()) {
             isDifferenceFound = true;
             EXPECT_FALSE(expectedFileReader.isNotFinished());
