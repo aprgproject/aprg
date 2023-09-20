@@ -107,6 +107,18 @@ void verifyFile(string const& expectedFile, string const& testFile) {
                 cout << testFileReader.getLine();
                 cout << "\n";
             }
+            expectedFileReader.moveToTheBeginning();
+            cout << "\nAll EXPECTED contents:\n";
+            while (expectedFileReader.isNotFinished()) {
+                cout << expectedFileReader.getLine();
+                cout << "\n";
+            }
+            testFileReader.moveToTheBeginning();
+            cout << "\nAll ACTUAL contents:\n";
+            while (testFileReader.isNotFinished()) {
+                cout << testFileReader.getLine();
+                cout << "\n";
+            }
             cout << "\n";
         }
     }
