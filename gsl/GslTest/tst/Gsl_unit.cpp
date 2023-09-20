@@ -972,7 +972,7 @@ TEST(GslTest, ImpulseDetectionFilterWorksInSquareWaveSignalExample) {
     size_t i = 0;
     /* generate input signal */
     for (i = 0; i < N; ++i) {
-        constexpr double xi = 10.0 * sin(2.0 * M_PI * i / static_cast<double>(N));
+        double xi = 10.0 * sin(2.0 * M_PI * i / static_cast<double>(N));
         double const ei = gsl_ran_gaussian(r, 2.0);
         double const u = gsl_rng_uniform(r);
         double const outlier = (u < 0.01) ? 15.0 * GSL_SIGN(ei) : 0.0;
@@ -1252,14 +1252,14 @@ TEST(GslTest, DISABLED_SimulatedAnnealingWorks) {
     gsl_rng_free(r);
 }
 
-int func(double const t, const double y[], double f[], void *) {
+int func(double const t, const double y[], double f[], void *params) {
     double mu = *(double *)params;
     f[0] = y[1];
     f[1] = -y[0] - mu * y[1] * (y[0] * y[0] - 1);
     return GSL_SUCCESS;
 }
 
-int jac(double const t, const double y[], double *dfdy, double dfdt[], void *) {
+int jac(double const t, const double y[], double *dfdy, double dfdt[], void *params) {
     double mu = *(double *)params;
     gsl_matrix_view dfdy_mat = gsl_matrix_view_array(dfdy, 2, 2);
     gsl_matrix *m = &dfdy_mat.matrix;
@@ -1356,9 +1356,7 @@ TEST(GslTest, TwoDimensionalInterpolationWorks) {
     gsl_interp_accel_free(yacc);
 }
 
-double functionToDifferentiate(double const x, void *) {
-    return pow(x, 1.5);
-}
+double functionToDifferentiate(double const x, void *) { return pow(x, 1.5); }
 
 TEST(GslTest, NumericalDifferentiationWorks) {
     // The following code estimates the derivative of the function f(x) = x^(3/2) at x = 2 and at x = 0.
@@ -1399,7 +1397,7 @@ TEST(GslTest, ChebyshevApproximationsWorks) {
     F.params = 0;
     gsl_cheb_init(cs, &F, 0.0, 1.0);
     for (i = 0; i < n; ++i) {
-        double x = i / static_cast<double>(n;
+        double x = i / static_cast<double>(n);
         double r10 = gsl_cheb_eval_n(cs, 10, x);
         double r40 = gsl_cheb_eval(cs, x);
         cout << x << " " << GSL_FN_EVAL(&F, x) << " " << r10 << " " << r40 << "\n";
@@ -1547,9 +1545,7 @@ TEST(GslTest, OneDimensionRootFindingWorks) {
     gsl_root_fsolver_free(s);
 }
 
-double fn1(double const x, void *) {
-    return cos(x) + 1.0;
-}
+double fn1(double const x, void *) { return cos(x) + 1.0; }
 
 TEST(GslTest, OneDimensionalMinimizationWorks) {
     // The following program uses the Brent algorithm to find the minimum of the function f(x) = cos(x)+1, which occurs
