@@ -91,9 +91,7 @@ TEST(
     CalculateSolutionAndReturnSolutionSetWorksAsDoesNotFindASolutionForNonLinearEquation) {
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
-    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
-    polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 3}}), Monomial(-4, {})});
-    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
+    polynomials.emplace_back(Monomials{Monomial(1, {{"x", 3}}), Monomial(-4, {})});
     MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
     EXPECT_FALSE(solver.isSolved());
@@ -106,9 +104,7 @@ TEST(
     CalculateSolutionAndReturnSolutionSetWorksAsDoesNotFindASolutionWhenEquationNumberDoesNotMatchVariableNumber) {
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
-    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
-    polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(-4, {})});
-    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
+    polynomials.emplace_back(Monomials{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(-4, {})});
     MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
     EXPECT_FALSE(solver.isSolved());
@@ -119,9 +115,7 @@ TEST(
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor1Polynomial) {
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
-    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
-    polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 1}}), Monomial(-4, {})});
-    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
+    polynomials.emplace_back(Monomials{Monomial(1, {{"x", 1}}), Monomial(-4, {})});
     MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
     EXPECT_TRUE(solver.isSolved());
@@ -135,10 +129,8 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor2Polynomials) {
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
-    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
-    polynomials.emplace_back(Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(-4, {})});
-    polynomials.emplace_back(Polynomial{Monomial(3, {{"x", 1}}), Monomial(-2, {{"y", 1}}), Monomial(12, {})});
-    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
+    polynomials.emplace_back(Monomials{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(-4, {})});
+    polynomials.emplace_back(Monomials{Monomial(3, {{"x", 1}}), Monomial(-2, {{"y", 1}}), Monomial(12, {})});
     MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
     EXPECT_TRUE(solver.isSolved());
@@ -155,14 +147,12 @@ TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWor
 TEST(LinearEquationsEqualitySolverTest, CalculateSolutionAndReturnSolutionSetWorksFor3Polynomials) {
     LinearEquationsEqualitySolver solver;
     Polynomials polynomials;
-    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
     polynomials.emplace_back(
-        Polynomial{Monomial(2, {{"x", 1}}), Monomial(-1, {{"y", 1}}), Monomial(1, {{"z", 1}}), Monomial(-8, {})});
+        Monomials{Monomial(2, {{"x", 1}}), Monomial(-1, {{"y", 1}}), Monomial(1, {{"z", 1}}), Monomial(-8, {})});
     polynomials.emplace_back(
-        Polynomial{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(3, {{"z", 1}}), Monomial(-9, {})});
+        Monomials{Monomial(1, {{"x", 1}}), Monomial(2, {{"y", 1}}), Monomial(3, {{"z", 1}}), Monomial(-9, {})});
     polynomials.emplace_back(
-        Polynomial{Monomial(4, {{"x", 1}}), Monomial(1, {{"y", 1}}), Monomial(-2, {{"z", 1}}), Monomial(-1, {})});
-    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
+        Monomials{Monomial(4, {{"x", 1}}), Monomial(1, {{"y", 1}}), Monomial(-2, {{"z", 1}}), Monomial(-1, {})});
     MultipleVariableSolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(polynomials));
 
     EXPECT_TRUE(solver.isSolved());

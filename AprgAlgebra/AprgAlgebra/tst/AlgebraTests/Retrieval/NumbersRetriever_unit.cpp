@@ -154,10 +154,8 @@ TEST(NumbersRetrieverTest, RetrieveFromFunctionWorks) {
 TEST(NumbersRetrieverTest, RetrieveFromPolynomialsWorks) {
     NumbersRetriever retriever;
     Polynomials polynomials;
-    // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
-    polynomials.emplace_back(Polynomial{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
-    polynomials.emplace_back(Polynomial{Monomial(587, {{"x", 9}}), Monomial(975, {{"y", 10}})});
-    // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
+    polynomials.emplace_back(Monomials{Monomial(516, {{"x", 7}}), Monomial(643, {{"y", 8}})});
+    polynomials.emplace_back(Monomials{Monomial(587, {{"x", 9}}), Monomial(975, {{"y", 10}})});
     retriever.retrieveFromPolynomials(polynomials);
 
     AlbaNumbersSet const& numbersSet(retriever.getNumbers());
