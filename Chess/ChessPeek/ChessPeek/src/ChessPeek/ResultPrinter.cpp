@@ -426,7 +426,7 @@ string ResultPrinter::getDisplayableStringForABoardCell(
     Piece const& piece, int const moveNumber, optional<char> const& firstChar) {
     string result(3, ' ');
     if (moveNumber != 0) {
-        constexpr char moveNumberCharacter = '0' + static_cast<char>(moveNumber);
+        char moveNumberCharacter = '0' + static_cast<char>(moveNumber);
         if (firstChar) {
             result[0] = firstChar.value();
         } else {
