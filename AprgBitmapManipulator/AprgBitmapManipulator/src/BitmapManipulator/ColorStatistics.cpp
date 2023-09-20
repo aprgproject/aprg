@@ -29,15 +29,13 @@ void AprgColorStatistics::gatherStatistics(path const& filePath) {
         saturationValueSet.emplace(hsvData.saturationValueDecimal);
         valueSet.emplace(hsvData.valueDecimalOfColorMax);
 
-        // NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
-        colorIntensitySamples.emplace_back(OneDimensionStatistics::Sample{colorIntensity});
-        saturationLightnessSamples.emplace_back(OneDimensionStatistics::Sample{hslData.saturationLightnessDecimal});
-        lightnessSamples.emplace_back(OneDimensionStatistics::Sample{hslData.lightnessDecimal});
-        saturationValueSamples.emplace_back(OneDimensionStatistics::Sample{hsvData.saturationValueDecimal});
-        valueSamples.emplace_back(OneDimensionStatistics::Sample{hsvData.valueDecimalOfColorMax});
-        luma601Samples.emplace_back(OneDimensionStatistics::Sample{luma601});
-        luma709Samples.emplace_back(OneDimensionStatistics::Sample{luma709});
-        // NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
+        colorIntensitySamples.emplace_back(DataSampleInitializerList{colorIntensity});
+        saturationLightnessSamples.emplace_back(DataSampleInitializerList{hslData.saturationLightnessDecimal});
+        lightnessSamples.emplace_back(DataSampleInitializerList{hslData.lightnessDecimal});
+        saturationValueSamples.emplace_back(DataSampleInitializerList{hsvData.saturationValueDecimal});
+        valueSamples.emplace_back(DataSampleInitializerList{hsvData.valueDecimalOfColorMax});
+        luma601Samples.emplace_back(DataSampleInitializerList{luma601});
+        luma709Samples.emplace_back(DataSampleInitializerList{luma709});
     });
 }
 
