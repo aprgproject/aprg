@@ -89,8 +89,12 @@ void verifyFile(string const& expectedFile, string const& testFile) {
         lines.emplace_back(lineInExpectedFile);
     }
     if (!isDifferenceFound) {
-        cout << "expected rdstate: [" << static_cast<int>(expectedFileStream.rdstate()) << "]\n";
-        cout << "test rdstate: [" << static_cast<int>(testFileStream.rdstate()) << "]\n";
+        cout << "expected rdstate: [" << static_cast<unsigned int>(expectedFileStream.rdstate()) << "]\n";
+        cout << "test rdstate: [" << static_cast<unsigned int>(testFileStream.rdstate()) << "]\n";
+        cout << "expected size: [" << expectedFileReader.getFileSize() << "]\n";
+        cout << "test size: [" << testFileReader.getFileSize() << "]\n";
+        cout << "expected current location: [" << expectedFileReader.getCurrentLocation() << "]\n";
+        cout << "test current location: [" << testFileReader.getCurrentLocation() << "]\n";
         if (expectedFileReader.isNotFinished() || testFileReader.isNotFinished()) {
             isDifferenceFound = true;
             EXPECT_FALSE(expectedFileReader.isNotFinished());
