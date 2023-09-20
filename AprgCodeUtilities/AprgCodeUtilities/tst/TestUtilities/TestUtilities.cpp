@@ -100,11 +100,14 @@ void verifyFile(string const& expectedFile, string const& testFile) {
             cout << "Remaining EXPECTED contents:\n";
             while (expectedFileReader.isNotFinished()) {
                 cout << expectedFileReader.getLine();
+                cout << "\n";
             }
-            cout << "Remaining ACTUAL contents:\n";
+            cout << "\nRemaining ACTUAL contents:\n";
             while (testFileReader.isNotFinished()) {
                 cout << testFileReader.getLine();
+                cout << "\n";
             }
+            cout << "\n";
         }
     }
     if (isDifferenceFound) {
