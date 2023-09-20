@@ -202,7 +202,10 @@ bool AlbaLocalPathHandler::copyFileToAndIsSuccessful(LocalPath const& destinatio
             cerr << "File does not exist during copy: [" << m_path << "]\n";
             return false;
         }
-        copy_file(m_path, destination);
+#ifdef OS_WINDOWS
+        remove(destination);  // overwrite does not work on windows
+#endif
+        copy_file(m_path, destination, copy_options::overwrite_existing);
     } catch (exception const& capturedException) {
         cerr << "Error copying file: [" << capturedException.what() << "]\n";
         return false;
@@ -221,7 +224,10 @@ bool AlbaLocalPathHandler::copyDirectoryToAndIsSuccessful(LocalPath const& desti
             if (directoryEntry.is_directory()) {
                 create_directories(destinationEntry);
             } else {
-                copy_file(directoryEntry, destinationEntry);
+#ifdef OS_WINDOWS
+                remove(destinationEntry);  // overwrite does not work on windows
+#endif
+                copy_file(directoryEntry, destinationEntry, copy_options::overwrite_existing);
             }
         }
     } catch (exception const& capturedException) {
