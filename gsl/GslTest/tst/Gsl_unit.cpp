@@ -1,41 +1,65 @@
 #include <Common/Math/Helpers/PrecisionHelpers.hpp>
 #include <Common/Math/Matrix/AlbaMatrix.hpp>
 #include <Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp>
+
 #include <gsl/gsl_blas.h>
+#include <gsl/gsl_bspline.h>
 #include <gsl/gsl_cdf.h>
+#include <gsl/gsl_chebyshev.h>
 #include <gsl/gsl_combination.h>
+#include <gsl/gsl_deriv.h>
 #include <gsl/gsl_eigen.h>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_fft_halfcomplex.h>
 #include <gsl/gsl_fft_real.h>
 #include <gsl/gsl_filter.h>
+#include <gsl/gsl_fit.h>
 #include <gsl/gsl_histogram.h>
 #include <gsl/gsl_histogram2d.h>
 #include <gsl/gsl_integration.h>
+#include <gsl/gsl_interp2d.h>
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_matrix.h>
+#include <gsl/gsl_min.h>
+#include <gsl/gsl_monte.h>
+#include <gsl/gsl_monte_miser.h>
+#include <gsl/gsl_monte_plain.h>
+#include <gsl/gsl_monte_vegas.h>
 #include <gsl/gsl_movstat.h>
+#include <gsl/gsl_multifit.h>
+#include <gsl/gsl_multifit_nlinear.h>
+#include <gsl/gsl_multilarge.h>
+#include <gsl/gsl_multimin.h>
+#include <gsl/gsl_multiroots.h>
 #include <gsl/gsl_multiset.h>
 #include <gsl/gsl_ntuple.h>
+#include <gsl/gsl_odeiv2.h>
 #include <gsl/gsl_permutation.h>
 #include <gsl/gsl_poly.h>
 #include <gsl/gsl_qrng.h>
 #include <gsl/gsl_randist.h>
 #include <gsl/gsl_rng.h>
+#include <gsl/gsl_roots.h>
 #include <gsl/gsl_rstat.h>
 #include <gsl/gsl_sf_bessel.h>
 #include <gsl/gsl_sf_gamma.h>
+#include <gsl/gsl_siman.h>
 #include <gsl/gsl_sort.h>
 #include <gsl/gsl_sort_double.h>
+#include <gsl/gsl_splinalg.h>
+#include <gsl/gsl_spline.h>
+#include <gsl/gsl_spline2d.h>
+#include <gsl/gsl_spmatrix.h>
 #include <gsl/gsl_statistics.h>
+#include <gsl/gsl_sum.h>
 #include <gsl/gsl_vector.h>
-
+#include <gsl/gsl_wavelet.h>
 #include <gtest/gtest.h>
 
 #include <array>
+#include <cmath>
 #include <iterator>
-#include <math.h>
 #include <vector>
 
 using namespace alba::mathHelper;
@@ -43,54 +67,6 @@ using namespace alba::matrix;
 using namespace std;
 
 namespace alba {
-
-struct data {
-    double x;
-    double y;
-    double z;
-};
-
-double function1ToIntegrate(double const inputValue, void *parameters) {
-    double const alpha = *static_cast<double *>(parameters);
-    return log(alpha * inputValue) / sqrt(inputValue);
-}
-
-double function2ToIntegrate(double const inputValue, void *parameters) {
-    int const mFunctionInput = *static_cast<int *>(parameters);
-    return gsl_pow_int(inputValue, mFunctionInput) + 1.0;
-}
-
-double func(const size_t n, double x[], void *params) {
-    const double alpha = *static_cast<double *>(params);
-    gsl_sort(x, 1, n);
-    return gsl_stats_trmean_from_sorted_data(alpha, x, 1, n);
-}
-
-double val_func(void *ntuple_data, void *) {
-    auto *data = static_cast<struct data *>(ntuple_data);
-    double x = NAN;
-    double y = NAN;
-    double z = NAN;
-    x = data->x;
-    y = data->y;
-    z = data->z;
-    return x * x + y * y + z * z;
-}
-
-int sel_func(void *ntuple_data, void *params) {
-    auto *data = static_cast<struct data *>(ntuple_data);
-    double x = NAN;
-    double y = NAN;
-    double z = NAN;
-    double E2 = NAN;
-    double scale = NAN;
-    scale = *static_cast<double *>(params);
-    x = data->x;
-    y = data->y;
-    z = data->z;
-    E2 = x * x + y * y + z * z;
-    return static_cast<int>(E2 > scale);
-}
 
 TEST(GslTest, GettingTheBesselFunctionInGslWorks) {
     double const xValue = 5.0;
@@ -382,6 +358,13 @@ TEST(GslTest, FastFourierTransformInGslWorks) {
     gsl_fft_real_workspace_free(workspace);
 }
 
+namespace {
+double function1ToIntegrate(double const inputValue, void *parameters) {
+    double const alpha = *static_cast<double *>(parameters);
+    return log(alpha * inputValue) / sqrt(inputValue);
+}
+}  // namespace
+
 TEST(GslTest, NumericalAdaptiveIntegrationInGslWorks) {
     // This uses adaptive integration to integrate.
     // The integrator QAGS will handle a large class of definite integrals.
@@ -408,6 +391,13 @@ TEST(GslTest, NumericalAdaptiveIntegrationInGslWorks) {
 
     gsl_integration_workspace_free(workspace);
 }
+
+namespace {
+double function2ToIntegrate(double const inputValue, void *parameters) {
+    int const mFunctionInput = *static_cast<int *>(parameters);
+    return gsl_pow_int(inputValue, mFunctionInput) + 1.0;
+}
+}  // namespace
 
 TEST(GslTest, NumericalFixedPointQuadratureIntegrationInGslWorks) {
     // This uses a fixed-point quadrature rule to integrate.
@@ -478,7 +468,7 @@ TEST(GslTest, UsingARandomGeneratorWithPoissonDistributionWorks) {
     for (int index = 0; index < NUMBER_OF_ITEMS; ++index) {
         cout << gsl_ran_poisson(randomGenerator, mu) << ",";
     }
-    printf("\n");
+    cout << "\n";
 
     gsl_rng_free(randomGenerator);
 }
@@ -500,7 +490,7 @@ TEST(GslTest, UsingARandomGeneratorWithTwoDimensionsWorks) {
         y += dy;
         cout << "(" << x << "," << y << "), ";
     }
-    printf("\n");
+    cout << "\n";
 
     gsl_rng_free(randomGenerator);
 }
@@ -649,9 +639,8 @@ TEST(GslTest, GettingMovingStatisticsWorks) {
     gsl_movstat_minmax(GSL_MOVSTAT_END_PADVALUE, x, xmin, xmax, w);
     /* print results */
     for (i = 0; i < N; ++i) {
-        printf(
-            "%zu %f %f %f %f\n", i, gsl_vector_get(x, i), gsl_vector_get(xmean, i), gsl_vector_get(xmin, i),
-            gsl_vector_get(xmax, i));
+        cout << i << "u " << gsl_vector_get(x, i) << " " << gsl_vector_get(xmean, i) << " " << gsl_vector_get(xmin, i)
+             << " " << gsl_vector_get(xmax, i) << "\n";
     }
     gsl_vector_free(x);
     gsl_vector_free(xmean);
@@ -699,9 +688,9 @@ TEST(GslTest, GettingMovingStatisticsWorksOnGaussianRandomVariates) {
     /* print results */
     idx = 0;
     for (i = 0; i < N; ++i) {
-        printf(
-            "%zu %f %f %f %f %f %f %f\n", i, gsl_vector_get(x, i), sigma[idx], gsl_vector_get(xmad, i),
-            gsl_vector_get(xiqr, i), gsl_vector_get(xSn, i), gsl_vector_get(xQn, i), gsl_vector_get(xsd, i));
+        cout << i << "u " << gsl_vector_get(x, i) << " " << sigma[idx] << " " << gsl_vector_get(xmad, i) << " "
+             << gsl_vector_get(xiqr, i) << " " << gsl_vector_get(xSn, i) << " " << gsl_vector_get(xQn, i) << " "
+             << gsl_vector_get(xsd, i) << "\n";
         if (i == N_sigma[idx] - 1) {
             ++idx;
         }
@@ -716,6 +705,14 @@ TEST(GslTest, GettingMovingStatisticsWorksOnGaussianRandomVariates) {
     gsl_rng_free(r);
     gsl_movstat_free(w);
 }
+
+namespace {
+double func(const size_t n, double x[], void *params) {
+    const double alpha = *static_cast<double *>(params);
+    gsl_sort(x, 1, n);
+    return gsl_stats_trmean_from_sorted_data(alpha, x, 1, n);
+}
+}  // namespace
 
 TEST(GslTest, GettingMovingStatisticsWorksOnUserDefinedMovingWindow) {
     // This example program illustrates how a user can define their own moving window function to apply to an input
@@ -747,7 +744,7 @@ TEST(GslTest, GettingMovingStatisticsWorksOnUserDefinedMovingWindow) {
     for (i = 0; i < N; ++i) {
         double const xi = gsl_vector_get(x, i);
         double const yi = gsl_vector_get(y, i);
-        printf("%f %f\n", xi, yi);
+        cout << xi << " " << yi << "\n";
     }
     gsl_vector_free(x);
     gsl_vector_free(y);
@@ -837,16 +834,16 @@ TEST(GslTest, GaussianFilterWorksInExample1) {
         double const k1i = gsl_vector_get(k1, i);
         double const k2i = gsl_vector_get(k2, i);
         double const k3i = gsl_vector_get(k3, i);
-        printf("%e %e %e\n", k1i, k2i, k3i);
+        cout << k1i << " " << k2i << " " << k3i << "\n";
     }
-    printf("\n\n");
+    cout << "\n\n";
     /* print filter results */
     for (i = 0; i < N; ++i) {
         double const xi = gsl_vector_get(x, i);
         double const y1i = gsl_vector_get(y1, i);
         double const y2i = gsl_vector_get(y2, i);
         double const y3i = gsl_vector_get(y3, i);
-        printf("%.12e %.12e %.12e %.12e\n", xi, y1i, y2i, y3i);
+        cout << xi << " " << y1i << " " << y2i << " " << y3i << "\n";
     }
     gsl_vector_free(x);
     gsl_vector_free(y1);
@@ -899,7 +896,7 @@ TEST(GslTest, GaussianFilterWorksInExample2) {
         } else {
             dxi = 0.5 * (gsl_vector_get(x, i + 1) - gsl_vector_get(x, i - 1));
         }
-        printf("%.12e %.12e %.12e %.12e %.12e\n", xi, yi, dxi, dyi, d2yi);
+        cout << xi << " " << yi << " " << dxi << " " << dyi << " " << d2yi << "\n";
     }
     gsl_vector_free(x);
     gsl_vector_free(y);
@@ -944,7 +941,7 @@ TEST(GslTest, MedianFilterWorksInSquareWaveSignalExample) {
         double const xi = gsl_vector_get(x, i);
         double const medi = gsl_vector_get(y_median, i);
         double const rmedi = gsl_vector_get(y_rmedian, i);
-        printf("%f %f %f %f\n", ti, xi, medi, rmedi);
+        cout << ti << " " << xi << " " << medi << " " << rmedi << "\n";
     }
     gsl_vector_free(t);
     gsl_vector_free(x);
@@ -990,7 +987,8 @@ TEST(GslTest, ImpulseDetectionFilterWorksInSquareWaveSignalExample) {
         double const xmedi = gsl_vector_get(xmedian, i);
         double const xsigmai = gsl_vector_get(xsigma, i);
         int const outlier = gsl_vector_int_get(ioutlier, i);
-        printf("%zu %f %f %f %f %d\n", i, xi, yi, xmedi + t * xsigmai, xmedi - t * xsigmai, outlier);
+        cout << i << "u " << xi << " " << yi << " " << xmedi + t * xsigmai << " " << xmedi - t * xsigmai << " "
+             << outlier << "\n";
     }
     gsl_vector_free(x);
     gsl_vector_free(y);
@@ -1045,7 +1043,7 @@ TEST(GslTest, TwoDimensionalHistogramWorks) {
             double const u = gsl_rng_uniform(r);
             double const v = gsl_rng_uniform(r);
             gsl_histogram2d_pdf_sample(p, u, v, &x, &y);
-            printf("%g %g\n", x, y);
+            cout << x << " " << y << "\n";
         }
         gsl_histogram2d_pdf_free(p);
     }
@@ -1053,51 +1051,1399 @@ TEST(GslTest, TwoDimensionalHistogramWorks) {
     gsl_rng_free(r);
 }
 
-// TEST(GslTest, NTuplesWorks) {
-//     // This demonstrate the use of ntuples in managing a large dataset. The first program
-//     // creates a set of 10,000 simulated “events”, each with 3 associated values (x; y; z). These are generated from
-//     a
-//     // Gaussian distribution with unit variance, for demonstration purposes, and written to the ntuple file test.dat.
-//     {
-//         const gsl_rng_type *T;
-//         gsl_rng *r;
-//         struct data ntuple_row;
-//         int i;
-//         gsl_ntuple *ntuple = gsl_ntuple_create("test.dat", &ntuple_row, sizeof(ntuple_row));
-//         gsl_rng_env_setup();
-//         T = gsl_rng_default;
-//         r = gsl_rng_alloc(T);
-//         for (i = 0; i < 10000; i++) {
-//             ntuple_row.x = gsl_ran_ugaussian(r);
-//             ntuple_row.y = gsl_ran_ugaussian(r);
-//             ntuple_row.z = gsl_ran_ugaussian(r);
-//             gsl_ntuple_write(ntuple);
-//         }
-//         gsl_ntuple_close(ntuple);
-//         gsl_rng_free(r);
-//     }
-//
-//     // This analyses the ntuple data in the file test.dat. The analysis procedure is to compute the
-//     // squared magnitude of each event, E2 = x2 + y2 + z2, and select only those which exceed a lower limit of 1.5.
-//     The
-//     // selected events are then histogrammed using their E2 values.
-//     {
-//         struct data ntuple_row;
-//         gsl_ntuple *ntuple = gsl_ntuple_open("test.dat", &ntuple_row, sizeof(ntuple_row));
-//         double lower = 1.5;
-//         gsl_ntuple_select_fn S;
-//         gsl_ntuple_value_fn V;
-//         gsl_histogram *h = gsl_histogram_alloc(100);
-//         gsl_histogram_set_ranges_uniform(h, 0.0, 10.0);
-//         S.function = &sel_func;
-//         S.params = &lower;
-//         V.function = &val_func;
-//         V.params = 0;
-//         gsl_ntuple_project(h, ntuple, &V, &S);
-//         gsl_histogram_fprintf(stdout, h, "%f", "%f");
-//         gsl_histogram_free(h);
-//         gsl_ntuple_close(ntuple);
-//     }
-// }
+namespace {
+struct data {
+    double x;
+    double y;
+    double z;
+};
+
+double val_func(void *ntuple_data, void *) {
+    auto *data = static_cast<struct data *>(ntuple_data);
+    double x = NAN;
+    double y = NAN;
+    double z = NAN;
+    x = data->x;
+    y = data->y;
+    z = data->z;
+    return x * x + y * y + z * z;
+}
+
+int sel_func(void *ntuple_data, void *params) {
+    auto *data = static_cast<struct data *>(ntuple_data);
+    double x = NAN;
+    double y = NAN;
+    double z = NAN;
+    double E2 = NAN;
+    double scale = NAN;
+    scale = *static_cast<double *>(params);
+    x = data->x;
+    y = data->y;
+    z = data->z;
+    E2 = x * x + y * y + z * z;
+    return static_cast<int>(E2 > scale);
+}
+}  // namespace
+
+TEST(GslTest, NTuplesWorks) {
+    // This demonstrate the use of ntuples in managing a large dataset. The first program
+    // creates a set of 10,000 simulated “events”, each with 3 associated values (x; y; z).
+    // These are generated from a Gaussian distribution with unit variance, for demonstration purposes, and written to
+    // the ntuple file test.dat.
+    {
+        const gsl_rng_type *T;
+        gsl_rng *r;
+        struct data ntuple_row;
+        int i;
+        gsl_ntuple *ntuple = gsl_ntuple_create("test.dat", &ntuple_row, sizeof(ntuple_row));
+        gsl_rng_env_setup();
+        T = gsl_rng_default;
+        r = gsl_rng_alloc(T);
+        for (i = 0; i < 10000; i++) {
+            ntuple_row.x = gsl_ran_ugaussian(r);
+            ntuple_row.y = gsl_ran_ugaussian(r);
+            ntuple_row.z = gsl_ran_ugaussian(r);
+            gsl_ntuple_write(ntuple);
+        }
+        gsl_ntuple_close(ntuple);
+        gsl_rng_free(r);
+    }
+
+    // This analyses the ntuple data in the file test.dat. The analysis procedure is to compute the
+    // squared magnitude of each event, E2 = x2 + y2 + z2, and select only those which exceed a lower limit of 1.5.
+    // The selected events are then histogrammed using their E2 values.
+    {
+        struct data ntuple_row;
+        gsl_ntuple *ntuple = gsl_ntuple_open("test.dat", &ntuple_row, sizeof(ntuple_row));
+        double lower = 1.5;
+        gsl_ntuple_select_fn S;
+        gsl_ntuple_value_fn V;
+        gsl_histogram *h = gsl_histogram_alloc(100);
+        gsl_histogram_set_ranges_uniform(h, 0.0, 10.0);
+        S.function = &sel_func;
+        S.params = &lower;
+        V.function = &val_func;
+        V.params = 0;
+        gsl_ntuple_project(h, ntuple, &V, &S);
+        gsl_histogram_fprintf(stdout, h, "%f", "%f");
+        gsl_histogram_free(h);
+        gsl_ntuple_close(ntuple);
+    }
+}
+
+/* Computation of the integral,
+I = int (dx dy dz)/(2pi)^3 1/(1-cos(x)cos(y)cos(z))
+over (-pi,-pi,-pi) to (+pi, +pi, +pi). The exact answer
+is Gamma(1/4)^4/(4 pi^3). This example is taken from
+C.Itzykson, J.M.Drouffe, "Statistical Field Theory -
+Volume 1", Section 1.1, p21, which cites the original
+paper M.L.Glasser, I.J.Zucker, Proc.Natl.Acad.Sci.USA 74
+1800 (1977) */
+
+/* For simplicity we compute the integral over the region
+(0,0,0) -> (pi,pi,pi) and multiply by 8 */
+double exact = 1.3932039296856768591842462603255;
+double g(double *k, size_t dim, void *params) {
+    (void)(dim); /* avoid unused parameter warnings */
+    (void)(params);
+    double A = 1.0 / (M_PI * M_PI * M_PI);
+    return A / (1.0 - cos(k[0]) * cos(k[1]) * cos(k[2]));
+}
+void display_results(char *title, double result, double error) {
+    cout << title << " ==================\n";
+    cout << "result = " << result << "\n";
+    cout << "sigma = " << error << "\n";
+    cout << "exact = " << exact << "\n";
+    cout << "error = " << result - exact << " = " << fabs(result - exact) / error << " sigma\n";
+}
+
+TEST(GslTest, MonteCarloRoutinesForIntegralWorks) {
+    /// This uses the Monte Carlo routines to estimate the value of the following 3-dimensional integral from the theory
+    /// of random walks.
+    double res, err;
+    double xl[3] = {0, 0, 0};
+    double xu[3] = {M_PI, M_PI, M_PI};
+    const gsl_rng_type *T;
+    gsl_rng *r;
+    gsl_monte_function G = {&g, 3, 0};
+    size_t calls = 500000;
+    gsl_rng_env_setup();
+    T = gsl_rng_default;
+    r = gsl_rng_alloc(T);
+    {
+        gsl_monte_plain_state *s = gsl_monte_plain_alloc(3);
+        gsl_monte_plain_integrate(&G, xl, xu, 3, calls, r, s, &res, &err);
+        gsl_monte_plain_free(s);
+        display_results("plain", res, err);
+    }
+    {
+        gsl_monte_miser_state *s = gsl_monte_miser_alloc(3);
+        gsl_monte_miser_integrate(&G, xl, xu, 3, calls, r, s, &res, &err);
+        gsl_monte_miser_free(s);
+        display_results("miser", res, err);
+    }
+    {
+        gsl_monte_vegas_state *s = gsl_monte_vegas_alloc(3);
+        gsl_monte_vegas_integrate(&G, xl, xu, 3, 10000, r, s, &res, &err);
+        display_results("vegas warm-up", res, err);
+        cout << "converging...\n";
+        do {
+            gsl_monte_vegas_integrate(&G, xl, xu, 3, calls / 5, r, s, &res, &err);
+            cout << "result = "
+                 << "chisq/dof = %.1f\n"
+                 << " sigma = " << res << " " << err << gsl_monte_vegas_chisq(s);
+        } while (fabs(gsl_monte_vegas_chisq(s) - 1.0) > 0.5);
+        display_results("vegas final", res, err);
+        gsl_monte_vegas_free(s);
+    }
+    gsl_rng_free(r);
+}
+
+/* set up parameters for this simulated annealing run */
+/* how many points do we try before stepping */
+#define N_TRIES 200
+/* how many iterations for each T? */
+#define ITERS_FIXED_T 1000
+/* max step size in random walk */
+#define STEP_SIZE 1.0
+/* Boltzmann constant */
+#define K 1.0
+/* initial temperature */
+#define T_INITIAL 0.008
+/* damping factor for temperature */
+#define MU_T 1.003
+#define T_MIN 2.0e-6
+gsl_siman_params_t params = {N_TRIES, ITERS_FIXED_T, STEP_SIZE, K, T_INITIAL, MU_T, T_MIN};
+/* now some functions to test in one dimension */
+double E1(void *xp) {
+    double x = *((double *)xp);
+    return exp(-pow((x - 1.0), 2.0)) * sin(8 * x);
+}
+double M1(void *xp, void *yp) {
+    double x = *((double *)xp);
+    double y = *((double *)yp);
+    return fabs(x - y);
+}
+void S1(const gsl_rng *r, void *xp, double step_size) {
+    double old_x = *((double *)xp);
+    double new_x;
+    double u = gsl_rng_uniform(r);
+    new_x = u * 2 * step_size - step_size + old_x;
+    memcpy(xp, &new_x, sizeof(new_x));
+}
+void P1(void *xp) { cout << *((double *)xp) << ""; }
+
+TEST(GslTest, DISABLED_SimulatedAnnealingWorks) {
+    // The goal is to find a point in the space at which a real valued energy function (or cost function) is minimized.
+    // Simulated annealing is a minimization technique which has given good results in avoiding local minima; it is
+    // based on the idea of taking a random walk through the space at successively lower temperatures, where the
+    // probability of taking a step is given by a Boltzmann distribution.
+
+    // This example, in one dimensional Cartesian space, sets up an energy function which is a damped sine wave; this
+    // has many local minima, but only one global minimum, somewhere between 1.0 and 1.5. The initial guess given
+    // is 15.5, which is several local minima away from the global minimum.
+
+    const gsl_rng_type *T;
+    gsl_rng *r;
+    double x_initial = 15.5;
+    gsl_rng_env_setup();
+    T = gsl_rng_default;
+    r = gsl_rng_alloc(T);
+    gsl_rng_free(r);
+    gsl_siman_solve(r, &x_initial, E1, S1, M1, P1, NULL, NULL, NULL, sizeof(double), params);
+    gsl_rng_free(r);
+}
+
+int func(double t, const double y[], double f[], void *params) {
+    (void)(t); /* avoid unused parameter warning */
+    double mu = *(double *)params;
+    f[0] = y[1];
+    f[1] = -y[0] - mu * y[1] * (y[0] * y[0] - 1);
+    return GSL_SUCCESS;
+}
+
+int jac(double t, const double y[], double *dfdy, double dfdt[], void *params) {
+    (void)(t); /* avoid unused parameter warning */
+    double mu = *(double *)params;
+    gsl_matrix_view dfdy_mat = gsl_matrix_view_array(dfdy, 2, 2);
+    gsl_matrix *m = &dfdy_mat.matrix;
+    gsl_matrix_set(m, 0, 0, 0.0);
+    gsl_matrix_set(m, 0, 1, 1.0);
+    gsl_matrix_set(m, 1, 0, -2.0 * mu * y[0] * y[1] - 1.0);
+    gsl_matrix_set(m, 1, 1, -mu * (y[0] * y[0] - 1.0));
+    dfdt[0] = 0.0;
+    dfdt[1] = 0.0;
+    return GSL_SUCCESS;
+}
+
+TEST(GslTest, DifferentialEquationsWorksOnVanDerPolOscillator) {
+    // This solves the second-order nonlinear Van der Pol oscillator equation
+
+    double mu = 10;
+    gsl_odeiv2_system sys = {func, jac, 2, &mu};
+    gsl_odeiv2_driver *d = gsl_odeiv2_driver_alloc_y_new(&sys, gsl_odeiv2_step_rk8pd, 1e-6, 1e-6, 0.0);
+    int i;
+    double t = 0.0, t1 = 100.0;
+    double y[2] = {1.0, 0.0};
+    for (i = 1; i <= 100; i++) {
+        double ti = i * t1 / 100.0;
+        int status = gsl_odeiv2_driver_apply(d, &t, ti, y);
+        if (status != GSL_SUCCESS) {
+            cout << "error, return value=" << status << "\n";
+            break;
+        }
+        cout << t << " " << y[0] << " " << y[1] << "\n";
+    }
+    gsl_odeiv2_driver_free(d);
+}
+
+TEST(GslTest, OneDimensionalInterpolationWorks) {
+    // The following program demonstrates the use of the interpolation and spline functions.
+    // It computes a cubic spline interpolation of the 10-point dataset
+
+    int i;
+    double xi, yi, x[10], y[10];
+    cout << "#m=0,S=17\n";
+    for (i = 0; i < 10; i++) {
+        x[i] = i + 0.5 * sin(i);
+        y[i] = i + cos(i * i);
+        cout << x[i] << " " << y[i] << "\n";
+    }
+    cout << "#m=1,S=0\n";
+    {
+        gsl_interp_accel *acc = gsl_interp_accel_alloc();
+        gsl_spline *spline = gsl_spline_alloc(gsl_interp_cspline, 10);
+        gsl_spline_init(spline, x, y, 10);
+        for (xi = x[0]; xi < x[9]; xi += 0.01) {
+            yi = gsl_spline_eval(spline, xi, acc);
+            cout << xi << " " << yi << "\n";
+        }
+        gsl_spline_free(spline);
+        gsl_interp_accel_free(acc);
+    }
+}
+
+TEST(GslTest, TwoDimensionalInterpolationWorks) {
+    // The following example performs bilinear interpolation on the unit square,
+    // using z values of (0; 1; 0:5; 1) going clockwise around the square.
+
+    const gsl_interp2d_type *T = gsl_interp2d_bilinear;
+    const size_t N = 100;           /* number of points to interpolate */
+    const double xa[] = {0.0, 1.0}; /* define unit square */
+    const double ya[] = {0.0, 1.0};
+    const size_t nx = sizeof(xa) / sizeof(double); /* x grid points */
+    const size_t ny = sizeof(ya) / sizeof(double); /* y grid points */
+    double *za = static_cast<double *>(malloc(nx * ny * sizeof(double)));
+    gsl_spline2d *spline = gsl_spline2d_alloc(T, nx, ny);
+    gsl_interp_accel *xacc = gsl_interp_accel_alloc();
+    gsl_interp_accel *yacc = gsl_interp_accel_alloc();
+    size_t i, j;
+    /* set z grid values */
+    gsl_spline2d_set(spline, za, 0, 0, 0.0);
+    gsl_spline2d_set(spline, za, 0, 1, 1.0);
+    gsl_spline2d_set(spline, za, 1, 1, 0.5);
+    gsl_spline2d_set(spline, za, 1, 0, 1.0);
+    /* initialize interpolation */
+    gsl_spline2d_init(spline, xa, ya, za, nx, ny);
+    /* interpolate N values in x and y and print out grid for plotting */
+    for (i = 0; i < N; ++i) {
+        double xi = i / (N - 1.0);
+        for (j = 0; j < N; ++j) {
+            double yj = j / (N - 1.0);
+            double zij = gsl_spline2d_eval(spline, xi, yj, xacc, yacc);
+            cout << xi << " " << yj << " " << zij << "\n";
+        }
+        cout << "\n";
+    }
+    gsl_spline2d_free(spline);
+    gsl_interp_accel_free(xacc);
+    gsl_interp_accel_free(yacc);
+}
+
+double functionToDifferentiate(double x, void *params) {
+    (void)(params); /* avoid unused parameter warning */
+    return pow(x, 1.5);
+}
+
+TEST(GslTest, NumericalDifferentiationWorks) {
+    // The following code estimates the derivative of the function f(x) = x^(3/2) at x = 2 and at x = 0.
+    // The function f(x) is undefined for x < 0 so the derivative at x = 0 is computed using gsl_deriv_forward()..
+
+    gsl_function F;
+    double result, abserr;
+    F.function = &functionToDifferentiate;
+    F.params = 0;
+    cout << "f(x) = x^(3/2)\n";
+    gsl_deriv_central(&F, 2.0, 1e-8, &result, &abserr);
+    cout << "x = 2.0\n";
+    cout << "f'(x) = " << result << " +/- " << abserr << "\n";
+    cout << "exact = " << 1.5 * sqrt(2.0) << "\n\n";
+    gsl_deriv_forward(&F, 0.0, 1e-8, &result, &abserr);
+    cout << "x = 0.0\n";
+    cout << "f'(x) = " << result << " +/- " << abserr << "\n";
+    cout << "exact = " << 0.0 << "\n";
+}
+
+double functionToChebyshevApproximate(double x, void *p) {
+    (void)(p); /* avoid unused parameter warning */
+    if (x < 0.5)
+        return 0.25;
+    else
+        return 0.75;
+}
+
+TEST(GslTest, ChebyshevApproximationsWorks) {
+    // The following example program computes Chebyshev approximations to a step function.
+    // This is an extremely difficult approximation to make, due to the discontinuity,
+    // and was chosen as an example where approximation error is visible.
+    // For smooth functions the Chebyshev approximation converges extremely rapidly and errors would not be visible.
+
+    int i, n = 10000;
+    gsl_cheb_series *cs = gsl_cheb_alloc(40);
+    gsl_function F;
+    F.function = functionToChebyshevApproximate;
+    F.params = 0;
+    gsl_cheb_init(cs, &F, 0.0, 1.0);
+    for (i = 0; i < n; i++) {
+        double x = i / (double)n;
+        double r10 = gsl_cheb_eval_n(cs, 10, x);
+        double r40 = gsl_cheb_eval(cs, x);
+        cout << x << " " << GSL_FN_EVAL(&F, x) << " " << r10 << " " << r40 << "\n";
+    }
+    gsl_cheb_free(cs);
+}
+
+TEST(GslTest, SeriesAccelerationWorks) {
+    // The following code calculates an estimate of (2) = 2=6 using a series,
+    // After N terms the error in the sum is O(1=N), making direct summation of the series converge slowly.
+
+    constexpr int N = 20;
+    double t[N];
+    double sum_accel, err;
+    double sum = 0;
+    int n;
+    gsl_sum_levin_u_workspace *w = gsl_sum_levin_u_alloc(N);
+    const double zeta_2 = M_PI * M_PI / 6.0;
+    /* terms for zeta(2) = \sum_{n=1}^{\infty} 1/n^2 */
+    for (n = 0; n < N; n++) {
+        double np1 = n + 1.0;
+        t[n] = 1.0 / (np1 * np1);
+        sum += t[n];
+    }
+    gsl_sum_levin_u_accel(t, N, w, &sum_accel, &err);
+    cout << "term-by-term sum = " << sum << " using " << N << " terms\n";
+    cout << "term-by-term sum = " << w->sum_plain << " using " << w->terms_used << "u terms\n";
+    cout << "exact value = " << zeta_2 << "\n";
+    cout << "accelerated sum = " << sum_accel << " using " << w->terms_used << "u terms\n";
+    cout << "estimated error = " << err << "\n";
+    cout << "actual error = " << sum_accel - zeta_2 << "\n";
+    gsl_sum_levin_u_free(w);
+}
+
+TEST(GslTest, WaveletTransformFunctionWorks) {
+    // The following program demonstrates the use of the one-dimensional wavelet transform functions.
+    // It computes an approximation to an input signal (of length 256) using the 20 largest components of the wavelet
+    // transform, while setting the others to zero.
+
+    int i, n = 256, nc = 20;
+    double *orig_data = static_cast<double *>(malloc(n * sizeof(double)));
+    double *data = static_cast<double *>(malloc(n * sizeof(double)));
+    double *abscoeff = static_cast<double *>(malloc(n * sizeof(double)));
+    size_t *p = static_cast<size_t *>(malloc(n * sizeof(size_t)));
+    FILE *f;
+    gsl_wavelet *w;
+    gsl_wavelet_workspace *work;
+    w = gsl_wavelet_alloc(gsl_wavelet_daubechies, 4);
+    work = gsl_wavelet_workspace_alloc(n);
+    f = fopen("test.dat", "r");
+    for (i = 0; i < n; i++) {
+        fscanf(f, "%lg", &orig_data[i]);
+        data[i] = orig_data[i];
+    }
+    fclose(f);
+    gsl_wavelet_transform_forward(w, data, 1, n, work);
+    for (i = 0; i < n; i++) {
+        abscoeff[i] = fabs(data[i]);
+    }
+    gsl_sort_index(p, abscoeff, 1, n);
+    for (i = 0; (i + nc) < n; i++) data[p[i]] = 0;
+    gsl_wavelet_transform_inverse(w, data, 1, n, work);
+    for (i = 0; i < n; i++) {
+        cout << orig_data[i] << " " << data[i] << "\n";
+    }
+    gsl_wavelet_free(w);
+    gsl_wavelet_workspace_free(work);
+    free(data);
+    free(orig_data);
+    free(abscoeff);
+    free(p);
+}
+
+struct quadratic_params {
+    double a, b, c;
+};
+double quadratic(double x, void *params);
+double quadratic_deriv(double x, void *params);
+void quadratic_fdf(double x, void *params, double *y, double *dy);
+
+double quadratic(double x, void *params) {
+    struct quadratic_params *p = (struct quadratic_params *)params;
+    double a = p->a;
+    double b = p->b;
+    double c = p->c;
+    return (a * x + b) * x + c;
+}
+double quadratic_deriv(double x, void *params) {
+    struct quadratic_params *p = (struct quadratic_params *)params;
+    double a = p->a;
+    double b = p->b;
+    return 2.0 * a * x + b;
+}
+void quadratic_fdf(double x, void *params, double *y, double *dy) {
+    struct quadratic_params *p = (struct quadratic_params *)params;
+    double a = p->a;
+    double b = p->b;
+    double c = p->c;
+    *y = (a * x + b) * x + c;
+    *dy = 2.0 * a * x + b;
+}
+
+TEST(GslTest, OneDimensionRootFindingWorks) {
+    // For any root finding algorithm we need to prepare the function to be solved.
+    // For this example we will use the general quadratic equation described earlier.
+    // We first need a header file (demo_fn.h) to define the function parameters
+
+    int status;
+    int iter = 0, max_iter = 100;
+    const gsl_root_fsolver_type *T;
+    gsl_root_fsolver *s;
+    double r = 0, r_expected = sqrt(5.0);
+    double x_lo = 0.0, x_hi = 5.0;
+    gsl_function F;
+    struct quadratic_params params = {1.0, 0.0, -5.0};
+    F.function = &quadratic;
+    F.params = &params;
+    T = gsl_root_fsolver_brent;
+    s = gsl_root_fsolver_alloc(T);
+    gsl_root_fsolver_set(s, &F, x_lo, x_hi);
+    cout << "using " << gsl_root_fsolver_name(s) << " method\n";
+    cout << "iter"
+         << " ["
+         << "lower"
+         << ", "
+         << "upper"
+         << "] "
+         << "root"
+         << " "
+         << "err"
+         << " "
+         << "err(est)"
+         << "\n";
+    do {
+        iter++;
+        status = gsl_root_fsolver_iterate(s);
+        r = gsl_root_fsolver_root(s);
+        x_lo = gsl_root_fsolver_x_lower(s);
+        x_hi = gsl_root_fsolver_x_upper(s);
+        status = gsl_root_test_interval(x_lo, x_hi, 0, 0.001);
+        if (status == GSL_SUCCESS) cout << "Converged:\n";
+        cout << iter << " [" << x_lo << ", " << x_hi << "] " << r << " " << r - r_expected << " " << x_hi - x_lo
+             << "\n";
+    } while (status == GSL_CONTINUE && iter < max_iter);
+    gsl_root_fsolver_free(s);
+}
+
+double fn1(double x, void *params) {
+    (void)(params); /* avoid unused parameter warning */
+    return cos(x) + 1.0;
+}
+
+TEST(GslTest, OneDimensionalMinimizationWorks) {
+    // The following program uses the Brent algorithm to find the minimum of the function f(x) = cos(x)+1, which occurs
+    // at x = pi. The starting interval is (0; 6), with an initial guess for the minimum of 2.
+
+    int status;
+    int iter = 0, max_iter = 100;
+    const gsl_min_fminimizer_type *T;
+    gsl_min_fminimizer *s;
+    double m = 2.0, m_expected = M_PI;
+    double a = 0.0, b = 6.0;
+    gsl_function F;
+    F.function = &fn1;
+    F.params = 0;
+    T = gsl_min_fminimizer_brent;
+    s = gsl_min_fminimizer_alloc(T);
+    gsl_min_fminimizer_set(s, &F, m, a, b);
+    cout << "using " << gsl_min_fminimizer_name(s) << " method\n";
+    cout << "iter"
+         << " ["
+         << "lower"
+         << ", "
+         << "upper"
+         << "] "
+         << "min"
+         << " "
+         << "err"
+         << " "
+         << "err(est)"
+         << "\n";
+    cout << iter << " [" << a << ", " << b << "] " << m << " " << m - m_expected << " " << b - a << "\n";
+    do {
+        iter++;
+        status = gsl_min_fminimizer_iterate(s);
+        m = gsl_min_fminimizer_x_minimum(s);
+        a = gsl_min_fminimizer_x_lower(s);
+        b = gsl_min_fminimizer_x_upper(s);
+        status = gsl_min_test_interval(a, b, 0.001, 0.0);
+        if (status == GSL_SUCCESS) cout << "Converged:\n";
+        cout << "%.7f %+.7f %.7f\n"
+             << " [" << iter << ", " << a << "] " << b << m << m - m_expected << b - a;
+    } while (status == GSL_CONTINUE && iter < max_iter);
+    gsl_min_fminimizer_free(s);
+}
+
+struct rparams {
+    double a;
+    double b;
+};
+
+int rosenbrock_f(const gsl_vector *x, void *params, gsl_vector *f) {
+    double a = ((struct rparams *)params)->a;
+    double b = ((struct rparams *)params)->b;
+    const double x0 = gsl_vector_get(x, 0);
+    const double x1 = gsl_vector_get(x, 1);
+    const double y0 = a * (1 - x0);
+    const double y1 = b * (x1 - x0 * x0);
+    gsl_vector_set(f, 0, y0);
+    gsl_vector_set(f, 1, y1);
+    return GSL_SUCCESS;
+}
+
+TEST(GslTest, MultiDimensionalRootFindingWorks) {
+    // The MultiDimensional solvers are used in a similar way to the one-dimensional root finding algorithms.
+    // This first example demonstrates the HYBRIDS scaled-hybrid algorithm, which does not require derivatives.
+    // The program solves the Rosenbrock system of equations.
+    // This begins by creating the function object f, with the arguments (x,y) and parameters (a,b).
+    // The solver s is initialized to use this function, with the gsl_multiroot_fsolver_hybrids method.
+
+    const gsl_multiroot_fsolver_type *T;
+    gsl_multiroot_fsolver *s;
+    int status;
+    size_t i, iter = 0;
+    const size_t n = 2;
+    struct rparams p = {1.0, 10.0};
+    gsl_multiroot_function f = {&rosenbrock_f, n, &p};
+    double x_init[2] = {-10.0, -5.0};
+    gsl_vector *x = gsl_vector_alloc(n);
+    gsl_vector_set(x, 0, x_init[0]);
+    gsl_vector_set(x, 1, x_init[1]);
+    T = gsl_multiroot_fsolver_hybrids;
+    s = gsl_multiroot_fsolver_alloc(T, 2);
+    gsl_multiroot_fsolver_set(s, &f, x);
+    do {
+        iter++;
+        status = gsl_multiroot_fsolver_iterate(s);
+        if (status) /* check if solver is stuck */
+            break;
+        status = gsl_multiroot_test_residual(s->f, 1e-7);
+    } while (status == GSL_CONTINUE && iter < 1000);
+    cout << "status = " << gsl_strerror(status) << "\n";
+    gsl_multiroot_fsolver_free(s);
+    gsl_vector_free(x);
+}
+
+int rosenbrock_df(const gsl_vector *x, void *params, gsl_matrix *J) {
+    const double a = ((struct rparams *)params)->a;
+    const double b = ((struct rparams *)params)->b;
+    const double x0 = gsl_vector_get(x, 0);
+    const double df00 = -a;
+    const double df01 = 0;
+    const double df10 = -2 * b * x0;
+    const double df11 = b;
+    gsl_matrix_set(J, 0, 0, df00);
+    gsl_matrix_set(J, 0, 1, df01);
+    gsl_matrix_set(J, 1, 0, df10);
+    gsl_matrix_set(J, 1, 1, df11);
+    return GSL_SUCCESS;
+}
+
+int rosenbrock_fdf(const gsl_vector *x, void *params, gsl_vector *f, gsl_matrix *J) {
+    rosenbrock_f(x, params, f);
+    rosenbrock_df(x, params, J);
+    return GSL_SUCCESS;
+}
+
+TEST(GslTest, MultiDimensionalRootFindingWithAccelerationWorks) {
+    // The next example program adds derivative information, in order to accelerate the solution.
+    // There are two derivative functions rosenbrock_df and rosenbrock_fdf.
+    // The latter computes both the function and its derivative simultaneously.
+    // This allows the optimization of any common terms.
+    // For simplicity we substitute calls to the separate f and df functions at this point in the code below
+
+    const gsl_multiroot_fdfsolver_type *T;
+    gsl_multiroot_fdfsolver *s;
+    int status;
+    size_t i, iter = 0;
+    const size_t n = 2;
+    struct rparams p = {1.0, 10.0};
+    gsl_multiroot_function_fdf f = {&rosenbrock_f, &rosenbrock_df, &rosenbrock_fdf, n, &p};
+    double x_init[2] = {-10.0, -5.0};
+    gsl_vector *x = gsl_vector_alloc(n);
+    gsl_vector_set(x, 0, x_init[0]);
+    gsl_vector_set(x, 1, x_init[1]);
+    T = gsl_multiroot_fdfsolver_gnewton;
+    s = gsl_multiroot_fdfsolver_alloc(T, n);
+    gsl_multiroot_fdfsolver_set(s, &f, x);
+    do {
+        iter++;
+        status = gsl_multiroot_fdfsolver_iterate(s);
+        if (status) break;
+        status = gsl_multiroot_test_residual(s->f, 1e-7);
+    } while (status == GSL_CONTINUE && iter < 1000);
+    cout << "status = " << gsl_strerror(status) << "\n";
+    gsl_multiroot_fdfsolver_free(s);
+    gsl_vector_free(x);
+}
+
+/* Paraboloid centered on (p[0],p[1]), with
+scale factors (p[2],p[3]) and minimum p[4] */
+double my_f(const gsl_vector *v, void *params) {
+    double x, y;
+    double *p = (double *)params;
+    x = gsl_vector_get(v, 0);
+    y = gsl_vector_get(v, 1);
+    return p[2] * (x - p[0]) * (x - p[0]) + p[3] * (y - p[1]) * (y - p[1]) + p[4];
+}
+/* The gradient of f, df = (df/dx, df/dy). */
+void my_df(const gsl_vector *v, void *params, gsl_vector *df) {
+    double x, y;
+    double *p = (double *)params;
+    x = gsl_vector_get(v, 0);
+    y = gsl_vector_get(v, 1);
+    gsl_vector_set(df, 0, 2.0 * p[2] * (x - p[0]));
+    gsl_vector_set(df, 1, 2.0 * p[3] * (y - p[1]));
+}
+/* Compute both f and df together. */
+void my_fdf(const gsl_vector *x, void *params, double *f, gsl_vector *df) {
+    *f = my_f(x, params);
+    my_df(x, params, df);
+}
+
+TEST(GslTest, MultiDimensionalMinimizationWorks) {
+    // This finds the minimum of the paraboloid function defined earlier.
+    // The location of the minimum is offset from the origin in x and y, and the function value at the minimum is
+    // non-zero.
+
+    size_t iter = 0;
+    int status;
+    const gsl_multimin_fdfminimizer_type *T;
+    gsl_multimin_fdfminimizer *s;
+    /* Position of the minimum (1,2), scale factors
+    10,20, height 30. */
+    double par[5] = {1.0, 2.0, 10.0, 20.0, 30.0};
+    gsl_vector *x;
+    gsl_multimin_function_fdf my_func;
+    my_func.n = 2;
+    my_func.f = my_f;
+    my_func.df = my_df;
+    my_func.fdf = my_fdf;
+    my_func.params = par;
+    /* Starting point, x = (5,7) */
+    x = gsl_vector_alloc(2);
+    gsl_vector_set(x, 0, 5.0);
+    gsl_vector_set(x, 1, 7.0);
+    T = gsl_multimin_fdfminimizer_conjugate_fr;
+    s = gsl_multimin_fdfminimizer_alloc(T, 2);
+    gsl_multimin_fdfminimizer_set(s, &my_func, x, 0.01, 1e-4);
+    do {
+        iter++;
+        status = gsl_multimin_fdfminimizer_iterate(s);
+        if (status) break;
+        status = gsl_multimin_test_gradient(s->gradient, 1e-3);
+        if (status == GSL_SUCCESS) cout << "Minimum found at:\n";
+        cout << iter << " " << gsl_vector_get(s->x, 0) << " " << gsl_vector_get(s->x, 1) << " " << s->f << "\n";
+    } while (status == GSL_CONTINUE && iter < 100);
+    gsl_multimin_fdfminimizer_free(s);
+    gsl_vector_free(x);
+}
+
+TEST(GslTest, MultiDimensionalMinimizationWorksWithNelderMeadSimplexAlgorithm) {
+    // This uses Nelder-Mead Simplex algorithm to minimize the same example object function, as above.
+    double par[5] = {1.0, 2.0, 10.0, 20.0, 30.0};
+    const gsl_multimin_fminimizer_type *T = gsl_multimin_fminimizer_nmsimplex2;
+    gsl_multimin_fminimizer *s = NULL;
+    gsl_vector *ss, *x;
+    gsl_multimin_function minex_func;
+    size_t iter = 0;
+    int status;
+    double size;
+    /* Starting point */
+    x = gsl_vector_alloc(2);
+    gsl_vector_set(x, 0, 5.0);
+    gsl_vector_set(x, 1, 7.0);
+    /* Set initial step sizes to 1 */
+    ss = gsl_vector_alloc(2);
+    gsl_vector_set_all(ss, 1.0);
+    /* Initialize method and iterate */
+    minex_func.n = 2;
+    minex_func.f = my_f;
+    minex_func.params = par;
+    s = gsl_multimin_fminimizer_alloc(T, 2);
+    gsl_multimin_fminimizer_set(s, &minex_func, x, ss);
+    do {
+        iter++;
+        status = gsl_multimin_fminimizer_iterate(s);
+        if (status) break;
+        size = gsl_multimin_fminimizer_size(s);
+        status = gsl_multimin_test_size(size, 1e-2);
+        if (status == GSL_SUCCESS) {
+            cout << "converged to minimum at\n";
+        }
+        cout << iter << " " << gsl_vector_get(s->x, 0) << " " << gsl_vector_get(s->x, 1) << " f() = " << s->fval
+             << " size = " << size << "\n";
+    } while (status == GSL_CONTINUE && iter < 100);
+    gsl_vector_free(x);
+    gsl_vector_free(ss);
+    gsl_multimin_fminimizer_free(s);
+}
+
+TEST(GslTest, SimpleLinearRegressionExampleWorks) {
+    // The following program computes a least squares straight-line fit to a simple dataset,
+    // and outputs the best-fit line and its associated one standard-deviation error bars.
+
+    int i, n = 4;
+    double x[4] = {1970, 1980, 1990, 2000};
+    double y[4] = {12, 11, 14, 13};
+    double w[4] = {0.1, 0.2, 0.3, 0.4};
+    double c0, c1, cov00, cov01, cov11, chisq;
+    gsl_fit_wlinear(x, 1, w, 1, y, 1, n, &c0, &c1, &cov00, &cov01, &cov11, &chisq);
+    cout << "# best fit: Y = " << c0 << " + " << c1 << " X\n";
+    cout << "# covariance matrix:\n";
+    cout << "# [ " << cov00 << ", " << cov01 << "\n# " << cov01 << ", " << cov11 << "]\n";
+    cout << "# chisq = " << chisq << "\n";
+    for (i = 0; i < n; i++) cout << "data: " << x[i] << " " << y[i] << " " << 1 / sqrt(w[i]) << "\n";
+    cout << "\n";
+    for (i = -30; i < 130; i++) {
+        double xf = x[0] + (i / 100.0) * (x[n - 1] - x[0]);
+        double yf, yf_err;
+        gsl_fit_linear_est(xf, c0, c1, cov00, cov01, cov11, &yf, &yf_err);
+        cout << "fit: " << xf << " " << yf << "\n";
+        cout << "hi : " << xf << " " << yf + yf_err << "\n";
+        cout << "lo : " << xf << " " << yf - yf_err << "\n";
+    }
+}
+
+TEST(GslTest, RegularizedLinearRegressionExampleWorks) {
+    // The next program demonstrates the difference between ordinary and regularized least squares when the design
+    // matrix is near-singular. In this program, we generate two random normally distributed variables u and v, with v =
+    // u+noise so that u and v are nearly colinear. We then set a third dependent variable y = u+v+noise and solve for
+    // the coefficients c1; c2 of the model Y (c1; c2) = c1u + c2v. Since u  v, the design matrix X is nearly singular,
+    // leading to unstable ordinary least squares solutions.
+
+    const size_t n = 1000; /* number of observations */
+    const size_t p = 2;    /* number of model parameters */
+    size_t i;
+    gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
+    gsl_matrix *X = gsl_matrix_alloc(n, p);
+    gsl_vector *y = gsl_vector_alloc(n);
+    for (i = 0; i < n; ++i) {
+        /* generate first random variable u */
+        double ui = 5.0 * gsl_ran_gaussian(r, 1.0);
+        /* set v = u + noise */
+        double vi = ui + gsl_ran_gaussian(r, 0.001);
+        /* set y = u + v + noise */
+        double yi = ui + vi + gsl_ran_gaussian(r, 1.0);
+        /* since u =~ v, the matrix X is ill-conditioned */
+        gsl_matrix_set(X, i, 0, ui);
+        gsl_matrix_set(X, i, 1, vi);
+        /* rhs vector */
+        gsl_vector_set(y, i, yi);
+    }
+    {
+        const size_t npoints = 200; /* number of points on L-curve and GCV␣
+        ,!curve */
+        gsl_multifit_linear_workspace *w = gsl_multifit_linear_alloc(n, p);
+        gsl_vector *c = gsl_vector_alloc(p);        /* OLS solution */
+        gsl_vector *c_lcurve = gsl_vector_alloc(p); /* regularized solution (L-curve) */
+        gsl_vector *c_gcv = gsl_vector_alloc(p);    /* regularized solution (GCV) */
+        gsl_vector *reg_param = gsl_vector_alloc(npoints);
+        gsl_vector *rho = gsl_vector_alloc(npoints); /* residual norms */
+        gsl_vector *eta = gsl_vector_alloc(npoints); /* solution norms */
+        gsl_vector *G = gsl_vector_alloc(npoints);   /* GCV function values */
+        double lambda_l;                             /* optimal regularization parameter (L-
+                                    ,!curve) */
+        double lambda_gcv;                           /* optimal regularization parameter␣
+                                  ,!(GCV) */
+        double G_gcv;                                /* G(lambda_gcv) */
+        size_t reg_idx;                              /* index of optimal lambda */
+        double rcond;                                /* reciprocal condition number of X */
+        double chisq, rnorm, snorm;
+        /* compute SVD of X */
+        gsl_multifit_linear_svd(X, w);
+        rcond = gsl_multifit_linear_rcond(w);
+        cout << "matrix condition number = " << 1.0 / rcond << "\n\n";
+        /* unregularized (standard) least squares fit, lambda = 0 */
+        gsl_multifit_linear_solve(0.0, X, y, c, &rnorm, &snorm, w);
+        chisq = pow(rnorm, 2.0);
+        cout << "=== Unregularized fit ===\n";
+        cout << "best fit: y = " << gsl_vector_get(c, 0) << " u + " << gsl_vector_get(c, 1) << " v\n";
+        cout << "residual norm = " << rnorm << "\n";
+        cout << "solution norm = " << snorm << "\n";
+        cout << "chisq/dof = " << chisq / (n - p) << "\n";
+        /* calculate L-curve and find its corner */
+        gsl_multifit_linear_lcurve(y, reg_param, rho, eta, w);
+        gsl_multifit_linear_lcorner(rho, eta, &reg_idx);
+        /* store optimal regularization parameter */
+        lambda_l = gsl_vector_get(reg_param, reg_idx);
+        /* regularize with lambda_l */
+        gsl_multifit_linear_solve(lambda_l, X, y, c_lcurve, &rnorm, &snorm, w);
+        chisq = pow(rnorm, 2.0) + pow(lambda_l * snorm, 2.0);
+        cout << "\n=== Regularized fit (L-curve) ===\n";
+        cout << "optimal lambda: " << lambda_l << "\n";
+        cout << "best fit: y = " << gsl_vector_get(c_lcurve, 0) << " u + " << gsl_vector_get(c_lcurve, 1) << " v\n";
+        cout << "residual norm = " << rnorm << "\n";
+        cout << "solution norm = " << snorm << "\n";
+        cout << "chisq/dof = " << chisq / (n - p) << "\n";
+        /* calculate GCV curve and find its minimum */
+        gsl_multifit_linear_gcv(y, reg_param, G, &lambda_gcv, &G_gcv, w);
+        /* regularize with lambda_gcv */
+        gsl_multifit_linear_solve(lambda_gcv, X, y, c_gcv, &rnorm, &snorm, w);
+        chisq = pow(rnorm, 2.0) + pow(lambda_gcv * snorm, 2.0);
+        cout << "\n=== Regularized fit (GCV) ===\n";
+        cout << "optimal lambda: " << lambda_gcv << "\n";
+        cout << "best fit: y = " << gsl_vector_get(c_gcv, 0) << " u + " << gsl_vector_get(c_gcv, 1) << " v\n";
+        cout << "residual norm = " << rnorm << "\n";
+        cout << "solution norm = " << snorm << "\n";
+        cout << "chisq/dof = " << chisq / (n - p) << "\n";
+        /* output L-curve and GCV curve */
+        for (i = 0; i < npoints; ++i) {
+            cout << gsl_vector_get(reg_param, i) << " " << gsl_vector_get(rho, i) << " " << gsl_vector_get(eta, i)
+                 << " " << gsl_vector_get(G, i) << "\n";
+        }
+        /* output L-curve corner point */
+        cout << "\n\n" << gsl_vector_get(rho, reg_idx) << " " << gsl_vector_get(eta, reg_idx) << "\n";
+        /* output GCV curve corner minimum */
+        cout << "\n\n" << lambda_gcv << " " << G_gcv << "\n";
+        gsl_multifit_linear_free(w);
+        gsl_vector_free(c);
+        gsl_vector_free(c_lcurve);
+        gsl_vector_free(reg_param);
+        gsl_vector_free(rho);
+        gsl_vector_free(eta);
+        gsl_vector_free(G);
+    }
+    gsl_rng_free(r);
+    gsl_matrix_free(X);
+    gsl_vector_free(y);
+}
+
+int doFitInRobust(
+    const gsl_multifit_robust_type *T, const gsl_matrix *X, const gsl_vector *y, gsl_vector *c, gsl_matrix *cov) {
+    int s;
+    gsl_multifit_robust_workspace *work = gsl_multifit_robust_alloc(T, X->size1, X->size2);
+    s = gsl_multifit_robust(X, y, c, cov, work);
+    gsl_multifit_robust_free(work);
+    return s;
+}
+
+TEST(GslTest, RobustLinearRegressionExampleWorks) {
+    // The next program demonstrates the advantage of robust least squares on a dataset with outliers. The program
+    // generates linear (x; y) data pairs on the line y = 1:45x + 3:88, adds some random noise, and inserts 3 outliers
+    // into the dataset. Both the robust and ordinary least squares (OLS) coefficients are computed for comparison.
+
+    size_t i;
+    size_t n;
+    const size_t p = 2; /* linear fit */
+    gsl_matrix *X, *cov;
+    gsl_vector *x, *y, *c, *c_ols;
+    const double a = 1.45; /* slope */
+    const double b = 3.88; /* intercept */
+    gsl_rng *r;
+    n = 10;
+    X = gsl_matrix_alloc(n, p);
+    x = gsl_vector_alloc(n);
+    y = gsl_vector_alloc(n);
+    c = gsl_vector_alloc(p);
+    c_ols = gsl_vector_alloc(p);
+    cov = gsl_matrix_alloc(p, p);
+    r = gsl_rng_alloc(gsl_rng_default);
+    /* generate linear dataset */
+    for (i = 0; i < n - 3; i++) {
+        double dx = 10.0 / (n - 1.0);
+        double ei = gsl_rng_uniform(r);
+        double xi = -5.0 + i * dx;
+        double yi = a * xi + b;
+        gsl_vector_set(x, i, xi);
+        gsl_vector_set(y, i, yi + ei);
+    }
+    /* add a few outliers */
+    gsl_vector_set(x, n - 3, 4.7);
+    gsl_vector_set(y, n - 3, -8.3);
+    gsl_vector_set(x, n - 2, 3.5);
+    gsl_vector_set(y, n - 2, -6.7);
+    gsl_vector_set(x, n - 1, 4.1);
+    gsl_vector_set(y, n - 1, -6.0);
+    /* construct design matrix X for linear fit */
+    for (i = 0; i < n; ++i) {
+        double xi = gsl_vector_get(x, i);
+        gsl_matrix_set(X, i, 0, 1.0);
+        gsl_matrix_set(X, i, 1, xi);
+    }
+    /* perform robust and OLS fit */
+    doFitInRobust(gsl_multifit_robust_ols, X, y, c_ols, cov);
+    doFitInRobust(gsl_multifit_robust_bisquare, X, y, c, cov);
+    /* output data and model */
+    for (i = 0; i < n; ++i) {
+        double xi = gsl_vector_get(x, i);
+        double yi = gsl_vector_get(y, i);
+        gsl_vector_view v = gsl_matrix_row(X, i);
+        double y_ols, y_rob, y_err;
+        gsl_multifit_robust_est(&v.vector, c, cov, &y_rob, &y_err);
+        gsl_multifit_robust_est(&v.vector, c_ols, cov, &y_ols, &y_err);
+        cout << xi << " " << yi << " " << y_rob << " " << y_ols << "\n";
+    }
+#define C(i) (gsl_vector_get(c, (i)))
+#define COV(i, j) (gsl_matrix_get(cov, (i), (j)))
+    {
+        cout << "# best fit: Y = " << C(0) << " + " << C(1) << " X\n";
+        cout << "# covariance matrix:\n";
+        cout << "# [ " << COV(0, 0) << ", " << COV(0, 1) << "\n";
+        cout << "# " << COV(1, 0) << ", " << COV(1, 1) << "\n";
+    }
+    gsl_matrix_free(X);
+    gsl_vector_free(x);
+    gsl_vector_free(y);
+    gsl_vector_free(c);
+    gsl_vector_free(c_ols);
+    gsl_matrix_free(cov);
+    gsl_rng_free(r);
+}
+
+/* function to be fitted */
+double func(const double t) {
+    double x = sin(10.0 * t);
+    return exp(x * x * x);
+}
+/* construct a row of the least squares matrix */
+int build_row(const double t, gsl_vector *row) {
+    const size_t p = row->size;
+    double Xj = 1.0;
+    size_t j;
+    for (j = 0; j < p; ++j) {
+        gsl_vector_set(row, j, Xj);
+        Xj *= t;
+    }
+    return 0;
+}
+int solve_system(
+    const int print_data, const gsl_multilarge_linear_type *T, const double lambda, const size_t n, const size_t p,
+    gsl_vector *c) {
+    const size_t nblock = 5;         /* number of blocks to accumulate */
+    const size_t nrows = n / nblock; /* number of rows per block */
+    gsl_multilarge_linear_workspace *w = gsl_multilarge_linear_alloc(T, p);
+    gsl_matrix *X = gsl_matrix_alloc(nrows, p);
+    gsl_vector *y = gsl_vector_alloc(nrows);
+    gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
+    const size_t nlcurve = 200;
+    gsl_vector *reg_param = gsl_vector_alloc(nlcurve);
+    gsl_vector *rho = gsl_vector_calloc(nlcurve);
+    gsl_vector *eta = gsl_vector_calloc(nlcurve);
+    size_t rowidx = 0;
+    double rnorm, snorm, rcond;
+    double t = 0.0;
+    double dt = 1.0 / (n - 1.0);
+    while (rowidx < n) {
+        size_t nleft = n - rowidx;         /* number of rows left to accumulate */
+        size_t nr = GSL_MIN(nrows, nleft); /* number of rows in this block */
+        gsl_matrix_view Xv = gsl_matrix_submatrix(X, 0, 0, nr, p);
+        gsl_vector_view yv = gsl_vector_subvector(y, 0, nr);
+        size_t i;
+        /* build (X,y) block with 'nr' rows */
+        for (i = 0; i < nr; ++i) {
+            gsl_vector_view row = gsl_matrix_row(&Xv.matrix, i);
+            double fi = func(t);
+            double ei = gsl_ran_gaussian(r, 0.1 * fi); /* noise */
+            double yi = fi + ei;
+            /* construct this row of LS matrix */
+            build_row(t, &row.vector);
+            /* set right hand side value with added noise */
+            gsl_vector_set(&yv.vector, i, yi);
+            if (print_data && (i % 100 == 0)) cout << t << " " << yi << "\n";
+            t += dt;
+        }
+        /* accumulate (X,y) block into LS system */
+        gsl_multilarge_linear_accumulate(&Xv.matrix, &yv.vector, w);
+        rowidx += nr;
+    }
+    if (print_data) cout << "\n\n";
+    /* compute L-curve */
+    gsl_multilarge_linear_lcurve(reg_param, rho, eta, w);
+    /* solve large LS system and store solution in c */
+    gsl_multilarge_linear_solve(lambda, c, &rnorm, &snorm, w);
+    /* compute reciprocal condition number */
+    gsl_multilarge_linear_rcond(&rcond, w);
+    cout << "=== Method " << gsl_multilarge_linear_name(w) << " ===\n";
+    cout << "condition number = " << 1.0 / rcond << "\n";
+    cout << "residual norm = " << rnorm << "\n";
+    cout << "solution norm = " << snorm << "\n";
+    /* output L-curve */
+    {
+        size_t i;
+        for (i = 0; i < nlcurve; ++i) {
+            cout << gsl_vector_get(reg_param, i) << " " << gsl_vector_get(rho, i) << " " << gsl_vector_get(eta, i)
+                 << "\n";
+        }
+        cout << "\n\n";
+    }
+    gsl_matrix_free(X);
+    gsl_vector_free(y);
+    gsl_multilarge_linear_free(w);
+    gsl_rng_free(r);
+    gsl_vector_free(reg_param);
+    gsl_vector_free(rho);
+    gsl_vector_free(eta);
+    return 0;
+}
+TEST(GslTest, LargeDenseLinearRegressionExampleWorks) {
+    // This  demonstrates the large dense linear least squares solvers.
+
+    const size_t n = 50000; /* number of observations */
+    const size_t p = 16;    /* polynomial order + 1 */
+    double lambda = 0.0;    /* regularization parameter */
+    gsl_vector *c_tsqr = gsl_vector_calloc(p);
+    gsl_vector *c_normal = gsl_vector_calloc(p);
+    lambda = 1;
+    /* turn off error handler so normal equations method won't abort */
+    gsl_set_error_handler_off();
+    /* solve system with TSQR method */
+    solve_system(1, gsl_multilarge_linear_tsqr, lambda, n, p, c_tsqr);
+    /* solve system with Normal equations method */
+    solve_system(0, gsl_multilarge_linear_normal, lambda, n, p, c_normal);
+    /* output solutions */
+    {
+        gsl_vector *v = gsl_vector_alloc(p);
+        double t;
+        for (t = 0.0; t <= 1.0; t += 0.01) {
+            double f_exact = func(t);
+            double f_tsqr, f_normal;
+            build_row(t, v);
+            gsl_blas_ddot(v, c_tsqr, &f_tsqr);
+            gsl_blas_ddot(v, c_normal, &f_normal);
+            cout << t << " " << f_exact << " " << f_tsqr << " " << f_normal << "\n";
+        }
+        gsl_vector_free(v);
+    }
+    gsl_vector_free(c_tsqr);
+    gsl_vector_free(c_normal);
+}
+
+struct ExponentialFittingData {
+    size_t n;
+    double *t;
+    double *y;
+};
+int expb_f(const gsl_vector *x, void *ExponentialFittingData, gsl_vector *f) {
+    size_t n = ((struct ExponentialFittingData *)ExponentialFittingData)->n;
+    double *t = ((struct ExponentialFittingData *)ExponentialFittingData)->t;
+    double *y = ((struct ExponentialFittingData *)ExponentialFittingData)->y;
+    double A = gsl_vector_get(x, 0);
+    double lambda = gsl_vector_get(x, 1);
+    double b = gsl_vector_get(x, 2);
+    size_t i;
+    for (i = 0; i < n; i++) {
+        /* Model Yi = A * exp(-lambda * t_i) + b */
+        double Yi = A * exp(-lambda * t[i]) + b;
+        gsl_vector_set(f, i, Yi - y[i]);
+    }
+    return GSL_SUCCESS;
+}
+int expb_df(const gsl_vector *x, void *ExponentialFittingData, gsl_matrix *J) {
+    size_t n = ((struct ExponentialFittingData *)ExponentialFittingData)->n;
+    double *t = ((struct ExponentialFittingData *)ExponentialFittingData)->t;
+    double A = gsl_vector_get(x, 0);
+    double lambda = gsl_vector_get(x, 1);
+    size_t i;
+    for (i = 0; i < n; i++) {
+        /* Jacobian matrix J(i,j) = dfi / dxj, */
+        /* where fi = (Yi - yi)/sigma[i], */
+        /* Yi = A * exp(-lambda * t_i) + b */
+        /* and the xj are the parameters (A,lambda,b) */
+        double e = exp(-lambda * t[i]);
+        gsl_matrix_set(J, i, 0, e);
+        gsl_matrix_set(J, i, 1, -t[i] * A * e);
+        gsl_matrix_set(J, i, 2, 1.0);
+    }
+    return GSL_SUCCESS;
+}
+void callback(const size_t iter, void *params, const gsl_multifit_nlinear_workspace *w) {
+    gsl_vector *f = gsl_multifit_nlinear_residual(w);
+    gsl_vector *x = gsl_multifit_nlinear_position(w);
+    double rcond;
+    /* compute reciprocal condition number of J(x) */
+    gsl_multifit_nlinear_rcond(&rcond, w);
+    fprintf(
+        stdout, "iter %2zu: A = %.4f, lambda = %.4f, b = %.4f, cond(J) = %8.4f, |f(x)|!= %.4f\n ", iter,
+        gsl_vector_get(x, 0), gsl_vector_get(x, 1), gsl_vector_get(x, 2), 1.0 / rcond, gsl_blas_dnrm2(f));
+}
+
+TEST(GslTest, ExponentialFittingExampleWorks) {
+    // The following example program fits a weighted exponential model with background to experimental
+    // ExponentialFittingData, Y = Aexp(􀀀t) + b. The first part of the program sets up the functions expb_f() and
+    // expb_df() to calculate the model and its Jacobian.
+    constexpr int N = 100; /* number of data points to fit */
+#define TMAX (3.0)         /* time variable in [0,TMAX] */
+    const gsl_multifit_nlinear_type *T = gsl_multifit_nlinear_trust;
+    gsl_multifit_nlinear_workspace *w;
+    gsl_multifit_nlinear_fdf fdf;
+    gsl_multifit_nlinear_parameters fdf_params = gsl_multifit_nlinear_default_parameters();
+    const size_t n = N;
+    const size_t p = 3;
+    gsl_vector *f;
+    gsl_matrix *J;
+    gsl_matrix *covar = gsl_matrix_alloc(p, p);
+    double t[N], y[N], weights[N];
+    struct ExponentialFittingData d = {n, t, y};
+    double x_init[3] = {1.0, 1.0, 0.0}; /* starting values */
+    gsl_vector_view x = gsl_vector_view_array(x_init, p);
+    gsl_vector_view wts = gsl_vector_view_array(weights, n);
+    gsl_rng *r;
+    double chisq, chisq0;
+    int status, info;
+    size_t i;
+    const double xtol = 1e-8;
+    const double gtol = 1e-8;
+    const double ftol = 0.0;
+    gsl_rng_env_setup();
+    r = gsl_rng_alloc(gsl_rng_default);
+    /* define the function to be minimized */
+    fdf.f = expb_f;
+    fdf.df = expb_df; /* set to NULL for finite-difference Jacobian */
+    fdf.fvv = NULL;   /* not using geodesic acceleration */
+    fdf.n = n;
+    fdf.p = p;
+    fdf.params = &d;
+    /* this is the ExponentialFittingData to be fitted */
+    for (i = 0; i < n; i++) {
+        double ti = i * TMAX / (n - 1.0);
+        double yi = 1.0 + 5 * exp(-1.5 * ti);
+        double si = 0.1 * yi;
+        double dy = gsl_ran_gaussian(r, si);
+        t[i] = ti;
+        y[i] = yi + dy;
+        weights[i] = 1.0 / (si * si);
+        cout << "ExponentialFittingData: " << ti << " " << y[i] << " " << si << "\n";
+    };
+    /* allocate workspace with default parameters */
+    w = gsl_multifit_nlinear_alloc(T, &fdf_params, n, p);
+    /* initialize solver with starting point and weights */
+    gsl_multifit_nlinear_winit(&x.vector, &wts.vector, &fdf, w);
+    /* compute initial cost function */
+    f = gsl_multifit_nlinear_residual(w);
+    gsl_blas_ddot(f, f, &chisq0);
+    /* solve the system with a maximum of 100 iterations */
+    status = gsl_multifit_nlinear_driver(100, xtol, gtol, ftol, callback, NULL, &info, w);
+    /* compute covariance of best fit parameters */
+    J = gsl_multifit_nlinear_jac(w);
+    gsl_multifit_nlinear_covar(J, 0.0, covar);
+    /* compute final cost */
+    gsl_blas_ddot(f, f, &chisq);
+#define FIT(i) gsl_vector_get(w->x, i)
+#define ERR(i) sqrt(gsl_matrix_get(covar, i, i))
+    cout << "summary from method '" << gsl_multifit_nlinear_name(w) << "/" << gsl_multifit_nlinear_trs_name(w) << "'\n";
+    cout << "number of iterations: " << gsl_multifit_nlinear_niter(w) << "u\n";
+    cout << "function evaluations: " << fdf.nevalf << "u\n";
+    cout << "Jacobian evaluations: " << fdf.nevaldf << "u\n";
+    cout << "reason for stopping: " << ((info == 1) ? "small step size"s : "small gradient"s) << "\n";
+    cout << "initial |f(x)| = " << sqrt(chisq0) << "\n";
+    cout << "final |f(x)| = " << sqrt(chisq) << "\n";
+    {
+        double dof = n - p;
+        double c = GSL_MAX_DBL(1, sqrt(chisq / dof));
+        cout << "chisq/dof = " << chisq / dof << "\n";
+        cout << "A = " << FIT(0) << " +/- " << c * ERR(0) << "\n";
+        cout << "lambda = " << FIT(1) << " +/- " << c * ERR(1) << "\n";
+        cout << "b = " << FIT(2) << " +/- " << c * ERR(2) << "\n";
+    }
+    cout << "status = " << gsl_strerror(status) << "\n";
+    gsl_multifit_nlinear_free(w);
+    gsl_matrix_free(covar);
+    gsl_rng_free(r);
+}
+
+TEST(GslTest, DerivativesOfBasisSplinesWorks) {
+    // This computes and outputs cubic B-splines and their derivatives using 6 breakpoints and uniform
+    // knots on the interval [0; 1]. All derivatives up to order 3 are computed.
+
+    const size_t nbreak = 6;
+    const size_t spline_order = 4;
+    gsl_bspline_workspace *w = gsl_bspline_alloc(spline_order, nbreak);
+    const size_t p = gsl_bspline_ncoeffs(w);
+    const size_t n = 300;
+    const double a = 0.0;
+    const double b = 1.0;
+    const double dx = (b - a) / (n - 1.0);
+    gsl_matrix *dB = gsl_matrix_alloc(p, spline_order);
+    size_t i, j, k;
+    /* uniform breakpoints on [a, b] */
+    gsl_bspline_knots_uniform(a, b, w);
+    /* output knot vector */
+    gsl_vector_fprintf(stdout, w->knots, "%f");
+    cout << "\n\n";
+    for (i = 0; i < spline_order; ++i) {
+        for (j = 0; j < n; ++j) {
+            double xj = j * dx;
+            gsl_bspline_deriv_eval(xj, i, dB, w);
+            cout << xj << " ";
+            for (k = 0; k < p; ++k) cout << gsl_matrix_get(dB, k, i) << " ";
+            cout << "\n";
+        }
+        cout << "\n\n";
+    }
+    gsl_matrix_free(dB);
+    gsl_bspline_free(w);
+}
+
+TEST(GslTest, SparseMatricesWorks) {
+    // The following example program builds a 5-by-4 sparse matrix and prints it in coordinate,
+    // compressed column, and compressed row format.
+    gsl_spmatrix *A = gsl_spmatrix_alloc(5, 4); /* triplet format */
+    gsl_spmatrix *B, *C;
+    size_t i, j;
+    /* build the sparse matrix */
+    gsl_spmatrix_set(A, 0, 2, 3.1);
+    gsl_spmatrix_set(A, 0, 3, 4.6);
+    gsl_spmatrix_set(A, 1, 0, 1.0);
+    gsl_spmatrix_set(A, 1, 2, 7.2);
+    gsl_spmatrix_set(A, 3, 0, 2.1);
+    gsl_spmatrix_set(A, 3, 1, 2.9);
+    gsl_spmatrix_set(A, 3, 3, 8.5);
+    gsl_spmatrix_set(A, 4, 0, 4.1);
+    cout << "printing all matrix elements:\n";
+    for (i = 0; i < 5; ++i)
+        for (j = 0; j < 4; ++j) cout << "A(" << i << "u," << j << "u) = " << gsl_spmatrix_get(A, i, j) << "\n";
+    /* print out elements in triplet format */
+    cout << "matrix in triplet format (i,j,Aij):\n";
+    gsl_spmatrix_fprintf(stdout, A, "%.1f");
+    /* convert to compressed column format */
+    B = gsl_spmatrix_ccs(A);
+    cout << "matrix in compressed column format:\n";
+    cout << "i = [ ";
+    for (i = 0; i < B->nz; ++i) cout << B->i[i] << ", ";
+    cout << "]\n";
+    cout << "p = [ ";
+    for (i = 0; i < B->size2 + 1; ++i) cout << B->p[i] << ", ";
+    cout << "]\n";
+    cout << "d = [ ";
+    for (i = 0; i < B->nz; ++i) cout << B->data[i] << ", ";
+    cout << "]\n";
+    /* convert to compressed row format */
+    C = gsl_spmatrix_crs(A);
+    cout << "matrix in compressed row format:\n";
+    cout << "i = [ ";
+    for (i = 0; i < C->nz; ++i) cout << C->i[i] << ", ";
+    cout << "]\n";
+    cout << "p = [ ";
+    for (i = 0; i < C->size1 + 1; ++i) cout << C->p[i] << ", ";
+    cout << "]\n";
+    cout << "d = [ ";
+    for (i = 0; i < C->nz; ++i) cout << C->data[i] << ", ";
+    cout << "]\n";
+    gsl_spmatrix_free(A);
+    gsl_spmatrix_free(B);
+    gsl_spmatrix_free(C);
+}
+
+TEST(GslTest, SparseLinearAlgebraWorks) {
+    // This example program demonstrates the sparse linear algebra routines on the solution
+    // of a simple 1D Poisson equation on [0; 1]:
+
+    const size_t N = 100;                       /* number of grid points */
+    const size_t n = N - 2;                     /* subtract 2 to exclude boundaries */
+    const double h = 1.0 / (N - 1.0);           /* grid spacing */
+    gsl_spmatrix *A = gsl_spmatrix_alloc(n, n); /* triplet format */
+    gsl_spmatrix *C;                            /* compressed format */
+    gsl_vector *f = gsl_vector_alloc(n);        /* right hand side vector */
+    gsl_vector *u = gsl_vector_alloc(n);        /* solution vector */
+    size_t i;
+    /* construct the sparse matrix for the finite difference equation */
+    /* construct first row */
+    gsl_spmatrix_set(A, 0, 0, -2.0);
+    gsl_spmatrix_set(A, 0, 1, 1.0);
+    /* construct rows [1:n-2] */
+    for (i = 1; i < n - 1; ++i) {
+        gsl_spmatrix_set(A, i, i + 1, 1.0);
+        gsl_spmatrix_set(A, i, i, -2.0);
+        gsl_spmatrix_set(A, i, i - 1, 1.0);
+    }
+    /* construct last row */
+    gsl_spmatrix_set(A, n - 1, n - 1, -2.0);
+    gsl_spmatrix_set(A, n - 1, n - 2, 1.0);
+    /* scale by h^2 */
+    gsl_spmatrix_scale(A, 1.0 / (h * h));
+    /* construct right hand side vector */
+    for (i = 0; i < n; ++i) {
+        double xi = (i + 1) * h;
+        double fi = -M_PI * M_PI * sin(M_PI * xi);
+        gsl_vector_set(f, i, fi);
+    }
+    /* convert to compressed column format */
+    C = gsl_spmatrix_ccs(A);
+    /* now solve the system with the GMRES iterative solver */
+    {
+        const double tol = 1.0e-6;  /* solution relative tolerance */
+        const size_t max_iter = 10; /* maximum iterations */
+        const gsl_splinalg_itersolve_type *T = gsl_splinalg_itersolve_gmres;
+        gsl_splinalg_itersolve *work = gsl_splinalg_itersolve_alloc(T, n, 0);
+        size_t iter = 0;
+        double residual;
+        int status;
+        /* initial guess u = 0 */
+        gsl_vector_set_zero(u);
+        /* solve the system A u = f */
+        do {
+            status = gsl_splinalg_itersolve_iterate(C, f, tol, u, work);
+            /* print out residual norm ||A*u - f|| */
+            residual = gsl_splinalg_itersolve_normr(work);
+            cout << "iter " << iter << "u residual = " << residual << "\n";
+            if (status == GSL_SUCCESS) cout << "Converged\n";
+        } while (status == GSL_CONTINUE && ++iter < max_iter);
+        /* output solution */
+        for (i = 0; i < n; ++i) {
+            double xi = (i + 1) * h;
+            double u_exact = sin(M_PI * xi);
+            double u_gsl = gsl_vector_get(u, i);
+            cout << xi << " " << u_gsl << " " << u_exact << "\n";
+        }
+        gsl_splinalg_itersolve_free(work);
+    }
+    gsl_spmatrix_free(A);
+    gsl_spmatrix_free(C);
+    gsl_vector_free(f);
+    gsl_vector_free(u);
+}
+
+TEST(GslTest, Works3) {
+    //
+}
+
+TEST(GslTest, Works4) {
+    //
+}
+
+TEST(GslTest, Works5) {
+    //
+}
+
+TEST(GslTest, Works6) {
+    //
+}
+
+TEST(GslTest, Works7) {
+    //
+}
+
+TEST(GslTest, Works8) {
+    //
+}
 
 }  // namespace alba

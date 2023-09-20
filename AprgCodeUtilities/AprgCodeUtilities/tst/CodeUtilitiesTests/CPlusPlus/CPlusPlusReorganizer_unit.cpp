@@ -33,11 +33,11 @@ void processAprgDirectory(string const& aprgPath) {
 
 }  // namespace
 
-TEST(CPlusPlusReorganizerTest, DISABLED_ActualProcessAprgDirectoryTest) {
+TEST(CPlusPlusReorganizerTest, DISABLED_ActualAprgDirectoryTest) {
     processAprgDirectory(R"(F:\Branches\aprg_project\aprg_semi_clean\aprg)");
 }
 
-TEST(CPlusPlusReorganizerTest, DISABLED_ActualProcessDirectoryTest) {
+TEST(CPlusPlusReorganizerTest, DISABLED_ActualDirectoryTest) {
     processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgCommon\AprgCommon)");
 }
 

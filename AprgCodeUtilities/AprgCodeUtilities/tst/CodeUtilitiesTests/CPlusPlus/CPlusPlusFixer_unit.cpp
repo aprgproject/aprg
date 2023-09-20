@@ -33,13 +33,13 @@ void processAprgDirectory(string const& aprgPath) {
 
 }  // namespace
 
-TEST(CPlusPlusFixerTest, DISABLED_AprgDirectoryTest) {
+TEST(CPlusPlusFixerTest, DISABLED_ActualAprgDirectoryTest) {
     processAprgDirectory(R"(F:\Branches\aprg_project\aprg_semi_clean\aprg)");
 }
 
-TEST(CPlusPlusFixerTest, DirectoryTest) {
+TEST(CPlusPlusFixerTest, DISABLED_ActualDirectoryTest) {
     CPlusPlusFixer fixer;
-    fixer.processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgCommon\AprgCommon)");
+    fixer.processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\gsl\GslTest)");
 }
 
 TEST(CPlusPlusFixerTest, FixerWorksForCombineCodes) {
