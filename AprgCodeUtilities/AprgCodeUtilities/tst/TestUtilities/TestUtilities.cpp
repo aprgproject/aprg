@@ -122,9 +122,9 @@ void verifyFile(string const& expectedFile, string const& testFile) {
             cout << "\n";
         }
     }
-    if (isDifferenceFound) {
-        runDiffForTwoFiles(expectedFilePathHandler.getPath(), testFilePathHandler.getPath());
-    }
+    // if (isDifferenceFound) {
+    //     runDiffForTwoFiles(expectedFilePathHandler.getPath(), testFilePathHandler.getPath());
+    // }
 }
 
 }  // namespace alba::CodeUtilities
