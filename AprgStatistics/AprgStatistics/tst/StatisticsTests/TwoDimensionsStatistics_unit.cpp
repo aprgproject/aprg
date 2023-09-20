@@ -14,6 +14,7 @@ using LocalLineModel = TwoDimensionsStatistics::LineModel;
 using LocalValueToSampleMultimap = TwoDimensionsStatistics::ValueToSampleMultimap;
 using LocalValueToSamplePair = TwoDimensionsStatistics::ValueToSamplePair;
 
+// NOLINTBEGIN(hicpp-use-emplace,modernize-use-emplace)
 TEST(TwoDimensionsStatisticsTest, SameValuesOfXAndYForLineModeling) {
     LocalSamples samples;
     samples.emplace_back(LocalSample{5, 3});
@@ -276,5 +277,6 @@ TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForScat
     EXPECT_EQ(
         1.9428304975833747825, TwoDimensionsStatistics::calculateSquareError(LocalSample{1.83, 74.46}, lineModel));
 }
+// NOLINTEND(hicpp-use-emplace,modernize-use-emplace)
 
 }  // namespace alba
