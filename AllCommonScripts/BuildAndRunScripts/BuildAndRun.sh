@@ -141,6 +141,11 @@ performRun(){
                 exitStatus=127
                 while [ $(("$retries")) -gt 0 ] && [ $(("$exitStatus")) -eq 127 ]; do
                     set +e
+                    file "$filename"
+                    if ! command -v "$filename" &> /dev/null; then
+                        echo "Error: $filename not found or is not executable"
+                        exit 1
+                    fi
                     set -x
                     $filename
                     exitStatus="${PIPESTATUS[0]}"
