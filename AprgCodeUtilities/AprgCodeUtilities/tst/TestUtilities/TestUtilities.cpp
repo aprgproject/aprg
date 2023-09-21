@@ -72,10 +72,6 @@ void verifyFile(string const& expectedFile, string const& testFile) {
         lineInExpectedFile = expectedFileReader.getLine();
         lineInTestFile = testFileReader.getLine();
         EXPECT_EQ(lineInExpectedFile, lineInTestFile);
-        cout << "expected line: [" << lineInExpectedFile << "]\n";
-        cout << "test line: [" << lineInTestFile << "]\n";
-        cout << "expected current location: [" << expectedFileReader.getCurrentLocation() << "]\n";
-        cout << "test current location: [" << testFileReader.getCurrentLocation() << "]\n";
         if (lineInExpectedFile != lineInTestFile) {
             constexpr int LINES_TO_DISPLAY = 6;
             int const numberOfLines = static_cast<int>(lines.size());
@@ -93,14 +89,6 @@ void verifyFile(string const& expectedFile, string const& testFile) {
         lines.emplace_back(lineInExpectedFile);
     }
     if (!isDifferenceFound) {
-        cout << "expected rdstate: [" << static_cast<unsigned int>(expectedFileStream.rdstate()) << "]\n";
-        cout << "test rdstate: [" << static_cast<unsigned int>(testFileStream.rdstate()) << "]\n";
-        cout << "expected size: [" << expectedFileReader.getFileSize() << "]\n";
-        cout << "test size: [" << testFileReader.getFileSize() << "]\n";
-        cout << "expected current location: [" << expectedFileReader.getCurrentLocation() << "]\n";
-        cout << "test current location: [" << testFileReader.getCurrentLocation() << "]\n";
-        cout << "expected filesystem size: [" << expectedFilePathHandler.getFileSize() << "]\n";
-        cout << "test filesystem size: [" << testFilePathHandler.getFileSize() << "]\n";
         if (expectedFileReader.isNotFinished() || testFileReader.isNotFinished()) {
             isDifferenceFound = true;
             EXPECT_FALSE(expectedFileReader.isNotFinished());

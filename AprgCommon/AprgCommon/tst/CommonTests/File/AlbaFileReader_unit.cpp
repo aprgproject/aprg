@@ -302,7 +302,9 @@ TEST_F(AlbaFileReaderTest, ReadLineWithSizeLimit) {
     ASSERT_FALSE(testFileReadStream.eof());
     EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(2000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
+    EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(2000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
+    EXPECT_TRUE(fileReader.isNotFinished());
     EXPECT_EQ(1000U, fileReader.getLineAndIgnoreWhiteSpaces().length());
     EXPECT_FALSE(fileReader.isNotFinished());
     EXPECT_TRUE(fileReader.getLineAndIgnoreWhiteSpaces().empty());
