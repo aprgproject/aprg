@@ -139,38 +139,27 @@ performRun(){
             scriptPrint "$scriptName" "$LINENO" "Running executable: [$fileInInstall]."
             if [[ -z "$gtestArgument" ]] || [[ "$gtestArgument" == "--gtest_filter=*.*" ]]; then
                 filename=$(basename "$fileInInstall")
-                retries=2
-                exitStatus=127
-                while [ $(("$retries")) -gt 0 ] && [ $(("$exitStatus")) -eq 127 ]; do
-                    set -x
-                    file "$filename"
-                    if ! command -v "$fileInInstall" &> /dev/null; then
-                        echo "Error: $fileInInstall not found or is not executable"
-                        exit 1
-                    fi
-                    gdb --ex run "$fileInInstall"
-                    set +e
-                    "$fileInInstall"
-                    exitStatus="${PIPESTATUS[0]}"
-                    set -e
-                    touch dependencyOutput.txt 
-                    depends.exe /c /f:1 /ot:dependencyOutput.txt "$filename"
-                    if [ -e dependencyOutput.txt ]; then
-                        echo "output of dependencyOutput.txt start:"
-                        cat dependencyOutput.txt
-                        echo "output of dependencyOutput.txt end:"
-                    else
-                        echo "Error: dependencyOutput.txt not found."
-                    fi
-                    set +x
-                
-                    if [ $(("$exitStatus")) -eq 127 ]; then
-                        retries=$((retries - 1))
-                        scriptPrint "$scriptName" "$LINENO" "Retrying... Remaining attempts: $retries"
-                        scriptPrint "$scriptName" "$LINENO" "Sleeping for 10 seconds before trying again..."
-                        sleep 1
-                    fi
-                done
+                set -x
+                file "$filename"
+                if ! command -v "$fileInInstall" &> /dev/null; then
+                    echo "Error: $fileInInstall not found or is not executable"
+                    exit 1
+                fi
+                gdb --ex run "$fileInInstall"
+                set +e
+                "$fileInInstall"
+                exitStatus="${PIPESTATUS[0]}"
+                set -e
+                touch dependencyOutput.txt 
+                depends.exe /c /f:1 /ot:dependencyOutput.txt "$filename"
+                if [ -e dependencyOutput.txt ]; then
+                    echo "output of dependencyOutput.txt start:"
+                    cat dependencyOutput.txt
+                    echo "output of dependencyOutput.txt end:"
+                else
+                    echo "Error: dependencyOutput.txt not found."
+                fi
+                set +x
                 failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
                 scriptPrint "$scriptName" "$LINENO" "The gtest exit status is: [$exitStatus]."
                 scriptPrint "$scriptName" "$LINENO" "The contents of failingTests are: [$failingTests]."
