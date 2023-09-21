@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-20T09:31:13
+StaticAnalysisJobIdentifier: [41]
+2023-09-21T02:44:25
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:41:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:42:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
@@ -235,6 +235,12 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SpecificGames/MisereGame.cpp:31:34: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SpecificGames/MisereGame.cpp:60:13: style: Unused variable: _ [unusedVariable]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Matrix/AlbaMatrix.hpp:250:19: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:23: style: Checking if unsigned expression 'delta' is less than zero. [unsignedLessThanZero]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:46: style: Checking if unsigned expression 'interval' is less than zero. [unsignedLessThanZero]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Matrix/AlbaMatrix.hpp:250:19: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:39: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SubGames/GrundyGame.cpp:24:55: warning: narrowing conversion from 'alba::math::UnsignedInteger' (aka 'unsigned long') to signed type 'std::_Deque_iterator::difference_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SubGames/GrundyGame.cpp:25:57: warning: narrowing conversion from 'alba::math::UnsignedInteger' (aka 'unsigned long') to signed type 'std::_Deque_iterator::difference_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SubGames/GrundyGame.cpp:26:57: warning: narrowing conversion from 'alba::math::UnsignedInteger' (aka 'unsigned long') to signed type 'std::_Deque_iterator::difference_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
@@ -246,12 +252,6 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SubGames/GrundyGame.cpp:88:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Matrix/AlbaMatrix.hpp:250:19: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/SubGames/GrundyGame.cpp:69:16: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:23: style: Checking if unsigned expression 'delta' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:46: style: Checking if unsigned expression 'interval' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Matrix/AlbaMatrix.hpp:250:19: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:39: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Matrix/AlbaMatrix.hpp:250:19: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Matrix/AlbaMatrix.hpp:250:19: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/NumberTheory/ModularArithmetic.cpp:61:21: warning: variable name 'x' is too short, expected at least 3 characters [readability-identifier-length]
@@ -271,10 +271,10 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Matrix/AlbaMatrix.hpp:250:19: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/BitManipulation/AddTwoNumbersWithoutUsingArithmeticOperators.cpp:14:9: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/BitManipulation/AddTwoNumbersWithoutUsingArithmeticOperators.cpp:15:30: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Matrix/AlbaMatrix.hpp:250:19: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/Probability/ProbabilityUtilities.cpp:188:20: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/AmortizedAnalysis/TwoPointers/SubArraySum.cpp:7:26: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/AmortizedAnalysis/TwoPointers/SubArraySum.cpp:15:28: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'alba::SubArraySum::Index' (aka 'int') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Matrix/AlbaMatrix.hpp:250:19: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/Probability/ProbabilityUtilities.cpp:188:20: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/BitManipulation/BitManipulationUniqueProblems.cpp:6:65: warning: parameter name 'k' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/BitManipulation/BitManipulationUniqueProblems.cpp:6:77: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/BitManipulation/BitManipulationUniqueProblems.cpp:6:86: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
@@ -408,6 +408,14 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Graph/Tree/LargestIndependentSetProblem.cpp:67:41: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp:23:23: style: Consider using std::copy_if algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Graph/Utilities/GraphUtilities.hpp:340:23: style: Unused variable: root [unusedVariable]
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Graph/Tree/VertexCoverProblem.cpp:10:40: warning: pass by value and use std::move [modernize-pass-by-value]
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Graph/Tree/VertexCoverProblem.cpp:62:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Graph/Tree/VertexCoverProblem.cpp:84:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Graph/Utilities/GraphUtilities.hpp:283:15: style: Consider using std::count_if algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Graph/Tree/VertexCoverProblem.cpp:52:32: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Graph/Tree/VertexCoverProblem.cpp:70:36: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp:23:23: style: Consider using std::copy_if algorithm instead of a raw loop. [useStlAlgorithm]
+/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Graph/Utilities/GraphUtilities.hpp:340:23: style: Unused variable: root [unusedVariable]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Grid/CollectMaximumPointsInAGridUsingTwoTraversals.cpp:8:30: warning: initialization of 'columnsOffsets' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Grid/CollectMaximumPointsInAGridUsingTwoTraversals.cpp:12:94: warning: pass by value and use std::move [modernize-pass-by-value]
@@ -434,14 +442,6 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Grid/CollectMaximumPointsInAGridUsingTwoTraversals.cpp:8:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Graph/Tree/VertexCoverProblem.cpp:10:40: warning: pass by value and use std::move [modernize-pass-by-value]
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Graph/Tree/VertexCoverProblem.cpp:62:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Graph/Tree/VertexCoverProblem.cpp:84:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Graph/Utilities/GraphUtilities.hpp:283:15: style: Consider using std::count_if algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Graph/Tree/VertexCoverProblem.cpp:52:32: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Graph/Tree/VertexCoverProblem.cpp:70:36: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Graph/UndirectedGraph/UndirectedGraphWithListOfEdges.hpp:23:23: style: Consider using std::copy_if algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Graph/Utilities/GraphUtilities.hpp:340:23: style: Unused variable: root [unusedVariable]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Grid/MaximumSizeSquareSubMatrixWithAllOnes.cpp:7:78: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Grid/MaximumSizeSquareSubMatrixWithAllOnes.cpp:17:18: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/DynamicProgramming/Grid/MaximumSizeSquareSubMatrixWithAllOnes.cpp:18:22: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
@@ -6777,58 +6777,6 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:15:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:15:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:15:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:21:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:21:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:21:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:27:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:27:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:27:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/SpecialProblems/KnightsTour.hpp:25:54: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/SpecialProblems/KnightsTour.hpp:25:67: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/src/UniqueProblems/SpecialProblems/KnightsTour.hpp:26:56: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
@@ -6968,6 +6916,58 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/KnightsTour_unit.cpp:72:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:15:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:15:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:15:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:21:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:21:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:21:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:27:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:27:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgUniqueProblems/AprgUniqueProblems/tst/UniqueProblemsTests/SpecialProblems/TowersOfHanoi_unit.cpp:27:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
