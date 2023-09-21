@@ -138,9 +138,9 @@ performRun(){
             if [[ -z "$gtestArgument" ]] || [[ "$gtestArgument" == "--gtest_filter=*.*" ]]; then
                 
                 set +e
-                runCommand="$containerProgram $fileInInstall | tee $outputLogPath 2>&1"
-                scriptPrint "$scriptName" "$LINENO" "The runCommand is [$runCommand]."
-                $runCommand
+                set -x
+                $containerProgram "$fileInInstall" | tee "$outputLogPath" 2>&1
+                set +x
                 exitStatus="${PIPESTATUS[0]}"
                 set -e
                 failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
@@ -156,9 +156,9 @@ performRun(){
                         while IFS= read -r failingTestName; do
                             echo "Running failing test: [$failingTestName]"
                             set +e
-                            runCommand="$containerProgram $fileInInstall --gtest_filter=$failingTestName"
-                            scriptPrint "$scriptName" "$LINENO" "The runCommand is [$runCommand]."
-                            $runCommand
+                            set -x
+                            $containerProgram "$fileInInstall" "--gtest_filter=$failingTestName"
+                            set +x
                             set -e
                         done <<< "$failingTests"
                     fi
@@ -166,9 +166,9 @@ performRun(){
                 fi
                 
             else 
-                runCommand="$containerProgram $fileInInstall $gtestArgument"
-                scriptPrint "$scriptName" "$LINENO" "The runCommand is [$runCommand]."
-                $runCommand
+                set -x
+                $containerProgram "$fileInInstall" "$gtestArgument"
+                set +x
             fi
         fi
     done

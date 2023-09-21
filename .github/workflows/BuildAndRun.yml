@@ -277,12 +277,26 @@ jobs:
           sudo apt install libgsl-dev
           echo "libgsl-dev version (dpkg): [$(dpkg -l | grep libgsl-dev | tr -s ' ')]"
 
-      - name: Install 7zip
+      - name: Install 7zip on Ubuntu
         shell: bash
         if: startsWith(matrix.configurationName, 'Ubuntu') && contains(fromJSON(needs.determineCppProjects.outputs.projectsWith7Zip), matrix.project)
         run: |
           sudo apt install p7zip-full
           echo "p7zip-full version (dpkg): [$(dpkg -l | grep p7zip-full | tr -s ' ')]"
+
+      - name: Install valgrind on Ubuntu
+        shell: bash
+        if: startsWith(matrix.configurationName, 'Ubuntu') && inputs.enableValgrind
+        run: |
+          sudo apt install valgrind
+          echo "valgrind version: [$(valgrind -v)]"
+
+      - name: Install valgrind on Windows
+        shell: bash
+        if: startsWith(matrix.configurationName, 'Windows') && inputs.enableValgrind
+        run: |
+          choco install valgrind
+          echo "valgrind version: [$(valgrind -v)]"
           
       - name: Prepare aprg directories and scripts
         shell: bash

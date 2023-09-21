@@ -1,8 +1,10 @@
 #pragma once
 
-#include <string_view>
+#include <filesystem>
+
+using namespace std::filesystem;
 
 namespace alba {
-void clearContentsOfFile(std::string_view const path);
-void createEmptyFile(std::string_view const path);
+void clearContentsOfFile(path const& filePath);
+void createEmptyFile(path const& filePath);
 }  // namespace alba

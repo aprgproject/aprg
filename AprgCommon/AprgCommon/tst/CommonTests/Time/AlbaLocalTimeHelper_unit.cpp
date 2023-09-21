@@ -1,8 +1,10 @@
+#include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 #include <Common/Time/AlbaLocalTimeHelper.hpp>
 #include <Common/Time/AlbaLocalTimer.hpp>
 #include <CommonTests/DirectoryConstants.hpp>
 #include <CommonTestsUtilities/File/FileUtilities.hpp>
+#include <CommonTestsUtilities/Time/DateTimeUtilities.hpp>
 
 #include <gtest/gtest.h>
 
@@ -15,10 +17,6 @@ using namespace std::chrono;
 using namespace std::filesystem;
 
 namespace alba {
-
-namespace {
-AlbaDateTime allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
-}  // namespace
 
 TEST(AlbaLocalTimerHelperTest, DISABLED_SleepForWorks) {
     // this is unstable because its not precise
@@ -43,12 +41,12 @@ TEST(AlbaLocalTimerHelperTest, DISABLED_SleepUntilWorks) {
 
 TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorksOnCurrentTime) {
     AlbaDateTime const time1(convertSystemTimeToAlbaDateTime(getSystemTimeNow()));
+    sleepFor(1);
     AlbaDateTime const time2(convertSystemTimeToAlbaDateTime(getSystemTimeNow()));
 
     EXPECT_FALSE(time1.isEmpty());
     EXPECT_FALSE(time2.isEmpty());
-    AlbaDateTime const difference(time1 - time2);
-    EXPECT_LT(difference, allowableDifference);
+    EXPECT_TRUE(isDifferenceAcceptable(time1, time2));
     // EXPECT_EQ(" 1 * 2023-09-16 20:03:14.090847", convertToString(time1));
     // EXPECT_EQ(" 1 * 2023-09-16 20:03:14.106822", convertToString(time2));
 }
@@ -69,48 +67,48 @@ TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorks) {
 }
 
 TEST(AlbaLocalTimerHelperTest, ConvertFileTimeToAlbaDateTimeTimeWorks) {
-    clearContentsOfFile(APRG_COMMON_TEST_FILE_TO_WRITE);
+    AlbaLocalPathHandler const filePathHandler(APRG_COMMON_TEST_FILE_TO_WRITE);
+    clearContentsOfFile(filePathHandler.getPath());
 
-    AlbaDateTime const lastModifiedTime(convertFileTimeToAlbaDateTime(last_write_time(APRG_COMMON_TEST_FILE_TO_WRITE)));
-
+    AlbaDateTime const lastModifiedTime(convertFileTimeToAlbaDateTime(last_write_time(filePathHandler.getPath())));
+    sleepFor(1);
     AlbaDateTime const currentTime(getCurrentDateTime());
-    AlbaDateTime const difference(currentTime - lastModifiedTime);
-    AlbaDateTime const allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
-    EXPECT_LT(difference, allowableDifference);
+
+    EXPECT_TRUE(isDifferenceAcceptable(lastModifiedTime, currentTime));
 }
 
 TEST(AlbaLocalTimerHelperTest, GetCurrentDateTimeWorks) {
     AlbaDateTime const time1(getCurrentDateTime());
+    sleepFor(1);
     AlbaDateTime const time2(getCurrentDateTime());
 
     EXPECT_FALSE(time1.isEmpty());
     EXPECT_FALSE(time2.isEmpty());
-    AlbaDateTime const difference(time1 - time2);
-    EXPECT_LT(difference, allowableDifference);
+    EXPECT_TRUE(isDifferenceAcceptable(time1, time2));
     // EXPECT_EQ(" 1 * 2023-09-16 20:03:14.107620", convertToString(time1));
     // EXPECT_EQ(" 1 * 2023-09-16 20:03:14.122168", convertToString(time2));
 }
 
 TEST(AlbaLocalTimerHelperTest, ConvertSinceEpochTimeToAlbaDateTimeWorksForSteadyTime) {
     AlbaDateTime const time1(convertSinceEpochTimeToAlbaDateTime(getSteadyTimeNow()));
+    sleepFor(1);
     AlbaDateTime const time2(convertSinceEpochTimeToAlbaDateTime(getSteadyTimeNow()));
 
     // EXPECT_FALSE(time1.isEmpty());
     // EXPECT_FALSE(time2.isEmpty());
-    AlbaDateTime const difference(time1 - time2);
-    EXPECT_LT(difference, allowableDifference);
+    EXPECT_TRUE(isDifferenceAcceptable(time1, time2));
     // EXPECT_EQ(" 1 * 0000-00-00 04:03:00.436885", convertToString(time1));
     // EXPECT_EQ(" 1 * 0000-00-00 04:03:00.452127", convertToString(time2));
 }
 
 TEST(AlbaLocalTimerHelperTest, ConvertSinceEpochTimeToAlbaDateTimeWorksForSystemTime) {
     AlbaDateTime const time1(convertSinceEpochTimeToAlbaDateTime(getSystemTimeNow()));
+    sleepFor(1);
     AlbaDateTime const time2(convertSinceEpochTimeToAlbaDateTime(getSystemTimeNow()));
 
     EXPECT_FALSE(time1.isEmpty());
     EXPECT_FALSE(time2.isEmpty());
-    AlbaDateTime const difference(time1 - time2);
-    EXPECT_LT(difference, allowableDifference);
+    EXPECT_TRUE(isDifferenceAcceptable(time1, time2));
     // EXPECT_EQ(" 1 * 0053-09-14 12:03:14.138281", convertToString(time1));
     // EXPECT_EQ(" 1 * 0053-09-14 12:03:14.1534223", convertToString(time2));
 }
