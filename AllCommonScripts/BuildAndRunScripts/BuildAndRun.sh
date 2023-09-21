@@ -150,6 +150,7 @@ performRun(){
                     fi
                     set -x
                     gdb --ex run "$fileInInstall"
+                    "$fileInInstall"
                     exitStatus="${PIPESTATUS[0]}"
                     set +x
                     set -e
