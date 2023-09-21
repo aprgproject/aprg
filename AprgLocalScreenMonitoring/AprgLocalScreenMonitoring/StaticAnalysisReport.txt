@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-20T08:08:25
+StaticAnalysisJobIdentifier: [41]
+2023-09-21T01:18:07
 D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
 D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest-all.cc:41:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
 D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest-all.cc:42:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
@@ -40,6 +40,7 @@ D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPa
 D:/a/aprg/aprg/AprgCommon/AprgCommon/src\Common/Macros/AlbaMacros.hpp:18:41: note: expanded from macro 'ALBA_MACROS_GET_PRETTY_FUNCTION'
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:307:102: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Windows\AlbaWindowsHelper.cpp:23:67: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
 D:/a/aprg/aprg/AprgLocalScreenMonitoring/AprgLocalScreenMonitoring/srcWindows\ScreenMonitoring/AlbaWindowsScreenMonitoring.hpp:11:7: warning: class 'AlbaWindowsScreenMonitoring' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 D:/a/aprg/aprg/AprgLocalScreenMonitoring/AprgLocalScreenMonitoring/srcWindows\ScreenMonitoring/AlbaWindowsScreenMonitoring.hpp:15:49: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 D:/a/aprg/aprg/AprgLocalScreenMonitoring/AprgLocalScreenMonitoring/srcWindows\ScreenMonitoring/AlbaWindowsScreenMonitoring.hpp:15:62: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
@@ -53,7 +54,6 @@ D:/a/aprg/aprg/AprgLocalScreenMonitoring/AprgLocalScreenMonitoring/srcWindows\Sc
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\windef.h:80:16: note: typedef declared here
 D:/a/aprg/aprg/AprgLocalScreenMonitoring/AprgLocalScreenMonitoring/srcWindows\ScreenMonitoring/AlbaWindowsScreenMonitoring.hpp:24:76: warning: 'bitmapHandler' declared with a const-qualified typedef; results in the type being 'HBITMAP__ *const' instead of 'const HBITMAP__ *' [misc-misplaced-const]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\windef.h:73:16: note: typedef declared here
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Windows\AlbaWindowsHelper.cpp:23:67: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
 D:\a\aprg\aprg\AprgLocalScreenMonitoring\AprgLocalScreenMonitoring\srcWindows\ScreenMonitoring/AlbaWindowsScreenMonitoring.hpp:19:13: warning: function 'alba::AlbaWindowsScreenMonitoring::createBitmapHandlerFromScreen' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
 D:\a\aprg\aprg\AprgLocalScreenMonitoring\AprgLocalScreenMonitoring\srcWindows\ScreenMonitoring\AlbaWindowsScreenMonitoring.cpp:83:38: note: the definition seen here
 D:\a\aprg\aprg\AprgLocalScreenMonitoring\AprgLocalScreenMonitoring\srcWindows\ScreenMonitoring/AlbaWindowsScreenMonitoring.hpp:19:13: note: differing parameters are named here: ('deviceContextHandler'), in definition: ('screenHandler')
