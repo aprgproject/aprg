@@ -130,6 +130,8 @@ performGenerateCompileCommandsJsonFile() {
 
 performRun(){
     cd install/runDirectory
+    choco install dependencywalker
+    choco info dependencywalker
     scriptPrint "$scriptName" "$LINENO" "The current directory is [$(pwd)] and the output of [$lsCommand]:"
     $lsCommand
     for fileInInstall in ./*; do
@@ -149,9 +151,10 @@ performRun(){
                     set -x
                     gdb --ex run "$fileInInstall"
                     exitStatus="${PIPESTATUS[0]}"
-                    run
                     set +x
                     set -e
+                    depends.exe /c /f:1 /oc:dependencyOutput.txt "$filename"
+                    cat dependencyOutput.txt
                 
                     if [ $(("$exitStatus")) -eq 127 ]; then
                         retries=$((retries - 1))
