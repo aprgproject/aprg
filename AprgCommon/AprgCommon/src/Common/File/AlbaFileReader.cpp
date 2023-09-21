@@ -10,14 +10,9 @@ using namespace std;
 
 namespace alba {
 
-AlbaFileReader::AlbaFileReader(ifstream& stream) : m_fileSize(getFileSize(stream)), m_stream(stream) {
-    setMaxBufferSize(INITIAL_MAX_BUFFER_SIZE);
-}
+AlbaFileReader::AlbaFileReader(ifstream& stream) : m_stream(stream) { setMaxBufferSize(INITIAL_MAX_BUFFER_SIZE); }
 
-AlbaFileReader::AlbaFileReader(ifstream& stream, size_t const size)
-    : m_fileSize(getFileSize(stream)), m_stream(stream) {
-    setMaxBufferSize(size);
-}
+AlbaFileReader::AlbaFileReader(ifstream& stream, size_t const size) : m_stream(stream) { setMaxBufferSize(size); }
 
 char AlbaFileReader::getCharacter() {
     char tempChar(0);
@@ -38,7 +33,9 @@ char* AlbaFileReader::getCharacters(size_t& numberOfCharacters) {
 
 bool AlbaFileReader::isNotFinished() {
     // return !m_stream.eof() && m_stream.peek()!=EOF;
-    return getCurrentLocation() < m_fileSize && !m_stream.eof();
+    // return getCurrentLocation() < m_fileSize && !m_stream.eof();
+    m_stream.clear();
+    return m_stream.peek() != EOF && !m_stream.eof();
 }
 
 size_t AlbaFileReader::getCurrentLocation() const {
@@ -46,7 +43,7 @@ size_t AlbaFileReader::getCurrentLocation() const {
     return tellgOutput > 0 ? static_cast<size_t>(tellgOutput) : 0U;
 }
 
-size_t AlbaFileReader::getFileSize() const { return m_fileSize; }
+size_t AlbaFileReader::getFileSize() const { return getFileSize(m_stream); }
 
 size_t AlbaFileReader::getMaxBufferSize() const {
     auto bufferSize = static_cast<size_t>(m_characterBuffer.size());
