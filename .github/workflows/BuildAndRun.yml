@@ -30,8 +30,28 @@ on:
         options:
         - Debug
         - Release
+      enableValgrind:
+        description: 'Enable Valgrind for Gcc Builds'
+        type: boolean
+        required: true
+        default: false
       enableAsan:
         description: 'Enable Address Sanitizer for Clang Builds'
+        type: boolean
+        required: true
+        default: false
+      enableMsan:
+        description: 'Enable Memory Sanitizer for Clang Builds'
+        type: boolean
+        required: true
+        default: false
+      enableTsan:
+        description: 'Enable Thread Sanitizer for Clang Builds'
+        type: boolean
+        required: true
+        default: false
+      enableUbsan:
+        description: 'Enable Undefined Behavior Sanitizer for Clang Builds'
         type: boolean
         required: true
         default: false
@@ -331,14 +351,54 @@ jobs:
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+
+      - name: Run
+        shell: bash
+        if: contains(matrix.configurationName, 'Gcc') && inputs.enableValgrind
+        working-directory: ${{ matrix.project }}
+        run: |
+          "$buildAndRunScriptPath" run ${{ env.buildDirectory }} valgrind
             
       - name: Build and Run with Address Sanitizer
         shell: bash
         if: contains(matrix.configurationName, 'Clang') && inputs.enableAsan
         working-directory: ${{ matrix.project }}
         run: |
-          "$buildAndRunScriptPath" cleanAndConfigureWithClangWithAsan "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_ASAN"
           echo "Building and running with ASAN..."
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+            
+      - name: Build and Run with Memory Sanitizer
+        shell: bash
+        if: contains(matrix.configurationName, 'Clang') && inputs.enableMsan
+        working-directory: ${{ matrix.project }}
+        run: |
+          "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_MSAN"
+          echo "Building and running with MSAN..."
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+            
+      - name: Build and Run with Thread Sanitizer
+        shell: bash
+        if: contains(matrix.configurationName, 'Clang') && inputs.enableTsan
+        working-directory: ${{ matrix.project }}
+        run: |
+          "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_TSAN"
+          echo "Building and running with TSAN..."
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+            
+      - name: Build and Run with Undefined Behavior Sanitizer
+        shell: bash
+        if: contains(matrix.configurationName, 'Clang') && inputs.enableUbsan
+        working-directory: ${{ matrix.project }}
+        run: |
+          "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_UBSAN"
+          echo "Building and running with UBSAN..."
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
@@ -354,13 +414,10 @@ jobs:
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
             
-      - name: Build and Run with Clang Static Analyzer
+      - name: Run with Clang Static Analyzer
         shell: bash
         if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
         working-directory: ${{ matrix.project }}
         run: |
           echo "Running Clang Static Analysis..."
           "$buildAndRunScriptPath" cleanAndConfigureWithClangStaticAnalyzer "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
-          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
-          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
-          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}

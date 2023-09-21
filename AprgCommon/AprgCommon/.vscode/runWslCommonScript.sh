@@ -34,10 +34,10 @@ if ! [[ -e $buildAndRunScriptPath ]]; then
 fi
 
 if [ "$scriptRunningOption" == "outputWithAbsolutePaths" ]; then
-    unbuffer "$buildAndRunScriptPath" "$2" "$3" "$4" "$5" | sed -E "s@\/mnt\/(\w+)\/@ \U\1:/@g"
+    unbuffer "$buildAndRunScriptPath" "$2" "$3" "$4" "$5" "$6" "$7" | sed -E "s@\/mnt\/(\w+)\/@ \U\1:/@g"
     exitCode=${PIPESTATUS[0]}
 elif [ "$scriptRunningOption" == "outputWithRelativePaths" ]; then
-    unbuffer "$buildAndRunScriptPath" "$2" "$3" "$4" "$5" | sed -E "s$(pwd)@@g"
+    unbuffer "$buildAndRunScriptPath" "$2" "$3" "$4" "$5" "$6" "$7" | sed -E "s$(pwd)@@g"
     exitCode=${PIPESTATUS[0]}
 else
     scriptPrint "$scriptName" "$LINENO" "The script running option [$scriptRunningOption] is not supported."
