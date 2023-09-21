@@ -10,8 +10,8 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     set(APRG_COMPILER_COMMON_FLAGS "${APRG_COMPILER_COMMON_FLAGS} -fdiagnostics-color=always")
 endif()
 set(APRG_COMPILER_COMMON_CPP_FLAGS "-std=c++20")
-set(APRG_COMPILER_FLAGS_FOR_DEBUG "") #set(APRG_COMPILER_FLAGS_FOR_DEBUG "-g --coverage -fno-rtti")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_SHOW_PREPROCESSING_RESULT "-E")
+set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_DEBUG_SYMBOLS "-g --coverage")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_RTTI "-g --coverage")
 set(APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_NO_RTTI "-g --coverage -fno-rtti")
 # -O0 is actually the default so this is useless
@@ -36,8 +36,8 @@ set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_MORE_SPEED "-Ofast -DNDEBUG")
 set(APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_STACK_PROTECTOR "-fstack-protector -DNDEBUG")
 set(APRG_COMPILER_FLAGS_WINDOWS_NON_CONSOLE "-mwindows")
 # -static is needed to make the program without libraries (GCC/QT libraries are missing)
-set(APRG_LINKER_FLAGS_FOR_RELEASE "-static")
-set(APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STRIP "-static -s")
+set(APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STATIC "-static")
+set(APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STATIC_AND_STRIP "-static -s")
 set(APRG_LINKER_FLAGS_FOR_PTHREAD "-pthread")
 set(APRG_LINKER_FLAGS_WITH_ASAN "-fsanitize=address") #Looks like this link flags are not needed in linux
 set(APRG_LINKER_FLAGS_WITH_LSAN_ONLY "-fsanitize=leak") #Looks like this link flags are not needed in linux
@@ -50,9 +50,11 @@ set(APRG_LINKER_FLAGS_WITH_UBSAN "-fsanitize=undefined") #Looks like this link f
 #The output is in the form of preprocessed source code, which is sent to the standard output.
 set(APRG_COMPILER_FLAGS_STOP_AT_PREPROCESSING "-E")
 
-#APRG Common flags
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COMPILER_COMMON_C_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${APRG_COMPILER_COMMON_FLAGS} ${APRG_COMPILER_COMMON_CPP_FLAGS}")
+# Default debug and release flags
+set(APRG_COMPILER_FLAGS_FOR_DEBUG "") 
+set(APRG_LINKER_FLAGS_FOR_DEBUG "")
+set(APRG_COMPILER_FLAGS_FOR_RELEASE "${APRG_COMPILER_FLAGS_FOR_RELEASE_WITH_SPEED}") 
+set(APRG_LINKER_FLAGS_FOR_RELEASE "${APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STATIC_AND_STRIP}")
 
 # Some notes
 # Sources:
