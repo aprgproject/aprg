@@ -25,12 +25,16 @@ jobs:
           command -v gcc
           command -v g++
           command -v cmake
-          choco install cmake ninja
-          choco info cmake
-          echo "cmake version: [$(cmake --version)]"
-          choco info ninja
-          echo "ninja version: [$(ninja --version)]"
-          ninja --version
-          command -v cmake
-          command -v ninja
+          #choco install cmake ninja
+          #choco info cmake
+          #echo "cmake version: [$(cmake --version)]"
+          #choco info ninja
+          #echo "ninja version: [$(ninja --version)]"
+          #ninja --version
+          #command -v cmake
+          #command -v ninja
           choco install dependencywalker
+          choco info dependencywalker
+          depends.exe
+          command -v depends.exe
+          
