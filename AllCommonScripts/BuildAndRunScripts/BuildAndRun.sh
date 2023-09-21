@@ -154,6 +154,7 @@ performRun(){
                     exitStatus="${PIPESTATUS[0]}"
                     set +x
                     set -e
+                    touch dependencyOutput.txt 
                     depends.exe /c /f:1 /oc:dependencyOutput.txt "$filename"
                     if [ -e dependencyOutput.txt ]; then
                         cat dependencyOutput.txt
