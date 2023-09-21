@@ -136,13 +136,13 @@ performRun(){
         if [[ -x "$fileInInstall" ]]; then
             scriptPrint "$scriptName" "$LINENO" "Running executable: [$fileInInstall]."
             if [[ -z "$gtestArgument" ]] || [[ "$gtestArgument" == "--gtest_filter=*.*" ]]; then
-                
+                filename=$(basename "$fileInInstall")
                 retries=3
                 exitStatus=127
                 while [ $(("$retries")) -gt 0 ] && [ $(("$exitStatus")) -eq 127 ]; do
                     set +e
                     set -x
-                    $fileInInstall
+                    $filename
                     exitStatus="${PIPESTATUS[0]}"
                     set +x
                     set -e
