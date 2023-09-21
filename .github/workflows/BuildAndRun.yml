@@ -104,6 +104,7 @@ jobs:
           chmod +x "$checkCMakeFilesPath"
           "$checkCMakeFilesPath"
           lintStatus=$?
+          echo "lintStatus: [$lintStatus]"
           echo "cmakeLintStatus=$lintStatus" >> "$GITHUB_ENV"
           
       - name: Perform linting for shell scripts
@@ -115,6 +116,7 @@ jobs:
           chmod +x "$checkShellScriptsPath"
           "$checkShellScriptsPath"
           lintStatus=$?
+          echo "lintStatus: [$lintStatus]"
           echo "shellLintStatus=$lintStatus" >> "$GITHUB_ENV"
           
       - name: Perform linting for python scripts
@@ -126,6 +128,7 @@ jobs:
           chmod +x "$checkPythonScriptsPath"
           "$checkPythonScriptsPath"
           lintStatus=$?
+          echo "lintStatus: [$lintStatus]"
           echo "pythonLintStatus=$lintStatus" >> "$GITHUB_ENV"
           
       - name: Check overall linting status
@@ -134,22 +137,22 @@ jobs:
           overallLintStatus=0
           echo "Checking linting errors..."
           echo "cmakeLintStatus: [$cmakeLintStatus]"
-          if [ "$cmakeLintStatus" -gt 0 ]; then
+          if [ "$cmakeLintStatus" == "0" ]; then
             echo "CMake linting failed, so the overall linting status is set to failed."
             overallLintStatus=1
           fi
           echo "shellLintStatus: [$shellLintStatus]"
-          if [ "$shellLintStatus" -gt 0 ]; then
+          if [ "$shellLintStatus" == "0" ]; then
             echo "Shell linting failed, so the overall linting status is set to failed."
             overallLintStatus=1
           fi
           echo "pythonLintStatus: [$pythonLintStatus]"
-          if [ "$pythonLintStatus" -gt 0 ]; then
+          if [ "$pythonLintStatus" == "0" ]; then
             echo "Python linting failed, so the overall linting status is set to failed."
             overallLintStatus=1
           fi
           echo "overallLintStatus: [$overallLintStatus]"
-          if [ $overallLintStatus -eq 0 ]; then
+          if [ $overallLintStatus == "0" ]; then
             echo "There were no linting issues found."
           fi
           exit $overallLintStatus

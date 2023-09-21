@@ -140,8 +140,8 @@ performRun(){
                 set +e
                 set -x
                 $containerProgram "$fileInInstall" | tee "$outputLogPath" 2>&1
-                set +x
                 exitStatus="${PIPESTATUS[0]}"
+                set +x
                 set -e
                 failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
                 scriptPrint "$scriptName" "$LINENO" "The gtest exit status is: [$exitStatus]."
