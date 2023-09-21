@@ -16,10 +16,20 @@ jobs:
     runs-on: windows-latest
     steps:
         
-      - name: Prepare for linting
+      - name: Debug Steps
         shell: bash
         run: |
           gcc --version
           g++ --version
           cmake --version
+          command -v gcc
+          command -v g++
+          command -v cmake
+          choco install cmake ninja
+          choco info cmake
+          echo "cmake version: [$(cmake --version)]"
+          choco info ninja
+          echo "ninja version: [$(ninja --version)]"
           ninja --version
+          command -v cmake
+          command -v ninja
