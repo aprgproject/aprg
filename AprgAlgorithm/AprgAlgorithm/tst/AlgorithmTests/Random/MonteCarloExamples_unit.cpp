@@ -20,7 +20,6 @@ TEST(MonteCarloTest, VerifyingMatrixExample) {
     MatrixForTest c(4, 2, {38, 44, 50, 56, 83, 98, 113, 128});
     MatrixForTest const x;
 
-
     MonteCarloAlgorithm const verifyingMatrixAlgorithm = [&]() {
         // It turns out that we can solve the problem using a Monte Carlo algorithm whose time complexity is only O(n2).
         // The idea is simple: we choose a random vector X of n elements, and calculate the matrices ABX and CX.
