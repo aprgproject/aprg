@@ -33,3 +33,4 @@ jobs:
           ninja --version
           command -v cmake
           command -v ninja
+          choco install dependencywalker
