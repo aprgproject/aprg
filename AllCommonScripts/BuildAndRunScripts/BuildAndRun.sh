@@ -137,7 +137,7 @@ performRun(){
             scriptPrint "$scriptName" "$LINENO" "Running executable: [$fileInInstall]."
             if [[ -z "$gtestArgument" ]] || [[ "$gtestArgument" == "--gtest_filter=*.*" ]]; then
                 filename=$(basename "$fileInInstall")
-                retries=3
+                retries=2
                 exitStatus=127
                 while [ $(("$retries")) -gt 0 ] && [ $(("$exitStatus")) -eq 127 ]; do
                     set +e
@@ -147,7 +147,7 @@ performRun(){
                         exit 1
                     fi
                     set -x
-                    gdb $fileInInstall
+                    gdb --ex run "$fileInInstall"
                     exitStatus="${PIPESTATUS[0]}"
                     run
                     set +x
@@ -157,7 +157,7 @@ performRun(){
                         retries=$((retries - 1))
                         scriptPrint "$scriptName" "$LINENO" "Retrying... Remaining attempts: $retries"
                         scriptPrint "$scriptName" "$LINENO" "Sleeping for 10 seconds before trying again..."
-                        sleep 10
+                        sleep 1
                     fi
                 done
                 failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
