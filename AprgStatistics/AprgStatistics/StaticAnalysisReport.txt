@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-20T09:20:08
+StaticAnalysisJobIdentifier: [41]
+2023-09-21T02:30:54
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:41:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:42:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
@@ -1829,188 +1829,204 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/TwoDimensionsStatistics.hpp:19:28: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/TwoDimensionsStatistics.hpp:19:44: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/TwoDimensionsStatistics.hpp:19:60: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:18:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:17:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:18:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:17:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:18:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:17:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:32:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:31:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:32:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:31:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:32:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:31:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:47:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:46:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:47:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:46:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:47:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:46:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:62:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:61:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:62:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:61:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:62:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:61:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:77:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:76:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:77:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:76:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:77:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:76:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:92:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:91:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:92:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:91:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:92:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:91:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:107:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:106:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:107:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:106:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:107:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:106:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:122:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:121:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:122:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:121:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:122:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:121:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:124:38: warning: 1.47 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:124:44: warning: 52.21 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:125:38: warning: 1.50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:125:44: warning: 53.12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:126:38: warning: 1.52 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:126:44: warning: 54.48 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:127:38: warning: 1.55 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:127:44: warning: 55.84 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:128:38: warning: 1.57 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:128:44: warning: 57.20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:129:38: warning: 1.60 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:129:44: warning: 58.57 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:130:38: warning: 1.63 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:130:44: warning: 59.93 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:131:38: warning: 1.65 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:131:44: warning: 61.29 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:132:38: warning: 1.68 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:132:44: warning: 63.11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:133:38: warning: 1.70 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:133:44: warning: 64.47 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:134:38: warning: 1.73 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:134:44: warning: 66.28 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:135:38: warning: 1.75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:135:44: warning: 68.10 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:136:38: warning: 1.78 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:136:44: warning: 69.92 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:137:38: warning: 1.80 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:137:44: warning: 72.19 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:138:38: warning: 1.83 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:138:44: warning: 74.46 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:146:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:123:52: warning: 1.47 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:123:58: warning: 52.21 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:124:52: warning: 1.50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:124:58: warning: 53.12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:125:52: warning: 1.52 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:125:58: warning: 54.48 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:126:52: warning: 1.55 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:126:58: warning: 55.84 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:127:52: warning: 1.57 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:127:58: warning: 57.20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:128:52: warning: 1.60 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:128:58: warning: 58.57 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:129:52: warning: 1.63 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:129:58: warning: 59.93 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:130:52: warning: 1.65 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:130:58: warning: 61.29 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:131:52: warning: 1.68 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:131:58: warning: 63.11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:132:52: warning: 1.70 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:132:58: warning: 64.47 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:133:52: warning: 1.73 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:133:58: warning: 66.28 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:134:52: warning: 1.75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:134:58: warning: 68.10 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:135:52: warning: 1.78 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:135:58: warning: 69.92 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:136:52: warning: 1.80 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:136:58: warning: 72.19 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:137:52: warning: 1.83 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:137:58: warning: 74.46 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:145:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:146:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:145:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:146:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:145:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:158:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:166:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:157:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:165:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:166:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:165:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:166:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:165:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:166:1: warning: function 'TestBody' has cognitive complexity of 28 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:165:1: warning: function 'TestBody' has cognitive complexity of 28 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1557:60: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:178:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:177:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1897:31: note: expanded from macro 'ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1881:3: note: expanded from macro 'GTEST_ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:148:3: note: expanded from macro 'ASSERT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:78:3: note: expanded from macro 'GTEST_ASSERT_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:178:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:177:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1897:31: note: expanded from macro 'ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1881:3: note: expanded from macro 'GTEST_ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:148:3: note: expanded from macro 'ASSERT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:79:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:178:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:177:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1897:31: note: expanded from macro 'ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1881:3: note: expanded from macro 'GTEST_ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:148:3: note: expanded from macro 'ASSERT_PRED_FORMAT2'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:179:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:78:3: note: expanded from macro 'GTEST_ASSERT_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:179:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:79:3: note: expanded from macro 'GTEST_ASSERT_'
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:179:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:180:5: note: +1, including nesting penalty of 0, nesting level increased to 1
@@ -2093,57 +2109,57 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:185:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:78:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:185:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:79:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:185:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:179:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:188:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:178:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:187:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:188:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:187:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:188:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:187:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:188:1: warning: function 'TestBody' has cognitive complexity of 28 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:187:1: warning: function 'TestBody' has cognitive complexity of 28 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1557:60: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:200:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:199:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1897:31: note: expanded from macro 'ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1881:3: note: expanded from macro 'GTEST_ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:148:3: note: expanded from macro 'ASSERT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:78:3: note: expanded from macro 'GTEST_ASSERT_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:200:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:199:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1897:31: note: expanded from macro 'ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1881:3: note: expanded from macro 'GTEST_ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:148:3: note: expanded from macro 'ASSERT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:79:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:200:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:199:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1897:31: note: expanded from macro 'ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1881:3: note: expanded from macro 'GTEST_ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:148:3: note: expanded from macro 'ASSERT_PRED_FORMAT2'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:201:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:78:3: note: expanded from macro 'GTEST_ASSERT_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:201:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:79:3: note: expanded from macro 'GTEST_ASSERT_'
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:201:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:202:5: note: +1, including nesting penalty of 0, nesting level increased to 1
@@ -2226,57 +2242,57 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:207:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:78:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:207:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:79:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:207:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:201:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:210:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:200:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:209:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:210:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:209:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:210:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:209:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:210:1: warning: function 'TestBody' has cognitive complexity of 64 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:209:1: warning: function 'TestBody' has cognitive complexity of 64 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1557:60: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:232:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:231:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1897:31: note: expanded from macro 'ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1881:3: note: expanded from macro 'GTEST_ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:148:3: note: expanded from macro 'ASSERT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:78:3: note: expanded from macro 'GTEST_ASSERT_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:232:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:231:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1897:31: note: expanded from macro 'ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1881:3: note: expanded from macro 'GTEST_ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:148:3: note: expanded from macro 'ASSERT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:79:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:232:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:231:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1897:31: note: expanded from macro 'ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1881:3: note: expanded from macro 'GTEST_ASSERT_EQ'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:148:3: note: expanded from macro 'ASSERT_PRED_FORMAT2'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:233:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:78:3: note: expanded from macro 'GTEST_ASSERT_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:233:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:79:3: note: expanded from macro 'GTEST_ASSERT_'
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:233:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:234:5: note: +1, including nesting penalty of 0, nesting level increased to 1
@@ -2503,107 +2519,91 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:248:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:78:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:248:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:79:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:248:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:212:38: warning: 1.47 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:212:44: warning: 52.21 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:213:38: warning: 1.50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:213:44: warning: 53.12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:214:38: warning: 1.52 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:214:44: warning: 54.48 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:215:38: warning: 1.55 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:215:44: warning: 55.84 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:216:38: warning: 1.57 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:216:44: warning: 57.20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:217:38: warning: 1.60 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:217:44: warning: 58.57 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:218:38: warning: 1.63 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:218:44: warning: 59.93 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:219:38: warning: 1.65 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:219:44: warning: 61.29 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:220:38: warning: 1.68 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:220:44: warning: 63.11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:221:38: warning: 1.70 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:221:44: warning: 64.47 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:222:38: warning: 1.73 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:222:44: warning: 66.28 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:223:38: warning: 1.75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:223:44: warning: 68.10 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:224:38: warning: 1.78 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:224:44: warning: 69.92 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:225:38: warning: 1.80 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:225:44: warning: 72.19 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:226:38: warning: 1.83 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:226:44: warning: 74.46 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:228:31: warning: 61.27218654211062443 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:228:56: warning: 39.061955918843921154 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:233:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:251:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:211:52: warning: 1.47 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:211:58: warning: 52.21 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:212:52: warning: 1.50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:212:58: warning: 53.12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:213:52: warning: 1.52 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:213:58: warning: 54.48 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:214:52: warning: 1.55 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:214:58: warning: 55.84 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:215:52: warning: 1.57 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:215:58: warning: 57.20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:216:52: warning: 1.60 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:216:58: warning: 58.57 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:217:52: warning: 1.63 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:217:58: warning: 59.93 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:218:52: warning: 1.65 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:218:58: warning: 61.29 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:219:52: warning: 1.68 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:219:58: warning: 63.11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:220:52: warning: 1.70 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:220:58: warning: 64.47 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:221:52: warning: 1.73 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:221:58: warning: 66.28 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:222:52: warning: 1.75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:222:58: warning: 68.10 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:223:52: warning: 1.78 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:223:58: warning: 69.92 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:224:52: warning: 1.80 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:224:58: warning: 72.19 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:225:52: warning: 1.83 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:225:58: warning: 74.46 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:227:31: warning: 61.27218654211062443 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:227:56: warning: 39.061955918843921154 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:232:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:250:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:251:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:250:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:251:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:250:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:258:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:257:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:258:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:257:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:258:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:257:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:264:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:263:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:264:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:263:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:264:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:263:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:270:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:269:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:270:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:269:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:270:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:269:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:271:31: warning: 61.27218654211062443 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:271:56: warning: 39.061955918843921154 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:270:31: warning: 61.27218654211062443 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/TwoDimensionsStatistics_unit.cpp:270:56: warning: 39.061955918843921154 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 DONE!
