@@ -142,7 +142,7 @@ performRun(){
                 while [ $(("$retries")) -gt 0 ] && [ $(("$exitStatus")) -eq 127 ]; do
                     set +e
                     set -x
-                    $containerProgram "$fileInInstall" | tee "$outputLogPath" 2>&1
+                    "$fileInInstall" | tee "$outputLogPath" 2>&1
                     exitStatus="${PIPESTATUS[0]}"
                     set +x
                     set -e
@@ -168,7 +168,7 @@ performRun(){
                             echo "Running failing test: [$failingTestName]"
                             set +e
                             set -x
-                            $containerProgram "$fileInInstall" "--gtest_filter=$failingTestName"
+                            "$fileInInstall" "--gtest_filter=$failingTestName"
                             set +x
                             set -e
                         done <<< "$failingTests"
@@ -178,7 +178,7 @@ performRun(){
                 
             else 
                 set -x
-                $containerProgram "$fileInInstall" "$gtestArgument"
+                "$fileInInstall" "$gtestArgument"
                 set +x
             fi
         fi
