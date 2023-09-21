@@ -154,7 +154,11 @@ performRun(){
                     set +x
                     set -e
                     depends.exe /c /f:1 /oc:dependencyOutput.txt "$filename"
-                    cat dependencyOutput.txt
+                    if [ -e dependencyOutput.txt ]; then
+                        cat dependencyOutput.txt
+                    else
+                        echo "Error: dependencyOutput.txt not found."
+                    fi
                 
                     if [ $(("$exitStatus")) -eq 127 ]; then
                         retries=$((retries - 1))
