@@ -56,6 +56,9 @@ getArgumentsForBuild() {
 getArgumentsForRun() {
     containerProgram="$argument1"
     gtestArgument="$argument2"
+    outputLogPath="$(pwd)/runOutput.log"
+    touch "$outputLogPath"
+    scriptPrint "$scriptName" "$LINENO" "The outputLogPath is [$outputLogPath]."
 }
 
 getGccCompilers() {
@@ -126,9 +129,6 @@ performGenerateCompileCommandsJsonFile() {
 }
 
 performRun(){
-    outputLogPath="$(pwd)/runOutput.log"
-    touch "$outputLogPath"
-    scriptPrint "$scriptName" "$LINENO" "The outputLogPath is [$outputLogPath]."
     cd install/runDirectory
     scriptPrint "$scriptName" "$LINENO" "The current directory is [$(pwd)] and the output of [$lsCommand]:"
     $lsCommand
@@ -137,12 +137,21 @@ performRun(){
             scriptPrint "$scriptName" "$LINENO" "Running executable: [$fileInInstall]."
             if [[ -z "$gtestArgument" ]] || [[ "$gtestArgument" == "--gtest_filter=*.*" ]]; then
                 
-                set +e
-                set -x
-                $containerProgram "$fileInInstall" | tee "$outputLogPath" 2>&1
-                exitStatus="${PIPESTATUS[0]}"
-                set +x
-                set -e
+                retries=3
+                exitStatus=127
+                while [ $(("$retries")) -gt 0 ] && [ $(("$exitStatus")) -eq 127 ]; do
+                    set +e
+                    set -x
+                    $containerProgram "$fileInInstall" | tee "$outputLogPath" 2>&1
+                    exitStatus="${PIPESTATUS[0]}"
+                    set +x
+                    set -e
+                
+                    if [ $(("$exitStatus")) -eq 127 ]; then
+                        retries=$((retries - 1))
+                        echo "Retrying... Remaining attempts: $retries"
+                    fi
+                done
                 failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
                 scriptPrint "$scriptName" "$LINENO" "The gtest exit status is: [$exitStatus]."
                 scriptPrint "$scriptName" "$LINENO" "The contents of failingTests are: [$failingTests]."
