@@ -142,25 +142,27 @@ performRun(){
                 retries=2
                 exitStatus=127
                 while [ $(("$retries")) -gt 0 ] && [ $(("$exitStatus")) -eq 127 ]; do
-                    set +e
+                    set -x
                     file "$filename"
                     if ! command -v "$fileInInstall" &> /dev/null; then
                         echo "Error: $fileInInstall not found or is not executable"
                         exit 1
                     fi
-                    set -x
                     gdb --ex run "$fileInInstall"
+                    set +e
                     "$fileInInstall"
                     exitStatus="${PIPESTATUS[0]}"
-                    set +x
                     set -e
                     touch dependencyOutput.txt 
-                    depends.exe /c /f:1 /oc:dependencyOutput.txt "$filename"
+                    depends.exe /c /f:1 /ot:dependencyOutput.txt "$filename"
                     if [ -e dependencyOutput.txt ]; then
+                        echo "output of dependencyOutput.txt start:"
                         cat dependencyOutput.txt
+                        echo "output of dependencyOutput.txt end:"
                     else
                         echo "Error: dependencyOutput.txt not found."
                     fi
+                    set +x
                 
                     if [ $(("$exitStatus")) -eq 127 ]; then
                         retries=$((retries - 1))
@@ -181,11 +183,11 @@ performRun(){
                         scriptPrint "$scriptName" "$LINENO" "Running the failing tests again..."
                         while IFS= read -r failingTestName; do
                             echo "Running failing test: [$failingTestName]"
-                            set +e
                             set -x
+                            set +e
                             $fileInInstall "--gtest_filter=$failingTestName"
-                            set +x
                             set -e
+                            set +x
                         done <<< "$failingTests"
                     fi
                     exit 1
