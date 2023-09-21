@@ -147,8 +147,9 @@ performRun(){
                         exit 1
                     fi
                     set -x
-                    $fileInInstall
+                    gdb $fileInInstall
                     exitStatus="${PIPESTATUS[0]}"
+                    run
                     set +x
                     set -e
                 
