@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-20T07:24:14
+StaticAnalysisJobIdentifier: [41]
+2023-09-21T00:29:51
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:155:67: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:158:12: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
@@ -931,9 +931,9 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:208:74: warning: repeated branch in conditional chain [bugprone-branch-clone]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:210:6: note: end of the original
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:225:12: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Operator.cpp:9:20: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Monomial.cpp:21:48: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Monomial.cpp:94:17: style: Unused variable: _ [unusedVariable]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Operator.cpp:9:20: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Term.cpp:161:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Polynomial.cpp:14:24: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Polynomial.cpp:42:26: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
