@@ -127,6 +127,7 @@ performGenerateCompileCommandsJsonFile() {
 
 performRun(){
     outputLogPath="$(pwd)/runOutput.log"
+    touch "$outputLogPath"
     scriptPrint "$scriptName" "$LINENO" "The outputLogPath is [$outputLogPath]."
     cd install/runDirectory
     scriptPrint "$scriptName" "$LINENO" "The current directory is [$(pwd)] and the output of [$lsCommand]:"

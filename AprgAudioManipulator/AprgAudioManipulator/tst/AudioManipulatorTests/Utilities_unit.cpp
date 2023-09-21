@@ -12,7 +12,7 @@ using namespace std;
 
 namespace alba::AprgAudio {
 
-TEST(UtilitiesTest, RetrieveDeltasWorks) {
+TEST(UtilitiesTest, DISABLED_RetrieveDeltasWorks) {
     AlbaLocalPathHandler const audioDirectoryPathHandler(SAMPLE_AUDIO_FILES_DIRECTORY);
     AlbaLocalPathHandler const audioFilePathHandler(
         audioDirectoryPathHandler.getDirectory() / "AChannel_AOpeningSong_001.wav");

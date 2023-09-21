@@ -352,7 +352,7 @@ jobs:
         run: |
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
 
-      - name: Run
+      - name: Run with valgrind
         shell: bash
         if: contains(matrix.configurationName, 'Gcc') && inputs.enableValgrind
         working-directory: ${{ matrix.project }}
