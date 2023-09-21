@@ -142,12 +142,12 @@ performRun(){
                 while [ $(("$retries")) -gt 0 ] && [ $(("$exitStatus")) -eq 127 ]; do
                     set +e
                     file "$filename"
-                    if ! command -v "$filename" &> /dev/null; then
-                        echo "Error: $filename not found or is not executable"
+                    if ! command -v "$fileInInstall" &> /dev/null; then
+                        echo "Error: $fileInInstall not found or is not executable"
                         exit 1
                     fi
                     set -x
-                    $filename
+                    $fileInInstall
                     exitStatus="${PIPESTATUS[0]}"
                     set +x
                     set -e
