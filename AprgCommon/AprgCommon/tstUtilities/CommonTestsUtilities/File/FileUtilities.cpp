@@ -6,13 +6,13 @@ using namespace std;
 
 namespace alba {
 
-void clearContentsOfFile(string_view const path) {
-    ofstream fileStream(path.data());
+void clearContentsOfFile(std::filesystem::path const& filePath) {
+    ofstream fileStream(filePath);
     fileStream.close();
 }
 
-void createEmptyFile(string_view const path) {
-    ofstream fileStream(path.data());
+void createEmptyFile(std::filesystem::path const& filePath) {
+    ofstream fileStream(filePath);
     fileStream.close();
 }
 

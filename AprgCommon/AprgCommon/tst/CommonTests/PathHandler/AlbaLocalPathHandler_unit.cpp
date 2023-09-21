@@ -3,6 +3,7 @@
 #include <Common/Time/AlbaLocalTimeHelper.hpp>
 #include <CommonTests/DirectoryConstants.hpp>
 #include <CommonTestsUtilities/File/FileUtilities.hpp>
+#include <CommonTestsUtilities/Time/DateTimeUtilities.hpp>
 
 #include <gtest/gtest.h>
 
@@ -42,14 +43,13 @@ LocalPath fixPath(LocalPath const& path) {
 
 TEST(AlbaLocalPathHandlerTest, GetLastModifiedDateTimeWorks) {
     PathHandler const pathHandler(APRG_COMMON_TEST_FILE_TO_WRITE);
-    createEmptyFile(pathHandler.getPath().string());
+    createEmptyFile(pathHandler.getPath());
 
     AlbaDateTime const lastModifiedTime(pathHandler.getLastModifiedDateTime());
-
+    sleepFor(1);
     AlbaDateTime const currentTime(getCurrentDateTime());
-    AlbaDateTime const difference(currentTime - lastModifiedTime);
-    AlbaDateTime const allowableDifference(0, 0, 0, 0, 1, 0, 0);  // 1 minute
-    EXPECT_LT(difference, allowableDifference);
+
+    EXPECT_TRUE(isDifferenceAcceptable(lastModifiedTime, currentTime));
 }
 
 TEST(AlbaLocalPathHandlerTest, EmptyPathWorks) {
@@ -66,7 +66,7 @@ TEST(AlbaLocalPathHandlerTest, EmptyPathWorks) {
 TEST(AlbaLocalPathHandlerTest, FileIsCopiedToNewFileActualLocalDirectory) {
     LocalPath const pathOfFileToBeCopied(getAprgTestDirectory() + R"(\DirectoryTest\FileToBeCopied.log)");
     string const pathOfCopiedFile("CopiedFile.log");
-    createEmptyFile(fixPath(pathOfFileToBeCopied).string());
+    createEmptyFile(fixPath(pathOfFileToBeCopied));
 
     PathHandler const pathHandler(pathOfFileToBeCopied);
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\FileToBeCopied.log)"), pathHandler.getPath());
@@ -96,7 +96,7 @@ TEST(AlbaLocalPathHandlerTest, FileIsCopiedToNewFileActualLocalDirectory) {
 
 TEST(AlbaLocalPathHandlerTest, ReInputFileThatIsToBeRenamedActualLocalDirectory) {
     LocalPath const pathOfFileToBeRenamed(getAprgTestDirectory() + R"(\DirectoryTest\FileToBeRenamed.log)");
-    createEmptyFile(fixPath(pathOfFileToBeRenamed).string());
+    createEmptyFile(fixPath(pathOfFileToBeRenamed));
 
     PathHandler pathHandler(pathOfFileToBeRenamed);
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\FileToBeRenamed.log)"), pathHandler.getPath());
@@ -124,7 +124,7 @@ TEST(AlbaLocalPathHandlerTest, ReInputFileThatIsToBeRenamedActualLocalDirectory)
 
 TEST(AlbaLocalPathHandlerTest, ReInputFileThatIsToBeDeletedActualLocalDirectory) {
     LocalPath const pathOfFileToBeDeleted(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\FileToBeDeleted.log)"));
-    createEmptyFile(fixPath(pathOfFileToBeDeleted).string());
+    createEmptyFile(fixPath(pathOfFileToBeDeleted));
 
     PathHandler const pathHandler(pathOfFileToBeDeleted);
     EXPECT_EQ(fixPath(getAprgTestDirectory() + R"(\DirectoryTest\FileToBeDeleted.log)"), pathHandler.getPath());
@@ -489,9 +489,9 @@ TEST(AlbaLocalPathHandlerTest, CopyDirectoryAndIsSuccessfulWorks) {
     PathHandler const pathHandler(getAprgTestDirectory() + R"(\CopyDirectory\)");
     EXPECT_TRUE(
         PathHandler(getAprgTestDirectory() + R"(\CopyDirectory\DIR1\DIR2\DIR3\)").createDirectoriesAndIsSuccessful());
-    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\CopyDirectory\FILE0.txt)").string());
-    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\CopyDirectory\DIR1\FILE1.txt)").string());
-    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\CopyDirectory\DIR1\DIR2\FILE2.txt)").string());
+    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\CopyDirectory\FILE0.txt)"));
+    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\CopyDirectory\DIR1\FILE1.txt)"));
+    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\CopyDirectory\DIR1\DIR2\FILE2.txt)"));
     ASSERT_TRUE(PathHandler(getAprgTestDirectory() + R"(\CopyDirectory\)").isExistingDirectory());
     PathHandler const destinationHandler(getAprgTestDirectory() + R"(\CopiedDirectory\)");
 
@@ -601,9 +601,9 @@ TEST(AlbaLocalPathHandlerTest, DeleteAllDirectoryContentsAndIsSuccessfulWorks) {
     PathHandler const pathHandler(getAprgTestDirectory() + R"(\DeleteContents\)");
     EXPECT_TRUE(
         PathHandler(getAprgTestDirectory() + R"(\DeleteContents\DIR1\DIR2\DIR3\)").createDirectoriesAndIsSuccessful());
-    createEmptyFile(getAprgTestDirectory() + R"(\DeleteContents\FILE0.txt)");
-    createEmptyFile(getAprgTestDirectory() + R"(\DeleteContents\DIR1\FILE1.txt)");
-    createEmptyFile(getAprgTestDirectory() + R"(\DeleteContents\DIR1\DIR2\FILE2.txt)");
+    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\DeleteContents\FILE0.txt)").string());
+    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\DeleteContents\DIR1\FILE1.txt)").string());
+    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\DeleteContents\DIR1\DIR2\FILE2.txt)").string());
     ASSERT_TRUE(PathHandler(getAprgTestDirectory() + R"(\DeleteContents\)").isExistingDirectory());
 
     EXPECT_TRUE(pathHandler.deleteAllDirectoryContentsAndIsSuccessful());
@@ -621,9 +621,9 @@ TEST(AlbaLocalPathHandlerTest, DeleteDirectoryAndIsSuccessfulWorks) {
     PathHandler const pathHandler(getAprgTestDirectory() + R"(\DeleteDirectory\)");
     EXPECT_TRUE(
         PathHandler(getAprgTestDirectory() + R"(\DeleteDirectory\DIR1\DIR2\DIR3\)").createDirectoriesAndIsSuccessful());
-    createEmptyFile(getAprgTestDirectory() + R"(\DeleteDirectory\FILE0.txt)");
-    createEmptyFile(getAprgTestDirectory() + R"(\DeleteDirectory\DIR1\FILE1.txt)");
-    createEmptyFile(getAprgTestDirectory() + R"(\DeleteDirectory\DIR1\DIR2\FILE2.txt)");
+    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\DeleteDirectory\FILE0.txt)"));
+    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\DeleteDirectory\DIR1\FILE1.txt)"));
+    createEmptyFile(fixPath(getAprgTestDirectory() + R"(\DeleteDirectory\DIR1\DIR2\FILE2.txt)"));
     ASSERT_TRUE(PathHandler(getAprgTestDirectory() + R"(\DeleteDirectory\)").isExistingDirectory());
 
     EXPECT_TRUE(pathHandler.deleteDirectoryAndIsSuccessful());

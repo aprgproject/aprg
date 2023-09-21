@@ -2,13 +2,13 @@
 
 #include <gtest/gtest.h>
 
+#include <filesystem>
 #include <fstream>
-#include <string_view>
 
 namespace alba {
 
 struct BaseFileReaderTest : public testing::Test {
-    explicit BaseFileReaderTest(std::string_view const testFilePath);
+    explicit BaseFileReaderTest(std::filesystem::path const& testFilePath);
     void SetUp() override;
     void TearDown() override;
     void clearContentsOfTestFile() const;
