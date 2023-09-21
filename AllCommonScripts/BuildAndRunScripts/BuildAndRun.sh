@@ -142,7 +142,7 @@ performRun(){
                 while [ $(("$retries")) -gt 0 ] && [ $(("$exitStatus")) -eq 127 ]; do
                     set +e
                     set -x
-                    "$fileInInstall" | tee "$outputLogPath" 2>&1
+                    "$fileInInstall"
                     exitStatus="${PIPESTATUS[0]}"
                     set +x
                     set -e
