@@ -142,14 +142,16 @@ performRun(){
                 while [ $(("$retries")) -gt 0 ] && [ $(("$exitStatus")) -eq 127 ]; do
                     set +e
                     set -x
-                    $containerProgram "$fileInInstall" | tee "$outputLogPath" 2>&1
+                    "$fileInInstall" | tee "$outputLogPath" 2>&1
                     exitStatus="${PIPESTATUS[0]}"
                     set +x
                     set -e
                 
                     if [ $(("$exitStatus")) -eq 127 ]; then
                         retries=$((retries - 1))
-                        echo "Retrying... Remaining attempts: $retries"
+                        scriptPrint "$scriptName" "$LINENO" "Retrying... Remaining attempts: $retries"
+                        scriptPrint "$scriptName" "$LINENO" "Sleeping for 10 seconds before trying again..."
+                        sleep 10
                     fi
                 done
                 failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
