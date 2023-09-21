@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-20T10:52:01
+StaticAnalysisJobIdentifier: [41]
+2023-09-21T04:02:26
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:41:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:42:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
@@ -568,254 +568,255 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:293:20: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:294:18: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:309:19: warning: unused variable 's2' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:309:19: warning: variable name 's2' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:323:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:302:7: warning: use emplace_back instead of push_back [hicpp-use-emplace,modernize-use-emplace]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:308:19: warning: unused variable 's2' [clang-diagnostic-unused-variable]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:308:19: warning: variable name 's2' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:322:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:323:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:322:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:323:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:322:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:324:25: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:326:15: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:341:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:323:25: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:325:15: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:340:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:341:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:340:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:341:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:340:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:342:17: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:344:15: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:348:68: warning: parameter name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:360:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:341:17: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:343:15: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:347:68: warning: parameter name 'i' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:359:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:360:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:359:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:360:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:359:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:373:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:372:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:373:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:372:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:373:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:372:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:389:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:388:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:389:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:388:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:389:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:388:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:390:30: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:389:30: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:391:29: warning: 42 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:391:42: warning: 3.14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:392:29: warning: 42 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:392:42: warning: 3.14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:393:29: warning: 42 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:393:42: warning: 3.14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:398:79: warning: 42 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:398:92: warning: 3.14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:413:20: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:420:20: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:426:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:397:79: warning: 42 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:397:92: warning: 3.14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:412:20: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:419:20: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:425:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:426:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:425:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:426:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:425:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:435:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:434:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:435:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:434:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:435:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:434:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:445:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:444:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:445:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:444:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:445:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:444:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:448:13: warning: variable name 'm' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:458:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:447:13: warning: variable name 'm' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:457:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:458:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:457:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:458:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:457:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:460:7: warning: variable name 'm' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:472:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:459:7: warning: variable name 'm' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:471:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:472:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:471:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:472:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:471:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:474:7: warning: variable name 'm' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:486:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:473:7: warning: variable name 'm' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:485:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:486:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:485:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:486:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:485:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:488:7: warning: variable name 'm' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:500:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:487:7: warning: variable name 'm' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:499:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:500:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:499:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:500:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:499:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:502:7: warning: variable name 'm' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:518:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:501:7: warning: variable name 'm' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:517:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:518:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:517:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:518:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:517:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:520:7: warning: variable name 'm' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:535:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:519:7: warning: variable name 'm' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:534:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:535:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:534:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:535:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:534:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:551:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:550:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:551:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:550:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:551:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:550:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:569:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:568:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:569:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:568:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:569:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:568:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:585:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:584:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:585:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:584:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:585:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:584:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:107:12: warning: moving a local object in a return statement prevents copy elision [-Wpessimizing-move]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:107:12: note: remove std::move call here
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:309:19: warning: unused variable 's2' [-Wunused-variable]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:409:33: warning: returning address of local temporary object [-Wreturn-stack-address]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:420:24: note: in instantiation of function template specialization 'alba::InitializerListHasConstStorageSoWeCantLocalInitializerLists::f<1, 2, 3>' requested here
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:308:19: warning: unused variable 's2' [-Wunused-variable]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:408:33: warning: returning address of local temporary object [-Wreturn-stack-address]
+/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:419:24: note: in instantiation of function template specialization 'alba::InitializerListHasConstStorageSoWeCantLocalInitializerLists::f<1, 2, 3>' requested here
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/IncrementDecrementExamples/IncrementDecrementExamples_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
