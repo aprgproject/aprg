@@ -137,22 +137,22 @@ jobs:
           overallLintStatus=0
           echo "Checking linting errors..."
           echo "cmakeLintStatus: [$cmakeLintStatus]"
-          if [ "$cmakeLintStatus" == "0" ]; then
+          if [ "$cmakeLintStatus" != "0" ]; then
             echo "CMake linting failed, so the overall linting status is set to failed."
             overallLintStatus=1
           fi
           echo "shellLintStatus: [$shellLintStatus]"
-          if [ "$shellLintStatus" == "0" ]; then
+          if [ "$shellLintStatus" != "0" ]; then
             echo "Shell linting failed, so the overall linting status is set to failed."
             overallLintStatus=1
           fi
           echo "pythonLintStatus: [$pythonLintStatus]"
-          if [ "$pythonLintStatus" == "0" ]; then
+          if [ "$pythonLintStatus" != "0" ]; then
             echo "Python linting failed, so the overall linting status is set to failed."
             overallLintStatus=1
           fi
           echo "overallLintStatus: [$overallLintStatus]"
-          if [ $overallLintStatus == "0" ]; then
+          if [ $overallLintStatus != "0" ]; then
             echo "There were no linting issues found."
           fi
           exit $overallLintStatus
