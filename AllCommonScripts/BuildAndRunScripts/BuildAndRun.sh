@@ -11,6 +11,8 @@ scriptOption="$1"
 buildDirectoryName="$2"
 argument1="$3"
 argument2="$4"
+argument3="$5"
+argument4="$6"
 cmakeCCompiler=""
 cmakeCppCompiler=""
 lsCommand="ls -la --color=auto"
@@ -43,10 +45,17 @@ set -e
 getArgumentsForConfigure() {
     buildType="$argument1"
     cmakeGenerator="$argument2"
+    buildFlagsTag="$argument3"
+    linkFlagsTag="$argument4"
 }
 
 getArgumentsForBuild() {
     buildType="$argument1"
+}
+
+getArgumentsForRun() {
+    containerProgram="$argument1"
+    gtestArgument="$argument2"
 }
 
 getGccCompilers() {
@@ -71,6 +80,7 @@ printBuildPathAndLsCommand() {
 
 printConfigureParameters() {
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType] and cmakeGenerator is [$cmakeGenerator]."
+    scriptPrint "$scriptName" "$LINENO" "The buildFlagsTag is [$buildFlagsTag] and linkFlagsTag is [$linkFlagsTag]."
     if [[ -n $cmakeCCompiler ]]; then
         scriptPrint "$scriptName" "$LINENO" "The cmakeCCompiler is [$cmakeCCompiler]."
     fi
@@ -88,6 +98,12 @@ printBuildParameters() {
 
 printInstallParameters() {
     scriptPrint "$scriptName" "$LINENO" "The buildType is [$buildType]."
+    printBuildPathAndLsCommand
+}
+
+printRunParameters() {
+    scriptPrint "$scriptName" "$LINENO" "The container program is [$containerProgram]."
+    scriptPrint "$scriptName" "$LINENO" "The gtest argument is [$gtestArgument]."
     printBuildPathAndLsCommand
 }
 
@@ -110,8 +126,6 @@ performGenerateCompileCommandsJsonFile() {
 }
 
 performRun(){
-    scriptPrint "$scriptName" "$LINENO" "The container program is [$containerProgram]."
-    scriptPrint "$scriptName" "$LINENO" "The first argument is [$argument1]."
     outputLogPath="$(pwd)/runOutput.log"
     scriptPrint "$scriptName" "$LINENO" "The outputLogPath is [$outputLogPath]."
     cd install/runDirectory
@@ -120,10 +134,12 @@ performRun(){
     for fileInInstall in ./*; do
         if [[ -x "$fileInInstall" ]]; then
             scriptPrint "$scriptName" "$LINENO" "Running executable: [$fileInInstall]."
-            if [[ -z "$argument1" ]] || [[ "$argument1" == "--gtest_filter=*.*" ]]; then
+            if [[ -z "$gtestArgument" ]] || [[ "$gtestArgument" == "--gtest_filter=*.*" ]]; then
                 
                 set +e
-                "$containerProgram" "$fileInInstall" | tee "$outputLogPath" 2>&1
+                runCommand="$containerProgram $fileInInstall | tee $outputLogPath 2>&1"
+                scriptPrint "$scriptName" "$LINENO" "The runCommand is [$runCommand]."
+                $runCommand
                 exitStatus="${PIPESTATUS[0]}"
                 set -e
                 failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
@@ -139,7 +155,9 @@ performRun(){
                         while IFS= read -r failingTestName; do
                             echo "Running failing test: [$failingTestName]"
                             set +e
-                            "$containerProgram" "$fileInInstall" "--gtest_filter=$failingTestName"
+                            runCommand="$containerProgram $fileInInstall --gtest_filter=$failingTestName"
+                            scriptPrint "$scriptName" "$LINENO" "The runCommand is [$runCommand]."
+                            $runCommand
                             set -e
                         done <<< "$failingTests"
                     fi
@@ -147,7 +165,9 @@ performRun(){
                 fi
                 
             else 
-                "$containerProgram" "$fileInInstall" "$argument1"
+                runCommand="$containerProgram $fileInInstall $gtestArgument"
+                scriptPrint "$scriptName" "$LINENO" "The runCommand is [$runCommand]."
+                $runCommand
             fi
         fi
     done
@@ -160,25 +180,19 @@ elif [ "$scriptOption" == "cleanAndConfigureWithDefaultCompiler" ]; then
     performClean
     getArgumentsForConfigure
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" "-DAPRG_BUILD_FLAGS_TAG=$buildFlagsTag" "-DAPRG_LINK_FLAGS_TAG=$linkFlagsTag" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "cleanAndConfigureWithGcc" ]; then
     performClean
     getArgumentsForConfigure
     getGccCompilers
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_BUILD_FLAGS_TAG=$buildFlagsTag" "-DAPRG_LINK_FLAGS_TAG=$linkFlagsTag" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "cleanAndConfigureWithClang" ]; then
     performClean
     getArgumentsForConfigure
     getClangCompilers
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
-elif [ "$scriptOption" == "cleanAndConfigureWithClangWithAsan" ]; then
-    performClean
-    getArgumentsForConfigure
-    getClangCompilers
-    printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" -DCMAKE_C_FLAGS:STRING="-g --coverage -fsanitize=address -fno-omit-frame-pointer" -DCMAKE_CXX_FLAGS:STRING="-g -fsanitize=address -fno-omit-frame-pointer" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_BUILD_FLAGS_TAG=$buildFlagsTag" "-DAPRG_LINK_FLAGS_TAG=$linkFlagsTag" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "cleanAndConfigureWithClangAndStaticAnalyzers" ]; then
     performClean
     getArgumentsForConfigure
@@ -191,20 +205,20 @@ elif [ "$scriptOption" == "cleanAndConfigureWithClangAndStaticAnalyzers" ]; then
         aprgStaticAnalyzersType="-DAPRG_STATIC_ANALYZERS_TYPE=ReportWithoutClazy"
     fi
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "$aprgStaticAnalyzersType" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_BUILD_FLAGS_TAG=$buildFlagsTag" "-DAPRG_LINK_FLAGS_TAG=$linkFlagsTag" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "$aprgStaticAnalyzersType" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "cleanAndConfigureWithStaticAnalyzersWithAutoFix" ]; then
     performClean
     getArgumentsForConfigure
     getClangCompilers
     aprgStaticAnalyzersType="-DAPRG_STATIC_ANALYZERS_TYPE=AutoFix"
     printConfigureParameters
-    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "$aprgStaticAnalyzersType" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_BUILD_FLAGS_TAG=$buildFlagsTag" "-DAPRG_LINK_FLAGS_TAG=$linkFlagsTag" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "$aprgStaticAnalyzersType" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "cleanAndConfigureWithClangStaticAnalyzer" ]; then
     performClean
     getArgumentsForConfigure
     getClangCompilers
     printConfigureParameters
-    scan-build "--use-analyzer=$(command -v clang++)" cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+    scan-build "--use-analyzer=$(command -v clang++)" cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_BUILD_FLAGS_TAG=$buildFlagsTag" "-DAPRG_LINK_FLAGS_TAG=$linkFlagsTag" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "generateCompileCommandsJsonFile" ]; then
     performGenerateCompileCommandsJsonFile
 elif [ "$scriptOption" == "build" ]; then
@@ -220,10 +234,8 @@ elif [ "$scriptOption" == "install" ]; then
     printInstallParameters
     cmake --install . --verbose --config "$buildType"
 elif [ "$scriptOption" == "run" ]; then
-    containerProgram=""
-    performRun
-elif [ "$scriptOption" == "runWithValgrind" ]; then
-    containerProgram="valgrind"
+    getArgumentsForRun
+    printRunParameters
     performRun
 else
     scriptPrint "$scriptName" "$LINENO" "The script option [$scriptOption] is not found."

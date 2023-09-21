@@ -27,7 +27,8 @@
 				"${input:cmakeConfiguration}",
 				"WslBuild",
 				"Debug",
-				"Ninja"
+				"Ninja",
+				"${input:buildFlagTag}"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -215,11 +216,22 @@
 			"options": [
 				"cleanAndConfigureWithGcc",
 				"cleanAndConfigureWithClang",
-				"cleanAndConfigureWithClangWithAsan",
 				"cleanAndConfigureWithClangAndStaticAnalyzers",
+				"cleanAndConfigureWithClangStaticAnalyzer",
 				"generateCompileCommandsJsonFile"
 			],
 			"default": "configureWithClang"
+		},
+		{
+			"id": "buildFlagTag",
+			"type": "pickString",
+			"description": "Select build flag tag:",
+			"options": [
+				"",
+				"APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_DEBUG_INFO",
+				"APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_ASAN"
+			],
+			"default": ""
 		}
 	]
 }

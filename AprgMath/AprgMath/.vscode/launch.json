@@ -13,6 +13,7 @@
                 "outputWithAbsolutePaths",
                 "run",
                 "WslBuild",
+                "", // containerProgram, valgrind
                 "" //"--gtest_filter=*.*"
             ],
             "cwd": "${workspaceFolder}",
