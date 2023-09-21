@@ -72,6 +72,10 @@ void verifyFile(string const& expectedFile, string const& testFile) {
         lineInExpectedFile = expectedFileReader.getLine();
         lineInTestFile = testFileReader.getLine();
         EXPECT_EQ(lineInExpectedFile, lineInTestFile);
+        cout << "expected line: [" << lineInExpectedFile << "]\n";
+        cout << "test line: [" << lineInTestFile << "]\n";
+        cout << "expected current location: [" << expectedFileReader.getCurrentLocation() << "]\n";
+        cout << "test current location: [" << testFileReader.getCurrentLocation() << "]\n";
         if (lineInExpectedFile != lineInTestFile) {
             constexpr int LINES_TO_DISPLAY = 6;
             int const numberOfLines = static_cast<int>(lines.size());
