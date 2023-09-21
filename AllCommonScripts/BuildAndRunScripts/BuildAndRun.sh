@@ -110,6 +110,7 @@ performGenerateCompileCommandsJsonFile() {
 }
 
 performRun(){
+    scriptPrint "$scriptName" "$LINENO" "The container program is [$containerProgram]."
     scriptPrint "$scriptName" "$LINENO" "The first argument is [$argument1]."
     outputLogPath="$(pwd)/runOutput.log"
     scriptPrint "$scriptName" "$LINENO" "The outputLogPath is [$outputLogPath]."
@@ -118,11 +119,11 @@ performRun(){
     $lsCommand
     for fileInInstall in ./*; do
         if [[ -x "$fileInInstall" ]]; then
-            scriptPrint "$scriptName" "$LINENO" "Running executable: [$(pwd)/$fileInInstall]."
+            scriptPrint "$scriptName" "$LINENO" "Running executable: [$fileInInstall]."
             if [[ -z "$argument1" ]] || [[ "$argument1" == "--gtest_filter=*.*" ]]; then
                 
                 set +e
-                "$fileInInstall" | tee "$outputLogPath" 2>&1
+                "$containerProgram" "$fileInInstall" | tee "$outputLogPath" 2>&1
                 exitStatus="${PIPESTATUS[0]}"
                 set -e
                 failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
@@ -138,7 +139,7 @@ performRun(){
                         while IFS= read -r failingTestName; do
                             echo "Running failing test: [$failingTestName]"
                             set +e
-                            "$fileInInstall" "--gtest_filter=$failingTestName"
+                            "$containerProgram" "$fileInInstall" "--gtest_filter=$failingTestName"
                             set -e
                         done <<< "$failingTests"
                     fi
@@ -146,7 +147,7 @@ performRun(){
                 fi
                 
             else 
-                "$fileInInstall" "$argument1"
+                "$containerProgram" "$fileInInstall" "$argument1"
             fi
         fi
     done
@@ -198,6 +199,12 @@ elif [ "$scriptOption" == "cleanAndConfigureWithStaticAnalyzersWithAutoFix" ]; t
     aprgStaticAnalyzersType="-DAPRG_STATIC_ANALYZERS_TYPE=AutoFix"
     printConfigureParameters
     cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "-DAPRG_ENABLE_STATIC_ANALYZERS=ON" "$aprgStaticAnalyzersType" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
+elif [ "$scriptOption" == "cleanAndConfigureWithClangStaticAnalyzer" ]; then
+    performClean
+    getArgumentsForConfigure
+    getClangCompilers
+    printConfigureParameters
+    scan-build "--use-analyzer=$(command -v clang++)" cmake -DCMAKE_BUILD_TYPE="$buildType" -DCMAKE_C_COMPILER="$cmakeCCompiler" -DCMAKE_CXX_COMPILER="$cmakeCppCompiler" "../$immediateDirectoryName/" "-G" "$cmakeGenerator"
 elif [ "$scriptOption" == "generateCompileCommandsJsonFile" ]; then
     performGenerateCompileCommandsJsonFile
 elif [ "$scriptOption" == "build" ]; then
@@ -213,6 +220,10 @@ elif [ "$scriptOption" == "install" ]; then
     printInstallParameters
     cmake --install . --verbose --config "$buildType"
 elif [ "$scriptOption" == "run" ]; then
+    containerProgram=""
+    performRun
+elif [ "$scriptOption" == "runWithValgrind" ]; then
+    containerProgram="valgrind"
     performRun
 else
     scriptPrint "$scriptName" "$LINENO" "The script option [$scriptOption] is not found."
