@@ -155,11 +155,11 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
 
     ASSERT_EQ(5U, squareErrorToSampleMultimap.size());
     auto it = squareErrorToSampleMultimap.begin();
-    EXPECT_EQ((DataSampleInitializerList{5, 3}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{5, 3}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{5, 3}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{5, 3}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{5, 3}), it++->second);
+    EXPECT_EQ((LocalSample{5, 3}), it++->second);
+    EXPECT_EQ((LocalSample{5, 3}), it++->second);
+    EXPECT_EQ((LocalSample{5, 3}), it++->second);
+    EXPECT_EQ((LocalSample{5, 3}), it++->second);
+    EXPECT_EQ((LocalSample{5, 3}), it++->second);
 }
 
 TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelForVerticalLine) {
@@ -176,12 +176,12 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
 
     ASSERT_EQ(6U, squareErrorToSampleMultimap.size());
     auto it = squareErrorToSampleMultimap.begin();
-    EXPECT_EQ((DataSampleInitializerList{5, 0}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{5, 1}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{5, 2}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{5, 3}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{5, 4}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{5, 5}), it++->second);
+    EXPECT_EQ((LocalSample{5, 0}), it++->second);
+    EXPECT_EQ((LocalSample{5, 1}), it++->second);
+    EXPECT_EQ((LocalSample{5, 2}), it++->second);
+    EXPECT_EQ((LocalSample{5, 3}), it++->second);
+    EXPECT_EQ((LocalSample{5, 4}), it++->second);
+    EXPECT_EQ((LocalSample{5, 5}), it++->second);
 }
 
 TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelForHorizontalLine) {
@@ -198,12 +198,12 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
 
     ASSERT_EQ(6U, squareErrorToSampleMultimap.size());
     auto it = squareErrorToSampleMultimap.begin();
-    EXPECT_EQ((DataSampleInitializerList{0, 5}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1, 5}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{2, 5}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{3, 5}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{4, 5}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{5, 5}), it++->second);
+    EXPECT_EQ((LocalSample{0, 5}), it++->second);
+    EXPECT_EQ((LocalSample{1, 5}), it++->second);
+    EXPECT_EQ((LocalSample{2, 5}), it++->second);
+    EXPECT_EQ((LocalSample{3, 5}), it++->second);
+    EXPECT_EQ((LocalSample{4, 5}), it++->second);
+    EXPECT_EQ((LocalSample{5, 5}), it++->second);
 }
 
 TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelForScatteredPoints) {
@@ -230,21 +230,21 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
 
     ASSERT_EQ(15U, squareErrorToSampleMultimap.size());
     auto it = squareErrorToSampleMultimap.begin();
-    EXPECT_EQ((DataSampleInitializerList{1.75, 68.10}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.57, 57.20}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.55, 55.84}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.78, 69.92}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.50, 53.12}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.60, 58.57}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.52, 54.48}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.70, 64.47}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.73, 66.28}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.65, 61.29}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.68, 63.11}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.63, 59.93}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.80, 72.19}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.47, 52.21}), it++->second);
-    EXPECT_EQ((DataSampleInitializerList{1.83, 74.46}), it++->second);
+    EXPECT_EQ((LocalSample{1.75, 68.10}), it++->second);
+    EXPECT_EQ((LocalSample{1.57, 57.20}), it++->second);
+    EXPECT_EQ((LocalSample{1.55, 55.84}), it++->second);
+    EXPECT_EQ((LocalSample{1.78, 69.92}), it++->second);
+    EXPECT_EQ((LocalSample{1.50, 53.12}), it++->second);
+    EXPECT_EQ((LocalSample{1.60, 58.57}), it++->second);
+    EXPECT_EQ((LocalSample{1.52, 54.48}), it++->second);
+    EXPECT_EQ((LocalSample{1.70, 64.47}), it++->second);
+    EXPECT_EQ((LocalSample{1.73, 66.28}), it++->second);
+    EXPECT_EQ((LocalSample{1.65, 61.29}), it++->second);
+    EXPECT_EQ((LocalSample{1.68, 63.11}), it++->second);
+    EXPECT_EQ((LocalSample{1.63, 59.93}), it++->second);
+    EXPECT_EQ((LocalSample{1.80, 72.19}), it++->second);
+    EXPECT_EQ((LocalSample{1.47, 52.21}), it++->second);
+    EXPECT_EQ((LocalSample{1.83, 74.46}), it++->second);
 }
 
 TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForInvalidLine) {
