@@ -2178,9 +2178,8 @@ void callback(const size_t iter, void *, const gsl_multifit_nlinear_workspace *w
     double rcond = 0;
     // compute reciprocal condition number of J(x)
     gsl_multifit_nlinear_rcond(&rcond, workspace);
-    printf(
-        "iter %2zu: A = %.4f, lambda = %.4f, b = %.4f, cond(J) = %8.4f, |f(x)|!= %.4f\n ", iter, gsl_vector_get(x, 0),
-        gsl_vector_get(x, 1), gsl_vector_get(x, 2), 1.0 / rcond, gsl_blas_dnrm2(f));
+    cout<<"iter "<< iter<<"u: A = "<< gsl_vector_get(x, 0)<<", lambda = "<<
+        gsl_vector_get(x, 1)<<", b = "<< gsl_vector_get(x, 2)<<", cond(J) = "<< 1.0 / rcond<<", |f(x)|!= "<< gsl_blas_dnrm2(f)<<"\n ";
 }
 }  // namespace
 
@@ -2401,8 +2400,8 @@ TEST(GslTest, SparseLinearAlgebraWorks) {
         gsl_vector_set(&fView.vector, i, fi);
     }
     // convert to compressed column format
-    gsl_spmatrix *C = gsl_spmatrix_ccs(A);  // compressed format
-    {
+    gsl_spmatrix *C = gsl_spmatrix_ccs(A);  {
+    // compressed format
         // now solve the system with the GMRES iterative solver
         constexpr double tol = 1.0e-6;  // solution relative tolerance
         const gsl_splinalg_itersolve_type *T = gsl_splinalg_itersolve_gmres;
