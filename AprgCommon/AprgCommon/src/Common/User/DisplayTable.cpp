@@ -152,10 +152,10 @@ string DisplayTablePrinter::getHorizontalBorderLine() const {
 }
 
 string DisplayTablePrinter::getVerticalBorderPoint() const { return m_verticalBorder; }
-int DisplayTablePrinter::getVerticalBorderLength() const { return m_verticalBorder.length(); }
+int DisplayTablePrinter::getVerticalBorderLength() const { return static_cast<int>(m_verticalBorder.length()); }
 
 int DisplayTablePrinter::getHorizontalBorderLength() const {
-    return ((m_maxLengthAtColumn.size() + 1) * getVerticalBorderLength()) + m_totalColumnLength;
+    return ((static_cast<int>(m_maxLengthAtColumn.size()) + 1) * getVerticalBorderLength()) + m_totalColumnLength;
 }
 
 void DisplayTablePrinter::saveTableInformation(DisplayTable const& displayTable) {
