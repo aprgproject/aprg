@@ -31,7 +31,7 @@ on:
         - Debug
         - Release
       enableValgrind:
-        description: 'Enable Valgrind for Gcc Builds'
+        description: 'Enable Valgrind for Ubuntu Gcc'
         type: boolean
         required: true
         default: false
@@ -293,13 +293,6 @@ jobs:
         run: |
           sudo apt install valgrind
           echo "valgrind version: [$(valgrind -v)]"
-
-      - name: Install valgrind on Windows
-        shell: bash
-        if: startsWith(matrix.configurationName, 'Windows') && inputs.enableValgrind
-        run: |
-          choco install valgrind
-          echo "valgrind version: [$(valgrind -v)]"
           
       - name: Prepare aprg directories and scripts
         shell: bash
@@ -368,7 +361,7 @@ jobs:
 
       - name: Run with valgrind
         shell: bash
-        if: contains(matrix.configurationName, 'Gcc') && inputs.enableValgrind
+        if: matrix.configurationName == 'UbuntuLatestGcc' && inputs.enableValgrind
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }} valgrind
