@@ -373,8 +373,8 @@ jobs:
         run: |
           set +e
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }} valgrind
-          set -e
           stepStatus=$?
+          set -e
           echo "stepStatus: [$stepStatus]"
           if [ "$stepStatus" != "0" ]; then
             echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
@@ -393,8 +393,8 @@ jobs:
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
-          set -e
           stepStatus=$?
+          set -e
           echo "stepStatus: [$stepStatus]"
           if [ "$stepStatus" != "0" ]; then
             echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
@@ -413,8 +413,8 @@ jobs:
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
-          set -e
           stepStatus=$?
+          set -e
           echo "stepStatus: [$stepStatus]"
           if [ "$stepStatus" != "0" ]; then
             echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
@@ -433,8 +433,8 @@ jobs:
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
-          set -e
           stepStatus=$?
+          set -e
           echo "stepStatus: [$stepStatus]"
           if [ "$stepStatus" != "0" ]; then
             echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
@@ -453,8 +453,8 @@ jobs:
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
-          set -e
           stepStatus=$?
+          set -e
           echo "stepStatus: [$stepStatus]"
           if [ "$stepStatus" != "0" ]; then
             echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
@@ -470,8 +470,8 @@ jobs:
           echo "Running Clang Static Analysis..."
           set +e
           "$buildAndRunScriptPath" cleanAndConfigureWithClangStaticAnalyzer "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
-          set -e
           stepStatus=$?
+          set -e
           echo "stepStatus: [$stepStatus]"
           if [ "$stepStatus" != "0" ]; then
             echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
@@ -490,8 +490,8 @@ jobs:
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
-          set -e
           stepStatus=$?
+          set -e
           echo "stepStatus: [$stepStatus]"
           if [ "$stepStatus" != "0" ]; then
             echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
