@@ -101,8 +101,8 @@ TEST(GslTest, PolynomialRootFindingInGslWorks) {
 
 TEST(GslTest, PermutationFunctionsInGslWorks) {
     // Th iscreates a random permutation (by shuffling the elements of the identity) and finds its inverse.
-    using PermutationVector = vector<size_t>;
-    constexpr size_t NUMBER_OF_DIGITS = 5;
+    using PermutationVector = vector<int>;
+    constexpr int NUMBER_OF_DIGITS = 5;
     gsl_permutation *permutation1 = gsl_permutation_alloc(NUMBER_OF_DIGITS);
     gsl_permutation *permutation2 = gsl_permutation_alloc(NUMBER_OF_DIGITS);
 
@@ -136,7 +136,7 @@ TEST(GslTest, PermutationFunctionsInGslWorks) {
 }
 
 TEST(GslTest, GettingRandomPermutationsInGslWorks) {
-    constexpr size_t NUMBER_OF_DIGITS = 5;
+    constexpr int NUMBER_OF_DIGITS = 5;
     gsl_permutation *permutation1 = gsl_permutation_alloc(NUMBER_OF_DIGITS);
 
     gsl_rng_env_setup();
@@ -144,7 +144,7 @@ TEST(GslTest, GettingRandomPermutationsInGslWorks) {
     gsl_rng *randomGenerator = gsl_rng_alloc(randomGeneratorType);
 
     gsl_permutation_init(permutation1);
-    gsl_ran_shuffle(randomGenerator, permutation1->data, NUMBER_OF_DIGITS, sizeof(size_t));
+    gsl_ran_shuffle(randomGenerator, permutation1->data, NUMBER_OF_DIGITS, sizeof(int));
     cout << "random permutation:";
     gsl_permutation_fprintf(stdout, permutation1, " %u");
     cout << "\n";
@@ -204,7 +204,7 @@ TEST(GslTest, SortingAndGettingTheSmallestValuesInGslWorks) {
     // This uses the function gsl_sort_smallest() to select the 5 smallest numbers.
     constexpr int NUMBER_OF_VALUES = 10;
     constexpr int NUMBER_OF_SMALLEST_VALUES = 5;
-    constexpr size_t stride = 1;
+    constexpr int stride = 1;
     array<double, NUMBER_OF_VALUES> values{3, 8, 4, 5, 1, 7, 9, 0, 2, 6};
     array<double, NUMBER_OF_SMALLEST_VALUES> smallestValues{};
 
@@ -269,8 +269,8 @@ TEST(GslTest, SolvingLinearSystemInGslWorks) {
     // This solves the linear system Ax = b.
     AlbaMatrix<double> matrixA(
         4, 4, {0.18, 0.60, 0.57, 0.96, 0.41, 0.24, 0.99, 0.58, 0.14, 0.30, 0.97, 0.66, 0.51, 0.13, 0.19, 0.85});
-    vector<double> vectorB{1.0, 2.0, 3.0, 4.0};
-    vector<double> vectorX{0.0, 0.0, 0.0, 0.0};
+    array<double, 4> vectorB{1.0, 2.0, 3.0, 4.0};
+    array<double, 4> vectorX{0.0, 0.0, 0.0, 0.0};
     gsl_matrix_view matrixViewA = gsl_matrix_view_array(matrixA.getMatrixDataReference().data(), 4, 4);
     gsl_vector_view const vectorViewB = gsl_vector_view_array(vectorB.data(), 4);
     gsl_vector_view vectorViewX = gsl_vector_view_array(vectorX.data(), 4);
@@ -280,7 +280,7 @@ TEST(GslTest, SolvingLinearSystemInGslWorks) {
     gsl_linalg_LU_decomp(&matrixViewA.matrix, permutation, &signum);
     gsl_linalg_LU_solve(&matrixViewA.matrix, permutation, &vectorViewB.vector, &vectorViewX.vector);
 
-    vector<double> const expectedVectorX{
+    array<double, 4> const expectedVectorX{
         -4.0520502295739744, -12.605611395906907, 1.6609116267088422, 8.6937669287952293};
     EXPECT_EQ(expectedVectorX, vectorX);
     gsl_permutation_free(permutation);
@@ -293,7 +293,7 @@ TEST(GslTest, GettingEigenValuesAndVectorInGslWorks) {
         4, 4,
         {1.0, 1 / 2.0, 1 / 3.0, 1 / 4.0, 1 / 2.0, 1 / 3.0, 1 / 4.0, 1 / 5.0, 1 / 3.0, 1 / 4.0, 1 / 5.0, 1 / 6.0,
          1 / 4.0, 1 / 5.0, 1 / 6.0, 1 / 7.0});
-    vector<double> eigenValues{0.0, 0.0, 0.0, 0.0};
+    array<double, 4> eigenValues{0.0, 0.0, 0.0, 0.0};
     AlbaMatrix<double> eigenVectors(4, 4);
     gsl_matrix_view matrixViewHilbert = gsl_matrix_view_array(matrixHilbert.getMatrixDataReference().data(), 4, 4);
     gsl_vector_view eigenValuesView = gsl_vector_view_array(eigenValues.data(), 4);
@@ -304,7 +304,7 @@ TEST(GslTest, GettingEigenValuesAndVectorInGslWorks) {
     gsl_eigen_symmv_free(workspace);
     gsl_eigen_symmv_sort(&eigenValuesView.vector, &eigenVectorsView.matrix, GSL_EIGEN_SORT_ABS_ASC);
 
-    vector<double> const expectedEigenValues{
+    array<double, 4> const expectedEigenValues{
         9.6702304022603313e-05, 0.0067382736057606408, 0.16914122022144978, 1.5002142800592426};
     AlbaMatrix<double> const expectedEigenVectors(
         4, 4,
@@ -606,7 +606,7 @@ TEST(GslTest, GettingRunningStatisticsWorks) {
     cout << "The kurtosis " << kurtosis << "\n";
     EXPECT_DOUBLE_EQ(-1.2217029020861698, kurtosis);
 
-    size_t n = gsl_rstat_n(runningStatistics);
+    auto n = gsl_rstat_n(runningStatistics);
     cout << "There are " << n << " items in the accumulator\n";
     gsl_rstat_reset(runningStatistics);
     EXPECT_DOUBLE_EQ(5, n);
@@ -620,90 +620,94 @@ TEST(GslTest, GettingRunningStatisticsWorks) {
 TEST(GslTest, GettingMovingStatisticsWorks) {
     // The following example program computes the moving mean, minimum and maximum of a noisy sinusoid signal of
     // length N = 500 with a symmetric moving window of size K = 11.
-    constexpr size_t N = 500; /* length of time series */
-    constexpr size_t K = 11;  /* window size */
-    gsl_movstat_workspace *w = gsl_movstat_alloc(K);
-    gsl_vector *x = gsl_vector_alloc(N);
-    gsl_vector *xmean = gsl_vector_alloc(N);
-    gsl_vector *xmin = gsl_vector_alloc(N);
-    gsl_vector *xmax = gsl_vector_alloc(N);
-    gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
-    size_t i = 0;
-    for (i = 0; i < N; ++i) {
-        double const xi = cos(4.0 * M_PI * i / static_cast<double>(N));
-        double const ei = gsl_ran_gaussian(r, 0.1);
-        gsl_vector_set(x, i, xi + ei);
+    constexpr int LENGTH_OF_TIME = 100;  // length of time series
+    constexpr int WINDOW_SIZE = 6;       // window size
+    array<double, LENGTH_OF_TIME> x{};
+    array<double, LENGTH_OF_TIME> xMean{};
+    array<double, LENGTH_OF_TIME> xMin{};
+    array<double, LENGTH_OF_TIME> xMax{};
+    gsl_vector_view xView = gsl_vector_view_array(x.data(), LENGTH_OF_TIME);
+    gsl_vector_view xMeanView = gsl_vector_view_array(xMean.data(), LENGTH_OF_TIME);
+    gsl_vector_view xMinView = gsl_vector_view_array(xMin.data(), LENGTH_OF_TIME);
+    gsl_vector_view xMaxView = gsl_vector_view_array(xMax.data(), LENGTH_OF_TIME);
+    gsl_movstat_workspace *workspace = gsl_movstat_alloc(WINDOW_SIZE);
+    gsl_rng *randomGenerator = gsl_rng_alloc(gsl_rng_default);
+
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        double const xi = cos(4.0 * M_PI * i / static_cast<double>(LENGTH_OF_TIME));
+        double const ei = gsl_ran_gaussian(randomGenerator, 0.1);
+        gsl_vector_set(&xView.vector, i, xi + ei);
     }
-    /* compute moving statistics */
-    gsl_movstat_mean(GSL_MOVSTAT_END_PADVALUE, x, xmean, w);
-    gsl_movstat_minmax(GSL_MOVSTAT_END_PADVALUE, x, xmin, xmax, w);
-    /* print results */
-    for (i = 0; i < N; ++i) {
-        cout << i << "u " << gsl_vector_get(x, i) << " " << gsl_vector_get(xmean, i) << " " << gsl_vector_get(xmin, i)
-             << " " << gsl_vector_get(xmax, i) << "\n";
+    // compute moving statistics
+    gsl_movstat_mean(GSL_MOVSTAT_END_PADVALUE, &xView.vector, &xMeanView.vector, workspace);
+    gsl_movstat_minmax(GSL_MOVSTAT_END_PADVALUE, &xView.vector, &xMinView.vector, &xMaxView.vector, workspace);
+    // print results
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        cout << i << "u " << gsl_vector_get(&xView.vector, i) << " " << gsl_vector_get(&xMeanView.vector, i) << " "
+             << gsl_vector_get(&xMinView.vector, i) << " " << gsl_vector_get(&xMaxView.vector, i) << "\n";
     }
-    gsl_vector_free(x);
-    gsl_vector_free(xmean);
-    gsl_rng_free(r);
-    gsl_movstat_free(w);
+
+    gsl_rng_free(randomGenerator);
+    gsl_movstat_free(workspace);
 }
 
 TEST(GslTest, GettingMovingStatisticsWorksOnGaussianRandomVariates) {
     // The following example program analyzes a time series of length N = 1000 composed of Gaussian random variates
     // with zero mean whose standard deviation changes in a piecewise constant fashion
-    constexpr size_t N = 1000;                           /* length of time series */
-    const double sigma[] = {1.0, 5.0, 1.0, 3.0, 5.0};    /* variances */
-    const size_t N_sigma[] = {200, 450, 600, 850, 1000}; /* samples where variance␣
-,!changes */
-    constexpr size_t K = 41;                             /* window size */
-    gsl_vector *x = gsl_vector_alloc(N);
-    gsl_vector *xmedian = gsl_vector_alloc(N);
-    gsl_vector *xmad = gsl_vector_alloc(N);
-    gsl_vector *xiqr = gsl_vector_alloc(N);
-    gsl_vector *xSn = gsl_vector_alloc(N);
-    gsl_vector *xQn = gsl_vector_alloc(N);
-    gsl_vector *xsd = gsl_vector_alloc(N);
-    gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
-    gsl_movstat_workspace *w = gsl_movstat_alloc(K);
-    size_t idx = 0;
-    size_t i = 0;
-    for (i = 0; i < N; ++i) {
-        double const gi = gsl_ran_gaussian(r, sigma[idx]);
-        double const u = gsl_rng_uniform(r);
+    constexpr int LENGTH_OF_TIME = 100;                              // length of time series
+    constexpr int WINDOW_SIZE = 6;                                   // window size
+    constexpr array<double, 5> sigma = {1.0, 5.0, 1.0, 3.0, 5.0};    // variances
+    constexpr array<double, 5> sigmaN = {200, 450, 600, 850, 1000};  // samples where variance, changes
+    array<double, LENGTH_OF_TIME> x{};
+    array<double, LENGTH_OF_TIME> xMedian{};
+    array<double, LENGTH_OF_TIME> xMad{};
+    array<double, LENGTH_OF_TIME> xIqr{};
+    array<double, LENGTH_OF_TIME> xSn{};
+    array<double, LENGTH_OF_TIME> xQn{};
+    array<double, LENGTH_OF_TIME> xSd{};
+    gsl_vector_view xView = gsl_vector_view_array(x.data(), LENGTH_OF_TIME);
+    gsl_vector_view xMedianView = gsl_vector_view_array(xMedian.data(), LENGTH_OF_TIME);
+    gsl_vector_view xMadView = gsl_vector_view_array(xMad.data(), LENGTH_OF_TIME);
+    gsl_vector_view xIqrView = gsl_vector_view_array(xIqr.data(), LENGTH_OF_TIME);
+    gsl_vector_view xSnView = gsl_vector_view_array(xSn.data(), LENGTH_OF_TIME);
+    gsl_vector_view xQnView = gsl_vector_view_array(xQn.data(), LENGTH_OF_TIME);
+    gsl_vector_view xSdView = gsl_vector_view_array(xSd.data(), LENGTH_OF_TIME);
+    gsl_rng *randomGenerator = gsl_rng_alloc(gsl_rng_default);
+    gsl_movstat_workspace *workspace = gsl_movstat_alloc(WINDOW_SIZE);
+
+    int idx = 0;
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        double const gi = gsl_ran_gaussian(randomGenerator, sigma[idx]);
+        double const u = gsl_rng_uniform(randomGenerator);
         double const outlier = (u < 0.01) ? 15.0 * GSL_SIGN(gi) : 0.0;
         double const xi = gi + outlier;
-        gsl_vector_set(x, i, xi);
-        if (i == N_sigma[idx] - 1) {
+        gsl_vector_set(&xView.vector, i, xi);
+        if (i == sigmaN[idx] - 1) {
             ++idx;
         }
     }
-    /* compute moving statistics */
-    gsl_movstat_mad(GSL_MOVSTAT_END_TRUNCATE, x, xmedian, xmad, w);
-    gsl_movstat_qqr(GSL_MOVSTAT_END_TRUNCATE, x, 0.25, xiqr, w);
-    gsl_movstat_Sn(GSL_MOVSTAT_END_TRUNCATE, x, xSn, w);
-    gsl_movstat_Qn(GSL_MOVSTAT_END_TRUNCATE, x, xQn, w);
-    gsl_movstat_sd(GSL_MOVSTAT_END_TRUNCATE, x, xsd, w);
-    /* scale IQR by factor to approximate standard deviation */
-    gsl_vector_scale(xiqr, 0.7413);
-    /* print results */
+    // compute moving statistics
+    gsl_movstat_mad(GSL_MOVSTAT_END_TRUNCATE, &xView.vector, &xMedianView.vector, &xMadView.vector, workspace);
+    gsl_movstat_qqr(GSL_MOVSTAT_END_TRUNCATE, &xView.vector, 0.25, &xIqrView.vector, workspace);
+    gsl_movstat_Sn(GSL_MOVSTAT_END_TRUNCATE, &xView.vector, &xSnView.vector, workspace);
+    gsl_movstat_Qn(GSL_MOVSTAT_END_TRUNCATE, &xView.vector, &xQnView.vector, workspace);
+    gsl_movstat_sd(GSL_MOVSTAT_END_TRUNCATE, &xView.vector, &xSdView.vector, workspace);
+    // scale IQR by factor to approximate standard deviation
+    gsl_vector_scale(&xIqrView.vector, 0.7413);
+    // print results
     idx = 0;
-    for (i = 0; i < N; ++i) {
-        cout << i << "u " << gsl_vector_get(x, i) << " " << sigma[idx] << " " << gsl_vector_get(xmad, i) << " "
-             << gsl_vector_get(xiqr, i) << " " << gsl_vector_get(xSn, i) << " " << gsl_vector_get(xQn, i) << " "
-             << gsl_vector_get(xsd, i) << "\n";
-        if (i == N_sigma[idx] - 1) {
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        cout << i << "u " << gsl_vector_get(&xView.vector, i) << " " << sigma[idx] << " "
+             << gsl_vector_get(&xMadView.vector, i) << " " << gsl_vector_get(&xIqrView.vector, i) << " "
+             << gsl_vector_get(&xSnView.vector, i) << " " << gsl_vector_get(&xQnView.vector, i) << " "
+             << gsl_vector_get(&xSdView.vector, i) << "\n";
+        if (i == sigmaN[idx] - 1) {
             ++idx;
         }
     }
-    gsl_vector_free(x);
-    gsl_vector_free(xmedian);
-    gsl_vector_free(xmad);
-    gsl_vector_free(xiqr);
-    gsl_vector_free(xSn);
-    gsl_vector_free(xQn);
-    gsl_vector_free(xsd);
-    gsl_rng_free(r);
-    gsl_movstat_free(w);
+
+    gsl_rng_free(randomGenerator);
+    gsl_movstat_free(workspace);
 }
 
 namespace {
@@ -719,37 +723,38 @@ TEST(GslTest, GettingMovingStatisticsWorksOnUserDefinedMovingWindow) {
     // vector. It constructs a random noisy time series of length N = 1000 with some outliers added. Then it applies a
     // moving window trimmed mean to the time series with trim parameter  = 0:1. The length of the moving window is K =
     // 11, so the smallest and largest sample of each window is discarded prior to computing the mean.
-    constexpr size_t N = 1000;           /* length of time series */
-    constexpr size_t K = 11;             /* window size */
-    double alpha = 0.1;                  /* trimmed mean parameter */
-    gsl_vector *x = gsl_vector_alloc(N); /* input vector */
-    gsl_vector *y = gsl_vector_alloc(N); /* filtered output vector for alpha1 */
-    gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
-    gsl_movstat_workspace *w = gsl_movstat_alloc(K);
+    constexpr int LENGTH_OF_TIME = 100;  // length of time series
+    constexpr int WINDOW_SIZE = 6;       // window size
+    double alpha = 0.1;                  // trimmed mean parameter
+    array<double, LENGTH_OF_TIME> x;     // input vector
+    array<double, LENGTH_OF_TIME> y;     // filtered output vector for alpha1
+    gsl_vector_view xView = gsl_vector_view_array(x.data(), LENGTH_OF_TIME);
+    gsl_vector_view yView = gsl_vector_view_array(y.data(), LENGTH_OF_TIME);
+    gsl_rng *randomGenerator = gsl_rng_alloc(gsl_rng_default);
+    gsl_movstat_workspace *workspace = gsl_movstat_alloc(WINDOW_SIZE);
     gsl_movstat_function F;
-    size_t i = 0;
+
     double sum = 0.0;
-    /* generate input signal */
-    for (i = 0; i < N; ++i) {
-        double const ui = gsl_ran_gaussian(r, 1.0);
-        double const outlier = (gsl_rng_uniform(r) < 0.01) ? 10.0 * GSL_SIGN(ui) : 0.0;
+    // generate input signal
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        double const ui = gsl_ran_gaussian(randomGenerator, 1.0);
+        double const outlier = (gsl_rng_uniform(randomGenerator) < 0.01) ? 10.0 * GSL_SIGN(ui) : 0.0;
         sum += ui;
-        gsl_vector_set(x, i, sum + outlier);
+        gsl_vector_set(&xView.vector, i, sum + outlier);
     }
-    /* apply moving window function */
+    // apply moving window function
     F.function = func;
     F.params = &alpha;
-    gsl_movstat_apply(GSL_MOVSTAT_END_PADVALUE, &F, x, y, w);
-    /* print results */
-    for (i = 0; i < N; ++i) {
-        double const xi = gsl_vector_get(x, i);
-        double const yi = gsl_vector_get(y, i);
+    gsl_movstat_apply(GSL_MOVSTAT_END_PADVALUE, &F, &xView.vector, &yView.vector, workspace);
+    // print results
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        double const xi = gsl_vector_get(&xView.vector, i);
+        double const yi = gsl_vector_get(&yView.vector, i);
         cout << xi << " " << yi << "\n";
     }
-    gsl_vector_free(x);
-    gsl_vector_free(y);
-    gsl_rng_free(r);
-    gsl_movstat_free(w);
+
+    gsl_rng_free(randomGenerator);
+    gsl_movstat_free(workspace);
 }
 
 TEST(GslTest, GettingRunningStatisticsForQuantileWorks) {
@@ -801,109 +806,111 @@ TEST(GslTest, GaussianFilterWorksInExample1) {
     // This illustrates the Gaussian filter applied to smoothing a time series of lengthN = 500 with a
     // kernel size of K = 51. Three filters are applied with parameters  = 0:5; 3; 10. We see that the filter
     // corresponding to  = 0:5 applies the most smoothing, while  = 10 corresponds to the least amount of smoothing.
-    constexpr size_t N = 500;                 /* length of time series */
-    constexpr size_t K = 51;                  /* window size */
-    const double alpha[3] = {0.5, 3.0, 10.0}; /* alpha values */
-    gsl_vector *x = gsl_vector_alloc(N);      /* input vector */
-    gsl_vector *y1 = gsl_vector_alloc(N);     /* filtered output vector for alpha1 */
-    gsl_vector *y2 = gsl_vector_alloc(N);     /* filtered output vector for alpha2 */
-    gsl_vector *y3 = gsl_vector_alloc(N);     /* filtered output vector for alpha3 */
-    gsl_vector *k1 = gsl_vector_alloc(K);     /* Gaussian kernel for alpha1 */
-    gsl_vector *k2 = gsl_vector_alloc(K);     /* Gaussian kernel for alpha2 */
-    gsl_vector *k3 = gsl_vector_alloc(K);     /* Gaussian kernel for alpha3 */
-    gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
-    gsl_filter_gaussian_workspace *gauss_p = gsl_filter_gaussian_alloc(K);
-    size_t i = 0;
+    constexpr int LENGTH_OF_TIME = 100;                   // length of time series
+    constexpr int WINDOW_SIZE = 11;                       // window size
+    constexpr array<double, 3> alpha = {0.5, 3.0, 10.0};  // alpha values
+    array<double, LENGTH_OF_TIME> x{};                    // input vector
+    array<double, LENGTH_OF_TIME> y1{};                   // filtered output vector for alpha1
+    array<double, LENGTH_OF_TIME> y2{};                   // filtered output vector for alpha2
+    array<double, LENGTH_OF_TIME> y3{};                   // filtered output vector for alpha3
+    array<double, LENGTH_OF_TIME> k1{};                   // Gaussian kernel for alpha1
+    array<double, LENGTH_OF_TIME> k2{};                   // Gaussian kernel for alpha2
+    array<double, LENGTH_OF_TIME> k3{};                   // Gaussian kernel for alpha3
+    gsl_vector_view xView = gsl_vector_view_array(x.data(), LENGTH_OF_TIME);
+    gsl_vector_view y1View = gsl_vector_view_array(y1.data(), LENGTH_OF_TIME);
+    gsl_vector_view y2View = gsl_vector_view_array(y2.data(), LENGTH_OF_TIME);
+    gsl_vector_view y3View = gsl_vector_view_array(y3.data(), LENGTH_OF_TIME);
+    gsl_vector_view k1View = gsl_vector_view_array(k1.data(), LENGTH_OF_TIME);
+    gsl_vector_view k2View = gsl_vector_view_array(k2.data(), LENGTH_OF_TIME);
+    gsl_vector_view k3View = gsl_vector_view_array(k3.data(), LENGTH_OF_TIME);
+    gsl_rng *randomGenerator = gsl_rng_alloc(gsl_rng_default);
+    gsl_filter_gaussian_workspace *gaussWorkspace = gsl_filter_gaussian_alloc(WINDOW_SIZE);
+
     double sum = 0.0;
-    /* generate input signal */
-    for (i = 0; i < N; ++i) {
-        double const ui = gsl_ran_gaussian(r, 1.0);
+    // generate input signal
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        double const ui = gsl_ran_gaussian(randomGenerator, 1.0);
         sum += ui;
-        gsl_vector_set(x, i, sum);
+        gsl_vector_set(&xView.vector, i, sum);
     }
-    /* compute kernels without normalization */
-    gsl_filter_gaussian_kernel(alpha[0], 0, 0, k1);
-    gsl_filter_gaussian_kernel(alpha[1], 0, 0, k2);
-    gsl_filter_gaussian_kernel(alpha[2], 0, 0, k3);
-    /* apply filters */
-    gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha[0], 0, x, y1, gauss_p);
-    gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha[1], 0, x, y2, gauss_p);
-    gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha[2], 0, x, y3, gauss_p);
-    /* print kernels */
-    for (i = 0; i < K; ++i) {
-        double const k1i = gsl_vector_get(k1, i);
-        double const k2i = gsl_vector_get(k2, i);
-        double const k3i = gsl_vector_get(k3, i);
+    // compute kernels without normalization
+    gsl_filter_gaussian_kernel(alpha[0], 0, 0, &k1View.vector);
+    gsl_filter_gaussian_kernel(alpha[1], 0, 0, &k2View.vector);
+    gsl_filter_gaussian_kernel(alpha[2], 0, 0, &k3View.vector);
+    // apply filters
+    gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha[0], 0, &xView.vector, &y1View.vector, gaussWorkspace);
+    gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha[1], 0, &xView.vector, &y2View.vector, gaussWorkspace);
+    gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha[2], 0, &xView.vector, &y3View.vector, gaussWorkspace);
+    // print kernels
+    for (int i = 0; i < WINDOW_SIZE; ++i) {
+        double const k1i = gsl_vector_get(&k1View.vector, i);
+        double const k2i = gsl_vector_get(&k2View.vector, i);
+        double const k3i = gsl_vector_get(&k3View.vector, i);
         cout << k1i << " " << k2i << " " << k3i << "\n";
     }
     cout << "\n\n";
-    /* print filter results */
-    for (i = 0; i < N; ++i) {
-        double const xi = gsl_vector_get(x, i);
-        double const y1i = gsl_vector_get(y1, i);
-        double const y2i = gsl_vector_get(y2, i);
-        double const y3i = gsl_vector_get(y3, i);
+    // print filter results
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        double const xi = gsl_vector_get(&xView.vector, i);
+        double const y1i = gsl_vector_get(&y1View.vector, i);
+        double const y2i = gsl_vector_get(&y2View.vector, i);
+        double const y3i = gsl_vector_get(&y3View.vector, i);
         cout << xi << " " << y1i << " " << y2i << " " << y3i << "\n";
     }
-    gsl_vector_free(x);
-    gsl_vector_free(y1);
-    gsl_vector_free(y2);
-    gsl_vector_free(y3);
-    gsl_vector_free(k1);
-    gsl_vector_free(k2);
-    gsl_vector_free(k3);
-    gsl_rng_free(r);
-    gsl_filter_gaussian_free(gauss_p);
+
+    gsl_rng_free(randomGenerator);
+    gsl_filter_gaussian_free(gaussWorkspace);
 }
 
 TEST(GslTest, GaussianFilterWorksInExample2) {
     // A common application of the Gaussian filter is to detect edges, or sudden jumps, in a noisy input signal.
     // It is used both for 1D edge detection in time series, as well as 2D edge detection in images.
     // Here we will examine a noisy time series of length N = 1000 with a single edge.
-    constexpr size_t N = 1000;             /* length of time series */
-    constexpr size_t K = 61;               /* window size */
-    constexpr double alpha = 3.0;          /* Gaussian kernel has +/- 3 standard␣
-             ,!deviations */
-    gsl_vector *x = gsl_vector_alloc(N);   /* input vector */
-    gsl_vector *y = gsl_vector_alloc(N);   /* filtered output vector */
-    gsl_vector *dy = gsl_vector_alloc(N);  /* first derivative filtered vector */
-    gsl_vector *d2y = gsl_vector_alloc(N); /* second derivative filtered vector */
-    gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
-    gsl_filter_gaussian_workspace *gauss_p = gsl_filter_gaussian_alloc(K);
-    size_t i = 0;
-    /* generate input signal */
-    for (i = 0; i < N; ++i) {
-        double const xi = (i > N / 2) ? 0.5 : 0.0;
-        double const ei = gsl_ran_gaussian(r, 0.1);
-        gsl_vector_set(x, i, xi + ei);
+
+    constexpr int LENGTH_OF_TIME = 100;   // length of time series
+    constexpr int WINDOW_SIZE = 11;       // window size
+    constexpr double alpha = 3.0;         // Gaussian kernel has +/- 3 standard deviations
+    array<double, LENGTH_OF_TIME> x{};    // input vector
+    array<double, LENGTH_OF_TIME> y{};    // filtered output vector
+    array<double, LENGTH_OF_TIME> dy{};   // first derivative filtered vector
+    array<double, LENGTH_OF_TIME> d2y{};  // second derivative filtered vector
+    gsl_vector_view xView = gsl_vector_view_array(x.data(), LENGTH_OF_TIME);
+    gsl_vector_view yView = gsl_vector_view_array(y.data(), LENGTH_OF_TIME);
+    gsl_vector_view dyView = gsl_vector_view_array(dy.data(), LENGTH_OF_TIME);
+    gsl_vector_view d2yView = gsl_vector_view_array(d2y.data(), LENGTH_OF_TIME);
+    gsl_rng *randomGenerator = gsl_rng_alloc(gsl_rng_default);
+    gsl_filter_gaussian_workspace *gaussWorkspace = gsl_filter_gaussian_alloc(WINDOW_SIZE);
+
+    // generate input signal
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        double const xi = (i > LENGTH_OF_TIME / 2) ? 0.5 : 0.0;
+        double const ei = gsl_ran_gaussian(randomGenerator, 0.1);
+        gsl_vector_set(&xView.vector, i, xi + ei);
     }
-    /* apply filters */
-    gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha, 0, x, y, gauss_p);
-    gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha, 1, x, dy, gauss_p);
-    gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha, 2, x, d2y, gauss_p);
-    /* print results */
-    for (i = 0; i < N; ++i) {
-        double const xi = gsl_vector_get(x, i);
-        double const yi = gsl_vector_get(y, i);
-        double const dyi = gsl_vector_get(dy, i);
-        double const d2yi = gsl_vector_get(d2y, i);
+    // apply filters
+    gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha, 0, &xView.vector, &yView.vector, gaussWorkspace);
+    gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha, 1, &xView.vector, &dyView.vector, gaussWorkspace);
+    gsl_filter_gaussian(GSL_FILTER_END_PADVALUE, alpha, 2, &xView.vector, &d2yView.vector, gaussWorkspace);
+    // print results
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        double const xi = gsl_vector_get(&xView.vector, i);
+        double const yi = gsl_vector_get(&yView.vector, i);
+        double const dyi = gsl_vector_get(&dyView.vector, i);
+        double const d2yi = gsl_vector_get(&d2yView.vector, i);
         double dxi = NAN;
-        /* compute finite difference of x vector */
+        // compute finite difference of x vector
         if (i == 0) {
-            dxi = gsl_vector_get(x, i + 1) - xi;
-        } else if (i == N - 1) {
-            dxi = gsl_vector_get(x, i) - gsl_vector_get(x, i - 1);
+            dxi = gsl_vector_get(&xView.vector, i + 1) - xi;
+        } else if (i == LENGTH_OF_TIME - 1) {
+            dxi = gsl_vector_get(&xView.vector, i) - gsl_vector_get(&xView.vector, i - 1);
         } else {
-            dxi = 0.5 * (gsl_vector_get(x, i + 1) - gsl_vector_get(x, i - 1));
+            dxi = 0.5 * (gsl_vector_get(&xView.vector, i + 1) - gsl_vector_get(&xView.vector, i - 1));
         }
         cout << xi << " " << yi << " " << dxi << " " << dyi << " " << d2yi << "\n";
     }
-    gsl_vector_free(x);
-    gsl_vector_free(y);
-    gsl_vector_free(dy);
-    gsl_vector_free(d2y);
-    gsl_rng_free(r);
-    gsl_filter_gaussian_free(gauss_p);
+
+    gsl_rng_free(randomGenerator);
+    gsl_filter_gaussian_free(gaussWorkspace);
 }
 
 TEST(GslTest, MedianFilterWorksInSquareWaveSignalExample) {
@@ -911,44 +918,42 @@ TEST(GslTest, MedianFilterWorksInSquareWaveSignalExample) {
     // well known for preserving sharp edges in the input signal while reducing noise. The program constructs a 5 Hz
     // square wave signal with Gaussian noise added. Then the signal is filtered with a standard median filter and
     // recursive median filter using a symmetric window of length K = 7.
-    constexpr size_t N = 1000; /* length of time series */
-    constexpr size_t K = 7;    /* window size */
-    constexpr double f = 5.0;  /* frequency of square wave in Hz␣
-     ,!*/
-    gsl_filter_median_workspace *median_p = gsl_filter_median_alloc(K);
-    gsl_filter_rmedian_workspace *rmedian_p = gsl_filter_rmedian_alloc(K);
-    gsl_vector *t = gsl_vector_alloc(N);         /* time */
-    gsl_vector *x = gsl_vector_alloc(N);         /* input vector */
-    gsl_vector *y_median = gsl_vector_alloc(N);  /* median filtered output */
-    gsl_vector *y_rmedian = gsl_vector_alloc(N); /* recursive median filtered␣
-    ,!output */
-    gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
-    size_t i = 0;
-    /* generate input signal */
-    for (i = 0; i < N; ++i) {
-        double const ti = static_cast<double>(i) / (N - 1.0);
-        double const tmp = sin(2.0 * M_PI * f * ti);
+    constexpr int LENGTH_OF_TIME = 1000;  // length of time series
+    constexpr int WINDOW_SIZE = 7;        // window size
+    constexpr double FREQUENCY = 5.0;     // frequency of square wave in Hz
+    gsl_filter_median_workspace *medianWorkspace = gsl_filter_median_alloc(WINDOW_SIZE);
+    gsl_filter_rmedian_workspace *rmedianWorkspace = gsl_filter_rmedian_alloc(WINDOW_SIZE);
+    array<double, LENGTH_OF_TIME> t{};         // time
+    array<double, LENGTH_OF_TIME> x{};         // input vector
+    array<double, LENGTH_OF_TIME> yMedian{};   // median filtered output
+    array<double, LENGTH_OF_TIME> yRMedian{};  // recursive median filtered output
+    gsl_vector_view tView = gsl_vector_view_array(x.data(), LENGTH_OF_TIME);
+    gsl_vector_view xView = gsl_vector_view_array(t.data(), LENGTH_OF_TIME);
+    gsl_vector_view yMedianView = gsl_vector_view_array(yMedian.data(), LENGTH_OF_TIME);
+    gsl_vector_view yRMedianView = gsl_vector_view_array(yRMedian.data(), LENGTH_OF_TIME);
+    gsl_rng *randomGenerator = gsl_rng_alloc(gsl_rng_default);
+
+    // generate input signal
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        double const ti = static_cast<double>(i) / (LENGTH_OF_TIME - 1.0);
+        double const tmp = sin(2.0 * M_PI * FREQUENCY * ti);
         double const xi = (tmp >= 0.0) ? 1.0 : -1.0;
-        double const ei = gsl_ran_gaussian(r, 0.1);
-        gsl_vector_set(t, i, ti);
-        gsl_vector_set(x, i, xi + ei);
+        double const ei = gsl_ran_gaussian(randomGenerator, 0.1);
+        gsl_vector_set(&tView.vector, i, ti);
+        gsl_vector_set(&xView.vector, i, xi + ei);
     }
-    gsl_filter_median(GSL_FILTER_END_PADVALUE, x, y_median, median_p);
-    gsl_filter_rmedian(GSL_FILTER_END_PADVALUE, x, y_rmedian, rmedian_p);
-    /* print results */
-    for (i = 0; i < N; ++i) {
-        double const ti = gsl_vector_get(t, i);
-        double const xi = gsl_vector_get(x, i);
-        double const medi = gsl_vector_get(y_median, i);
-        double const rmedi = gsl_vector_get(y_rmedian, i);
+    gsl_filter_median(GSL_FILTER_END_PADVALUE, &xView.vector, &yMedianView.vector, medianWorkspace);
+    gsl_filter_rmedian(GSL_FILTER_END_PADVALUE, &xView.vector, &yRMedianView.vector, rmedianWorkspace);
+    // print results
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        double const ti = gsl_vector_get(&tView.vector, i);
+        double const xi = gsl_vector_get(&xView.vector, i);
+        double const medi = gsl_vector_get(&yMedianView.vector, i);
+        double const rmedi = gsl_vector_get(&yRMedianView.vector, i);
         cout << ti << " " << xi << " " << medi << " " << rmedi << "\n";
     }
-    gsl_vector_free(t);
-    gsl_vector_free(x);
-    gsl_vector_free(y_median);
-    gsl_vector_free(y_rmedian);
-    gsl_rng_free(r);
-    gsl_filter_median_free(median_p);
+    gsl_rng_free(randomGenerator);
+    gsl_filter_median_free(medianWorkspace);
 }
 
 TEST(GslTest, ImpulseDetectionFilterWorksInSquareWaveSignalExample) {
@@ -957,46 +962,48 @@ TEST(GslTest, ImpulseDetectionFilterWorksInSquareWaveSignalExample) {
     // Then, about 1% of the data are perturbed to represent large outliers.
     // An impulse detecting filter is applied with a window size K = 25 and tuning parameter t = 4, using the Qn
     // statistic as the robust measure of scale.
-    constexpr size_t N = 1000;                          /* length of time series */
-    constexpr size_t K = 25;                            /* window size */
-    constexpr double t = 4.0;                           /* number of scale factors for␣
-                              ,!outlier detection */
-    gsl_vector *x = gsl_vector_alloc(N);                /* input vector */
-    gsl_vector *y = gsl_vector_alloc(N);                /* output (filtered) vector */
-    gsl_vector *xmedian = gsl_vector_alloc(N);          /* window medians */
-    gsl_vector *xsigma = gsl_vector_alloc(N);           /* window scale estimates */
-    gsl_vector_int *ioutlier = gsl_vector_int_alloc(N); /* outlier detected? */
-    gsl_filter_impulse_workspace *w = gsl_filter_impulse_alloc(K);
-    gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
+    constexpr int LENGTH_OF_TIME = 100;       // length of time series
+    constexpr int WINDOW_SIZE = 25;           // window size
+    constexpr double t = 4.0;                 // number of scale factors for outlier detection
+    array<double, LENGTH_OF_TIME> x{};        // input vector
+    array<double, LENGTH_OF_TIME> y{};        // output (filtered) vector
+    array<double, LENGTH_OF_TIME> xMedian{};  // window medians
+    array<double, LENGTH_OF_TIME> xSigma{};   // window scale estimates
+    gsl_vector_view xView = gsl_vector_view_array(x.data(), LENGTH_OF_TIME);
+    gsl_vector_view yView = gsl_vector_view_array(y.data(), LENGTH_OF_TIME);
+    gsl_vector_view xMedianView = gsl_vector_view_array(xMedian.data(), LENGTH_OF_TIME);
+    gsl_vector_view xSigmaView = gsl_vector_view_array(xSigma.data(), LENGTH_OF_TIME);
+    gsl_vector_int *ioutlier = gsl_vector_int_alloc(LENGTH_OF_TIME);  // outlier detected?
+    gsl_filter_impulse_workspace *workspace = gsl_filter_impulse_alloc(WINDOW_SIZE);
+    gsl_rng *randomGenerator = gsl_rng_alloc(gsl_rng_default);
+
     size_t noutlier = 0;
-    size_t i = 0;
-    /* generate input signal */
-    for (i = 0; i < N; ++i) {
-        double xi = 10.0 * sin(2.0 * M_PI * i / static_cast<double>(N));
-        double const ei = gsl_ran_gaussian(r, 2.0);
-        double const u = gsl_rng_uniform(r);
+    // generate input signal
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        double xi = 10.0 * sin(2.0 * M_PI * i / static_cast<double>(LENGTH_OF_TIME));
+        double const ei = gsl_ran_gaussian(randomGenerator, 2.0);
+        double const u = gsl_rng_uniform(randomGenerator);
         double const outlier = (u < 0.01) ? 15.0 * GSL_SIGN(ei) : 0.0;
-        gsl_vector_set(x, i, xi + ei + outlier);
+        gsl_vector_set(&xView.vector, i, xi + ei + outlier);
     }
-    /* apply impulse detection filter */
-    gsl_filter_impulse(GSL_FILTER_END_TRUNCATE, GSL_FILTER_SCALE_QN, t, x, y, xmedian, xsigma, &noutlier, ioutlier, w);
-    /* print results */
-    for (i = 0; i < N; ++i) {
-        double const xi = gsl_vector_get(x, i);
-        double const yi = gsl_vector_get(y, i);
-        double const xmedi = gsl_vector_get(xmedian, i);
-        double const xsigmai = gsl_vector_get(xsigma, i);
+    // apply impulse detection filter
+    gsl_filter_impulse(
+        GSL_FILTER_END_TRUNCATE, GSL_FILTER_SCALE_QN, t, &xView.vector, &yView.vector, &xMedianView.vector,
+        &xSigmaView.vector, &noutlier, ioutlier, workspace);
+    // print results
+    for (int i = 0; i < LENGTH_OF_TIME; ++i) {
+        double const xi = gsl_vector_get(&xView.vector, i);
+        double const yi = gsl_vector_get(&yView.vector, i);
+        double const xmedi = gsl_vector_get(&xMedianView.vector, i);
+        double const xsigmai = gsl_vector_get(&xSigmaView.vector, i);
         int const outlier = gsl_vector_int_get(ioutlier, i);
         cout << i << "u " << xi << " " << yi << " " << xmedi + t * xsigmai << " " << xmedi - t * xsigmai << " "
              << outlier << "\n";
     }
-    gsl_vector_free(x);
-    gsl_vector_free(y);
-    gsl_vector_free(xmedian);
-    gsl_vector_free(xsigma);
+
     gsl_vector_int_free(ioutlier);
-    gsl_filter_impulse_free(w);
-    gsl_rng_free(r);
+    gsl_filter_impulse_free(workspace);
+    gsl_rng_free(randomGenerator);
 }
 
 TEST(GslTest, DISABLED_OneDimensionalHistogramWorks) {
@@ -1024,7 +1031,7 @@ TEST(GslTest, TwoDimensionalHistogramWorks) {
     // of 5 and at (0.7,0.9) with a height of 0.5. This histogram with three events is used to generate a random sample
     // of 1000 simulated events, which are printed out.
     const gsl_rng_type *T = nullptr;
-    gsl_rng *r = nullptr;
+    gsl_rng *randomGenerator = nullptr;
     gsl_histogram2d *h = gsl_histogram2d_alloc(10, 10);
     gsl_histogram2d_set_ranges_uniform(h, 0.0, 1.0, 0.0, 1.0);
     gsl_histogram2d_accumulate(h, 0.3, 0.3, 1);
@@ -1032,7 +1039,7 @@ TEST(GslTest, TwoDimensionalHistogramWorks) {
     gsl_histogram2d_accumulate(h, 0.7, 0.9, 0.5);
     gsl_rng_env_setup();
     T = gsl_rng_default;
-    r = gsl_rng_alloc(T);
+    randomGenerator = gsl_rng_alloc(T);
     {
         int i = 0;
         gsl_histogram2d_pdf *p = gsl_histogram2d_pdf_alloc(h->nx, h->ny);
@@ -1040,15 +1047,15 @@ TEST(GslTest, TwoDimensionalHistogramWorks) {
         for (i = 0; i < 1000; ++i) {
             double x = NAN;
             double y = NAN;
-            double const u = gsl_rng_uniform(r);
-            double const v = gsl_rng_uniform(r);
+            double const u = gsl_rng_uniform(randomGenerator);
+            double const v = gsl_rng_uniform(randomGenerator);
             gsl_histogram2d_pdf_sample(p, u, v, &x, &y);
             cout << x << " " << y << "\n";
         }
         gsl_histogram2d_pdf_free(p);
     }
     gsl_histogram2d_free(h);
-    gsl_rng_free(r);
+    gsl_rng_free(randomGenerator);
 }
 
 namespace {
@@ -1092,21 +1099,21 @@ TEST(GslTest, NTuplesWorks) {
         // to the ntuple file test.dat. This demonstrate the use of ntuples in managing a large dataset. The first
         // program
         const gsl_rng_type *T;
-        gsl_rng *r;
+        gsl_rng *randomGenerator;
         struct data ntuple_row;
         int i;
         gsl_ntuple *ntuple = gsl_ntuple_create(const_cast<char *>("test.dat"), &ntuple_row, sizeof(ntuple_row));
         gsl_rng_env_setup();
         T = gsl_rng_default;
-        r = gsl_rng_alloc(T);
+        randomGenerator = gsl_rng_alloc(T);
         for (i = 0; i < 10000; ++i) {
-            ntuple_row.x = gsl_ran_ugaussian(r);
-            ntuple_row.y = gsl_ran_ugaussian(r);
-            ntuple_row.z = gsl_ran_ugaussian(r);
+            ntuple_row.x = gsl_ran_ugaussian(randomGenerator);
+            ntuple_row.y = gsl_ran_ugaussian(randomGenerator);
+            ntuple_row.z = gsl_ran_ugaussian(randomGenerator);
             gsl_ntuple_write(ntuple);
         }
         gsl_ntuple_close(ntuple);
-        gsl_rng_free(r);
+        gsl_rng_free(randomGenerator);
     }
 
     {
@@ -1131,17 +1138,16 @@ TEST(GslTest, NTuplesWorks) {
     }
 }
 
-/* Computation of the integral,
-I = int (dx dy dz)/(2pi)^3 1/(1-cos(x)cos(y)cos(z))
-over (-pi,-pi,-pi) to (+pi, +pi, +pi). The exact answer
-is Gamma(1/4)^4/(4 pi^3). This example is taken from
-C.Itzykson, J.M.Drouffe, "Statistical Field Theory -
-Volume 1", Section 1.1, p21, which cites the original
-paper M.L.Glasser, I.J.Zucker, Proc.Natl.Acad.Sci.USA 74
-1800 (1977) */
+// Computation of the integral,
+// I = int (dx dy dz)/(2pi)^3 1/(1-cos(x)cos(y)cos(z))
+// over (-pi,-pi,-pi) to (+pi, +pi, +pi). The exact answer
+// is Gamma(1/4)^4/(4 pi^3). This example is taken from
+// C.Itzykson, J.M.Drouffe, "Statistical Field Theory -
+// Volume 1", Section 1.1, p21, which cites the original
+// paper M.L.Glasser, I.J.Zucker, Proc.Natl.Acad.Sci.USA 74
+// 1800 (1977)
 
-/* For simplicity we compute the integral over the region
-(0,0,0) -> (pi,pi,pi) and multiply by 8 */
+// For simplicity we compute the integral over the region (0,0,0) -> (pi,pi,pi) and multiply by 8
 double exact = 1.3932039296856768591842462603255;
 double g(double *k, size_t const dim, void *params) {
     double A = 1.0 / (M_PI * M_PI * M_PI);
@@ -1162,31 +1168,31 @@ TEST(GslTest, MonteCarloRoutinesForIntegralWorks) {
     double xl[3] = {0, 0, 0};
     double xu[3] = {M_PI, M_PI, M_PI};
     const gsl_rng_type *T;
-    gsl_rng *r;
+    gsl_rng *randomGenerator;
     gsl_monte_function G = {&g, 3, 0};
     size_t calls = 500000;
     gsl_rng_env_setup();
     T = gsl_rng_default;
-    r = gsl_rng_alloc(T);
+    randomGenerator = gsl_rng_alloc(T);
     {
         gsl_monte_plain_state *s = gsl_monte_plain_alloc(3);
-        gsl_monte_plain_integrate(&G, xl, xu, 3, calls, r, s, &res, &err);
+        gsl_monte_plain_integrate(&G, xl, xu, 3, calls, randomGenerator, s, &res, &err);
         gsl_monte_plain_free(s);
         display_results(const_cast<char *>("plain"), res, err);
     }
     {
         gsl_monte_miser_state *s = gsl_monte_miser_alloc(3);
-        gsl_monte_miser_integrate(&G, xl, xu, 3, calls, r, s, &res, &err);
+        gsl_monte_miser_integrate(&G, xl, xu, 3, calls, randomGenerator, s, &res, &err);
         gsl_monte_miser_free(s);
         display_results(const_cast<char *>("miser"), res, err);
     }
     {
         gsl_monte_vegas_state *s = gsl_monte_vegas_alloc(3);
-        gsl_monte_vegas_integrate(&G, xl, xu, 3, 10000, r, s, &res, &err);
+        gsl_monte_vegas_integrate(&G, xl, xu, 3, 10000, randomGenerator, s, &res, &err);
         display_results(const_cast<char *>("vegas warm-up"), res, err);
         cout << "converging...\n";
         do {
-            gsl_monte_vegas_integrate(&G, xl, xu, 3, calls / 5, r, s, &res, &err);
+            gsl_monte_vegas_integrate(&G, xl, xu, 3, calls / 5, randomGenerator, s, &res, &err);
             cout << "result = "
                  << "chisq/dof = %.1f\n"
                  << " sigma = " << res << " " << err << gsl_monte_vegas_chisq(s);
@@ -1194,25 +1200,25 @@ TEST(GslTest, MonteCarloRoutinesForIntegralWorks) {
         display_results(const_cast<char *>("vegas final"), res, err);
         gsl_monte_vegas_free(s);
     }
-    gsl_rng_free(r);
+    gsl_rng_free(randomGenerator);
 }
 
-/* set up parameters for this simulated annealing run */
-/* how many points do we try before stepping */
+// set up parameters for this simulated annealing run
+// how many points do we try before stepping
 #define N_TRIES 200
-/* how many iterations for each T? */
+// how many iterations for each T?
 #define ITERS_FIXED_T 1000
-/* max step size in random walk */
+// max step size in random walk
 #define STEP_SIZE 1.0
-/* Boltzmann constant */
+// Boltzmann constant
 #define K 1.0
-/* initial temperature */
+// initial temperature
 #define T_INITIAL 0.008
-/* damping factor for temperature */
+// damping factor for temperature
 #define MU_T 1.003
 #define T_MIN 2.0e-6
 gsl_siman_params_t params = {N_TRIES, ITERS_FIXED_T, STEP_SIZE, K, T_INITIAL, MU_T, T_MIN};
-/* now some functions to test in one dimension */
+// now some functions to test in one dimension
 double E1(void *xp) {
     double x = *((double *)xp);
     return exp(-pow((x - 1.0), 2.0)) * sin(8 * x);
@@ -1222,10 +1228,10 @@ double M1(void *xp, void *yp) {
     double y = *((double *)yp);
     return fabs(x - y);
 }
-void S1(const gsl_rng *r, void *xp, double const step_size) {
+void S1(const gsl_rng *randomGenerator, void *xp, double const step_size) {
     double old_x = *((double *)xp);
     double new_x;
-    double u = gsl_rng_uniform(r);
+    double u = gsl_rng_uniform(randomGenerator);
     new_x = u * 2 * step_size - step_size + old_x;
     memcpy(xp, &new_x, sizeof(new_x));
 }
@@ -1242,14 +1248,14 @@ TEST(GslTest, DISABLED_SimulatedAnnealingWorks) {
     // is 15.5, which is several local minima away from the global minimum.
 
     const gsl_rng_type *T;
-    gsl_rng *r;
+    gsl_rng *randomGenerator;
     double x_initial = 15.5;
     gsl_rng_env_setup();
     T = gsl_rng_default;
-    r = gsl_rng_alloc(T);
-    gsl_rng_free(r);
-    gsl_siman_solve(r, &x_initial, E1, S1, M1, P1, NULL, NULL, NULL, sizeof(double), params);
-    gsl_rng_free(r);
+    randomGenerator = gsl_rng_alloc(T);
+    gsl_rng_free(randomGenerator);
+    gsl_siman_solve(randomGenerator, &x_initial, E1, S1, M1, P1, NULL, NULL, NULL, sizeof(double), params);
+    gsl_rng_free(randomGenerator);
 }
 
 int func(double const t, const double y[], double f[], void *params) {
@@ -1324,24 +1330,24 @@ TEST(GslTest, TwoDimensionalInterpolationWorks) {
     // using z values of (0; 1; 0:5; 1) going clockwise around the square.
 
     const gsl_interp2d_type *T = gsl_interp2d_bilinear;
-    constexpr size_t N = 100;       /* number of points to interpolate */
-    const double xa[] = {0.0, 1.0}; /* define unit square */
+    constexpr size_t N = 100;        // number of points to interpolate
+    const double xa[] = {0.0, 1.0};  // define unit square
     const double ya[] = {0.0, 1.0};
-    size_t const nx = sizeof(xa) / sizeof(double); /* x grid points */
-    size_t const ny = sizeof(ya) / sizeof(double); /* y grid points */
+    size_t const nx = sizeof(xa) / sizeof(double);  // x grid points
+    size_t const ny = sizeof(ya) / sizeof(double);  // y grid points
     double *za = static_cast<double *>(malloc(nx * ny * sizeof(double)));
     gsl_spline2d *spline = gsl_spline2d_alloc(T, nx, ny);
     gsl_interp_accel *xacc = gsl_interp_accel_alloc();
     gsl_interp_accel *yacc = gsl_interp_accel_alloc();
     size_t i, j;
-    /* set z grid values */
+    // set z grid values
     gsl_spline2d_set(spline, za, 0, 0, 0.0);
     gsl_spline2d_set(spline, za, 0, 1, 1.0);
     gsl_spline2d_set(spline, za, 1, 1, 0.5);
     gsl_spline2d_set(spline, za, 1, 0, 1.0);
-    /* initialize interpolation */
+    // initialize interpolation
     gsl_spline2d_init(spline, xa, ya, za, nx, ny);
-    /* interpolate N values in x and y and print out grid for plotting */
+    // interpolate N values in x and y and print out grid for plotting
     for (i = 0; i < N; ++i) {
         double xi = i / (N - 1.0);
         for (j = 0; j < N; ++j) {
@@ -1414,22 +1420,22 @@ TEST(GslTest, SeriesAccelerationWorks) {
     double sum_accel, err;
     double sum = 0;
     int n;
-    gsl_sum_levin_u_workspace *w = gsl_sum_levin_u_alloc(N);
+    gsl_sum_levin_u_workspace *workspace = gsl_sum_levin_u_alloc(N);
     double const zeta_2 = M_PI * M_PI / 6.0;
-    /* terms for zeta(2) = \sum_{n=1}^{\infty} 1/n^2 */
+    // terms for zeta(2) = \sum_{n=1}^{\infty} 1/n^2
     for (n = 0; n < N; ++n) {
         double np1 = n + 1.0;
         t[n] = 1.0 / (np1 * np1);
         sum += t[n];
     }
-    gsl_sum_levin_u_accel(t, N, w, &sum_accel, &err);
+    gsl_sum_levin_u_accel(t, N, workspace, &sum_accel, &err);
     cout << "term-by-term sum = " << sum << " using " << N << " terms\n";
-    cout << "term-by-term sum = " << w->sum_plain << " using " << w->terms_used << "u terms\n";
+    cout << "term-by-term sum = " << workspace->sum_plain << " using " << workspace->terms_used << "u terms\n";
     cout << "exact value = " << zeta_2 << "\n";
-    cout << "accelerated sum = " << sum_accel << " using " << w->terms_used << "u terms\n";
+    cout << "accelerated sum = " << sum_accel << " using " << workspace->terms_used << "u terms\n";
     cout << "estimated error = " << err << "\n";
     cout << "actual error = " << sum_accel - zeta_2 << "\n";
-    gsl_sum_levin_u_free(w);
+    gsl_sum_levin_u_free(workspace);
 }
 
 TEST(GslTest, WaveletTransformFunctionWorks) {
@@ -1443,27 +1449,27 @@ TEST(GslTest, WaveletTransformFunctionWorks) {
     double *abscoeff = static_cast<double *>(malloc(n * sizeof(double)));
     size_t *p = static_cast<size_t *>(malloc(n * sizeof(size_t)));
     FILE *f;
-    gsl_wavelet *w;
+    gsl_wavelet *workspace;
     gsl_wavelet_workspace *work;
-    w = gsl_wavelet_alloc(gsl_wavelet_daubechies, 4);
+    workspace = gsl_wavelet_alloc(gsl_wavelet_daubechies, 4);
     work = gsl_wavelet_workspace_alloc(n);
-    f = fopen("test.dat", "r");
+    f = fopen("test.dat", "randomGenerator");
     for (i = 0; i < n; ++i) {
         fscanf(f, "%lg", &orig_data[i]);
         data[i] = orig_data[i];
     }
     fclose(f);
-    gsl_wavelet_transform_forward(w, data, 1, n, work);
+    gsl_wavelet_transform_forward(workspace, data, 1, n, work);
     for (i = 0; i < n; ++i) {
         abscoeff[i] = fabs(data[i]);
     }
     gsl_sort_index(p, abscoeff, 1, n);
     for (i = 0; (i + nc) < n; ++i) data[p[i]] = 0;
-    gsl_wavelet_transform_inverse(w, data, 1, n, work);
+    gsl_wavelet_transform_inverse(workspace, data, 1, n, work);
     for (i = 0; i < n; ++i) {
         cout << orig_data[i] << " " << data[i] << "\n";
     }
-    gsl_wavelet_free(w);
+    gsl_wavelet_free(workspace);
     gsl_wavelet_workspace_free(work);
     free(data);
     free(orig_data);
@@ -1509,7 +1515,7 @@ TEST(GslTest, OneDimensionRootFindingWorks) {
     int iter = 0, max_iter = 100;
     const gsl_root_fsolver_type *T;
     gsl_root_fsolver *s;
-    double r = 0, r_expected = sqrt(5.0);
+    double randomGenerator = 0, randomGenerator_expected = sqrt(5.0);
     double x_lo = 0.0, x_hi = 5.0;
     gsl_function F;
     struct quadratic_params params = {1.0, 0.0, -5.0};
@@ -1534,13 +1540,13 @@ TEST(GslTest, OneDimensionRootFindingWorks) {
     do {
         ++iter;
         status = gsl_root_fsolver_iterate(s);
-        r = gsl_root_fsolver_root(s);
+        randomGenerator = gsl_root_fsolver_root(s);
         x_lo = gsl_root_fsolver_x_lower(s);
         x_hi = gsl_root_fsolver_x_upper(s);
         status = gsl_root_test_interval(x_lo, x_hi, 0, 0.001);
         if (status == GSL_SUCCESS) cout << "Converged:\n";
-        cout << iter << " [" << x_lo << ", " << x_hi << "] " << r << " " << r - r_expected << " " << x_hi - x_lo
-             << "\n";
+        cout << iter << " [" << x_lo << ", " << x_hi << "] " << randomGenerator << " "
+             << randomGenerator - randomGenerator_expected << " " << x_hi - x_lo << "\n";
     } while (status == GSL_CONTINUE && iter < max_iter);
     gsl_root_fsolver_free(s);
 }
@@ -1632,7 +1638,7 @@ TEST(GslTest, MultiDimensionalRootFindingWorks) {
     do {
         ++iter;
         status = gsl_multiroot_fsolver_iterate(s);
-        if (status) /* check if solver is stuck */
+        if (status)  // check if solver is stuck
             break;
         status = gsl_multiroot_test_residual(s->f, 1e-7);
     } while (status == GSL_CONTINUE && iter < 1000);
@@ -1703,7 +1709,7 @@ double my_f(const gsl_vector *v, void *params) {
     y = gsl_vector_get(v, 1);
     return p[2] * (x - p[0]) * (x - p[0]) + p[3] * (y - p[1]) * (y - p[1]) + p[4];
 }
-/* The gradient of f, df = (df/dx, df/dy). */
+// The gradient of f, df = (df/dx, df/dy).
 void my_df(const gsl_vector *v, void *params, gsl_vector *df) {
     double x, y;
     double *p = (double *)params;
@@ -1712,7 +1718,7 @@ void my_df(const gsl_vector *v, void *params, gsl_vector *df) {
     gsl_vector_set(df, 0, 2.0 * p[2] * (x - p[0]));
     gsl_vector_set(df, 1, 2.0 * p[3] * (y - p[1]));
 }
-/* Compute both f and df together. */
+// Compute both f and df together.
 void my_fdf(const gsl_vector *x, void *params, double *f, gsl_vector *df) {
     *f = my_f(x, params);
     my_df(x, params, df);
@@ -1737,7 +1743,7 @@ TEST(GslTest, MultiDimensionalMinimizationWorks) {
     my_func.df = my_df;
     my_func.fdf = my_fdf;
     my_func.params = par;
-    /* Starting point, x = (5,7) */
+    // Starting point, x = (5,7)
     x = gsl_vector_alloc(2);
     gsl_vector_set(x, 0, 5.0);
     gsl_vector_set(x, 1, 7.0);
@@ -1766,14 +1772,14 @@ TEST(GslTest, MultiDimensionalMinimizationWorksWithNelderMeadSimplexAlgorithm) {
     size_t iter = 0;
     int status;
     double size;
-    /* Starting point */
+    // Starting point
     x = gsl_vector_alloc(2);
     gsl_vector_set(x, 0, 5.0);
     gsl_vector_set(x, 1, 7.0);
-    /* Set initial step sizes to 1 */
+    // Set initial step sizes to 1
     ss = gsl_vector_alloc(2);
     gsl_vector_set_all(ss, 1.0);
-    /* Initialize method and iterate */
+    // Initialize method and iterate
     minex_func.n = 2;
     minex_func.f = my_f;
     minex_func.params = par;
@@ -1803,14 +1809,14 @@ TEST(GslTest, SimpleLinearRegressionExampleWorks) {
     int i, n = 4;
     double x[4] = {1970, 1980, 1990, 2000};
     double y[4] = {12, 11, 14, 13};
-    double w[4] = {0.1, 0.2, 0.3, 0.4};
+    double workspace[4] = {0.1, 0.2, 0.3, 0.4};
     double c0, c1, cov00, cov01, cov11, chisq;
-    gsl_fit_wlinear(x, 1, w, 1, y, 1, n, &c0, &c1, &cov00, &cov01, &cov11, &chisq);
+    gsl_fit_wlinear(x, 1, workspace, 1, y, 1, n, &c0, &c1, &cov00, &cov01, &cov11, &chisq);
     cout << "# best fit: Y = " << c0 << " + " << c1 << " X\n";
     cout << "# covariance matrix:\n";
     cout << "# [ " << cov00 << ", " << cov01 << "\n# " << cov01 << ", " << cov11 << "]\n";
     cout << "# chisq = " << chisq << "\n";
-    for (i = 0; i < n; ++i) cout << "data: " << x[i] << " " << y[i] << " " << 1 / sqrt(w[i]) << "\n";
+    for (i = 0; i < n; ++i) cout << "data: " << x[i] << " " << y[i] << " " << 1 / sqrt(workspace[i]) << "\n";
     cout << "\n";
     for (i = -30; i < 130; ++i) {
         double xf = x[0] + (i / 100.0) * (x[n - 1] - x[0]);
@@ -1829,63 +1835,60 @@ TEST(GslTest, RegularizedLinearRegressionExampleWorks) {
     // the coefficients c1; c2 of the model Y (c1; c2) = c1u + c2v. Since u  v, the design matrix X is nearly singular,
     // leading to unstable ordinary least squares solutions.
 
-    constexpr size_t n = 1000; /* number of observations */
-    constexpr size_t p = 2;    /* number of model parameters */
+    constexpr size_t n = 1000;  // number of observations
+    constexpr size_t p = 2;     // number of model parameters
     size_t i;
-    gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
+    gsl_rng *randomGenerator = gsl_rng_alloc(gsl_rng_default);
     gsl_matrix *X = gsl_matrix_alloc(n, p);
     gsl_vector *y = gsl_vector_alloc(n);
     for (i = 0; i < n; ++i) {
-        /* generate first random variable u */
-        double ui = 5.0 * gsl_ran_gaussian(r, 1.0);
-        /* set v = u + noise */
-        double vi = ui + gsl_ran_gaussian(r, 0.001);
-        /* set y = u + v + noise */
-        double yi = ui + vi + gsl_ran_gaussian(r, 1.0);
-        /* since u =~ v, the matrix X is ill-conditioned */
+        // generate first random variable u
+        double ui = 5.0 * gsl_ran_gaussian(randomGenerator, 1.0);
+        // set v = u + noise
+        double vi = ui + gsl_ran_gaussian(randomGenerator, 0.001);
+        // set y = u + v + noise
+        double yi = ui + vi + gsl_ran_gaussian(randomGenerator, 1.0);
+        // since u =~ v, the matrix X is ill-conditioned
         gsl_matrix_set(X, i, 0, ui);
         gsl_matrix_set(X, i, 1, vi);
-        /* rhs vector */
+        // rhs vector
         gsl_vector_set(y, i, yi);
     }
     {
-        constexpr size_t npoints = 200; /* number of points on L-curve and GCV␣
-        ,!curve */
-        gsl_multifit_linear_workspace *w = gsl_multifit_linear_alloc(n, p);
-        gsl_vector *c = gsl_vector_alloc(p);        /* OLS solution */
-        gsl_vector *c_lcurve = gsl_vector_alloc(p); /* regularized solution (L-curve) */
-        gsl_vector *c_gcv = gsl_vector_alloc(p);    /* regularized solution (GCV) */
+        constexpr size_t npoints = 200;  // number of points on L-curve and GCV curve
+        gsl_multifit_linear_workspace *workspace = gsl_multifit_linear_alloc(n, p);
+        gsl_vector *c = gsl_vector_alloc(p);         // OLS solution
+        gsl_vector *c_lcurve = gsl_vector_alloc(p);  // regularized solution (L-curve)
+        gsl_vector *c_gcv = gsl_vector_alloc(p);     // regularized solution (GCV)
         gsl_vector *reg_param = gsl_vector_alloc(npoints);
-        gsl_vector *rho = gsl_vector_alloc(npoints); /* residual norms */
-        gsl_vector *eta = gsl_vector_alloc(npoints); /* solution norms */
-        gsl_vector *G = gsl_vector_alloc(npoints);   /* GCV function values */
-        double lambda_l;                             /* optimal regularization parameter (L-
-                                    ,!curve) */
-        double lambda_gcv;                           /* optimal regularization parameter␣
-                                  ,!(GCV) */
-        double G_gcv;                                /* G(lambda_gcv) */
-        size_t reg_idx;                              /* index of optimal lambda */
-        double rcond;                                /* reciprocal condition number of X */
+        gsl_vector *rho = gsl_vector_alloc(npoints);  // residual norms
+        gsl_vector *eta = gsl_vector_alloc(npoints);  // solution norms
+        gsl_vector *G = gsl_vector_alloc(npoints);    // GCV function values
+        double lambda_l;                              // optimal regularization parameter (L- curve)
+        double lambda_gcv;                            // optimal regularization parameter (GCV)
+        double G_gcv;                                 // G(lambda_gcv)
+        size_t reg_idx;                               // index of optimal lambda
+        double rcond;                                 // reciprocal condition number of X
         double chisq, rnorm, snorm;
-        /* compute SVD of X */
-        gsl_multifit_linear_svd(X, w);
-        rcond = gsl_multifit_linear_rcond(w);
+        // compute SVD of X
+        gsl_multifit_linear_svd(X, workspace);
+        rcond = gsl_multifit_linear_rcond(workspace);
         cout << "matrix condition number = " << 1.0 / rcond << "\n\n";
-        /* unregularized (standard) least squares fit, lambda = 0 */
-        gsl_multifit_linear_solve(0.0, X, y, c, &rnorm, &snorm, w);
+        // unregularized (standard) least squares fit, lambda = 0
+        gsl_multifit_linear_solve(0.0, X, y, c, &rnorm, &snorm, workspace);
         chisq = pow(rnorm, 2.0);
         cout << "=== Unregularized fit ===\n";
         cout << "best fit: y = " << gsl_vector_get(c, 0) << " u + " << gsl_vector_get(c, 1) << " v\n";
         cout << "residual norm = " << rnorm << "\n";
         cout << "solution norm = " << snorm << "\n";
         cout << "chisq/dof = " << chisq / (n - p) << "\n";
-        /* calculate L-curve and find its corner */
-        gsl_multifit_linear_lcurve(y, reg_param, rho, eta, w);
+        // calculate L-curve and find its corner
+        gsl_multifit_linear_lcurve(y, reg_param, rho, eta, workspace);
         gsl_multifit_linear_lcorner(rho, eta, &reg_idx);
-        /* store optimal regularization parameter */
+        // store optimal regularization parameter
         lambda_l = gsl_vector_get(reg_param, reg_idx);
-        /* regularize with lambda_l */
-        gsl_multifit_linear_solve(lambda_l, X, y, c_lcurve, &rnorm, &snorm, w);
+        // regularize with lambda_l
+        gsl_multifit_linear_solve(lambda_l, X, y, c_lcurve, &rnorm, &snorm, workspace);
         chisq = pow(rnorm, 2.0) + pow(lambda_l * snorm, 2.0);
         cout << "\n=== Regularized fit (L-curve) ===\n";
         cout << "optimal lambda: " << lambda_l << "\n";
@@ -1893,10 +1896,10 @@ TEST(GslTest, RegularizedLinearRegressionExampleWorks) {
         cout << "residual norm = " << rnorm << "\n";
         cout << "solution norm = " << snorm << "\n";
         cout << "chisq/dof = " << chisq / (n - p) << "\n";
-        /* calculate GCV curve and find its minimum */
-        gsl_multifit_linear_gcv(y, reg_param, G, &lambda_gcv, &G_gcv, w);
-        /* regularize with lambda_gcv */
-        gsl_multifit_linear_solve(lambda_gcv, X, y, c_gcv, &rnorm, &snorm, w);
+        // calculate GCV curve and find its minimum
+        gsl_multifit_linear_gcv(y, reg_param, G, &lambda_gcv, &G_gcv, workspace);
+        // regularize with lambda_gcv
+        gsl_multifit_linear_solve(lambda_gcv, X, y, c_gcv, &rnorm, &snorm, workspace);
         chisq = pow(rnorm, 2.0) + pow(lambda_gcv * snorm, 2.0);
         cout << "\n=== Regularized fit (GCV) ===\n";
         cout << "optimal lambda: " << lambda_gcv << "\n";
@@ -1904,16 +1907,16 @@ TEST(GslTest, RegularizedLinearRegressionExampleWorks) {
         cout << "residual norm = " << rnorm << "\n";
         cout << "solution norm = " << snorm << "\n";
         cout << "chisq/dof = " << chisq / (n - p) << "\n";
-        /* output L-curve and GCV curve */
+        // output L-curve and GCV curve
         for (i = 0; i < npoints; ++i) {
             cout << gsl_vector_get(reg_param, i) << " " << gsl_vector_get(rho, i) << " " << gsl_vector_get(eta, i)
                  << " " << gsl_vector_get(G, i) << "\n";
         }
-        /* output L-curve corner point */
+        // output L-curve corner point
         cout << "\n\n" << gsl_vector_get(rho, reg_idx) << " " << gsl_vector_get(eta, reg_idx) << "\n";
-        /* output GCV curve corner minimum */
+        // output GCV curve corner minimum
         cout << "\n\n" << lambda_gcv << " " << G_gcv << "\n";
-        gsl_multifit_linear_free(w);
+        gsl_multifit_linear_free(workspace);
         gsl_vector_free(c);
         gsl_vector_free(c_lcurve);
         gsl_vector_free(reg_param);
@@ -1921,7 +1924,7 @@ TEST(GslTest, RegularizedLinearRegressionExampleWorks) {
         gsl_vector_free(eta);
         gsl_vector_free(G);
     }
-    gsl_rng_free(r);
+    gsl_rng_free(randomGenerator);
     gsl_matrix_free(X);
     gsl_vector_free(y);
 }
@@ -1942,12 +1945,12 @@ TEST(GslTest, RobustLinearRegressionExampleWorks) {
 
     size_t i;
     size_t n;
-    constexpr size_t p = 2; /* linear fit */
+    constexpr size_t p = 2;  // linear fit
     gsl_matrix *X, *cov;
     gsl_vector *x, *y, *c, *c_ols;
-    constexpr double a = 1.45; /* slope */
-    constexpr double b = 3.88; /* intercept */
-    gsl_rng *r;
+    constexpr double a = 1.45;  // slope
+    constexpr double b = 3.88;  // intercept
+    gsl_rng *randomGenerator;
     n = 10;
     X = gsl_matrix_alloc(n, p);
     x = gsl_vector_alloc(n);
@@ -1955,33 +1958,33 @@ TEST(GslTest, RobustLinearRegressionExampleWorks) {
     c = gsl_vector_alloc(p);
     c_ols = gsl_vector_alloc(p);
     cov = gsl_matrix_alloc(p, p);
-    r = gsl_rng_alloc(gsl_rng_default);
-    /* generate linear dataset */
+    randomGenerator = gsl_rng_alloc(gsl_rng_default);
+    // generate linear dataset
     for (i = 0; i < n - 3; ++i) {
         double dx = 10.0 / (n - 1.0);
-        double ei = gsl_rng_uniform(r);
+        double ei = gsl_rng_uniform(randomGenerator);
         double xi = -5.0 + i * dx;
         double yi = a * xi + b;
         gsl_vector_set(x, i, xi);
         gsl_vector_set(y, i, yi + ei);
     }
-    /* add a few outliers */
+    // add a few outliers
     gsl_vector_set(x, n - 3, 4.7);
     gsl_vector_set(y, n - 3, -8.3);
     gsl_vector_set(x, n - 2, 3.5);
     gsl_vector_set(y, n - 2, -6.7);
     gsl_vector_set(x, n - 1, 4.1);
     gsl_vector_set(y, n - 1, -6.0);
-    /* construct design matrix X for linear fit */
+    // construct design matrix X for linear fit
     for (i = 0; i < n; ++i) {
         double xi = gsl_vector_get(x, i);
         gsl_matrix_set(X, i, 0, 1.0);
         gsl_matrix_set(X, i, 1, xi);
     }
-    /* perform robust and OLS fit */
+    // perform robust and OLS fit
     doFitInRobust(gsl_multifit_robust_ols, X, y, c_ols, cov);
     doFitInRobust(gsl_multifit_robust_bisquare, X, y, c, cov);
-    /* output data and model */
+    // output data and model
     for (i = 0; i < n; ++i) {
         double xi = gsl_vector_get(x, i);
         double yi = gsl_vector_get(y, i);
@@ -2005,15 +2008,15 @@ TEST(GslTest, RobustLinearRegressionExampleWorks) {
     gsl_vector_free(c);
     gsl_vector_free(c_ols);
     gsl_matrix_free(cov);
-    gsl_rng_free(r);
+    gsl_rng_free(randomGenerator);
 }
 
-/* function to be fitted */
+// function to be fitted
 double func(const double t) {
     double x = sin(10.0 * t);
     return exp(x * x * x);
 }
-/* construct a row of the least squares matrix */
+// construct a row of the least squares matrix
 int build_row(const double t, gsl_vector *row) {
     size_t const p = row->size;
     double Xj = 1.0;
@@ -2027,12 +2030,12 @@ int build_row(const double t, gsl_vector *row) {
 int solve_system(
     const int print_data, const gsl_multilarge_linear_type *T, const double lambda, const size_t n, const size_t p,
     gsl_vector *c) {
-    constexpr size_t nblock = 5;     /* number of blocks to accumulate */
-    size_t const nrows = n / nblock; /* number of rows per block */
-    gsl_multilarge_linear_workspace *w = gsl_multilarge_linear_alloc(T, p);
+    constexpr size_t nblock = 5;      // number of blocks to accumulate
+    size_t const nrows = n / nblock;  // number of rows per block
+    gsl_multilarge_linear_workspace *workspace = gsl_multilarge_linear_alloc(T, p);
     gsl_matrix *X = gsl_matrix_alloc(nrows, p);
     gsl_vector *y = gsl_vector_alloc(nrows);
-    gsl_rng *r = gsl_rng_alloc(gsl_rng_default);
+    gsl_rng *randomGenerator = gsl_rng_alloc(gsl_rng_default);
     constexpr size_t nlcurve = 200;
     gsl_vector *reg_param = gsl_vector_alloc(nlcurve);
     gsl_vector *rho = gsl_vector_calloc(nlcurve);
@@ -2042,41 +2045,41 @@ int solve_system(
     double t = 0.0;
     double dt = 1.0 / (n - 1.0);
     while (rowidx < n) {
-        size_t nleft = n - rowidx;         /* number of rows left to accumulate */
-        size_t nr = GSL_MIN(nrows, nleft); /* number of rows in this block */
+        size_t nleft = n - rowidx;          // number of rows left to accumulate
+        size_t nr = GSL_MIN(nrows, nleft);  // number of rows in this block
         gsl_matrix_view Xv = gsl_matrix_submatrix(X, 0, 0, nr, p);
         gsl_vector_view yv = gsl_vector_subvector(y, 0, nr);
         size_t i;
-        /* build (X,y) block with 'nr' rows */
+        // build (X,y) block with 'nr' rows
         for (i = 0; i < nr; ++i) {
             gsl_vector_view row = gsl_matrix_row(&Xv.matrix, i);
             double fi = func(t);
-            double ei = gsl_ran_gaussian(r, 0.1 * fi); /* noise */
+            double ei = gsl_ran_gaussian(randomGenerator, 0.1 * fi);  // noise
             double yi = fi + ei;
-            /* construct this row of LS matrix */
+            // construct this row of LS matrix
             build_row(t, &row.vector);
-            /* set right hand side value with added noise */
+            // set right hand side value with added noise
             gsl_vector_set(&yv.vector, i, yi);
             if (print_data && (i % 100 == 0)) cout << t << " " << yi << "\n";
             t += dt;
         }
-        /* accumulate (X,y) block into LS system */
-        gsl_multilarge_linear_accumulate(&Xv.matrix, &yv.vector, w);
+        // accumulate (X,y) block into LS system
+        gsl_multilarge_linear_accumulate(&Xv.matrix, &yv.vector, workspace);
         rowidx += nr;
     }
     if (print_data) cout << "\n\n";
-    /* compute L-curve */
-    gsl_multilarge_linear_lcurve(reg_param, rho, eta, w);
-    /* solve large LS system and store solution in c */
-    gsl_multilarge_linear_solve(lambda, c, &rnorm, &snorm, w);
-    /* compute reciprocal condition number */
-    gsl_multilarge_linear_rcond(&rcond, w);
-    cout << "=== Method " << gsl_multilarge_linear_name(w) << " ===\n";
+    // compute L-curve
+    gsl_multilarge_linear_lcurve(reg_param, rho, eta, workspace);
+    // solve large LS system and store solution in c
+    gsl_multilarge_linear_solve(lambda, c, &rnorm, &snorm, workspace);
+    // compute reciprocal condition number
+    gsl_multilarge_linear_rcond(&rcond, workspace);
+    cout << "=== Method " << gsl_multilarge_linear_name(workspace) << " ===\n";
     cout << "condition number = " << 1.0 / rcond << "\n";
     cout << "residual norm = " << rnorm << "\n";
     cout << "solution norm = " << snorm << "\n";
     {
-        /* output L-curve */
+        // output L-curve
         size_t i;
         for (i = 0; i < nlcurve; ++i) {
             cout << gsl_vector_get(reg_param, i) << " " << gsl_vector_get(rho, i) << " " << gsl_vector_get(eta, i)
@@ -2086,8 +2089,8 @@ int solve_system(
     }
     gsl_matrix_free(X);
     gsl_vector_free(y);
-    gsl_multilarge_linear_free(w);
-    gsl_rng_free(r);
+    gsl_multilarge_linear_free(workspace);
+    gsl_rng_free(randomGenerator);
     gsl_vector_free(reg_param);
     gsl_vector_free(rho);
     gsl_vector_free(eta);
@@ -2096,20 +2099,20 @@ int solve_system(
 TEST(GslTest, LargeDenseLinearRegressionExampleWorks) {
     // This  demonstrates the large dense linear least squares solvers.
 
-    constexpr size_t n = 50000; /* number of observations */
-    constexpr size_t p = 16;    /* polynomial order + 1 */
-    double lambda = 0.0;        /* regularization parameter */
+    constexpr size_t n = 50000;  // number of observations
+    constexpr size_t p = 16;     // polynomial order + 1
+    double lambda = 0.0;         // regularization parameter
     gsl_vector *c_tsqr = gsl_vector_calloc(p);
     gsl_vector *c_normal = gsl_vector_calloc(p);
     lambda = 1;
-    /* turn off error handler so normal equations method won't abort */
+    // turn off error handler so normal equations method won't abort
     gsl_set_error_handler_off();
-    /* solve system with TSQR method */
+    // solve system with TSQR method
     solve_system(1, gsl_multilarge_linear_tsqr, lambda, n, p, c_tsqr);
-    /* solve system with Normal equations method */
+    // solve system with Normal equations method
     solve_system(0, gsl_multilarge_linear_normal, lambda, n, p, c_normal);
     {
-        /* output solutions */
+        // output solutions
         gsl_vector *v = gsl_vector_alloc(p);
         double t;
         for (t = 0.0; t <= 1.0; t += 0.01) {
@@ -2140,7 +2143,7 @@ int expb_f(const gsl_vector *x, void *ExponentialFittingData, gsl_vector *f) {
     double b = gsl_vector_get(x, 2);
     size_t i;
     for (i = 0; i < n; ++i) {
-        /* Model Yi = A * exp(-lambda * t_i) + b */
+        // Model Yi = A * exp(-lambda * t_i) + b
         double Yi = A * exp(-lambda * t[i]) + b;
         gsl_vector_set(f, i, Yi - y[i]);
     }
@@ -2153,10 +2156,10 @@ int expb_df(const gsl_vector *x, void *ExponentialFittingData, gsl_matrix *J) {
     double lambda = gsl_vector_get(x, 1);
     size_t i;
     for (i = 0; i < n; ++i) {
-        /* Jacobian matrix J(i,j) = dfi / dxj, */
-        /* where fi = (Yi - yi)/sigma[i], */
-        /* Yi = A * exp(-lambda * t_i) + b */
-        /* and the xj are the parameters (A,lambda,b) */
+        // Jacobian matrix J(i,j) = dfi / dxj,
+        // where fi = (Yi - yi)/sigma[i],
+        // Yi = A * exp(-lambda * t_i) + b
+        // and the xj are the parameters (A,lambda,b)
         double e = exp(-lambda * t[i]);
         gsl_matrix_set(J, i, 0, e);
         gsl_matrix_set(J, i, 1, -t[i] * A * e);
@@ -2164,12 +2167,12 @@ int expb_df(const gsl_vector *x, void *ExponentialFittingData, gsl_matrix *J) {
     }
     return GSL_SUCCESS;
 }
-void callback(const size_t iter, void *params, const gsl_multifit_nlinear_workspace *w) {
-    gsl_vector *f = gsl_multifit_nlinear_residual(w);
-    gsl_vector *x = gsl_multifit_nlinear_position(w);
+void callback(const size_t iter, void *params, const gsl_multifit_nlinear_workspace *workspace) {
+    gsl_vector *f = gsl_multifit_nlinear_residual(workspace);
+    gsl_vector *x = gsl_multifit_nlinear_position(workspace);
     double rcond;
-    /* compute reciprocal condition number of J(x) */
-    gsl_multifit_nlinear_rcond(&rcond, w);
+    // compute reciprocal condition number of J(x)
+    gsl_multifit_nlinear_rcond(&rcond, workspace);
     fprintf(
         stdout, "iter %2zu: A = %.4f, lambda = %.4f, b = %.4f, cond(J) = %8.4f, |f(x)|!= %.4f\n ", iter,
         gsl_vector_get(x, 0), gsl_vector_get(x, 1), gsl_vector_get(x, 2), 1.0 / rcond, gsl_blas_dnrm2(f));
@@ -2179,10 +2182,10 @@ TEST(GslTest, ExponentialFittingExampleWorks) {
     // The following example program fits a weighted exponential model with background to experimental
     // ExponentialFittingData, Y = Aexp(􀀀t) + b. The first part of the program sets up the functions expb_f() and
     // expb_df() to calculate the model and its Jacobian.
-    constexpr int N = 100; /* number of data points to fit */
-#define TMAX (3.0)         /* time variable in [0,TMAX] */
+    constexpr int N = 100;  // number of data points to fit
+#define TMAX (3.0)          // time variable in [0,TMAX]
     const gsl_multifit_nlinear_type *T = gsl_multifit_nlinear_trust;
-    gsl_multifit_nlinear_workspace *w;
+    gsl_multifit_nlinear_workspace *workspace;
     gsl_multifit_nlinear_fdf fdf;
     gsl_multifit_nlinear_parameters fdf_params = gsl_multifit_nlinear_default_parameters();
     size_t const n = N;
@@ -2192,10 +2195,10 @@ TEST(GslTest, ExponentialFittingExampleWorks) {
     gsl_matrix *covar = gsl_matrix_alloc(p, p);
     double t[N], y[N], weights[N];
     struct ExponentialFittingData d = {n, t, y};
-    double x_init[3] = {1.0, 1.0, 0.0}; /* starting values */
+    double x_init[3] = {1.0, 1.0, 0.0};  // starting values
     gsl_vector_view x = gsl_vector_view_array(x_init, p);
     gsl_vector_view wts = gsl_vector_view_array(weights, n);
-    gsl_rng *r;
+    gsl_rng *randomGenerator;
     double chisq, chisq0;
     int status, info;
     size_t i;
@@ -2203,43 +2206,44 @@ TEST(GslTest, ExponentialFittingExampleWorks) {
     constexpr double gtol = 1e-8;
     constexpr double ftol = 0.0;
     gsl_rng_env_setup();
-    r = gsl_rng_alloc(gsl_rng_default);
-    /* define the function to be minimized */
+    randomGenerator = gsl_rng_alloc(gsl_rng_default);
+    // define the function to be minimized
     fdf.f = expb_f;
-    fdf.df = expb_df; /* set to NULL for finite-difference Jacobian */
-    fdf.fvv = NULL;   /* not using geodesic acceleration */
+    fdf.df = expb_df;  // set to NULL for finite-difference Jacobian
+    fdf.fvv = NULL;    // not using geodesic acceleration
     fdf.n = n;
     fdf.p = p;
     fdf.params = &d;
-    /* this is the ExponentialFittingData to be fitted */
+    // this is the ExponentialFittingData to be fitted
     for (i = 0; i < n; ++i) {
         double ti = i * TMAX / (n - 1.0);
         double yi = 1.0 + 5 * exp(-1.5 * ti);
         double si = 0.1 * yi;
-        double dy = gsl_ran_gaussian(r, si);
+        double dy = gsl_ran_gaussian(randomGenerator, si);
         t[i] = ti;
         y[i] = yi + dy;
         weights[i] = 1.0 / (si * si);
         cout << "ExponentialFittingData: " << ti << " " << y[i] << " " << si << "\n";
     };
-    /* allocate workspace with default parameters */
-    w = gsl_multifit_nlinear_alloc(T, &fdf_params, n, p);
-    /* initialize solver with starting point and weights */
-    gsl_multifit_nlinear_winit(&x.vector, &wts.vector, &fdf, w);
-    /* compute initial cost function */
-    f = gsl_multifit_nlinear_residual(w);
+    // allocate workspace with default parameters
+    workspace = gsl_multifit_nlinear_alloc(T, &fdf_params, n, p);
+    // initialize solver with starting point and weights
+    gsl_multifit_nlinear_winit(&x.vector, &wts.vector, &fdf, workspace);
+    // compute initial cost function
+    f = gsl_multifit_nlinear_residual(workspace);
     gsl_blas_ddot(f, f, &chisq0);
-    /* solve the system with a maximum of 100 iterations */
-    status = gsl_multifit_nlinear_driver(100, xtol, gtol, ftol, callback, NULL, &info, w);
-    /* compute covariance of best fit parameters */
-    J = gsl_multifit_nlinear_jac(w);
+    // solve the system with a maximum of 100 iterations
+    status = gsl_multifit_nlinear_driver(100, xtol, gtol, ftol, callback, NULL, &info, workspace);
+    // compute covariance of best fit parameters
+    J = gsl_multifit_nlinear_jac(workspace);
     gsl_multifit_nlinear_covar(J, 0.0, covar);
-    /* compute final cost */
+    // compute final cost
     gsl_blas_ddot(f, f, &chisq);
-#define FIT(i) gsl_vector_get(w->x, i)
+#define FIT(i) gsl_vector_get(workspace->x, i)
 #define ERR(i) sqrt(gsl_matrix_get(covar, i, i))
-    cout << "summary from method '" << gsl_multifit_nlinear_name(w) << "/" << gsl_multifit_nlinear_trs_name(w) << "'\n";
-    cout << "number of iterations: " << gsl_multifit_nlinear_niter(w) << "u\n";
+    cout << "summary from method '" << gsl_multifit_nlinear_name(workspace) << "/"
+         << gsl_multifit_nlinear_trs_name(workspace) << "'\n";
+    cout << "number of iterations: " << gsl_multifit_nlinear_niter(workspace) << "u\n";
     cout << "function evaluations: " << fdf.nevalf << "u\n";
     cout << "Jacobian evaluations: " << fdf.nevaldf << "u\n";
     cout << "reason for stopping: " << ((info == 1) ? "small step size"s : "small gradient"s) << "\n";
@@ -2254,9 +2258,9 @@ TEST(GslTest, ExponentialFittingExampleWorks) {
         cout << "b = " << FIT(2) << " +/- " << c * ERR(2) << "\n";
     }
     cout << "status = " << gsl_strerror(status) << "\n";
-    gsl_multifit_nlinear_free(w);
+    gsl_multifit_nlinear_free(workspace);
     gsl_matrix_free(covar);
-    gsl_rng_free(r);
+    gsl_rng_free(randomGenerator);
 }
 
 TEST(GslTest, DerivativesOfBasisSplinesWorks) {
@@ -2265,23 +2269,23 @@ TEST(GslTest, DerivativesOfBasisSplinesWorks) {
 
     constexpr size_t nbreak = 6;
     constexpr size_t spline_order = 4;
-    gsl_bspline_workspace *w = gsl_bspline_alloc(spline_order, nbreak);
-    size_t const p = gsl_bspline_ncoeffs(w);
+    gsl_bspline_workspace *workspace = gsl_bspline_alloc(spline_order, nbreak);
+    size_t const p = gsl_bspline_ncoeffs(workspace);
     constexpr size_t n = 300;
     constexpr double a = 0.0;
     constexpr double b = 1.0;
     double const dx = (b - a) / (n - 1.0);
     gsl_matrix *dB = gsl_matrix_alloc(p, spline_order);
     size_t i, j, k;
-    /* uniform breakpoints on [a, b] */
-    gsl_bspline_knots_uniform(a, b, w);
-    /* output knot vector */
-    gsl_vector_fprintf(stdout, w->knots, "%f");
+    // uniform breakpoints on [a, b]
+    gsl_bspline_knots_uniform(a, b, workspace);
+    // output knot vector
+    gsl_vector_fprintf(stdout, workspace->knots, "%f");
     cout << "\n\n";
     for (i = 0; i < spline_order; ++i) {
         for (j = 0; j < n; ++j) {
             double xj = j * dx;
-            gsl_bspline_deriv_eval(xj, i, dB, w);
+            gsl_bspline_deriv_eval(xj, i, dB, workspace);
             cout << xj << " ";
             for (k = 0; k < p; ++k) cout << gsl_matrix_get(dB, k, i) << " ";
             cout << "\n";
@@ -2289,16 +2293,16 @@ TEST(GslTest, DerivativesOfBasisSplinesWorks) {
         cout << "\n\n";
     }
     gsl_matrix_free(dB);
-    gsl_bspline_free(w);
+    gsl_bspline_free(workspace);
 }
 
 TEST(GslTest, SparseMatricesWorks) {
     // The following example program builds a 5-by-4 sparse matrix and prints it in coordinate,
     // compressed column, and compressed row format.
-    gsl_spmatrix *A = gsl_spmatrix_alloc(5, 4); /* triplet format */
+    gsl_spmatrix *A = gsl_spmatrix_alloc(5, 4);  // triplet format
     gsl_spmatrix *B, *C;
     size_t i, j;
-    /* build the sparse matrix */
+    // build the sparse matrix
     gsl_spmatrix_set(A, 0, 2, 3.1);
     gsl_spmatrix_set(A, 0, 3, 4.6);
     gsl_spmatrix_set(A, 1, 0, 1.0);
@@ -2310,10 +2314,10 @@ TEST(GslTest, SparseMatricesWorks) {
     cout << "printing all matrix elements:\n";
     for (i = 0; i < 5; ++i)
         for (j = 0; j < 4; ++j) cout << "A(" << i << "u," << j << "u) = " << gsl_spmatrix_get(A, i, j) << "\n";
-    /* print out elements in triplet format */
+    // print out elements in triplet format
     cout << "matrix in triplet format (i,j,Aij):\n";
     gsl_spmatrix_fprintf(stdout, A, "%.1f");
-    /* convert to compressed column format */
+    // convert to compressed column format
     B = gsl_spmatrix_ccs(A);
     cout << "matrix in compressed column format:\n";
     cout << "i = [ ";
@@ -2325,7 +2329,7 @@ TEST(GslTest, SparseMatricesWorks) {
     cout << "d = [ ";
     for (i = 0; i < B->nz; ++i) cout << B->data[i] << ", ";
     cout << "]\n";
-    /* convert to compressed row format */
+    // convert to compressed row format
     C = gsl_spmatrix_crs(A);
     cout << "matrix in compressed row format:\n";
     cout << "i = [ ";
@@ -2346,57 +2350,57 @@ TEST(GslTest, SparseLinearAlgebraWorks) {
     // This example program demonstrates the sparse linear algebra routines on the solution
     // of a simple 1D Poisson equation on [0; 1]:
 
-    constexpr size_t N = 100;                   /* number of grid points */
-    size_t const n = N - 2;                     /* subtract 2 to exclude boundaries */
-    constexpr double h = 1.0 / (N - 1.0);       /* grid spacing */
-    gsl_spmatrix *A = gsl_spmatrix_alloc(n, n); /* triplet format */
-    gsl_spmatrix *C;                            /* compressed format */
-    gsl_vector *f = gsl_vector_alloc(n);        /* right hand side vector */
-    gsl_vector *u = gsl_vector_alloc(n);        /* solution vector */
+    constexpr size_t N = 100;                    // number of grid points
+    size_t const n = N - 2;                      // subtract 2 to exclude boundaries
+    constexpr double h = 1.0 / (N - 1.0);        // grid spacing
+    gsl_spmatrix *A = gsl_spmatrix_alloc(n, n);  // triplet format
+    gsl_spmatrix *C;                             // compressed format
+    gsl_vector *f = gsl_vector_alloc(n);         // right hand side vector
+    gsl_vector *u = gsl_vector_alloc(n);         // solution vector
     size_t i;
-    /* construct the sparse matrix for the finite difference equation */
-    /* construct first row */
+    // construct the sparse matrix for the finite difference equation
+    // construct first row
     gsl_spmatrix_set(A, 0, 0, -2.0);
     gsl_spmatrix_set(A, 0, 1, 1.0);
-    /* construct rows [1:n-2] */
+    // construct rows [1:n-2]
     for (i = 1; i < n - 1; ++i) {
         gsl_spmatrix_set(A, i, i + 1, 1.0);
         gsl_spmatrix_set(A, i, i, -2.0);
         gsl_spmatrix_set(A, i, i - 1, 1.0);
     }
-    /* construct last row */
+    // construct last row
     gsl_spmatrix_set(A, n - 1, n - 1, -2.0);
     gsl_spmatrix_set(A, n - 1, n - 2, 1.0);
-    /* scale by h^2 */
+    // scale by h^2
     gsl_spmatrix_scale(A, 1.0 / (h * h));
-    /* construct right hand side vector */
+    // construct right hand side vector
     for (i = 0; i < n; ++i) {
         double xi = (i + 1) * h;
         double fi = -M_PI * M_PI * sin(M_PI * xi);
         gsl_vector_set(f, i, fi);
     }
-    /* convert to compressed column format */
+    // convert to compressed column format
     C = gsl_spmatrix_ccs(A);
     {
-        /* now solve the system with the GMRES iterative solver */
-        constexpr double tol = 1.0e-6;  /* solution relative tolerance */
-        constexpr size_t max_iter = 10; /* maximum iterations */
+        // now solve the system with the GMRES iterative solver
+        constexpr double tol = 1.0e-6;   // solution relative tolerance
+        constexpr size_t max_iter = 10;  // maximum iterations
         const gsl_splinalg_itersolve_type *T = gsl_splinalg_itersolve_gmres;
         gsl_splinalg_itersolve *work = gsl_splinalg_itersolve_alloc(T, n, 0);
         size_t iter = 0;
         double residual;
         int status;
-        /* initial guess u = 0 */
+        // initial guess u = 0
         gsl_vector_set_zero(u);
-        /* solve the system A u = f */
+        // solve the system A u = f
         do {
             status = gsl_splinalg_itersolve_iterate(C, f, tol, u, work);
-            /* print out residual norm ||A*u - f|| */
+            // print out residual norm ||A*u - f||
             residual = gsl_splinalg_itersolve_normr(work);
             cout << "iter " << iter << "u residual = " << residual << "\n";
             if (status == GSL_SUCCESS) cout << "Converged\n";
         } while (status == GSL_CONTINUE && ++iter < max_iter);
-        /* output solution */
+        // output solution
         for (i = 0; i < n; ++i) {
             double xi = (i + 1) * h;
             double u_exact = sin(M_PI * xi);
@@ -2409,30 +2413,6 @@ TEST(GslTest, SparseLinearAlgebraWorks) {
     gsl_spmatrix_free(C);
     gsl_vector_free(f);
     gsl_vector_free(u);
-}
-
-TEST(GslTest, Works3) {
-    //
-}
-
-TEST(GslTest, Works4) {
-    //
-}
-
-TEST(GslTest, Works5) {
-    //
-}
-
-TEST(GslTest, Works6) {
-    //
-}
-
-TEST(GslTest, Works7) {
-    //
-}
-
-TEST(GslTest, Works8) {
-    //
 }
 
 }  // namespace alba
