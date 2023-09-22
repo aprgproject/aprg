@@ -55,6 +55,11 @@ on:
         type: boolean
         required: true
         default: false
+      enableClangStaticAnalyzer:
+        description: 'Enable Clang Static Analyzer'
+        type: boolean
+        required: true
+        default: false
       enableStaticAnalyzers:
         description: 'Enable Static Analyzers for Clang Builds'
         type: boolean
@@ -417,6 +422,14 @@ jobs:
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
             
+      - name: Run with Clang Static Analyzer
+        shell: bash
+        if: contains(matrix.configurationName, 'Clang') && inputs.enableClangStaticAnalyzer
+        working-directory: ${{ matrix.project }}
+        run: |
+          echo "Running Clang Static Analysis..."
+          "$buildAndRunScriptPath" cleanAndConfigureWithClangStaticAnalyzer "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+            
       - name: Build and Run with Static Analyzers
         shell: bash
         if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
@@ -427,11 +440,3 @@ jobs:
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
-            
-      - name: Run with Clang Static Analyzer
-        shell: bash
-        if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
-        working-directory: ${{ matrix.project }}
-        run: |
-          echo "Running Clang Static Analysis..."
-          "$buildAndRunScriptPath" cleanAndConfigureWithClangStaticAnalyzer "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
