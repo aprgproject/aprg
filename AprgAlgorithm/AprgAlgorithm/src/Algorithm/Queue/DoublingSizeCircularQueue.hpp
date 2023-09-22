@@ -12,6 +12,10 @@ template <typename Object>
 class DoublingSizeCircularQueue : public BaseQueue<Object> {
 public:
     ~DoublingSizeCircularQueue() override = default;
+    DoublingSizeCircularQueue(DoublingSizeCircularQueue const &) = default;
+    DoublingSizeCircularQueue(DoublingSizeCircularQueue &&) = default;
+    DoublingSizeCircularQueue &operator=(DoublingSizeCircularQueue const &) = default;
+    DoublingSizeCircularQueue &operator=(DoublingSizeCircularQueue &&) = default;
     DoublingSizeCircularQueue() { initialize(MINUMUM_CONTAINER_SIZE); }
 
     [[nodiscard]] int getSize() const override {
@@ -23,7 +27,7 @@ public:
 
     [[nodiscard]] bool isEmpty() const override { return getSize() == 0; }
 
-    void enqueue(Object const& object) override {
+    void enqueue(Object const &object) override {
         resizeOnEnqueueIfNeeded();
         moveBackIndexIfNeeded(m_afterLastIndex);
         m_objects[m_afterLastIndex++] = object;
@@ -47,7 +51,7 @@ private:
         m_containerSize = initialSize;
     }
 
-    void moveBackIndexIfNeeded(int& index) {
+    void moveBackIndexIfNeeded(int &index) {
         if (index >= m_containerSize) {
             index = 0;
         }

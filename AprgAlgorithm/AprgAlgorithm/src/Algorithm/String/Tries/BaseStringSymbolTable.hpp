@@ -10,7 +10,13 @@ class BaseStringSymbolTable {
 public:
     using Key = std::string_view;
     using Strings = std::vector<std::string>;
-    virtual ~BaseStringSymbolTable() = default;  // virtual destructor because of virtual functions (vtable exists)
+    // virtual destructor because of virtual functions (vtable exists)
+    virtual ~BaseStringSymbolTable() = default;
+    BaseStringSymbolTable() = default;
+    BaseStringSymbolTable(BaseStringSymbolTable const&) = default;
+    BaseStringSymbolTable(BaseStringSymbolTable&&) = default;
+    BaseStringSymbolTable& operator=(BaseStringSymbolTable const&) = default;
+    BaseStringSymbolTable& operator=(BaseStringSymbolTable&&) = default;
     [[nodiscard]] virtual Key getLongestPrefixOf(
         Key const& keyToCheck) const = 0;               // get the longest key that has a prefix
     [[nodiscard]] virtual Strings getKeys() const = 0;  // get all keys in sorted order

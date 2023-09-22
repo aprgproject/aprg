@@ -21,6 +21,10 @@ public:
     using EntryPointers = std::unique_ptr<EntryUniquePointer[]>;
     // virtual destructor because of virtual functions (vtable exists)
     ~BaseLinearProbingHash() override = default;
+    BaseLinearProbingHash(BaseLinearProbingHash const&) = default;
+    BaseLinearProbingHash(BaseLinearProbingHash&&) = default;
+    BaseLinearProbingHash& operator=(BaseLinearProbingHash const&) = default;
+    BaseLinearProbingHash& operator=(BaseLinearProbingHash&&) = default;
     BaseLinearProbingHash() : m_entryPointers(nullptr) { initialize(INITIAL_HASH_TABLE_SIZE); }
 
     [[nodiscard]] Key getMinimum() const override {

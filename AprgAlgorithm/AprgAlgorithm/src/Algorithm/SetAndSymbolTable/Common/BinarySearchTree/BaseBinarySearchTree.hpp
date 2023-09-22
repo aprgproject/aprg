@@ -14,7 +14,13 @@ public:
     using NodeUniquePointer = std::unique_ptr<Node>;
     using Keys = std::vector<Key>;
     using TraverseFunction = std::function<void(Node const&)>;
-    ~BaseBinarySearchTree() override = default;  // virtual destructor because of virtual functions (vtable exists)
+    // virtual destructor because of virtual functions (vtable exists)
+    ~BaseBinarySearchTree() override = default;
+    BaseBinarySearchTree() = default;
+    BaseBinarySearchTree(BaseBinarySearchTree const&) = default;
+    BaseBinarySearchTree(BaseBinarySearchTree&&) = default;
+    BaseBinarySearchTree& operator=(BaseBinarySearchTree const&) = default;
+    BaseBinarySearchTree& operator=(BaseBinarySearchTree&&) = default;
 
     [[nodiscard]] Key getMinimum() const override {
         Key result{};

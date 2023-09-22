@@ -9,7 +9,13 @@ class BaseStringSet {
 public:
     using Key = std::string_view;
     using Strings = std::vector<std::string>;
-    virtual ~BaseStringSet() = default;  // virtual destructor because of virtual functions (vtable exists)
+    // virtual destructor because of virtual functions (vtable exists)
+    virtual ~BaseStringSet() = default;
+    BaseStringSet() = default;
+    BaseStringSet(BaseStringSet const&) = default;
+    BaseStringSet(BaseStringSet&&) = default;
+    BaseStringSet& operator=(BaseStringSet const&) = default;
+    BaseStringSet& operator=(BaseStringSet&&) = default;
     [[nodiscard]] virtual Key getLongestPrefixOf(
         Key const& keyToCheck) const = 0;               // get the longest key that has a prefix
     [[nodiscard]] virtual Strings getKeys() const = 0;  // get all keys in sorted order

@@ -16,8 +16,12 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Path = typename GraphTypes<Vertex>::Path;
     // virtual destructor because of virtual functions (vtable exists)
+    BaseEulerPathSearchForUndirectedGraph(BaseEulerPathSearchForUndirectedGraph const &) = default;
+    BaseEulerPathSearchForUndirectedGraph(BaseEulerPathSearchForUndirectedGraph &&) = default;
+    BaseEulerPathSearchForUndirectedGraph &operator=(BaseEulerPathSearchForUndirectedGraph const &) = default;
+    BaseEulerPathSearchForUndirectedGraph &operator=(BaseEulerPathSearchForUndirectedGraph &&) = default;
     virtual ~BaseEulerPathSearchForUndirectedGraph() = default;
-    explicit BaseEulerPathSearchForUndirectedGraph(BaseUndirectedGraphWithVertex const& graph) : m_graph(graph) {}
+    explicit BaseEulerPathSearchForUndirectedGraph(BaseUndirectedGraphWithVertex const &graph) : m_graph(graph) {}
     // An Euler circuit is a circuit that uses every edge in a graph with no repeats. Being a circuit, it must start and
     // end at the same vertex.
     [[nodiscard]] virtual Path getEulerCycle() const = 0;
@@ -42,7 +46,7 @@ protected:
         Vertices vertices(m_graph.getVertices());
         if (!vertices.empty()) {
             result = vertices.front();
-            for (Vertex const& vertex : vertices) {
+            for (Vertex const &vertex : vertices) {
                 if (mathHelper::isOdd(GraphUtilities::getDegreeAt(m_graph, vertex))) {
                     result = vertex;
                     break;
@@ -52,7 +56,7 @@ protected:
         return result;
     }
 
-    BaseUndirectedGraphWithVertex const& m_graph;
+    BaseUndirectedGraphWithVertex const &m_graph;
 };
 
 }  // namespace alba::algorithm

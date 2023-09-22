@@ -12,8 +12,12 @@ public:
     using Path = typename GraphTypes<Vertex>::Path;
     using VertexToAdjacencyVerticesMap = std::map<Vertex, Vertices>;
     // virtual destructor because of virtual functions (vtable exists)
+    BaseHierholzerAlgorithm(BaseHierholzerAlgorithm const &) = default;
+    BaseHierholzerAlgorithm(BaseHierholzerAlgorithm &&) = default;
+    BaseHierholzerAlgorithm &operator=(BaseHierholzerAlgorithm const &) = default;
+    BaseHierholzerAlgorithm &operator=(BaseHierholzerAlgorithm &&) = default;
     ~BaseHierholzerAlgorithm() override = default;
-    explicit BaseHierholzerAlgorithm(BaseGraphType const& graph) : BaseClass(graph), b_graph(BaseClass::m_graph) {}
+    explicit BaseHierholzerAlgorithm(BaseGraphType const &graph) : BaseClass(graph), b_graph(BaseClass::m_graph) {}
 
     [[nodiscard]] Path getEulerCycle() const override {
         Path result;
@@ -34,8 +38,8 @@ public:
     }
 
 protected:
-    virtual void searchForEulerPath(Path& result, Vertex const& startingVertex) const = 0;
-    BaseGraphType const& b_graph;
+    virtual void searchForEulerPath(Path &result, Vertex const &startingVertex) const = 0;
+    BaseGraphType const &b_graph;
 };
 
 }  // namespace alba::algorithm

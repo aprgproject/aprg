@@ -16,6 +16,11 @@ public:
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseRedBlackBinarySearchTree() override = default;
+    BaseRedBlackBinarySearchTree() = default;
+    BaseRedBlackBinarySearchTree(BaseRedBlackBinarySearchTree const&) = default;
+    BaseRedBlackBinarySearchTree(BaseRedBlackBinarySearchTree&&) = default;
+    BaseRedBlackBinarySearchTree& operator=(BaseRedBlackBinarySearchTree const&) = default;
+    BaseRedBlackBinarySearchTree& operator=(BaseRedBlackBinarySearchTree&&) = default;
 
 protected:
     [[nodiscard]] inline bool isRed(NodeUniquePointer const& nodePointer) const {

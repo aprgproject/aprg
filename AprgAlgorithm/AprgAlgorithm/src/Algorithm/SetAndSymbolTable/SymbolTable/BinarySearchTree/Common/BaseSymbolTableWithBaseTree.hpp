@@ -12,6 +12,10 @@ public:
     using TraverseFunction = typename BaseTree::TraverseFunction;
     // virtual destructor because of virtual functions (vtable exists)
     ~BaseSymbolTableWithBaseTree() override = default;
+    BaseSymbolTableWithBaseTree(BaseSymbolTableWithBaseTree const&) = default;
+    BaseSymbolTableWithBaseTree(BaseSymbolTableWithBaseTree&&) = default;
+    BaseSymbolTableWithBaseTree& operator=(BaseSymbolTableWithBaseTree const&) = default;
+    BaseSymbolTableWithBaseTree& operator=(BaseSymbolTableWithBaseTree&&) = default;
     BaseSymbolTableWithBaseTree() : b_root(BaseTree::m_root) {}
     [[nodiscard]] Value get(Key const& key) const override {  // overrides in BaseSymbolTable
         return getStartingOnThisNode(b_root, key);

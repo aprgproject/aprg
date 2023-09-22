@@ -8,6 +8,11 @@ template <typename Vertex>
 class BaseDirectedGraph : public BaseGraph<Vertex> {
 public:
     using Edges = typename GraphTypes<Vertex>::Edges;
+    BaseDirectedGraph() = default;
+    BaseDirectedGraph(BaseDirectedGraph const &) = default;
+    BaseDirectedGraph(BaseDirectedGraph &&) = default;
+    BaseDirectedGraph &operator=(BaseDirectedGraph const &) = default;
+    BaseDirectedGraph &operator=(BaseDirectedGraph &&) = default;
     ~BaseDirectedGraph() override = default;  // no need for virtual destructor because base destructor is virtual
     // (similar to other virtual functions)
     [[nodiscard]] GraphDirectionType getGraphDirectionType() const override { return DIRECTION_TYPE; }
@@ -15,7 +20,7 @@ public:
     void reverseDirections() {
         Edges const originalEdges(this->getEdges());
         this->clear();
-        for (auto const& [startVertexOfEdge, endVertexOfEdge] : originalEdges) {
+        for (auto const &[startVertexOfEdge, endVertexOfEdge] : originalEdges) {
             this->connect(endVertexOfEdge, startVertexOfEdge);
         }
     }

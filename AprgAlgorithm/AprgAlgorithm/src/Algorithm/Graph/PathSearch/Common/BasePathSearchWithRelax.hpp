@@ -19,6 +19,10 @@ public:
         typename GraphTypesWithWeights<Vertex, Weight>::VertexToEdgeOrderedByWeightMap;
     using AdditionalRelaxationStepsWithNewWeight = std::function<void(Vertex const&, Vertex const&, Weight const&)>;
     using AdditionalRelaxationSteps = std::function<void(void)>;
+    BasePathSearchWithRelax(BasePathSearchWithRelax const&) = default;
+    BasePathSearchWithRelax(BasePathSearchWithRelax&&) = default;
+    BasePathSearchWithRelax& operator=(BasePathSearchWithRelax const&) = default;
+    BasePathSearchWithRelax& operator=(BasePathSearchWithRelax&&) = default;
     BasePathSearchWithRelax(EdgeWeightedGraph const& graph, Vertex const& startVertex)
         : m_graph(graph), m_startVertex(startVertex) {}
 

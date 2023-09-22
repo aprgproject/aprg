@@ -9,6 +9,11 @@ class BaseSymbolTable {
 public:
     using Keys = std::vector<Key>;
     virtual ~BaseSymbolTable() = default;
+    BaseSymbolTable() = default;
+    BaseSymbolTable(BaseSymbolTable const&) = default;
+    BaseSymbolTable(BaseSymbolTable&&) = default;
+    BaseSymbolTable& operator=(BaseSymbolTable const&) = default;
+    BaseSymbolTable& operator=(BaseSymbolTable&&) = default;
     [[nodiscard]] virtual Key getMinimum() const = 0;                // get smallest key
     [[nodiscard]] virtual Key getMaximum() const = 0;                // get largest key
     [[nodiscard]] virtual Key selectAt(int const rank) const = 0;    // get key at rank

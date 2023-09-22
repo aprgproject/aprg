@@ -8,22 +8,26 @@ public:
     using Key = typename BaseSeparateChainingHash::Key;
     using Entry = typename BaseSeparateChainingHash::Entry;
     using HashTable = typename BaseSeparateChainingHash::HashTable;
-    ~BaseSetWithBaseSeparateChainingHash() override =
-        default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
+    // no need for virtual destructor because base destructor is virtual (similar to other virtual
+    ~BaseSetWithBaseSeparateChainingHash() override = default;
+    BaseSetWithBaseSeparateChainingHash(BaseSetWithBaseSeparateChainingHash const &) = default;
+    BaseSetWithBaseSeparateChainingHash(BaseSetWithBaseSeparateChainingHash &&) = default;
+    BaseSetWithBaseSeparateChainingHash &operator=(BaseSetWithBaseSeparateChainingHash const &) = default;
+    BaseSetWithBaseSeparateChainingHash &operator=(BaseSetWithBaseSeparateChainingHash &&) = default;
 
     BaseSetWithBaseSeparateChainingHash()
         : b_size(BaseSeparateChainingHash::m_size),
           b_smallerSymbolTables(BaseSeparateChainingHash::m_smallerSymbolTables) {}
 
     // functions)
-    void put(Key const& key) override {
+    void put(Key const &key) override {
         b_smallerSymbolTables[this->getHash(key)].put(key);
         ++b_size;
     }
 
 private:
-    int& b_size;
-    HashTable& b_smallerSymbolTables;
+    int &b_size;
+    HashTable &b_smallerSymbolTables;
 };
 
 }  // namespace alba::algorithm

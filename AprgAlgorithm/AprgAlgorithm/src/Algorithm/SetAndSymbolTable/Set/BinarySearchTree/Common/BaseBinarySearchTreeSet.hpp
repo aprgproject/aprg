@@ -11,9 +11,14 @@ template <typename Key>
 class BaseBinarySearchTreeSet
     : public BaseSetWithBaseTree<BaseBinarySearchTree<Key, BasicTreeNode<Key>, BaseSet<Key>>> {
 public:
-    ~BaseBinarySearchTreeSet() override = default;
     // no need for virtual destructor because base destructor is virtual
     // (similar to other virtual functions)
+    ~BaseBinarySearchTreeSet() override = default;
+    BaseBinarySearchTreeSet() = default;
+    BaseBinarySearchTreeSet(BaseBinarySearchTreeSet const &) = default;
+    BaseBinarySearchTreeSet(BaseBinarySearchTreeSet &&) = default;
+    BaseBinarySearchTreeSet &operator=(BaseBinarySearchTreeSet const &) = default;
+    BaseBinarySearchTreeSet &operator=(BaseBinarySearchTreeSet &&) = default;
 };
 
 }  // namespace alba::algorithm

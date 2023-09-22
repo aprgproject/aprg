@@ -5,7 +5,13 @@ namespace alba::algorithm {
 template <typename Object>
 class BaseUnionFind {
 public:
-    virtual ~BaseUnionFind() = default;  // virtual destructor because of virtual functions (vtable exists)
+    // virtual destructor because of virtual functions (vtable exists)
+    virtual ~BaseUnionFind() = default;
+    BaseUnionFind() = default;
+    BaseUnionFind(BaseUnionFind const&) = default;
+    BaseUnionFind(BaseUnionFind&&) = default;
+    BaseUnionFind& operator=(BaseUnionFind const&) = default;
+    BaseUnionFind& operator=(BaseUnionFind&&) = default;
     [[nodiscard]] virtual Object getRoot(
         Object const& object) const = 0;  // this is basically an identifier for the connected components
     [[nodiscard]] virtual bool isConnected(Object const& object1, Object const& object2) const = 0;

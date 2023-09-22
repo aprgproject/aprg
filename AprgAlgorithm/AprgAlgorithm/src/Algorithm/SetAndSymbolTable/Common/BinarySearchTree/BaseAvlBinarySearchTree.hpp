@@ -16,6 +16,11 @@ public:
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseAvlBinarySearchTree() override = default;
+    BaseAvlBinarySearchTree() = default;
+    BaseAvlBinarySearchTree(BaseAvlBinarySearchTree const&) = default;
+    BaseAvlBinarySearchTree(BaseAvlBinarySearchTree&&) = default;
+    BaseAvlBinarySearchTree& operator=(BaseAvlBinarySearchTree const&) = default;
+    BaseAvlBinarySearchTree& operator=(BaseAvlBinarySearchTree&&) = default;
 
 protected:
     void updateTreeNodeDetails(Node& node) const override {

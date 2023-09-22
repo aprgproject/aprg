@@ -16,6 +16,10 @@ public:
     using NodeUniquePointer = std::unique_ptr<Node>;
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseTernarySearchTrie() override = default;
+    BaseTernarySearchTrie(BaseTernarySearchTrie const&) = default;
+    BaseTernarySearchTrie(BaseTernarySearchTrie&&) = default;
+    BaseTernarySearchTrie& operator=(BaseTernarySearchTrie const&) = default;
+    BaseTernarySearchTrie& operator=(BaseTernarySearchTrie&&) = default;
     BaseTernarySearchTrie() : m_root(nullptr) {}
 
     [[nodiscard]] Key getLongestPrefixOf(Key const& keyToCheck) const override {

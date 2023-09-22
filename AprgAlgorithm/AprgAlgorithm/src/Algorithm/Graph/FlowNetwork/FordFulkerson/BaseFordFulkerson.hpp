@@ -20,6 +20,10 @@ public:
     using VertexToFlowEdgeMap = std::map<Vertex, FlowEdge>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
     using TraverseFunction = std::function<void(Vertex)>;
+    BaseFordFulkerson(BaseFordFulkerson const&) = default;
+    BaseFordFulkerson(BaseFordFulkerson&&) = default;
+    BaseFordFulkerson& operator=(BaseFordFulkerson const&) = default;
+    BaseFordFulkerson& operator=(BaseFordFulkerson&&) = default;
     virtual ~BaseFordFulkerson() = default;  // virtual destructor because of virtual functions (vtable exists)
     explicit BaseFordFulkerson(SinkSourceFlowNetworkType const& flowNetwork) : m_flowNetwork(flowNetwork) {}
 

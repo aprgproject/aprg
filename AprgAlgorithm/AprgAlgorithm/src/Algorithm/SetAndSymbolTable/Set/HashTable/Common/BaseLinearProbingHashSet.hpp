@@ -15,6 +15,11 @@ class BaseLinearProbingHashSet
 public:
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseLinearProbingHashSet() override = default;
+    BaseLinearProbingHashSet() = default;
+    BaseLinearProbingHashSet(BaseLinearProbingHashSet const &) = default;
+    BaseLinearProbingHashSet(BaseLinearProbingHashSet &&) = default;
+    BaseLinearProbingHashSet &operator=(BaseLinearProbingHashSet const &) = default;
+    BaseLinearProbingHashSet &operator=(BaseLinearProbingHashSet &&) = default;
 };
 
 }  // namespace alba::algorithm

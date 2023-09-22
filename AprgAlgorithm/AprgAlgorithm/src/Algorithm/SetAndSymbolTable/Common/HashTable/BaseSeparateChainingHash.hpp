@@ -21,6 +21,10 @@ public:
     using HashTable = std::array<UnorderedLinkedList, HASH_TABLE_SIZE>;
     ~BaseSeparateChainingHash() override = default;  // no need for virtual destructor because base destructor is
     BaseSeparateChainingHash() = default;
+    BaseSeparateChainingHash(BaseSeparateChainingHash const&) = default;
+    BaseSeparateChainingHash(BaseSeparateChainingHash&&) = default;
+    BaseSeparateChainingHash& operator=(BaseSeparateChainingHash const&) = default;
+    BaseSeparateChainingHash& operator=(BaseSeparateChainingHash&&) = default;
 
     [[nodiscard]] Key getMinimum() const override {
         Key result{};

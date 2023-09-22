@@ -15,8 +15,14 @@ class BaseLinearProbingHashSymbolTable
                      Key, HashTableEntryWithValue<Key, Value>, HashFunction, OrderedArraySymbolTable<Key, Value>,
                      BaseSymbolTable<Key, Value>>> {
 public:
-    ~BaseLinearProbingHashSymbolTable() override = default;  // no need for virtual destructor because base destructor
+    // no need for virtual destructor because base destructor
     // is virtual (similar to other virtual functions)
+    ~BaseLinearProbingHashSymbolTable() override = default;
+    BaseLinearProbingHashSymbolTable() = default;
+    BaseLinearProbingHashSymbolTable(BaseLinearProbingHashSymbolTable const &) = default;
+    BaseLinearProbingHashSymbolTable(BaseLinearProbingHashSymbolTable &&) = default;
+    BaseLinearProbingHashSymbolTable &operator=(BaseLinearProbingHashSymbolTable const &) = default;
+    BaseLinearProbingHashSymbolTable &operator=(BaseLinearProbingHashSymbolTable &&) = default;
 };
 
 }  // namespace alba::algorithm

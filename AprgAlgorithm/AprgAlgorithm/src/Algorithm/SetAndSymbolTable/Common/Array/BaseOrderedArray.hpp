@@ -13,6 +13,10 @@ public:
     using Keys = std::vector<Key>;
     ~BaseOrderedArray() override = default;  // no need for virtual destructor because base destructor is virtual
     BaseOrderedArray() = default;
+    BaseOrderedArray(BaseOrderedArray const&) = default;
+    BaseOrderedArray(BaseOrderedArray&&) = default;
+    BaseOrderedArray& operator=(BaseOrderedArray const&) = default;
+    BaseOrderedArray& operator=(BaseOrderedArray&&) = default;
 
     [[nodiscard]] Key getMinimum() const override {
         Key result{};

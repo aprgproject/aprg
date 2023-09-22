@@ -14,6 +14,10 @@ public:
     using VertexToVertexMap = typename GraphTypes<Vertex>::VertexToVertexMap;
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
+    BasePathSearchWithBfsAndDfs(BasePathSearchWithBfsAndDfs const&) = default;
+    BasePathSearchWithBfsAndDfs(BasePathSearchWithBfsAndDfs&&) = default;
+    BasePathSearchWithBfsAndDfs& operator=(BasePathSearchWithBfsAndDfs const&) = default;
+    BasePathSearchWithBfsAndDfs& operator=(BasePathSearchWithBfsAndDfs&&) = default;
     explicit BasePathSearchWithBfsAndDfs(BaseGraphWithVertex const& graph) : m_graph(graph) {}
 
     [[nodiscard]] Path getPathTo(Vertex const& endVertex) const {

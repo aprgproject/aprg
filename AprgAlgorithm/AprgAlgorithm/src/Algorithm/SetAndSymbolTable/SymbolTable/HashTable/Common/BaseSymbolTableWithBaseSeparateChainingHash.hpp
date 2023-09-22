@@ -8,8 +8,13 @@ public:
     using Key = typename BaseSeparateChainingHash::Key;
     using Entry = typename BaseSeparateChainingHash::Entry;
     using HashTable = typename BaseSeparateChainingHash::HashTable;
-    ~BaseSymbolTableWithBaseSeparateChainingHash() override =
-        default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
+    // no need for virtual destructor because base destructor is virtual (similar to other virtual
+    ~BaseSymbolTableWithBaseSeparateChainingHash() override = default;
+    BaseSymbolTableWithBaseSeparateChainingHash(BaseSymbolTableWithBaseSeparateChainingHash const&) = default;
+    BaseSymbolTableWithBaseSeparateChainingHash(BaseSymbolTableWithBaseSeparateChainingHash&&) = default;
+    BaseSymbolTableWithBaseSeparateChainingHash& operator=(BaseSymbolTableWithBaseSeparateChainingHash const&) =
+        default;
+    BaseSymbolTableWithBaseSeparateChainingHash& operator=(BaseSymbolTableWithBaseSeparateChainingHash&&) = default;
 
     BaseSymbolTableWithBaseSeparateChainingHash()
         : b_size(BaseSeparateChainingHash::m_size),

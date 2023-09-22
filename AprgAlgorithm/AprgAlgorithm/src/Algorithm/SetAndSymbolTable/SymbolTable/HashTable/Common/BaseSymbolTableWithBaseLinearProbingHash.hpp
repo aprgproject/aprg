@@ -9,8 +9,12 @@ public:
     using Entry = typename BaseLinearProbingHash::Entry;
     using EntryUniquePointer = typename BaseLinearProbingHash::EntryUniquePointer;
     using EntryPointers = typename BaseLinearProbingHash::EntryPointers;
-    ~BaseSymbolTableWithBaseLinearProbingHash() override =
-        default;  // no need for virtual destructor because base destructor is virtual (similar to other virtual
+    // no need for virtual destructor because base destructor is virtual (similar to other virtual)
+    ~BaseSymbolTableWithBaseLinearProbingHash() override = default;
+    BaseSymbolTableWithBaseLinearProbingHash(BaseSymbolTableWithBaseLinearProbingHash const&) = default;
+    BaseSymbolTableWithBaseLinearProbingHash(BaseSymbolTableWithBaseLinearProbingHash&&) = default;
+    BaseSymbolTableWithBaseLinearProbingHash& operator=(BaseSymbolTableWithBaseLinearProbingHash const&) = default;
+    BaseSymbolTableWithBaseLinearProbingHash& operator=(BaseSymbolTableWithBaseLinearProbingHash&&) = default;
     BaseSymbolTableWithBaseLinearProbingHash()
         : b_size(BaseLinearProbingHash::m_size), b_entryPointers(BaseLinearProbingHash::m_entryPointers) {}
 

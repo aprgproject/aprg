@@ -16,7 +16,12 @@ public:
     using Keys = std::vector<Key>;
     using TraverseFunctionWithNoChange = std::function<void(Node const&, bool&)>;
     using TraverseFunctionWithChange = std::function<void(Node&, bool&)>;
-    ~BaseUnorderedLinkedList() override = default;  // no need for virtual destructor because base destructor is virtual
+    // no need for virtual destructor because base destructor is virtual
+    ~BaseUnorderedLinkedList() override = default;
+    BaseUnorderedLinkedList(BaseUnorderedLinkedList const&) = default;
+    BaseUnorderedLinkedList(BaseUnorderedLinkedList&&) = default;
+    BaseUnorderedLinkedList& operator=(BaseUnorderedLinkedList const&) = default;
+    BaseUnorderedLinkedList& operator=(BaseUnorderedLinkedList&&) = default;
     BaseUnorderedLinkedList() : m_first(nullptr) {}
 
     [[nodiscard]] Key getMinimum() const override {
