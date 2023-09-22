@@ -359,10 +359,12 @@ TEST(GslTest, FastFourierTransformInGslWorks) {
 }
 
 namespace {
+
 double function1ToIntegrate(double const inputValue, void *parameters) {
     double const alpha = *static_cast<double *>(parameters);
     return log(alpha * inputValue) / sqrt(inputValue);
 }
+
 }  // namespace
 
 TEST(GslTest, NumericalAdaptiveIntegrationInGslWorks) {
@@ -393,10 +395,12 @@ TEST(GslTest, NumericalAdaptiveIntegrationInGslWorks) {
 }
 
 namespace {
+
 double function2ToIntegrate(double const inputValue, void *parameters) {
     int const mFunctionInput = *static_cast<int *>(parameters);
     return gsl_pow_int(inputValue, mFunctionInput) + 1.0;
 }
+
 }  // namespace
 
 TEST(GslTest, NumericalFixedPointQuadratureIntegrationInGslWorks) {
@@ -711,11 +715,13 @@ TEST(GslTest, GettingMovingStatisticsWorksOnGaussianRandomVariates) {
 }
 
 namespace {
+
 double func(const size_t n, double x[], void *params) {
     double const alpha = *static_cast<double *>(params);
     gsl_sort(x, 1, n);
     return gsl_stats_trmean_from_sorted_data(alpha, x, 1, n);
 }
+
 }  // namespace
 
 TEST(GslTest, GettingMovingStatisticsWorksOnUserDefinedMovingWindow) {
@@ -866,7 +872,6 @@ TEST(GslTest, GaussianFilterWorksInExample2) {
     // A common application of the Gaussian filter is to detect edges, or sudden jumps, in a noisy input signal.
     // It is used both for 1D edge detection in time series, as well as 2D edge detection in images.
     // Here we will examine a noisy time series of length N = 1000 with a single edge.
-
     constexpr int LENGTH_OF_TIME = 100;   // length of time series
     constexpr int WINDOW_SIZE = 11;       // window size
     constexpr double alpha = 3.0;         // Gaussian kernel has +/- 3 standard deviations
@@ -1062,6 +1067,7 @@ TEST(GslTest, TwoDimensionalHistogramWorks) {
 }
 
 namespace {
+
 struct nTupleData {
     double x;
     double y;
@@ -1093,6 +1099,7 @@ int sel_func(void *ntuple_data, void *params) {
     E2 = x * x + y * y + z * z;
     return static_cast<int>(E2 > scale);
 }
+
 }  // namespace
 
 TEST(GslTest, DISABLED_NTuplesWorks) {
@@ -1139,6 +1146,7 @@ TEST(GslTest, DISABLED_NTuplesWorks) {
 }
 
 namespace {
+
 // Computation of the integral,
 // I = int (dx dy dz)/(2pi)^3 1/(1-cos(x)cos(y)cos(z))
 // over (-pi,-pi,-pi) to (+pi, +pi, +pi). The exact answer
@@ -1147,13 +1155,14 @@ namespace {
 // Volume 1", Section 1.1, p21, which cites the original
 // paper M.L.Glasser, I.J.Zucker, Proc.Natl.Acad.Sci.USA 74
 // 1800 (1977)
-
 // For simplicity we compute the integral over the region (0,0,0) -> (pi,pi,pi) and multiply by 8
 double exact = 1.3932039296856768591842462603255;
+
 double g(double *k, size_t const, void *) {
     double A = 1.0 / (M_PI * M_PI * M_PI);
     return A / (1.0 - cos(k[0]) * cos(k[1]) * cos(k[2]));
 }
+
 void display_results(char *title, double const result, double const error) {
     cout << title << " ==================\n";
     cout << "result = " << result << "\n";
@@ -1161,6 +1170,7 @@ void display_results(char *title, double const result, double const error) {
     cout << "exact = " << exact << "\n";
     cout << "error = " << result - exact << " = " << fabs(result - exact) / error << " sigma\n";
 }
+
 }  // namespace
 
 TEST(GslTest, MonteCarloRoutinesForIntegralWorks) {
@@ -1206,6 +1216,7 @@ TEST(GslTest, MonteCarloRoutinesForIntegralWorks) {
 }
 
 namespace {
+
 // set up parameters for this simulated annealing run
 constexpr int N_TRIES = 10;                    // how many points do we try before stepping
 constexpr int ITERS_FIXED_T = 100;             // how many iterations for each T?
@@ -1216,16 +1227,19 @@ constexpr double DUMPING_FACTOR = 1.003;       // damping factor for temperature
 constexpr double MINIMUM_TEMPERATURE = 2.0e-6;
 gsl_siman_params_t params = {N_TRIES,        ITERS_FIXED_T,      STEP_SIZE, BOLTZMANN_CONSTANT, INITIAL_TEMPERATURE,
                              DUMPING_FACTOR, MINIMUM_TEMPERATURE};
+
 // now some functions to test in one dimension
 double E1(void *xp) {
     double x = *static_cast<double *>(xp);
     return exp(-pow((x - 1.0), 2.0)) * sin(8 * x);
 }
+
 double M1(void *xp, void *yp) {
     double x = *static_cast<double *>(xp);
     double y = *static_cast<double *>(yp);
     return fabs(x - y);
 }
+
 void S1(const gsl_rng *randomGenerator, void *xp, double const step_size) {
     double old_x = *static_cast<double *>(xp);
     double new_x{};
@@ -1233,7 +1247,9 @@ void S1(const gsl_rng *randomGenerator, void *xp, double const step_size) {
     new_x = u * 2 * step_size - step_size + old_x;
     memcpy(xp, &new_x, sizeof(new_x));
 }
+
 void P1(void *xp) { cout << *static_cast<double *>(xp) << ""; }
+
 }  // namespace
 
 TEST(GslTest, DISABLED_SimulatedAnnealingWorks) {
@@ -1241,11 +1257,9 @@ TEST(GslTest, DISABLED_SimulatedAnnealingWorks) {
     // Simulated annealing is a minimization technique which has given good results in avoiding local minima; it is
     // based on the idea of taking a random walk through the space at successively lower temperatures, where the
     // probability of taking a step is given by a Boltzmann distribution.
-
     // This example, in one dimensional Cartesian space, sets up an energy function which is a damped sine wave; this
     // has many local minima, but only one global minimum, somewhere between 1.0 and 1.5. The initial guess given
     // is 15.5, which is several local minima away from the global minimum.
-
     double x_initial = 15.5;
     gsl_rng_env_setup();
     const gsl_rng_type *randomGeneratorType = gsl_rng_default;
@@ -1256,6 +1270,7 @@ TEST(GslTest, DISABLED_SimulatedAnnealingWorks) {
 }
 
 namespace {
+
 int func(double const, double const y[], double f[], void *params) {
     double mu = *static_cast<double *>(params);
     f[0] = y[1];
@@ -1275,11 +1290,11 @@ int jac(double const, double const y[], double *dfdy, double dfdt[], void *param
     dfdt[1] = 0.0;
     return GSL_SUCCESS;
 }
+
 }  // namespace
 
 TEST(GslTest, DifferentialEquationsWorksOnVanDerPolOscillator) {
     // This solves the second-order nonlinear Van der Pol oscillator equation
-
     double mu = 10;
     gsl_odeiv2_system sys = {func, jac, 2, &mu};
     gsl_odeiv2_driver *d = gsl_odeiv2_driver_alloc_y_new(&sys, gsl_odeiv2_step_rk8pd, 1e-6, 1e-6, 0.0);
@@ -1300,7 +1315,6 @@ TEST(GslTest, DifferentialEquationsWorksOnVanDerPolOscillator) {
 TEST(GslTest, OneDimensionalInterpolationWorks) {
     // The following program demonstrates the use of the interpolation and spline functions.
     // It computes a cubic spline interpolation of the 10-point dataset
-
     array<double, 10> x{};
     array<double, 10> y{};
     cout << "#m=0,S=17\n";
@@ -1327,7 +1341,6 @@ TEST(GslTest, OneDimensionalInterpolationWorks) {
 TEST(GslTest, TwoDimensionalInterpolationWorks) {
     // The following example performs bilinear interpolation on the unit square,
     // using z values of (0; 1; 0:5; 1) going clockwise around the square.
-
     const gsl_interp2d_type *T = gsl_interp2d_bilinear;
     constexpr int NUMBER_OF_POINTS = 10;         // number of points to interpolate
     constexpr array<double, 2> xa = {0.0, 1.0};  // define unit square
@@ -1369,7 +1382,6 @@ double functionToDifferentiate(double const x, void *) { return pow(x, 1.5); }
 TEST(GslTest, NumericalDifferentiationWorks) {
     // The following code estimates the derivative of the function f(x) = x^(3/2) at x = 2 and at x = 0.
     // The function f(x) is undefined for x < 0 so the derivative at x = 0 is computed using gsl_deriv_forward()..
-
     gsl_function F;
     double result = 0;
     double abserr = 0;
@@ -1395,7 +1407,6 @@ TEST(GslTest, ChebyshevApproximationsWorks) {
     // This is an extremely difficult approximation to make, due to the discontinuity,
     // and was chosen as an example where approximation error is visible.
     // For smooth functions the Chebyshev approximation converges extremely rapidly and errors would not be visible.
-
     int n = 100;
     gsl_cheb_series *cs = gsl_cheb_alloc(40);
     gsl_function F;
@@ -1414,7 +1425,6 @@ TEST(GslTest, ChebyshevApproximationsWorks) {
 TEST(GslTest, SeriesAccelerationWorks) {
     // The following code calculates an estimate of(2) = 2=6 using a series
     // After N terms the error in the sum is O(1=N), making direct summation of the series converge slowly.
-
     constexpr int NUMBER_OF_TERMS = 20;
     array<double, NUMBER_OF_TERMS> terms{};
     double sum_accel = 0;
@@ -1444,7 +1454,6 @@ TEST(GslTest, DISABLED_WaveletTransformFunctionWorks) {
     // The following program demonstrates the use of the one-dimensional wavelet transform functions.
     // It computes an approximation to an input signal (of length 256) using the 20 largest components of the wavelet
     // transform, while setting the others to zero.
-
     constexpr int NUMBER_OF_ITEMS = 256;
     int nc = 20;
     array<double, NUMBER_OF_ITEMS> originalData{};
@@ -1480,9 +1489,11 @@ TEST(GslTest, DISABLED_WaveletTransformFunctionWorks) {
 }
 
 namespace {
+
 struct quadratic_params {
     double a, b, c;
 };
+
 double quadratic(double const x, void *parameters) {
     auto *quadraticParameters = static_cast<quadratic_params *>(parameters);
     double a = quadraticParameters->a;
@@ -1490,13 +1501,13 @@ double quadratic(double const x, void *parameters) {
     double c = quadraticParameters->c;
     return (a * x + b) * x + c;
 }
+
 }  // namespace
 
 TEST(GslTest, OneDimensionRootFindingWorks) {
     // For any root finding algorithm we need to prepare the function to be solved.
     // For this example we will use the general quadratic equation described earlier.
     // We first need a header file (demo_fn.h) to define the function parameters
-
     double randomGenerator = 0, randomGenerator_expected = sqrt(5.0);
     double x_lo = 0.0, x_hi = 5.0;
     gsl_function F;
@@ -1538,7 +1549,6 @@ double fn1(double const x, void *) { return cos(x) + 1.0; }
 TEST(GslTest, OneDimensionalMinimizationWorks) {
     // The following program uses the Brent algorithm to find the minimum of the function f(x) = cos(x)+1, which occurs
     // at x = pi. The starting interval is (0; 6), with an initial guess for the minimum of 2.
-
     double m = 2.0, m_expected = M_PI;
     double a = 0.0, b = 6.0;
     gsl_function F;
@@ -1573,6 +1583,7 @@ TEST(GslTest, OneDimensionalMinimizationWorks) {
 }
 
 namespace {
+
 struct rparams {
     double a;
     double b;
@@ -1589,6 +1600,7 @@ int rosenbrock_f(const gsl_vector *x, void *params, gsl_vector *f) {
     gsl_vector_set(f, 1, y1);
     return GSL_SUCCESS;
 }
+
 }  // namespace
 
 TEST(GslTest, MultiDimensionalRootFindingWorks) {
@@ -1597,7 +1609,6 @@ TEST(GslTest, MultiDimensionalRootFindingWorks) {
     // The program solves the Rosenbrock system of equations.
     // This begins by creating the function object f, with the arguments (x,y) and parameters (a,b).
     // The solver s is initialized to use this function, with the gsl_multiroot_fsolver_hybrids method.
-
     constexpr size_t DIMENSION = 2;
     struct rparams p = {1.0, 10.0};
     gsl_multiroot_function f = {&rosenbrock_f, DIMENSION, &p};
@@ -1627,6 +1638,7 @@ TEST(GslTest, MultiDimensionalRootFindingWorks) {
 }
 
 namespace {
+
 int rosenbrock_df(const gsl_vector *x, void *params, gsl_matrix *J) {
     double const a = static_cast<rparams *>(params)->a;
     double const b = static_cast<rparams *>(params)->b;
@@ -1647,6 +1659,7 @@ int rosenbrock_fdf(const gsl_vector *x, void *params, gsl_vector *f, gsl_matrix 
     rosenbrock_df(x, params, J);
     return GSL_SUCCESS;
 }
+
 }  // namespace
 
 TEST(GslTest, MultiDimensionalRootFindingWithAccelerationWorks) {
@@ -1655,7 +1668,6 @@ TEST(GslTest, MultiDimensionalRootFindingWithAccelerationWorks) {
     // The latter computes both the function and its derivative simultaneously.
     // This allows the optimization of any common terms.
     // For simplicity we substitute calls to the separate f and df functions at this point in the code below
-
     int iter = 0;
     constexpr size_t DIMENSION = 2;
     struct rparams p = {1.0, 10.0};
@@ -1684,6 +1696,7 @@ TEST(GslTest, MultiDimensionalRootFindingWithAccelerationWorks) {
 }
 
 namespace {
+
 // Paraboloid centered on (p[0],p[1]), with scale factors (p[2],p[3]) and minimum p[4]
 double my_f(const gsl_vector *v, void *params) {
     auto *p = static_cast<double *>(params);
@@ -1691,6 +1704,7 @@ double my_f(const gsl_vector *v, void *params) {
     double y = gsl_vector_get(v, 1);
     return p[2] * (x - p[0]) * (x - p[0]) + p[3] * (y - p[1]) * (y - p[1]) + p[4];
 }
+
 // The gradient of f, df = (df/dx, df/dy).
 void my_df(const gsl_vector *v, void *params, gsl_vector *df) {
     auto *p = static_cast<double *>(params);
@@ -1699,18 +1713,19 @@ void my_df(const gsl_vector *v, void *params, gsl_vector *df) {
     gsl_vector_set(df, 0, 2.0 * p[2] * (x - p[0]));
     gsl_vector_set(df, 1, 2.0 * p[3] * (y - p[1]));
 }
+
 // Compute both f and df together.
 void my_fdf(const gsl_vector *x, void *params, double *f, gsl_vector *df) {
     *f = my_f(x, params);
     my_df(x, params, df);
 }
+
 }  // namespace
 
 TEST(GslTest, MultiDimensionalMinimizationWorks) {
     // This finds the minimum of the paraboloid function defined earlier.
     // The location of the minimum is offset from the origin in x and y, and the function value at the minimum is
     // non-zero.
-
     // Position of the minimum (1,2), scale factors 10,20, height 30.
     array<double, 5> par = {1.0, 2.0, 10.0, 20.0, 30.0};
     ;
@@ -1791,7 +1806,6 @@ TEST(GslTest, MultiDimensionalMinimizationWorksWithNelderMeadSimplexAlgorithm) {
 TEST(GslTest, SimpleLinearRegressionExampleWorks) {
     // The following program computes a least squares straight-line fit to a simple dataset,
     // and outputs the best-fit line and its associated one standard-deviation error bars.
-
     int n = 4;
     array<double, 4> x = {1970, 1980, 1990, 2000};
     array<double, 4> y = {12, 11, 14, 13};
@@ -1823,7 +1837,6 @@ TEST(GslTest, RegularizedLinearRegressionExampleWorks) {
     // u+noise so that u and v are nearly colinear. We then set a third dependent variable y = u+v+noise and solve for
     // the coefficients c1; c2 of the model Y (c1; c2) = c1u + c2v. Since u  v, the design matrix X is nearly singular,
     // leading to unstable ordinary least squares solutions.
-
     constexpr int NUMBER_OF_OBSERVATIONS = 100;    // number of observations
     constexpr int NUMBER_OF_MODEL_PARAMETERS = 2;  // number of model parameters
 
@@ -1932,6 +1945,7 @@ TEST(GslTest, RegularizedLinearRegressionExampleWorks) {
 }
 
 namespace {
+
 int doFitInRobust(
     const gsl_multifit_robust_type *T, const gsl_matrix *X, const gsl_vector *y, gsl_vector *c, gsl_matrix *cov) {
     gsl_multifit_robust_workspace *work = gsl_multifit_robust_alloc(T, X->size1, X->size2);
@@ -1939,13 +1953,13 @@ int doFitInRobust(
     gsl_multifit_robust_free(work);
     return s;
 }
+
 }  // namespace
 
 TEST(GslTest, RobustLinearRegressionExampleWorks) {
     // The next program demonstrates the advantage of robust least squares on a dataset with outliers. The program
     // generates linear (x; y) data pairs on the line y = 1:45x + 3:88, adds some random noise, and inserts 3 outliers
     // into the dataset. Both the robust and ordinary least squares (OLS) coefficients are computed for comparison.
-
     constexpr double a = 1.45;  // slope
     constexpr double b = 3.88;  // intercept
     constexpr int n = 10;
@@ -2011,11 +2025,13 @@ TEST(GslTest, RobustLinearRegressionExampleWorks) {
 }
 
 namespace {
+
 // function to be fitted
 double func(double const t) {
     double x = sin(10.0 * t);
     return exp(x * x * x);
 }
+
 // construct a row of the least squares matrix
 int build_row(double const t, gsl_vector *row) {
     int const p = static_cast<int>(row->size);
@@ -2026,6 +2042,7 @@ int build_row(double const t, gsl_vector *row) {
     }
     return 0;
 }
+
 int solve_system(
     int const print_data, const gsl_multilarge_linear_type *T, double const lambda, int const numberOfObservations,
     int const polynomialOrder, gsl_vector *c) {
@@ -2100,11 +2117,11 @@ int solve_system(
     gsl_rng_free(randomGenerator);
     return 0;
 }
+
 }  // namespace
 
 TEST(GslTest, LargeDenseLinearRegressionExampleWorks) {
     // This  demonstrates the large dense linear least squares solvers.
-
     constexpr size_t NUMBER_OF_OBSERVATIONS = 100;  // number of observations
     constexpr size_t POLYNOMIAL_ORDER = 16;         // polynomial order + 1
     double lambda = 0.0;                            // regularization parameter
@@ -2136,11 +2153,13 @@ TEST(GslTest, LargeDenseLinearRegressionExampleWorks) {
 }
 
 namespace {
+
 struct ExponentialFittingData {
     int n;
     double *t;
     double *y;
 };
+
 int expb_f(const gsl_vector *x, void *data, gsl_vector *f) {
     int n = static_cast<ExponentialFittingData *>(data)->n;
     double *t = static_cast<ExponentialFittingData *>(data)->t;
@@ -2155,6 +2174,7 @@ int expb_f(const gsl_vector *x, void *data, gsl_vector *f) {
     }
     return GSL_SUCCESS;
 }
+
 int expb_df(const gsl_vector *x, void *data, gsl_matrix *J) {
     int n = static_cast<ExponentialFittingData *>(data)->n;
     double *t = static_cast<ExponentialFittingData *>(data)->t;
@@ -2172,15 +2192,18 @@ int expb_df(const gsl_vector *x, void *data, gsl_matrix *J) {
     }
     return GSL_SUCCESS;
 }
+
 void callback(const size_t iter, void *, const gsl_multifit_nlinear_workspace *workspace) {
     gsl_vector *f = gsl_multifit_nlinear_residual(workspace);
     gsl_vector *x = gsl_multifit_nlinear_position(workspace);
     double rcond = 0;
     // compute reciprocal condition number of J(x)
     gsl_multifit_nlinear_rcond(&rcond, workspace);
-    cout<<"iter "<< iter<<"u: A = "<< gsl_vector_get(x, 0)<<", lambda = "<<
-        gsl_vector_get(x, 1)<<", b = "<< gsl_vector_get(x, 2)<<", cond(J) = "<< 1.0 / rcond<<", |f(x)|!= "<< gsl_blas_dnrm2(f)<<"\n ";
+    cout << "iter " << iter << "u: A = " << gsl_vector_get(x, 0) << ", lambda = " << gsl_vector_get(x, 1)
+         << ", b = " << gsl_vector_get(x, 2) << ", cond(J) = " << 1.0 / rcond << ", |f(x)|!= " << gsl_blas_dnrm2(f)
+         << "\n ";
 }
+
 }  // namespace
 
 TEST(GslTest, ExponentialFittingExampleWorks) {
@@ -2271,7 +2294,6 @@ TEST(GslTest, ExponentialFittingExampleWorks) {
 TEST(GslTest, DerivativesOfBasisSplinesWorks) {
     // This computes and outputs cubic B-splines and their derivatives using 6 breakpoints and uniform
     // knots on the interval [0; 1]. All derivatives up to order 3 are computed.
-
     constexpr int nbreak = 6;
     constexpr int spline_order = 4;
     constexpr int n = 100;
@@ -2307,7 +2329,7 @@ TEST(GslTest, SparseMatricesWorks) {
     // The following example program builds a 5-by-4 sparse matrix and prints it in coordinate,
     // compressed column, and compressed row format.
     gsl_spmatrix *A = gsl_spmatrix_alloc(5, 4);  // triplet format
-    // build the sparse matrix
+                                                 // build the sparse matrix
     gsl_spmatrix_set(A, 0, 2, 3.1);
     gsl_spmatrix_set(A, 0, 3, 4.6);
     gsl_spmatrix_set(A, 1, 0, 1.0);
@@ -2369,7 +2391,6 @@ TEST(GslTest, SparseMatricesWorks) {
 TEST(GslTest, SparseLinearAlgebraWorks) {
     // This example program demonstrates the sparse linear algebra routines on the solution
     // of a simple 1D Poisson equation on [0; 1]:
-
     constexpr int NUMBER_OF_GRID_POINTS = 100;                                 // number of grid points
     constexpr int NUMBER_OF_POINTS = NUMBER_OF_GRID_POINTS - 2;                // subtract 2 to exclude boundaries
     constexpr double h = 1.0 / (NUMBER_OF_GRID_POINTS - 1.0);                  // grid spacing
@@ -2400,8 +2421,9 @@ TEST(GslTest, SparseLinearAlgebraWorks) {
         gsl_vector_set(&fView.vector, i, fi);
     }
     // convert to compressed column format
-    gsl_spmatrix *C = gsl_spmatrix_ccs(A);  {
-    // compressed format
+    gsl_spmatrix *C = gsl_spmatrix_ccs(A);
+    {
+        // compressed format
         // now solve the system with the GMRES iterative solver
         constexpr double tol = 1.0e-6;  // solution relative tolerance
         const gsl_splinalg_itersolve_type *T = gsl_splinalg_itersolve_gmres;
