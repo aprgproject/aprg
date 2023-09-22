@@ -325,7 +325,7 @@ jobs:
         working-directory: ${{ matrix.project }}
         run: |
           echo "gcc version: [$(gcc --version)]"
-          "$buildAndRunScriptPath" cleanAndConfigureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          "$buildAndRunScriptPath" cleanAndConfigureWithGcc "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_RELEASE_NO_FLAGS" "APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STATIC"
             
       - name: Configure for Windows/Clang
         shell: bash
