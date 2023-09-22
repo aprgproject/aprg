@@ -7,6 +7,11 @@ namespace alba::algebra {
 
 class BaseMutator {
 public:
+    BaseMutator() = default;
+    BaseMutator(BaseMutator const &) = default;
+    BaseMutator(BaseMutator &&) = default;
+    BaseMutator &operator=(BaseMutator const &) = default;
+    BaseMutator &operator=(BaseMutator &&) = default;
     virtual ~BaseMutator() = default;  // virtual destructor because of virtual functions (vtable exists)
     virtual void mutateEquation(Equation &equation);
     virtual void mutateTerm(Term &term);

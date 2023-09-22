@@ -5,6 +5,10 @@ namespace alba::algebra {
 class BaseSolver {
 public:
     BaseSolver();
+    BaseSolver(BaseSolver const &) = default;
+    BaseSolver(BaseSolver &&) = default;
+    BaseSolver &operator=(BaseSolver const &) = default;
+    BaseSolver &operator=(BaseSolver &&) = default;
     [[nodiscard]] bool isSolved() const;
     [[nodiscard]] bool isACompleteSolution() const;
 

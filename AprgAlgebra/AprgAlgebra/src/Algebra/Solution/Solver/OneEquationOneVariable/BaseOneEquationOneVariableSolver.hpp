@@ -12,6 +12,10 @@ public:
     // virtual destructor because of virtual functions (vtable exists)
     virtual ~BaseOneEquationOneVariableSolver() = default;
     BaseOneEquationOneVariableSolver() = default;
+    BaseOneEquationOneVariableSolver(BaseOneEquationOneVariableSolver const&) = default;
+    BaseOneEquationOneVariableSolver(BaseOneEquationOneVariableSolver&&) = default;
+    BaseOneEquationOneVariableSolver& operator=(BaseOneEquationOneVariableSolver const&) = default;
+    BaseOneEquationOneVariableSolver& operator=(BaseOneEquationOneVariableSolver&&) = default;
     SolutionSet calculateSolutionAndReturnSolutionSet(Equation const& equation);
 
 protected:
