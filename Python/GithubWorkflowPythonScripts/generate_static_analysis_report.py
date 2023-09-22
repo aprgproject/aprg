@@ -19,7 +19,8 @@ def find_files(directory, filename):
     return found_files
 
 
-REPORT_FILENAME = sys.argv[1]
+#REPORT_FILENAME = sys.argv[1]
+REPORT_FILENAME = "StaticAnalysisReport.txt"
 SCRIPT_DIRECTORY = __file__
 logging.info("Generate Static Analysis Report Script")
 logging.info("The script_directory is [%s]", SCRIPT_DIRECTORY)
@@ -38,7 +39,7 @@ for report_file_path in reports:
     logging.info("Found report_file_path: [%s]", report_file_path)
     with open(report_file_path, 'r', encoding='utf-8') as file:
         for line in file:
-            PATTERN = r'\[(.*?)\]'
+            PATTERN = r'\[([a-zA-Z].*?)\]'
             matches = re.findall(PATTERN, line.strip())
             if matches:
                 for issues_list in matches:
