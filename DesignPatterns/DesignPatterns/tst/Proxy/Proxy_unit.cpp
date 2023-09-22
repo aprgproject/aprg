@@ -7,10 +7,9 @@ using namespace std;
 namespace Proxy {
 
 TEST(ProxyTest, Test1) {
-    auto *proxy = new Proxy();
-    proxy->request();
+    auto proxy = std::make_unique<Proxy>();
 
-    delete proxy;
+    proxy->request();
 }
 
 }  // namespace Proxy

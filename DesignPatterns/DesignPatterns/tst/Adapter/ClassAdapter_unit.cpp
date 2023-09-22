@@ -7,9 +7,9 @@ using namespace std;
 namespace ClassAdapter {
 
 TEST(ClassAdapterTest, Test1) {
-    Target *t = new Adapter();
+    std::unique_ptr<Target> t = std::make_unique<Adapter>();
+
     t->request();
-    delete t;
 }
 
 }  // namespace ClassAdapter

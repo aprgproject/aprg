@@ -7,11 +7,10 @@ using namespace std;
 namespace Facade {
 
 TEST(FacadeTest, Test1) {
-    auto *facade = new Facade();
+    auto facade = std::make_unique<Facade>();
 
     facade->operation1();
     facade->operation2();
-    delete facade;
 }
 
 }  // namespace Facade
