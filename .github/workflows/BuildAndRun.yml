@@ -495,7 +495,7 @@ jobs:
           fi
           echo "asanStatus: [$asanStatus]"
           if [ "$asanStatus" != "0" ]; then
-            echo ASAN failed, so the overall step status is set to failed."
+            echo "ASAN failed, so the overall step status is set to failed."
             overallStepStatus=1
           fi
           echo "msanStatus: [$msanStatus]"
