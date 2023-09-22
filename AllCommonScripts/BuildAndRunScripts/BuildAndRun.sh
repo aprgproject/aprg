@@ -129,37 +129,18 @@ performGenerateCompileCommandsJsonFile() {
 }
 
 performRun(){
+    echo "$PATH"
     cd install/runDirectory
-    choco install dependencywalker
-    choco info dependencywalker
     scriptPrint "$scriptName" "$LINENO" "The current directory is [$(pwd)] and the output of [$lsCommand]:"
     $lsCommand
     for fileInInstall in ./*; do
         if [[ -x "$fileInInstall" ]]; then
             scriptPrint "$scriptName" "$LINENO" "Running executable: [$fileInInstall]."
             if [[ -z "$gtestArgument" ]] || [[ "$gtestArgument" == "--gtest_filter=*.*" ]]; then
-                filename=$(basename "$fileInInstall")
-                set -x
-                file "$filename"
-                if ! command -v "$fileInInstall" &> /dev/null; then
-                    echo "Error: $fileInInstall not found or is not executable"
-                    exit 1
-                fi
-                gdb --ex run "$fileInInstall"
                 set +e
-                "$fileInInstall"
+                "$containerProgram" "$fileInInstall" | tee "$outputLogPath" 2>&1
                 exitStatus="${PIPESTATUS[0]}"
                 set -e
-                touch dependencyOutput.txt 
-                depends.exe /c /f:1 /ot:dependencyOutput.txt "$filename"
-                if [ -e dependencyOutput.txt ]; then
-                    echo "output of dependencyOutput.txt start:"
-                    cat dependencyOutput.txt
-                    echo "output of dependencyOutput.txt end:"
-                else
-                    echo "Error: dependencyOutput.txt not found."
-                fi
-                set +x
                 failingTests=$(sed -n -E 's@^.*\[  FAILED  \]\s+((\w|\.)+)\s+\(.*$@\1@p' "$outputLogPath")
                 scriptPrint "$scriptName" "$LINENO" "The gtest exit status is: [$exitStatus]."
                 scriptPrint "$scriptName" "$LINENO" "The contents of failingTests are: [$failingTests]."
@@ -172,20 +153,16 @@ performRun(){
                         scriptPrint "$scriptName" "$LINENO" "Running the failing tests again..."
                         while IFS= read -r failingTestName; do
                             echo "Running failing test: [$failingTestName]"
-                            set -x
                             set +e
-                            $fileInInstall "--gtest_filter=$failingTestName"
+                            "$containerProgram" "$fileInInstall" "--gtest_filter=$failingTestName"
                             set -e
-                            set +x
                         done <<< "$failingTests"
                     fi
                     exit 1
                 fi
                 
             else 
-                set -x
-                $fileInInstall "$gtestArgument"
-                set +x
+                "$containerProgram" "$fileInInstall" "$gtestArgument"
             fi
         fi
     done
