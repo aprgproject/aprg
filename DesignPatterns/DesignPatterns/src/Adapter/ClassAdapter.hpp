@@ -7,6 +7,11 @@ namespace ClassAdapter {
 class Target {
 public:
     virtual ~Target() = default;
+    Target() = default;
+    Target(Target const &) = default;
+    Target(Target &&) = default;
+    Target &operator=(Target const &) = default;
+    Target &operator=(Target &&) = default;
     virtual void request() = 0;
     // ...
 };

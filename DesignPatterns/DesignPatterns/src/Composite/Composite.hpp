@@ -10,6 +10,11 @@ namespace Composite {
 class Component {
 public:
     virtual ~Component() = default;
+    Component() = default;
+    Component(Component const&) = default;
+    Component(Component &&) = default;
+    Component &operator=(Component const &) = default;
+    Component &operator=(Component &&) = default;
 
     [[nodiscard]] virtual Component const* getChildPointerAt(int const) const {
         // method/function makes sense.)

@@ -7,9 +7,9 @@ namespace Builder {
 // the final object that will be created using Builder
 class Product {
 public:
-    void makeA(std::string const& part) { m_partA = part; }
-    void makeB(std::string const& part) { m_partB = part; }
-    void makeC(std::string const& part) { m_partC = part; }
+    void makeA(std::string const &part) { m_partA = part; }
+    void makeB(std::string const &part) { m_partB = part; }
+    void makeC(std::string const &part) { m_partC = part; }
     std::string getProduct() { return (m_partA + " " + m_partB + " " + m_partC); }
 
     // ...
@@ -25,6 +25,11 @@ private:
 class Builder {
 public:
     virtual ~Builder() = default;
+    Builder() = default;
+    Builder(Builder const &) = default;
+    Builder(Builder &&) = default;
+    Builder &operator=(Builder const &) = default;
+    Builder &operator=(Builder &&) = default;
     virtual void buildPartA() = 0;
     virtual void buildPartB() = 0;
     virtual void buildPartC() = 0;

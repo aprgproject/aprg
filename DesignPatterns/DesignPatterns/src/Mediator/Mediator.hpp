@@ -12,6 +12,10 @@ class Mediator;
 class Colleague {
 public:
     virtual ~Colleague() = default;
+    Colleague(Colleague const&) = default;
+    Colleague(Colleague&&) = default;
+    Colleague& operator=(Colleague const&) = default;
+    Colleague& operator=(Colleague&&) = default;
     Colleague(Mediator& mediator, const int id) : m_mediator(mediator), m_id(id) {}
     virtual void send(std::string const&) = 0;
     virtual void receive(std::string const&) = 0;
@@ -34,6 +38,10 @@ public:
 class Mediator {
 public:
     virtual ~Mediator() = default;
+    Mediator(Mediator const&) = default;
+    Mediator(Mediator&&) = default;
+    Mediator& operator=(Mediator const&) = default;
+    Mediator& operator=(Mediator&&) = default;
     virtual void add(Colleague& colleague) = 0;
     virtual void distribute(Colleague const& sender, std::string const& message) = 0;
 

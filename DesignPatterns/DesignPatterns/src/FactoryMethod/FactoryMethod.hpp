@@ -9,6 +9,11 @@ namespace FactoryMethod {
 class Product {
 public:
     virtual ~Product() = default;
+    Product() = default;
+    Product(Product const &) = default;
+    Product(Product &&) = default;
+    Product &operator=(Product const &) = default;
+    Product &operator=(Product &&) = default;
     [[nodiscard]] virtual std::string getName() const = 0;
     // ...
 };
@@ -35,6 +40,11 @@ public:
 class Creator {
 public:
     virtual ~Creator() = default;
+    Creator() = default;
+    Creator(Creator const &) = default;
+    Creator(Creator &&) = default;
+    Creator &operator=(Creator const &) = default;
+    Creator &operator=(Creator &&) = default;
     [[nodiscard]] virtual std::unique_ptr<Product> createProduct() const = 0;
     // ...
 };

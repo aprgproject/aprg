@@ -11,6 +11,11 @@ class Subject;
 class Observer {
 public:
     virtual ~Observer() = default;
+    Observer() = default;
+    Observer(Observer const&) = default;
+    Observer(Observer&&) = default;
+    Observer& operator=(Observer const&) = default;
+    Observer& operator=(Observer&&) = default;
     [[nodiscard]] virtual int getState() const = 0;
     virtual void update(Subject const* const subject) = 0;
     // ...
@@ -37,6 +42,11 @@ private:
 class Subject {
 public:
     virtual ~Subject() = default;
+    Subject() = default;
+    Subject(Subject const&) = default;
+    Subject(Subject&&) = default;
+    Subject& operator=(Subject const&) = default;
+    Subject& operator=(Subject&&) = default;
     [[nodiscard]] virtual int getState() const = 0;
     virtual void setState(const int s) = 0;
     void attach(Observer* observer) { m_observerPointers.emplace_back(observer); }

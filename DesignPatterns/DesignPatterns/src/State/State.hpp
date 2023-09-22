@@ -9,6 +9,11 @@ namespace State {
 class State {
 public:
     virtual ~State() = default;
+    State() = default;
+    State(State const&) = default;
+    State(State &&) = default;
+    State &operator=(State const &) = default;
+    State &operator=(State &&) = default;
     virtual void handle() = 0;
     // ...
 };

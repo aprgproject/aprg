@@ -13,6 +13,11 @@ class ConcreteAggregate;
 class Aggregate {
 public:
     virtual ~Aggregate() = default;
+    Aggregate() = default;
+    Aggregate(Aggregate const&) = default;
+    Aggregate(Aggregate &&) = default;
+    Aggregate &operator=(Aggregate const &) = default;
+    Aggregate &operator=(Aggregate &&) = default;
     virtual std::unique_ptr<Iterator> createIterator() = 0;
     // ...
 };
@@ -40,6 +45,11 @@ private:
 class Iterator {
 public:
     virtual ~Iterator() = default;
+    Iterator() = default;
+    Iterator(Iterator const&) = default;
+    Iterator(Iterator &&) = default;
+    Iterator &operator=(Iterator const &) = default;
+    Iterator &operator=(Iterator &&) = default;
     [[nodiscard]] virtual int getCurrentItem() const = 0;
     [[nodiscard]] virtual bool isDone() const = 0;
     virtual void gotoFirst() = 0;

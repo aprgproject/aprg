@@ -8,6 +8,11 @@ namespace Bridge {
 class Implementor {
 public:
     virtual ~Implementor() = default;
+    Implementor() = default;
+    Implementor(Implementor const &) = default;
+    Implementor(Implementor &&) = default;
+    Implementor &operator=(Implementor const &) = default;
+    Implementor &operator=(Implementor &&) = default;
     virtual void action() = 0;
     // ...
 };
@@ -31,6 +36,11 @@ public:
 class Abstraction {
 public:
     virtual ~Abstraction() = default;
+    Abstraction() = default;
+    Abstraction(Abstraction const &) = default;
+    Abstraction(Abstraction &&) = default;
+    Abstraction &operator=(Abstraction const &) = default;
+    Abstraction &operator=(Abstraction &&) = default;
     virtual void operation() = 0;
     // ...
 };

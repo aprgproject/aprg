@@ -9,6 +9,11 @@ namespace Proxy {
 class Subject {
 public:
     virtual ~Subject() = default;
+    Subject() = default;
+    Subject(Subject const &) = default;
+    Subject(Subject &&) = default;
+    Subject &operator=(Subject const &) = default;
+    Subject &operator=(Subject &&) = default;
     virtual void request() = 0;
     // ...
 };

@@ -7,6 +7,11 @@ namespace TemplateMethod {
 class AbstractClass {
 public:
     virtual ~AbstractClass() = default;
+    AbstractClass() = default;
+    AbstractClass(AbstractClass const &) = default;
+    AbstractClass(AbstractClass &&) = default;
+    AbstractClass &operator=(AbstractClass const &) = default;
+    AbstractClass &operator=(AbstractClass &&) = default;
 
     void templateMethod() {
         // should NOT be "virtual" or should be marked as "final"

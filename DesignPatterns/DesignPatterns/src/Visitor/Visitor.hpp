@@ -12,8 +12,13 @@ class ConcreteElementB;
 class Visitor {
 public:
     virtual ~Visitor() = default;
-    virtual void visitElementA(ConcreteElementA* const) = 0;
-    virtual void visitElementB(ConcreteElementB* const) = 0;
+    Visitor() = default;
+    Visitor(Visitor const &) = default;
+    Visitor(Visitor &&) = default;
+    Visitor &operator=(Visitor const &) = default;
+    Visitor &operator=(Visitor &&) = default;
+    virtual void visitElementA(ConcreteElementA *const) = 0;
+    virtual void visitElementB(ConcreteElementB *const) = 0;
     // ...
 };
 
@@ -23,15 +28,15 @@ public:
 // of object in the structure
 class ConcreteVisitor1 : public Visitor {
 public:
-    void visitElementA(ConcreteElementA* const) override { std::cout << "Concrete Visitor 1: Element A visited.\n"; }
-    void visitElementB(ConcreteElementB* const) override { std::cout << "Concrete Visitor 1: Element B visited.\n"; }
+    void visitElementA(ConcreteElementA *const) override { std::cout << "Concrete Visitor 1: Element A visited.\n"; }
+    void visitElementB(ConcreteElementB *const) override { std::cout << "Concrete Visitor 1: Element B visited.\n"; }
     // ...
 };
 
 class ConcreteVisitor2 : public Visitor {
 public:
-    void visitElementA(ConcreteElementA* const) override { std::cout << "Concrete Visitor 2: Element A visited.\n"; }
-    void visitElementB(ConcreteElementB* const) override { std::cout << "Concrete Visitor 2: Element B visited.\n"; }
+    void visitElementA(ConcreteElementA *const) override { std::cout << "Concrete Visitor 2: Element A visited.\n"; }
+    void visitElementB(ConcreteElementB *const) override { std::cout << "Concrete Visitor 2: Element B visited.\n"; }
     // ...
 };
 
@@ -40,7 +45,12 @@ public:
 class Element {
 public:
     virtual ~Element() = default;
-    virtual void accept(Visitor& visitor) = 0;
+    Element() = default;
+    Element(Element const &) = default;
+    Element(Element &&) = default;
+    Element &operator=(Element const &) = default;
+    Element &operator=(Element &&) = default;
+    virtual void accept(Visitor &visitor) = 0;
     // ...
 };
 
@@ -48,13 +58,13 @@ public:
 // implement an accept operation that takes a visitor as an argument
 class ConcreteElementA : public Element {
 public:
-    void accept(Visitor& visitor) override { visitor.visitElementA(this); }
+    void accept(Visitor &visitor) override { visitor.visitElementA(this); }
     // ...
 };
 
 class ConcreteElementB : public Element {
 public:
-    void accept(Visitor& visitor) override { visitor.visitElementB(this); }
+    void accept(Visitor &visitor) override { visitor.visitElementB(this); }
     // ...
 };
 

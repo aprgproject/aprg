@@ -23,6 +23,11 @@ private:
 class AbstractExpression {
 public:
     virtual ~AbstractExpression() = default;
+    AbstractExpression() = default;
+    AbstractExpression(AbstractExpression const&) = default;
+    AbstractExpression(AbstractExpression&&) = default;
+    AbstractExpression& operator=(AbstractExpression const&) = default;
+    AbstractExpression& operator=(AbstractExpression&&) = default;
     virtual int interpret(Context const&) = 0;
     // ...
 };

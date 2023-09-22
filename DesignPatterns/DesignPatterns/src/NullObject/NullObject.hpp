@@ -9,6 +9,11 @@ namespace NullObject {
 class AbstractObject {
 public:
     virtual ~AbstractObject() = default;
+    AbstractObject() = default;
+    AbstractObject(AbstractObject const &) = default;
+    AbstractObject(AbstractObject &&) = default;
+    AbstractObject &operator=(AbstractObject const &) = default;
+    AbstractObject &operator=(AbstractObject &&) = default;
     virtual void doSomething() = 0;
     // ...
 };

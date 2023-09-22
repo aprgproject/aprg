@@ -10,6 +10,11 @@ namespace Flyweight {
 class Flyweight {
 public:
     virtual ~Flyweight() = default;
+    Flyweight() = default;
+    Flyweight(Flyweight const &) = default;
+    Flyweight(Flyweight &&) = default;
+    Flyweight &operator=(Flyweight const &) = default;
+    Flyweight &operator=(Flyweight &&) = default;
     virtual void operation(int const extrinsicState) = 0;
     // ...
 };
@@ -18,7 +23,7 @@ public:
 // implements the Flyweight interface and adds storage for intrinsic state
 class SharedConcreteFlyweight : public Flyweight {
 public:
-    explicit SharedConcreteFlyweight(int& intrinsicState) : m_sharedIntrinsicState(intrinsicState) {}
+    explicit SharedConcreteFlyweight(int &intrinsicState) : m_sharedIntrinsicState(intrinsicState) {}
 
     void operation(int const extrinsicState) override {
         std::cout << "Concrete Flyweight with extrinsicState " << extrinsicState
@@ -27,7 +32,7 @@ public:
 
     // ...
 private:
-    int& m_sharedIntrinsicState;  // This might be different on the example of the book (we store it as reference).
+    int &m_sharedIntrinsicState;  // This might be different on the example of the book (we store it as reference).
     // ...
 };
 

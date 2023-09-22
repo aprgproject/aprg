@@ -8,6 +8,11 @@ namespace Strategy {
 class Strategy {
 public:
     virtual ~Strategy() = default;  // polymorphic destruction
+    Strategy() = default;
+    Strategy(Strategy const &) = default;
+    Strategy(Strategy &&) = default;
+    Strategy &operator=(Strategy const &) = default;
+    Strategy &operator=(Strategy &&) = default;
     virtual void algorithmInterface() = 0;
     // ...
 };

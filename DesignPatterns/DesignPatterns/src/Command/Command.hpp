@@ -21,6 +21,10 @@ private:
 class Command {
 public:
     virtual ~Command() = default;
+    Command(Command const &) = default;
+    Command(Command &&) = default;
+    Command &operator=(Command const &) = default;
+    Command &operator=(Command &&) = default;
     virtual void execute() = 0;
     virtual void undo() = 0;
 
@@ -34,13 +38,13 @@ protected:
 // operation(s) on Receiver
 class ConcreteCommand : public Command {
 public:
-    explicit ConcreteCommand(Receiver& receiver) : m_receiver(receiver) {}
+    explicit ConcreteCommand(Receiver &receiver) : m_receiver(receiver) {}
     void execute() override { m_receiver.action(); }
     void undo() override { m_receiver.reverseAction(); }
 
     // ...
 private:
-    Receiver& m_receiver;
+    Receiver &m_receiver;
     // ...
 };
 
@@ -49,7 +53,7 @@ private:
 class Invoker {
 public:
     Invoker() = default;
-    void setCommand(Command* command) { m_command = command; }
+    void setCommand(Command *command) { m_command = command; }
 
     void invoke() {
         if (m_command != nullptr) {
@@ -65,7 +69,7 @@ public:
 
     // ...
 private:
-    Command* m_command{nullptr};  // can be reference if you can but it will need the command on constructor
+    Command *m_command{nullptr};  // can be reference if you can but it will need the command on constructor
     // ...
 };
 

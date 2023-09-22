@@ -9,6 +9,11 @@ namespace AbstractFactory {
 class ProductA {
 public:
     virtual ~ProductA() = default;
+    ProductA() = default;
+    ProductA(ProductA const &) = default;
+    ProductA(ProductA &&) = default;
+    ProductA &operator=(ProductA const &) = default;
+    ProductA &operator=(ProductA &&) = default;
     [[nodiscard]] virtual std::string getName() const = 0;
     // ...
 };
@@ -33,6 +38,11 @@ public:
 class ProductB {
 public:
     virtual ~ProductB() = default;
+    ProductB() = default;
+    ProductB(ProductB const &) = default;
+    ProductB(ProductB &&) = default;
+    ProductB &operator=(ProductB const &) = default;
+    ProductB &operator=(ProductB &&) = default;
     [[nodiscard]] virtual std::string getName() const = 0;
     // ...
 };
@@ -56,6 +66,11 @@ public:
 class AbstractFactory {
 public:
     virtual ~AbstractFactory() = default;
+    AbstractFactory() = default;
+    AbstractFactory(AbstractFactory const &) = default;
+    AbstractFactory(AbstractFactory &&) = default;
+    AbstractFactory &operator=(AbstractFactory const &) = default;
+    AbstractFactory &operator=(AbstractFactory &&) = default;
     [[nodiscard]] virtual std::unique_ptr<ProductA> createProductA() const = 0;
     [[nodiscard]] virtual std::unique_ptr<ProductB> createProductB() const = 0;
 };

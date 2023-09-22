@@ -9,6 +9,11 @@ namespace Decorator {
 class Component {
 public:
     virtual ~Component() = default;
+    Component() = default;
+    Component(Component const &) = default;
+    Component(Component &&) = default;
+    Component &operator=(Component const &) = default;
+    Component &operator=(Component &&) = default;
     virtual void operation() = 0;
     // ...
 };
