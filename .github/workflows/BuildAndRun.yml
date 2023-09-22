@@ -359,13 +359,27 @@ jobs:
         run: |
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
 
+      - name: Set additional step status
+        shell: bash
+        working-directory: ${{ matrix.project }}
+        run: |
+          echo "additionalStepStatus=0" >> "$GITHUB_ENV"
+
       - name: Run with valgrind
         shell: bash
         continue-on-error: true
         if: matrix.configurationName == 'UbuntuLatestGcc' && inputs.enableValgrind
         working-directory: ${{ matrix.project }}
         run: |
+          set +e
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }} valgrind
+          set -e
+          stepStatus=$?
+          echo "stepStatus: [$stepStatus]"
+          if [ "$stepStatus" != "0" ]; then
+            echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
+          fi
+          echo "additionalStepStatus: [$additionalStepStatus]"
             
       - name: Build and Run with Address Sanitizer
         shell: bash
@@ -375,9 +389,17 @@ jobs:
         run: |
           "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_ASAN"
           echo "Building and running with ASAN..."
+          set +e
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+          set -e
+          stepStatus=$?
+          echo "stepStatus: [$stepStatus]"
+          if [ "$stepStatus" != "0" ]; then
+            echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
+          fi
+          echo "additionalStepStatus: [$additionalStepStatus]"
             
       - name: Build and Run with Memory Sanitizer
         shell: bash
@@ -387,9 +409,17 @@ jobs:
         run: |
           "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_MSAN"
           echo "Building and running with MSAN..."
+          set +e
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+          set -e
+          stepStatus=$?
+          echo "stepStatus: [$stepStatus]"
+          if [ "$stepStatus" != "0" ]; then
+            echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
+          fi
+          echo "additionalStepStatus: [$additionalStepStatus]"
             
       - name: Build and Run with Thread Sanitizer
         shell: bash
@@ -399,9 +429,17 @@ jobs:
         run: |
           "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_TSAN"
           echo "Building and running with TSAN..."
+          set +e
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+          set -e
+          stepStatus=$?
+          echo "stepStatus: [$stepStatus]"
+          if [ "$stepStatus" != "0" ]; then
+            echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
+          fi
+          echo "additionalStepStatus: [$additionalStepStatus]"
             
       - name: Build and Run with Undefined Behavior Sanitizer
         shell: bash
@@ -411,9 +449,17 @@ jobs:
         run: |
           "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_UBSAN"
           echo "Building and running with UBSAN..."
+          set +e
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+          set -e
+          stepStatus=$?
+          echo "stepStatus: [$stepStatus]"
+          if [ "$stepStatus" != "0" ]; then
+            echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
+          fi
+          echo "additionalStepStatus: [$additionalStepStatus]"
             
       - name: Run with Clang Static Analyzer
         shell: bash
@@ -422,7 +468,15 @@ jobs:
         working-directory: ${{ matrix.project }}
         run: |
           echo "Running Clang Static Analysis..."
+          set +e
           "$buildAndRunScriptPath" cleanAndConfigureWithClangStaticAnalyzer "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          set -e
+          stepStatus=$?
+          echo "stepStatus: [$stepStatus]"
+          if [ "$stepStatus" != "0" ]; then
+            echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
+          fi
+          echo "additionalStepStatus: [$additionalStepStatus]"
             
       - name: Build and Run with Static Analyzers
         shell: bash
@@ -432,6 +486,19 @@ jobs:
         run: |
           "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
           echo "Running Static Analysis..."
+          set +e
           "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+          set -e
+          stepStatus=$?
+          echo "stepStatus: [$stepStatus]"
+          if [ "$stepStatus" != "0" ]; then
+            echo "additionalStepStatus=$stepStatus" >> "$GITHUB_ENV"
+          fi
+          echo "additionalStepStatus: [$additionalStepStatus]"
+          
+      - name: Check overall additional step status
+        shell: bash
+        run: |
+          exit $additionalStepStatus
