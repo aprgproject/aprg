@@ -8,7 +8,13 @@ namespace alba::booleanAlgebra {
 template <typename DataType>
 class BaseRetriever {
 public:
-    virtual ~BaseRetriever() = default;  // virtual destructor because of virtual functions (vtable exists)
+    // virtual destructor because of virtual functions (vtable exists)
+    virtual ~BaseRetriever() = default;
+    BaseRetriever() = default;
+    BaseRetriever(BaseRetriever const&) = default;
+    BaseRetriever(BaseRetriever&&) = default;
+    BaseRetriever& operator=(BaseRetriever const&) = default;
+    BaseRetriever& operator=(BaseRetriever&&) = default;
 
     virtual void retrieveFromTerm(Term const& term) {
         if (term.isConstant()) {
