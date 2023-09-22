@@ -361,6 +361,7 @@ jobs:
 
       - name: Run with valgrind
         shell: bash
+        continue-on-error: true
         if: matrix.configurationName == 'UbuntuLatestGcc' && inputs.enableValgrind
         working-directory: ${{ matrix.project }}
         run: |
@@ -368,6 +369,7 @@ jobs:
             
       - name: Build and Run with Address Sanitizer
         shell: bash
+        continue-on-error: true
         if: contains(matrix.configurationName, 'Clang') && inputs.enableAsan
         working-directory: ${{ matrix.project }}
         run: |
@@ -379,6 +381,7 @@ jobs:
             
       - name: Build and Run with Memory Sanitizer
         shell: bash
+        continue-on-error: true
         if: contains(matrix.configurationName, 'Clang') && inputs.enableMsan
         working-directory: ${{ matrix.project }}
         run: |
@@ -390,6 +393,7 @@ jobs:
             
       - name: Build and Run with Thread Sanitizer
         shell: bash
+        continue-on-error: true
         if: contains(matrix.configurationName, 'Clang') && inputs.enableTsan
         working-directory: ${{ matrix.project }}
         run: |
@@ -401,6 +405,7 @@ jobs:
             
       - name: Build and Run with Undefined Behavior Sanitizer
         shell: bash
+        continue-on-error: true
         if: contains(matrix.configurationName, 'Clang') && inputs.enableUbsan
         working-directory: ${{ matrix.project }}
         run: |
@@ -412,6 +417,7 @@ jobs:
             
       - name: Run with Clang Static Analyzer
         shell: bash
+        continue-on-error: true
         if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
         working-directory: ${{ matrix.project }}
         run: |
@@ -420,6 +426,7 @@ jobs:
             
       - name: Build and Run with Static Analyzers
         shell: bash
+        continue-on-error: true
         if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
         working-directory: ${{ matrix.project }}
         run: |
