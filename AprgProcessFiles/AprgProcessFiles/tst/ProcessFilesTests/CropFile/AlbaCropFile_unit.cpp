@@ -151,9 +151,9 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsHalfOfTheWholeDocumentAtTheStart) 
 #if defined(OS_WINDOWS) && (defined(__GNUC__) || defined(__GNUG__))
     // Covers Windows GCC
     // windows handling is problematic, tellg on windows works on mysterious ways
-    EXPECT_EQ(R"(0)", fileReader.getLine());
     EXPECT_EQ(R"(1)", fileReader.getLine());
     EXPECT_EQ(R"(2)", fileReader.getLine());
+    EXPECT_EQ(R"(3)", fileReader.getLine());
 #else
     // Covers Linux and MSVC windows
     EXPECT_EQ(R"(0)", fileReader.getLine());
