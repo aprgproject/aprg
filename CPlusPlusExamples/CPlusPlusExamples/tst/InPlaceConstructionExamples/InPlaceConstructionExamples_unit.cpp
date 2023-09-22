@@ -25,10 +25,10 @@ struct S {
     S(int, int) { cout << "Explicit value construct (2)\n"; }
     // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     ~S() { cout << "Destruct\n"; }
-    S(S const&) { cout << "Copy construct\n"; }
-    S(S&&) noexcept { cout << "Move construct\n"; }
+    S(S const &) { cout << "Copy construct\n"; }
+    S(S &&) noexcept { cout << "Move construct\n"; }
 
-    S& operator=(S const& rhs) {
+    S &operator=(S const &rhs) {
         if (this == &rhs) {
             return *this;
         }
@@ -36,7 +36,7 @@ struct S {
         return *this;
     }
 
-    S& operator=(S&&) noexcept {
+    S &operator=(S &&) noexcept {
         cout << "Move assign\n";
         return *this;
     }
@@ -152,7 +152,10 @@ namespace MultipleExamplesOfRvo {
 
 struct MoveOnlyConstExprObject {
     constexpr MoveOnlyConstExprObject() = default;
-    constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject&&) noexcept : x{1} {}
+    constexpr MoveOnlyConstExprObject &operator=(MoveOnlyConstExprObject &&) = default;
+    constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject const &) = delete;
+    constexpr MoveOnlyConstExprObject &operator=(MoveOnlyConstExprObject const &) = delete;
+    constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject &&) noexcept : x{1} {}
     int x{0};
 };
 
@@ -305,7 +308,7 @@ TEST(InPlaceConstructionExamplesTest, VectorPushBackVsEmplaceBack) {
     // ---> "I don't like that view, I don't login to my computer as root."
     // ---> "I like to use the least powerful thing that is available to me."
     // ---> "It helps the reader of my code, theres gonna be a copy here and I can't do anything better."
-    string const& s2 = v.emplace_back();  // first default construct in the vector
+    string const &s2 = v.emplace_back();  // first default construct in the vector
                                           // after emplace_back we can mutate s2
     // emplace_back takes a parameter pack and parameter packs can be empty
     // emplace_back does perfect forwarding. It can call explicit constructors;
@@ -382,7 +385,7 @@ TEST(InPlaceConstructionExamplesTest, AvoidSuperfluousMovesDueToExplicitConstruc
 namespace CreatingAVectorOfPairs {
 
 struct Value {
-    Value(int, string const&, double) {}
+    Value(int, string const &, double) {}
 };
 
 TEST(InPlaceConstructionExamplesTest, CreatingAVectorOfPairs) {

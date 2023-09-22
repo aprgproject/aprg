@@ -11,8 +11,12 @@ constexpr int constInteger = 100;  // implicity inline (external linkage)
 // ---> This is to guarantee that its defined in every translation unit and have same address (otherwise its ill formed)
 // ---> Its nightmare to maintain multiple definitions of the function and make sure its the same
 struct SampleClassWithInline {
-    SampleClassWithInline& operator=(SampleClassWithInline const&) = delete;  // implicitly inline
-    // (can appear in more than one translation unit)
+    SampleClassWithInline() = default;
+    SampleClassWithInline(SampleClassWithInline const &) = delete;
+    SampleClassWithInline(SampleClassWithInline &&) = delete;
+    // implicitly inline (can appear in more than one translation unit)
+    SampleClassWithInline &operator=(SampleClassWithInline const &) = delete;
+    SampleClassWithInline &operator=(SampleClassWithInline &&) = delete;
     static constexpr int constIntegerInClass = 1000;  // implicity inline (external linkage)
 };
 
