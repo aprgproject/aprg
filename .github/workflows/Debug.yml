@@ -33,8 +33,10 @@ jobs:
           #ninja --version
           #command -v cmake
           #command -v ninja
-          choco install dependencywalker
-          choco info dependencywalker
-          depends.exe
-          command -v depends.exe
+          set +x
+          valgrind
+          valgrind -v
+          which gcc | xargs -t gcc --version
+          dpkg --list | grep compiler
+          set -x
           
