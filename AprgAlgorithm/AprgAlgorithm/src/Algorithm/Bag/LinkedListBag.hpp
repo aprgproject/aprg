@@ -24,8 +24,7 @@ public:
     [[nodiscard]] bool isEmpty() const override { return m_size == 0; }
 
     void add(Object const& object) override {
-        NodeUniquePointer newNext(std::move(m_first));
-        m_first.reset(new Node{object, std::move(newNext)});
+        m_first = NodeUniquePointer(new Node{object, std::move(m_first)});
         ++m_size;
     }
 

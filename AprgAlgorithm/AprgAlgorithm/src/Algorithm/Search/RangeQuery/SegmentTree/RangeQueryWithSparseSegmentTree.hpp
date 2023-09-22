@@ -71,7 +71,7 @@ protected:
         Index const baseRight) {
         // This has log(N) running time
         if (!nodePointer) {
-            nodePointer.reset(new Node{m_defaultValue, nullptr, nullptr});
+            nodePointer = NodePointer(new Node{m_defaultValue, nullptr, nullptr});
         }
         if (baseLeft == baseRight) {
             nodePointer->value = valueToSet;
@@ -94,7 +94,7 @@ protected:
         // This has log(N) running time
         Value result{};
         if (!nodePointer) {
-            nodePointer.reset(new Node{m_defaultValue, nullptr, nullptr});
+            nodePointer = NodePointer(new Node{m_defaultValue, nullptr, nullptr});
         }
         if (startInterval <= baseLeft && baseRight <= endInterval) {
             result = nodePointer->value;

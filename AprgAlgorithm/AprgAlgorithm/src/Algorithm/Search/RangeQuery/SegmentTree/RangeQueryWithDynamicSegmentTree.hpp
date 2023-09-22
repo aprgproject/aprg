@@ -96,7 +96,7 @@ private:
         Values const& values, NodePointer& nodePointer, Index const baseLeft, Index const baseRight) {
         // This has log(N) running time
         if (!nodePointer) {
-            nodePointer.reset(new Node{Value{}, nullptr, nullptr});
+            nodePointer = NodePointer(new Node{Value{}, nullptr, nullptr});
         }
         if (baseLeft == baseRight) {
             nodePointer->value = values[baseLeft];

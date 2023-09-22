@@ -40,7 +40,7 @@ public:
             }
         }
         if (!isFound) {
-            b_entryPointers[i].reset(new Entry{key, value});
+            b_entryPointers[i] = EntryUniquePointer(new Entry{key, value});
         }
         ++b_size;
     }

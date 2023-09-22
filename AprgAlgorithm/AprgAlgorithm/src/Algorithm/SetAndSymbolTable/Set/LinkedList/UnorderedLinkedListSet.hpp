@@ -24,8 +24,7 @@ public:
             }
         });
         if (!isKeyFound) {
-            NodeUniquePointer newNext(std::move(b_first));
-            b_first.reset(new Node{key, std::move(newNext)});
+            b_first = NodeUniquePointer(new Node{key, std::move(b_first)});
             ++b_size;
         }
     }

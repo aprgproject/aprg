@@ -29,7 +29,7 @@ protected:
         } else {
             // every new node created has a red link -> this corresponds in 2-3 trees a change on node number (1 becomes
             // 2, 2 become 3, 3 becomes 4)
-            nodePointer.reset(new Node{key, nullptr, nullptr, 1, RedBlackColor::Red});
+            nodePointer = NodeUniquePointer(new Node{key, nullptr, nullptr, 1, RedBlackColor::Red});
         }
     }
 };

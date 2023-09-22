@@ -11,8 +11,8 @@ namespace alba::algorithm {
 template <typename Object>
 class DoublingSizeCircularQueue : public BaseQueue<Object> {
 public:
-    ~DoublingSizeCircularQueue() override { deleteAllObjects(); }
-    DoublingSizeCircularQueue() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
+    ~DoublingSizeCircularQueue() override = default;
+    DoublingSizeCircularQueue() { initialize(MINUMUM_CONTAINER_SIZE); }
 
     [[nodiscard]] int getSize() const override {
         if (m_firstIndex <= m_afterLastIndex) {
@@ -42,16 +42,9 @@ public:
     static constexpr int MINUMUM_CONTAINER_SIZE = 1;
 
 private:
-    void deleteAllObjects() {
-        delete[] m_objects;
-        m_objects = nullptr;
-    }
-
     void initialize(int const initialSize) {
-        if (m_objects == nullptr) {
-            m_objects = new Object[initialSize];
-            m_containerSize = initialSize;
-        }
+        m_objects = std::make_unique<Object[]>(initialSize);
+        m_containerSize = initialSize;
     }
 
     void moveBackIndexIfNeeded(int& index) {
@@ -61,19 +54,20 @@ private:
     }
 
     void resize(int const newSize) {
-        auto* newObjects = new Object[newSize];
+        auto newObjects = std::make_unique<Object[]>(newSize);
         if (m_objects != nullptr) {
             if (m_firstIndex <= m_afterLastIndex) {
-                std::copy(m_objects + m_firstIndex, m_objects + m_afterLastIndex, newObjects);
+                std::copy(m_objects.get() + m_firstIndex, m_objects.get() + m_afterLastIndex, newObjects.get());
             } else {
-                std::copy(m_objects + m_firstIndex, m_objects + m_containerSize, newObjects);
-                std::copy(m_objects, m_objects + m_afterLastIndex, newObjects + m_containerSize - m_firstIndex);
+                std::copy(m_objects.get() + m_firstIndex, m_objects.get() + m_containerSize, newObjects.get());
+                std::copy(
+                    m_objects.get(), m_objects.get() + m_afterLastIndex,
+                    newObjects.get() + m_containerSize - m_firstIndex);
             }
-            delete[](m_objects);
         }
         m_afterLastIndex = getSize();
         m_firstIndex = 0;
-        m_objects = newObjects;
+        swap(m_objects, newObjects);
         m_containerSize = newSize;
     }
 
@@ -92,7 +86,7 @@ private:
     int m_containerSize{0};
     int m_firstIndex{0};
     int m_afterLastIndex{0};
-    Object* m_objects;
+    std::unique_ptr<Object[]> m_objects;
 };
 
 }  // namespace alba::algorithm

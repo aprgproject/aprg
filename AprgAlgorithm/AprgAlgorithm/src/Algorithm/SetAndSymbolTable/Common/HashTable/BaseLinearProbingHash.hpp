@@ -18,9 +18,9 @@ public:
     using Entry = EntryTemplateType;
     using Keys = std::vector<Key>;
     using EntryUniquePointer = std::unique_ptr<Entry>;
-    using EntryPointers = EntryUniquePointer*;
+    using EntryPointers = std::unique_ptr<EntryUniquePointer[]>;
     // virtual destructor because of virtual functions (vtable exists)
-    ~BaseLinearProbingHash() override { deleteAllEntries(); }
+    ~BaseLinearProbingHash() override = default;
     BaseLinearProbingHash() : m_entryPointers(nullptr) { initialize(INITIAL_HASH_TABLE_SIZE); }
 
     [[nodiscard]] Key getMinimum() const override {
@@ -147,11 +147,6 @@ protected:
     [[nodiscard]] int getHash(Key const& key) const { return HashFunction::getHash(key); }
     void incrementHashTableIndexWithWrapAround(int& index) const { index = (index + 1) % m_hashTableSize; }
 
-    void deleteAllEntries() {
-        delete[] m_entryPointers;
-        m_entryPointers = nullptr;
-    }
-
     void deleteEntryOnIndex(int const index) {
         m_entryPointers[index].reset();
         --m_size;
@@ -159,16 +154,16 @@ protected:
 
     void initialize(int const initialSize) {
         if (m_entryPointers == nullptr) {
-            m_entryPointers = new EntryUniquePointer[initialSize];
+            m_entryPointers = std::make_unique<EntryUniquePointer[]>(initialSize);
             m_hashTableSize = initialSize;
         }
     }
 
     void resize(int const newHashTableSize) {
-        EntryPointers oldEntryPointers = m_entryPointers;
+        EntryPointers oldEntryPointers = std::move(m_entryPointers);
         int const oldHashTableSize = m_hashTableSize;
         m_size = 0;
-        m_entryPointers = new EntryUniquePointer[newHashTableSize]();
+        m_entryPointers = std::make_unique<EntryUniquePointer[]>(newHashTableSize);
         m_hashTableSize = newHashTableSize;
         for (int i = 0; i < oldHashTableSize; ++i) {
             EntryUniquePointer const& entryPointer(oldEntryPointers[i]);
@@ -176,8 +171,6 @@ protected:
                 putEntry(*entryPointer);
             }
         }
-        delete[] oldEntryPointers;
-        oldEntryPointers = nullptr;
     }
 
     void resizeOnPutIfNeeded() {

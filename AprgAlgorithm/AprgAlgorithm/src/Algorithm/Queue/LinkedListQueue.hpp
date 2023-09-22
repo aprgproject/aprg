@@ -23,7 +23,7 @@ public:
     [[nodiscard]] bool isEmpty() const override { return m_first == nullptr; }
 
     void enqueue(Object const& object) override {
-        m_nextOfLastDoublePointer->reset(new Node{object, nullptr});
+        *m_nextOfLastDoublePointer = NodeUniquePointer(new Node{object, nullptr});
         m_nextOfLastDoublePointer = &((*m_nextOfLastDoublePointer)->next);
         ++m_size;
     }

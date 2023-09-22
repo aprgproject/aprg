@@ -24,8 +24,7 @@ public:
 
     void push(Object const& object) override {
         // runs in constant time, but array is still faster because here there is allocation
-        NodeUniquePointer next(std::move(m_first));        // previous first is the new next
-        m_first.reset(new Node{object, std::move(next)});  // create a new node at first
+        m_first = NodeUniquePointer(new Node{object, std::move(m_first)});  // create a new node at first
         ++m_size;
     }
 

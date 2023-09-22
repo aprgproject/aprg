@@ -124,7 +124,7 @@ private:
         Values const& values, NodePointer& nodePointer, Index const baseLeft, Index const baseRight) {
         // This has log(N) running time
         if (!nodePointer) {
-            nodePointer.reset(new Node{Value{}, nullptr, nullptr});
+            nodePointer = NodePointer(new Node{Value{}, nullptr, nullptr});
         }
         if (baseLeft == baseRight) {
             nodePointer->value = values[baseLeft];
@@ -144,16 +144,16 @@ private:
         // This has log(N) running time
         if (previousTreeNode) {
             if (baseLeft == baseRight) {
-                newTreeNode.reset(new Node{newValue, nullptr, nullptr});
+                newTreeNode = NodePointer(new Node{newValue, nullptr, nullptr});
             } else {
                 Index const baseMidPoint = getMidpointOfIndexes(baseLeft, baseRight);
                 if (index <= baseMidPoint) {
-                    newTreeNode.reset(new Node{Value{}, nullptr, previousTreeNode->rightChildPointer});
+                    newTreeNode = NodePointer(new Node{Value{}, nullptr, previousTreeNode->rightChildPointer});
                     changeValueOnIndexFromTopToBottom(
                         index, newValue, previousTreeNode->leftChildPointer, newTreeNode->leftChildPointer, baseLeft,
                         baseMidPoint);
                 } else {
-                    newTreeNode.reset(new Node{Value{}, previousTreeNode->leftChildPointer, nullptr});
+                    newTreeNode = NodePointer(new Node{Value{}, previousTreeNode->leftChildPointer, nullptr});
                     changeValueOnIndexFromTopToBottom(
                         index, newValue, previousTreeNode->rightChildPointer, newTreeNode->rightChildPointer,
                         baseMidPoint + 1, baseRight);

@@ -152,7 +152,7 @@ protected:
                 this->updateTreeNodeDetails(*nodePointer);
             }
         } else {
-            nodePointer.reset(new Node{key, nullptr, nullptr, 1});
+            nodePointer = NodeUniquePointer(new Node{key, nullptr, nullptr, 1});
         }
         --depth;
     }
@@ -177,7 +177,7 @@ protected:
                 NodeUniquePointer& minimumOnTheRight(
                     this->getMinimumNodePointerReferenceStartingOnThisNode(nodePointer->right));
                 if (!minimumOnTheRight) {
-                    nodePointer.reset(nullptr);
+                    nodePointer.reset();
                 } else {
                     this->copyNodeContents(*nodePointer, *minimumOnTheRight);
                     // starting from the minimum so less checks

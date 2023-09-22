@@ -25,7 +25,7 @@ protected:
                 this->updateTreeNodeDetails(*nodePointer);
             }
         } else {
-            nodePointer.reset(new Node{key, nullptr, nullptr, 1, 1});
+            nodePointer = NodeUniquePointer(new Node{key, nullptr, nullptr, 1, 1});
         }
         this->reBalanceTreeOnPutAction(nodePointer);
     }

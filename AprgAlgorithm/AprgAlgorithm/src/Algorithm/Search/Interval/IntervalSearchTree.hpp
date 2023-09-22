@@ -67,7 +67,7 @@ protected:
                 this->setParentAsRedAndChildrenAsBlack(nodePointer);
             }
         } else {
-            nodePointer.reset(new Node{key, nullptr, nullptr, 1, RedBlackColor::Red, key.end});
+            nodePointer = NodeUniquePointer(new Node{key, nullptr, nullptr, 1, RedBlackColor::Red, key.end});
         }
     }
 

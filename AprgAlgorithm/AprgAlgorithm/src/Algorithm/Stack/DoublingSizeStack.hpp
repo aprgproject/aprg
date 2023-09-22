@@ -4,13 +4,14 @@
 
 #include <algorithm>
 #include <cassert>
+#include <memory>
 
 namespace alba::algorithm {
 
 template <typename Object>
 class DoublingSizeStack : public BaseStack<Object> {
 public:
-    ~DoublingSizeStack() override { deleteAllObjects(); }
+    ~DoublingSizeStack() override = default;
     DoublingSizeStack() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
     [[nodiscard]] int getSize() const override { return m_stackSize; }
     [[nodiscard]] bool isEmpty() const override { return m_stackSize == 0; }
@@ -33,26 +34,18 @@ public:
     static constexpr int MINUMUM_CONTAINER_SIZE = 1;
 
 private:
-    void deleteAllObjects() {
-        delete[] m_objects;
-        m_objects = nullptr;
-    }
-
     void initialize(int const initialSize) {
-        if (m_objects == nullptr) {
-            m_objects = new Object[initialSize];
-            m_containerSize = initialSize;
-        }
+        m_objects = std::make_unique<Object[]>(initialSize);
+        m_containerSize = initialSize;
     }
 
     void resize(int const newSize) {
         // array is between 25% and 100% full
-        auto* newObjects = new Object[newSize];
+        auto newObjects = std::make_unique<Object[]>(newSize);
         if (m_objects != nullptr) {
-            std::copy(m_objects, m_objects + std::min(m_stackSize, newSize), newObjects);
-            delete[](m_objects);
+            std::copy(m_objects.get(), m_objects.get() + std::min(m_stackSize, newSize), newObjects.get());
         }
-        m_objects = newObjects;
+        std::swap(m_objects, newObjects);
         m_containerSize = newSize;
     }
 
@@ -72,7 +65,7 @@ private:
 
     int m_stackSize{0};
     int m_containerSize{0};
-    Object* m_objects;
+    std::unique_ptr<Object[]> m_objects;
 };
 
 }  // namespace alba::algorithm
