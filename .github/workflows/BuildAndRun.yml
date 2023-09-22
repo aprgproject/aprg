@@ -152,7 +152,7 @@ jobs:
             overallLintStatus=1
           fi
           echo "overallLintStatus: [$overallLintStatus]"
-          if [ $overallLintStatus != "0" ]; then
+          if [ "$overallLintStatus" != "0" ]; then
             echo "There were no linting issues found."
           fi
           exit $overallLintStatus
@@ -359,6 +359,18 @@ jobs:
         run: |
           "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
 
+      - name: Initialize step statuses
+        shell: bash
+        working-directory: ${{ matrix.project }}
+        run: |
+          echo "valgrindStatus=0" >> "$GITHUB_ENV"
+          echo "asanStatus=0" >> "$GITHUB_ENV"
+          echo "msanStatus=0" >> "$GITHUB_ENV"
+          echo "tsanStatus=0" >> "$GITHUB_ENV"
+          echo "ubsanStatus=0" >> "$GITHUB_ENV"
+          echo "clangStaticAnalysisStatus=0" >> "$GITHUB_ENV"
+          echo "otherStaticAnalysisStatus=0" >> "$GITHUB_ENV"
+
       - name: Run with valgrind
         shell: bash
         continue-on-error: true
@@ -475,7 +487,7 @@ jobs:
         shell: bash
         run: |
           overallStepStatus=0
-          echo "Checking linting errors..."
+          echo "Checking step statuses..."
           echo "valgrindStatus: [$valgrindStatus]"
           if [ "$valgrindStatus" != "0" ]; then
             echo "Valgrind failed, so the overall step status is set to failed."
@@ -512,7 +524,7 @@ jobs:
             overallStepStatus=1
           fi
           echo "overallStepStatus: [$overallStepStatus]"
-          if [ $overallStepStatus != "0" ]; then
+          if [ "$overallStepStatus" != "0" ]; then
             echo "There were issues found in other steps."
           fi
           exit $overallStepStatus
