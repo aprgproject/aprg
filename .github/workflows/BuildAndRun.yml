@@ -55,11 +55,6 @@ on:
         type: boolean
         required: true
         default: false
-      enableClangStaticAnalyzer:
-        description: 'Enable Clang Static Analyzer'
-        type: boolean
-        required: true
-        default: false
       enableStaticAnalyzers:
         description: 'Enable Static Analyzers for Clang Builds'
         type: boolean
@@ -424,7 +419,7 @@ jobs:
             
       - name: Run with Clang Static Analyzer
         shell: bash
-        if: contains(matrix.configurationName, 'Clang') && inputs.enableClangStaticAnalyzer
+        if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
         working-directory: ${{ matrix.project }}
         run: |
           echo "Running Clang Static Analysis..."
