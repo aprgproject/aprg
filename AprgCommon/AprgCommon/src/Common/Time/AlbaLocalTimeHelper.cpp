@@ -15,6 +15,28 @@ constexpr int MONTH_OFFSET = 1;
 
 namespace alba {
 
+// Walter E Brown technique
+template <typename, typename = void>
+struct hasToSys : std::false_type {};
+template <typename Clock>
+struct hasToSys<Clock, std::void_t<decltype(Clock::to_sys(std::declval<LibraryFileTime>()))>> : std::true_type {};
+template <typename, typename = void>
+struct hasToUtc : std::false_type {};
+template <typename Clock>
+struct hasToUtc<Clock, std::void_t<decltype(Clock::to_utc(std::declval<LibraryFileTime>()))>> : std::true_type {};
+
+template <typename TimePoint, typename FileClock, typename UtcClock>
+std::enable_if_t<hasToSys<FileClock>::value, AlbaDateTime> convertFileTimeToAlbaDateTimeInternal(
+    TimePoint const& inputTime) {
+    return convertSystemTimeToAlbaDateTime(FileClock::to_sys(inputTime));
+}
+
+template <typename TimePoint, typename FileClock, typename UtcClock>
+std::enable_if_t<!hasToSys<FileClock>::value && hasToUtc<FileClock>::value, AlbaDateTime>
+convertFileTimeToAlbaDateTimeInternal(TimePoint const& inputTime) {
+    return convertSystemTimeToAlbaDateTime(UtcClock::to_sys(FileClock::to_utc(inputTime)));
+}
+
 void sleepFor(size_t const milliSeconds) { sleep_for(chrono::milliseconds(milliSeconds)); }
 void sleepUntil(AlbaDateTime const& awakeTime) { sleep_until(convertAlbaDateTimeToSystemTime(awakeTime)); }
 
@@ -52,11 +74,7 @@ AlbaDateTime convertSystemTimeToAlbaDateTime(LibrarySystemTime const& inputTime)
 }
 
 AlbaDateTime convertFileTimeToAlbaDateTime(LibraryFileTime const& inputTime) {
-#if defined(_MSC_VER)
-    return convertSystemTimeToAlbaDateTime(utc_clock::to_sys(file_clock::to_utc(inputTime)));
-#else
-    return convertSystemTimeToAlbaDateTime(file_clock::to_sys(inputTime));
-#endif
+    return convertFileTimeToAlbaDateTimeInternal<LibraryFileTime, file_clock, utc_clock>(inputTime);
 }
 
 AlbaDateTime getCurrentDateTime() { return convertSystemTimeToAlbaDateTime(getSystemTimeNow()); }
