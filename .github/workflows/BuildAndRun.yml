@@ -308,9 +308,6 @@ jobs:
           echo "buildAndRunScriptPath: [$buildAndRunScriptPath]"
           chmod +x "$buildAndRunScriptPath"
           echo "buildAndRunScriptPath=$buildAndRunScriptPath" >> "$GITHUB_ENV"
-          unquotedProject=$(echo "${{ matrix.project }}" | tr -d '"')
-          echo "unquotedProject: [$unquotedProject]"
-          echo "unquotedProject=$unquotedProject" >> "$GITHUB_ENV"
             
       - name: Configure for Windows/MSVC
         shell: bash
