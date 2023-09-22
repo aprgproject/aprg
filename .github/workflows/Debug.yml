@@ -13,7 +13,7 @@ jobs:
 
   debugJob:
     name: Perform debug
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
         
       - name: Debug Steps
@@ -33,10 +33,13 @@ jobs:
           #ninja --version
           #command -v cmake
           #command -v ninja
+          #set +x
+          #valgrind
+          #valgrind -v
+          #which gcc | xargs -t gcc --version
+          #dpkg --list | grep compiler
+          #set -x
           set +x
-          valgrind
-          valgrind -v
-          which gcc | xargs -t gcc --version
-          dpkg --list | grep compiler
+          find / -name "scan-build"
           set -x
           
