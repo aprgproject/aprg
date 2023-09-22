@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
@@ -42,11 +43,11 @@ struct OperationPrinter {
 class NaiveIntVector {
 public:
     NaiveIntVector() = default;
-    ~NaiveIntVector() { delete[] m_ptr; }
+    ~NaiveIntVector() = default;
 
     NaiveIntVector(NaiveIntVector const& rightHandSide) : m_size(rightHandSide.m_size) {
-        m_ptr = new int[m_size];
-        copy(rightHandSide.m_ptr, rightHandSide.m_ptr + m_size, m_ptr);
+        m_ptr = std::make_unique<int[]>(m_size);
+        copy(rightHandSide.m_ptr.get(), rightHandSide.m_ptr.get() + m_size, m_ptr.get());
     }
 
     NaiveIntVector(NaiveIntVector&& rightHandSide) noexcept {
@@ -80,11 +81,9 @@ public:
     //        return *this;
     //    }
     void push_back(int const newValue) {
-        int* newPtr = new int[m_size + 1];  // This is inefficient because it rellocates every time.
-        copy(m_ptr, m_ptr + m_size, newPtr);
-        delete[] m_ptr;  // delete does not crash even if m_ptr is empty
-                         // (see https://en.cppreference.com/w/cpp/language/delete)
-        m_ptr = newPtr;
+        auto newPtr = std::make_unique<int[]>(m_size + 1);  // This is inefficient because it rellocates every time.
+        copy(m_ptr.get(), m_ptr.get() + m_size, newPtr.get());
+        swap(m_ptr, newPtr);
         m_ptr[m_size++] = newValue;
     }
 
@@ -95,7 +94,7 @@ public:
     }
 
 private:
-    int* m_ptr{nullptr};
+    std::unique_ptr<int[]> m_ptr;
     size_t m_size{0};
 };
 
