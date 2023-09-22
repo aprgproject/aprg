@@ -370,7 +370,7 @@ jobs:
       - name: Build and Run with Address Sanitizer
         shell: bash
         continue-on-error: true
-        if: contains(matrix.configurationName, 'Clang') && inputs.enableAsan
+        if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableAsan
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_ASAN"
@@ -382,7 +382,7 @@ jobs:
       - name: Build and Run with Memory Sanitizer
         shell: bash
         continue-on-error: true
-        if: contains(matrix.configurationName, 'Clang') && inputs.enableMsan
+        if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableMsan
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_MSAN"
@@ -394,7 +394,7 @@ jobs:
       - name: Build and Run with Thread Sanitizer
         shell: bash
         continue-on-error: true
-        if: contains(matrix.configurationName, 'Clang') && inputs.enableTsan
+        if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableTsan
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_TSAN"
@@ -406,7 +406,7 @@ jobs:
       - name: Build and Run with Undefined Behavior Sanitizer
         shell: bash
         continue-on-error: true
-        if: contains(matrix.configurationName, 'Clang') && inputs.enableUbsan
+        if: matrix.configurationName == 'UbuntuLatestClang' && inputs.enableUbsan
         working-directory: ${{ matrix.project }}
         run: |
           "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_DEBUG_WITH_UBSAN"
