@@ -451,38 +451,38 @@ jobs:
           set -e
           echo "ubsanStatus: [$ubsanStatus]"
           echo "ubsanStatus=$ubsanStatus" >> "$GITHUB_ENV"
-            
-      - name: Run with Clang Static Analyzer
-        shell: bash
-        continue-on-error: true
-        if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
-        working-directory: ${{ matrix.project }}
-        run: |
-          echo "Running Clang Static Analysis..."
-          set +e
-          "$buildAndRunScriptPath" cleanAndConfigureWithClangStaticAnalyzer "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
-          clangStaticAnalysisStatus=$?
-          set -e
-          echo "clangStaticAnalysisStatus: [$clangStaticAnalysisStatus]"
-          echo "clangStaticAnalysisStatus=$clangStaticAnalysisStatus" >> "$GITHUB_ENV"
 
-# Commented out because we have a separate job for this
-#      - name: Build and Run with Static Analyzers
+# Commented out because github has no scan-build
+#      - name: Run with Clang Static Analyzer
 #        shell: bash
 #        continue-on-error: true
 #        if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
 #        working-directory: ${{ matrix.project }}
 #        run: |
-#          "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
-#          echo "Running Static Analysis..."
+#          echo "Running Clang Static Analysis..."
 #          set +e
-#          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
-#          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
-#          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
-#          otherStaticAnalysisStatus=$?
+#          "$buildAndRunScriptPath" cleanAndConfigureWithClangStaticAnalyzer "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+#          clangStaticAnalysisStatus=$?
 #          set -e
-#          echo "otherStaticAnalysisStatus: [$otherStaticAnalysisStatus]"
-#          echo "otherStaticAnalysisStatus=$otherStaticAnalysisStatus" >> "$GITHUB_ENV"
+#          echo "clangStaticAnalysisStatus: [$clangStaticAnalysisStatus]"
+#          echo "clangStaticAnalysisStatus=$clangStaticAnalysisStatus" >> "$GITHUB_ENV"
+
+      - name: Build and Run with Static Analyzers
+        shell: bash
+        continue-on-error: true
+        if: contains(matrix.configurationName, 'Clang') && inputs.enableStaticAnalyzers
+        working-directory: ${{ matrix.project }}
+        run: |
+          "$buildAndRunScriptPath" cleanAndConfigureWithClangAndStaticAnalyzers "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja"
+          echo "Running Static Analysis..."
+          set +e
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
+          otherStaticAnalysisStatus=$?
+          set -e
+          echo "otherStaticAnalysisStatus: [$otherStaticAnalysisStatus]"
+          echo "otherStaticAnalysisStatus=$otherStaticAnalysisStatus" >> "$GITHUB_ENV"
           
       - name: Check overall additional step status
         shell: bash
