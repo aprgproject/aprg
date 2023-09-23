@@ -11,7 +11,7 @@ NewSamplesBuilder::NewSamplesBuilder(Samples const& oldSamples) : m_oldSamples(o
 
 void NewSamplesBuilder::saveToNewSamples(
     Samples& newSamples, SamplesMergingDetails const& samplesMergingDetails, bool const alwaysPutNewValue) {
-    int const sampleSize = min(samplesMergingDetails.size(), newSamples.size());
+    int const sampleSize = static_cast<int>(min(samplesMergingDetails.size(), newSamples.size()));
     for (int i = 0; i < sampleSize; ++i) {
         SampleMergingDetails const& mergingDetails(samplesMergingDetails.at(i));
         if (mergingDetails.isChanged) {
@@ -29,7 +29,7 @@ void NewSamplesBuilder::saveToNewSamples(
 
 void NewSamplesBuilder::retrieveSampleMergingDetails(
     SamplesMergingDetails& samplesMergingDetails, SearchResultsDetails const& details, Samples const& searchSamples) {
-    int const searchSamplesSize = searchSamples.size();
+    int const searchSamplesSize = static_cast<int>(searchSamples.size());
     for (SearchResultDetails const& detail : details) {
         double const midpoint = static_cast<double>(detail.numberOfSamples) / 2;
         for (int i = 0; i < detail.numberOfSamples && (i + detail.searchIndex) < searchSamplesSize; ++i) {

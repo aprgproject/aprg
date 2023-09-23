@@ -34,10 +34,10 @@ void searchForBestSampleIndexes(
     int const numberOfSamplesForReplication, int const numberOfSearchSamplesPerReplication,
     Samples const& samplesToReplicate, Samples const& samplesToSearch) {
     Samples deltaSamplesToReplicate;
-    retrieveDeltas(deltaSamplesToReplicate, samplesToReplicate, samplesToReplicate.size());
+    retrieveDeltas(deltaSamplesToReplicate, samplesToReplicate, static_cast<int>(samplesToReplicate.size()));
 
     Samples deltaSamplesToSearch;
-    retrieveDeltas(deltaSamplesToSearch, samplesToSearch, samplesToSearch.size());
+    retrieveDeltas(deltaSamplesToSearch, samplesToSearch, static_cast<int>(samplesToSearch.size()));
 
     NearestSamples nearestSamplesToSearch(samplesToSearch);
 
@@ -146,11 +146,12 @@ double getSumInRange(Samples const& samples, int const startIndexIncluded, int c
 }
 
 double getAverageOfSamples(Samples const& samples) {
-    return accumulate(samples.cbegin(), samples.cend(), 0.0) / samples.size();
+    return accumulate(samples.cbegin(), samples.cend(), 0.0) / static_cast<double>(samples.size());
 }
 
 double getAverageInRange(Samples const& samples, int const startIndexIncluded, int const endIndexExcluded) {
-    return accumulate(samples.cbegin() + startIndexIncluded, samples.cbegin() + endIndexExcluded, 0.0) / samples.size();
+    return accumulate(samples.cbegin() + startIndexIncluded, samples.cbegin() + endIndexExcluded, 0.0) /
+           static_cast<double>(samples.size());
 }
 
 double getCommonMultiplierForDeltaSamples(
