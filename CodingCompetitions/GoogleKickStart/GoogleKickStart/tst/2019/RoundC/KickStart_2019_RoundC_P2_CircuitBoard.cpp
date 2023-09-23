@@ -49,6 +49,11 @@ public:
         initialize(valuesToCheck);
     }
 
+    RangeQueryWithSelector(Values const& valuesToCheck, SelectorFunction&& selector)
+        : m_selectedValueMatrix(), m_selector(selector) {
+        initialize(valuesToCheck);
+    }
+
     [[nodiscard]] Value getSelectedValueOnInterval(Index const start, Index const end) const {
         // This is on constant time
         Value result{};

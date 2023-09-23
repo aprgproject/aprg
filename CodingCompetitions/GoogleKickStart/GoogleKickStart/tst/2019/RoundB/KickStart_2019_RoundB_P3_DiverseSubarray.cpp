@@ -87,6 +87,11 @@ public:
         initialize(valuesToCheck);
     }
 
+    RangeQueryWithStaticSegmentTree(Values const& valuesToCheck, Function&& functionObject)
+        : m_treeValues(), m_function(functionObject) {
+        initialize(valuesToCheck);
+    }
+
     [[nodiscard]] Index getStartOfChildren() const { return m_startOfChildren; }
 
     [[nodiscard]] Values const& getTreeValues() const { return m_treeValues; }
