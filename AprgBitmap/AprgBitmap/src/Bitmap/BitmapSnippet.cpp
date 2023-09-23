@@ -42,7 +42,7 @@ uint32_t BitmapSnippet::getColorAt(BitmapXY const position) const {
 int BitmapSnippet::getDeltaX() const { return m_bottomRightCorner.getX() - m_topLeftCorner.getX(); }
 int BitmapSnippet::getDeltaY() const { return m_bottomRightCorner.getY() - m_topLeftCorner.getY(); }
 int BitmapSnippet::getNumberOfPixelsInSnippet() const { return getDeltaX() * getDeltaY(); }
-int BitmapSnippet::getPixelDataSize() const { return m_pixelData.getSize(); }
+int BitmapSnippet::getPixelDataSize() const { return static_cast<int>(m_pixelData.getSize()); }
 
 bool BitmapSnippet::isPositionInsideTheSnippet(BitmapXY const position) const {
     return m_topLeftCorner.getX() <= position.getX() && m_topLeftCorner.getY() <= position.getY() &&

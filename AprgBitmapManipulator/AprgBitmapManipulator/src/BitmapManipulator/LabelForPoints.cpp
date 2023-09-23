@@ -24,7 +24,7 @@ int LabelForPoints::getLabel(BitmapXY const& point) const {
 void LabelForPoints::setLabel(BitmapXY const& point, int const label) { m_pixelsTolabelsMap[point] = label; }
 
 uint32_t getLabelColor(int const label) {
-    int const digits = getNumberOfBase10Digits(label);
+    int const digits = static_cast<int>(getNumberOfBase10Digits(label));
     double const newValue = (static_cast<double>(1) / label) * pow(10, digits + 8);
     return getColorValueOnly(static_cast<uint32_t>(newValue) % 0xFFFFFF);
 }

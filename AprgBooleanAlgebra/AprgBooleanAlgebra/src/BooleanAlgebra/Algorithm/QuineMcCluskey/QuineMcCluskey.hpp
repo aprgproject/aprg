@@ -147,7 +147,7 @@ public:
             int minSize = std::numeric_limits<int>::max();
             int minSizeIndex = 0;
             for (int i = 0; i < static_cast<int>(onlyInnerTerms.size()); ++i) {
-                int const idsSize = onlyInnerTerms[i].size();
+                int const idsSize = static_cast<int>(onlyInnerTerms[i].size());
                 if (minSize > idsSize) {
                     minSizeIndex = i;
                     minSize = idsSize;

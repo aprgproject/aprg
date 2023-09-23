@@ -59,7 +59,7 @@ void distributeTermsWithRecursion(
 }
 
 Implicants getBestPrimeImplicantsUsingQuineMcCluskey(Term const& term, VariableNamesSet const& variableNames) {
-    int const numberOfBits = variableNames.size();
+    int const numberOfBits = static_cast<int>(variableNames.size());
     QuineMcCluskey qmc;
     SubstitutionOfVariablesToValues substitution;
     for (Minterm minterm = 0; minterm < static_cast<Minterm>(1) << static_cast<Minterm>(numberOfBits); ++minterm) {
@@ -130,7 +130,7 @@ void simplifyTermWithOuterAndAndInnerOr(Term& term) {
 
 void simplifyByQuineMcKluskey(Term& term) {
     VariableNamesSet const variableNames(getVariableNames(term));
-    int const numberOfBits = variableNames.size();
+    int const numberOfBits = static_cast<int>(variableNames.size());
     if (numberOfBits > 0 && numberOfBits <= static_cast<int>(AlbaBitValueUtilities<Minterm>::getNumberOfBits())) {
         // cannot be used if number of bits is beyond limit
         OperatorLevel targetOuter(OperatorLevel::Unknown);
@@ -145,8 +145,8 @@ void simplifyByQuineMcKluskey(Term& term) {
             Expression newExpression;
             for (Implicant const& bestPrimeImplicant : bestPrimeImplicants) {
                 Expression implicantExpression;
-                string bitString(bestPrimeImplicant.getEquivalentString(variableNames.size()));
-                int i = variableNames.size() - 1;
+                string bitString(bestPrimeImplicant.getEquivalentString(static_cast<int>(variableNames.size())));
+                int i = static_cast<int>(variableNames.size()) - 1;
                 for (string const& variableName : variableNames) {
                     char const primeBit(bitString[i]);
                     implicantExpression.putTerm(

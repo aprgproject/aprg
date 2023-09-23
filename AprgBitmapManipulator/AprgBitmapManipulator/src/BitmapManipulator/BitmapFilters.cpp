@@ -116,7 +116,7 @@ void BitmapFilters::drawToFillGapsUsingBlur(BitmapSnippet& snippet, double const
     });
     int previousNumberOfPoints = 0;
     while (previousNumberOfPoints != static_cast<int>(backgroundPoints.size()) && !backgroundPoints.empty()) {
-        previousNumberOfPoints = backgroundPoints.size();
+        previousNumberOfPoints = static_cast<int>(backgroundPoints.size());
         BitmapXYs newBackgroundPoints;
         BitmapSnippet tempSnippet(snippet);
         for (BitmapXY const& backgroundPoint : backgroundPoints) {
