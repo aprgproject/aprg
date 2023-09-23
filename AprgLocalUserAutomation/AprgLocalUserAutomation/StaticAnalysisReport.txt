@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [41]
-2023-09-21T01:35:16
+StaticAnalysisJobIdentifier: [43]
+2023-09-23T12:39:50
 D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
 D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest-all.cc:41:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
 D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest-all.cc:42:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
@@ -10,12 +10,7 @@ D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest-all.cc:46:11: warning: suspiciou
 D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest-all.cc:47:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
 D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest-all.cc:48:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
 D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest-all.cc:49:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Stream\AlbaStreamBitWriter.cpp:11:22: warning: an exception may be thrown in function '~AlbaStreamBitWriter' which should not throw exceptions [bugprone-exception-escape]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:40:40: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
 D:/a/aprg/aprg/AprgCommon/AprgCommon/src\Common/Macros/AlbaMacros.hpp:18:41: note: expanded from macro 'ALBA_MACROS_GET_PRETTY_FUNCTION'
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:89:32: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
@@ -32,7 +27,6 @@ D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPa
 D:/a/aprg/aprg/AprgCommon/AprgCommon/src\Common/Macros/AlbaMacros.hpp:18:41: note: expanded from macro 'ALBA_MACROS_GET_PRETTY_FUNCTION'
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:191:36: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
 D:/a/aprg/aprg/AprgCommon/AprgCommon/src\Common/Macros/AlbaMacros.hpp:18:41: note: expanded from macro 'ALBA_MACROS_GET_PRETTY_FUNCTION'
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:250:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:266:5: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:267:37: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:268:78: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
@@ -41,19 +35,6 @@ D:/a/aprg/aprg/AprgCommon/AprgCommon/src\Common/Macros/AlbaMacros.hpp:18:41: not
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:307:102: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Windows\AlbaWindowsHelper.cpp:23:67: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tst\UserAutomationTests\AlbaLocalUserAutomation_unit.cpp:8:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tst\UserAutomationTests\AlbaLocalUserAutomation_unit.cpp:8:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tst\UserAutomationTests\AlbaLocalUserAutomation_unit.cpp:8:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:19:22: warning: 'signed char' to 'int' conversion; consider casting to 'unsigned char' first. [bugprone-signed-char-misuse,cert-str34-c]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:28:53: warning: 'windowHandle' declared with a const-qualified typedef; results in the type being 'HWND__ *const' instead of 'const HWND__ *' [misc-misplaced-const]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\windef.h:39:28: note: typedef declared here
@@ -69,12 +50,8 @@ D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAu
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:87:33: warning: 15 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:127:5: warning: consider replacing 'long' with 'int32' [google-runtime-int]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:128:5: warning: consider replacing 'long' with 'int32' [google-runtime-int]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:129:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:129:41: warning: 65535.0F is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:129:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:130:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:130:41: warning: 65535.0F is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:130:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:129:61: warning: 65535.0F is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:130:61: warning: 65535.0F is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:134:15: warning: do not access members of unions; use (boost::)variant instead [cppcoreguidelines-pro-type-union-access]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:135:15: warning: do not access members of unions; use (boost::)variant instead [cppcoreguidelines-pro-type-union-access]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:135:35: warning: consider replacing 'long' with 'int32' [google-runtime-int]
@@ -112,244 +89,76 @@ D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAu
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:290:40: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:292:17: warning: consider replacing 'unsigned long long' with 'uint64' [google-runtime-int]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:293:50: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:294:66: warning: narrowing conversion from 'unsigned long long' to signed type 'streamsize' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tst\UserAutomationTests\AlbaLocalUserAutomation_unit.cpp:8:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tst\UserAutomationTests\AlbaLocalUserAutomation_unit.cpp:8:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tst\UserAutomationTests\AlbaLocalUserAutomation_unit.cpp:8:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:13:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:13:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:13:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:14:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:14:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:25:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:25:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:25:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:29:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:29:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:29:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:31:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:31:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:31:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:32:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:32:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:43:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:43:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:43:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:44:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:44:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:55:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:55:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:55:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:56:15: warning: loop variable name 'c' is too short, expected at least 2 characters [readability-identifier-length]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:61:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:61:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:61:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:62:15: warning: loop variable name 'c' is too short, expected at least 2 characters [readability-identifier-length]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:67:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:67:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:67:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:68:15: warning: loop variable name 'c' is too short, expected at least 2 characters [readability-identifier-length]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:73:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:73:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:73:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:78:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:78:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:78:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:84:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:84:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:84:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:85:14: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:91:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:91:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:91:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:100:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:100:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:100:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:104:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:104:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:104:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:108:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:108:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:108:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:110:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:110:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\AlbaWindowsUserAutomation_unit.cpp:110:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:18:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:18:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:18:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:23:33: warning: 2368 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:23:39: warning: 52 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:32:11: warning: 3000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
@@ -362,34 +171,14 @@ D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAu
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:65:43: warning: 52 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:66:15: warning: 2000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:70:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:70:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:70:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:76:41: warning: 2368 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:76:47: warning: 52 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:86:19: warning: 3000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:116:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:116:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:116:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:119:12: warning: converting integer literal to bool, use bool literal instead [modernize-use-bool-literals]
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:119:12: warning: implicit conversion 'int' -> bool [readability-implicit-bool-conversion]
@@ -408,18 +197,8 @@ D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAu
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:177:31: warning: 15000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:191:31: warning: 2000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:204:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:204:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:204:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:217:13: warning: function is not thread safe [concurrency-mt-unsafe]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:220:37: warning: 3377 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:220:43: warning: 116 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
@@ -432,22 +211,9 @@ D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAu
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:229:15: warning: 3000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:235:15: warning: 5000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:239:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:239:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:239:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:239:1: warning: function 'TestBody' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-internal.h:1557:60: note: expanded from macro 'GTEST_TEST_'
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:256:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:258:9: note: +2, including nesting penalty of 1, nesting level increased to 2
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\tstWindows\UserAutomationTests\RealAutomationTests.cpp:262:9: note: +2, including nesting penalty of 1, nesting level increased to 2
