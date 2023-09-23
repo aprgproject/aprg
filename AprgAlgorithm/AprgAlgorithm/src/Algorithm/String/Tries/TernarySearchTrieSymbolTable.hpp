@@ -127,7 +127,7 @@ protected:
         Node const* const currentNodePointer, std::string const& previousPrefix, Key const& patternToMatch,
         Strings& collectedKeys) const override {
         if (currentNodePointer != nullptr) {
-            int const previousPrefixLength = previousPrefix.length();
+            int const previousPrefixLength = static_cast<int>(previousPrefix.length());
             int const lastIndexToMatch = patternToMatch.length() - 1;
             char const currentChar = currentNodePointer->c;
             char const charToMatch = patternToMatch[previousPrefixLength];

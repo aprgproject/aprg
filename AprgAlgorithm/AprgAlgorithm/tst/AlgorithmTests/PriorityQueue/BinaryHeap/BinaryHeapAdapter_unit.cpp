@@ -26,7 +26,7 @@ TEST(BinaryHeapAdapterTest, SwimWorks) {
     ContainerForTest objects{'H', 'E', 'A', 'P', 'O', 'B', 'J', 'E', 'C', 'T', 'S'};
     AdapterForTest adapter(objects);
 
-    adapter.swim(objects.size());
+    adapter.swim(static_cast<int>(objects.size()));
 
     ContainerForTest const objectsToExpect{'S', 'H', 'A', 'P', 'E', 'B', 'J', 'E', 'C', 'T', 'O'};
     EXPECT_EQ(objectsToExpect, objects);

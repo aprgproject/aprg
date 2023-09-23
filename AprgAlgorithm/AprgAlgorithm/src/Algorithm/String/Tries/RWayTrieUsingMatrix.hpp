@@ -90,7 +90,7 @@ public:
         table.addRow();
         table.getLastRow().addCell(" ");
         for (int c = 0; c < RADIX; ++c) {
-            if (stringHelper::isDisplayableCharacter(c)) {
+            if (stringHelper::isDisplayableCharacter(static_cast<int>(c))) {
                 table.getLastRow().addCell(stringHelper::convertToString(static_cast<char>(c)));
             } else {
                 table.getLastRow().addCell(" ");
@@ -220,7 +220,7 @@ private:
         NodeId const nodeId, std::string const& previousPrefix, Key const& patternToMatch,
         Strings& collectedKeys) const {
         if (isValidNodeId(nodeId)) {
-            int const prefixLength = previousPrefix.length();
+            int const prefixLength = static_cast<int>(previousPrefix.length());
             if (prefixLength < static_cast<NodeId>(patternToMatch.length())) {
                 char const charToMatch = patternToMatch[prefixLength];
                 for (int c = 0; c < RADIX; ++c) {

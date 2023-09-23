@@ -28,7 +28,7 @@ private:
     DistanceEntry transformOneSetOfValues(
         DistancetMatrix::MatrixData const& first, DistancetMatrix::MatrixData const& second) {
         DistanceEntry result(AlbaNumberConstants::ALBA_NUMBER_POSITIVE_INFINITY);
-        int const minSize = std::min(first.size(), second.size());
+        int const minSize = static_cast<int>(std::min(first.size(), second.size()));
         for (int i = 0; i < minSize; ++i) {
             AlbaNumber const currentValue = first[i] + second[i];
             if (currentValue < result) {

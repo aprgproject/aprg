@@ -74,7 +74,7 @@ int getIndexOfMedianOfMedians(Values const& values, int const lowIndex, int cons
         Indexes medianIndexes(highIndex - lowIndex);
         std::iota(medianIndexes.begin(), medianIndexes.end(), lowIndex);
 
-        int medianIndexesSize = medianIndexes.size();
+        int medianIndexesSize = static_cast<int>(medianIndexes.size());
         while (medianIndexesSize > 1) {
             int medianIndex = 0;
             for (int lowOfFive = 0; lowOfFive < medianIndexesSize; lowOfFive += 5) {
