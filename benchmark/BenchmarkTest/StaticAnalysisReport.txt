@@ -1,1051 +1,114 @@
-StaticAnalysisJobIdentifier: [41]
-2023-09-21T03:23:27
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.cc:40:23: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.cc:44:19: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.cc:49:22: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.cc:53:24: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.cc:58:25: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.cc:78:21: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.cc:86:9: warning: variable name 'st' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.cc:92:2: warning: namespace 'benchmark::internal' ends with a comment that refers to a wrong namespace 'benchmark' [google-readability-namespace-comments,llvm-namespace-comment]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.cc:7:11: note: namespace 'benchmark::internal' starts here
+StaticAnalysisJobIdentifier: [43]
+2023-09-23T14:16:38
 note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.h:20:3: warning: function 'benchmark::internal::BenchmarkInstance::BenchmarkInstance' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.cc:9:20: note: the definition seen here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_api_internal.h:20:3: note: differing parameters are named here: ('family_index', 'per_family_instance_index', 'threads'), in definition: ('family_idx', 'per_family_instance_idx', 'thread_count')
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:49:1: warning: duplicate include [readability-duplicate-include]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:61:1: warning: initialization of 'FLAGS_benchmark_list_tests' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:21:8: note: expanded from macro 'BM_DEFINE_bool'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:38:6: note: possibly throwing function declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:61:1: warning: variable 'FLAGS_benchmark_list_tests' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:21:8: note: expanded from macro 'BM_DEFINE_bool'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:66:1: warning: initialization of 'FLAGS_benchmark_filter' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:27:15: note: expanded from macro 'BM_DEFINE_string'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/basic_string.h:642:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:66:1: warning: variable 'FLAGS_benchmark_filter' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:27:15: note: expanded from macro 'BM_DEFINE_string'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:73:1: warning: initialization of 'FLAGS_benchmark_min_time' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:25:10: note: expanded from macro 'BM_DEFINE_double'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:52:8: note: possibly throwing function declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:73:1: warning: variable 'FLAGS_benchmark_min_time' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:25:10: note: expanded from macro 'BM_DEFINE_double'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:77:1: warning: initialization of 'FLAGS_benchmark_repetitions' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:23:11: note: expanded from macro 'BM_DEFINE_int32'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:45:9: note: possibly throwing function declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:77:1: warning: variable 'FLAGS_benchmark_repetitions' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:23:11: note: expanded from macro 'BM_DEFINE_int32'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:81:1: warning: initialization of 'FLAGS_benchmark_enable_random_interleaving' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:21:8: note: expanded from macro 'BM_DEFINE_bool'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:38:6: note: possibly throwing function declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:81:1: warning: variable 'FLAGS_benchmark_enable_random_interleaving' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:21:8: note: expanded from macro 'BM_DEFINE_bool'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:86:1: warning: initialization of 'FLAGS_benchmark_report_aggregates_only' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:21:8: note: expanded from macro 'BM_DEFINE_bool'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:38:6: note: possibly throwing function declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:86:1: warning: variable 'FLAGS_benchmark_report_aggregates_only' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:21:8: note: expanded from macro 'BM_DEFINE_bool'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:93:1: warning: initialization of 'FLAGS_benchmark_display_aggregates_only' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:21:8: note: expanded from macro 'BM_DEFINE_bool'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:38:6: note: possibly throwing function declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:93:1: warning: variable 'FLAGS_benchmark_display_aggregates_only' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:21:8: note: expanded from macro 'BM_DEFINE_bool'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:97:1: warning: initialization of 'FLAGS_benchmark_format' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:27:15: note: expanded from macro 'BM_DEFINE_string'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/basic_string.h:642:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:97:1: warning: variable 'FLAGS_benchmark_format' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:27:15: note: expanded from macro 'BM_DEFINE_string'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:101:1: warning: initialization of 'FLAGS_benchmark_out_format' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:27:15: note: expanded from macro 'BM_DEFINE_string'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/basic_string.h:642:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:101:1: warning: variable 'FLAGS_benchmark_out_format' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:27:15: note: expanded from macro 'BM_DEFINE_string'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:104:1: warning: initialization of 'FLAGS_benchmark_out' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:27:15: note: expanded from macro 'BM_DEFINE_string'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/basic_string.h:642:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:104:1: warning: variable 'FLAGS_benchmark_out' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:27:15: note: expanded from macro 'BM_DEFINE_string'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:110:1: warning: initialization of 'FLAGS_benchmark_color' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:27:15: note: expanded from macro 'BM_DEFINE_string'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/basic_string.h:642:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:110:1: warning: variable 'FLAGS_benchmark_color' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:27:15: note: expanded from macro 'BM_DEFINE_string'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:114:1: warning: initialization of 'FLAGS_benchmark_counters_tabular' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:21:8: note: expanded from macro 'BM_DEFINE_bool'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:38:6: note: possibly throwing function declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:114:1: warning: variable 'FLAGS_benchmark_counters_tabular' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:21:8: note: expanded from macro 'BM_DEFINE_bool'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:118:1: warning: initialization of 'FLAGS_benchmark_perf_counters' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:27:15: note: expanded from macro 'BM_DEFINE_string'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/basic_string.h:642:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:118:1: warning: variable 'FLAGS_benchmark_perf_counters' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:27:15: note: expanded from macro 'BM_DEFINE_string'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:122:1: warning: initialization of 'FLAGS_benchmark_context' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:29:38: note: expanded from macro 'BM_DEFINE_kvpairs'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:66:36: note: possibly throwing function declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:122:1: warning: variable 'FLAGS_benchmark_context' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:29:38: note: expanded from macro 'BM_DEFINE_kvpairs'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:125:1: warning: initialization of 'FLAGS_v' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:23:11: note: expanded from macro 'BM_DEFINE_int32'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:45:9: note: possibly throwing function declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:125:1: warning: variable 'FLAGS_v' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:23:11: note: expanded from macro 'BM_DEFINE_int32'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.h:9:20: note: expanded from macro 'FLAG'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:129:37: warning: variable 'global_context' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:129:37: warning: variable 'global_context' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:136:40: warning: pass by value and use std::move [modernize-pass-by-value]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:154:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:155:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:73:27: note: expanded from macro 'BM_CHECK_LT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:173:3: warning: use unary 'static_assert' when the string literal is an empty string [modernize-unary-static-assert]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:185:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:192:7: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:68:27: note: expanded from macro 'BM_CHECK_EQ'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:199:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:207:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:210:21: warning: variable name 'l' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:211:41: warning: redundant boolean literal supplied to boolean operator [readability-simplify-boolean-expr]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:226:19: warning: variable name 'l' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:231:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:240:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:288:6: warning: function 'RunBenchmarks' has cognitive complexity of 39 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:292:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:59:6: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:298:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:303:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:307:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:318:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:318:48: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:319:35: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:327:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:329:7: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:336:7: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:340:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /usr/include/assert.h:94:7: note: expanded from macro 'assert'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:340:48: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:344:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:350:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /usr/include/assert.h:94:7: note: expanded from macro 'assert'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:350:63: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:353:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:359:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:362:7: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:369:7: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:370:9: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:385:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:292:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:354:26: warning: variable name 'rd' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:355:20: warning: variable name 'g' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:408:5: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:434:5: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:436:5: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:439:5: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:441:5: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:480:5: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:486:7: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:523:5: warning: assigning newly created 'gsl::owner<>' to non-owner 'std::map<std::string, std::string> *' (aka 'map<basic_string<char>, basic_string<char>> *') [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:534:3: warning: the value returned by this function should be used [cert-err33-c]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:534:3: note: cast the expression to void to silence this warning
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:534:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:551:3: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:578:9: warning: missing username/bug in TODO [google-readability-todo]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:605:20: warning: variable name 'kv' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:623:3: warning: deleting a pointer through a type that is not marked 'gsl::owner<>'; consider using a smart pointer instead [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:129:1: note: variable declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:628:5: warning: the value returned by this function should be used [cert-err33-c]
     fprintf(stderr, "%s: error: unrecognized command-line flag: %s\n", argv[0],
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:628:5: note: cast the expression to void to silence this warning
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:628:5: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
     fprintf(stderr, "%s: error: unrecognized command-line flag: %s\n", argv[0],
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/mutex.h:143:25: style: Condition 'phase_number_>phase_number_cp' is always false [knownConditionTrueFalse]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/mutex.h:137:27: note: phase_number_cp is assigned 'phase_number_' here.
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/mutex.h:143:25: note: Condition 'phase_number_>phase_number_cp' is always false
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_name.cc:30:1: warning: missing username/bug in TODO [google-readability-todo]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_name.cc:34:29: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_name.cc:46:47: warning: parameter name 'ts' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_name.cc:47:15: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:46:1: warning: duplicate include [readability-duplicate-include]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:58:16: warning: variable 'memory_manager' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:58:16: warning: variable 'memory_manager' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:62:33: warning: 'kMaxIterations' is a static definition in anonymous namespace; static is redundant here [readability-static-definition-in-anonymous-namespace]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:65:51: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:103:35: warning: narrowing conversion from 'benchmark::IterationCount' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:116:43: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:123:15: warning: variable name 'st' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:125:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:128:21: warning: variable name 'l' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:143:51: warning: parameter name 'b_' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:169:5: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:179:11: warning: use std::make_unique instead [modernize-make-unique]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:179:17: warning: initializing non-owner argument of type 'std::unique_ptr<benchmark::internal::ThreadManager>::pointer' (aka 'benchmark::internal::ThreadManager *') with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:196:20: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:199:21: warning: variable name 'l' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:232:29: warning: parameter name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:235:34: warning: 1.4 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:235:60: warning: 1e-9 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:256:29: warning: parameter name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:273:20: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:314:13: warning: use std::make_unique instead [modernize-make-unique]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:314:19: warning: initializing non-owner argument of type 'std::unique_ptr<benchmark::internal::ThreadManager>::pointer' (aka 'benchmark::internal::ThreadManager *') with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:348:2: warning: namespace 'benchmark::internal' ends with a comment that refers to a wrong namespace 'benchmark' [google-readability-namespace-comments,llvm-namespace-comment]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:56:11: note: namespace 'benchmark::internal' starts here
 note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/mutex.h:143:25: style: Condition 'phase_number_>phase_number_cp' is always false [knownConditionTrueFalse]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/mutex.h:137:27: note: phase_number_cp is assigned 'phase_number_' here.
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/mutex.h:143:25: note: Condition 'phase_number_>phase_number_cp' is always false
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:102:29: style: Condition 'memory_iterations!=0U' is always true [knownConditionTrueFalse]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:99:27: note: Assuming that condition 'memory_iterations>0' is not redundant
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_runner.cc:102:29: note: Condition 'memory_iterations!=0U' is always true
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:907:14: warning: function 'benchmark::internal::Benchmark::Apply' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:322:23: note: the definition seen here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:907:14: note: differing parameters are named here: ('func'), in definition: ('custom_arguments')
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:56:18: warning: 'kRangeMultiplier' is a static definition in anonymous namespace; static is redundant here [readability-static-definition-in-anonymous-namespace]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:59:21: warning: 'kMaxFamilySize' is a static definition in anonymous namespace; static is redundant here [readability-static-definition-in-anonymous-namespace]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:82:8: warning: function 'benchmark::internal::BenchmarkFamilies::FindBenchmarks' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:111:25: note: the definition seen here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:82:8: note: differing parameters are named here: ('re'), in definition: ('spec')
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:82:35: warning: parameter name 're' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:99:19: warning: variable name 'l' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:106:19: warning: variable name 'l' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:111:25: warning: function 'FindBenchmarks' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:114:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:59:6: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:120:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:124:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:135:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:140:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:143:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:148:14: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:153:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:159:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:162:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:163:7: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:169:9: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:169:56: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:169:34: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:170:35: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:177:11: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:114:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:118:9: warning: variable name 're' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:134:19: warning: variable name 'l' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:195:48: warning: parameter name 're' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:231:35: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:232:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:243:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:247:22: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:255:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:269:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:296:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:302:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:308:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:309:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:71:27: note: expanded from macro 'BM_CHECK_LE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:317:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:328:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:333:38: warning: parameter name 't' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:334:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:335:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:341:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:342:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:348:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:381:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:388:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:405:53: warning: the parameter 'name' is copied for each invocation but only used as a const reference; consider making it a const reference [performance-unnecessary-value-param]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:412:35: warning: parameter name 't' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:413:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:72:27: note: expanded from macro 'BM_CHECK_GT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:419:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:72:27: note: expanded from macro 'BM_CHECK_GT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:420:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:70:27: note: expanded from macro 'BM_CHECK_GE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:428:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:72:27: note: expanded from macro 'BM_CHECK_GT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:429:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:70:27: note: expanded from macro 'BM_CHECK_GE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:430:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:70:27: note: expanded from macro 'BM_CHECK_GE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:459:36: warning: parameter name 'st' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:467:42: warning: parameter name 'lo' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:467:54: warning: parameter name 'hi' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark_register.cc:475:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:71:27: note: expanded from macro 'BM_CHECK_LE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/mutex.h:143:25: style: Condition 'phase_number_>phase_number_cp' is always false [knownConditionTrueFalse]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/mutex.h:137:27: note: phase_number_cp is assigned 'phase_number_' here.
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/mutex.h:143:25: note: Condition 'phase_number_>phase_number_cp' is always false
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:49:41: warning: consider replacing 'long' with 'int64' [google-runtime-int]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:50:41: warning: consider replacing 'long' with 'int64' [google-runtime-int]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:91:16: warning: variable name 'kv' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:112:20: warning: 'FlagToEnvVar' is a static definition in anonymous namespace; static is redundant here [readability-static-definition-in-anonymous-namespace]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:127:33: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:133:33: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:145:33: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:157:29: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:164:33: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:270:16: warning: variable name 'kv' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:285:16: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:291:28: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:87:3: warning: do not declare variables of type va_list; use variadic templates instead [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:88:11: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:91:3: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:92:24: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:92:47: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:94:10: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:97:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:103:12: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:106:19: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:108:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:112:13: warning: do not define a C-style variadic function; consider using a function parameter pack or currying instead [cert-dcl50-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:113:3: warning: do not declare variables of type va_list; use variadic templates instead [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:114:12: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:115:32: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:116:10: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:120:6: warning: do not define a C-style variadic function; consider using a function parameter pack or currying instead [cert-dcl50-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:121:3: warning: do not declare variables of type va_list; use variadic templates instead [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:122:12: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:123:32: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:124:10: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:153:12: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:168:9: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/colorprint.cc:175:28: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc:20:1: warning: #includes are not sorted properly [llvm-include-order]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc:44:25: warning: narrowing conversion from 'benchmark::IterationCount' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc:111:36: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc:112:27: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc:126:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:68:27: note: expanded from macro 'BM_CHECK_EQ'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc:127:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:70:27: note: expanded from macro 'BM_CHECK_GE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc:129:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:69:27: note: expanded from macro 'BM_CHECK_NE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc:165:24: warning: variable name 'n' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc:171:5: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:72:27: note: expanded from macro 'BM_CHECK_GT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc:174:53: warning: narrowing conversion from 'benchmark::IterationCount' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/complexity.cc:175:51: warning: narrowing conversion from 'benchmark::IterationCount' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1586:16: warning: function 'benchmark::ConsoleReporter::PrintRunData' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:115:23: note: the definition seen here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1586:16: note: differing parameters are named here: ('report'), in definition: ('result')
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1587:16: warning: function 'benchmark::ConsoleReporter::PrintHeader' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:55:23: note: the definition seen here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1587:16: note: differing parameters are named here: ('report'), in definition: ('run')
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:57:7: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:61:24: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:62:16: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:93:13: warning: do not define a C-style variadic function; consider using a function parameter pack or currying instead [cert-dcl50-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:95:3: warning: do not declare variables of type va_list; use variadic templates instead [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:96:12: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:97:28: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:98:10: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:104:12: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:107:12: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:110:12: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:112:10: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:115:23: warning: function 'PrintRunData' has cognitive complexity of 29 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:119:28: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:122:50: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:122:28: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:126:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:138:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:142:10: note: +1, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:145:10: note: +1, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:145:51: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:150:5: note: +1, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:151:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /usr/include/assert.h:94:7: note: expanded from macro 'assert'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:157:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:157:28: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:161:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:166:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:166:46: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:170:7: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:172:7: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:173:58: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:176:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:179:7: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:184:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:161:14: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:164:17: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:168:11: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/console_reporter.cc:62:13: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:19:30: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:21:10: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:29:10: warning: narrowing conversion from 'benchmark::IterationCount' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:32:10: warning: narrowing conversion from 'benchmark::IterationCount' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:41:27: warning: parameter name 'l' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:43:14: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:48:30: warning: parameter name 'l' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:48:53: warning: parameter name 'r' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:50:14: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:51:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:57:20: warning: variable name 'tc' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:58:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:65:36: warning: parameter name 'l' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:65:59: warning: parameter name 'r' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:71:3: warning: replace loop by 'std::ranges::all_of()' [readability-use-anyofallof]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:71:20: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:79:2: warning: namespace 'benchmark::internal' ends with a comment that refers to a wrong namespace 'benchmark' [google-readability-namespace-comments,llvm-namespace-comment]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/counter.cc:17:11: note: namespace 'benchmark::internal' starts here
 note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1617:8: warning: function 'benchmark::CSVReporter::PrintRunData' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:106:19: note: the definition seen here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1617:8: note: differing parameters are named here: ('report'), in definition: ('run')
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:34:26: warning: initialization of 'elements' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:34:26: warning: variable 'elements' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:40:43: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:43:19: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:44:5: warning: switch could be better written as an if/else statement [hicpp-multiway-paths-covered]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:57:19: warning: function 'ReportRuns' has cognitive complexity of 34 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:60:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:62:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:63:7: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:64:9: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:64:45: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:72:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:74:7: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:77:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:84:5: note: +1, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:86:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:87:7: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:88:9: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:88:45: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:91:9: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:59:6: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:101:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:72:15: warning: loop variable name 'B' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:77:15: warning: loop variable name 'B' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:91:9: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:148:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/csv_reporter.cc:34:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/perf_counters.cc:27:37: warning: redundant 'kMaxCounters' declaration [readability-redundant-declaration]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/perf_counters.h:50:27: note: previously declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/perf_counters.cc:130:2: warning: namespace 'benchmark::internal' ends with a comment that refers to a wrong namespace 'benchmark' [google-readability-namespace-comments,llvm-namespace-comment]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/perf_counters.cc:25:11: note: namespace 'benchmark::internal' starts here
 note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1603:8: warning: function 'benchmark::JSONReporter::PrintRunData' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:230:20: note: the definition seen here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1603:8: note: differing parameters are named here: ('report'), in definition: ('run')
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:32:44: warning: variable 'global_context' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:32:44: warning: variable 'global_context' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:37:42: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:40:19: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:72:10: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:72:20: warning: escaped string literal can be written as a raw string literal [modernize-raw-string-literal]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:77:10: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:77:20: warning: escaped string literal can be written as a raw string literal [modernize-raw-string-literal]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:82:10: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:87:21: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:93:21: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:99:21: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:116:28: warning: parameter name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:144:56: warning: 1000000.0 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:149:65: warning: redundant boolean literal in ternary expression result [readability-simplify-boolean-expr]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:157:11: warning: variable name 'CI' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:185:9: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:187:51: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:190:22: warning: variable name 'kv' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/json_reporter.cc:296:14: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sleep.cc:53:24: warning: performing an implicit widening conversion to type '__syscall_slong_t' (aka 'long') of a multiplication performed in type 'int' [bugprone-implicit-widening-of-multiplication-result]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sleep.cc:53:24: note: make conversion explicit to silence this warning
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sleep.cc:53:24: note: perform multiplication in a wider type
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/reporter.cc:31:44: warning: variable 'global_context' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/reporter.cc:31:44: warning: variable 'global_context' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/reporter.cc:41:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/reporter.cc:52:36: warning: 1000000.0 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/reporter.cc:54:7: warning: the 'empty' method should be used to check for emptiness instead of 'size' [readability-container-size-empty]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:1083:7: note: method 'vector'::empty() defined here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/reporter.cc:68:14: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/reporter.cc:76:22: warning: variable name 'kv' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/reporter.cc:94:41: warning: variable 'executable_name' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:19:7: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:21:7: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:23:7: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:31:22: warning: initialization of 'kUnitsSize' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/arraysize.h:25:8: note: possibly throwing function declared here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:31:22: warning: 'kUnitsSize' is a static definition in anonymous namespace; static is redundant here [readability-static-definition-in-anonymous-namespace]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:59:21: warning: narrowing conversion from 'unsigned long' to signed type 'int64_t' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:100:7: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:104:10: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:108:72: warning: 1024.0 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:119:21: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:129:42: warning: 1.1 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:134:3: warning: do not declare variables of type va_list; use variadic templates instead [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:135:11: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:143:54: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:145:10: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:152:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:158:35: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:161:3: warning: Value stored to 'ret' is never read [clang-analyzer-deadcode.DeadStores]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:161:3: note: Value stored to 'ret' is never read
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:162:10: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:165:13: warning: do not define a C-style variadic function; consider using a function parameter pack or currying instead [cert-dcl50-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:166:3: warning: do not declare variables of type va_list; use variadic templates instead [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:167:12: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:168:42: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:169:10: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/string_util.cc:161:7: style: Variable 'ret' is assigned a value that is never used. [unreadVariable]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:18:1: warning: #includes are not sorted properly [llvm-include-order]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:28:6: warning: variable 'StatisticsSum' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:28:52: warning: parameter name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:32:50: warning: parameter name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:35:36: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:38:52: warning: parameter name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:43:32: warning: narrowing conversion from 'unsigned long' to signed type '__gnu_cxx::__normal_iterator<double *, std::vector<double>>::difference_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:52:33: warning: narrowing conversion from 'unsigned long' to signed type '__gnu_cxx::__normal_iterator<double *, std::vector<double>>::difference_type' (aka 'long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:58:6: warning: variable 'SumSquares' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:58:49: warning: parameter name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:62:6: warning: variable 'Sqr' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:63:6: warning: variable 'Sqrt' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:70:52: warning: parameter name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:79:53: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:80:15: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:80:27: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:83:48: warning: parameter name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:93:37: warning: function 'ComputeStats' has cognitive complexity of 32 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:100:21: note: nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:102:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:118:10: note: nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:118:10: note: nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:118:10: note: nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:118:10: note: nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:118:10: note: nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:118:10: note: nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:123:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:124:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:126:7: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:130:9: note: +1, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:131:9: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:68:27: note: expanded from macro 'BM_CHECK_EQ'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:59:6: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:137:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:138:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:68:27: note: expanded from macro 'BM_CHECK_EQ'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:59:6: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:139:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:68:27: note: expanded from macro 'BM_CHECK_EQ'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:59:6: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:140:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:145:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:147:7: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:69:27: note: expanded from macro 'BM_CHECK_NE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:59:6: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:154:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:155:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:164:3: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:188:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:201:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:123:19: warning: variable name 'r' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:125:12: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:131:9: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:68:27: note: expanded from macro 'BM_CHECK_EQ'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:138:5: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:68:27: note: expanded from macro 'BM_CHECK_EQ'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:139:5: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:68:27: note: expanded from macro 'BM_CHECK_EQ'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:146:12: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:147:7: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:69:27: note: expanded from macro 'BM_CHECK_NE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:201:22: warning: variable name 'kv' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/statistics.cc:204:12: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:82:38: warning: parameter name 'ru' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:84:54: warning: 1e-6 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:86:54: warning: 1e-6 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:98:40: warning: parameter name 'ts' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:99:10: warning: narrowing conversion from '__time_t' (aka 'long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:99:57: warning: 1e-9 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:103:32: warning: 'DiagnoseAndExit' is a static definition in anonymous namespace; static is redundant here [readability-static-definition-in-anonymous-namespace]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:105:3: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:176:19: warning: variable name 'ts' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:194:3: warning: consider replacing 'long' with 'int64' [google-runtime-int]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:204:3: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:204:18: warning: 41 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:206:3: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:216:26: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:223:31: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:229:14: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:229:25: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:231:5: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:243:13: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:246:33: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:248:3: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/check.h:60:58: note: expanded from macro 'BM_CHECK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:252:16: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:252:25: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:253:10: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:253:22: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:49:1: warning: duplicate include [readability-duplicate-include]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:78:42: warning: parameter name 'f' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:79:12: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:86:5: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:207:19: warning: variable name 'f' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:266:23: warning: variable name 'f' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:467:5: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:468:30: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:470:16: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:472:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:472:24: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:503:19: warning: variable name 'f' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:509:17: warning: variable name 'ln' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:544:9: warning: the value returned by this function should be used [cert-err33-c]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:544:9: note: cast the expression to void to silence this warning
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:544:9: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:554:8: warning: function 'GetCPUCyclesPerSecond' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:568:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:577:9: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:572:51: note: +1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:587:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:592:26: note: nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:593:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:596:20: note: nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:601:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:602:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:607:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:613:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:614:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:616:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:620:16: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:621:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:623:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:629:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:633:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:641:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:560:5: warning: consider replacing 'long' with 'int64' [google-runtime-int]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:580:16: warning: narrowing conversion from 'long' to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:586:19: warning: variable name 'f' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:596:29: warning: parameter name 'X' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:596:37: warning: parameter name 'Y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:600:17: warning: variable name 'ln' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:615:69: warning: 1000000.0 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/src/sysinfo.cc:622:55: warning: 1000000.0 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:41:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:42:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:43:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:44:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:45:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:46:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:47:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:48:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest.cc:622:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:155:67: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:158:12: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:105:1: warning: initialization of 'benchmark_uniq_2BM_BaseRunForInteger' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1061:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:105:1: warning: variable 'benchmark_uniq_2BM_BaseRunForInteger' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:105:1: warning: variable 'benchmark_uniq_2BM_BaseRunForInteger' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:105:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1173:11: note: expanded from macro 'BENCHMARK'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:106:1: warning: initialization of 'benchmark_uniq_3BM_BaseRunForDouble' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1061:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:106:1: warning: variable 'benchmark_uniq_3BM_BaseRunForDouble' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:106:1: warning: variable 'benchmark_uniq_3BM_BaseRunForDouble' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:106:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1173:11: note: expanded from macro 'BENCHMARK'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:107:1: warning: initialization of 'benchmark_uniq_4BM_BaseRunForTwoIntegers' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1061:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:107:1: warning: variable 'benchmark_uniq_4BM_BaseRunForTwoIntegers' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:107:1: warning: variable 'benchmark_uniq_4BM_BaseRunForTwoIntegers' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:107:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1173:11: note: expanded from macro 'BENCHMARK'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:108:1: warning: initialization of 'benchmark_uniq_5BM_BaseRunForTwoFloats' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1061:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:108:1: warning: variable 'benchmark_uniq_5BM_BaseRunForTwoFloats' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:108:1: warning: variable 'benchmark_uniq_5BM_BaseRunForTwoFloats' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:108:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1173:11: note: expanded from macro 'BENCHMARK'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:109:1: warning: initialization of 'benchmark_uniq_6BM_AlbaNumberIntegerCreation' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1061:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:109:1: warning: variable 'benchmark_uniq_6BM_AlbaNumberIntegerCreation' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:109:1: warning: variable 'benchmark_uniq_6BM_AlbaNumberIntegerCreation' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:109:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1173:11: note: expanded from macro 'BENCHMARK'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:110:1: warning: initialization of 'benchmark_uniq_7BM_AlbaNumberDoubleCreation' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1061:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:110:1: warning: variable 'benchmark_uniq_7BM_AlbaNumberDoubleCreation' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:110:1: warning: variable 'benchmark_uniq_7BM_AlbaNumberDoubleCreation' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:110:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1173:11: note: expanded from macro 'BENCHMARK'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:111:1: warning: initialization of 'benchmark_uniq_8BM_AlbaNumberFractionCreation' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1061:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:111:1: warning: variable 'benchmark_uniq_8BM_AlbaNumberFractionCreation' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:111:1: warning: variable 'benchmark_uniq_8BM_AlbaNumberFractionCreation' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:111:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1173:11: note: expanded from macro 'BENCHMARK'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:112:1: warning: initialization of 'benchmark_uniq_9BM_AlbaNumberComplexNumberCreation' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1061:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:112:1: warning: variable 'benchmark_uniq_9BM_AlbaNumberComplexNumberCreation' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:112:1: warning: variable 'benchmark_uniq_9BM_AlbaNumberComplexNumberCreation' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:44: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1159:3: note: expanded from macro 'BENCHMARK_PRIVATE_NAME'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1160:43: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1161:44: note: expanded from macro 'BENCHMARK_PRIVATE_CONCAT2'
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:112:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1173:11: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::family_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::per_family_instance_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetition_index' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::repetitions' is not initialized in the constructor. [uninitMemberVar]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1423:5: warning: Member variable 'Run::statistics' is not initialized in the constructor. [uninitMemberVar]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:105:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:3: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:106:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:3: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:107:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:3: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:108:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:3: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:109:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:3: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:110:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:3: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:111:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:3: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:112:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1171:3: note: expanded from macro 'BENCHMARK'
-/home/runner/work/aprg/aprg/benchmark/benchmarkLibrary/include/benchmark/benchmark.h:1167:3: note: expanded from macro 'BENCHMARK_PRIVATE_DECLARE'
 DONE!
