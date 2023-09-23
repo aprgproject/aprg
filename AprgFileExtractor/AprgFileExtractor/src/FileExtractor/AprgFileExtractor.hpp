@@ -18,6 +18,9 @@ public:
         std::string const& condition, std::filesystem::path const& pathOf7zExecutable,
         std::filesystem::path const& pathOf7zTempFile);
 
+    AprgFileExtractor(
+        std::string&& condition, std::filesystem::path&& pathOf7zExecutable, std::filesystem::path&& pathOf7zTempFile);
+
     void copyRelativeFilePathsFromCompressedFile(
         std::filesystem::path const& filePathOfCompressedFile, SetOfPaths& files) const;
     // NOLINTNEXTLINE(modernize-use-nodiscard)

@@ -30,7 +30,10 @@ public:
     using VoidElementFunction = std::function<void(ElementType const&)>;
     using GenerateFunction = std::function<void(VoidElementFunction const& generateElementFunction)>;
     explicit MathSet(RosterList const& rosterList) { constructSetBasedOnRosterList(rosterList); }
+    explicit MathSet(RosterList&& rosterList) { constructSetBasedOnRosterList(rosterList); }
     MathSet() : m_description("Null set"), m_ruleToBeInTheSet([](ElementType const&) -> bool { return false; }) {}
+    MathSet(std::string const& description, Rule const& rule) : m_description(description), m_ruleToBeInTheSet(rule) {}
+    MathSet(std::string&& description, Rule&& rule) : m_description(description), m_ruleToBeInTheSet(rule) {}
 
     MathSet(RosterInitializerList const& initializerList) {
         RosterList rosterList;
@@ -38,8 +41,6 @@ public:
         std::copy(initializerList.begin(), initializerList.end(), std::back_inserter(rosterList));
         constructSetBasedOnRosterList(rosterList);
     }
-
-    MathSet(std::string const& description, Rule const& rule) : m_description(description), m_ruleToBeInTheSet(rule) {}
 
     [[nodiscard]] MathSet getComplement() const {
         Rule const ruleToBeInTheNewSet = [&](ElementType const& elementToCheck) -> bool {

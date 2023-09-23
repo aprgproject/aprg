@@ -49,6 +49,9 @@ AprgFileExtractor::AprgFileExtractor(
     string const& condition, path const& pathOf7zExecutable, path const& pathOf7zTempFile)
     : m_grepEvaluator(condition), m_pathOf7zExecutable(pathOf7zExecutable), m_pathOf7zTempFile(pathOf7zTempFile) {}
 
+AprgFileExtractor::AprgFileExtractor(string&& condition, path&& pathOf7zExecutable, path&& pathOf7zTempFile)
+    : m_grepEvaluator(condition), m_pathOf7zExecutable(pathOf7zExecutable), m_pathOf7zTempFile(pathOf7zTempFile) {}
+
 void AprgFileExtractor::copyRelativeFilePathsFromCompressedFile(
     path const& filePathOfCompressedFile, SetOfPaths& files) const {
     AlbaLocalPathHandler const filePathHandler(filePathOfCompressedFile);

@@ -8,6 +8,8 @@ namespace alba {
 
 AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm(string const& stringToFind)
     : m_type(AlbaGrepStringEvaluatorTermType::StringToFind), m_savedResult(false), m_stringToFind(stringToFind) {}
+AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm(string&& stringToFind)
+    : m_type(AlbaGrepStringEvaluatorTermType::StringToFind), m_savedResult(false), m_stringToFind(stringToFind) {}
 AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm(bool const result)
     : m_type(AlbaGrepStringEvaluatorTermType::BooleanResult), m_savedResult(result) {}
 AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm()

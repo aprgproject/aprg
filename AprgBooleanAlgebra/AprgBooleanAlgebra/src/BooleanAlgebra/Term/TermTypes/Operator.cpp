@@ -7,6 +7,7 @@ using namespace std;
 namespace alba::booleanAlgebra {
 
 Operator::Operator(string const& operatingString) : m_operatingString(operatingString) {}
+Operator::Operator(string&& operatingString) : m_operatingString(operatingString) {}
 bool Operator::operator==(Operator const& second) const { return m_operatingString == second.m_operatingString; }
 bool Operator::operator!=(Operator const& second) const { return m_operatingString != second.m_operatingString; }
 

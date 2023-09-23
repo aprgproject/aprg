@@ -25,6 +25,7 @@ public:
     using PointToColorDetailsMap = std::map<BitmapXY, ColorDetails>;
     using PointAndColorDetailsPair = std::pair<BitmapXY, ColorDetails>;
     PenCirclesDrawer(PenCircles const& penCircles, BitmapSnippet& snippet);
+    PenCirclesDrawer(PenCircles&& penCircles, BitmapSnippet& snippet);
     void draw();
     void drawUsingCirclesWithoutOverlay();
     void drawUsingCirclesWithOverlay();

@@ -17,6 +17,10 @@ public:
         BitmapXY const topLeftCornerPosition, BitmapXY const bottomRightCornerPosition,
         BitmapConfiguration const& configuration);
 
+    BitmapSnippet(
+        BitmapXY const topLeftCornerPosition, BitmapXY const bottomRightCornerPosition,
+        BitmapConfiguration&& configuration);
+
     [[nodiscard]] BitmapConfiguration getConfiguration() const;
     [[nodiscard]] BitmapXY getTopLeftCorner() const;
     [[nodiscard]] BitmapXY getBottomRightCorner() const;

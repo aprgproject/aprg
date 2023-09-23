@@ -6,6 +6,8 @@ namespace alba {
 
 AlbaGrepStringToken::AlbaGrepStringToken(string const& stringToFind)
     : m_type(TokenType::StringToFind), m_operatorType(AlbaGrepStringOperatorType::Unknown), m_string(stringToFind) {}
+AlbaGrepStringToken::AlbaGrepStringToken(string&& stringToFind)
+    : m_type(TokenType::StringToFind), m_operatorType(AlbaGrepStringOperatorType::Unknown), m_string(stringToFind) {}
 AlbaGrepStringToken::AlbaGrepStringToken(AlbaGrepStringOperatorType const operatorType)
     : m_type(TokenType::Operator), m_operatorType(operatorType) {}
 AlbaGrepStringToken::AlbaGrepStringToken()

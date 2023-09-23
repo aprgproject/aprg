@@ -16,6 +16,14 @@ BitmapSnippet::BitmapSnippet(
     loadPixelDataFromFileInConfiguration();
 }
 
+BitmapSnippet::BitmapSnippet(
+    BitmapXY const topLeftCornerPosition, BitmapXY const bottomRightCornerPosition, BitmapConfiguration&& configuration)
+    : m_topLeftCorner(topLeftCornerPosition),
+      m_bottomRightCorner(bottomRightCornerPosition),
+      m_configuration(configuration) {
+    loadPixelDataFromFileInConfiguration();
+}
+
 BitmapConfiguration BitmapSnippet::getConfiguration() const { return m_configuration; }
 BitmapXY BitmapSnippet::getTopLeftCorner() const { return m_topLeftCorner; }
 BitmapXY BitmapSnippet::getBottomRightCorner() const { return m_bottomRightCorner; }

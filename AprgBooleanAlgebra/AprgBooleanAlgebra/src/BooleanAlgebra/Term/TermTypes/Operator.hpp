@@ -12,6 +12,7 @@ class Operator : public BaseTermData {
 public:
     Operator() = default;
     explicit Operator(std::string const& operatingString);
+    explicit Operator(std::string&& operatingString);
     bool operator==(Operator const& second) const;
     bool operator!=(Operator const& second) const;
     bool operator<(Operator const& second) const;
