@@ -14,6 +14,7 @@ public:
     using Values = std::vector<Value>;
     using ValueMatrix = matrix::AlbaMatrix<Value>;
     explicit FindTheMinimumCostToReachDestinationUsingATrain(ValueMatrix const& prices);
+    explicit FindTheMinimumCostToReachDestinationUsingATrain(ValueMatrix&& prices);
     static constexpr Value UNUSED_VALUE = std::numeric_limits<Value>::max();
     [[nodiscard]] Value getMinimumCostUsingNaiveRecursion() const;
     [[nodiscard]] Value getMinimumCostUsingMemoizationDP() const;

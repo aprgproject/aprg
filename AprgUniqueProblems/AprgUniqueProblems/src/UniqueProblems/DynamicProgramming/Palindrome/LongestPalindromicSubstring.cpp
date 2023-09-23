@@ -5,6 +5,7 @@ using namespace std;
 namespace alba {
 
 LongestPalindromicSubstring::LongestPalindromicSubstring(string const& stringParameter) : m_string(stringParameter) {}
+LongestPalindromicSubstring::LongestPalindromicSubstring(string&& stringParameter) : m_string(stringParameter) {}
 
 LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLengthUsingNaiveRecursion() const {
     // Time Complexity: Exponential

@@ -21,6 +21,7 @@ auto endTimeJobAndTimeComparator = [](WeightedJobScheduling::Job const& job, Wei
 }  // namespace
 
 WeightedJobScheduling::WeightedJobScheduling(Jobs const& jobs) : m_jobs(jobs) {}
+WeightedJobScheduling::WeightedJobScheduling(Jobs&& jobs) : m_jobs(jobs) {}
 
 WeightedJobScheduling::Profit WeightedJobScheduling::getMaxProfitByMonitoringTimeStampsUsingIterativeDP() const {
     // Time Complexity: O(n^2)

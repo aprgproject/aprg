@@ -10,6 +10,9 @@ namespace alba {
 LongestIncreasingSubsequenceLinearithmic::LongestIncreasingSubsequenceLinearithmic(Values const& sequence)
     : m_sequence(sequence) {}
 
+LongestIncreasingSubsequenceLinearithmic::LongestIncreasingSubsequenceLinearithmic(Values&& sequence)
+    : m_sequence(sequence) {}
+
 LongestIncreasingSubsequenceLinearithmic::Index LongestIncreasingSubsequenceLinearithmic::getLongestLength() const {
     Index longestLength(0);
     if (!m_sequence.empty()) {

@@ -12,6 +12,8 @@ namespace alba {
 LongestEqualLengthSubArraysWithSameSum::LongestEqualLengthSubArraysWithSameSum(Values const& values)
     : m_values(values) {}
 
+LongestEqualLengthSubArraysWithSameSum::LongestEqualLengthSubArraysWithSameSum(Values&& values) : m_values(values) {}
+
 LongestEqualLengthSubArraysWithSameSum::Index
 LongestEqualLengthSubArraysWithSameSum::getLongestTotalLengthOfSubArraysUsingPartialSums() const {
     // Time Complexity: O(n^2)

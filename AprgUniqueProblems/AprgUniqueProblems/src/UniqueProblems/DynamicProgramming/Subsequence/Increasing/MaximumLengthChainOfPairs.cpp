@@ -12,6 +12,11 @@ MaximumLengthChainOfPairs::MaximumLengthChainOfPairs(Pairs const& sequence) : m_
     sort(m_sequence.begin(), m_sequence.end());
 }
 
+MaximumLengthChainOfPairs::MaximumLengthChainOfPairs(Pairs&& sequence) : m_sequence(sequence) {
+    // SORT is needed to process correctly
+    sort(m_sequence.begin(), m_sequence.end());
+}
+
 MaximumLengthChainOfPairs::Index MaximumLengthChainOfPairs::getLongestLength() const {
     // Time Complexity: O(n^2)
     // Auxilliary space: O(n)

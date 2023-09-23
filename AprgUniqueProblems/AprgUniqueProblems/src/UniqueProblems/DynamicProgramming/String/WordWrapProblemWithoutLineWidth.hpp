@@ -20,6 +20,7 @@ public:
     };
 
     explicit WordWrapProblemWithoutLineWidth(stringHelper::strings const& words);
+    explicit WordWrapProblemWithoutLineWidth(stringHelper::strings&& words);
     static constexpr Cost MAX_COST = std::numeric_limits<Cost>::max();
     [[nodiscard]] Cost getOptimizedCostUsingNaiveRecursion() const;
     [[nodiscard]] Cost getOptimizedCostByTryingAllLengths() const;

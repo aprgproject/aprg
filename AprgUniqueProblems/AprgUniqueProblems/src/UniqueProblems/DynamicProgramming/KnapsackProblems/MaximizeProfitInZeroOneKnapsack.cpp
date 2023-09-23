@@ -7,6 +7,9 @@ namespace alba {
 MaximizeProfitInZeroOneKnapsack::MaximizeProfitInZeroOneKnapsack(Weight const maximumWeight, Items const& items)
     : m_maximumWeight(maximumWeight), m_items(items) {}
 
+MaximizeProfitInZeroOneKnapsack::MaximizeProfitInZeroOneKnapsack(Weight const maximumWeight, Items&& items)
+    : m_maximumWeight(maximumWeight), m_items(items) {}
+
 MaximizeProfitInZeroOneKnapsack::Profit MaximizeProfitInZeroOneKnapsack::getBestProfitUsingNaiveRecursion() const {
     // Time Complexity: O(2^n)
     // Auxiliary Space: O(1)

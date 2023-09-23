@@ -9,6 +9,11 @@ ElevatorWeightProblem::ElevatorWeightProblem(Weight const maximumElevatorWeight,
       m_peopleWeights(peopleWeights),
       m_numberOfRidesAndLastWeights(getNumberOfPeopleSubsets(), NumberOfRidesAndWeight{}) {}
 
+ElevatorWeightProblem::ElevatorWeightProblem(Weight const maximumElevatorWeight, Weights&& peopleWeights)
+    : m_maximumElevatorWeight(maximumElevatorWeight),
+      m_peopleWeights(peopleWeights),
+      m_numberOfRidesAndLastWeights(getNumberOfPeopleSubsets(), NumberOfRidesAndWeight{}) {}
+
 int ElevatorWeightProblem::getNumberOfOptimalRides() {
     int result(0);
     for (PeopleBits peopleBits = 1; peopleBits < getNumberOfPeopleSubsets(); ++peopleBits) {

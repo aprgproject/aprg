@@ -17,6 +17,7 @@ public:
     using CountMatrix = matrix::AlbaMatrix<Count>;
     using CountMatrices = std::vector<CountMatrix>;
     BooleanParenthesizationProblem(Booleans const& inputValues, Operators const& operators);
+    BooleanParenthesizationProblem(Booleans&& inputValues, Operators&& operators);
     static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getNumberOfWaysForTrueUsingNaiveRecursion() const;
     [[nodiscard]] Count getNumberOfWaysForTrueUsingMemoizationDP() const;

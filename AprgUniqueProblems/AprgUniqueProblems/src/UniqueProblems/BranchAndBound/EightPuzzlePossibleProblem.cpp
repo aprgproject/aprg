@@ -12,7 +12,14 @@ EightPuzzlePossibleProblem::EightPuzzlePossibleProblem(
     : m_startMatrix(startMatrix),
       m_targetMatrix(targetMatrix),
       m_sideSize(static_cast<int>(m_startMatrix.getNumberOfColumns())),
+      m_nodeId(START_NODE_ID) {
+    clearIfInvalid();
+}
 
+EightPuzzlePossibleProblem::EightPuzzlePossibleProblem(NumberMatrix&& startMatrix, NumberMatrix&& targetMatrix)
+    : m_startMatrix(startMatrix),
+      m_targetMatrix(targetMatrix),
+      m_sideSize(static_cast<int>(m_startMatrix.getNumberOfColumns())),
       m_nodeId(START_NODE_ID) {
     clearIfInvalid();
 }

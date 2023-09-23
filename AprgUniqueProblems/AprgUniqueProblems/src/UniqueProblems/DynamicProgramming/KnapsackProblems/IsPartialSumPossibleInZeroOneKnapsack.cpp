@@ -10,6 +10,9 @@ IsPartialSumPossibleInZeroOneKnapsack::IsPartialSumPossibleInZeroOneKnapsack(
     Value const targetSum, Values const& values)
     : m_targetSum(targetSum), m_inputValues(values) {}
 
+IsPartialSumPossibleInZeroOneKnapsack::IsPartialSumPossibleInZeroOneKnapsack(Value const targetSum, Values&& values)
+    : m_targetSum(targetSum), m_inputValues(values) {}
+
 bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingNaiveRecursion() const {
     // Time Complexity: O(2^n)
     // -> In the worst case, this solution tries two possibilities (whether to include or exclude) for every element.

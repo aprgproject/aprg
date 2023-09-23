@@ -5,6 +5,7 @@ using namespace std;
 namespace alba {
 
 SubArraySum::SubArraySum(Values const& valuesToCheck) : m_valuesToCheck(valuesToCheck) {}
+SubArraySum::SubArraySum(Values&& valuesToCheck) : m_valuesToCheck(valuesToCheck) {}
 
 SubArraySum::Values SubArraySum::getSubArrayWithSum(Value const targetSum) const {
     Values result;

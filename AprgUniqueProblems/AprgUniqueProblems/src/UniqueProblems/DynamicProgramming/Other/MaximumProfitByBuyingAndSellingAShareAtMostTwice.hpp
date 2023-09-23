@@ -13,6 +13,7 @@ public:
     using Value = int;
     using Values = std::vector<Value>;
     explicit MaximumProfitByBuyingAndSellingAShareAtMostTwice(Values const& prices);
+    explicit MaximumProfitByBuyingAndSellingAShareAtMostTwice(Values&& prices);
     [[nodiscard]] Value getMaximumProfitUsingIterativeDP() const;
     static constexpr Index MAX_NUMBER_OF_TRANSACTIONS = 2;
 

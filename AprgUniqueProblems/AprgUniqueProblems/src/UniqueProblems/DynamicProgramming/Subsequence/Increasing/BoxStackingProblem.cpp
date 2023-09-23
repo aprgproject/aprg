@@ -10,6 +10,7 @@ using namespace std;
 namespace alba {
 
 BoxStackingProblem::BoxStackingProblem(Boxes const& boxes) : m_boxes(boxes) {}
+BoxStackingProblem::BoxStackingProblem(Boxes&& boxes) : m_boxes(boxes) {}
 
 BoxStackingProblem::Boxes BoxStackingProblem::getBoxesWithMaximumStackedHeight() const {
     // Time Complexity: O(n^2)

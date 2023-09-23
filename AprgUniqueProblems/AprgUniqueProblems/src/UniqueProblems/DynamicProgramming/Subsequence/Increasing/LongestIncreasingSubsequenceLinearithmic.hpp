@@ -13,6 +13,7 @@ public:
     using IndexToIndex = std::vector<Index>;
     using IndexToValue = std::vector<Value>;
     explicit LongestIncreasingSubsequenceLinearithmic(Values const& sequence);
+    explicit LongestIncreasingSubsequenceLinearithmic(Values&& sequence);
     static constexpr Value UNUSED_VALUE = std::numeric_limits<Value>::max();
     [[nodiscard]] Index getLongestLength() const;
     [[nodiscard]] Values getLongestSubsequence() const;

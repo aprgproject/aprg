@@ -5,6 +5,7 @@ using namespace std;
 namespace alba {
 
 MaximumSubArraySum::MaximumSubArraySum(Values const& values) : m_values(values) {}
+MaximumSubArraySum::MaximumSubArraySum(Values&& values) : m_values(values) {}
 
 MaximumSubArraySum::SubArrayDetails MaximumSubArraySum::getMaximumSubArraySumWithDetails() const {
     SubArrayDetails currentSubArray{};

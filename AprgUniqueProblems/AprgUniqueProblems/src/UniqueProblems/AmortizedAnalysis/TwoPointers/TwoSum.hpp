@@ -14,6 +14,7 @@ public:
     using Values = std::vector<Value>;
     using ValuesPair = std::pair<Value, Value>;
     explicit TwoSum(Values const& valuesToCheck);
+    explicit TwoSum(Values&& valuesToCheck);
     [[nodiscard]] ValuesPair getTwoValuesWithSum(Value const targetSum) const;
 
 private:

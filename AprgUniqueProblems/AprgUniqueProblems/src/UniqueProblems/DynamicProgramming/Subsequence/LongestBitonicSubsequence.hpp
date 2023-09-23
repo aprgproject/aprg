@@ -12,6 +12,7 @@ public:
     using Values = std::vector<Value>;
     using IndexToIndex = std::vector<Index>;
     explicit LongestBitonicSubsequence(Values const& sequence);
+    explicit LongestBitonicSubsequence(Values&& sequence);
     [[nodiscard]] Index getLongestLength() const;
     [[nodiscard]] Values getLongestSubsequence() const;
 

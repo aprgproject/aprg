@@ -12,6 +12,7 @@ public:
     using Value = int;
     using Values = std::vector<Value>;
     explicit SubArraySum(Values const& valuesToCheck);
+    explicit SubArraySum(Values&& valuesToCheck);
     [[nodiscard]] Values getSubArrayWithSum(Value const targetSum) const;
 
 private:

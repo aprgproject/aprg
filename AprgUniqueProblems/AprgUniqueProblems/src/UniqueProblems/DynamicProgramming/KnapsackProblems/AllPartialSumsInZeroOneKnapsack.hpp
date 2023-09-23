@@ -10,6 +10,7 @@ public:
     using Values = std::vector<Value>;
     using Booleans = std::vector<bool>;
     explicit AllPartialSumsInZeroOneKnapsack(Values const& values);
+    explicit AllPartialSumsInZeroOneKnapsack(Values&& values);
     [[nodiscard]] Values getAllPossiblePartialSums() const;
     [[nodiscard]] Values getAllPossiblePartialSumsBySettingFutureValues() const;
     Values getAllPossiblePartialSumsWithSquareRootAlgorithm();

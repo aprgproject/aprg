@@ -8,6 +8,7 @@ using namespace std;
 namespace alba {
 
 LongestIncreasingSubsequence::LongestIncreasingSubsequence(Values const& sequence) : m_sequence(sequence) {}
+LongestIncreasingSubsequence::LongestIncreasingSubsequence(Values&& sequence) : m_sequence(sequence) {}
 
 LongestIncreasingSubsequence::Index LongestIncreasingSubsequence::getLongestLength() const {
     // Time Complexity: O(n^2)

@@ -12,6 +12,7 @@ public:
     using Pairs = std::vector<Pair>;
     using IndexToIndex = std::vector<Index>;
     explicit MaximumLengthChainOfPairs(Pairs const& sequence);
+    explicit MaximumLengthChainOfPairs(Pairs&& sequence);
     [[nodiscard]] Index getLongestLength() const;
     [[nodiscard]] Pairs getLongestSubsequence() const;
 

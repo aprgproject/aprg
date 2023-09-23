@@ -6,6 +6,8 @@ namespace alba {
 
 MatrixMultiplicationOrder::MatrixMultiplicationOrder(Dimensions const& dimensions) : m_dimensions(dimensions) {}
 
+MatrixMultiplicationOrder::MatrixMultiplicationOrder(Dimensions&& dimensions) : m_dimensions(dimensions) {}
+
 MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOperationsUsingNaiveRecursion() const {
     // Time Complexity: Exponential
     // Auxiliary Space: Constant

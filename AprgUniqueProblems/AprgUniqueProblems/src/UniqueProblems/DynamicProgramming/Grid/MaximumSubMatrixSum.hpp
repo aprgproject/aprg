@@ -22,6 +22,7 @@ public:
     using Values = std::vector<Value>;
     using ValueMatrix = matrix::AlbaMatrix<Value>;
     explicit MaximumSubMatrixSum(ValueMatrix const& valueMatrix);
+    explicit MaximumSubMatrixSum(ValueMatrix&& valueMatrix);
     static constexpr Value MIN_VALUE = std::numeric_limits<Value>::min();
     [[nodiscard]] SubArrayDetails getMaximumSubMatrixSumWithDetails() const;
     [[nodiscard]] Value getMaximumSubMatrixSum() const;

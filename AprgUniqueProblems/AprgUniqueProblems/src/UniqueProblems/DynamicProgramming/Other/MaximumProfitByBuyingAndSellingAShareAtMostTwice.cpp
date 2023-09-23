@@ -9,6 +9,9 @@ namespace alba {
 MaximumProfitByBuyingAndSellingAShareAtMostTwice::MaximumProfitByBuyingAndSellingAShareAtMostTwice(Values const& prices)
     : m_prices(prices) {}
 
+MaximumProfitByBuyingAndSellingAShareAtMostTwice::MaximumProfitByBuyingAndSellingAShareAtMostTwice(Values&& prices)
+    : m_prices(prices) {}
+
 MaximumProfitByBuyingAndSellingAShareAtMostTwice::Value
 MaximumProfitByBuyingAndSellingAShareAtMostTwice::getMaximumProfitUsingIterativeDP() const {
     // Time Complexity: O(prices)

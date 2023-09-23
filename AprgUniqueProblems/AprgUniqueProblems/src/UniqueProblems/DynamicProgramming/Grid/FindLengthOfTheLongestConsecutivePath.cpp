@@ -12,6 +12,9 @@ vector<pair<int, int>> const columnOffsets{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, 
 FindLengthOfTheLongestConsecutivePath::FindLengthOfTheLongestConsecutivePath(ValueGrid const& inputGrid)
     : m_inputGrid(inputGrid) {}
 
+FindLengthOfTheLongestConsecutivePath::FindLengthOfTheLongestConsecutivePath(ValueGrid&& inputGrid)
+    : m_inputGrid(inputGrid) {}
+
 FindLengthOfTheLongestConsecutivePath::Count
 FindLengthOfTheLongestConsecutivePath::getLongestLengthUsingNaiveRecursion() const {
     Count result(0);

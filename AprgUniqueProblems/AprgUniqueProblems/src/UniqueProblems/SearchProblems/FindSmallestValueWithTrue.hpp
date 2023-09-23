@@ -24,6 +24,7 @@ public:
     // ok. For example, if the function works in O(n) time, the total time complexity is O(nlogz)
     using BoolFunction = std::function<bool(Value)>;
     explicit FindSmallestValueWithTrue(BoolFunction const& boolFunction) : m_boolFunction(boolFunction) {}
+    explicit FindSmallestValueWithTrue(BoolFunction&& boolFunction) : m_boolFunction(boolFunction) {}
 
     [[nodiscard]] Value getSmallestValueWithTrue(Value const& startValue, Value const& endValue) const {
         // Binary search with skip

@@ -5,6 +5,7 @@ using namespace std;
 namespace alba {
 
 PalindromePartitioning::PalindromePartitioning(string const& stringParameter) : m_string(stringParameter) {}
+PalindromePartitioning::PalindromePartitioning(string&& stringParameter) : m_string(stringParameter) {}
 
 PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsingNaiveRecursion() const {
     // Time Complexity: Exponential

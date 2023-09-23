@@ -15,6 +15,7 @@ public:
     using Dimensions = std::vector<Dimension>;
     using CountMatrix = matrix::AlbaMatrix<Count>;
     explicit MatrixMultiplicationOrder(Dimensions const& dimensions);
+    explicit MatrixMultiplicationOrder(Dimensions&& dimensions);
     static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getMinimumNumberOfOperationsUsingNaiveRecursion() const;
     [[nodiscard]] Count getMinimumNumberOfOperationsUsingMemoizationDP() const;

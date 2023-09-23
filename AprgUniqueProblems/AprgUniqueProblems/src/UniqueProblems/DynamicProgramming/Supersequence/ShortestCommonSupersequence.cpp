@@ -7,6 +7,9 @@ namespace alba {
 ShortestCommonSupersequence::ShortestCommonSupersequence(Values const& sequence1, Values const& sequence2)
     : m_sequence1(sequence1), m_sequence2(sequence2) {}
 
+ShortestCommonSupersequence::ShortestCommonSupersequence(Values&& sequence1, Values&& sequence2)
+    : m_sequence1(sequence1), m_sequence2(sequence2) {}
+
 ShortestCommonSupersequence::Count ShortestCommonSupersequence::getShortestLengthUsingNaiveRecursion() const {
     // Time Complexity: Exponential -> Since there are (m x n) calls per iteration:  O(2^(m x n))
     // Auxiliary Space: Constant

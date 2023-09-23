@@ -17,6 +17,7 @@ public:
     using ValueAndFrequencyPairs = std::vector<ValueAndFrequencyPair>;
     using CostMatrix = matrix::AlbaMatrix<Cost>;
     explicit OptimalBinarySearchTree(ValueAndFrequencyPairs const& valueAndFrequencyPairs);
+    explicit OptimalBinarySearchTree(ValueAndFrequencyPairs&& valueAndFrequencyPairs);
     static constexpr Cost MAX_COUNT = std::numeric_limits<Cost>::max();
     [[nodiscard]] Cost getMinimumCostUsingNaiveRecursion() const;
     [[nodiscard]] Cost getMinimumCostUsingIterativeDP() const;

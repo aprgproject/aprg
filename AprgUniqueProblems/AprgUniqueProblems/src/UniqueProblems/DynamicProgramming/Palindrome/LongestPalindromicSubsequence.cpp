@@ -7,6 +7,8 @@ namespace alba {
 LongestPalindromicSubsequence::LongestPalindromicSubsequence(string const& stringParameter)
     : m_string(stringParameter) {}
 
+LongestPalindromicSubsequence::LongestPalindromicSubsequence(string&& stringParameter) : m_string(stringParameter) {}
+
 LongestPalindromicSubsequence::Count LongestPalindromicSubsequence::getLongestLengthUsingNaiveRecursion() const {
     Count result(0);
     if (!m_string.empty()) {

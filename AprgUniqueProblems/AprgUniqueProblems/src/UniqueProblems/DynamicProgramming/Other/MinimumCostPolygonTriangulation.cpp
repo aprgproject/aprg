@@ -9,6 +9,7 @@ using namespace std;
 namespace alba {
 
 MinimumCostPolygonTriangulation::MinimumCostPolygonTriangulation(Points const& vertices) : m_vertices(vertices) {}
+MinimumCostPolygonTriangulation::MinimumCostPolygonTriangulation(Points&& vertices) : m_vertices(vertices) {}
 
 MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimumNumberOfOperationsUsingNaiveRecursion()
     const {

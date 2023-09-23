@@ -17,6 +17,7 @@ public:
     using Items = std::vector<Item>;
     using ProfitMatrix = matrix::AlbaMatrix<Profit>;
     MaximizeProfitInZeroOneKnapsack(Weight const maximumWeight, Items const& items);
+    MaximizeProfitInZeroOneKnapsack(Weight const maximumWeight, Items&& items);
     static constexpr Profit UNUSED_VALUE = std::numeric_limits<Profit>::max();
     [[nodiscard]] Profit getBestProfitUsingNaiveRecursion() const;
     [[nodiscard]] Profit getBestProfitUsingMemoizationDP() const;

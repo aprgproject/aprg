@@ -10,6 +10,9 @@ namespace alba {
 VertexCoverProblem::VertexCoverProblem(Graph const& nAryTreeGraph, Vertex const rootOfTree)
     : m_nAryTreeGraph(nAryTreeGraph), m_rootOfTree(rootOfTree), m_childrenInTree(m_nAryTreeGraph, m_rootOfTree) {}
 
+VertexCoverProblem::VertexCoverProblem(Graph&& nAryTreeGraph, Vertex const rootOfTree)
+    : m_nAryTreeGraph(nAryTreeGraph), m_rootOfTree(rootOfTree), m_childrenInTree(m_nAryTreeGraph, m_rootOfTree) {}
+
 VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingNaiveRecursion() const {
     // Time Complexity: Exponential
     // Auxiliary Space: Constant

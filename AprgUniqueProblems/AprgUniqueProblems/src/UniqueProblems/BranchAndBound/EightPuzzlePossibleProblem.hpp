@@ -35,6 +35,7 @@ public:
     using SearchNodeIdToSnapshot = std::vector<PuzzleSnapshot>;
     using MinCostPriorityQueue = std::priority_queue<SearchNode, std::vector<SearchNode>, CostComparator>;
     EightPuzzlePossibleProblem(NumberMatrix const& startMatrix, NumberMatrix const& targetMatrix);
+    EightPuzzlePossibleProblem(NumberMatrix&& startMatrix, NumberMatrix&& targetMatrix);
     void printStepsToSolve();
     static constexpr std::array<int, 4> X_OFFSETS = {1, 0, -1, 0};
     static constexpr std::array<int, 4> Y_OFFSETS = {0, -1, 0, 1};

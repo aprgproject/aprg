@@ -20,6 +20,7 @@ public:
     using HashValue = uint64_t;
     using HashValues = std::vector<HashValue>;
     StringConstruction(std::string const& stringToConstruct, stringHelper::strings const& subStrings);
+    StringConstruction(std::string&& stringToConstruct, stringHelper::strings&& subStrings);
     static constexpr HashValue UNUSED_VALUE = std::numeric_limits<int>::max();
     int getCount();
     int getCountSquareRootAlgorithm();

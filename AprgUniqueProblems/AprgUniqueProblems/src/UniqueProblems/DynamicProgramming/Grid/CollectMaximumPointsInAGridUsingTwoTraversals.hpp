@@ -11,6 +11,7 @@ public:
     using ValueGrid = matrix::AlbaMatrix<Value>;
     using ValueGrids = std::vector<ValueGrid>;
     explicit CollectMaximumPointsInAGridUsingTwoTraversals(ValueGrid const& inputGrid);
+    explicit CollectMaximumPointsInAGridUsingTwoTraversals(ValueGrid&& inputGrid);
     static constexpr Value INVALID_COUNT = std::numeric_limits<Value>::max();
     [[nodiscard]] Value getMaximumPointsUsingNaiveRecursion() const;
     [[nodiscard]] Value getMaximumPointsUsingMemoizationDP() const;

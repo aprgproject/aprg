@@ -12,6 +12,11 @@ DeBruijnSequences::DeBruijnSequences(int const substringSize, string const& alph
     initialize();
 }
 
+DeBruijnSequences::DeBruijnSequences(int const substringSize, string&& alphabet)
+    : m_substringSize(substringSize), m_alphabet(alphabet) {
+    initialize();
+}
+
 string DeBruijnSequences::getDeBruijnString() const {
     string result;
     if (m_substringSize == 1) {

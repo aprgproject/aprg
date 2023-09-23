@@ -9,6 +9,7 @@ using namespace std;
 namespace alba {
 
 LongestBitonicSubsequence::LongestBitonicSubsequence(Values const& sequence) : m_sequence(sequence) {}
+LongestBitonicSubsequence::LongestBitonicSubsequence(Values&& sequence) : m_sequence(sequence) {}
 
 LongestBitonicSubsequence::Index LongestBitonicSubsequence::getLongestLength() const {
     // Time Complexity: O(n^2)

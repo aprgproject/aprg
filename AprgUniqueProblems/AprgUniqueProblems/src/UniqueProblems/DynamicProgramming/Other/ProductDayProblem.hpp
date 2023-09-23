@@ -17,6 +17,7 @@ public:
     using ProductAndDayPair = std::pair<Product, Day>;
     using ProductAndDayPairs = std::vector<ProductAndDayPair>;
     explicit ProductDayProblem(PriceMatrix const& pricesInDayByProduct);
+    explicit ProductDayProblem(PriceMatrix&& pricesInDayByProduct);
     static constexpr Price INVALID_PRICE = std::numeric_limits<Price>::max();
     [[nodiscard]] Price getMinimumPriceUsingMemoizationDP() const;
     [[nodiscard]] Price getMinimumPriceUsingIterativeDP() const;

@@ -7,6 +7,7 @@ using namespace std;
 namespace alba {
 
 MinimumNumberOfJumpsToReachEnd::MinimumNumberOfJumpsToReachEnd(Counts const& sequence) : m_sequence(sequence) {}
+MinimumNumberOfJumpsToReachEnd::MinimumNumberOfJumpsToReachEnd(Counts&& sequence) : m_sequence(sequence) {}
 
 MinimumNumberOfJumpsToReachEnd::Count MinimumNumberOfJumpsToReachEnd::getMinimumNumberOfJumpsUsingNaiveRecursion()
     const {

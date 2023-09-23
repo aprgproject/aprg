@@ -17,6 +17,13 @@ StringConstruction::StringConstruction(string const& stringToConstruct, stringHe
     initialize();
 }
 
+StringConstruction::StringConstruction(string&& stringToConstruct, stringHelper::strings&& subStrings)
+    : m_stringToConstruct(stringToConstruct),
+      m_subStrings(subStrings),
+      m_prefixLengthToCount(stringToConstruct.length() + 1, UNUSED_VALUE) {
+    initialize();
+}
+
 int StringConstruction::getCount() {
     int result(0);
     if (!m_stringToConstruct.empty()) {

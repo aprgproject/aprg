@@ -16,6 +16,7 @@ public:
     using Counts = std::vector<Count>;
     using CountMatrix = matrix::AlbaMatrix<Count>;
     ShortestCommonSupersequence(Values const& sequence1, Values const& sequence2);
+    ShortestCommonSupersequence(Values&& sequence1, Values&& sequence2);
     static constexpr Count UNUSED_COUNT = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getShortestLengthUsingNaiveRecursion() const;
     [[nodiscard]] Count getShortestLengthUsingMemoizationDP() const;

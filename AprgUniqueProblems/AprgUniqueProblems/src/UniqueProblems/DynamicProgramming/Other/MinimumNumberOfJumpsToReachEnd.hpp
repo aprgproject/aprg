@@ -15,6 +15,7 @@ public:
     using IndexToIndex = std::vector<Index>;
     using Counts = std::vector<Count>;
     explicit MinimumNumberOfJumpsToReachEnd(Counts const& sequence);
+    explicit MinimumNumberOfJumpsToReachEnd(Counts&& sequence);
     static constexpr Count MAX_COUNT = std::numeric_limits<Count>::max();
     [[nodiscard]] Count getMinimumNumberOfJumpsUsingNaiveRecursion() const;
     [[nodiscard]] Count getMinimumNumberOfJumpsUsingMemoizationDP() const;

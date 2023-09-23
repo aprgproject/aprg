@@ -7,6 +7,7 @@ using namespace std;
 namespace alba {
 
 MaximumSubMatrixSum::MaximumSubMatrixSum(ValueMatrix const& valueMatrix) : m_valueMatrix(valueMatrix) {}
+MaximumSubMatrixSum::MaximumSubMatrixSum(ValueMatrix&& valueMatrix) : m_valueMatrix(valueMatrix) {}
 
 MaximumSubMatrixSum::SubArrayDetails MaximumSubMatrixSum::getMaximumSubMatrixSumWithDetails() const {
     // Time Complexity: O(n^3)

@@ -18,6 +18,7 @@ public:
     using VertexToCountMap = std::map<Vertex, Count>;
     using VertexToSetOfVerticesMap = std::map<Vertex, SetOfVertices>;
     LargestIndependentSetProblem(Graph const& nAryTreeGraph, Vertex const rootOfTree);
+    LargestIndependentSetProblem(Graph&& nAryTreeGraph, Vertex const rootOfTree);
     static constexpr int UNUSED_COUNT = std::numeric_limits<int>::max();
     [[nodiscard]] Count getMaximumCountUsingNaiveRecursion() const;
     [[nodiscard]] Count getMaximumCountUsingMemoizationDP() const;

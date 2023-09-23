@@ -10,6 +10,11 @@ FindTheMinimumCostToReachDestinationUsingATrain::FindTheMinimumCostToReachDestin
     clearIfInvalid();
 }
 
+FindTheMinimumCostToReachDestinationUsingATrain::FindTheMinimumCostToReachDestinationUsingATrain(ValueMatrix&& prices)
+    : m_pricesAtEachStation(prices) {
+    clearIfInvalid();
+}
+
 FindTheMinimumCostToReachDestinationUsingATrain::Value
 FindTheMinimumCostToReachDestinationUsingATrain::getMinimumCostUsingNaiveRecursion() const {
     // Time Complexity: Exponential -> Since there are two calls per iteration:  O(n^n)

@@ -7,6 +7,9 @@ namespace alba {
 LongestCommonSubsequence::LongestCommonSubsequence(Values const& sequence1, Values const& sequence2)
     : m_sequence1(sequence1), m_sequence2(sequence2) {}
 
+LongestCommonSubsequence::LongestCommonSubsequence(Values&& sequence1, Values&& sequence2)
+    : m_sequence1(sequence1), m_sequence2(sequence2) {}
+
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingNaiveRecursion() const {
     return getLongestLengthUsingNaiveRecursion(
         static_cast<Index>(m_sequence1.size()), static_cast<Index>(m_sequence2.size()));

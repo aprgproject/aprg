@@ -30,6 +30,7 @@ public:
     using NumberOfRidesAndWeight = std::pair<int, Weight>;
     using NumberOfRidesAndWeights = std::vector<NumberOfRidesAndWeight>;
     ElevatorWeightProblem(Weight const maximumElevatorWeight, Weights const& peopleWeights);
+    ElevatorWeightProblem(Weight const maximumElevatorWeight, Weights&& peopleWeights);
     int getNumberOfOptimalRides();
 
 private:

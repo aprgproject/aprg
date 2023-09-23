@@ -7,6 +7,9 @@ namespace alba {
 MaximizeProfitInCuttingARod::MaximizeProfitInCuttingARod(Length const length, Rods const& rods)
     : m_length(length), m_rods(rods) {}
 
+MaximizeProfitInCuttingARod::MaximizeProfitInCuttingARod(Length const length, Rods&& rods)
+    : m_length(length), m_rods(rods) {}
+
 MaximizeProfitInCuttingARod::Profit MaximizeProfitInCuttingARod::getBestProfitUsingNaiveRecursion() const {
     // Time Complexity: O(n^r)
     // Auxiliary Space: O(1)

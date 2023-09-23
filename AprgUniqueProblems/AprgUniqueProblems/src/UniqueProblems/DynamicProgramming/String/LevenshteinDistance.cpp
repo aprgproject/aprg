@@ -9,6 +9,8 @@ namespace alba {
 LevenshteinDistance::LevenshteinDistance(string const& string1, string const& string2)
     : m_string1(string1), m_string2(string2) {}
 
+LevenshteinDistance::LevenshteinDistance(string&& string1, string&& string2) : m_string1(string1), m_string2(string2) {}
+
 LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingNaiveRecursion() const {
     // The time complexity of above solution is exponential.
     // In worst case, we may end up doing O(3m) operations.

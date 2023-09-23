@@ -10,6 +10,12 @@ PathSumInGridInRightOrDownWithDiagonalTraversal::PathSumInGridInRightOrDownWithD
     initialize(type);
 }
 
+PathSumInGridInRightOrDownWithDiagonalTraversal::PathSumInGridInRightOrDownWithDiagonalTraversal(
+    Type const type, Grid&& inputGrid)
+    : m_inputGrid(inputGrid) {
+    initialize(type);
+}
+
 PathSumInGridInRightOrDownWithDiagonalTraversal::Path
 PathSumInGridInRightOrDownWithDiagonalTraversal::getBestPathUsingIterativeDP() const {
     Path path;

@@ -21,6 +21,7 @@ public:
     using ExtraSpacesGrid = matrix::AlbaMatrix<int>;
     using CostGrid = matrix::AlbaMatrix<Cost>;
     WordWrapProblemWithLineWidth(Index const lineWidth, stringHelper::strings const& words);
+    WordWrapProblemWithLineWidth(Index const lineWidth, stringHelper::strings&& words);
     static constexpr Cost MAX_COST = std::numeric_limits<Cost>::max();
     [[nodiscard]] Cost getOptimizedCostUsingNaiveRecursion() const;
     [[nodiscard]] Cost getOptimizedCostByTryingAllLengths() const;

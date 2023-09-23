@@ -12,6 +12,9 @@ vector<pair<int, int>> const columnsOffsets{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1},
 CollectMaximumPointsInAGridUsingTwoTraversals::CollectMaximumPointsInAGridUsingTwoTraversals(ValueGrid const& inputGrid)
     : m_inputGrid(inputGrid) {}
 
+CollectMaximumPointsInAGridUsingTwoTraversals::CollectMaximumPointsInAGridUsingTwoTraversals(ValueGrid&& inputGrid)
+    : m_inputGrid(inputGrid) {}
+
 CollectMaximumPointsInAGridUsingTwoTraversals::Value
 CollectMaximumPointsInAGridUsingTwoTraversals::getMaximumPointsUsingNaiveRecursion() const {
     // Time Complexity: Exponential -> Since there are nine calls per iteration:  O(9^rows)

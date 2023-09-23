@@ -7,6 +7,9 @@ namespace alba {
 MaximumSizeSquareSubMatrixWithAllOnes::MaximumSizeSquareSubMatrixWithAllOnes(BooleanMatrix const& booleanMatrix)
     : m_booleanMatrix(booleanMatrix) {}
 
+MaximumSizeSquareSubMatrixWithAllOnes::MaximumSizeSquareSubMatrixWithAllOnes(BooleanMatrix&& booleanMatrix)
+    : m_booleanMatrix(booleanMatrix) {}
+
 MaximumSizeSquareSubMatrixWithAllOnes::Unit
 MaximumSizeSquareSubMatrixWithAllOnes::getMaximumSquareAreaUsingMemoizationDP() const {
     // Time Complexity: O(m*n*max(m,n)) (same as iterative DP)

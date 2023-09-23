@@ -9,6 +9,9 @@ namespace alba {
 ProductDayProblem::ProductDayProblem(PriceMatrix const& pricesInDayByProduct)
     : m_pricesInDayByProduct(pricesInDayByProduct) {}
 
+ProductDayProblem::ProductDayProblem(PriceMatrix&& pricesInDayByProduct)
+    : m_pricesInDayByProduct(pricesInDayByProduct) {}
+
 ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingMemoizationDP() const {
     Price result(0);
     if (!m_pricesInDayByProduct.isEmpty()) {

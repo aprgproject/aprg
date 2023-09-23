@@ -7,6 +7,9 @@ namespace alba {
 MinimumInitialPointsToReachDestination::MinimumInitialPointsToReachDestination(Grid const& inputGrid)
     : m_inputGrid(inputGrid) {}
 
+MinimumInitialPointsToReachDestination::MinimumInitialPointsToReachDestination(Grid&& inputGrid)
+    : m_inputGrid(inputGrid) {}
+
 MinimumInitialPointsToReachDestination::Value
 MinimumInitialPointsToReachDestination::getMinimalInitialPointsUsingIterativeDP() const {
     // Time Complexity of the DP implementation is O(mn) which is much better than Naive Recursive implementation.

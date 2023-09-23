@@ -9,6 +9,11 @@ BooleanParenthesizationProblem::BooleanParenthesizationProblem(Booleans const& i
     initialize();
 }
 
+BooleanParenthesizationProblem::BooleanParenthesizationProblem(Booleans&& inputValues, Operators&& operators)
+    : m_inputValues(inputValues), m_operators(operators) {
+    initialize();
+}
+
 BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberOfWaysForTrueUsingNaiveRecursion()
     const {
     // Time Complexity: Exponential

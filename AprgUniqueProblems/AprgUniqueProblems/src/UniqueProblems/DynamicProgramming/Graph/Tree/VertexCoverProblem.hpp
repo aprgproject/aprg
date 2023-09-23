@@ -18,6 +18,7 @@ public:
     using VertexToCountMap = std::map<Vertex, Count>;
     using VertexToSetOfVerticesMap = std::map<Vertex, SetOfVertices>;
     VertexCoverProblem(Graph const& nAryTreeGraph, Vertex const rootOfTree);
+    VertexCoverProblem(Graph&& nAryTreeGraph, Vertex const rootOfTree);
     static constexpr int UNUSED_COUNT = std::numeric_limits<int>::max();
     [[nodiscard]] Count getMinimumCountUsingNaiveRecursion() const;
     [[nodiscard]] Count getMinimumCountUsingMemoizationDP() const;

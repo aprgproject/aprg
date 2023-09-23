@@ -38,6 +38,7 @@ public:
     using CoinPermutationsPerValue = std::vector<CoinPermutations>;
     using CoinCombinationsPerValue = std::vector<CoinCombinations>;
     explicit CoinProblem(Coins const& availableCoins);
+    explicit CoinProblem(Coins&& availableCoins);
     static constexpr int UNUSED_COUNT = std::numeric_limits<int>::max();
     [[nodiscard]] CoinCombinations getCoinCombinationsUsingMemoizationDP(Value const total) const;
     [[nodiscard]] CoinCombinations getCoinCombinationsUsingIterativeDP(Value const total) const;

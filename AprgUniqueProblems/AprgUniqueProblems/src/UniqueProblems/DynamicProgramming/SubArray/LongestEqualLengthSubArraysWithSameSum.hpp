@@ -11,6 +11,7 @@ public:
     using Value = int;
     using Values = std::vector<Value>;
     explicit LongestEqualLengthSubArraysWithSameSum(Values const& values);
+    explicit LongestEqualLengthSubArraysWithSameSum(Values&& values);
     static constexpr Value MIN_VALUE = std::numeric_limits<Value>::min();
     [[nodiscard]] Index getLongestTotalLengthOfSubArraysUsingPartialSums() const;
     [[nodiscard]] Index getLongestTotalLengthOfSubArraysByAccumulatingSum() const;

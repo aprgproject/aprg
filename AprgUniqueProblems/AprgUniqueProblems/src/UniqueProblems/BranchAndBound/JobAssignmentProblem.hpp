@@ -36,6 +36,7 @@ public:
     using SearchNodeIdToDetails = std::vector<SearchNodeDetails>;
     using MinCostPriorityQueue = std::priority_queue<SearchNode, std::vector<SearchNode>, CostComparator>;
     explicit JobAssignmentProblem(CostMatrix const& costMatrix);
+    explicit JobAssignmentProblem(CostMatrix&& costMatrix);
     int getMinimalCostAndPrintAssignments();
     static constexpr SearchNodeId INVALID_NODE_ID = 0;
     static constexpr SearchNodeId START_NODE_ID = 1;

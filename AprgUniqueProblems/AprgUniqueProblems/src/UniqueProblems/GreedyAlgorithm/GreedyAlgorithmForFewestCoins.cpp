@@ -11,6 +11,11 @@ GreedyAlgorithmForFewestCoins::GreedyAlgorithmForFewestCoins(Coins const& availa
     initialize();
 }
 
+GreedyAlgorithmForFewestCoins::GreedyAlgorithmForFewestCoins(Coins && availableCoins)
+    : m_sortedAvailableCoins(availableCoins) {
+    initialize();
+}
+
 int GreedyAlgorithmForFewestCoins::getFewestNumberOfCoins(Value const value) const {
     // Greedy strategy is to subtract the largest possible coin until value reaches to zero
     // Note: The above approach may not work for all denominations.

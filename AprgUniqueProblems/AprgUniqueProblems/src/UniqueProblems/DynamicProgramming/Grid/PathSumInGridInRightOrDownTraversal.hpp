@@ -18,6 +18,7 @@ public:
     using CompareFunction = std::function<bool(Value const&, Value const&)>;
     using MinMaxFunction = std::function<Value(Value const&, Value const&)>;
     PathSumInGridInRightOrDownTraversal(Type const type, Grid const& inputGrid);
+    PathSumInGridInRightOrDownTraversal(Type const type, Grid&& inputGrid);
     static constexpr Index UNUSED_VALUE = std::numeric_limits<Index>::max();
     [[nodiscard]] Path getBestPathUsingIterativeDP() const;
     [[nodiscard]] Value getBestPathSumUsingNaiveRecursion() const;

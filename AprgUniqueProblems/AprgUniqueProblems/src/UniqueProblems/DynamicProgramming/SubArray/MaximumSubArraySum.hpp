@@ -19,6 +19,7 @@ public:
     };
 
     explicit MaximumSubArraySum(Values const& values);
+    explicit MaximumSubArraySum(Values&& values);
     static constexpr Value MIN_VALUE = std::numeric_limits<Value>::min();
     [[nodiscard]] SubArrayDetails getMaximumSubArraySumWithDetails() const;
     [[nodiscard]] Value getMaximumSubArraySum() const;

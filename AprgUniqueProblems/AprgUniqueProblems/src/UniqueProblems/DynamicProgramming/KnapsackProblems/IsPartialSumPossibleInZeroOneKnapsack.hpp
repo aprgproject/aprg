@@ -18,6 +18,7 @@ public:
     using BooleanMatrix = matrix::AlbaMatrix<bool>;
     using StateMatrix = matrix::AlbaMatrix<State>;
     IsPartialSumPossibleInZeroOneKnapsack(Value const targetSum, Values const& values);
+    IsPartialSumPossibleInZeroOneKnapsack(Value const targetSum, Values&& values);
     [[nodiscard]] bool isPartialSumPossibleUsingNaiveRecursion() const;
     [[nodiscard]] bool isPartialSumPossibleUsingMemoizationDP() const;
     [[nodiscard]] bool isPartialSumPossibleUsingIterativeDP() const;

@@ -10,6 +10,8 @@ namespace alba {
 
 AllPartialSumsInZeroOneKnapsack::AllPartialSumsInZeroOneKnapsack(Values const& values) : m_inputValues(values) {}
 
+AllPartialSumsInZeroOneKnapsack::AllPartialSumsInZeroOneKnapsack(Values&& values) : m_inputValues(values) {}
+
 AllPartialSumsInZeroOneKnapsack::Values AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSums() const {
     Value const sum(accumulate(m_inputValues.cbegin(), m_inputValues.cend(), 0));
     Booleans isPartialSumPossible(sum + 1, false);  // zero index is for zero value, sum index is for the sum

@@ -14,6 +14,11 @@ OptimalBinarySearchTree::OptimalBinarySearchTree(ValueAndFrequencyPairs const& v
     initialize();
 }
 
+OptimalBinarySearchTree::OptimalBinarySearchTree(ValueAndFrequencyPairs&& valueAndFrequencyPairs)
+    : m_valueAndFrequencyPairs(valueAndFrequencyPairs) {
+    initialize();
+}
+
 OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingNaiveRecursion() const {
     // Time Complexity: Exponential
     // Auxiliary Space: Constant

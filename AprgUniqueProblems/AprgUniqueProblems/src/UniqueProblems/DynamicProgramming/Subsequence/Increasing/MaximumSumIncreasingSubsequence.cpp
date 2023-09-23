@@ -7,6 +7,7 @@ using namespace std;
 namespace alba {
 
 MaximumSumIncreasingSubsequence::MaximumSumIncreasingSubsequence(Values const& sequence) : m_sequence(sequence) {}
+MaximumSumIncreasingSubsequence::MaximumSumIncreasingSubsequence(Values&& sequence) : m_sequence(sequence) {}
 
 MaximumSumIncreasingSubsequence::Value MaximumSumIncreasingSubsequence::getMaximumSum() const {
     // Quadratic time because of double loop

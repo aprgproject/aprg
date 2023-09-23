@@ -7,6 +7,7 @@ using namespace std;
 namespace alba {
 
 CoinProblem::CoinProblem(Coins const& availableCoins) : m_availableCoins(availableCoins) {}
+CoinProblem::CoinProblem(Coins&& availableCoins) : m_availableCoins(availableCoins) {}
 
 CoinProblem::CoinCombinations CoinProblem::getCoinCombinationsUsingMemoizationDP(Value const total) const {
     CoinCombinationsPerValue coinCombinationsPerValue(getMaxOfTotalAndMaxCoinPlusOne(total));

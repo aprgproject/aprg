@@ -10,6 +10,10 @@ TwoSum::TwoSum(Values const& valuesToCheck) : m_sortedValues(valuesToCheck) {
     sort(m_sortedValues.begin(), m_sortedValues.end());  // sort first
 }
 
+TwoSum::TwoSum(Values&& valuesToCheck) : m_sortedValues(valuesToCheck) {
+    sort(m_sortedValues.begin(), m_sortedValues.end());  // sort first
+}
+
 TwoSum::ValuesPair TwoSum::getTwoValuesWithSum(Value const targetSum) const {
     ValuesPair result{};
     if (!m_sortedValues.empty()) {

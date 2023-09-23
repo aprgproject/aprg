@@ -11,6 +11,7 @@ using namespace std;
 namespace alba {
 
 BuildingBridges::BuildingBridges(Bridges const& bridges) : m_bridges(bridges) {}
+BuildingBridges::BuildingBridges(Bridges&& bridges) : m_bridges(bridges) {}
 
 BuildingBridges::Bridges BuildingBridges::getPossibleBridges() const {
     // Time Complexity – O(NlogN)

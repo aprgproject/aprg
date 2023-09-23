@@ -9,6 +9,9 @@ namespace alba {
 LongestCommonSubstring::LongestCommonSubstring(string const& string1, string const& string2)
     : m_string1(string1), m_string2(string2) {}
 
+LongestCommonSubstring::LongestCommonSubstring(string&& string1, string&& string2)
+    : m_string1(string1), m_string2(string2) {}
+
 LongestCommonSubstring::Count LongestCommonSubstring::getLongestCommonSubstringLengthUsingNaiveRecursion() const {
     Index maxLength = 0;
     for (Index index2 = 0; index2 < static_cast<int>(m_string2.length()); ++index2) {

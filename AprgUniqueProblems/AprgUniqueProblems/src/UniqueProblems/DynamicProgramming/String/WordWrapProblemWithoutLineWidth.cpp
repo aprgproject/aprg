@@ -8,6 +8,8 @@ namespace alba {
 
 WordWrapProblemWithoutLineWidth::WordWrapProblemWithoutLineWidth(stringHelper::strings const& words) : m_words(words) {}
 
+WordWrapProblemWithoutLineWidth::WordWrapProblemWithoutLineWidth(stringHelper::strings&& words) : m_words(words) {}
+
 WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimizedCostUsingNaiveRecursion() const {
     // Time Complexity: O(2^numberOfWords) (since there are two tries)
     // Auxiliary Space :O(numberOfWords) (RecursionDetails has allocation on stack)
