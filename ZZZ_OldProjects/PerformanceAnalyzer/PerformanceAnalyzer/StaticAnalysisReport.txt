@@ -1,51 +1,30 @@
-StaticAnalysisJobIdentifier: [41]
-2023-09-21T08:27:50
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:41:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:42:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:43:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:44:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:45:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:46:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:47:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:48:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest.cc:622:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:155:67: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:158:12: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+StaticAnalysisJobIdentifier: [43]
+2023-09-23T17:55:48
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/KMeansClustering.hpp:88:20: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:32:12: warning: variable 'numberOfFilesToBeAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:33:12: warning: variable 'numberOfFilesAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:49:30: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:49:62: warning: pass by value and use std::move [modernize-pass-by-value]
-/home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:157:65: warning: narrowing conversion from 'std::set<std::filesystem::path>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:177:5: warning: calling 'system' uses a command processor [cert-env33-c]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:177:5: warning: function is not thread safe [concurrency-mt-unsafe]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.cpp:23:26: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.cpp:96:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.cpp:249:24: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:52:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:63:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:79:69: warning: 2010 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:145:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:155:21: warning: consider replacing 'unsigned short' with 'uint16' [google-runtime-int]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsPrintReaderWithRollback.cpp:42:66: warning: narrowing conversion from 'std::streamoff' (aka 'long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:17:15: warning: variable 'totalSizeToBeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:18:15: warning: variable 'totalSizeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:19:12: warning: variable 'writeProgressForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:30:117: warning: 30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:73:73: warning: narrowing conversion from 'size_t' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:75:69: warning: narrowing conversion from 'uintmax_t' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:105:30: warning: narrowing conversion from 'uintmax_t' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:163:27: warning: narrowing conversion from 'uintmax_t' (aka 'unsigned long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:169:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:179:70: warning: 75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:179:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:197:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:197:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:214:70: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:214:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorter.hpp:152:10: style: Unused private function: 'AlbaLargeSorter < BtsLogPrint >::putIndexesWithMultiplesOfNumber' [unusedPrivateFunction]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:170:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:180:70: warning: 75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:180:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:198:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:198:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:215:70: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:215:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/DataBlocks.hpp:29:50: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringToken.cpp:7:42: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringToken.cpp:15:52: warning: pass by value and use std::move [modernize-pass-by-value]
@@ -332,8 +311,6 @@ StaticAnalysisJobIdentifier: [41]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:960:20: note: +1, nesting level increased to 3
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:962:20: note: +1, nesting level increased to 3
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:977:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:915:30: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:916:35: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:919:26: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:933:33: warning: comparison of integers of different signs: 'int' and 'std::basic_string<char>::size_type' (aka 'unsigned long') [clang-diagnostic-sign-compare]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:933:77: warning: comparison of integers of different signs: 'int' and 'std::basic_string<char>::size_type' (aka 'unsigned long') [clang-diagnostic-sign-compare]
@@ -360,13 +337,7 @@ StaticAnalysisJobIdentifier: [41]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1049:20: note: +1, nesting level increased to 3
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1051:20: note: +1, nesting level increased to 3
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1063:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1012:30: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1013:35: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1016:26: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1017:18: warning: the type of the loop variable 'consumption' is different from the one returned by the iterator and generates an implicit conversion; you can either change the type to the matching one ('const double &' but 'const auto&' is always a valid option) or remove the reference to make it explicit that you are creating a new value [performance-implicit-conversion-in-loop]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1017:29: warning: loop variable 'consumption' of type 'const int &' binds to a temporary constructed from type '__gnu_cxx::__normal_iterator<double *, std::vector<double>>::reference' (aka 'double &') [clang-diagnostic-range-loop-construct]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1017:18: note: use non-reference type 'int' to make construction explicit or type 'const double &' to prevent copying
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1017:41: warning: narrowing conversion from 'double' to 'int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1024:33: warning: comparison of integers of different signs: 'int' and 'std::basic_string<char>::size_type' (aka 'unsigned long') [clang-diagnostic-sign-compare]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1024:77: warning: comparison of integers of different signs: 'int' and 'std::basic_string<char>::size_type' (aka 'unsigned long') [clang-diagnostic-sign-compare]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1029:21: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
@@ -376,366 +347,96 @@ StaticAnalysisJobIdentifier: [41]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1092:54: warning: comparison of integers of different signs: 'int' and 'unsigned int' [clang-diagnostic-sign-compare]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1092:87: warning: comparison of integers of different signs: 'int' and 'unsigned int' [clang-diagnostic-sign-compare]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1095:30: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1098:24: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1099:23: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1100:23: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1105:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1118:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1150:12: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1150:67: warning: 1000000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1155:12: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorter.hpp:152:10: style: Unused private function: 'AlbaLargeSorter < BtsLogPrint >::putIndexesWithMultiplesOfNumber' [unusedPrivateFunction]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1150:84: warning: 1000000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/DataBlocks.hpp:29:50: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:933:77: warning: comparison of integers of different signs: 'int' and 'std::basic_string<char>::size_type' (aka 'unsigned long') [-Wsign-compare]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:933:33: warning: comparison of integers of different signs: 'int' and 'std::basic_string<char>::size_type' (aka 'unsigned long') [-Wsign-compare]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:940:26: warning: comparison of integers of different signs: 'int' and 'std::vector::size_type' (aka 'unsigned long') [-Wsign-compare]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1017:29: warning: loop variable 'consumption' of type 'const int &' binds to a temporary constructed from type '__gnu_cxx::__normal_iterator<double *, std::vector<double>>::reference' (aka 'double &') [-Wrange-loop-construct]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1017:18: note: use non-reference type 'int' to make construction explicit or type 'const double &' to prevent copying
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1024:77: warning: comparison of integers of different signs: 'int' and 'std::basic_string<char>::size_type' (aka 'unsigned long') [-Wsign-compare]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1024:33: warning: comparison of integers of different signs: 'int' and 'std::basic_string<char>::size_type' (aka 'unsigned long') [-Wsign-compare]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1031:26: warning: comparison of integers of different signs: 'int' and 'std::vector::size_type' (aka 'unsigned long') [-Wsign-compare]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1092:87: warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1092:54: warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1092:23: warning: comparison of integers of different signs: 'int' and 'unsigned int' [-Wsign-compare]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/TopLogAnalyzer.cpp:36:16: warning: narrowing conversion from 'double' to 'unsigned int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/TopLogAnalyzer.cpp:37:16: warning: narrowing conversion from 'double' to 'unsigned int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/TopLogAnalyzer.cpp:302:1: warning: constructor does not initialize these fields: m_state [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/BtsLogAnalyzer_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/BtsLogAnalyzer_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/BtsLogAnalyzer_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/CombineAndGrep_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/CombineAndGrep_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/CombineAndGrep_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/LogStatisticsAnalyzer_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/LogStatisticsAnalyzer_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/LogStatisticsAnalyzer_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:17:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:17:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:17:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:23:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:23:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:23:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:31:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:31:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:31:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:37:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:37:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:37:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:44:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:44:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:44:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:52:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:52:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:52:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:60:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:60:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:60:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:66:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:66:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:66:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:74:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:74:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:74:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:80:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:80:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:80:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:86:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:86:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:86:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:94:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:94:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:94:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:102:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:102:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:102:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:110:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:110:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:110:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:118:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:118:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:118:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:124:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:124:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:124:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:131:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:131:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:131:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:137:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:137:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:137:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:145:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:145:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/PerformanceAnalyzer_unit.cpp:145:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/StartupLogAnalyzer_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/StartupLogAnalyzer_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/StartupLogAnalyzer_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/TopLogAnalyzer_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/TopLogAnalyzer_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/TopLogAnalyzer_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/TopLogAnalyzer_unit.cpp:15:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/TopLogAnalyzer_unit.cpp:15:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/tst/TopLogAnalyzer_unit.cpp:15:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 DONE!
