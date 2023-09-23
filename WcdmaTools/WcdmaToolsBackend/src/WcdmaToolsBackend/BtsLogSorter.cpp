@@ -103,7 +103,7 @@ double BtsLogSorter::getTotalSizeToBeRead(set<string> const& listOfFiles) {
     for (string const& filePath : listOfFiles) {
         AlbaLocalPathHandler const filePathHandler(filePath);
         if (m_acceptedFilesGrepEvaluator.evaluate(filePathHandler.getFile().string())) {
-            totalFileSize += static_cast<double>(filePathHandler.getFileSize();
+            totalFileSize += static_cast<double>(filePathHandler.getFileSize());
         }
     }
     return totalFileSize;
