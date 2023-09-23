@@ -26,6 +26,7 @@ public:
     BaseFordFulkerson& operator=(BaseFordFulkerson&&) = default;
     virtual ~BaseFordFulkerson() = default;  // virtual destructor because of virtual functions (vtable exists)
     explicit BaseFordFulkerson(SinkSourceFlowNetworkType const& flowNetwork) : m_flowNetwork(flowNetwork) {}
+    explicit BaseFordFulkerson(SinkSourceFlowNetworkType&& flowNetwork) : m_flowNetwork(flowNetwork) {}
 
     [[nodiscard]] Edges getMinCutEdges() const {
         // Let A be the set of nodes that can be reached from the source using positive-weight edges.

@@ -44,6 +44,18 @@ public:
         // only parent have pending updates
     }
 
+    RangeQueryWithAccumulatorLazySegmentTree(
+        Values const& valuesToCheck, Function const& functionObject, Function&& inverseFunction, Value&& identityValue)
+        : BaseClass(valuesToCheck, functionObject),
+          b_startOfChildren(BaseClass::m_startOfChildren),
+          b_treeValues(BaseClass::m_treeValues),
+          b_function(BaseClass::m_function),
+          m_inverseFunction(inverseFunction),
+          m_identityValue(identityValue),
+          m_pendingUpdates(b_startOfChildren, m_identityValue) {
+        // only parent have pending updates
+    }
+
     void increaseAtRange(Index const start, Index const end, Value const& incrementValue) {
         if (start <= end && (b_startOfChildren + start) < static_cast<Index>(b_treeValues.size()) &&
             (b_startOfChildren + end) < static_cast<Index>(b_treeValues.size())) {

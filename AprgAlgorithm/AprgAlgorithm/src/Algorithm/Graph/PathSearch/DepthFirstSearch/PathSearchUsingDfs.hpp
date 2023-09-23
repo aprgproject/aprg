@@ -54,6 +54,19 @@ public:
         reinitializeStartingFrom(startVertices);
     }
 
+    PathSearchUsingDfs(
+        BaseGraphWithVertex const& graph, Vertices const& startVertices,
+        InitializeDataFunction&& initializeDataFunction, UpdateDataFunction&& updateDataFunction)
+        : BaseClass(graph),
+          b_graph(BaseClass::m_graph),
+          b_startVertices(BaseClass::m_startVertices),
+          b_processedVertices(BaseClass::m_processedVertices),
+          b_vertexToPreviousVertexMap(BaseClass::m_vertexToPreviousVertexMap),
+          m_initializeDataFunction(initializeDataFunction),
+          m_updateDataFunction(updateDataFunction) {
+        reinitializeStartingFrom(startVertices);
+    }
+
     [[nodiscard]] Path getOrderedPathTo(Vertex const& endVertex) const { return this->getPathTo(endVertex); }
 
     void reinitializeStartingFrom(Vertices const& startVertices) {

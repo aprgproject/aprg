@@ -30,6 +30,11 @@ public:
           m_function(functionObject),
           m_twoDSegmentTree(createAllRowSegmentTrees(), getFunctionForSegmentTree2D()) {}
 
+    RangeQueryForTwoDSegmentTree(ValueMatrix&& valueMatrix, OneDFunction&& functionObject)
+        : m_valueMatrix(valueMatrix),
+          m_function(functionObject),
+          m_twoDSegmentTree(createAllRowSegmentTrees(), getFunctionForSegmentTree2D()) {}
+
     [[nodiscard]] Value getValueOn2DInterval(
         Index const topLeftX, Index const topLeftY, Index const bottomRightX, Index const bottomRightY) const {
         // Works on O(log(n)^2) time

@@ -38,6 +38,8 @@ public:
     using NodeUniquePointer = typename TwoDTree::NodeUniquePointer;
     PointsInsideRectangleSearch(Point const& bottomLeft, Point const& topRight)
         : m_twoDTree(), m_rectangleBottomLeft(bottomLeft), m_rectangleTopRight(topRight) {}
+    PointsInsideRectangleSearch(Point&& bottomLeft, Point&& topRight)
+        : m_twoDTree(), m_rectangleBottomLeft(bottomLeft), m_rectangleTopRight(topRight) {}
 
     [[nodiscard]] Points getPointsInsideTheRectangle() const {
         Points result{};

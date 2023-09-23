@@ -119,7 +119,7 @@ protected:
         return out;
     }
 
-    int m_numberOfEdges{0};
+    int m_numberOfEdges{};
     AdjacencyLists m_adjacencyLists;
 };
 

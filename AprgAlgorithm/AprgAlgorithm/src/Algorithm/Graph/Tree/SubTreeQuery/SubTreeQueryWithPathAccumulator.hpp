@@ -23,6 +23,12 @@ public:
         initializeIfNeeded();
     }
 
+    SubTreeQueryWithPathAccumulator(
+        BaseUndirectedGraphWithVertex const& graph, Vertex&& rootOfTree, AccumulatorFunction&& accumulator)
+        : m_graph(graph), m_rootOfTree(rootOfTree), m_accumulator(accumulator) {
+        initializeIfNeeded();
+    }
+
     [[nodiscard]] Vertices const& getVerticesInDfsPreOrder() const { return m_verticesInDfsPreOrder; }
     [[nodiscard]] Vertices const& getAccumulatedValuesOfPaths() const { return m_accumulatedValuesOfPaths; }
 

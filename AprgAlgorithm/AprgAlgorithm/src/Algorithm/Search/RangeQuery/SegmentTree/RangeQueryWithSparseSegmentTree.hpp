@@ -35,6 +35,11 @@ public:
         initialize();
     }
 
+    RangeQueryWithSparseSegmentTree(Index const numberOfValues, Value const& defaultValue, Function&& functionObject)
+        : m_numberOfValues(numberOfValues), m_defaultValue(defaultValue), m_function(functionObject) {
+        initialize();
+    }
+
     void setValueOnIndex(Index const index, Value const& valueToSet) {
         // This has log(N) running time
         if (index < m_numberOfValues) {
@@ -119,7 +124,7 @@ protected:
         return result;
     }
 
-    Index m_maxChildrenIndex{0};
+    Index m_maxChildrenIndex{};
     Index const m_numberOfValues;
     Value const m_defaultValue;
     Function m_function;

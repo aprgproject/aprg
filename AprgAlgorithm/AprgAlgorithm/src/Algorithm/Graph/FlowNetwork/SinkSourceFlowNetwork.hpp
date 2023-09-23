@@ -15,6 +15,7 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     // An ST-flow network has two identified vertices, a source "s" and a sink "t";
     SinkSourceFlowNetwork(Vertex const& source, Vertex const& sink) : BaseClass(), m_source(source), m_sink(sink) {}
+    SinkSourceFlowNetwork(Vertex&& source, Vertex&& sink) : BaseClass(), m_source(source), m_sink(sink) {}
     [[nodiscard]] Vertex getSourceVertex() const { return m_source; }
     [[nodiscard]] Vertex getSinkVertex() const { return m_sink; }
 

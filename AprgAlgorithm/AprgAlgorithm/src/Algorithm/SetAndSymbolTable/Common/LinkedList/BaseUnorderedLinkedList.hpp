@@ -190,7 +190,7 @@ protected:
         }
     }
 
-    int m_size{0};
+    int m_size{};
     NodeUniquePointer m_first;
 };
 

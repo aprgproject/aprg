@@ -33,7 +33,16 @@ public:
         Values const& valuesToCheck, Index const suggestedNumberOfBlocks, ValuesFunction const& valuesFunction,
         BlockValuesFunction const& blockValuesFunction)
         : m_values(valuesToCheck),
+          m_blocks(),
+          m_valuesFunction(valuesFunction),
+          m_blockValuesFunction(blockValuesFunction) {
+        initialize(valuesToCheck, suggestedNumberOfBlocks);
+    }
 
+    RangeQueryWithBlocks(
+        Values&& valuesToCheck, Index const suggestedNumberOfBlocks, ValuesFunction&& valuesFunction,
+        BlockValuesFunction&& blockValuesFunction)
+        : m_values(valuesToCheck),
           m_blocks(),
           m_valuesFunction(valuesFunction),
           m_blockValuesFunction(blockValuesFunction) {
@@ -104,7 +113,7 @@ protected:
     }
 
     Values m_values;
-    Index m_blockSize{0};
+    Index m_blockSize{};
     BlockValues m_blocks;
     ValuesFunction m_valuesFunction;
     BlockValuesFunction m_blockValuesFunction;

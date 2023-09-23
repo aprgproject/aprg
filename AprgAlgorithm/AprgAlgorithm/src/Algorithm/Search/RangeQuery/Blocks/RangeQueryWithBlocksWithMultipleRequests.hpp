@@ -36,6 +36,15 @@ public:
           m_accumulateFunction(accumulateFunction),
           m_inverseAccumulateFunction(inverseAccumulateFunction) {}
 
+    RangeQueryWithBlocksWithMultipleRequests(
+        Values const& valuesToCheck, ValuesFunction const& valuesFunction,
+        BlockValuesFunction const& blockValuesFunction, TwoBlocksFunction&& accumulateFunction,
+        TwoBlocksFunction&& inverseAccumulateFunction)
+        : BaseClass(valuesToCheck, getSquareRootSize(valuesToCheck.size()), valuesFunction, blockValuesFunction),
+          b_values(BaseClass::m_values),
+          m_accumulateFunction(accumulateFunction),
+          m_inverseAccumulateFunction(inverseAccumulateFunction) {}
+
     [[nodiscard]] InputAndOutputPairs getInputAndOutputPairsUsingMoAlgorithm(Ranges const& inputRanges) const {
         // Mo’s algorithm maintains an active range of the array, and the answer to a query concerning the active range
         // is known at each moment. The algorithm processes the queries one by one, and always moves the endpoints of

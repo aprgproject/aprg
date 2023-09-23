@@ -190,7 +190,7 @@ protected:
     }
 
     static constexpr int INITIAL_HASH_TABLE_SIZE = 1;
-    int m_size{0};
+    int m_size{};
     int m_hashTableSize{};
     EntryPointers m_entryPointers;
 };

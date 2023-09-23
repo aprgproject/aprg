@@ -67,8 +67,8 @@ private:
         }
     }
 
-    int m_stackSize{0};
-    int m_containerSize{0};
+    int m_stackSize{};
+    int m_containerSize{};
     std::unique_ptr<Object[]> m_objects;
 };
 

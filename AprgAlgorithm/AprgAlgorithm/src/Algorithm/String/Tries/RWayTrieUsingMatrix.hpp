@@ -341,8 +341,8 @@ private:
         return isDeleted;
     }
 
-    int m_size{0};
-    int m_nextNodeId{0};
+    int m_size{};
+    int m_nextNodeId{};
     SetOfNodeIds m_unusedNodeIds;
     NodePointerMatrix m_nodePointerMatrix;
 };

@@ -117,7 +117,7 @@ public:
 
 protected:
     [[nodiscard]] int getHash(Key const& key) const { return HashFunction::getHash(key); }
-    int m_size{0};
+    int m_size{};
     HashTable m_smallerSymbolTables;
 };
 

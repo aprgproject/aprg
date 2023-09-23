@@ -26,6 +26,11 @@ public:
         initialize(valuesToCheck);
     }
 
+    RangeQueryWithDynamicSegmentTree(Values const& valuesToCheck, Function&& functionObject)
+        : m_numberOfValues(valuesToCheck.size()), m_function(functionObject) {
+        initialize(valuesToCheck);
+    }
+
     virtual void changeValueAtIndex(Index const index, Value const& newValue) {
         // This has log(N) running time
         if (index < m_numberOfValues) {
@@ -131,7 +136,7 @@ private:
         }
     }
 
-    Index m_maxChildrenIndex{0};
+    Index m_maxChildrenIndex{};
     Index const m_numberOfValues;
     Function m_function;
     NodePointer m_root;

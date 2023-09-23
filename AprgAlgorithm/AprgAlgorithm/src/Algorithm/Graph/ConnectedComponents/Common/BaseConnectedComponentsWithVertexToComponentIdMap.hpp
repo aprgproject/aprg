@@ -43,7 +43,7 @@ public:
 
 protected:
     Graph const& m_graph;
-    int m_numberOfComponentIds{0};
+    int m_numberOfComponentIds{};
     VertexToIntMap m_vertexToComponentIdMap;
 };
 

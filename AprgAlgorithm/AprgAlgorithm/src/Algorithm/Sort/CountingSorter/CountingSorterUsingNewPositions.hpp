@@ -16,6 +16,8 @@ public:
     CountingSorterUsingNewPositions() = delete;
     explicit CountingSorterUsingNewPositions(ValueToIndexableValueFunction const& valueToIndexableValueFunction)
         : m_valueToIndexableValueFunction(valueToIndexableValueFunction) {}
+    explicit CountingSorterUsingNewPositions(ValueToIndexableValueFunction&& valueToIndexableValueFunction)
+        : m_valueToIndexableValueFunction(valueToIndexableValueFunction) {}
 
     void sort(Values& valuesToSort) const override {
         ArrayOfCountPerValue correctPositions{};  // important to initialize to zero

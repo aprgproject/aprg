@@ -12,6 +12,7 @@ class Alphabet {
 public:
     using DigitValues = std::vector<DigitValue>;
     explicit Alphabet(std::string const& characters) : m_characters(characters) {}
+    explicit Alphabet(std::string&& characters) : m_characters(characters) {}
 
     DigitValue getDigitValue(char const c) {
         DigitValue result{};

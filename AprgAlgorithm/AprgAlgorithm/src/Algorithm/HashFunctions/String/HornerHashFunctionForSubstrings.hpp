@@ -19,6 +19,11 @@ public:
         reinitializeHPartsAndPParts();
     }
 
+    HornerHashFunctionForSubstrings(HashValue const radix, HashValue const largeRandomPrime, std::string&& stringToHash)
+        : m_radix(radix), m_largeRandomPrime(largeRandomPrime), m_stringToHash(stringToHash) {
+        reinitializeHPartsAndPParts();
+    }
+
     [[nodiscard]] HashValue getHashCodeOfWholeString() const {
         // The hash value of any substring s[a...b] can be calculated in O(1) time using the formula:
         // (h[b] - (h[a-1] * p[b-a+1])) mod B

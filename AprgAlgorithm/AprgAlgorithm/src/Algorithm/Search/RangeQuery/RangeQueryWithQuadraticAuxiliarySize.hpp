@@ -20,6 +20,11 @@ public:
         initialize(valuesToCheck);
     }
 
+    RangeQueryWithQuadraticAuxiliarySize(Values&& valuesToCheck, Function&& selector)
+        : m_partialValueMatrix(valuesToCheck.size(), valuesToCheck.size(), 0), m_function(selector) {
+        initialize(valuesToCheck);
+    }
+
     [[nodiscard]] Value getValueOnInterval(Index const start, Index const end) const {
         // This is on constant time
         Value result{};

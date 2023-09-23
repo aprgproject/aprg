@@ -23,6 +23,9 @@ public:
         GetDigitAtFunction const& getDigitAtFunction, IsDigitFunction const& isDigitInvalidFunction)
         : m_getDigitAtFunction(getDigitAtFunction), m_isDigitInvalidFunction(isDigitInvalidFunction) {}
 
+    MostSignificantDigitSorter(GetDigitAtFunction&& getDigitAtFunction, IsDigitFunction&& isDigitInvalidFunction)
+        : m_getDigitAtFunction(getDigitAtFunction), m_isDigitInvalidFunction(isDigitInvalidFunction) {}
+
     void sort(Values& valuesToSort) const override {
         sortStartingAtMostSignificantDigit(valuesToSort, 0, valuesToSort.size() - 1, 0);
     }

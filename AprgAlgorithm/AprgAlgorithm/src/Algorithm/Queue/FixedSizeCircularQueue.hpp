@@ -43,8 +43,8 @@ private:
         }
     }
 
-    int m_firstIndex{0};
-    int m_afterLastIndex{0};
+    int m_firstIndex{};
+    int m_afterLastIndex{};
     Objects m_objects{};
 };
 

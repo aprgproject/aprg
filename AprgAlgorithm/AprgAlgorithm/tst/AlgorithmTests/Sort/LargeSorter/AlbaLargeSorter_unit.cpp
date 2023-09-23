@@ -29,6 +29,14 @@ struct TestObject {
           valueCharacter(valueCharacterParameter),
           valueString(valueStringParameter) {}
 
+    TestObject(
+        int const valueIntegerParameter, double const valueDoubleParameter, char const valueCharacterParameter,
+        string&& valueStringParameter)
+        : valueInteger(valueIntegerParameter),
+          valueDouble(valueDoubleParameter),
+          valueCharacter(valueCharacterParameter),
+          valueString(valueStringParameter) {}
+
     bool operator<(TestObject const& testObject) const { return valueInteger < testObject.valueInteger; }
     bool operator>(TestObject const& testObject) const { return valueInteger > testObject.valueInteger; }
     bool operator==(TestObject const& testObject) const { return valueInteger == testObject.valueInteger; }

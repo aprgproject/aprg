@@ -21,6 +21,10 @@ public:
         GetNumberOfDigitsFunction const& getNumberOfDigitsFunction, GetDigitAtFunction const& getDigitAtFunction)
         : m_getNumberOfDigitsFunction(getNumberOfDigitsFunction), m_getDigitAtFunction(getDigitAtFunction) {}
 
+    LeastSignificantDigitSorter(
+        GetNumberOfDigitsFunction&& getNumberOfDigitsFunction, GetDigitAtFunction&& getDigitAtFunction)
+        : m_getNumberOfDigitsFunction(getNumberOfDigitsFunction), m_getDigitAtFunction(getDigitAtFunction) {}
+
     void sort(Values& valuesToSort) const override {
         // highest index so least signficant first
         for (int digitIndex = static_cast<int>(m_getNumberOfDigitsFunction(valuesToSort)) - 1; 0 <= digitIndex;

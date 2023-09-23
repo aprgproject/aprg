@@ -109,7 +109,7 @@ private:
     WeightedQuickUnionWithArray<int, getDimensionsSquared() + 2>
         m_unionFindOfIndexes;  //+2 because of virtual top site and bottom site
     std::array<bool, getDimensionsSquared()> m_sites{};
-    int m_numberOfOpenSites{0};
+    int m_numberOfOpenSites{};
     AlbaUniformNonDeterministicRandomizer<int> m_randomizer;
 };
 

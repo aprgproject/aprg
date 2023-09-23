@@ -23,6 +23,12 @@ public:
         initialize(valuesToCheck);
     }
 
+    RangeQueryWithAccumulator(
+        Values const& valuesToCheck, AccumulatorFunction&& accumulator, AccumulatorFunction&& inverseAccumulator)
+        : m_partialResults(), m_accumulator(accumulator), m_inverseAccumulator(inverseAccumulator) {
+        initialize(valuesToCheck);
+    }
+
     [[nodiscard]] Value getAccumulatedValueOnInterval(Index const start, Index const end) const {
         // This is on constant time
         Value result{};

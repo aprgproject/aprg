@@ -22,16 +22,12 @@ class DataBlock {
 public:
     DataBlock(DataBlockType const blockType, int const blockNumber, std::string const& fileDumpPath)
         : m_blockType(blockType), m_blockId(blockNumber), m_fileDumpPath(fileDumpPath) {
-        switch (blockType) {
-            case DataBlockType::Empty:
-                break;
-            case DataBlockType::File:
-                createFileHandlerIfNeeded();
-                break;
-            case DataBlockType::Memory:
-                createMemoryHandlerIfNeeded();
-                break;
-        }
+        createHandlerIfNeeded(blockType);
+    }
+
+    DataBlock(DataBlockType const blockType, int const blockNumber, std::string&& fileDumpPath)
+        : m_blockType(blockType), m_blockId(blockNumber), m_fileDumpPath(fileDumpPath) {
+        createHandlerIfNeeded(blockType);
     }
 
     [[nodiscard]] DataBlockType getBlockType() const { return m_blockType; }
@@ -135,6 +131,19 @@ public:
     void releaseFileStream() { m_blockFileHandler->releaseFileStream(); }
 
 private:
+    void createHandlerIfNeeded(DataBlockType const blockType) {
+        switch (blockType) {
+            case DataBlockType::Empty:
+                break;
+            case DataBlockType::File:
+                createFileHandlerIfNeeded();
+                break;
+            case DataBlockType::Memory:
+                createMemoryHandlerIfNeeded();
+                break;
+        }
+    }
+
     void createMemoryHandlerIfNeeded() {
         if (!m_memoryBlockHandler) {
             m_memoryBlockHandler.emplace();
@@ -163,7 +172,7 @@ private:
     DataBlockType m_blockType;
     int const m_blockId;
     std::string const m_fileDumpPath;
-    int m_numberOfObjects{0};
+    int m_numberOfObjects{};
     ObjectToSort m_lowestValue{};
     std::optional<DataBlockMemoryHandler<ObjectToSort>> m_memoryBlockHandler;
     std::optional<DataBlockFileHandler<ObjectToSort>> m_blockFileHandler;

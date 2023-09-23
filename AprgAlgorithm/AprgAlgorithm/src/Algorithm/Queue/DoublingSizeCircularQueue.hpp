@@ -87,9 +87,9 @@ private:
         }
     }
 
-    int m_containerSize{0};
-    int m_firstIndex{0};
-    int m_afterLastIndex{0};
+    int m_containerSize{};
+    int m_firstIndex{};
+    int m_afterLastIndex{};
     std::unique_ptr<Object[]> m_objects;
 };
 

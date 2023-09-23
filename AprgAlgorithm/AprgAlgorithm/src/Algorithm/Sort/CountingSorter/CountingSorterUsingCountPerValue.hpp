@@ -22,6 +22,12 @@ public:
         : m_valueToIndexableValueFunction(valueToIndexableValueFunction),
           m_indexableValueToValueFunction(indexableValueToValueFunction) {}
 
+    CountingSorterUsingCountPerValue(
+        ValueToIndexableValueFunction&& valueToIndexableValueFunction,
+        IndexableValueToValueFunction&& indexableValueToValueFunction)
+        : m_valueToIndexableValueFunction(valueToIndexableValueFunction),
+          m_indexableValueToValueFunction(indexableValueToValueFunction) {}
+
     void sort(Values& valuesToSort) const override {
         ArrayOfCountPerValue countPerValue{};  // important to initialize to zero
         for (auto const& value : valuesToSort) {

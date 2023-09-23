@@ -32,26 +32,31 @@ public:
         : m_termType(TermType::Value),
           m_value(value),
           m_operator(),
-          m_operatorSyntaxType(OperatorSyntaxType::Unknown),
-          m_operatorPriority(0) {}
+          m_operatorSyntaxType(OperatorSyntaxType::Unknown) {}
+
+    explicit ExpressionEvaluatorTerm(ValueTemplateType&& value)
+        : m_termType(TermType::Value),
+          m_value(value),
+          m_operator(),
+          m_operatorSyntaxType(OperatorSyntaxType::Unknown) {}
 
     explicit ExpressionEvaluatorTerm(OperatorSyntaxType const& operatorSyntaxValue)
-        : m_termType(TermType::Operator),
-          m_value(),
-          m_operator(),
-          m_operatorSyntaxType(operatorSyntaxValue),
-          m_operatorPriority(0) {}
+        : m_termType(TermType::Operator), m_value(), m_operator(), m_operatorSyntaxType(operatorSyntaxValue) {}
 
-    ExpressionEvaluatorTerm(OperatorTemplateType const& operatorValue, OperatorSyntaxType const& operatorSyntaxValue)
+    explicit ExpressionEvaluatorTerm(OperatorSyntaxType&& operatorSyntaxValue)
+        : m_termType(TermType::Operator), m_value(), m_operator(), m_operatorSyntaxType(operatorSyntaxValue) {}
+
+    ExpressionEvaluatorTerm(
+        OperatorTemplateType const& operatorValue, OperatorSyntaxType const& operatorSyntaxValue,
+        int const operatorPriority = 0)
         : m_termType(TermType::Operator),
           m_value(),
           m_operator(operatorValue),
           m_operatorSyntaxType(operatorSyntaxValue),
-          m_operatorPriority(0) {}
+          m_operatorPriority(operatorPriority) {}
 
     ExpressionEvaluatorTerm(
-        OperatorTemplateType const& operatorValue, OperatorSyntaxType const& operatorSyntaxValue,
-        int const operatorPriority)
+        OperatorTemplateType&& operatorValue, OperatorSyntaxType&& operatorSyntaxValue, int const operatorPriority = 0)
         : m_termType(TermType::Operator),
           m_value(),
           m_operator(operatorValue),
@@ -74,7 +79,7 @@ private:
     ValueTemplateType m_value;
     OperatorTemplateType m_operator;
     OperatorSyntaxType m_operatorSyntaxType;
-    int m_operatorPriority;
+    int m_operatorPriority{};
 };
 
 template <typename ValueTemplateType, typename OperatorTemplateType>

@@ -30,7 +30,7 @@ public:
     [[nodiscard]] Objects const& getObjects() const { return m_objects; }
 
 private:
-    int m_size{0};
+    int m_size{};
     Objects m_objects{};
 };
 

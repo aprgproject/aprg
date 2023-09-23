@@ -20,6 +20,10 @@ public:
         GetNumberOfDigitsFunction const& getNumberOfDigitsFunction, GetDigitAtFunction const& getDigitAtFunction)
         : m_getNumberOfDigitsFunction(getNumberOfDigitsFunction), m_getDigitAtFunction(getDigitAtFunction) {}
 
+    RadixSorterUsingCountingSorter(
+        GetNumberOfDigitsFunction&& getNumberOfDigitsFunction, GetDigitAtFunction&& getDigitAtFunction)
+        : m_getNumberOfDigitsFunction(getNumberOfDigitsFunction), m_getDigitAtFunction(getDigitAtFunction) {}
+
     void sort(Values& valuesToSort) const override {
         int const numberOfDigits(m_getNumberOfDigitsFunction(valuesToSort));
         for (int digitIndex = 0; digitIndex < numberOfDigits; ++digitIndex) {

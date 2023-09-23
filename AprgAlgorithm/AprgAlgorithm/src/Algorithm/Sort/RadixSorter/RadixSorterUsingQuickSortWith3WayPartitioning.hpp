@@ -19,6 +19,10 @@ public:
         GetDigitAtFunction const& getDigitAtFunction, IsDigitFunction const& isDigitValidFunction)
         : m_getDigitAtFunction(getDigitAtFunction), m_isDigitValidFunction(isDigitValidFunction) {}
 
+    RadixSorterUsingQuickSortWith3WayPartitioning(
+        GetDigitAtFunction&& getDigitAtFunction, IsDigitFunction&& isDigitValidFunction)
+        : m_getDigitAtFunction(getDigitAtFunction), m_isDigitValidFunction(isDigitValidFunction) {}
+
     void sort(Values& valuesToSort) const override {
         // You can randomize inputs here to remove dependence on input (quick sort works best if input is not sorted)
         if (!valuesToSort.empty()) {

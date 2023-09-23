@@ -39,8 +39,8 @@ public:
     friend bool areObjectsEqualOnVisibleOnly(StabilityCheckObject const& object1, StabilityCheckObject const& object2);
 
 private:
-    char m_visiblePart;
-    int m_notVisiblePart;
+    char m_visiblePart{};
+    int m_notVisiblePart{};
 };
 
 bool areObjectsEqualOnVisibleAndNotVisiblePart(

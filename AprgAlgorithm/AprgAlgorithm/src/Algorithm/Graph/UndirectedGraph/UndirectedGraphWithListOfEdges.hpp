@@ -94,7 +94,7 @@ protected:
         return out;
     }
 
-    int m_numberOfEdges{0};
+    int m_numberOfEdges{};
     SetOfEdges m_edges{};
 };
 

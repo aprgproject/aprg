@@ -21,6 +21,14 @@ public:
         initialize(valueMatrix);
     }
 
+    RangeQueryForTwoDimensionsWithAccumulator(
+        ValueMatrix const& valueMatrix, AccumulatorFunction&& accumulator, AccumulatorFunction&& inverseAccumulator)
+        : m_partialResults(valueMatrix.getNumberOfColumns(), valueMatrix.getNumberOfRows()),
+          m_accumulator(accumulator),
+          m_inverseAccumulator(inverseAccumulator) {
+        initialize(valueMatrix);
+    }
+
     [[nodiscard]] Value getAccumulatedValueOn2DInterval(
         Index const topLeftX, Index const topLeftY, Index const bottomRightX, Index const bottomRightY) const {
         // This works on constant time.

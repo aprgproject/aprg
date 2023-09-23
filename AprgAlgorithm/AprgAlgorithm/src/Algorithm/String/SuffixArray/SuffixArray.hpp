@@ -18,6 +18,8 @@ public:
         initialize();
     }
 
+    explicit SuffixArray(std::string&& mainString) : m_mainString(mainString), m_mainStringIndexes() { initialize(); }
+
     [[nodiscard]] Index getSize() const { return m_mainStringIndexes.size(); }
     [[nodiscard]] Index getIndexOnMainStringOfSuffixAt(Index const index) const { return m_mainStringIndexes[index]; }
 

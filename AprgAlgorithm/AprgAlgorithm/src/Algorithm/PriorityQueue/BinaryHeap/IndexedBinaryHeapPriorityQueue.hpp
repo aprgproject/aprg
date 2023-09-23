@@ -164,8 +164,8 @@ private:
     }
 
     bool isInHeapOrder(Object const& child, Object const& parent) { return m_comparator(child, parent); }
-    int m_size{0};
-    int m_maxSize{0};
+    int m_size{};
+    int m_maxSize{};
     Comparator m_comparator;
     Indexes m_treeIndexToObjectIndex;
     Indexes m_objectIndexToTreeIndex;

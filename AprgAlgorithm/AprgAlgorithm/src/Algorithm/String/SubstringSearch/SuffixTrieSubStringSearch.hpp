@@ -10,6 +10,7 @@ template <typename Index>
 class SuffixTrieSubStringSearch {
 public:
     explicit SuffixTrieSubStringSearch(std::string const& query) : m_query(query) {}
+    explicit SuffixTrieSubStringSearch(std::string&& query) : m_query(query) {}
 
     [[nodiscard]] Index search(std::string const& searchSpace) const {
         if (!m_query.empty()) {

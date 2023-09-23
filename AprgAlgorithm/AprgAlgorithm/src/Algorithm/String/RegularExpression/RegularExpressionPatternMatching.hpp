@@ -19,6 +19,11 @@ public:
         initialize();
     }
 
+    explicit RegularExpressionPatternMatching(std::string&& regularExpression)
+        : m_regularExpression(regularExpression) {
+        initialize();
+    }
+
     [[nodiscard]] bool isAMatch(std::string const& stringToCheck) const {
         bool isEndReached(false);
         Indexes nullTransitionStates(getNullTransitionsStates({0}));  // start from first index

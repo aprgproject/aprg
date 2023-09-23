@@ -24,7 +24,16 @@ public:
     AlbaLargeSorter(AlbaLargeSorter&&) = default;
     AlbaLargeSorter& operator=(AlbaLargeSorter const&) = default;
     AlbaLargeSorter& operator=(AlbaLargeSorter&&) = default;
+
     explicit AlbaLargeSorter(AlbaLargeSorterConfiguration const& configuration)
+        : m_configuration(configuration),
+          m_memoryCache(),
+          m_fileStreamOpenedCache(),
+          m_blocks(m_configuration, m_memoryCache, m_fileStreamOpenedCache) {
+        createTempDirectories();
+    }
+
+    explicit AlbaLargeSorter(AlbaLargeSorterConfiguration&& configuration)
         : m_configuration(configuration),
           m_memoryCache(),
           m_fileStreamOpenedCache(),
@@ -169,7 +178,7 @@ private:
         return totalMemoryConsumption;
     }
 
-    long long m_size{0};
+    long long m_size{};
     AlbaLargeSorterConfiguration const m_configuration;
     BlockCache m_memoryCache;
     BlockCache m_fileStreamOpenedCache;

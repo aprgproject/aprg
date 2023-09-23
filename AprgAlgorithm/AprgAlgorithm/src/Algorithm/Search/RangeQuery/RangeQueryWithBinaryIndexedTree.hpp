@@ -30,6 +30,15 @@ public:
         initializePartialSums();
     }
 
+    RangeQueryWithBinaryIndexedTree(
+        Values&& valuesToCheck, AccumulatorFunction&& accumulator, AccumulatorFunction&& inverseAccumulator)
+        : m_values(valuesToCheck),
+          m_partialTreeSums(),
+          m_accumulator(accumulator),
+          m_inverseAccumulator(inverseAccumulator) {
+        initializePartialSums();
+    }
+
     [[nodiscard]] Value getAccumulatedValueOnInterval(Index const start, Index const end) const {
         // This has log(N) running time
         Value result{};
