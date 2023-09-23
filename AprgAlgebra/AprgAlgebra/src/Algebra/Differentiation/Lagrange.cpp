@@ -22,7 +22,7 @@ void calculateLagrangeEquations(
 
 Term getTermWithLagrangeFunctions(
     Term const& term, Terms const& lagrangeFunctions, strings const& lagrangeMultiplierNames) {
-    int const size(min(lagrangeFunctions.size(), lagrangeMultiplierNames.size()));
+    int const size(static_cast<int>(min(lagrangeFunctions.size(), lagrangeMultiplierNames.size())));
     Term result(term);
     for (int i = 0; i < size; ++i) {
         result += lagrangeFunctions[i] * Term(lagrangeMultiplierNames[i]);
@@ -31,7 +31,7 @@ Term getTermWithLagrangeFunctions(
 }
 
 Terms getLagrangeMultipliers(Term const& term, strings const& coordinateNames, Terms const& lagrangeFunctions) {
-    strings const lagrangeMultiplierNames(getLagrangeMultiplierNames(lagrangeFunctions.size()));
+    strings const lagrangeMultiplierNames(getLagrangeMultiplierNames(static_cast<int>(lagrangeFunctions.size())));
     Term const termWithLagrangeFunctions(
         getTermWithLagrangeFunctions(term, lagrangeFunctions, lagrangeMultiplierNames));
     Equations lagrangeEquations;

@@ -22,7 +22,7 @@ void collectAndUniqueValuesAndSort(AlbaNumbersSet& sortedValues, AlbaNumbers con
 }
 
 void collectMinAndMaxValues(AlbaNumbersSet& collectedValues, AlbaNumbersSet const& sortedValues) {
-    int const valuesSize = sortedValues.size();
+    int const valuesSize = static_cast<int>(sortedValues.size());
     if (valuesSize == 1) {
         auto itFront = sortedValues.cbegin();
         collectedValues.emplace(*itFront);

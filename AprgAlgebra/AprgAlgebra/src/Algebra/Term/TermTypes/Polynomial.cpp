@@ -39,7 +39,7 @@ bool Polynomial::operator<(Polynomial const& second) const {
     Monomials const& monomials2(second.m_monomials);
     bool result(false);
     if (monomials1.size() == monomials2.size()) {
-        int const size = monomials1.size();
+        int const size = static_cast<int>(monomials1.size());
         for (int i = 0; i < size; ++i) {
             Monomial const& monomial1(monomials1[i]);
             Monomial const& monomial2(monomials2[i]);

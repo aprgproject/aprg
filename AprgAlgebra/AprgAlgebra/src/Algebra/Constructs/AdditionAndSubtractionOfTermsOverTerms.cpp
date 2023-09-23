@@ -83,7 +83,7 @@ void AdditionAndSubtractionOfTermsOverTerms::putAsAddOrSubtraction(
 Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedNumeratorExpression(
     Terms const& lcmDenominatorTerms) const {
     Expression combinedNumerator;
-    int const numberOfItems = m_items.size();
+    int const numberOfItems = static_cast<int>(m_items.size());
     for (int numeratorIndex = 0; numeratorIndex < numberOfItems; ++numeratorIndex) {
         Expression const combinedNumeratorOnIndex(
             getCombinedExpressionForNumeratorOnIndex(numeratorIndex, lcmDenominatorTerms));

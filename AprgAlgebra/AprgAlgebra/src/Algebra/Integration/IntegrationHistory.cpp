@@ -16,7 +16,7 @@ IntegrationPurpose IntegrationHistory::getLastIntegrationPurpose() const {
     return result;
 }
 
-int IntegrationHistory::getDepth() const { return m_recordOfIntegrationPurposes.size(); }
+int IntegrationHistory::getDepth() const { return static_cast<int>(m_recordOfIntegrationPurposes.size()); }
 
 bool IntegrationHistory::didThisIntegrationPurposeAlreadyHappened(IntegrationPurpose const purpose) const {
     return find(m_recordOfIntegrationPurposes.cbegin(), m_recordOfIntegrationPurposes.cend(), purpose) !=

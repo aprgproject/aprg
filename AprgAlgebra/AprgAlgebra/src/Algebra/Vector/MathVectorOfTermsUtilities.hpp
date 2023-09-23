@@ -264,7 +264,7 @@ MathVectorOfTerms<SIZE> differentiateMultipleTimes(
     Differentiation const differentiation(variableName);
     Values const& values(termVector.getValues());
     std::transform(values.cbegin(), values.cend(), result.getValuesReference().begin(), [&](Term const& term) {
-        return differentiation.differentiateMultipleTimes(term, numberOfTimes);
+        return differentiation.differentiateMultipleTimes(term, static_cast<int>(numberOfTimes));
     });
     return result;
 }

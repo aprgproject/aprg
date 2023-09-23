@@ -39,8 +39,8 @@ void factorizePolynomialsAndPutToResult(Polynomials& result, Polynomials const& 
         if (doesNotNeedToBeFactorized(simplifiedPolynomial)) {
             result.emplace_back(simplifiedPolynomial);
         } else {
-            int const originalSize(polynomialsToFactorize.size());
-            int deltaSize = polynomialsToFactorize.size() - originalSize;
+            int const originalSize(static_cast<int>(polynomialsToFactorize.size()));
+            int deltaSize = static_cast<int>(polynomialsToFactorize.size()) - originalSize;
             tryToFactorizeCommonMonomial(polynomialsToFactorize, deltaSize, simplifiedPolynomial, originalSize);
             tryToFactorizeUsingPatterns(polynomialsToFactorize, deltaSize, simplifiedPolynomial, originalSize);
             tryToFactorizeIncreasingAndDecreasingExponentsForm(
@@ -95,7 +95,7 @@ void tryToFactorizeUsingPatterns(
         Polynomials factorizedPolynomials;
         factorizeUsingPatternsIfPossible(factorizedPolynomials, simplifiedPolynomial);
         putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
-        deltaSize = polynomialsToFactorize.size() - originalSize;
+        deltaSize = static_cast<int>(polynomialsToFactorize.size()) - originalSize;
     }
 }
 
@@ -106,7 +106,7 @@ void tryToFactorizeIncreasingAndDecreasingExponentsForm(
         Polynomials factorizedPolynomials;
         factorizeIncreasingAndDecreasingExponentsFormIfPossible(factorizedPolynomials, simplifiedPolynomial);
         putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
-        deltaSize = polynomialsToFactorize.size() - originalSize;
+        deltaSize = static_cast<int>(polynomialsToFactorize.size()) - originalSize;
     }
 }
 
@@ -117,7 +117,7 @@ void tryToFactorizeBySplittingToSmallerPolynomials(
         Polynomials factorizedPolynomials;
         factorizeBySplittingToSmallerPolynomialsIfPossible(factorizedPolynomials, simplifiedPolynomial);
         putFactorizedPolynomialsIfPossible(polynomialsToFactorize, factorizedPolynomials);
-        deltaSize = polynomialsToFactorize.size() - originalSize;
+        deltaSize = static_cast<int>(polynomialsToFactorize.size()) - originalSize;
     }
 }
 

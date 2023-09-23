@@ -136,7 +136,7 @@ bool MultiplicationAndDivisionOfRadicals::isNotANegativeTermWithExponentDenomina
     bool result(true);
     if (gcfOfExponents.isIntegerOrFractionType()) {
         AlbaNumber::FractionData const fractionData(gcfOfExponents.getFractionData());
-        if (isEven(static_cast<int>(getAbsoluteValue<int>(fractionData.denominator)))) {
+        if (isEven(getAbsoluteValue<int>(static_cast<int>(fractionData.denominator)))) {
             result = !isANegativeMonomial(combinedMonomial);
         }
     }

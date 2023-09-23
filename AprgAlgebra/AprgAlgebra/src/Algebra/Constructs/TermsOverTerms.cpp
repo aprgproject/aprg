@@ -268,8 +268,8 @@ void TermsOverTerms::simplifyPolynomialsToPolynomialOverPolynomial() {
 }
 
 bool TermsOverTerms::removeTermsIfNeededAndReturnIfSomeTermsAreRemoved(Terms& numerators, Terms& denominators) {
-    int const previousNumberOfNumerators = numerators.size();
-    int const previousNumberOfDenominators = denominators.size();
+    int const previousNumberOfNumerators = static_cast<int>(numerators.size());
+    int const previousNumberOfDenominators = static_cast<int>(denominators.size());
 
     handleZerosInNumeratorOrDenominator(denominators, numerators);
     removeTermsThatHaveNoEffect(numerators);

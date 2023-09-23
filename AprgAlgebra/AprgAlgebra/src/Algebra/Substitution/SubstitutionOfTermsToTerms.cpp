@@ -80,7 +80,7 @@ Term SubstitutionOfTermsToTerms::performSubstitutionTo(Term const& term) const {
     return newTerm;
 }
 
-int SubstitutionOfTermsToTerms::getSize() const { return m_termsToTermsMap.size(); }
+int SubstitutionOfTermsToTerms::getSize() const { return static_cast<int>(m_termsToTermsMap.size()); }
 bool SubstitutionOfTermsToTerms::isEmpty() const { return m_termsToTermsMap.empty(); }
 
 bool SubstitutionOfTermsToTerms::isTermFound(Term const& term) const {

@@ -24,7 +24,7 @@ AlbaNumber SimplexSolver::getOptimizedObjectiveValue() const {
 
 Equations SimplexSolver::getSolutionEquations() const {
     Equations result;
-    int const lastX = m_simplexTable.getNumberOfColumns() - 1;
+    int const lastX = static_cast<int>(m_simplexTable.getNumberOfColumns()) - 1;
     for (int y = 0; y < static_cast<int>(m_simplexTable.getNumberOfRows()) - 1; ++y) {
         Polynomial solutionPolynomial;
         for (int x = 0; x < static_cast<int>(m_inputVariables.size()); ++x) {
@@ -80,8 +80,8 @@ void SimplexSolver::initializeSimplexTable(
         variableNameToIndexMap.emplace(inputVariableName, i++);
     }
 
-    int const lastX = m_simplexTable.getNumberOfColumns() - 1;
-    int slackColumn = inputVariableNames.size();
+    int const lastX = static_cast<int>(m_simplexTable.getNumberOfColumns()) - 1;
+    int slackColumn = static_cast<int>(inputVariableNames.size());
     for (int y = 0; y < static_cast<int>(constraintsInStandardForm.size()); ++y) {
         Polynomial const& standardFormConstraint(constraintsInStandardForm[y]);
         for (Monomial const& monomial : standardFormConstraint.getMonomials()) {
@@ -99,7 +99,7 @@ void SimplexSolver::initializeSimplexTable(
         }
     }
 
-    int const lastY(m_simplexTable.getNumberOfRows() - 1);
+    int const lastY(static_cast<int>(m_simplexTable.getNumberOfRows()) - 1);
     for (Monomial const& monomial : objectiveFunction.getMonomials()) {
         string const variableName(getFirstVariableName(monomial));
         if (variableName.empty()) {

@@ -69,7 +69,7 @@ void splitPolynomialsByDivisibilityOfExponents(Polynomials& result, Polynomial c
             Polynomial partialPolynomial;
             Monomials collectedMonomials;
             for (Monomial const& remainingMonomial : remainingMonomials) {
-                if (areExponentsDivisible(remainingMonomial, degree)) {
+                if (areExponentsDivisible(remainingMonomial, static_cast<int>(degree))) {
                     partialPolynomial.addMonomial(remainingMonomial);
                 } else {
                     collectedMonomials.emplace_back(remainingMonomial);

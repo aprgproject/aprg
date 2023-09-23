@@ -21,7 +21,7 @@ bool TermsWithAssociation::operator==(TermsWithAssociation const& second) const 
     bool result(false);
     if (terms1.size() == terms2.size()) {
         result = true;
-        int const commonSize = terms1.size();
+        int const commonSize = static_cast<int>(terms1.size());
         for (int i = 0; i < commonSize; ++i) {
             if (terms1[i] != terms2[i]) {
                 result = false;
@@ -39,7 +39,7 @@ bool TermsWithAssociation::operator<(TermsWithAssociation const& second) const {
     TermsWithDetails const& terms2(second.m_termsWithDetails);
     bool result(false);
     if (terms1.size() == terms2.size()) {
-        int const size = terms1.size();
+        int const size = static_cast<int>(terms1.size());
         for (int i = 0; i < size; ++i) {
             TermWithDetails const& termWithDetails1(terms1[i]);
             TermWithDetails const& termWithDetails2(terms2[i]);
@@ -63,7 +63,7 @@ TermAssociationType TermsWithAssociation::getFirstAssociationType() const {
 }
 
 TermsWithDetails const& TermsWithAssociation::getTermsWithDetails() const { return m_termsWithDetails; }
-int TermsWithAssociation::getSize() const { return m_termsWithDetails.size(); }
+int TermsWithAssociation::getSize() const { return static_cast<int>(m_termsWithDetails.size()); }
 bool TermsWithAssociation::isEmpty() const { return m_termsWithDetails.empty(); }
 void TermsWithAssociation::clear() { m_termsWithDetails.clear(); }
 

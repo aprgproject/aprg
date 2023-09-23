@@ -81,7 +81,7 @@ void LinearEquationsEqualitySolver::saveSolutionSetsFromTheCoefficientMatrix(
     MultipleVariableSolutionSet& solutionSet, NumberMatrix const& coefficientsMatrix,
     VariableNamesSet const& variables) {
     int index = 0;
-    int const columnEndIndex = variables.size();
+    int const columnEndIndex = static_cast<int>(variables.size());
     for (string const& variableName : variables) {
         AlbaNumber const identityDiagonalEntry(coefficientsMatrix.getEntry(index, index));
         if (identityDiagonalEntry == 1) {

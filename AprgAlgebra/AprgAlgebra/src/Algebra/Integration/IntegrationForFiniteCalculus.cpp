@@ -101,7 +101,7 @@ Term IntegrationForFiniteCalculus::integrateMonomial(Monomial const& monomial) c
     Term result;
     AlbaNumber const exponent(monomial.getExponentForVariable(m_nameOfVariableToIntegrate));
     if (exponent.isIntegerType()) {
-        int const exponentInteger(exponent.getInteger());
+        int const exponentInteger(static_cast<int>(exponent.getInteger()));
         if (exponentInteger >= 0) {
             Polynomial const polynomialInFallingPower(
                 convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(monomial));
@@ -191,7 +191,7 @@ Polynomial IntegrationForFiniteCalculus::integratePolynomialInFallingPower(Polyn
 Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(
     Monomial const& monomial) const {
     Polynomial result;
-    int const exponent(monomial.getExponentForVariable(m_nameOfVariableToIntegrate).getInteger());
+    int const exponent(static_cast<int>(monomial.getExponentForVariable(m_nameOfVariableToIntegrate).getInteger()));
     if (exponent >= 0) {
         int const exponentUnsigned = static_cast<int>(exponent);
         Monomial monomialToRetain(monomial);
@@ -209,7 +209,7 @@ Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFro
 Polynomial IntegrationForFiniteCalculus::convertMonomialWithPositiveExponentsFromFallingPowerToRegularPower(
     Monomial const& monomial) const {
     Polynomial result;
-    int const exponent(monomial.getExponentForVariable(m_nameOfVariableToIntegrate).getInteger());
+    int const exponent(static_cast<int>(monomial.getExponentForVariable(m_nameOfVariableToIntegrate).getInteger()));
     if (exponent > 0) {
         int const exponentUnsigned = static_cast<int>(exponent);
         result = createPolynomialFromNumber(1);

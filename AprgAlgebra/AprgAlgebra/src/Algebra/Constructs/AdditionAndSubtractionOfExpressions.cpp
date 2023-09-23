@@ -44,7 +44,9 @@ TermsWithDetails AdditionAndSubtractionOfExpressions::getAsTermsWithDetails() co
     return result;
 }
 
-int AdditionAndSubtractionOfExpressions::getSize() const { return min(m_expressions.size(), m_associations.size()); }
+int AdditionAndSubtractionOfExpressions::getSize() const {
+    return static_cast<int>(min(m_expressions.size(), m_associations.size()));
+}
 
 void AdditionAndSubtractionOfExpressions::putAsAddition(Expression const& expression) {
     putItem(expression, TermAssociationType::Positive);
@@ -92,7 +94,7 @@ bool AdditionAndSubtractionOfExpressions::doAllSizesMatch(Terms const& mergePart
 
 void AdditionAndSubtractionOfExpressions::mergeExpressionsByCheckingTwoTermsAtATime(
     Terms& mergeParts, Terms& commonParts) {
-    int size = mergeParts.size();
+    int size = static_cast<int>(mergeParts.size());
     for (int i = 0; i < size; ++i) {
         for (int j = i + 1; j < size; ++j) {
             // quadratic time: think on how this can be better
@@ -108,7 +110,7 @@ void AdditionAndSubtractionOfExpressions::mergeExpressionsByCheckingTwoTermsAtAT
                 m_expressions.erase(m_expressions.begin() + j);
                 m_associations.erase(m_associations.begin() + j);
 
-                size = mergeParts.size();
+                size = static_cast<int>(mergeParts.size());
                 j = i;
             }
         }
