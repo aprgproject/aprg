@@ -912,8 +912,8 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
             isStringFoundNotCaseSensitive(lineInLogs, "PID") && isStringFoundNotCaseSensitive(lineInLogs, "%CPU") &&
             isStringFoundNotCaseSensitive(lineInLogs, "COMMAND")) {
             state = 2;
-            cpuIndexInLine = lineInLogs.find("%CPU");
-            commmandIndexInLine = lineInLogs.find("COMMAND");
+            cpuIndexInLine = static_cast<int>(lineInLogs.find("%CPU"));
+            commmandIndexInLine = static_cast<int>(lineInLogs.find("COMMAND"));
 
             double totalCpu(0);
             stringstream ss;
@@ -1009,12 +1009,12 @@ void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
             isStringFoundNotCaseSensitive(lineInLogs, "PID") && isStringFoundNotCaseSensitive(lineInLogs, "MEM") &&
             isStringFoundNotCaseSensitive(lineInLogs, "COMMAND")) {
             state = 2;
-            memIndexInLine = lineInLogs.find("MEM");
-            commmandIndexInLine = lineInLogs.find("COMMAND");
+            memIndexInLine = static_cast<int>(lineInLogs.find("MEM"));
+            commmandIndexInLine = static_cast<int>(lineInLogs.find("COMMAND"));
 
             double totalMem(0);
             stringstream ss;
-            for (int const& consumption : memConsumptions) {
+            for (auto const& consumption : memConsumptions) {
                 totalMem += consumption;
                 ss << consumption << ", ";
             }
@@ -1095,9 +1095,9 @@ void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath)
                 stringstream ss;
                 ss << hour << ":" << min << ":" << sec << "," << instances;
                 logLineInRawDataFile(ss.str());
-                hour = logTime.getHours();
-                min = logTime.getMinutes();
-                sec = logTime.getSeconds();
+                hour = static_cast<int>(logTime.getHours());
+                min = static_cast<int>(logTime.getMinutes());
+                sec = static_cast<int>(logTime.getSeconds());
                 instances = 1;
             }
         }
@@ -1147,12 +1147,12 @@ void PerformanceAnalyzer::processDirectoryForTraceLog(string const& traceLogPath
 
 int PerformanceAnalyzer::getDelayTimeInUs(BtsLogTime const& endTime, BtsLogTime const& startTime) {
     BtsLogTime const delayTime = endTime - startTime;
-    return delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000;
+    return static_cast<int>(delayTime.getMicroSeconds() + delayTime.getSeconds() * 1000000);
 }
 
 int PerformanceAnalyzer::getDelayTimeInMinutes(BtsLogTime const& endTime, BtsLogTime const& startTime) {
     BtsLogTime const delayTime = endTime - startTime;
-    return delayTime.getMinutes();
+    return static_cast<int>(delayTime.getMinutes());
 }
 
 }  // namespace alba

@@ -526,25 +526,25 @@ void RagnarokOnline::retrieveMonsterDataFromRmsWebPage(string const& filePathOfW
                 } else if ("Sight Range" == parameterName) {
                     monster.sightRange = convertStringToNumber<unsigned int>(value);
                 } else if ("Neutral" == parameterName) {
-                    monster.neutralPercentage = convertStringToNumber<unsigned int>(value);
+                    monster.neutralPercentage = convertStringToNumber<int>(value);
                 } else if ("Water" == parameterName) {
-                    monster.waterPercentage = convertStringToNumber<unsigned int>(value);
+                    monster.waterPercentage = convertStringToNumber<int>(value);
                 } else if ("Earth" == parameterName) {
-                    monster.earthPercentage = convertStringToNumber<unsigned int>(value);
+                    monster.earthPercentage = convertStringToNumber<int>(value);
                 } else if ("Fire" == parameterName) {
-                    monster.firePercentage = convertStringToNumber<unsigned int>(value);
+                    monster.firePercentage = convertStringToNumber<int>(value);
                 } else if ("Wind" == parameterName) {
-                    monster.windPercentage = convertStringToNumber<unsigned int>(value);
+                    monster.windPercentage = convertStringToNumber<int>(value);
                 } else if ("Poison" == parameterName) {
-                    monster.poisonPercentage = convertStringToNumber<unsigned int>(value);
+                    monster.poisonPercentage = convertStringToNumber<int>(value);
                 } else if ("Holy" == parameterName) {
-                    monster.holyPercentage = convertStringToNumber<unsigned int>(value);
+                    monster.holyPercentage = convertStringToNumber<int>(value);
                 } else if ("Shadow" == parameterName) {
-                    monster.shadowPercentage = convertStringToNumber<unsigned int>(value);
+                    monster.shadowPercentage = convertStringToNumber<int>(value);
                 } else if ("Ghost" == parameterName) {
-                    monster.ghostPercentage = convertStringToNumber<unsigned int>(value);
+                    monster.ghostPercentage = convertStringToNumber<int>(value);
                 } else if ("Undead" == parameterName) {
-                    monster.undeadPercentage = convertStringToNumber<unsigned int>(value);
+                    monster.undeadPercentage = convertStringToNumber<int>(value);
                 }
             }
             if (isStringFoundCaseSensitive(line, R"(onclick="return popItem)")) {

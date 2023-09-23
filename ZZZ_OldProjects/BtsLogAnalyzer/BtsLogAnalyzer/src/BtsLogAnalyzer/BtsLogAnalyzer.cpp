@@ -489,7 +489,7 @@ void BtsLogAnalyzer::processFileForBtsDelayForMikhailKnife(string const& filePat
 
 string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string const& stringToSearch) {
     string result;
-    int const firstIndexOfFirstString = mainString.find(stringToSearch);
+    int const firstIndexOfFirstString = static_cast<int>(mainString.find(stringToSearch));
     if (stringHelper::isNotNpos(firstIndexOfFirstString)) {
         int const lastIndexOfFirstString = static_cast<int>(firstIndexOfFirstString + stringToSearch.length());
         int lastIndexOfNumber = 0;
@@ -503,7 +503,7 @@ string BtsLogAnalyzer::getNumberAfterThisString(string const& mainString, string
 }
 
 double BtsLogAnalyzer::getWireSharkTime(string const& lineInLogs) {
-    int const length(lineInLogs.length());
+    int const length(static_cast<int>(lineInLogs.length()));
     int startIndexOfTime = 0;
     int endIndexOfTime = 0;
     int i = 0;

@@ -178,8 +178,9 @@ void RevisionEditor::setDataFromGitHistory() {
         }
     }
     // add fake data of days with no commits
-    m_numberInstancesOfEachDayCommitCount[0] = totalNumberOfInstances * 0.5;
-    m_revisionRandomizer.setMinimumAndMaximum(m_revisionEntries.empty() ? 0 : 1, m_revisionEntries.size());
+    m_numberInstancesOfEachDayCommitCount[0] = static_cast<int>(totalNumberOfInstances * 0.5);
+    m_revisionRandomizer.setMinimumAndMaximum(
+        m_revisionEntries.empty() ? 0 : 1, static_cast<int>(m_revisionEntries.size()));
 }
 
 void RevisionEditor::setDataOnCommitsPerDay() {
@@ -226,15 +227,15 @@ int RevisionEditor::getRandomHour() {
 AlbaDateTime RevisionEditor::getDateTime(string const& date) {
     int index = 0;
     auto year = convertStringToNumber<uint16_t>(getStringBeforeThisString(date, "-", index));
-    index = date.find('-', index) + 1;
+    index = static_cast<int>(date.find('-', index)) + 1;
     auto month = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "-", index));
-    index = date.find('-', index) + 1;
+    index = static_cast<int>(date.find('-', index)) + 1;
     auto day = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "T", index));
-    index = date.find('T', index) + 1;
+    index = static_cast<int>(date.find('T', index)) + 1;
     auto hour = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
-    index = date.find(':', index) + 1;
+    index = static_cast<int>(date.find(':', index)) + 1;
     auto minute = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, ":", index));
-    index = date.find(':', index) + 1;
+    index = static_cast<int>(date.find(':', index)) + 1;
     auto second = convertStringToNumber<uint8_t>(getStringBeforeThisString(date, "+", index));
 
     return {year, month, day, hour, minute, second, 0U};
@@ -249,11 +250,11 @@ RevisionEditor::DaysInterval RevisionEditor::createDaysInterval(
 RevisionEditor::RevisionEntry RevisionEditor::getRevisionEntry(string const& line) {
     int index = 0;
     string const revisionHash = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
-    index = line.find(END_ENTRY_PATTERN, index) + 3;
+    index = static_cast<int>(line.find(END_ENTRY_PATTERN, index)) + 3;
     string const date = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
-    index = line.find(END_ENTRY_PATTERN, index) + 3;
+    index = static_cast<int>(line.find(END_ENTRY_PATTERN, index)) + 3;
     string const author = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
-    index = line.find(END_ENTRY_PATTERN, index) + 3;
+    index = static_cast<int>(line.find(END_ENTRY_PATTERN, index)) + 3;
     string const message = getStringInBetweenTwoStrings(line, START_ENTRY_PATTERN, END_ENTRY_PATTERN, index);
     // ALBA_PRINT4(revisionHash, date, author, message);
     return {revisionHash, getDateTime(date), author, message};

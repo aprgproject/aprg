@@ -46,7 +46,7 @@ private:
     int m_lineBarWidthSearchInitialBlackPointsValue{};
     double m_lineBarWidthSearchAcceptedRunningBlackRatio{};
     double m_acceptableDistanceOverWidthRatioFromWidthMidpoint{};
-    double m_acceptableMinimumDistanceFromWidthMidpoint{};
+    int m_acceptableMinimumDistanceFromWidthMidpoint{};
     double m_acceptableSdOverMeanDeviationForLine{};
     double m_acceptableSdOverMeanDeviationForBar{};
     double m_removalRatioForLineAndBar{};

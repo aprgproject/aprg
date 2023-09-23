@@ -33,8 +33,8 @@ void TopLogAnalyzer::clear() {
 void TopLogAnalyzer::ColumnHeaders::set(
     unsigned int const sizeFromTop, double const cpuIndexFromTop, double const memIndexFromTop) {
     size = sizeFromTop;
-    cpuIndex = cpuIndexFromTop;
-    memIndex = memIndexFromTop;
+    cpuIndex = static_cast<unsigned int>(cpuIndexFromTop);
+    memIndex = static_cast<unsigned int>(memIndexFromTop);
 }
 
 void TopLogAnalyzer::processTopLog(std::string const& pathOfTopLog) {

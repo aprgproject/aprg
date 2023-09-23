@@ -186,7 +186,8 @@ void PidSimulator::calculateAndGenerateOutputImage() {
                  << m_xMagnificationToGraph << ", " << m_yMagnificationToGraph << "]\n";
 
             AprgGraph graph(
-                graphOutputFile.getPath(), BitmapXY(m_xOffsetToGraph, m_yOffsetToGraph),
+                graphOutputFile.getPath(),
+                BitmapXY(static_cast<int>(m_xOffsetToGraph), static_cast<int>(m_yOffsetToGraph)),
                 BitmapDoubleXY(m_xMagnificationToGraph, m_yMagnificationToGraph));
             graph.drawGrid(BitmapDoubleXY(m_xGridInterval, m_yGridInterval));
             graph.drawContinuousPoints(targetSeries, 0x00444444);

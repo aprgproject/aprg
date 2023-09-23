@@ -70,9 +70,10 @@ void BtsLogSorter::processFile(string const& filePath) {
         if (!m_isFilterOn || m_filterGrepEvaluator.evaluate(lineInFile)) {
             processLineInFile(filePathHandler.getFile().string(), lineInFile);
         }
-        ProgressCounters::totalSizeReadForCombine = previousTotalSize + fileReader.getCurrentLocation();
+        ProgressCounters::totalSizeReadForCombine =
+            previousTotalSize + static_cast<double>(fileReader.getCurrentLocation());
     }
-    ProgressCounters::totalSizeReadForCombine = previousTotalSize + filePathHandler.getFileSize();
+    ProgressCounters::totalSizeReadForCombine = previousTotalSize + static_cast<double>(filePathHandler.getFileSize());
 }
 
 void BtsLogSorter::processLineInFile(string const& filename, string const& lineInFile) {
@@ -102,7 +103,7 @@ double BtsLogSorter::getTotalSizeToBeRead(set<string> const& listOfFiles) {
     for (string const& filePath : listOfFiles) {
         AlbaLocalPathHandler const filePathHandler(filePath);
         if (m_acceptedFilesGrepEvaluator.evaluate(filePathHandler.getFile().string())) {
-            totalFileSize += filePathHandler.getFileSize();
+            totalFileSize += static_cast<double>(filePathHandler.getFileSize();
         }
     }
     return totalFileSize;
@@ -160,7 +161,7 @@ void BtsLogSorter::addStartupLogsOnSorterWithPcTime() {
     m_startupLogStreamOptional.reset();
     BtsPrintReaderWithRollback printReader;
     printReader.openIfNeeded(m_pathOfStartupLog);
-    double const fileSize(AlbaLocalPathHandler(m_pathOfStartupLog).getFileSize());
+    double const fileSize(static_cast<double>(AlbaLocalPathHandler(m_pathOfStartupLog).getFileSize()));
     while (printReader.isGood()) {
         BtsLogPrint const startupLogPrint(printReader.getPrint());
         if (!startupLogPrint.isEmpty()) {

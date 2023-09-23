@@ -30,7 +30,7 @@ namespace KickStart_2020_RoundG_P1_KickStart {
 void runTestCase(int const testCaseNumber) {
     string s;
     my_cin >> s;
-    int n = s.length();
+    int n = static_cast<int>(s.length());
     vector<int> pref(n);
     for (int i = 0; i + 3 < n; ++i) {
         if (i > 0) {

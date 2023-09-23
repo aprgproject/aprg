@@ -246,7 +246,7 @@ void BtsLogPrint::handleBtsTimeState(
 
 void BtsLogPrint::analyzeLineInLogs(string const& lineInLogs) {
     State state(State::UnknownState);
-    int const length = lineInLogs.length();
+    int const length = static_cast<int>(lineInLogs.length());
 
     TransactionData transactionData;
     for (int index = 0; !transactionData.isBtsTimeSaved && index < length; ++index) {

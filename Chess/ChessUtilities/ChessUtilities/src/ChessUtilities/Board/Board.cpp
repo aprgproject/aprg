@@ -42,7 +42,7 @@ BoardOrientation Board::getOrientation() const { return m_orientation; }
 Coordinate Board::getCoordinateFromAlgebraicNotation(string const& text) const {
     Coordinate result{};
     if (text.size() == 2) {
-        char const letterChar = tolower(text[0]);
+        char const letterChar = static_cast<char>(tolower(text[0]));
         char const numberChar = text[1];
         if (isAToH(letterChar) && is1To8(numberChar)) {
             result = getCorrectCoordinateFromAlgebraicNotation(letterChar - 'a', numberChar - '1');
@@ -735,7 +735,7 @@ int Board::getNumberOfWaysToBlockPath(
     Coordinate cellInBetween = startpoint + oneIncrementDelta;
     while (isCoordinateWithinTheBoard(cellInBetween) && endpoint != cellInBetween) {
         cellInBetween += oneIncrementDelta;
-        result += getMovesToThis(cellInBetween, blockingPieceColor, maxSize - result).size();
+        result += static_cast<int>(getMovesToThis(cellInBetween, blockingPieceColor, maxSize - result).size());
     }
     return result;
 }

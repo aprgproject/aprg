@@ -1,5 +1,5 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "KickStart_2019_PracticeRound_P1_NumberGuessing.hpp"
 
@@ -31,8 +31,8 @@ void runTestCase(int const) {
     my_cin >> minimumValue >> maximumValue;
     int numberOfTries = 0;
     my_cin >> numberOfTries;
-    int lowValue = minimumValue + 1;
-    int highValue = maximumValue;
+    long long lowValue = minimumValue + 1;
+    long long highValue = maximumValue;
     while (true) {
         long long m = (lowValue + highValue) / 2;
         my_cout << m << endl;

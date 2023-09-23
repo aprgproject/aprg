@@ -208,7 +208,8 @@ void MapAnalyzer::selectMaps() {
             mapAnalyzerData.baseExperiencePotential = totalPotentialBaseExperience;
             mapAnalyzerData.jobExperiencePotential = totalPotentialJobExperience;
             // double averageZeny = totalPotentialZeny / monstersNameToDataMap.size();
-            double const averageJobExperience = totalPotentialJobExperience / monstersNameToDataMap.size();
+            double const averageJobExperience =
+                totalPotentialJobExperience / static_cast<double>(monstersNameToDataMap.size());
             for (auto& monsterNameToDataPair : monstersNameToDataMap) {
                 Monster const monster(m_ragnarokOnline.getMonster(monsterNameToDataPair.first));
                 MonsterData& monsterData(monsterNameToDataPair.second);

@@ -113,7 +113,7 @@ char convertToFenCharacter(PieceType const pieceType, PieceColor const pieceColo
             break;
         }
     }
-    result = (PieceColor::White == pieceColor) ? toupper(result) : result;
+    result = (PieceColor::White == pieceColor) ? static_cast<char>(toupper(result)) : result;
     return result;
 }
 
