@@ -97,7 +97,7 @@ TEST(AlbaCropFileTest, CropWorksWhenCropSizeIsTwiceOfTheWholeDocument) {
     ifstream testFileToRead(file1ToReadPathHandler.getPath());
     AlbaFileReader const testFileReader(testFileToRead);
 
-    AlbaCropFile cropFile("[4]", testFileReader.getFileSize() * 2);
+    AlbaCropFile cropFile("[4]", static_cast<double>(testFileReader.getFileSize()) * 2);
     EXPECT_FALSE(cropFile.isOutputFileWritten());
     cropFile.processFile(file1ToReadPathHandler.getPath(), file2ToReadPathHandler.getPath());
     EXPECT_TRUE(cropFile.isOutputFileWritten());

@@ -15,7 +15,7 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
     // Auxiliary Space: Constant
     Count result(0);
     if (!m_inputValues.empty()) {
-        result = getNumberOfWaysUsingNaiveRecursion(true, 0, m_inputValues.size() - 1);
+        result = getNumberOfWaysUsingNaiveRecursion(true, 0, static_cast<int>(m_inputValues.size()) - 1);
     }
     return result;
 }
@@ -26,7 +26,7 @@ BooleanParenthesizationProblem::Count BooleanParenthesizationProblem::getNumberO
     Count result(0);
     if (!m_inputValues.empty()) {
         CountMatrices countMatrices(2, CountMatrix(m_inputValues.size(), m_inputValues.size(), UNUSED_COUNT));
-        result = getNumberOfWaysUsingMemoizationDP(countMatrices, true, 0, m_inputValues.size() - 1);
+        result = getNumberOfWaysUsingMemoizationDP(countMatrices, true, 0, static_cast<int>(m_inputValues.size()) - 1);
     }
     return result;
 }

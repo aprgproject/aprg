@@ -14,8 +14,8 @@ int CountingSubGrids::countSubGridsWithAllBlackCorners() const {
         for (int nextRow = row + 1; nextRow < static_cast<int>(m_bitValueGrid.getNumberOfRows()); ++nextRow) {
             int commonBlackColumns(0);
             for (int i = 0; i < static_cast<int>(m_bitValueGrid.getNumberOfColumns()); ++i) {
-                commonBlackColumns += BitValueUtilities::getNumberOfOnes(
-                    m_bitValueGrid.getEntry(i, row) & m_bitValueGrid.getEntry(i, nextRow));
+                commonBlackColumns += static_cast<int>(BitValueUtilities::getNumberOfOnes(
+                    m_bitValueGrid.getEntry(i, row) & m_bitValueGrid.getEntry(i, nextRow)));
             }
             result += commonBlackColumns * (commonBlackColumns - 1) /
                       2;  // combinations of subgrids based on common black columns
@@ -26,8 +26,8 @@ int CountingSubGrids::countSubGridsWithAllBlackCorners() const {
 
 void CountingSubGrids::initialize(BitGrid const& bitGrid) {
     if (bitGrid.getNumberOfRows() <= bitGrid.getNumberOfColumns()) {
-        int const newColumns((bitGrid.getNumberOfColumns() + NUMBER_OF_BITS - 1) / NUMBER_OF_BITS);
-        int const newRows(bitGrid.getNumberOfRows());
+        int const newColumns((static_cast<int>(bitGrid.getNumberOfColumns()) + NUMBER_OF_BITS - 1) / NUMBER_OF_BITS);
+        int const newRows(static_cast<int>(bitGrid.getNumberOfRows()));
         m_bitValueGrid.clearAndResize(newColumns, newRows);
         bitset<NUMBER_OF_BITS> bitsetValue;
         for (int y = 0; y < static_cast<int>(bitGrid.getNumberOfRows()); ++y) {
@@ -43,8 +43,8 @@ void CountingSubGrids::initialize(BitGrid const& bitGrid) {
             }
         }
     } else {
-        int const newColumns((bitGrid.getNumberOfRows() + NUMBER_OF_BITS - 1) / NUMBER_OF_BITS);
-        int const newRows(bitGrid.getNumberOfColumns());
+        int const newColumns((static_cast<int>(bitGrid.getNumberOfRows()) + NUMBER_OF_BITS - 1) / NUMBER_OF_BITS);
+        int const newRows(static_cast<int>(bitGrid.getNumberOfColumns()));
         m_bitValueGrid.clearAndResize(newColumns, newRows);
         bitset<NUMBER_OF_BITS> bitsetValue;
         for (int y = 0; y < static_cast<int>(bitGrid.getNumberOfColumns()); ++y) {

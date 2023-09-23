@@ -21,9 +21,9 @@ void GrundyGame::split(HeapIndexAndFirstPileAndSecondPile const& heapIndexAndFir
         UnsignedInteger const firstPile = get<1>(heapIndexAndFirstPileAndSecondPile);
         UnsignedInteger const secondPile = get<2>(heapIndexAndFirstPileAndSecondPile);
         if (m_stickHeaps[index] == firstPile + secondPile) {
-            m_stickHeaps.erase(m_stickHeaps.begin() + index);
-            m_stickHeaps.emplace(m_stickHeaps.begin() + index, secondPile);
-            m_stickHeaps.emplace(m_stickHeaps.begin() + index, firstPile);
+            m_stickHeaps.erase(m_stickHeaps.begin() + static_cast<int>(index));
+            m_stickHeaps.emplace(m_stickHeaps.begin() + static_cast<int>(index), secondPile);
+            m_stickHeaps.emplace(m_stickHeaps.begin() + static_cast<int>(index), firstPile);
         }
     }
 }
@@ -76,7 +76,7 @@ SetOfUnsignedIntegers GrundyGame::getNextGrundyNumbersWithNumberOfSticks(Unsigne
 
     UnsignedInteger const limit = (numberOfSticks + 1) / 2;
     for (int a = 1; a < static_cast<int>(limit); ++a) {
-        int const b = numberOfSticks - a;
+        int const b = static_cast<int>(numberOfSticks) - a;
         result.emplace(
             getCombinedGrundyNumber(getGrundyNumberWithNumberOfSticks(a), getGrundyNumberWithNumberOfSticks(b)));
     }

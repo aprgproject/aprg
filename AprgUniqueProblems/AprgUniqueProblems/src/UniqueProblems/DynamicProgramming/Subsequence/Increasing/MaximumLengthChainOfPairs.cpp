@@ -53,7 +53,7 @@ MaximumLengthChainOfPairs::Pairs MaximumLengthChainOfPairs::getLongestSubsequenc
 
         // construct longest sequence
         auto itMax = max_element(subLengths.cbegin(), subLengths.cend());
-        Index const indexOfLongestLength = distance(subLengths.cbegin(), itMax);
+        Index const indexOfLongestLength = static_cast<Index>(distance(subLengths.cbegin(), itMax));
         Index traverseIndex = indexOfLongestLength;
         for (; traverseIndex != indexToPreviousIndex[traverseIndex];
              traverseIndex = indexToPreviousIndex[traverseIndex]) {

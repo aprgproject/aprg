@@ -12,7 +12,7 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
     // Auxiliary Space :O(numberOfWords) (RecursionDetails has allocation on stack)
     Cost result(0);
     if (!m_words.empty()) {
-        Index const firstWordLength = m_words.front().length();
+        Index const firstWordLength = static_cast<Index>(m_words.front().length());
         RecursionDetails const recursionDetails{Indices{firstWordLength}};  // bad idea to have structure as argument
         result = getOptimizedCostUsingNaiveRecursion(recursionDetails, 1);
     }
@@ -28,9 +28,9 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
         for (Index targetLineLength = 1; targetLineLength <= m_maxLineLength; ++targetLineLength) {
             Cost costAtLength(0);
             bool hasNoSolutions(false);
-            Index lineLength(m_words.front().length());
+            Index lineLength(static_cast<Index>(m_words.front().length()));
             for (auto it = m_words.cbegin() + 1; it != m_words.cend(); ++it) {
-                Index const wordLength(it->length());
+                Index const wordLength(static_cast<Index>(it->length()));
                 if (wordLength > targetLineLength) {
                     hasNoSolutions = true;
                     break;  // no possible solutions on all lengths
@@ -59,7 +59,7 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
     // Auxiliary Space: O(numberOfWords)
     Cost result(0);
     if (!m_words.empty()) {
-        Index const numberOfWords(m_words.size());
+        Index const numberOfWords(static_cast<Index>(m_words.size()));
         Costs costsIfFirstWord(numberOfWords, static_cast<Cost>(MAX_COST));
         for (int firstWordIndex = numberOfWords - 1; firstWordIndex >= 0; --firstWordIndex) {
             // try all first word in lines
@@ -67,7 +67,7 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
             Index lineLength(0);
             for (Index lastWordIndex = firstWordIndex; lastWordIndex < numberOfWords; ++lastWordIndex) {
                 // try all last word in lines
-                lineLength += m_words[lastWordIndex].length();
+                lineLength += static_cast<Index>(m_words[lastWordIndex].length());
                 lineLength += (static_cast<Index>(firstWordIndex) < lastWordIndex) ? 1 : 0;  // add space character
                 if (lineLength <= m_maxLineLength) {
                     Cost possibleCost = getCostFromExtraSpaces(m_maxLineLength - lineLength);
@@ -87,7 +87,7 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
     Cost result(0);
     if (wordIndex < static_cast<Index>(m_words.size())) {
         result = MAX_COST;
-        Index const wordLength(m_words[wordIndex].length());
+        Index const wordLength(static_cast<Index>(m_words[wordIndex].length()));
         if (wordLength <= m_maxLineLength) {
             Index const lastLength(recursionDetails.lineLengths.back());
             if (lastLength + 1 + wordLength <= m_maxLineLength) {
@@ -113,9 +113,9 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getOptimizedCos
 WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getTotalLength() const {
     Index result(0);
     if (!m_words.empty()) {
-        result = m_words.front().length();
+        result = static_cast<Index>(m_words.front().length());
         for (auto it = m_words.cbegin() + 1; it != m_words.cend(); ++it) {
-            result += it->length() + 1;  // plus one for space
+            result += static_cast<Index>(it->length()) + 1;  // plus one for space
         }
     }
     return result;

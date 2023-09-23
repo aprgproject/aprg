@@ -72,11 +72,11 @@ ProductDayProblem::Price ProductDayProblem::getMinimumPriceUsingIterativeDP() co
 }
 
 inline ProductDayProblem::Day ProductDayProblem::getNumberOfDays() const {
-    return m_pricesInDayByProduct.getNumberOfColumns();
+    return static_cast<Day>(m_pricesInDayByProduct.getNumberOfColumns());
 }
 
 inline ProductDayProblem::Product ProductDayProblem::getNumberOfProducts() const {
-    return m_pricesInDayByProduct.getNumberOfRows();
+    return static_cast<Product>(m_pricesInDayByProduct.getNumberOfRows());
 }
 
 inline ProductDayProblem::ProductBits ProductDayProblem::getNumberOfProductsSubsets() const {

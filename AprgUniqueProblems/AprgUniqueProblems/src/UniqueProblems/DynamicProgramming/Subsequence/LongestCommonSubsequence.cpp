@@ -8,7 +8,8 @@ LongestCommonSubsequence::LongestCommonSubsequence(Values const& sequence1, Valu
     : m_sequence1(sequence1), m_sequence2(sequence2) {}
 
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingNaiveRecursion() const {
-    return getLongestLengthUsingNaiveRecursion(m_sequence1.size(), m_sequence2.size());
+    return getLongestLengthUsingNaiveRecursion(
+        static_cast<Index>(m_sequence1.size()), static_cast<Index>(m_sequence2.size()));
 }
 
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingMemoizationDP() const {
@@ -20,7 +21,8 @@ LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingM
         lengthMatrix.setEntry(0, index2, 0);
     }
 
-    return getLongestLengthUsingMemoizationDP(lengthMatrix, m_sequence1.size(), m_sequence2.size());
+    return getLongestLengthUsingMemoizationDP(
+        lengthMatrix, static_cast<Index>(m_sequence1.size()), static_cast<Index>(m_sequence2.size()));
 }
 
 LongestCommonSubsequence::Count LongestCommonSubsequence::getLongestLengthUsingIterativeDP() const {

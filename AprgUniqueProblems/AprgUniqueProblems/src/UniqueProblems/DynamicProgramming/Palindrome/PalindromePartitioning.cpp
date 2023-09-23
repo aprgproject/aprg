@@ -11,7 +11,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
     // Auxiliary Space: Constant
     Count result(0);
     if (!m_string.empty()) {
-        result = getMinimumNumberOfCutsUsingNaiveRecursion(0, m_string.length() - 1);
+        result = getMinimumNumberOfCutsUsingNaiveRecursion(0, static_cast<Index>(m_string.length()) - 1);
     }
     return result;
 }
@@ -22,7 +22,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
     Count result(0);
     if (!m_string.empty()) {
         CountMatrix countMatrix(m_string.length(), m_string.length(), static_cast<Count>(MAX_COUNT));
-        result = getMinimumNumberOfCutsUsingMemoizationDP(countMatrix, 0, m_string.length() - 1);
+        result = getMinimumNumberOfCutsUsingMemoizationDP(countMatrix, 0, static_cast<Index>(m_string.length()) - 1);
     }
     return result;
 }
@@ -32,7 +32,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
     // Auxiliary Space: O(n^2)
     Count result(0);
     if (!m_string.empty()) {
-        Index const stringLength = m_string.length();
+        Index const stringLength = static_cast<Index>(m_string.length());
         CountMatrix countMatrix(stringLength, stringLength, 0);
 
         for (Index length = 1; length <= stringLength; ++length) {
@@ -61,7 +61,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
     // Auxiliary Space: O(n^2) (partialCounts is linear, but isSubstrAPalindrome is quadratic)
     Count result(0);
     if (!m_string.empty()) {
-        Index const stringLength = m_string.length();
+        Index const stringLength = static_cast<Index>(m_string.length());
         Counts partialCounts(stringLength, 0);
         BoolMatrix isSubstrAPalindrome(stringLength, stringLength, false);
 

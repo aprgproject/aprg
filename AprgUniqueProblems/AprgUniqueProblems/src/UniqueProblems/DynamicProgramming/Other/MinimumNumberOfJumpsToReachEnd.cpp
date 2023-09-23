@@ -113,7 +113,7 @@ MinimumNumberOfJumpsToReachEnd::Indices MinimumNumberOfJumpsToReachEnd::getPathO
         }
 
         // construct path
-        Index traverseIndex = m_sequence.size() - 1;
+        Index traverseIndex = static_cast<Index>(m_sequence.size()) - 1;
         for (; traverseIndex != indexToPreviousIndex[traverseIndex];
              traverseIndex = indexToPreviousIndex[traverseIndex]) {
             result.emplace_back(m_sequence[traverseIndex]);

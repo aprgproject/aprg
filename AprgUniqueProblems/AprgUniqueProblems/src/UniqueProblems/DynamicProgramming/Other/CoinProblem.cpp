@@ -144,7 +144,7 @@ int CoinProblem::getNumberOfCoinCombinationsUsingMemoizationDP(Value const total
     int result(0);
     if (!m_availableCoins.empty()) {
         result = getNumberOfCoinCombinationsUsingMemoizationDPInternal(
-            countByValueByCoin, total, m_availableCoins.size() - 1);
+            countByValueByCoin, total, static_cast<int>(m_availableCoins.size()) - 1);
     }
     return result;
 }
@@ -263,7 +263,7 @@ CoinProblem::Coins CoinProblem::getFewestCoinsUsingMemoizationDPInternal(
                 Coins subSolution(getFewestCoinsUsingMemoizationDPInternal(fewestCoins, total - availableCoin));
                 if (static_cast<int>(subSolution.size()) + 1 < fewestSize) {
                     subSolution.emplace_back(availableCoin);
-                    fewestSize = subSolution.size();
+                    fewestSize = static_cast<int>(subSolution.size());
                     result = subSolution;
                 }
             } else if (total == availableCoin) {

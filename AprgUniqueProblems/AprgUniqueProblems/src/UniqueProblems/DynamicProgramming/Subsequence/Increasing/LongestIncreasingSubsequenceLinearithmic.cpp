@@ -54,7 +54,8 @@ LongestIncreasingSubsequenceLinearithmic::Values LongestIncreasingSubsequenceLin
                 lengthMinus1ToEndIndex[longestLength] = i;
                 lengthMinus1ToEndValue[longestLength++] = value;  // extend
             } else {
-                Index const currentLength = distance(lengthMinus1ToEndValue.begin(), lowerBoundItForEndValue);
+                Index const currentLength =
+                    static_cast<Index>(distance(lengthMinus1ToEndValue.begin(), lowerBoundItForEndValue));
                 if (currentLength > 0) {
                     indexToPreviousIndex[i] = lengthMinus1ToEndIndex[currentLength - 1];
                 }

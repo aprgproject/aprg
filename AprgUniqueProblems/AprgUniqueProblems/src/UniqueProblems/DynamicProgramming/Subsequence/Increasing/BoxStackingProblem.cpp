@@ -39,7 +39,7 @@ BoxStackingProblem::Boxes BoxStackingProblem::getBoxesWithMaximumStackedHeight()
 
         // construct longest sequence
         auto itMax = max_element(partialHeights.cbegin(), partialHeights.cend());
-        Index const indexOfMaxSum = distance(partialHeights.cbegin(), itMax);
+        Index const indexOfMaxSum = static_cast<Index>(distance(partialHeights.cbegin(), itMax));
         Index traverseIndex = indexOfMaxSum;
         for (; traverseIndex != indexToPreviousIndex[traverseIndex];
              traverseIndex = indexToPreviousIndex[traverseIndex]) {

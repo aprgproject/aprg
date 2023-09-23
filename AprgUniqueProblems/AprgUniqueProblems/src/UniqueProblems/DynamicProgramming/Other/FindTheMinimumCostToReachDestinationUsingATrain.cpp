@@ -16,7 +16,7 @@ FindTheMinimumCostToReachDestinationUsingATrain::getMinimumCostUsingNaiveRecursi
     // Auxiliary Space: O(1)
     Value result(0);
     if (!m_pricesAtEachStation.isEmpty()) {
-        result = getMinimumCostUsingNaiveRecursion(m_pricesAtEachStation.getNumberOfColumns() - 1);
+        result = getMinimumCostUsingNaiveRecursion(static_cast<Index>(m_pricesAtEachStation.getNumberOfColumns()) - 1);
     }
     return result;
 }
@@ -28,7 +28,8 @@ FindTheMinimumCostToReachDestinationUsingATrain::getMinimumCostUsingMemoizationD
     Value result(0);
     if (!m_pricesAtEachStation.isEmpty()) {
         Values savedCosts(m_pricesAtEachStation.getNumberOfColumns(), static_cast<Value>(UNUSED_VALUE));
-        result = getMinimumCostUsingMemoizationDP(savedCosts, m_pricesAtEachStation.getNumberOfColumns() - 1);
+        result = getMinimumCostUsingMemoizationDP(
+            savedCosts, static_cast<Index>(m_pricesAtEachStation.getNumberOfColumns()) - 1);
     }
     return result;
 }

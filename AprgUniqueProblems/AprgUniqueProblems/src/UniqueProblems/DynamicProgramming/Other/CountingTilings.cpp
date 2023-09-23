@@ -37,7 +37,7 @@ void CountingTilings::searchNextRow(Count const rowIndex, Row const& currentRow)
             searchNextRow(rowIndex + 1, nextRow);
         }
     } else if (rowIndex == m_numberOfRows - 1) {
-        Row const emptyRow(getEmptyRow(currentRow.length()));
+        Row const emptyRow(getEmptyRow(static_cast<Count>(currentRow.length())));
         for (Row const& nextRow : getNextRows(currentRow)) {
             if (emptyRow == nextRow) {
                 ++m_numberOfSolutions;
@@ -111,7 +111,7 @@ CountingTilings::Rows CountingTilings::calculateNextRows(Row const& currentRow) 
 
     Rows result;
     stack<NextDetail> possibleNextDetails;
-    possibleNextDetails.emplace(NextDetail{getEmptyRow(currentRow.length()), 0});
+    possibleNextDetails.emplace(NextDetail{getEmptyRow(static_cast<Count>(currentRow.length())), 0});
     while (!possibleNextDetails.empty()) {
         NextDetail const& nextDetail(possibleNextDetails.top());
         Row nextRow(nextDetail.nextRow);

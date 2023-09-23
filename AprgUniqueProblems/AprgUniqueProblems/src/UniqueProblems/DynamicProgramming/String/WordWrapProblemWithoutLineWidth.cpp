@@ -13,7 +13,7 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
     // Auxiliary Space :O(numberOfWords) (RecursionDetails has allocation on stack)
     Cost result(0);
     if (!m_words.empty()) {
-        Index const firstWordLength = m_words.front().length();
+        Index const firstWordLength = static_cast<Index>(m_words.front().length());
         RecursionDetails const recursionDetails{firstWordLength, Indices{firstWordLength}};
         result = getOptimizedCostUsingNaiveRecursion(recursionDetails, 1);
     }
@@ -30,9 +30,9 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
         for (Index targetLineLength = 1; targetLineLength < totalLength; ++targetLineLength) {
             Cost costAtLength(0);
             bool hasNoSolutions(false);
-            Index lineLength(m_words.front().length());
+            Index lineLength(static_cast<Index>(m_words.front().length()));
             for (auto it = m_words.cbegin() + 1; it != m_words.cend(); ++it) {
-                Index const wordLength(it->length());
+                Index const wordLength(static_cast<Index>(it->length()));
                 if (wordLength > targetLineLength) {
                     hasNoSolutions = true;
                     break;  // no possible solution try next length
@@ -60,7 +60,7 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
     Cost result(0);
     if (wordIndex < static_cast<Index>(m_words.size())) {
         result = MAX_COST;
-        Index const wordLength(m_words[wordIndex].length());
+        Index const wordLength(static_cast<Index>(m_words[wordIndex].length()));
         {
             RecursionDetails currentDetails(recursionDetails);
             Index& lastLength(currentDetails.lengths.back());
@@ -83,9 +83,9 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
 WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getTotalLength() const {
     Index result(0);
     if (!m_words.empty()) {
-        result = m_words.front().length();
+        result = static_cast<Index>(m_words.front().length());
         for (auto it = m_words.cbegin() + 1; it != m_words.cend(); ++it) {
-            result += it->length() + 1;  // plus one for space
+            result += static_cast<Index>(it->length()) + 1;  // plus one for space
         }
     }
     return result;
