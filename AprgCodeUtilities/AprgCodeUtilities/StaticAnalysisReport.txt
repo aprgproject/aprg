@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [41]
-2023-09-20T22:41:58
+StaticAnalysisJobIdentifier: [42]
+2023-09-23T02:18:02
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:41:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:42:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
@@ -11,8 +11,6 @@ StaticAnalysisJobIdentifier: [41]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:48:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest.cc:622:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:155:67: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:158:12: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:187:97: warning: 0.20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:236:32: warning: function 'saveDetailsBasedFromItemTerms' has cognitive complexity of 123 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:245:5: note: +1, including nesting penalty of 0, nesting level increased to 1
@@ -628,6 +626,84 @@ StaticAnalysisJobIdentifier: [41]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusUtilities_unit.cpp:39:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:23:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:23:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:23:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:37:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:37:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:37:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:51:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:51:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:51:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:65:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:65:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:65:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:79:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:79:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:79:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
@@ -4921,84 +4997,6 @@ StaticAnalysisJobIdentifier: [41]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:23:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:23:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:23:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:37:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:37:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:37:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:51:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:51:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:51:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:65:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:65:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:65:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:79:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:79:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermMatcher_unit.cpp:79:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/Term_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
@@ -5103,66 +5101,6 @@ StaticAnalysisJobIdentifier: [41]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:26:5: warning: calling 'system' uses a command processor [cert-env33-c]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:26:5: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:37:5: warning: calling 'system' uses a command processor [cert-env33-c]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:37:5: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:60:6: warning: function 'verifyFile' has cognitive complexity of 49 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:71:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:71:47: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:74:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:78:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:74:9: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:79:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:74:9: note: +1, nesting level increased to 3
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:75:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:78:62: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:80:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:91:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:100:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:100:48: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:102:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1810:33: note: expanded from macro 'EXPECT_FALSE'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1794:3: note: expanded from macro 'GTEST_EXPECT_FALSE'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1490:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:102:13: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1810:33: note: expanded from macro 'EXPECT_FALSE'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1794:3: note: expanded from macro 'GTEST_EXPECT_FALSE'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1491:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:102:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1810:33: note: expanded from macro 'EXPECT_FALSE'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1794:3: note: expanded from macro 'GTEST_EXPECT_FALSE'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1494:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:103:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1810:33: note: expanded from macro 'EXPECT_FALSE'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1794:3: note: expanded from macro 'GTEST_EXPECT_FALSE'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1490:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:103:13: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1810:33: note: expanded from macro 'EXPECT_FALSE'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1794:3: note: expanded from macro 'GTEST_EXPECT_FALSE'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1491:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:103:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1810:33: note: expanded from macro 'EXPECT_FALSE'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1794:3: note: expanded from macro 'GTEST_EXPECT_FALSE'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1494:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:107:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:112:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:118:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:124:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:131:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/TermUtilities_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
@@ -6038,4 +5976,64 @@ StaticAnalysisJobIdentifier: [41]
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1806:32: note: expanded from macro 'EXPECT_TRUE'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1791:3: note: expanded from macro 'GTEST_EXPECT_TRUE'
 /home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1494:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:26:5: warning: calling 'system' uses a command processor [cert-env33-c]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:26:5: warning: function is not thread safe [concurrency-mt-unsafe]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:37:5: warning: calling 'system' uses a command processor [cert-env33-c]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:37:5: warning: function is not thread safe [concurrency-mt-unsafe]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:60:6: warning: function 'verifyFile' has cognitive complexity of 49 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:71:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:71:47: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:74:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:78:3: note: expanded from macro 'GTEST_ASSERT_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:74:9: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:79:3: note: expanded from macro 'GTEST_ASSERT_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:74:9: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1868:3: note: expanded from macro 'EXPECT_EQ'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:144:3: note: expanded from macro 'EXPECT_PRED_FORMAT2'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:134:3: note: expanded from macro 'GTEST_PRED_FORMAT2_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest_pred_impl.h:81:3: note: expanded from macro 'GTEST_ASSERT_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:75:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:78:62: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:80:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:91:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:92:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:92:48: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:94:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1810:33: note: expanded from macro 'EXPECT_FALSE'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1794:3: note: expanded from macro 'GTEST_EXPECT_FALSE'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1490:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:94:13: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1810:33: note: expanded from macro 'EXPECT_FALSE'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1794:3: note: expanded from macro 'GTEST_EXPECT_FALSE'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1491:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:94:13: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1810:33: note: expanded from macro 'EXPECT_FALSE'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1794:3: note: expanded from macro 'GTEST_EXPECT_FALSE'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1494:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:95:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1810:33: note: expanded from macro 'EXPECT_FALSE'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1794:3: note: expanded from macro 'GTEST_EXPECT_FALSE'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1490:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-port.h:714:3: note: expanded from macro 'GTEST_AMBIGUOUS_ELSE_BLOCKER_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:95:13: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1810:33: note: expanded from macro 'EXPECT_FALSE'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1794:3: note: expanded from macro 'GTEST_EXPECT_FALSE'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1491:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:95:13: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1810:33: note: expanded from macro 'EXPECT_FALSE'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:1794:3: note: expanded from macro 'GTEST_EXPECT_FALSE'
+/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1494:3: note: expanded from macro 'GTEST_TEST_BOOLEAN_'
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:99:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:104:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:110:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:116:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:123:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 DONE!
