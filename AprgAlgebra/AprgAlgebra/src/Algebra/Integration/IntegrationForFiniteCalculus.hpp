@@ -7,6 +7,7 @@ namespace alba::algebra {
 class IntegrationForFiniteCalculus {
 public:
     explicit IntegrationForFiniteCalculus(std::string const& nameOfVariableToIntegrate);
+    explicit IntegrationForFiniteCalculus(std::string&& nameOfVariableToIntegrate);
     [[nodiscard]] Monomial integrateConstant(Constant const& constant) const;
     [[nodiscard]] Polynomial integrateVariable(Variable const& variable) const;
     [[nodiscard]] Term integrate(Term const& term) const;

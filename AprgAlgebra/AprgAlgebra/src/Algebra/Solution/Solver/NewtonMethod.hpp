@@ -10,6 +10,7 @@ class NewtonMethod {
 public:
     using Function = std::function<AlbaNumber(AlbaNumber const&)>;
     NewtonMethod(AlbaNumber const& initialValue, Function const& functionToIterate);
+    NewtonMethod(AlbaNumber&& initialValue, Function&& functionToIterate);
     [[nodiscard]] AlbaNumber const& getCurrentValue() const;
     [[nodiscard]] int getNumberOfIterationsExecuted() const;
     [[nodiscard]] bool isSolved() const;

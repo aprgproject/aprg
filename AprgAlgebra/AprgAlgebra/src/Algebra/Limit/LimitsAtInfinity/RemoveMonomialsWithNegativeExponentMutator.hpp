@@ -7,6 +7,7 @@ namespace alba::algebra {
 class RemoveMonomialsWithNegativeExponentMutator final : public BaseMutator {
 public:
     explicit RemoveMonomialsWithNegativeExponentMutator(std::string const& variableName);
+    explicit RemoveMonomialsWithNegativeExponentMutator(std::string&& variableName);
     void mutateTerm(Term& term) override;
     void mutateMonomial(Monomial& monomial) override;
     void mutatePolynomial(Polynomial& polynomial) override;

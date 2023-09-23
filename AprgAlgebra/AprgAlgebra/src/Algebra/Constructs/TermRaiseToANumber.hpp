@@ -8,6 +8,7 @@ class TermRaiseToANumber {
 public:
     TermRaiseToANumber();
     TermRaiseToANumber(Term const& base, AlbaNumber const& exponent);
+    TermRaiseToANumber(Term && base, AlbaNumber && exponent);
     [[nodiscard]] AlbaNumber const& getExponent() const;
     [[nodiscard]] Term getCombinedTerm() const;
     [[nodiscard]] Term const& getBase() const;

@@ -11,6 +11,7 @@ class FunctionsRetriever final : public BaseRetriever {
 public:
     using FunctionCondition = std::function<bool(Function const&)>;
     explicit FunctionsRetriever(FunctionCondition const& isFunctionIncluded);
+    explicit FunctionsRetriever(FunctionCondition&& isFunctionIncluded);
     void retrieveFromPolynomial(Polynomial const&) override;
     void retrieveFromFunction(Function const& functionObject) override;
     [[nodiscard]] FunctionsSet const& getFunctions() const;

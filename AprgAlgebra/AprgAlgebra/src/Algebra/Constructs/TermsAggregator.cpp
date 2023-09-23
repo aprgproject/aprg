@@ -11,6 +11,7 @@ using namespace std;
 namespace alba::algebra {
 
 TermsAggregator::TermsAggregator(Terms const& terms) : m_terms(terms) {}
+TermsAggregator::TermsAggregator(Terms&& terms) : m_terms(terms) {}
 Terms const& TermsAggregator::getTermsConstReference() const { return m_terms; }
 void TermsAggregator::buildExpressionFromTerms() { traverse(AggregatorTraverseSteps::BuildExpression); }
 void TermsAggregator::simplifyTerms() { traverse(AggregatorTraverseSteps::Simplify); }

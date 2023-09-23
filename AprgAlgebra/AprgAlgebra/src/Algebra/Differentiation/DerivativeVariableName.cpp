@@ -7,8 +7,7 @@ using namespace std;
 
 namespace alba::algebra {
 
-DerivativeVariableName::DerivativeVariableName(string const& derivativeVariableInLeibnizNotation)
-    : m_isValid(false), m_differentiationLevel(0) {
+DerivativeVariableName::DerivativeVariableName(string const& derivativeVariableInLeibnizNotation) {
     string const numerator = getStringBeforeThisString(derivativeVariableInLeibnizNotation, "/");
     string const denominator = getStringAfterThisString(derivativeVariableInLeibnizNotation, "/");
     processNumerator(numerator);
@@ -19,6 +18,13 @@ DerivativeVariableName::DerivativeVariableName(string const& derivativeVariableI
 
 DerivativeVariableName::DerivativeVariableName(
     int const differentiationLevel, string const& baseVariable, string const& dependentVariable)
+    : m_isValid(true),
+      m_differentiationLevel(differentiationLevel),
+      m_baseVariable(baseVariable),
+      m_dependentVariable(dependentVariable) {}
+
+DerivativeVariableName::DerivativeVariableName(
+    int const differentiationLevel, string&& baseVariable, string&& dependentVariable)
     : m_isValid(true),
       m_differentiationLevel(differentiationLevel),
       m_baseVariable(baseVariable),

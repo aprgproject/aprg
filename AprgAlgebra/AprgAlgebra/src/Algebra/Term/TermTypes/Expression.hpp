@@ -77,9 +77,9 @@ private:
     void distributeAndMultiply(TermsWithDetails const& termsWithDetails1, TermsWithDetails const& termsWithDetails2);
     void distributeAndMultiply(Expression const& multiplicand, BaseTerm const& multiplier, bool const isAdd);
     friend std::ostream& operator<<(std::ostream& out, Expression const& expression);
-    OperatorLevel m_commonOperatorLevel;
+    OperatorLevel m_commonOperatorLevel{OperatorLevel::Unknown};
     TermsWithAssociation m_termsWithAssociation;
-    bool m_isSimplified;
+    bool m_isSimplified{false};
 };
 
 using Expressions = std::vector<Expression>;

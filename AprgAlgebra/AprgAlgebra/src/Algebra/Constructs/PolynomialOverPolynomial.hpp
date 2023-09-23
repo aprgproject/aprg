@@ -16,6 +16,7 @@ public:
 
     PolynomialOverPolynomial();
     PolynomialOverPolynomial(Polynomial const& numerator, Polynomial const& denominator);
+    PolynomialOverPolynomial(Polynomial&& numerator, Polynomial&& denominator);
     [[nodiscard]] Polynomial const& getNumerator() const;
     [[nodiscard]] Polynomial const& getDenominator() const;
     [[nodiscard]] QuotientAndRemainder divide() const;
@@ -39,7 +40,7 @@ private:
         Polynomials& numeratorFactors, Polynomials& denominatorFactors);
     Polynomial m_numerator;
     Polynomial m_denominator;
-    bool m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue;
+    bool m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue{false};
 };
 
 using ListOfPolynomialOverPolynomial = std::vector<PolynomialOverPolynomial>;

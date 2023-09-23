@@ -6,6 +6,8 @@ namespace alba::algebra {
 
 DegreeOnlyMutator::DegreeOnlyMutator(string const& variableName) : m_variableName(variableName) {}
 
+DegreeOnlyMutator::DegreeOnlyMutator(string&& variableName) : m_variableName(variableName) {}
+
 Monomial DegreeOnlyMutator::getMonomialWithDegree(AlbaNumber const& degree) const {
     Monomial result(1, {{m_variableName, degree}});
     if (degree == 0) {

@@ -10,6 +10,7 @@ class SegregateTermsByConditionInAdditionAndSubtractionRetriever : public BaseRe
 public:
     using ConditionFunction = std::function<bool(Term const&)>;
     explicit SegregateTermsByConditionInAdditionAndSubtractionRetriever(ConditionFunction const& condition);
+    explicit SegregateTermsByConditionInAdditionAndSubtractionRetriever(ConditionFunction&& condition);
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;
     void retrieveFromMonomial(Monomial const& monomial) override;

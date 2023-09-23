@@ -57,6 +57,11 @@ TermsRaiseToExponents<ExponentType, BaseRaiseToExponentType>::TermsRaiseToExpone
     BaseToExponentMap const& baseToExponentMap)
     : m_baseToExponentMap(baseToExponentMap) {}
 
+template <typename ExponentType, typename BaseRaiseToExponentType>
+TermsRaiseToExponents<ExponentType, BaseRaiseToExponentType>::TermsRaiseToExponents(
+    BaseToExponentMap&& baseToExponentMap)
+    : m_baseToExponentMap(baseToExponentMap) {}
+
 template TermsRaiseToExponents<AlbaNumber, TermRaiseToANumber>::TermsRaiseToExponents(
     BaseToExponentMap const& baseToExponentMap);
 template TermsRaiseToExponents<Term, TermRaiseToTerms>::TermsRaiseToExponents(

@@ -24,8 +24,7 @@ public:
     using BaseTermDataPointer = std::unique_ptr<BaseTermData>;
     // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
     Term();
-    // enabled via a type template parameter
-    Term(TermType const type, bool const isSimplified, BaseTermDataPointer&& m_baseTermDataPointer);  // for move
+    Term(TermType const type, BaseTermDataPointer&& m_baseTermDataPointer, bool const isSimplified);  // for move
     template <typename ArithmeticType, typename = std::enable_if_t<typeHelper::isArithmeticType<ArithmeticType>()>>
     Term(ArithmeticType const value) : Term(AlbaNumber(value)) {}
     // rule of five or six
@@ -87,8 +86,8 @@ private:
     static BaseTermDataPointer createANewDataPointerFrom(Term const& term);
     friend std::ostream& operator<<(std::ostream& out, Term const& term);
     TermType m_type;
-    bool m_isSimplified;
     BaseTermDataPointer m_baseTermDataPointer;
+    bool m_isSimplified{false};
 };
 
 using Terms = std::vector<Term>;

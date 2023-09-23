@@ -22,6 +22,7 @@ constexpr double BRENT_METHOD_TOLERANCE_TO_ZERO_FOR_A_AND_B = 1E-11;
 }  // namespace
 
 BrentMethod::BrentMethod(AlbaNumbers const& coefficients) : m_coefficients(coefficients), m_values{} {}
+BrentMethod::BrentMethod(AlbaNumbers&& coefficients) : m_coefficients(coefficients), m_values{} {}
 AlbaNumbers const& BrentMethod::getCoefficients() const { return m_coefficients; }
 BrentMethod::CalculationValues const& BrentMethod::getCalculationValues() const { return m_values; }
 int BrentMethod::getNumberOfIterationsExecuted() const { return m_numberOfIterationsExecuted; }

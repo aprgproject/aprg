@@ -10,6 +10,7 @@ public:
 
     using Indexes = std::vector<int>;
     explicit TermsAggregator(Terms const& terms);
+    explicit TermsAggregator(Terms&& terms);
     [[nodiscard]] Terms const& getTermsConstReference() const;
     void buildExpressionFromTerms();
     void simplifyTerms();

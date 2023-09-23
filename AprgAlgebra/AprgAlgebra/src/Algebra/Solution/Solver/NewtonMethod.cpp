@@ -15,6 +15,11 @@ NewtonMethod::NewtonMethod(AlbaNumber const& initialValue, Function const& funct
       m_positiveDeltaForSlope(INITIAL_DELTA_FOR_SLOPE),
       m_functionToIterate(functionToIterate) {}
 
+NewtonMethod::NewtonMethod(AlbaNumber&& initialValue, Function&& functionToIterate)
+    : m_currentValue(initialValue),
+      m_positiveDeltaForSlope(INITIAL_DELTA_FOR_SLOPE),
+      m_functionToIterate(functionToIterate) {}
+
 AlbaNumber const& NewtonMethod::getCurrentValue() const { return m_currentValue; }
 int NewtonMethod::getNumberOfIterationsExecuted() const { return m_numberOfIterationsExecuted; }
 bool NewtonMethod::isSolved() const { return m_functionToIterate(m_currentValue) == 0; }

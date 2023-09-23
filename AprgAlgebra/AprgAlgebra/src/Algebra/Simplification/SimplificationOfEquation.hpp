@@ -7,6 +7,7 @@ namespace alba::algebra::Simplification {
 class SimplificationOfEquation {
 public:
     explicit SimplificationOfEquation(Equation const& equation);
+    explicit SimplificationOfEquation(Equation&& equation);
     [[nodiscard]] Equation getEquation() const;
     void simplify();
 

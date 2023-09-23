@@ -11,15 +11,13 @@ using namespace std;
 
 namespace alba::algebra {
 
-Monomial::Monomial() : m_isSimplified(false) {}
-
-Monomial::Monomial(AlbaNumber const& constant, initializer_list<VariableExponentPair> const& variablesWithExponents)
-    : m_constant(constant), m_isSimplified(false) {
-    putVariablesWithExponents(variablesWithExponents);
-}
+Monomial::Monomial() {}
 
 Monomial::Monomial(AlbaNumber const& constant, VariablesToExponentsMap const& variablesWithExponents)
-    : m_constant(constant), m_variablesToExponentsMap(variablesWithExponents), m_isSimplified(false) {}
+    : m_constant(constant), m_variablesToExponentsMap(variablesWithExponents) {}
+
+Monomial::Monomial(AlbaNumber&& constant, VariablesToExponentsMap&& variablesWithExponents)
+    : m_constant(constant), m_variablesToExponentsMap(variablesWithExponents) {}
 
 bool Monomial::operator==(Monomial const& second) const {
     return m_constant == second.m_constant && m_variablesToExponentsMap == second.m_variablesToExponentsMap;

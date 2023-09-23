@@ -16,26 +16,20 @@ using namespace std;
 namespace alba::algebra {
 
 Expression::Expression(BaseTerm const& baseTerm)
-    : m_commonOperatorLevel(OperatorLevel::Unknown),
-      m_termsWithAssociation(TermsWithDetails{{baseTerm, TermAssociationType::Positive}}),
-      m_isSimplified(false) {}
+    : m_termsWithAssociation(TermsWithDetails{{baseTerm, TermAssociationType::Positive}}) {}
 
 Expression::Expression(BaseTerm&& baseTerm)
-    : m_commonOperatorLevel(OperatorLevel::Unknown),
-      m_termsWithAssociation(TermsWithDetails{{std::move(baseTerm), TermAssociationType::Positive}}),
-      m_isSimplified(false) {}
+    : m_termsWithAssociation(TermsWithDetails{{std::move(baseTerm), TermAssociationType::Positive}}) {}
 
-Expression::Expression() : m_commonOperatorLevel(OperatorLevel::Unknown), m_isSimplified(false) {}
+Expression::Expression() {}
 
 Expression::Expression(OperatorLevel const operatorLevel, TermsWithDetails const& termsWithDetails)
     : m_commonOperatorLevel(termsWithDetails.empty() ? OperatorLevel::Unknown : operatorLevel),
-      m_termsWithAssociation(termsWithDetails),
-      m_isSimplified(false) {}
+      m_termsWithAssociation(termsWithDetails) {}
 
 Expression::Expression(OperatorLevel const operatorLevel, TermsWithDetails&& termsWithDetails)
     : m_commonOperatorLevel(termsWithDetails.empty() ? OperatorLevel::Unknown : operatorLevel),
-      m_termsWithAssociation(termsWithDetails),
-      m_isSimplified(false) {}
+      m_termsWithAssociation(termsWithDetails) {}
 
 bool Expression::operator==(Expression const& second) const {
     return m_commonOperatorLevel == second.m_commonOperatorLevel &&

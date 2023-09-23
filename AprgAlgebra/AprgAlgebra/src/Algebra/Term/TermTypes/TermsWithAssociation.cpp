@@ -11,6 +11,9 @@ namespace alba::algebra {
 TermsWithAssociation::TermsWithAssociation(TermsWithDetails const& termsWithDetails)
     : m_termsWithDetails(termsWithDetails) {}
 
+TermsWithAssociation::TermsWithAssociation(TermsWithDetails&& termsWithDetails)
+    : m_termsWithDetails(termsWithDetails) {}
+
 TermsWithAssociation::TermsWithAssociation(initializer_list<TermWithDetails> const& termsWithDetails) {
     putTermsWithDetails(termsWithDetails);
 }

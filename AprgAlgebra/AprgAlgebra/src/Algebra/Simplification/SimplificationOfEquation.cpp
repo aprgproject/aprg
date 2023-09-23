@@ -25,6 +25,7 @@ using namespace std;
 namespace alba::algebra::Simplification {
 
 SimplificationOfEquation::SimplificationOfEquation(Equation const& equation) : m_equation(equation) {}
+SimplificationOfEquation::SimplificationOfEquation(Equation&& equation) : m_equation(equation) {}
 Equation SimplificationOfEquation::getEquation() const { return m_equation; }
 
 void SimplificationOfEquation::simplify() {

@@ -11,6 +11,7 @@ namespace alba::algebra {
 class LimitsAtInfinity {
 public:
     LimitsAtInfinity(Term const& term, std::string const& variableName);
+    LimitsAtInfinity(Term&& term, std::string&& variableName);
     [[nodiscard]] Term getSimplifiedTermAtInfinity() const;
     [[nodiscard]] Term getValueAtInfinity(AlbaNumber const infinityValue) const;
 

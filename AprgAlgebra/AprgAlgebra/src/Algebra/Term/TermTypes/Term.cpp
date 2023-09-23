@@ -13,41 +13,39 @@ using namespace std;
 
 namespace alba::algebra {
 
-Term::Term() : m_type(TermType::Empty), m_isSimplified(false), m_baseTermDataPointer(nullptr) {}
-Term::Term(TermType const type, bool const isSimplified, BaseTermDataPointer&& baseTermDataPointer)  // for move
-    : m_type(type), m_isSimplified(isSimplified), m_baseTermDataPointer(std::move(baseTermDataPointer)) {}
+Term::Term() : m_type(TermType::Empty), m_baseTermDataPointer(nullptr) {}
+Term::Term(TermType const type, BaseTermDataPointer&& baseTermDataPointer, bool const isSimplified)  // for move
+    : m_type(type), m_baseTermDataPointer(std::move(baseTermDataPointer)), m_isSimplified(isSimplified) {}
 Term::Term(AlbaNumber const& number)
-    : m_type(TermType::Constant), m_isSimplified(false), m_baseTermDataPointer(make_unique<Constant>(number)) {}
+    : m_type(TermType::Constant), m_baseTermDataPointer(make_unique<Constant>(number)) {}
 
-Term::Term(char const* const characterString)
-    : m_type(TermType::Empty), m_isSimplified(false), m_baseTermDataPointer(nullptr) {
+Term::Term(char const* const characterString) : m_type(TermType::Empty), m_baseTermDataPointer(nullptr) {
     initializeBasedOnString(string(characterString));
 }
 
-Term::Term(string const& stringAsParameter)
-    : m_type(TermType::Empty), m_isSimplified(false), m_baseTermDataPointer(nullptr) {
+Term::Term(string const& stringAsParameter) : m_type(TermType::Empty), m_baseTermDataPointer(nullptr) {
     initializeBasedOnString(stringAsParameter);
 }
 
 Term::Term(Constant const& constant)
-    : m_type(TermType::Constant), m_isSimplified(false), m_baseTermDataPointer(make_unique<Constant>(constant)) {}
+    : m_type(TermType::Constant), m_baseTermDataPointer(make_unique<Constant>(constant)) {}
 Term::Term(Variable const& variable)
-    : m_type(TermType::Variable), m_isSimplified(false), m_baseTermDataPointer(make_unique<Variable>(variable)) {}
+    : m_type(TermType::Variable), m_baseTermDataPointer(make_unique<Variable>(variable)) {}
 Term::Term(Operator const& operatorTerm)
-    : m_type(TermType::Operator), m_isSimplified(false), m_baseTermDataPointer(make_unique<Operator>(operatorTerm)) {}
+    : m_type(TermType::Operator), m_baseTermDataPointer(make_unique<Operator>(operatorTerm)) {}
 Term::Term(Monomial const& monomial)
-    : m_type(TermType::Monomial), m_isSimplified(false), m_baseTermDataPointer(make_unique<Monomial>(monomial)) {}
+    : m_type(TermType::Monomial), m_baseTermDataPointer(make_unique<Monomial>(monomial)) {}
 Term::Term(Polynomial const& polynomial)
-    : m_type(TermType::Polynomial), m_isSimplified(false), m_baseTermDataPointer(make_unique<Polynomial>(polynomial)) {}
+    : m_type(TermType::Polynomial), m_baseTermDataPointer(make_unique<Polynomial>(polynomial)) {}
 Term::Term(Expression const& expression)
-    : m_type(TermType::Expression), m_isSimplified(false), m_baseTermDataPointer(make_unique<Expression>(expression)) {}
+    : m_type(TermType::Expression), m_baseTermDataPointer(make_unique<Expression>(expression)) {}
 Term::Term(Function const& function)
-    : m_type(TermType::Function), m_isSimplified(false), m_baseTermDataPointer(make_unique<Function>(function)) {}
+    : m_type(TermType::Function), m_baseTermDataPointer(make_unique<Function>(function)) {}
 
 Term::Term(Term const& term)
     : m_type(term.m_type),
-      m_isSimplified(term.m_isSimplified),
-      m_baseTermDataPointer(createANewDataPointerFrom(term)) {}
+      m_baseTermDataPointer(createANewDataPointerFrom(term)),
+      m_isSimplified(term.m_isSimplified) {}
 
 Term& Term::operator=(Term const& term) {
     if (this == &term) {
@@ -261,7 +259,7 @@ void Term::clearAllInnerSimplifiedFlags() {
 
 BaseTermUniquePointer Term::createBasePointerByMove() {
     return static_cast<BaseTermUniquePointer>(
-        make_unique<Term>(m_type, m_isSimplified, std::move(m_baseTermDataPointer)));
+        make_unique<Term>(m_type, std::move(m_baseTermDataPointer), m_isSimplified));
 }
 
 Constant& Term::getAsConstantReference() {

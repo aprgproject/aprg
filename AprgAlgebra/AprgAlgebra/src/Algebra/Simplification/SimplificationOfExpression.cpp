@@ -24,6 +24,7 @@ namespace alba {
 namespace algebra::Simplification {
 
 SimplificationOfExpression::SimplificationOfExpression(Expression const& expression) : m_expression(expression) {}
+SimplificationOfExpression::SimplificationOfExpression(Expression&& expression) : m_expression(expression) {}
 Expression SimplificationOfExpression::getExpression() const { return m_expression; }
 
 void SimplificationOfExpression::simplify() {

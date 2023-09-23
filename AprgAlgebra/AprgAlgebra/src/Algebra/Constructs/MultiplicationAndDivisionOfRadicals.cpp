@@ -17,6 +17,9 @@ namespace alba::algebra {
 MultiplicationAndDivisionOfRadicals::MultiplicationAndDivisionOfRadicals(TermsWithDetails const& termsWithDetails)
     : m_termsWithDetails(termsWithDetails) {}
 
+MultiplicationAndDivisionOfRadicals::MultiplicationAndDivisionOfRadicals(TermsWithDetails&& termsWithDetails)
+    : m_termsWithDetails(termsWithDetails) {}
+
 Term MultiplicationAndDivisionOfRadicals::getCombinedTerm() const {
     SimplificationOfExpression::ConfigurationDetails radicalSimplificationConfigurationDetails(
         SimplificationOfExpression::Configuration::getInstance().getConfigurationDetails());

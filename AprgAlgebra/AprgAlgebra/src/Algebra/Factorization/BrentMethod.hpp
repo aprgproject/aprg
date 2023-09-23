@@ -22,6 +22,7 @@ public:
 
     using ListOfCoefficients = std::vector<AlbaNumbers>;
     explicit BrentMethod(AlbaNumbers const& coefficients);
+    explicit BrentMethod(AlbaNumbers&& coefficients);
     [[nodiscard]] AlbaNumbers const& getCoefficients() const;
     [[nodiscard]] CalculationValues const& getCalculationValues() const;
     [[nodiscard]] int getNumberOfIterationsExecuted() const;

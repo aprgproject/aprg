@@ -22,6 +22,14 @@ LimitsAtInfinity::LimitsAtInfinity(Term const& term, string const& variableName)
     simplify();
 }
 
+LimitsAtInfinity::LimitsAtInfinity(Term&& term, string&& variableName)
+    : m_simplifiedTermAtInfinity(term),
+      m_variableName(variableName),
+      m_degreeOnlyMutator(variableName),
+      m_removeMonomialsWithNegativeExponentMutator(variableName) {
+    simplify();
+}
+
 Term LimitsAtInfinity::getSimplifiedTermAtInfinity() const { return m_simplifiedTermAtInfinity; }
 
 Term LimitsAtInfinity::getValueAtInfinity(AlbaNumber const infinityValue) const {

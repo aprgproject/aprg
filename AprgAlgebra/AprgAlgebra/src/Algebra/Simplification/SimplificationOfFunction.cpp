@@ -9,6 +9,7 @@ using namespace std;
 namespace alba::algebra::Simplification {
 
 SimplificationOfFunction::SimplificationOfFunction(Function const& functionObject) : m_function(functionObject) {}
+SimplificationOfFunction::SimplificationOfFunction(Function&& functionObject) : m_function(functionObject) {}
 Function SimplificationOfFunction::getFunction() const { return m_function; }
 
 void SimplificationOfFunction::simplify() {

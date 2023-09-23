@@ -30,6 +30,7 @@ public:
     class Configuration : public AlbaConfigurationHolder<ConfigurationDetails> {};
     class ScopeObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {};
     explicit SimplificationOfExpression(Expression const& expression);
+    explicit SimplificationOfExpression(Expression&& expression);
     SimplificationOfExpression();
     [[nodiscard]] Expression getExpression() const;
     void simplify();

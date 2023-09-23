@@ -17,6 +17,9 @@ namespace alba::algebra {
 Summation::Summation(Term const& termToSum, string const& variableName)
     : m_termToSum(termToSum), m_variableName(variableName), m_summationModel(getSummationModel()) {}
 
+Summation::Summation(Term&& termToSum, string&& variableName)
+    : m_termToSum(termToSum), m_variableName(variableName), m_summationModel(getSummationModel()) {}
+
 Term Summation::getSummationModelWithKnownConstant(AlbaNumber const& startNumber) const {
     SubstitutionOfVariablesToValues substitution({{m_variableName, startNumber}});
     Term const firstTerm(substitution.performSubstitutionTo(m_termToSum));

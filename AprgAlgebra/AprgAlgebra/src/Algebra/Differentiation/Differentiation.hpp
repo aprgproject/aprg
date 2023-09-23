@@ -10,8 +10,10 @@ namespace alba::algebra {
 class Differentiation {
 public:
     explicit Differentiation(std::string const& nameOfVariableToDifferentiate);
+    explicit Differentiation(std::string&& nameOfVariableToDifferentiate);
     Differentiation(
         std::string const& nameOfVariableToDifferentiate, VariableNamesSet const& namesOfDependentVariables);
+    Differentiation(std::string&& nameOfVariableToDifferentiate, VariableNamesSet&& namesOfDependentVariables);
     [[nodiscard]] Equation differentiate(Equation const& equation) const;
     [[nodiscard]] Equation differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const;
     [[nodiscard]] Equation differentiateEquation(Equation const& equation) const;

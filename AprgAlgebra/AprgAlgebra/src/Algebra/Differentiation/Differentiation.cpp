@@ -23,8 +23,15 @@ namespace alba::algebra {
 Differentiation::Differentiation(string const& nameOfVariableToDifferentiate)
     : m_nameOfVariableToDifferentiate(nameOfVariableToDifferentiate) {}
 
+Differentiation::Differentiation(string&& nameOfVariableToDifferentiate)
+    : m_nameOfVariableToDifferentiate(nameOfVariableToDifferentiate) {}
+
 Differentiation::Differentiation(
     string const& nameOfVariableToDifferentiate, VariableNamesSet const& namesOfDependentVariables)
+    : m_nameOfVariableToDifferentiate(nameOfVariableToDifferentiate),
+      m_namesOfDependentVariables(namesOfDependentVariables) {}
+
+Differentiation::Differentiation(string&& nameOfVariableToDifferentiate, VariableNamesSet&& namesOfDependentVariables)
     : m_nameOfVariableToDifferentiate(nameOfVariableToDifferentiate),
       m_namesOfDependentVariables(namesOfDependentVariables) {}
 

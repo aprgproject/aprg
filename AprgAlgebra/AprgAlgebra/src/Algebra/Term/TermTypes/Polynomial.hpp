@@ -11,6 +11,7 @@ namespace alba::algebra {
 class Polynomial : public BaseTermData {
 public:
     explicit Polynomial(Monomials const& monomials);
+    explicit Polynomial(Monomials&& monomials);
     Polynomial();
     Polynomial(std::initializer_list<Monomial> const& monomials);
     // rule of zero
@@ -42,7 +43,7 @@ private:
     static bool isFurtherSimplificationNeeded(Polynomial const& beforeSimplify, Polynomial const& afterSimplify);
     friend std::ostream& operator<<(std::ostream& out, Polynomial const& polynomial);
     Monomials m_monomials;
-    bool m_isSimplified;
+    bool m_isSimplified{false};
 };
 
 using Polynomials = std::vector<Polynomial>;

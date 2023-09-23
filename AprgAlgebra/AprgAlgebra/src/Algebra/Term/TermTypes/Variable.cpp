@@ -7,6 +7,7 @@ using namespace std;
 namespace alba::algebra {
 
 Variable::Variable(string const& variableName) : m_variableName(variableName) {}
+Variable::Variable(string&& variableName) : m_variableName(variableName) {}
 bool Variable::operator==(Variable const& second) const { return m_variableName == second.m_variableName; }
 bool Variable::operator!=(Variable const& second) const { return m_variableName != second.m_variableName; }
 bool Variable::operator<(Variable const& second) const { return m_variableName < second.m_variableName; }

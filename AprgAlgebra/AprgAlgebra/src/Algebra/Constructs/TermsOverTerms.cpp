@@ -28,8 +28,7 @@ using namespace std;
 namespace alba::algebra {
 
 TermsOverTerms::TermsOverTerms(TermsWithDetails const& termsInMultiplicationAndDivision)
-    : m_shouldSimplifyToFactors(false),
-      m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails()) {
+    : m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails()) {
     TermsWithDetails numeratorsWithDetails;
     TermsWithDetails denominatorsWithDetails;
     segregateTermsWithPositiveAndNegativeAssociations(
@@ -39,13 +38,16 @@ TermsOverTerms::TermsOverTerms(TermsWithDetails const& termsInMultiplicationAndD
 }
 
 TermsOverTerms::TermsOverTerms()
-    : m_shouldSimplifyToFactors(false),
-      m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails()) {}
+    : m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails()) {}
 
 TermsOverTerms::TermsOverTerms(Terms const& numerators, Terms const& denominators)
     : m_numerators(numerators),
       m_denominators(denominators),
-      m_shouldSimplifyToFactors(false),
+      m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails()) {}
+
+TermsOverTerms::TermsOverTerms(Terms&& numerators, Terms&& denominators)
+    : m_numerators(numerators),
+      m_denominators(denominators),
       m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails()) {}
 
 Term TermsOverTerms::getCombinedTerm() const {

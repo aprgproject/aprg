@@ -9,6 +9,7 @@ public:
     explicit DerivativeVariableName(std::string const& derivativeVariableInLeibnizNotation);
     DerivativeVariableName(
         int const differentiationLevel, std::string const& baseVariable, std::string const& dependentVariable);
+    DerivativeVariableName(int const differentiationLevel, std::string&& baseVariable, std::string&& dependentVariable);
     [[nodiscard]] std::string const& getBaseVariable() const;
     [[nodiscard]] std::string const& getDependentVariable() const;
     [[nodiscard]] std::string getNameInLeibnizNotation() const;
@@ -19,8 +20,8 @@ public:
 private:
     void processNumerator(std::string const& numerator);
     void processDenominator(std::string const& denominator);
-    bool m_isValid;
-    int m_differentiationLevel;
+    bool m_isValid{false};
+    int m_differentiationLevel{0};
     std::string m_baseVariable;
     std::string m_dependentVariable;
 };

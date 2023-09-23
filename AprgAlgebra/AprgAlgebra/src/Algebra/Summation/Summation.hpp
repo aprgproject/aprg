@@ -7,6 +7,7 @@ namespace alba::algebra {
 class Summation {
 public:
     Summation(Term const& termToSum, std::string const& variableName);
+    Summation(Term&& termToSum, std::string&& variableName);
     [[nodiscard]] Term getSummationModelWithKnownConstant(AlbaNumber const& startNumber) const;
     [[nodiscard]] Term getSummationModelWithUnknownConstant() const;
     [[nodiscard]] Term getSum(Term const& start, Term const& end) const;

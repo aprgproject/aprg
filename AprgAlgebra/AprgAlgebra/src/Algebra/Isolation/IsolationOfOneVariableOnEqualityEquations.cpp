@@ -14,6 +14,9 @@ namespace alba::algebra {
 IsolationOfOneVariableOnEqualityEquations::IsolationOfOneVariableOnEqualityEquations(Equations const& equations)
     : m_equations(equations) {}
 
+IsolationOfOneVariableOnEqualityEquations::IsolationOfOneVariableOnEqualityEquations(Equations&& equations)
+    : m_equations(equations) {}
+
 Term IsolationOfOneVariableOnEqualityEquations::getEquivalentTermByIsolatingAVariable(
     string const& variableName) const {
     Term termWithVariable;

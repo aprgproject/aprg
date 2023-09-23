@@ -8,6 +8,7 @@ class EquationOperator {
 public:
     EquationOperator() = default;
     explicit EquationOperator(std::string const& operatingString);
+    explicit EquationOperator(std::string&& operatingString);
     // rule of zero
     bool operator==(EquationOperator const& second) const;
     bool operator!=(EquationOperator const& second) const;

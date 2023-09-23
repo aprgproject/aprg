@@ -20,33 +20,23 @@ using namespace std;
 
 namespace alba::algebra {
 
-TermRaiseToTerms::TermRaiseToTerms(TermsWithDetails const& termsInRaiseToPowerExpression)
-    : m_shouldSimplifyToFactors(false),
-      m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(false),
-      m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(false) {
+TermRaiseToTerms::TermRaiseToTerms(TermsWithDetails const& termsInRaiseToPowerExpression) {
     initializeUsingTermsInRaiseToPowerExpression(termsInRaiseToPowerExpression);
 }
 
-TermRaiseToTerms::TermRaiseToTerms()
-    : m_shouldSimplifyToFactors(false),
-      m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(false),
-      m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(false) {}
+TermRaiseToTerms::TermRaiseToTerms(Term const& base, Terms const& exponents) : m_base(base) {
+    initializeExponentsInTerms(exponents);
+}
 
-TermRaiseToTerms::TermRaiseToTerms(Term const& base, Terms const& exponents)
-    : m_base(base),
-
-      m_shouldSimplifyToFactors(false),
-      m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(false),
-      m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(false) {
+TermRaiseToTerms::TermRaiseToTerms(Term&& base, Terms const& exponents) : m_base(base) {
     initializeExponentsInTerms(exponents);
 }
 
 TermRaiseToTerms::TermRaiseToTerms(Term const& base, Term const& exponent)
-    : m_base(base),
-      m_exponents{TermWithDetails(exponent, TermAssociationType::Positive)},
-      m_shouldSimplifyToFactors(false),
-      m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(false),
-      m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(false) {}
+    : m_base(base), m_exponents{TermWithDetails(exponent, TermAssociationType::Positive)} {}
+
+TermRaiseToTerms::TermRaiseToTerms(Term&& base, Term const& exponent)
+    : m_base(base), m_exponents{TermWithDetails(exponent, TermAssociationType::Positive)} {}
 
 Term TermRaiseToTerms::getCombinedTerm() const { return getCombinedBaseAndExponents(); }
 

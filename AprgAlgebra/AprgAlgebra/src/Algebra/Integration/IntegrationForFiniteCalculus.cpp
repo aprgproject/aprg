@@ -26,6 +26,9 @@ namespace alba::algebra {
 IntegrationForFiniteCalculus::IntegrationForFiniteCalculus(string const& nameOfVariableToIntegrate)
     : m_nameOfVariableToIntegrate(nameOfVariableToIntegrate) {}
 
+IntegrationForFiniteCalculus::IntegrationForFiniteCalculus(string&& nameOfVariableToIntegrate)
+    : m_nameOfVariableToIntegrate(nameOfVariableToIntegrate) {}
+
 Monomial IntegrationForFiniteCalculus::integrateConstant(Constant const& constant) const {
     return {constant.getNumber(), {{m_nameOfVariableToIntegrate, 1}}};
 }

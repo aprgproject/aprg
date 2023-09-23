@@ -11,6 +11,9 @@ namespace alba::algebra {
 Equation::Equation(Term const& leftHandTerm, string const& equationOperator, Term const& rightHandTerm)
     : m_equationOperator(equationOperator), m_leftHandTerm(leftHandTerm), m_rightHandTerm(rightHandTerm) {}
 
+Equation::Equation(Term&& leftHandTerm, string&& equationOperator, Term&& rightHandTerm)
+    : m_equationOperator(equationOperator), m_leftHandTerm(leftHandTerm), m_rightHandTerm(rightHandTerm) {}
+
 bool Equation::operator==(Equation const& second) const {
     return m_equationOperator == second.m_equationOperator && m_leftHandTerm == second.m_leftHandTerm &&
            m_rightHandTerm == second.m_rightHandTerm;

@@ -19,8 +19,8 @@ public:
     using VariableExponentReferencePair = std::pair<std::string&, AlbaNumber&>;
     using ChangeExponentsForVariableFunction = std::function<void(std::string const&, AlbaNumber&)>;
     Monomial();
-    Monomial(AlbaNumber const& constant, std::initializer_list<VariableExponentPair> const& variablesWithExponents);
     Monomial(AlbaNumber const& constant, VariablesToExponentsMap const& variablesWithExponents);
+    Monomial(AlbaNumber&& constant, VariablesToExponentsMap&& variablesWithExponents);
     bool operator==(Monomial const& second) const;
     bool operator!=(Monomial const& second) const;
     bool operator<(Monomial const& second) const;
@@ -54,7 +54,7 @@ private:
     friend std::ostream& operator<<(std::ostream& out, Monomial const& monomial);
     AlbaNumber m_constant;
     VariablesToExponentsMap m_variablesToExponentsMap;
-    bool m_isSimplified;
+    bool m_isSimplified{false};
 };
 
 using Monomials = std::vector<Monomial>;

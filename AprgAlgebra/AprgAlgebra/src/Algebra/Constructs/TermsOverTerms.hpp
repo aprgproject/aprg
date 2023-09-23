@@ -14,6 +14,7 @@ public:
     explicit TermsOverTerms(TermsWithDetails const& termsInMultiplicationAndDivision);
     TermsOverTerms();
     TermsOverTerms(Terms const& numerators, Terms const& denominators);
+    TermsOverTerms(Terms&& numerators, Terms&& denominators);
     [[nodiscard]] Term getCombinedTerm() const;
     [[nodiscard]] Term getCombinedNumerator() const;
     [[nodiscard]] Term getCombinedDenominator() const;
@@ -62,7 +63,7 @@ private:
     friend std::ostream& operator<<(std::ostream& out, TermsOverTerms const& termsOverTerms);
     Terms m_numerators;
     Terms m_denominators;
-    bool m_shouldSimplifyToFactors;
+    bool m_shouldSimplifyToFactors{false};
     Factorization::ConfigurationDetails m_factorizationConfiguration;
 };
 

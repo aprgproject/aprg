@@ -11,6 +11,10 @@ SegregateTermsByConditionInAdditionAndSubtractionRetriever::SegregateTermsByCond
     ConditionFunction const& condition)
     : m_condition(condition) {}
 
+SegregateTermsByConditionInAdditionAndSubtractionRetriever::SegregateTermsByConditionInAdditionAndSubtractionRetriever(
+    ConditionFunction&& condition)
+    : m_condition(condition) {}
+
 void SegregateTermsByConditionInAdditionAndSubtractionRetriever::retrieveFromConstant(Constant const& constant) {
     saveTerm(Term(constant));
 }

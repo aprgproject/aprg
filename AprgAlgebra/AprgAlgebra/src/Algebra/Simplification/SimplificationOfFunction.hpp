@@ -7,6 +7,7 @@ namespace alba::algebra::Simplification {
 class SimplificationOfFunction {
 public:
     explicit SimplificationOfFunction(Function const& functionObject);
+    explicit SimplificationOfFunction(Function&& functionObject);
     [[nodiscard]] Function getFunction() const;
     void simplify();
 

@@ -11,8 +11,10 @@ namespace alba::algebra {
 class Operator : public BaseTermData {
 public:
     Operator() = default;
-    // NOLINTNEXTLINE(google-explicit-constructor,hicpp-explicit-conversions)
+    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
     Operator(std::string const& operatingString);
+    Operator(std::string&& operatingString);
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     // rule of zero
     bool operator==(Operator const& second) const;
     bool operator!=(Operator const& second) const;

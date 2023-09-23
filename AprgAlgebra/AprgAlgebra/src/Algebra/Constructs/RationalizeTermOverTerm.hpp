@@ -14,6 +14,7 @@ public:
 
     RationalizeTermOverTerm();
     RationalizeTermOverTerm(Term const& numerator, Term const& denominator);
+    RationalizeTermOverTerm(Term&& numerator, Term&& denominator);
     [[nodiscard]] Term const& getNumerator() const;
     [[nodiscard]] Term const& getDenominator() const;
     [[nodiscard]] Term getCombinedTerm() const;

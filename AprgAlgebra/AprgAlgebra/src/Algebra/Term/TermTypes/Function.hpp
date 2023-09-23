@@ -19,7 +19,7 @@ public:
     Function& operator=(Function&& functionObject) = default;
     Function();
     Function(std::string const& functionName, BaseTerm const& baseTerm, EvaluationFunction const& evaluationFunction);
-    Function(std::string const& functionName, BaseTerm&& baseTerm, EvaluationFunction const& evaluationFunction);
+    Function(std::string&& functionName, BaseTerm&& baseTerm, EvaluationFunction&& evaluationFunction);
     Function(Function const& functionObject);
     Function& operator=(Function const& functionObject);
     bool operator==(Function const& second) const;
@@ -42,7 +42,7 @@ private:
     std::string m_functionName;
     BaseTermUniquePointer m_inputTermPointer;
     EvaluationFunction m_evaluationFunction;
-    bool m_isSimplified;
+    bool m_isSimplified{false};
 };
 
 }  // namespace alba::algebra

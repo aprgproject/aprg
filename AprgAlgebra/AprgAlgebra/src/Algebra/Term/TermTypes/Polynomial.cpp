@@ -11,10 +11,11 @@ using namespace std;
 
 namespace alba::algebra {
 
-Polynomial::Polynomial(Monomials const& monomials) : m_monomials(monomials), m_isSimplified(false) {}
-Polynomial::Polynomial() : m_isSimplified(false) {}
+Polynomial::Polynomial(Monomials const& monomials) : m_monomials(monomials) {}
+Polynomial::Polynomial(Monomials&& monomials) : m_monomials(monomials) {}
+Polynomial::Polynomial() {}
 
-Polynomial::Polynomial(initializer_list<Monomial> const& monomials) : m_isSimplified(false) {
+Polynomial::Polynomial(initializer_list<Monomial> const& monomials) {
     m_monomials.reserve(monomials.size());
     copy(monomials.begin(), monomials.end(), back_inserter(m_monomials));
 }

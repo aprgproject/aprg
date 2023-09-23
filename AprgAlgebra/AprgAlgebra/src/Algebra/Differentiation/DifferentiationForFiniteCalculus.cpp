@@ -10,6 +10,9 @@ namespace alba::algebra {
 DifferentiationForFiniteCalculus::DifferentiationForFiniteCalculus(string const& nameOfVariableToDifferentiate)
     : m_nameOfVariableToDifferentiate(nameOfVariableToDifferentiate) {}
 
+DifferentiationForFiniteCalculus::DifferentiationForFiniteCalculus(string&& nameOfVariableToDifferentiate)
+    : m_nameOfVariableToDifferentiate(nameOfVariableToDifferentiate) {}
+
 Equation DifferentiationForFiniteCalculus::differentiate(Equation const& equation) const {
     return differentiateEquation(equation);
 }

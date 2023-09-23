@@ -22,6 +22,9 @@ namespace alba::algebra {
 SeriesBasedOnFormula::SeriesBasedOnFormula(Term const& formulaForSeries, string const& variableName)
     : m_formulaForSeries(formulaForSeries), m_variableName(variableName) {}
 
+SeriesBasedOnFormula::SeriesBasedOnFormula(Term&& formulaForSeries, string&& variableName)
+    : m_formulaForSeries(formulaForSeries), m_variableName(variableName) {}
+
 AlbaNumberOptional SeriesBasedOnFormula::getGreatestLowerBound() const {
     AlbaNumberOptional result;
     AlbaNumbers boundValues(getBoundValues());

@@ -8,6 +8,7 @@ namespace alba::algebra {
 class DifferentiationForFiniteCalculus {
 public:
     explicit DifferentiationForFiniteCalculus(std::string const& nameOfVariableToDifferentiate);
+    explicit DifferentiationForFiniteCalculus(std::string&& nameOfVariableToDifferentiate);
     [[nodiscard]] Equation differentiate(Equation const& equation) const;
     [[nodiscard]] Equation differentiateMultipleTimes(Equation const& equation, int const numberOfTimes) const;
     [[nodiscard]] Equation differentiateEquation(Equation const& equation) const;

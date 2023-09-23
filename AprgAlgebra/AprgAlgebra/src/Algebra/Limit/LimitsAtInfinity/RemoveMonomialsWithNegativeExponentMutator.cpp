@@ -11,6 +11,9 @@ namespace alba::algebra {
 RemoveMonomialsWithNegativeExponentMutator::RemoveMonomialsWithNegativeExponentMutator(string const& variableName)
     : m_variableName(variableName) {}
 
+RemoveMonomialsWithNegativeExponentMutator::RemoveMonomialsWithNegativeExponentMutator(string&& variableName)
+    : m_variableName(variableName) {}
+
 bool RemoveMonomialsWithNegativeExponentMutator::isMonomialToBeRemoved(Monomial const& monomial) const {
     bool result(false);
     if (hasASingleVariable(monomial) && monomial.getExponentForVariable(m_variableName) < 0) {

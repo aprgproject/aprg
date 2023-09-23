@@ -7,6 +7,7 @@ namespace alba::algebra {
 class BinomialSeries {
 public:
     BinomialSeries(Term const& monomialPart, Term const& exponent);
+    BinomialSeries(Term&& monomialPart, Term&& exponent);
     [[nodiscard]] Term getMonomialPart() const;
     [[nodiscard]] Term getExponent() const;
     [[nodiscard]] Term getValueAtIndex(int const index) const;

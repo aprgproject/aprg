@@ -8,9 +8,11 @@ class TermsWithAssociation {
 public:
     friend class Expression;
     TermsWithAssociation() = default;
-    // NOLINTNEXTLINE(google-explicit-constructor,hicpp-explicit-conversions)
+    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
     TermsWithAssociation(TermsWithDetails const& termsWithDetails);
+    TermsWithAssociation(TermsWithDetails&& termsWithDetails);
     TermsWithAssociation(std::initializer_list<TermWithDetails> const& termsWithDetails);
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     // rule of zero
     bool operator==(TermsWithAssociation const& second) const;
     bool operator!=(TermsWithAssociation const& second) const;

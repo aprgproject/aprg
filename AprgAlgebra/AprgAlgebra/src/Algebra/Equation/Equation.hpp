@@ -12,6 +12,7 @@ class Equation {
 public:
     Equation() = default;
     Equation(Term const& leftHandTerm, std::string const& equationOperator, Term const& rightHandTerm);
+    Equation(Term&& leftHandTerm, std::string&& equationOperator, Term&& rightHandTerm);
     // rule of zero
     bool operator==(Equation const& second) const;
     bool operator!=(Equation const& second) const;

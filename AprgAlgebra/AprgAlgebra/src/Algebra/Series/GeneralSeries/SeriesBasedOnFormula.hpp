@@ -15,6 +15,7 @@ public:
     SeriesBasedOnFormula &operator=(SeriesBasedOnFormula const &series) = default;
     SeriesBasedOnFormula &operator=(SeriesBasedOnFormula &&series) = default;
     SeriesBasedOnFormula(Term const &formulaForSeries, std::string const &variableName);
+    SeriesBasedOnFormula(Term &&formulaForSeries, std::string &&variableName);
     [[nodiscard]] virtual AlbaNumberOptional getGreatestLowerBound() const;
     [[nodiscard]] virtual AlbaNumberOptional getLeastUpperBound() const;
     [[nodiscard]] virtual Term getFormulaForSeries() const;

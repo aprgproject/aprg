@@ -11,6 +11,9 @@ public:
     ProofByInduction(
         std::string const& variableName, Term const& expressionForEachStep, Operator const& accumulateOperator,
         Term const& guessExpression, ManualCalculationFunction const& manualCalculation);
+    ProofByInduction(
+        std::string&& variableName, Term&& expressionForEachStep, Operator&& accumulateOperator, Term&& guessExpression,
+        ManualCalculationFunction&& manualCalculation);
 
     [[nodiscard]] bool isCorrectOnASpecificValue(AlbaNumber const& value) const;
     [[nodiscard]] bool isCorrectOnInductionStep() const;

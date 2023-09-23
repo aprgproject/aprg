@@ -7,9 +7,11 @@ namespace alba::algebra {
 class TermRaiseToTerms {
 public:
     explicit TermRaiseToTerms(TermsWithDetails const& termsInRaiseToPowerExpression);
-    TermRaiseToTerms();
+    TermRaiseToTerms() = default;
     TermRaiseToTerms(Term const& base, Terms const& exponents);
+    TermRaiseToTerms(Term&& base, Terms const& exponents);
     TermRaiseToTerms(Term const& base, Term const& exponent);
+    TermRaiseToTerms(Term&& base, Term const& exponent);
     [[nodiscard]] Term getCombinedTerm() const;
     [[nodiscard]] Term getCombinedExponents() const;
     [[nodiscard]] Term const& getBase() const;
@@ -42,9 +44,9 @@ private:
         Term& base, TermsWithDetails& exponents, Term const& exponentCombinedTerm);
     Term m_base;
     TermsWithDetails m_exponents;
-    bool m_shouldSimplifyToFactors;
-    bool m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt;
-    bool m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase;
+    bool m_shouldSimplifyToFactors{false};
+    bool m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt{false};
+    bool m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase{false};
 };
 
 }  // namespace alba::algebra

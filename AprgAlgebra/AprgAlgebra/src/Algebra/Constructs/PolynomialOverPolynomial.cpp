@@ -17,13 +17,13 @@ using namespace std;
 
 namespace alba::algebra {
 
-PolynomialOverPolynomial::PolynomialOverPolynomial()
-    : m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(false) {}
+PolynomialOverPolynomial::PolynomialOverPolynomial() {}
 
 PolynomialOverPolynomial::PolynomialOverPolynomial(Polynomial const& numerator, Polynomial const& denominator)
-    : m_numerator(numerator),
-      m_denominator(denominator),
-      m_shouldNotFactorizeIfItWouldYieldToPolynomialsWithDoubleValue(false) {}
+    : m_numerator(numerator), m_denominator(denominator) {}
+
+PolynomialOverPolynomial::PolynomialOverPolynomial(Polynomial&& numerator, Polynomial&& denominator)
+    : m_numerator(numerator), m_denominator(denominator) {}
 
 Polynomial const& PolynomialOverPolynomial::getNumerator() const { return m_numerator; }
 Polynomial const& PolynomialOverPolynomial::getDenominator() const { return m_denominator; }
