@@ -105,7 +105,7 @@ TEST(TermUtilitiesTest, SearchForPatternsBackwardsWorksAsGoingBackward) {
         Term(TermType::Identifier, "identifier1")};
     Patterns const patterns{{M("identifier2")}};
 
-    Indexes const hitIndexes = searchBackwardsForPatterns(terms, terms.size() - 1, patterns);
+    Indexes const hitIndexes = searchBackwardsForPatterns(terms, static_cast<int>(terms.size()) - 1, patterns);
     ASSERT_EQ(1U, hitIndexes.size());
     auto itPatterns = hitIndexes.cbegin();
     EXPECT_EQ(3, *itPatterns++);

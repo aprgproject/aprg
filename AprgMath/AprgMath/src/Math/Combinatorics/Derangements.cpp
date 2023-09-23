@@ -165,11 +165,12 @@ UnsignedInteger getNumberOfDerangementsApproximation(UnsignedInteger const n) {
     // !n = n! * (1 - 1/1! + 1/2! - 1/3! + 1/4! ... 1/n!)
     // !n = n! * (1/e)
     // !n = n!/e
-    return getIntegerAfterRoundingADoubleValue<UnsignedInteger>(getNumberOfPermutations(n, n) / E_DOUBLE_VALUE);
+    return getIntegerAfterRoundingADoubleValue<UnsignedInteger>(
+        static_cast<double>(getNumberOfPermutations(n, n)) / E_DOUBLE_VALUE);
 }
 
 double getDerangementsProbability(UnsignedInteger const n) {
-    return static_cast<double>(getNumberOfDerangements(n)) / getNumberOfPermutations(n, n);
+    return static_cast<double>(getNumberOfDerangements(n)) / static_cast<double>(getNumberOfPermutations(n, n));
 }
 
 }  // namespace alba::math

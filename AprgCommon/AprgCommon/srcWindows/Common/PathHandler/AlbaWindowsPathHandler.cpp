@@ -25,9 +25,9 @@ bool AlbaWindowsPathHandler::isRelativePath() const { return m_relativePath; }
 void AlbaWindowsPathHandler::createDirectoriesForNonExisitingDirectories() const {
     string const fullPath(getPath());
     int index = 0;
-    int const length = fullPath.length();
+    int const length = static_cast<int>(fullPath.length());
     while (index < length) {
-        int const indexWithSlashCharacter = fullPath.find_first_of(m_slashCharacterString, index);
+        int const indexWithSlashCharacter = static_cast<int>(fullPath.find_first_of(m_slashCharacterString, index));
         if (isNpos(indexWithSlashCharacter)) {
             break;
         }
@@ -247,7 +247,7 @@ void AlbaWindowsPathHandler::setPath(string_view const path) {
 }
 
 void AlbaWindowsPathHandler::setDriveOrRoot() {
-    int const index = m_directory.find_first_of(m_slashCharacterString + ":");
+    int const index = static_cast<int>(m_directory.find_first_of(m_slashCharacterString + ":"));
     if (isNotNpos(index) && m_directory[index] == ':') {
         m_driveOrRoot = getStringWithCapitalLetters(m_directory.substr(0, index));
     }

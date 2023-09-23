@@ -55,7 +55,7 @@ Quadrilateral::GroupOfPoints Quadrilateral::getGroupOfPointsBasedOnYValue() cons
 Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXs(
     Quadrilateral::GroupOfPoints const& groupOfPointsBasedOnYValue, double const interval) {
     ListOfStartEndOfXAndY result;
-    int const groupSize = groupOfPointsBasedOnYValue.size();
+    int const groupSize = static_cast<int>(groupOfPointsBasedOnYValue.size());
     if (groupSize == 1) {
         Points const& points(groupOfPointsBasedOnYValue[0]);
         result = getStartEndForXsFor1Points(points);
@@ -89,8 +89,8 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor1Points(P
 Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor2Points(
     Points const& points1, Points const& points2, double const interval) {
     ListOfStartEndOfXAndY result;
-    int const points1Size = points1.size();
-    int const points2Size = points2.size();
+    int const points1Size = static_cast<int>(points1.size());
+    int const points2Size = static_cast<int>(points2.size());
     if (points1Size == 1 && points2Size == 3) {
         Point const point1(points1[0]);
         Point const point21(points2[0]);
@@ -129,9 +129,9 @@ Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor2Points(
 Quadrilateral::ListOfStartEndOfXAndY Quadrilateral::getStartEndForXsFor3Points(
     Points const& points1, Points const& points2, Points const& points3, double const interval) {
     ListOfStartEndOfXAndY result;
-    int const points1Size = points1.size();
-    int const points2Size = points2.size();
-    int const points3Size = points3.size();
+    int const points1Size = static_cast<int>(points1.size());
+    int const points2Size = static_cast<int>(points2.size());
+    int const points3Size = static_cast<int>(points3.size());
     if (points1Size == 1 && points2Size == 1 && points3Size == 2) {
         Point const point1(points1[0]);
         Point const point2(points2[0]);

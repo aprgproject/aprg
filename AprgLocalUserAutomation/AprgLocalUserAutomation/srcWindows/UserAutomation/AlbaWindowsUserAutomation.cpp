@@ -126,8 +126,8 @@ void saveBitmapOnScreen(string_view const& filePath) {
 void setMousePosition(MousePosition const& position) {
     long const screenWidth = GetSystemMetrics(SM_CXSCREEN) - 1;
     long const screenHeight = GetSystemMetrics(SM_CYSCREEN) - 1;
-    float ratioInX = position.getX() * (65535.0F / screenWidth);
-    float ratioInY = position.getY() * (65535.0F / screenHeight);
+    float ratioInX = static_cast<float>(position.getX()) * (65535.0F / static_cast<float>(screenWidth));
+    float ratioInY = static_cast<float>(position.getY()) * (65535.0F / static_cast<float>(screenHeight));
 
     doOperation([&](INPUT& input) {
         input.type = INPUT_MOUSE;
@@ -291,7 +291,7 @@ void saveBitmapFromClipboard(string_view const& filePath) {
 
                 unsigned long long const sizeOfBitmapData = bitmapInfoPointer->biSizeImage;
                 char* startOfBitmapDataPointer = reinterpret_cast<char*>(++bitmapInfoPointer);
-                outputBitmapFile.write(startOfBitmapDataPointer, sizeOfBitmapData);
+                outputBitmapFile.write(startOfBitmapDataPointer, static_cast<ofstream::streamsize>(sizeOfBitmapData));
                 GlobalUnlock(dib);
             }
         }

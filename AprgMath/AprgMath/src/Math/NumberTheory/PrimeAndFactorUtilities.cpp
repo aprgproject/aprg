@@ -57,7 +57,7 @@ UnsignedInteger getProductOfFactors(UnsignedInteger const number) {
 
 UnsignedInteger getApproximateDensityOfPrimes(UnsignedInteger const number) {
     // formula = n/(ln(n))
-    return number / log(number);
+    return static_cast<double>(number) / log(number);
 }
 
 UnsignedInteger getNumberOfCoPrimesBelowThisNumber(UnsignedInteger const number) {
@@ -88,7 +88,7 @@ UnsignedIntegers getPrimesBelowThisNumber(UnsignedInteger const number) {
             sieveOfEratosthenes[multiple] = false;
         }
         auto itLowestCandidate =
-            find(sieveOfEratosthenes.cbegin() + candidatePrime + 1, sieveOfEratosthenes.cend(), true);
+            find(sieveOfEratosthenes.cbegin() + static_cast<int>(candidatePrime) + 1, sieveOfEratosthenes.cend(), true);
         candidatePrime = distance(sieveOfEratosthenes.cbegin(), itLowestCandidate);
     }
     UnsignedIntegers result;

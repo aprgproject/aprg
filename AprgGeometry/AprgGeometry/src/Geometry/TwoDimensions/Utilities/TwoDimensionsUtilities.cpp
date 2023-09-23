@@ -740,7 +740,7 @@ Points getConvexHullPointsUsingJarvisAlgorithm(Points const& points) {
     int startIndex = indexOfLeftMostPoint;
     do {
         result.push_back(points[startIndex]);
-        int endIndex = (startIndex + 1) % points.size();
+        int endIndex = static_cast<int>((startIndex + 1) % points.size());
         for (int indexInBetween = 0; indexInBetween < static_cast<int>(points.size()); ++indexInBetween) {
             if (RotationDirection::CounterClockWise ==
                 getRotationDirectionTraversing3Points(points[startIndex], points[indexInBetween], points[endIndex])) {
@@ -759,7 +759,7 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
     // Farthest point pair problem
     assert(points.size() >= 3);
     Points auxiliary = points;
-    int const auxiliarySize = auxiliary.size();
+    int const auxiliarySize = static_cast<int>(auxiliary.size());
 
     // Find bottom most left point
     auto&& [minIt, maxIt] =

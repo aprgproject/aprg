@@ -149,7 +149,7 @@ void AprgGraph::drawNumberLabel(
     string label(m_numberToStringConverter.convertToString(number));
     constexpr int widthOfCharacter = 12;
     constexpr int heightOfCharacter = 20;
-    int const labelCharacterLength = label.length();
+    int const labelCharacterLength = static_cast<int>(label.length());
     int startPositionInX = 0;
     int startPositionInY = 0;
     int const numberPositionInX = static_cast<int>(round(bitmapPointNumberPosition.getX()));

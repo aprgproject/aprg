@@ -160,11 +160,11 @@ Modeling::ValidationResult Modeling::validate() {
         totalSquareError += calculationDataBuffer[j];
     }
 
-    double const meanSquareError = totalSquareError / calculationDataBuffer.size();
+    double const meanSquareError = totalSquareError / static_cast<double>(calculationDataBuffer.size());
     double const rootMeanSquareError = pow(meanSquareError, 0.5);
 
     result.totalSquareError = totalSquareError;
-    result.resultSize = calculationDataBuffer.size();
+    result.resultSize = static_cast<double>(calculationDataBuffer.size());
     result.meanSquareError = meanSquareError;
     result.rootMeanSquareError = rootMeanSquareError;
     return result;

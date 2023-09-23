@@ -17,7 +17,7 @@ Line::Line(Point const& first, Point const& second) {
     double sign = 1;
     vector<double> const deltas = {deltaX, deltaY, deltaZ};
     int const negativeNumbers =
-        std::count_if(deltas.cbegin(), deltas.cend(), [&](double const delta) { return delta < 0; });
+        static_cast<int>(std::count_if(deltas.cbegin(), deltas.cend(), [&](double const delta) { return delta < 0; }));
     if (negativeNumbers > 1) {
         sign = -1;
     }
