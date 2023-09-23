@@ -20,6 +20,7 @@ struct FspDetails {
 class Fsp {
 public:
     explicit Fsp(FspDetails const& fspDetails);
+    explicit Fsp(FspDetails&& fspDetails);
     Fsp();
     [[nodiscard]] DspAddresses const& getDspAddresses() const;
     [[nodiscard]] SmType getSmType() const;

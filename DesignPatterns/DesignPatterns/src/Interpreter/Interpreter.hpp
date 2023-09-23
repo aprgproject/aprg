@@ -39,6 +39,7 @@ public:
 class TerminalExpression : public AbstractExpression {
 public:
     explicit TerminalExpression(std::string const& variable) : m_variable(variable) {}
+    explicit TerminalExpression(std::string&& variable) : m_variable(variable) {}
     int interpret(Context const& context) override { return context.getValue(m_variable); }
 
     // ...

@@ -105,7 +105,11 @@ SOOSA::Status& SOOSA::Status::getInstance() {
 SOOSA::SOOSA(SoosaConfiguration const& soosaConfiguration, InputConfiguration const& inputConfiguration)
     : m_soosaConfiguration(soosaConfiguration),
       m_inputConfiguration(inputConfiguration),
+      m_frequencyDatabase(m_inputConfiguration.getNumberOfQuestions(), m_soosaConfiguration.getNumberOfChoices()) {}
 
+SOOSA::SOOSA(SoosaConfiguration&& soosaConfiguration, InputConfiguration&& inputConfiguration)
+    : m_soosaConfiguration(soosaConfiguration),
+      m_inputConfiguration(inputConfiguration),
       m_frequencyDatabase(m_inputConfiguration.getNumberOfQuestions(), m_soosaConfiguration.getNumberOfChoices()) {}
 
 int SOOSA::getNumberOfAnswers() const { return static_cast<int>(m_questionToAnswersMap.size()); }

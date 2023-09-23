@@ -14,6 +14,9 @@ namespace alba {
 CombineAndGrep::CombineAndGrep(path const& outputFilePath, string const& grepString)
     : m_outputFileStream(AlbaLocalPathHandler(outputFilePath).getPath()), m_grepString(grepString) {}
 
+CombineAndGrep::CombineAndGrep(path const& outputFilePath, string&& grepString)
+    : m_outputFileStream(AlbaLocalPathHandler(outputFilePath).getPath()), m_grepString(grepString) {}
+
 void CombineAndGrep::processDirectory(path const& inputDirectoryPath) {
     AlbaLocalPathHandler const inputDirectoryPathHandler(inputDirectoryPath);
     cout << "processDirectory() inputDirectoryPath:" << inputDirectoryPath << "\n";

@@ -46,6 +46,7 @@ public:
     BtsLogPrint() = default;
     explicit BtsLogPrint(std::string const& lineInLogs);
     BtsLogPrint(std::string const& filename, std::string const& lineInLogs);
+    BtsLogPrint(std::string&& filename, std::string const& lineInLogs);
     bool operator<(BtsLogPrint const& btsLogPrintToCompare) const;
     bool operator>(BtsLogPrint const& btsLogPrintToCompare) const;
     bool operator==(BtsLogPrint const& btsLogPrintToCompare) const;

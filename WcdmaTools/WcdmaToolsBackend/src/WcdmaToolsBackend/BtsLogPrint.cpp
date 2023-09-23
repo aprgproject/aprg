@@ -25,6 +25,11 @@ BtsLogPrint::BtsLogPrint(string const& filename, string const& lineInLogs) : m_f
     analyzeLineInLogs(lineInLogs);
 }
 
+BtsLogPrint::BtsLogPrint(string&& filename, string const& lineInLogs) : m_fileName(filename) {
+    m_fileName.resize(NUMBER_OF_CHARACTER_FOR_FILE, ' ');
+    analyzeLineInLogs(lineInLogs);
+}
+
 bool BtsLogPrint::operator<(BtsLogPrint const& btsLogPrintToCompare) const {
     bool const hasPcTime1 = !m_pcTime.isEmpty();
     bool const hasPcTime2 = !btsLogPrintToCompare.m_pcTime.isEmpty();

@@ -82,6 +82,7 @@ public:
     using EndPointIndexes = std::pair<int, int>;
     using CountToEndPointIndexesMultiMap = std::multimap<int, EndPointIndexes>;
     SOOSA(SoosaConfiguration const& soosaConfiguration, InputConfiguration const& inputConfiguration);
+    SOOSA(SoosaConfiguration&& soosaConfiguration, InputConfiguration&& inputConfiguration);
     [[nodiscard]] int getNumberOfAnswers() const;
     [[nodiscard]] int getAnswerToQuestion(int const questionIndex) const;
     void process();
