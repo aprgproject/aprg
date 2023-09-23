@@ -154,7 +154,7 @@ TEST(OneEquationOneVariableEqualitySolverTest, SquareRootInEquationAreSolved) {
 
     EXPECT_TRUE(solver.isSolved());
     EXPECT_FALSE(solver.isACompleteSolution());
-    EXPECT_EQ(AlbaNumbers{0}, solutionSet.getAcceptedValues());
+    EXPECT_EQ(AlbaNumbers{}, solutionSet.getAcceptedValues());
 }
 
 TEST(OneEquationOneVariableEqualitySolverTest, RadicalOverRadicalInEquationAreSolved) {

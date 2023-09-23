@@ -46,7 +46,7 @@ private:
         AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c, AlbaNumber const& d, AlbaNumber const& s,
         bool const mflag);
 
-    int m_numberOfIterationsExecuted{0};
+    int m_numberOfIterationsExecuted{};
     AlbaNumbers m_coefficients;
     CalculationValues m_values;
 };

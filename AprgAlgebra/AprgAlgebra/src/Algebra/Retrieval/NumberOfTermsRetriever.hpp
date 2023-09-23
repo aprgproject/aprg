@@ -15,7 +15,7 @@ public:
     [[nodiscard]] int getNumberOfTerms() const;
 
 private:
-    int m_numberOfTerms{0};
+    int m_numberOfTerms{};
 };
 
 }  // namespace alba::algebra

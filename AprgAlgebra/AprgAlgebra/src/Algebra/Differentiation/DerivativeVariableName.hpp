@@ -21,7 +21,7 @@ private:
     void processNumerator(std::string const& numerator);
     void processDenominator(std::string const& denominator);
     bool m_isValid{false};
-    int m_differentiationLevel{0};
+    int m_differentiationLevel{};
     std::string m_baseVariable;
     std::string m_dependentVariable;
 };

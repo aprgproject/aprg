@@ -39,8 +39,8 @@ private:
     bool buildExpressionWithUnaryOperationAndReturnIfBuilt(int const index);
     bool simplifyBinaryOperationAndReturnIfSimplified(int const index);
     bool simplifyUnaryOperationAndReturnIfSimplified(int const index);
-    int m_startIndex{0};
-    int m_endIndex{0};
+    int m_startIndex{};
+    int m_endIndex{};
     Terms m_terms;
 };
 

@@ -23,7 +23,7 @@ private:
     [[nodiscard]] AlbaNumber getSlopeApproximationAt(AlbaNumber const& value) const;
     void updatePositiveDeltaForSlopeIfNeeded(AlbaNumber const& newValue);
     static constexpr double INITIAL_DELTA_FOR_SLOPE = 1E-6;
-    int m_numberOfIterationsExecuted{0};
+    int m_numberOfIterationsExecuted{};
     AlbaNumber m_currentValue;
     AlbaNumber m_positiveDeltaForSlope;
     Function m_functionToIterate;
