@@ -11,7 +11,7 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
     // Auxiliary Space: Constant
     Count result(0);
     if (!m_dimensions.empty()) {
-        result = getMinimumNumberOfOperationsUsingNaiveRecursion(0, m_dimensions.size() - 1);
+        result = getMinimumNumberOfOperationsUsingNaiveRecursion(0, static_cast<int>(m_dimensions.size()) - 1);
     }
     return result;
 }
@@ -22,7 +22,8 @@ MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOp
     Count result(0);
     if (!m_dimensions.empty()) {
         CountMatrix countMatrix(m_dimensions.size(), m_dimensions.size(), MAX_COUNT);
-        result = getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, 0, m_dimensions.size() - 1);
+        result =
+            getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, 0, static_cast<int>(m_dimensions.size()) - 1);
     }
     return result;
 }

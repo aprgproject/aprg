@@ -142,7 +142,7 @@ void CPlusPlusFileFixer::notifyIfMoreThanLoopsAreCascaded(string const& path) co
                 cout << "CHECK THIS: More than 2 loops found in:[" << path << "] in line:[" << line << "].\n";
             }
         } else if (isLineWithALoopEnd(line)) {
-            auto it = indentionsOfLoops.find(getStringThatContainsWhiteSpaceIndention(line).size());
+            auto it = indentionsOfLoops.find(static_cast<int>(getStringThatContainsWhiteSpaceIndention(line).size()));
             if (it != indentionsOfLoops.end()) {
                 indentionsOfLoops.erase(it);
             }
@@ -291,7 +291,7 @@ void CPlusPlusFileFixer::fixNamespaces() {
 
 void CPlusPlusFileFixer::fixSmallUToCapitalUInNumbers() {
     for (string& line : m_linesAfterTheHeader) {
-        int indexOfU = line.find('u');
+        int indexOfU = static_cast<int>(line.find('u'));
         while (isNotNpos(indexOfU)) {
             bool isCharacterBeforeUANumber(false);
             bool isCharacterAfterUNotALetterOrNumberOrUnderscore(false);
@@ -306,7 +306,7 @@ void CPlusPlusFileFixer::fixSmallUToCapitalUInNumbers() {
             if (isCharacterBeforeUANumber && isCharacterAfterUNotALetterOrNumberOrUnderscore) {
                 line[indexOfU] = 'U';
             }
-            indexOfU = line.find('u', indexOfU + 1);
+            indexOfU = static_cast<int>(line.find('u', indexOfU + 1));
         }
     }
 }

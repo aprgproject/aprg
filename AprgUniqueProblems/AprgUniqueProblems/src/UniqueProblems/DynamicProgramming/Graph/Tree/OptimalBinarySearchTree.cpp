@@ -19,7 +19,7 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingNaiveR
     // Auxiliary Space: Constant
     Cost result(0);
     if (!m_valueAndFrequencyPairs.empty()) {
-        result = getMinimumCostUsingNaiveRecursion(1, 0, m_valueAndFrequencyPairs.size() - 1);
+        result = getMinimumCostUsingNaiveRecursion(1, 0, static_cast<Index>(m_valueAndFrequencyPairs.size()) - 1);
     }
     return result;
 }
@@ -29,7 +29,7 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingIterat
     // Auxiliary Space: O(n^2)
     Cost result(0);
     if (!m_valueAndFrequencyPairs.empty()) {
-        Index const numberOfPairs = m_valueAndFrequencyPairs.size();
+        Index const numberOfPairs = static_cast<Index>(m_valueAndFrequencyPairs.size());
         CostMatrix costMatrix(numberOfPairs, numberOfPairs);
 
         Frequencies frequencies;

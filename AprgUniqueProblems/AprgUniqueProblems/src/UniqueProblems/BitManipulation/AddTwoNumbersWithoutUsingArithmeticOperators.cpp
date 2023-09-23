@@ -12,7 +12,7 @@ AddTwoNumbersWithoutUsingArithmeticOperators::Value AddTwoNumbersWithoutUsingAri
     Value sum = value1 ^ value2;
     while (carry > 0) {
         carry <<= 1;
-        int const newCarry = sum & carry;
+        int const newCarry = static_cast<int>(sum & carry);
         sum = sum ^ carry;
         carry = newCarry;
     }

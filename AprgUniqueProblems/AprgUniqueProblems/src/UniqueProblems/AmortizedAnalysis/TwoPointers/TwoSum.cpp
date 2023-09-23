@@ -15,7 +15,7 @@ TwoSum::ValuesPair TwoSum::getTwoValuesWithSum(Value const targetSum) const {
     if (!m_sortedValues.empty()) {
         bool isFound(false);
         Index lowIndex = 0;
-        Index highIndex = m_sortedValues.size() - 1;
+        Index highIndex = static_cast<Index>(m_sortedValues.size()) - 1;
         while (lowIndex < highIndex) {
             Value const currentSum(m_sortedValues[lowIndex] + m_sortedValues[highIndex]);
             if (currentSum > targetSum) {

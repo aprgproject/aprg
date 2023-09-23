@@ -13,8 +13,8 @@ PathSumInGridInRightOrDownTraversal::Path PathSumInGridInRightOrDownTraversal::g
     Path path;
     if (!m_inputGrid.isEmpty()) {
         Grid const partialSumGrid(getPartialSumGridUsingIterativeDP());
-        Index x = partialSumGrid.getNumberOfColumns() - 1;
-        Index y = partialSumGrid.getNumberOfRows() - 1;
+        Index x = static_cast<Index>(partialSumGrid.getNumberOfColumns()) - 1;
+        Index y = static_cast<Index>(partialSumGrid.getNumberOfRows()) - 1;
         path = {m_inputGrid.getEntry(x, y)};
         while (true) {
             if (x == 0 && y == 0) {
@@ -39,8 +39,9 @@ PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::
     const {
     Value pathSum(0);
     if (!m_inputGrid.isEmpty()) {
-        pathSum =
-            getBestPathSumUsingNaiveRecursion(m_inputGrid.getNumberOfColumns() - 1, m_inputGrid.getNumberOfRows() - 1);
+        pathSum = getBestPathSumUsingNaiveRecursion(
+            static_cast<Index>(m_inputGrid.getNumberOfColumns()) - 1,
+            static_cast<Index>(m_inputGrid.getNumberOfRows()) - 1);
     }
     return pathSum;
 }
@@ -51,7 +52,8 @@ PathSumInGridInRightOrDownTraversal::Value PathSumInGridInRightOrDownTraversal::
     if (!m_inputGrid.isEmpty()) {
         Grid partialSumGrid(m_inputGrid.getNumberOfColumns(), m_inputGrid.getNumberOfRows(), UNUSED_VALUE);
         pathSum = getBestPathSumUsingMemoizationDP(
-            partialSumGrid, m_inputGrid.getNumberOfColumns() - 1, m_inputGrid.getNumberOfRows() - 1);
+            partialSumGrid, static_cast<Index>(m_inputGrid.getNumberOfColumns()) - 1,
+            static_cast<Index>(m_inputGrid.getNumberOfRows()) - 1);
     }
     return pathSum;
 }

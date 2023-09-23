@@ -114,7 +114,8 @@ BinomialCoefficient::Value BinomialCoefficient::getBinomialCoefficientUsingGcf()
                 shouldContinue = true;
             }
             if (shouldContinue && accumulatedDenominator > 1 &&
-                mathHelper::isValueBeyondLimits<Value>(static_cast<double>(accumulatedNumerator) * numerator)) {
+                mathHelper::isValueBeyondLimits<Value>(
+                    static_cast<double>(accumulatedNumerator) * static_cast<double>(numerator))) {
                 Value const gcf = mathHelper::getGreatestCommonFactor(accumulatedNumerator, accumulatedDenominator);
                 accumulatedNumerator /= gcf;
                 accumulatedDenominator /= gcf;

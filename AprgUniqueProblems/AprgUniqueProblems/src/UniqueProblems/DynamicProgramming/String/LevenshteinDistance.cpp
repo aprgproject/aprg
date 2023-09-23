@@ -13,12 +13,14 @@ LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingNaive
     // The time complexity of above solution is exponential.
     // In worst case, we may end up doing O(3m) operations.
     // The worst case happens when none of characters of two strings match.
-    return getLevenshteinDistanceUsingNaiveRecursion(m_string1.length(), m_string2.length());
+    return getLevenshteinDistanceUsingNaiveRecursion(
+        static_cast<Index>(m_string1.length()), static_cast<Index>(m_string2.length()));
 }
 
 LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingMemoizationDP() const {
     CountGrid distanceGrid(m_string1.length() + 1, m_string2.length() + 1, UNUSED_INDEX);
-    return getLevenshteinDistanceUsingMemoizationDP(distanceGrid, m_string1.length(), m_string2.length());
+    return getLevenshteinDistanceUsingMemoizationDP(
+        distanceGrid, static_cast<Index>(m_string1.length()), static_cast<Index>(m_string2.length()));
 }
 
 LevenshteinDistance::Count LevenshteinDistance::getLevenshteinDistanceUsingIterativeDP() const {

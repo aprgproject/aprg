@@ -16,7 +16,7 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
     // Auxiliary Space: Constant
     Cost result(0);
     if (!m_vertices.empty()) {
-        result = getMinimumNumberOfOperationsUsingNaiveRecursion(0, m_vertices.size() - 1);
+        result = getMinimumNumberOfOperationsUsingNaiveRecursion(0, static_cast<Index>(m_vertices.size()) - 1);
     }
     return result;
 }
@@ -28,7 +28,8 @@ MinimumCostPolygonTriangulation::Cost MinimumCostPolygonTriangulation::getMinimu
     Cost result(0);
     if (!m_vertices.empty()) {
         CostMatrix countMatrix(m_vertices.size(), m_vertices.size(), MAX_COUNT);
-        result = getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, 0, m_vertices.size() - 1);
+        result =
+            getMinimumNumberOfOperationsUsingMemoizationDP(countMatrix, 0, static_cast<Index>(m_vertices.size()) - 1);
     }
     return result;
 }

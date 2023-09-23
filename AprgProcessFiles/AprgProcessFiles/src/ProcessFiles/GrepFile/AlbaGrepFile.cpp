@@ -27,7 +27,7 @@ void AlbaGrepFile::processFile(path const& inputFilePath, path const& outputFile
     ifstream inputFileStream(inputPathHandler.getPath());
     ofstream outputFileStream(outputPathHandler.getPath());
     AlbaFileReader fileReader(inputFileStream);
-    double const sizeOfFile = fileReader.getFileSize();
+    double const sizeOfFile = static_cast<double>(fileReader.getFileSize());
     while (fileReader.isNotFinished()) {
         string const lineInLogs(fileReader.getLineAndIgnoreWhiteSpaces());
         if (m_lineGrepEvaluator.evaluate(lineInLogs)) {
@@ -35,7 +35,7 @@ void AlbaGrepFile::processFile(path const& inputFilePath, path const& outputFile
             outputFileStream << lineInLogs << "\n";
         }
         if (fileReader.isNotFinished()) {
-            updateAfterOneIteration(fileReader.getCurrentLocation() * 100 / sizeOfFile);
+            updateAfterOneIteration(static_cast<double>(fileReader.getCurrentLocation()) * 100 / sizeOfFile);
         }
     }
     updateAfterOneIteration(100);

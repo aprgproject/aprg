@@ -11,7 +11,7 @@ EightPuzzlePossibleProblem::EightPuzzlePossibleProblem(
     NumberMatrix const& startMatrix, NumberMatrix const& targetMatrix)
     : m_startMatrix(startMatrix),
       m_targetMatrix(targetMatrix),
-      m_sideSize(m_startMatrix.getNumberOfColumns()),
+      m_sideSize(static_cast<int>(m_startMatrix.getNumberOfColumns())),
 
       m_nodeId(START_NODE_ID) {
     clearIfInvalid();

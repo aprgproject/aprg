@@ -19,7 +19,7 @@ LongestEqualLengthSubArraysWithSameSum::getLongestTotalLengthOfSubArraysUsingPar
     Index result(0);
 
     RangeQueryWithAccumulator<Values> const partialSumsQuery(m_values, plus<>(), minus<>());
-    for (Index subArrayLength = m_values.size() / 2; subArrayLength > 0; --subArrayLength) {
+    for (Index subArrayLength = static_cast<Index>(m_values.size()) / 2; subArrayLength > 0; --subArrayLength) {
         // starts with highest length
         for (Index startOfSubArray1 = 0; startOfSubArray1 + (2 * subArrayLength) <= static_cast<Index>(m_values.size());
              ++startOfSubArray1) {

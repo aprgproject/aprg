@@ -10,7 +10,8 @@ ShortestCommonSupersequence::ShortestCommonSupersequence(Values const& sequence1
 ShortestCommonSupersequence::Count ShortestCommonSupersequence::getShortestLengthUsingNaiveRecursion() const {
     // Time Complexity: Exponential -> Since there are (m x n) calls per iteration:  O(2^(m x n))
     // Auxiliary Space: Constant
-    return getShortestLengthUsingNaiveRecursion(m_sequence1.size(), m_sequence2.size());
+    return getShortestLengthUsingNaiveRecursion(
+        static_cast<Index>(m_sequence1.size()), static_cast<Index>(m_sequence2.size()));
 }
 
 ShortestCommonSupersequence::Count ShortestCommonSupersequence::getShortestLengthUsingMemoizationDP() const {
@@ -25,7 +26,8 @@ ShortestCommonSupersequence::Count ShortestCommonSupersequence::getShortestLengt
     for (Index index2 = 1; index2 < static_cast<Index>(lengthMatrix.getNumberOfRows()); ++index2) {
         lengthMatrix.setEntry(0, index2, index2);
     }
-    return getShortestLengthUsingMemoizationDP(lengthMatrix, m_sequence1.size(), m_sequence2.size());
+    return getShortestLengthUsingMemoizationDP(
+        lengthMatrix, static_cast<Index>(m_sequence1.size()), static_cast<Index>(m_sequence2.size()));
 }
 
 ShortestCommonSupersequence::Count ShortestCommonSupersequence::getShortestLengthUsingIterativeDP() const {

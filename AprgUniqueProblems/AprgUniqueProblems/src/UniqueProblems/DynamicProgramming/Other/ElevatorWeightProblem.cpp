@@ -40,7 +40,9 @@ ElevatorWeightProblem::PeopleBits ElevatorWeightProblem::getNumberOfPeopleSubset
     return 1 << getNumberOfPeople();
 }
 
-ElevatorWeightProblem::Person ElevatorWeightProblem::getNumberOfPeople() const { return m_peopleWeights.size(); }
+ElevatorWeightProblem::Person ElevatorWeightProblem::getNumberOfPeople() const {
+    return static_cast<Person>(m_peopleWeights.size());
+}
 
 bool ElevatorWeightProblem::isPersonIncluded(PeopleBits const peopleBits, Person const person) {
     return (peopleBits & getProductBits(person)) != 0;

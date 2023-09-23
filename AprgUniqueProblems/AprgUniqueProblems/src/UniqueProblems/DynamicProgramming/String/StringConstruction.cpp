@@ -20,7 +20,7 @@ StringConstruction::StringConstruction(string const& stringToConstruct, stringHe
 int StringConstruction::getCount() {
     int result(0);
     if (!m_stringToConstruct.empty()) {
-        result = getCount(m_stringToConstruct.length());
+        result = getCount(static_cast<int>(m_stringToConstruct.length()));
     }
     return result;
 }
@@ -28,7 +28,7 @@ int StringConstruction::getCount() {
 int StringConstruction::getCountSquareRootAlgorithm() {
     int result(0);
     if (!m_stringToConstruct.empty()) {
-        result = getCountSquareRootAlgorithm(m_stringToConstruct.length());
+        result = getCountSquareRootAlgorithm(static_cast<int>(m_stringToConstruct.length()));
     }
     return result;
 }
@@ -80,7 +80,7 @@ int StringConstruction::count(int const prefixLength) {
     // structure.
     int result(0);
     for (string const& subString : m_subStrings) {
-        int const subStringLength = subString.length();
+        int const subStringLength = static_cast<int>(subString.length());
         if (subStringLength < prefixLength &&
             subString == m_stringToConstruct.substr(prefixLength - subStringLength, subStringLength)) {
             result += getCount(prefixLength - subStringLength);
@@ -102,9 +102,9 @@ int StringConstruction::countSquareRootAlgorithm(int const prefixLength) {
     HornerHashFunctionForSubstrings<HashValue> const mainHashFunction(RADIX, A_LARGE_PRIME, m_stringToConstruct);
 
     int result(0);
-    int const limit = min(m_subStrings.size(), m_subStringHash.size());
+    int const limit = static_cast<int>(min(m_subStrings.size(), m_subStringHash.size()));
     for (int i = 0; i < limit; ++i) {
-        int const subStringLength = m_subStrings[i].length();
+        int const subStringLength = static_cast<int>(m_subStrings[i].length());
         HashValue const subStringHash = m_subStringHash[i];
 
         // Note that getHashCodeOfSubstring is on constant time.
