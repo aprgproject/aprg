@@ -93,7 +93,7 @@ void Bitmap::setSnippetWriteToFile(BitmapSnippet const& snippet) const {
                     char const* pixelDataPointer =
                         static_cast<char const*>(snippet.getPixelDataConstReference().getConstantBufferPointer()) +
                         snippetIndex;
-                    streamFile.seekg(fileOffsetForStart, std::fstream::beg);
+                    streamFile.seekg(static_cast<fstream::off_type>(fileOffsetForStart), std::fstream::beg);
                     streamFile.write(pixelDataPointer, numberOfBytesToBeCopiedForX);
                     snippetIndex += numberOfBytesToBeCopiedForX;
                 }
@@ -111,7 +111,7 @@ void Bitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(
         static_cast<int>(m_configuration.getXCoordinateWithinTheBitmap(static_cast<int>(center.getX()) - halfSide)));
     int right(
         static_cast<int>(m_configuration.getXCoordinateWithinTheBitmap(static_cast<int>(center.getX()) + halfSide)));
-    adjustToTargetLength(left, right, side, m_configuration.getBitmapWidth());
+    adjustToTargetLength(left, right, side, static_cast<int>(m_configuration.getBitmapWidth()));
 
     int xSizeInBytes(static_cast<int>(m_configuration.getOneRowSizeInBytesFromPixels(left, right)));
     xSizeInBytes = (xSizeInBytes > 0) ? xSizeInBytes : 1;
@@ -121,7 +121,7 @@ void Bitmap::calculateNewCornersBasedOnCenterAndNumberOfBytes(
         m_configuration.getYCoordinateWithinTheBitmap(static_cast<int>(center.getY()) - halfYSizeInBytes)));
     int bottom(static_cast<int>(
         m_configuration.getYCoordinateWithinTheBitmap(static_cast<int>(center.getY()) + halfYSizeInBytes)));
-    adjustToTargetLength(top, bottom, ySizeInBytes, m_configuration.getBitmapHeight());
+    adjustToTargetLength(top, bottom, ySizeInBytes, static_cast<int>(m_configuration.getBitmapHeight()));
 
     topLeftCorner.setX(left);
     topLeftCorner.setY(top);

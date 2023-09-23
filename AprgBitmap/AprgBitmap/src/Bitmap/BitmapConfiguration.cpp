@@ -64,12 +64,13 @@ int BitmapConfiguration::convertPixelsToBytesRoundedToFloor(int const pixels) co
 }
 
 int BitmapConfiguration::convertPixelsToBytesRoundedToCeil(int const pixels) const {
-    return ((pixels * m_numberOfBitsPerPixel) + static_cast<int>(AlbaBitConstants::BYTE_SIZE_IN_BITS) - 1) /
-           AlbaBitConstants::BYTE_SIZE_IN_BITS;
+    return static_cast<int>(
+        ((pixels * m_numberOfBitsPerPixel) + static_cast<int>(AlbaBitConstants::BYTE_SIZE_IN_BITS) - 1) /
+        AlbaBitConstants::BYTE_SIZE_IN_BITS);
 }
 
 int BitmapConfiguration::convertBytesToPixels(int const bytes) const {
-    return (bytes * AlbaBitConstants::BYTE_SIZE_IN_BITS) / m_numberOfBitsPerPixel;
+    return static_cast<int>((bytes * AlbaBitConstants::BYTE_SIZE_IN_BITS) / m_numberOfBitsPerPixel);
 }
 
 int BitmapConfiguration::getNumberOfPixelsForOneByte() const { return convertBytesToPixels(1); }
