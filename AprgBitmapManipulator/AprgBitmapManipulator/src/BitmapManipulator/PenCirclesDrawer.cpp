@@ -62,7 +62,7 @@ void PenCirclesDrawer::writeCirclesWithoutOverlay() {
     for (auto const& pointAndPenCircleDetailsPair : m_penCircles.getPenCircles()) {
         Circle const penCircle(
             convertBitmapXYToPoint(pointAndPenCircleDetailsPair.first), pointAndPenCircleDetailsPair.second.radius);
-        int circleColor(pointAndPenCircleDetailsPair.second.color);
+        int circleColor(static_cast<int>(pointAndPenCircleDetailsPair.second.color));
         m_snippetTraversal.traverseCircleArea(
             penCircle, [&](BitmapXY const& pointInCircle) { m_snippet.setPixelAt(pointInCircle, circleColor); });
     }
@@ -105,7 +105,7 @@ void PenCirclesDrawer::putCirclesWithoutOverlay() {
     for (auto const& pointAndPenCircleDetailsPair : m_penCircles.getPenCircles()) {
         Circle const penCircle(
             convertBitmapXYToPoint(pointAndPenCircleDetailsPair.first), pointAndPenCircleDetailsPair.second.radius);
-        int circleColor(pointAndPenCircleDetailsPair.second.color);
+        int circleColor(static_cast<int>(pointAndPenCircleDetailsPair.second.color));
         m_snippetTraversal.traverseCircleArea(
             penCircle, [&](BitmapXY const& pointInCircle) { m_drawnPoints.emplace(pointInCircle, circleColor); });
     }
