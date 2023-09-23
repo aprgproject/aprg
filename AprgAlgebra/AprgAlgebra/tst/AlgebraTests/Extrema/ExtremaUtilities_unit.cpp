@@ -224,10 +224,10 @@ TEST(ExtremaUtilitiesTest, GetCriticalNumbersWithMultipleVariablesWorksWithExamp
     ASSERT_EQ(2U, variableToCriticalNumbersMap.size());
     auto it = variableToCriticalNumbersMap.cbegin();
     EXPECT_EQ("x", it->first);
-    EXPECT_EQ(AlbaNumbers{}, it->second);
+    EXPECT_EQ(AlbaNumbers{0}, it->second);
     ++it;
     EXPECT_EQ("y", it->first);
-    EXPECT_EQ(AlbaNumbers{}, it->second);
+    EXPECT_EQ(AlbaNumbers{0}, it->second);
 }
 
 TEST(ExtremaUtilitiesTest, GetCriticalNumbersWithMultipleVariablesWorksWithExample2) {
