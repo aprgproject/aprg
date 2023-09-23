@@ -69,7 +69,7 @@ void printTupleParameters(std::ostream& out, std::tuple<ValueTypes...> const& pa
     std::apply  // C++17, applies a function by unpacking a tuple to its tupleParameters
         (
             [&out](ValueTypes const&... tupleParameters) {
-                std::size_t tupleIndex{0};
+                std::size_t tupleIndex{};
                 auto printTupleParameter = [&out](auto&& tupleParameter, auto& tupleIndex) {
                     printParameter(out, tupleParameter);
                     out << (++tupleIndex != sizeof...(ValueTypes) ? ", " : "");

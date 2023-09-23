@@ -145,7 +145,7 @@ private:
     }
 
     BaseVariantDataType *m_ptr{nullptr};
-    TypeId m_typeId{0};
+    TypeId m_typeId{};
 };
 
 }  // namespace alba
