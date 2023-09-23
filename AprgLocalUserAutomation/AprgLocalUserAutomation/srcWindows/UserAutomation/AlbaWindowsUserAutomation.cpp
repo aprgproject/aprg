@@ -291,7 +291,7 @@ void saveBitmapFromClipboard(string_view const& filePath) {
 
                 unsigned long long const sizeOfBitmapData = bitmapInfoPointer->biSizeImage;
                 char* startOfBitmapDataPointer = reinterpret_cast<char*>(++bitmapInfoPointer);
-                outputBitmapFile.write(startOfBitmapDataPointer, static_cast<ofstream::streamsize>(sizeOfBitmapData));
+                outputBitmapFile.write(startOfBitmapDataPointer, static_cast<streamsize>(sizeOfBitmapData));
                 GlobalUnlock(dib);
             }
         }
