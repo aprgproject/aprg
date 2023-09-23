@@ -51,7 +51,7 @@ VariableTerm VariableTerm::createNegatedVariableTerm(string const& variableName)
 }
 
 void VariableTerm::initializeIfNotEmpty() {
-    int const lastIndex = m_variableName.length() - 1;
+    int const lastIndex = static_cast<int>(m_variableName.length()) - 1;
     int index = lastIndex;
     for (; index >= 0; --index) {
         if (!isPrime(m_variableName[index])) {
