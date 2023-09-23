@@ -51,7 +51,7 @@ protected:
     }
 
     void initialize(Key const& searchSpace) {
-        int const length = searchSpace.length();
+        int const length = static_cast<int>(searchSpace.length());
         for (int i = 0; i < length; ++i) {
             TernarySearchSuffixTrie::put(searchSpace.substr(i), i);
         }

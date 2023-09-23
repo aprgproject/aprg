@@ -127,7 +127,7 @@ private:
         Node const* const currentNodePointer, std::string const& previousPrefix, Key const& patternToMatch,
         Strings& collectedKeys) const {
         if (currentNodePointer != nullptr) {
-            int const prefixLength = previousPrefix.length();
+            int const prefixLength = static_cast<int>(previousPrefix.length());
             if (prefixLength == static_cast<int>(patternToMatch.length()) && currentNodePointer->valueUniquePointer) {
                 collectedKeys.emplace_back(previousPrefix);
             } else if (prefixLength < static_cast<int>(patternToMatch.length())) {

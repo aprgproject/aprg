@@ -20,8 +20,8 @@ private:
 
     [[nodiscard]] int searchUsingOneLoop(std::string const& searchSpace, std::string const& query) const {
         int result(static_cast<int>(std::string::npos));
-        int const searchSpaceLength(searchSpace.length());
-        int const queryLength(query.length());
+        int const searchSpaceLength(static_cast<int>(searchSpace.length()));
+        int const queryLength(static_cast<int>(query.length()));
         int searchIndex = 0;
         int matchIndex = 0;
         for (; searchIndex < searchSpaceLength && matchIndex < queryLength; ++searchIndex) {
@@ -41,8 +41,8 @@ private:
 
     [[nodiscard]] int searchUsingTwoLoops(std::string const& searchSpace, std::string const& query) const {
         int result(static_cast<int>(std::string::npos));
-        int const searchSpaceLength(searchSpace.length());
-        int const queryLength(query.length());
+        int const searchSpaceLength(static_cast<int>(searchSpace.length()));
+        int const queryLength(static_cast<int>(query.length()));
         for (int offset = 0; offset + queryLength <= searchSpaceLength; ++offset) {
             int matchIndex = 0;
             for (; matchIndex < queryLength; ++matchIndex) {

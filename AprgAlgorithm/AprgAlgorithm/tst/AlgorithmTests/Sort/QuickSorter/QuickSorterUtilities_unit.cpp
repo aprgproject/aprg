@@ -24,8 +24,8 @@ TEST(QuickSorterUtilitiesTest, GetPivotValueWorks) {
 TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithLowestIndex) {
     Characters valuesToSort{'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
 
-    auto partitionIndex =
-        partitionAndGetPartitionIndex(valuesToSort, 0, valuesToSort.size() - 1, PivotType::LowestIndex);
+    auto partitionIndex = partitionAndGetPartitionIndex(
+        valuesToSort, 0, static_cast<int>(valuesToSort.size()) - 1, PivotType::LowestIndex);
 
     Characters const valuesToExpect{'E', 'O', 'R', 'L', 'E', 'P', 'A', 'M', 'S', 'T', 'X'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
@@ -35,8 +35,8 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithLowestIndex
 TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithHighestIndex) {
     Characters valuesToSort{'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
 
-    auto partitionIndex =
-        partitionAndGetPartitionIndex(valuesToSort, 0, valuesToSort.size() - 1, PivotType::HighestIndex);
+    auto partitionIndex = partitionAndGetPartitionIndex(
+        valuesToSort, 0, static_cast<int>(valuesToSort.size()) - 1, PivotType::HighestIndex);
 
     Characters const valuesToExpect{'A', 'E', 'E', 'T', 'O', 'X', 'R', 'M', 'P', 'L', 'S'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
@@ -46,8 +46,8 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithHighestInde
 TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithMedianOfLowMidHighIndexes) {
     Characters valuesToSort{'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
 
-    auto partitionIndex =
-        partitionAndGetPartitionIndex(valuesToSort, 0, valuesToSort.size() - 1, PivotType::MedianOfLowMidHighIndexes);
+    auto partitionIndex = partitionAndGetPartitionIndex(
+        valuesToSort, 0, static_cast<int>(valuesToSort.size()) - 1, PivotType::MedianOfLowMidHighIndexes);
 
     Characters const valuesToExpect{'E', 'O', 'R', 'L', 'E', 'P', 'A', 'M', 'S', 'T', 'X'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
@@ -57,8 +57,8 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithMedianOfLow
 TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithMedianNinther) {
     Characters valuesToSort{'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
 
-    auto partitionIndex =
-        partitionAndGetPartitionIndex(valuesToSort, 0, valuesToSort.size() - 1, PivotType::MedianNinther);
+    auto partitionIndex = partitionAndGetPartitionIndex(
+        valuesToSort, 0, static_cast<int>(valuesToSort.size()) - 1, PivotType::MedianNinther);
 
     Characters const valuesToExpect{'E', 'O', 'L', 'P', 'E', 'M', 'A', 'R', 'T', 'S', 'X'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
@@ -68,8 +68,8 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithMedianNinth
 TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithMedianOfMedians) {
     Characters valuesToSort{'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
 
-    auto partitionIndex =
-        partitionAndGetPartitionIndex(valuesToSort, 0, valuesToSort.size() - 1, PivotType::MedianOfMedians);
+    auto partitionIndex = partitionAndGetPartitionIndex(
+        valuesToSort, 0, static_cast<int>(valuesToSort.size()) - 1, PivotType::MedianOfMedians);
 
     Characters const valuesToExpect{'E', 'L', 'A', 'E', 'M', 'X', 'R', 'S', 'P', 'O', 'T'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
@@ -79,8 +79,8 @@ TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexWorksWithMedianOfMed
 TEST(QuickSorterUtilitiesTest, PartitionAndGetPartitionIndexUsingLomutoWorks) {
     Characters valuesToSort{'S', 'O', 'R', 'T', 'E', 'X', 'A', 'M', 'P', 'L', 'E'};
 
-    auto partitionIndex =
-        partitionAndGetPartitionIndexUsingLomuto(valuesToSort, 0, valuesToSort.size() - 1, PivotType::MedianOfMedians);
+    auto partitionIndex = partitionAndGetPartitionIndexUsingLomuto(
+        valuesToSort, 0, static_cast<int>(valuesToSort.size()) - 1, PivotType::MedianOfMedians);
 
     Characters const valuesToExpect{'E', 'A', 'E', 'L', 'M', 'X', 'O', 'R', 'P', 'T', 'S'};
     EXPECT_EQ(valuesToExpect, valuesToSort);
