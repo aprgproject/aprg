@@ -12,6 +12,7 @@ constexpr int constInteger = 100;  // implicity inline (external linkage)
 // ---> Its nightmare to maintain multiple definitions of the function and make sure its the same
 struct SampleClassWithInline {
     SampleClassWithInline() = default;
+    ~SampleClassWithInline() = default;
     SampleClassWithInline(SampleClassWithInline const &) = delete;
     SampleClassWithInline(SampleClassWithInline &&) = delete;
     // implicitly inline (can appear in more than one translation unit)

@@ -28,7 +28,7 @@ set -e
 # Show all issues found in static analysis reports
 staticAnalysisReportPath="StaticAnalysisReport.txt"
 scriptPrint "$scriptName" "$LINENO" "Processing static report: [$staticAnalysisReportPath]..."
-sed -E "s|.*[/\\]aprg[/\\]| F:/Branches/aprg_project/aprg/aprg/|g" "$staticAnalysisReportPath" | grep -P "^.* (note|style|warning|error): .*$" || true
+sed -E "s|.*[/\\]aprg[/\\]| F:/Branches/aprg_project/aprg/aprg/|g" "$staticAnalysisReportPath" | grep -E "note:|style:|warning:|error:" || true
 scriptPrint "$scriptName" "$LINENO" "The exit code is: [$exitCode]"
 exit "$exitCode"
 

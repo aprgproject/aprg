@@ -152,6 +152,7 @@ namespace MultipleExamplesOfRvo {
 
 struct MoveOnlyConstExprObject {
     constexpr MoveOnlyConstExprObject() = default;
+    constexpr ~MoveOnlyConstExprObject() = default;
     constexpr MoveOnlyConstExprObject &operator=(MoveOnlyConstExprObject &&) = default;
     constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject const &) = delete;
     constexpr MoveOnlyConstExprObject &operator=(MoveOnlyConstExprObject const &) = delete;
