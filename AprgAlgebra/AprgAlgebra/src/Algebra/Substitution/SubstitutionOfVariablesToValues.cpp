@@ -118,7 +118,7 @@ VariablesToValuesMap const& SubstitutionOfVariablesToValues::getVariableToValues
     return m_variableToValuesMap;
 }
 
-int SubstitutionOfVariablesToValues::getSize() const { return m_variableToValuesMap.size(); }
+int SubstitutionOfVariablesToValues::getSize() const { return static_cast<int>(m_variableToValuesMap.size()); }
 bool SubstitutionOfVariablesToValues::isEmpty() const { return m_variableToValuesMap.empty(); }
 
 bool SubstitutionOfVariablesToValues::isVariableFound(string const& variable) const {

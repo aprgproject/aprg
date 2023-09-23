@@ -47,7 +47,7 @@ void TermsAggregator::updateStartIndexAndEndIndexAndCheckOpeningAndClosingOperat
     m_startIndex = 0;
     m_endIndex = 0;
     if (!m_terms.empty()) {
-        m_endIndex = m_terms.size() - 1;
+        m_endIndex = static_cast<int>(m_terms.size()) - 1;
     }
     for (int i = 0; i < static_cast<int>(m_terms.size()); ++i) {
         Term const& term(m_terms[i]);

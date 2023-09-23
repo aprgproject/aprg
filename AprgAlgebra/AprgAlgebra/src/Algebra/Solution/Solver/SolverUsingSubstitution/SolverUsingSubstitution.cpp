@@ -126,7 +126,7 @@ void SolverUsingSubstitution::calculateASolutionForAllVariables(
     int previousNumberOfVariables(0);
     VariableNamesSet variablesWithSolution;
     do {
-        previousNumberOfVariables = variablesWithSolution.size();
+        previousNumberOfVariables = static_cast<int>(variablesWithSolution.size());
         calculateASolutionForOneVariable(solutionSet, equations);
         variablesWithSolution = solutionSet.getVariableNames();
     } while (previousNumberOfVariables != static_cast<int>(variablesWithSolution.size()) &&

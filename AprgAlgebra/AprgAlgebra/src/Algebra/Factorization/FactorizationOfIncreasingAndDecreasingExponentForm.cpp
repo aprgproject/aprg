@@ -84,7 +84,8 @@ void fixCoefficientsOfFactors(
     AlbaNumber::FractionData const aCoefficientFractionData(aCoefficient.getFractionData());
     AlbaNumber::FractionData const secondFractionData(rootSecondCoefficient.getFractionData());
     int const multiplier = getGreatestCommonFactor<int>(
-        getAbsoluteValue(aCoefficientFractionData.numerator), secondFractionData.denominator);
+        getAbsoluteValue(static_cast<int>(aCoefficientFractionData.numerator)),
+        static_cast<int>(secondFractionData.denominator));
     rootFirstCoefficient = rootFirstCoefficient * multiplier;
     rootSecondCoefficient = rootSecondCoefficient * multiplier;
     aCoefficient = aCoefficient / multiplier;
@@ -128,7 +129,7 @@ AlbaNumbers calculatePolynomialRootsUsingBrentMethod(
     valuesForRootFinding.emplace_back(maxAbsoluteValue);
     sort(valuesForRootFinding.begin(), valuesForRootFinding.end());
     BrentMethod brentMethod(coefficients);
-    int const size = valuesForRootFinding.size();
+    int const size = static_cast<int>(valuesForRootFinding.size());
     for (int i = 0; i < size - 1; ++i) {
         int const j = i + 1;
         brentMethod.resetCalculation(valuesForRootFinding[i], valuesForRootFinding[j]);
@@ -180,7 +181,7 @@ Polynomials factorizeIncreasingAndDecreasingExponentsForm(Polynomial const& poly
 
 int calculateMaxExponentDivisor(Monomial const& firstMonomial, Monomial const& lastMonomial) {
     AlbaNumber const maxExponent = max(getMaxExponent(firstMonomial), getMaxExponent(lastMonomial));
-    int const maxExponentDivisor = getAbsoluteValue(maxExponent.getInteger());
+    int const maxExponentDivisor = getAbsoluteValue(static_cast<int>(maxExponent.getInteger()));
     return maxExponentDivisor;
 }
 

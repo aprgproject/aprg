@@ -159,12 +159,13 @@ void SimplificationOfExpression::convertPolynomialToPolynomialOverPolynomial(Exp
 bool SimplificationOfExpression::tryToSubstituteSubExpressionOrSubFunctionAndReturnIfContinue(
     Expression const& expression) {
     bool continueToTryToSubstitute = false;
-    int const oldNumberOfTerms = expression.getTermsWithAssociation().getTermsWithDetails().size();
+    int const oldNumberOfTerms = static_cast<int>(expression.getTermsWithAssociation().getTermsWithDetails().size());
     Terms const expressionAndFunctionTerms(retrieveSubExpressionsAndSubFunctions(expression));
     for (Term const& expressionOrFunctionTerm : expressionAndFunctionTerms) {
         Expression const newExpression(
             getNewExpressionWithSubstitutedVariableForTerm(m_expression, expressionOrFunctionTerm));
-        int const newNumberOfTerms = newExpression.getTermsWithAssociation().getTermsWithDetails().size();
+        int const newNumberOfTerms =
+            static_cast<int>(newExpression.getTermsWithAssociation().getTermsWithDetails().size());
         if (expression.getCommonOperatorLevel() != newExpression.getCommonOperatorLevel() ||
             oldNumberOfTerms != newNumberOfTerms) {
             m_expression = newExpression;

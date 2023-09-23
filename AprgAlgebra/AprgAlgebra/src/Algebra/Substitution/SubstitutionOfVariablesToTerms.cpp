@@ -123,7 +123,7 @@ VariablesToTermsMap const& SubstitutionOfVariablesToTerms::getVariablesToTermsMa
     return m_variableToTermsMap;
 }
 
-int SubstitutionOfVariablesToTerms::getSize() const { return m_variableToTermsMap.size(); }
+int SubstitutionOfVariablesToTerms::getSize() const { return static_cast<int>(m_variableToTermsMap.size()); }
 bool SubstitutionOfVariablesToTerms::isEmpty() const { return m_variableToTermsMap.empty(); }
 
 bool SubstitutionOfVariablesToTerms::isVariableFound(string const& variable) const {

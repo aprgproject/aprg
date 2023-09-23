@@ -47,8 +47,8 @@ void IsolationOfOneVariableOnEqualityEquations::sortEquationsWithVariable(Equati
             VariableNamesRetriever namesRetriever2;
             namesRetriever1.retrieveFromEquation(equation1);
             namesRetriever2.retrieveFromEquation(equation2);
-            int const size1 = namesRetriever1.getVariableNames().size();
-            int const size2 = namesRetriever2.getVariableNames().size();
+            int const size1 = static_cast<int>(namesRetriever1.getVariableNames().size());
+            int const size2 = static_cast<int>(namesRetriever2.getVariableNames().size());
             bool result(false);
             if (size1 == size2) {
                 AlbaNumber const degree1(getDegree(equation1));

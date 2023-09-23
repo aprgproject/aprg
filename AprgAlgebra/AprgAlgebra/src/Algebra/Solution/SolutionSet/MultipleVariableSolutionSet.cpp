@@ -30,7 +30,7 @@ VariableNamesSet MultipleVariableSolutionSet::getVariableNames() const {
 }
 
 int MultipleVariableSolutionSet::getNumberOfVariablesWithSolutions() const {
-    return m_variableNameToSolutionSetMap.size();
+    return static_cast<int>(m_variableNameToSolutionSetMap.size());
 }
 
 bool MultipleVariableSolutionSet::isValueAcceptedForVariable(
