@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [42]
-2023-09-23T03:34:59
+StaticAnalysisJobIdentifier: [43]
+2023-09-23T11:13:01
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-2d.cc:28:1: warning: #includes are not sorted properly [llvm-include-order]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-2d.cc:32:1: warning: #includes are not sorted properly [llvm-include-order]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-2d.cc:58:5: warning: variable 'num_v_total' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
@@ -22,18 +22,8 @@ note: cannot apply fix-it because an alias checker has suggested a different fix
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-2d.cc:108:9: warning: variable name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-2d.cc:109:9: warning: variable name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-2d.cc:113:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-2d.cc:113:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-2d.cc:113:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-2d.cc:115:10: warning: variable name 'gp' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-2d.cc:127:19: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-2d.cc:145:11: warning: loop variable name 'u' is too short, expected at least 2 characters [readability-identifier-length]
@@ -64,18 +54,8 @@ note: cannot apply fix-it because an alias checker has suggested a different fix
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-1d.cc:84:11: note: namespace 'gnuplotio' starts here
 note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-1d.cc:116:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-1d.cc:116:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-1d.cc:116:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-1d.cc:118:10: warning: variable name 'gp' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-1d.cc:122:21: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-1d.cc:148:4: warning: 'emplace_back' is called inside a loop; consider pre-allocating the container capacity before the loop [performance-inefficient-vector-operation]
@@ -98,18 +78,8 @@ note: cannot apply fix-it because an alias checker has suggested a different fix
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-data-1d.cc:448:34: warning: 1e-12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-interactive.cc:23:1: warning: #includes are not sorted properly [llvm-include-order]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-interactive.cc:35:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-interactive.cc:35:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-interactive.cc:35:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-interactive.cc:37:10: warning: variable name 'gp' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-interactive.cc:42:10: warning: variable name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/example-interactive.cc:42:14: warning: rand() has limited randomness; use C++11 random library instead [cert-msc30-c,cert-msc50-cpp]
@@ -217,109 +187,66 @@ note: cannot apply fix-it because an alias checker has suggested a different fix
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/basic_string.h:642:7: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-empty.cc:53:18: warning: parameter name 'gp' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-empty.cc:64:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-empty.cc:64:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-empty.cc:64:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-empty.cc:66:10: warning: variable name 'gp' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-empty.cc:66:63: warning: use 'fopen' mode 'e' to set O_CLOEXEC [android-cloexec-fopen]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-empty.cc:50:1: warning: non-POD static (basic_string) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-noncopyable.cc:25:1: warning: #includes are not sorted properly [llvm-include-order]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-noncopyable.cc:40:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-noncopyable.cc:40:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-noncopyable.cc:40:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-noncopyable.cc:42:10: warning: variable name 'gp' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:41:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:42:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:43:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:44:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:45:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:46:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:47:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:48:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest.cc:622:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:29:1: warning: #includes are not sorted properly [llvm-include-order]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:41:1: warning: duplicate include [readability-duplicate-include]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:47:1: warning: duplicate include [readability-duplicate-include]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:48:1: warning: duplicate include [readability-duplicate-include]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:52:9: warning: initialization of 'gp' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:33:1: warning: #includes are not sorted properly [llvm-include-order]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:40:1: warning: duplicate include [readability-duplicate-include]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:46:1: warning: duplicate include [readability-duplicate-include]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:50:9: warning: initialization of 'gp' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/src/gnuplot-iostream.h:1587:14: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:52:9: warning: variable 'gp' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:52:9: warning: variable name 'gp' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:53:19: warning: initialization of 'basedir' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:50:9: warning: variable 'gp' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:50:9: warning: variable name 'gp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:51:19: warning: initialization of 'basedir' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/basic_string.h:642:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:57:36: warning: the parameter 'header' is copied for each invocation but only used as a const reference; consider making it a const reference [performance-unnecessary-value-param]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:69:36: warning: the parameter 'header' is copied for each invocation but only used as a const reference; consider making it a const reference [performance-unnecessary-value-param]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:119:17: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:121:3: warning: 'push_back' is called inside a loop; consider pre-allocating the container capacity before the loop [performance-inefficient-vector-operation]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:128:17: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:130:3: warning: 'push_back' is called inside a loop; consider pre-allocating the container capacity before the loop [performance-inefficient-vector-operation]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:130:19: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:54:56: warning: the parameter 'header' is copied for each invocation but only used as a const reference; consider making it a const reference [performance-unnecessary-value-param]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:62:56: warning: the parameter 'header' is copied for each invocation but only used as a const reference; consider making it a const reference [performance-unnecessary-value-param]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:110:20: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:112:9: warning: 'push_back' is called inside a loop; consider pre-allocating the container capacity before the loop [performance-inefficient-vector-operation]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:119:20: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:121:9: warning: 'push_back' is called inside a loop; consider pre-allocating the container capacity before the loop [performance-inefficient-vector-operation]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:121:25: warning: C-style casts are discouraged; use static_cast [google-readability-casting]
 note: this fix will not be applied because it overlaps with another fix
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:130:19: warning: C-style casts are discouraged; use static_cast (if needed, the cast may be redundant) [google-readability-casting]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:121:25: warning: C-style casts are discouraged; use static_cast (if needed, the cast may be redundant) [google-readability-casting]
 note: this fix will not be applied because it overlaps with another fix
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:130:21: warning: 0.1234 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:136:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:136:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:136:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:138:12: warning: variable name 'NX' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:139:12: warning: variable name 'NY' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:140:12: warning: variable name 'NZ' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:141:22: warning: variable name 'vd' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:142:19: warning: variable name 'vi' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:143:21: warning: variable name 'vf' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:148:2: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:148:6: warning: variable name 'ai' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:149:24: warning: variable name 'bi' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:152:22: warning: variable name 'si' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:156:10: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:157:18: warning: 7.5 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:159:16: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:159:18: warning: 7.2F is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:160:38: warning: 0.123 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:160:52: warning: 200 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:162:23: warning: 0.123 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:162:37: warning: 200 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:163:13: warning: 90 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:166:13: warning: 70 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:167:11: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:169:21: warning: 200 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:171:18: warning: 300 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:172:18: warning: 400 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:176:12: warning: loop variable name 'z' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:177:5: warning: 'emplace_back' is called inside a loop; consider pre-allocating the container capacity before the loop [performance-inefficient-vector-operation]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:220:35: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:53:1: warning: non-POD static (basic_string) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:121:27: warning: 0.1234 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:127:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:127:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:127:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:128:15: warning: variable name 'NX' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:129:15: warning: variable name 'NY' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:130:15: warning: variable name 'NZ' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:131:25: warning: variable name 'vd' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:132:22: warning: variable name 'vi' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:133:24: warning: variable name 'vf' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:138:5: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:138:9: warning: variable name 'ai' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:139:27: warning: variable name 'bi' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:142:25: warning: variable name 'si' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:146:14: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:147:26: warning: 7.5 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:149:46: warning: 7.2F is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:150:46: warning: 0.123 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:150:62: warning: 200 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:152:31: warning: 0.123 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:152:47: warning: 200 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:153:21: warning: 90 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:156:21: warning: 70 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:157:18: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:159:30: warning: 200 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:161:27: warning: 300 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:162:27: warning: 400 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:166:22: warning: loop variable name 'z' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:167:17: warning: 'emplace_back' is called inside a loop; consider pre-allocating the container capacity before the loop [performance-inefficient-vector-operation]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:208:38: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
+/home/runner/work/aprg/aprg/AprgGnuPlot/GnuPlotWrapper/tst/test-outputs.cc:51:1: warning: non-POD static (basic_string) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/AdditionAndSubtractionOfExpressions.cpp:20:44: warning: initialization of 'isCommonPart' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/BaseTermHelpers.hpp:15:13: note: possibly throwing function declared here
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/AdditionAndSubtractionOfExpressions.cpp:25:44: warning: initialization of 'isMergePart' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
@@ -408,10 +335,10 @@ note: this fix will not be applied because it overlaps with another fix
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DerivativeVariableName.cpp:140:11: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DerivativeVariableName.cpp:143:7: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DerivativeVariableName.cpp:105:21: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DifferentiationForFiniteCalculus.cpp:10:68: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/Differentiation.cpp:23:34: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/Differentiation.cpp:27:5: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/Differentiation.cpp:27:50: warning: pass by value and use std::move [modernize-pass-by-value]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DifferentiationForFiniteCalculus.cpp:10:68: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/Lagrange.cpp:16:27: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/Lagrange.cpp:19:27: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/Lagrange.cpp:43:16: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
@@ -1152,9 +1079,9 @@ note: this fix will not be applied because it overlaps with another fix
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Simplification/SimplificationOfFunction.cpp:11:52: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Simplification/SimplificationOfExpression.cpp:26:56: warning: pass by value and use std::move [modernize-pass-by-value]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/SolutionSet/MultipleVariableSolutionSet.cpp:12:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/DomainAndRange/DomainAndRange.cpp:43:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/DomainAndRange/DomainAndRange.cpp:65:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/SolutionSet/MultipleVariableSolutionSet.cpp:12:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/DiophantineEquation/LinearDiophantineEquationCoefficientSolver.cpp:11:23: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/DiophantineEquation/LinearDiophantineEquationCoefficientSolver.cpp:11:44: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/DiophantineEquation/LinearDiophantineEquationCoefficientSolver.cpp:11:65: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
@@ -1200,9 +1127,9 @@ note: this fix will not be applied because it overlaps with another fix
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:208:74: warning: repeated branch in conditional chain [bugprone-branch-clone]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:210:6: note: end of the original
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:225:12: note: clone 1 starts here
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Operator.cpp:9:20: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Monomial.cpp:21:48: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Monomial.cpp:94:17: style: Unused variable: _ [unusedVariable]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Operator.cpp:9:20: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Term.cpp:161:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Polynomial.cpp:14:24: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Variable.cpp:9:20: warning: pass by value and use std::move [modernize-pass-by-value]
@@ -1278,7 +1205,6 @@ note: this fix will not be applied because it overlaps with another fix
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/HyperbolicParaboloid.cpp:35:79: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/HyperbolicParaboloid.cpp:41:63: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/HyperbolicParaboloid.cpp:41:79: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Line.cpp:20:9: warning: narrowing conversion from 'typename iterator_traits<__normal_iterator<const double *, vector<double>>>::difference_type' (aka 'long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Line.cpp:53:53: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Line.cpp:57:53: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Line.cpp:61:53: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
@@ -1370,15 +1296,9 @@ note: this fix will not be applied because it overlaps with another fix
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Line.cpp:145:43: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Line.cpp:148:43: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:24:45: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:58:27: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:92:29: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:93:29: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:101:45: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:112:45: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:122:45: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:132:29: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:133:29: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:134:29: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:145:49: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:149:49: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:157:49: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
@@ -1449,8 +1369,6 @@ note: this fix will not be applied because it overlaps with another fix
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:584:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:584:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:584:99: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:743:24: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:762:31: warning: narrowing conversion from 'std::vector::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:779:20: warning: 1st argument 'firstPoint' (passed to 'point1') looks like it might be swapped with the 2nd, 'point1' (passed to 'point2') [readability-suspicious-call-argument]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:235:8: note: in the call to 'getDistance', declared here
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Vector/AlbaMathVectorUtilities.hpp:136:89: warning: Return value of function sin() is not used. [ignoredReturnValue]
@@ -1509,18 +1427,8 @@ note: this fix will not be applied because it overlaps with another fix
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlotBase.hpp:18:22: warning: explicitly defaulted move assignment operator is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlotBase.hpp:28:13: note: move assignment operator of 'AprgGnuPlotBase' is implicitly deleted because field 'm_gnuPlot' has an inaccessible move assignment operator
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:18:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:18:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:18:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:29:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:29:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:29:17: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
@@ -1530,18 +1438,8 @@ note: this fix will not be applied because it overlaps with another fix
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:30:21: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:30:43: warning: loop induction expression should not have floating-point type [cert-flp30-c]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:51:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:51:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:51:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:57:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:57:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgAlgebra_unit.cpp:57:17: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
@@ -1570,52 +1468,22 @@ note: this fix will not be applied because it overlaps with another fix
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlotBase.hpp:18:22: warning: explicitly defaulted move assignment operator is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlotBase.hpp:28:13: note: move assignment operator of 'AprgGnuPlotBase' is implicitly deleted because field 'm_gnuPlot' has an inaccessible move assignment operator
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:15:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:15:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:15:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:18:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:18:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:18:17: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:18:36: warning: loop induction expression should not have floating-point type [cert-flp30-c]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:34:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:34:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:34:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:41:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:41:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:41:17: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:41:36: warning: loop induction expression should not have floating-point type [cert-flp30-c]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:74:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:74:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:74:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:80:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:80:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:80:17: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
@@ -1625,18 +1493,8 @@ note: this fix will not be applied because it overlaps with another fix
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:81:21: warning: loop variable name 'z' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:81:40: warning: loop induction expression should not have floating-point type [cert-flp30-c]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:97:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:97:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:97:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:110:5: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:110:5: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:110:17: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
@@ -1646,22 +1504,9 @@ note: this fix will not be applied because it overlaps with another fix
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:111:21: warning: loop variable name 'z' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:111:38: warning: loop induction expression should not have floating-point type [cert-flp30-c]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:143:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:143:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:143:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:143:1: warning: function 'TestBody' has cognitive complexity of 26 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1557:60: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:152:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:153:9: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryThreeDimensions_unit.cpp:154:13: note: +3, including nesting penalty of 2, nesting level increased to 3
@@ -1721,60 +1566,20 @@ note: this fix will not be applied because it overlaps with another fix
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlotBase.hpp:18:22: warning: explicitly defaulted move assignment operator is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlotBase.hpp:28:13: note: move assignment operator of 'AprgGnuPlotBase' is implicitly deleted because field 'm_gnuPlot' has an inaccessible move assignment operator
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:15:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:15:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:15:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:27:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:27:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:27:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:39:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:39:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:39:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:43:55: warning: 2.5 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:43:60: warning: 3.5 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:44:41: warning: 0.01 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:61:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:61:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:61:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:62:30: warning: 96 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:63:30: warning: 40 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/tst/AprgGnuPlotTests/AprgGeometryTwoDimensions_unit.cpp:64:30: warning: 238 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
