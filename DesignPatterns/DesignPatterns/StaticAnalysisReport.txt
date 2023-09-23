@@ -1,438 +1,135 @@
-StaticAnalysisJobIdentifier: [41]
-2023-09-21T04:12:11
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:41:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:42:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:43:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:44:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:45:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:46:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:47:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:48:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest-all.cc:49:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/src/gtest.cc:622:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:155:67: warning: narrowing conversion from 'std::basic_string<char>::size_type' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/User/DisplayTable.cpp:158:12: warning: narrowing conversion from 'unsigned long' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/AbstractFactory/AbstractFactory.hpp:9:7: warning: class 'ProductA' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/AbstractFactory/AbstractFactory.hpp:33:7: warning: class 'ProductB' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/AbstractFactory/AbstractFactory.hpp:56:7: warning: class 'AbstractFactory' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
+StaticAnalysisJobIdentifier: [43]
+2023-09-23T15:07:59
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/AbstractFactory/AbstractFactory_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/AbstractFactory/AbstractFactory_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/AbstractFactory/AbstractFactory_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Adapter/ClassAdapter.hpp:7:7: warning: class 'Target' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ClassAdapter_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ClassAdapter_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ClassAdapter_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ClassAdapter_unit.cpp:10:13: warning: variable name 't' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ClassAdapter_unit.cpp:12:5: warning: deleting a pointer through a type that is not marked 'gsl::owner<>'; consider using a smart pointer instead [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ClassAdapter_unit.cpp:10:5: note: variable declared here
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Adapter/ObjectAdapter.hpp:7:7: warning: class 'Target' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ClassAdapter_unit.cpp:10:29: warning: variable name 't' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ObjectAdapter_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ObjectAdapter_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ObjectAdapter_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ObjectAdapter_unit.cpp:10:13: warning: variable name 't' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ObjectAdapter_unit.cpp:12:5: warning: deleting a pointer through a type that is not marked 'gsl::owner<>'; consider using a smart pointer instead [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ObjectAdapter_unit.cpp:10:5: note: variable declared here
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Bridge/Bridge.hpp:8:7: warning: class 'Implementor' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Bridge/Bridge.hpp:31:7: warning: class 'Abstraction' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ObjectAdapter_unit.cpp:10:29: warning: variable name 't' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Bridge/Bridge_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Bridge/Bridge_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Bridge/Bridge_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Builder/Builder.hpp:25:7: warning: class 'Builder' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Builder/Builder_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Builder/Builder_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Builder/Builder_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:9:7: warning: class 'Handler' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:13:5: warning: explicitly defaulted copy constructor is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:30:30: note: copy constructor of 'Handler' is implicitly deleted because field 'm_successorPointer' has a deleted copy constructor
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/unique_ptr.h:514:7: note: 'unique_ptr' has been explicitly marked deleted here
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:15:14: warning: explicitly defaulted copy assignment operator is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:30:30: note: copy assignment operator of 'Handler' is implicitly deleted because field 'm_successorPointer' has a deleted copy assignment operator
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/unique_ptr.h:515:19: note: 'operator=' has been explicitly marked deleted here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/ChainOfResponsibility/ChainOfResponsibility_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/ChainOfResponsibility/ChainOfResponsibility_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/ChainOfResponsibility/ChainOfResponsibility_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Command/Command.hpp:21:7: warning: class 'Command' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:13:5: warning: explicitly defaulted copy constructor is implicitly deleted [-Wdefaulted-function-deleted]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:30:30: note: copy constructor of 'Handler' is implicitly deleted because field 'm_successorPointer' has a deleted copy constructor
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/unique_ptr.h:514:7: note: 'unique_ptr' has been explicitly marked deleted here
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:15:14: warning: explicitly defaulted copy assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:30:30: note: copy assignment operator of 'Handler' is implicitly deleted because field 'm_successorPointer' has a deleted copy assignment operator
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/unique_ptr.h:515:19: note: 'operator=' has been explicitly marked deleted here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Command/Command_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Command/Command_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Command/Command_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Composite/Composite.hpp:10:7: warning: class 'Component' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Composite/Composite.hpp:57:29: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Composite/Composite.hpp:62:29: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Composite/Composite_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Composite/Composite_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Composite/Composite_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Composite/Composite_unit.cpp:10:9: warning: variable name 'id' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Decorator/Decorator.hpp:9:7: warning: class 'Component' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Decorator/Decorator_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Decorator/Decorator_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Decorator/Decorator_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Facade/Facade_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Facade/Facade_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Facade/Facade_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Facade/Facade_unit.cpp:10:5: warning: initializing non-owner 'Facade::Facade *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Facade/Facade_unit.cpp:14:5: warning: deleting a pointer through a type that is not marked 'gsl::owner<>'; consider using a smart pointer instead [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Facade/Facade_unit.cpp:10:5: note: variable declared here
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/FactoryMethod/FactoryMethod.hpp:9:7: warning: class 'Product' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/FactoryMethod/FactoryMethod.hpp:35:7: warning: class 'Creator' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/FactoryMethod/FactoryMethod_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/FactoryMethod/FactoryMethod_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/FactoryMethod/FactoryMethod_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Flyweight/Flyweight.hpp:10:7: warning: class 'Flyweight' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Flyweight/Flyweight.hpp:57:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Flyweight/Flyweight.hpp:62:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Flyweight/Flyweight_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Flyweight/Flyweight_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Flyweight/Flyweight_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Flyweight/Flyweight_unit.cpp:16:40: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Flyweight/Flyweight_unit.cpp:19:34: warning: 30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Flyweight/Flyweight_unit.cpp:22:36: warning: 40 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Interpreter/Interpreter.hpp:23:7: warning: class 'AbstractExpression' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Interpreter/Interpreter.hpp:36:33: warning: pass by value and use std::move [modernize-pass-by-value]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Interpreter/Interpreter.hpp:41:33: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Interpreter/Interpreter_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Interpreter/Interpreter_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Interpreter/Interpreter_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Interpreter/Interpreter_unit.cpp:12:10: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Interpreter/Interpreter_unit.cpp:13:10: warning: variable name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Interpreter/Interpreter_unit.cpp:18:22: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:13:7: warning: class 'Aggregate' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:25:81: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:32:21: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:40:7: warning: class 'Iterator' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:68:46: warning: function 'createIterator' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:68:46: note: make as 'inline'
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:30:81: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:37:21: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:78:46: warning: function 'createIterator' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:78:46: note: make as 'inline'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Iterator/Iterator_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Iterator/Iterator_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Iterator/Iterator_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Iterator/Iterator_unit.cpp:13:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:12:7: warning: class 'Colleague' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:15:45: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:27:53: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:34:7: warning: class 'Mediator' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:63:25: warning: function 'send' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:63:25: note: make as 'inline'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:68:25: warning: function 'receive' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:68:25: note: make as 'inline'
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:17:16: warning: explicitly defaulted copy assignment operator is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:25:15: note: copy assignment operator of 'Colleague' is implicitly deleted because field 'm_mediator' is of reference type 'Mediator::Mediator &'
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:18:16: warning: explicitly defaulted move assignment operator is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:25:15: note: move assignment operator of 'Colleague' is implicitly deleted because field 'm_mediator' is of reference type 'Mediator::Mediator &'
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:19:45: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:31:53: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:71:25: warning: function 'send' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:71:25: note: make as 'inline'
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:76:25: warning: function 'receive' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:76:25: note: make as 'inline'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Mediator/Mediator_unit.cpp:11:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Mediator/Mediator_unit.cpp:11:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Mediator/Mediator_unit.cpp:11:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:17:16: warning: explicitly defaulted copy assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:25:15: note: copy assignment operator of 'Colleague' is implicitly deleted because field 'm_mediator' is of reference type 'Mediator::Mediator &'
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:18:16: warning: explicitly defaulted move assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:25:15: note: move assignment operator of 'Colleague' is implicitly deleted because field 'm_mediator' is of reference type 'Mediator::Mediator &'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Memento/Memento_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Memento/Memento_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Memento/Memento_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/NullObject/NullObject.hpp:9:7: warning: class 'AbstractObject' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/NullObject/NullObject_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/NullObject/NullObject_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/NullObject/NullObject_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:11:7: warning: class 'Observer' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:37:7: warning: class 'Subject' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:41:37: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:70:24: warning: function 'update' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:70:24: note: make as 'inline'
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:51:37: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:80:24: warning: function 'update' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:80:24: note: make as 'inline'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Observer/Observer_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Observer/Observer_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Observer/Observer_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Prototype/Prototype.hpp:9:7: warning: class 'Prototype' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Prototype/Prototype_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Prototype/Prototype_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Prototype/Prototype_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Proxy/Proxy.hpp:9:7: warning: class 'Subject' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Proxy/Proxy_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Proxy/Proxy_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Proxy/Proxy_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Proxy/Proxy_unit.cpp:10:5: warning: initializing non-owner 'Proxy::Proxy *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Proxy/Proxy_unit.cpp:13:5: warning: deleting a pointer through a type that is not marked 'gsl::owner<>'; consider using a smart pointer instead [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Proxy/Proxy_unit.cpp:10:5: note: variable declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:36:39: warning: variable 'm_instancePointer' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:40:39: warning: variable 'm_instancePointer' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:40:39: warning: variable 'm_instancePointer' defined in a header file; variable definitions in header files can lead to ODR violations [misc-definitions-in-headers]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Singleton/Singleton_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Singleton/Singleton_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Singleton/Singleton_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Singleton/Singleton_unit.cpp:10:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Singleton/Singleton_unit.cpp:14:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/State/State.hpp:9:7: warning: class 'State' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/State/State_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/State/State_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/State/State_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Strategy/Strategy.hpp:8:7: warning: class 'Strategy' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Strategy/Strategy_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Strategy/Strategy_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Strategy/Strategy_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Strategy/Strategy_unit.cpp:14:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Strategy/Strategy_unit.cpp:14:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Strategy/Strategy_unit.cpp:14:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Strategy/Strategy_unit.cpp:19:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Strategy/Strategy_unit.cpp:19:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Strategy/Strategy_unit.cpp:19:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/TemplateMethod/TemplateMethod.hpp:7:7: warning: class 'AbstractClass' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/TemplateMethod/TemplateMethod_unit.cpp:11:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/TemplateMethod/TemplateMethod_unit.cpp:11:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/TemplateMethod/TemplateMethod_unit.cpp:11:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Visitor/Visitor.hpp:12:7: warning: class 'Visitor' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Visitor/Visitor.hpp:40:7: warning: class 'Element' defines a default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions,hicpp-special-member-functions]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Visitor/Visitor_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1547:65: note: expanded from macro 'GTEST_TEST_'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:477:3: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Visitor/Visitor_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1543:39: note: expanded from macro 'GTEST_TEST_'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Visitor/Visitor_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2175:42: note: expanded from macro 'TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/gtest.h:2169:3: note: expanded from macro 'GTEST_TEST'
-/home/runner/work/aprg/aprg/gtest/gtest/googletest/include/gtest/internal/gtest-internal.h:1555:11: note: expanded from macro 'GTEST_TEST_'
 DONE!
