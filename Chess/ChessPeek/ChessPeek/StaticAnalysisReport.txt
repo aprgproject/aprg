@@ -1,43 +1,42 @@
-StaticAnalysisJobIdentifier: [43]
-2023-09-23T14:40:30
+StaticAnalysisJobIdentifier: [44]
+2023-09-24T21:35:39
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:88:26: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:92:18: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:93:18: warning: variable name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:94:18: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:120:77: warning: 40 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:125:73: warning: 24 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:136:63: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:136:76: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:177:29: warning: 14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:180:29: warning: 18 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:183:29: warning: 22 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:186:29: warning: 26 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:189:29: warning: 28 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:194:29: warning: 30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:197:29: warning: 34 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:200:29: warning: 38 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:203:29: warning: 42 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:206:29: warning: 46 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:209:29: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:214:29: warning: 54 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:251:14: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:254:14: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:257:14: warning: 13 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:68:18: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:69:18: warning: variable name 'b' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:70:18: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:121:77: warning: 40 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:126:73: warning: 24 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:137:63: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:137:76: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:178:29: warning: 14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:181:29: warning: 18 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:184:29: warning: 22 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:187:29: warning: 26 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:190:29: warning: 28 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:195:29: warning: 30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:198:29: warning: 34 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:201:29: warning: 38 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:204:29: warning: 42 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:207:29: warning: 46 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:210:29: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:215:29: warning: 54 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:252:14: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:255:14: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:258:14: warning: 13 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitValueUtilitiesClassDefinition.hpp:306:19: style: Checking if unsigned expression 'value' is less than zero. [unsignedLessThanZero]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitValueUtilitiesClassDefinition.hpp:335:19: style: Checking if unsigned expression 'value' is less than zero. [unsignedLessThanZero]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitValueUtilitiesClassDefinition.hpp:113:96: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:12:5: warning: pass by value and use std::move [modernize-pass-by-value]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:58:14: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:59:18: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:83:22: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:106:24: warning: performing an implicit widening conversion to type 'size_t' (aka 'unsigned long') of a multiplication performed in type 'int' [bugprone-implicit-widening-of-multiplication-result]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:106:24: note: make conversion explicit to silence this warning
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:106:24: note: perform multiplication in a wider type
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:122:14: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:123:18: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:157:19: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:180:38: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:182:14: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:65:14: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:66:18: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:90:22: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:113:24: warning: performing an implicit widening conversion to type 'size_t' (aka 'unsigned long') of a multiplication performed in type 'int' [bugprone-implicit-widening-of-multiplication-result]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:113:24: note: make conversion explicit to silence this warning
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:113:24: note: perform multiplication in a wider type
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:129:14: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:130:18: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:164:19: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:187:38: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:189:14: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/BoardUtilities.cpp:69:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/BoardUtilities.cpp:127:9: warning: switch has 2 consecutive identical branches [bugprone-branch-clone]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/BoardUtilities.cpp:134:10: note: last of these clones ends here
@@ -47,150 +46,150 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/BoardUtilities.cpp:159:10: warning: variable name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/BoardValue.cpp:109:50: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/BoardValue.cpp:109:78: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:54:17: warning: function 'getExchangeAt' has cognitive complexity of 38 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:72:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:81:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:81:85: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:82:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:82:57: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:82:31: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:82:78: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:85:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:86:49: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:93:16: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:94:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:96:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:96:104: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:96:44: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:97:45: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:103:19: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:106:20: note: +1, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:109:16: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:110:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:112:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:112:104: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:112:44: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:113:45: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:119:19: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:122:20: note: +1, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:125:11: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:178:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:185:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:201:29: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:203:33: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:226:15: warning: function 'getCastlingPartOfFenString' has cognitive complexity of 27 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:228:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:235:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:235:80: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:239:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:239:80: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:243:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:243:80: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:247:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:247:80: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:251:12: note: +1, nesting level increased to 1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:258:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:258:80: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:262:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:262:80: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:266:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:266:80: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:270:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:270:80: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:275:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:342:30: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:342:58: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:352:77: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:362:77: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:525:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:536:18: warning: function 'getCastlingKingAndRookMovePairs' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:538:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:539:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:543:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:543:79: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:547:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:547:79: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:551:16: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:555:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:555:79: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:559:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:559:79: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:564:12: note: +1, nesting level increased to 1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:565:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:569:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:569:79: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:573:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:573:79: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:577:16: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:581:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:581:79: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:585:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:585:79: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:652:20: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:847:13: warning: function 'isAPawnEnPassantMove' has cognitive complexity of 33 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:851:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:851:30: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:852:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:853:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:854:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:854:44: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:858:20: note: +1, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:859:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:859:44: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:864:16: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:865:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:866:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:866:44: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:870:20: note: +1, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:871:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:871:44: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1151:13: warning: function 'retrievePawnEnPassantReverseToThis' has cognitive complexity of 85 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1153:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:56:17: warning: function 'getExchangeAt' has cognitive complexity of 38 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:74:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:83:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:83:85: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:84:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:84:57: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:84:31: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:84:78: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:87:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:88:49: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:95:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:96:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:98:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:98:104: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:98:44: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:99:45: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:105:19: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:108:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:111:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:112:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:114:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:114:104: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:114:44: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:115:45: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:121:19: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:124:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:127:11: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:180:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:187:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:203:29: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:205:33: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:228:15: warning: function 'getCastlingPartOfFenString' has cognitive complexity of 27 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:230:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:237:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:237:80: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:241:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:241:80: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:245:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:245:80: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:249:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:249:80: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:253:12: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:260:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:260:80: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:264:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:264:80: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:268:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:268:80: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:272:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:272:80: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:277:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:344:30: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:344:58: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:354:77: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:364:77: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:527:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:538:18: warning: function 'getCastlingKingAndRookMovePairs' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:540:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:541:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:545:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:545:79: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:549:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:549:79: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:553:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:557:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:557:79: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:561:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:561:79: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:566:12: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:567:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:571:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:571:79: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:575:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:575:79: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:579:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:583:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:583:79: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:587:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:587:79: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:654:20: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:849:13: warning: function 'isAPawnEnPassantMove' has cognitive complexity of 33 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:853:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:853:30: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:854:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:855:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:856:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:856:44: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:860:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:861:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:861:44: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:866:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:867:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:868:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:868:44: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:872:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:873:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:873:44: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1153:13: warning: function 'retrievePawnEnPassantReverseToThis' has cognitive complexity of 85 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1155:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:20:5: note: expanded from macro 'CHESS_UTILITIES_BOARD_QUICK_RETURN_IF_MAX_SIZE_IS_REACHED'
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1154:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1155:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1156:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1157:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1161:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1161:88: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1164:25: note: +6, including nesting penalty of 5, nesting level increased to 6
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1156:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1157:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1158:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1159:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1163:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1163:88: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1166:25: note: +6, including nesting penalty of 5, nesting level increased to 6
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:25:5: note: expanded from macro 'CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED'
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1168:16: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1169:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1170:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1174:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1174:88: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1177:25: note: +6, including nesting penalty of 5, nesting level increased to 6
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1170:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1171:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1172:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1176:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1176:88: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1179:25: note: +6, including nesting penalty of 5, nesting level increased to 6
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:25:5: note: expanded from macro 'CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED'
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1182:12: note: +1, nesting level increased to 1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1183:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1184:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1185:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1189:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1189:88: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1192:25: note: +6, including nesting penalty of 5, nesting level increased to 6
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1184:12: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1185:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1186:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1187:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1191:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1191:88: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1194:25: note: +6, including nesting penalty of 5, nesting level increased to 6
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:25:5: note: expanded from macro 'CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED'
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1196:16: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1197:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1198:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1202:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1202:88: note: +1
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1205:25: note: +6, including nesting penalty of 5, nesting level increased to 6
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1198:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1199:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1200:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1204:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1204:88: note: +1
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1207:25: note: +6, including nesting penalty of 5, nesting level increased to 6
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:25:5: note: expanded from macro 'CHESS_UTILITIES_BOARD_QUICK_BREAK_IN_LOOP_IF_MAX_SIZE_IS_REACHED'
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1427:17: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1427:25: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1427:29: warning: 13 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1427:33: warning: 14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1427:37: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1427:45: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1432:89: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1432:97: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1432:101: warning: 14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1432:105: warning: 13 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1432:109: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1432:117: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1437:35: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1437:48: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1429:17: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1429:25: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1429:29: warning: 13 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1429:33: warning: 14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1429:37: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1429:45: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1434:89: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1434:97: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1434:101: warning: 14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1434:105: warning: 13 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1434:109: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1434:117: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1439:35: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.cpp:1439:48: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Piece.cpp:27:36: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Piece.cpp:27:37: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Piece.cpp:31:43: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
@@ -212,26 +211,26 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/StreamOperators.cpp:94:18: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineControllerWithUci.cpp:15:1: warning: constructor does not initialize these fields: m_uciOptionNamesAndValuePairs, m_pendingCommands [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineControllerWithUci.cpp:16:73: warning: parameter 'uciOptionNamesAndValuePairs' is unused [misc-unused-parameters]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineControllerWithUci.cpp:80:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineControllerWithUci.cpp:81:5: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineControllerWithUci.cpp:160:36: warning: method 'log' can be made static [readability-convert-member-functions-to-static]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineControllerWithUci.cpp:167:36: warning: method 'sendUci' can be made static [readability-convert-member-functions-to-static]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineControllerWithUci.cpp:174:36: warning: method 'sendStop' can be made static [readability-convert-member-functions-to-static]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineControllerWithUci.cpp:79:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineControllerWithUci.cpp:80:5: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineControllerWithUci.cpp:159:36: warning: method 'log' can be made static [readability-convert-member-functions-to-static]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineControllerWithUci.cpp:166:36: warning: method 'sendUci' can be made static [readability-convert-member-functions-to-static]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineControllerWithUci.cpp:173:36: warning: method 'sendStop' can be made static [readability-convert-member-functions-to-static]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:3:10: error: 'windows.h' file not found [clang-diagnostic-error]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:22:7: warning: variable 'WINAPI' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:38:1: warning: constructor does not initialize these fields: m_startupInfo, m_processInfo, m_engineMonitoringThread, m_threadId, m_inputStreamOnEngineThread, m_outputStreamOnEngineThread, m_inputStreamOnHandler, m_outputStreamOnHandler [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:61:11: warning: variable 'bytesWritten' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:64:5: warning: consider replacing 'long' with 'int64' [google-runtime-int]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:66:5: warning: this loop is infinite; none of its condition variables (isSuccessful, remainingLength) are updated in the loop body [bugprone-infinite-loop]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:90:11: warning: variable 'bytesRead' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:91:11: warning: variable 'bytesAvailable' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:93:12: warning: variable 'stringBuffer' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:142:25: warning: variable 'securityDescriptor' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:143:25: warning: variable 'securityAttributes' is not initialized [cppcoreguidelines-init-variables]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:145:5: warning: if with identical then and else branches [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:149:7: note: else branch starts here
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:175:5: warning: initializing non-owner 'alba::chess::(anonymous namespace)::CallBackData *' (aka 'alba::chess::(anonymous namespace)::_mydata *') with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:191:26: warning: method 'log' can be made static [readability-convert-member-functions-to-static]
-/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:199:12: warning: variable 'result' is not initialized [cppcoreguidelines-init-variables]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:24:7: warning: variable 'WINAPI' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:40:1: warning: constructor does not initialize these fields: m_startupInfo, m_processInfo, m_engineMonitoringThread, m_threadId, m_inputStreamOnEngineThread, m_outputStreamOnEngineThread, m_inputStreamOnHandler, m_outputStreamOnHandler [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:63:11: warning: variable 'bytesWritten' is not initialized [cppcoreguidelines-init-variables]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:66:5: warning: consider replacing 'long' with 'int64' [google-runtime-int]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:68:5: warning: this loop is infinite; none of its condition variables (isSuccessful, remainingLength) are updated in the loop body [bugprone-infinite-loop]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:92:11: warning: variable 'bytesRead' is not initialized [cppcoreguidelines-init-variables]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:93:11: warning: variable 'bytesAvailable' is not initialized [cppcoreguidelines-init-variables]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:95:12: warning: variable 'stringBuffer' is not initialized [cppcoreguidelines-init-variables]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:144:25: warning: variable 'securityDescriptor' is not initialized [cppcoreguidelines-init-variables]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:145:25: warning: variable 'securityAttributes' is not initialized [cppcoreguidelines-init-variables]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:147:5: warning: if with identical then and else branches [bugprone-branch-clone]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:151:7: note: else branch starts here
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:177:5: warning: initializing non-owner 'alba::chess::(anonymous namespace)::CallBackData *' (aka 'alba::chess::(anonymous namespace)::_mydata *') with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:193:26: warning: method 'log' can be made static [readability-convert-member-functions-to-static]
+/home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:201:12: warning: variable 'result' is not initialized [cppcoreguidelines-init-variables]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:3:10: error: 'windows.h' file not found [clang-diagnostic-error]
 DONE!
