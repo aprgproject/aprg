@@ -57,14 +57,14 @@ MousePosition getMousePosition() {
     MousePosition const position;
     POINT mouse;
     GetCursorPos(&mouse);
-    return MousePosition(mouse.x, mouse.y);
+    return {mouse.x, mouse.y};
 }
 
 string getClassNameOfForegroundWindow() {
     constexpr int LENGTH = 1000;
     char className[LENGTH];
     GetClassName(GetForegroundWindow(), className, LENGTH);
-    return string(className);
+    return {className};
 }
 
 string getStringFromClipboard() {

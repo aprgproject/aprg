@@ -16,7 +16,7 @@ Function abs(Term const& term) {
 
 Function greatestIntegerFunction(Term const& term) {
     return {"greatestIntegerFunction", term, [](AlbaNumber const& number) -> AlbaNumber {
-                return AlbaNumber(ceil(number.getDouble()));
+                return {ceil(number.getDouble())};
             }};
 }
 

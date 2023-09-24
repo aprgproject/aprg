@@ -6,6 +6,7 @@
 namespace alba::algorithm {
 
 template <typename Vertex, typename Weight, typename EdgeWeightedGraph>
+// NOLINTNEXTLINE(fuchsia-multiple-inheritance)
 class PathSearchUsingDfsWithDistanceSum : public BasePathSearchWithDistanceSum<Vertex, Weight, EdgeWeightedGraph>,
                                           public PathSearchUsingDfs<Vertex> {
 public:

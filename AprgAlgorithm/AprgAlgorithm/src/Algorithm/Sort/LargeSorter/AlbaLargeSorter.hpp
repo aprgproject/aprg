@@ -152,7 +152,8 @@ private:
     }
 
     void createTempDirectories() {
-        AlbaLocalPathHandler(m_configuration.m_directoryForBlocks).createDirectoriesAndIsSuccessful();
+        AlbaLocalPathHandler blockDirectoryPathHandler(m_configuration.m_directoryForBlocks);
+        blockDirectoryPathHandler.createDirectoriesAndIsSuccessful();
     }
 
     void deleteTempFilesAndDirectories() {

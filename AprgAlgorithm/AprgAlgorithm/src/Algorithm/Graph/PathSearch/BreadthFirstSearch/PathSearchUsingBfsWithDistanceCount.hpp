@@ -6,6 +6,7 @@
 namespace alba::algorithm {
 
 template <typename Vertex>
+// NOLINTNEXTLINE(fuchsia-multiple-inheritance)
 class PathSearchUsingBfsWithDistanceCount : public BasePathSearchWithDistanceCount<Vertex>,
                                             public PathSearchUsingBfs<Vertex> {
 public:
