@@ -1,18 +1,6 @@
-StaticAnalysisJobIdentifier: [43]
-2023-09-23T15:24:51
-/home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:15:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:15:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:15:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:41:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:41:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:41:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+StaticAnalysisJobIdentifier: [44]
+2023-09-24T22:19:50
 /home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:64:25: warning: 3.141 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:76:43: warning: 42 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:82:61: warning: 42.99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:102:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:102:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:102:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:109:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:109:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:109:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 DONE!
