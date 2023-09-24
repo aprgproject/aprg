@@ -52,7 +52,8 @@ private:
                 }
                 if (currentSum > targetSum) {
                     --highIndex;
-                } else if (currentSum < targetSum) {
+                } else {
+                    // currentSum < targetSum
                     ++lowIndex;
                 }
             }

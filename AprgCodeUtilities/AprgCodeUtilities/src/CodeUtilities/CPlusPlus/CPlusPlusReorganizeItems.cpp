@@ -375,9 +375,11 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                 } else if (firstTerm.getContent() == "static") {
                     isStatic = true;
                 } else if (firstTerm.getContent() == "[[nodiscard]]") {
-                    sortItem.score += 0x40;  // qualifier:nodiscard
+                    sortItem.score += 0x50;  // qualifier:nodiscard
                 } else if (firstTerm.getTermType() == TermType::Attribute) {
-                    sortItem.score += 0x30;  // qualifier:attribute
+                    sortItem.score += 0x40;  // qualifier:attribute
+                } else if (firstTerm.getContent() == "noexcept") {
+                    sortItem.score += 0x30;  // qualifier:noexcept
                 } else if (firstTerm.getContent() == "volatile") {
                     sortItem.score += 0x20;  // qualifier:volatile
                 } else if (firstTerm.getContent() == "const") {

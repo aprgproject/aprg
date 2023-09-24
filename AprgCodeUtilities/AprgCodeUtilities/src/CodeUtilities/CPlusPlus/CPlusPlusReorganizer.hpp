@@ -53,7 +53,7 @@ private:
     void gatherInformationFromFile(std::filesystem::path const& file);
     void processTerms();
     void processMacro(int& nextIndex, int const macroStartIndex);
-    void processSemiColon(int& nextIndex, int const endIndex);
+    void processSemiColon(int& nextIndex, int const semiColonIndex);
 
     void processOpeningAndClosingBrace(
         int& nextIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex);
