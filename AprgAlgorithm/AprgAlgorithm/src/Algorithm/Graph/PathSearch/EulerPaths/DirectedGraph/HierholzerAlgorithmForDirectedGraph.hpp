@@ -20,8 +20,7 @@ public:
     using Path = typename GraphTypes<Vertex>::Path;
     using VertexToAdjacencyVerticesMap = std::map<Vertex, Vertices>;
 
-    explicit HierholzerAlgorithmForDirectedGraph(BaseDirectedGraphWithVertex const& graph)
-        : BaseClass(graph), b_graph(BaseClass::b_graph) {}
+    explicit HierholzerAlgorithmForDirectedGraph(BaseDirectedGraphWithVertex const& graph) : BaseClass(graph) {}
 
 private:
     void searchForEulerPath(Path& result, Vertex const& startingVertex) const override {
@@ -50,14 +49,12 @@ private:
 
     [[nodiscard]] VertexToAdjacencyVerticesMap createVertexToAdjacentVerticesMap() const {
         VertexToAdjacencyVerticesMap result;
-        Vertices const allVertices(b_graph.getVertices());
+        Vertices const allVertices(BaseClass::b_graph.getVertices());
         for (Vertex const& vertex : allVertices) {
-            result.emplace(vertex, b_graph.getAdjacentVerticesAt(vertex));
+            result.emplace(vertex, BaseClass::b_graph.getAdjacentVerticesAt(vertex));
         }
         return result;
     }
-
-    BaseDirectedGraphWithVertex const& b_graph;
 };
 
 }  // namespace alba::algorithm
