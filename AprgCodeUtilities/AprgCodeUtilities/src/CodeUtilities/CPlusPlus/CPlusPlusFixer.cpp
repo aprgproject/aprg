@@ -8,8 +8,8 @@
 
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
 using namespace alba::stringHelper;
-using namespace filesystem;
 using namespace std;
+using namespace std::filesystem;
 
 namespace alba::CodeUtilities {
 
