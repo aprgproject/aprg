@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [43]
-2023-09-23T14:16:38
+StaticAnalysisJobIdentifier: [44]
+2023-09-24T20:41:37
 note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
 note: expanded from here
 note: expanded from here
@@ -53,56 +53,48 @@ note: expanded from here
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:105:1: warning: variable 'benchmark_uniq_2BM_BaseRunForInteger' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:105:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:106:1: warning: initialization of 'benchmark_uniq_3BM_BaseRunForDouble' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:106:1: warning: variable 'benchmark_uniq_3BM_BaseRunForDouble' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:106:1: warning: variable 'benchmark_uniq_3BM_BaseRunForDouble' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:106:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:107:1: warning: initialization of 'benchmark_uniq_4BM_BaseRunForTwoIntegers' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:107:1: warning: variable 'benchmark_uniq_4BM_BaseRunForTwoIntegers' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:107:1: warning: variable 'benchmark_uniq_4BM_BaseRunForTwoIntegers' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:107:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:108:1: warning: initialization of 'benchmark_uniq_5BM_BaseRunForTwoFloats' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:108:1: warning: variable 'benchmark_uniq_5BM_BaseRunForTwoFloats' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:108:1: warning: variable 'benchmark_uniq_5BM_BaseRunForTwoFloats' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:108:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:109:1: warning: initialization of 'benchmark_uniq_6BM_AlbaNumberIntegerCreation' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:109:1: warning: variable 'benchmark_uniq_6BM_AlbaNumberIntegerCreation' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:109:1: warning: variable 'benchmark_uniq_6BM_AlbaNumberIntegerCreation' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:109:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:110:1: warning: initialization of 'benchmark_uniq_7BM_AlbaNumberDoubleCreation' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:110:1: warning: variable 'benchmark_uniq_7BM_AlbaNumberDoubleCreation' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:110:1: warning: variable 'benchmark_uniq_7BM_AlbaNumberDoubleCreation' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:110:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:111:1: warning: initialization of 'benchmark_uniq_8BM_AlbaNumberFractionCreation' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:111:1: warning: variable 'benchmark_uniq_8BM_AlbaNumberFractionCreation' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:111:1: warning: variable 'benchmark_uniq_8BM_AlbaNumberFractionCreation' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:111:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:112:1: warning: initialization of 'benchmark_uniq_9BM_AlbaNumberComplexNumberCreation' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:112:1: warning: variable 'benchmark_uniq_9BM_AlbaNumberComplexNumberCreation' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:112:1: warning: variable 'benchmark_uniq_9BM_AlbaNumberComplexNumberCreation' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 note: expanded from here
-/home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:112:1: warning: initializing non-owner argument of type 'benchmark::internal::Benchmark *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:105:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:106:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/benchmark/BenchmarkTest/tst/benchmarkTests/AlbaNumberPerformanceTests.cpp:107:1: warning: non-POD static (FunctionBenchmark) [-Wclazy-non-pod-global-static]
