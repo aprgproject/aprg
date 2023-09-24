@@ -36,6 +36,7 @@ auto goodIncrementBy(int const y) {
     return [=](int const x) { return x + y; };
 }
 
+// NOLINTNEXTLINE(clang-diagnostic-unused-function)
 auto badIncrementBy(int const y) {
     // NOLINTNEXTLINE(clang-diagnostic-return-stack-address)
     return [&](int const x) { return x + y; };
