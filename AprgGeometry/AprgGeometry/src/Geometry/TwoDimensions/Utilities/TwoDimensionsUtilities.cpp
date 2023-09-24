@@ -479,9 +479,10 @@ Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::Polynomia
     double const newC = (parabola.getC() * line.getBCoefficient()) + line.getCCoefficient();
     AlbaNumbers const xValues(
         getQuadraticRoots(RootType::RealRootsOnly, AlbaNumber(newA), AlbaNumber(newB), AlbaNumber(newC)));
-    for (AlbaNumber const& xValue : xValues) {
-        result.emplace_back(xValue.getDouble(), line.calculateYFromX(xValue.getDouble()));
-    }
+    result.reserve(xValues.size());
+    transform(xValues.cbegin(), xValues.cend(), back_inserter(result), [&](AlbaNumber const& xValue) {
+        return Point(xValue.getDouble(), line.calculateYFromX(xValue.getDouble()));
+    });
     return result;
 }
 
@@ -493,9 +494,10 @@ Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::Polynomia
     double const newC = (parabola.getC() * line.getACoefficient()) + line.getCCoefficient();
     AlbaNumbers const yValues(
         getQuadraticRoots(RootType::RealRootsOnly, AlbaNumber(newA), AlbaNumber(newB), AlbaNumber(newC)));
-    for (AlbaNumber const& yValue : yValues) {
-        result.emplace_back(line.calculateXFromY(yValue.getDouble()), yValue.getDouble());
-    }
+    result.reserve(yValues.size());
+    transform(yValues.cbegin(), yValues.cend(), back_inserter(result), [&](AlbaNumber const& yValue) {
+        return Point(line.calculateXFromY(yValue.getDouble()), yValue.getDouble());
+    });
     return result;
 }
 

@@ -266,9 +266,10 @@ void AprgGraph::drawEquationWithXSubstitution(Equation const& equation, uint32_t
         OneEquationOneVariableEqualitySolver solver;
         SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(substitutedEquation));
         AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
-        for (AlbaNumber const& acceptedValue : acceptedValues) {
-            points.emplace_back(xValue, acceptedValue.getDouble());
-        }
+        points.reserve(acceptedValues.size());
+        transform(
+            acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(points),
+            [&](AlbaNumber const& acceptedValue) { return Point(xValue, acceptedValue.getDouble()); });
     });
     drawDiscontinuousPoints(points, color);
 }
@@ -283,9 +284,10 @@ void AprgGraph::drawEquationWithYSubstitution(Equation const& equation, uint32_t
         OneEquationOneVariableEqualitySolver solver;
         SolutionSet const solutionSet(solver.calculateSolutionAndReturnSolutionSet(substitutedEquation));
         AlbaNumbers const& acceptedValues(solutionSet.getAcceptedValues());
-        for (AlbaNumber const& acceptedValue : acceptedValues) {
-            points.emplace_back(acceptedValue.getDouble(), yValue);
-        }
+        points.reserve(acceptedValues.size());
+        transform(
+            acceptedValues.cbegin(), acceptedValues.cend(), back_inserter(points),
+            [&](AlbaNumber const& acceptedValue) { return Point(acceptedValue.getDouble(), yValue); });
     });
     drawDiscontinuousPoints(points, color);
 }

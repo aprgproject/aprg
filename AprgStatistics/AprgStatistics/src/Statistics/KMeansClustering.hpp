@@ -84,9 +84,10 @@ private:
         SamplesGroupPairs result;
         int count(0);
         int const numberSamplesPerGroup((m_samples.size() / numberOfGroups) + 1);
-        for (Sample const& sample : m_samples) {
-            result.emplace_back(sample, count++ / numberSamplesPerGroup);
-        }
+        result.reserve(m_samples.size());
+        transform(m_samples.cbegin(), m_samples.cend(), back_inserter(result), [&](Sample const& sample) {
+            return SamplesGroupPair(sample, count++ / numberSamplesPerGroup);
+        });
         return result;
     }
 
