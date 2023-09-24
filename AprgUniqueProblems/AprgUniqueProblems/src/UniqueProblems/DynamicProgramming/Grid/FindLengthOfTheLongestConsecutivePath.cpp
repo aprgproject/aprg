@@ -44,7 +44,7 @@ FindLengthOfTheLongestConsecutivePath::Count
 FindLengthOfTheLongestConsecutivePath::getLongestLengthStartingAtUsingNaiveRecursion(
     Index const x, Index const y) const {
     Count result(0);
-    Value const nextValue = static_cast<Value>(m_inputGrid.getEntry(x, y)) + 1;
+    Value const nextValue = static_cast<Value>(m_inputGrid.getEntry(x, y) + 1);
 
     for (auto const& [xOffset, yOffset] : columnOffsets) {
         Index const neighborX = x + xOffset;
@@ -74,7 +74,7 @@ FindLengthOfTheLongestConsecutivePath::getLongestLengthStartingAtUsingMemoizatio
     Count result(countGrid.getEntry(x, y));
     if (UNUSED_COUNT == result) {
         result = 0;
-        Value const nextValue = static_cast<Value>(m_inputGrid.getEntry(x, y)) + 1;
+        Value const nextValue = static_cast<Value>(m_inputGrid.getEntry(x, y) + 1);
 
         for (auto const& neighborOffset : columnOffsets) {
             Index const neighborX = x + neighborOffset.first;

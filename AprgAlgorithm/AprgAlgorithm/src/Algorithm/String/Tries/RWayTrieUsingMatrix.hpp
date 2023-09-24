@@ -90,7 +90,7 @@ public:
         table.addRow();
         table.getLastRow().addCell(" ");
         for (int c = 0; c < RADIX; ++c) {
-            if (stringHelper::isDisplayableCharacter(static_cast<int>(c))) {
+            if (stringHelper::isDisplayableCharacter(static_cast<char>(c))) {
                 table.getLastRow().addCell(stringHelper::convertToString(static_cast<char>(c)));
             } else {
                 table.getLastRow().addCell(" ");
