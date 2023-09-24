@@ -1,13 +1,3 @@
-StaticAnalysisJobIdentifier: [43]
-2023-09-23T15:49:57
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:9:59: warning: unused variable 'entity' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:11:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:11:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:11:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:12:22: warning: unused variable 'entity' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:9:59: warning: unused variable 'entity' [-Wunused-variable]
-/home/runner/work/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:12:22: warning: unused variable 'entity' [-Wunused-variable]
+StaticAnalysisJobIdentifier: [44]
+2023-09-24T23:25:40
 DONE!
