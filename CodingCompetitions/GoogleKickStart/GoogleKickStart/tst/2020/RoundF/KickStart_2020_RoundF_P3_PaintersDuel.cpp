@@ -33,6 +33,7 @@ vector<int> g[36];
 map<ll, int> ok[10][36][36][2];
 int id[20][20];
 
+// NOLINTBEGIN(readability-use-anyofallof)
 bool can_move(ll ban, int a) {
     for (int x : g[a]) {
         if (((ban >> x) & 1) != 0) {
@@ -42,6 +43,7 @@ bool can_move(ll ban, int a) {
     }
     return false;
 }
+// NOLINTEND(readability-use-anyofallof)
 
 void dfs(int v, ll &mask, ll ban) {
     if (((mask >> v) & 1) != 0) {
