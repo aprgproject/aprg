@@ -11,7 +11,7 @@ using namespace std;
 namespace alba::AlbaWindowsUserAutomation {
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_ShowMousePositions) {
-    while (1) {
+    while (true) {
         MousePosition const position(getMousePosition());
         cout << "X: " << position.getX() << " Y: " << position.getY() << "\n";
         cout.flush();
@@ -29,7 +29,7 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_GetClassNameOfForegroundWindow) {
 TEST(AlbaWindowsUserAutomationTest, DISABLED_GetStringFromClipboard) { cout << getStringFromClipboard() << "\n"; }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_IsKeyPressedTest) {
-    while (1) {
+    while (true) {
         auto key = VK_CONTROL;
         bool const isPressed = isKeyPressed(key);
         cout << " isPressed: " << isPressed << "\n";
@@ -41,7 +41,7 @@ TEST(AlbaWindowsUserAutomationTest, DISABLED_IsKeyPressedTest) {
 }
 
 TEST(AlbaWindowsUserAutomationTest, DISABLED_IsLetterPressedTest) {
-    while (1) {
+    while (true) {
         constexpr char letter = 'q';
         bool const isPressed = isLetterPressed(letter);
         cout << "letter: " << letter << " isPressed: " << isPressed << "\n";

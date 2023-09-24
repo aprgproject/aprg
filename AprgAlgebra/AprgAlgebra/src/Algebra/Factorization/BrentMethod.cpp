@@ -115,10 +115,12 @@ AlbaNumberOptional const& BrentMethod::getSolution() {
 AlbaNumber BrentMethod::calculate(AlbaNumber const& inputValue) const {
     AlbaNumber result;
     AlbaNumber partialProduct(1);
+    // NOLINTBEGIN(modernize-loop-convert)
     for (auto it = m_coefficients.crbegin(); it != m_coefficients.crend(); ++it) {
         result = result + (*it) * partialProduct;
         partialProduct = partialProduct * inputValue;
     }
+    // NOLINTEND(modernize-loop-convert)
     return result;
 }
 

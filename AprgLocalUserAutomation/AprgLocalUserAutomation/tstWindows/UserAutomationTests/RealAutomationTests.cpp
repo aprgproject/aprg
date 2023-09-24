@@ -116,7 +116,7 @@ TEST(RealAutomationTest, DISABLED_TraverseDatabaseOnRms) {
 TEST(RealAutomationTest, DISABLED_NormalizeAudioForMp3Files) {
     AlbaLocalPathHandler const mp3FilesPathHandler(R"(N:\MUSIC\111_DoAutomationHere)");
 
-    while (1) {
+    while (true) {
         if (isLetterPressed('s')) {
             // s for start
             mp3FilesPathHandler.findFilesAndDirectoriesOneDepth(

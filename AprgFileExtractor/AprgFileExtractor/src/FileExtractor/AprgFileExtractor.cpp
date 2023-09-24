@@ -175,6 +175,7 @@ void AprgFileExtractor::extractAllRelevantFilesRecursively(path const& filePathO
 }
 
 void AprgFileExtractor::runInConsole(string const& command) {
+    // NOLINTBEGIN(cert-env33-c)
 #if defined(OS_LINUX)
     // ALBA_INF_PRINT1(cout, command);
     system(command.c_str());
@@ -183,6 +184,7 @@ void AprgFileExtractor::runInConsole(string const& command) {
     // ALBA_INF_PRINT1(cout, revisedCommand);
     system(revisedCommand.c_str());
 #endif
+    // NOLINTEND(cert-env33-c)
 }
 
 bool AprgFileExtractor::isTheExtensionXzOrGzOrTar(string const& extensionString) {

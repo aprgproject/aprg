@@ -836,6 +836,7 @@ TEST(TermTypeOperatorsTest, BinaryMinusOperatorFunctionSubtractExpressionOperati
 TEST(TermTypeOperatorsTest, BinaryMinusOperatorFunctionSubtractFunctionOperationWorks) {
     Function const absoluteValueFunction(abs(Expression{}));
 
+    // NOLINTNEXTLINE(misc-redundant-expression)
     Term const term(absoluteValueFunction - absoluteValueFunction);
 
     Expression const expressionToExpect(
@@ -1641,6 +1642,7 @@ TEST(TermTypeOperatorsTest, BinaryDivideOperatorFunctionDivideExpressionOperatio
 TEST(TermTypeOperatorsTest, BinaryDivideOperatorFunctionDivideFunctionOperationWorks) {
     Function const absoluteValueFunction(abs(Expression{}));
 
+    // NOLINTNEXTLINE(misc-redundant-expression)
     Term const term(absoluteValueFunction / absoluteValueFunction);
 
     Expression const expressionToExpect(
@@ -2101,6 +2103,7 @@ TEST(TermTypeOperatorsTest, BinaryRaiseToPowerOperatorFunctionRaiseToPowerExpres
 TEST(TermTypeOperatorsTest, BinaryRaiseToPowerOperatorFunctionRaiseToPowerFunctionOperationWorks) {
     Function const absoluteValueFunction(abs(Expression{}));
 
+    // NOLINTNEXTLINE(misc-redundant-expression)
     Term const term(absoluteValueFunction ^ absoluteValueFunction);
 
     Expression const expressionToExpect(

@@ -17,38 +17,6 @@ using namespace std::filesystem;
 
 namespace alba::CodeUtilities {
 
-void runFormatter(path const& file) {
-    string command(FORMATTER_APPLICATION_PATH);
-    command += R"( -style=file -i ")";
-    command += file.string();
-    command += R"(")";
-    cout << "---> command [" << command << "]:\n";
-    system(command.c_str());
-}
-
-void runDiffForTwoFiles(path const& file1, path const& file2) {
-    string command(DIFF_APPLICATION_PATH);
-    command += R"( ")";
-    command += file1.string();
-    command += R"(" ")";
-    command += file2.string();
-    command += R"(")";
-    cout << "---> command [" << command << "]:\n";
-    system(command.c_str());
-}
-
-void runFormatterInDirectory(path const& directoryPath) {
-    AlbaLocalPathHandler const directoryPathHandler(directoryPath);
-    directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth(
-        [](AlbaLocalPathHandler::LocalPath const&) {},
-        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
-            AlbaLocalPathHandler const filePathHandler(filePath);
-            if (isCppFileExtension(filePathHandler.getExtension().string())) {
-                runFormatter(filePathHandler.getPath());
-            }
-        });
-}
-
 void clearFile(path const& file) { ofstream const expectedFileStream(AlbaLocalPathHandler(file).getPath()); }
 
 void copyFile(string const& source, string const& destination) {
@@ -123,6 +91,43 @@ void verifyFile(string const& expectedFile, string const& testFile) {
     if (isDifferenceFound) {
         runDiffForTwoFiles(expectedFilePathHandler.getPath(), testFilePathHandler.getPath());
     }
+}
+
+void runFormatter(path const& file) {
+    string command(FORMATTER_APPLICATION_PATH);
+    command += R"( -style=file -i ")";
+    command += file.string();
+    command += R"(")";
+    runInConsole(command);
+}
+
+void runDiffForTwoFiles(path const& file1, path const& file2) {
+    string command(DIFF_APPLICATION_PATH);
+    command += R"( ")";
+    command += file1.string();
+    command += R"(" ")";
+    command += file2.string();
+    command += R"(")";
+    runInConsole(command);
+}
+
+void runFormatterInDirectory(path const& directoryPath) {
+    AlbaLocalPathHandler const directoryPathHandler(directoryPath);
+    directoryPathHandler.findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& filePath) {
+            AlbaLocalPathHandler const filePathHandler(filePath);
+            if (isCppFileExtension(filePathHandler.getExtension().string())) {
+                runFormatter(filePathHandler.getPath());
+            }
+        });
+}
+
+void runInConsole(string const& command) {
+    // NOLINTBEGIN(cert-env33-c)
+    cout << "---> command [" << command << "]:\n";
+    system(command.c_str());
+    // NOLINTEND(cert-env33-c)
 }
 
 }  // namespace alba::CodeUtilities

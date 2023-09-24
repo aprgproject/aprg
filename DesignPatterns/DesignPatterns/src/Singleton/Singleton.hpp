@@ -8,16 +8,16 @@ namespace Singleton {
 // and method which gives us a way to instantiate the class
 class Singleton {
 public:
+    void tellSomething() {
+        std::cout << "This is Singleton. And the data is: [" << m_data << "]\n";
+        // ...
+    }
+
     static void restartInstance() {
         // "static variable approach" has no restart
         if (m_instancePointer) {
             m_instancePointer.reset();
         }
-    }
-
-    static void tellSomething() {
-        std::cout << "This is Singleton.\n";
-        // ...
     }
 
     static Singleton& getInstance() {
@@ -34,6 +34,7 @@ public:
 private:
     Singleton() = default;
     static std::unique_ptr<Singleton> m_instancePointer;
+    int m_data{5};
     // ...
 };
 
