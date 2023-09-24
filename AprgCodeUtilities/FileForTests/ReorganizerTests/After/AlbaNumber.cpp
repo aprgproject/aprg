@@ -80,6 +80,7 @@ AlbaNumber AlbaNumber::createComplexNumber(NumberType const realPart, NumberType
 
 template AlbaNumber AlbaNumber::createComplexNumber<AlbaNumber::NumeratorDataType>(
     NumeratorDataType const realPart, NumeratorDataType const imaginaryPart);
+
 template AlbaNumber AlbaNumber::createComplexNumber<float>(float const realPart, float const imaginaryPart);
 template AlbaNumber AlbaNumber::createComplexNumber<double>(double const realPart, double const imaginaryPart);
 AlbaNumber AlbaNumber::operator+() const { return *this; }

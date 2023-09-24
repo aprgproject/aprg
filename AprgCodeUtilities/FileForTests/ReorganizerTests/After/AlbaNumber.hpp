@@ -102,8 +102,10 @@ AlbaNumber(char const character) = delete;
 // no need to be explicit in the constructors (allow implicit conversions)
 constexpr AlbaNumber() : m_type(Type::Integer) {}
 constexpr AlbaNumber(FractionData const& fractionData) : m_type(Type::Fraction), m_data(fractionData) {}
+
 constexpr AlbaNumber(ComplexNumberData const& complexNumberData)
         : m_type(Type::ComplexNumber), m_data(complexNumberData) {}
+
 AlbaNumber operator+() const;
 AlbaNumber operator-() const;
 AlbaNumber operator+(AlbaNumber const& second) const;
@@ -150,25 +152,37 @@ static constexpr double ADJUSTMENT_FLOAT_TOLERANCE = 1E-15;
 private:
 template <typename NumberType1, typename NumberType2>
     void constructBasedFromComplexNumberDetails(NumberType1 const realPart, NumberType2 const imaginaryPart);
+
 static void correctPowerResult(double& powerResult, double const base, double const exponent);
 static AlbaNumber addBothIntegersAndReturnNumber(IntDataType const integerValue1, IntDataType const integerValue2);
 static AlbaNumber addBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2);
+
 static AlbaNumber addBothFractionsAndReturnNumber(
         FractionData const& fractionData1, FractionData const& fractionData2);
+
 static AlbaNumber addIntegerAndDoubleAndReturnNumber(IntDataType const integerValue, double const doubleValue);
+
 static AlbaNumber addIntegerAndFractionAndReturnNumber(
         IntDataType const integerValue, FractionData const& fractionData);
+
 static AlbaNumber addFractionAndDoubleAndReturnNumber(FractionData const& fractionData, double const doubleValue);
+
 static AlbaNumber multiplyBothIntegersAndReturnNumber(
         IntDataType const integerValue1, IntDataType const integerValue2);
+
 static AlbaNumber multiplyBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2);
+
 static AlbaNumber multiplyBothFractionsAndReturnNumber(
         FractionData const& fractionData1, FractionData const& fractionData2);
+
 static AlbaNumber multiplyIntegerAndDoubleAndReturnNumber(IntDataType const integerValue, double const doubleValue);
+
 static AlbaNumber multiplyIntegerAndFractionAndReturnNumber(
         IntDataType const integerValue, FractionData const& fractionData);
+
 static AlbaNumber multiplyFractionAndDoubleAndReturnNumber(
         FractionData const& fractionData, double const doubleValue);
+
 static AlbaNumber divideBothIntegersAndReturnNumber(IntDataType const dividend, IntDataType const divisor);
 
 static AlbaNumber divideDividendsAndDivisorsAndReturnNumber(
@@ -177,9 +191,12 @@ static AlbaNumber divideDividendsAndDivisorsAndReturnNumber(
 
 static AlbaNumber divideBothFractionsAndReturnNumber(
         FractionData const& dividendFractionData, FractionData const& divisorFractionData);
+
 static AlbaNumber raisePowerOfBothIntegersAndReturnNumber(IntDataType const base, IntDataType const exponent);
+
 static AlbaNumber raisePowerOfFractionsAndIntegerAndReturnNumber(
         FractionData const& baseFractionData, IntDataType const exponent);
+
 static ComplexFloat createComplexFloat(ComplexNumberData const& data);
 // static functions
 static double getComparisonTolerance();

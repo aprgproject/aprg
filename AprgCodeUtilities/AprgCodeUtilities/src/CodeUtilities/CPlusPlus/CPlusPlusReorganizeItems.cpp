@@ -537,7 +537,7 @@ bool CPlusPlusReorganizeItems::hasMultilineItem(SortItems const& sortItems) {
     });
 }
 
-bool CPlusPlusReorganizeItems::isMultiLine(int const numberOfLines) { return numberOfLines > 2; }
+bool CPlusPlusReorganizeItems::isMultiLine(int const numberOfLines) { return numberOfLines > 1; }
 
 bool CPlusPlusReorganizeItems::compareAlphabetically(string const& string1, string const& string2) {
     for (int i = 0; i < static_cast<int>(string1.length()) && i < static_cast<int>(string2.length()); ++i) {

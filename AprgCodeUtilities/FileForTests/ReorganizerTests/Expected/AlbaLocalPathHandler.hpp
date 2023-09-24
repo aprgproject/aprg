@@ -15,8 +15,10 @@ static_assert(false, "The operating system is not supported.");
 namespace alba {
 
 #if defined(OS_LINUX)
+
 class AlbaLocalPathHandler : public AlbaLinuxPathHandler
 #elif defined(OS_WINDOWS)
+
 class AlbaLocalPathHandler : public AlbaWindowsPathHandler
 #endif
 
