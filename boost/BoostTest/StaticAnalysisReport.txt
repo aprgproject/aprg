@@ -1,9 +1,6 @@
-StaticAnalysisJobIdentifier: [43]
-2023-09-23T14:25:44
+StaticAnalysisJobIdentifier: [44]
+2023-09-24T21:22:32
 /home/runner/work/aprg/aprg/boost/BoostTest/tst/Boost_unit.cpp:1:1: warning: #includes are not sorted properly [llvm-include-order]
-/home/runner/work/aprg/aprg/boost/BoostTest/tst/Boost_unit.cpp:10:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/boost/BoostTest/tst/Boost_unit.cpp:10:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/boost/BoostTest/tst/Boost_unit.cpp:10:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/boost/BoostTest/tst/Boost_unit.cpp:20:76: warning: 103.34 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/boost/BoostTest/tst/Boost_unit.cpp:21:79: warning: 103.34 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 DONE!
