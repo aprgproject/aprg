@@ -57,7 +57,7 @@ UnsignedInteger getProductOfFactors(UnsignedInteger const number) {
 
 UnsignedInteger getApproximateDensityOfPrimes(UnsignedInteger const number) {
     // formula = n/(ln(n))
-    return static_cast<double>(number) / log(number);
+    return static_cast<UnsignedInteger>(static_cast<double>(number) / log(number));
 }
 
 UnsignedInteger getNumberOfCoPrimesBelowThisNumber(UnsignedInteger const number) {

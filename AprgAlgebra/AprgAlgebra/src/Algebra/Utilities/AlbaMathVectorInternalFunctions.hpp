@@ -1,15 +1,9 @@
 #pragma once
 
 #include <Algebra/Term/TermTypes/Term.hpp>
+#include <Common/Math/Vector/AlbaMathVectorUtilitiesHeaders.hpp>
 
 namespace alba {
-
-// Template declaration
-template <typename DataType>
-bool isEqualForMathVectorDataType(DataType const& value1, DataType const& value2);
-
-template <typename DataType>
-DataType raiseToPowerForMathVectorDataType(DataType const& value1, DataType const& value2);
 
 // Template specialization
 template <>
