@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [43]
-2023-09-23T09:01:20
+StaticAnalysisJobIdentifier: [44]
+2023-09-24T15:09:31
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:16:43: warning: initialization of 'aiffSampleRateTable' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/unordered_map.h:227:7: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:199:23: warning: function 'decodeWaveFile' has cognitive complexity of 26 (threshold 25) [readability-function-cognitive-complexity]
@@ -123,22 +123,16 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:723:58: warning: 32767. is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:728:70: warning: 255. is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:733:72: warning: 128. is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:80:81: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:86:45: warning: parameter name 'v1' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:86:94: warning: parameter name 'v2' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:89:20: warning: 44100 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:74:81: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:90:45: warning: parameter name 'v1' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:90:94: warning: parameter name 'v2' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:93:20: warning: 44100 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:16:1: warning: non-POD static (unordered_map) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:80:81: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:86:45: warning: parameter name 'v1' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:86:94: warning: parameter name 'v2' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:89:20: warning: 44100 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:74:81: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:90:45: warning: parameter name 'v1' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:90:94: warning: parameter name 'v2' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.hpp:93:20: warning: 44100 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:36:96: warning: 440.0 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:64:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:64:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:64:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:81:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:81:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:81:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:81:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:86:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:86:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -160,9 +154,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:95:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:95:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:95:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:102:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:102:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:102:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:102:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:107:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:107:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -184,9 +175,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:116:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:116:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:116:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:123:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:123:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:123:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:123:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:128:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:128:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -208,9 +196,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:137:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:137:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:137:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:144:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:144:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:144:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:144:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:149:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:149:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -232,9 +217,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:158:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:158:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:158:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:165:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:165:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:165:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:165:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:170:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:170:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -256,9 +238,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:179:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:179:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:179:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:186:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:186:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:186:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:186:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:191:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:191:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -280,9 +259,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:200:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:200:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:200:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:207:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:207:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:207:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:207:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:212:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:212:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -304,9 +280,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:221:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:221:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:221:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:228:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:228:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:228:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:228:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:233:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:233:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -328,9 +301,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:242:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:242:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:242:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:249:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:249:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:249:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:249:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:254:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:254:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -352,9 +322,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:263:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:263:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:263:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:270:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:270:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:270:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:270:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:275:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:275:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -376,9 +343,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:283:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:283:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:283:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:289:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:289:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:289:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:289:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:294:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:294:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -400,9 +364,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:303:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:303:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:303:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:310:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:310:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:310:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:310:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:315:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:315:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -424,9 +385,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:324:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:324:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:324:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:331:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:331:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:331:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:331:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:336:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:336:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -448,9 +406,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:345:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:345:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:345:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:352:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:352:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:352:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:352:1: warning: function 'TestBody' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:357:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:357:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -472,9 +427,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:365:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:365:13: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:365:13: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:371:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:371:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/Audio_unit.cpp:371:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/ExpectedValues/aiff_stereo_16bit_44100.hpp:10:41: warning: initialization of 'testBuffer' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/tst/AudioTests/ExpectedValues/aiff_stereo_16bit_44100.hpp:10:41: warning: variable 'testBuffer' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
