@@ -26,7 +26,7 @@ AprgGraph::AprgGraph(path const& bitmapPath, BitmapXY const& originInBitmap, Bit
       m_originInBitmap(originInBitmap),
       m_magnification(magnification),
       m_lowestInterval(getLowestInterval()),
-      m_realUpLeftPoint(convertBitmapXYToRealPoint(m_bitmap.getConfiguration().getUpLeftCornerPoint())),
+      m_realUpLeftPoint(convertBitmapXYToRealPoint(BitmapConfiguration::getUpLeftCornerPoint())),
       m_realDownRightPoint(convertBitmapXYToRealPoint(m_bitmap.getConfiguration().getDownRightCornerPoint())) {
     m_numberToStringConverter.setPrecision(5);
 }

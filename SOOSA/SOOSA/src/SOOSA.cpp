@@ -1096,6 +1096,7 @@ void SOOSA::removeBarPointsWithFewHeightPointsCount(
     TwoDimensionSamples barPointsSamplesCopy(kMeansForBarPoints.getSamples());
     kMeansForBarPoints.clear();
     int count = 0;
+    // NOLINTBEGIN(modernize-loop-convert)
     for (auto itMap = countToEndPointsIndexesMultiMap.crbegin(); itMap != countToEndPointsIndexesMultiMap.crend();
          ++itMap) {
         EndPointIndexes const& range(itMap->second);
@@ -1108,6 +1109,7 @@ void SOOSA::removeBarPointsWithFewHeightPointsCount(
             break;
         }
     }
+    // NOLINTEND(modernize-loop-convert)
     TwoDimensionSamples& samplesToSort(kMeansForBarPoints.getSamplesReference());
     sort(samplesToSort.begin(), samplesToSort.end(), [](Sample const& sample1, Sample const& sample2) {
         return sample1.getValueAt(1) < sample2.getValueAt(1);

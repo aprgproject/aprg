@@ -12,7 +12,7 @@ namespace alba {
 namespace RValueAssignmentCannotWork {
 
 TEST(ValueCategoriesExamplesTest, RValueAssignmentCannotWork) {
-    constexpr int n = 5;
+    //constexpr int n = 5;
     // 1 = n; // Error: lvalue required as left operand of assignment
 }
 

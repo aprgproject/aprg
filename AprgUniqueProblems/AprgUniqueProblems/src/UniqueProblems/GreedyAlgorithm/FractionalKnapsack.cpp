@@ -21,7 +21,7 @@ FractionalKnapsack::Profit FractionalKnapsack::getBestProfit(Weight const maximu
             remainingWeight -= weight;
             result += profit;
         } else {
-            result += static_cast<double>(profit) * (static_cast<double>(remainingWeight) / weight);
+            result += profit * remainingWeight / weight;
             break;
         }
     }

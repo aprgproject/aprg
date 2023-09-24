@@ -16,7 +16,7 @@ namespace alba::AlbaWindowsUserAutomation {
 namespace {
 
 uint16_t convertToVirtualKey(char const character) {
-    int virtualKey = character;
+    int virtualKey = static_cast<int>(static_cast<unsigned char>(character));
     if (stringHelper::isLetter(character)) {
         virtualKey = ::toupper(character);
     } else if ('.' == character) {
