@@ -25,12 +25,9 @@ public:
     }
 
     [[nodiscard]] bool isEmpty() const {
-        for (BlockType const& block : m_blocks) {
-            if (block.getNumberOfObjects() != 0) {
-                return false;
-            }
-        }
-        return true;
+        return !any_of(m_blocks.cbegin(), m_blocks.cend(), [&](BlockType const& block) {
+            return block.getNumberOfObjects() != 0;
+        });
     }
 
     void moveMainInteratorToStart() { m_mainIterator = m_blocks.begin(); }

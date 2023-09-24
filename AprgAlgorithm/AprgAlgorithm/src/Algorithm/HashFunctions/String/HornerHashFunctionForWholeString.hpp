@@ -1,5 +1,6 @@
 #pragma once
 
+#include <numeric>
 #include <string>
 #include <vector>
 
@@ -16,12 +17,12 @@ public:
 private:
     [[nodiscard]] HashValue getFinalHPart(std::string const& stringToHash) const {
         // Based from formula (check substrings file notes): h[k] = (h[k-1]*A + s[k]) mod B
-        HashValue finalHPart(0);
         // linear time
-        for (char const c : stringToHash) {
-            finalHPart = (finalHPart * m_radix + c) % m_largeRandomPrime;
-        }
-        return finalHPart;
+        return accumulate(
+            stringToHash.cbegin(), stringToHash.cend(), HashValue(0),
+            [&](HashValue const partialResult, char const character) {
+                return (partialResult * m_radix + character) % m_largeRandomPrime;
+            });
     }
 
     HashValue m_radix;

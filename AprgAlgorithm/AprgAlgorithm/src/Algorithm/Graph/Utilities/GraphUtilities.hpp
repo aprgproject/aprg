@@ -277,13 +277,9 @@ double getAverageDegree(BaseGraph<Vertex> const& graph) {
 template <typename Vertex>
 int getNumberOfSelfLoops(BaseGraph<Vertex> const& graph) {
     using Edge = typename GraphTypes<Vertex>::Edge;
-    int count(0);
-    for (Edge const& edge : graph.getEdges()) {
-        if (edge.first == edge.second) {
-            ++count;
-        }
-    }
-    return count;
+    auto const& edges(graph.getEdges());
+    return static_cast<int>(
+        count_if(edges.cbegin(), edges.cend(), [&](Edge const& edge) { return edge.first == edge.second; }));
 }
 
 template <typename Vertex>

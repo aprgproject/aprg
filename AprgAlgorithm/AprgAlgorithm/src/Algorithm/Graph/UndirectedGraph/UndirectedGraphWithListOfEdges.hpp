@@ -18,11 +18,9 @@ public:
 
     [[nodiscard]] Edges getEdges() const override {
         Edges result;
-        for (auto const& edge : m_edges) {
-            if (edge.first <= edge.second) {
-                result.emplace_back(edge);
-            }
-        }
+        copy_if(m_edges.cbegin(), m_edges.cend(), back_inserter(result), [&](auto const& edge) {
+            return edge.first <= edge.second;
+        });
         return result;
     }
 
