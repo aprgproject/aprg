@@ -5,6 +5,7 @@
 #include <Common/Stream/AlbaStreamParameterReader.hpp>
 #include <Common/Stream/AlbaStreamParameterWriter.hpp>
 
+#include <algorithm>
 #include <sstream>
 
 using namespace alba::stringHelper;
@@ -13,25 +14,11 @@ using namespace std;
 namespace alba {
 
 bool Monster::isAggressive() const {
-    bool result(false);
-    for (string const& mode : modes) {
-        if ("Aggressive" == mode) {
-            result = true;
-            break;
-        }
-    }
-    return result;
+    return any_of(modes.cbegin(), modes.cend(), [&](string const& mode) { return "Aggressive" == mode; });
 }
 
 bool Monster::isMvp() const {
-    bool result(false);
-    for (string const& mode : modes) {
-        if ("MVP Boss" == mode) {
-            result = true;
-            break;
-        }
-    }
-    return result;
+    return any_of(modes.cbegin(), modes.cend(), [&](string const& mode) { return "MVP Boss" == mode; });
 }
 
 bool Monster::hasStoneCurseSkill() const {

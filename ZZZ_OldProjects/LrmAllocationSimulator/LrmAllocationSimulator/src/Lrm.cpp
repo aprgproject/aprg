@@ -737,13 +737,10 @@ bool Lrm::canAFreeDliBeAllocatedInFsp(unsigned int const fspAddress, unsigned in
     if (!isSharedLcgId || fsp.getSmType() == SmType::MSM) {
         for (unsigned int const freeDliToBeAllocated : freeDliPools) {
             unsigned int const conflictingDliPoolForThisDli(getConflictingDliPoolForThisDli(freeDliToBeAllocated));
-            bool canBeAllocated(true);
-            for (unsigned int const currentUsedDli : usedDliPools) {
-                if (freeDliToBeAllocated == currentUsedDli || conflictingDliPoolForThisDli == currentUsedDli) {
-                    canBeAllocated = false;
-                    break;
-                }
-            }
+            bool canBeAllocate =
+                !any_of(usedDliPools.cbegin(), usedDliPools.cend(), [&](unsigned int const currentUsedDli) {
+                    return freeDliToBeAllocated == currentUsedDli || conflictingDliPoolForThisDli == currentUsedDli;
+                });
             if (canBeAllocated) {
                 result = true;
                 break;
@@ -1180,6 +1177,7 @@ void Lrm::copyUsedDliPoolsOnOtherFspsExceptThisFsp(
 }
 
 void Lrm::copyAllFspPairs(FspPairsDetails& fspPairsDetails) const {
+    fspPairsDetails.reserve(m_addressToFspMap.size() * m_addressToFspMap.size());
     for (auto const& addressToFsp1 : m_addressToFspMap) {
         for (auto const& addressToFsp2 : m_addressToFspMap) {
             fspPairsDetails.emplace_back(addressToFsp1.first, addressToFsp2.first, 0);
