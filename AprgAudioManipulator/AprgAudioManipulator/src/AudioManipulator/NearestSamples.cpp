@@ -27,10 +27,8 @@ Indexes NearestSamples::getNearestSamplesIndexes(double const value, int const r
             indexesInOrder.emplace(itLower->second);
             --itLower;
         }
-        if (itUpper != m_valuesToIndexes.cend()) {
-            indexesInOrder.emplace(itUpper->second);
-            ++itUpper;
-        }
+        indexesInOrder.emplace(itUpper->second);
+        ++itUpper;
     }
     result.reserve(result.size());
     copy(indexesInOrder.cbegin(), indexesInOrder.cend(), back_inserter(result));

@@ -12,6 +12,7 @@ Checks: '
   -altera-id-dependent-backward-branch,
   -android-cloexec-open,
   -bugprone-easily-swappable-parameters,
+  -cppcoreguidelines-avoid-const-or-ref-data-members,
   -cppcoreguidelines-avoid-magic-numbers,
   -cppcoreguidelines-macro-usage,
   -cppcoreguidelines-non-private-member-variables-in-classes,
@@ -54,9 +55,10 @@ Checks: '
   -hicpp-signed-bitwise
 '
 # -> Noisy checks
-#  -readability-magic-numbers,
-#  -readability-identifier-length,
+#  -readability-magic-numbers
+#  -readability-identifier-length
 #  -hicpp-signed-bitwise
+#  -cppcoreguidelines-avoid-const-or-ref-data-members
 
 # -> Configure specific checkers
 CheckOptions:

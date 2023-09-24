@@ -8,7 +8,7 @@
 namespace alba::algorithm {
 
 struct AlbaLargeSorterConfiguration {
-    AlbaLargeSorterConfiguration() {}
+    AlbaLargeSorterConfiguration() = default;
 
     AlbaLargeSorterConfiguration(
         std::string const& directoryForBlocks, int const minimumNumberOfObjectsPerBlock,
@@ -20,13 +20,6 @@ struct AlbaLargeSorterConfiguration {
           m_maximumNumberOfObjectsInMemory(maximumNumberOfObjectsInMemory),
           m_maximumFileStreams(maximumFileStreams) {}
 
-    // perfect forwarding
-    template <typename ConfigurationType, typename StringType>
-    AlbaLargeSorterConfiguration(ConfigurationType&& sorterConfiguration, StringType&& directoryForBlocks)
-        : AlbaLargeSorterConfiguration(std::forward<ConfigurationType>(sorterConfiguration)) {
-        m_directoryForBlocks = getFixedPath(std::forward<StringType>(directoryForBlocks));
-    }
-
     [[nodiscard]] std::string getFilePathWithBlockNumber(int const blockNumber) const {
         std::stringstream ss;
         ss << m_directoryForBlocks << R"(\BLOCK_)" << blockNumber << ".txt";
@@ -34,16 +27,14 @@ struct AlbaLargeSorterConfiguration {
     }
 
     [[nodiscard]] bool isConfigurationValid() const {
-        if (m_minimumNumberOfObjectsPerBlock <= 0 ||
-            m_maximumNumberOfObjectsPerBlock <= m_minimumNumberOfObjectsPerBlock) {
-            return false;
+        bool isValid =
+            m_minimumNumberOfObjectsPerBlock > 0 || m_minimumNumberOfObjectsPerBlock < m_maximumNumberOfObjectsPerBlock;
+        if (isValid) {
+            AlbaLocalPathHandler const directoryPath(m_directoryForBlocks);
+            directoryPath.createDirectoriesAndIsSuccessful();
+            isValid = directoryPath.isExistingDirectory();
         }
-        AlbaLocalPathHandler const directoryPath(m_directoryForBlocks);
-        directoryPath.createDirectoriesAndIsSuccessful();
-        if (!directoryPath.isExistingDirectory()) {
-            return false;
-        }
-        return true;
+        return isValid;
     }
 
     static std::string getFixedPath(std::string const& path) { return AlbaLocalPathHandler(path).getPath().string(); }

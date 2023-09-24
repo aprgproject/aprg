@@ -2,6 +2,8 @@
 
 #include <Common/String/AlbaStringHelper.hpp>
 
+#include <iostream>
+
 using namespace alba::stringHelper;
 using namespace std;
 
@@ -63,22 +65,26 @@ void AlbaStreamBitWriter::transferBytesAsMuchAsPossibleToStream() {
     }
 }
 
-void AlbaStreamBitWriter::transferAllToStream() {
-    bitset<8> byte;
-    auto bitBufferSize = static_cast<int>(m_bitBuffer.size());
-    int index = 0;
-    for (; index < bitBufferSize; ++index) {
-        int const remainder(index % 8);
-        byte.set(7 - remainder, m_bitBuffer[remainder]);
-        if (remainder == 7) {
-            m_stream << static_cast<char>(byte.to_ulong());
-            byte.reset();
+void AlbaStreamBitWriter::transferAllToStream() noexcept {
+    try {
+        bitset<8> byte;
+        auto bitBufferSize = static_cast<int>(m_bitBuffer.size());
+        int index = 0;
+        for (; index < bitBufferSize; ++index) {
+            int const remainder(index % 8);
+            byte.set(7 - remainder, m_bitBuffer[remainder]);
+            if (remainder == 7) {
+                m_stream << static_cast<char>(byte.to_ulong());
+                byte.reset();
+            }
         }
+        if (index % 8 != 0) {
+            m_stream << static_cast<char>(byte.to_ulong());
+        }
+        m_bitBuffer.clear();
+    } catch (exception const& capturedException) {
+        cerr << "Exception happened at transferring all to stream: [" << capturedException.what() << "]\n";
     }
-    if (index % 8 != 0) {
-        m_stream << static_cast<char>(byte.to_ulong());
-    }
-    m_bitBuffer.clear();
 }
 
 }  // namespace alba

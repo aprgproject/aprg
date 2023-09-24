@@ -52,7 +52,7 @@ private:
     void putBoolDataToBuffer(bool const boolValue);
     void putCharDataToBuffer(char const data);
     void transferBytesAsMuchAsPossibleToStream();
-    void transferAllToStream();
+    void transferAllToStream() noexcept;
     std::ostream& m_stream;
     std::deque<bool> m_bitBuffer;
 };

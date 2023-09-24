@@ -14,7 +14,7 @@ source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 set -e
 
 # set issue to filter
-issueToFilter="cert-msc50-cpp"
+issueToFilter="readability-static-accessed-through-instance"
 
 # Show all issues found in static analysis reports
 while IFS= read -r staticAnalysisReportPath; do

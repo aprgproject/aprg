@@ -20,7 +20,7 @@ public:
     void capturePixelsFromScreen();
 
 private:
-    HBITMAP createBitmapHandlerFromScreen(HDC const deviceContextHandler) const;
+    HBITMAP createBitmapHandlerFromScreen(HDC const screenHandler) const;
     void initialize();
     void cleanup();
     void initializeScreenParameters();
