@@ -16,7 +16,7 @@ set -e
 # Show all issues found in static analysis reports
 while IFS= read -r staticAnalysisReportPath; do
     scriptPrint "$scriptName" "$LINENO" "Processing static report: [$staticAnalysisReportPath]..."
-    sed -E "s|.*[/\\]aprg[/\\]| F:/Branches/aprg_project/aprg/aprg/|g" "$staticAnalysisReportPath" | grep "modernize-pass-by-value" | grep -E "note:|style:|warning:|error:" || true
+    sed -E "s|.*[/\\]aprg[/\\]| F:/Branches/aprg_project/aprg/aprg/|g" "$staticAnalysisReportPath" | grep "useStlAlgorithm" | grep -E "note:|style:|warning:|error:" || true
 done < <(find "$aprgDirectory" -depth -type f -name "StaticAnalysisReport.txt")
 
 scriptPrint "$scriptName" "$LINENO" "The exit code is: [$exitCode]"

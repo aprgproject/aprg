@@ -4,6 +4,8 @@
 #include <Algebra/Isolation/IsolationOfOneVariableOnEqualityEquations.hpp>
 #include <Algebra/Term/Operators/TermOperators.hpp>
 
+#include <algorithm>
+
 using namespace alba::stringHelper;
 using namespace std;
 

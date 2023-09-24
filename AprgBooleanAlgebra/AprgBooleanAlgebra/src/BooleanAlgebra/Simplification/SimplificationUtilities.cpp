@@ -93,9 +93,11 @@ OperatorLevel getSubOperatorLevel(Term const& term1, Term const& term2) {
 Terms getTermOrSubTerms(Term const& term) {
     Terms terms;
     if (term.isExpression()) {
-        for (WrappedTerm const& subTerm : term.getExpressionConstReference().getWrappedTerms()) {
-            terms.emplace_back(getTermConstReferenceFromUniquePointer(subTerm.baseTermPointer));
-        }
+        WrappedTerms const& wrappedTerms(term.getExpressionConstReference().getWrappedTerms());
+        terms.reserve(wrappedTerms.size());
+        transform(wrappedTerms.cbegin(), wrappedTerms.cend(), back_inserter(terms), [](WrappedTerm const& subTerm) {
+            return getTermConstReferenceFromUniquePointer(subTerm.baseTermPointer);
+        });
     } else {
         terms.emplace_back(term);
     }
@@ -299,10 +301,13 @@ void distributeTermsIfNeeded(
                     if (distributeInnerOperation == subExpression.getCommonOperatorLevel()) {
                         innerExpressions.emplace_back(subExpression);
                     } else if (distributeOuterOperation == subExpression.getCommonOperatorLevel()) {
-                        for (WrappedTerm const& subExpressionTerm : subExpression.getWrappedTerms()) {
-                            outerFactors.emplace_back(
-                                getTermConstReferenceFromUniquePointer(subExpressionTerm.baseTermPointer));
-                        }
+                        WrappedTerms const& wrappedTerms(subExpression.getWrappedTerms());
+                        outerFactors.reserve(outerFactors.size() + wrappedTerms.size());
+                        transform(
+                            wrappedTerms.cbegin(), wrappedTerms.cend(), back_inserter(outerFactors),
+                            [](WrappedTerm const& subExpressionTerm) {
+                                return getTermConstReferenceFromUniquePointer(subExpressionTerm.baseTermPointer);
+                            });
                     }
                 } else {
                     outerFactors.emplace_back(inputTerm);

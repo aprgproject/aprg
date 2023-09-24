@@ -50,13 +50,10 @@ public:
             for (auto reverseIt = implicantsMap.rbegin(); reverseIt != implicantsMap.rend(); ++reverseIt) {
                 Implicants const& implicantsFromTable(reverseIt->second);
                 for (Implicant const& implicantFromTable : implicantsFromTable) {
-                    bool isAlreadyCovered(false);
-                    for (Implicant const& existingImplicant : result) {
-                        if (implicantFromTable.isASubsetOf(existingImplicant)) {
-                            isAlreadyCovered = true;
-                            break;
-                        }
-                    }
+                    bool isAlreadyCovered =
+                        any_of(result.cbegin(), result.cend(), [&](Implicant const& existingImplicant) {
+                            return implicantFromTable.isASubsetOf(existingImplicant);
+                        });
                     if (!isAlreadyCovered) {
                         result.emplace(implicantFromTable);
                     }
@@ -213,12 +210,9 @@ public:
             if (!mintermsToCover.empty()) {
                 std::pair<int, Implicant> mintermCountAndImplicantPair;
                 for (Implicant const& remainingImplicant : remainingImplicants) {
-                    int mintermCount(0U);
-                    for (auto const& mintermToCover : mintermsToCover) {
-                        if (remainingImplicant.hasMinterm(mintermToCover)) {
-                            ++mintermCount;
-                        }
-                    }
+                    int mintermCount = static_cast<int>(count_if(
+                        mintermsToCover.cbegin(), mintermsToCover.cend(),
+                        [&](auto const& mintermToCover) { return remainingImplicant.hasMinterm(mintermToCover); }));
                     if (mintermCountAndImplicantPair.first < mintermCount) {
                         mintermCountAndImplicantPair = std::make_pair(mintermCount, remainingImplicant);
                     }

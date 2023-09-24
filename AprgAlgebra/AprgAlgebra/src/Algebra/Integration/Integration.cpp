@@ -112,8 +112,8 @@ Term Integration::integrateMonomial(Monomial const& monomial) {
 Term Integration::integratePolynomial(Polynomial const& polynomial) {
     Monomials const& monomials(polynomial.getMonomials());
     Term result = accumulate(
-        monomials.cbegin(), monomials.cend(), Term{}, [&](Term const& partialresult, Monomial const& monomial) {
-            return partialresult + integrateMonomial(monomial);
+        monomials.cbegin(), monomials.cend(), Term{}, [&](Term const& partialResult, Monomial const& monomial) {
+            return partialResult + integrateMonomial(monomial);
         });
     result.simplify();
     return result;

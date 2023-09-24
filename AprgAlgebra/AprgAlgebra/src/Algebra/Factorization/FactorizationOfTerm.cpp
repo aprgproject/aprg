@@ -5,6 +5,8 @@
 #include <Algebra/Factorization/FactorizationOfPolynomial.hpp>
 #include <Algebra/Term/Utilities/ConvertHelpers.hpp>
 
+#include <algorithm>
+
 using namespace std;
 
 namespace alba::algebra::Factorization {

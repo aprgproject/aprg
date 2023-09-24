@@ -7,6 +7,8 @@
 #include <Algebra/Solution/Solver/SolverUsingSubstitution/ReduceEquationsBySubstitution.hpp>
 #include <Algebra/Term/Utilities/ValueCheckingHelpers.hpp>
 
+#include <algorithm>
+
 using namespace std;
 
 namespace alba::algebra {

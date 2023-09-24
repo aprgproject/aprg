@@ -9,6 +9,7 @@
 #include <Common/Types/AlbaTypeHelper.hpp>
 #include <Common/User/DisplayTable.hpp>
 
+#include <algorithm>
 #include <cassert>
 #include <functional>
 #include <sstream>
@@ -246,9 +247,7 @@ public:
     }
 
     void negate() {
-        for (DataType& value : m_matrixData) {
-            value *= -1;
-        }
+        for_each(m_matrixData.begin(), m_matrixData.end(), [&](DataType& value) { value *= -1; });
     }
 
     void transpose() {

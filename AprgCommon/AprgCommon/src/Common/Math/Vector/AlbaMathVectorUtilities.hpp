@@ -5,6 +5,7 @@
 #include <Common/Math/Vector/AlbaMathVector.hpp>
 #include <Common/Math/Vector/AlbaMathVectorUtilitiesHeaders.hpp>
 
+#include <algorithm>
 #include <cmath>
 
 namespace alba {
@@ -73,9 +74,8 @@ template <typename DataType, size_t SIZE>
 AlbaMathVector<DataType, SIZE> getUnitVector(AlbaMathVector<DataType, SIZE> const& vector) {
     AlbaMathVector<DataType, SIZE> unitVector(vector);
     DataType magnitude(vector.getMagnitude());
-    for (DataType& value : unitVector.getValuesReference()) {
-        value /= magnitude;
-    }
+    auto& values(unitVector.getValuesReference());
+    std::for_each(values.begin(), values.end(), [&](DataType& value) { value /= magnitude; });
     return unitVector;
 }
 

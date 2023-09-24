@@ -83,10 +83,9 @@ bool AnimizeColor::isValueIncluded(double const value) const {
 }
 
 void AnimizeColor::calculateNewValues(ColorDataMap& colorDataMap) const {
-    int totalCount = 0;
-    for (auto const& colorDataPair : colorDataMap) {
-        totalCount += colorDataPair.second.count;
-    }
+    int totalCount = accumulate(
+        colorDataMap.cbegin(), colorDataMap.cend(), 0,
+        [](int partialResult, auto const& colorDataPair) { return partialResult + colorDataPair.second.count; });
     int partialCount = 0;
     double const diffOfHighestAndLowestValue = m_highestIncludedValue - m_lowestIncludedValue;
     for (auto& colorDataPair : colorDataMap) {
