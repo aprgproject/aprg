@@ -29,6 +29,7 @@ int writeProgressForCombine;
 
 PerformanceAnalyzer::UniqueUserId::UniqueUserId(std::string const& lineInLogs)
     : nbccId(getNbccId(lineInLogs)), crnccId(getCrnccId(lineInLogs)), transactionId(getTransactionId(lineInLogs)) {}
+
 PerformanceAnalyzer::UniqueUserId::UniqueUserId() : nbccId(0), crnccId(0), transactionId(0) {}
 
 bool PerformanceAnalyzer::UniqueUserId::operator<(UniqueUserId const& uniqueUserId) const {

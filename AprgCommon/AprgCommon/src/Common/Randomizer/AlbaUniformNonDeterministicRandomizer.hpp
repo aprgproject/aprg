@@ -26,6 +26,7 @@ public:
 
     explicit AlbaUniformNonDeterministicRandomizer(ValueType const minimum, ValueType const maximum)
         : m_randomEngine(m_entropySeedSource()), m_randomNumberDistribution(minimum, maximum) {}
+
     // NOLINTNEXTLINE(cert-msc32-c,cert-msc51-cpp)
     AlbaUniformNonDeterministicRandomizer() : m_randomEngine(), m_randomNumberDistribution() {}
 

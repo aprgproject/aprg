@@ -16,8 +16,10 @@ namespace alba::algebra {
 
 RationalizeTermOverTerm::RationalizeTermOverTerm(Term const& numerator, Term const& denominator)
     : m_numerator(numerator), m_denominator(denominator) {}
+
 RationalizeTermOverTerm::RationalizeTermOverTerm(Term&& numerator, Term&& denominator)
     : m_numerator(numerator), m_denominator(denominator) {}
+
 Term const& RationalizeTermOverTerm::getNumerator() const { return m_numerator; }
 Term const& RationalizeTermOverTerm::getDenominator() const { return m_denominator; }
 Term RationalizeTermOverTerm::getCombinedTerm() const { return m_numerator / m_denominator; }

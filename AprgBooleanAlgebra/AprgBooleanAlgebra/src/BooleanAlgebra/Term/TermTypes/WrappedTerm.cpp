@@ -11,6 +11,7 @@ namespace alba::booleanAlgebra {
 
 WrappedTerm::WrappedTerm(BaseTerm const& baseTerm) : baseTermPointer(createBasePointer(baseTerm)) {}
 WrappedTerm::WrappedTerm(BaseTerm&& baseTerm) : baseTermPointer(createBasePointer(baseTerm)) {}
+
 WrappedTerm::WrappedTerm(WrappedTerm const& wrappedTerm)
     : baseTermPointer(duplicateUniquePointer(wrappedTerm.baseTermPointer)) {}
 

@@ -124,6 +124,7 @@ namespace TagDispatchIdiomWithIteratorTraitsWorks {
 
 template <typename Element>
 struct TreeIterator {};
+
 template <typename Element>
 struct VectorIterator {};
 

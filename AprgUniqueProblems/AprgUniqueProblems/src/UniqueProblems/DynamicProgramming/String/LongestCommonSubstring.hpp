@@ -24,8 +24,10 @@ public:
 private:
     [[nodiscard]] Count getLongestCommonSubstringLengthUsingNaiveRecursion(
         Index const index1, Index const index2) const;
+
     Count getLongestCommonSubstringLengthUsingMemoizationDP(
         CountGrid& lengthGrid, Index const index1, Index const index2) const;
+
     std::string m_string1;
     std::string m_string2;
 };

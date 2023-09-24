@@ -19,6 +19,7 @@ public:
 private:
     void initializeSubstitution(
         std::string const& xName, std::string const& yName, double const angle, bool const doRotationBack);
+
     SubstitutionOfVariablesToTerms m_substitution;
 };
 

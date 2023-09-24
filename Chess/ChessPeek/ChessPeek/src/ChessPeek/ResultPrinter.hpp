@@ -54,6 +54,7 @@ public:
 private:
     void printCalculationDetails(MovesToPrint const& movesToPrint) const;
     void printMovesGrids(MovesToPrint const& movesToPrint) const;
+
     template <typename GenericMoves>
     void printARowOfNextMoves(GenericMoves const& genericMoves, int const startIndex) const;
 
@@ -63,16 +64,18 @@ private:
 
     [[nodiscard]] BookMove createBookMove(
         Move const& move, Book::LineDetail const& lineDetail, Book::MoveDetail const& bookMoveDetail) const;
+
     [[nodiscard]] BookMoves getMovesFromBook() const;
     [[nodiscard]] MovesSequence getMovesSequenceFromMoveString(std::string const& moveString) const;
     [[nodiscard]] NextMove createNextMove(Move const& move, Variation const& variation) const;
     [[nodiscard]] NextMoves getNextMovesFromCalculation() const;
     [[nodiscard]] std::string getNameOfBookMove(Move const& move, Book::LineDetail const& lineDetail) const;
-    [[nodiscard]] static stringHelper::strings getNextMovesString(NextMoves const& nextMoves, int const startIndex);
     void printARowOfMovesSequence(MovesSequence const& movesSequence) const;
     void setMovesSequenceOnGrid(DisplayTable& grid, MovesSequence const& movesSequence, int const rowSize) const;
+
     void printHeadersForNextMoves(
         NextMoves const& nextMoves, int const startIndex, stringHelper::strings const& suffixHeaders) const;
+
     void printHeadersForBookMoves(BookMoves const& bookMoves) const;
     void printHeadersForBestLine(MovesSequence const& movesSequence, stringHelper::strings const& suffixHeaders) const;
     void printHorizontalBorder() const;
@@ -82,24 +85,33 @@ private:
     void removeTooManyPawnMoves(NextMoves& nextMoves) const;
     void fillMovesSequenceFromVariation(MovesSequence& result, Variation const& variation) const;
     [[nodiscard]] static ScorePair getBestAndWorstScores(Variations const& variations);
+
     [[nodiscard]] static std::optional<char> getFirstCharOfABoardCell(
         bool const isCertainPreMove, bool const isPossiblePreMove);
+
     [[nodiscard]] static std::string getDisplayableString(NextMove const& nextMove);
     [[nodiscard]] static std::string getDisplayableString(MovesSequence const& movesSequence);
     [[nodiscard]] static std::string getDisplayableString(BookMove const& bookMove);
+
     [[nodiscard]] static std::string getDisplayableString(
         int const mateValue, int const engineScore, HumanScoreGenerator::Score const humanScore);
+
     [[nodiscard]] static std::string getDisplayableString(int const mateValue, int const engineScore);
     [[nodiscard]] static std::string formatToHeaderString(std::string const& content);
+
     [[nodiscard]] static std::string getDisplayableStringForABoardCell(
         Piece const& piece, int const moveNumber, std::optional<char> const& firstChar);
+
+    [[nodiscard]] static stringHelper::strings getNextMovesString(NextMoves const& nextMoves, int const startIndex);
     [[nodiscard]] static stringHelper::strings getBookMovesString(BookMoves const& bookMoves);
     [[nodiscard]] static int getNumberOfColumnsOfGrid(int const numberOfBoards);
     [[nodiscard]] static int getHorizontalBorderSize(int const numberOfBoards);
     [[nodiscard]] static int getRowSizeForHalfMoves(int const numberOfHalfMoves);
     [[nodiscard]] static int getRowSizeForFullMoves(int const numberOfFullMoves);
+
     static void printHeaders(
         stringHelper::strings const& prefixHeaders, stringHelper::strings const& suffixHeaders, int const rowSize);
+
     static void setBoardOnGrid(DisplayTable& grid, Board const& board, int const xOffset);
 
     static void setMoveOnGrid(

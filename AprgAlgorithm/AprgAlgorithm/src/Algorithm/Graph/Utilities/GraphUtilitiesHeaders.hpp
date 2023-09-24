@@ -8,28 +8,40 @@ namespace alba::algorithm::GraphUtilities {
 
 template <typename Vertex>
 bool isASimplePath(typename GraphTypes<Vertex>::Path const& path);
+
 template <typename Vertex>
 bool isACycle(typename GraphTypes<Vertex>::Path const& path);
+
 template <typename Vertex>
 bool isASimpleCycle(typename GraphTypes<Vertex>::Path const& path);
+
 template <typename Vertex>
 bool isDirectedAcyclicGraph(BaseGraph<Vertex> const& graph);
+
 template <typename Vertex>
 bool isDirectedSuccessorGraph(BaseGraph<Vertex> const& graph);
+
 template <typename Vertex>
 bool hasAnyCyclesOnGraph(BaseGraph<Vertex> const& graph);
+
 template <typename Vertex>
 bool isARegularGraph(BaseGraph<Vertex> const& graph);
+
 template <typename Vertex>
 bool isACompleteGraph(BaseGraph<Vertex> const& graph);
+
 template <typename Vertex>
 bool isASimpleGraph(BaseGraph<Vertex> const& graph);
+
 template <typename Vertex>
 bool isATree(BaseUndirectedGraph<Vertex> const& graph);
+
 template <typename Vertex>
 bool isAForest(BaseUndirectedGraph<Vertex> const& graph);
+
 template <typename Vertex>
 bool areAllDegrees(BaseGraph<Vertex> const& graph, int const degreeThatShouldMatch);
+
 template <typename Vertex>
 bool isASpanningTree(BaseUndirectedGraph<Vertex> const& mainGraph, BaseUndirectedGraph<Vertex> const& subGraphToCheck);
 
@@ -39,32 +51,46 @@ bool isASpanningForest(
 
 template <typename Vertex>
 bool isGraphConnected(BaseUndirectedGraph<Vertex> const& graph);
+
 template <typename Vertex>
 bool isGraphStronglyConnected(BaseDirectedGraph<Vertex> const& graph);
+
 template <typename Vertex>
 bool isBipartite(BaseUndirectedGraph<Vertex> const& graph);
+
 template <typename EdgeWeightedGraphType>
 bool isFlowNetwork(EdgeWeightedGraphType const& graph);
+
 template <typename SinkSourceFlowNetworkType>
 bool isSinkSourceFlowNetworkFeasible(SinkSourceFlowNetworkType const& flowNetwork);
+
 template <typename Vertex>
 int getLengthOfPath(typename GraphTypes<Vertex>::Path const& path);
+
 template <typename Vertex>
 int getDegreeAt(BaseGraph<Vertex> const& graph, Vertex const& vertex);
+
 template <typename Vertex>
 int getMaxDegree(BaseGraph<Vertex> const& graph);
+
 template <typename Vertex>
 int getSumOfDegrees(BaseGraph<Vertex> const& graph);
+
 template <typename Vertex>
 double getAverageDegree(BaseGraph<Vertex> const& graph);
+
 template <typename Vertex>
 int getNumberOfSelfLoops(BaseGraph<Vertex> const& graph);
+
 template <typename Vertex>
 int getDiameterOfATree(BaseUndirectedGraph<Vertex> const& graph);
+
 template <typename Vertex>
 std::pair<int, int> getInDegreeAndOutDegreeAt(BaseDirectedGraph<Vertex> const& graph, Vertex const& vertex);
+
 template <typename Vertex>
 std::map<Vertex, std::pair<int, int>> getAllInDegreesAndOutDegrees(BaseDirectedGraph<Vertex> const& graph);
+
 template <typename Vertex>
 typename GraphTypes<Vertex>::ListOfEdges getEdgesOfMaximalConnectedSubgraphs(BaseUndirectedGraph<Vertex> const& graph);
 

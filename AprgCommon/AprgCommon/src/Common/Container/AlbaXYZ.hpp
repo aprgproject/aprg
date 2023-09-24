@@ -11,8 +11,10 @@ template <typename CoordinateType>
 class AlbaXYZ {
 public:
     AlbaXYZ() : m_x{}, m_y{}, m_z{} {}
+
     AlbaXYZ(CoordinateType const& xValue, CoordinateType const& yValue, CoordinateType const& zValue)
         : m_x(xValue), m_y(yValue), m_z(zValue) {}
+
     AlbaXYZ operator+() const { return *this; }
     AlbaXYZ operator-() const { return AlbaXYZ(-m_x, -m_y, -m_z); }
 

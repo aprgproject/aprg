@@ -16,6 +16,7 @@ using namespace std::filesystem;
 namespace alba {
 
 AlbaSackReader::AlbaSackReader(path const& filePath) : m_inputPathHandler(filePath), m_fileEvaluator(string()) {}
+
 AlbaSackReader::AlbaSackReader(path const& filePath, string const& fileCondition)
     : m_inputPathHandler(filePath), m_fileEvaluator(fileCondition) {}
 

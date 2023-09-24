@@ -19,10 +19,13 @@ LowerAndHigherValues getApproximateValuesForDefiniteIntegral(
     AlbaNumber const& higherEndInInterval);
 
 Term getAverageValueInBetweenTwoValues(Term const& term, DetailsForDefiniteIntegralWithValues const& integralDetails);
+
 Term evaluateValuesAndGetDifference(
     Term const& term, std::string const& variableName, AlbaNumber const& lowerEnd, AlbaNumber const& higherEnd);
+
 Term evaluateTermsAndGetDifference(
     Term const& term, std::string const& variableName, Term const& lowerEnd, Term const& higherEnd);
+
 Term evaluate(Term const& term, std::string const& variableName, Term const& value);
 
 Term getAreaUnderACurveUsingReimannSums(
@@ -31,8 +34,10 @@ Term getAreaUnderACurveUsingReimannSums(
 
 bool isTheSecondFundamentalTheoremOfCalculusTrue(
     Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b);
+
 bool isTheIntegralDefinitionForFiniteCalculusIsTrue(
     Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b);
+
 bool isAreaUnderTheCurveEqualToDefiniteIntegral(
     Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b);
 

@@ -3,6 +3,7 @@
 #include <Algebra/Term/TermTypes/Term.hpp>
 
 namespace alba::algebra {
+
 AlbaNumber getDegree(Monomial const& monomial);
 AlbaNumber getMaxExponent(Monomial const& monomial);
 AlbaNumber getGcfOfExponentsInMonomial(Monomial const& monomial);
@@ -11,10 +12,13 @@ AlbaNumber getLcmOfCoefficientsInMonomials(Monomials const& monomials);
 AlbaNumber getCommonSignInMonomials(Monomials const& monomials);
 Monomial getGcfMonomialInMonomials(Monomials const& monomials);
 Monomial getLcmMonomialInMonomials(Monomials const& monomials);
+
 Monomial compareMonomialsAndSaveMinimumExponentsForEachVariable(
     Monomial const& firstMonomial, Monomial const& secondMonomial);
+
 Monomial compareMonomialsAndSaveMaximumExponentsForEachVariable(
     Monomial const& firstMonomial, Monomial const& secondMonomial);
+
 Monomial getMonomialWithMinimumExponentsInMonomials(Monomials const& monomials);
 Monomial getMonomialWithMaximumExponentsInMonomials(Monomials const& monomials);
 std::string getFirstVariableName(Monomial const& monomial);
@@ -27,4 +31,5 @@ bool hasNegativeExponents(Monomial const& monomial);
 bool isConstantOnly(Monomial const& monomial);
 bool isVariableOnly(Monomial const& monomial);
 bool hasASingleVariable(Monomial const& monomial);
+
 }  // namespace alba::algebra

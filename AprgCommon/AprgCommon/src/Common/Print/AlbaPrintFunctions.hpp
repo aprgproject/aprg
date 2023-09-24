@@ -11,18 +11,25 @@ namespace alba {
 
 void printLogHeader(
     std::ostream& out, std::string_view const fileName, int const lineNumber, std::string_view const functionName);
+
 void printCurrentDateTime(std::ostream& out);
+
 void printStringAndShortenIfPossible(
     std::ostream& out, std::string_view const longStr, size_t const prefixLength, size_t const suffixLength);
+
 // printParameter declaration
 void printParameter(std::ostream& out, std::string const& parameter);
 void printParameter(std::ostream& out, char const* const parameter);
+
 template <typename ParameterType>
 void printParameter(std::ostream& out, ParameterType const& parameter);
+
 template <typename ParameterType>
 void printParameter(std::ostream& out, std::optional<ParameterType> const& parameter);
+
 template <typename... UnderlyingTypes>
 void printParameter(std::ostream& out, std::pair<UnderlyingTypes...> const& parameter);
+
 template <typename... UnderlyingTypes>
 void printParameter(std::ostream& out, std::tuple<UnderlyingTypes...> const& parameter);
 

@@ -7,8 +7,10 @@ namespace alba::ThreeDimensions {
 class EllipticParaboloid {
 public:
     EllipticParaboloid();
+
     EllipticParaboloid(
         Point const& center, double const aCoefficient, double const bCoefficient, double const cCoefficient);
+
     // ((x-center.x)^2/aCoefficient^2) + ((y-center.y)^2/bCoefficient^2) = (z-center.z)/c
     bool operator==(EllipticParaboloid const& ellipticParaboloid) const;
     bool operator!=(EllipticParaboloid const& ellipticParaboloid) const;

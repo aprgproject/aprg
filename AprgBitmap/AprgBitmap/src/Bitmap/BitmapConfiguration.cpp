@@ -26,30 +26,6 @@ BitmapXY BitmapConfiguration::getDownRightCornerPoint() const {
 Colors BitmapConfiguration::getColorTable() const { return m_colors; }
 CompressedMethodType BitmapConfiguration::getCompressedMethodType() const { return m_compressionMethodType; }
 path BitmapConfiguration::getPath() const { return m_path; }
-uint16_t BitmapConfiguration::getNumberOfBitsPerPixel() const { return m_numberOfBitsPerPixel; }
-uint32_t BitmapConfiguration::getPixelArrayAddress() const { return m_pixelArrayAddress; }
-uint32_t BitmapConfiguration::getBitmapWidth() const { return m_bitmapWidth; }
-uint32_t BitmapConfiguration::getBitmapHeight() const { return m_bitmapHeight; }
-uint32_t BitmapConfiguration::getNumberOfBytesPerRowInFile() const { return m_numberOfBytesPerRowInFile; }
-uint32_t BitmapConfiguration::getBitMaskForValue() const { return m_bitMaskForValue; }
-
-uint32_t BitmapConfiguration::getColorUsingPixelValue(uint32_t const pixelValue) const {
-    uint32_t color(0);
-    switch (m_numberOfBitsPerPixel) {
-        case 1:
-        case 2:
-        case 4:
-        case 8:
-            if (pixelValue < m_colors.size()) {
-                color = m_colors[pixelValue];
-            }
-            break;
-        default:
-            color = pixelValue;
-            break;
-    }
-    return color;
-}
 
 int BitmapConfiguration::getXCoordinateWithinTheBitmap(int const coordinate) const {
     return getCoordinateWithinRange(coordinate, static_cast<int>(m_bitmapWidth));
@@ -110,6 +86,31 @@ int BitmapConfiguration::getOneRowSizeInBytesFromPixels(
 int BitmapConfiguration::getOneRowSizeInBytesFromBytes(
     int const leftByteInclusive, int const rightByteInclusive) const {
     return rightByteInclusive - leftByteInclusive + getMinimumNumberOfBytesForOnePixel();
+}
+
+uint16_t BitmapConfiguration::getNumberOfBitsPerPixel() const { return m_numberOfBitsPerPixel; }
+uint32_t BitmapConfiguration::getPixelArrayAddress() const { return m_pixelArrayAddress; }
+uint32_t BitmapConfiguration::getBitmapWidth() const { return m_bitmapWidth; }
+uint32_t BitmapConfiguration::getBitmapHeight() const { return m_bitmapHeight; }
+uint32_t BitmapConfiguration::getNumberOfBytesPerRowInFile() const { return m_numberOfBytesPerRowInFile; }
+uint32_t BitmapConfiguration::getBitMaskForValue() const { return m_bitMaskForValue; }
+
+uint32_t BitmapConfiguration::getColorUsingPixelValue(uint32_t const pixelValue) const {
+    uint32_t color(0);
+    switch (m_numberOfBitsPerPixel) {
+        case 1:
+        case 2:
+        case 4:
+        case 8:
+            if (pixelValue < m_colors.size()) {
+                color = m_colors[pixelValue];
+            }
+            break;
+        default:
+            color = pixelValue;
+            break;
+    }
+    return color;
 }
 
 bool BitmapConfiguration::isValid() const {

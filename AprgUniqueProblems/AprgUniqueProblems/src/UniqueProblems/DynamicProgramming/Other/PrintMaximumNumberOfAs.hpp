@@ -33,10 +33,13 @@ public:
 private:
     [[nodiscard]] CountDetail getMaxCountOfAOnScreenUsingNaiveRecursion(
         Count const remainingNumberOfPresses, PressType const pressType) const;
+
     CountDetail getMaxCountOfAOnScreenUsingMemoizationDP(
         CountDetailMatrix& savedCounts, Count const remainingNumberOfPresses, PressType const pressType) const;
+
     CountDetail getBestDetailBasedOnPreviousDetails(
         CountDetails& previousDetails, Count const remainingNumberOfPresses, PressType const pressType) const;
+
     static void updateDetailsBasedOnPressType(CountDetails& previousDetails, PressType const pressType);
     Count const m_numberOfPresses;
 };

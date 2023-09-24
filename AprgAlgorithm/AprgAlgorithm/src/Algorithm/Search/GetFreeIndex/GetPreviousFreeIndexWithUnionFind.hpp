@@ -8,6 +8,7 @@ template <typename Index>
 class GetPreviousFreeIndexWithUnionFind {
 public:
     using UnionFind = UnionFindForFreeIndex<Index>;
+
     explicit GetPreviousFreeIndexWithUnionFind(Index const numberOfIndexes)
         : m_numberOfIndexes(numberOfIndexes), m_unionFind(numberOfIndexes) {}
 

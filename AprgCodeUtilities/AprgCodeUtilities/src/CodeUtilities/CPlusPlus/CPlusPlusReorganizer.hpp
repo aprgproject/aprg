@@ -38,6 +38,7 @@ public:
     CPlusPlusReorganizer() = default;
     void processDirectory(std::filesystem::path const& directory);
     void processHeaderFile(std::filesystem::path const& headerFile);
+
     void processImplementationFile(
         std::filesystem::path const& headerFile, std::filesystem::path const& implementationFile);
 
@@ -53,8 +54,10 @@ private:
     void processTerms();
     void processMacro(int& nextIndex, int const macroStartIndex);
     void processSemiColon(int& nextIndex, int const endIndex);
+
     void processOpeningAndClosingBrace(
         int& nextIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex);
+
     void processOpeningBrace(int& nextIndex, int const openingBraceIndex);
     void processClosingBrace(int& nextIndex, int const closingBraceIndex, int const closingBraceSemiColonIndex);
     void processRecognizedItem(int& nextIndex, int const recognizedItemEndIndex);
@@ -68,8 +71,10 @@ private:
     [[nodiscard]] static bool hasEndBrace(std::string const& content);
     static void makeIsolatedCommentsStickWithNextLine(Terms& terms);
     static void removeStartingAndTrailingWhiteSpace(Terms& terms);
+
     static int getIndexAtClosingString(
         Terms const& terms, int const openingIndex, std::string const& openingString, std::string const& closingString);
+
     CppFileType m_fileType{CppFileType::Unknown};
     Purpose m_purpose{Purpose::Unknown};
     std::vector<ScopeDetail> m_scopeDetails;

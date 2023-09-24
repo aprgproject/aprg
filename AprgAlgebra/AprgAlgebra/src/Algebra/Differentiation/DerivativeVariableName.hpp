@@ -7,8 +7,10 @@ namespace alba::algebra {
 class DerivativeVariableName {
 public:
     explicit DerivativeVariableName(std::string const& derivativeVariableInLeibnizNotation);
+
     DerivativeVariableName(
         int const differentiationLevel, std::string const& baseVariable, std::string const& dependentVariable);
+
     DerivativeVariableName(int const differentiationLevel, std::string&& baseVariable, std::string&& dependentVariable);
     [[nodiscard]] std::string const& getBaseVariable() const;
     [[nodiscard]] std::string const& getDependentVariable() const;

@@ -22,9 +22,9 @@ public:
     // No need for virtual destructor because this class is not destroyed polymorphically.
     PathSearchUsingBfs(PathSearchUsingBfs const&) = default;
     PathSearchUsingBfs(PathSearchUsingBfs&&) = default;
+    ~PathSearchUsingBfs() = default;
     PathSearchUsingBfs& operator=(PathSearchUsingBfs const&) = default;
     PathSearchUsingBfs& operator=(PathSearchUsingBfs&&) = default;
-    ~PathSearchUsingBfs() = default;
 
     PathSearchUsingBfs(BaseGraphWithVertex const& graph, Vertex const& startVertex)
         : BaseClass(graph),

@@ -36,10 +36,13 @@ public:
 private:
     [[nodiscard]] Points getPointsInTraversingXAndY(
         double const signOfX, double const signOfY, double const interval) const;
+
     [[nodiscard]] Points getPointsInTraversingY(
         double const signOfX, double const signOfY, double const interval) const;
+
     [[nodiscard]] Points getPointsInTraversingX(
         double const signOfX, double const signOfY, double const interval) const;
+
     friend std::ostream& operator<<(std::ostream& out, Hyperbola const& hyperbola);
     Point m_center;
     double m_aValue;

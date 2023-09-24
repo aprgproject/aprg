@@ -17,9 +17,11 @@ public:
     BaseSymbolTableWithBaseTree& operator=(BaseSymbolTableWithBaseTree const&) = default;
     BaseSymbolTableWithBaseTree& operator=(BaseSymbolTableWithBaseTree&&) = default;
     BaseSymbolTableWithBaseTree() : b_root(BaseTree::m_root) {}
+
     [[nodiscard]] Value get(Key const& key) const override {  // overrides in BaseSymbolTable
         return getStartingOnThisNode(b_root, key);
     }
+
     void put(Key const& key, Value const& value) override {  // overrides in BaseSymbolTable
         putStartingOnThisNode(b_root, key, value);
     }

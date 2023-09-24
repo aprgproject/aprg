@@ -531,6 +531,10 @@ void BitmapFilters::updateUnionFindForLabels(
     }
 }
 
+double BitmapFilters::getBlurWeight(double const distanceFromCenter, double const blurRadius) {
+    return (blurRadius - distanceFromCenter + 1) / (blurRadius + 1);
+}
+
 uint8_t BitmapFilters::getBlurredColorPart(
     uint8_t const centerColorPart, uint8_t const colorToComparePart, uint32_t const similarityColorLimit) {
     uint8_t blurredColorPart(colorToComparePart);
@@ -543,10 +547,6 @@ uint8_t BitmapFilters::getBlurredColorPart(
         }
     }
     return blurredColorPart;
-}
-
-double BitmapFilters::getBlurWeight(double const distanceFromCenter, double const blurRadius) {
-    return (blurRadius - distanceFromCenter + 1) / (blurRadius + 1);
 }
 
 bool BitmapFilters::isThisPenCircleBetter(

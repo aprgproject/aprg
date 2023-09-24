@@ -23,8 +23,10 @@ public:
 private:
     [[nodiscard]] Cost getMinimumNumberOfOperationsUsingNaiveRecursion(Index const left, Index const right) const;
     [[nodiscard]] Cost getCostOfThreePoints(Index const index1, Index const index2, Index const index3) const;
+
     Cost getMinimumNumberOfOperationsUsingMemoizationDP(
         CostMatrix& countMatrix, Index const left, Index const right) const;
+
     TwoDimensions::Points m_vertices;
 };
 

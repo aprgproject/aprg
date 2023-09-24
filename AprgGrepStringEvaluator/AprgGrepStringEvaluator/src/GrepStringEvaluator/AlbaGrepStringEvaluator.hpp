@@ -15,12 +15,16 @@ namespace alba {
 
 class AlbaGrepStringEvaluator {
     using VectorOfTokens = std::vector<AlbaGrepStringToken>;
+
     using InfixEvaluator = algorithm::ExpressionEvaluator::ExpressionInfixEvaluator<
         AlbaGrepStringEvaluatorTerm, AlbaGrepStringOperatorType>;
+
     using PostfixEvaluator = algorithm::ExpressionEvaluator::ExpressionPostfixEvaluator<
         AlbaGrepStringEvaluatorTerm, AlbaGrepStringOperatorType>;
+
     using EvaluatorTerm = algorithm::ExpressionEvaluator::ExpressionEvaluatorTerm<
         AlbaGrepStringEvaluatorTerm, AlbaGrepStringOperatorType>;
+
     using EvaluatorConverter = algorithm::ExpressionEvaluator::ExpressionEvaluatorConverter<
         AlbaGrepStringEvaluatorTerm, AlbaGrepStringOperatorType>;
 

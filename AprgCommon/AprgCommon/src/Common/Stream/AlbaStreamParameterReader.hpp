@@ -11,12 +11,16 @@ namespace alba {
 class AlbaStreamParameterReader {
 public:
     explicit AlbaStreamParameterReader(std::istream& stream);
+
     template <typename TypeToRetrieve>
     TypeToRetrieve readData() const;
+
     template <typename TypeToRetrieve>
     void readVectorData(std::vector<TypeToRetrieve>& vectorOfData) const;
+
     template <typename TypeToRetrieve>
     void readSetData(std::set<TypeToRetrieve>& setOfData) const;
+
     template <typename TypeToRetrieve1, typename TypeToRetrieve2>
     void readMapData(std::map<TypeToRetrieve1, TypeToRetrieve2>& mapOfData) const;
 

@@ -7,8 +7,10 @@ namespace alba::ThreeDimensions {
 class HyperbolicParaboloid {
 public:
     HyperbolicParaboloid();
+
     HyperbolicParaboloid(
         Point const& center, double const aCoefficient, double const bCoefficient, double const cCoefficient);
+
     // ((y-center.y)^2/bCoefficient^2) - ((x-center.x)^2/aCoefficient^2) = (z-center.z)/c
     bool operator==(HyperbolicParaboloid const& hyperbolicParaboloid) const;
     bool operator!=(HyperbolicParaboloid const& hyperbolicParaboloid) const;

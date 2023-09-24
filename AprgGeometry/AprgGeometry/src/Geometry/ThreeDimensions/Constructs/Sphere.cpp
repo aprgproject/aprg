@@ -9,6 +9,7 @@ using namespace std;
 namespace alba::ThreeDimensions {
 
 Sphere::Sphere() : m_radius(0), m_radiusSquared(0) {}
+
 Sphere::Sphere(Point const& center, double const radius)
     : m_center(center), m_radius(radius), m_radiusSquared(radius * radius) {}
 

@@ -142,9 +142,11 @@ double Line::getSlope() const { return -m_aCoefficient / m_bCoefficient; }
 double Line::getPerpendicularSlope() const { return m_bCoefficient / m_aCoefficient; }
 double Line::getAUnitIncreaseInX() const { return m_bCoefficient; }
 double Line::getAUnitIncreaseInY() const { return -m_aCoefficient; }
+
 double Line::calculateYFromX(double const x) const {
     return -1 * (m_aCoefficient * x + m_cCoefficient) / m_bCoefficient;  // form: y = -(a*x + c)/b
 }
+
 double Line::calculateXFromY(double const y) const {
     return -1 * (m_bCoefficient * y + m_cCoefficient) / m_aCoefficient;  // form: x = -(b*y + c)/a
 }

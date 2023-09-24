@@ -7,7 +7,6 @@ using namespace std;
 namespace alba {
 
 WordWrapProblemWithoutLineWidth::WordWrapProblemWithoutLineWidth(stringHelper::strings const& words) : m_words(words) {}
-
 WordWrapProblemWithoutLineWidth::WordWrapProblemWithoutLineWidth(stringHelper::strings&& words) : m_words(words) {}
 
 WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimizedCostUsingNaiveRecursion() const {

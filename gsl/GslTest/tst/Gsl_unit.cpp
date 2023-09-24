@@ -1225,6 +1225,7 @@ constexpr double BOLTZMANN_CONSTANT = 1.0;     // Boltzmann constant
 constexpr double INITIAL_TEMPERATURE = 0.008;  // initial temperature
 constexpr double DUMPING_FACTOR = 1.003;       // damping factor for temperature
 constexpr double MINIMUM_TEMPERATURE = 2.0e-6;
+
 gsl_siman_params_t params = {N_TRIES,        ITERS_FIXED_T,      STEP_SIZE, BOLTZMANN_CONSTANT, INITIAL_TEMPERATURE,
                              DUMPING_FACTOR, MINIMUM_TEMPERATURE};
 

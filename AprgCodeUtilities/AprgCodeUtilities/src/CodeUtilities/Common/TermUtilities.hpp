@@ -3,8 +3,10 @@
 #include <CodeUtilities/Common/CommonTypes.hpp>
 
 namespace alba::CodeUtilities {
+
 void replaceAllForwards(
     Terms& terms, int const startIndex, Patterns const& searchPatterns, Terms const& replacementTerms);
+
 void combineTermsInPlace(Terms& terms, TermType const newTermType, int const startIndex, int const endIndex);
 void changeTerm(Term& term, TermType const newTermType, std::string const& content);
 Indexes searchForwardsForPatterns(Terms const& terms, int const startIndex, Patterns const& searchPatterns);
@@ -25,4 +27,5 @@ bool isWhiteSpace(Term const& term);
 bool isCommentOrWhiteSpace(Term const& term);
 bool isWhiteSpaceWithNewLine(Term const& term);
 bool hasNewLine(Term const& term);
+
 }  // namespace alba::CodeUtilities

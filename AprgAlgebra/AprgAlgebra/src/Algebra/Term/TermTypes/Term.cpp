@@ -16,6 +16,7 @@ namespace alba::algebra {
 Term::Term() : m_type(TermType::Empty), m_baseTermDataPointer(nullptr) {}
 Term::Term(TermType const type, BaseTermDataPointer&& baseTermDataPointer, bool const isSimplified)  // for move
     : m_type(type), m_baseTermDataPointer(std::move(baseTermDataPointer)), m_isSimplified(isSimplified) {}
+
 Term::Term(AlbaNumber const& number)
     : m_type(TermType::Constant), m_baseTermDataPointer(make_unique<Constant>(number)) {}
 
@@ -29,16 +30,22 @@ Term::Term(string const& stringAsParameter) : m_type(TermType::Empty), m_baseTer
 
 Term::Term(Constant const& constant)
     : m_type(TermType::Constant), m_baseTermDataPointer(make_unique<Constant>(constant)) {}
+
 Term::Term(Variable const& variable)
     : m_type(TermType::Variable), m_baseTermDataPointer(make_unique<Variable>(variable)) {}
+
 Term::Term(Operator const& operatorTerm)
     : m_type(TermType::Operator), m_baseTermDataPointer(make_unique<Operator>(operatorTerm)) {}
+
 Term::Term(Monomial const& monomial)
     : m_type(TermType::Monomial), m_baseTermDataPointer(make_unique<Monomial>(monomial)) {}
+
 Term::Term(Polynomial const& polynomial)
     : m_type(TermType::Polynomial), m_baseTermDataPointer(make_unique<Polynomial>(polynomial)) {}
+
 Term::Term(Expression const& expression)
     : m_type(TermType::Expression), m_baseTermDataPointer(make_unique<Expression>(expression)) {}
+
 Term::Term(Function const& function)
     : m_type(TermType::Function), m_baseTermDataPointer(make_unique<Function>(function)) {}
 

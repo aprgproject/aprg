@@ -13,6 +13,7 @@ class TernarySearchTrieSymbolTable
 public:
     using BaseClass = BaseTernarySearchTrie<
         TernarySearchTrieSymbolTableNode<ValueTemplateType>, BaseStringSymbolTable<ValueTemplateType>>;
+
     using Key = typename BaseClass::Key;
     using Strings = typename BaseClass::Strings;
     using Node = typename BaseClass::Node;

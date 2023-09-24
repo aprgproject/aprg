@@ -4,10 +4,13 @@
 #include <Common/Math/Number/AlbaNumberTypes.hpp>
 
 namespace alba::algebra {
+
 AlbaNumber getConstantFactor(Term const& term);
 AlbaNumber getDegree(Term const& term);
+
 AlbaNumberPairs evaluateAndGetInputOutputPair(
     AlbaNumbers const& numbers, std::string const& variableName, Term const& term);
+
 Expression negateExpression(Expression const& expression);
 Term getPiAsATerm();
 Term getEAsATerm();
@@ -25,4 +28,5 @@ bool isNegatedTermSimpler(Term const& term, Term const& negatedTerm);
 bool isNonEmptyOrNonOperatorType(Term const& term);
 bool isNonEmptyOrNonOperatorOrNonExpressionType(Term const& term);
 bool isARadicalTerm(Term const& term);
+
 }  // namespace alba::algebra

@@ -30,6 +30,7 @@ public:
 private:
     [[nodiscard]] Cost getOptimizedCostUsingNaiveRecursion(
         RecursionDetails const& recursionDetails, Index const wordIndex) const;
+
     [[nodiscard]] Cost getTotalLength() const;
     [[nodiscard]] Cost getTotalCostOfAllLines(Indices const& lengths) const;
     static Cost getCostFromExtraSpaces(Index const numberOfExtraSpaces);

@@ -15,8 +15,10 @@ using WeightForTest = double;
 using PathForTest = GraphTypes<VertexForTest>::Path;
 using DirectedGraphForTest = DirectedGraphWithListOfEdges<VertexForTest>;
 using EdgeWeightedDirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, DirectedGraphForTest>;
+
 using ShortestPathSearchForTest =
     PathSearchUsingDijkstra<VertexForTest, WeightForTest, EdgeWeightedDirectedGraphForTest, less>;
+
 using LongestPathSearchForTest =
     PathSearchUsingDijkstra<VertexForTest, WeightForTest, EdgeWeightedDirectedGraphForTest, greater>;
 

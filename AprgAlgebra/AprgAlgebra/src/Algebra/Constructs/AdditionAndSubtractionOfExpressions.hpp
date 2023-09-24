@@ -35,6 +35,7 @@ private:
 
     static bool canBeMerged(
         Term const& mergePart1, Term const& mergePart2, Term const& commonPart1, Term const& commonPart2);
+
     Expressions m_expressions;
     TermAssociationTypes m_associations;
 };

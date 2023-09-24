@@ -16,9 +16,9 @@ public:
     AnimizeColor();
     using ColorDataMap = std::map<double, ColorDetails>;
     using ValueAndColorDataPair = std::pair<double, ColorDetails>;
-    [[nodiscard]] uint32_t getNewColor(uint32_t const originalColor) const;
     [[nodiscard]] double getNewLightness(double const originalValue) const;
     [[nodiscard]] double getNewSaturation(double const originalValue) const;
+    [[nodiscard]] uint32_t getNewColor(uint32_t const originalColor) const;
     void gatherStatistics(std::filesystem::path const& filePath);
     void calculateNewValues();
     void saveColorData(std::filesystem::path const& filePath);

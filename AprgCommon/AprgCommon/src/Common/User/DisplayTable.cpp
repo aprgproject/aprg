@@ -58,6 +58,7 @@ void DisplayTableRow::addCell(
 
 DisplayTableCell& DisplayTableRow::getCellReferenceAt(int const columnIndex) { return m_cells[columnIndex]; }
 DisplayTableCells& DisplayTableRow::getCellsReference() { return m_cells; }
+
 DisplayTable::DisplayTable(int const numberOfColumns, int const numberOfRows)
     : m_rows(numberOfRows, DisplayTableRow(numberOfColumns)) {}
 

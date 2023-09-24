@@ -29,8 +29,10 @@ public:
     };
 
     using StepsInCalculationMonitoring = std::function<void(CalculationDetails const&)>;
+
     explicit ChessEngineControllerWithUci(
         ChessEngineHandler& engineHandler, stringHelper::StringPairs const& uciOptionNamesAndValuePairs = {});
+
     void initialize();
     void quit();
     void resetEngine();

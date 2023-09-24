@@ -14,6 +14,7 @@ public:
     struct BlockCacheEntry {
         BlockCacheEntry(int const blockId, BlockInformation const& blockInformation)
             : m_blockId(blockId), m_blockInformation(blockInformation) {}
+
         int m_blockId;
         BlockInformation m_blockInformation;
     };

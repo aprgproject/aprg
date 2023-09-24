@@ -13,8 +13,10 @@ class MostSignificantDigitSorter : public BaseSorter<Values> {
 public:
     using Value = typename Values::value_type;
     using DigitValue = int;  // this needs to be indexable
+
     using ArrayOfCountPerDigitValue =
         std::array<int, MAX_NUMBER_OF_DIGIT_VALUES + 2>;  // offset of two for cumulate and copying back
+
     using GetDigitAtFunction = std::function<DigitValue(Value const&, int const)>;
     using IsDigitFunction = std::function<bool(Value const&, int const)>;
     MostSignificantDigitSorter() = delete;

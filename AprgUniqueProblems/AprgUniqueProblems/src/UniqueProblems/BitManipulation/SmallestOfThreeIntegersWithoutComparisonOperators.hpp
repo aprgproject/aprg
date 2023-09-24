@@ -8,8 +8,10 @@ class SmallestOfThreeIntegersWithoutComparisonOperators {
 public:
     using UnsignedValue = uint64_t;  // The comparison works only on unsigned values.
     SmallestOfThreeIntegersWithoutComparisonOperators();
+
     [[nodiscard]] static UnsignedValue getSmallest(
         UnsignedValue const value1, UnsignedValue const value2, UnsignedValue const value3);
+
     static bool isLessThan(UnsignedValue const value1, UnsignedValue const value2);
 };
 

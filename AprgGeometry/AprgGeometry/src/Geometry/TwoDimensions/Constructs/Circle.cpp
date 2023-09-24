@@ -13,6 +13,7 @@ using namespace std;
 namespace alba::TwoDimensions {
 
 Circle::Circle() : m_radius(0), m_radiusSquared(0) {}
+
 Circle::Circle(Point const& center, double const radius)
     : m_center(center), m_radius(radius), m_radiusSquared(radius * radius) {}
 

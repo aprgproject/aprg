@@ -49,14 +49,17 @@ public:
     void processFileForRlSetupPerSecond(std::string const& filePath);
     void processFileForTraceLog(std::string const& traceLogPath);
     void processDirectoryForTraceLog(std::string const& traceLogPath);
+
     static int getDelayTimeInUs(
         wcdmaToolsBackend::BtsLogTime const& endTime, wcdmaToolsBackend::BtsLogTime const& startTime);
+
     static int getDelayTimeInMinutes(
         wcdmaToolsBackend::BtsLogTime const& endTime, wcdmaToolsBackend::BtsLogTime const& startTime);
 
 private:
     std::string m_extractGrepCondition{
         R"([LRM] || [alarm] || [UDP] || [CPU] || [syslog] || [ccns] || [tcom] || [startup] || [runtime] || [system] || [radparam] || ([bts]&&([.log]||[.zip]||[.tar])) || [snapshot] || ([tech]&&[report]) || [BTSLogFiles])"};
+
     wcdmaToolsBackend::BtsLogSorterConfiguration m_sorterConfiguration;
     std::optional<std::ofstream> m_RawDataFileOptional;
 };

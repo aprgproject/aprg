@@ -25,14 +25,19 @@ public:
     std::string readWholeStreamAsStringData();
     char readCharData();
     bool readBoolData();
+
     template <typename TypeToWrite>
     TypeToWrite readNumberData(AlbaStreamBitEndianType const endianType);
+
     template <typename TypeToWrite>
     TypeToWrite readBigEndianNumberData();
+
     template <typename TypeToWrite>
     TypeToWrite readLittleEndianNumberData();
+
     template <auto BITSET_SIZE>
     std::bitset<BITSET_SIZE> readBitsetData(size_t const startBitsetIndex, size_t const endBitsetIndex);
+
     std::istream &getInputStream();
 
 private:

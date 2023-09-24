@@ -29,6 +29,7 @@ public:
     using ValueToCountMaps = std::vector<ValueToCountMap>;
     using SegmentTree = RangeQueryWithDynamicSegmentTree<ValueToCountMaps>;
     using Function = typename SegmentTree::Function;
+
     explicit RangeQueryForCount(Values const& valuesToCheck)
         : m_valueToCountMapSegmentTree(getValueToCountMaps(valuesToCheck), getFunctionForSegmentTree()) {}
 

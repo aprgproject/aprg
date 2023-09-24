@@ -63,10 +63,13 @@ private:
     void putTermWithDivision(BaseTerm const& baseTerm);
     void putTermWithRaiseToPower(BaseTerm const& baseTerm);
     void putTermForExpressionAndNonExpressions(BaseTerm const& baseTerm, TermAssociationType const overallAssociation);
+
     void putTermWithRaiseToPowerForExpressionAndNonExpressions(
         BaseTerm const& baseTerm, TermAssociationType const overallAssociation);
+
     void putTermsWithAssociation(
         TermsWithAssociation const& termsWithAssociation, TermAssociationType const overallAssociation);
+
     // functions for multiply then add or subtract
     void distributeAndMultiply(Polynomial const& polynomial, Expression const& expression);
     void distributeAndMultiply(Expression const& expression, Polynomial const& polynomial);

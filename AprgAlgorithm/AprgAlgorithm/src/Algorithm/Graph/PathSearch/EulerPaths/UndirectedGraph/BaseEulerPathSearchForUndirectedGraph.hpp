@@ -15,12 +15,12 @@ public:
     using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Path = typename GraphTypes<Vertex>::Path;
+    virtual ~BaseEulerPathSearchForUndirectedGraph() = default;
     // virtual destructor because of virtual functions (vtable exists)
     BaseEulerPathSearchForUndirectedGraph(BaseEulerPathSearchForUndirectedGraph const &) = default;
     BaseEulerPathSearchForUndirectedGraph(BaseEulerPathSearchForUndirectedGraph &&) = default;
     BaseEulerPathSearchForUndirectedGraph &operator=(BaseEulerPathSearchForUndirectedGraph const &) = default;
     BaseEulerPathSearchForUndirectedGraph &operator=(BaseEulerPathSearchForUndirectedGraph &&) = default;
-    virtual ~BaseEulerPathSearchForUndirectedGraph() = default;
     explicit BaseEulerPathSearchForUndirectedGraph(BaseUndirectedGraphWithVertex const &graph) : m_graph(graph) {}
     // An Euler circuit is a circuit that uses every edge in a graph with no repeats. Being a circuit, it must start and
     // end at the same vertex.

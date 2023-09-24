@@ -7,13 +7,17 @@
 namespace alba::algorithm {
 
 namespace {
+
 using VertexForTest = int;
 using WeightForTest = double;
 using UndirectedGraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
 using EdgeWeightedUndirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, UndirectedGraphForTest>;
+
 using MinimumSpanningTreeSearchForTest =
     KruskalAlgorithm<VertexForTest, WeightForTest, EdgeWeightedUndirectedGraphForTest>;
+
 using Edges = GraphTypes<VertexForTest>::Edges;
+
 }  // namespace
 
 TEST(KruskalAlgorithmTest, WorksOnUndirectedGraph) {

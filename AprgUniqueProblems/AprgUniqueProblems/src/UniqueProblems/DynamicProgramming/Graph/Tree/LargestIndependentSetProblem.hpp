@@ -27,8 +27,10 @@ public:
 private:
     [[nodiscard]] Count getMaximumCountUsingNaiveRecursion(Vertex const vertex) const;
     Count getMaximumCountUsingMemoizationDP(VertexToCountMap& vertexToCountMap, Vertex const vertex) const;
+
     SetOfVertices getMaximumSetUsingMemoizationDP(
         VertexToSetOfVerticesMap& vertexToMaximumSetMap, Vertex const vertex) const;
+
     Graph m_nAryTreeGraph;
     Vertex m_rootOfTree;
     ChildrenInTree m_childrenInTree;

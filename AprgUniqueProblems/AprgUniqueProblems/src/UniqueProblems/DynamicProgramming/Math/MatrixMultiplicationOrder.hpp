@@ -23,8 +23,10 @@ public:
 
 private:
     [[nodiscard]] Count getMinimumNumberOfOperationsUsingNaiveRecursion(Index const left, Index const right) const;
+
     Count getMinimumNumberOfOperationsUsingMemoizationDP(
         CountMatrix& countMatrix, Index const left, Index const right) const;
+
     Dimensions m_dimensions;
 };
 

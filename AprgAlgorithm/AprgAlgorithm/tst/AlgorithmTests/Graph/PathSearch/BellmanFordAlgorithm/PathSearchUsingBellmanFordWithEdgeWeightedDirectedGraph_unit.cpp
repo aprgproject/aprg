@@ -9,15 +9,19 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 using VertexForTest = int;
 using WeightForTest = double;
 using PathForTest = GraphTypes<VertexForTest>::Path;
 using DirectedGraphForTest = DirectedGraphWithListOfEdges<VertexForTest>;
 using EdgeWeightedDirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, DirectedGraphForTest>;
+
 using ShortestPathSearchForTest =
     PathSearchUsingBellmanFord<VertexForTest, WeightForTest, EdgeWeightedDirectedGraphForTest, less>;
+
 using LongestPathSearchForTest =
     PathSearchUsingBellmanFord<VertexForTest, WeightForTest, EdgeWeightedDirectedGraphForTest, greater>;
+
 }  // namespace
 
 TEST(PathSearchUsingBellmanFordTest, ShortestPathSearchEndsWhenThereArePositiveCycles) {

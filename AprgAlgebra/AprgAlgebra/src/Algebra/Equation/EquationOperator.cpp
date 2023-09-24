@@ -7,7 +7,6 @@ using namespace std;
 namespace alba::algebra {
 
 EquationOperator::EquationOperator(string const& operatingString) : m_operatingString(operatingString) {}
-
 EquationOperator::EquationOperator(string&& operatingString) : m_operatingString(operatingString) {}
 
 bool EquationOperator::operator==(EquationOperator const& second) const {

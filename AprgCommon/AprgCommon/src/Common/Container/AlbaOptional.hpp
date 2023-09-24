@@ -105,6 +105,7 @@ public:
     explicit AlbaOptional(ContentType& content) : m_hasContent(true), m_contentPointer(std::addressof(content)) {}
     // #warning Please make sure that object still exists in the life time of an optional reference object
     AlbaOptional() : m_hasContent(false), m_contentPointer(nullptr) {}
+
     AlbaOptional(AlbaOptional<ContentType&> const& optional)
         : m_hasContent(optional.m_hasContent), m_contentPointer(optional.m_contentPointer) {}
 

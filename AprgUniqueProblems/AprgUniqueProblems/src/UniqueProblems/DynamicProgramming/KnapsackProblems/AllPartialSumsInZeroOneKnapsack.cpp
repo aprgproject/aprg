@@ -9,7 +9,6 @@ using namespace std;
 namespace alba {
 
 AllPartialSumsInZeroOneKnapsack::AllPartialSumsInZeroOneKnapsack(Values const& values) : m_inputValues(values) {}
-
 AllPartialSumsInZeroOneKnapsack::AllPartialSumsInZeroOneKnapsack(Values&& values) : m_inputValues(values) {}
 
 AllPartialSumsInZeroOneKnapsack::Values AllPartialSumsInZeroOneKnapsack::getAllPossiblePartialSums() const {

@@ -16,8 +16,8 @@ bool Piece::operator!=(Piece const& piece) const { return !operator==(piece); }
 PieceColor Piece::getColor() const { return extractColor(m_data); }
 PieceColorAndType Piece::getColorAndType() const { return extractColorAndType(m_data); }
 PieceType Piece::getType() const { return extractType(m_data); }
-uint8_t Piece::getData() const { return m_data; }
 char Piece::getFenCharacter() const { return convertToFenCharacter(extractType(m_data), extractColor(m_data)); }
+uint8_t Piece::getData() const { return m_data; }
 bool Piece::isEmpty() const { return PieceType::Empty == getType(); }
 
 PieceColor Piece::extractColor(uint8_t const data) {

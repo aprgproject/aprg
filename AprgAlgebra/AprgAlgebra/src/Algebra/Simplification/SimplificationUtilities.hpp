@@ -20,8 +20,10 @@ void simplifyAndCopyTermsFromAnExpressionAndChangeOperatorLevelIfNeeded(
 
 TermsWithAssociation getTermsWithAssociationAndReverseIfNeeded(
     Expression const& expression, TermAssociationType const overallAssociation);
+
 bool simplifyToACommonDenominatorForExpressionAndReturnIfAdditionOrSubtractionOfTermsOverTermsOccurred(
     Expression& expression);
+
 bool tryToAddSubtractTermsOverTermsAndReturnIfChanged(Expression& addSubtractExpression);
 
 }  // namespace alba::algebra::Simplification

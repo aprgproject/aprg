@@ -72,6 +72,7 @@ struct ST {
 
 template <typename T>
 int ST<T>::intData = 42;  // still fine in header
+
 template <typename T>
 T ST<T>::tData = {};  // still fine in header
 
@@ -290,6 +291,7 @@ void f(void (*)(T)) {
 // -> Although we prefer to deduce T=int rather T=int&& in the forwarding-reference case,
 // ---> there do exists other cases where T=int&& is the only possible deduction.
 void g(int&&) {}
+
 TEST(TemplateExamplesTest, TemplateTypeDeductionWithDoubleRefRefDeduction) {
     f(g);  // [with T = int&&]
 }
@@ -380,11 +382,14 @@ namespace PartialSpecializationWorks {
 // This is the primary template:
 template <typename T>
 constexpr bool isAnArray = false;
+
 // These are the partial specializations:
 template <typename Tp>
 constexpr bool isAnArray<Tp[]> = true;
+
 template <typename Tp, size_t N>
 constexpr bool isAnArray<Tp[N]> = true;
+
 // This is a full specialization
 template <>
 constexpr bool isAnArray<void> = true;
@@ -704,6 +709,7 @@ struct myvec {
 
 myvec(int) -> myvec<double>;  // deduction guide
 myvec(double) -> myvec<int>;  // deduction guide
+
 TEST(TemplateExamplesTest, TemplateDeductionGuidesWorksForCpp17) {
     myvec const v1(5);    // myvec(int) [with T = double]
     myvec const v2(5.1);  // myvec(double) [with T = int]

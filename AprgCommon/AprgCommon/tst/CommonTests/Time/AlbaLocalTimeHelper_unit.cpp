@@ -28,17 +28,6 @@ TEST(AlbaLocalTimerHelperTest, DISABLED_SleepForWorks) {
     EXPECT_EQ(4321U, timer.getElapsedTimeInMilliseconds());
 }
 
-TEST(AlbaLocalTimerHelperTest, DISABLED_SleepUntilWorks) {
-    // this is unstable because time varies
-    AlbaDateTime const inputTime(2021, 9, 13, 3, 17, 0, 0);
-    AlbaLocalTimer timer;
-
-    sleepUntil(inputTime);
-
-    timer.stopTimer();
-    EXPECT_EQ(0U, timer.getElapsedTimeInMilliseconds());
-}
-
 TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorksOnCurrentTime) {
     AlbaDateTime const time1(convertSystemTimeToAlbaDateTime(getSystemTimeNow()));
     sleepFor(1);
@@ -49,21 +38,6 @@ TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorksOnCurrentTime
     EXPECT_TRUE(isDifferenceAcceptable(time1, time2));
     // EXPECT_EQ(" 1 * 2023-09-16 20:03:14.090847", convertToString(time1));
     // EXPECT_EQ(" 1 * 2023-09-16 20:03:14.106822", convertToString(time2));
-}
-
-TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorks) {
-    tm timeInformation{};  // dont brace initialize values
-    timeInformation.tm_sec = 11;
-    timeInformation.tm_min = 22;
-    timeInformation.tm_hour = 3;
-    timeInformation.tm_mday = 4;
-    timeInformation.tm_mon = 5;
-    timeInformation.tm_year = 96;
-    LibrarySystemTime const systemTime(convertTimeInformationToSystemTime(timeInformation, nanoseconds(777'777'777)));
-
-    AlbaDateTime const currentTime(convertSystemTimeToAlbaDateTime(systemTime));
-
-    EXPECT_EQ(" 1 * 1996-06-04 03:22:11.777777", convertToString(currentTime));
 }
 
 TEST(AlbaLocalTimerHelperTest, ConvertFileTimeToAlbaDateTimeTimeWorks) {
@@ -111,6 +85,32 @@ TEST(AlbaLocalTimerHelperTest, ConvertSinceEpochTimeToAlbaDateTimeWorksForSystem
     EXPECT_TRUE(isDifferenceAcceptable(time1, time2));
     // EXPECT_EQ(" 1 * 0053-09-14 12:03:14.138281", convertToString(time1));
     // EXPECT_EQ(" 1 * 0053-09-14 12:03:14.1534223", convertToString(time2));
+}
+
+TEST(AlbaLocalTimerHelperTest, DISABLED_SleepUntilWorks) {
+    // this is unstable because time varies
+    AlbaDateTime const inputTime(2021, 9, 13, 3, 17, 0, 0);
+    AlbaLocalTimer timer;
+
+    sleepUntil(inputTime);
+
+    timer.stopTimer();
+    EXPECT_EQ(0U, timer.getElapsedTimeInMilliseconds());
+}
+
+TEST(AlbaLocalTimerHelperTest, ConvertSystemTimeToAlbaDateTimeWorks) {
+    tm timeInformation{};  // dont brace initialize values
+    timeInformation.tm_sec = 11;
+    timeInformation.tm_min = 22;
+    timeInformation.tm_hour = 3;
+    timeInformation.tm_mday = 4;
+    timeInformation.tm_mon = 5;
+    timeInformation.tm_year = 96;
+    LibrarySystemTime const systemTime(convertTimeInformationToSystemTime(timeInformation, nanoseconds(777'777'777)));
+
+    AlbaDateTime const currentTime(convertSystemTimeToAlbaDateTime(systemTime));
+
+    EXPECT_EQ(" 1 * 1996-06-04 03:22:11.777777", convertToString(currentTime));
 }
 
 TEST(AlbaLocalTimerHelperTest, ConvertTimeInformationToSystemTimeWorks) {

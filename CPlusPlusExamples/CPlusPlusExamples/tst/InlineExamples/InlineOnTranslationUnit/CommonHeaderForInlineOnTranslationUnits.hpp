@@ -5,6 +5,7 @@
 namespace alba::InlineOnTranslationUnits {
 
 constexpr int constInteger = 100;  // implicity inline (external linkage)
+
 // -> Note: Don't do this in production code.
 // ---> Its better to have the definition in the header as well.
 // ---> This is to avoid different definitions of the function (undefined behavior)

@@ -198,19 +198,6 @@ string ResultPrinter::getNameOfBookMove(Move const& move, Book::LineDetail const
     return result;
 }
 
-strings ResultPrinter::getNextMovesString(NextMoves const& nextMoves, int const startIndex) {
-    strings result;
-    if (startIndex < static_cast<int>(nextMoves.size())) {
-        int const rowSize = min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(nextMoves.size() - startIndex));
-        result.reserve(rowSize);
-        for (int moveIndex = 0; moveIndex < rowSize; ++moveIndex) {
-            auto const& nextMove(nextMoves[startIndex + moveIndex]);
-            result.emplace_back(formatToHeaderString(getDisplayableString(nextMove)));
-        }
-    }
-    return result;
-}
-
 void ResultPrinter::printARowOfMovesSequence(MovesSequence const& movesSequence) const {
     int const rowSize = getRowSizeForHalfMoves(movesSequence.halfMoves.size());
     int const numberOfColumns = getNumberOfColumnsOfGrid(rowSize);
@@ -435,6 +422,19 @@ string ResultPrinter::getDisplayableStringForABoardCell(
         result[2] = moveNumberCharacter;
     }
     result[1] = piece.getFenCharacter();
+    return result;
+}
+
+strings ResultPrinter::getNextMovesString(NextMoves const& nextMoves, int const startIndex) {
+    strings result;
+    if (startIndex < static_cast<int>(nextMoves.size())) {
+        int const rowSize = min(MAX_NUMBER_OF_BOARDS_IN_A_ROW, static_cast<int>(nextMoves.size() - startIndex));
+        result.reserve(rowSize);
+        for (int moveIndex = 0; moveIndex < rowSize; ++moveIndex) {
+            auto const& nextMove(nextMoves[startIndex + moveIndex]);
+            result.emplace_back(formatToHeaderString(getDisplayableString(nextMove)));
+        }
+    }
     return result;
 }
 

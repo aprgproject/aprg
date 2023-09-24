@@ -14,8 +14,10 @@ struct DL {
 };
 
 void f1(DL) {}
+
 template <int I>
 void f2(DL) {}
+
 template <int I>
 void f3(DL) {}
 
@@ -23,6 +25,7 @@ void f3(DL) {}
 
 template <int I>
 void f3();  // just let the compiler know f3 is a template, even if the function signatures does not match.
+
 TEST(ArgumentDependentLookupExamplesTest, FunctionNotOnTheCurrentNamespaceStillWorks) {
     f1(A::DL{3.14});  // compiles because "f1" is considered because argument is in A.
     // f2(A::DL{3.14}); // does not compile because "f2" because template argument can't be determined

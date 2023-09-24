@@ -15,8 +15,10 @@ public:
     using Edge = typename GraphTypes<Vertex>::Edge;
     using Edges = typename GraphTypes<Vertex>::Edges;
     using EdgeOrderedByWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgeOrderedByWeight;
+
     using EdgeOrderedByWeightsPriorityQueue =
         std::priority_queue<EdgeOrderedByWeight, std::deque<EdgeOrderedByWeight>, std::greater<>>;
+
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
     PrimAlgorithmLazyVersion(EdgeWeightedGraph const& graph, Vertex const& startVertex)
@@ -68,6 +70,7 @@ private:
     Vertex m_startVertex;
     CheckableVerticesWithVertex m_processedVertices;
     Edges m_minimumSpanningTreeEdges;
+
     EdgeOrderedByWeightsPriorityQueue
         m_adjacentEdgesInOrder;  // makes this lazy algorithm (find the nearest edge when needed)
 };

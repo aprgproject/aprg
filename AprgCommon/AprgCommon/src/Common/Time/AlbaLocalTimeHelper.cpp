@@ -18,10 +18,13 @@ namespace alba {
 // Walter E Brown technique
 template <typename, typename = void>
 struct hasToSys : std::false_type {};
+
 template <typename Clock>
 struct hasToSys<Clock, std::void_t<decltype(Clock::to_sys(std::declval<LibraryFileTime>()))>> : std::true_type {};
+
 template <typename, typename = void>
 struct hasToUtc : std::false_type {};
+
 template <typename Clock>
 struct hasToUtc<Clock, std::void_t<decltype(Clock::to_utc(std::declval<LibraryFileTime>()))>> : std::true_type {};
 

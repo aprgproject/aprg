@@ -28,8 +28,10 @@ private:
     [[nodiscard]] Product getNumberOfProducts() const;
     [[nodiscard]] ProductBits getNumberOfProductsSubsets() const;
     [[nodiscard]] ProductBits getProductBitsWithAllProducts() const;
+
     Price getMinimumPriceUsingMemoizationDP(
         PriceMatrix& minimumPrices, Day const day, ProductBits const productBits) const;
+
     [[nodiscard]] static bool isProductIncluded(ProductBits const productBits, Product const product);
     static ProductBits getProductBits(Product const product);
     static ProductBits addProduct(ProductBits const productBits, Product const product);

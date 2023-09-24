@@ -28,7 +28,9 @@ namespace alba::chess {
 
 Board::Board(BoardOrientation const& orientation)
     : m_orientation(orientation), m_pieceGrid(getInitialValues(orientation)) {}
+
 Board::Board() : m_orientation(BoardOrientation::Unknown), m_pieceGrid{} {}
+
 Board::Board(BoardOrientation const& orientation, PieceGrid const& pieceGrid)
     : m_orientation(orientation), m_pieceGrid(pieceGrid) {}
 

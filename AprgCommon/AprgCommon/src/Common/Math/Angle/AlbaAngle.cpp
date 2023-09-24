@@ -12,6 +12,7 @@ using namespace std;
 namespace alba {
 
 AlbaAngle::AlbaAngle() : m_angleValueInDegrees(0) {}
+
 AlbaAngle::AlbaAngle(AngleUnitType const angleUnitType, double const angleValue)
     : m_angleValueInDegrees(calculateAngleValueInDegrees(angleUnitType, angleValue)) {}
 

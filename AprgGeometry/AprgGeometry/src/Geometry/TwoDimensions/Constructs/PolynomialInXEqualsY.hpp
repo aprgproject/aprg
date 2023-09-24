@@ -9,6 +9,7 @@ class PolynomialInXEqualsY : public Polynomial<numberOfCoefficients> {
 public:
     using PolynomialInXEqualsYParent = Polynomial<numberOfCoefficients>;
     PolynomialInXEqualsY() : PolynomialInXEqualsYParent() {}
+
     PolynomialInXEqualsY(std::initializer_list<double> const& coefficients)
         : PolynomialInXEqualsYParent(coefficients) {}
 

@@ -25,8 +25,10 @@ public:
     using DequeOfEdges = typename GraphTypes<Vertex>::DequeOfEdges;
     using VectorOfDequeOfVertices = std::vector<DequeOfVertices>;
     using VertexWithLeftRight = VertexWithBool<Vertex>;
+
     using FlowNetwork =
         SinkSourceFlowNetwork<VertexWithLeftRight, int, DirectedGraphWithListOfEdges<VertexWithLeftRight>>;
+
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
     explicit NodeDisjointPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}
 

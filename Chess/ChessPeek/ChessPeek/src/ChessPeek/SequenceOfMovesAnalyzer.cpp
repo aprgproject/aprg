@@ -9,6 +9,7 @@ namespace alba::chess::ChessPeek {
 
 SequenceOfMovesAnalyzer::SequenceOfMovesAnalyzer(BoardWithContext const& boardWithContext)
     : m_state(State::NoMove), m_current{boardWithContext, {}}, m_previous{} {}
+
 Board const& SequenceOfMovesAnalyzer::getCurrentBoard() const { return m_current.boardWithContext.getBoard(); }
 PieceColor SequenceOfMovesAnalyzer::getCurrentMoveColor() const { return m_current.boardWithContext.getPlayerColor(); }
 SequenceOfMovesAnalyzer::State SequenceOfMovesAnalyzer::getState() const { return m_state; }

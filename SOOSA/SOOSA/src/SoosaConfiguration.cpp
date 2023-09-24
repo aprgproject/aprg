@@ -11,10 +11,6 @@ namespace alba::soosa {
 double SoosaConfiguration::getRemovalRatioForLineModel() const { return m_removalRatioForLineModel; }
 double SoosaConfiguration::getBitmapWidthToBarWidthMultiplier() const { return m_bitmapWidthToBarWidthMultiplier; }
 
-int SoosaConfiguration::getLineBarWidthSearchInitialBlackPointsValue() const {
-    return m_lineBarWidthSearchInitialBlackPointsValue;
-}
-
 double SoosaConfiguration::getLineBarWidthSearchAcceptedRunningBlackRatio() const {
     return m_lineBarWidthSearchAcceptedRunningBlackRatio;
 }
@@ -50,6 +46,10 @@ double SoosaConfiguration::getBarHeightToDiameterMultiplier() const { return m_b
 
 double SoosaConfiguration::getMinimumPercentageOfBlackPixelsForAFilledCircle() const {
     return m_minimumPercentageOfBlackPixelsForAFilledCircle;
+}
+
+int SoosaConfiguration::getLineBarWidthSearchInitialBlackPointsValue() const {
+    return m_lineBarWidthSearchInitialBlackPointsValue;
 }
 
 int SoosaConfiguration::getAcceptableLineDeviationForLineModelInPixels() const {

@@ -14,8 +14,10 @@ public:
 
 private:
     [[nodiscard]] Term getSummationModel() const;
+
     void calculateSumFromANumberToANumber(
         Term& result, AlbaNumber const& startNumber, AlbaNumber const& endNumber) const;
+
     void calculateSumStartingFromANumber(Term& result, AlbaNumber const& startNumber, Term const& end) const;
     void calculateSumUsingEachTerm(Term& result, AlbaNumber const& startNumber, AlbaNumber const& endNumber) const;
     void calculateSumUsingModel(Term& result, AlbaNumber const& startNumber, AlbaNumber const& endNumber) const;

@@ -24,6 +24,7 @@ void putRemainingNonConstantFactorsAsInnerMultipliers(
 
 void putRemainingInnerMultipliersAsOuterAddend(
     TermsWithDetails& outerAddends, TermsWithDetails const& innerMultipliers, TermWithDetails const& originalAddend);
+
 AlbaNumber getGcfOfConstants(AlbaNumbers const& constantFactorsPerAddends);
 Terms factorizeAnExpression(Expression const& expression);
 Terms factorizeAnExpressionWithConfigurationChanged(Expression const& expression);

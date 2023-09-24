@@ -30,8 +30,10 @@ public:
 private:
     void simplifyExpressionUntilNoChange();
     static void simplifyExpression(Expression& expression);
+
     static void processTermsBaseOnOperatorLevel(
         Expression& expression, WrappedTerms const& termsToProcess, OperatorLevel const operatorLevel);
+
     static void processAndSaveTermsForAndOperation(Expression& expression, WrappedTerms const& termsToProcess);
     static void processAndSaveTermsForOrOperation(Expression& expression, WrappedTerms const& termsToProcess);
     static bool isChangeDetected(Expression const& expression1, Expression const& expression2);

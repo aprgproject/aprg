@@ -12,12 +12,15 @@ class AlbaUserInterface {
 public:
     template <typename AnswerType>
     using Choices = std::map<AnswerType, std::string>;
+
     // rule of zero
     AlbaUserInterface();
     std::string getUserInput();
     std::string getFilePathInput();
+
     std::string displayQuestionAndChoicesAndGetStringAnswerInAllCapitals(
         std::string_view const question, Choices<std::string> const& choices);
+
     template <typename NumberType>
     NumberType getNumberFromInput();
 

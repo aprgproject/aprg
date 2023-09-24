@@ -18,8 +18,10 @@ bool isDifferentiableAt(
 
 template <size_t SIZE>
 bool areOriginalAndDerivativeVectorsOrthogonal(MathVectorOfTerms<SIZE> const& termVector);
+
 template <size_t SIZE>
 Term getLengthOfArcDerivative(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
+
 template <size_t SIZE>
 Term getLengthOfArc(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
 
@@ -41,6 +43,7 @@ MathVectorOfTerms<SIZE> getLimit(
 
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> differentiate(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
+
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> integrate(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
 
@@ -50,8 +53,10 @@ MathVectorOfTerms<SIZE> getUnitTangentVector(
 
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> getUnitNormalVector(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
+
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> getCurvatureVector(MathVectorOfTerms<SIZE> const& termVector, std::string const& variableName);
+
 template <size_t SIZE>
 MathVectorOfTerms<SIZE> getGradient(Term const& term, ArrayOfStrings<SIZE> const& coordinateVariables);
 

@@ -34,8 +34,10 @@ public:
     [[nodiscard]] int getNotVisiblePart() const;
     friend std::ostream& operator<<(std::ostream& out, StabilityCheckObject const& object);
     friend double operator/(double const dividend, StabilityCheckObject const& divisor);
+
     friend bool areObjectsEqualOnVisibleAndNotVisiblePart(
         StabilityCheckObject const& object1, StabilityCheckObject const& object2);
+
     friend bool areObjectsEqualOnVisibleOnly(StabilityCheckObject const& object1, StabilityCheckObject const& object2);
 
 private:
@@ -45,6 +47,7 @@ private:
 
 bool areObjectsEqualOnVisibleAndNotVisiblePart(
     StabilityCheckObject const& object1, StabilityCheckObject const& object2);
+
 bool areObjectsEqualOnVisibleOnly(StabilityCheckObject const& object1, StabilityCheckObject const& object2);
 
 }  // namespace alba::algorithm

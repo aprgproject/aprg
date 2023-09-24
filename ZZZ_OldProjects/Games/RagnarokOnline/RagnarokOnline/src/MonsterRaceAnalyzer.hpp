@@ -40,8 +40,10 @@ private:
         RaceConfiguration const& currentConfiguration);
 
     static void showWinners(BestWinners& queueOfWinners);
+
     static void showBestConfiguration(
         RaceConfiguration const& bestConfiguration, RaceConfiguration const& currentConfiguration);
+
     static int getDiscrepancy(RaceConfiguration const& r1, RaceConfiguration const& r2);
     PreviousRaces m_singleRace;
     PreviousRaces m_dualRaceFirstPlace;

@@ -27,8 +27,10 @@ public:
 private:
     [[nodiscard]] Count getMinimumCountUsingNaiveRecursion(Vertex const vertex) const;
     Count getMinimumCountUsingMemoizationDP(VertexToCountMap& vertexToCountMap, Vertex const vertex) const;
+
     SetOfVertices getMinimumSetUsingMemoizationDP(
         VertexToSetOfVerticesMap& vertexToMinimumSetMap, Vertex const vertex) const;
+
     Graph m_nAryTreeGraph;
     Vertex m_rootOfTree;
     ChildrenInTree m_childrenInTree;

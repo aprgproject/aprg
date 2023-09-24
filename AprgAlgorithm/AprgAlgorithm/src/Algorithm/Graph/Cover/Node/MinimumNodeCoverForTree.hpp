@@ -17,8 +17,10 @@ public:
     using Count = int;
     using VertexToCountMap = std::map<Vertex, Count>;
     using VertexToSetOfVerticesMap = std::map<Vertex, SetOfVerticesWithVertex>;
+
     MinimumNodeCoverForTree(BaseUndirectedGraphWithVertex const& nAryTreeGraph, Vertex const rootOfTree)
         : m_nAryTreeGraph(nAryTreeGraph), m_rootOfTree(rootOfTree), m_childrenInTree(m_nAryTreeGraph, m_rootOfTree) {}
+
     static constexpr int UNUSED_COUNT = std::numeric_limits<Count>::max();
 
     [[nodiscard]] Count getMinimumNodeCoverSize() const {

@@ -23,6 +23,7 @@ public:
     using UnaryFunction = std::function<DataType(DataType const&)>;
     using BinaryFunction = std::function<DataType(DataType const&, DataType const&)>;
     AlbaSparseMatrix() : m_numberOfColumns(0), m_numberOfRows(0) {}
+
     AlbaSparseMatrix(size_t const numberOfColumns, size_t const numberOfRows)
         : m_numberOfColumns(numberOfColumns), m_numberOfRows(numberOfRows), m_matrixData() {}
 

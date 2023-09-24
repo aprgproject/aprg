@@ -9,15 +9,20 @@ template <typename Vertex, typename Graph>
 class BaseConnectedComponentsWithVertexToComponentIdMap : public BaseConnectedComponents<Vertex> {
 public:
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
-    BaseConnectedComponentsWithVertexToComponentIdMap(BaseConnectedComponentsWithVertexToComponentIdMap const&) =
-        default;
-    BaseConnectedComponentsWithVertexToComponentIdMap(BaseConnectedComponentsWithVertexToComponentIdMap&&) = default;
-    BaseConnectedComponentsWithVertexToComponentIdMap& operator=(
-        BaseConnectedComponentsWithVertexToComponentIdMap const&) = default;
-    BaseConnectedComponentsWithVertexToComponentIdMap& operator=(BaseConnectedComponentsWithVertexToComponentIdMap&&) =
-        default;
     // no need for virtual destructor because base destructor is virtual (similar to other virtual
     ~BaseConnectedComponentsWithVertexToComponentIdMap() override = default;
+
+    BaseConnectedComponentsWithVertexToComponentIdMap(BaseConnectedComponentsWithVertexToComponentIdMap const&) =
+        default;
+
+    BaseConnectedComponentsWithVertexToComponentIdMap(BaseConnectedComponentsWithVertexToComponentIdMap&&) = default;
+
+    BaseConnectedComponentsWithVertexToComponentIdMap& operator=(
+        BaseConnectedComponentsWithVertexToComponentIdMap const&) = default;
+
+    BaseConnectedComponentsWithVertexToComponentIdMap& operator=(BaseConnectedComponentsWithVertexToComponentIdMap&&) =
+        default;
+
     explicit BaseConnectedComponentsWithVertexToComponentIdMap(Graph const& graph) : m_graph(graph) {}
     [[nodiscard]] int getNumberOfComponentIds() const override { return m_numberOfComponentIds; }
 

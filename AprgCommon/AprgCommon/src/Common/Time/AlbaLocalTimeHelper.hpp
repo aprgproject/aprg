@@ -16,8 +16,10 @@ AlbaDateTime convertFileTimeToAlbaDateTime(LibraryFileTime const& inputTime);
 AlbaDateTime getCurrentDateTime();
 LibrarySteadyTime getSteadyTimeNow();
 LibrarySystemTime getSystemTimeNow();
+
 LibrarySystemTime convertTimeInformationToSystemTime(
     std::tm& timeInformation, std::chrono::nanoseconds const& nanosecondsDuration);
+
 LibrarySystemTime convertAlbaDateTimeToSystemTime(AlbaDateTime const& inputTime);
 
 template <typename LibraryTime>

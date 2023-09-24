@@ -17,8 +17,10 @@ private:
     void calculateForTermAndVariable(Term const& term, std::string const& variableName) override;
     void addValuesToSolutionSetIfNeeded(SolutionSet& solutionSet, Term const& term, std::string const& variableName);
     void performNewtonMethodToFindSolution(Term const& termToCheck, std::string const& variableNameForSubstitution);
+
     static AlbaNumber getMoreAccurateValueFromNewtonMethod(
         Term const& termToCheck, std::string const& variableNameForSubstitution, AlbaNumber const& value);
+
     static NewtonMethod::Function getFunctionToIterate(
         Term const& termToCheck, std::string const& variableNameForSubstitution);
 };

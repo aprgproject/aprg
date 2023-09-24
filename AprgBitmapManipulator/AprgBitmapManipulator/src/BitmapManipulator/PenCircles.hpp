@@ -23,8 +23,10 @@ public:
     using CircleCenterConnections = std::set<CircleCenterConnection>;
     [[nodiscard]] CircleCenterConnections const& getCenterConnections() const;
     [[nodiscard]] PenCircleDetails getPenCircleDetails(BitmapXY const& point) const;
+
     [[nodiscard]] PointAndPenCircleDetailsPairs getNearestPenCirclesToAPoint(
         BitmapXY const& point, int const distance) const;
+
     [[nodiscard]] PointToPenCircleDetailsMap const& getPenCircles() const;
     [[nodiscard]] bool isPenCircle(BitmapXY const& point) const;
     void addAsPenCircle(BitmapXY const& point, double const radius, uint32_t const color);

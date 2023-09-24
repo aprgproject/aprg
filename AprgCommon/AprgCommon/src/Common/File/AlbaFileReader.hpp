@@ -17,24 +17,34 @@ public:
     char getCharacter();
     char* getCharacters(size_t& numberOfCharacters);
     bool isNotFinished();
+
     template <typename NumberType>
     NumberType getOneByteData();
+
     template <typename NumberType>
     NumberType getTwoByteData();
+
     template <typename NumberType>
     NumberType getFourByteData();
+
     template <typename NumberType>
     NumberType getEightByteData();
+
     template <typename NumberType>
     NumberType getTwoByteSwappedData();
+
     template <typename NumberType>
     NumberType getFourByteSwappedData();
+
     template <typename NumberType>
     NumberType getEightByteSwappedData();
+
     template <typename NumberType, size_t numberOfBytesToRead>
     NumberType getData();
+
     template <typename NumberType>
     NumberType getDataForOneByte();
+
     [[nodiscard]] size_t getCurrentLocation() const;
     [[nodiscard]] size_t getFileSize() const;
     [[nodiscard]] size_t getMaxBufferSize() const;

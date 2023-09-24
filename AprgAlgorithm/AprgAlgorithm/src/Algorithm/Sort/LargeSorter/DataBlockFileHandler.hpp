@@ -18,6 +18,7 @@ public:
     DataBlockFileHandler(DataBlockFileHandler &&) = default;
     DataBlockFileHandler &operator=(DataBlockFileHandler const &) = default;
     DataBlockFileHandler &operator=(DataBlockFileHandler &&) = default;
+
     ~DataBlockFileHandler() {
         releaseFileStream();
         AlbaLocalPathHandler(m_path).deleteFileAndIsSuccessful();

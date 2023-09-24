@@ -15,6 +15,7 @@ public:
     BaseSetWithBaseLinearProbingHash(BaseSetWithBaseLinearProbingHash&&) = default;
     BaseSetWithBaseLinearProbingHash& operator=(BaseSetWithBaseLinearProbingHash const&) = default;
     BaseSetWithBaseLinearProbingHash& operator=(BaseSetWithBaseLinearProbingHash&&) = default;
+
     BaseSetWithBaseLinearProbingHash()
         : b_size(BaseLinearProbingHash::m_size), b_entryPointers(BaseLinearProbingHash::m_entryPointers) {}
 

@@ -25,8 +25,10 @@ public:
     // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
     Term();
     Term(TermType const type, BaseTermDataPointer&& m_baseTermDataPointer, bool const isSimplified);  // for move
+
     template <typename ArithmeticType, typename = std::enable_if_t<typeHelper::isArithmeticType<ArithmeticType>()>>
     Term(ArithmeticType const value) : Term(AlbaNumber(value)) {}
+
     // rule of five or six
     ~Term() override = default;
     Term(Term&& term) = default;

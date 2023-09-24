@@ -13,19 +13,19 @@ using namespace std::filesystem;
 
 namespace alba::AprgBitmap {
 
-uint32_t AnimizeColor::getNewColor(uint32_t const originalColor) const {
-    HueSaturationLightnessData newHslData(convertColorToHueSaturationLightnessData(originalColor));
-    newHslData.lightnessDecimal = getNewLightness(newHslData.lightnessDecimal);
-    newHslData.saturationLightnessDecimal = getNewSaturation(newHslData.saturationLightnessDecimal);
-    return convertHueSaturationLightnessDataToColor(newHslData);
-}
-
 double AnimizeColor::getNewLightness(double const originalValue) const {
     return getNewValue(m_lightnessData, originalValue);
 }
 
 double AnimizeColor::getNewSaturation(double const originalValue) const {
     return getNewValue(m_saturationData, originalValue);
+}
+
+uint32_t AnimizeColor::getNewColor(uint32_t const originalColor) const {
+    HueSaturationLightnessData newHslData(convertColorToHueSaturationLightnessData(originalColor));
+    newHslData.lightnessDecimal = getNewLightness(newHslData.lightnessDecimal);
+    newHslData.saturationLightnessDecimal = getNewSaturation(newHslData.saturationLightnessDecimal);
+    return convertHueSaturationLightnessDataToColor(newHslData);
 }
 
 void AnimizeColor::gatherStatistics(path const& filePath) {

@@ -10,6 +10,7 @@ class HornerHashFunctionForSubstrings {
     // horners rule: continuously mod to keep the value
 public:
     using HashValues = std::vector<HashValue>;
+
     HornerHashFunctionForSubstrings(HashValue const radix, HashValue const largeRandomPrime)
         : m_radix(radix), m_largeRandomPrime(largeRandomPrime) {}
 

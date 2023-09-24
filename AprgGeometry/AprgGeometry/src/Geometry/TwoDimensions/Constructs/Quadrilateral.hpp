@@ -26,11 +26,15 @@ public:
 
 private:
     [[nodiscard]] GroupOfPoints getGroupOfPointsBasedOnYValue() const;
+
     static ListOfStartEndOfXAndY getStartEndForXs(
         GroupOfPoints const& groupOfPointsBasedOnYValue, double const interval);
+
     static ListOfStartEndOfXAndY getStartEndForXsFor1Points(Points const& points);
+
     static ListOfStartEndOfXAndY getStartEndForXsFor2Points(
         Points const& points1, Points const& points2, double const interval);
+
     static ListOfStartEndOfXAndY getStartEndForXsFor3Points(
         Points const& points1, Points const& points2, Points const& points3, double const interval);
 

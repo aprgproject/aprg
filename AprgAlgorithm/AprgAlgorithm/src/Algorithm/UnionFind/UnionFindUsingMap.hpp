@@ -11,6 +11,7 @@ class UnionFindUsingMap : public BaseUnionFind<Object> {
 public:
     using ConnectionMap =
         std::map<Object, Object>;  // you are using map, so log N but this should to be near constant (boo!)
+
     UnionFindUsingMap() = default;
 
     [[nodiscard]] Object getRoot(Object const& object) const override {

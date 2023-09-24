@@ -33,6 +33,7 @@ public:
     Proxy() {
         m_subject = std::make_unique<RealSubject>();  // instantiation might happen elsewhere on other examples
     }
+
     void request() override { m_subject->request(); }
 
     // ...

@@ -43,6 +43,7 @@ public:
 
     void drawBlurredColorsUsingCircles(
         BitmapSnippet& snippet, double const blurRadius, uint32_t const similarityColorLimit);
+
     // other draw functions
     void drawToFillGapsUsingBlur(BitmapSnippet& snippet, double const blurRadius);
     void drawNewColorForLabels(BitmapSnippet& snippet);
@@ -63,13 +64,17 @@ public:
     // draw pen and non pen functions
     static void drawPenPoints(
         PenPoints const& penPoints, BitmapSnippet const& inputSnippet, BitmapSnippet& outputSnippet);
+
     static void drawNonPenPoints(
         PenPoints const& penPoints, BitmapSnippet const& inputSnippet, BitmapSnippet& outputSnippet);
+
     static void drawPenCircles(PenCircles const& penCircles, BitmapSnippet& snippet);
     static void drawPenCirclesOnly(PenCircles const& penCircles, BitmapSnippet& snippet);
+
     // draw blur functions
     static void drawWithBlurringDisimilarColors(
         BitmapSnippet& snippet, int const numberOfPasses, uint32_t const similarityColorLimit);
+
     static void drawWithBlurUsingSnakeLikeTraversal(BitmapSnippet& snippet, uint32_t const similarityColorLimit);
     static void drawAnimeColor(BitmapSnippet& snippet, AnimizeColor const& animizeColor);
 
@@ -92,12 +97,16 @@ private:
 
     void determineConnectedComponentsUsingTwoPassInFirstPass(
         BitmapSnippet const& inputSnippet, UnionFindForLabels& unionFindForLabels);
+
     void determineConnectedComponentsUsingTwoPassInSecondPass(
         BitmapSnippet const& inputSnippet, UnionFindForLabels const& unionFindForLabels);
+
     int analyzeFourConnectivityNeighborPointsForConnectedComponentsTwoPassAndReturnSmallestLabel(
         BitmapSnippet const& inputSnippet, UnionFindForLabels& unionFindForLabels, BitmapXY const& neighborPoint);
+
     int analyzeNeighborPointForConnectedComponentsTwoPassAneReturnLabel(
         BitmapSnippet const& inputSnippet, BitmapXY const& neighborPoint);
+
     [[nodiscard]] static uint32_t getBlurredColor(
         uint32_t const centerColor, uint32_t const colorToCompare, uint32_t const similarityColorLimit);
 
@@ -120,9 +129,10 @@ private:
         UnionFindForLabels& unionFindForLabels, int const smallestLabel, int const neighbor1Label,
         int const neighbor2Label);
 
+    static double getBlurWeight(double const distanceFromCenter, double const blurRadius);
+
     static uint8_t getBlurredColorPart(
         uint8_t const centerColorPart, uint8_t const colorToComparePart, uint32_t const similarityColorLimit);
-    static double getBlurWeight(double const distanceFromCenter, double const blurRadius);
 
     static bool isThisPenCircleBetter(
         BitmapXY const& penBitmapXY, TwoDimensions::Circle const& circleToCheck,

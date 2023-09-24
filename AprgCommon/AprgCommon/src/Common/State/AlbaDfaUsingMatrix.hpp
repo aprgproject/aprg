@@ -8,6 +8,7 @@ template <typename State, typename Input>
 class AlbaDfaUsingMatrix {
 public:
     using StateMatrix = matrix::AlbaMatrix<State>;
+
     AlbaDfaUsingMatrix(size_t const maxStateValue, size_t const maxInputValue)
         : m_nextStateMatrix(maxStateValue, maxInputValue) {}
 

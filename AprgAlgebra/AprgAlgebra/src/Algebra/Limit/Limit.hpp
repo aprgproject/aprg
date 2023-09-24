@@ -19,8 +19,10 @@ AlbaNumber getLimitAtAValueByApproachType(
 
 AlbaNumber getLimitAtAValueInBothSides(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
+
 AlbaNumber getLimitAtAValueInThePositiveSide(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
+
 AlbaNumber getLimitAtAValueInTheNegativeSide(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
 
@@ -59,6 +61,7 @@ Term getObliqueAsymptote(Term const& term);
 bool isAlmostEqualForLimitIteration(AlbaNumber const& value1, AlbaNumber const& value2);
 bool isAlmostEqualForLimitChecking(AlbaNumber const& value1, AlbaNumber const& value2);
 bool hasVerticalAsymptoteAtValue(Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
+
 bool hasHorizontalAsymptoteAtValue(
     Term const& term, std::string const& variableName, AlbaNumber const& valueToApproach);
 

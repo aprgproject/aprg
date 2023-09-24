@@ -24,9 +24,12 @@ public:
     using Path = typename GraphTypes<Vertex>::Path;
     using Paths = typename GraphTypes<Vertex>::Paths;
     using VertexWithDuplicate = VertexWithBool<Vertex>;
+
     using FlowNetwork =
         SinkSourceFlowNetwork<VertexWithDuplicate, int, DirectedGraphWithListOfEdges<VertexWithDuplicate>>;
+
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
+
     NodeDisjointPaths(BaseDirectedGraphWithVertex const& graph, Vertex const& startVertex, Vertex const& endVertex)
         : m_fordFulkerson(getFlowNetwork(graph, startVertex, endVertex)) {}
 

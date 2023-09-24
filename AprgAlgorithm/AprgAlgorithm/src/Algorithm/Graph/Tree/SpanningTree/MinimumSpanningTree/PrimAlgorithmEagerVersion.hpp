@@ -17,10 +17,13 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using EdgeOrderedByWeight = typename GraphTypesWithWeights<Vertex, Weight>::EdgeOrderedByWeight;
     using VertexOrderedByWeight = typename GraphTypesWithWeights<Vertex, Weight>::VertexOrderedByWeight;
+
     using VertexOrderedByWeightMinimumPriorityQueue =
         std::priority_queue<VertexOrderedByWeight, std::deque<VertexOrderedByWeight>, std::greater<>>;
+
     using VertexToEdgeOrderedByWeightMap =
         typename GraphTypesWithWeights<Vertex, Weight>::VertexToEdgeOrderedByWeightMap;
+
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
 
     PrimAlgorithmEagerVersion(EdgeWeightedGraph const& graph, Vertex const& startVertex)
@@ -82,6 +85,7 @@ private:
     Vertex m_startVertex;
     CheckableVerticesWithVertex m_processedVertices;
     VertexToEdgeOrderedByWeightMap m_vertexToEdgeWithMinimumWeightMap;
+
     VertexOrderedByWeightMinimumPriorityQueue
         m_nearestVerticesToTree;  // makes this eager algorithm (nearest vertices is kept to find nearest edges easier)
 };

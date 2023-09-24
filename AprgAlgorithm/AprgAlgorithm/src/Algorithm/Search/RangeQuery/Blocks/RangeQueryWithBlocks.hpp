@@ -26,6 +26,7 @@ public:
     using BlockValue = typename BlockValues::value_type;
     using Output = BlockValue;
     using ValuesFunction = std::function<BlockValue(typename Values::const_iterator, typename Values::const_iterator)>;
+
     using BlockValuesFunction =
         std::function<BlockValue(typename BlockValues::const_iterator, typename BlockValues::const_iterator)>;
 

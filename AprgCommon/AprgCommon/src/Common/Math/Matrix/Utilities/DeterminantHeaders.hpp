@@ -6,8 +6,10 @@ namespace alba::matrix {
 
 template <typename DataType>
 size_t getIndexWithHighestNumberOfZeros(ListOfAlbaMatrixData<DataType> const& rowsOrColumns);
+
 template <typename DataType>
 size_t getIndexWithHighestNumberOfNonZeros(ListOfAlbaMatrixData<DataType> const& rowsOrColumns);
+
 template <typename DataType>
 DataType getDeterminant(AlbaMatrix<DataType> const& matrix);
 

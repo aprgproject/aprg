@@ -12,16 +12,6 @@ namespace alba {
 FileDestructor::FileDestructor() : m_pathToDestroy(AlbaLocalPathHandler::createPathHandlerForDetectedPath()) {}
 void FileDestructor::destroy() const { destroy(m_pathToDestroy.getPath()); }
 
-void FileDestructor::destroy(path const& destroyPath) {
-    cout << "Destroying files in: [" << destroyPath << "]\n";
-    AlbaLocalPathHandler const pathHandler(destroyPath);
-    if (pathHandler.isExistingDirectory()) {
-        pathHandler.deleteAllDirectoryContentsAndIsSuccessful();
-    } else {
-        pathHandler.deleteFileAndIsSuccessful();
-    }
-}
-
 void FileDestructor::renameDirectory(path const& directoryPath) {
     cout << "Renaming directory: [" << directoryPath << "]\n";
     AlbaLocalPathHandler directoryPathHandler(directoryPath);
@@ -34,6 +24,16 @@ void FileDestructor::renameDirectory(path const& directoryPath) {
             cout << "Renamed directory: [" << directoryPathHandler.getPath() << "]\n";
         }
         --retries;
+    }
+}
+
+void FileDestructor::destroy(path const& destroyPath) {
+    cout << "Destroying files in: [" << destroyPath << "]\n";
+    AlbaLocalPathHandler const pathHandler(destroyPath);
+    if (pathHandler.isExistingDirectory()) {
+        pathHandler.deleteAllDirectoryContentsAndIsSuccessful();
+    } else {
+        pathHandler.deleteFileAndIsSuccessful();
     }
 }
 

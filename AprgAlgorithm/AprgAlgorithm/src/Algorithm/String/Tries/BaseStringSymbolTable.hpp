@@ -17,13 +17,18 @@ public:
     BaseStringSymbolTable(BaseStringSymbolTable&&) = default;
     BaseStringSymbolTable& operator=(BaseStringSymbolTable const&) = default;
     BaseStringSymbolTable& operator=(BaseStringSymbolTable&&) = default;
+
     [[nodiscard]] virtual Key getLongestPrefixOf(
-        Key const& keyToCheck) const = 0;               // get the longest key that has a prefix
+        Key const& keyToCheck) const = 0;  // get the longest key that has a prefix
+
     [[nodiscard]] virtual Strings getKeys() const = 0;  // get all keys in sorted order
+
     [[nodiscard]] virtual Strings getAllKeysWithPrefix(
         Key const& prefix) const = 0;  // all the keys having s as a prefix
+
     [[nodiscard]] virtual Strings getAllKeysThatMatch(
-        Key const& patternToMatch) const = 0;                          // all the keys having s as a prefix
+        Key const& patternToMatch) const = 0;  // all the keys having s as a prefix
+
     [[nodiscard]] virtual Value get(Key const& key) const = 0;         // get value paired with key
     [[nodiscard]] virtual int getSize() const = 0;                     // get number of key-value pairs
     [[nodiscard]] virtual bool isEmpty() const = 0;                    // is the symbol table empty

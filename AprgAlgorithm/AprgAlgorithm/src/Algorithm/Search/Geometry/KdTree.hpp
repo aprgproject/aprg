@@ -8,8 +8,10 @@ namespace alba::algorithm {
 
 template <typename Key>
 bool isEqualThanWithDepth(Key const& key1, Key const& key2, int const depth);
+
 template <typename Key>
 bool isLessThanWithDepth(Key const& key1, Key const& key2, int const depth);
+
 template <typename Key>
 bool isGreaterThanWithDepth(Key const& key1, Key const& key2, int const depth);
 

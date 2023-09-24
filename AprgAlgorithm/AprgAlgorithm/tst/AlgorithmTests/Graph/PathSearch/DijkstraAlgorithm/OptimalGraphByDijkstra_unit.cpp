@@ -11,6 +11,7 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 using VertexForTest = int;
 using WeightForTest = double;
 using PathForTest = GraphTypes<VertexForTest>::Path;
@@ -19,8 +20,10 @@ using DirectedGraphForTest = DirectedGraphWithListOfEdges<VertexForTest>;
 using UndirectedGraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
 using EdgeWeightedDirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, DirectedGraphForTest>;
 using EdgeWeightedUndirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, UndirectedGraphForTest>;
+
 using ShortestPathSearchForTest =
     PathSearchUsingDijkstra<VertexForTest, WeightForTest, EdgeWeightedUndirectedGraphForTest, less>;
+
 }  // namespace
 
 TEST(OptimalGraphByDijkstraTest, GetOptimalDirectedGraphWithUndirectedToOptimizedDirectedWorksOnExample1) {

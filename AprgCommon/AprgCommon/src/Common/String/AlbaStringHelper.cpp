@@ -657,6 +657,7 @@ void splitToStrings(strings& listOfStrings, string_view const mainText, string_v
 
 template void splitToStrings<SplitStringType::WithoutDelimeters>(
     strings& listOfStrings, string_view const mainText, string_view const delimiter);
+
 template void splitToStrings<SplitStringType::WithDelimeters>(
     strings& listOfStrings, string_view const mainText, string_view const delimiter);
 

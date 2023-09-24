@@ -11,8 +11,10 @@ public:
     using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using Walker = WalkInSuccessorGraph<Vertex>;
     using Path = typename GraphTypes<Vertex>::Path;
+
     explicit BrentAlgorithmForSuccessorGraphs(BaseDirectedGraphWithVertex const& graph)
         : m_graph(graph), m_walker(graph) {}
+
     [[nodiscard]] Path getCycle() const { return m_cyclePath; }
     [[nodiscard]] bool hasACycle() const { return m_hasACycle; }
 

@@ -71,20 +71,6 @@ void FesterRobot::updateExcelFile(unsigned int const freqUsageBits) {
     alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'S'});
 }
 
-void FesterRobot::setupFesterEnvironmentInMatlab() {
-    alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(MATLAB_COMMAND_WINDOW_COORDINATES));
-    alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(MATLAB_COMMAND_WINDOW_COORDINATES));
-    alba::AlbaWindowsUserAutomation::setStringToClipboard("clc");
-    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
-    alba::AlbaWindowsUserAutomation::typeCharacter(VK_RETURN);
-    alba::AlbaWindowsUserAutomation::setStringToClipboard(R"(run('C:\Users\malba\Desktop\DSS\Fester\Fester_scp.m'))");
-    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
-    alba::AlbaWindowsUserAutomation::typeCharacter(VK_RETURN);
-    alba::AlbaWindowsUserAutomation::setStringToClipboard(R"(format long g)");
-    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
-    alba::AlbaWindowsUserAutomation::typeCharacter(VK_RETURN);
-}
-
 void FesterRobot::editCellInExcelWithNewFrequencies(MousePosition const& excelCellPosition) {
     alba::AlbaWindowsUserAutomation::doLeftClickAt(excelCellPosition);
     alba::AlbaWindowsUserAutomation::doLeftClickAt(excelCellPosition);
@@ -151,6 +137,20 @@ string FesterRobot::getClipboardFormattedData() {
     string clipboardData(alba::AlbaWindowsUserAutomation::getStringFromClipboard());
     stringHelper::replaceAllAndReturnIfFound(clipboardData, "\r", "");
     return clipboardData;
+}
+
+void FesterRobot::setupFesterEnvironmentInMatlab() {
+    alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(MATLAB_COMMAND_WINDOW_COORDINATES));
+    alba::AlbaWindowsUserAutomation::doLeftClickAt(MousePosition(MATLAB_COMMAND_WINDOW_COORDINATES));
+    alba::AlbaWindowsUserAutomation::setStringToClipboard("clc");
+    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
+    alba::AlbaWindowsUserAutomation::typeCharacter(VK_RETURN);
+    alba::AlbaWindowsUserAutomation::setStringToClipboard(R"(run('C:\Users\malba\Desktop\DSS\Fester\Fester_scp.m'))");
+    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
+    alba::AlbaWindowsUserAutomation::typeCharacter(VK_RETURN);
+    alba::AlbaWindowsUserAutomation::setStringToClipboard(R"(format long g)");
+    alba::AlbaWindowsUserAutomation::performKeyCombination({VK_CONTROL}, {'V'});
+    alba::AlbaWindowsUserAutomation::typeCharacter(VK_RETURN);
 }
 
 void FesterRobot::exitIfSpecialKeyIsPressed() {

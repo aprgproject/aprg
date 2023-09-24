@@ -31,8 +31,10 @@ public:
     using VertexPair = std::pair<Vertex, Vertex>;  // same definition with edge but edge is not correct in name
     using VertexPairs = std::vector<VertexPair>;
     using VertexWithLeftRight = VertexWithBool<Vertex>;
+
     using FlowNetwork =
         SinkSourceFlowNetwork<VertexWithLeftRight, int, DirectedGraphWithListOfEdges<VertexWithLeftRight>>;
+
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
     using TransitiveClosure = TransitiveClosureWithMap<Vertex>;
     explicit GeneralPathCover(BaseDirectedGraphWithVertex const& graph) : m_graph(graph) {}

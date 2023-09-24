@@ -25,14 +25,19 @@ private:
     static void rationalize(Term& termToRationalize, Term& otherTerm);
     static void simplifyForRationalize(Term& term);
     static void retrieveTermsForRationalization(Term& rationalizedTerm, Term& multiplier, Term const& term);
+
     static void retrieveTermsForRationalizationForPolynomial(
         Term& rationalizedTerm, Term& multiplier, Polynomial const& polynomial);
+
     static void retrieveTermsForRationalizationForPolynomial(
         Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial);
+
     static void retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByTwo(
         Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial);
+
     static void retrieveTermsForRationalizationForPolynomialWhenExponentIsDivisibleByThree(
         Term& rationalizedTerm, Term& multiplier, Monomial const& firstMonomial, Monomial const& secondMonomial);
+
     static void retrieveTermsForRationalizationForExpression(
         Term& rationalizedTerm, Term& multiplier, Expression const& expression);
 

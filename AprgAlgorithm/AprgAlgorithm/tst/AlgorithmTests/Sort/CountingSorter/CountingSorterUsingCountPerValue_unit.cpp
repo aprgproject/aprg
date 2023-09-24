@@ -23,6 +23,7 @@ using CharactersSorter = CountingSorterUsingCountPerValue<Characters, MAX_NUMBER
 using ListOfCharactersSorter = CountingSorterUsingCountPerValue<ListOfCharacters, MAX_NUMBER_OF_CHARACTERS>;
 using SmallIntegerSorter = CountingSorterUsingCountPerValue<Integers, MAX_NUMBER_OF_SMALL_INTS>;
 using StabilityCheckObjectsSorter = CountingSorterUsingCountPerValue<StabilityCheckObjects, MAX_NUMBER_OF_CHARACTERS>;
+
 CharactersSorter::IndexableValueToValueFunction indexableValueToCharacterFunction =
     [](int const indexableValue) -> char { return static_cast<char>(indexableValue & 0xFF); };
 

@@ -29,23 +29,32 @@ struct ExtremumWithMultipleVariables {
 using Extrema = std::vector<Extremum>;
 using ExtremaWithMultipleVariables = std::vector<ExtremumWithMultipleVariables>;
 using VariableNameToCriticalNumbersMap = std::map<std::string, AlbaNumbers>;
+
 AlbaNumbers getInputValuesInIntervalWithSameAsMeanOfInterval(
     Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b);
+
 AlbaNumbers getInputValuesForCauchyMeanValueTheorem(
     Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b);
+
 AlbaNumbers getCriticalNumbers(Term const& term, std::string const& variableName);
 AlbaNumbers getInputValuesAtPointsOfInflection(Term const& term, std::string const& variableName);
 Extrema getRelativeExtrema(Term const& term, std::string const& variableName);
+
 ExtremaWithMultipleVariables getRelativeExtremaWithMultipleVariables(
     Term const& term, stringHelper::strings const& coordinateNames);
+
 Extremum getAbsoluteExtremumBasedOnRelativeExtremaOnInterval(
     Extrema const& relativeExtrema, AlbaNumberInterval const& interval);
+
 MinimumAndMaximum getMinimumAndMaximumAtClosedInterval(
     Term const& term, std::string const& variableName, AlbaNumberInterval const& closedInterval);
+
 VariableNameToCriticalNumbersMap getCriticalNumbersWithMultipleVariables(
     Term const& term, stringHelper::strings const& coordinateNames);
+
 bool willYieldToAbsoluteMinimumValue(
     Term const& term, std::string const& variableName, AlbaNumber const& valueForEvaluation);
+
 bool willYieldToAbsoluteMaximumValue(
     Term const& term, std::string const& variableName, AlbaNumber const& valueForEvaluation);
 
@@ -70,6 +79,7 @@ bool isIncreasingAt(Term const& term, std::string const& variableName, AlbaNumbe
 bool isConcaveDownwardAt(Term const& term, std::string const& variableName, AlbaNumber const& value);
 bool isConcaveUpwardAt(Term const& term, std::string const& variableName, AlbaNumber const& value);
 bool hasPointOfInflectionAt(Term const& term, std::string const& variableName, AlbaNumber const& value);
+
 bool isRolleTheoremSatisfied(
     Term const& term, std::string const& variableName, AlbaNumber const& a, AlbaNumber const& b, AlbaNumber const& c);
 

@@ -21,8 +21,10 @@ public:
 private:
     void save(std::string_view const path) override;
     void setPath(std::string_view const path);
+
     void splitPathToBeforeAndAfterProtocol(
         std::string_view const path, std::string& protocolWithSymbols, std::string& pathAfterProtocol);
+
     void setUrlParameters(std::string_view const urlParameters);
     std::string m_protocolWithSymbols;
     std::string m_urlParameters;

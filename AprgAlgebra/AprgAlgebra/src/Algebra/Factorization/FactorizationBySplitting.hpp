@@ -14,6 +14,7 @@ void splitPolynomialsByDivisibilityOfExponents(Polynomials& result, Polynomial c
 void splitPolynomialsByFirstVariable(Polynomials& result, Polynomial const& polynomial);
 void factorizeSmallerPolynomials(Polynomials& result, Polynomials const& smallerPolynomials);
 void factorizeSmallerPolynomialsByFactoringOutCommonFactors(Polynomials& result, Polynomials const& smallerPolynomials);
+
 void factorizeSmallerPolynomialsBySubstitutingCommonFactorsToNewVariables(
     Polynomials& result, Polynomials const& smallerPolynomials);
 
@@ -22,13 +23,18 @@ void factorizePolynomialWithNewVariables(
     SubstitutionOfVariablesToTerms const& variableSubstitution);
 
 void getCommonFactorsInThesePolynomials(Polynomials& commonFactors, Polynomials const& smallerPolynomials);
+
 void getPolynomialsWithRemovedCommonFactors(
     Polynomials& result, Polynomials const& polynomialsWithCommonFactors, Polynomials const& commonFactors);
+
 void updateToGetSubsetOfFactors(Polynomials& commonFactors, Polynomials const& commonFactorsOfAPolynomial);
+
 void combinePolynomialsByAdditionThenEmplaceFactoredPolynomialIfNeeded(
     Polynomials& result, Polynomials const& smallerPolynomials);
+
 Polynomial getNewPolynomialWithNewVariables(
     SubstitutionOfVariablesToTerms& variableSubstitution, Polynomials const& smallerPolynomials);
+
 Polynomials factorizeBySplittingToSmallerPolynomials(Polynomial const& polynomial);
 
 }  // namespace alba::algebra::Factorization

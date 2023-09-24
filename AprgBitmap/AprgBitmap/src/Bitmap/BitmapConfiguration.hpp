@@ -31,13 +31,6 @@ public:
     [[nodiscard]] Colors getColorTable() const;
     [[nodiscard]] CompressedMethodType getCompressedMethodType() const;
     [[nodiscard]] std::filesystem::path getPath() const;
-    [[nodiscard]] uint16_t getNumberOfBitsPerPixel() const;
-    [[nodiscard]] uint32_t getPixelArrayAddress() const;
-    [[nodiscard]] uint32_t getBitmapWidth() const;
-    [[nodiscard]] uint32_t getBitmapHeight() const;
-    [[nodiscard]] uint32_t getNumberOfBytesPerRowInFile() const;
-    [[nodiscard]] uint32_t getBitMaskForValue() const;
-    [[nodiscard]] uint32_t getColorUsingPixelValue(uint32_t const pixelValue) const;
     [[nodiscard]] int getXCoordinateWithinTheBitmap(int const coordinate) const;
     [[nodiscard]] int getYCoordinateWithinTheBitmap(int const coordinate) const;
     [[nodiscard]] int convertPixelsToBytesRoundedToFloor(int const pixels) const;
@@ -49,6 +42,13 @@ public:
     [[nodiscard]] int getEstimatedSquareSideInPixels(int const numberOfBytesToRead) const;
     [[nodiscard]] int getOneRowSizeInBytesFromPixels(int const leftPixelInclusive, int const rightPixelInclusive) const;
     [[nodiscard]] int getOneRowSizeInBytesFromBytes(int const leftByteInclusive, int const rightByteInclusive) const;
+    [[nodiscard]] uint16_t getNumberOfBitsPerPixel() const;
+    [[nodiscard]] uint32_t getPixelArrayAddress() const;
+    [[nodiscard]] uint32_t getBitmapWidth() const;
+    [[nodiscard]] uint32_t getBitmapHeight() const;
+    [[nodiscard]] uint32_t getNumberOfBytesPerRowInFile() const;
+    [[nodiscard]] uint32_t getBitMaskForValue() const;
+    [[nodiscard]] uint32_t getColorUsingPixelValue(uint32_t const pixelValue) const;
     [[nodiscard]] bool isValid() const;
     [[nodiscard]] bool isSignatureValid() const;
     [[nodiscard]] bool isHeaderValid() const;

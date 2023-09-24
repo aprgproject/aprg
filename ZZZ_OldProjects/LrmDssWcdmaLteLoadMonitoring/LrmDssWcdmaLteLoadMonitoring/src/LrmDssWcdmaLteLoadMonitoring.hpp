@@ -28,12 +28,16 @@ public:
         bool const hasHsfachInTheCell) const;
 
     void setConsecutiveLowerLoadStateCount(unsigned int const count);
+
     void setCommissioningLoadFactorValues(
         unsigned int const dchLoadFactor, unsigned int const hsdpaAndHsfachLoadFactor);
+
     void setCommissioningLoadThresholdValues(
         unsigned int const mediumLoadThreshold, unsigned int const highLoadThreshold);
+
     EDssWcdmaLoad determineLoadStateForTheNextFilterUpdateAndUpdateConsecutiveLowerLoadStateCountIfNeeded(
         EDssWcdmaLoad const currentLoadState, EDssWcdmaLoad const currentLoadStateOfTheAppliedFilter);
+
     static EDssWcdmaFilterBandwidth convertLoadStateToFilterBandwidth(EDssWcdmaLoad const loadState);
     static EDssWcdmaLoad getNextLowerLoadState(EDssWcdmaLoad const loadState);
     static EDssWcdmaLoad convertFilterBandwidthToLoadState(EDssWcdmaFilterBandwidth const filterBandwidth);

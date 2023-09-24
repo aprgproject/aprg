@@ -17,6 +17,7 @@ public:
     [[nodiscard]] bool doesExist() const;
     [[nodiscard]] bool isRelativePath() const;
     void createDirectoriesForNonExisitingDirectories() const;
+
     void findFilesAndDirectoriesOneDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
 
@@ -26,6 +27,7 @@ public:
 
     void findFilesAndDirectoriesUnlimitedDepth(
         std::string_view const wildCardSearch, ListOfPaths& listOfFiles, ListOfPaths& listOfDirectories) const;
+
     void deleteFilesInDirectory();                  // do tests
     void deleteInnerFilesAndDirectories();          // do tests
     void deleteDirectoryWithFilesAndDirectories();  // do tests
@@ -41,6 +43,7 @@ public:
 
 private:
     void save(std::string_view const path) override;
+
     [[nodiscard]] bool isSlashNeededAtTheEnd(
         std::string_view const correctedPath, std::string_view const originalPath) const;
 

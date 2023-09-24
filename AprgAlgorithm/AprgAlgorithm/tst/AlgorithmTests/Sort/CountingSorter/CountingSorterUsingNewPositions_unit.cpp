@@ -19,6 +19,7 @@ using StabilityCheckObjects = vector<StabilityCheckObject>;
 using CharactersSorter = CountingSorterUsingNewPositions<Characters, MAX_NUMBER_OF_CHARACTERS>;
 using SmallIntegerSorter = CountingSorterUsingNewPositions<Integers, MAX_NUMBER_OF_SMALL_INTS>;
 using StabilityCheckObjectsSorter = CountingSorterUsingNewPositions<StabilityCheckObjects, MAX_NUMBER_OF_CHARACTERS>;
+
 CharactersSorter::ValueToIndexableValueFunction characterToIndexableValueFunction = [](char const& value) -> int {
     return value & 0xFF;  // already converts to integer
 };

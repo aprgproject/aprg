@@ -17,6 +17,7 @@ public:
     using DequeOfVertices = typename GraphTypes<Vertex>::DequeOfVertices;
     using Path = typename GraphTypes<Vertex>::Path;
     using Paths = typename GraphTypes<Vertex>::Paths;
+
     using VertexToEdgeOrderedByWeightMap =
         typename GraphTypesWithWeights<Vertex, Weight>::VertexToEdgeOrderedByWeightMap;
 

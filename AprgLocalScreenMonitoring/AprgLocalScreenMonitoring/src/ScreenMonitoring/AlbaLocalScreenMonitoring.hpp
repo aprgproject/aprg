@@ -11,12 +11,18 @@ static_assert(false, "WINDOWS and LINUX are the only supported OS yet.");
 #endif
 
 namespace alba {
+
 #ifdef OS_WINDOWS
+
 class AlbaLocalScreenMonitoring : public AlbaWindowsScreenMonitoring
 #endif
+
 #ifdef OS_LINUX
+
                                   class AlbaLocalScreenMonitoring : public AlbaLinuxScreenMonitoring
 #endif
+
 {
 };
+
 }  // namespace alba

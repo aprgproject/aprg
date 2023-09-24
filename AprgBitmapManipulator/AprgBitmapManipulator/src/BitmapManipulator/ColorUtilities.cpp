@@ -105,6 +105,59 @@ HueSaturationValueData convertHslDataToHsvData(HueSaturationLightnessData const&
     return result;
 }
 
+double calculateHueDegrees(ColorPercentagesData const& colorPercentagesData) {
+    double hueDegrees = NAN;
+    if (colorPercentagesData.deltaMaxMinPercentage == 0) {
+        hueDegrees = 0;
+    } else {
+        double hueBy60Degrees(0);
+        if (colorPercentagesData.colorPercentageMax == colorPercentagesData.redPercentage) {
+            hueBy60Degrees = (colorPercentagesData.greenPercentage - colorPercentagesData.bluePercentage) /
+                             colorPercentagesData.deltaMaxMinPercentage;
+        } else if (colorPercentagesData.colorPercentageMax == colorPercentagesData.greenPercentage) {
+            hueBy60Degrees = ((colorPercentagesData.bluePercentage - colorPercentagesData.redPercentage) /
+                              colorPercentagesData.deltaMaxMinPercentage) +
+                             2;
+        } else if (colorPercentagesData.colorPercentageMax == colorPercentagesData.bluePercentage) {
+            hueBy60Degrees = ((colorPercentagesData.redPercentage - colorPercentagesData.greenPercentage) /
+                              colorPercentagesData.deltaMaxMinPercentage) +
+                             4;
+        }
+        hueDegrees = hueBy60Degrees * 60;
+        if (hueDegrees < 0) {
+            hueDegrees += 360;
+        }
+    }
+    return hueDegrees;
+}
+
+double calculateColorIntensityDecimal(uint32_t const color) {
+    return ((static_cast<double>(extractRed(color)) + extractGreen(color) + extractBlue(color)) / MAX_COLOR_VALUE) / 3;
+}
+
+double calculateLuma601Decimal(uint32_t const color) {
+    ColorPercentagesData const colorPercentagesData(calculateColorPercentagesData(color));
+    return colorPercentagesData.redPercentage * 0.2990 + colorPercentagesData.greenPercentage * 0.5870 +
+           colorPercentagesData.bluePercentage * 0.1140;
+}
+
+double calculateLuma709Decimal(uint32_t const color) {
+    ColorPercentagesData const colorPercentagesData(calculateColorPercentagesData(color));
+    return colorPercentagesData.redPercentage * 0.2126 + colorPercentagesData.greenPercentage * 0.7152 +
+           colorPercentagesData.bluePercentage * 0.0722;
+}
+
+double calculateSaturationColorIntensityDecimal(uint32_t const color) {
+    double result = NAN;
+    double const colorIntensityDecimal(calculateColorIntensityDecimal(color));
+    if (colorIntensityDecimal == 0) {
+        result = 0;
+    } else {
+        result = 1 - (static_cast<double>(extractMinForOneColor(color)) / MAX_COLOR_VALUE / colorIntensityDecimal);
+    }
+    return result;
+}
+
 uint32_t getColorValueOnly(uint32_t const value) { return 0xFFFFFF & value; }
 
 uint32_t combineRgbToColor(uint8_t const red, uint8_t const green, uint8_t const blue) {
@@ -188,59 +241,6 @@ uint8_t extractMaxForOneColor(uint32_t const color) {
 
 uint8_t extractMinForOneColor(uint32_t const color) {
     return min(min(extractRed(color), extractGreen(color)), extractBlue(color));
-}
-
-double calculateHueDegrees(ColorPercentagesData const& colorPercentagesData) {
-    double hueDegrees = NAN;
-    if (colorPercentagesData.deltaMaxMinPercentage == 0) {
-        hueDegrees = 0;
-    } else {
-        double hueBy60Degrees(0);
-        if (colorPercentagesData.colorPercentageMax == colorPercentagesData.redPercentage) {
-            hueBy60Degrees = (colorPercentagesData.greenPercentage - colorPercentagesData.bluePercentage) /
-                             colorPercentagesData.deltaMaxMinPercentage;
-        } else if (colorPercentagesData.colorPercentageMax == colorPercentagesData.greenPercentage) {
-            hueBy60Degrees = ((colorPercentagesData.bluePercentage - colorPercentagesData.redPercentage) /
-                              colorPercentagesData.deltaMaxMinPercentage) +
-                             2;
-        } else if (colorPercentagesData.colorPercentageMax == colorPercentagesData.bluePercentage) {
-            hueBy60Degrees = ((colorPercentagesData.redPercentage - colorPercentagesData.greenPercentage) /
-                              colorPercentagesData.deltaMaxMinPercentage) +
-                             4;
-        }
-        hueDegrees = hueBy60Degrees * 60;
-        if (hueDegrees < 0) {
-            hueDegrees += 360;
-        }
-    }
-    return hueDegrees;
-}
-
-double calculateColorIntensityDecimal(uint32_t const color) {
-    return ((static_cast<double>(extractRed(color)) + extractGreen(color) + extractBlue(color)) / MAX_COLOR_VALUE) / 3;
-}
-
-double calculateLuma601Decimal(uint32_t const color) {
-    ColorPercentagesData const colorPercentagesData(calculateColorPercentagesData(color));
-    return colorPercentagesData.redPercentage * 0.2990 + colorPercentagesData.greenPercentage * 0.5870 +
-           colorPercentagesData.bluePercentage * 0.1140;
-}
-
-double calculateLuma709Decimal(uint32_t const color) {
-    ColorPercentagesData const colorPercentagesData(calculateColorPercentagesData(color));
-    return colorPercentagesData.redPercentage * 0.2126 + colorPercentagesData.greenPercentage * 0.7152 +
-           colorPercentagesData.bluePercentage * 0.0722;
-}
-
-double calculateSaturationColorIntensityDecimal(uint32_t const color) {
-    double result = NAN;
-    double const colorIntensityDecimal(calculateColorIntensityDecimal(color));
-    if (colorIntensityDecimal == 0) {
-        result = 0;
-    } else {
-        result = 1 - (static_cast<double>(extractMinForOneColor(color)) / MAX_COLOR_VALUE / colorIntensityDecimal);
-    }
-    return result;
 }
 
 // bool isSimilar(uint32_t const color1, uint32_t const color2)//Pythagorean algo

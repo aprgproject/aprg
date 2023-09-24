@@ -77,8 +77,10 @@ private:
     // For Monomial
     [[nodiscard]] Term integrateMonomialWhenExponentIsNegativeOne(Monomial const& monomial) const;
     [[nodiscard]] Term substituteToNewVariable(Term const& mainTerm, Term const& termForNewVariable) const;
+
     [[nodiscard]] Term substituteToTrigonometricFunctions(
         Term const& mainTerm, TrigonometricSubstitutionDetails const& details) const;
+
     [[nodiscard]] Term divideFirstTermAndDerivativeOfSecondTerm(Term const& firstTerm, Term const& secondTerm) const;
     [[nodiscard]] std::string getCurrentVariableToIntegrate() const;
     // Miscellaneous
@@ -97,24 +99,31 @@ private:
         TermsWithDetails& changingTerms) const;
 
     void findInnerAndOuterTermForChainRule(Term& innerTerm, Term& outerTerm) const;
+
     void integrateSimplifiedExpressionOnly(
         Term& result, Expression const& expression, Configuration const& configuration);
+
     void integrateTermsInAdditionOrSubtraction(Term& result, Expression const& expression);
     void integrateTermsInMultiplicationOrDivision(Term& result, Expression const& expression);
     void integrateTermsInRaiseToPower(Term& result, Expression const& expression);
+
     // Changing and non changing
     void integrateNonChangingAndChangingTermsInMultiplicationOrDivision(
         Term& result, TermsWithDetails const& termsWithDetails);
+
     void integrateChangingTermsInMultiplicationOrDivision(Term& result, TermsWithDetails const& changingTerms);
     void integrateNonChangingTermRaiseToChangingTerm(Term& result, Term const& base, Term const& exponent);
     void integrateChangingTermRaiseToNonChangingTerm(Term& result, Term const& base, Term const& exponent);
     // Substitution
     void integrateTermUsingSubstitutionWithMaxDepth(Term& result, Term const& term, Configuration const& configuration);
     void integrateTermUsingSubstitution(Term& result, Term const& term, Configuration const& configuration);
+
     void integrateBySubstitutionAndUsingANewVariable(
         Term& result, Term const& mainTerm, Term const& termForNewVariable, Configuration const& configuration);
+
     // Trignometric Substitution
     void integrateTermUsingTrigonometricSubstitution(Term& result, Term const& term);
+
     void integrateUsingTrigonometricSubstitutionByFindingTwoTerms(
         Term& result, Term const& mainTerm, Term const& termToSubstitute);
 
@@ -125,8 +134,10 @@ private:
     // Reverse chain rule
     void integrateInMultiplicationOrDivisionByTryingReverseChainRule(
         Term& result, TermsWithDetails const& termsWithDetailsInMultiplicationOrDivision);
+
     void integrateUsingReverseChainRule(
         Term& result, Term const& firstOuterTerm, Term const& firstInnerTerm, Term const& secondTerm);
+
     // Polynomial over polynomial
     void integrateAsPolynomialOverPolynomialIfPossible(
         Term& result, Term const& term, bool const canProceedToPartialPolynomialFractions);
@@ -147,8 +158,10 @@ private:
     void integrateByTryingIntegrationByParts(Term& result, Term const& term);
     void integrateUsingIntegrationByPartsByOneTermAndOne(Term& result, Term const& term);
     void integrateUsingIntegrationByPartsByTryingTwoTerms(Term& result, Term const& term);
+
     void integrateUsingIntegrationByPartsByTryingTwoTermsWithDifferentOrder(
         Term& result, Term const& term, Term const& firstTerm, Term const& secondTerm);
+
     void integrateUsingIntegrationByPartsAndCheckingPreviousValues(
         Term& result, Term const& term, Term const& u, Term const& dv);
 
@@ -162,23 +175,30 @@ private:
 
     void integrateUsingKnownTrigonometricCombinations(
         Term& result, TrigonometryFunctionExponents const& exponents, Term const& functionInputTerm);
+
     void integrateSinRaiseToAnIntegerGreaterThanOne(Term& result, Term const& functionInputTerm, int const exponent);
     void integrateCosRaiseToAnIntegerGreaterThanOne(Term& result, Term const& functionInputTerm, int const exponent);
     void integrateTanRaiseToAnIntegerGreaterThanOne(Term& result, Term const& functionInputTerm, int const exponent);
     void integrateCscRaiseToAnIntegerGreaterThanOne(Term& result, Term const& functionInputTerm, int const exponent);
     void integrateSecRaiseToAnIntegerGreaterThanOne(Term& result, Term const& functionInputTerm, int const exponent);
     void integrateCotRaiseToAnIntegerGreaterThanOne(Term& result, Term const& functionInputTerm, int const exponent);
+
     void integrateSinAndCosCombinationWithExponentsGreaterThanOne(
         Term& result, Term const& functionInputTerm, int const sinExponent, int const cosExponent);
+
     void integrateCscAndCotCombinationWithExponentsGreaterThanOne(
         Term& result, Term const& functionInputTerm, int const cscExponent, int const cotExponent);
+
     void integrateSecAndTanCombinationWithExponentsGreaterThanOne(
         Term& result, Term const& functionInputTerm, int const secExponent, int const tanExponent);
+
     // Internal integration
     Term integrateIntenally(Term const& term);
     Term integrateInternallyWithPurpose(Term const& term, IntegrationPurpose const purpose);
+
     Term integrateIntenallyWithNewVariable(
         Term const& term, IntegrationPurpose const purpose, std::string const& newVariable);
+
     // For Expression
     Term integrateAsTermOrExpressionIfNeeded(Expression const& expression);
     // For Function
@@ -221,8 +241,10 @@ private:
 
     static void putReducedSineSquaredToDoubleAngleCosineTerms(
         Term& outputTerm, Term const& inputTerm, int const exponent);
+
     static void putReducedCosineSquaredToDoubleAngleCosineTerms(
         Term& outputTerm, Term const& inputTerm, int const exponent);
+
     static void putTangentSquaredToSecantSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent);
     static void putCosecantSquaredToCotangentSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent);
     static void putSecantSquaredToTangentSquaredTerms(Term& outputTerm, Term const& inputTerm, int const exponent);
@@ -237,10 +259,13 @@ private:
 
     static void putTrigonometricFunctionsWithExponents(
         TermsRaiseToNumbers& newTerms, Term const& inputTerm, TrigonometryFunctionExponents const& exponents);
+
     // Initialize and Finalize steps
     static void finalizeTermForIntegration(Term& term);
+
     static AlbaNumbersSet getExponentsForPartialFraction(
         std::string const& originalVariableName, Polynomial const& numeratorWithNewVariables);
+
     // Integration configurations
     static Configuration getConfigurationWithFactors();
     static Configuration getConfigurationWithCommonDenominator();
@@ -252,8 +277,10 @@ private:
         Polynomials const& partialDenominators);
 
     static Polynomial getPartialNumeratorForPartialFractions(int const degree, std::string const& variableName);
+
     static Term substituteBackToOldVariable(
         Term const& mainTerm, std::string const& newVariableName, Term const& termForNewVariable);
+
     static Term substituteFromTrigonometricFunctionsBackToNormal(
         Term const& mainTerm, TrigonometricSubstitutionDetails const& details);
 
@@ -263,11 +290,15 @@ private:
 
     static TrigonometryFunctionExponents getTrigonometricExponentsSuitableForIntegration(
         TrigonometryFunctionExponents const& oldExponents);
+
     static VariableNamesSet getNamesOfNewVariablesForPartialFraction(
         std::string const& originalVariableName, Polynomial const& numeratorWithNewVariables);
+
     static std::string getNewVariableNameForPartialFractions();
+
     static bool areExponentsSame(
         TrigonometryFunctionExponents const& exponents1, TrigonometryFunctionExponents const& exponents2);
+
     static bool isTrigonometricSubstitutionAllowed();
     stringHelper::strings m_variablesToIntegrate;
     IntegrationHistory m_history;

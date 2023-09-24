@@ -71,8 +71,10 @@ public:
     static AlbaNumber createFraction(NumeratorDataType const numerator, NumeratorDataType const denominator);
     static AlbaNumber createFraction(NumeratorDataType const numerator, DenominatorDataType const denominator);
     static constexpr double ADJUSTMENT_FLOAT_TOLERANCE = 1E-15;
+
     template <typename NumberType>
     static AlbaNumber createComplexNumber(NumberType const realPart, NumberType const imaginaryPart);
+
     static AlbaNumber createComplexNumber(ComplexFloat const& complexNumber);
 
     // constexpr functions
@@ -108,8 +110,10 @@ public:
     // remove character to integer conversion (delete any functions is a C++11 feature)
     AlbaNumber(char const character) = delete;
     constexpr AlbaNumber(FractionData const& fractionData) : m_type(Type::Fraction), m_data(fractionData) {}
+
     constexpr AlbaNumber(ComplexNumberData const& complexNumberData)
         : m_type(Type::ComplexNumber), m_data(complexNumberData) {}
+
     AlbaNumber operator+() const;
     AlbaNumber operator-() const;
     AlbaNumber operator+(AlbaNumber const& second) const;
@@ -154,26 +158,39 @@ private:
     static double getComparisonTolerance();
     static double getFloatAdjustmentTolerance();
     static double adjustFloatValue(float const value);
+
     template <typename NumberType1, typename NumberType2>
     void constructBasedFromComplexNumberDetails(NumberType1 const realPart, NumberType2 const imaginaryPart);
+
     static AlbaNumber addBothIntegersAndReturnNumber(IntDataType const integerValue1, IntDataType const integerValue2);
     static AlbaNumber addBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2);
+
     static AlbaNumber addBothFractionsAndReturnNumber(
         FractionData const& fractionData1, FractionData const& fractionData2);
+
     static AlbaNumber addIntegerAndDoubleAndReturnNumber(IntDataType const integerValue, double const doubleValue);
+
     static AlbaNumber addIntegerAndFractionAndReturnNumber(
         IntDataType const integerValue, FractionData const& fractionData);
+
     static AlbaNumber addFractionAndDoubleAndReturnNumber(FractionData const& fractionData, double const doubleValue);
+
     static AlbaNumber multiplyBothIntegersAndReturnNumber(
         IntDataType const integerValue1, IntDataType const integerValue2);
+
     static AlbaNumber multiplyBothDoubleAndReturnNumber(double const doubleValue1, double const doubleValue2);
+
     static AlbaNumber multiplyBothFractionsAndReturnNumber(
         FractionData const& fractionData1, FractionData const& fractionData2);
+
     static AlbaNumber multiplyIntegerAndDoubleAndReturnNumber(IntDataType const integerValue, double const doubleValue);
+
     static AlbaNumber multiplyIntegerAndFractionAndReturnNumber(
         IntDataType const integerValue, FractionData const& fractionData);
+
     static AlbaNumber multiplyFractionAndDoubleAndReturnNumber(
         FractionData const& fractionData, double const doubleValue);
+
     static AlbaNumber divideBothIntegersAndReturnNumber(IntDataType const dividend, IntDataType const divisor);
 
     static AlbaNumber divideDividendsAndDivisorsAndReturnNumber(
@@ -182,9 +199,12 @@ private:
 
     static AlbaNumber divideBothFractionsAndReturnNumber(
         FractionData const& dividendFractionData, FractionData const& divisorFractionData);
+
     static AlbaNumber raisePowerOfBothIntegersAndReturnNumber(IntDataType const base, IntDataType const exponent);
+
     static AlbaNumber raisePowerOfFractionsAndIntegerAndReturnNumber(
         FractionData const& baseFractionData, IntDataType const exponent);
+
     friend std::ostream& operator<<(std::ostream& out, AlbaNumber const& number);
     Type m_type;  // Hotness: Type is much hotter.
     // use std::variant instead? Nah, I dont wanna deal with getting the "index" to know the "type".
@@ -202,6 +222,7 @@ constexpr AlbaNumber operator"" _AS_ALBA_NUMBER(unsigned long long int const val
 
 constexpr AlbaNumber operator"" _AS_ALBA_NUMBER(long double const value) { return {static_cast<double>(value)}; }
 static_assert(sizeof(AlbaNumber) == 16, "The size of AlbaNumber should be 16 bytes/128 bits.");
+
 // AlbaNumber operator "" _AS_ALBA_NUMBER(char const value) = delete;
 // not needed to delete because there is no implicit conversion
 template <>

@@ -12,8 +12,10 @@ public:
     [[nodiscard]] Equation isolateTermWithVariableOnRightSideOfEquation(std::string const& variableName) const;
     [[nodiscard]] Term getEquivalentTermByIsolatingAVariable(std::string const& variableName) const;
     [[nodiscard]] bool canBeIsolated(std::string const& variableName) const;
+
     void isolateTermWithVariable(
         std::string const& variableName, Term& termWithVariable, Term& termWithWithoutVariable) const;
+
     void setEquation(Equation const& equation);
 
 private:
@@ -27,8 +29,10 @@ private:
 
     static void simplifyForIsolation(Term& term);
     static void simplifyForIsolation(Expression& expression);
+
     static AlbaNumber getIdenticalExponentForVariableIfPossible(
         std::string const& variableName, Polynomial const& polynomial);
+
     static bool canBeIsolatedBasedOnExponent(AlbaNumber const& identicalExponentForVariable);
     Term m_simplifiedLeftSideTerm;
 };

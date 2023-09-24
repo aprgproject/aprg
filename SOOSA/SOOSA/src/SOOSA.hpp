@@ -94,14 +94,17 @@ private:
 
     [[nodiscard]] DoubleCollection getAcceptableSquareErrorCollectionUsingRemovalRatio(
         ValueToTwoDimensionSampleMultimap const& squareErrorToSampleMultimap) const;
+
     [[nodiscard]] Line findLeftLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findRightLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findTopLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findBottomLine(BitmapSnippet const& snippet) const;
     [[nodiscard]] Line findLeftLineUsingStartingLine(BitmapSnippet const& snippet, Line const& startingLine) const;
     [[nodiscard]] Line findRightLineUsingStartingLine(BitmapSnippet const& snippet, Line const& startingLine) const;
+
     [[nodiscard]] Line findVerticalLineUsingStartingLine(
         BitmapSnippet const& snippet, Line const& startingLine, RangeOfInts const& rangeForX) const;
+
     // Line modeling functions
     [[nodiscard]] Line getLeftLineModel(TwoDimensionSamples& samples) const;
     [[nodiscard]] Line getRightLineModel(TwoDimensionSamples& samples) const;
@@ -129,10 +132,13 @@ private:
 
     // Widths functions
     [[nodiscard]] RangeOfDoubles getMinMaxCriteriaForBar(PointAndWidthPairs const& pointAndWidthPairs) const;
+
     [[nodiscard]] TwoDimensionSamples getSamplesInVerticalLine(
         BitmapSnippet const& snippet, RangeOfInts const& range) const;
+
     [[nodiscard]] TwoDimensionSamples getSamplesInHorizontalLine(
         BitmapSnippet const& snippet, RangeOfInts const& range) const;
+
     // output related functions
     [[nodiscard]] std::string getCsvFilePath(std::string const& path) const;
     [[nodiscard]] std::string getReportHtmlFilePath(std::string const& path) const;
@@ -143,13 +149,16 @@ private:
 
     [[nodiscard]] double getRadiusForChoiceChecking(
         QuestionBarCoordinate const& leftCoordinate, QuestionBarCoordinate const& rightCoordinate) const;
+
     [[nodiscard]] double getMaximumDistanceForBetweenBarHeights(double const previousHeight) const;
     [[nodiscard]] int getMaximumLineAndBarWidth(BitmapSnippet const& snippet) const;
     // utilities
     [[nodiscard]] bool isBlackAt(BitmapSnippet const& snippet, BitmapXY const bitmapXy) const;
     void performStepsWhenNumberOfAnswersNotEqualToNumberOfQuestions() const;
+
     void removeFurthestSamplesUntilLineOrientationMatch(
         TwoDimensionSamples& samples, LineOrientation const lineOrientation) const;
+
     void removeErroneousSamplesInLine(TwoDimensionSamples& samples) const;
 
     void addAndRetainWidthsIfPossible(
@@ -163,6 +172,7 @@ private:
     // Height functions
     void removeBarPointsWithFewHeightPoints(
         TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn) const;
+
     void removeBarPointsToGetConsistentHeight(
         TwoDimensionKMeans& kMeansForBarPoints, int const numberQuestionsInColumn) const;
 
@@ -174,8 +184,10 @@ private:
     void saveHeadersToCsvFile() const;
     void saveOutputHtmlFile(std::string const& processedFilePath) const;
     void saveTableToOutputHtmlFile(std::ofstream& reportHtmlFileStream) const;
+
     CountToEndPointIndexesMultiMap getHeightPointsCountToEndPointIndexesMultimap(
         TwoDimensionKMeans& kMeansForBarPoints) const;
+
     void processDirectory(std::string const& directoryPath);
     void processFile(std::string const& filePath);
     void processBitmapFile(Bitmap const& bitmap);
@@ -203,9 +215,11 @@ private:
     [[nodiscard]] static OneDimensionSamples getBarHeights(GroupOfTwoDimensionSamples const& groupOfBarPoints);
     [[nodiscard]] static double getHeight(TwoDimensionSamples const& barPoints);
     [[nodiscard]] static int getRetainSizeInLineModel(int const size, double const removalRatio);
+
     // find line
     [[nodiscard]] static bool areLinesValid(
         Line const& leftLine, Line const& rightLine, Line const& topLine, Line const& bottomLine);
+
     [[nodiscard]] static bool isConsideredHorizontal(double const aCoefficient, double const bCoefficient);
     [[nodiscard]] static bool isConsideredVertical(double const aCoefficient, double const bCoefficient);
 
@@ -230,8 +244,10 @@ private:
     static OneDimensionKMeans getKMeansForWidths(PointAndWidthPairs const& pointAndWidthPairs);
     static Point convertToPoint(BitmapXY const& bitmapXY);
     static Point convertToPoint(TwoDimensionSample const& sample);
+
     static RangeOfDoubles getMinMaxCriteriaForBar(
         OneDimensionStatistics& firstGroupStatistics, OneDimensionStatistics& secondGroupStatistics);
+
     static RangeOfDoubles getMinMaxRangeOfSamples(OneDimensionSamples const& samples);
     static TwoDimensionSample convertToTwoDimensionSample(Point const& point);
     static std::string getPrintableStringForPercentage(double const numerator, double const denominator);

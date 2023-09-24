@@ -14,10 +14,12 @@ class HierholzerAlgorithmForDirectedGraph
 public:
     using BaseClass =
         BaseHierholzerAlgorithm<Vertex, BaseDirectedGraph<Vertex>, BaseEulerPathSearchForDirectedGraph<Vertex>>;
+
     using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Path = typename GraphTypes<Vertex>::Path;
     using VertexToAdjacencyVerticesMap = std::map<Vertex, Vertices>;
+
     explicit HierholzerAlgorithmForDirectedGraph(BaseDirectedGraphWithVertex const& graph)
         : BaseClass(graph), b_graph(BaseClass::b_graph) {}
 

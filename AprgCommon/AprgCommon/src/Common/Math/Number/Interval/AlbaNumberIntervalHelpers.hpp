@@ -5,6 +5,7 @@
 #include <Common/Math/Number/Interval/AlbaNumberIntervalEndpoint.hpp>
 
 namespace alba {
+
 AlbaNumberInterval createAllRealValuesInterval();
 AlbaNumberIntervalEndpoint createOpenEndpoint(AlbaNumber const value);
 AlbaNumberIntervalEndpoint createCloseEndpoint(AlbaNumber const value);
@@ -15,6 +16,8 @@ AlbaNumbers getNumbersInsideTheInterval(AlbaNumbers const& numbersToCheck, AlbaN
 AlbaNumberIntervalEndpoint::Type getEndpointTypeWithCheckingIfItsClosed(bool const isCloseEndpoint);
 bool isValueInsideTheIntervals(AlbaNumber const innerValue, AlbaNumberIntervals const& outerIntervals);
 bool isIntervalInsideTheIntervals(AlbaNumberInterval const& innerInterval, AlbaNumberIntervals const& outerIntervals);
+
 bool areTheIntervalsInsideTheInterval(
     AlbaNumberIntervals const& innerIntervals, AlbaNumberInterval const& outerInterval);
+
 }  // namespace alba

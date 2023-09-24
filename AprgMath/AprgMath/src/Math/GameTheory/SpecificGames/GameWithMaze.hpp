@@ -22,8 +22,10 @@ public:
     explicit GameWithMaze(BooleanMatrix const& isBlockedMatrix);
     [[nodiscard]] bool hasNoMoves(Coordinate const& coordinate) const;
     Coordinate getOptimalNextCoordinateAt(Coordinate const& coordinate);
+
     Coordinate getNextCoordinateWithGrundyNumber(
         Coordinate const& coordinate, UnsignedInteger const& targetGrundyNumber);
+
     GameState getGameStateAt(Coordinate const& coordinate);
     UnsignedInteger getGrundyNumberAt(Coordinate const& coordinate);
     std::string getString();

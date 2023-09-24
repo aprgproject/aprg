@@ -27,9 +27,12 @@ public:
 private:
     [[nodiscard]] Profit getBestProfitUsingNaiveRecursion(
         Weight const remainingWeight, ItemIndex const itemIndex) const;
+
     [[nodiscard]] Weight getSmallestItemWeight() const;
+
     Profit getBestProfitUsingMemoizationDP(
         ProfitMatrix& profitMatrix, Weight const remainingWeight, ItemIndex const itemIndex) const;
+
     Weight const m_maximumWeight;
     Items const m_items;
 };

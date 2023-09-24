@@ -51,18 +51,23 @@ public:
     [[nodiscard]] Move getMoveUsingUciNotation(std::string const& text) const;
     [[nodiscard]] Move getMoveUsingAlgebraicNotation(std::string const& text, PieceColor const moveColor) const;
     [[nodiscard]] Moves getMovesFromThis(Coordinate const& startpoint, int const maxSize = MAX_NUMBER_OF_MOVES) const;
+
     [[nodiscard]] Moves getMovesToThis(
         Coordinate const& endpoint, PieceColor const& moveColor, int const maxSize = MAX_NUMBER_OF_MOVES) const;
+
     [[nodiscard]] Moves getAttacksToThis(
         Coordinate const& endpoint, PieceColor const& moveColor, int const maxSize = MAX_NUMBER_OF_MOVES) const;
+
     [[nodiscard]] Piece getPieceAt(Coordinate const& coordinate) const;
     [[nodiscard]] PieceGrid const& getPieceGrid() const;
     [[nodiscard]] std::string getAlgebraicNotationOfCoordinate(Coordinate const& coordinate) const;
     [[nodiscard]] std::string getReadableStringOfMove(Move const& move) const;
     [[nodiscard]] std::string getNotationPartOfFenString() const;
     [[nodiscard]] std::string getCastlingPartOfFenString() const;
+
     [[nodiscard]] int getNumberOfWaysToBlockAttacks(
         Moves const& attacks, int const maxSize = MAX_NUMBER_OF_MOVES) const;
+
     [[nodiscard]] bool isEmptyAt(Coordinate const& coordinate) const;
     [[nodiscard]] bool isACaptureMove(Move const& move) const;
     [[nodiscard]] bool isAPromotionMove(Move const& move) const;
@@ -79,12 +84,15 @@ public:
 private:
     [[nodiscard]] Coordinate getCorrectCoordinateFromAlgebraicNotation(
         CoordinateDataType const x, CoordinateDataType const y) const;
+
     [[nodiscard]] CoordinateDataType getXInCorrectOrientation(CoordinateDataType const x) const;
     [[nodiscard]] CoordinateDataType getYInCorrectOrientation(CoordinateDataType const y) const;
     [[nodiscard]] Coordinates getPawnCapturesDeltaCoordinates(PieceColor const moveColor) const;
     [[nodiscard]] Coordinates getPawnReverseCapturesDeltaCoordinates(PieceColor const moveColor) const;
+
     [[nodiscard]] DeltaRange getPawnNonCaptureDeltaRange(
         Coordinate const& startpoint, PieceColor const moveColor) const;
+
     [[nodiscard]] DeltaRange getPawnReverseNonCaptureDeltaRange(
         Coordinate const& endpoint, PieceColor const moveColor) const;
 
@@ -96,8 +104,10 @@ private:
     [[nodiscard]] Move getNonCastleMoveWithAlgebraicNotation(std::string const& text, PieceColor const moveColor) const;
     [[nodiscard]] MovePair getMatchingCastlingKingAndRookMovePair(Move const& kingMoveThatShouldMatch) const;
     [[nodiscard]] MovePairs getCastlingKingAndRookMovePairs(PieceColor const moveColor) const;
+
     [[nodiscard]] Moves getCandidatesMoves(
         Coordinate const& endpoint, PieceColor const moveColor, PieceType const pieceType) const;
+
     [[nodiscard]] NotationDetailsOfMove determineNotationDetailsOfMove(
         std::string const& textInAlgebraicNotation) const;
 
@@ -135,36 +145,52 @@ private:
     void retrieveKingOneStepMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
     void retrieveKingCastlingMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
     void retrieveCastlingMovesFromThis(Moves& result, Coordinate const& startpoint, int const maxSize) const;
+
     void retrieveMovesFromThisByIncrementingDelta(
         Moves& result, Coordinate const& startpoint, Coordinate const& delta, int const maxSize) const;
+
     void retrieveMovesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+
     void retrieveAttacksToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+
     void retrieveAttacksToThisWithNoKingMoves(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+
     void retrievePawnReverseNonCapturesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+
     void retrievePawnReverseCapturesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+
     void retrievePawnEnPassantReverseToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+
     void retrieveAllNonPawnMovesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+
     void retrieveKnightMovesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+
     void retrieveDiagonalMovesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+
     void retrieveStraightMovesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+
     void retrieveKingOneStepMovesToThis(
         Moves& result, Coordinate const& endpoint, PieceColor const moveColor, int const maxSize) const;
+
     void retrievePawnAttackDefendCountToThis(AttackDefendCount& count, Coordinate const& endpoint) const;
     void retrieveKnightAttackDefendCountToThis(AttackDefendCount& count, Coordinate const& endpoint) const;
+
     void retrieveDiagonalAttackDefendCountToThis(
         AttackDefendCount& bishopCount, AttackDefendCount& queenCount, Coordinate const& endpoint) const;
+
     void retrieveStraightAttackDefendCountToThis(
         AttackDefendCount& rookCount, AttackDefendCount& queenCount, Coordinate const& endpoint) const;
+
     void retrieveQueenAttackDefendCountToThis(AttackDefendCount& count, Coordinate const& endpoint) const;
     void retrieveKingOneStepAttackDefendCountToThis(AttackDefendCount& count, Coordinate const& endpoint) const;
     void changePieceGridWithMove(Move const& move);
@@ -189,8 +215,10 @@ private:
     static bool isAStraightMove(Move const& move);
     static bool isAnLMove(Move const& move);
     static bool isAOneStepMove(Move const& move);
+
     static bool doesAllCellsInBetweenSatisfyTheCondition(
         Coordinate const& startpoint, Coordinate const& endpoint, CoordinateCondition const& condition);
+
     BoardOrientation m_orientation;
     PieceGrid m_pieceGrid;
 };

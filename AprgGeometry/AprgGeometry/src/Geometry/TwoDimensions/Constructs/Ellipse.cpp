@@ -13,6 +13,7 @@ using namespace std;
 namespace alba::TwoDimensions {
 
 Ellipse::Ellipse() : m_aValue(0), m_bValue(0) {}
+
 Ellipse::Ellipse(Point const& center, double const aCoefficient, double const bCoefficient)
     : m_center(center), m_aValue(aCoefficient), m_bValue(bCoefficient) {}
 

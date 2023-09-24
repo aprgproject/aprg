@@ -7,8 +7,10 @@ using namespace std;
 namespace alba::algorithm {
 
 namespace {
+
 using MaxPriorityQueueForTest =
     BinaryHeapPriorityQueue<char, less>;  // less leads to Max Priority Queue same as in c++ standard
+
 }  // namespace
 
 TEST(BinaryHeapPriorityQueueTest, GetTopWorks) {

@@ -14,14 +14,18 @@ void segregateEquationsWithAndWithoutVariable(
 
 AlbaNumber getDegree(Equation const& equation);
 Equation buildEquationIfPossible(std::string const& equationString);
+
 Term getEquivalentTermByReducingItToAVariable(
     std::string const& variableName, Term const& termWithVariable, Term const& termWithWithoutVariable);
+
 std::string getEquationOperatorCharacters();
 std::string getReverseEquationOperatorString(std::string const& equationOperatorString);
 bool isEquationOperatorString(std::string const& stringToCheck);
 bool isEquationOperatorCharacterString(std::string const& stringToCheck);
+
 bool doesNegativeVariableSubstitutionYieldsToTheSameEquation(
     Equation const& equation, stringHelper::strings const& variableNames);
+
 bool isSymmetricAlongXAxis(Equation const& equation);
 bool isSymmetricAlongYAxis(Equation const& equation);
 bool isSymmetricOnOrigin(Equation const& equation);

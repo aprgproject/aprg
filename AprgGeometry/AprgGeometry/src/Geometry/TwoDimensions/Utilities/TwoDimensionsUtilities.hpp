@@ -30,13 +30,17 @@ AlbaAngle getTheInnerAngleUsingThreePoints(Point const& commonPoint, Point const
 AlbaAngle getTheSmallerAngleBetweenTwoLines(Line const& line1, Line const& line2);
 AlbaAngle getTheLargerAngleBetweenTwoLines(Line const& line1, Line const& line2);
 ConicSectionType getConicSectionBasedOnEccentricity(double const eccentricity);
+
 ConicSectionType getConicSectionBasedOnGeneralForm(
     double const a, double const b, double const c, double const d, double const e);
+
 Point getIntersectionOfTwoLines(Line const& line1, Line const& line2);
 Point getIntersectionOfTwoLineSegment(LineSegment const& segment1, LineSegment const& segment2);
 Point getMidpoint(Point const& point1, Point const& point2);
+
 Point getPointAlongALineWithDistanceFromAPoint(
     Line const& line, Point const& referencePoint, double const distance, bool const isIncreasedOnX);
+
 Point popNearestPoint(Points& points, Point const& point);
 Point rotateAxisByAngle(Point const& point, AlbaAngle const& angle);
 Point rotateAxisBackByAngle(Point const& point, AlbaAngle const& angle);
@@ -72,16 +76,22 @@ bool areLinesParallel(Line const& line1, Line const& line2);
 bool areLinesPerpendicular(Line const& line1, Line const& line2);
 bool doesTheTwoLineSegmentsIntersect(LineSegment const& segment1, LineSegment const& segment2);
 bool isPointInsideTriangle(Triangle const& triangle, Point const& point);
+
 template <ParabolaOrientation parabolaOrientation>
 Points getIntersectionsOfParabolaAndLine(Parabola<parabolaOrientation> const& parabola, Line const& line);
+
 template <>
 Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialX> const& parabola, Line const& line);
+
 template <>
 Points getIntersectionsOfParabolaAndLine(Parabola<ParabolaOrientation::PolynomialY> const& parabola, Line const& line);
+
 void addPointIfInsideTwoPoints(
     Points& pointsAtBorder, Point const& point, Point const& minimumXAndY, Point const& maximumXAndY);
+
 void savePointsFromTwoPointsUsingALineWithoutLastPoint(
     Points& points, Point const& previousPoint, Point const& currentPoint, double const interval);
+
 void sortPointsInYAndThenX(Points& points);
 
 void traverseCircleAreaBetweenTwoRadius(

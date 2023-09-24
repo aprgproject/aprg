@@ -24,6 +24,7 @@ private:
     void eraseTermsInclusive(int const firstIndex, int const secondIndex);
     void insertTerm(int const index, Term const& term);
     bool combineOpeningClosingOperatorsAtStartEndIndexesAndReturnIfCombined();
+
     bool traverseOnOperatorIndexesAndReturnIfContinue(
         AggregatorTraverseSteps const traverseSteps, OperatorInputType const operatorInputType);
 
@@ -33,8 +34,10 @@ private:
 
     bool performTraverseStepsWithBinaryOperationAndReturnIfContinue(
         AggregatorTraverseSteps const traverseSteps, int const nextOperatorIndex);
+
     bool performTraverseStepsWithUnaryOperationAndReturnIfContinue(
         AggregatorTraverseSteps const traverseSteps, int const nextOperatorIndex);
+
     bool buildExpressionWithBinaryOperationAndReturnIfBuilt(int const index);
     bool buildExpressionWithUnaryOperationAndReturnIfBuilt(int const index);
     bool simplifyBinaryOperationAndReturnIfSimplified(int const index);

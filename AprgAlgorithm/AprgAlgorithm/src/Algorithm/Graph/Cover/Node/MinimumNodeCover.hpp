@@ -13,6 +13,7 @@ public:
     // endpoint in the set.
     using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using MaximumMatchingsWithVertex = MaximumMatchings<Vertex>;
+
     explicit MinimumNodeCover(BaseUndirectedGraphWithVertex const& graph)
         : m_graph(graph), m_maximumMatchings(m_graph) {}
 

@@ -12,6 +12,7 @@ class HornerHashFunctionForWholeString {
 public:
     HornerHashFunctionForWholeString(HashValue const radix, HashValue const largeRandomPrime)
         : m_radix(radix), m_largeRandomPrime(largeRandomPrime) {}
+
     [[nodiscard]] HashValue getHashCode(std::string const& stringToHash) const { return getFinalHPart(stringToHash); }
 
 private:

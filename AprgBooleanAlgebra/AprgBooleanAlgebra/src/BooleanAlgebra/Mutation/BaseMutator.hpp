@@ -5,7 +5,8 @@
 namespace alba::booleanAlgebra {
 
 class BaseMutator {
-public:  // virtual destructor because of virtual functions (vtable exists)
+public:
+    // virtual destructor because of virtual functions (vtable exists)
     virtual ~BaseMutator() = default;
     BaseMutator() = default;
     BaseMutator(BaseMutator const &) = default;

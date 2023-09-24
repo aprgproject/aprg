@@ -142,32 +142,6 @@ TEST(ColorUtilitiesTest, ConvertColorToHueSaturationValueDataWorks) {
     EXPECT_DOUBLE_EQ(0.90196078431372550543, hsvData3.valueDecimalOfColorMax);
 }
 
-TEST(ColorUtilitiesTest, CombineRgbColorWorks) {
-    EXPECT_EQ(0x0U, combineRgbToColor(0x0, 0x0, 0x0));
-    EXPECT_EQ(0x6A0000U, combineRgbToColor(0x6A, 0x0, 0x0));
-    EXPECT_EQ(0x005A00U, combineRgbToColor(0x0, 0x5A, 0x0));
-    EXPECT_EQ(0x0000CDU, combineRgbToColor(0x0, 0x0, 0xCD));
-    EXPECT_EQ(0x6A5ACDU, combineRgbToColor(0x6A, 0x5A, 0xCD));
-}
-
-TEST(ColorUtilitiesTest, ExtractRedWorks) {
-    EXPECT_EQ(0xFFU, extractRed(0xFFFFFF));
-    EXPECT_EQ(0x0U, extractRed(0x0));
-    EXPECT_EQ(0x32U, extractRed(0x32CD32));
-}
-
-TEST(ColorUtilitiesTest, ExtractGreenWorks) {
-    EXPECT_EQ(0xFFU, extractGreen(0xFFFFFF));
-    EXPECT_EQ(0x0U, extractGreen(0x0));
-    EXPECT_EQ(0xB3U, extractGreen(0x3CB371));
-}
-
-TEST(ColorUtilitiesTest, ExtractBlueWorks) {
-    EXPECT_EQ(0xFFU, extractBlue(0xFFFFFF));
-    EXPECT_EQ(0x0U, extractBlue(0x0));
-    EXPECT_EQ(0x57U, extractBlue(0x2E8B57));
-}
-
 TEST(ColorUtilitiesTest, CalculateColorIntensityDecimalWorks) {
     double const colorIntensityDecimal1(calculateColorIntensityDecimal(0x0));
     double const colorIntensityDecimal2(calculateColorIntensityDecimal(0xFFFFFF));
@@ -206,6 +180,32 @@ TEST(ColorUtilitiesTest, CalculateSaturationColorIntensityDecimalWorks) {
     EXPECT_DOUBLE_EQ(0, saturationColorIntensityDecimal1);
     EXPECT_DOUBLE_EQ(0, saturationColorIntensityDecimal2);
     EXPECT_DOUBLE_EQ(0.26701570680628272658, saturationColorIntensityDecimal3);
+}
+
+TEST(ColorUtilitiesTest, CombineRgbColorWorks) {
+    EXPECT_EQ(0x0U, combineRgbToColor(0x0, 0x0, 0x0));
+    EXPECT_EQ(0x6A0000U, combineRgbToColor(0x6A, 0x0, 0x0));
+    EXPECT_EQ(0x005A00U, combineRgbToColor(0x0, 0x5A, 0x0));
+    EXPECT_EQ(0x0000CDU, combineRgbToColor(0x0, 0x0, 0xCD));
+    EXPECT_EQ(0x6A5ACDU, combineRgbToColor(0x6A, 0x5A, 0xCD));
+}
+
+TEST(ColorUtilitiesTest, ExtractRedWorks) {
+    EXPECT_EQ(0xFFU, extractRed(0xFFFFFF));
+    EXPECT_EQ(0x0U, extractRed(0x0));
+    EXPECT_EQ(0x32U, extractRed(0x32CD32));
+}
+
+TEST(ColorUtilitiesTest, ExtractGreenWorks) {
+    EXPECT_EQ(0xFFU, extractGreen(0xFFFFFF));
+    EXPECT_EQ(0x0U, extractGreen(0x0));
+    EXPECT_EQ(0xB3U, extractGreen(0x3CB371));
+}
+
+TEST(ColorUtilitiesTest, ExtractBlueWorks) {
+    EXPECT_EQ(0xFFU, extractBlue(0xFFFFFF));
+    EXPECT_EQ(0x0U, extractBlue(0x0));
+    EXPECT_EQ(0x57U, extractBlue(0x2E8B57));
 }
 
 }  // namespace alba::AprgBitmap

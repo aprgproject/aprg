@@ -9,6 +9,7 @@ namespace alba::algebra {
 
 TermWithDetails::TermWithDetails(BaseTerm const& baseTerm, TermAssociationType const associationParameter)
     : baseTermPointer(createBasePointer(baseTerm)), association(associationParameter) {}
+
 TermWithDetails::TermWithDetails(BaseTerm&& baseTerm, TermAssociationType const associationParameter)
     : baseTermPointer(createBasePointer(baseTerm)), association(associationParameter) {}
 

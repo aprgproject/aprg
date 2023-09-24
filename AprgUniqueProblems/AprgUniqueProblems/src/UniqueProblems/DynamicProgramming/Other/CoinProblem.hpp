@@ -60,18 +60,23 @@ public:
 private:
     [[nodiscard]] Value getMaxAvailableCoin() const;
     [[nodiscard]] Value getMaxOfTotalAndMaxCoinPlusOne(Value const total) const;
+
     CoinCombinations getCoinCombinationsUsingMemoizationDPInternal(
         CoinCombinationsPerValue& coinCombinationsPerValue, Value const total) const;
+
     CoinPermutations getCoinPermutationsUsingMemoizationDPInternal(
         CoinPermutationsPerValue& coinPermutationsPerValue, Value const total) const;
+
     Coins getFewestCoinsUsingMemoizationDPInternal(VectorOfCoins& fewestCoins, Value const total) const;
     // fewest coins
     int getNumberOfFewestCoinsUsingMemoizationDPInternal(CountPerValue& countPerValue, Value const total) const;
     // permutations
     int getNumberOfCoinPermutationsMemoizationDPInternal(CountPerValue& countPerValue, Value const total) const;
+
     // combinations
     int getNumberOfCoinCombinationsUsingMemoizationDPInternal(
         CountMatrix& countByValueByCoin, Value const total, int const coinIndex) const;
+
     Coins m_availableCoins;
 };
 

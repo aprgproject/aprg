@@ -14,6 +14,7 @@ private:
     void calculateSolution(SolutionSet& solutionSet, Equation const& equation) override;
     void calculateForEquation(SolutionSet& solutionSet, Equation const& equation) override;
     void calculateForTermAndVariable(Term const& term, std::string const&) override;
+
     void addIntervalsToSolutionSetIfNeeded(
         SolutionSet& solutionSet, Equation const& equation, std::string const& variableName);
 };

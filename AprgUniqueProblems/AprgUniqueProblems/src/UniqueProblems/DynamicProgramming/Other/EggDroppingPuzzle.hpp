@@ -20,8 +20,10 @@ public:
 private:
     [[nodiscard]] Count getMinimumNumberOfTrialsUsingNaiveRecursion(
         Count const remainingEggs, Count const floorIndexPlusOne) const;
+
     Count getMinimumNumberOfTrialsUsingMemoizationDP(
         CountMatrix& countMatrix, Count const remainingEggs, Count const floorIndexPlusOne) const;
+
     Count const m_numberOfEggs;
     Count const m_numberOfFloors;
 };

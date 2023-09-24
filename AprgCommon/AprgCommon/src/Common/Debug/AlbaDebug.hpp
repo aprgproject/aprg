@@ -31,8 +31,10 @@ inline std::ofstream debugStream(ALBA_DBG_PRINT_EXTERNAL_OUTPUT_STREAM_FILE_PATH
 #define ALBA_DBG_PRINT4(p1, p2, p3, p4) ALBA_DBG_HEADER ALBA_PRINT4(ALBA_DBG_STREAM, p1, p2, p3, p4)
 #define ALBA_DBG_PRINT5(p1, p2, p3, p4, p5) ALBA_DBG_HEADER ALBA_PRINT5(ALBA_DBG_STREAM, p1, p2, p3, p4, p5)
 #define ALBA_DBG_PRINT6(p1, p2, p3, p4, p5, p6) ALBA_DBG_HEADER ALBA_PRINT6(ALBA_DBG_STREAM, p1, p2, p3, p4, p5, p6)
+
 #define ALBA_DBG_PRINT7(out, p1, p2, p3, p4, p5, p6, p7) \
     ALBA_DBG_HEADER ALBA_PRINT7(ALBA_DBG_STREAM, p1, p2, p3, p4, p5, p6, p7)
+
 #if defined(__clang__) || defined(__GNUC__) || defined(__GNUG__)
 #define ALBA_DBG_PRINT(...) ALBA_DBG_HEADER ALBA_PRINT_ALL(ALBA_DBG_STREAM, __VA_ARGS__)
 #endif
@@ -41,6 +43,7 @@ inline std::ofstream debugStream(ALBA_DBG_PRINT_EXTERNAL_OUTPUT_STREAM_FILE_PATH
 // Macros for debug scope
 #define ALBA_DBG_SCOPE_START {
 #define ALBA_DBG_SCOPE_END }
+
 // Macros for output operator
 // Note: Dont include "friend" keyword in macro just include in the class.
 #define ALBA_DBG_CLASS_OUTPUT_OPERATOR_DECLARATION(ParameterSignature) \

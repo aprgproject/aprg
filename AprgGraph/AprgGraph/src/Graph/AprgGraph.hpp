@@ -41,8 +41,10 @@ public:
     void drawGrid(AprgBitmap::BitmapDoubleXY const& gridInterval);
     void drawFunctionUsingX(uint32_t const color, FunctionWithDoubles const& functionFromXToY);
     void drawFunctionUsingY(uint32_t const color, FunctionWithDoubles const& functionFromYToX);
+
     void drawNumberLabel(
         LabelType const labelType, TwoDimensions::Point const& bitmapPointNumberPosition, double const number);
+
     void drawCharacter(AprgBitmap::BitmapXY const& upLeftPoint, char const character, uint32_t const colorToWrite);
     void saveChangesToBitmapFile();
 

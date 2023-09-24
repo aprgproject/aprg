@@ -51,8 +51,10 @@ private:
     static void combineWords(stringHelper::strings& tokens);
     static void combineArrayOperators(stringHelper::strings& tokens);
     static std::string getReaderStateString(ReaderState const state);
+
     template <ReaderState readerState>
     void analyzeInReaderState(ReaderTransactionData& transactionData, std::string const& token);
+
     AlbaLocalPathHandler m_inputPathHandler;
     std::map<std::string, AlbaSackReaderType> m_types;
     AlbaGrepStringEvaluator m_fileEvaluator;

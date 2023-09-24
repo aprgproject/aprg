@@ -8,8 +8,8 @@
 
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
 using namespace alba::stringHelper;
-using namespace std;
 using namespace filesystem;
+using namespace std;
 
 namespace alba::CodeUtilities {
 
@@ -30,6 +30,34 @@ void CPlusPlusFixer::processFile(path const& file) {
     m_terms = getTermsFromFile(file);
     fixTerms();
     writeAllTerms(file, m_terms);
+}
+
+strings CPlusPlusFixer::getPrintItems(int& printfEnd, int const printStringIndex) const {
+    strings printItems;
+    int parenthesisLevel = 1;
+    int printItemStart = printStringIndex + 1;
+    for (int termIndex = printStringIndex + 1; termIndex < static_cast<int>(m_terms.size()); ++termIndex) {
+        if ("(" == m_terms[termIndex].getContent()) {
+            ++parenthesisLevel;
+        } else if (")" == m_terms[termIndex].getContent()) {
+            --parenthesisLevel;
+            if (parenthesisLevel == 0) {
+                printfEnd = termIndex;
+                break;
+            }
+        } else if (parenthesisLevel == 1 && "," == m_terms[termIndex].getContent()) {
+            int printItemEnd = termIndex - 1;
+            if (printItemStart < printItemEnd) {
+                printItems.emplace_back(getCombinedContents(m_terms, printItemStart, printItemEnd));
+            }
+            printItemStart = termIndex + 1;
+        }
+    }
+    int printItemEnd = printfEnd - 1;
+    if (printItemStart < printItemEnd) {
+        printItems.emplace_back(getCombinedContents(m_terms, printItemStart, printItemEnd));
+    }
+    return printItems;
 }
 
 void CPlusPlusFixer::fixTerms() {
@@ -200,73 +228,6 @@ void CPlusPlusFixer::fixCStylePrintf(int const printfStart, int const printStrin
     cout << "Converted printf to C++ print at: [" << getLocatorString(m_terms, printfStart) << "]\n";
 }
 
-strings CPlusPlusFixer::getPrintItems(int& printfEnd, int const printStringIndex) const {
-    strings printItems;
-    int parenthesisLevel = 1;
-    int printItemStart = printStringIndex + 1;
-    for (int termIndex = printStringIndex + 1; termIndex < static_cast<int>(m_terms.size()); ++termIndex) {
-        if ("(" == m_terms[termIndex].getContent()) {
-            ++parenthesisLevel;
-        } else if (")" == m_terms[termIndex].getContent()) {
-            --parenthesisLevel;
-            if (parenthesisLevel == 0) {
-                printfEnd = termIndex;
-                break;
-            }
-        } else if (parenthesisLevel == 1 && "," == m_terms[termIndex].getContent()) {
-            int printItemEnd = termIndex - 1;
-            if (printItemStart < printItemEnd) {
-                printItems.emplace_back(getCombinedContents(m_terms, printItemStart, printItemEnd));
-            }
-            printItemStart = termIndex + 1;
-        }
-    }
-    int printItemEnd = printfEnd - 1;
-    if (printItemStart < printItemEnd) {
-        printItems.emplace_back(getCombinedContents(m_terms, printItemStart, printItemEnd));
-    }
-    return printItems;
-}
-
-Terms CPlusPlusFixer::getNewPrintTerms(string const& printString, strings const& printItems) {
-    Terms newPrintTerms{Term(TermType::Identifier, "cout")};
-    string currentString;
-    int printItemIndex = 0;
-    bool isInString = true;
-    for (char const character : printString) {
-        if (isInString) {
-            if (character == '%') {
-                isInString = false;
-                if (currentString != R"(")") {
-                    currentString += R"(")";
-                    newPrintTerms.emplace_back(TermType::Operator, "<<");
-                    newPrintTerms.emplace_back(TermType::StringLiteral, currentString);
-                }
-                if (printItemIndex < static_cast<int>(printItems.size())) {
-                    newPrintTerms.emplace_back(TermType::Operator, "<<");
-                    newPrintTerms.emplace_back(TermType::Aggregate, printItems[printItemIndex++]);
-                }
-            } else {
-                currentString += character;
-            }
-        } else {
-            if (isLetter(character)) {
-                isInString = true;
-                currentString = R"(")";
-            }
-        }
-    }
-    if (currentString != R"(")") {
-        newPrintTerms.emplace_back(TermType::Operator, "<<");
-        newPrintTerms.emplace_back(TermType::StringLiteral, currentString);
-    }
-    for (; printItemIndex < static_cast<int>(printItems.size()); ++printItemIndex) {
-        newPrintTerms.emplace_back(TermType::Operator, "<<");
-        newPrintTerms.emplace_back(TermType::Aggregate, printItems[printItemIndex]);
-    }
-    return newPrintTerms;
-}
-
 void CPlusPlusFixer::fixCommentsPositionOfBraces() {
     Patterns const searchPatterns{{M(MatcherType::Comment), M("{")}};
     int termIndex = 0;
@@ -366,6 +327,45 @@ void CPlusPlusFixer::findTermsAndConvertToConstexpr(
             cout << "Swapped at: [" << getLocatorString(m_terms, hitIndexes[typeIndex]) << "]\n";
         }
     }
+}
+
+Terms CPlusPlusFixer::getNewPrintTerms(string const& printString, strings const& printItems) {
+    Terms newPrintTerms{Term(TermType::Identifier, "cout")};
+    string currentString;
+    int printItemIndex = 0;
+    bool isInString = true;
+    for (char const character : printString) {
+        if (isInString) {
+            if (character == '%') {
+                isInString = false;
+                if (currentString != R"(")") {
+                    currentString += R"(")";
+                    newPrintTerms.emplace_back(TermType::Operator, "<<");
+                    newPrintTerms.emplace_back(TermType::StringLiteral, currentString);
+                }
+                if (printItemIndex < static_cast<int>(printItems.size())) {
+                    newPrintTerms.emplace_back(TermType::Operator, "<<");
+                    newPrintTerms.emplace_back(TermType::Aggregate, printItems[printItemIndex++]);
+                }
+            } else {
+                currentString += character;
+            }
+        } else {
+            if (isLetter(character)) {
+                isInString = true;
+                currentString = R"(")";
+            }
+        }
+    }
+    if (currentString != R"(")") {
+        newPrintTerms.emplace_back(TermType::Operator, "<<");
+        newPrintTerms.emplace_back(TermType::StringLiteral, currentString);
+    }
+    for (; printItemIndex < static_cast<int>(printItems.size()); ++printItemIndex) {
+        newPrintTerms.emplace_back(TermType::Operator, "<<");
+        newPrintTerms.emplace_back(TermType::Aggregate, printItems[printItemIndex]);
+    }
+    return newPrintTerms;
 }
 
 }  // namespace alba::CodeUtilities

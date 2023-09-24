@@ -26,10 +26,13 @@ void retrieveWithAndWithoutOtherCoordinates(
 
 Equation getTangentPlaneOnAPointOfASurface(
     Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
+
 Equations getPerpendicularLineOnAPointOfASurface(
     Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
+
 MathVectorOfThreeTerms getNormalOfASurfaceOnAPoint(
     Equation const& surface, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeNumbers const& point);
+
 MathVectorOfThreeTerms getCurl(
     MathVectorOfThreeTerms const& termVector, ArrayOfThreeStrings const& coordinateVariables);
 
@@ -38,8 +41,10 @@ SegregateTermsByConditionInAdditionAndSubtractionRetriever getRetrieverForCompar
     stringHelper::strings const& processedCoordinates);
 
 Term getDyOverDx(MathVectorOfTwoTerms const& termVector, std::string const& variableName);
+
 Term getDirectionalDerivativeInTwoDimensions(
     Term const& term, ArrayOfTwoStrings const& coordinateVariables, AlbaAngle const& angleOfDirection);
+
 Term getDirectionalDerivativeInThreeDimensions(
     Term const& term, ArrayOfThreeStrings const& coordinateVariables, MathVectorOfThreeAngles const& coordinateAngles);
 

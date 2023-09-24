@@ -7,14 +7,17 @@
 namespace alba::algorithm {
 
 namespace {
+
 using VertexForTest = int;
 using WeightForTest = double;
 using VerticesForTest = GraphTypes<VertexForTest>::Vertices;
 using ContentMapForTest = GraphTypesWithWeights<VertexForTest, WeightForTest>::VertexToWeightMap;
 using UndirectedGraphForTest = UndirectedGraphWithListOfEdges<VertexForTest>;
 using EdgeWeightedUndirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, UndirectedGraphForTest>;
+
 using NodeSearchForTest =
     KCentersWithGreedyApproximate<VertexForTest, WeightForTest, EdgeWeightedUndirectedGraphForTest>;
+
 }  // namespace
 
 TEST(KCentersWithGreedyApproximateTest, GetDistanceToWorksWithUndirectedGraphForExample1) {

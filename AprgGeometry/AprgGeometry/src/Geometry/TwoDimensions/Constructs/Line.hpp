@@ -20,8 +20,10 @@ public:
     [[nodiscard]] LineType getType() const;
     [[nodiscard]] Point getAPoint() const;
     [[nodiscard]] Points getPoints(Point const& first, Point const& second, double const interval) const;
+
     [[nodiscard]] Points getPointsWithoutLastPoint(
         Point const& first, Point const& second, double const interval) const;
+
     [[nodiscard]] double getXIntercept() const;  // form: a*(x-x0) + b*(y-y0) = 0
     [[nodiscard]] double getYIntercept() const;  // form: a*(x-x0) + b*(y-y0) = 0
     [[nodiscard]] double getSlope() const;
@@ -36,13 +38,18 @@ public:
 
 private:
     void getPointsForVerticalLine(Points& points, Point const& first, Point const& second, double const interval) const;
+
     void getPointsForHorizontalLine(
         Points& points, Point const& first, Point const& second, double const interval) const;
+
     void getPointsForLineWithSlope(
         Points& points, Point const& first, Point const& second, double const interval) const;
+
     void setLineParametersBasedOnDeltas(double const deltaX, double const deltaY, Point const& point);
+
     void setLineParametersBasedOnCoefficients(
         double const aCoefficient, double const bCoefficient, double const cCoefficient);
+
     void setCoefficientsUsingLineTypeAndDeltaXandDeltaYAndAPoint(
         double const deltaY, double const deltaX, Point const& point);
 

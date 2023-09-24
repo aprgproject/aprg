@@ -26,9 +26,12 @@ public:
 private:
     [[nodiscard]] Count getNumberOfWaysUsingNaiveRecursion(
         bool const expectedOutput, Index const left, Index const right) const;
+
     [[nodiscard]] bool areSizesCorrect() const;
+
     Count getNumberOfWaysUsingMemoizationDP(
         CountMatrices& countMatrices, bool const expectedOutput, Index const left, Index const right) const;
+
     void initialize();
     static Count convertBoolToCount(bool const booleanValue);
     Booleans m_inputValues;

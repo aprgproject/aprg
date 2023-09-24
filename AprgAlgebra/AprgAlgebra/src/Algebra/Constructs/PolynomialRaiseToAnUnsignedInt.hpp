@@ -17,8 +17,10 @@ public:
 private:
     static void factorizeAndUpdateCommonMonomialAndFactorsToExponent(
         Polynomial const& polynomial, PolynomialToNumberMap& factorsToExponent, Monomial& commonMonomialInBase);
+
     static Polynomial getRemainingBase(
         PolynomialToNumberMap const& factorsToExponent, Monomial const& commonMonomialInBase, int const gcfOfExponents);
+
     static int getGcfOfExponents(PolynomialToNumberMap const& factorsToExponent);
     static bool canBeSimplified(int const gcfOfExponents, Monomial const& commonMonomialInBase);
     Polynomial m_base;

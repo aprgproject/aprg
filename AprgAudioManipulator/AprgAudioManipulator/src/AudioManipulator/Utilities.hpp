@@ -31,8 +31,10 @@ DoubleOptional compareDeltasAndGetDifference(
 double getSumInRange(Samples const& samples, int const startIndexIncluded, int const endIndexExcluded);
 double getAverageOfSamples(Samples const& samples);
 double getAverageInRange(Samples const& samples, int const startIndexIncluded, int const endIndexExcluded);
+
 double getCommonMultiplierForDeltaSamples(
     Samples const& samples, int const startIndexIncluded, int const endIndexExcluded);
+
 double getCommonMultiplierUsingSumAndNumberOfItems(double const sum, int const numberOfItems);
 
 }  // namespace alba::AprgAudio

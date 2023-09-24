@@ -24,6 +24,7 @@ public:
 
     static void replaceCToCPlusPlusStylePrintOnDirectories(
         std::filesystem::path const& inputDirectory, std::filesystem::path const& outputDirectory);
+
     static void replaceCToCPlusPlusStylePrintOnFile(
         std::filesystem::path const& inputFilePath, std::filesystem::path const& outputFilePath);
 

@@ -10,11 +10,15 @@
 namespace alba::algebra {
 
 void sortIntegralsDetailsToEvaluate(DetailsForDefiniteIntegralsWithTerms& integrals);
+
 Term getAreaInBetweenTwoTermsInAnInterval(
     Term const& lowerTerm, Term const& higherTerm, DetailsForDefiniteIntegralWithValues const& integralDetails);
+
 Term getVolumeUsingOnCrossSectionalArea(
     Term const& crossSectionalArea, DetailsForDefiniteIntegralWithTerms const& integralDetails);
+
 Term getVolumeUsingOnSolidOfRevolution(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
+
 Term getSurfaceAreaUsingOnSolidOfRevolution(
     Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
 
@@ -24,8 +28,10 @@ Term getVolumeUsingOnSolidOfRevolution(
 
 Term getVolumeUsingCylindricalShells(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
 Term getLengthOfArc(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
+
 Term getLengthOfArcInPolarCoordinates(
     Term const& radiusInTermsOfTheta, DetailsForDefiniteIntegralWithTerms const& thetaDetails);
+
 Term getTotalMassOfARod(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
 Term getMomentOfMassOfARod(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);
 Term getCenterOfMassOfARod(Term const& term, DetailsForDefiniteIntegralWithTerms const& integralDetails);

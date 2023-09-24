@@ -12,7 +12,6 @@ public:
     [[nodiscard]] double getRemovalRatioForLineModel() const;
     // Line and bar parameters
     [[nodiscard]] double getBitmapWidthToBarWidthMultiplier() const;
-    [[nodiscard]] int getLineBarWidthSearchInitialBlackPointsValue() const;
     [[nodiscard]] double getLineBarWidthSearchAcceptedRunningBlackRatio() const;
     [[nodiscard]] double getAcceptableDistanceOverWidthRatioFromWidthMidpoint() const;
     [[nodiscard]] double getAcceptableSdOverMeanDeviationForLine() const;
@@ -24,6 +23,7 @@ public:
     [[nodiscard]] double getRemovalRatioForBarHeight() const;
     [[nodiscard]] double getBarHeightToDiameterMultiplier() const;
     [[nodiscard]] double getMinimumPercentageOfBlackPixelsForAFilledCircle() const;
+    [[nodiscard]] int getLineBarWidthSearchInitialBlackPointsValue() const;
     // Line model parameters
     [[nodiscard]] int getAcceptableLineDeviationForLineModelInPixels() const;
     [[nodiscard]] int getMinimumLineSamples() const;

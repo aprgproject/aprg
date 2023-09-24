@@ -22,8 +22,8 @@ public:
     [[nodiscard]] PieceColor getColor() const;
     [[nodiscard]] PieceColorAndType getColorAndType() const;
     [[nodiscard]] PieceType getType() const;
-    [[nodiscard]] uint8_t getData() const;
     [[nodiscard]] char getFenCharacter() const;
+    [[nodiscard]] uint8_t getData() const;
     [[nodiscard]] bool isEmpty() const;
     static PieceColor extractColor(uint8_t const data);
     static PieceColorAndType extractColorAndType(uint8_t const data);

@@ -17,6 +17,7 @@ public:
     using AdjacencyMatrix = matrix::AlbaMatrix<bool>;
     using DistanceEntry = AlbaNumber;
     using DistancetMatrix = matrix::AlbaMatrix<DistanceEntry>;
+
     ShortestDistanceByTraverseCountUsingAdjacencyMatrix(EdgeWeightedGraph const& graph, int const traverseCount)
         : m_shortestDistanceMatrix(createDistanceMatrix(traverseCount, graph)) {}
 

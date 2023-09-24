@@ -8,6 +8,7 @@ namespace alba::algebra {
 
 TermRaiseToANumber::TermRaiseToANumber(Term const& base, AlbaNumber const& exponent)
     : m_base(base), m_exponent(exponent) {}
+
 TermRaiseToANumber::TermRaiseToANumber(Term&& base, AlbaNumber&& exponent) : m_base(base), m_exponent(exponent) {}
 AlbaNumber const& TermRaiseToANumber::getExponent() const { return m_exponent; }
 

@@ -14,19 +14,28 @@ void factorizePolynomialForm(
 
 void fixCoefficientsOfFactors(
     AlbaNumber& aCoefficient, AlbaNumber& rootFirstCoefficient, AlbaNumber& rootSecondCoefficient);
+
 AlbaNumber getMaxAbsoluteValueForRootFinding(AlbaNumbers const& coefficients);
+
 AlbaNumbers getCoefficientsInMonomialsWithExponentsInOrder(
     Polynomial const& polynomial, Monomials const& monomialsWithExponentsInOrder);
+
 AlbaNumbers calculatePolynomialRoots(AlbaNumbers const& coefficients);
+
 AlbaNumbers calculatePolynomialRootsUsingBrentMethod(
     AlbaNumbers const& previousDerivativeRoots, AlbaNumbers const& coefficients);
+
 AlbaNumbers getDerivativeCoefficients(AlbaNumbers const& coefficients);
+
 Monomials getMonomialsWithExponentsInOrder(
     int const exponentDivisor, Monomial const& firstInPolynomial, Monomial const& lastInPolynomial);
+
 Polynomials factorizeIncreasingAndDecreasingExponentsForm(Polynomial const& polynomial);
 int calculateMaxExponentDivisor(Monomial const& firstMonomial, Monomial const& lastMonomial);
+
 bool areAllMonomialsFoundInMonomialsWithExponentsInOrder(
     Monomials const& monomialsToCheck, Monomials const& monomialsWithExponentsInOrder);
+
 bool areRootsAcceptable(AlbaNumbers const& rootValues);
 
 }  // namespace alba::algebra::Factorization

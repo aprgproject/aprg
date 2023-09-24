@@ -23,11 +23,14 @@ public:
 
     void copyRelativeFilePathsFromCompressedFile(
         std::filesystem::path const& filePathOfCompressedFile, SetOfPaths& files) const;
+
     // NOLINTNEXTLINE(modernize-use-nodiscard)
     std::filesystem::path extractOnceForAllFiles(std::filesystem::path const& filePathOfCompressedFile) const;
+
     // NOLINTNEXTLINE(modernize-use-nodiscard)
     std::filesystem::path extractOneFile(
         std::filesystem::path const& filePathOfCompressedFile, std::filesystem::path const& relativePathOfFile) const;
+
     void extractAllRelevantFiles(std::filesystem::path const& pathOfFileOrDirectory);
     static bool isRecognizedCompressedFile(std::string const& extensionString);
 

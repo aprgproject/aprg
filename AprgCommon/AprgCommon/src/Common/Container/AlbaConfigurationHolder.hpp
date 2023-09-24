@@ -17,6 +17,7 @@ class AlbaConfigurationHolder : public AlbaSingleton<AlbaConfigurationHolder<Con
 public:
     explicit AlbaConfigurationHolder(ConfigurationDetails const& configurationDetails)
         : m_configurationDetails{configurationDetails} {}
+
     AlbaConfigurationHolder() : m_configurationDetails{getDefaultConfigurationDetails<ConfigurationDetails>()} {}
     [[nodiscard]] ConfigurationDetails const& getConfigurationDetails() const { return m_configurationDetails; }
 

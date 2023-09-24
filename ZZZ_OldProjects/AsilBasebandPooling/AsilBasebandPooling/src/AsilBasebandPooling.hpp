@@ -24,8 +24,10 @@ class AsilBasebandPooling {
 public:
     AsilBasebandPooling();
     AsilBasebandPooling(LcgInitializerList const& lcgs, BasebandCardInitializerList const& basebandCards);
+
     [[nodiscard]] BasebandCardsSplitBasedOnNumberOfLcgs getBasebandCardsSplitBetweenOneLcgAndMultipleLcgs(
         unsigned int const numberOfBasebandCardsWithMultipleLcgs) const;
+
     [[nodiscard]] BasebandPoolingResult performBasebandPoolingForAsil() const;
     [[nodiscard]] VectorOfLcgs getLcgsInPriorityOrder() const;
     [[nodiscard]] unsigned int getNumberBasebandCardsWithMultipleLcgs() const;

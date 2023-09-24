@@ -41,8 +41,10 @@ void PenCirclesDrawer::ColorDetails::clear() {
 
 PenCirclesDrawer::PenCirclesDrawer(PenCircles const& penCircles, BitmapSnippet& snippet)
     : m_snippet(snippet), m_snippetTraversal(snippet), m_penCircles(penCircles) {}
+
 PenCirclesDrawer::PenCirclesDrawer(PenCircles&& penCircles, BitmapSnippet& snippet)
     : m_snippet(snippet), m_snippetTraversal(snippet), m_penCircles(penCircles) {}
+
 void PenCirclesDrawer::draw() { drawUsingCirclesWithOverlay(); }
 void PenCirclesDrawer::drawUsingCirclesWithoutOverlay() { writeCirclesWithoutOverlay(); }
 void PenCirclesDrawer::drawUsingCirclesWithOverlay() { writeCirclesWithOverlay(); }

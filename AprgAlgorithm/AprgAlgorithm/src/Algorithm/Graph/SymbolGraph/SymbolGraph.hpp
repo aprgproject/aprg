@@ -6,6 +6,7 @@ namespace alba::algorithm {
 
 template <typename Vertex, typename Object>
 Vertex getUniqueVertexIdentifier(Object const& object);
+
 template <typename Vertex, typename Object>
 void removeUniqueVertexIdentifierIfNeeded(Object const& object);
 

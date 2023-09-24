@@ -9,8 +9,10 @@ namespace alba::CodeUtilities {
 TermMatcher::TermMatcher(TermType const termType) : m_termTypeOptional(termType) {}
 TermMatcher::TermMatcher(std::string const& content) : m_contentOptional(content) {}
 TermMatcher::TermMatcher(MatcherType const matcherType) : m_matcherTypeOptional(matcherType) {}
+
 TermMatcher::TermMatcher(TermType const termType, string const& content)
     : m_termTypeOptional(termType), m_contentOptional(content) {}
+
 TermMatcher::MatcherTypeOptional const& TermMatcher::getMatcherTypeOptional() const { return m_matcherTypeOptional; }
 TermMatcher::StringOptional const& TermMatcher::getContentOptional() const { return m_contentOptional; }
 TermMatcher::TermTypeOptional const& TermMatcher::getTermTypeOptional() const { return m_termTypeOptional; }

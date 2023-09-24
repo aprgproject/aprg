@@ -29,8 +29,10 @@ public:
     [[nodiscard]] int getQuestionIndexInColumn(int const columnNumber, int const questionOffsetInColumn) const;
     [[nodiscard]] int getMinimumSatisfactoryScore() const;
     void setPath(std::string const& path);
+
     void setMainParameters(
         std::string const& area, std::string const& period, double const discharge, int const minimumSatisfactoryScore);
+
     void addQuestion(int const columnNumber, std::string const& question);
     void setFormDetailsTitle(std::string const& title);
 

@@ -11,8 +11,10 @@ class PidSimulator {
 public:
     explicit PidSimulator(stringHelper::strings const& argumentsInMain);
     [[nodiscard]] double calculatePid(double const input, double const target) const;
+
     double computeFromMachsModel(
         double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand) const;
+
     void generateInput();
     void generateTriangleWavesForInput();
     void generateSineWavesForInput();
@@ -20,8 +22,10 @@ public:
     void generateStepDownForInput();
     void generateRandomForInput();
     void calculateAndGenerateOutputImage();
+
     static double computeFromMachsModel1(
         double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand);
+
     static double computeFromMachsModel2(
         double const inputDemandSample, double const psuedoMaxTxPower, double& adjustedDemand);
 
@@ -32,8 +36,10 @@ private:
 
     static void updateAllMaxWithBuffer(int& xLeftMax, int& xRightMax, int& yBottomMax, int& yTopMax);
     static void updateMaxWithBuffer(int& lowerValue, int& higherValue);
+
     static void updateMaxPoints(
         int const xCoordinate, int const yCoordinate, int& xLeftMax, int& xRightMax, int& yBottomMax, int& yTopMax);
+
     static void updateRightMax(int& xRightMax, int const xCoordinate);
     static void updateLeftMax(int& xLeftMax, int const xCoordinate);
     static void updateTopMax(int& yTopMax, int const yCoordinate);

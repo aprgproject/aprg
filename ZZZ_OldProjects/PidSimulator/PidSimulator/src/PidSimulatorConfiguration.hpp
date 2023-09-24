@@ -11,10 +11,13 @@ struct PidSimulatorConfiguration {
     explicit PidSimulatorConfiguration(stringHelper::strings const& argumentsInMain);
     void print() const;
     void saveArgumentValues(StringToStringMap& argumentsToValuesMap);
+
     static void processArgumentsWithEqualDelimeter(
         StringToStringMap& argumentsToValuesMap, stringHelper::strings const& argumentsInMain);
+
     static void processOneArgumentWithEqualDelimeter(
         StringToStringMap& argumentsToValuesMap, std::string const& argument);
+
     unsigned int numberOfLoopsOfPeriodicInputDemand{0};
     unsigned int amplitudeOfInputDemand{0};
     unsigned int numberOfSamplesOfInputDemandInOnePeriod{0};

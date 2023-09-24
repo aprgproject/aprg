@@ -15,6 +15,7 @@ public:
     BaseSymbolTableWithBaseLinearProbingHash(BaseSymbolTableWithBaseLinearProbingHash&&) = default;
     BaseSymbolTableWithBaseLinearProbingHash& operator=(BaseSymbolTableWithBaseLinearProbingHash const&) = default;
     BaseSymbolTableWithBaseLinearProbingHash& operator=(BaseSymbolTableWithBaseLinearProbingHash&&) = default;
+
     BaseSymbolTableWithBaseLinearProbingHash()
         : b_size(BaseLinearProbingHash::m_size), b_entryPointers(BaseLinearProbingHash::m_entryPointers) {}
 

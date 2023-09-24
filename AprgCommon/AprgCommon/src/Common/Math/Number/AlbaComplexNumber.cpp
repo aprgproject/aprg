@@ -16,6 +16,7 @@ namespace alba {
 
 template <typename DataType>
 AlbaComplexNumber<DataType>::AlbaComplexNumber() : m_realPart(0), m_imaginaryPart(0) {}
+
 template AlbaComplexNumber<float>::AlbaComplexNumber();
 template AlbaComplexNumber<double>::AlbaComplexNumber();
 
@@ -240,6 +241,7 @@ AlbaComplexNumber<DataType> AlbaComplexNumber<DataType>::getNthRoot(
 
 template AlbaComplexNumber<float> AlbaComplexNumber<float>::getNthRoot(
     size_t const rootIndex, size_t const rootDegree) const;
+
 template AlbaComplexNumber<double> AlbaComplexNumber<double>::getNthRoot(
     size_t const rootIndex, size_t const rootDegree) const;
 

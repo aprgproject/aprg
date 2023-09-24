@@ -25,6 +25,7 @@ public:
     [[nodiscard]] bool isEquilateral() const;
     [[nodiscard]] bool isEquiangular() const;
     [[nodiscard]] bool isRegular() const;
+
     void getPointsFromVerticesWithoutLastPoint(
         Points& points, double const interval, int const vertexIndex1, int const vertexIndex2) const;
 

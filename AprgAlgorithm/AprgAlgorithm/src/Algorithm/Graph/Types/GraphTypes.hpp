@@ -36,6 +36,7 @@ struct GraphTypesWithWeights {
     struct VertexOrderedByWeight {
         VertexOrderedByWeight(Vertex const& vertexParameter, Weight const& weightParameter)
             : vertex(vertexParameter), weight(weightParameter) {}
+
         bool operator<(VertexOrderedByWeight const& otherVertex) const { return weight < otherVertex.weight; }
         bool operator>(VertexOrderedByWeight const& otherVertex) const { return weight > otherVertex.weight; }
         bool operator==(VertexOrderedByWeight const& otherVertex) const { return weight == otherVertex.weight; }
@@ -49,8 +50,10 @@ struct GraphTypesWithWeights {
     struct EdgeOrderedByWeight : public GraphTypes<Vertex>::Edge {
         using Edge = typename GraphTypes<Vertex>::Edge;
         EdgeOrderedByWeight() : Edge{}, weight{} {}
+
         EdgeOrderedByWeight(Vertex const& vertex1, Vertex const& vertex2, Weight const& weightParameter)
             : Edge{vertex1, vertex2}, weight(weightParameter) {}
+
         bool operator<(EdgeOrderedByWeight const& otherEdge) const { return weight < otherEdge.weight; }
         bool operator>(EdgeOrderedByWeight const& otherEdge) const { return weight > otherEdge.weight; }
         bool operator==(EdgeOrderedByWeight const& otherEdge) const { return weight == otherEdge.weight; }

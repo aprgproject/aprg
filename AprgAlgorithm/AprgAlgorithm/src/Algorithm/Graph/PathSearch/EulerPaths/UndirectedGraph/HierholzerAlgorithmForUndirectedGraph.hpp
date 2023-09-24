@@ -15,11 +15,13 @@ class HierholzerAlgorithmForUndirectedGraph
 public:
     using BaseClass =
         BaseHierholzerAlgorithm<Vertex, BaseUndirectedGraph<Vertex>, BaseEulerPathSearchForUndirectedGraph<Vertex>>;
+
     using BaseUndirectedGraphWithVertex = BaseUndirectedGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Path = typename GraphTypes<Vertex>::Path;
     using SetOfVertices = typename GraphTypes<Vertex>::SetOfVertices;
     using VertexToSetOfAdjacencyVerticesMap = std::map<Vertex, SetOfVertices>;
+
     explicit HierholzerAlgorithmForUndirectedGraph(BaseUndirectedGraphWithVertex const& graph)
         : BaseClass(graph), b_graph(BaseClass::b_graph) {}
 

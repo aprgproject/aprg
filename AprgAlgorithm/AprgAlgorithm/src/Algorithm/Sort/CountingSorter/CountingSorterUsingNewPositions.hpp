@@ -14,8 +14,10 @@ public:
     using ArrayOfCountPerValue = std::array<int, MAX_NUMBER_OF_VALUES>;
     using ValueToIndexableValueFunction = std::function<int(Value const&)>;
     CountingSorterUsingNewPositions() = delete;
+
     explicit CountingSorterUsingNewPositions(ValueToIndexableValueFunction const& valueToIndexableValueFunction)
         : m_valueToIndexableValueFunction(valueToIndexableValueFunction) {}
+
     explicit CountingSorterUsingNewPositions(ValueToIndexableValueFunction&& valueToIndexableValueFunction)
         : m_valueToIndexableValueFunction(valueToIndexableValueFunction) {}
 

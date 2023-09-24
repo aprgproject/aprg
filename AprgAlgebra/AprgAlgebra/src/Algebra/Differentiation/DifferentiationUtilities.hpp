@@ -20,8 +20,10 @@ Equation getRelationshipOfDerivativeOfTheInverseAndTheDerivative(
 
 Equation getIntegralEquationForFirstOrderDifferentialEquation(
     Equation const& equation, std::string const& xVariableName, std::string const& yVariableName);
+
 Equation getIntegralEquationForFirstOrderDifferentialEquation(
     Term const& p, Term const& q, std::string const& xVariableName, std::string const& yVariableName);
+
 SolutionSet getDifferentiabilityDomain(Term const& term, std::string const& variableName);
 Term evaluateAtDefiniteValue(Term const& term, std::string const& variableName, AlbaNumber const& value);
 Term evaluateAtDefiniteTerm(Term const& term, std::string const& variableName, Term const& valueTerm);
@@ -32,9 +34,12 @@ Term getDerivativeAtUsingLimit(
     LimitAtAValueApproachType const approachType);
 
 Term getDerivativeDefinitionForFiniteCalculus(Term const& term, std::string const& variableName);
+
 Term getLogarithmicDifferentiationToYieldDyOverDx(
     Term const& yInTermsOfX, std::string const& xVariableName, std::string const& yVariableName);
+
 Term getCartesianDerivativeOfTermInPolarCoordinates(Term const& radiusInTermsOfTheta, std::string const& thetaName);
+
 Term getSlopeOfTermInPolarCoordinates(
     Term const& radiusInTermsOfTheta, std::string const& thetaName, AlbaNumber const& thetaValue);
 
@@ -48,10 +53,12 @@ Term getApproximationOfErrorUsingTaylorsRemainder(
 
 Term getTotalDerivativeWithInnerTermsUsingChainRule(
     Term const& term, SubstitutionOfVariablesToTerms const& substitution, std::string const& commonVariable);
+
 Term getTotalDerivative(Term const& term, stringHelper::strings const& variableNames);
 Term getPartialDerivative(Term const& term, std::string const& variableName);
 bool isTheFirstFundamentalTheoremOfCalculusTrue(Term const& term, std::string const& variableName);
 bool isDifferentiableAt(Term const& term, std::string const& variableName, AlbaNumber const& value);
+
 bool isDifferentiableAtUsingDerivativeDefinition(
     Term const& term, std::string const& variableName, AlbaNumber const& value);
 

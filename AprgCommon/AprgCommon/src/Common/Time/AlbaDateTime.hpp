@@ -13,8 +13,10 @@ using UInt32BitHelper = AlbaBitManipulation<uint32_t>;
 class AlbaYearMonthDay {
 public:
     constexpr AlbaYearMonthDay() : m_yearMonthDay{} {}
+
     constexpr AlbaYearMonthDay(uint16_t const years, uint8_t const month, uint8_t const days)
         : m_yearMonthDay(convertToYearMonthDayFormat(years, month, days)) {}
+
     bool operator<(AlbaYearMonthDay const& second) const;
     bool operator>(AlbaYearMonthDay const& second) const;
     bool operator==(AlbaYearMonthDay const& second) const;
@@ -45,8 +47,10 @@ private:
 class AlbaHourMinuteSecond {
 public:
     constexpr AlbaHourMinuteSecond() : m_hourMinuteSecond{} {}
+
     constexpr AlbaHourMinuteSecond(uint8_t const hours, uint8_t const minutes, uint8_t const seconds)
         : m_hourMinuteSecond(convertToHourMinuteSecondFormat(hours, minutes, seconds)) {}
+
     bool operator<(AlbaHourMinuteSecond const& second) const;
     bool operator>(AlbaHourMinuteSecond const& second) const;
     bool operator==(AlbaHourMinuteSecond const& second) const;
@@ -133,6 +137,7 @@ public:
     AlbaHourMinuteSecond& getHourMinutesSecondReference();
     AlbaYearMonthDay& getYearMonthDayReference();
     uint32_t& getMicroSecondsReference();
+
     // rule of zero
     static AlbaDateTime createFromTotalDaysAndSecondsAndMicroSeconds(
         uint32_t const totalDays, uint32_t const totalSeconds, uint32_t const totalMicroseconds);
@@ -145,14 +150,18 @@ public:
 
 private:
     static AlbaDateTime addDateTimeMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
+
     static AlbaDateTime subtractDateTimeMagnitude(
         AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
+
     static AlbaDateTime executeAddOrSubtract(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
     static bool isLessThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
     static bool isGreaterThanInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
     static bool isEqualInMagnitude(AlbaDateTime const& firstDateTime, AlbaDateTime const& secondDateTime);
+
     template <PrintFormat printFormat>
     friend std::ostream& operator<<(std::ostream& out, AlbaDateTime::PrintObject<printFormat> const&);
+
     friend std::ostream& operator<<(std::ostream& out, AlbaDateTime const& dateTime);
     int32_t m_sign;  // sign is the hottest parameter (based from my evaluation)
     AlbaYearMonthDay m_yearMonthDay;

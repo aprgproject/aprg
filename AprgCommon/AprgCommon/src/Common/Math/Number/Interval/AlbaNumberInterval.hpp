@@ -8,6 +8,7 @@ class AlbaNumberInterval {
 public:
     AlbaNumberInterval(
         AlbaNumberIntervalEndpoint const& firstEndpoint, AlbaNumberIntervalEndpoint const& secondEndpoint);
+
     // rule of zero
     bool operator==(AlbaNumberInterval const& second) const;
     [[nodiscard]] AlbaNumberIntervalEndpoint const& getLowerEndpoint() const;

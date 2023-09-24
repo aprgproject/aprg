@@ -19,6 +19,7 @@ public:
     using Edges = typename GraphTypes<Vertex>::Edges;
     using SetOfEdges = typename GraphTypes<Vertex>::SetOfEdges;
     using GraphToManipulate = UndirectedGraphWithListOfEdges<Vertex>;
+
     explicit FleuryAlgorithm(BaseUndirectedGraphWithVertex const& graph)
         : BaseClass(graph), b_graph(BaseClass::m_graph) {}
 

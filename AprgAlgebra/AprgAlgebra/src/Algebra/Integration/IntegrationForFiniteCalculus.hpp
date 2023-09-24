@@ -17,8 +17,10 @@ public:
     [[nodiscard]] Term integrate(Polynomial const& polynomial) const;
     [[nodiscard]] Term integrate(Expression const& expression) const;
     [[nodiscard]] Term integrateWithPlusC(Term const& term) const;
+
     [[nodiscard]] Term integrateAtDefiniteValues(
         Term const& term, AlbaNumber const& lowerEnd, AlbaNumber const& higherEnd) const;
+
     [[nodiscard]] Term integrateTerm(Term const& term) const;
     [[nodiscard]] Term integrateMonomial(Monomial const& monomial) const;
     [[nodiscard]] Term integratePolynomial(Polynomial const& polynomial) const;
@@ -30,14 +32,19 @@ private:
     // For Monomial and Polynomial
     [[nodiscard]] Monomial integrateMonomialInFallingPower(Monomial const& monomial) const;
     [[nodiscard]] Polynomial integratePolynomialInFallingPower(Polynomial const& polynomial) const;
+
     [[nodiscard]] Polynomial convertMonomialWithPositiveExponentsFromRegularPowerToFallingPower(
         Monomial const& monomial) const;
+
     [[nodiscard]] Polynomial convertMonomialWithPositiveExponentsFromFallingPowerToRegularPower(
         Monomial const& monomial) const;
+
     [[nodiscard]] Polynomial convertPolynomialWithPositiveExponentsFromRegularPowerToFallingPower(
         Polynomial const& polynomial) const;
+
     [[nodiscard]] Polynomial convertPolynomialWithPositiveExponentsFromFallingPowerToRegularPower(
         Polynomial const& polynomial) const;
+
     // For Expression
     [[nodiscard]] Term integrateAsTermOrExpressionIfNeeded(Expression const& expression) const;
     [[nodiscard]] Term integrateSimplifiedExpressionOnly(Expression const& expression) const;
@@ -47,6 +54,7 @@ private:
     [[nodiscard]] Term integrateNonChangingTermRaiseToChangingTerm(Term const& base, Term const& exponent) const;
     [[nodiscard]] bool isVariableToIntegrate(std::string const& variableName) const;
     [[nodiscard]] bool isChangingTerm(Term const& term) const;
+
     // For changing and non changing
     void integrateNonChangingAndChangingTermsInMultiplicationOrDivision(
         Term& result, TermsWithDetails const& termsWithDetails) const;

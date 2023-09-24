@@ -5,7 +5,6 @@ using namespace std;
 namespace alba {
 
 MatrixMultiplicationOrder::MatrixMultiplicationOrder(Dimensions const& dimensions) : m_dimensions(dimensions) {}
-
 MatrixMultiplicationOrder::MatrixMultiplicationOrder(Dimensions&& dimensions) : m_dimensions(dimensions) {}
 
 MatrixMultiplicationOrder::Count MatrixMultiplicationOrder::getMinimumNumberOfOperationsUsingNaiveRecursion() const {

@@ -25,10 +25,13 @@ public:
     void writeCharData(char const data);
     void writeStringData(std::string_view const data);
     void writeHexDigitData(std::string_view const hexDigitsData);
+
     template <typename TypeToWrite>
     void writeNumberData(AlbaStreamBitEndianType const endianType, TypeToWrite const& data);
+
     template <typename TypeToWrite>
     void writeBigEndianNumberData(TypeToWrite const& data);
+
     template <typename TypeToWrite>
     void writeLittleEndianNumberData(TypeToWrite const& data);
 
@@ -42,8 +45,10 @@ public:
 private:
     template <typename TypeToWrite>
     void putBigEndianNumberDataInBuffer(TypeToWrite const& data);
+
     template <typename TypeToWrite>
     void putLittleEndianNumberDataInBuffer(TypeToWrite const& data);
+
     void putBoolDataToBuffer(bool const boolValue);
     void putCharDataToBuffer(char const data);
     void transferBytesAsMuchAsPossibleToStream();

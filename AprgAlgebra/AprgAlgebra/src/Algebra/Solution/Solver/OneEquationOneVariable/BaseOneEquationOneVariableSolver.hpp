@@ -25,10 +25,13 @@ protected:
     void processWhenEquationIsAlwaysSatisfied(SolutionSet& solutionSet);
     void calculateWhenEquationIsSometimesSatisfied(SolutionSet& solutionSet, Equation const& equation);
     void sortAndRemoveDuplicateCalculatedValues();
+
     void calculateForTermAndCheckAbsoluteValueFunctions(
         Term const& nonZeroLeftHandTerm, std::string const& variableName);
+
     void calculateAndSubstituteAbsoluteValueFunctions(
         FunctionsSet const& absFunctions, Term const& term, std::string const& variableName);
+
     AlbaNumbers m_calculatedValues;
 };
 

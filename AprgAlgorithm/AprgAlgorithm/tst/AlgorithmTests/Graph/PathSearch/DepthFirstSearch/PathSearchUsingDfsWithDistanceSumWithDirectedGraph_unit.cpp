@@ -13,6 +13,7 @@ using WeightForTest = double;
 using ContentMapForTest = GraphTypesWithWeights<VertexForTest, WeightForTest>::VertexToWeightMap;
 using DirectedGraphForTest = DirectedGraphWithListOfEdges<VertexForTest>;
 using EdgeWeightedDirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, DirectedGraphForTest>;
+
 using PathSearchForTest =
     PathSearchUsingDfsWithDistanceSum<VertexForTest, WeightForTest, EdgeWeightedDirectedGraphForTest>;
 

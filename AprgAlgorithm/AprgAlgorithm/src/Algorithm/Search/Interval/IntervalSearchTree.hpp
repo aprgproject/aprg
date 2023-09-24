@@ -26,8 +26,10 @@ class IntervalSearchTree : public BaseRedBlackBinarySearchTreeSet<
 public:
     using Key = Interval<IntervalUnit>;
     using Keys = std::vector<Key>;
+
     using BaseClass = BaseRedBlackBinarySearchTreeSet<
         Interval<IntervalUnit>, IntervalSearchTreeNode<Interval<IntervalUnit>, IntervalUnit>>;
+
     using Node = typename BaseClass::Node;
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
     using BooleanBinaryFunction = std::function<bool(Key const&, Key const&)>;

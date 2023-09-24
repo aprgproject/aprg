@@ -14,6 +14,7 @@ public:
     void processFile(std::filesystem::path const& file);
 
 private:
+    stringHelper::strings getPrintItems(int& printfEnd, int const printStringIndex) const;
     void fixTerms();
     void combinePrimitiveTypes();
     void fixPostFixIncrementDecrement();
@@ -29,16 +30,17 @@ private:
     void fixCStylePrintf();
     void fixCStylePrintf(Patterns const& searchPatterns);
     void fixCStylePrintf(int const printfStart, int const printStringIndex);
-    stringHelper::strings getPrintItems(int& printfEnd, int const printStringIndex) const;
-    static Terms getNewPrintTerms(std::string const& printString, stringHelper::strings const& printItems);
     void fixCommentsPositionOfBraces();
     void fixCStyleStaticCast();
     void fixCStyleStaticCast(TermMatcher const& typeMatcher);
     void findTermsAndSwapAt(Patterns const& searchPatterns, int const index1, int const index2);
     void findTermsAndCheckForLoopAndSwapAt(Patterns const& searchPatterns, int const index1, int const index2);
+
     void findTermsAndConvertToConstexpr(
         Patterns const& searchPatterns, int const typeIndex, int const constIndex, int const openingParenthesisIndex,
         int const closingParenthesisIndex);
+
+    static Terms getNewPrintTerms(std::string const& printString, stringHelper::strings const& printItems);
     std::filesystem::path m_currentFile;
     Terms m_terms;
 };

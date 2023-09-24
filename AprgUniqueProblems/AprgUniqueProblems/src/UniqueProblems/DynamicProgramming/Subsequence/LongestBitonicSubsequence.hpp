@@ -19,8 +19,10 @@ public:
 private:
     void computeIncreasingPartialLengths(IndexToIndex& increasingPartialLengths) const;
     void computeDecreasingPartialLengths(IndexToIndex& decreasingPartialLengths) const;
+
     void computeIncreasingPartialLengths(
         IndexToIndex& increasingPartialLengths, IndexToIndex& indexToIncreasingPreviousIndex) const;
+
     void computeDecreasingPartialLengths(
         IndexToIndex& decreasingPartialLengths, IndexToIndex& indexToDecreasingPreviousIndex) const;
 

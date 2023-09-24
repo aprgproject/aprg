@@ -85,8 +85,10 @@ private:
     void initializeDataDumpOfOneDsp(std::string const& fileName);
     void initializeTotalUsersAndCfsDump();
     void initializeSaveAllUsersAndCfsDump();
+
     void saveDataDumpOfOneDsp(
         std::string const& fileName, DspData const& dspData, wcdmaToolsBackend::BtsLogPrint const& logPrint);
+
     void saveTotalUsersAndCfs(wcdmaToolsBackend::BtsLogPrint const& logPrint);
     void saveAllUsersAndCfs(wcdmaToolsBackend::BtsLogPrint const& logPrint);
     void saveDspInformation(unsigned int const dspAddress, DspData const& dspData);
@@ -96,18 +98,25 @@ private:
     void saveRlhSetupTime(std::string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs);
     void saveRlhDeletionTime(std::string const& lineInLogs, LogTimePairs& rlDeletionLogTimePairs);
     void saveAdditionalPrintsRlSetup(std::string const& lineInLogs, LogTimePairs& rlSetupLogTimePairs);
+
     void computeRlSetupLatencyAndUpdateIfLogTimePairIsValid(
         UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
+
     void computeRLDeletionLatencyAndUpdateIfLogTimePairIsValid(
         UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
+
     void saveMessageQueueingTimeToCsvFile(std::string const& lineInLogs, unsigned int const messageQueueingTime);
     void savePrintsAvailableToCsvFile(UserIdentifiers const& userIdentifiers, std::ofstream& csvFileStream);
+
     static void setFirstLogTimeInPair(
         std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
+
     static void setSecondLogTimeInPair(
         std::string const& lineInLogs, UserIdentifiers const& userIdentifiers, LogTimePairs& logTimePairs);
+
     static void saveUserIndentifierAndLatencyToCsvFile(
         UserIdentifiers const& userIdentifiers, double const latencyInMicroseconds, std::ofstream& csvFileStream);
+
     static void setLogTimeIfNeeded(std::string const& lineInLogs, LogTime& logTime);
     static double getTotalMicroseconds(LogTimePair const& logTimePairOfTheUser);
     static double getTotalMicroseconds(wcdmaToolsBackend::BtsLogTime const& btsLogTime);

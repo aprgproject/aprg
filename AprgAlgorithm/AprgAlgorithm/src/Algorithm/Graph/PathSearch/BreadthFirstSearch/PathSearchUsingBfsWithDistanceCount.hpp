@@ -15,6 +15,7 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using InitializeDataFunction = typename BaseBfs::InitializeDataFunction;
     using UpdateDataFunction = typename BaseBfs::UpdateDataFunction;
+
     PathSearchUsingBfsWithDistanceCount(BaseGraphWithVertex const& graph, Vertices const& startVertices)
         : BaseDistanceCount(), BaseBfs(graph, startVertices, getInitializeDataFunction(), getUpdateDataFunction()) {}
 

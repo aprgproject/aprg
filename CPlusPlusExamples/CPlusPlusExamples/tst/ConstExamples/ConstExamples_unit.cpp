@@ -224,6 +224,7 @@ TEST(ConstExamplesTest, MutabilityOfStructInsideAFunctionWorks) {
                            //*b=20; // Error because b is const*
             refData = 20;  // No error because only deferenced value is changed, not the actual reference
         }
+
         int value = 0;
         int* a = &data;
         int const* b = &data;
@@ -301,6 +302,7 @@ namespace OptimzationOfConstParametersDoesNotWork {
 void logIt(int) {
     // dont change parameter
 }
+
 void modifyIt(int&) {
     // change parameter
 }

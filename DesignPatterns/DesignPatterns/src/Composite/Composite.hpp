@@ -27,11 +27,13 @@ public:
         // Make sure that this doesn't break interface segregation principle.
         //...
     }
+
     virtual void removeAtIndex(int const) {
         // principle. (Make sure the method/function makes sense.)
         // Make sure that this doesn't break interface segregation
         //...
     }
+
     virtual void operation() = 0;
 };
 

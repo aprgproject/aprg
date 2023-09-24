@@ -20,8 +20,10 @@ public:
     using Paths = typename GraphTypes<Vertex>::Paths;
     using FlowNetwork = SinkSourceFlowNetwork<Vertex, int, DirectedGraphWithListOfEdges<Vertex>>;
     using FordFulkerson = FordFulkersonUsingBfs<FlowNetwork>;
+
     EdgeDisjointPaths(BaseDirectedGraphWithVertex const& graph, Vertex const& startVertex, Vertex const& endVertex)
         : m_fordFulkerson(getFlowNetwork(graph, startVertex, endVertex)) {}
+
     [[nodiscard]] Paths getEdgeDisjointPaths() const { return m_fordFulkerson.getAugmentingPaths(); }
     [[nodiscard]] int getNumberOfEdgeDisjointPaths() const { return m_fordFulkerson.getMaxFlowValue(); }
 

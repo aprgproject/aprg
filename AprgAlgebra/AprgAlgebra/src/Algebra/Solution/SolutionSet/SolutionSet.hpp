@@ -22,11 +22,13 @@ public:
     void addRejectedValues(AlbaNumbers const& values);
     void addAcceptedInterval(AlbaNumberInterval const& interval);
     void addValue(AlbaNumber const& value, FunctionForCheckingValues const& isValueAcceptedFunction);
+
     void determineAndAddAcceptedIntervals(
         AlbaNumbers const& additionalValuesToCheck, FunctionForCheckingValues const& isValueAcceptedFunction);
 
 private:
     void prepareValuesToCheck(AlbaNumbers& combinedValuesToCheck);
+
     void checkValuesAndPutIntervals(
         AlbaNumbers const& valuesToCheck, FunctionForCheckingValues const& isValueAcceptedFunction);
 

@@ -5,8 +5,10 @@ using namespace std;
 namespace alba {
 
 namespace {
+
 vector<pair<int, int>> const columnOffsets{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 0},
                                            {0, 1},   {1, -1}, {1, 0},  {1, 1}};
+
 }  // namespace
 
 FindLengthOfTheLongestConsecutivePath::FindLengthOfTheLongestConsecutivePath(ValueGrid const& inputGrid)

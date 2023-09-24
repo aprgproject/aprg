@@ -48,14 +48,17 @@ public:
     }
 
     void deleteBasedOnKey(Key const& key) override { deleteBasedOnKeyStartingOnThisNode(m_root, key, 0); }
+
     [[nodiscard]] int getNumberOfNodes() const {
         return getNumberOfNodes(m_root);  // dont count the root pointer
     }
 
 protected:
     [[nodiscard]] virtual int getSizeStartingOnThisNode(NodeUniquePointer const& currentNodePointer) const = 0;
+
     [[nodiscard]] virtual int getLengthOfLongestPrefixStartingOnThisNode(
         NodeUniquePointer const& currentNodePointer, Key const& keyToCheck, int const index) const = 0;
+
     virtual void collectAllKeysAtNode(
         Node const* const currentNodePointer, std::string const& previousPrefix, Strings& collectedKeys) const = 0;
 

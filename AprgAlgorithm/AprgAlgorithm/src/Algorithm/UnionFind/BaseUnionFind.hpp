@@ -12,8 +12,10 @@ public:
     BaseUnionFind(BaseUnionFind&&) = default;
     BaseUnionFind& operator=(BaseUnionFind const&) = default;
     BaseUnionFind& operator=(BaseUnionFind&&) = default;
+
     [[nodiscard]] virtual Object getRoot(
         Object const& object) const = 0;  // this is basically an identifier for the connected components
+
     [[nodiscard]] virtual bool isConnected(Object const& object1, Object const& object2) const = 0;
     virtual void connect(Object const& object1, Object const& object2) = 0;
 };

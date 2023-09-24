@@ -7,10 +7,13 @@ using namespace std;
 
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_SIMPLE_DATA_SET \
     APRG_DIR R"(\AprgModeling\FilesForTests\DataSets\SimpleDataSet.csv)"
+
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_DATA1 \
     APRG_DIR R"(\AprgModeling\FilesForTests\DataSets\FileFormat1_DataSet1.csv)"
+
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT1_DATA2 \
     APRG_DIR R"(\AprgModeling\FilesForTests\DataSets\FileFormat1_DataSet2.csv)"
+
 #define ALBA_MODELING_DATA_SET_WITH_FILE_FORMAT2_DATA1 \
     APRG_DIR R"(\AprgModeling\FilesForTests\DataSets\FileFormat2_DataSet1.csv)"
 

@@ -11,7 +11,6 @@ using namespace std;
 namespace alba {
 
 AlbaFileReader::AlbaFileReader(ifstream& stream) : m_stream(stream) { setMaxBufferSize(INITIAL_MAX_BUFFER_SIZE); }
-
 AlbaFileReader::AlbaFileReader(ifstream& stream, size_t const size) : m_stream(stream) { setMaxBufferSize(size); }
 
 char AlbaFileReader::getCharacter() {

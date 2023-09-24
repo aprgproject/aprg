@@ -7,6 +7,7 @@ namespace alba {
 
 template <typename DataType>
 bool isEqualForMathVectorDataType(DataType const& value1, DataType const& value2);
+
 template <typename DataType>
 DataType raiseToPowerForMathVectorDataType(DataType const& value1, DataType const& value2);
 
@@ -34,6 +35,7 @@ bool isDotProductEqualToProductOfMagnitudesWithCosineOfAngle(
 
 template <typename DataType, size_t SIZE>
 AlbaMathVector<DataType, SIZE> createZeroVector();
+
 template <typename DataType, size_t SIZE>
 AlbaMathVector<DataType, SIZE> getUnitVector(AlbaMathVector<DataType, SIZE> const& vector);
 
@@ -43,6 +45,7 @@ AlbaMathVector<DataType, SIZE> getVectorProjection(
 
 template <typename DataType, size_t SIZE>
 DataType getDotProduct(AlbaMathVector<DataType, SIZE> const& vector1, AlbaMathVector<DataType, SIZE> const& vector2);
+
 // cross product on 2D results in vector on the Z axis
 template <typename DataType>
 DataType getCrossProduct(AlbaMathVector<DataType, 2U> const& vector1, AlbaMathVector<DataType, 2U> const& vector2);

@@ -34,8 +34,10 @@ public:
     using MatrixData = AlbaMatrixData<DataType>;
     using ListOfMatrixData = ListOfAlbaMatrixData<DataType>;
     using LoopFunction = std::function<void(size_t const xPosition, size_t const yPosition)>;
+
     using LoopWithValueFunction =
         std::function<void(size_t const xPosition, size_t const yPosition, DataType const& value)>;
+
     using MatrixIndexRange = AlbaValueRange<size_t>;
     // Do we have to make rows and columns as template parameter?
     // No, its better to have this on runtime because matrix can have different dimensions on applications.

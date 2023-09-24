@@ -26,8 +26,10 @@ public:
 
 private:
     [[nodiscard]] bool isPartialSumPossibleUsingNaiveRecursion(Value const partialSum, Index const valueIndex) const;
+
     bool isPartialSumPossibleUsingMemoizationDP(
         StateMatrix& stateMatrix, Value const partialSum, Index const valueIndex) const;
+
     Value m_targetSum;
     Values m_inputValues;
 };

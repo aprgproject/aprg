@@ -435,9 +435,11 @@ TEST(InPlaceConstructionExamplesTest, InitializerListHasConstStorageSoWeCantLoca
 }  // namespace InitializerListHasConstStorageSoWeCantLocalInitializerLists
 
 namespace InitializerListHasConstStorageSoWeCantUseMoveOnlyObjects {
+
 TEST(InPlaceConstructionExamplesTest, InitializerListHasConstStorageSoWeCantUseMoveOnlyObjects) {
     //  vector<unique_ptr<int>> v = {make_unique<int>(1), make_unique<int>(2)};  // cannot compile, needs copy
 }
+
 }  // namespace InitializerListHasConstStorageSoWeCantUseMoveOnlyObjects
 
 namespace InitializerListWithMap {

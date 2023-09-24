@@ -71,14 +71,18 @@ private:
     DataType sixteenBitIntToSample(int16_t const sample);
     DataType singleByteToSample(uint8_t const sample);
     DataType clamp(DataType const value, DataType const minValue, DataType const maxValue);
-    int16_t twoBytesToInt(
-        std::vector<uint8_t> const& source, int const startIndex, Endianness endianness = Endianness::LittleEndian);
-    int16_t sampleToSixteenBitInt(DataType const sample);
-    int32_t fourBytesToInt(
-        std::vector<uint8_t> const& source, int const startIndex, Endianness endianness = Endianness::LittleEndian);
-    uint8_t sampleToSingleByte(DataType const sample);
     int getIndexOfString(std::vector<uint8_t> const& source, std::string const& s);
     int getAiffSampleRate(std::vector<uint8_t>& dataBuffer, int const sampleRateStartIndex);
+
+    int16_t twoBytesToInt(
+        std::vector<uint8_t> const& source, int const startIndex, Endianness endianness = Endianness::LittleEndian);
+
+    int16_t sampleToSixteenBitInt(DataType const sample);
+
+    int32_t fourBytesToInt(
+        std::vector<uint8_t> const& source, int const startIndex, Endianness endianness = Endianness::LittleEndian);
+
+    uint8_t sampleToSingleByte(DataType const sample);
     bool decodeWaveFile(std::vector<uint8_t>& dataBuffer);
     bool decodeAiffFile(std::vector<uint8_t>& dataBuffer);
     bool saveToWaveFile(std::filesystem::path const& filePath);

@@ -15,12 +15,12 @@ public:
     using BaseDirectedGraphWithVertex = BaseDirectedGraph<Vertex>;
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Path = typename GraphTypes<Vertex>::Path;
+    virtual ~BaseEulerPathSearchForDirectedGraph() = default;
     // virtual destructor because of virtual functions (vtable exists)
     BaseEulerPathSearchForDirectedGraph(BaseEulerPathSearchForDirectedGraph const &) = default;
     BaseEulerPathSearchForDirectedGraph(BaseEulerPathSearchForDirectedGraph &&) = default;
     BaseEulerPathSearchForDirectedGraph &operator=(BaseEulerPathSearchForDirectedGraph const &) = default;
     BaseEulerPathSearchForDirectedGraph &operator=(BaseEulerPathSearchForDirectedGraph &&) = default;
-    virtual ~BaseEulerPathSearchForDirectedGraph() = default;
     explicit BaseEulerPathSearchForDirectedGraph(BaseDirectedGraphWithVertex const &graph) : m_graph(graph) {}
     // An Euler circuit is a circuit that uses every edge in a graph with no repeats. Being a circuit, it must start and
     // end at the same vertex.

@@ -21,8 +21,10 @@ public:
 private:
     [[nodiscard]] Value getMaximumPointsUsingNaiveRecursion(
         Index const row, Index const columnLeft, Index const columnRight) const;
+
     Value getMaximumPointsUsingMemoizationDP(
         ValueGrids& valueGrids, Index const row, Index const columnLeft, Index const columnRight) const;
+
     ValueGrid m_inputGrid;
 };
 

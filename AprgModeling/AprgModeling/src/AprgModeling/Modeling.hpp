@@ -41,8 +41,10 @@ public:
 private:
     void saveRetrievedDataToMatrixRandomly(
         MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int const numberOfSamples);
+
     void saveRetrievedDataToMatrix(
         MatrixOfDoubles& matrixInX, MatrixOfDoubles& matrixInY, unsigned int const numberOfSamples);
+
     void calculateCoefficientsUsingLeastSquares();
 
     static void copyVectorToMatrix(

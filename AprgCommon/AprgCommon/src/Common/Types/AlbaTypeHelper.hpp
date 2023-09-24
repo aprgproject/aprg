@@ -332,34 +332,49 @@ constexpr bool isNoThrowMoveAssignable() {
 // Get Types
 template <typename Type>
 using GetPlainType = typename std::decay<Type>::type;
+
 template <typename... Types>
 using GetCommonType = typename std::common_type<Types...>::type;
+
 template <typename FunctorType, typename... ArgumentTypes>
 using GetFunctorResultType = typename std::invoke_result<FunctorType, ArgumentTypes...>::type;
+
 template <typename Type>
 using GetTypeWithLValueReference = typename std::add_lvalue_reference<Type>::type;
+
 template <typename Type>
 using GetTypeWithRValueReference = typename std::add_rvalue_reference<Type>::type;
+
 template <typename Type>
 using GetTypeWithPointer = typename std::add_pointer<Type>::type;
+
 template <typename Type>
 using GetTypeWithConstVolatile = typename std::add_cv<Type>::type;
+
 template <typename Type>
 using GetTypeWithConst = typename std::add_const<Type>::type;  // you can also use as_const
+
 template <typename Type>
 using GetTypeWithVolatile = typename std::add_volatile<Type>::type;
+
 template <typename Type>
 using GetTypeWithoutReference = typename std::remove_reference<Type>::type;
+
 template <typename Type>
 using GetTypeWithoutPointer = typename std::remove_pointer<Type>::type;
+
 template <typename Type>
 using GetTypeWithoutConstVolatile = typename std::remove_cv<Type>::type;
+
 template <typename Type>
 using GetTypeWithoutConst = typename std::remove_const<Type>::type;
+
 template <typename Type>
 using GetTypeWithoutVolatile = typename std::remove_volatile<Type>::type;
+
 template <typename Type>
 using GetSignedType = typename std::make_signed<Type>::type;
+
 template <typename Type>
 using GetUnsignedType = typename std::make_unsigned<Type>::type;
 
@@ -371,22 +386,29 @@ constexpr std::size_t getDimensions() {
 
 template <typename Array>
 using GetTypeByRemovingOneDimension = typename std::remove_extent<Array>::type;
+
 template <typename Array>
 using GetTypeByRemovingRemovingAllDimensions = typename std::remove_all_extents<Array>::type;
+
 // Conditional types
 template <bool condition, typename TypeIfTrue, typename TypeIfFalse>
 using ConditionalType = typename std::conditional<condition, TypeIfTrue, TypeIfFalse>::type;
+
 // Walter E Brown technique
 // IsPointer
 template <typename, typename = void>
 struct hasElementType : std::false_type {};
+
 template <typename T>
 struct hasElementType<T, std::void_t<typename T::element_type>> : std::true_type {};
+
 // IsContainer
 template <typename, typename = void>
 struct hasValueType : std::false_type {};
+
 template <typename T>
 struct hasValueType<T, std::void_t<typename T::value_type>> : std::true_type {};
+
 // HasContainerType
 // ::c cannot be used because its protected
 // -> template<typename, typename = void>
@@ -395,27 +417,36 @@ struct hasValueType<T, std::void_t<typename T::value_type>> : std::true_type {};
 // -> struct HasContainerType<T, std::void_t<decltype((void)T::c, void())>> : std::true_type {};
 template <typename, typename = void>
 struct HasContainerType : std::false_type {};
+
 template <typename T>
 struct HasContainerType<T, std::void_t<typename T::container_type>> : std::true_type {};
+
 // HasDereferenceOperator
 template <typename, typename = void>
 struct HasDereferenceOperator : std::false_type {};
+
 template <typename T>
 struct HasDereferenceOperator<T, std::void_t<decltype(*std::declval<T>())>> : std::true_type {};
+
 // HasBegin
 template <typename, typename = void>
 struct HasBegin : std::false_type {};
+
 template <typename T>
 struct HasBegin<T, std::void_t<decltype(std::declval<T>().begin())>> : std::true_type {};
+
 // declval adds a reference, this is done to allow types with deleted constructor (see cppreference example)
 // HasEnd
 template <typename, typename = void>
 struct HasEnd : std::false_type {};
+
 template <typename T>
 struct HasEnd<T, std::void_t<decltype(std::declval<T>().end())>> : std::true_type {};
+
 // HasSize
 template <typename, typename = void>
 struct HasSize : std::false_type {};
+
 template <typename T>
 struct HasSize<T, std::void_t<decltype(std::declval<T>().size())>> : std::true_type {};
 

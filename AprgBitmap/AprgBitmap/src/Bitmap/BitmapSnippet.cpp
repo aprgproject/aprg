@@ -28,6 +28,10 @@ BitmapConfiguration BitmapSnippet::getConfiguration() const { return m_configura
 BitmapXY BitmapSnippet::getTopLeftCorner() const { return m_topLeftCorner; }
 BitmapXY BitmapSnippet::getBottomRightCorner() const { return m_bottomRightCorner; }
 PixelData const& BitmapSnippet::getPixelDataConstReference() const { return m_pixelData; }
+int BitmapSnippet::getDeltaX() const { return m_bottomRightCorner.getX() - m_topLeftCorner.getX(); }
+int BitmapSnippet::getDeltaY() const { return m_bottomRightCorner.getY() - m_topLeftCorner.getY(); }
+int BitmapSnippet::getNumberOfPixelsInSnippet() const { return getDeltaX() * getDeltaY(); }
+int BitmapSnippet::getPixelDataSize() const { return static_cast<int>(m_pixelData.getSize()); }
 
 uint32_t BitmapSnippet::getPixelAt(BitmapXY const position) const {
     uint32_t result(0);
@@ -46,11 +50,6 @@ uint32_t BitmapSnippet::getPixelAt(BitmapXY const position) const {
 uint32_t BitmapSnippet::getColorAt(BitmapXY const position) const {
     return m_configuration.getColorUsingPixelValue(getPixelAt(position));
 }
-
-int BitmapSnippet::getDeltaX() const { return m_bottomRightCorner.getX() - m_topLeftCorner.getX(); }
-int BitmapSnippet::getDeltaY() const { return m_bottomRightCorner.getY() - m_topLeftCorner.getY(); }
-int BitmapSnippet::getNumberOfPixelsInSnippet() const { return getDeltaX() * getDeltaY(); }
-int BitmapSnippet::getPixelDataSize() const { return static_cast<int>(m_pixelData.getSize()); }
 
 bool BitmapSnippet::isPositionInsideTheSnippet(BitmapXY const position) const {
     return m_topLeftCorner.getX() <= position.getX() && m_topLeftCorner.getY() <= position.getY() &&

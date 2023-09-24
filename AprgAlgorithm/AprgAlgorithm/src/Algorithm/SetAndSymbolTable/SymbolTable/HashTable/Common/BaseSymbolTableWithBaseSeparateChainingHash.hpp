@@ -12,8 +12,10 @@ public:
     ~BaseSymbolTableWithBaseSeparateChainingHash() override = default;
     BaseSymbolTableWithBaseSeparateChainingHash(BaseSymbolTableWithBaseSeparateChainingHash const&) = default;
     BaseSymbolTableWithBaseSeparateChainingHash(BaseSymbolTableWithBaseSeparateChainingHash&&) = default;
+
     BaseSymbolTableWithBaseSeparateChainingHash& operator=(BaseSymbolTableWithBaseSeparateChainingHash const&) =
         default;
+
     BaseSymbolTableWithBaseSeparateChainingHash& operator=(BaseSymbolTableWithBaseSeparateChainingHash&&) = default;
 
     BaseSymbolTableWithBaseSeparateChainingHash()

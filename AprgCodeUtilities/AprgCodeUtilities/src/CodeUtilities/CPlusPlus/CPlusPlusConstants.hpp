@@ -2,6 +2,7 @@
 
 #define KEYWORD_OPERATORS \
     "typeid", "const_cast", "dynamic_cast", "reinterpret_cast", "static_cast", "sizeof", "new", "delete", "throw"
+
 #define THREE_CHAR_OPERATORS "->*", "<<=", ">>="
 
 #define TWO_CHAR_OPERATORS                                                        \

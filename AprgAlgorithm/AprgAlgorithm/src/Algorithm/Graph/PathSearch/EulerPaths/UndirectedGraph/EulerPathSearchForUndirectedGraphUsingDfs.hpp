@@ -19,6 +19,7 @@ public:
     using QueueOfEdges = std::queue<Edge>;
     using StackOfVertices = std::stack<Vertex>;
     using VertexToQueueOfEdgesMap = std::map<Vertex, QueueOfEdges>;
+
     explicit EulerPathSearchForUndirectedGraphUsingDfs(BaseUndirectedGraphWithVertex const& graph)
         : BaseClass(graph), b_graph(BaseClass::m_graph) {}
 

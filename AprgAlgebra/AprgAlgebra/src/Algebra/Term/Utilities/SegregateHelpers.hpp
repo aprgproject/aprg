@@ -9,8 +9,10 @@ void segregateMonomialsWithAndWithoutVariable(
     Monomials& monomialsWithoutVariable);
 
 void segregateMonomialsAndNonMonomials(Terms const& termsToSegregate, Terms& monomials, Terms& nonMonomials);
+
 void segregateMonomialsAndNonMonomials(
     TermsWithDetails const& termsToSegregate, TermsWithDetails& monomials, TermsWithDetails& nonMonomials);
+
 void segregatePolynomialAndNonPolynomials(Terms const& termsToSegregate, Terms& polynomials, Terms& nonPolynomials);
 
 void segregateNonExpressionsAndExpressions(

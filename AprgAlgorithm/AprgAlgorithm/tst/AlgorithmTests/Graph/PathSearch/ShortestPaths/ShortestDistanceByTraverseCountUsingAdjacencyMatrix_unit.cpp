@@ -8,6 +8,7 @@
 namespace alba::algorithm {
 
 namespace {
+
 using VertexForTest = int;
 constexpr VertexForTest MAX_VERTEX_VALUE = 7;
 using WeightForTest = double;
@@ -15,10 +16,13 @@ using UndirectedGraphForTest = UndirectedGraphWithAdjacencyMatrix<VertexForTest,
 using DirectedGraphForTest = DirectedGraphWithAdjacencyMatrix<VertexForTest, MAX_VERTEX_VALUE>;
 using EdgeWeightedUndirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, UndirectedGraphForTest>;
 using EdgeWeightedDirectedGraphForTest = EdgeWeightedGraph<VertexForTest, WeightForTest, DirectedGraphForTest>;
+
 using ShortestPathsForUndirectedGraphForTest = ShortestDistanceByTraverseCountUsingAdjacencyMatrix<
     VertexForTest, WeightForTest, EdgeWeightedUndirectedGraphForTest>;
+
 using ShortestPathsForDirectedGraphForTest =
     ShortestDistanceByTraverseCountUsingAdjacencyMatrix<VertexForTest, WeightForTest, EdgeWeightedDirectedGraphForTest>;
+
 }  // namespace
 
 TEST(ShortestDistanceByTraverseCountUsingAdjacencyMatrixTest, GetShortestDistanceWorksWithUndirectedGraphOnExample1) {
