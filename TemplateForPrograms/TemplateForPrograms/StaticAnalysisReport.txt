@@ -1,6 +1,3 @@
-StaticAnalysisJobIdentifier: [43]
-2023-09-23T16:10:14
-/home/runner/work/aprg/aprg/TemplateForPrograms/TemplateForPrograms/tst/TemplateForProgramsTests/TemplateForPrograms_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/TemplateForPrograms/TemplateForPrograms/tst/TemplateForProgramsTests/TemplateForPrograms_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/TemplateForPrograms/TemplateForPrograms/tst/TemplateForProgramsTests/TemplateForPrograms_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+StaticAnalysisJobIdentifier: [44]
+2023-09-24T23:48:18
 DONE!
