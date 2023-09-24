@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [43]
-2023-09-23T12:22:01
+StaticAnalysisJobIdentifier: [44]
+2023-09-24T18:25:45
 D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest_main.cc:62:3: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
 D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest-all.cc:41:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
 D:\a\aprg\aprg\gtest\gtest\googletest\src\gtest-all.cc:42:11: warning: suspicious #include of file with '.cc' extension [bugprone-suspicious-include]
@@ -83,8 +83,6 @@ D:/a/aprg/aprg/AprgLocalScreenMonitoring/AprgLocalScreenMonitoring/srcWindows\Sc
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\windef.h:80:16: note: typedef declared here
 D:/a/aprg/aprg/AprgLocalScreenMonitoring/AprgLocalScreenMonitoring/srcWindows\ScreenMonitoring/AlbaWindowsScreenMonitoring.hpp:28:76: warning: 'bitmapHandler' declared with a const-qualified typedef; results in the type being 'HBITMAP__ *const' instead of 'const HBITMAP__ *' [misc-misplaced-const]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\windef.h:73:16: note: typedef declared here
-D:\a\aprg\aprg\AprgLocalScreenMonitoring\AprgLocalScreenMonitoring\tst\ScreenMonitoringTests\AlbaLocalScreenMonitoring_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:\a\aprg\aprg\AprgLocalScreenMonitoring\AprgLocalScreenMonitoring\tst\ScreenMonitoringTests\AlbaLocalScreenMonitoring_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 D:\a\aprg\aprg\AprgLocalScreenMonitoring\AprgLocalScreenMonitoring\tst\ScreenMonitoringTests\AlbaLocalScreenMonitoring_unit.cpp:9:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 D:/a/aprg/aprg/AprgLocalScreenMonitoring/AprgLocalScreenMonitoring/srcWindows\ScreenMonitoring/AlbaWindowsScreenMonitoring.hpp:19:49: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 D:/a/aprg/aprg/AprgLocalScreenMonitoring/AprgLocalScreenMonitoring/srcWindows\ScreenMonitoring/AlbaWindowsScreenMonitoring.hpp:19:62: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
@@ -98,7 +96,5 @@ D:/a/aprg/aprg/AprgLocalScreenMonitoring/AprgLocalScreenMonitoring/srcWindows\Sc
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\windef.h:80:16: note: typedef declared here
 D:/a/aprg/aprg/AprgLocalScreenMonitoring/AprgLocalScreenMonitoring/srcWindows\ScreenMonitoring/AlbaWindowsScreenMonitoring.hpp:28:76: warning: 'bitmapHandler' declared with a const-qualified typedef; results in the type being 'HBITMAP__ *const' instead of 'const HBITMAP__ *' [misc-misplaced-const]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\windef.h:73:16: note: typedef declared here
-D:\a\aprg\aprg\AprgLocalScreenMonitoring\AprgLocalScreenMonitoring\tstWindows\ScreenMonitoringTests\AlbaWindowsScreenMonitoring_unit.cpp:13:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-D:\a\aprg\aprg\AprgLocalScreenMonitoring\AprgLocalScreenMonitoring\tstWindows\ScreenMonitoringTests\AlbaWindowsScreenMonitoring_unit.cpp:13:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
 D:\a\aprg\aprg\AprgLocalScreenMonitoring\AprgLocalScreenMonitoring\tstWindows\ScreenMonitoringTests\AlbaWindowsScreenMonitoring_unit.cpp:13:1: warning: initializing non-owner argument of type 'TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 DONE!
