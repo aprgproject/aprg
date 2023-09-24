@@ -10,7 +10,7 @@ class Handler {
 public:
     virtual ~Handler() = default;
     Handler() = default;
-    Handler(Handler const&) = default;
+    Handler(Handler const &) = default;
     Handler(Handler &&) = default;
     Handler &operator=(Handler const &) = default;
     Handler &operator=(Handler &&) = default;

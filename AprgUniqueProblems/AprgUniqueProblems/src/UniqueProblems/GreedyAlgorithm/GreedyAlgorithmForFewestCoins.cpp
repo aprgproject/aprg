@@ -11,7 +11,7 @@ GreedyAlgorithmForFewestCoins::GreedyAlgorithmForFewestCoins(Coins const& availa
     initialize();
 }
 
-GreedyAlgorithmForFewestCoins::GreedyAlgorithmForFewestCoins(Coins && availableCoins)
+GreedyAlgorithmForFewestCoins::GreedyAlgorithmForFewestCoins(Coins&& availableCoins)
     : m_sortedAvailableCoins(availableCoins) {
     initialize();
 }

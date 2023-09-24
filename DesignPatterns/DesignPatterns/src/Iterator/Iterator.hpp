@@ -14,7 +14,7 @@ class Aggregate {
 public:
     virtual ~Aggregate() = default;
     Aggregate() = default;
-    Aggregate(Aggregate const&) = default;
+    Aggregate(Aggregate const &) = default;
     Aggregate(Aggregate &&) = default;
     Aggregate &operator=(Aggregate const &) = default;
     Aggregate &operator=(Aggregate &&) = default;
@@ -46,7 +46,7 @@ class Iterator {
 public:
     virtual ~Iterator() = default;
     Iterator() = default;
-    Iterator(Iterator const&) = default;
+    Iterator(Iterator const &) = default;
     Iterator(Iterator &&) = default;
     Iterator &operator=(Iterator const &) = default;
     Iterator &operator=(Iterator &&) = default;
@@ -62,7 +62,7 @@ public:
 // the current position of the iterator
 class ConcreteIterator : public Iterator {
 public:
-    explicit ConcreteIterator(ConcreteAggregate& aggregate) : m_aggregate(aggregate) {}
+    explicit ConcreteIterator(ConcreteAggregate &aggregate) : m_aggregate(aggregate) {}
     [[nodiscard]] int getCurrentItem() const override { return isDone() ? -1 : m_aggregate.getValueAt(index); }
     [[nodiscard]] bool isDone() const override { return (index >= m_aggregate.size()); }
     void gotoFirst() override { index = 0; }
@@ -70,7 +70,7 @@ public:
 
     // ...
 private:
-    ConcreteAggregate& m_aggregate;
+    ConcreteAggregate &m_aggregate;
     int index{0};
     // ...
 };

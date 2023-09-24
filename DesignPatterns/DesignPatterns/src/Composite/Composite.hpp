@@ -11,12 +11,12 @@ class Component {
 public:
     virtual ~Component() = default;
     Component() = default;
-    Component(Component const&) = default;
+    Component(Component const &) = default;
     Component(Component &&) = default;
     Component &operator=(Component const &) = default;
     Component &operator=(Component &&) = default;
 
-    [[nodiscard]] virtual Component const* getChildPointerAt(int const) const {
+    [[nodiscard]] virtual Component const *getChildPointerAt(int const) const {
         // method/function makes sense.)
         // Make sure that this doesn't break interface segregation principle. (Make sure the
         return nullptr;
@@ -40,12 +40,12 @@ public:
 // and store child components
 class Composite : public Component {
 public:
-    [[nodiscard]] Component const* getChildPointerAt(int const index) const override { return m_children[index].get(); }
+    [[nodiscard]] Component const *getChildPointerAt(int const index) const override { return m_children[index].get(); }
     void add(std::unique_ptr<Component> component) override { m_children.emplace_back(std::move(component)); }
     void removeAtIndex(int const index) override { m_children.erase(m_children.begin() + index); }
 
     void operation() override {
-        for (auto& child : m_children) {
+        for (auto &child : m_children) {
             child->operation();
         }
     }

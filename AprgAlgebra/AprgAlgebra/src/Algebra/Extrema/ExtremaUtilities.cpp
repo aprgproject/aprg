@@ -486,7 +486,8 @@ void putArbitiaryValuesBasedFromDomainOfTerm(AlbaNumbers& arbitiaryValues, Term 
 void retrieveSecondDerivatives(Terms& secondDerivatives, Term const& term, strings const& variableNames) {
     secondDerivatives.reserve(variableNames.size());
     transform(
-        variableNames.cbegin(), variableNames.cend(), back_inserter(secondDerivatives), [&](string const& variableName) {
+        variableNames.cbegin(), variableNames.cend(), back_inserter(secondDerivatives),
+        [&](string const& variableName) {
             return getPartialDerivative(getPartialDerivative(term, variableName), variableName);
         });
 }
