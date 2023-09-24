@@ -37,8 +37,6 @@ THE SOFTWARE.
 #include <armadillo>
 #endif
 
-#include "gnuplot-iostream.h"
-
 #if USE_BLITZ
 #include <blitz/array.h>
 #endif
@@ -51,7 +49,7 @@ Gnuplot gp;
 const std::string basedir = "unittest-output";
 
 template <typename T, typename ArrayMode>
-void test_given_mode(std::ostream &log_fh, std::string header, const T &arg, ArrayMode, boost::mpl::true_) {
+void test_given_mode(std::ostream &log_fh, std::string const& header, const T &arg, ArrayMode, boost::mpl::true_) {
     std::string modename = ArrayMode::class_name();
     std::string fn_prefix = basedir + "/" + header + "-" + modename;
     log_fh << "* " << modename << " -> " << gp.binaryFile(arg, fn_prefix + ".bin", "record", ArrayMode()) << std::endl;
@@ -59,7 +57,7 @@ void test_given_mode(std::ostream &log_fh, std::string header, const T &arg, Arr
 }
 
 template <typename T, typename ArrayMode>
-void test_given_mode(std::ostream &log_fh, std::string header, const T &arg, ArrayMode, boost::mpl::false_) {
+void test_given_mode(std::ostream &log_fh, std::string const& header, const T &arg, ArrayMode, boost::mpl::false_) {
     std::string modename = ArrayMode::class_name();
     std::string fn_prefix = basedir + "/" + header + "-" + modename;
     log_fh << "* " << modename << " (skipped binary) " << std::endl;

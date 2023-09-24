@@ -16,7 +16,6 @@ ChessEngineControllerWithUci::ChessEngineControllerWithUci(
     ChessEngineHandler& engineHandler, stringHelper::StringPairs const& uciOptionNamesAndValuePairs)
     : m_engineHandler(engineHandler),
       m_uciOptionNamesAndValuePairs(uciOptionNamesAndValuePairs),
-
       m_state(ControllerState::Initializing),
       m_waitingForReadyOkay(false),
       m_calculationDetails{},
