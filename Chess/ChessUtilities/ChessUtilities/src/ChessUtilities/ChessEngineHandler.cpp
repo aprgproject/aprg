@@ -65,7 +65,7 @@ void ChessEngineHandler::sendStringToEngine(string const& stringToEngine) {
     stringToWrite += "\n";
     long remainingLength = stringToWrite.length();
     bool isSuccessful(true);
-    do {
+    while (isSuccessful && remainingLength > 0) {
         isSuccessful =
             (WriteFile(m_inputStreamOnHandler, stringToWrite.c_str(), remainingLength, &bytesWritten, nullptr) != 0);
         if (isSuccessful) {
@@ -76,7 +76,7 @@ void ChessEngineHandler::sendStringToEngine(string const& stringToEngine) {
         } else {
             cout << "Error on sendStringToEngine: " << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
         }
-    } while (isSuccessful && remainingLength > 0);
+    }
     log(LogType::ToEngine, stringToEngine);
 }
 
