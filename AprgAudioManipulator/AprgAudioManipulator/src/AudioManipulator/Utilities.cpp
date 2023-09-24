@@ -24,9 +24,7 @@ void retrieveDeltas(Samples& deltaSamples, Samples const& pointerOfSampleToCheck
 }
 
 void multiplyValueToAllSamples(Samples& samples, double const value) {
-    for (double& sample : samples) {
-        sample *= value;
-    }
+    for_each(samples.begin(), samples.end(), [value](double& sample) { sample *= value; });
 }
 
 void searchForBestSampleIndexes(
