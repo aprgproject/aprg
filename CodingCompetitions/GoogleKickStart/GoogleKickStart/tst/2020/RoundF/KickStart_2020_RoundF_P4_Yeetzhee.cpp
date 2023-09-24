@@ -57,6 +57,7 @@ double ans(vector<int> a, int tot) {
     if (!in(a)) {
         return 1e18;
     }
+    // NOLINTNEXTLINE(readability-container-contains)
     if (mp.contains(a)) {
         return mp[a];
     }

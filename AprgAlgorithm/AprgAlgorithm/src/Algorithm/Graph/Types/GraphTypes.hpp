@@ -60,6 +60,7 @@ struct GraphTypesWithWeights {
 
         [[nodiscard]] Edge getEdge() const {
             // slice the object the proper way
+            // NOLINTNEXTLINE(cppcoreguidelines-slicing)
             return Edge(*this);
         }
 

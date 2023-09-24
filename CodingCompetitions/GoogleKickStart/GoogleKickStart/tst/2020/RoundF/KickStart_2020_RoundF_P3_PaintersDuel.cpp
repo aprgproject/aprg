@@ -68,6 +68,7 @@ int calc(int s, ll ban, int a, int b, int who) {
         }
         ban |= (1LL << i);
     }
+    // NOLINTNEXTLINE(readability-container-contains)
     if (ok[s][a][b][who].contains(ban)) {
         return ok[s][a][b][who][ban];
     }
