@@ -121,6 +121,7 @@ TEST(InPlaceConstructionExamplesTest, NoRvoBecauseNoOpportunity) {
 namespace NoRvoBecauseNotEnoughInfo {
 
 namespace {
+// NOLINTNEXTLINE(readability-static-definition-in-anonymous-namespace)
 static volatile int happinessValue = 100;
 int getHappiness() { return happinessValue; }
 }  // namespace
