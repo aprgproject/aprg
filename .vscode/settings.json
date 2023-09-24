@@ -107,6 +107,7 @@
         "xmemory": "cpp",
         "xtr1common": "cpp",
         "xtree": "cpp",
-        "*.ipp": "cpp"
+        "*.ipp": "cpp",
+        "*.rh": "cpp"
     }
 }

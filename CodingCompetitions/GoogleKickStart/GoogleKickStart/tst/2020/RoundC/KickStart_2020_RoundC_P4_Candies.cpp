@@ -59,9 +59,9 @@ void app(int i, ll x) {
 void runTestCase(int const testCaseNumber) {
     my_cin >> n >> q;
     for (int i = 0; i < n; ++i) {
-        ll a = 0;
-        my_cin >> a;
-        app(i, a);
+        ll a_temp = 0;
+        my_cin >> a_temp;
+        app(i, a_temp);
     }
     ll ans = 0;
     while ((q--) != 0) {

@@ -1,4 +1,0 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-01T06:09:59
-/home/runner/work/aprg/aprg/CodingCompetitions/ZZZ_ManipulateFiles/ZZZ_ManipulateFiles/src/ZZZ_ManipulateFiles/CopyGoogleTemplates.cpp:27:76: warning: string concatenation results in allocation of unnecessary temporary strings; consider using 'operator+=' or 'string::append()' instead [performance-inefficient-string-concatenation]
-DONE!

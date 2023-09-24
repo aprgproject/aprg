@@ -396,7 +396,7 @@ void BtsLogAnalyzer::saveAllUsersAndCfs(BtsLogPrint const& logPrint) {
     ofstream totalUsersAndCfsFileStream(dspDataPathHandler.getPath(), std::ios::ate | std::ios::app);
     totalUsersAndCfsFileStream << logPrint.getBtsTime().getEquivalentStringBtsTimeFormat() << ",";
     unsigned int totalCfs(0);
-    for (DspDataPair const& dspDataPair : m_dspDataMap) {
+    for (auto const& dspDataPair : m_dspDataMap) {
         totalCfs += dspDataPair.second.hsupaCFs;
         totalUsersAndCfsFileStream << hex << dspDataPair.first << ",";
         totalUsersAndCfsFileStream << dec << dspDataPair.second.hsupaCFs << ",";
