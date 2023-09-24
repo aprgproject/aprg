@@ -124,10 +124,10 @@ void runFormatterInDirectory(path const& directoryPath) {
 }
 
 void runInConsole(string const& command) {
-    // NOLINTBEGIN(cert-env33-c)
+    // NOLINTBEGIN(concurrency-mt-unsafe,cert-env33-c)
     cout << "---> command [" << command << "]:\n";
     system(command.c_str());
-    // NOLINTEND(cert-env33-c)
+    // NOLINTEND(concurrency-mt-unsafe,cert-env33-c)
 }
 
 }  // namespace alba::CodeUtilities

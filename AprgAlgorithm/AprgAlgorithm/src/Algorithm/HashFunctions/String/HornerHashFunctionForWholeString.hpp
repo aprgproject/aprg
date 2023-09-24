@@ -20,7 +20,7 @@ private:
         // Based from formula (check substrings file notes): h[k] = (h[k-1]*A + s[k]) mod B
         // linear time
         return accumulate(
-            stringToHash.cbegin(), stringToHash.cend(), HashValue(0),
+            stringToHash.cbegin(), stringToHash.cend(), static_cast<HashValue>(0),
             [&](HashValue const partialResult, char const character) {
                 return (partialResult * m_radix + character) % m_largeRandomPrime;
             });

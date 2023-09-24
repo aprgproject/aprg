@@ -21,7 +21,8 @@ public:
 
     ~DataBlockFileHandler() {
         releaseFileStream();
-        AlbaLocalPathHandler(m_path).deleteFileAndIsSuccessful();
+        AlbaLocalPathHandler filePathHandler(m_path);
+        filePathHandler.deleteFileAndIsSuccessful();
     }
 
     void openFileIfNeeded(std::filesystem::path const &path) {

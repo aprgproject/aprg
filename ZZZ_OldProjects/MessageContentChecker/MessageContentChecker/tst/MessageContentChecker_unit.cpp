@@ -514,11 +514,11 @@ TEST(SampleTest, SampleTest2) {
         (sizeof(TCtfc) * swap4(rlSetupReqPointer->numOfUlTfc)) + (sizeof(TCtfc) * swap4(rlSetupReqPointer->numOfDlTfc));
     //+ (sizeof(SDchInfo_Ver2)*swap4(rlSetupReqPointer->numOfDch))
     unsigned int const numOfDch = swap4(rlSetupReqPointer->numOfDch);
-    for (int i = 0; i < numOfDch; ++i) {
+    for (int i = 0; i < static_cast<int>(numOfDch); ++i) {
         auto* dchInfoPointer = reinterpret_cast<SDchInfo_Ver2*>(dynamicPayload + offset);
         offset += sizeof(SDchInfo_Ver2) - sizeof(TDynamicData);
         unsigned int const numOfDchSpecificInfo = swap4(dchInfoPointer->numOfDchSpecificInfo);
-        for (int j = 0; j < numOfDchSpecificInfo; ++j) {
+        for (int j = 0; j < static_cast<int>(numOfDchSpecificInfo); ++j) {
             auto* dchSpecificInfoPointer = reinterpret_cast<SDchSpecificInfo*>(dynamicPayload + offset);
             offset += sizeof(SDchSpecificInfo) - sizeof(SDynamicTfInfo);
             unsigned int const numberOfTfUl = swap4(dchSpecificInfoPointer->numberOfTfUl);

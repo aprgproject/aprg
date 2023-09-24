@@ -931,14 +931,14 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
             maxTotalCpuFromTop = std::max(maxTotalCpuFromTop, totalCpuFromTop);
         }
         if (state == 2 && isNotNpos(commmandIndexInLine) && isNotNpos(cpuIndexInLine) &&
-            commmandIndexInLine < lineInLogs.length() && cpuIndexInLine + 5 < lineInLogs.length()) {
+            commmandIndexInLine < static_cast<int>(lineInLogs.length()) && cpuIndexInLine + 5 < static_cast<int>(lineInLogs.length())) {
             string const processName(
                 getStringWithoutStartingAndTrailingWhiteSpace(lineInLogs.substr(commmandIndexInLine)));
             auto cpuLoad = convertStringToNumber<double>(lineInLogs.substr(cpuIndexInLine, 5));
             if (cpuLoad > 0 && processName != "`- top") {
                 int i = 0;
                 bool isFound(false);
-                for (; i < processNames.size(); ++i) {
+                for (; i < static_cast<int>(processNames.size()); ++i) {
                     if (processNames[i] == processName) {
                         isFound = true;
                         break;
@@ -1022,14 +1022,14 @@ void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
             masterStringStream << totalMem << ", " << ss.str() << "\n";
         }
         if (state == 2 && isNotNpos(commmandIndexInLine) && isNotNpos(memIndexInLine) &&
-            commmandIndexInLine < lineInLogs.length() && memIndexInLine + 5 < lineInLogs.length()) {
+            commmandIndexInLine < static_cast<int>(lineInLogs.length()) && memIndexInLine + 5 < static_cast<int>(lineInLogs.length())) {
             string const processName(
                 getStringWithoutStartingAndTrailingWhiteSpace(lineInLogs.substr(commmandIndexInLine)));
             auto memLoad = convertStringToNumber<double>(lineInLogs.substr(memIndexInLine - 1, 4));
             if (memLoad > 0 && processName != "`- top") {
                 int i = 0;
                 bool isFound(false);
-                for (; i < processNames.size(); ++i) {
+                for (; i < static_cast<int>(processNames.size()); ++i) {
                     if (processNames[i] == processName) {
                         isFound = true;
                         break;
@@ -1090,7 +1090,7 @@ void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath)
         // int hourOffsetForDay = 0;
         // cout<<"hourOffsetForDay"<<hourOffsetForDay<<"D1:"<<firstLogTime.getDays()<<"D1:"<<logTime.getDays()<<"\n";
         if (!logTime.isStartup()) {
-            if ((hour == logTime.getHours()) && (min == logTime.getMinutes()) && (sec == logTime.getSeconds())) {
+            if ((hour == static_cast<int>(logTime.getHours())) && (min == static_cast<int>(logTime.getMinutes())) && (sec == static_cast<int>(logTime.getSeconds()))) {
                 ++instances;
             } else {
                 stringstream ss;
