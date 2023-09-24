@@ -61,9 +61,9 @@ Equations getPerpendicularLineOnAPointOfASurface(
     substitution.putVariableWithTerm(z0, point.getValueAt(2));
 
     Equations lineEquations(ThreeDimensions::getLineEquations());
-    for (Equation& lineEquation : lineEquations) {
+    for_each(lineEquations.begin(), lineEquations.end(), [&](Equation& lineEquation) {
         lineEquation = substitution.performSubstitutionTo(lineEquation);
-    }
+    });
     return lineEquations;
 }
 

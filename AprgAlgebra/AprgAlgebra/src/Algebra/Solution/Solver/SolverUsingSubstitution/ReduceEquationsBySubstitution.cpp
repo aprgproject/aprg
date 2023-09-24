@@ -40,14 +40,15 @@ void selectVariableNameAndEquationNumber(
     int equationIndex = 0;
     for (Equation const& equation : equations) {
         IsolationOfOneVariableOnEqualityEquation const isolation(equation);
-        for (string const& variableName : variableNamesToCheck) {
-            if (isolation.canBeIsolated(variableName) &&
-                isolation.getIdenticalExponentForVariableIfPossible(variableName) == 1) {
-                areVariableAndEquationSelected = true;
-                selectedVariableName = variableName;
-                selectedEquationIndex = equationIndex;
-                break;
-            }
+        auto it = find_if(variableNamesToCheck.cbegin(), variableNamesToCheck.cend(), [&](string const& variableName) {
+            return isolation.canBeIsolated(variableName) &&
+                   isolation.getIdenticalExponentForVariableIfPossible(variableName) == 1;
+        });
+        bool canBePutOnOneSide = it != variableNamesToCheck.cend();
+        if (canBePutOnOneSide) {
+            areVariableAndEquationSelected = true;
+            selectedVariableName = *it;
+            selectedEquationIndex = equationIndex;
         }
         ++equationIndex;
     }
@@ -62,9 +63,9 @@ void substituteEquationForSelectedEquationIndex(
         SubstitutionOfVariablesToTerms substitution;
         substitution.putVariableWithTerm(
             selectedVariableName, isolation.getEquivalentTermByIsolatingAVariable(selectedVariableName));
-        for (Equation& substitutedEquation : substitutedEquations) {
+        for_each(substitutedEquations.begin(), substitutedEquations.end(), [&](Equation& substitutedEquation) {
             substitutedEquation = substitution.performSubstitutionTo(substitutedEquation);
-        }
+        });
     }
 }
 

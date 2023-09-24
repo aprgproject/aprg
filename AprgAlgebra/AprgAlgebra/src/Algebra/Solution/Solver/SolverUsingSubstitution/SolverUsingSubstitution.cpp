@@ -144,9 +144,9 @@ void SolverUsingSubstitution::calculateASolutionForOneVariable(
 void SolverUsingSubstitution::substituteSolutionSetValuesToEquations(
     Equations& substitutedEquations, MultipleVariableSolutionSet const& solutionSet) {
     SubstitutionOfVariablesToValues const substitution(getSubstitutionFromSolutionSet(solutionSet));
-    for (Equation& substitutedEquation : substitutedEquations) {
+    for_each(substitutedEquations.begin(), substitutedEquations.end(), [&](Equation& substitutedEquation) {
         substitutedEquation = substitution.performSubstitutionTo(substitutedEquation);
-    }
+    });
     removeEquationsWithoutUnknowns(substitutedEquations);
 }
 

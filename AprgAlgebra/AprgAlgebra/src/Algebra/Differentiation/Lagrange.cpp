@@ -12,12 +12,17 @@ namespace alba::algebra {
 void calculateLagrangeEquations(
     Equations& lagrangeEquations, Term const& termWithLagrangeFunctions, strings const& coordinateNames,
     strings const& lagrangeMultiplierNames) {
-    for (string const& coordinateName : coordinateNames) {
-        lagrangeEquations.emplace_back(getPartialDerivative(termWithLagrangeFunctions, coordinateName), "=", 0);
-    }
-    for (string const& lagrangeMultiplierName : lagrangeMultiplierNames) {
-        lagrangeEquations.emplace_back(getPartialDerivative(termWithLagrangeFunctions, lagrangeMultiplierName), "=", 0);
-    }
+    lagrangeEquations.reserve(lagrangeEquations.size() + coordinateNames.size() + lagrangeMultiplierNames.size());
+    transform(
+        coordinateNames.cbegin(), coordinateNames.cend(), back_inserter(lagrangeEquations),
+        [&](string const& coordinateName) {
+            return Equation(getPartialDerivative(termWithLagrangeFunctions, coordinateName), "=", 0);
+        });
+    transform(
+        lagrangeMultiplierNames.cbegin(), lagrangeMultiplierNames.cend(), back_inserter(lagrangeEquations),
+        [&](string const& lagrangeMultiplierName) {
+            return Equation(getPartialDerivative(termWithLagrangeFunctions, lagrangeMultiplierName), "=", 0);
+        });
 }
 
 Term getTermWithLagrangeFunctions(
@@ -37,11 +42,14 @@ Terms getLagrangeMultipliers(Term const& term, strings const& coordinateNames, T
     Equations lagrangeEquations;
     calculateLagrangeEquations(lagrangeEquations, termWithLagrangeFunctions, coordinateNames, lagrangeMultiplierNames);
 
-    Terms result;
     IsolationOfOneVariableOnEqualityEquations const isolation(lagrangeEquations);
-    for (string const& lagrangeMultiplierName : lagrangeMultiplierNames) {
-        result.emplace_back(isolation.getEquivalentTermByIsolatingAVariable(lagrangeMultiplierName));
-    }
+    Terms result;
+    result.reserve(lagrangeMultiplierNames.size());
+    transform(
+        lagrangeMultiplierNames.cbegin(), lagrangeMultiplierNames.cend(), back_inserter(result),
+        [&isolation](string const& lagrangeMultiplierName) {
+            return isolation.getEquivalentTermByIsolatingAVariable(lagrangeMultiplierName);
+        });
     return result;
 }
 

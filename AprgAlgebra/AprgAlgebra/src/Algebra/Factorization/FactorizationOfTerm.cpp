@@ -18,9 +18,12 @@ Terms factorizeTerms(Terms const& terms) {
             Polynomial simplifiedPolynomial(term.getAsPolynomial());
             simplifiedPolynomial.simplify();
             Polynomials const polynomialFactors(factorizeAPolynomial(simplifiedPolynomial));
-            for (Polynomial const& polynomialFactor : polynomialFactors) {
-                result.emplace_back(simplifyAndConvertPolynomialToSimplestTerm(polynomialFactor));
-            }
+            result.reserve(result.size() + polynomialFactors.size());
+            transform(
+                polynomialFactors.cbegin(), polynomialFactors.cend(), back_inserter(result),
+                [&](Polynomial const& polynomialFactor) {
+                    return simplifyAndConvertPolynomialToSimplestTerm(polynomialFactor);
+                });
         } else if (term.isExpression()) {
             if (shouldSimplifyExpressionsToFactors()) {
                 Terms const factors(factorizeAnExpression(term.getAsExpression()));

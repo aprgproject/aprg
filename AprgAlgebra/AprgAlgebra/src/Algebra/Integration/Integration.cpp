@@ -26,6 +26,8 @@
 #include <Common/Math/Number/AlbaNumberConstants.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
+#include <numeric>
+
 using namespace alba::AlbaNumberConstants;
 using namespace alba::algebra::Factorization;
 using namespace alba::algebra::Functions;
@@ -108,10 +110,11 @@ Term Integration::integrateMonomial(Monomial const& monomial) {
 }
 
 Term Integration::integratePolynomial(Polynomial const& polynomial) {
-    Term result;
-    for (Monomial const& monomial : polynomial.getMonomials()) {
-        result = result + integrateMonomial(monomial);
-    }
+    Monomials const& monomials(polynomial.getMonomials());
+    Term result = accumulate(
+        monomials.cbegin(), monomials.cend(), Term{}, [&](Term const& partialresult, Monomial const& monomial) {
+            return partialresult + integrateMonomial(monomial);
+        });
     result.simplify();
     return result;
 }

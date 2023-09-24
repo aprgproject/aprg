@@ -245,9 +245,10 @@ VariableNameToCriticalNumbersMap getCriticalNumbersWithMultipleVariables(
     Term const& term, strings const& coordinateNames) {
     VariableNameToCriticalNumbersMap result;
     Equations equationsWithPartialDerivatives;
-    for (string const& variableName : coordinateNames) {
-        equationsWithPartialDerivatives.emplace_back(getPartialDerivative(term, variableName), "=", 0);
-    }
+    equationsWithPartialDerivatives.reserve(coordinateNames.size());
+    transform(
+        coordinateNames.cbegin(), coordinateNames.cend(), back_inserter(equationsWithPartialDerivatives),
+        [&](string const& variableName) { return Equation(getPartialDerivative(term, variableName), "=", 0); });
     SolverUsingSubstitution solver;
     MultipleVariableSolutionSets const solutionSets(
         solver.calculateSolutionAndReturnSolutionSet(equationsWithPartialDerivatives));
@@ -483,9 +484,11 @@ void putArbitiaryValuesBasedFromDomainOfTerm(AlbaNumbers& arbitiaryValues, Term 
 }
 
 void retrieveSecondDerivatives(Terms& secondDerivatives, Term const& term, strings const& variableNames) {
-    for (string const& variableName : variableNames) {
-        secondDerivatives.emplace_back(getPartialDerivative(getPartialDerivative(term, variableName), variableName));
-    }
+    secondDerivatives.reserve(variableNames.size());
+    transform(
+        variableNames.cbegin(), variableNames.cend(), back_inserter(secondDerivatives), [&](string const& variableName) {
+            return getPartialDerivative(getPartialDerivative(term, variableName), variableName);
+        });
 }
 
 void retrieveSubstitutionsFromCriticalNumbers(

@@ -64,9 +64,10 @@ Term TermsOverTerms::getCombinedTerm() const {
 Term TermsOverTerms::getCombinedNumerator() const {
     Term combinedTerm(1);
     TermsWithDetails numeratorsWithPositiveAssociation;
-    for (Term const& numerator : m_numerators) {
-        numeratorsWithPositiveAssociation.emplace_back(numerator, TermAssociationType::Positive);
-    }
+    numeratorsWithPositiveAssociation.reserve(m_numerators.size());
+    transform(
+        m_numerators.cbegin(), m_numerators.cend(), back_inserter(numeratorsWithPositiveAssociation),
+        [](Term const& numerator) { return TermWithDetails(numerator, TermAssociationType::Positive); });
     if (m_shouldSimplifyToFactors) {
         combinedTerm = createTermWithMultiplicationAndDivisionTermsWithDetails(numeratorsWithPositiveAssociation);
     } else {
@@ -78,9 +79,10 @@ Term TermsOverTerms::getCombinedNumerator() const {
 Term TermsOverTerms::getCombinedDenominator() const {
     Term combinedTerm(1);
     TermsWithDetails denominatorsWithPositiveAssociation;
-    for (Term const& denominator : m_denominators) {
-        denominatorsWithPositiveAssociation.emplace_back(denominator, TermAssociationType::Positive);
-    }
+    denominatorsWithPositiveAssociation.reserve(m_denominators.size());
+    transform(
+        m_denominators.cbegin(), m_denominators.cend(), back_inserter(denominatorsWithPositiveAssociation),
+        [](Term const& denominator) { return TermWithDetails(denominator, TermAssociationType::Positive); });
     if (m_shouldSimplifyToFactors) {
         combinedTerm = createTermWithMultiplicationAndDivisionTermsWithDetails(denominatorsWithPositiveAssociation);
     } else {
@@ -114,12 +116,13 @@ TermsRaiseToTerms TermsOverTerms::getTermsRaiseToTerms() const {
 
 TermsWithDetails TermsOverTerms::getNumeratorAndDenominatorAsTermWithDetails() const {
     TermsWithDetails result;
-    for (Term const& numerator : m_numerators) {
-        result.emplace_back(numerator, TermAssociationType::Positive);
-    }
-    for (Term const& denominator : m_denominators) {
-        result.emplace_back(denominator, TermAssociationType::Negative);
-    }
+    result.reserve(m_numerators.size() + m_denominators.size());
+    transform(m_numerators.cbegin(), m_numerators.cend(), back_inserter(result), [](Term const& numerator) {
+        return TermWithDetails(numerator, TermAssociationType::Positive);
+    });
+    transform(m_denominators.cbegin(), m_denominators.cend(), back_inserter(result), [](Term const& denominator) {
+        return TermWithDetails(denominator, TermAssociationType::Negative);
+    });
     return result;
 }
 

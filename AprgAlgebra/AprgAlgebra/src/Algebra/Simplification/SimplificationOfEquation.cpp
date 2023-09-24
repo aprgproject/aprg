@@ -142,10 +142,9 @@ void SimplificationOfEquation::removeCommonConstant(Term& leftHandSide) {
                 }
             }
             if (isLeftHandSideChanged) {
-                Term combinedTerm(1);
-                for (Term const& factor : factors) {
-                    combinedTerm *= factor;
-                }
+                Term combinedTerm = accumulate(
+                    factors.cbegin(), factors.cend(), Term(1),
+                    [](Term const& partialresult, Term const& factor) { return partialresult * factor; });
                 leftHandSide = combinedTerm;
             }
         }

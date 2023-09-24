@@ -119,9 +119,9 @@ void AdditionAndSubtractionOfTermsOverTerms::updateMonomialAndNonMonomialMultipl
 
 void AdditionAndSubtractionOfTermsOverTerms::emplaceExistingNumeratorTerms(
     Terms& numeratorTerms, int const itemIndex) const {
-    for (Term const& numeratorTerm : m_items[itemIndex].getNumerators()) {
-        numeratorTerms.emplace_back(numeratorTerm);
-    }
+    Terms const& termsToCopy(m_items[itemIndex].getNumerators());
+    numeratorTerms.reserve(numeratorTerms.size() + termsToCopy.size());
+    copy(termsToCopy.cbegin(), termsToCopy.cend(), back_inserter(numeratorTerms));
 }
 
 void AdditionAndSubtractionOfTermsOverTerms::putItem(
@@ -149,9 +149,8 @@ void AdditionAndSubtractionOfTermsOverTerms::emplaceMonomialMultiplierIfNeeded(
 
 void AdditionAndSubtractionOfTermsOverTerms::emplaceNonMonomialMultipliers(
     Terms& numeratorTerms, Terms const& nonMonomialMultiplierTerms) {
-    for (Term const& numeratorTerm : nonMonomialMultiplierTerms) {
-        numeratorTerms.emplace_back(numeratorTerm);
-    }
+    numeratorTerms.reserve(numeratorTerms.size() + nonMonomialMultiplierTerms.size());
+    copy(nonMonomialMultiplierTerms.cbegin(), nonMonomialMultiplierTerms.cend(), back_inserter(numeratorTerms));
 }
 
 void AdditionAndSubtractionOfTermsOverTerms::combineExpressionAsAddOrSubtract(
@@ -173,12 +172,11 @@ Expression AdditionAndSubtractionOfTermsOverTerms::getCombinedDenominatorExpress
 
 Monomial AdditionAndSubtractionOfTermsOverTerms::getCombinedMonomialMultiplier(Terms const& monomialMultiplierTerms) {
     Monomials monomialMultipliers;
-    for (Term const& monomialMultiplierTerm : monomialMultiplierTerms) {
-        monomialMultipliers.emplace_back(createMonomialIfPossible(monomialMultiplierTerm));
-    }
-    Monomial monomialMultiplier(getLcmMonomialInMonomials(monomialMultipliers));
-
-    return monomialMultiplier;
+    monomialMultipliers.reserve(monomialMultiplierTerms.size());
+    transform(
+        monomialMultiplierTerms.cbegin(), monomialMultiplierTerms.cend(), back_inserter(monomialMultipliers),
+        [&](Term const& monomialMultiplierTerm) { return createMonomialIfPossible(monomialMultiplierTerm); });
+    return getLcmMonomialInMonomials(monomialMultipliers);
 }
 
 TermsOverTerms AdditionAndSubtractionOfTermsOverTerms::getSimplifiedTermsOverTerms(

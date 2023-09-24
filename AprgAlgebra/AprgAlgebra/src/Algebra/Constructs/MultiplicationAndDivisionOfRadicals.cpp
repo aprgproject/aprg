@@ -112,9 +112,8 @@ void MultiplicationAndDivisionOfRadicals::combineMonomialAndRadicalsAndSave(
 }
 
 void MultiplicationAndDivisionOfRadicals::saveRemainingTerms(TermsWithDetails const& remainingTerms) {
-    for (TermWithDetails const& remainingTerm : remainingTerms) {
-        m_termsWithDetails.emplace_back(remainingTerm);
-    }
+    m_termsWithDetails.reserve(m_termsWithDetails.size() + remainingTerms.size());
+    copy(remainingTerms.cbegin(), remainingTerms.cend(), back_inserter(m_termsWithDetails));
 }
 
 AlbaNumber MultiplicationAndDivisionOfRadicals::getGcfOfExponents(RadicalDetails const& radicalDetails) {

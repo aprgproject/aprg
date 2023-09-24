@@ -51,11 +51,12 @@ AlbaNumber getDegreeForVariable(Polynomial const& polynomial, string const& vari
 
 AlbaNumber getCoefficientOfVariableExponent(Polynomial const& polynomial, Monomial const& monomial) {
     AlbaNumber coefficient;
-    for (Monomial const& monomialInternal : polynomial.getMonomials()) {
-        if (monomial.getVariablesToExponentsMap() == monomialInternal.getVariablesToExponentsMap()) {
-            coefficient = monomialInternal.getCoefficient();
-            break;
-        }
+    Monomials const& monomials(polynomial.getMonomials());
+    auto it = find_if(monomials.cbegin(), monomials.cend(), [&](Monomial const& monomialInPolynomial) {
+        return monomial.getVariablesToExponentsMap() == monomialInPolynomial.getVariablesToExponentsMap();
+    });
+    if (it != monomials.cend()) {
+        coefficient = it->getCoefficient();
     }
     return coefficient;
 }
@@ -233,14 +234,10 @@ bool doesOnePolynomialHaveADoubleValue(Polynomials const& polynomials) {
 }
 
 bool hasAMonomialWithMultipleVariables(Polynomial const& polynomial) {
-    bool result(false);
-    for (Monomial const& monomial : polynomial.getMonomials()) {
-        if (monomial.getVariablesToExponentsMap().size() >= 2) {
-            result = true;
-            break;
-        }
-    }
-    return result;
+    Monomials const& monomials(polynomial.getMonomials());
+    return any_of(monomials.cbegin(), monomials.cend(), [&](Monomial const& monomialInPolynomial) {
+        return monomialInPolynomial.getVariablesToExponentsMap().size() >= 2;
+    });
 }
 
 bool hasAMonomialWithDegreeMoreThanOneOrFractional(Polynomial const& polynomial) {
@@ -258,14 +255,10 @@ bool hasAMonomialWithDegreeMoreThanOneOrFractional(Polynomial const& polynomial)
 bool isOneMonomial(Polynomial const& polynomial) { return polynomial.getMonomials().size() == 1; }
 
 bool isVariableExponentInMonomialFound(Polynomial const& polynomial, Monomial const& monomial) {
-    bool result(false);
-    for (Monomial const& monomialInternal : polynomial.getMonomials()) {
-        if (monomial.getVariablesToExponentsMap() == monomialInternal.getVariablesToExponentsMap()) {
-            result = true;
-            break;
-        }
-    }
-    return result;
+    Monomials const& monomials(polynomial.getMonomials());
+    return any_of(monomials.cbegin(), monomials.cend(), [&](Monomial const& monomialInPolynomial) {
+        return monomial.getVariablesToExponentsMap() == monomialInPolynomial.getVariablesToExponentsMap();
+    });
 }
 
 bool isPolynomialLinear(Polynomial const& polynomial) {

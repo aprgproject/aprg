@@ -102,9 +102,12 @@ AlbaNumber getMaxAbsoluteValueForRootFinding(AlbaNumbers const& coefficients) {
 AlbaNumbers getCoefficientsInMonomialsWithExponentsInOrder(
     Polynomial const& polynomial, Monomials const& monomialsWithExponentsInOrder) {
     AlbaNumbers coefficients;
-    for (Monomial const& monomialWithExponentInOrder : monomialsWithExponentsInOrder) {
-        coefficients.emplace_back(getCoefficientOfVariableExponent(polynomial, monomialWithExponentInOrder));
-    }
+    coefficients.reserve(monomialsWithExponentsInOrder.size());
+    transform(
+        monomialsWithExponentsInOrder.cbegin(), monomialsWithExponentsInOrder.cend(), back_inserter(coefficients),
+        [&](Monomial const& monomialWithExponentInOrder) {
+            return getCoefficientOfVariableExponent(polynomial, monomialWithExponentInOrder);
+        });
     return coefficients;
 }
 
@@ -188,14 +191,9 @@ int calculateMaxExponentDivisor(Monomial const& firstMonomial, Monomial const& l
 bool areAllMonomialsFoundInMonomialsWithExponentsInOrder(
     Monomials const& monomialsToCheck, Monomials const& monomialsWithExponentsInOrder) {
     Polynomial const polynomialWithExponentsInOrder(monomialsWithExponentsInOrder);
-    bool areAllMonomialsFoundInPolynomialWithExponentsInOrder(true);
-    for (Monomial const& monomialToCheck : monomialsToCheck) {
-        if (!isVariableExponentInMonomialFound(polynomialWithExponentsInOrder, monomialToCheck)) {
-            areAllMonomialsFoundInPolynomialWithExponentsInOrder = false;
-            break;
-        }
-    }
-    return areAllMonomialsFoundInPolynomialWithExponentsInOrder;
+    return !any_of(monomialsToCheck.cbegin(), monomialsToCheck.cend(), [&](Monomial const& monomialToCheck) {
+        return !isVariableExponentInMonomialFound(polynomialWithExponentsInOrder, monomialToCheck);
+    });
 }
 
 bool areRootsAcceptable(AlbaNumbers const& rootValues) {

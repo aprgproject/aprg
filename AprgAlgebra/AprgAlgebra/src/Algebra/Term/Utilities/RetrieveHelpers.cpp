@@ -52,24 +52,22 @@ AlbaNumber getCoefficientOfMonomialWithVariableOnly(Polynomial const& polynomial
 Terms retrieveSubExpressionsAndSubFunctions(Term const& term) {
     ExpressionAndFunctionsRetriever retriever;
     retriever.retrieveFromTerm(term);
+    TermSet const& retrievedTerms(retriever.getExpressionsAndFunctions());
     Terms result;
-    for (Term const& retrievedTerm : retriever.getExpressionsAndFunctions()) {
-        if ((retrievedTerm.isFunction() || retrievedTerm.isExpression()) && term != retrievedTerm) {
-            result.emplace_back(retrievedTerm);
-        }
-    }
+    copy_if(retrievedTerms.cbegin(), retrievedTerms.cend(), back_inserter(result), [&](Term const& retrievedTerm) {
+        return (retrievedTerm.isFunction() || retrievedTerm.isExpression()) && term != retrievedTerm;
+    });
     return result;
 }
 
 Terms retrieveSubTerms(Term const& term) {
     SubTermsRetriever retriever;
     retriever.retrieveFromTerm(term);
+    TermSet const& subTerms(retriever.getSubTerms());
     Terms result;
-    for (Term const& retrievedTerm : retriever.getSubTerms()) {
-        if (term != retrievedTerm) {
-            result.emplace_back(retrievedTerm);
-        }
-    }
+    copy_if(subTerms.cbegin(), subTerms.cend(), back_inserter(result), [&](Term const& retrievedTerm) {
+        return term != retrievedTerm;
+    });
     return result;
 }
 
