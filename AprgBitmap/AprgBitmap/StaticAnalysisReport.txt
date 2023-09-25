@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [45]
-2023-09-25T06:51:04
+StaticAnalysisJobIdentifier: [40]
+2023-09-25T22:33:57
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:88:26: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.hpp:59:60: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.hpp:59:73: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
@@ -27,17 +27,11 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:258:14: warning: 13 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.hpp:59:60: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.hpp:59:73: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitValueUtilitiesClassDefinition.hpp:306:19: style: Checking if unsigned expression 'value' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitValueUtilitiesClassDefinition.hpp:335:19: style: Checking if unsigned expression 'value' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitValueUtilitiesClassDefinition.hpp:113:96: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.hpp:59:60: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.hpp:59:73: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:65:14: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:66:18: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:90:22: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:113:24: warning: performing an implicit widening conversion to type 'size_t' (aka 'unsigned long') of a multiplication performed in type 'int' [bugprone-implicit-widening-of-multiplication-result]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:113:24: note: make conversion explicit to silence this warning
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:113:24: note: perform multiplication in a wider type
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:129:14: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:130:18: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:164:19: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
@@ -61,19 +55,16 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapWriteTest_unit.cpp:41:13: warning: 0x00FF0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.hpp:59:60: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.hpp:59:73: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:23:1: warning: function 'TestBody' has cognitive complexity of 180 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:25:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:25:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:25:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:24:1: warning: function 'TestBody' has cognitive complexity of 180 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:26:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:26:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:26:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:27:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:27:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:27:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:30:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:30:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:30:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:28:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:28:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:28:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:31:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:31:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:31:5: note: +1, nesting level increased to 2
@@ -86,15 +77,15 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:34:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:34:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:34:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:37:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:37:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:37:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:35:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:35:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:35:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:38:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:38:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:38:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:42:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:42:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:42:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:39:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:39:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:39:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:43:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:43:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:43:5: note: +1, nesting level increased to 2
@@ -104,9 +95,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:45:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:45:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:45:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:47:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:47:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:47:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:46:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:46:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:46:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:48:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:48:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:48:5: note: +1, nesting level increased to 2
@@ -131,9 +122,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:55:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:55:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:55:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:58:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:58:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:58:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:56:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:56:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:56:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:59:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:59:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:59:5: note: +1, nesting level increased to 2
@@ -146,9 +137,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:62:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:62:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:62:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:65:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:65:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:65:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:63:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:63:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:63:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:66:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:66:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:66:5: note: +1, nesting level increased to 2
@@ -161,9 +152,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:69:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:69:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:69:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:72:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:72:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:72:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:70:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:70:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:70:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:73:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:73:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:73:5: note: +1, nesting level increased to 2
@@ -176,9 +167,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:76:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:76:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:76:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:79:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:79:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:79:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:77:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:77:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:77:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:80:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:80:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:80:5: note: +1, nesting level increased to 2
@@ -191,30 +182,29 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:83:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:83:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:83:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:86:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:86:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:86:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:84:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:84:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:84:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:87:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:87:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:87:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:36:66: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:36:70: warning: 97 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:36:84: warning: 101 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:36:89: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:41:20: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:90:1: warning: function 'TestBody' has cognitive complexity of 200 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:92:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:92:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:92:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:88:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:88:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:88:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:37:66: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:37:70: warning: 97 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:37:84: warning: 101 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:37:89: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:91:1: warning: function 'TestBody' has cognitive complexity of 200 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:93:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:93:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:93:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:94:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:94:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:94:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:97:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:97:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:97:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:95:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:95:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:95:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:98:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:98:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:98:5: note: +1, nesting level increased to 2
@@ -233,15 +223,15 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:103:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:103:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:103:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:106:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:106:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:106:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:104:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:104:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:104:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:107:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:107:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:107:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:111:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:111:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:111:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:108:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:108:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:108:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:112:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:112:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:112:5: note: +1, nesting level increased to 2
@@ -260,9 +250,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:117:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:117:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:117:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:119:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:119:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:119:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:118:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:118:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:118:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:120:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:120:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:120:5: note: +1, nesting level increased to 2
@@ -287,9 +277,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:127:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:127:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:127:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:130:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:130:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:130:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:128:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:128:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:128:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:131:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:131:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:131:5: note: +1, nesting level increased to 2
@@ -302,9 +292,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:134:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:134:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:134:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:137:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:137:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:137:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:135:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:135:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:135:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:138:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:138:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:138:5: note: +1, nesting level increased to 2
@@ -317,9 +307,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:141:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:141:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:141:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:144:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:144:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:144:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:142:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:142:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:142:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:145:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:145:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:145:5: note: +1, nesting level increased to 2
@@ -332,9 +322,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:148:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:148:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:148:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:151:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:151:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:151:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:149:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:149:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:149:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:152:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:152:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:152:5: note: +1, nesting level increased to 2
@@ -347,30 +337,29 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:155:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:155:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:155:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:158:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:158:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:158:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:156:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:156:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:156:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:159:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:159:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:159:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:105:66: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:105:70: warning: 97 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:105:84: warning: 101 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:105:89: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:110:20: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:162:1: warning: function 'TestBody' has cognitive complexity of 212 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:164:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:164:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:164:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:160:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:160:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:160:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:106:66: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:106:70: warning: 97 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:106:84: warning: 101 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:106:89: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:163:1: warning: function 'TestBody' has cognitive complexity of 212 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:165:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:165:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:165:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:166:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:166:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:166:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:169:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:169:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:169:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:167:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:167:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:167:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:170:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:170:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:170:5: note: +1, nesting level increased to 2
@@ -389,15 +378,15 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:175:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:175:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:175:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:178:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:178:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:178:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:176:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:176:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:176:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:179:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:179:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:179:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:183:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:183:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:183:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:180:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:180:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:180:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:184:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:184:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:184:5: note: +1, nesting level increased to 2
@@ -425,9 +414,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:192:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:192:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:192:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:194:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:194:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:194:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:193:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:193:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:193:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:195:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:195:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:195:5: note: +1, nesting level increased to 2
@@ -452,9 +441,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:202:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:202:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:202:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:205:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:205:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:205:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:203:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:203:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:203:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:206:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:206:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:206:5: note: +1, nesting level increased to 2
@@ -467,9 +456,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:209:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:209:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:209:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:212:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:212:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:212:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:210:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:210:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:210:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:213:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:213:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:213:5: note: +1, nesting level increased to 2
@@ -482,9 +471,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:216:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:216:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:216:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:219:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:219:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:219:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:217:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:217:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:217:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:220:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:220:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:220:5: note: +1, nesting level increased to 2
@@ -497,9 +486,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:223:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:223:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:223:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:226:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:226:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:226:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:224:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:224:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:224:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:227:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:227:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:227:5: note: +1, nesting level increased to 2
@@ -512,45 +501,44 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:230:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:230:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:230:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:233:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:233:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:233:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:231:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:231:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:231:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:234:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:234:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:234:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:177:66: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:177:70: warning: 97 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:177:84: warning: 101 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:177:89: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:182:20: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:237:1: warning: function 'TestBody' has cognitive complexity of 268 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:239:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:239:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:239:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:235:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:235:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:235:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:178:66: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:178:70: warning: 97 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:178:84: warning: 101 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:178:89: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:238:1: warning: function 'TestBody' has cognitive complexity of 268 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:240:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:240:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:240:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:241:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:241:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:241:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:244:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:244:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:244:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:242:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:242:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:242:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:245:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:245:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:245:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:246:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:246:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:246:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:249:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:249:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:249:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:247:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:247:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:247:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:250:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:250:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:250:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:254:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:254:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:254:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:251:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:251:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:251:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:255:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:255:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:255:5: note: +1, nesting level increased to 2
@@ -632,9 +620,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:281:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:281:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:281:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:283:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:283:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:283:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:282:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:282:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:282:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:284:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:284:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:284:5: note: +1, nesting level increased to 2
@@ -659,9 +647,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:291:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:291:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:291:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:294:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:294:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:294:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:292:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:292:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:292:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:295:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:295:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:295:5: note: +1, nesting level increased to 2
@@ -674,9 +662,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:298:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:298:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:298:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:301:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:301:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:301:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:299:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:299:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:299:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:302:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:302:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:302:5: note: +1, nesting level increased to 2
@@ -689,9 +677,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:305:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:305:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:305:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:308:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:308:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:308:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:306:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:306:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:306:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:309:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:309:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:309:5: note: +1, nesting level increased to 2
@@ -704,9 +692,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:312:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:312:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:312:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:315:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:315:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:315:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:313:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:313:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:313:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:316:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:316:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:316:5: note: +1, nesting level increased to 2
@@ -719,68 +707,67 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:319:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:319:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:319:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:322:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:322:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:322:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:320:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:320:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:320:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:323:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:323:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:323:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:248:66: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:248:70: warning: 97 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:248:84: warning: 101 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:248:89: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:253:20: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:326:1: warning: function 'TestBody' has cognitive complexity of 44 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:328:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:328:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:328:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:324:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:324:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:324:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:249:66: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:249:70: warning: 97 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:249:84: warning: 101 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:249:89: warning: 99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:327:1: warning: function 'TestBody' has cognitive complexity of 44 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:329:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:329:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:329:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:330:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:330:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:330:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:333:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:333:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:333:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:331:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:331:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:331:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:334:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:334:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:334:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:335:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:335:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:335:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:338:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:338:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:338:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:336:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:336:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:336:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:339:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:339:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:339:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:342:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:342:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:342:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:340:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:340:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:340:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:343:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:343:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:343:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:344:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:344:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:344:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:337:66: warning: 49 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:337:70: warning: 49 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:337:84: warning: 51 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:337:88: warning: 51 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:347:1: warning: function 'TestBody' has cognitive complexity of 44 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:349:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:349:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:349:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:345:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:345:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:345:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:338:66: warning: 49 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:338:70: warning: 49 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:338:84: warning: 51 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:338:88: warning: 51 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:348:1: warning: function 'TestBody' has cognitive complexity of 44 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:350:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:350:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:350:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:351:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:351:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:351:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:354:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:354:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:354:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:352:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:352:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:352:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:355:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:355:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:355:5: note: +1, nesting level increased to 2
@@ -793,13 +780,16 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:358:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:358:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:358:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:361:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:361:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:361:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:359:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:359:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:359:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:362:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:362:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:362:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:364:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:364:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:364:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:363:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:363:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:363:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:365:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:365:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/tst/BitmapTests/AprgBitmapReadTest_unit.cpp:365:5: note: +1, nesting level increased to 2
 DONE!
