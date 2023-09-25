@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [45]
-2023-09-25T09:49:38
+StaticAnalysisJobIdentifier: [40]
+2023-09-25T19:46:28
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/AdditionAndSubtractionOfExpressions.cpp:20:44: warning: initialization of 'isCommonPart' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/BaseTermHelpers.hpp:15:13: note: possibly throwing function declared here
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/AdditionAndSubtractionOfExpressions.cpp:25:44: warning: initialization of 'isMergePart' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
@@ -1697,6 +1697,31 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DifferentiationUtilities.hpp:66:54: warning: parameter name 'q' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Differentiation/DifferentiationUtilities_unit.cpp:236:16: warning: variable name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Differentiation/DifferentiationUtilities_unit.cpp:237:16: warning: variable name 'y' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:37:1: warning: function 'TestBody' has cognitive complexity of 32 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:42:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:42:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:42:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:43:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:43:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:43:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:44:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:44:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:44:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:45:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:45:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:45:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:46:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:46:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:46:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:47:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:47:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:47:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:48:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:48:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:48:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:49:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:49:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:49:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Differentiation/Differentiation_unit.cpp:349:1: warning: function 'TestBody' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Differentiation/Differentiation_unit.cpp:386:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Differentiation/Differentiation_unit.cpp:386:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -1795,31 +1820,6 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Differentiation/Differentiation_unit.cpp:468:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Differentiation/Differentiation_unit.cpp:468:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Differentiation/Differentiation_unit.cpp:468:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:37:1: warning: function 'TestBody' has cognitive complexity of 32 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:42:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:42:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:42:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:43:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:43:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:43:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:44:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:44:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:44:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:45:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:45:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:45:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:46:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:46:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:46:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:47:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:47:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:47:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:48:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:48:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:48:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:49:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:49:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationBuilder_unit.cpp:49:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationOperator_unit.cpp:36:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationOperator_unit.cpp:69:1: warning: function 'TestBody' has cognitive complexity of 36 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Equation/EquationOperator_unit.cpp:80:5: note: +1, including nesting penalty of 0, nesting level increased to 1
@@ -4151,9 +4151,6 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Substitution/SubstitutionOfTermsToTerms_unit.cpp:114:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Substitution/SubstitutionOfTermsToTerms_unit.cpp:114:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Substitution/SubstitutionOfTermsToTerms_unit.cpp:114:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Summation/SummationExperimentalTests_unit.cpp:46:9: warning: variable name 'r' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Summation/SummationExperimentalTests_unit.cpp:47:9: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Summation/SummationExperimentalTests_unit.cpp:47:13: warning: 500 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Substitution/SubstitutionOfVariablesToValues_unit.cpp:21:1: warning: function 'TestBody' has cognitive complexity of 28 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Substitution/SubstitutionOfVariablesToValues_unit.cpp:27:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Substitution/SubstitutionOfVariablesToValues_unit.cpp:27:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -4177,6 +4174,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Substitution/SubstitutionOfVariablesToValues_unit.cpp:33:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Substitution/SubstitutionOfVariablesToValues_unit.cpp:33:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Substitution/SubstitutionOfVariablesToValues_unit.cpp:74:44: warning: 29 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Summation/SummationExperimentalTests_unit.cpp:46:9: warning: variable name 'r' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Summation/SummationExperimentalTests_unit.cpp:47:9: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/tst/AlgebraTests/Summation/SummationExperimentalTests_unit.cpp:47:13: warning: 500 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Utilities/KnownNames.hpp:6:23: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Utilities/KnownNames.hpp:7:23: warning: variable name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Utilities/KnownNames.hpp:8:23: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
