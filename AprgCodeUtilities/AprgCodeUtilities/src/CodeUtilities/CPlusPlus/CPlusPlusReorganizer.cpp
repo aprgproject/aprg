@@ -2,7 +2,7 @@
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.hpp>
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
-#include <CodeUtilities/Common/TermUtilities.hpp>
+#include <CodeUtilities/Common/CommonUtilities.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 #include <Common/Print/AlbaLogPrints.hpp>
 

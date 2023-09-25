@@ -1,7 +1,7 @@
 #include "CPlusPlusFixer.hpp"
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
-#include <CodeUtilities/Common/TermUtilities.hpp>
+#include <CodeUtilities/Common/CommonUtilities.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <iostream>
@@ -115,7 +115,7 @@ void CPlusPlusFixer::fixConstReferenceOrder() {
     fixConstReferenceOrder(M("auto"));
 }
 
-void CPlusPlusFixer::fixConstReferenceOrder(TermMatcher const& typeMatcher) {
+void CPlusPlusFixer::fixConstReferenceOrder(Matcher const& typeMatcher) {
     findTermsAndSwapAt({{M("{"), M("const"), typeMatcher, M("&")}}, 1, 2);
     findTermsAndSwapAt({{M("}"), M("const"), typeMatcher, M("&")}}, 1, 2);
     findTermsAndSwapAt({{M(";"), M("const"), typeMatcher, M("&")}}, 1, 2);
@@ -177,7 +177,7 @@ void CPlusPlusFixer::fixNoConstPassByValue() {
     fixNoConstPassByValue(M(TermType::PrimitiveType));
 }
 
-void CPlusPlusFixer::fixNoConstPassByValue(TermMatcher const& typeMatcher) {
+void CPlusPlusFixer::fixNoConstPassByValue(Matcher const& typeMatcher) {
     fixNoConstPassByValue({{M("("), typeMatcher, M(TermType::Identifier), M(")")}});
     fixNoConstPassByValue({{M("("), typeMatcher, M(TermType::Identifier), M(",")}});
     fixNoConstPassByValue({{M(","), typeMatcher, M(TermType::Identifier), M(",")}});
@@ -250,7 +250,7 @@ void CPlusPlusFixer::fixCommentsPositionOfBraces() {
 
 void CPlusPlusFixer::fixCStyleStaticCast() { fixCStyleStaticCast(M(TermType::PrimitiveType)); }
 
-void CPlusPlusFixer::fixCStyleStaticCast(TermMatcher const& typeMatcher) {
+void CPlusPlusFixer::fixCStyleStaticCast(Matcher const& typeMatcher) {
     Patterns const searchPatterns{{M(TermType::Operator), M("("), typeMatcher, M(")"), M(MatcherType::NotAWhiteSpace)}};
     int termIndex = 0;
     bool isFound(true);

@@ -1,7 +1,7 @@
 #include "CPlusPlusTokenizer.hpp"
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusConstants.hpp>
-#include <CodeUtilities/Common/TermCreateHelpers.hpp>
+#include <CodeUtilities/Common/Term/TermCreateHelpers.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <algorithm>

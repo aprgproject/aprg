@@ -1,4 +1,4 @@
-#include <CodeUtilities/Common/TermUtilities.hpp>
+#include <CodeUtilities/Common/CommonUtilities.hpp>
 
 #include <gtest/gtest.h>
 
@@ -6,7 +6,7 @@ using namespace std;
 
 namespace alba::CodeUtilities {
 
-TEST(TermUtilitiesTest, ReplaceAllForwardsWorks) {
+TEST(CommonUtilitiesTest, ReplaceAllForwardsWorks) {
     Terms terms{
         Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
         Term(TermType::Identifier, "identifier3"), Term(TermType::Identifier, "identifier4"),
@@ -23,7 +23,7 @@ TEST(TermUtilitiesTest, ReplaceAllForwardsWorks) {
     EXPECT_EQ(Term(TermType::Identifier, "identifier5"), *itTerms++);
 }
 
-TEST(TermUtilitiesTest, CombineTermsInPlaceWorks) {
+TEST(CommonUtilitiesTest, CombineTermsInPlaceWorks) {
     Terms terms{
         Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
         Term(TermType::Identifier, "identifier3"), Term(TermType::Identifier, "identifier4"),
@@ -38,7 +38,7 @@ TEST(TermUtilitiesTest, CombineTermsInPlaceWorks) {
     EXPECT_EQ(expectedTerms, terms);
 }
 
-TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksInTheMiddleOfMatch) {
+TEST(CommonUtilitiesTest, SearchForPatternsForwardsWorksInTheMiddleOfMatch) {
     Terms const terms{
         Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
         Term(TermType::Identifier, "identifier3"), Term(TermType::Identifier, "identifier4"),
@@ -53,7 +53,7 @@ TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksInTheMiddleOfMatch) {
     EXPECT_EQ(3, *itPatterns++);
 }
 
-TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksWithIgnoringComments) {
+TEST(CommonUtilitiesTest, SearchForPatternsForwardsWorksWithIgnoringComments) {
     Terms const terms{Term(TermType::Identifier, "identifier1"), Term(TermType::CommentMultiline, "/*Comment*/"),
                       Term(TermType::Identifier, "identifier2"), Term(TermType::CommentMultiline, "/*Comment*/"),
                       Term(TermType::Identifier, "identifier3"), Term(TermType::CommentMultiline, "/*Comment*/"),
@@ -69,7 +69,7 @@ TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksWithIgnoringComments) {
     EXPECT_EQ(6, *itPatterns++);
 }
 
-TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksWithSpaces) {
+TEST(CommonUtilitiesTest, SearchForPatternsForwardsWorksWithSpaces) {
     Terms const terms{Term(TermType::Identifier, "identifier1"), Term(TermType::WhiteSpace, "\t"),
                       Term(TermType::Identifier, "identifier2"), Term(TermType::WhiteSpace, "\t"),
                       Term(TermType::Identifier, "identifier3"), Term(TermType::WhiteSpace, "\t"),
@@ -85,7 +85,7 @@ TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksWithSpaces) {
     EXPECT_EQ(6, *itPatterns++);
 }
 
-TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksAsGoingForward) {
+TEST(CommonUtilitiesTest, SearchForPatternsForwardsWorksAsGoingForward) {
     Terms const terms{
         Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
         Term(TermType::Identifier, "identifier2"), Term(TermType::Identifier, "identifier2"),
@@ -98,7 +98,7 @@ TEST(TermUtilitiesTest, SearchForPatternsForwardsWorksAsGoingForward) {
     EXPECT_EQ(1, *itPatterns++);
 }
 
-TEST(TermUtilitiesTest, SearchForPatternsBackwardsWorksAsGoingBackward) {
+TEST(CommonUtilitiesTest, SearchForPatternsBackwardsWorksAsGoingBackward) {
     Terms const terms{
         Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
         Term(TermType::Identifier, "identifier2"), Term(TermType::Identifier, "identifier2"),
@@ -111,7 +111,7 @@ TEST(TermUtilitiesTest, SearchForPatternsBackwardsWorksAsGoingBackward) {
     EXPECT_EQ(3, *itPatterns++);
 }
 
-TEST(TermUtilitiesTest, ConvertToStringWorks) {
+TEST(CommonUtilitiesTest, ConvertToStringWorks) {
     EXPECT_EQ("TermType::Boolean", convertToString(TermType::Boolean));
     EXPECT_EQ("TermType::CharacterLiteral", convertToString(TermType::CharacterLiteral));
     EXPECT_EQ("TermType::CommentMultiline", convertToString(TermType::CommentMultiline));
@@ -127,7 +127,7 @@ TEST(TermUtilitiesTest, ConvertToStringWorks) {
     EXPECT_EQ("TermType::WhiteSpace", convertToString(TermType::WhiteSpace));
 }
 
-TEST(TermUtilitiesTest, IsCommentWorks) {
+TEST(CommonUtilitiesTest, IsCommentWorks) {
     EXPECT_FALSE(isComment(Term(TermType::Boolean, "")));
     EXPECT_FALSE(isComment(Term(TermType::CharacterLiteral, "")));
     EXPECT_TRUE(isComment(Term(TermType::CommentMultiline, "")));
@@ -143,7 +143,7 @@ TEST(TermUtilitiesTest, IsCommentWorks) {
     EXPECT_FALSE(isComment(Term(TermType::WhiteSpace, "")));
 }
 
-TEST(TermUtilitiesTest, IsWhiteSpaceWorks) {
+TEST(CommonUtilitiesTest, IsWhiteSpaceWorks) {
     EXPECT_FALSE(isWhiteSpace(Term(TermType::Boolean, "")));
     EXPECT_FALSE(isWhiteSpace(Term(TermType::CharacterLiteral, "")));
     EXPECT_FALSE(isWhiteSpace(Term(TermType::CommentMultiline, "")));
@@ -159,7 +159,7 @@ TEST(TermUtilitiesTest, IsWhiteSpaceWorks) {
     EXPECT_TRUE(isWhiteSpace(Term(TermType::WhiteSpace, "")));
 }
 
-TEST(TermUtilitiesTest, IsCommentOrWhiteSpaceWorks) {
+TEST(CommonUtilitiesTest, IsCommentOrWhiteSpaceWorks) {
     EXPECT_FALSE(isCommentOrWhiteSpace(Term(TermType::Boolean, "")));
     EXPECT_FALSE(isCommentOrWhiteSpace(Term(TermType::CharacterLiteral, "")));
     EXPECT_TRUE(isCommentOrWhiteSpace(Term(TermType::CommentMultiline, "")));

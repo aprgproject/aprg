@@ -22,17 +22,17 @@ private:
     void fixPostFixIncrementDecrementInLine(std::string const& crementOperator);
     void fixPostFixIncrementDecrementInForLoop(std::string const& crementOperator);
     void fixConstReferenceOrder();
-    void fixConstReferenceOrder(TermMatcher const& typeMatcher);
+    void fixConstReferenceOrder(Matcher const& typeMatcher);
     void fixConstToConstexpr();
     void fixNoConstPassByValue();
-    void fixNoConstPassByValue(TermMatcher const& typeMatcher);
+    void fixNoConstPassByValue(Matcher const& typeMatcher);
     void fixNoConstPassByValue(Patterns const& searchPatterns);
     void fixCStylePrintf();
     void fixCStylePrintf(Patterns const& searchPatterns);
     void fixCStylePrintf(int const printfStart, int const printStringIndex);
     void fixCommentsPositionOfBraces();
     void fixCStyleStaticCast();
-    void fixCStyleStaticCast(TermMatcher const& typeMatcher);
+    void fixCStyleStaticCast(Matcher const& typeMatcher);
     void findTermsAndSwapAt(Patterns const& searchPatterns, int const index1, int const index2);
     void findTermsAndCheckForLoopAndSwapAt(Patterns const& searchPatterns, int const index1, int const index2);
 

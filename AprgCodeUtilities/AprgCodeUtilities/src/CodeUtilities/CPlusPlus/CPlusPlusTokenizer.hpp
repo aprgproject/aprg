@@ -1,6 +1,6 @@
 #pragma once
 
-#include <CodeUtilities/Common/Term.hpp>
+#include <CodeUtilities/Common/Term/Term.hpp>
 
 namespace alba::CodeUtilities {
 
