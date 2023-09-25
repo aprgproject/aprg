@@ -23,6 +23,7 @@
 
 using namespace std;
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
 namespace alba {
 
 unsigned int swap4(unsigned int const temp) {
@@ -557,3 +558,4 @@ TEST(SampleTest, SampleTest2) {
 }
 
 }  // namespace alba
+// NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)

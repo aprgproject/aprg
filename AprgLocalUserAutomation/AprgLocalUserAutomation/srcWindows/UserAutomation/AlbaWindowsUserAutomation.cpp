@@ -26,6 +26,7 @@ uint16_t convertToVirtualKey(char const character) {
     return virtualKey;
 }
 
+// NOLINTBEGIN(misc-misplaced-const)
 void setForegroundWindowWithWindowHandle(HWND const windowHandle) {
     bool isSuccessful(false);
     if (windowHandle != nullptr) {
@@ -44,6 +45,7 @@ void setForegroundWindowWithWindowHandle(HWND const windowHandle) {
         cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
     }
 }
+// NOLINTEND(misc-misplaced-const)
 
 void doOperation(InputFunction const& inputFunction) {
     INPUT input;
@@ -264,6 +266,7 @@ void setStringToClipboard(string_view const& clipBoardText) {
     CloseClipboard();
 }
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
 void saveBitmapFromClipboard(string_view const& filePath) {
     AlbaLocalPathHandler const pathHandler(filePath);
     ofstream outputBitmapFile(pathHandler.getPath(), ios::out | ios::binary);
@@ -299,6 +302,7 @@ void saveBitmapFromClipboard(string_view const& filePath) {
         CloseClipboard();
     }
 }
+// NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
 
 }  // namespace alba::AlbaWindowsUserAutomation
 // NOLINTEND(cppcoreguidelines-pro-type-union-access)

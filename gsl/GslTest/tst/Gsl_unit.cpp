@@ -1465,13 +1465,9 @@ TEST(GslTest, DISABLED_WaveletTransformFunctionWorks) {
     array<size_t, NUMBER_OF_ITEMS> p{};
     gsl_wavelet *workspace = gsl_wavelet_alloc(gsl_wavelet_daubechies, 4);
     gsl_wavelet_workspace *work = gsl_wavelet_workspace_alloc(NUMBER_OF_ITEMS);
-    FILE *f = fopen("test.dat", "randomGenerator");
     for (int i = 0; i < NUMBER_OF_ITEMS; ++i) {
         cin >> originalData[i];
         data[i] = originalData[i];
-    }
-    if (fclose(f) != 0) {
-        cout << "Closing the file is not successful\n";
     }
 
     gsl_wavelet_transform_forward(workspace, data.data(), 1, NUMBER_OF_ITEMS, work);

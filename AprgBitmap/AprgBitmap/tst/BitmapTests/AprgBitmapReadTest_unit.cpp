@@ -13,6 +13,7 @@ using namespace std;
 #define APRG_BITMAP_24_BIT_TEST_FILE APRG_DIR R"(\AprgBitmap\FilesForTests\SampleBitmaps\24BitBitmap.bmp)"
 #define APRG_BITMAP_32_BIT_TEST_FILE APRG_DIR R"(\AprgBitmap\FilesForTests\SampleBitmaps\32BitBitmap.bmp)"
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
 namespace alba::AprgBitmap {
 
 TEST(BitmapReadTest, TestForInvalidBitmap) {
@@ -378,3 +379,4 @@ TEST(BitmapReadTest, DISABLED_ExperimentTest) {
 }
 
 }  // namespace alba::AprgBitmap
+// NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)

@@ -6,6 +6,7 @@
 
 #include <string>
 
+// NOLINTBEGIN(misc-misplaced-const)
 namespace alba {
 
 class AlbaWindowsScreenMonitoring {
@@ -34,3 +35,4 @@ private:
 };
 
 }  // namespace alba
+// NOLINTEND(misc-misplaced-const)

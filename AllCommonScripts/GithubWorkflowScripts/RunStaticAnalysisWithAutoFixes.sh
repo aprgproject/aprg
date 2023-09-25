@@ -12,6 +12,9 @@ cppProjects="$3"
 
 # Source needed scripts
 source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
+cppItemWithSeverityGrep=""
+cppItemAprgOnlyGrep=""
+source "$aprgDirectory/AllCommonScripts/CommonRegex/CommonGrepCppOutput.sh"
 
 # Validate input
 if [ -z "$staticAnalysisFilename" ]; then
@@ -46,7 +49,7 @@ runStaticAnalyzersInDirectory() {
     set +e
     # "note" is added in the grep to cover "FIX-IT"
     scriptPrint "$scriptName" "$LINENO" "Building..."
-    "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | grep -E 'note:|style:|warning:|error:' | grep -Ev 'test_info_|testing::|benchmark::|\/aprg\/benchmark\/benchmarkLibrary\/|\/aprg\/gtest\/gtest\/|\/aprg\/gsl\/gsl\/' | tee -a "$staticAnalysisFilename"
+    "$buildAndRunScriptPath" buildOnOneCore "StaticAnalyzersBuild" "Debug" | grep -E "$cppItemWithSeverityGrep" | grep -Ev "$cppItemAprgOnlyGrep" | tee -a "$staticAnalysisFilename"
     scriptPrint "$scriptName" "$LINENO" "Building step done"
     set -e
     

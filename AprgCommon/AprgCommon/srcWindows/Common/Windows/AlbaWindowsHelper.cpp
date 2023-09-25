@@ -12,6 +12,7 @@ using namespace std;
 
 namespace alba::AlbaWindowsHelper {
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
 string getLastFormattedErrorMessage() {
     stringstream lastErrorStream;
     auto errorCode = GetLastError();
@@ -34,5 +35,6 @@ string getLastFormattedErrorMessage() {
     }
     return lastErrorStream.str();
 }
+// NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
 
 }  // namespace alba::AlbaWindowsHelper
