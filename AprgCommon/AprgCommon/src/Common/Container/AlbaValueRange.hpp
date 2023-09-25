@@ -35,6 +35,7 @@ public:
 
     [[nodiscard]] DataType getDelta() const {
         DataType delta(m_endValue - m_startValue);
+        // cppcheck-suppress [unsignedLessThanZero,signConversion]
         return (delta < 0) ? delta * -1 : delta;
     }
 
@@ -108,12 +109,14 @@ private:
 
     [[nodiscard]] DataType getIntervalWithSign(DataType const interval, AlbaValueRangeType const rangeType) const {
         DataType intervalWithSign(0);
+        // cppcheck-suppress [unsignedLessThanZero,signConversion]
         DataType intervalMagnitude((interval < 0) ? interval * -1 : interval);
         switch (rangeType) {
             case AlbaValueRangeType::Forward:
                 intervalWithSign = intervalMagnitude;
                 break;
             case AlbaValueRangeType::Backward:
+                // cppcheck-suppress signConversion
                 intervalWithSign = intervalMagnitude * -1;
                 break;
             default:

@@ -11,50 +11,38 @@ namespace alba::algebra {
 
 Equation getTrigonometricPythagoreanIdentity(Term const& term) {
     // sin(x)^2 + cos(x)^2 = 1
-    Term const leftSideTerm(createExpressionIfPossible({getSineSquared(term), "+", getCosineSquared(term)}));
-    return {leftSideTerm, "=", 1};
+    return {createExpressionIfPossible({getSineSquared(term), "+", getCosineSquared(term)}), "=", 1};
 }
 
 Equation getSineEquationOfRightTriangle(Term const& angle, Term const& oppositeSideOfAngle, Term const& hypotenuse) {
     // sin(x) = o/h
-    Term const leftSideTerm(sin(angle));
-    Term const rightSideTerm(createExpressionIfPossible({oppositeSideOfAngle, "/", hypotenuse}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {sin(angle), "=", createExpressionIfPossible({oppositeSideOfAngle, "/", hypotenuse})};
 }
 
 Equation getCosineEquationOfRightTriangle(Term const& angle, Term const& adjacentSideOfAngle, Term const& hypotenuse) {
     // cos(x) = a/h
-    Term const leftSideTerm(cos(angle));
-    Term const rightSideTerm(createExpressionIfPossible({adjacentSideOfAngle, "/", hypotenuse}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {cos(angle), "=", createExpressionIfPossible({adjacentSideOfAngle, "/", hypotenuse})};
 }
 
 Equation getTangentEquationOfRightTriangle(
     Term const& angle, Term const& oppositeSideOfAngle, Term const& adjacentSideOfAngle) {
     // (x) = o/a
-    Term const leftSideTerm(tan(angle));
-    Term const rightSideTerm(createExpressionIfPossible({oppositeSideOfAngle, "/", adjacentSideOfAngle}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {tan(angle), "=", createExpressionIfPossible({oppositeSideOfAngle, "/", adjacentSideOfAngle})};
 }
 
 Equation getLawOfSineEquation(
     Term const& side1, Term const& oppositeAngleOfSide1, Term const& side2, Term const& oppositeAngleOfSide2) {
     // x/sin(angleOppositeOfX) = y/sin(angleOppositeOfY) = z/sin(angleOppositeOfZ)
-    Term const leftSideTerm(createExpressionIfPossible({side1, "/", sin(oppositeAngleOfSide1)}));
-    Term const rightSideTerm(createExpressionIfPossible({side2, "/", sin(oppositeAngleOfSide2)}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {createExpressionIfPossible({side1, "/", sin(oppositeAngleOfSide1)}), "=", createExpressionIfPossible({side2, "/", sin(oppositeAngleOfSide2)})};
 }
 
 Equation getLawOfCosineEquation(
     Term const& side1, Term const& side2, Term const& side3, Term const& oppositeAngleOfSide1) {
     // x^2 = y^2 + z^2 - 2*y*z*cos(angleOppositeOfX)
-    Term const side1Squared(createExpressionIfPossible({side1, "^", 2}));
     Term const side2Squared(createExpressionIfPossible({side2, "^", 2}));
     Term const side3Squared(createExpressionIfPossible({side3, "^", 2}));
     Term const cosinePart(createExpressionIfPossible({2, "*", side2, "*", side3, "*", cos(oppositeAngleOfSide1)}));
-    Term const& leftSideTerm(side1Squared);
-    Term const rightSideTerm(createExpressionIfPossible({side2Squared, "+", side3Squared, "-", cosinePart}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {createExpressionIfPossible({side1, "^", 2}), "=", createExpressionIfPossible({side2Squared, "+", side3Squared, "-", cosinePart})};
 }
 
 Term getSineSquared(Term const& term) {

@@ -11,104 +11,81 @@ namespace alba::algebra {
 
 Equation getHyperbolicSineDefinition(Term const& term) {
     // sinh(x) = (e^x - e^(-x)) / 2
-    Term const leftSideTerm(sinh(term));
-    Term const rightSideTerm(createExpressionIfPossible({getEToTheXMinusEToTheNegativeX(term), "/", 2}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {sinh(term), "=", createExpressionIfPossible({getEToTheXMinusEToTheNegativeX(term), "/", 2})};
 }
 
 Equation getHyperbolicCosineDefinition(Term const& term) {
     // cosh(x) = (e^x + e^(-x)) / 2
-    Term const leftSideTerm(cosh(term));
-    Term const rightSideTerm(createExpressionIfPossible({getEToTheXPlusEToTheNegativeX(term), "/", 2}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {cosh(term), "=", createExpressionIfPossible({getEToTheXPlusEToTheNegativeX(term), "/", 2})};
 }
 
 Equation getHyperbolicTangentDefinition(Term const& term) {
     // tanh(x) = (e^x - e^(-x)) / (e^x + e^(-x))
-    Term const leftSideTerm(tanh(term));
-    Term const rightSideTerm(
-        createExpressionIfPossible({getEToTheXMinusEToTheNegativeX(term), "/", getEToTheXPlusEToTheNegativeX(term)}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {
+        tanh(term), "=",
+        createExpressionIfPossible({getEToTheXMinusEToTheNegativeX(term), "/", getEToTheXPlusEToTheNegativeX(term)})};
 }
 
 Equation getHyperbolicCosecantDefinition(Term const& term) {
     // csch(x) = 2 / (e^x - e^(-x))
-    Term const leftSideTerm(csch(term));
-    Term const rightSideTerm(createExpressionIfPossible({2, "/", getEToTheXMinusEToTheNegativeX(term)}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {csch(term), "=", createExpressionIfPossible({2, "/", getEToTheXMinusEToTheNegativeX(term)})};
 }
 
 Equation getHyperbolicSecantDefinition(Term const& term) {
     // sech(x) = 2 / (e^x + e^(-x))
-    Term const leftSideTerm(sech(term));
-    Term const rightSideTerm(createExpressionIfPossible({2, "/", getEToTheXPlusEToTheNegativeX(term)}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {sech(term), "=", createExpressionIfPossible({2, "/", getEToTheXPlusEToTheNegativeX(term)})};
 }
 
 Equation getHyperbolicCotangentDefinition(Term const& term) {
     // coth(x) = (e^x + e^(-x)) / (e^x - e^(-x))
-    Term const leftSideTerm(coth(term));
-    Term const rightSideTerm(
-        createExpressionIfPossible({getEToTheXPlusEToTheNegativeX(term), "/", getEToTheXMinusEToTheNegativeX(term)}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {
+        coth(term), "=",
+        createExpressionIfPossible({getEToTheXPlusEToTheNegativeX(term), "/", getEToTheXMinusEToTheNegativeX(term)})};
 }
 
 Equation getHyperbolicFunctionIdentityEquation(Term const& term) {
     // cosh(x)^2 - sinh(x)^2 = 1
-    Term const leftSideTerm(createExpressionIfPossible({cosh(term), "^", 2, "-", sinh(term), "^", 2}));
-    return {leftSideTerm, "=", 1};
+    return {createExpressionIfPossible({cosh(term), "^", 2, "-", sinh(term), "^", 2}), "=", 1};
 }
 
 Equation getEToTheXFromHyperbolicFunctionsEquation(Term const& term) {
     // e^x = cosh(x) + sinh(x)
-    Term const leftSideTerm(getEToTheX(term));
-    Term const rightSideTerm(createExpressionIfPossible({cosh(term), "+", sinh(term)}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {getEToTheX(term), "=", createExpressionIfPossible({cosh(term), "+", sinh(term)})};
 }
 
 Equation getEToTheNegativeXFromHyperbolicFunctionsEquation(Term const& term) {
     // e^(-x) = cosh(x) - sinh(x)
-    Term const leftSideTerm(getEToTheNegativeX(term));
-    Term const rightSideTerm(createExpressionIfPossible({cosh(term), "-", sinh(term)}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {getEToTheNegativeX(term), "=", createExpressionIfPossible({cosh(term), "-", sinh(term)})};
 }
 
 Equation getHyperbolicArcSineDefinition(Term const& term) {
-    Term const leftSideTerm(arcsinh(term));
     Term const insideSquareRoot(createExpressionIfPossible({term, "^", 2, "+", 1}));
     Term const squareRootTerm(createExpressionIfPossible({insideSquareRoot, "^", AlbaNumber::createFraction(1, 2)}));
     Term const insideLogarithm(createExpressionIfPossible({term, "+", squareRootTerm}));
-    Term const rightSideTerm(ln(insideLogarithm));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {arcsinh(term), "=", ln(insideLogarithm)};
 }
 
 Equation getHyperbolicArcCosineDefinition(Term const& term) {
-    Term const leftSideTerm(arccosh(term));
     Term const insideSquareRoot(createExpressionIfPossible({term, "^", 2, "-", 1}));
     Term const squareRootTerm(createExpressionIfPossible({insideSquareRoot, "^", AlbaNumber::createFraction(1, 2)}));
     Term const insideLogarithm(createExpressionIfPossible({term, "+", squareRootTerm}));
-    Term const rightSideTerm(ln(insideLogarithm));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {arccosh(term), "=", ln(insideLogarithm)};
 }
 
 Equation getHyperbolicArcTangentDefinition(Term const& term) {
-    Term const leftSideTerm(arctanh(term));
     Term const oneMinusTerm(createExpressionIfPossible({1, "-", term}));
     Term const onePlusTerm(createExpressionIfPossible({1, "+", term}));
     Term const insideLogarithm(createExpressionIfPossible({oneMinusTerm, "/", onePlusTerm}));
     Term const logarithmTerm(ln(insideLogarithm));
-    Term const rightSideTerm(createExpressionIfPossible({AlbaNumber::createFraction(1, 2), "*", logarithmTerm}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {arctanh(term), "=", createExpressionIfPossible({AlbaNumber::createFraction(1, 2), "*", logarithmTerm})};
 }
 
 Equation getHyperbolicArcCotangentDefinition(Term const& term) {
-    Term const leftSideTerm(arccoth(term));
     Term const termPlusOne(createExpressionIfPossible({term, "+", 1}));
     Term const termMinusOne(createExpressionIfPossible({term, "-", 1}));
     Term const insideLogarithm(createExpressionIfPossible({termPlusOne, "/", termMinusOne}));
     Term const logarithmTerm(ln(insideLogarithm));
-    Term const rightSideTerm(createExpressionIfPossible({AlbaNumber::createFraction(1, 2), "*", logarithmTerm}));
-    return {leftSideTerm, "=", rightSideTerm};
+    return {arccoth(term), "=", createExpressionIfPossible({AlbaNumber::createFraction(1, 2), "*", logarithmTerm})};
 }
 
 Term getEToTheX(Term const& term) {

@@ -15,10 +15,7 @@ Equation getCircleEquation() {
     Term const yMinusY0(createExpressionIfPossible({y, "-", y0}));
     Term const xSquared(createExpressionIfPossible({xMinusX0, "^", 2}));
     Term const ySquared(createExpressionIfPossible({yMinusY0, "^", 2}));
-    Term const rSquared(createExpressionIfPossible({r, "^", 2}));
-    Term const leftHandSide(createExpressionIfPossible({xSquared, "+", ySquared}));
-    Term const& rightHandSide(rSquared);
-    return {leftHandSide, "=", rightHandSide};
+    return {createExpressionIfPossible({xSquared, "+", ySquared}), "=", createExpressionIfPossible({r, "^", 2})};
 }
 
 Equation getEllipseEquation() {
@@ -28,8 +25,7 @@ Equation getEllipseEquation() {
     Term const ySquared(createExpressionIfPossible({yMinusY0, "^", 2}));
     Term const aSquared(createExpressionIfPossible({a, "^", 2}));
     Term const bSquared(createExpressionIfPossible({b, "^", 2}));
-    Term const leftHandSide(createExpressionIfPossible({xSquared, "/", aSquared, "+", ySquared, "/", bSquared}));
-    return {leftHandSide, "=", 1};
+    return {createExpressionIfPossible({xSquared, "/", aSquared, "+", ySquared, "/", bSquared}), "=", 1};
 }
 
 Equation getHyperbolaEquation() {
@@ -39,8 +35,7 @@ Equation getHyperbolaEquation() {
     Term const ySquared(createExpressionIfPossible({yMinusY0, "^", 2}));
     Term const aSquared(createExpressionIfPossible({a, "^", 2}));
     Term const bSquared(createExpressionIfPossible({b, "^", 2}));
-    Term const leftHandSide(createExpressionIfPossible({xSquared, "/", aSquared, "-", ySquared, "/", bSquared}));
-    return {leftHandSide, "=", 1};
+    return {createExpressionIfPossible({xSquared, "/", aSquared, "-", ySquared, "/", bSquared}), "=", 1};
 }
 
 Equation getLimaconEquation(LimaconTrigonometricFunctionType const type) {
@@ -50,28 +45,21 @@ Equation getLimaconEquation(LimaconTrigonometricFunctionType const type) {
     } else if (LimaconTrigonometricFunctionType::Sine == type) {
         trigPart = sin(theta);
     }
-    Term const leftHandSide(createExpressionIfPossible({a, "+", b, "*", trigPart}));
-    Term const rightHandSide(r);
-    return {leftHandSide, "=", rightHandSide};
+    return {createExpressionIfPossible({a, "+", b, "*", trigPart}), "=", r};
 }
 
 Equation getLineEquation() {
-    Term const leftHandSide(createExpressionIfPossible({a, "*", x, "+", b, "*", y, "+", c}));
-    return {leftHandSide, "=", 0};
+    return {createExpressionIfPossible({a, "*", x, "+", b, "*", y, "+", c}), "=", 0};
 }
 
 Equation getParabolaEquation(ParabolaOrientation const parabolaOrientation) {
     Equation result;
     if (ParabolaOrientation::PolynomialX == parabolaOrientation) {
         Term const xSquared(createExpressionIfPossible({x, "^", 2}));
-        Term const leftHandSide(createExpressionIfPossible({a, "*", xSquared, "+", b, "*", x, "+", c}));
-        Term const rightHandSide(y);
-        result = Equation(leftHandSide, "=", rightHandSide);
+        result = Equation(createExpressionIfPossible({a, "*", xSquared, "+", b, "*", x, "+", c}), "=", y);
     } else if (ParabolaOrientation::PolynomialY == parabolaOrientation) {
         Term const ySquared(createExpressionIfPossible({y, "^", 2}));
-        Term const leftHandSide(createExpressionIfPossible({a, "*", ySquared, "+", b, "*", y, "+", c}));
-        Term const rightHandSide(x);
-        result = Equation(leftHandSide, "=", rightHandSide);
+        result = Equation(createExpressionIfPossible({a, "*", ySquared, "+", b, "*", y, "+", c}), "=", x);
     }
     return result;
 }

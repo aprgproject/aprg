@@ -15,9 +15,8 @@ Equation getEllipsoidEquation() {
     Term const aSquared(createExpressionIfPossible({a, "^", 2}));
     Term const bSquared(createExpressionIfPossible({b, "^", 2}));
     Term const cSquared(createExpressionIfPossible({c, "^", 2}));
-    Term const leftHandSide(createExpressionIfPossible(
-        {xSquared, "/", aSquared, "+", ySquared, "/", bSquared, "+", zSquared, "/", cSquared}));
-    return {leftHandSide, "=", 1};
+    return {createExpressionIfPossible(
+        {xSquared, "/", aSquared, "+", ySquared, "/", bSquared, "+", zSquared, "/", cSquared}), "=", 1};
 }
 
 Equation getEllipticConeEquation() {
@@ -30,9 +29,8 @@ Equation getEllipticConeEquation() {
     Term const aSquared(createExpressionIfPossible({a, "^", 2}));
     Term const bSquared(createExpressionIfPossible({b, "^", 2}));
     Term const cSquared(createExpressionIfPossible({c, "^", 2}));
-    Term const leftHandSide(createExpressionIfPossible(
-        {xSquared, "/", aSquared, "+", ySquared, "/", bSquared, "+", zSquared, "/", cSquared}));
-    return {leftHandSide, "=", 0};
+    return {createExpressionIfPossible(
+        {xSquared, "/", aSquared, "+", ySquared, "/", bSquared, "+", zSquared, "/", cSquared}), "=", 0};
 }
 
 Equation getEllipticHyperboloidEquation(bool const isOneNegative) {
@@ -45,10 +43,8 @@ Equation getEllipticHyperboloidEquation(bool const isOneNegative) {
     Term const aSquared(createExpressionIfPossible({a, "^", 2}));
     Term const bSquared(createExpressionIfPossible({b, "^", 2}));
     Term const cSquared(createExpressionIfPossible({c, "^", 2}));
-    Term const leftHandSide(createExpressionIfPossible(
-        {xSquared, "/", aSquared, "+", ySquared, "/", bSquared, "-", zSquared, "/", cSquared}));
-    Term const oneWithSign = isOneNegative ? -1 : 1;
-    return {leftHandSide, "=", oneWithSign};
+    return {createExpressionIfPossible(
+        {xSquared, "/", aSquared, "+", ySquared, "/", bSquared, "-", zSquared, "/", cSquared}), "=", isOneNegative ? -1 : 1};
 }
 
 Equation getEllipticParaboloidEquation() {
@@ -59,10 +55,7 @@ Equation getEllipticParaboloidEquation() {
     Term const ySquared(createExpressionIfPossible({yMinusY0, "^", 2}));
     Term const aSquared(createExpressionIfPossible({a, "^", 2}));
     Term const bSquared(createExpressionIfPossible({b, "^", 2}));
-    Term const zOverC(createExpressionIfPossible({zMinusZ0, "/", c}));
-    Term const leftHandSide(createExpressionIfPossible({xSquared, "/", aSquared, "+", ySquared, "/", bSquared}));
-    Term const& rightHandSide(zOverC);
-    return {leftHandSide, "=", rightHandSide};
+    return {createExpressionIfPossible({xSquared, "/", aSquared, "+", ySquared, "/", bSquared}), "=", createExpressionIfPossible({zMinusZ0, "/", c})};
 }
 
 Equation getHyperbolicParaboloidEquation() {
@@ -73,24 +66,18 @@ Equation getHyperbolicParaboloidEquation() {
     Term const ySquared(createExpressionIfPossible({yMinusY0, "^", 2}));
     Term const aSquared(createExpressionIfPossible({a, "^", 2}));
     Term const bSquared(createExpressionIfPossible({b, "^", 2}));
-    Term const zOverC(createExpressionIfPossible({zMinusZ0, "/", c}));
-    Term const leftHandSide(createExpressionIfPossible({ySquared, "/", bSquared, "-", xSquared, "/", aSquared}));
-    Term const& rightHandSide(zOverC);
-    return {leftHandSide, "=", rightHandSide};
+    return {createExpressionIfPossible({ySquared, "/", bSquared, "-", xSquared, "/", aSquared}), "=", createExpressionIfPossible({zMinusZ0, "/", c})};
 }
 
 Equation getPlaneEquation() {
-    Term const leftHandSide(createExpressionIfPossible({a, "*", x, "+", b, "*", y, "+", c, "*", z, "+", d}));
-    return {leftHandSide, "=", 0};
+    return {createExpressionIfPossible({a, "*", x, "+", b, "*", y, "+", c, "*", z, "+", d}), "=", 0};
 }
 
 Equation getPlaneEquationWithPointCoordinates() {
     Term const xMinusX0(createExpressionIfPossible({x, "-", x0}));
     Term const yMinusY0(createExpressionIfPossible({y, "-", y0}));
     Term const zMinusZ0(createExpressionIfPossible({z, "-", z0}));
-    Term const leftHandSide(
-        createExpressionIfPossible({a, "*", xMinusX0, "+", b, "*", yMinusY0, "+", c, "*", zMinusZ0}));
-    return {leftHandSide, "=", 0};
+    return {createExpressionIfPossible({a, "*", xMinusX0, "+", b, "*", yMinusY0, "+", c, "*", zMinusZ0}), "=", 0};
 }
 
 Equation getSphereEquation() {
@@ -100,10 +87,7 @@ Equation getSphereEquation() {
     Term const xSquared(createExpressionIfPossible({xMinusX0, "^", 2}));
     Term const ySquared(createExpressionIfPossible({yMinusY0, "^", 2}));
     Term const zSquared(createExpressionIfPossible({zMinusZ0, "^", 2}));
-    Term const rSquared(createExpressionIfPossible({r, "^", 2}));
-    Term const leftHandSide(createExpressionIfPossible({xSquared, "+", ySquared, "+", zSquared}));
-    Term const& rightHandSide(rSquared);
-    return {leftHandSide, "=", rightHandSide};
+    return {createExpressionIfPossible({xSquared, "+", ySquared, "+", zSquared}), "=", createExpressionIfPossible({r, "^", 2})};
 }
 
 Equations getLineEquations() {

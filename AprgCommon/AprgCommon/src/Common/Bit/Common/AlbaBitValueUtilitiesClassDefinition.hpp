@@ -110,7 +110,10 @@ public:
     }
 
     static constexpr inline DataType getOnesComplement(DataType const value) { return ~value; }
-    static constexpr inline DataType getTwosComplement(DataType const value) { return value * -1; }
+    static constexpr inline DataType getTwosComplement(DataType const value) { 
+        // cppcheck-suppress signConversion
+        return value * -1; 
+    }
 
     static constexpr inline DataType getGreatestPowerOf2Factor(DataType const value) {
         return getLastBitOneOnly(value);
@@ -303,6 +306,7 @@ public:
         if (value == 1) {
             return false;
         }
+        // cppcheck-suppress unsignedLessThanZero
         if (value < 0) {
             return isMultipleOfThree(-value);
         }
@@ -332,6 +336,7 @@ public:
         // This expression can only be an integer if the sub-expression [floor(n/8) – n%8]/9 is an integer.
         // The subexpression can only be an integer if [floor(n/8) – n%8] is a multiple of 9.
         // So the problem reduces to a smaller value which can be written in terms of bitwise operators.
+        // cppcheck-suppress unsignedLessThanZero
         if (value < 0) {
             return isMultipleOfNine(-value);
         }
