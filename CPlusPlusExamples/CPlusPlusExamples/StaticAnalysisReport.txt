@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-24T21:51:03
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T15:13:16
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/ArgumentDependentLookupExamples/ArgumentDependentLookupExamples_unit.cpp:30:14: warning: 3.14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/ArgumentDependentLookupExamples/ArgumentDependentLookupExamples_unit.cpp:35:17: warning: 3.14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/AlgorithmExamples/AlgorithmExamples_unit.cpp:59:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
@@ -72,7 +72,6 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:262:12: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:298:20: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:299:18: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:307:7: warning: use emplace_back instead of push_back [hicpp-use-emplace,modernize-use-emplace]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:314:19: warning: unused variable 's2' [clang-diagnostic-unused-variable]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:314:19: warning: variable name 's2' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/InPlaceConstructionExamples/InPlaceConstructionExamples_unit.cpp:329:25: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
@@ -643,12 +642,9 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Macros/AlbaMacros.hpp:18:41: note: expanded from macro 'ALBA_MACROS_GET_PRETTY_FUNCTION'
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/TemplateExamples/TemplateIdiomsExamples_unit.cpp:157:13: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Macros/AlbaMacros.hpp:18:41: note: expanded from macro 'ALBA_MACROS_GET_PRETTY_FUNCTION'
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/ValueCategoriesExamples/ValueCategoriesExamples_unit.cpp:15:19: warning: unused variable 'n' [clang-diagnostic-unused-variable]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/ValueCategoriesExamples/ValueCategoriesExamples_unit.cpp:15:19: warning: variable name 'n' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/ValueCategoriesExamples/ValueCategoriesExamples_unit.cpp:25:13: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Macros/AlbaMacros.hpp:18:41: note: expanded from macro 'ALBA_MACROS_GET_PRETTY_FUNCTION'
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/ValueCategoriesExamples/ValueCategoriesExamples_unit.cpp:31:13: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Macros/AlbaMacros.hpp:18:41: note: expanded from macro 'ALBA_MACROS_GET_PRETTY_FUNCTION'
 /home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/ValueCategoriesExamples/ValueCategoriesExamples_unit.cpp:35:12: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/CPlusPlusExamples/CPlusPlusExamples/tst/ValueCategoriesExamples/ValueCategoriesExamples_unit.cpp:15:19: warning: unused variable 'n' [-Wunused-variable]
 DONE!
