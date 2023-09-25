@@ -7,17 +7,78 @@ on:
         description: 'C/C++ Project ("all" for all projects)'
         type: string
         required: true
-        default: 'AprgAlgorithm'
+        default: 'AprgCommon'
+      cppCMakeBuildType:
+        description: 'Build Type to use for C/C++ Project'
+        type: choice
+        required: true
+        default: 'Debug'
+        options:
+        - Debug
+        - Release
+
+env:
+  determineCppProjectsRelativePath: "AllCommonScripts/GithubWorkflowScripts/DetermineCppProjects.sh"
+  buildAndRunScriptRelativePath: "AllCommonScripts/BuildAndRunScripts/BuildAndRun.sh"
+  buildType: ${{ inputs.cppCMakeBuildType || 'Debug'}} # default value
+  buildDirectory: "GithubBuild"
+  windowsEnvironmentScript: "C:/Program Files (x86)/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+  
 
 jobs:
 
-  debugJob:
-    name: Perform debug
+  determineCppProjects:
+    name: Determine CPP Projects
     runs-on: ubuntu-latest
+    outputs:
+      projectsToBuild: ${{ steps.idOfGetCppProjectStep.outputs.APRG_CPP_DIRECTORIES }}
+      excludedConfigurations: ${{ steps.idOfGetCppProjectStep.outputs.APRG_EXCLUDED_CONFIGURATIONS }}
+      projectsWithBoost: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_BOOST }}
+      projectsWithGsl: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_GSL }}
+      projectsWith7Zip: ${{ steps.idOfGetCppProjectStep.outputs.APRG_PROJECTS_WITH_7ZIP }}
     steps:
+      - name: Checkout code for changes checking
+        id: idOfCheckout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch || github.head_ref }} # default value
+          fetch-depth: 2
+          
+      - name: Get C/C++ Projects from Git Diff and User Input
+        shell: bash
+        id: idOfGetCppProjectStep
+        run: |
+          determineCppProjectsPath=$(realpath "$(pwd)/${{ env.determineCppProjectsRelativePath }}")
+          echo "determineCppProjectsPath: [$determineCppProjectsPath]"
+          chmod +x "$determineCppProjectsPath"
+          userInput="${{ inputs.cppProjects }}"
+          if [[ -z $userInput ]]; then
+            echo "User input is empty, [checkGit] is set as argument to script."
+            "$determineCppProjectsPath" checkGit
+          else
+            echo "User input is not empty, [checkUserInputWithMultipleOutput] is set as argument to script."
+            "$determineCppProjectsPath" checkUserInputWithMultipleOutput "${{ inputs.cppProjects }}"
+          fi
+
+  debugJob:
+    name: Perform gcc windows building
+    needs: determineCppProjects
+    if: needs.determineCppProjects.outputs.projectsToBuild != '[]'
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJSON(needs.determineCppProjects.outputs.projectsToBuild) }}
+    steps:
+          
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch || github.head_ref }} # default value
         
       - name: Debug Steps
         shell: bash
+        working-directory: ${{ matrix.project }}
         run: |
           gcc --version
           g++ --version
@@ -26,20 +87,16 @@ jobs:
           command -v g++
           command -v cmake
           #choco install cmake ninja
-          #choco info cmake
-          #echo "cmake version: [$(cmake --version)]"
-          #choco info ninja
-          #echo "ninja version: [$(ninja --version)]"
-          #ninja --version
-          #command -v cmake
-          #command -v ninja
-          #set +x
-          #valgrind
-          #valgrind -v
-          #which gcc | xargs -t gcc --version
-          #dpkg --list | grep compiler
-          #set -x
-          set +x
-          find / -name "scan-build"
-          set -x
+          choco info cmake
+          echo "cmake version: [$(cmake --version)]"
+          choco info ninja
+          echo "ninja version: [$(ninja --version)]"
+          ninja --version
+          command -v cmake
+          command -v ninja
+          echo "Building and running in windows mingw..."
+          "$buildAndRunScriptPath" cleanAndConfigureWithClang "${{ env.buildDirectory }}" "${{ env.buildType }}" "Ninja" "APRG_COMPILER_FLAGS_FOR_RELEASE_NO_FLAGS" "APRG_LINKER_FLAGS_FOR_RELEASE_WITH_STATIC"
+          "$buildAndRunScriptPath" build ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" install ${{ env.buildDirectory }} ${{ env.buildType }}
+          "$buildAndRunScriptPath" run ${{ env.buildDirectory }}
           

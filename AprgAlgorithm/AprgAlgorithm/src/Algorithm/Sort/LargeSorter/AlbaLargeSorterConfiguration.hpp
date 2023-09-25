@@ -20,6 +20,12 @@ struct AlbaLargeSorterConfiguration {
           m_maximumNumberOfObjectsInMemory(maximumNumberOfObjectsInMemory),
           m_maximumFileStreams(maximumFileStreams) {}
 
+    [[nodiscard]] AlbaLargeSorterConfiguration getConfigurationWithDifferentDirectory(std::string const& directoryForBlocks) const {
+        AlbaLargeSorterConfiguration copiedConfiguration(*this);
+        copiedConfiguration.m_directoryForBlocks = directoryForBlocks;
+        return copiedConfiguration;
+    }
+
     [[nodiscard]] std::string getFilePathWithBlockNumber(int const blockNumber) const {
         std::stringstream ss;
         ss << m_directoryForBlocks << R"(\BLOCK_)" << blockNumber << ".txt";

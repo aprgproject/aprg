@@ -182,7 +182,9 @@ struct dont_treat_as_stl_container {
     using type = boost::mpl::bool_<false>;
 };
 
+// cppcheck-suppress unknownMacro
 BOOST_MPL_HAS_XXX_TRAIT_DEF(value_type)
+// cppcheck-suppress unknownMacro
 BOOST_MPL_HAS_XXX_TRAIT_DEF(const_iterator)
 
 template <typename T>
@@ -205,7 +207,9 @@ struct is_boost_tuple_nulltype<boost::tuples::null_type> {
     using type = boost::mpl::bool_<value>;
 };
 
+// cppcheck-suppress unknownMacro
 BOOST_MPL_HAS_XXX_TRAIT_DEF(head_type)
+// cppcheck-suppress unknownMacro
 BOOST_MPL_HAS_XXX_TRAIT_DEF(tail_type)
 
 template <typename T>

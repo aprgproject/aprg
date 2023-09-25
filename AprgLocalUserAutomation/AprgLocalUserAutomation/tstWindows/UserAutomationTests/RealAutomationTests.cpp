@@ -214,7 +214,7 @@ TEST(RealAutomationTest, DISABLED_DownloadFacebookImagesFromFirefox) {
         string const url = getStringFromClipboard();
         if (isLetterPressed('a') ||
             url == R"(https://www.facebook.com/photo?fbid=10227411012716536&set=t.100000122270987)") {
-            exit(0);
+            break;
         }
 
         doLeftClickAt(MousePosition(3377, 116));

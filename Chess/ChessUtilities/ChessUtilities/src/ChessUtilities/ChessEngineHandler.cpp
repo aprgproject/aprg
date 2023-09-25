@@ -94,7 +94,7 @@ void ChessEngineHandler::startMonitoringEngineOutput() {
     DWORD bytesRead{};       // bytes read
     DWORD bytesAvailable{};  // bytes available
     array<char, MAX_BUFFER_SIZE> buffer{};
-    string stringBuffer;
+    string stringBuffer{};
     while (true) {
         PeekNamedPipe(m_outputStreamOnHandler, buffer.data(), MAX_BUFFER_SIZE, nullptr, &bytesAvailable, nullptr);
         if (bytesAvailable > 0) {
@@ -144,7 +144,7 @@ void ChessEngineHandler::setAdditionalStepsInProcessingAStringFromEngine(
 
 void ChessEngineHandler::initializeEngine() {
     SECURITY_DESCRIPTOR securityDescriptor{};  // security information for pipes
-    SECURITY_ATTRIBUTES securityAttributes;
+    SECURITY_ATTRIBUTES securityAttributes{};
 
     if (IsWinNT() != 0) {
         InitializeSecurityDescriptor(&securityDescriptor, SECURITY_DESCRIPTOR_REVISION);
@@ -192,6 +192,7 @@ void ChessEngineHandler::shutdownEngine() {
     CloseHandle(m_inputStreamOnHandler);
 }
 
+// NOLINTNEXTLINE(readability-convert-member-functions-to-static)
 void ChessEngineHandler::log(LogType const logtype, string const& logString) {
     if (m_logFileStreamOptional) {
         m_logFileStreamOptional.value() << getLogHeader(logtype) << logString << "\n";
@@ -200,7 +201,7 @@ void ChessEngineHandler::log(LogType const logtype, string const& logString) {
 }
 
 string ChessEngineHandler::getLogHeader(LogType const logtype) {
-    string result;
+    string result{};
     switch (logtype) {
         case LogType::FromEngine: {
             result = "From engine: ";
