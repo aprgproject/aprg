@@ -6,6 +6,7 @@ void NumbersRetriever::retrieveFromConstant(Constant const& constant) { m_number
 
 void NumbersRetriever::retrieveFromMonomial(Monomial const& monomial) {
     m_numbers.emplace(monomial.getCoefficient());
+    // cppcheck-suppress unusedVariable
     for (auto const& [_, exponent] : monomial.getVariablesToExponentsMap()) {
         m_numbers.emplace(exponent);
     }

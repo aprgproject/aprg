@@ -33,7 +33,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
     // Auxiliary Space: O(n^2)
     Count result(0);
     if (!m_string.empty()) {
-        Index const stringLength = static_cast<Index>(m_string.length());
+        auto const stringLength = static_cast<Index>(m_string.length());
         CountMatrix countMatrix(stringLength, stringLength, 0);
 
         for (Index length = 1; length <= stringLength; ++length) {
@@ -62,7 +62,7 @@ PalindromePartitioning::Count PalindromePartitioning::getMinimumNumberOfCutsUsin
     // Auxiliary Space: O(n^2) (partialCounts is linear, but isSubstrAPalindrome is quadratic)
     Count result(0);
     if (!m_string.empty()) {
-        Index const stringLength = static_cast<Index>(m_string.length());
+        auto const stringLength = static_cast<Index>(m_string.length());
         Counts partialCounts(stringLength, 0);
         BoolMatrix isSubstrAPalindrome(stringLength, stringLength, false);
 

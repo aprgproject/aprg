@@ -92,7 +92,7 @@ CountPossibleWaysToConstructBuildings::getNumberOfWaysUsingFibonacciNumber() con
     // N = 5, result = 169 [result for one side = 13]
     // ...
     // In general, we can say that: result(N) = getFibonacciNumber(N+2)^2
-    Count const resultInOnSide = static_cast<Count>(getNthFibonacciNumber(m_numberOfSections + 2));
+    auto const resultInOnSide = static_cast<Count>(getNthFibonacciNumber(m_numberOfSections + 2));
     return resultInOnSide * resultInOnSide;
 }
 

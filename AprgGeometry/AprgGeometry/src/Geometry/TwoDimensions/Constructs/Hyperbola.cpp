@@ -105,6 +105,7 @@ Points Hyperbola::getPointsInTraversingXAndY(double const signOfX, double const 
     Points result;
     Points const pointsFromTraversingX(getPointsInTraversingX(signOfX, signOfY, interval));
     Points const pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
+    // NOLINTBEGIN(bugprone-branch-clone)
     if (signOfX > 0 && signOfY > 0) {
         // first quarter
         result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
@@ -118,6 +119,7 @@ Points Hyperbola::getPointsInTraversingXAndY(double const signOfX, double const 
         // third quarter
         result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
+    // NOLINTEND(bugprone-branch-clone)
     return result;
 }
 

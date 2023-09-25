@@ -12,10 +12,10 @@ public:
     using GraphingSteps = std::function<void(void)>;
     virtual ~AprgGnuPlotBase() = default;  // virtual destructor because of virtual functions (vtable exists)
     AprgGnuPlotBase() = default;
-    AprgGnuPlotBase(AprgGnuPlotBase const& plot) = default;
-    AprgGnuPlotBase(AprgGnuPlotBase&& plot) = default;
-    AprgGnuPlotBase& operator=(AprgGnuPlotBase const& plot) = default;
-    AprgGnuPlotBase& operator=(AprgGnuPlotBase&& plot) = default;
+    AprgGnuPlotBase(AprgGnuPlotBase const& plot) = delete;
+    AprgGnuPlotBase(AprgGnuPlotBase&& plot) = delete;
+    AprgGnuPlotBase& operator=(AprgGnuPlotBase const& plot) = delete;
+    AprgGnuPlotBase& operator=(AprgGnuPlotBase&& plot) = delete;
     void setTitle(std::string const& title, std::string const& configurationString);
     void setXAxis(std::string const& xAxisName, std::string const& configurationString);
     void setYAxis(std::string const& yAxisName, std::string const& configurationString);

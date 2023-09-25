@@ -11,6 +11,7 @@ namespace alba::algebra {
 
 AlbaNumber getDegree(Monomial const& monomial) {
     AlbaNumber degree;
+    // cppcheck-suppress unusedVariable
     for (auto const& [_, exponent] : monomial.getVariablesToExponentsMap()) {
         degree = degree + exponent;
     }
@@ -34,6 +35,7 @@ AlbaNumber getMaxExponent(Monomial const& monomial) {
 AlbaNumber getGcfOfExponentsInMonomial(Monomial const& monomial) {
     AlbaNumber commonExponent(1);
     bool isFirst(true);
+    // cppcheck-suppress unusedVariable
     for (auto const& [_, exponent] : monomial.getVariablesToExponentsMap()) {
         if (exponent.isIntegerOrFractionType()) {
             if (isFirst) {
@@ -232,6 +234,7 @@ bool doesCoefficientsHaveSameSign(Monomial const& monomial1, Monomial const& mon
 
 bool hasNegativeExponents(Monomial const& monomial) {
     bool result(false);
+    // cppcheck-suppress unusedVariable
     for (auto const& [_, exponent] : monomial.getVariablesToExponentsMap()) {
         if (exponent < 0) {
             result = true;

@@ -333,7 +333,8 @@ typename GraphTypes<Vertex>::ListOfEdges getEdgesOfMaximalConnectedSubgraphs(Bas
         }
     }
     ListOfEdges result;
-    for (auto const& [root, edge] : rootToEdgeMap) {
+    // cppcheck-suppress unusedVariable
+    for (auto const& [_, edge] : rootToEdgeMap) {
         result.emplace_back(edge);
     }
     return result;

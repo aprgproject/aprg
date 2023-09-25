@@ -14,8 +14,8 @@ public:
     virtual ~Colleague() = default;
     Colleague(Colleague const&) = default;
     Colleague(Colleague&&) = default;
-    Colleague& operator=(Colleague const&) = default;
-    Colleague& operator=(Colleague&&) = default;
+    Colleague& operator=(Colleague const&) = delete;
+    Colleague& operator=(Colleague&&) = delete;
     Colleague(Mediator& mediator, const int id) : m_mediator(mediator), m_id(id) {}
     virtual void send(std::string const&) = 0;
     virtual void receive(std::string const&) = 0;

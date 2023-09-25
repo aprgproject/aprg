@@ -205,6 +205,7 @@ Points Ellipse::getPointsInTraversingXAndY(double const signOfX, double const si
     Points result;
     Points const pointsFromTraversingX(getPointsInTraversingX(signOfX, signOfY, interval));
     Points const pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
+    // NOLINTBEGIN(bugprone-branch-clone)
     if (signOfX > 0 && signOfY > 0) {
         result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
     } else if (signOfX < 0 && signOfY > 0) {
@@ -214,6 +215,7 @@ Points Ellipse::getPointsInTraversingXAndY(double const signOfX, double const si
     } else if (signOfX > 0 && signOfY < 0) {
         result = getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
+    // NOLINTEND(bugprone-branch-clone)
     return result;
 }
 

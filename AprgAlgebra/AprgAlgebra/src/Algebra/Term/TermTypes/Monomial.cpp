@@ -87,6 +87,7 @@ void Monomial::divideNumber(AlbaNumber const& number) {
 
 void Monomial::raiseToPowerNumber(AlbaNumber const& number) {
     m_constant = m_constant ^ number;
+    // cppcheck-suppress unusedVariable
     for (auto& [_, exponent] : m_variablesToExponentsMap) {
         exponent = exponent * number;
     }

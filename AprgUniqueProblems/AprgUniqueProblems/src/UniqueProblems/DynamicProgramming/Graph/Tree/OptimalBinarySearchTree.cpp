@@ -34,7 +34,7 @@ OptimalBinarySearchTree::Cost OptimalBinarySearchTree::getMinimumCostUsingIterat
     // Auxiliary Space: O(n^2)
     Cost result(0);
     if (!m_valueAndFrequencyPairs.empty()) {
-        Index const numberOfPairs = static_cast<Index>(m_valueAndFrequencyPairs.size());
+        auto const numberOfPairs = static_cast<Index>(m_valueAndFrequencyPairs.size());
         CostMatrix costMatrix(numberOfPairs, numberOfPairs);
 
         Frequencies frequencies;

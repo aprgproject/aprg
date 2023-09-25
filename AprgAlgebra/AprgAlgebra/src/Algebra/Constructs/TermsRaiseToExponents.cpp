@@ -169,6 +169,7 @@ template void TermsRaiseToExponents<Term, TermRaiseToTerms>::subtractExponents(
 
 template <typename ExponentType, typename BaseRaiseToExponentType>
 void TermsRaiseToExponents<ExponentType, BaseRaiseToExponentType>::multiplyToExponents(ExponentType const& exponent) {
+    // cppcheck-suppress unusedVariable
     for (auto& [_, exponentFromMap] : m_baseToExponentMap) {
         exponentFromMap *= exponent;
     }

@@ -7,6 +7,7 @@ namespace alba {
 SmallestOfThreeIntegersWithoutComparisonOperators::UnsignedValue
 SmallestOfThreeIntegersWithoutComparisonOperators::getSmallest(
     UnsignedValue const value1, UnsignedValue const value2, UnsignedValue const value3) {
+    // NOLINTBEGIN(readability-suspicious-call-argument)
     if (isLessThan(value3, value2)) {
         if (isLessThan(value3, value1)) {
             return value3;
@@ -15,6 +16,7 @@ SmallestOfThreeIntegersWithoutComparisonOperators::getSmallest(
             return value2;
         }
     }
+    // NOLINTEND(readability-suspicious-call-argument)
     return value1;
 }
 

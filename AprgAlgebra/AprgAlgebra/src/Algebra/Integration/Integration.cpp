@@ -1371,6 +1371,7 @@ void Integration::fixTrigonometricFunctionsBasedFromExponents(
         InputTermToTrigonometryFunctionExponentsMap newTrigFunctionsInputTermToExponents(
             trigFunctionsInputTermToExponents);
         bool isChanged(false);
+        // cppcheck-suppress unusedVariable
         for (auto& [_, exponents] : newTrigFunctionsInputTermToExponents) {
             TrigonometryFunctionExponents const newExponents(
                 getTrigonometricExponentsSuitableForIntegration(exponents));

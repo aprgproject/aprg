@@ -113,6 +113,7 @@ private:
                 searchUsingDfsWithDirectedGraph(adjacentVertex);
             } else if (VertexState::Processing == adjacentVertexState) {
                 // there is a cycle if adjacent vertex is in processing as well
+                // NOLINTNEXTLINE(readability-suspicious-call-argument)
                 m_pathsWithCycle.emplace_back(getPathWithCycle(startVertex, adjacentVertex));
             }
         }
@@ -133,6 +134,7 @@ private:
             } else if (previousVertex != adjacentVertex && VertexState::Processing == adjacentVertexState) {
                 // there is a cycle if adjacent vertex is in processing as well
                 // if previous and adjacent are equal then its the same edge (and not technically a cycle)
+                // NOLINTNEXTLINE(readability-suspicious-call-argument)
                 m_pathsWithCycle.emplace_back(getPathWithCycle(startVertex, adjacentVertex));
             }
         }

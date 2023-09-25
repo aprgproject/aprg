@@ -263,6 +263,7 @@ MobileNumericKeypadProblem::Count MobileNumericKeypadProblem::getCountForValueUs
         } else if (length == 1) {
             result = 1;
         }
+        // NOLINTNEXTLINE(readability-suspicious-call-argument)
         countMatrix.setEntry(length, numpadValue, result);
     }
     return result;

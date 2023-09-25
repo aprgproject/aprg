@@ -53,6 +53,7 @@ TotalNumberOfNonDecreasingNumbersWithNDigits::getCountUsingIterativeDP() const {
                 for (Value beforeDigitValue = 0; beforeDigitValue <= digitValue; ++beforeDigitValue) {
                     entryResult += countMatrix.getEntry(beforeDigitValue, digitIndex - 1);
                 }
+                // NOLINTNEXTLINE(readability-suspicious-call-argument)
                 countMatrix.setEntry(digitValue, digitIndex, entryResult);
             }
         }
@@ -133,6 +134,7 @@ TotalNumberOfNonDecreasingNumbersWithNDigits::getCountUsingMemoizationDP(
         } else {
             result = 1;
         }
+        // NOLINTNEXTLINE(readability-suspicious-call-argument)
         countMatrix.setEntry(digitValue, digitIndex, result);
     }
     return result;
