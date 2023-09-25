@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-25T02:26:54
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T18:58:30
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.cpp:21:19: warning: initialization of 'START_ENTRY_PATTERN' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/basic_string.h:642:7: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.cpp:22:19: warning: initialization of 'END_ENTRY_PATTERN' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
@@ -125,9 +125,6 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.cpp:91:97: warning: 3.4 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.cpp:92:13: warning: 4.5 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.hpp:49:21: warning: 24 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.hpp:32:10: style: Unused private function: 'RevisionEditor::saveCommitsPerHourToFile' [unusedPrivateFunction]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.hpp:33:10: style: Unused private function: 'RevisionEditor::saveCommitsInADayToFile' [unusedPrivateFunction]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.hpp:34:10: style: Unused private function: 'RevisionEditor::saveCommitMessagesToFile' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.cpp:21:1: warning: non-POD static (basic_string) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.cpp:22:1: warning: non-POD static (basic_string) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.hpp:49:21: warning: 24 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
