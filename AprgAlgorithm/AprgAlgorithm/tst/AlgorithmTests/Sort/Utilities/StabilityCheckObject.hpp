@@ -7,7 +7,7 @@ namespace alba::algorithm {
 class StabilityCheckObject {
 public:
     explicit StabilityCheckObject(int const value);
-    StabilityCheckObject();
+    StabilityCheckObject() = default;
     StabilityCheckObject(char const visiblePart, int const notVisiblePart);
 
     template <typename ValueType>

@@ -31,7 +31,7 @@ TEST(FixedSizeStackTest, DISABLED_PushWorksWithAssertionWhenItReachesMaximumSize
     for (int i = 0; i < 10; ++i) {
         stack.push(i);
     }
-    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c,cppcoreguidelines-pro-type-vararg,hicpp-vararg)
     EXPECT_DEATH(stack.push(100), "Assertion failed!");
 }
 

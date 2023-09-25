@@ -7,20 +7,20 @@ namespace alba::chess {
 struct Variation {
     int mateValue{};  // number of mate moves, can be negative if player is about to be mated
     int scoreInCentipawns{};
-    stringHelper::strings halfMoves;
+    stringHelper::strings halfMoves{};
 };
 
 using Variations = std::vector<Variation>;
 
 struct CalculationDetails {
-    int depthInPlies;           // search depth in plies
-    int selectiveDepthInPlies;  // selective search depth in plies
+    int depthInPlies{};           // search depth in plies
+    int selectiveDepthInPlies{};  // selective search depth in plies
     // Some programs also report a selective search depth beside the nominal search depth, most often much greater than
     // the nominal search depth. Some programs determine the highest distance to the root at any node, others only at
     // the horizon.
-    Variations variations;
-    std::string bestMove;              // best move in position as determined by engine
-    std::string responseMoveToPonder;  // move that engine is pondering after best move
+    Variations variations{};
+    std::string bestMove{};              // best move in position as determined by engine
+    std::string responseMoveToPonder{};  // move that engine is pondering after best move
 };
 
 // Ply explanation:

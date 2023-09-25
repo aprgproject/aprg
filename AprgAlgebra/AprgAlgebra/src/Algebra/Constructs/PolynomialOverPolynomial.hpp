@@ -14,7 +14,7 @@ public:
         Polynomial remainder;
     };
 
-    PolynomialOverPolynomial();
+    PolynomialOverPolynomial() = default;
     PolynomialOverPolynomial(Polynomial const& numerator, Polynomial const& denominator);
     PolynomialOverPolynomial(Polynomial&& numerator, Polynomial&& denominator);
     [[nodiscard]] Polynomial const& getNumerator() const;

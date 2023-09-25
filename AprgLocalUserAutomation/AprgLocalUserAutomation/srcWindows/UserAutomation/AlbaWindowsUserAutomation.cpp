@@ -11,6 +11,7 @@
 
 using namespace std;
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-union-access)
 namespace alba::AlbaWindowsUserAutomation {
 
 namespace {
@@ -300,3 +301,4 @@ void saveBitmapFromClipboard(string_view const& filePath) {
 }
 
 }  // namespace alba::AlbaWindowsUserAutomation
+// NOLINTEND(cppcoreguidelines-pro-type-union-access)

@@ -110,7 +110,7 @@ void BitmapSnippet::clearAndPutOneColorOnWholeSnippet(uint8_t const colorByte) {
     int const numberOfBytesToBeCopiedForX =
         static_cast<int>(m_configuration.getOneRowSizeInBytesFromBytes(byteOffsetInXForStart, byteOffsetInXForEnd));
     int const yDifference = static_cast<int>(m_bottomRightCorner.getY()) - static_cast<int>(m_topLeftCorner.getY()) + 1;
-    m_pixelData.resize(numberOfBytesToBeCopiedForX * yDifference, colorByte);
+    m_pixelData.resize(static_cast<size_t>(numberOfBytesToBeCopiedForX) * static_cast<size_t>(yDifference), colorByte);
 }
 
 void BitmapSnippet::setPixelAt(BitmapXY const position, uint32_t const value) {

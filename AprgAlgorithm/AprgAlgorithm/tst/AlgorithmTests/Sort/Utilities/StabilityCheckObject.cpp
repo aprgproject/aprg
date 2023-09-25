@@ -5,7 +5,6 @@ using namespace std;
 namespace alba::algorithm {
 
 StabilityCheckObject::StabilityCheckObject(int const value) : m_visiblePart(static_cast<char>(value)) {}
-StabilityCheckObject::StabilityCheckObject() {}
 
 StabilityCheckObject::StabilityCheckObject(char const visiblePart, int const notVisiblePart)
     : m_visiblePart(visiblePart), m_notVisiblePart(notVisiblePart) {}

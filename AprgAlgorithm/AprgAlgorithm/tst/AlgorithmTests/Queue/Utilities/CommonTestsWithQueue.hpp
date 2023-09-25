@@ -65,7 +65,7 @@ void testDequeueWithInt() {
 template <typename Queue>
 void testDequeueAssertionWhenEmptyWithInt() {
     Queue queue;
-    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c,cppcoreguidelines-pro-type-vararg,hicpp-vararg)
     EXPECT_DEATH(queue.dequeue(), "Assertion failed!");
 }
 

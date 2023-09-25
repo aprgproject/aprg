@@ -11,8 +11,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-Monomial::Monomial() {}
-
 Monomial::Monomial(AlbaNumber const& constant, VariablesToExponentsMap const& variablesWithExponents)
     : m_constant(constant), m_variablesToExponentsMap(variablesWithExponents) {}
 

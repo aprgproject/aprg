@@ -24,7 +24,7 @@ public:
     };
 
     struct Command {
-        CommandType commandType;
+        CommandType commandType{CommandType::Uci};
         std::string commandString;
     };
 

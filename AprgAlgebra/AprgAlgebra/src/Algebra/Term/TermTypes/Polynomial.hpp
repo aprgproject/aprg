@@ -12,7 +12,7 @@ class Polynomial : public BaseTermData {
 public:
     explicit Polynomial(Monomials const& monomials);
     explicit Polynomial(Monomials&& monomials);
-    Polynomial();
+    Polynomial() = default;
     Polynomial(std::initializer_list<Monomial> const& monomials);
     // rule of zero
     bool operator==(Polynomial const& second) const;

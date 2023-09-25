@@ -38,16 +38,7 @@ int IsWinNT() {
 }  // namespace
 
 ChessEngineHandler::ChessEngineHandler(string const& enginePath)
-    : m_enginePath(enginePath),
-
-      m_startupInfo{},
-      m_processInfo{},
-      m_engineMonitoringThread{},
-      m_threadId{},
-      m_inputStreamOnEngineThread{},
-      m_outputStreamOnEngineThread{},
-      m_inputStreamOnHandler{},
-      m_outputStreamOnHandler{} {
+    : m_enginePath(enginePath){
     initializeEngine();
 }
 

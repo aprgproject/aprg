@@ -9,8 +9,8 @@ namespace alba::algebra {
 class MultiplicationAndDivisionOfRadicals {
 public:
     struct RadicalDetail {
-        TermRaiseToANumber radical;
-        TermAssociationType association;
+        TermRaiseToANumber radical{};
+        TermAssociationType association{};
     };
 
     using RadicalDetails = std::vector<RadicalDetail>;

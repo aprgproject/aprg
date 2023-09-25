@@ -19,7 +19,7 @@ public:
     // Windows.h.
     static constexpr int MAX_NUMBER_OF_MOVES = (std::numeric_limits<int>::max)();
     static constexpr int CHESS_SIDE_SIZE = 8;
-    using PieceGrid = std::array<Piece, CHESS_SIDE_SIZE * CHESS_SIDE_SIZE>;
+    using PieceGrid = std::array<Piece, static_cast<std::size_t>(CHESS_SIDE_SIZE) * static_cast<std::size_t>(CHESS_SIDE_SIZE)>;
     using CoordinateCondition = std::function<bool(Coordinate const&)>;
 
     enum class CastleType { NotACastle, KingSideCastle, QueenSideCastle };
@@ -30,7 +30,7 @@ public:
     };
 
     struct NotationDetailsOfMove {
-        PieceType pieceType;
+        PieceType pieceType{PieceType::Empty};
         std::optional<CoordinateDataType> firstX, firstY, lastX, lastY;
     };
 

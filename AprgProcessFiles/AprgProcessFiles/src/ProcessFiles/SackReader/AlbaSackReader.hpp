@@ -30,7 +30,7 @@ public:
     };
 
     struct ReaderTransactionData {
-        ReaderState state;
+        ReaderState state{ReaderState::LookingForInitialKeyword};
         std::string typeName;
         std::string firstIdentifier;
         std::string secondIdentifier;

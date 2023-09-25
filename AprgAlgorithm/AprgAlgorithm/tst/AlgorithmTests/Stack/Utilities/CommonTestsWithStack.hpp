@@ -66,7 +66,7 @@ template <typename Stack>
 void testPopAssertionWhenEmptyWithInt() {
     Stack stack;
 
-    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c,cppcoreguidelines-pro-type-vararg,hicpp-vararg)
     EXPECT_DEATH(stack.pop(), "Assertion failed!");
 }
 

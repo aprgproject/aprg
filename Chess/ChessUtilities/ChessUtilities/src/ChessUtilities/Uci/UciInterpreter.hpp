@@ -8,11 +8,11 @@ namespace alba::chess {
 class UciInterpreter {
 public:
     struct InfoDetails {
-        stringHelper::StringPairs commonParameterNameAndValue;
-        int multipv;
-        stringHelper::strings pvHalfMoves;
-        int scoreInCentipawns;
-        int mateValue;  // number of mate moves, can be negative if player is about to be mated
+        stringHelper::StringPairs commonParameterNameAndValue{};
+        int multipv{};
+        stringHelper::strings pvHalfMoves{};
+        int scoreInCentipawns{};
+        int mateValue{};  // number of mate moves, can be negative if player is about to be mated
     };
 
     explicit UciInterpreter(CalculationDetails& calculationDetails);
