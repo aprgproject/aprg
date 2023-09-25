@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-25T00:12:44
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T16:59:01
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.cpp:101:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:52:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:63:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
@@ -10,21 +10,43 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:18:15: warning: variable 'totalSizeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:19:12: warning: variable 'writeProgressForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:30:117: warning: 30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:33:26: error: no matching constructor for initialization of 'alba::algorithm::AlbaLargeSorterConfiguration' [clang-diagnostic-error]
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:10:8: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:10:8: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:11:5: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:13:5: note: candidate constructor not viable: requires 5 arguments, but 2 were provided
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:36:29: error: no matching constructor for initialization of 'alba::algorithm::AlbaLargeSorterConfiguration' [clang-diagnostic-error]
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:10:8: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:10:8: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:11:5: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:13:5: note: candidate constructor not viable: requires 5 arguments, but 2 were provided
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:170:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:180:70: warning: 75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:180:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:198:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:198:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:215:70: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:215:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:168:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:178:70: warning: 75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:178:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:196:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:196:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:213:70: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:213:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.cpp:35:37: warning: variable 's_mainString' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:267:29: warning: 1000000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:306:28: warning: 0x1200 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:310:35: warning: 0x1300 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:319:22: warning: function 'processFileForBtsDelayForMikhailKnife' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:364:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:367:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:377:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:383:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:393:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:396:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:406:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:410:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:420:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:424:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:433:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:439:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:439:50: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:440:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:453:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:453:55: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:454:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:467:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:467:50: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:468:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:509:9: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.hpp:10:1: warning: using declarations in the global namespace in headers are prohibited [google-global-names-in-headers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.hpp:10:1: warning: using declarations in the global namespace in headers are prohibited [google-global-names-in-headers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/tst/BtsLogAnalyzerTests/BtsLogAnalyzer_unit.cpp:13:9: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/tst/BtsLogAnalyzerTests/BtsLogAnalyzer_unit.cpp:14:9: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/tst/BtsLogAnalyzerTests/BtsLogAnalyzer_unit.cpp:15:9: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/tst/BtsLogAnalyzerTests/BtsLogAnalyzer_unit.cpp:20:9: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
 DONE!
