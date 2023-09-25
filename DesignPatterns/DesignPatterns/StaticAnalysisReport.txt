@@ -1,19 +1,7 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-24T22:02:45
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T15:25:58
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ClassAdapter_unit.cpp:10:29: warning: variable name 't' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ObjectAdapter_unit.cpp:10:29: warning: variable name 't' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:13:5: warning: explicitly defaulted copy constructor is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:30:30: note: copy constructor of 'Handler' is implicitly deleted because field 'm_successorPointer' has a deleted copy constructor
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/unique_ptr.h:514:7: note: 'unique_ptr' has been explicitly marked deleted here
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:15:14: warning: explicitly defaulted copy assignment operator is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:30:30: note: copy assignment operator of 'Handler' is implicitly deleted because field 'm_successorPointer' has a deleted copy assignment operator
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/unique_ptr.h:515:19: note: 'operator=' has been explicitly marked deleted here
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:13:5: warning: explicitly defaulted copy constructor is implicitly deleted [-Wdefaulted-function-deleted]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:30:30: note: copy constructor of 'Handler' is implicitly deleted because field 'm_successorPointer' has a deleted copy constructor
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/unique_ptr.h:514:7: note: 'unique_ptr' has been explicitly marked deleted here
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:15:14: warning: explicitly defaulted copy assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/ChainOfResponsibility/ChainOfResponsibility.hpp:30:30: note: copy assignment operator of 'Handler' is implicitly deleted because field 'm_successorPointer' has a deleted copy assignment operator
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/unique_ptr.h:515:19: note: 'operator=' has been explicitly marked deleted here
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Composite/Composite.hpp:64:29: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Composite/Composite_unit.cpp:10:9: warning: variable name 'id' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Flyweight/Flyweight.hpp:62:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
@@ -28,26 +16,17 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:78:46: warning: function 'createIterator' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:78:46: note: make as 'inline'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Iterator/Iterator_unit.cpp:13:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:17:16: warning: explicitly defaulted copy assignment operator is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:25:15: note: copy assignment operator of 'Colleague' is implicitly deleted because field 'm_mediator' is of reference type 'Mediator::Mediator &'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:18:16: warning: explicitly defaulted move assignment operator is implicitly deleted [clang-diagnostic-defaulted-function-deleted]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:25:15: note: move assignment operator of 'Colleague' is implicitly deleted because field 'm_mediator' is of reference type 'Mediator::Mediator &'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:19:45: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:31:53: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:71:25: warning: function 'send' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:71:25: note: make as 'inline'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:76:25: warning: function 'receive' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:76:25: note: make as 'inline'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:17:16: warning: explicitly defaulted copy assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:25:15: note: copy assignment operator of 'Colleague' is implicitly deleted because field 'm_mediator' is of reference type 'Mediator::Mediator &'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:18:16: warning: explicitly defaulted move assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:25:15: note: move assignment operator of 'Colleague' is implicitly deleted because field 'm_mediator' is of reference type 'Mediator::Mediator &'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:51:37: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:80:24: warning: function 'update' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:80:24: note: make as 'inline'
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:11:10: warning: method 'tellSomething' can be made const [readability-make-member-function-const]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:36:39: warning: variable 'm_instancePointer' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:40:39: warning: variable 'm_instancePointer' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:40:39: warning: variable 'm_instancePointer' defined in a header file; variable definitions in header files can lead to ODR violations [misc-definitions-in-headers]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Singleton/Singleton_unit.cpp:10:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Singleton/Singleton_unit.cpp:14:5: warning: static member accessed through instance [readability-static-accessed-through-instance]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:41:39: warning: variable 'm_instancePointer' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:41:39: warning: variable 'm_instancePointer' defined in a header file; variable definitions in header files can lead to ODR violations [misc-definitions-in-headers]
 DONE!
