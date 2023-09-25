@@ -1,4 +1,4 @@
-#include <CodeUtilities/Common/TermMatcher.hpp>
+#include <CodeUtilities/Common/Matcher/Matcher.hpp>
 
 #include <gtest/gtest.h>
 
@@ -6,8 +6,8 @@ using namespace std;
 
 namespace alba::CodeUtilities {
 
-TEST(TermMatcherTest, OperatorEqualsWorksWithBothTermTypeAndIdentifier) {
-    TermMatcher const matcher(TermType::Identifier, "SomeIdentifier");
+TEST(MatcherTest, OperatorEqualsWorksWithBothTermTypeAndIdentifier) {
+    Matcher const matcher(TermType::Identifier, "SomeIdentifier");
     Term const term2(TermType::Identifier, "SomeIdentifier");
     Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
     Term const term4(TermType::Keyword, "SomeIdentifier");
@@ -20,8 +20,8 @@ TEST(TermMatcherTest, OperatorEqualsWorksWithBothTermTypeAndIdentifier) {
     EXPECT_FALSE(operator==(term4, matcher));
 }
 
-TEST(TermMatcherTest, OperatorEqualsWorksWithTermType) {
-    TermMatcher const matcher(TermType::Identifier);
+TEST(MatcherTest, OperatorEqualsWorksWithTermType) {
+    Matcher const matcher(TermType::Identifier);
     Term const term2(TermType::Identifier, "SomeIdentifier");
     Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
     Term const term4(TermType::Keyword, "SomeIdentifier");
@@ -34,8 +34,8 @@ TEST(TermMatcherTest, OperatorEqualsWorksWithTermType) {
     EXPECT_FALSE(operator==(term4, matcher));
 }
 
-TEST(TermMatcherTest, OperatorEqualsWorksWithContent) {
-    TermMatcher const matcher("SomeIdentifier");
+TEST(MatcherTest, OperatorEqualsWorksWithContent) {
+    Matcher const matcher("SomeIdentifier");
     Term const term2(TermType::Identifier, "SomeIdentifier");
     Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
     Term const term4(TermType::Keyword, "SomeIdentifier");
@@ -48,8 +48,8 @@ TEST(TermMatcherTest, OperatorEqualsWorksWithContent) {
     EXPECT_TRUE(operator==(term4, matcher));
 }
 
-TEST(TermMatcherTest, OperatorNotEqualsWorksWithBothTermTypeAndIdentifier) {
-    TermMatcher const matcher(TermType::Identifier, "SomeIdentifier");
+TEST(MatcherTest, OperatorNotEqualsWorksWithBothTermTypeAndIdentifier) {
+    Matcher const matcher(TermType::Identifier, "SomeIdentifier");
     Term const term2(TermType::Identifier, "SomeIdentifier");
     Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
     Term const term4(TermType::Keyword, "SomeIdentifier");
@@ -62,8 +62,8 @@ TEST(TermMatcherTest, OperatorNotEqualsWorksWithBothTermTypeAndIdentifier) {
     EXPECT_TRUE(operator!=(term4, matcher));
 }
 
-TEST(TermMatcherTest, OperatorNotEqualsWorksWithTermType) {
-    TermMatcher const matcher(TermType::Identifier);
+TEST(MatcherTest, OperatorNotEqualsWorksWithTermType) {
+    Matcher const matcher(TermType::Identifier);
     Term const term2(TermType::Identifier, "SomeIdentifier");
     Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
     Term const term4(TermType::Keyword, "SomeIdentifier");
@@ -76,8 +76,8 @@ TEST(TermMatcherTest, OperatorNotEqualsWorksWithTermType) {
     EXPECT_TRUE(operator!=(term4, matcher));
 }
 
-TEST(TermMatcherTest, OperatorNotEqualsWorksWithContent) {
-    TermMatcher const matcher("SomeIdentifier");
+TEST(MatcherTest, OperatorNotEqualsWorksWithContent) {
+    Matcher const matcher("SomeIdentifier");
     Term const term2(TermType::Identifier, "SomeIdentifier");
     Term const term3(TermType::Identifier, "SomeIdentifierDifferent");
     Term const term4(TermType::Keyword, "SomeIdentifier");

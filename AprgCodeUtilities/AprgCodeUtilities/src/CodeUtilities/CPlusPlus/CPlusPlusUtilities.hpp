@@ -1,7 +1,7 @@
 #pragma once
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusTypes.hpp>
-#include <CodeUtilities/Common/Term.hpp>
+#include <CodeUtilities/Common/Term/Term.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
 
 #include <filesystem>

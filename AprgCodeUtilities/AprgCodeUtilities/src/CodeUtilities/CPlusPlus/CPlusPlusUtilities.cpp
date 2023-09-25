@@ -2,7 +2,7 @@
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusTokenizer.hpp>
 #include <CodeUtilities/Common/CommonTypes.hpp>
-#include <CodeUtilities/Common/TermUtilities.hpp>
+#include <CodeUtilities/Common/CommonUtilities.hpp>
 #include <Common/File/AlbaFileReader.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 

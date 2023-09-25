@@ -1,4 +1,4 @@
-#include <CodeUtilities/Common/Term.hpp>
+#include <CodeUtilities/Common/Term/Term.hpp>
 
 #include <gtest/gtest.h>
 

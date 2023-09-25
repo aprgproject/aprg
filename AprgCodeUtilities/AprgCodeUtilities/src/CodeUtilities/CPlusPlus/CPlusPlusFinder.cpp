@@ -1,7 +1,7 @@
 #include "CPlusPlusFinder.hpp"
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
-#include <CodeUtilities/Common/TermUtilities.hpp>
+#include <CodeUtilities/Common/CommonUtilities.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <iostream>

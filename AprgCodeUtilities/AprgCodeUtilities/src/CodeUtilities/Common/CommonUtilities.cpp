@@ -1,4 +1,4 @@
-#include "TermUtilities.hpp"
+#include "CommonUtilities.hpp"
 
 #include <Common/Macros/AlbaMacros.hpp>
 #include <Common/String/AlbaStringHelper.hpp>
@@ -91,7 +91,7 @@ Indexes searchPatternsAt(Terms const& terms, int const termIndex, Patterns const
     return {};
 }
 
-Indexes searchBackwardsWithMatcher(Terms const& terms, int const termIndex, TermMatcher const& matcher) {
+Indexes searchBackwardsWithMatcher(Terms const& terms, int const termIndex, Matcher const& matcher) {
     Indexes hitIndexes;
     for (int termIndex2 = termIndex; termIndex2 >= 0; --termIndex2) {
         Term const& currentTerm(terms[termIndex2]);

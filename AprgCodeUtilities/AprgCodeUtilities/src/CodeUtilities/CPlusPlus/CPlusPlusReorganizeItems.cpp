@@ -1,7 +1,7 @@
 #include "CPlusPlusReorganizeItems.hpp"
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
-#include <CodeUtilities/Common/TermUtilities.hpp>
+#include <CodeUtilities/Common/CommonUtilities.hpp>
 #include <Common/Print/AlbaLogPrints.hpp>
 
 #include <algorithm>
