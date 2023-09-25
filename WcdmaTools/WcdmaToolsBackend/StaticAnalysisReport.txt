@@ -1,32 +1,8 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-24T23:54:41
-/home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringToken.cpp:20:52: warning: pass by value and use std::move [modernize-pass-by-value]
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T16:38:26
 /home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.cpp:35:37: warning: variable 's_mainString' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.cpp:101:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.hpp:61:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.hpp:36:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.hpp:61:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:17:15: warning: variable 'totalSizeToBeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:18:15: warning: variable 'totalSizeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:19:12: warning: variable 'writeProgressForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:30:117: warning: 30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:33:26: error: no matching constructor for initialization of 'alba::algorithm::AlbaLargeSorterConfiguration' [clang-diagnostic-error]
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:10:8: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:10:8: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:11:5: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:13:5: note: candidate constructor not viable: requires 5 arguments, but 2 were provided
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:36:29: error: no matching constructor for initialization of 'alba::algorithm::AlbaLargeSorterConfiguration' [clang-diagnostic-error]
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:10:8: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:10:8: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:11:5: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:13:5: note: candidate constructor not viable: requires 5 arguments, but 2 were provided
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:170:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:180:70: warning: 75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:180:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:198:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:198:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:215:70: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:215:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.hpp:36:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:52:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:63:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
@@ -34,4 +10,501 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:145:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:155:21: warning: consider replacing 'unsigned short' with 'uint16' [google-runtime-int]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.hpp:36:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.hpp:61:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.hpp:36:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.hpp:61:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:17:15: warning: variable 'totalSizeToBeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:18:15: warning: variable 'totalSizeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:19:12: warning: variable 'writeProgressForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:30:117: warning: 30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:168:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:178:70: warning: 75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:178:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:196:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:196:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:213:70: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:213:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.hpp:36:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.hpp:61:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.hpp:36:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogSorterTest.cpp:20:82: warning: 10000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogSorterTest.cpp:21:82: warning: 100000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogSorterTest.cpp:22:82: warning: 200000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogSorterTest.cpp:23:70: warning: 70 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogSorterTest.cpp:28:85: warning: 10000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogSorterTest.cpp:29:85: warning: 100000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogSorterTest.cpp:30:85: warning: 200000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogSorterTest.cpp:31:73: warning: 70 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.hpp:61:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.hpp:36:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogSorter_unit.cpp:9:8: warning: variable 'totalSizeToBeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogSorter_unit.cpp:10:8: warning: variable 'totalSizeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogSorter_unit.cpp:11:5: warning: variable 'writeProgressForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.hpp:61:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.hpp:36:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:15:1: warning: function 'TestBody' has cognitive complexity of 64 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:38:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:38:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:38:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:39:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:39:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:39:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:40:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:40:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:40:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:41:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:41:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:41:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:43:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:43:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:43:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:44:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:44:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:44:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:45:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:45:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:45:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:46:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:46:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:46:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:48:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:48:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:48:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:49:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:49:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:49:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:50:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:50:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:50:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:51:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:51:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:51:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:53:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:53:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:53:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:54:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:54:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:54:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:55:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:55:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:55:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:56:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:56:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:56:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:59:1: warning: function 'TestBody' has cognitive complexity of 64 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:82:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:82:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:82:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:83:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:83:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:83:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:84:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:84:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:84:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:85:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:85:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:85:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:87:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:87:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:87:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:88:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:88:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:88:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:89:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:89:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:89:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:90:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:90:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:90:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:92:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:92:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:92:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:93:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:93:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:93:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:94:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:94:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:94:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:95:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:95:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:95:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:97:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:97:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:97:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:98:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:98:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:98:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:99:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:99:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:99:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:100:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:100:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:100:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:103:1: warning: function 'TestBody' has cognitive complexity of 64 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:126:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:126:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:126:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:127:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:127:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:127:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:128:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:128:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:128:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:129:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:129:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:129:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:131:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:131:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:131:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:132:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:132:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:132:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:133:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:133:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:133:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:134:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:134:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:134:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:136:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:136:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:136:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:137:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:137:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:137:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:138:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:138:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:138:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:139:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:139:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:139:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:141:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:141:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:141:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:142:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:142:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:142:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:143:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:143:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:143:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:144:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:144:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:144:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:147:1: warning: function 'TestBody' has cognitive complexity of 64 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:170:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:170:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:170:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:171:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:171:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:171:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:172:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:172:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:172:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:173:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:173:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:173:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:175:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:175:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:175:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:176:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:176:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:176:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:177:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:177:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:177:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:178:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:178:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:178:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:180:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:180:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:180:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:181:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:181:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:181:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:182:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:182:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:182:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:183:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:183:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:183:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:185:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:185:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:185:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:186:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:186:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:186:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:187:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:187:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:187:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:188:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:188:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogPrint_unit.cpp:188:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.hpp:36:51: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:13:1: warning: function 'TestBody' has cognitive complexity of 64 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:23:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:23:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:23:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:24:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:24:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:24:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:25:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:25:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:25:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:26:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:26:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:26:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:27:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:27:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:27:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:28:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:28:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:28:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:29:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:29:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:29:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:31:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:31:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:31:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:32:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:32:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:32:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:33:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:33:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:33:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:34:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:34:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:34:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:35:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:35:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:35:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:36:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:36:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:36:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:37:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:37:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:37:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:39:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:39:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:39:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:40:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:40:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:40:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:43:1: warning: function 'TestBody' has cognitive complexity of 64 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:53:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:53:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:53:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:54:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:54:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:54:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:55:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:55:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:55:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:56:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:56:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:56:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:57:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:57:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:57:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:58:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:58:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:58:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:59:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:59:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:59:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:61:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:61:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:61:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:62:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:62:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:62:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:63:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:63:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:63:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:64:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:64:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:64:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:65:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:65:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:65:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:66:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:66:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:66:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:67:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:67:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:67:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:69:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:69:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:69:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:70:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:70:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:70:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:73:1: warning: function 'TestBody' has cognitive complexity of 60 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:83:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:83:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:83:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:84:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:84:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:84:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:85:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:85:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:85:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:86:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:86:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:86:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:87:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:87:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:87:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:88:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:88:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:88:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:89:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:89:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:89:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:91:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:91:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:91:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:92:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:92:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:92:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:93:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:93:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:93:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:94:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:94:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:94:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:95:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:95:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:95:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:96:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:96:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:96:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:97:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:97:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:97:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:99:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:99:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:99:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:138:1: warning: function 'TestBody' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:141:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:141:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:141:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:142:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:142:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:142:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:143:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:143:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:143:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:144:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:144:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:144:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:145:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:145:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:145:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:146:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:146:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:146:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:147:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:147:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:147:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:148:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:148:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:148:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:149:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:149:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:149:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:150:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:150:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:150:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:153:1: warning: function 'TestBody' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:156:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:156:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:156:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:157:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:157:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:157:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:158:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:158:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:158:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:159:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:159:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:159:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:160:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:160:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:160:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:161:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:161:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:161:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:162:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:162:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:162:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:163:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:163:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:163:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:164:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:164:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:164:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:165:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:165:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:165:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:168:1: warning: function 'TestBody' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:171:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:171:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:171:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:172:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:172:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:172:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:173:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:173:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:173:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:174:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:174:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:174:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:175:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:175:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:175:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:176:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:176:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:176:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:177:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:177:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:177:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:178:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:178:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:178:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:179:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:179:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:179:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:180:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:180:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:180:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:183:1: warning: function 'TestBody' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:186:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:186:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:186:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:187:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:187:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:187:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:188:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:188:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:188:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:189:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:189:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:189:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:190:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:190:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:190:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:191:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:191:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:191:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:192:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:192:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:192:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:193:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:193:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:193:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:194:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:194:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:194:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:195:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:195:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/tst/WcdmaToolsBackendTests/BtsLogTime_unit.cpp:195:5: note: +1, nesting level increased to 2
 DONE!
