@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// NOLINTBEGIN(cppcoreguidelines-pro-type-reinterpret-cast)
 namespace alba {
 
 TEST(AlbaMemoryBufferTest, OperatorBoolWorks) {
@@ -248,3 +249,4 @@ TEST(AlbaMemoryBufferTest, SaveObjectWorksOnStandardLayoutTypes) {
 }
 
 }  // namespace alba
+// NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)

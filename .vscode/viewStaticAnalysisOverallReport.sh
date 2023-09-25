@@ -14,7 +14,7 @@ source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 set -e
 
 # set issue to filter
-issueToFilter="misc-misplaced-const"
+issueToFilter="bugprone-suspicious-include"
 
 # Show all issues found in static analysis reports
 while IFS= read -r staticAnalysisReportPath; do

@@ -133,6 +133,7 @@ AlbaMathVector<DataType, 2U> rotateVectorCounterClockwise(
     AlbaMathVector<DataType, 2U> const& vectorToBeRotated, AlbaAngle const& angle) {
     double const magnitude = vectorToBeRotated.getMagnitude();
     double const newAngleInRadians = angle.getRadians() + acos(vectorToBeRotated.getValueAt(0) / magnitude);
+    // cppcheck-suppress ignoredReturnValue
     return AlbaMathVector<DataType, 2U>{magnitude * cos(newAngleInRadians), magnitude * sin(newAngleInRadians)};
 }
 

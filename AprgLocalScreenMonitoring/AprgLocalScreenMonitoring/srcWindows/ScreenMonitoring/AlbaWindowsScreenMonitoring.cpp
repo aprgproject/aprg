@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// NOLINTBEGIN(misc-misplaced-const)
 namespace alba {
 
 AlbaWindowsScreenMonitoring::AlbaWindowsScreenMonitoring()
@@ -99,3 +100,4 @@ HBITMAP AlbaWindowsScreenMonitoring::createBitmapHandlerFromScreen(HDC const scr
 }
 
 }  // namespace alba
+// NOLINTEND(misc-misplaced-const)

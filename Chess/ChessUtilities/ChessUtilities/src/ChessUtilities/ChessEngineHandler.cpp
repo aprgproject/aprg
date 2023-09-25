@@ -167,6 +167,7 @@ void ChessEngineHandler::initializeEngine() {
             &m_processInfo)) {
         log(LogType::HandlerStatus, "Cannot Create Process");
     }
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
     auto pData = new CallBackData();
     pData->epointer = this;
     m_engineMonitoringThread = CreateThread(nullptr, 0, engineMonitoringCallbackFunction, pData, 0, &(m_threadId));
