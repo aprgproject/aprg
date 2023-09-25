@@ -20,6 +20,10 @@ AlbaGrepStringToken::AlbaGrepStringToken(
     AlbaGrepStringOperatorType const operatorType, std::string const& operatorString)
     : m_type(TokenType::Operator), m_operatorType(operatorType), m_string(operatorString) {}
 
+AlbaGrepStringToken::AlbaGrepStringToken(
+    AlbaGrepStringOperatorType const operatorType, std::string && operatorString)
+    : m_type(TokenType::Operator), m_operatorType(operatorType), m_string(operatorString) {}
+
 AlbaGrepStringOperatorType AlbaGrepStringToken::getOperatorType() const { return m_operatorType; }
 AlbaGrepStringToken::TokenType AlbaGrepStringToken::getTokenType() const { return m_type; }
 
