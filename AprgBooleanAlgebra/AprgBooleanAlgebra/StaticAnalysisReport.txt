@@ -1,7 +1,5 @@
-StaticAnalysisJobIdentifier: [45]
-2023-09-25T07:11:20
-/home/runner/work/aprg/aprg/AprgBooleanAlgebra/AprgBooleanAlgebra/src/BooleanAlgebra/Constructs/TermsAggregator.hpp:20:24: style: Unused private function: 'TermsAggregator::hasNoValueBeforeThisIndex' [unusedPrivateFunction]
-/home/runner/work/aprg/aprg/AprgBooleanAlgebra/AprgBooleanAlgebra/src/BooleanAlgebra/Constructs/TermsAggregator.cpp:33:23: style: Unused variable: _ [unusedVariable]
+StaticAnalysisJobIdentifier: [40]
+2023-09-25T22:54:14
 /home/runner/work/aprg/aprg/AprgBooleanAlgebra/AprgBooleanAlgebra/src/BooleanAlgebra/Functions/CommonFunctionLibrary.cpp:86:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBooleanAlgebra/AprgBooleanAlgebra/src/BooleanAlgebra/Retrieval/BaseRetriever.hpp:15:5: warning: move constructors should be marked noexcept [hicpp-noexcept-move,performance-noexcept-move-constructor]
 /home/runner/work/aprg/aprg/AprgBooleanAlgebra/AprgBooleanAlgebra/src/BooleanAlgebra/Retrieval/BaseRetriever.hpp:17:20: warning: move assignment operators should be marked noexcept [hicpp-noexcept-move,performance-noexcept-move-constructor]
