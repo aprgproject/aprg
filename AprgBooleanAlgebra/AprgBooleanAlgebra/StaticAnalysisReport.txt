@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-24T15:44:42
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T07:11:20
 /home/runner/work/aprg/aprg/AprgBooleanAlgebra/AprgBooleanAlgebra/src/BooleanAlgebra/Constructs/TermsAggregator.hpp:20:24: style: Unused private function: 'TermsAggregator::hasNoValueBeforeThisIndex' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/AprgBooleanAlgebra/AprgBooleanAlgebra/src/BooleanAlgebra/Constructs/TermsAggregator.cpp:33:23: style: Unused variable: _ [unusedVariable]
 /home/runner/work/aprg/aprg/AprgBooleanAlgebra/AprgBooleanAlgebra/src/BooleanAlgebra/Functions/CommonFunctionLibrary.cpp:86:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
