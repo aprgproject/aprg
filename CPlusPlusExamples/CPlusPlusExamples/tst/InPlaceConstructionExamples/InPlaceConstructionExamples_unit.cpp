@@ -304,8 +304,8 @@ TEST(InPlaceConstructionExamplesTest, VectorPushBackVsEmplaceBack) {
     v.emplace_back(std::move(sTemp2));
     // No difference, except emplace_back returns a reference on the created object by definition
     auto carray = "Content2";
-    v.push_back(carray);  // may copy/move from constructed string from carray
     // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
+    v.push_back(carray);  // may copy/move from constructed string from carray
     v.emplace_back(carray);  // assured in-place construction based from carray
     // -> Some people: "Just always use emplace_back because its certain more powerful that push back"
     // ---> "I don't like that view, I don't login to my computer as root."
