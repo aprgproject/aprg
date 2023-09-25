@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-24T17:41:33
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T11:33:30
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/AdditionAndSubtractionOfExpressions.cpp:20:44: warning: initialization of 'isCommonPart' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/BaseTermHelpers.hpp:15:13: note: possibly throwing function declared here
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/AdditionAndSubtractionOfExpressions.cpp:25:44: warning: initialization of 'isMergePart' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
@@ -8,25 +8,22 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/AdditionAndSubtractionOfExpressions.cpp:25:1: warning: non-POD static (function) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialRaiseToAnUnsignedInt.cpp:36:18: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialRaiseToAnUnsignedInt.cpp:63:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:20:27: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:187:32: warning: function 'removeCommonFactorsAndReturnIfSomeFactorsAreRemoved' has cognitive complexity of 27 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:190:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:192:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:196:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:196:44: note: +1
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:197:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:200:72: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:201:76: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:207:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:207:50: note: +1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:185:32: warning: function 'removeCommonFactorsAndReturnIfSomeFactorsAreRemoved' has cognitive complexity of 27 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:188:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:190:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:194:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:194:44: note: +1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:195:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:198:72: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:199:76: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:205:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:205:50: note: +1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermRaiseToTerms.cpp:142:59: warning: repeated branch in conditional chain [bugprone-branch-clone]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermRaiseToTerms.cpp:143:6: note: end of the original
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermRaiseToTerms.cpp:143:66: note: clone 1 starts here
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermRaiseToTerms.cpp:144:48: note: clone 2 starts here
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermRaiseToTerms.cpp:147:94: note: clone 3 starts here
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermsAggregator.cpp:31:23: style: Unused variable: _ [unusedVariable]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermsRaiseToExponents.cpp:88:17: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermsRaiseToExponents.cpp:172:17: style: Unused variable: _ [unusedVariable]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DerivativeVariableName.cpp:37:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DerivativeVariableName.cpp:56:30: warning: function 'processNumerator' has cognitive complexity of 27 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DerivativeVariableName.cpp:61:5: note: +1, including nesting penalty of 0, nesting level increased to 1
@@ -76,31 +73,6 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DifferentiationUtilities.cpp:226:14: warning: loop variable name 'n' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DifferentiationUtilities.cpp:321:39: warning: parameter name 'p' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DifferentiationUtilities.cpp:321:54: warning: parameter name 'q' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:23: style: Checking if unsigned expression 'delta' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:46: style: Checking if unsigned expression 'interval' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:39: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:66:22: warning: variable name 'fc' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:87:22: warning: variable name 'fs' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:118:5: warning: use range-based for loop instead [modernize-loop-convert]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:126:23: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:126:44: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:126:65: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:128:22: warning: variable name 'fa' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:129:22: warning: variable name 'fb' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:130:22: warning: variable name 'fc' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:144:73: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:144:94: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:146:22: warning: variable name 'fa' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:147:22: warning: variable name 'fb' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:171:68: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:171:89: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:182:23: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:182:44: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:182:65: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:182:86: warning: parameter name 'd' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:182:107: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Extrema/ExtremaUtilities.cpp:41:69: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Extrema/ExtremaUtilities.cpp:41:90: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Extrema/ExtremaUtilities.cpp:50:16: warning: variable name 'fa' is too short, expected at least 3 characters [readability-identifier-length]
@@ -129,22 +101,26 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Extrema/ExtremaUtilities.cpp:530:21: note: +5, including nesting penalty of 4, nesting level increased to 5
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Extrema/ExtremaUtilities.cpp:532:28: note: +1, nesting level increased to 5
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Extrema/ExtremaUtilities.cpp:539:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:66:22: warning: variable name 'fc' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:87:22: warning: variable name 'fs' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:128:23: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:128:44: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:128:65: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:130:22: warning: variable name 'fa' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:131:22: warning: variable name 'fb' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:132:22: warning: variable name 'fc' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:146:73: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:146:94: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:148:22: warning: variable name 'fa' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:149:22: warning: variable name 'fb' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:173:68: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:173:89: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:184:23: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:184:44: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:184:65: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:184:86: warning: parameter name 'd' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/BrentMethod.cpp:184:107: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Factorization/FactorizationOfIncreasingAndDecreasingExponentForm.cpp:137:19: warning: variable name 'j' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Functions/CommonFunctionLibrary.cpp:19:24: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/ThreeDimensions/ThreeDimensionsUtilities.cpp:20:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/ThreeDimensions/ThreeDimensionsUtilities.cpp:35:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/ThreeDimensions/ThreeDimensionsUtilities.cpp:51:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/ThreeDimensions/ThreeDimensionsUtilities.cpp:65:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/ThreeDimensions/ThreeDimensionsUtilities.cpp:79:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/ThreeDimensions/ThreeDimensionsUtilities.cpp:84:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/ThreeDimensions/ThreeDimensionsUtilities.cpp:93:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/ThreeDimensions/ThreeDimensionsUtilities.cpp:106:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/TwoDimensions/TwoDimensionsUtilities.cpp:21:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/TwoDimensions/TwoDimensionsUtilities.cpp:32:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/TwoDimensions/TwoDimensionsUtilities.cpp:43:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/TwoDimensions/TwoDimensionsUtilities.cpp:55:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Geometry/TwoDimensions/TwoDimensionsUtilities.cpp:60:12: warning: constness of 'leftHandSide' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/IntegrationForFiniteCalculus.hpp:42:30: style: Unused private function: 'IntegrationForFiniteCalculus::convertPolynomialWithPositiveExponentsFromRegularPowerToFallingPower' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/Integration.cpp:627:21: warning: variable name 'u' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/Integration.cpp:776:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/Integration.cpp:843:49: warning: parameter name 'u' is too short, expected at least 3 characters [readability-identifier-length]
@@ -153,20 +129,9 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/Integration.cpp:869:17: warning: parameter name 'dv' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/Integration.cpp:871:20: warning: variable name 'v' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/Integration.cpp:874:24: warning: variable name 'du' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/Integration.cpp:1516:17: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/Integration.cpp:1516:32: warning: parameter name 'u' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:23: style: Checking if unsigned expression 'delta' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:46: style: Checking if unsigned expression 'interval' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:39: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/Integration.cpp:1374:21: style: Unused variable: _ [unusedVariable]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/Integration.cpp:1517:17: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/Integration.cpp:1517:32: warning: parameter name 'u' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/IntegrationGeometryUtilities.cpp:233:17: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:23: style: Checking if unsigned expression 'delta' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:46: style: Checking if unsigned expression 'interval' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:39: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/IntegrationUtilities.cpp:101:69: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/IntegrationUtilities.cpp:101:90: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/IntegrationUtilities.cpp:107:16: warning: variable name 'g' is too short, expected at least 3 characters [readability-identifier-length]
@@ -174,36 +139,7 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/IntegrationUtilities.cpp:118:90: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/IntegrationUtilities.cpp:128:69: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/IntegrationUtilities.cpp:128:90: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:23: style: Checking if unsigned expression 'delta' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:46: style: Checking if unsigned expression 'interval' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:39: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/NumericalIntegration.cpp:104:55: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:23: style: Checking if unsigned expression 'delta' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:46: style: Checking if unsigned expression 'interval' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:39: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:16:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:23:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:31:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:38:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:45:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:53:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:59:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:66:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:73:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:82:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:91:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:101:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/HyperbolicEquations.cpp:111:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/TrigonometricEquations.cpp:15:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/TrigonometricEquations.cpp:22:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/TrigonometricEquations.cpp:29:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/TrigonometricEquations.cpp:37:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/KnownExpressionsAndEquations/TrigonometricEquations.cpp:45:12: warning: constness of 'leftSideTerm' prevents automatic move [performance-no-automatic-move]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Retrieval/ExponentsRetriever.cpp:6:23: style: Unused variable: _ [unusedVariable]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:6: warning: function 'performAddition' has cognitive complexity of 63 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:56:5: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
@@ -769,15 +705,9 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:163:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:165:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Retrieval/NumbersRetriever.cpp:9:23: style: Unused variable: _ [unusedVariable]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Series/GeneralSeries/SeriesBasedOnFormula.cpp:33:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Series/GeneralSeries/SeriesBasedOnFormula.cpp:49:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Series/SpecificSeries/BinomialSeries.cpp:35:14: warning: loop variable name 'n' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:23: style: Checking if unsigned expression 'delta' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:46: style: Checking if unsigned expression 'interval' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:39: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Simplification/SimplificationOfEquation.cpp:109:32: warning: function 'removeCommonConstant' has cognitive complexity of 30 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Simplification/SimplificationOfEquation.cpp:110:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Simplification/SimplificationOfEquation.cpp:110:38: note: +1
@@ -792,11 +722,6 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Simplification/SimplificationOfEquation.cpp:137:17: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Simplification/SimplificationOfEquation.cpp:144:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Simplification/SimplificationOfEquation.cpp:147:21: note: nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:23: style: Checking if unsigned expression 'delta' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:46: style: Checking if unsigned expression 'interval' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:39: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/DomainAndRange/DomainAndRange.cpp:43:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/DomainAndRange/DomainAndRange.cpp:65:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/SolutionSet/MultipleVariableSolutionSet.cpp:12:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
@@ -812,11 +737,6 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/DiophantineEquation/LinearDiophantineEquationSolver.cpp:55:59: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/DiophantineEquation/LinearDiophantineEquationSolver.cpp:55:74: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/MultipleLinearEquations/LinearEquationsEqualitySolver.cpp:71:18: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:23: style: Checking if unsigned expression 'delta' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:46: style: Checking if unsigned expression 'interval' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:39: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/OneEquationOneVariable/BaseOneEquationOneVariableSolver.cpp:44:39: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/OneEquationOneVariable/BaseOneEquationOneVariableSolver.cpp:44:40: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/Simplex/SimplexSolver.cpp:28:14: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
@@ -824,25 +744,13 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/Simplex/SimplexSolver.cpp:78:9: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/Simplex/SimplexSolver.cpp:85:14: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/Simplex/SimplexSolver.cpp:108:18: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:23: style: Checking if unsigned expression 'delta' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:46: style: Checking if unsigned expression 'interval' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:39: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/SolverUsingSubstitution/ReduceEquationsBySubstitution.cpp:43:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:24:13: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:62:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:202:74: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:204:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:219:12: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Monomial.cpp:14:11: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Monomial.cpp:92:17: style: Unused variable: _ [unusedVariable]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:60:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:200:74: warning: repeated branch in conditional chain [bugprone-branch-clone]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:202:6: note: end of the original
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:217:12: note: clone 1 starts here
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Term.cpp:166:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Polynomial.cpp:16:13: warning: use '= default' to define a trivial default constructor [hicpp-use-equals-default,modernize-use-equals-default]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/MonomialHelpers.cpp:24:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/MonomialHelpers.cpp:14:23: style: Unused variable: _ [unusedVariable]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/MonomialHelpers.cpp:37:23: style: Unused variable: _ [unusedVariable]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/MonomialHelpers.cpp:235:23: style: Unused variable: _ [unusedVariable]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/MonomialHelpers.cpp:25:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/PolynomialHelpers.cpp:55:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/PolynomialHelpers.cpp:113:13: warning: function 'getRoots' has cognitive complexity of 31 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/PolynomialHelpers.cpp:115:5: note: +1, including nesting penalty of 0, nesting level increased to 1
@@ -857,7 +765,6 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/PolynomialHelpers.cpp:135:29: note: +7, including nesting penalty of 6, nesting level increased to 7
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/StringHelpers.cpp:33:21: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/StringHelpers.cpp:93:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/TermUtilities.cpp:34:24: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/ValueCheckingHelpers.cpp:15:31: warning: initialization of 'IsDoubleCondition' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Number/AlbaNumber.hpp:141:24: note: possibly throwing function declared here
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/ValueCheckingHelpers.cpp:19:31: warning: initialization of 'IsNanCondition' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
@@ -883,19 +790,12 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Plane.cpp:78:74: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Plane.cpp:86:58: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Plane.cpp:86:74: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Vector/AlbaMathVectorUtilities.hpp:136:89: warning: Return value of function sin() is not used. [ignoredReturnValue]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/EllipticParaboloid.cpp:28:61: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/EllipticParaboloid.cpp:28:77: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/EllipticParaboloid.cpp:34:61: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/EllipticParaboloid.cpp:34:77: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/EllipticParaboloid.cpp:40:61: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/EllipticParaboloid.cpp:40:77: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Vector/AlbaMathVectorUtilities.hpp:136:89: warning: Return value of function sin() is not used. [ignoredReturnValue]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:23: style: Checking if unsigned expression 'delta' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:46: style: Checking if unsigned expression 'interval' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:38:39: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:111:65: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaValueRange.hpp:117:57: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/HyperbolicParaboloid.cpp:29:63: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/HyperbolicParaboloid.cpp:29:79: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/HyperbolicParaboloid.cpp:35:63: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
@@ -926,7 +826,6 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Sphere.cpp:40:75: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Sphere.cpp:49:59: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Sphere.cpp:49:75: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Vector/AlbaMathVectorUtilities.hpp:136:89: warning: Return value of function sin() is not used. [ignoredReturnValue]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:20:29: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:20:45: warning: parameter name 'd' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:20:61: warning: parameter name 'e' is too short, expected at least 3 characters [readability-identifier-length]
@@ -943,16 +842,10 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:109:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:109:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:109:75: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:141:37: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:143:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:143:44: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:145:44: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:147:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:147:44: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:178:18: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:178:34: warning: parameter name 'd' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:178:50: warning: parameter name 'e' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:178:66: warning: parameter name 'f' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:180:18: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:180:34: warning: parameter name 'd' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:180:50: warning: parameter name 'e' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:180:66: warning: parameter name 'f' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:49:18: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:50:18: warning: variable name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:54:22: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
@@ -971,24 +864,12 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:191:9: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:191:21: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:191:56: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:208:37: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:210:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:210:44: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:212:44: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:214:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:214:44: note: clone 1 starts here
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:40:22: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:44:22: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:88:48: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:92:48: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:96:61: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:100:61: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:108:37: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:111:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:117:44: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:111:44: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:114:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:114:44: note: clone 1 starts here
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Line.cpp:146:43: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Line.cpp:150:43: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:24:45: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
@@ -1035,60 +916,42 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:252:14: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:255:14: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:258:14: warning: 13 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitValueUtilitiesClassDefinition.hpp:306:19: style: Checking if unsigned expression 'value' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitValueUtilitiesClassDefinition.hpp:335:19: style: Checking if unsigned expression 'value' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitValueUtilitiesClassDefinition.hpp:113:96: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:59:52: warning: 90 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:89:18: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:89:34: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:89:50: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:89:66: warning: parameter name 'd' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:89:82: warning: parameter name 'e' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:197:22: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:199:10: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:199:34: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:205:22: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:207:10: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:209:16: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:216:69: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:216:84: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:216:99: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:233:46: warning: parameter name 'xy' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:267:48: warning: 1st argument 'perpendicularLine' (passed to 'line1') looks like it might be swapped with the 2nd, 'line1' (passed to 'line2') [readability-suspicious-call-argument]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:114:7: note: in the call to 'getIntersectionOfTwoLines', declared here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:346:68: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:346:84: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:346:100: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:370:18: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:437:63: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:439:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:439:119: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:441:120: note: clone 2 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:443:119: note: clone 3 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:445:120: note: clone 4 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:582:5: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:582:5: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:582:17: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:582:43: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:13: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:99: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:781:20: warning: 1st argument 'firstPoint' (passed to 'point1') looks like it might be swapped with the 2nd, 'point1' (passed to 'point2') [readability-suspicious-call-argument]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:235:8: note: in the call to 'getDistance', declared here
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Vector/AlbaMathVectorUtilities.hpp:136:89: warning: Return value of function sin() is not used. [ignoredReturnValue]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:218:69: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:218:84: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:218:99: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:235:46: warning: parameter name 'xy' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:350:68: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:350:84: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:350:100: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:374:18: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:441:63: warning: repeated branch in conditional chain [bugprone-branch-clone]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:443:6: note: end of the original
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:443:119: note: clone 1 starts here
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:445:120: note: clone 2 starts here
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:447:119: note: clone 3 starts here
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:449:120: note: clone 4 starts here
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:5: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:5: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:17: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:43: warning: loop induction expression should not have floating-point type [cert-flp30-c]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:13: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:99: warning: loop induction expression should not have floating-point type [cert-flp30-c]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:65:14: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:66:18: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:90:22: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:113:24: warning: performing an implicit widening conversion to type 'size_t' (aka 'unsigned long') of a multiplication performed in type 'int' [bugprone-implicit-widening-of-multiplication-result]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:113:24: note: make conversion explicit to silence this warning
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:113:24: note: perform multiplication in a wider type
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:129:14: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:130:18: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:164:19: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:187:38: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:189:14: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-/home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:29:52: warning: static member accessed through instance [readability-static-accessed-through-instance]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:105:9: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:105:9: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGraph/AprgGraph/src/Graph/AprgGraph.cpp:105:21: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
