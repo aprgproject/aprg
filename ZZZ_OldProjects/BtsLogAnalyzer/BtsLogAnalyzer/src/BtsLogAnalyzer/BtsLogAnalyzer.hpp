@@ -7,13 +7,11 @@
 #include <optional>
 #include <string>
 
-using wcdmaToolsBackend::BtsLogTime;
-
 namespace alba {
 
 struct BtsLogDelay {
-    std::optional<BtsLogTime> startTimeOptional;
-    std::optional<BtsLogTime> endTimeOptional;
+    std::optional<wcdmaToolsBackend::BtsLogTime> startTimeOptional;
+    std::optional<wcdmaToolsBackend::BtsLogTime> endTimeOptional;
 };
 
 struct UniqueId {
