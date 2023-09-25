@@ -1,6 +1,5 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-24T19:29:38
-/home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringToken.cpp:20:52: warning: pass by value and use std::move [modernize-pass-by-value]
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T13:24:48
 /home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.cpp:35:37: warning: variable 's_mainString' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:21:19: warning: initialization of 'listOfCPlusPlusHeaders' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_set.h:243:7: note: possibly throwing constructor declared here
@@ -9,19 +8,12 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:85:19: warning: initialization of 'listOfWindowsHeaders' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_set.h:243:7: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:145:18: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.hpp:17:10: style: Unused private function: 'CPlusPlusFileFixer::notifyIfIostreamHeaderExistInProductionCode' [unusedPrivateFunction]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.hpp:18:10: style: Unused private function: 'CPlusPlusFileFixer::notifyIfCAssertHeaderExistInProductionCode' [unusedPrivateFunction]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.hpp:19:10: style: Unused private function: 'CPlusPlusFileFixer::notifyIfMoreThanLoopsAreCascaded' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:21:1: warning: non-POD static (set) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:64:1: warning: non-POD static (set) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:85:1: warning: non-POD static (set) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CropFile/AlbaCropFile.cpp:76:9: warning: use auto when initializing with a cast to avoid duplicating the type name [hicpp-use-auto,modernize-use-auto]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CropFile/AlbaCropFile.cpp:85:37: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CropFile/AlbaCropFile.cpp:85:88: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CropFile/AlbaCropFile.cpp:100:5: warning: use auto when initializing with a cast to avoid duplicating the type name [hicpp-use-auto,modernize-use-auto]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CropFile/AlbaCropFile.cpp:102:9: warning: use auto when initializing with a cast to avoid duplicating the type name [hicpp-use-auto,modernize-use-auto]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CropFile/AlbaCropFile.cpp:110:92: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/GrepFile/AlbaGrepFile.cpp:30:5: warning: use auto when initializing with a cast to avoid duplicating the type name [hicpp-use-auto,modernize-use-auto]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/ReplaceStringInFiles/ReplaceStringInFiles.cpp:96:28: warning: function 'replaceCToCPlusPlusStylePrintOnFile' has cognitive complexity of 28 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/ReplaceStringInFiles/ReplaceStringInFiles.cpp:98:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/ReplaceStringInFiles/ReplaceStringInFiles.cpp:101:9: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -40,7 +32,6 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/ReplaceStringInFiles/ReplaceStringInFiles.cpp:156:21: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/ReplaceStringInFiles/ReplaceStringInFiles.cpp:184:104: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/ReplaceStringInFiles/ReplaceStringInFiles.hpp:37:98: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/SackReader/AlbaSackReader.hpp:32:12: warning: constructor does not initialize these fields: state [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/CPlusPlusFileFixer/CPlusPlusFileFixer_unit.cpp:20:1: warning: function 'TestBody' has cognitive complexity of 100 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/CPlusPlusFileFixer/CPlusPlusFileFixer_unit.cpp:24:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/tst/ProcessFilesTests/CPlusPlusFileFixer/CPlusPlusFileFixer_unit.cpp:24:5: note: +2, including nesting penalty of 1, nesting level increased to 2
