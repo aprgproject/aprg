@@ -20,6 +20,7 @@ public:
     explicit AlbaGrepStringToken(AlbaGrepStringOperatorType const operatorType);
     AlbaGrepStringToken();
     AlbaGrepStringToken(AlbaGrepStringOperatorType const operatorType, std::string const& operatorString);
+    AlbaGrepStringToken(AlbaGrepStringOperatorType const operatorType, std::string && operatorString);
     [[nodiscard]] AlbaGrepStringOperatorType getOperatorType() const;
     [[nodiscard]] TokenType getTokenType() const;
     [[nodiscard]] std::string getTokenTypeString() const;
