@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [0]
-2023-09-25T07:57:29
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T11:01:33
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Bit/AlbaBitManipulation_unit.cpp:21:1: warning: function 'TestBody' has cognitive complexity of 32 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Bit/AlbaBitManipulation_unit.cpp:22:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Bit/AlbaBitManipulation_unit.cpp:22:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -6886,36 +6886,24 @@ StaticAnalysisJobIdentifier: [0]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Math/Vector/AlbaMathVector_unit.cpp:163:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaRaiiafPointer_unit.cpp:11:45: warning: 0xA1BA is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaRaiiafPointer_unit.cpp:15:45: warning: 0x1234 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:12:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:21:17: warning: 0x12345678 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:32:17: warning: 0x12345678 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:35:17: warning: 0xAA is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:45:17: warning: 0x12345678 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:62:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:66:25: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:73:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:78:25: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:85:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:91:25: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:98:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:105:26: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:112:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:120:26: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:127:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:128:18: warning: 22222222 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:134:25: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:141:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:146:25: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:153:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:158:25: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:173:20: warning: 12345678 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:174:20: warning: 1.234E56 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:178:28: warning: do not use reinterpret_cast [cppcoreguidelines-pro-type-reinterpret-cast]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:187:17: warning: 0x12345678 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:199:1: warning: function 'TestBody' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:207:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:207:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:207:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:13:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:22:17: warning: 0x12345678 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:33:17: warning: 0x12345678 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:36:17: warning: 0xAA is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:46:17: warning: 0x12345678 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:63:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:74:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:86:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:99:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:113:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:128:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:129:18: warning: 22222222 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:142:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:154:17: warning: 11111111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:174:20: warning: 12345678 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:175:20: warning: 1.234E56 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:188:17: warning: 0x12345678 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:200:1: warning: function 'TestBody' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:208:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:208:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:208:5: note: +1, nesting level increased to 2
@@ -6943,15 +6931,18 @@ StaticAnalysisJobIdentifier: [0]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:216:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:216:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:216:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:201:39: warning: 0x12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:201:45: warning: 0x34 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:201:51: warning: 0x56 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:201:57: warning: 0x78 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:202:39: warning: 0x87 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:202:45: warning: 0x65 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:202:51: warning: 0x43 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:202:57: warning: 0x21 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:240:34: warning: 0xA1BA is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:217:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:217:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:217:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:202:39: warning: 0x12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:202:45: warning: 0x34 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:202:51: warning: 0x56 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:202:57: warning: 0x78 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:203:39: warning: 0x87 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:203:45: warning: 0x65 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:203:51: warning: 0x43 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:203:57: warning: 0x21 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Memory/AlbaMemoryBuffer_unit.cpp:241:34: warning: 0xA1BA is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/PathHandler/AlbaPathHandler_unit.cpp:12:1: warning: function 'TestBody' has cognitive complexity of 48 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/PathHandler/AlbaPathHandler_unit.cpp:14:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/PathHandler/AlbaPathHandler_unit.cpp:14:5: note: +2, including nesting penalty of 1, nesting level increased to 2
