@@ -14,7 +14,7 @@ BranchAndBoundZeroAndOneKnapsack::Profit BranchAndBoundZeroAndOneKnapsack::getBe
         return static_cast<double>(item1.first) / item1.second > static_cast<double>(item2.first) / item2.second;
     });
 
-    Index const itemSize = static_cast<Index>(items.size());
+    auto const itemSize = static_cast<Index>(items.size());
     Profit bestProfit(0);
     queue<Node> remainingNodes;
     remainingNodes.push(Node{-1, 0, 0, 0});
@@ -59,7 +59,7 @@ BranchAndBoundZeroAndOneKnapsack::Profit BranchAndBoundZeroAndOneKnapsack::getMa
         Index itemIndex = currentNode.level + 1;
         Profit maxPossibleProfit = currentNode.profit;
         Weight totalWeight = currentNode.weight;
-        Index const itemSize = static_cast<Index>(items.size());
+        auto const itemSize = static_cast<Index>(items.size());
         while (itemIndex < itemSize && totalWeight + items[itemIndex].first <= maximumWeight) {
             totalWeight += items[itemIndex].first;
             maxPossibleProfit += items[itemIndex].second;

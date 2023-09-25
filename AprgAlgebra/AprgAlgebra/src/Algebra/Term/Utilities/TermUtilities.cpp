@@ -31,6 +31,7 @@ AlbaNumber getConstantFactor(Term const& term) {
         Polynomials const factors(factorizeCommonMonomial(term.getAsPolynomial()));
         for (Polynomial const& factor : factors) {
             if (isOneMonomial(factor)) {
+                // cppcheck-suppress useStlAlgorithm
                 result *= getFirstMonomial(factor).getCoefficient();
             }
         }

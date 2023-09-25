@@ -45,7 +45,7 @@ BuildingBridges::Bridges BuildingBridges::getPossibleBridges() const {
                 lengthMinus1ToEndIndex[longestLength] = i;
                 lengthMinus1ToEndValue[longestLength++] = value;  // extend
             } else {
-                Index const currentLength =
+                auto const currentLength =
                     static_cast<Index>(distance(lengthMinus1ToEndValue.begin(), lowerBoundItForEndValue));
                 if (currentLength > 0) {
                     indexToPreviousIndex[i] = lengthMinus1ToEndIndex[currentLength - 1];

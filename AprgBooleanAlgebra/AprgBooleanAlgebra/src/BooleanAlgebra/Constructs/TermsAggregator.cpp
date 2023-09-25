@@ -30,6 +30,7 @@ TermsAggregator::Indexes TermsAggregator::getNextOperatorIndexes(OperatorInputTy
             }
         }
     }
+    // cppcheck-suppress unusedVariable
     for (auto const& [_, index] : operatorLevelToIndexMap) {
         operatorIndexes.emplace_back(index);
     }

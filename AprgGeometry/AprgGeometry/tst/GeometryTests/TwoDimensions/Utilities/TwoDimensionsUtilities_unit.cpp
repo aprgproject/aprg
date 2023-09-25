@@ -87,9 +87,11 @@ TEST(TwoDimensionsUtilitiesTest, LineAndLineIntersectionCanBeFound) {
     Line const line4(Point(0, 1), Point(1, 2));
 
     EXPECT_EQ(Point(3, 3), getIntersectionOfTwoLines(line1, line2));
+    // NOLINTNEXTLINE(readability-suspicious-call-argument)
     Point const verifyIfNan(getIntersectionOfTwoLines(line2, line3));
     EXPECT_TRUE(isnan(verifyIfNan.getX()));
     EXPECT_TRUE(isnan(verifyIfNan.getY()));
+    // NOLINTNEXTLINE(readability-suspicious-call-argument)
     EXPECT_EQ(Point(INFINITY, INFINITY), getIntersectionOfTwoLines(line2, line4));
 }
 

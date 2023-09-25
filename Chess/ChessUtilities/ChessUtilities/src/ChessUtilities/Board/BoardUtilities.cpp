@@ -119,6 +119,7 @@ char convertToFenCharacter(PieceType const pieceType, PieceColor const pieceColo
 
 int getValueOfPieceType(PieceType const pieceType) {
     int result{};
+    // NOLINTBEGIN(bugprone-branch-clone)
     switch (pieceType) {
         case PieceType::Pawn: {
             result = 1;
@@ -148,6 +149,7 @@ int getValueOfPieceType(PieceType const pieceType) {
             break;
         }
     }
+    // NOLINTEND(bugprone-branch-clone)
     return result;
 }
 

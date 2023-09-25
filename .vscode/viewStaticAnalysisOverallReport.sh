@@ -17,7 +17,7 @@ source "$aprgDirectory/AllCommonScripts/CommonRegex/CommonGrepCppOutput.sh"
 set -e
 
 # set issue to filter
-issueToFilter="clang-diagnostic-defaulted-function-deleted"
+issueToFilter="performance-no-automatic-move"
 
 # Show all issues found in static analysis reports
 while IFS= read -r staticAnalysisReportPath; do

@@ -56,6 +56,7 @@ bool IsPartialSumPossibleInZeroOneKnapsack::isPartialSumPossibleUsingIterativeDP
                     isPossible =
                         isPossibleMatrix.getEntry(partialSum - previousValue, valueIndex - 1);  // use previous value
                 }
+                // NOLINTNEXTLINE(readability-suspicious-call-argument)
                 isPossibleMatrix.setEntry(partialSum, valueIndex, isPossible);
             }
         }

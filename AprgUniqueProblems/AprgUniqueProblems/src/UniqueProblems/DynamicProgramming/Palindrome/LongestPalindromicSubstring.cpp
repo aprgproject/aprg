@@ -36,7 +36,7 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
     Index result(0);
     if (!m_string.empty()) {
         result = 1;
-        Index const stringLength = static_cast<Index>(m_string.length());
+        auto const stringLength = static_cast<Index>(m_string.length());
         BoolMatrix isSubstrAPalindrome(stringLength, stringLength, false);
 
         for (Index index = 0; index < stringLength; ++index) {
@@ -70,7 +70,7 @@ LongestPalindromicSubstring::Index LongestPalindromicSubstring::getLongestLength
     // Auxiliary Space: O(1).
     Index result(0);
     if (!m_string.empty()) {
-        Index const stringLength = static_cast<Index>(m_string.length());
+        auto const stringLength = static_cast<Index>(m_string.length());
         Index maxLength = 1;
         for (Index centerIndex = 0; centerIndex < stringLength; ++centerIndex) {
             Index lowIndex = centerIndex - 1;
@@ -96,7 +96,7 @@ string LongestPalindromicSubstring::getLongestStringUsingIterativeDPAndSpaceEffi
     // Time complexity: O(n^2).
     // Auxiliary Space: O(1).
     if (!m_string.empty()) {
-        Index const stringLength = static_cast<Index>(m_string.length());
+        auto const stringLength = static_cast<Index>(m_string.length());
         Index maxLength = 1;
         Index startIndex = 0;
         for (Index centerIndex = 0; centerIndex < stringLength; ++centerIndex) {

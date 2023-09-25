@@ -33,6 +33,7 @@ FactorsToCountMap getPrimeFactorsToCountMap(UnsignedInteger const number) {
 UnsignedInteger getNumberOfFactors(UnsignedInteger const number) {
     FactorsToCountMap const primeFactorsToCountMap(getPrimeFactorsToCountMap(number));
     UnsignedInteger result(1);
+    // cppcheck-suppress unusedVariable
     for (auto const& [_, count] : primeFactorsToCountMap) {
         result *= count + 1;
     }

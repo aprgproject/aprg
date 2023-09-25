@@ -10,10 +10,10 @@ class Handler {
 public:
     virtual ~Handler() = default;
     Handler() = default;
-    Handler(Handler const &) = default;
     Handler(Handler &&) = default;
-    Handler &operator=(Handler const &) = default;
+    Handler(Handler const &) = delete;
     Handler &operator=(Handler &&) = default;
+    Handler &operator=(Handler const &) = delete;
 
     virtual void setHandler(std::unique_ptr<Handler> successorPointer) {
         m_successorPointer = std::move(successorPointer);

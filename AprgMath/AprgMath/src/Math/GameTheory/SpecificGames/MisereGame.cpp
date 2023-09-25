@@ -57,6 +57,7 @@ NimState MisereGame::getOptimalNextState(NimState const& inputNimState) {
 }
 
 NimHeapSize MisereGame::getMaxHeapSize(NimState const& nimState) {
+    // cppcheck-suppress unusedVariable
     auto&& [_, maxIt] = minmax_element(nimState.cbegin(), nimState.cend());
     return *maxIt;
 }

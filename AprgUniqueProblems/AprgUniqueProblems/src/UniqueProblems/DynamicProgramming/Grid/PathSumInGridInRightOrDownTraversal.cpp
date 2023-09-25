@@ -25,6 +25,7 @@ PathSumInGridInRightOrDownTraversal::Path PathSumInGridInRightOrDownTraversal::g
             if (x == 0 && y == 0) {
                 break;
             }
+            // NOLINTBEGIN(bugprone-branch-clone)
             if (x == 0) {
                 path.emplace_back(m_inputGrid.getEntry(x, --y));
             } else if (y == 0) {
@@ -34,6 +35,7 @@ PathSumInGridInRightOrDownTraversal::Path PathSumInGridInRightOrDownTraversal::g
             } else {
                 path.emplace_back(m_inputGrid.getEntry(x, --y));
             }
+            // NOLINTEND(bugprone-branch-clone)
         }
         reverse(path.begin(), path.end());
     }

@@ -185,6 +185,7 @@ Quadrant getQuadrantOfAPoint(Point const& point) {
     bool const isYZero = isAlmostEqual(point.getY(), 0.0);
     double const signOfX = getSign(point.getX());
     double const signOfY = getSign(point.getY());
+    // NOLINTBEGIN(bugprone-branch-clone)
     if (isXZero) {
         if (isYZero) {
             result = Quadrant::Invalid;
@@ -210,6 +211,7 @@ Quadrant getQuadrantOfAPoint(Point const& point) {
             result = Quadrant::III;
         }
     }
+    // NOLINTEND(bugprone-branch-clone)
     return result;
 }
 
@@ -264,8 +266,10 @@ double getDistance(Line const& line1, Line const& line2) {
     double distance(0);
     if (!areLinesParallel(line1, line2)) {
         Line const perpendicularLine(getLineWithPerpendicularSlope(line1, Point(0, 0)));
+        // NOLINTBEGIN(readability-suspicious-call-argument)
         Point const pointOfIntersectionInLine1(getIntersectionOfTwoLines(perpendicularLine, line1));
         Point const pointOfIntersectionInLine2(getIntersectionOfTwoLines(perpendicularLine, line2));
+        // NOLINTEND(readability-suspicious-call-argument)
         distance = getDistance(pointOfIntersectionInLine1, pointOfIntersectionInLine2);
     }
     return distance;
@@ -778,6 +782,7 @@ Points getConvexHullPointsUsingGrahamScan(Points const& points) {
     sort(next(auxiliary.begin()), auxiliary.end(), [firstPoint](Point const& point1, Point const& point2) {
         RotationDirection const direction = getRotationDirectionTraversing3Points(firstPoint, point1, point2);
         if (RotationDirection::Collinear == direction) {
+        // NOLINTNEXTLINE(readability-suspicious-call-argument)
             return getDistance(firstPoint, point1) <= getDistance(firstPoint, point2);
         }
         return RotationDirection::CounterClockWise == direction;

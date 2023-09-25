@@ -13,7 +13,7 @@ SubArraySum::Values SubArraySum::getSubArrayWithSum(Value const targetSum) const
         bool isFound(false);
         Index start = 0;
         Index end = 0;
-        Index const size = static_cast<Index>(m_valuesToCheck.size());
+        auto const size = static_cast<Index>(m_valuesToCheck.size());
         Value currentSum = m_valuesToCheck[0];
         while (start < size && end < size) {
             if (currentSum == targetSum) {

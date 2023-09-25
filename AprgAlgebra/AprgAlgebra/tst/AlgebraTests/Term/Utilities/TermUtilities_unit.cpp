@@ -155,6 +155,7 @@ TEST(TermUtilitiesTest, IsNegatedTermSimplerWorks) {
     Term const negativeXToTheX(createExpressionIfPossible({-1, "*", "x", "^", "x"}));
 
     EXPECT_FALSE(isNegatedTermSimpler(xToTheX, negativeXToTheX));
+    // NOLINTNEXTLINE(readability-suspicious-call-argument)
     EXPECT_TRUE(isNegatedTermSimpler(negativeXToTheX, xToTheX));
     EXPECT_FALSE(isNegatedTermSimpler(Monomial(5, {}), Monomial(-5, {})));
     EXPECT_TRUE(isNegatedTermSimpler(Monomial(-5, {}), Monomial(5, {})));

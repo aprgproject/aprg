@@ -14,7 +14,7 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
     // Auxiliary Space :O(numberOfWords) (RecursionDetails has allocation on stack)
     Cost result(0);
     if (!m_words.empty()) {
-        Index const firstWordLength = static_cast<Index>(m_words.front().length());
+        auto const firstWordLength = static_cast<Index>(m_words.front().length());
         RecursionDetails const recursionDetails{firstWordLength, Indices{firstWordLength}};
         result = getOptimizedCostUsingNaiveRecursion(recursionDetails, 1);
     }
@@ -31,9 +31,9 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
         for (Index targetLineLength = 1; targetLineLength < totalLength; ++targetLineLength) {
             Cost costAtLength(0);
             bool hasNoSolutions(false);
-            Index lineLength(static_cast<Index>(m_words.front().length()));
+            auto lineLength(static_cast<Index>(m_words.front().length()));
             for (auto it = m_words.cbegin() + 1; it != m_words.cend(); ++it) {
-                Index const wordLength(static_cast<Index>(it->length()));
+                auto const wordLength(static_cast<Index>(it->length()));
                 if (wordLength > targetLineLength) {
                     hasNoSolutions = true;
                     break;  // no possible solution try next length
@@ -61,7 +61,7 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getOptimi
     Cost result(0);
     if (wordIndex < static_cast<Index>(m_words.size())) {
         result = MAX_COST;
-        Index const wordLength(static_cast<Index>(m_words[wordIndex].length()));
+        auto const wordLength(static_cast<Index>(m_words[wordIndex].length()));
         {
             RecursionDetails currentDetails(recursionDetails);
             Index& lastLength(currentDetails.lengths.back());

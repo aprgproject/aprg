@@ -138,6 +138,7 @@ Points Circle::getPointsInTraversingXAndY(double const signOfX, double const sig
     Points result;
     Points const pointsFromTraversingX(getPointsInTraversingX(signOfX, signOfY, interval));
     Points const pointsFromTraversingY(getPointsInTraversingY(signOfX, signOfY, interval));
+    // NOLINTBEGIN(bugprone-branch-clone)
     if (signOfX > 0 && signOfY > 0) {
         result = getMergedPointsInDecreasingX(pointsFromTraversingX, pointsFromTraversingY);
     } else if (signOfX < 0 && signOfY > 0) {
@@ -147,6 +148,7 @@ Points Circle::getPointsInTraversingXAndY(double const signOfX, double const sig
     } else if (signOfX > 0 && signOfY < 0) {
         result = getMergedPointsInIncreasingX(pointsFromTraversingX, pointsFromTraversingY);
     }
+    // NOLINTEND(bugprone-branch-clone)
     return result;
 }
 

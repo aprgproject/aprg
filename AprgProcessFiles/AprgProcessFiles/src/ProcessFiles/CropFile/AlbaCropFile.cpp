@@ -73,7 +73,7 @@ void AlbaCropFile::performCropForFile(
 
     double const locationDifference = locations.endLocation - locations.startLocation;
     while (fileReader.isNotFinished()) {
-        double const currentLocation = static_cast<double>(fileReader.getCurrentLocation());
+        auto const currentLocation = static_cast<double>(fileReader.getCurrentLocation());
         string const lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
         if (currentLocation < locations.endLocation) {
             m_isOutputFileWritten = true;
@@ -97,9 +97,9 @@ double AlbaCropFile::getLocationOfPrioritizedPrint(path const& inputFilePath) {
     double foundLocation(-1);
     ifstream inputFileStream(inputFilePath);
     AlbaFileReader fileReader(inputFileStream);
-    double const sizeOfFile = static_cast<double>(fileReader.getFileSize());
+    auto const sizeOfFile = static_cast<double>(fileReader.getFileSize());
     while (fileReader.isNotFinished()) {
-        double const currentLocation = static_cast<double>(fileReader.getCurrentLocation());
+        auto const currentLocation = static_cast<double>(fileReader.getCurrentLocation());
         string const lineInFile(fileReader.getLineAndIgnoreWhiteSpaces());
         if (m_prioritizedLineEvaluator.evaluate(lineInFile)) {
             cout << "CropFile: Found the prioritized line in input file. Line: " << lineInFile << "\n";
