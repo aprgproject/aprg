@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-24T19:39:41
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T13:37:40
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/TwoDimensionsStatistics.hpp:19:28: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/TwoDimensionsStatistics.hpp:19:44: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgStatistics/AprgStatistics/src/Statistics/TwoDimensionsStatistics.hpp:19:60: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
