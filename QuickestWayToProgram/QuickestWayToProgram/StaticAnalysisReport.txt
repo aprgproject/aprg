@@ -1,9 +1,7 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-24T22:57:49
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T15:54:34
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:32:12: warning: variable 'numberOfFilesToBeAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:33:12: warning: variable 'numberOfFilesAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:181:5: warning: function is not thread safe [concurrency-mt-unsafe]
-/home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringToken.cpp:20:52: warning: pass by value and use std::move [modernize-pass-by-value]
 /home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.cpp:35:37: warning: variable 's_mainString' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/QuickestWayToProgram/QuickestWayToProgram/tst/QuickestWayToProgram_unit.cpp:1845:19: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
 DONE!
