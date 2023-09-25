@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [43]
-2023-09-23T17:21:53
+StaticAnalysisJobIdentifier: [44]
+2023-09-25T01:00:49
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:103:19: warning: function 'selectMaps' has cognitive complexity of 52 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:105:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:108:16: note: nesting level increased to 2
@@ -43,8 +43,8 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.cpp:171:95: warning: parameter name 'r2' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:26:38: warning: parameter name 'w1' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:26:64: warning: parameter name 'w2' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:45:56: warning: parameter name 'r1' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:45:85: warning: parameter name 'r2' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:47:56: warning: parameter name 'r1' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:47:85: warning: parameter name 'r2' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:167:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:168:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:169:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
@@ -55,156 +55,153 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:174:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:175:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:176:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/MapAnalyzer_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/MapAnalyzer_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/MapAnalyzer_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:89:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:98:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:253:20: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:263:20: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:283:22: warning: function 'retrieveItemDataFromRmsWebPage' has cognitive complexity of 97 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:295:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:298:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:302:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:306:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:307:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:314:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:315:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:318:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:322:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:325:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:327:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:329:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:331:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:333:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:335:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:337:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:339:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:341:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:343:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:345:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:347:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:351:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:352:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:356:20: note: +1, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:357:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:359:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:363:23: note: +1, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:366:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:76:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:85:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:240:20: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:250:20: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:270:22: warning: function 'retrieveItemDataFromRmsWebPage' has cognitive complexity of 97 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:282:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:285:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:289:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:293:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:294:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:301:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:302:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:305:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:309:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:312:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:314:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:316:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:318:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:320:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:322:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:324:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:326:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:328:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:330:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:332:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:334:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:338:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:339:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:343:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:344:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:346:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:350:23: note: +1, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:353:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:354:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:359:23: note: +1, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:364:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:365:17: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:367:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:372:23: note: +1, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:377:20: note: +1, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:378:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:380:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:384:23: note: +1, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:387:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:388:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:392:23: note: +1, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:398:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:400:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:402:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:408:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:410:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:287:33: warning: 100000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:436:22: warning: function 'retrieveMonsterDataFromRmsWebPage' has cognitive complexity of 111 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:444:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:447:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:451:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:455:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:456:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:463:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:464:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:468:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:472:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:472:71: note: +1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:475:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:477:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:479:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:481:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:483:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:485:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:487:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:489:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:491:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:371:23: note: +1, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:374:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:375:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:379:23: note: +1, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:385:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:387:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:389:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:395:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:397:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:274:33: warning: 100000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:423:22: warning: function 'retrieveMonsterDataFromRmsWebPage' has cognitive complexity of 111 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:431:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:434:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:438:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:442:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:443:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:450:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:451:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:455:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:459:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:459:71: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:462:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:464:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:466:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:468:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:470:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:472:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:474:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:476:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:478:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:480:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:482:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:484:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:486:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:488:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:490:24: note: +1, nesting level increased to 4
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:493:24: note: +1, nesting level increased to 4
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:495:24: note: +1, nesting level increased to 4
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:497:24: note: +1, nesting level increased to 4
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:499:24: note: +1, nesting level increased to 4
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:501:24: note: +1, nesting level increased to 4
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:503:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:506:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:508:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:510:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:512:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:514:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:516:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:518:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:520:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:522:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:524:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:526:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:528:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:530:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:532:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:534:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:536:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:538:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:540:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:542:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:544:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:546:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:505:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:507:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:509:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:511:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:513:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:515:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:517:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:519:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:521:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:523:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:525:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:527:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:529:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:531:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:533:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:537:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:538:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:541:21: note: +5, including nesting penalty of 4, nesting level increased to 5
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:550:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:551:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:550:79: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:552:17: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:554:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:563:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:563:79: note: +1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:565:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:567:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:575:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:577:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:583:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:584:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:586:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:594:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:596:20: note: +1, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:598:20: note: +1, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:600:20: note: +1, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:440:33: warning: 100000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:618:22: warning: function 'retrieveMapDataFromRmsWebPage' has cognitive complexity of 37 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:625:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:628:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:632:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:636:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:562:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:564:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:570:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:571:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:573:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:581:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:583:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:585:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:587:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:427:33: warning: 100000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:605:22: warning: function 'retrieveMapDataFromRmsWebPage' has cognitive complexity of 37 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:612:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:615:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:619:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:623:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:624:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:630:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:631:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:631:64: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:634:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:634:65: note: +1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:637:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:643:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:644:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:644:64: note: +1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:647:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:647:65: note: +1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:650:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:650:91: note: +1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:655:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:657:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:666:21: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:670:23: note: +1, nesting level increased to 5
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:622:33: warning: 100000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:708:33: warning: 100000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:728:26: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:740:26: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:826:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:827:18: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:834:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:842:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:866:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:914:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:915:18: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:923:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:931:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:937:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:943:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:949:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:956:19: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:1048:19: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:637:91: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:642:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:644:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:653:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:657:23: note: +1, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:609:33: warning: 100000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:695:33: warning: 100000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:715:26: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:727:26: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:813:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:814:18: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:821:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:829:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:853:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:901:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:902:18: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:910:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:918:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:924:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:930:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:936:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:943:19: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:1035:19: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:167:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:168:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:169:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
@@ -215,18 +212,10 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:174:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:175:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:176:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:18:35: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.cpp:29:33: style: Consider using std::any_of algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:26:38: warning: parameter name 'w1' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:26:64: warning: parameter name 'w2' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:45:56: warning: parameter name 'r1' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:45:85: warning: parameter name 'r2' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/MonsterRaceAnalyzer_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/MonsterRaceAnalyzer_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/MonsterRaceAnalyzer_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/MonsterRaceAnalyzer_unit.cpp:29:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/MonsterRaceAnalyzer_unit.cpp:29:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/MonsterRaceAnalyzer_unit.cpp:29:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:47:56: warning: parameter name 'r1' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:47:85: warning: parameter name 'r2' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:167:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:168:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:169:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
@@ -237,18 +226,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:174:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:175:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:176:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:18:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:18:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:18:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:26:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:26:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:26:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:36:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:36:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:36:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:36:1: warning: function 'TestBody' has cognitive complexity of 936 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:43:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:43:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -964,9 +941,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:254:43: warning: 14110U is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:278:43: warning: 14111U is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:302:43: warning: 14536U is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:329:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:329:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:329:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:329:1: warning: function 'TestBody' has cognitive complexity of 1548 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:336:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:336:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -2150,18 +2124,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:174:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:175:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:176:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:18:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:18:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:18:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:26:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:26:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:26:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:35:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:35:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:35:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:35:1: warning: function 'TestBody' has cognitive complexity of 148 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:42:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:42:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -2274,9 +2236,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:80:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:80:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:80:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:83:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:83:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:83:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:83:1: warning: function 'TestBody' has cognitive complexity of 100 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:90:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:90:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -2363,18 +2322,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:174:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:175:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:176:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:19:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:19:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:19:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:28:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:28:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:28:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:37:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:37:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:37:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:37:1: warning: function 'TestBody' has cognitive complexity of 296 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:44:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMonsterDataFromRms_unit.cpp:44:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -2609,33 +2556,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:174:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:175:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:176:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:18:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:18:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:18:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:27:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:27:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:27:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:36:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:36:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:36:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:45:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:45:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:45:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:53:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:53:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:53:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:61:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:61:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:61:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:70:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:70:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:70:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:79:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:79:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:79:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:79:1: warning: function 'TestBody' has cognitive complexity of 160 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:86:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:86:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -2757,9 +2677,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:151:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:151:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:151:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:154:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:154:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:154:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:154:1: warning: function 'TestBody' has cognitive complexity of 28 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:161:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:161:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -2782,9 +2699,6 @@ StaticAnalysisJobIdentifier: [43]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:171:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:171:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:171:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:174:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:174:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:174:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:174:1: warning: function 'TestBody' has cognitive complexity of 124 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:181:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveShopDataFromTalonRo_unit.cpp:181:5: note: +2, including nesting penalty of 1, nesting level increased to 2
