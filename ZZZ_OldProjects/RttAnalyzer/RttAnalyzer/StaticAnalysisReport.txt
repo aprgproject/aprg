@@ -1,11 +1,5 @@
-StaticAnalysisJobIdentifier: [43]
-2023-09-23T18:43:13
+StaticAnalysisJobIdentifier: [44]
+2023-09-25T02:35:54
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:14:5: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/tst/RttAnalyzer2_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/tst/RttAnalyzer2_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/tst/RttAnalyzer2_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/src/RttAnalyzer.hpp:14:5: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/tst/RttAnalyzer_unit.cpp:9:1: warning: initialization of 'test_info_' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/tst/RttAnalyzer_unit.cpp:9:1: warning: variable 'test_info_' provides global access to a non-const object; consider making the pointed-to data 'const' [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/RttAnalyzer/RttAnalyzer/tst/RttAnalyzer_unit.cpp:9:1: warning: initializing non-owner argument of type 'testing::internal::TestFactoryBase *' with a newly created 'gsl::owner<>' [cppcoreguidelines-owning-memory]
 DONE!
