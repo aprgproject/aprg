@@ -30,9 +30,9 @@ public:
         std::filesystem::path headerFile;
         std::filesystem::path implementationFile;
         std::filesystem::path testFile;
-        bool isHeaderFileProcessed;
-        bool isImplementationFileProcessed;
-        bool isTestFileProcessed;
+        bool isHeaderFileProcessed{false};
+        bool isImplementationFileProcessed{false};
+        bool isTestFileProcessed{false};
     };
 
     CPlusPlusReorganizer() = default;

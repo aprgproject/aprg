@@ -59,6 +59,7 @@ GTEST_API_ int main() {
 // Normal platforms: program entry point is main, argc/argv are initialized.
 
 GTEST_API_ int main(int argc, char **argv) {
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-vararg,hicpp-vararg)
   printf("Running main() from %s\n", __FILE__);
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

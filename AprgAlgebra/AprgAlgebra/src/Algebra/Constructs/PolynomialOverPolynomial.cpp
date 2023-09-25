@@ -17,8 +17,6 @@ using namespace std;
 
 namespace alba::algebra {
 
-PolynomialOverPolynomial::PolynomialOverPolynomial() {}
-
 PolynomialOverPolynomial::PolynomialOverPolynomial(Polynomial const& numerator, Polynomial const& denominator)
     : m_numerator(numerator), m_denominator(denominator) {}
 

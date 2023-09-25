@@ -30,7 +30,7 @@ TEST(RWayTrieUsingMatrixTest, Example1Works) { testExample1WithInt<TrieForTest>(
 TEST(RWayTrieUsingMatrixTest, DISABLED_AssertionWorksWhenNodeIdsReachesMaximumSize) {
     RWayTrieUsingMatrix<int, 1> trie;
 
-    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto,cert-err33-c,cppcoreguidelines-pro-type-vararg,hicpp-vararg)
     EXPECT_DEATH(trie.put("se", 100), "Assertion failed!");
 }
 

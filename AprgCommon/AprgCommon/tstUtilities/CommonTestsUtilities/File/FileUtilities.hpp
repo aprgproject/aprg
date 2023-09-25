@@ -2,9 +2,7 @@
 
 #include <filesystem>
 
-using namespace std::filesystem;
-
 namespace alba {
-void clearContentsOfFile(path const& filePath);
-void createEmptyFile(path const& filePath);
+void clearContentsOfFile(std::filesystem::path const& filePath);
+void createEmptyFile(std::filesystem::path const& filePath);
 }  // namespace alba

@@ -14,7 +14,7 @@ source "$aprgDirectory/AllCommonScripts/UtilitiesScripts/PrintUtilities.sh"
 set -e
 
 # set issue to filter
-issueToFilter="bugprone-implicit-widening-of-multiplication-result"
+issueToFilter="misc-misplaced-const"
 
 # Show all issues found in static analysis reports
 while IFS= read -r staticAnalysisReportPath; do

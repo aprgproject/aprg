@@ -35,14 +35,14 @@ private:
     static std::string getLogHeader(LogType const logtype);
     std::string m_enginePath;
     std::mutex m_readMutex;
-    STARTUPINFO m_startupInfo;
-    PROCESS_INFORMATION m_processInfo;
-    HANDLE m_engineMonitoringThread;
-    DWORD m_threadId;
-    HANDLE m_inputStreamOnEngineThread, m_outputStreamOnEngineThread;
-    HANDLE m_inputStreamOnHandler, m_outputStreamOnHandler;
-    std::optional<std::ofstream> m_logFileStreamOptional;
-    std::optional<ProcessAStringFunction> m_additionalStepsInProcessingAStringFromEngine;
+    STARTUPINFO m_startupInfo{};
+    PROCESS_INFORMATION m_processInfo{};
+    HANDLE m_engineMonitoringThread{};
+    DWORD m_threadId{};
+    HANDLE m_inputStreamOnEngineThread{}, m_outputStreamOnEngineThread{};
+    HANDLE m_inputStreamOnHandler{}, m_outputStreamOnHandler{};
+    std::optional<std::ofstream> m_logFileStreamOptional{};
+    std::optional<ProcessAStringFunction> m_additionalStepsInProcessingAStringFromEngine{};
 };
 
 }  // namespace alba::chess

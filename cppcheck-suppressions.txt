@@ -11,6 +11,7 @@ missingReturn
 noExplicitConstructor
 variableScope
 constVariable
+unusedPrivateFunction
 
 
 // Full command:
