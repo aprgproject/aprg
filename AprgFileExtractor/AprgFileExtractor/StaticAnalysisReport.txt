@@ -1,11 +1,8 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-24T16:45:11
-/home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringToken.cpp:20:52: warning: pass by value and use std::move [modernize-pass-by-value]
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T08:35:57
 /home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.cpp:35:37: warning: variable 's_mainString' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:32:12: warning: variable 'numberOfFilesToBeAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:33:12: warning: variable 'numberOfFilesAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:180:5: warning: calling 'system' uses a command processor [cert-env33-c]
-/home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:180:5: warning: function is not thread safe [concurrency-mt-unsafe]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/tst/FileExtractorTests/AprgFileExtractor_unit.cpp:34:5: warning: variable 'numberOfFilesToBeAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/tst/FileExtractorTests/AprgFileExtractor_unit.cpp:35:5: warning: variable 'numberOfFilesAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/tst/FileExtractorTests/AprgFileExtractor_unit.cpp:38:1: warning: function 'TestBody' has cognitive complexity of 48 (threshold 25) [readability-function-cognitive-complexity]
