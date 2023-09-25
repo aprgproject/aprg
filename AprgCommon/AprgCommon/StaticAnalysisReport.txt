@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [45]
-2023-09-25T11:01:33
+StaticAnalysisJobIdentifier: [40]
+2023-09-25T23:23:01
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Bit/AlbaBitManipulation_unit.cpp:21:1: warning: function 'TestBody' has cognitive complexity of 32 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Bit/AlbaBitManipulation_unit.cpp:22:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Bit/AlbaBitManipulation_unit.cpp:22:5: note: +2, including nesting penalty of 1, nesting level increased to 2
