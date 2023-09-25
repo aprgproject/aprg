@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-25T01:00:49
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T17:47:08
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:103:19: warning: function 'selectMaps' has cognitive complexity of 52 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:105:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:108:16: note: nesting level increased to 2
@@ -216,6 +216,204 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:26:64: warning: parameter name 'w2' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:47:56: warning: parameter name 'r1' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MonsterRaceAnalyzer.hpp:47:85: warning: parameter name 'r2' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:167:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:168:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:169:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:170:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:171:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:172:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:173:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:174:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:175:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:176:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:35:1: warning: function 'TestBody' has cognitive complexity of 148 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:42:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:42:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:42:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:45:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:45:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:45:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:46:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:46:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:46:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:47:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:47:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:47:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:48:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:48:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:48:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:49:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:49:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:49:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:50:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:50:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:50:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:51:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:51:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:51:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:52:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:52:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:52:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:53:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:53:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:53:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:54:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:54:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:54:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:55:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:55:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:55:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:56:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:56:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:56:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:57:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:57:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:57:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:58:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:58:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:58:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:59:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:59:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:59:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:60:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:60:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:60:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:61:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:61:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:61:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:62:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:62:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:62:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:63:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:63:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:63:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:64:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:64:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:64:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:65:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:65:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:65:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:66:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:66:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:66:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:67:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:67:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:67:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:68:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:68:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:68:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:69:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:69:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:69:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:70:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:70:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:70:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:71:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:71:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:71:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:72:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:72:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:72:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:73:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:73:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:73:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:74:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:74:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:74:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:75:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:75:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:75:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:76:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:76:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:76:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:77:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:77:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:77:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:78:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:78:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:78:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:79:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:79:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:79:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:80:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:80:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:80:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:83:1: warning: function 'TestBody' has cognitive complexity of 100 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:90:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:90:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:90:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:93:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:93:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:93:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:94:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:94:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:94:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:95:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:95:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:95:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:96:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:96:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:96:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:97:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:97:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:97:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:98:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:98:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:98:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:99:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:99:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:99:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:100:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:100:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:100:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:101:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:101:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:101:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:102:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:102:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:102:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:103:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:103:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:103:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:104:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:104:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:104:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:105:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:105:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:105:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:106:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:106:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:106:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:107:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:107:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:107:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:108:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:108:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:108:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:109:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:109:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:109:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:110:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:110:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:110:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:111:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:111:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:111:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:112:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:112:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:112:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:113:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:113:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:113:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:114:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:114:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:114:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:115:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:115:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:115:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:116:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:116:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:116:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:167:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:168:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:169:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
@@ -2114,204 +2312,6 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:708:43: warning: 9026U is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:732:43: warning: 13525U is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveItemDataFromRms_unit.cpp:756:43: warning: 14508U is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:167:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:168:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:169:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:170:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:171:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:172:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:173:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:174:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:175:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:176:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:35:1: warning: function 'TestBody' has cognitive complexity of 148 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:42:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:42:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:42:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:45:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:45:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:45:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:46:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:46:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:46:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:47:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:47:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:47:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:48:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:48:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:48:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:49:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:49:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:49:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:50:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:50:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:50:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:51:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:51:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:51:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:52:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:52:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:52:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:53:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:53:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:53:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:54:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:54:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:54:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:55:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:55:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:55:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:56:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:56:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:56:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:57:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:57:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:57:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:58:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:58:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:58:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:59:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:59:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:59:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:60:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:60:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:60:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:61:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:61:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:61:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:62:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:62:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:62:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:63:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:63:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:63:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:64:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:64:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:64:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:65:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:65:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:65:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:66:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:66:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:66:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:67:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:67:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:67:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:68:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:68:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:68:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:69:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:69:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:69:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:70:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:70:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:70:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:71:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:71:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:71:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:72:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:72:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:72:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:73:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:73:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:73:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:74:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:74:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:74:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:75:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:75:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:75:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:76:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:76:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:76:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:77:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:77:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:77:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:78:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:78:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:78:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:79:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:79:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:79:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:80:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:80:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:80:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:83:1: warning: function 'TestBody' has cognitive complexity of 100 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:90:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:90:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:90:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:93:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:93:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:93:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:94:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:94:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:94:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:95:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:95:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:95:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:96:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:96:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:96:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:97:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:97:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:97:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:98:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:98:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:98:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:99:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:99:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:99:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:100:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:100:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:100:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:101:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:101:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:101:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:102:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:102:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:102:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:103:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:103:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:103:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:104:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:104:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:104:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:105:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:105:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:105:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:106:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:106:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:106:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:107:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:107:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:107:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:108:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:108:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:108:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:109:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:109:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:109:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:110:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:110:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:110:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:111:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:111:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:111:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:112:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:112:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:112:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:113:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:113:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:113:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:114:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:114:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:114:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:115:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:115:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:115:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:116:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:116:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/tst/RetrieveMapDataFromRms_unit.cpp:116:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:167:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:168:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/RagnarokOnline.hpp:169:40: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
