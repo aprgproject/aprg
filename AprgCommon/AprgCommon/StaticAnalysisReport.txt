@@ -1,7 +1,5 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-24T16:13:14
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/FileUtilities.hpp:5:1: warning: using declarations in the global namespace in headers are prohibited [google-global-names-in-headers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/FileUtilities.hpp:5:1: warning: using declarations in the global namespace in headers are prohibited [google-global-names-in-headers]
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T07:57:29
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Bit/AlbaBitManipulation_unit.cpp:21:1: warning: function 'TestBody' has cognitive complexity of 32 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Bit/AlbaBitManipulation_unit.cpp:22:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Bit/AlbaBitManipulation_unit.cpp:22:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -1644,10 +1642,6 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Debug/AlbaExit_unit.cpp:12:5: note: +5, including nesting penalty of 4, nesting level increased to 5
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Debug/AlbaExit_unit.cpp:12:5: note: +1
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Debug/AlbaExit_unit.cpp:12:5: note: +5, including nesting penalty of 4, nesting level increased to 5
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Debug/AlbaExit_unit.cpp:12:5: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Debug/AlbaExit_unit.cpp:15:5: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Debug/AlbaExit_unit.cpp:20:5: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Debug/AlbaExit_unit.cpp:23:5: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg,hicpp-vararg]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Debug/AlbaFundamentalOperationsCounter_unit.cpp:48:37: warning: 5678 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Debug/AlbaFundamentalOperationsCounter_unit.cpp:89:32: warning: 1234 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Debug/AlbaFundamentalOperationsCounter_unit.cpp:102:24: warning: 5678 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
@@ -8045,7 +8039,6 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/PathHandler/AlbaLocalPathHandler_unit.cpp:590:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/PathHandler/AlbaLocalPathHandler_unit.cpp:590:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/PathHandler/AlbaLocalPathHandler_unit.cpp:590:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/FileUtilities.hpp:5:1: warning: using declarations in the global namespace in headers are prohibited [google-global-names-in-headers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Print/AlbaPrintFunctions_unit.cpp:25:76: warning: 265 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Print/AlbaPrintFunctions_unit.cpp:71:25: warning: 500 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Randomizer/AlbaUniformDeterministicAllBitsRandomizer_unit.cpp:17:45: warning: consider replacing 'long long' with 'int64' [google-runtime-int]
@@ -9101,7 +9094,6 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Time/AlbaLocalTimeHelper_unit.cpp:118:30: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Time/AlbaLocalTimeHelper_unit.cpp:119:30: warning: 22 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Time/AlbaLocalTimeHelper_unit.cpp:123:31: warning: 96 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tstUtilities/CommonTestsUtilities/File/FileUtilities.hpp:5:1: warning: using declarations in the global namespace in headers are prohibited [google-global-names-in-headers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/String/AlbaStringHelper_unit.cpp:12:1: warning: function 'TestBody' has cognitive complexity of 68 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/String/AlbaStringHelper_unit.cpp:13:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/String/AlbaStringHelper_unit.cpp:13:5: note: +2, including nesting penalty of 1, nesting level increased to 2
