@@ -1,32 +1,328 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-25T01:35:12
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T18:20:05
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:32:12: warning: variable 'numberOfFilesToBeAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp:33:12: warning: variable 'numberOfFilesAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.cpp:101:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:17:15: warning: variable 'totalSizeToBeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:18:15: warning: variable 'totalSizeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:19:12: warning: variable 'writeProgressForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:30:117: warning: 30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:33:26: error: no matching constructor for initialization of 'alba::algorithm::AlbaLargeSorterConfiguration' [clang-diagnostic-error]
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:10:8: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:10:8: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:11:5: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:13:5: note: candidate constructor not viable: requires 5 arguments, but 2 were provided
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:36:29: error: no matching constructor for initialization of 'alba::algorithm::AlbaLargeSorterConfiguration' [clang-diagnostic-error]
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:10:8: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:10:8: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:11:5: note: candidate constructor not viable: requires 0 arguments, but 2 were provided
-/home/runner/work/aprg/aprg/AprgAlgorithm/AprgAlgorithm/src/Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp:13:5: note: candidate constructor not viable: requires 5 arguments, but 2 were provided
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:170:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:180:70: warning: 75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:180:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:198:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:198:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:215:70: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:215:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:52:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:63:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:79:69: warning: 2010 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:145:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:155:21: warning: consider replacing 'unsigned short' with 'uint16' [google-runtime-int]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:17:15: warning: variable 'totalSizeToBeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:18:15: warning: variable 'totalSizeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:19:12: warning: variable 'writeProgressForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:30:117: warning: 30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:168:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:178:70: warning: 75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:178:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:196:70: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:196:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:213:70: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogSorter.cpp:213:91: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.cpp:35:37: warning: variable 's_mainString' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:20:20: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:76:45: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:87:37: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:99:40: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:112:42: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:137:43: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:149:71: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:153:42: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:154:22: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:189:43: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:204:42: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:217:71: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:221:42: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:222:22: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:286:42: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/BtsLogAnalyzer.cpp:287:22: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/LogStatisticsAnalyzer.cpp:80:24: warning: 10000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:107:20: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:125:26: warning: function 'analyzeStartupDelays' has cognitive complexity of 62 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:132:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:133:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:133:81: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:139:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:140:24: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:151:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:152:82: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:185:14: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:188:69: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:187:69: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:196:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:199:69: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:198:69: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:208:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:209:82: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:218:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:219:82: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:227:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:228:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:272:14: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:273:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:281:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:282:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:290:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:291:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:300:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:301:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:311:14: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:312:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:320:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:321:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:329:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:330:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:338:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:339:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:347:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:348:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:357:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:358:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:366:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:367:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:377:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:378:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:386:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:387:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:395:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:396:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:404:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:405:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:413:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:414:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:425:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:426:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:435:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:436:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:444:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:445:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:453:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:454:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:462:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:463:83: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:236:21: warning: 14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:273:22: warning: 14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:282:22: warning: 15 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:291:22: warning: 14 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:301:22: warning: 15 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:321:22: warning: 17 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:330:22: warning: 18 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:339:22: warning: 19 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:348:22: warning: 20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:358:22: warning: 21 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:367:22: warning: 22 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:378:22: warning: 23 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:387:22: warning: 24 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:396:22: warning: 25 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:405:22: warning: 26 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:414:22: warning: 27 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:426:22: warning: 28 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:436:22: warning: 29 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:445:22: warning: 30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:454:22: warning: 31 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/StartupLogAnalyzer.cpp:491:21: warning: 1000000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:23:5: warning: variable 'numberOfFilesToBeAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:24:5: warning: variable 'numberOfFilesAnalyzedForExtraction' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:25:8: warning: variable 'totalSizeToBeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:26:8: warning: variable 'totalSizeReadForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:27:5: warning: variable 'writeProgressForCombine' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:94:88: warning: 10000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:95:88: warning: 100000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:96:88: warning: 200000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:97:76: warning: 50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:103:91: warning: 100000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:104:91: warning: 200000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:105:79: warning: 70 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:194:27: warning: function 'processFileForRlSetupDelayInRlh' has cognitive complexity of 35 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:211:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:213:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:217:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:219:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:221:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:226:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:230:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:233:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:233:78: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:237:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:249:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:253:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:256:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:256:78: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:243:30: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:261:30: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:315:30: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:357:26: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:364:27: warning: function 'processFileForRlSetupDelayInTupcWithSymonKnife' has cognitive complexity of 59 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:403:23: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:407:92: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:411:23: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:412:13: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:426:106: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:402:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:402:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:402:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:402:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:402:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:402:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:449:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:451:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:458:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:465:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:469:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:473:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:477:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:482:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:484:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:486:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:490:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:493:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:497:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:499:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:504:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:508:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:512:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:516:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:520:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:524:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:528:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:536:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:540:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:541:45: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:545:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:551:30: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:621:27: warning: function 'processFileForRlSetupDelayInTupcWithSymonKnifeForFtm' has cognitive complexity of 43 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:645:23: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:647:93: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:651:23: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:652:13: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:659:107: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:644:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:644:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:644:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:644:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:644:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:644:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:678:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:680:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:687:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:694:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:698:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:703:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:705:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:707:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:711:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:714:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:718:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:720:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:725:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:733:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:737:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:738:45: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:742:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:748:30: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:777:27: warning: function 'processFileForFtmFcmWireshark' has cognitive complexity of 56 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:791:9: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:792:13: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:790:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:790:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:790:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:790:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:790:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:790:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:801:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:801:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:801:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:801:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:801:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:801:12: note: nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:808:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:810:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:817:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:819:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:821:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:821:56: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:823:25: note: +6, including nesting penalty of 5, nesting level increased to 6
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:825:29: note: +7, including nesting penalty of 6, nesting level increased to 7
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:827:36: note: +1, nesting level increased to 7
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:829:36: note: +1, nesting level increased to 7
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:831:31: note: +1, nesting level increased to 7
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:839:28: note: +1, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:839:63: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:841:25: note: +6, including nesting penalty of 5, nesting level increased to 6
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:843:29: note: +7, including nesting penalty of 6, nesting level increased to 7
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:845:36: note: +1, nesting level increased to 7
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:847:36: note: +1, nesting level increased to 7
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:849:31: note: +1, nesting level increased to 7
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:861:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:861:100: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:820:94: warning: 18 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:821:34: warning: 0x75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:821:51: warning: 0x77 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:821:68: warning: 0x7E is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:825:42: warning: 0x75 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:827:49: warning: 0x77 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:829:49: warning: 0x7E is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:839:41: warning: 0x74 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:839:58: warning: 0x76 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:839:75: warning: 0x7C is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:843:42: warning: 0x74 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:845:49: warning: 0x76 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:847:49: warning: 0x7C is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:868:30: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:870:30: warning: 17 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:874:84: warning: 17 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:884:27: warning: function 'processFileForTopLogs' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:906:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:909:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:909:82: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:912:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:913:115: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:921:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:928:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:928:31: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:933:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:934:73: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:938:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:938:29: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:941:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:942:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:947:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:949:19: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:955:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:957:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:959:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:961:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:963:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:978:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:920:26: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:939:21: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:976:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:985:27: warning: function 'processFileForTopLogsMem' has cognitive complexity of 37 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1003:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1006:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1006:82: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1009:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1010:114: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1018:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1024:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1025:73: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1029:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1029:29: note: +1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1032:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1033:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1038:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1040:19: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1046:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1048:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1050:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1052:20: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1064:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1017:26: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1030:21: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1062:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1096:30: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1106:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1119:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/PerformanceAnalyzer.cpp:1151:84: warning: 1000000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/PerformanceAnalyzer/PerformanceAnalyzer/src/TopLogAnalyzer.cpp:302:1: warning: constructor does not initialize these fields: m_state [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
 DONE!
