@@ -156,6 +156,7 @@ void ChessEngineControllerWithUci::processPendingCommands() {
     }
 }
 
+// NOLINTNEXTLINE(readability-convert-member-functions-to-static)
 void ChessEngineControllerWithUci::log(string const& logString) {
     if (m_logFileStreamOptional) {
         m_logFileStreamOptional.value() << logString << "\n";
@@ -163,6 +164,7 @@ void ChessEngineControllerWithUci::log(string const& logString) {
     }
 }
 
+// NOLINTNEXTLINE(readability-convert-member-functions-to-static)
 void ChessEngineControllerWithUci::sendUci() { send(CommandType::Uci, "uci"); }
 
 void ChessEngineControllerWithUci::sendQuit() {
@@ -170,6 +172,7 @@ void ChessEngineControllerWithUci::sendQuit() {
     changeState(ControllerState::Quitted);
 }
 
+// NOLINTNEXTLINE(readability-convert-member-functions-to-static)
 void ChessEngineControllerWithUci::sendStop() { send(CommandType::Stop, "stop"); }
 
 void ChessEngineControllerWithUci::sendUciAndUciOptions() {

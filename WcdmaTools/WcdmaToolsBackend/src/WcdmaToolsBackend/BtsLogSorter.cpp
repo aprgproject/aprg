@@ -30,11 +30,9 @@ BtsLogSorter::BtsLogSorter(BtsLogSorterConfiguration const& configuration)
           AlbaLocalPathHandler(configuration.m_pathOfTempFiles + R"(\)" + stringHelper::getRandomAlphaNumericString(30))
               .getPath()
               .string()),
-      m_sorterWithPcTime(AlbaLargeSorterConfiguration(
-          configuration.m_configurationWithPcTime,
+      m_sorterWithPcTime(configuration.m_configurationWithPcTime.getConfigurationWithDifferentDirectory(
           AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\BlocksWithPcTime\)").getPath().string())),
-      m_sorterWithoutPcTime(AlbaLargeSorterConfiguration(
-          configuration.m_configurationWithoutPcTime,
+      m_sorterWithoutPcTime(configuration.m_configurationWithoutPcTime.getConfigurationWithDifferentDirectory(
           AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\BlocksWithoutPcTime\)").getPath().string())),
       m_directoryOfLogsWithoutPcTime(
           AlbaLocalPathHandler(m_pathOfCurrentTempFiles + R"(\LogsWithoutPcTime\)").getPath().string()),
