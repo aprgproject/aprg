@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [44]
-2023-09-24T15:16:45
+StaticAnalysisJobIdentifier: [45]
+2023-09-25T06:43:19
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:16:43: warning: initialization of 'aiffSampleRateTable' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/unordered_map.h:227:7: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:199:23: warning: function 'decodeWaveFile' has cognitive complexity of 26 (threshold 25) [readability-function-cognitive-complexity]
@@ -124,8 +124,7 @@ StaticAnalysisJobIdentifier: [44]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:728:70: warning: 255. is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:733:72: warning: 128. is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:16:1: warning: non-POD static (unordered_map) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NearestSamples.cpp:41:9: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NearestSamples.cpp:30:21: style: Condition 'itUpper!=m_valuesToIndexes.cend()' is always true [knownConditionTrueFalse]
+/home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/NearestSamples.cpp:39:9: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/Utilities.cpp:84:59: warning: 24000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/src/AudioManipulator/Utilities.cpp:84:66: warning: 48000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudioManipulator/AprgAudioManipulator/tst/AudioManipulatorTests/AudioManipulator_unit.cpp:28:47: warning: 0.30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
