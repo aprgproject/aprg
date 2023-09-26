@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-25T22:41:13
+StaticAnalysisJobIdentifier: [41]
+2023-09-26T18:14:15
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:88:26: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:68:18: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:69:18: warning: variable name 'b' is too short, expected at least 3 characters [readability-identifier-length]
@@ -160,20 +160,14 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:350:84: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:350:100: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:374:18: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:441:63: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:443:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:443:119: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:445:120: note: clone 2 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:447:119: note: clone 3 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:449:120: note: clone 4 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:5: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:5: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:17: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:43: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:13: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:99: warning: loop induction expression should not have floating-point type [cert-flp30-c]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:588:5: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:588:5: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:588:17: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:588:43: warning: loop induction expression should not have floating-point type [cert-flp30-c]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:592:13: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:592:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:592:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:592:99: warning: loop induction expression should not have floating-point type [cert-flp30-c]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:42:83: warning: 0.90 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:62:81: warning: 0.60 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:108:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
@@ -208,10 +202,6 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/ColorUtilities.cpp:228:83: warning: 60 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/LabelForPoints.cpp:17:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/LabelForPoints.cpp:29:64: warning: 0xFFFFFF is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/LogarithmHelpers.hpp:18:16: warning: Either the condition 'currentLogarithm>=0' is redundant or log() argument nr 1 can have invalid value. The value is 0 but the valid values are '4.94066e-324:'. [invalidFunctionArg]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/LogarithmHelpers.hpp:72:29: note: Assuming that condition 'currentLogarithm>=0' is not redundant
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/LogarithmHelpers.hpp:74:47: note: Calling function 'getLogarithm', 2nd argument 'currentLogarithm' value is 0
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Helpers/LogarithmHelpers.hpp:18:16: note: Invalid argument
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/PenCircles.cpp:19:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.hpp:32:35: warning: 0.9 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/PenCirclesDrawer.cpp:87:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
