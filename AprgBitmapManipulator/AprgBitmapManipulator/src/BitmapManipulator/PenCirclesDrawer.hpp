@@ -9,7 +9,7 @@ namespace alba::AprgBitmap {
 class PenCirclesDrawer {
 public:
     struct ColorDetails {
-        ColorDetails();
+        ColorDetails() = default;
         [[nodiscard]] uint32_t getColor() const;
         [[nodiscard]] bool isEmpty() const;
         void addColor(uint32_t const color, double const weight);
