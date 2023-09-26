@@ -18,7 +18,7 @@ public:
 
     using VectorOfDoubles = std::vector<double>;
     using MatrixOfDoubles = matrix::AlbaMatrix<double>;
-    Modeling();
+    Modeling() = default;
     [[nodiscard]] unsigned int getNumberOfSamples [[nodiscard]] () const;
     [[nodiscard]] MatrixOfDoubles getCoefficients() const;
     void retrieveDataFromFileWithFileFormat1(std::string const& filePath);
