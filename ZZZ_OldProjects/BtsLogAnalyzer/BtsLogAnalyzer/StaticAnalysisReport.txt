@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [45]
-2023-09-25T16:59:01
+StaticAnalysisJobIdentifier: [40]
+2023-09-26T05:59:14
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogPrint.cpp:101:30: warning: parameter name 'in' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:52:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/WcdmaTools/WcdmaToolsBackend/src/WcdmaToolsBackend/BtsLogTime.cpp:63:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
@@ -43,8 +43,6 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:467:50: note: +1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:468:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.cpp:509:9: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.hpp:10:1: warning: using declarations in the global namespace in headers are prohibited [google-global-names-in-headers]
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/src/BtsLogAnalyzer/BtsLogAnalyzer.hpp:10:1: warning: using declarations in the global namespace in headers are prohibited [google-global-names-in-headers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/tst/BtsLogAnalyzerTests/BtsLogAnalyzer_unit.cpp:13:9: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/tst/BtsLogAnalyzerTests/BtsLogAnalyzer_unit.cpp:14:9: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsLogAnalyzer/BtsLogAnalyzer/tst/BtsLogAnalyzerTests/BtsLogAnalyzer_unit.cpp:15:9: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
