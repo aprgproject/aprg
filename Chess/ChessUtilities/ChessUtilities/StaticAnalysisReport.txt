@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [45]
-2023-09-25T15:05:58
+StaticAnalysisJobIdentifier: [40]
+2023-09-26T04:06:18
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.hpp:86:34: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.hpp:86:62: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/Board/Board.hpp:88:88: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
