@@ -36,6 +36,5 @@ void AlbaSackReaderType::addParameter(AlbaSackReaderParameter const& parameter) 
 
 void AlbaSackReaderType::addOtherTypeName(std::string const& otherTypeName) { m_otherTypes.emplace(otherTypeName); }
 void AlbaSackReaderType::setAsUnion() { m_isUnion = true; }
-AlbaSackReaderType::AlbaSackReaderType() = default;
 
 }  // namespace alba
