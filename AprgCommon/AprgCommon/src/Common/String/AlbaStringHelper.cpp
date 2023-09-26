@@ -137,19 +137,19 @@ string getStringWithoutQuotations(string_view const str) {
     return string(str);
 }
 
-string getStringWithoutCharAtTheStartAndEnd(string_view const str, char const char1) {
-    return getStringWithoutCharAtTheStart(getStringWithoutCharAtTheEnd(str, char1), char1);
+string getStringWithoutCharAtTheStartAndEnd(string_view const str, char const character) {
+    return getStringWithoutCharAtTheStart(getStringWithoutCharAtTheEnd(str, character), character);
 }
 
-string getStringWithoutCharAtTheStart(string_view const str, char const char1) {
+string getStringWithoutCharAtTheStart(string_view const str, char const character) {
     size_t const length = str.length();
-    size_t const start = (str[0] == char1) ? 1 : 0;
+    size_t const start = (str[0] == character) ? 1 : 0;
     return string(str.substr(start, length - start));
 }
 
-string getStringWithoutCharAtTheEnd(string_view const str, char const char1) {
+string getStringWithoutCharAtTheEnd(string_view const str, char const character) {
     size_t const length = str.length();
-    size_t const end = (length == 0) ? 0 : (str[length - 1] == char1) ? length - 1 : length;
+    size_t const end = (length == 0) ? 0 : (str[length - 1] == character) ? length - 1 : length;
     return string(str.substr(0, end));
 }
 
