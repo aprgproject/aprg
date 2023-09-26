@@ -2,7 +2,7 @@
 
 namespace alba::CodeUtilities {
 
-enum class MatcherType {
+enum class SpecialMatcherType {
     Comment,
     HasNewLine,
     IdentifierWithPascalCase,

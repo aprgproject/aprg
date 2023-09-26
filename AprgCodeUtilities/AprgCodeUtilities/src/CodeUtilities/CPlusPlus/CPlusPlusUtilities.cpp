@@ -59,7 +59,7 @@ string getFunctionSignature(string const& functionText) {
     }
 
     Patterns const removePatterns{
-        {M(MatcherType::Comment)},
+        {M(SpecialMatcherType::Comment)},
         {M("explicit")},
         {M("inline")},
         {M("static")},
@@ -90,7 +90,7 @@ string getFunctionName(string const& functionSignature) {
 
 string getTextWithoutCommentsWithNewLine(Terms const& terms) {
     Terms revisedTerms(terms);
-    Patterns const removePatterns{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+    Patterns const removePatterns{{M(SpecialMatcherType::Comment), M(SpecialMatcherType::WhiteSpaceWithNewLine)}};
     replaceAllForwards(revisedTerms, 0, removePatterns, {});
     return getCombinedContents(revisedTerms);
 }

@@ -169,17 +169,17 @@ strings CPlusPlusReorganizer::getSavedSignatures() const { return m_headerInform
 
 int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
     int endIndex = index;
-    Patterns const searchPatterns{{M(TermType::WhiteSpace), M(MatcherType::Comment)}, {M(MatcherType::Comment)}};
+    Patterns const searchPatterns{{M(TermType::WhiteSpace), M(SpecialMatcherType::Comment)}, {M(SpecialMatcherType::Comment)}};
     Indexes hitIndexes = searchPatternsAt(m_terms, index + 1, searchPatterns);
     if (!hitIndexes.empty()) {
         int const firstHitIndex = hitIndexes.front();
         int const lastHitIndex = hitIndexes.back();
         Term const& firstTerm(m_terms[firstHitIndex]);
         Term const& lastTerm(m_terms[lastHitIndex]);
-        if (firstTerm == M(TermType::WhiteSpace) && lastTerm == M(MatcherType::Comment) && !hasNewLine(firstTerm)) {
+        if (firstTerm == M(TermType::WhiteSpace) && lastTerm == M(SpecialMatcherType::Comment) && !hasNewLine(firstTerm)) {
             endIndex = lastHitIndex;
         }
-        if (firstTerm == M(MatcherType::Comment)) {
+        if (firstTerm == M(SpecialMatcherType::Comment)) {
             endIndex = firstHitIndex;
         }
     }
@@ -281,7 +281,7 @@ void CPlusPlusReorganizer::processTerms() {
 void CPlusPlusReorganizer::processMacro(int& nextIndex, int const macroStartIndex) {
     int searchIndex = macroStartIndex;
     Patterns const searchPatterns{
-        {M(MatcherType::WhiteSpaceWithNewLine)}, {M("\\"), M(MatcherType::WhiteSpaceWithNewLine)}};
+        {M(SpecialMatcherType::WhiteSpaceWithNewLine)}, {M("\\"), M(SpecialMatcherType::WhiteSpaceWithNewLine)}};
     bool isFound(true);
     while (isFound) {
         Indexes hitIndexes = searchForwardsForPatterns(m_terms, searchIndex, searchPatterns);
@@ -290,7 +290,7 @@ void CPlusPlusReorganizer::processMacro(int& nextIndex, int const macroStartInde
             int const firstHitIndex = hitIndexes.front();
             int const lastHitIndex = hitIndexes.back();
             Term const& firstTerm(m_terms[firstHitIndex]);
-            if (firstTerm == M(MatcherType::WhiteSpaceWithNewLine)) {
+            if (firstTerm == M(SpecialMatcherType::WhiteSpaceWithNewLine)) {
                 addItemIfNeeded(nextIndex, lastHitIndex);
                 nextIndex = lastHitIndex + 1;
                 break;
@@ -446,7 +446,7 @@ bool CPlusPlusReorganizer::hasEndBrace(string const& content) {
 void CPlusPlusReorganizer::makeIsolatedCommentsStickWithNextLine(Terms& terms) {
     if (!terms.empty()) {
         int searchIndex = 0;
-        Patterns const searchPatterns{{M(MatcherType::Comment), M(MatcherType::WhiteSpaceWithNewLine)}};
+        Patterns const searchPatterns{{M(SpecialMatcherType::Comment), M(SpecialMatcherType::WhiteSpaceWithNewLine)}};
         bool isFound(true);
         while (isFound) {
             Indexes hitIndexes = searchForwardsForPatterns(terms, searchIndex, searchPatterns);
