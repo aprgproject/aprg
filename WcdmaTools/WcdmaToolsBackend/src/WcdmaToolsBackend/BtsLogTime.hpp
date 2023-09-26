@@ -10,7 +10,7 @@ enum class BtsLogTimeType { BtsTimeStamp, PcTimeStamp };
 
 class BtsLogTime {
 public:
-    BtsLogTime();
+    BtsLogTime() = default;
     BtsLogTime(BtsLogTimeType const logTimeType, std::string const& timeStampString);
     BtsLogTime operator+(BtsLogTime const& btsLogTime) const;
     BtsLogTime operator-(BtsLogTime const& btsLogTime) const;

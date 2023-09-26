@@ -40,6 +40,5 @@ BtsLogPrint BtsPrintReaderWithRollback::getPrint() {
 }
 
 double BtsPrintReaderWithRollback::getCurrentLocation() { return static_cast<double>(m_inputStream.tellg()); }
-BtsPrintReaderWithRollback::BtsPrintReaderWithRollback() = default;
 
 }  // namespace wcdmaToolsBackend

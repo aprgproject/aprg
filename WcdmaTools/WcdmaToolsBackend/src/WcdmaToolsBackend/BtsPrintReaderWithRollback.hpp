@@ -8,7 +8,7 @@ namespace wcdmaToolsBackend {
 
 class BtsPrintReaderWithRollback {
 public:
-    BtsPrintReaderWithRollback();
+    BtsPrintReaderWithRollback() = default;
     [[nodiscard]] bool isGood() const;
     void clear();
     void rollBackPrint();

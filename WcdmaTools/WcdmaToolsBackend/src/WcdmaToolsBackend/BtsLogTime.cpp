@@ -170,6 +170,4 @@ ostream& operator<<(ostream& out, BtsLogTime const& btsLogTime) {
     return out;
 }
 
-BtsLogTime::BtsLogTime() = default;
-
 }  // namespace wcdmaToolsBackend
