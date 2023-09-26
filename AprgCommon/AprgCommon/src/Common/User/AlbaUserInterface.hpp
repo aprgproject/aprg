@@ -14,7 +14,7 @@ public:
     using Choices = std::map<AnswerType, std::string>;
 
     // rule of zero
-    AlbaUserInterface();
+    AlbaUserInterface() = default;
     std::string getUserInput();
     std::string getFilePathInput();
 
