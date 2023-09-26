@@ -26,6 +26,7 @@ public:
     [[nodiscard]] LocalPath getProximatePathFrom(LocalPath const& source) const;
     [[nodiscard]] LocalPath getProximatePathTo(LocalPath const& destination) const;
     [[nodiscard]] uintmax_t getFileSize() const;
+    [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] bool doesExist() const;
     [[nodiscard]] bool isExistingDirectory() const;
     [[nodiscard]] bool isExistingFile() const;
