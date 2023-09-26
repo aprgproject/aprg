@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [45]
-2023-09-25T06:58:08
+StaticAnalysisJobIdentifier: [40]
+2023-09-25T22:41:13
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:88:26: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:68:18: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:69:18: warning: variable name 'b' is too short, expected at least 3 characters [readability-identifier-length]
@@ -23,15 +23,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:252:14: warning: 11 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:255:14: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:258:14: warning: 13 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitValueUtilitiesClassDefinition.hpp:306:19: style: Checking if unsigned expression 'value' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitValueUtilitiesClassDefinition.hpp:335:19: style: Checking if unsigned expression 'value' is less than zero. [unsignedLessThanZero]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Bit/Common/AlbaBitValueUtilitiesClassDefinition.hpp:113:96: warning: Expression '-1' has a negative value. That is converted to an unsigned value and used in an unsigned calculation. [signConversion]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:65:14: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:66:18: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:90:22: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:113:24: warning: performing an implicit widening conversion to type 'size_t' (aka 'unsigned long') of a multiplication performed in type 'int' [bugprone-implicit-widening-of-multiplication-result]
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:113:24: note: make conversion explicit to silence this warning
-/home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:113:24: note: perform multiplication in a wider type
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:129:14: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:130:18: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:164:19: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
@@ -79,14 +73,12 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Plane.cpp:78:74: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Plane.cpp:86:58: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Plane.cpp:86:74: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Vector/AlbaMathVectorUtilities.hpp:136:89: warning: Return value of function sin() is not used. [ignoredReturnValue]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Sphere.cpp:31:59: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Sphere.cpp:31:75: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Sphere.cpp:40:59: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Sphere.cpp:40:75: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Sphere.cpp:49:59: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Sphere.cpp:49:75: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Vector/AlbaMathVectorUtilities.hpp:136:89: warning: Return value of function sin() is not used. [ignoredReturnValue]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:20:29: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:20:45: warning: parameter name 'd' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:20:61: warning: parameter name 'e' is too short, expected at least 3 characters [readability-identifier-length]
@@ -103,16 +95,10 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:109:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:109:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:109:75: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:141:37: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:143:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:143:44: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:145:44: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:147:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:147:44: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:178:18: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:178:34: warning: parameter name 'd' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:178:50: warning: parameter name 'e' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:178:66: warning: parameter name 'f' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:180:18: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:180:34: warning: parameter name 'd' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:180:50: warning: parameter name 'e' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Circle.cpp:180:66: warning: parameter name 'f' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:49:18: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:50:18: warning: variable name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:54:22: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
@@ -131,24 +117,12 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:191:9: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:191:21: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:191:56: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:208:37: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:210:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:210:44: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:212:44: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:214:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Ellipse.cpp:214:44: note: clone 1 starts here
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:40:22: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:44:22: warning: variable name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:88:48: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:92:48: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:96:61: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:100:61: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:108:37: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:111:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:117:44: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:111:44: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:114:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Hyperbola.cpp:114:44: note: clone 1 starts here
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Line.cpp:146:43: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Line.cpp:150:43: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Constructs/Quadrilateral.cpp:24:45: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
@@ -178,39 +152,28 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:89:50: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:89:66: warning: parameter name 'd' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:89:82: warning: parameter name 'e' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:197:22: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:199:10: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:199:34: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:205:22: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:207:10: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:209:16: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:216:69: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:216:84: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:216:99: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:233:46: warning: parameter name 'xy' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:267:48: warning: 1st argument 'perpendicularLine' (passed to 'line1') looks like it might be swapped with the 2nd, 'line1' (passed to 'line2') [readability-suspicious-call-argument]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:114:7: note: in the call to 'getIntersectionOfTwoLines', declared here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:346:68: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:346:84: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:346:100: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:370:18: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:437:63: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:439:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:439:119: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:441:120: note: clone 2 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:443:119: note: clone 3 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:445:120: note: clone 4 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:582:5: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:582:5: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:582:17: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:582:43: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:13: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:99: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:781:20: warning: 1st argument 'firstPoint' (passed to 'point1') looks like it might be swapped with the 2nd, 'point1' (passed to 'point2') [readability-suspicious-call-argument]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:235:8: note: in the call to 'getDistance', declared here
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Math/Vector/AlbaMathVectorUtilities.hpp:136:89: warning: Return value of function sin() is not used. [ignoredReturnValue]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:218:69: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:218:84: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:218:99: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:235:46: warning: parameter name 'xy' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:350:68: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:350:84: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:350:100: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:374:18: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:441:63: warning: repeated branch in conditional chain [bugprone-branch-clone]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:443:6: note: end of the original
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:443:119: note: clone 1 starts here
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:445:120: note: clone 2 starts here
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:447:119: note: clone 3 starts here
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:449:120: note: clone 4 starts here
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:5: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:5: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:17: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:43: warning: loop induction expression should not have floating-point type [cert-flp30-c]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:13: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:99: warning: loop induction expression should not have floating-point type [cert-flp30-c]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:42:83: warning: 0.90 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:62:81: warning: 0.60 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimeFilter.cpp:108:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
@@ -260,7 +223,6 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:90:9: warning: variable name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:109:9: warning: variable name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.cpp:128:9: warning: variable name 'y' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/Traversal/OutwardSnakeLikeTraversal.hpp:21:24: style: Unused private function: 'OutwardSnakeLikeTraversal::isPointInCorner' [unusedPrivateFunction]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.hpp:32:35: warning: 0.9 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/AnimizeColor.hpp:32:35: warning: 0.9 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgBitmapManipulator/AprgBitmapManipulator/src/BitmapManipulator/BitmapFilters.hpp:141:32: warning: 0xFFFFFF is a magic number; consider replacing it with a named constant [readability-magic-numbers]
