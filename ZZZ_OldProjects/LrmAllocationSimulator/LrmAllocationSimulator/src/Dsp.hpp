@@ -16,7 +16,7 @@ enum class DspMode {
 enum class NyquistType { Nyquist, TurboNyquist };
 
 struct DspDetails {
-    DspDetails();
+    DspDetails() = default;
     unsigned int address{0};
     unsigned int lcgId{0};
     unsigned int numberOfDchUsers{0};
@@ -33,7 +33,7 @@ struct DspDetails {
 
 class Dsp {
 public:
-    Dsp();
+    Dsp() = default;
     explicit Dsp(DspDetails const& dspDetails);
     [[nodiscard]] DspMode getMode() const;
     [[nodiscard]] NyquistType getNyquistType() const;

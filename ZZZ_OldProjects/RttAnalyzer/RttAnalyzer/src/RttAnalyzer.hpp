@@ -17,7 +17,7 @@ struct RttDetails {
 
 class RttAnalyzer {
 public:
-    RttAnalyzer();
+    RttAnalyzer() = default;
     void saveAllRttDetails(std::ofstream& collectedRttDetails) const;
     void processFile(std::string const& file);
     void processLine(std::string const& line);

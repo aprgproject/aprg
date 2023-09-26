@@ -92,6 +92,4 @@ void UserIdentifiers::saveTransactionId(std::string const& lineInLogs) {
     }
 }
 
-UserIdentifiers::UserIdentifiers() = default;
-
 }  // namespace alba

@@ -190,6 +190,5 @@ pos,diffPos1,diffPos2,diffPos3,diffPos4,diffPos5,diffPos6,minDifferencePos,maxDi
     }
 }
 */
-RttAnalyzer::RttAnalyzer() = default;
 
 }  // namespace alba

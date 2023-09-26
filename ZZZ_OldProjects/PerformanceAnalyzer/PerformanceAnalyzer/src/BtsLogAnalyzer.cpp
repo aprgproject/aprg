@@ -598,8 +598,4 @@ double BtsLogAnalyzer::getTotalMicroseconds(BtsLogTime const& btsLogTime) {
     return result;
 }
 
-BtsLogAnalyzer::PrintsAvailable::PrintsAvailable()
-
-    = default;
-
 }  // namespace alba

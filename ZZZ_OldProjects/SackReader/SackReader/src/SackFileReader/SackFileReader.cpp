@@ -22,7 +22,7 @@ void SackFileReader::readFile(string const& fileFullPath) {
     ifstream fileStream(fileFullPath);
     AlbaLocalPathHandler fileFullPathHandler(fileFullPath);
     AlbaFileReader fileReader(fileStream);
-    SackFileReaderStateMachine sackFileReaderStateMachine(m_database, fileFullPathHandler.getPath());
+    SackFileReaderStateMachine sackFileReaderStateMachine(m_database, fileFullPathHandler.getPath().string());
     while (fileReader.isNotFinished()) {
         string line(getStringWithoutRedundantWhiteSpace(fileReader.getLineAndIgnoreWhiteSpaces()));
         strings tokens;

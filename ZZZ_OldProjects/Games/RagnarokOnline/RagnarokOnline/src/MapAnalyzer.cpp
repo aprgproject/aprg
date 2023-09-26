@@ -292,8 +292,6 @@ double MapAnalyzer::getTalonRoDropRate(double const dropRate) {
     return talonRoDropRate;
 }
 
-MapAnalyzer::MapAnalyzer() = default;
-
 bool MapAnalyzer::isDropRateAcceptable(double const /*dropRate*/) {
     return true;
     // return dropRate >= 1; // This removes hard farming

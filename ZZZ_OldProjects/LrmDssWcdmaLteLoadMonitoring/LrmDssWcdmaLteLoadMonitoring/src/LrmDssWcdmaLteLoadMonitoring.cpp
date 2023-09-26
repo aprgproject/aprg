@@ -105,8 +105,4 @@ EDssWcdmaLoad LrmDssWcdmaLteLoadMonitoring::convertFilterBandwidthToLoadState(
     return result;
 }
 
-LrmDssWcdmaLteLoadMonitoring::LrmDssWcdmaLteLoadMonitoring()
-
-    = default;
-
 }  // namespace alba

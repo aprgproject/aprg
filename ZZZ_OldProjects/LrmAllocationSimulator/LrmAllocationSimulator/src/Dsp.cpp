@@ -70,10 +70,5 @@ void Dsp::setLcgId(unsigned int const lcgId) { m_dspDetails.lcgId = lcgId; }
 void Dsp::setDliPool(unsigned int const dliPool) { m_dspDetails.dliPool = dliPool; }
 void Dsp::setIsNbicAllocated(bool const isNbicAllocated) { m_dspDetails.isNbicAllocated = isNbicAllocated; }
 DspDetails& Dsp::getDspDetailsReference() { return m_dspDetails; }
-Dsp::Dsp() = default;
-
-DspDetails::DspDetails()
-
-    = default;
 
 }  // namespace alba

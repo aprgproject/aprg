@@ -53,10 +53,10 @@ TEST(DatabaseTest, DISABLED_SaveAndLoadFile) {
     databaseToBeSaved.enumNameToEnumDetailsMap["EnumName"].parameters["ParameterName"].descriptionFromUser =
         "ParameterDescriptionFromUser";
     databaseToBeSaved.messagesToGenerate.emplace("ThisIsAMessage");
-    databaseToBeSaved.saveDatabaseToFile(databasePathHandler.getPath());
+    databaseToBeSaved.saveDatabaseToFile(databasePathHandler.getPath().string());
 
     Database loadedDatabase;
-    loadedDatabase.loadDatabaseFromFile(databasePathHandler.getPath());
+    loadedDatabase.loadDatabaseFromFile(databasePathHandler.getPath().string());
     EXPECT_EQ("ThisIsAMap", loadedDatabase.fileToPathMap.at("ThisIsAFile"));
     EXPECT_EQ("ConstantName", loadedDatabase.constantNameToConstantDetailsMap.at("ConstantName").name);
     EXPECT_EQ("ConstantValue", loadedDatabase.constantNameToConstantDetailsMap.at("ConstantName").value);

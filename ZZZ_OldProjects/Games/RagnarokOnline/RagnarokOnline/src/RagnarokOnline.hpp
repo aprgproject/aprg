@@ -115,7 +115,7 @@ using ItemNameToShopItemDetailMap = std::map<std::string, ShopItemDetail>;
 
 class RagnarokOnline {
 public:
-    RagnarokOnline();
+    RagnarokOnline() = default;
     [[nodiscard]] Item getItem(std::string const& fixedItemName) const;
     [[nodiscard]] ItemIdToItemMap const& getItemIdToItemMap() const;
     [[nodiscard]] ItemNameToShopItemDetailMap const& getBuyingItemShops() const;

@@ -145,6 +145,4 @@ bool AsilBasebandPooling::canMultipleLcgsBePutOnBasebandCard(BasebandCard const&
     return getMaxNumberOfLcgsInBasebandCard(basebandCard) > 1;
 }
 
-AsilBasebandPooling::AsilBasebandPooling() = default;
-
 }  // namespace alba

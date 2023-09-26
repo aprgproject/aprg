@@ -36,7 +36,7 @@ TEST(RealTest, DISABLED_UpdateTrunkFiles) {
         R"(D:\Specifications\OAM-TCOM-IFS\OAM_CPLANE_IFS_template.lyx)",
         R"(D:\Specifications\OAM-TCOM-IFS\OAM_CPLANE_IFS_TEST.lyx)");
 
-    sackReader.saveDatabaseToFile(databasePathHandler.getPath());
+    sackReader.saveDatabaseToFile(databasePathHandler.getPath().string());
 }
 
 }  // namespace alba

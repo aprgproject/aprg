@@ -13,7 +13,7 @@ namespace DesignDocumentCreator {
 class UmlLogger {
 public:
     using UmlParticipants = std::vector<UmlParticipant>;
-    UmlLogger();
+    UmlLogger() = default;
     void logMessage(std::string const& senderName, std::string const& receiverName, std::string const& messageName);
     void addParticipant(UmlParticipant const& participant);
     void log(std::string const& line);

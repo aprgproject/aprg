@@ -10,7 +10,7 @@ namespace alba {
 enum class SmType { MSM, ESM, BOTH_SM };
 
 struct FspDetails {
-    FspDetails();
+    FspDetails() = default;
     SmType smType{SmType::MSM};
     bool isMasterTcom{false};
     unsigned int address{0};
@@ -19,7 +19,7 @@ struct FspDetails {
 
 class Fsp {
 public:
-    Fsp();
+    Fsp() = default;
     explicit Fsp(FspDetails const& fspDetails);
     explicit Fsp(FspDetails&& fspDetails);
     [[nodiscard]] DspAddresses const& getDspAddresses() const;

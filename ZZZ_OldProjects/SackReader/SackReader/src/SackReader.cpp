@@ -13,24 +13,24 @@ using namespace std;
 
 namespace alba {
 
-SackReader::SackReader(string const& path, string const& pathOfLog) : m_path(path), m_pathOfLog(pathOfLog) {
-    m_path = AlbaLocalPathHandler(path).getPath();
-}
+SackReader::SackReader(string const& path, string const& pathOfLog)
+    : m_path(AlbaLocalPathHandler(path).getPath().string()), m_pathOfLog(pathOfLog) {}
 
 string SackReader::getFileFullPath(string const& fileName) const { return m_database.getFileFullPath(fileName); }
 
 void SackReader::gatherAllFiles() {
     AlbaLocalPathHandler pathHandler(m_path);
-    ListOfPaths files;
-    ListOfPaths directories;
-    pathHandler.findFilesAndDirectoriesUnlimitedDepth("*.*", files, directories);
-    for (string const& file : files) {
-        AlbaLocalPathHandler filePathHandler(file);
-        string extension(filePathHandler.getExtension());
-        if ("c" == extension || "cpp" == extension || "h" == extension || "hpp" == extension || "sig" == extension) {
-            m_database.fileToPathMap.emplace(filePathHandler.getFile(), filePathHandler.getPath());
-        }
-    }
+    pathHandler.findFilesAndDirectoriesUnlimitedDepth(
+        [](AlbaLocalPathHandler::LocalPath const&) {},
+        [&](AlbaLocalPathHandler::LocalPath const& file) {
+            AlbaLocalPathHandler filePathHandler(file);
+            string extension(filePathHandler.getExtension().string());
+            if ("c" == extension || "cpp" == extension || "h" == extension || "hpp" == extension ||
+                "sig" == extension) {
+                m_database.fileToPathMap.emplace(
+                    filePathHandler.getFile().string(), filePathHandler.getPath().string());
+            }
+        });
 }
 
 void SackReader::readFilesNeededForIfs() {
