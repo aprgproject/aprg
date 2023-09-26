@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-26T00:23:36
+StaticAnalysisJobIdentifier: [41]
+2023-09-26T20:01:03
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/AdditionAndSubtractionOfExpressions.cpp:20:44: warning: initialization of 'isCommonPart' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/BaseTermHelpers.hpp:15:13: note: possibly throwing function declared here
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/AdditionAndSubtractionOfExpressions.cpp:25:44: warning: initialization of 'isMergePart' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
@@ -18,11 +18,6 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialOverPolynomial.cpp:205:50: note: +1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialRaiseToAnUnsignedInt.cpp:36:18: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/PolynomialRaiseToAnUnsignedInt.cpp:63:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermRaiseToTerms.cpp:142:59: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermRaiseToTerms.cpp:143:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermRaiseToTerms.cpp:143:66: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermRaiseToTerms.cpp:144:48: note: clone 2 starts here
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermRaiseToTerms.cpp:147:94: note: clone 3 starts here
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/TermsRaiseToExponents.cpp:88:17: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DerivativeVariableName.cpp:37:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Differentiation/DerivativeVariableName.cpp:56:30: warning: function 'processNumerator' has cognitive complexity of 27 (threshold 25) [readability-function-cognitive-complexity]
@@ -140,570 +135,570 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/IntegrationUtilities.cpp:128:69: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/IntegrationUtilities.cpp:128:90: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Integration/NumericalIntegration.cpp:104:55: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:6: warning: function 'performAddition' has cognitive complexity of 63 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:5: warning: function 'performAddition' has cognitive complexity of 63 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:56:5: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:57:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:59:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:61:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:63:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:65:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:67:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:69:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:72:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:73:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:75:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:77:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:79:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:81:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:83:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:85:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:88:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:89:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:91:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:93:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:95:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:97:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:99:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:101:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:104:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:105:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:107:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:109:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:111:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:113:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:115:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:117:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:120:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:121:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:123:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:125:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:127:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:129:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:131:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:133:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:136:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:137:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:139:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:141:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:143:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:145:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:147:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:149:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:152:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:153:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:155:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:157:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:159:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:161:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:163:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:173:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:165:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:6: warning: function 'performSubtraction' has cognitive complexity of 63 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:5: warning: function 'performSubtraction' has cognitive complexity of 63 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:56:5: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:57:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:59:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:61:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:63:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:65:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:67:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:69:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:72:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:73:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:75:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:77:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:79:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:81:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:83:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:85:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:88:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:89:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:91:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:93:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:95:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:97:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:99:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:101:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:104:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:105:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:107:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:109:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:111:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:113:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:115:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:117:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:120:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:121:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:123:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:125:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:127:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:129:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:131:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:133:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:136:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:137:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:139:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:141:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:143:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:145:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:147:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:149:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:152:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:153:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:155:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:157:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:159:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:161:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:163:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:177:63: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:174:62: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:165:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:6: warning: function 'performMultiplication' has cognitive complexity of 63 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:5: warning: function 'performMultiplication' has cognitive complexity of 63 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:56:5: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:57:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:59:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:61:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:63:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:65:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:67:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:69:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:72:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:73:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:75:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:77:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:79:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:81:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:83:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:85:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:88:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:89:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:91:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:93:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:95:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:97:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:99:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:101:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:104:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:105:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:107:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:109:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:111:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:113:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:115:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:117:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:120:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:121:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:123:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:125:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:127:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:129:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:131:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:133:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:136:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:137:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:139:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:141:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:143:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:145:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:147:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:149:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:152:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:153:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:155:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:157:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:159:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:161:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:163:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:66: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:175:65: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:165:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:6: warning: function 'performDivision' has cognitive complexity of 63 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:5: warning: function 'performDivision' has cognitive complexity of 63 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:56:5: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:57:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:59:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:61:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:63:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:65:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:67:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:69:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:72:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:73:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:75:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:77:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:79:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:81:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:83:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:85:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:88:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:89:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:91:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:93:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:95:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:97:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:99:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:101:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:104:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:105:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:107:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:109:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:111:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:113:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:115:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:117:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:120:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:121:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:123:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:125:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:127:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:129:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:131:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:133:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:136:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:137:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:139:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:141:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:143:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:145:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:147:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:149:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:152:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:153:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:155:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:157:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:159:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:161:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:163:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:181:60: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:176:59: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:165:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:183:6: warning: function 'performRaiseToPower' has cognitive complexity of 63 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:178:6: warning: function 'performRaiseToPower' has cognitive complexity of 63 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:56:5: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:57:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:59:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:61:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:63:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:65:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:67:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:69:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:72:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:73:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:75:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:77:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:79:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:81:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:83:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:85:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:88:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:89:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:91:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:93:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:95:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:97:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:99:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:101:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:104:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:105:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:107:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:109:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:111:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:113:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:115:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:117:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:120:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:121:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:123:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:125:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:127:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:129:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:131:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:133:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:136:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:137:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:139:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:141:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:143:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:145:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:147:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:149:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:152:12: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:153:9: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:155:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:157:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:159:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:161:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:163:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:179:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Operations/PerformOperations.cpp:165:16: note: expanded from macro 'TERM_BINARY_OPERATION_MACRO'
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Series/GeneralSeries/SeriesBasedOnFormula.cpp:33:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Series/GeneralSeries/SeriesBasedOnFormula.cpp:49:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
@@ -746,9 +741,6 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/Simplex/SimplexSolver.cpp:108:18: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/SolverUsingSubstitution/ReduceEquationsBySubstitution.cpp:43:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:60:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:200:74: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:202:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Expression.cpp:217:12: note: clone 1 starts here
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/TermTypes/Term.cpp:166:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/MonomialHelpers.cpp:25:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/PolynomialHelpers.cpp:55:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
@@ -907,20 +899,14 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:350:84: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:350:100: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:374:18: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:441:63: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:443:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:443:119: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:445:120: note: clone 2 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:447:119: note: clone 3 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:449:120: note: clone 4 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:5: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:5: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:17: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:43: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:13: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:99: warning: loop induction expression should not have floating-point type [cert-flp30-c]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:588:5: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:588:5: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:588:17: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:588:43: warning: loop induction expression should not have floating-point type [cert-flp30-c]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:592:13: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:592:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:592:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:592:99: warning: loop induction expression should not have floating-point type [cert-flp30-c]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlot3D.cpp:22:66: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlot3D.cpp:22:82: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGnuPlot/AprgGnuPlot/src/AprgGnuPlot/AprgGnuPlot3D.cpp:22:98: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
