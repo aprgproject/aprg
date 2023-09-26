@@ -568,7 +568,7 @@ void CPlusPlusReorganizeItems::sortByComparingItems(SortItems& sortItems) {
 
 void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& termIndex, int const parenthesisIndex) {
     termIndex = parenthesisIndex + 1;
-    Patterns const searchPatterns{{M(")")}, {M(";")}, {M("{")}, {M(":")}};
+    Patterns const searchPatterns{{M_OR(M(")"), M(";"), M("{"), M(":"))}};
     bool isFound(true);
     bool isCloseParenthesisFound(false);
     while (isFound) {
@@ -595,7 +595,7 @@ void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& ter
 void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
     SortItem& sortItem, string const& functionSignature) {
     Terms terms(getTermsFromString(functionSignature));
-    Patterns const searchPatterns{{M(TermType::PrimitiveType)}, {M(TermType::Identifier)}, {M(TermType::Keyword)}};
+    Patterns const searchPatterns{{M_OR(M(TermType::PrimitiveType), M(TermType::Identifier), M(TermType::Keyword))}};
     Indexes hitIndexes = searchForwardsForPatterns(terms, 0, searchPatterns);
     if (!hitIndexes.empty()) {
         int const firstHitIndex = hitIndexes.front();

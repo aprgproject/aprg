@@ -86,98 +86,50 @@ void CPlusPlusFixer::combinePrimitiveTypes() {
 }
 
 void CPlusPlusFixer::fixPostFixIncrementDecrement() {
-    fixPostFixIncrementDecrement("++");
-    fixPostFixIncrementDecrement("--");
+    fixPostFixIncrementDecrementInLine();
+    fixPostFixIncrementDecrementInForLoop();
 }
 
-void CPlusPlusFixer::fixPostFixIncrementDecrement(string const& crementOperator) {
-    fixPostFixIncrementDecrementInLine(crementOperator);
-    fixPostFixIncrementDecrementInForLoop(crementOperator);
+void CPlusPlusFixer::fixPostFixIncrementDecrementInLine() {
+    auto const startDivider = M_OR(M("{"), M("}"), M(";"), M(","));
+    auto const crementOperator = M_OR(M("++"), M("--"));
+    findTermsAndSwapAt({{startDivider, M(TermType::Identifier), crementOperator, M(";")}}, 1, 2);
+    findTermsAndSwapAt({{M(";"), M(TermType::Identifier), crementOperator, M_OR(M(","), M(")"))}}, 1, 2);
 }
 
-void CPlusPlusFixer::fixPostFixIncrementDecrementInLine(string const& crementOperator) {
-    findTermsAndSwapAt({{M("{"), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
-    findTermsAndSwapAt({{M("}"), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
-    findTermsAndSwapAt({{M(";"), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
-    findTermsAndSwapAt({{M(","), M(TermType::Identifier), M(crementOperator), M(";")}}, 1, 2);
-    findTermsAndSwapAt({{M(";"), M(TermType::Identifier), M(crementOperator), M(",")}}, 1, 2);
-    findTermsAndSwapAt({{M(";"), M(TermType::Identifier), M(crementOperator), M(")")}}, 1, 2);
-}
-
-void CPlusPlusFixer::fixPostFixIncrementDecrementInForLoop(string const& crementOperator) {
-    findTermsAndCheckForLoopAndSwapAt({{M(","), M(TermType::Identifier), M(crementOperator), M(")")}}, 1, 2);
-    findTermsAndCheckForLoopAndSwapAt({{M(","), M(TermType::Identifier), M(crementOperator), M(",")}}, 1, 2);
+void CPlusPlusFixer::fixPostFixIncrementDecrementInForLoop() {
+    auto const crementOperator = M_OR(M("++"), M("--"));
+    auto const endDivider = M_OR(M(","), M(")"));
+    findTermsAndCheckForLoopAndSwapAt({{M(","), M(TermType::Identifier), crementOperator, endDivider}}, 1, 2);
 }
 
 void CPlusPlusFixer::fixConstReferenceOrder() {
-    fixConstReferenceOrder(M(TermType::Identifier));
-    fixConstReferenceOrder(M(TermType::PrimitiveType));
-    fixConstReferenceOrder(M("auto"));
-}
-
-void CPlusPlusFixer::fixConstReferenceOrder(Matcher const& typeMatcher) {
-    findTermsAndSwapAt({{M("{"), M("const"), typeMatcher, M("&")}}, 1, 2);
-    findTermsAndSwapAt({{M("}"), M("const"), typeMatcher, M("&")}}, 1, 2);
-    findTermsAndSwapAt({{M(";"), M("const"), typeMatcher, M("&")}}, 1, 2);
-    findTermsAndSwapAt({{M("("), M("const"), typeMatcher, M("&")}}, 1, 2);
-    findTermsAndSwapAt({{M(","), M("const"), typeMatcher, M("&")}}, 1, 2);
-    findTermsAndSwapAt({{M("{"), M("const"), typeMatcher, M(TermType::Identifier), M("=")}}, 1, 2);
-    findTermsAndSwapAt({{M("}"), M("const"), typeMatcher, M(TermType::Identifier), M("=")}}, 1, 2);
-    findTermsAndSwapAt({{M(";"), M("const"), typeMatcher, M(TermType::Identifier), M("=")}}, 1, 2);
-    findTermsAndSwapAt({{M("("), M("const"), typeMatcher, M(TermType::Identifier), M("=")}}, 1, 2);
-    findTermsAndSwapAt({{M(","), M("const"), typeMatcher, M(TermType::Identifier), M("=")}}, 1, 2);
-    findTermsAndSwapAt({{M("{"), M("const"), typeMatcher, M("("), M(TermType::Identifier), M(")")}}, 1, 2);
-    findTermsAndSwapAt({{M("}"), M("const"), typeMatcher, M("("), M(TermType::Identifier), M(")")}}, 1, 2);
-    findTermsAndSwapAt({{M(";"), M("const"), typeMatcher, M("("), M(TermType::Identifier), M(")")}}, 1, 2);
-    findTermsAndSwapAt({{M("("), M("const"), typeMatcher, M("("), M(TermType::Identifier), M(")")}}, 1, 2);
-    findTermsAndSwapAt({{M(","), M("const"), typeMatcher, M("("), M(TermType::Identifier), M(")")}}, 1, 2);
+    auto const startDivider = M_OR(M("{"), M("}"), M(";"), M("("), M(","));
+    auto const typeMatcher = M_OR(M(TermType::Identifier), M(TermType::PrimitiveType), M("auto"));
+    findTermsAndSwapAt({{startDivider, M("const"), typeMatcher, M("&")}}, 1, 2);
+    findTermsAndSwapAt({{startDivider, M("const"), typeMatcher, M(TermType::Identifier), M("=")}}, 1, 2);
+    findTermsAndSwapAt({{startDivider, M("const"), typeMatcher, M("("), M(TermType::Identifier), M(")")}}, 1, 2);
 }
 
 void CPlusPlusFixer::fixConstToConstexpr() {
+    auto const startDivider = M_OR(M("{"), M("}"), M(";"));
     findTermsAndConvertToConstexpr(
-        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(SpecialMatcherType::Literal),
-          M(";")}},
+        {{startDivider, M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="),
+          M(SpecialMatcherType::Literal), M(";")}},
         1, 2, 0, 0);
     findTermsAndConvertToConstexpr(
-        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(SpecialMatcherType::Literal),
-          M(";")}},
-        1, 2, 0, 0);
-    findTermsAndConvertToConstexpr(
-        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(SpecialMatcherType::Literal),
-          M(";")}},
-        1, 2, 0, 0);
-    findTermsAndConvertToConstexpr(
-        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(SpecialMatcherType::Literal),
-          M(")"), M(";")}},
+        {{startDivider, M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("),
+          M(SpecialMatcherType::Literal), M(")"), M(";")}},
         1, 2, 4, 6);
     findTermsAndConvertToConstexpr(
-        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(SpecialMatcherType::Literal),
-          M(")"), M(";")}},
-        1, 2, 4, 6);
-    findTermsAndConvertToConstexpr(
-        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(SpecialMatcherType::Literal),
-          M(")"), M(";")}},
-        1, 2, 4, 6);
-    findTermsAndConvertToConstexpr(
-        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"), M(SpecialMatcherType::Literal),
-          M("}"), M(";")}},
-        1, 2, 4, 6);
-    findTermsAndConvertToConstexpr(
-        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"), M(SpecialMatcherType::Literal),
-          M("}"), M(";")}},
-        1, 2, 4, 6);
-    findTermsAndConvertToConstexpr(
-        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"), M(SpecialMatcherType::Literal),
-          M("}"), M(";")}},
+        {{startDivider, M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"),
+          M(SpecialMatcherType::Literal), M("}"), M(";")}},
         1, 2, 4, 6);
 }
 
 void CPlusPlusFixer::fixNoConstPassByValue() {
-    fixNoConstPassByValue(M(SpecialMatcherType::IdentifierAndNotAScreamingSnakeCase));
-    fixNoConstPassByValue(M(TermType::PrimitiveType));
-}
-
-void CPlusPlusFixer::fixNoConstPassByValue(Matcher const& typeMatcher) {
+    auto const typeMatcher =
+        M_OR(M(SpecialMatcherType::IdentifierAndNotAScreamingSnakeCase), M(TermType::PrimitiveType));
     fixNoConstPassByValue({{M("("), typeMatcher, M(TermType::Identifier), M(")")}});
     fixNoConstPassByValue({{M("("), typeMatcher, M(TermType::Identifier), M(",")}});
     fixNoConstPassByValue({{M(","), typeMatcher, M(TermType::Identifier), M(",")}});
@@ -251,7 +203,8 @@ void CPlusPlusFixer::fixCommentsPositionOfBraces() {
 void CPlusPlusFixer::fixCStyleStaticCast() { fixCStyleStaticCast(M(TermType::PrimitiveType)); }
 
 void CPlusPlusFixer::fixCStyleStaticCast(Matcher const& typeMatcher) {
-    Patterns const searchPatterns{{M(TermType::Operator), M("("), typeMatcher, M(")"), M(SpecialMatcherType::NotAWhiteSpace)}};
+    Patterns const searchPatterns{
+        {M(TermType::Operator), M("("), typeMatcher, M(")"), M(SpecialMatcherType::NotAWhiteSpace)}};
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {

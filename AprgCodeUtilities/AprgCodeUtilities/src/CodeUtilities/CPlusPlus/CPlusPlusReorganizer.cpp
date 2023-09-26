@@ -169,17 +169,18 @@ strings CPlusPlusReorganizer::getSavedSignatures() const { return m_headerInform
 
 int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
     int endIndex = index;
-    Patterns const searchPatterns{{M(TermType::WhiteSpace), M(SpecialMatcherType::Comment)}, {M(SpecialMatcherType::Comment)}};
+    Patterns const searchPatterns{
+        {M(TermType::WhiteSpace), M(SpecialMatcherType::Comment)}, {M(SpecialMatcherType::Comment)}};
     Indexes hitIndexes = searchPatternsAt(m_terms, index + 1, searchPatterns);
     if (!hitIndexes.empty()) {
         int const firstHitIndex = hitIndexes.front();
         int const lastHitIndex = hitIndexes.back();
         Term const& firstTerm(m_terms[firstHitIndex]);
         Term const& lastTerm(m_terms[lastHitIndex]);
-        if (firstTerm == M(TermType::WhiteSpace) && lastTerm == M(SpecialMatcherType::Comment) && !hasNewLine(firstTerm)) {
+        if (firstTerm.getTermType() == TermType::WhiteSpace && isComment(lastTerm) && !hasNewLine(firstTerm)) {
             endIndex = lastHitIndex;
         }
-        if (firstTerm == M(SpecialMatcherType::Comment)) {
+        if (isComment(firstTerm)) {
             endIndex = firstHitIndex;
         }
     }
