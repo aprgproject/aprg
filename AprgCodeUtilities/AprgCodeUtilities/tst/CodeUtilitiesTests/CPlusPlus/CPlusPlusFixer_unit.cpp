@@ -37,9 +37,9 @@ TEST(CPlusPlusFixerTest, DISABLED_ActualAprgDirectoryTest) {
     processAprgDirectory(R"(F:\Branches\aprg_project\aprg_semi_clean\aprg)");
 }
 
-TEST(CPlusPlusFixerTest, ActualDirectoryTest) {
+TEST(CPlusPlusFixerTest, DISABLED_ActualDirectoryTest) {
     CPlusPlusFixer fixer;
-    fixer.processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgCommon\AprgCommon)");
+    fixer.processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgAlgebra\AprgAlgebra)");
 }
 
 TEST(CPlusPlusFixerTest, FixerWorksForGenericCode) {

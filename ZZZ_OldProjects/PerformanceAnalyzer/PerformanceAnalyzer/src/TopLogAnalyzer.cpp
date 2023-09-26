@@ -299,6 +299,4 @@ bool TopLogAnalyzer::isTopCommandHeaderLine(string const& lineInLogs) {
            stringHelper::isStringFoundNotCaseSensitive(lineInLogs, "COMMAND");
 }
 
-TopLogAnalyzer::TopLogAnalyzer() = default;
-
 }  // namespace alba

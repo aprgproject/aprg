@@ -21,8 +21,8 @@ public:
     void processFile(std::filesystem::path const& file);
 
 private:
-    stringHelper::strings getPrintItems(int& printfEnd, int const printStringIndex) const;
-    std::string getCorrectedGTestName(std::string const& testName) const;
+    [[nodiscard]] stringHelper::strings getPrintItems(int& printfEnd, int const printStringIndex) const;
+    [[nodiscard]] static std::string getCorrectedGTestName(std::string const& testName);
     void fixTerms();
     void fixRegardlessWithScopes();
     void fixBasedOnScopes();

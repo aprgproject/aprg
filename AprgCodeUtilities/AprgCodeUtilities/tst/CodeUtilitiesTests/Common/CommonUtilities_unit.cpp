@@ -111,6 +111,35 @@ TEST(CommonUtilitiesTest, SearchForPatternsBackwardsWorksAsGoingBackward) {
     EXPECT_EQ(3, *itPatterns++);
 }
 
+TEST(CommonUtilitiesTest, SearchPatternsAtWorks) {
+    Terms const terms{
+        Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
+        Term(TermType::Identifier, "identifier2"), Term(TermType::Identifier, "identifier2"),
+        Term(TermType::Identifier, "identifier1")};
+    Patterns const patterns{{M("identifier1")}};
+
+    Indexes const hitIndexes = searchPatternsAt(terms, patterns);
+    ASSERT_EQ(1U, hitIndexes.size());
+    auto itPatterns = hitIndexes.cbegin();
+    EXPECT_EQ(0, *itPatterns++);
+}
+
+TEST(CommonUtilitiesTest, SearchPatternsAtWorksWithMultiplePatterns) {
+    Terms const terms{
+        Term(TermType::Identifier, "identifier1"), Term(TermType::Identifier, "identifier2"),
+        Term(TermType::Identifier, "identifier2"), Term(TermType::Identifier, "identifier2"),
+        Term(TermType::Identifier, "identifier1")};
+    Patterns const patterns{
+        {M("identifier1"), M("identifier2"), M("identifier3")}, {M("identifier1"), M("identifier2"), M("identifier2")}};
+
+    Indexes const hitIndexes = searchPatternsAt(terms, patterns);
+    ASSERT_EQ(3U, hitIndexes.size());
+    auto itPatterns = hitIndexes.cbegin();
+    EXPECT_EQ(0, *itPatterns++);
+    EXPECT_EQ(1, *itPatterns++);
+    EXPECT_EQ(2, *itPatterns++);
+}
+
 TEST(CommonUtilitiesTest, ConvertToStringWorks) {
     EXPECT_EQ("TermType::Boolean", convertToString(TermType::Boolean));
     EXPECT_EQ("TermType::CharacterLiteral", convertToString(TermType::CharacterLiteral));

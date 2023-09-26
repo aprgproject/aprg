@@ -30,11 +30,15 @@ constexpr unsigned int variable=0;
 // fixNoExceptOnMoveConstructor
 // fixNoExceptOnMoveAssignment
 SomeClass(SomeClass const &) = default;
-SomeClass(SomeClass &&) noexcept  = default;
 SomeClass &operator=(SomeClass const &) = default;
+SomeClass(SomeClass &&) noexcept  = default;
 SomeClass &operator=(SomeClass &&) noexcept  = default;
-SomeClass &operator=(SomeClass const &) noexcept = default;
+SomeClass(SomeClass &&) noexcept = default;
 SomeClass &operator=(SomeClass &&) noexcept = default;
+SomeClass(SomeClass && objectName) noexcept  = default;
+SomeClass &operator=(SomeClass && objectName) noexcept  = default;
+SomeClass(SomeClass && objectName) noexcept = default;
+SomeClass &operator=(SomeClass && objectName) noexcept = default;
 
 //fixGTestNames
 TEST(TestSuiteName, TestName) {}

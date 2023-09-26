@@ -15,7 +15,7 @@ CountWaysToReachTheNthStair::Count CountWaysToReachTheNthStair::getCountUsingFib
     // Auxiliary Space: O(1)
     Count result(0);
     if (m_numberOfStairs > 0) {
-        result = static_cast<int>(getNthFibonacciNumberUsingBinetsFormula(static_cast<UnsignedInteger>(m_numberOfStairs + 1)));
+        result = static_cast<Count>(getNthFibonacciNumberUsingBinetsFormula(static_cast<UnsignedInteger>(m_numberOfStairs) + 1));
     }
     return result;
 }

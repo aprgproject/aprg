@@ -93,8 +93,8 @@ Indexes searchPatternsAt(int const startIndex, Terms const& terms, Patterns cons
 }
 
 Indexes searchPatternsAt(int const startIndex, int const endIndex, Terms const& terms, Patterns const& searchPatterns) {
-    Indexes hitIndexes;
     for (Pattern const& searchPattern : searchPatterns) {
+        Indexes hitIndexes;
         int matchIndex = 0;
         for (int termIndex = startIndex; termIndex <= endIndex && matchIndex < static_cast<int>(searchPattern.size());
              ++termIndex) {

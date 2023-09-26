@@ -311,6 +311,7 @@ TEST(InPlaceConstructionExamplesTest, VectorPushBackVsEmplaceBack) {
     // ---> "I don't like that view, I don't login to my computer as root."
     // ---> "I like to use the least powerful thing that is available to me."
     // ---> "It helps the reader of my code, theres gonna be a copy here and I can't do anything better."
+    // NOLINTNEXTLINE(clang-diagnostic-unused-variable)
     string const &s2 = v.emplace_back();  // first default construct in the vector
                                           // after emplace_back we can mutate s2
     // emplace_back takes a parameter pack and parameter packs can be empty

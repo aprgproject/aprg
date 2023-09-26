@@ -139,6 +139,7 @@ void TermRaiseToTerms::simplifyBaseAndExponents() {
 
     m_exponents.clear();
 
+    // NOLINTBEGIN(bugprone-branch-clone)
     if (m_base.isConstant() && m_base.getAsNumber() == 0) {
     } else if (m_base.isConstant() && m_base.getAsNumber() == 1) {
     } else if (exponentCombinedTerm.isEmpty()) {
@@ -164,6 +165,7 @@ void TermRaiseToTerms::simplifyBaseAndExponents() {
     } else {
         m_exponents.emplace_back(exponentCombinedTerm, TermAssociationType::Positive);
     }
+    // NOLINTEND(bugprone-branch-clone)
 }
 
 void TermRaiseToTerms::initializeUsingTermsInRaiseToPowerExpression(

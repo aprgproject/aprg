@@ -36,6 +36,7 @@ public:
         bool isDivider;
         bool shouldSortAlphabetically;
         bool hasComment;
+        bool isNonFriendOperator;
         ItemType itemType;
         ItemSubType itemSubType;
         int itemsIndex;
@@ -48,8 +49,8 @@ public:
     struct Data {
         CppFileType fileType;
         ScopeType scopeType;
+        std::string scopeName;
         stringHelper::strings items;
-        stringHelper::strings scopeNames;
         stringHelper::strings headerFunctionSignatures;
         Patterns headerFunctionNamePatterns;
     };
@@ -66,10 +67,19 @@ private:
     [[nodiscard]] Terms getReorganizedTermsInNamespace() const;
     [[nodiscard]] Terms getReorganizedTermsInTopLevelScope() const;
     [[nodiscard]] int getBestHeaderIndex(std::string const& item) const;
+    [[nodiscard]] bool isDefaultConstructor(Terms const& terms) const;
+    [[nodiscard]] bool isOtherConstructor(Terms const& terms) const;
+    [[nodiscard]] bool isDestructor(Terms const& terms) const;
+    [[nodiscard]] bool isCopyConstructor(Terms const& terms) const;
+    [[nodiscard]] bool isMoveConstructor(Terms const& terms) const;
+    [[nodiscard]] bool isCopyAssignment(Terms const& terms) const;
+    [[nodiscard]] bool isMoveAssignment(Terms const& terms) const;
     void sortAlphabetically(SortItems& sortItems) const;
     void saveDetailsFromHeaderSignatures(SortItem& sortItem, std::string const& item) const;
     void saveDetailsBasedFromItem(SortItem& sortItem, std::string const& item) const;
     void saveDetailsBasedFromItemTerms(SortItem& sortItem, std::string const& item, Terms const& terms) const;
+    void saveDetailsBasedFromFunctionSignature(SortItem& sortItem, std::string const& functionSignature) const;
+    void saveDetailsForSpecialFunctions(SortItem& sortItem, Terms const& terms) const;
     void saveDetailsForTest(SortItem& sortItem, Terms const& terms) const;
     [[nodiscard]] static GroupType getGroupType(ItemType const itemType);
     [[nodiscard]] static Patterns getSearchPatternsForAnalysis();
@@ -81,7 +91,7 @@ private:
     [[nodiscard]] static bool compareAlphabetically(std::string const& string1, std::string const& string2);
     static void sortByComparingItems(SortItems& sortItems);
     static void moveToEndParenthesis(Terms const& terms, int& termIndex, int const parenthesisIndex);
-    static void saveDetailsBasedFromFunctionSignature(SortItem& sortItem, std::string const& functionSignature);
+    static void saveDetailsBasedFromReturnType(SortItem& sortItem, Terms const& terms);
     Data m_data;
 };
 

@@ -569,7 +569,9 @@ struct InstantiationClass {
 // ---> N4604 dcl.dcl /6, 14.6 temp.res /8.3
 TEST(TemplateExamplesTest, TemplateIsOnlyInstantiatedWhenNeeded) {
     // NoInstantiationClass<int> variable1;  // Compiler error (static_assert failure)
+    // NOLINTNEXTLINE(clang-diagnostic-unused-variable)
     NoInstantiationClass<int>* variable2 = nullptr;  // No compiler error.
+    // NOLINTNEXTLINE(clang-diagnostic-unused-variable)
     InstantiationClass<int> const variable3;         // No compiler error.
     // InstantiationClass<int>::noInstantiationStaticFunction(); // Compiler error (static_assert failure)
     // variable3.noInstantiationFunction();  // Compiler error (static_assert failure)

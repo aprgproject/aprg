@@ -42,7 +42,7 @@ public:
         DataCollection<double> cpu;
     };
 
-    TopLogAnalyzer();
+    TopLogAnalyzer() = default;
     void clear();
     void processTopLog(std::string const& pathOfTopLog);
 
@@ -72,7 +72,7 @@ private:
     static void saveOverallCpuData(std::string const& lineInLogs, DataEntry& currentEntry);
     static bool isTopCommandFirstLine(std::string const& lineInLogs);
     static bool isTopCommandHeaderLine(std::string const& lineInLogs);
-    TopLogAnalyzerState m_state;
+    TopLogAnalyzerState m_state{TopLogAnalyzerState::BeforeColumnHeaders};
     ColumnHeaders m_columnHeaders{};
     std::vector<DataEntry> m_dataEntries;
     std::map<std::string, CpuMemCollection> m_processToCpuMemCollectionMap;

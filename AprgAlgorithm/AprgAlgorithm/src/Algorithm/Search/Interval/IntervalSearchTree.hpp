@@ -90,6 +90,7 @@ protected:
                 // if interval in node intersect query interval
                 intersectingIntervals.emplace_back(nodePointer->key);
             }
+            // NOLINTBEGIN(bugprone-branch-clone)
             if (!nodePointer->left) {
                 // if left subtree is null, go right
                 searchForIntersectingIntervals(intersectingIntervals, nodePointer->right, intervalToCheck);
@@ -101,6 +102,7 @@ protected:
                 searchForIntersectingIntervals(intersectingIntervals, nodePointer->left, intervalToCheck);
                 searchForIntersectingIntervals(intersectingIntervals, nodePointer->right, intervalToCheck);
             }
+            // NOLINTEND(bugprone-branch-clone)
         }
     }
 

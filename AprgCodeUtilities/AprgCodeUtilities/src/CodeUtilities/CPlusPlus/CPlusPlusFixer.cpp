@@ -62,17 +62,16 @@ strings CPlusPlusFixer::getPrintItems(int& printfEnd, int const printStringIndex
     return printItems;
 }
 
-string CPlusPlusFixer::getCorrectedGTestName(string const& testName) const {
-    if (testName.find_first_of("_") != std::string::npos) {
-        if (testName.substr(0, std::min(testName.length(), 9ULL)) == "DISABLED_") {
+string CPlusPlusFixer::getCorrectedGTestName(string const& testName) {
+    if (testName.find_first_of('_') != std::string::npos) {
+        if (testName.substr(0, std::min(static_cast<int>(testName.length()), 9)) == "DISABLED_") {
             string withoutUnderscore = testName.substr(9);
             replaceAllAndReturnIfFound(withoutUnderscore, "_", "");
             return string("DISABLED_") + withoutUnderscore;
-        } else {
-            string withoutUnderscore = testName;
-            replaceAllAndReturnIfFound(withoutUnderscore, "_", "");
-            return withoutUnderscore;
         }
+        string withoutUnderscore = testName;
+        replaceAllAndReturnIfFound(withoutUnderscore, "_", "");
+        return withoutUnderscore;
     }
     return testName;
 }
@@ -183,6 +182,8 @@ void CPlusPlusFixer::fixNoConstPassByValue(Patterns const& searchPatterns) {
 void CPlusPlusFixer::fixNoExceptOnMoveConstructor() {
     Patterns const searchPatterns{
         {M(TermType::Identifier), M("("), M(TermType::Identifier), M("&&"), M(")"),
+         M(SpecialMatcherType::NotACommentNorWhiteSpace)},
+        {M(TermType::Identifier), M("("), M(TermType::Identifier), M("&&"), M(TermType::Identifier), M(")"),
          M(SpecialMatcherType::NotACommentNorWhiteSpace)}};
     int termIndex = 0;
     bool isFound(true);
@@ -191,10 +192,18 @@ void CPlusPlusFixer::fixNoExceptOnMoveConstructor() {
         isFound = !hitIndexes.empty();
         if (isFound) {
             if (m_terms[hitIndexes[0]] == m_terms[hitIndexes[2]]) {
-                if (m_terms[hitIndexes[5]].getContent() != "noexcept") {
-                    changeTerm(m_terms[hitIndexes[4]], TermType::Aggregate, ") noexcept ");
-                    cout << "Fixed file: [" << m_currentFile << "]\n";
-                    cout << "Fixed noexcept at: [" << getLocatorString(hitIndexes[4], m_terms) << "]\n";
+                if (m_terms[hitIndexes[4]].getContent() == ")") {
+                    if (m_terms[hitIndexes[5]].getContent() != "noexcept") {
+                        changeTerm(m_terms[hitIndexes[4]], TermType::Aggregate, ") noexcept ");
+                        cout << "Fixed file: [" << m_currentFile << "]\n";
+                        cout << "Fixed noexcept at: [" << getLocatorString(hitIndexes[4], m_terms) << "]\n";
+                    }
+                } else if (m_terms[hitIndexes[5]].getContent() == ")") {
+                    if (m_terms[hitIndexes[6]].getContent() != "noexcept") {
+                        changeTerm(m_terms[hitIndexes[5]], TermType::Aggregate, ") noexcept ");
+                        cout << "Fixed file: [" << m_currentFile << "]\n";
+                        cout << "Fixed noexcept at: [" << getLocatorString(hitIndexes[5], m_terms) << "]\n";
+                    }
                 }
             }
             termIndex = hitIndexes.back();
@@ -205,7 +214,9 @@ void CPlusPlusFixer::fixNoExceptOnMoveConstructor() {
 void CPlusPlusFixer::fixNoExceptOnMoveAssignment() {
     Patterns const searchPatterns{
         {M(TermType::Identifier), M("&"), M("operator"), M("="), M("("), M(TermType::Identifier), M("&&"), M(")"),
-         M(SpecialMatcherType::NotACommentNorWhiteSpace)}};
+         M(SpecialMatcherType::NotACommentNorWhiteSpace)},
+        {M(TermType::Identifier), M("&"), M("operator"), M("="), M("("), M(TermType::Identifier), M("&&"),
+         M(TermType::Identifier), M(")"), M(SpecialMatcherType::NotACommentNorWhiteSpace)}};
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
@@ -213,10 +224,18 @@ void CPlusPlusFixer::fixNoExceptOnMoveAssignment() {
         isFound = !hitIndexes.empty();
         if (isFound) {
             if (m_terms[hitIndexes[0]] == m_terms[hitIndexes[5]]) {
-                if (m_terms[hitIndexes[8]].getContent() != "noexcept") {
-                    changeTerm(m_terms[hitIndexes[7]], TermType::Aggregate, ") noexcept ");
-                    cout << "Fixed file: [" << m_currentFile << "]\n";
-                    cout << "Fixed noexcept at: [" << getLocatorString(hitIndexes[7], m_terms) << "]\n";
+                if (m_terms[hitIndexes[7]].getContent() == ")") {
+                    if (m_terms[hitIndexes[8]].getContent() != "noexcept") {
+                        changeTerm(m_terms[hitIndexes[7]], TermType::Aggregate, ") noexcept ");
+                        cout << "Fixed file: [" << m_currentFile << "]\n";
+                        cout << "Fixed noexcept at: [" << getLocatorString(hitIndexes[7], m_terms) << "]\n";
+                    }
+                } else if (m_terms[hitIndexes[8]].getContent() == ")") {
+                    if (m_terms[hitIndexes[9]].getContent() != "noexcept") {
+                        changeTerm(m_terms[hitIndexes[8]], TermType::Aggregate, ") noexcept ");
+                        cout << "Fixed file: [" << m_currentFile << "]\n";
+                        cout << "Fixed noexcept at: [" << getLocatorString(hitIndexes[8], m_terms) << "]\n";
+                    }
                 }
             }
             termIndex = hitIndexes.back();

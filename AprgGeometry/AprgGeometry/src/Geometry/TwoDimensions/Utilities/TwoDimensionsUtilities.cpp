@@ -438,6 +438,7 @@ bool doesTheTwoLineSegmentsIntersect(LineSegment const& segment1, LineSegment co
         getRotationDirectionTraversing3Points(segment2.first, segment2.second, segment1.second);
 
     bool result(false);
+    // NOLINTBEGIN(bugprone-branch-clone)
     if (direction1 != direction2 && direction3 != direction4) {
         result = true;
     } else if (RotationDirection::Collinear == direction1 && isCollinearPointInLineSegment(segment1, segment2.first)) {
@@ -449,6 +450,7 @@ bool doesTheTwoLineSegmentsIntersect(LineSegment const& segment1, LineSegment co
     } else if (RotationDirection::Collinear == direction4 && isCollinearPointInLineSegment(segment2, segment1.second)) {
         result = true;
     }
+    // NOLINTEND(bugprone-branch-clone)
     return result;
 }
 

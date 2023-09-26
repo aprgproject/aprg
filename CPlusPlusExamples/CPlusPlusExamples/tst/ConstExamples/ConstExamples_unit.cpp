@@ -206,6 +206,7 @@ TEST(ConstExamplesTest, FunctionMatchingWithoutConstInFunctionSignatureOfAClassW
         static void myFunction() { cout << "calling non-const\n"; }
     };
 
+    // NOLINTNEXTLINE(clang-diagnostic-unused-variable)
     Foo const a;
     // Foo const b(a);
     Foo::myFunction();  // goes to "non-const"

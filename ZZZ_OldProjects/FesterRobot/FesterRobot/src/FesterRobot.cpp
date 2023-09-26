@@ -16,7 +16,7 @@ using namespace std;
 
 namespace {
 constexpr int POLLING_DELAY_TO_WAIT_FOR_START = 1000;
-}
+} // namespace
 
 namespace alba {
 
@@ -159,6 +159,7 @@ void FesterRobot::setupFesterEnvironmentInMatlab() {
 void FesterRobot::exitIfSpecialKeyIsPressed() {
     if (isLetterPressed(VK_MENU)) {
         setMousePosition(MousePosition(ORIGIN));
+        // NOLINTNEXTLINE(concurrency-mt-unsafe)
         exit(0);
     }
 }

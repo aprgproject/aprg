@@ -246,9 +246,10 @@ void CPlusPlusReorganizer::processTerms() {
                 processSemiColon(nextIndex, firstHitIndex);
                 searchIndex = nextIndex;
             } else if (
-                (firstTerm.getContent() == "{" && m_terms[hitIndexes[1]].getContent() == "}" &&
-                 lastTerm.getContent() == ";") ||
-                (firstTerm.getContent() == "{" && lastTerm.getContent() == "}")) {
+                hitIndexes.size() > 1 &&
+                ((firstTerm.getContent() == "{" && m_terms[hitIndexes[1]].getContent() == "}" &&
+                  lastTerm.getContent() == ";") ||
+                 (firstTerm.getContent() == "{" && lastTerm.getContent() == "}"))) {
                 processOpeningAndClosingBrace(nextIndex, firstHitIndex, lastHitIndex);
                 searchIndex = nextIndex;
             } else if (firstTerm.getContent() == "{") {
@@ -346,7 +347,7 @@ void CPlusPlusReorganizer::exitTopLevelScope() {
     ScopeDetail const& scopeToExit(m_scopeDetails.back());
 
     CPlusPlusReorganizeItems const sorter(
-        {m_fileType, scopeToExit.scopeType, scopeToExit.items, getScopeNames(), m_headerInformation.functionSignatures,
+        {m_fileType, scopeToExit.scopeType, scopeToExit.name, scopeToExit.items, m_headerInformation.functionSignatures,
          m_headerInformation.functionNamePatterns});
     Terms const sortedTerms(sorter.getReorganizedTerms());
     m_terms = sortedTerms;
@@ -364,7 +365,7 @@ void CPlusPlusReorganizer::exitScope(int& nextIndex, int const closingBraceIndex
         m_terms.erase(m_terms.cbegin() + scopeToExit.openingBraceIndex + 1, m_terms.cbegin() + closingBraceIndex);
 
         CPlusPlusReorganizeItems const sorter(
-            {m_fileType, scopeToExit.scopeType, scopeToExit.items, getScopeNames(),
+            {m_fileType, scopeToExit.scopeType, scopeToExit.name, scopeToExit.items,
              m_headerInformation.functionSignatures, m_headerInformation.functionNamePatterns});
         Terms const sortedTerms(sorter.getReorganizedTerms());
         m_terms.insert(m_terms.cbegin() + scopeToExit.openingBraceIndex + 1, sortedTerms.cbegin(), sortedTerms.cend());

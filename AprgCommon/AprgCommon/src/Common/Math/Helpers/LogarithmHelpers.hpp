@@ -15,6 +15,7 @@ inline double getLogarithm(double const base, double const inputForLogarithm) {
     // -> ln(b) = C*ln(a)
     // -> C = ln(b)/ln(a)
     // log a(b) = ln(b) / ln(a)
+    // cppcheck-suppress invalidFunctionArg
     return log(inputForLogarithm) / log(base);
 }
 

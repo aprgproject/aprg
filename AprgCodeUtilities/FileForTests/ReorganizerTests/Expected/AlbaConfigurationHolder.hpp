@@ -15,10 +15,10 @@ ConfigurationDetails getDefaultConfigurationDetails() {
 template <typename ConfigurationDetails>
 class AlbaConfigurationHolder : public AlbaSingleton<AlbaConfigurationHolder<ConfigurationDetails>> {
 public:
+AlbaConfigurationHolder() : m_configurationDetails{getDefaultConfigurationDetails<ConfigurationDetails>()} {}
+
 explicit AlbaConfigurationHolder(ConfigurationDetails const& configurationDetails)
         : m_configurationDetails{configurationDetails} {}
-
-AlbaConfigurationHolder() : m_configurationDetails{getDefaultConfigurationDetails<ConfigurationDetails>()} {}
 
 void setConfigurationDetails(ConfigurationDetails const& configurationDetails) {
         m_configurationDetails = configurationDetails;

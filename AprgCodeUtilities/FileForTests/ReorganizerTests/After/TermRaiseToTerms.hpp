@@ -6,8 +6,8 @@ namespace alba::algebra {
 
 class TermRaiseToTerms {
 public:
-explicit TermRaiseToTerms(TermsWithDetails const& termsInRaiseToPowerExpression);
 TermRaiseToTerms();
+explicit TermRaiseToTerms(TermsWithDetails const& termsInRaiseToPowerExpression);
 TermRaiseToTerms(Term const& base, Terms const& exponents);
 TermRaiseToTerms(Term const& base, Term const& exponent);
 [[nodiscard]] Term getCombinedTerm() const;

@@ -197,6 +197,7 @@ void Expression::putPolynomialSecondWithMultiplication(Polynomial const& polynom
 }
 
 void Expression::putExpressionWithMultiplication(Expression const& secondExpression) {
+    // NOLINTBEGIN(bugprone-branch-clone)
     if (willHaveNoEffectOnMultiplicationOrDivisionOrRaiseToPower(*this)) {
         putOnlyTermWithMultiplicationIfNeeded(Term(secondExpression));
     } else if (
@@ -217,6 +218,7 @@ void Expression::putExpressionWithMultiplication(Expression const& secondExpress
     } else {
         putOnlyTermWithMultiplicationIfNeeded(Term(secondExpression));
     }
+    // NOLINTEND(bugprone-branch-clone)
     clearSimplifiedFlag();
 }
 

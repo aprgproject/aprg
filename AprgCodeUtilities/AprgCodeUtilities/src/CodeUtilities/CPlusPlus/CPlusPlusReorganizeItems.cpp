@@ -76,7 +76,20 @@ Terms CPlusPlusReorganizeItems::getReorganizedTermsInClassDeclaration() const {
         if (placeNewLineBeforeItem) {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
+        // stringstream commentStream;
+        // auto headerSignature = sortItem.headerIndex < static_cast<int>(m_data.headerFunctionSignatures.size())
+        //                            ? m_data.headerFunctionSignatures[sortItem.headerIndex]
+        //                            : "NO MAPPING";
+        // commentStream << "/*BEGIN ADD (";
+        // commentStream << "headerIndex:[" << sortItem.headerIndex << "] ";
+        // commentStream << "headerSignature:[" << headerSignature << "] ";
+        // commentStream << "score:[" << hex << sortItem.score << dec << "] ";
+        // commentStream << "returnType:[" << sortItem.functionReturnTypeName << "] ";
+        // ALBA_INF_PRINT(commentStream, sortItem.functionIndexesUsed);
+        // commentStream << ")*/";
+        // terms.emplace_back(TermType::CommentMultiline, commentStream.str());
         terms.emplace_back(TermType::Aggregate, item);
+        // terms.emplace_back(TermType::CommentMultiline, "/*END ADD*/");
         terms.emplace_back(TermType::WhiteSpace, "\n");
         isPreviousAMultilineItem = isMultilineItem;
         isFirst = false;
@@ -113,18 +126,7 @@ Terms CPlusPlusReorganizeItems::getReorganizedTermsInNamespace() const {
         if (placeNewLineBeforeItem) {
             terms.emplace_back(TermType::WhiteSpace, "\n");
         }
-        // stringstream commentStream;
-        // auto headerSignature = sortItem.headerIndex < static_cast<int>(m_data.headerFunctionSignatures.size())
-        //                            ? m_data.headerFunctionSignatures[sortItem.headerIndex]
-        //                            : "NO MAPPING";
-        // commentStream << "/*BEGIN ADD (";
-        // ALBA_INF_PRINT(
-        //     commentStream, sortItem.headerIndex, headerSignature, sortItem.score, sortItem.functionReturnTypeName,
-        //     sortItem.functionIndexesUsed);
-        // commentStream << ")*/";
-        // terms.emplace_back(TermType::CommentMultiline, commentStream.str());
         terms.emplace_back(TermType::Aggregate, item);
-        // terms.emplace_back(TermType::CommentMultiline, "/*END ADD*/");
         terms.emplace_back(TermType::WhiteSpace, "\n");
         isPreviousAMultilineItem = isMultilineItem;
     }
@@ -190,6 +192,58 @@ int CPlusPlusReorganizeItems::getBestHeaderIndex(string const& item) const {
         return static_cast<int>(m_data.headerFunctionSignatures.size());
     }
     return 0;
+}
+
+bool CPlusPlusReorganizeItems::isDefaultConstructor(Terms const& terms) const {
+    Patterns const searchPatterns{{M(m_data.scopeName), M("("), M(")")}};
+    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    return !hitIndexes.empty();
+}
+
+bool CPlusPlusReorganizeItems::isOtherConstructor(Terms const& terms) const {
+    Patterns const searchPatterns{{M(m_data.scopeName), M("("), M_NOT(")")}};
+    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    return !hitIndexes.empty();
+}
+
+bool CPlusPlusReorganizeItems::isDestructor(Terms const& terms) const {
+    Patterns const searchPatterns{{M("~"), M(m_data.scopeName), M("("), M(")")}};
+    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    return !hitIndexes.empty();
+}
+
+bool CPlusPlusReorganizeItems::isCopyConstructor(Terms const& terms) const {
+    Patterns const searchPatterns{
+        {M(m_data.scopeName), M("("), M(m_data.scopeName), M("const"), M("&"), M(")")},
+        {M(m_data.scopeName), M("("), M(m_data.scopeName), M("const"), M("&"), M(TermType::Identifier), M(")")}};
+    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    return !hitIndexes.empty();
+}
+
+bool CPlusPlusReorganizeItems::isMoveConstructor(Terms const& terms) const {
+    Patterns const searchPatterns{
+        {M(m_data.scopeName), M("("), M(m_data.scopeName), M("&&"), M(")")},
+        {M(m_data.scopeName), M("("), M(m_data.scopeName), M("&&"), M(TermType::Identifier), M(")")}};
+    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    return !hitIndexes.empty();
+}
+
+bool CPlusPlusReorganizeItems::isCopyAssignment(Terms const& terms) const {
+    Patterns const searchPatterns{
+        {M(m_data.scopeName), M("&"), M("operator"), M("="), M("("), M(m_data.scopeName), M("const"), M("&"), M(")")},
+        {M(m_data.scopeName), M("&"), M("operator"), M("="), M("("), M(m_data.scopeName), M("const"), M("&"),
+         M(TermType::Identifier), M(")")}};
+    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    return !hitIndexes.empty();
+}
+
+bool CPlusPlusReorganizeItems::isMoveAssignment(Terms const& terms) const {
+    Patterns const searchPatterns{
+        {M(m_data.scopeName), M("&"), M("operator"), M("="), M("("), M(m_data.scopeName), M("&&"), M(")")},
+        {M(m_data.scopeName), M("&"), M("operator"), M("="), M("("), M(m_data.scopeName), M("&&"),
+         M(TermType::Identifier), M(")")}};
+    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    return !hitIndexes.empty();
 }
 
 void CPlusPlusReorganizeItems::sortAlphabetically(SortItems& sortItems) const {
@@ -298,40 +352,36 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                 break;
             }
             if (firstTerm.getContent() == "TEST_F") {
-                sortItem.score += 0x40'0000;  // other:TEST_F
+                sortItem.score += 0x4'0000;  // other:TEST_F
                 sortItem.itemType = ItemType::Test;
                 saveDetailsForTest(sortItem, terms);
                 break;
             }
             if (firstTerm.getContent() == "TEST") {
-                sortItem.score += 0x30'0000;  // other:TEST
+                sortItem.score += 0x3'0000;  // other:TEST
                 sortItem.itemType = ItemType::Test;
                 saveDetailsForTest(sortItem, terms);
                 break;
             }
             if (firstTerm.getContent() == "BENCHMARK") {
-                sortItem.score += 0x20'0000;  // other:BENCHMARK
+                sortItem.score += 0x2'0000;  // other:BENCHMARK
                 sortItem.itemType = ItemType::Test;
                 break;
             }
             if (firstTerm.getContent() == "BENCHMARK_MAIN") {
-                sortItem.score += 0x10'0000;  // other:BENCHMARK_MAIN
+                sortItem.score += 0x1'0000;  // other:BENCHMARK_MAIN
                 sortItem.itemType = ItemType::Test;
                 break;
             }
-            // Score: 0x-TOI'HCQR
+            // Score: 0x-TIO'HCQR
             // R - return type
             // Q - qualifiers and attributes (const, volatile)
             // C - class specific (explicit, virtual, override, static, friend)
-            // H - header specific (constexpr, inline)
-            // I - important functions (constructors/etc, operators)
+            // H - header specific (operators, constexpr, inline)
             // O - other (default, delete), TEST, TEST_F, BENCHMARK
+            // I - impt functions (constructors/etc, operators)
             // T - type (namespace const data, declarations, namespace data, functions, data, test)
             if (firstTerm.getContent() == "(") {
-                if (!m_data.scopeNames.empty() &&
-                    m_data.scopeNames.back() == getIdentifierBeforeParenthesis(terms, firstHitIndex)) {
-                    sortItem.score += 0x3'0000;  // impt:constructors, etc
-                }
                 moveToEndParenthesis(terms, termIndex, firstHitIndex);
                 sortItem.score += 0x200'0000;  // type:function
                 sortItem.itemType = ItemType::Function;
@@ -354,13 +404,14 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
                     sortItem.score += 0x400'0000;  // type:class
                     sortItem.itemType = ItemType::Declaration;
                 } else if (firstTerm.getContent() == "=" && lastTerm.getContent() == "default") {
-                    sortItem.score += 0x20'0000;  // other:default
+                    sortItem.score += 0x2'0000;  // other:default
                 } else if (firstTerm.getContent() == "=" && lastTerm.getContent() == "delete") {
-                    sortItem.score += 0x10'0000;  // other:delete
+                    sortItem.score += 0x1'0000;  // other:delete
                 } else if (!isAFriend && firstTerm.getContent() == "operator" && lastTerm.getContent() == "=") {
-                    sortItem.score += 0x2'0000;  // impt:assignment
+                    sortItem.score += 0x4000;  // header:assignment
                 } else if (!isAFriend && firstTerm.getContent() == "operator") {
-                    sortItem.score += 0x1'0000;  // impt:other operator
+                    sortItem.score += 0x3000;  // header:operator for items not in class declaration
+                    sortItem.isNonFriendOperator = true;
                 } else if (firstTerm.getContent() == "constexpr") {
                     sortItem.score += 0x2000;  // header:constexpr
                     isConst = true;
@@ -420,6 +471,35 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
             // do not move class member data
             sortItem.score += 0x100'0000;    // type:data
             sortItem.score &= 0xFFFF'FF00U;  // remove qualifiers and return type
+        }
+    }
+}
+
+void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
+    SortItem& sortItem, string const& functionSignature) const {
+    Terms functionSignatureTerms(getTermsFromString(functionSignature));
+    saveDetailsBasedFromReturnType(sortItem, functionSignatureTerms);
+    saveDetailsForSpecialFunctions(sortItem, functionSignatureTerms);
+}
+
+void CPlusPlusReorganizeItems::saveDetailsForSpecialFunctions(SortItem& sortItem, Terms const& terms) const {
+    if (m_data.scopeType == ScopeType::ClassDeclaration && !m_data.scopeName.empty()) {
+        if (isMoveAssignment(terms)) {
+            sortItem.score += 0x20'0000;  // impt:
+        } else if (isCopyAssignment(terms)) {
+            sortItem.score += 0x30'0000;  // impt:
+        } else if (isMoveConstructor(terms)) {
+            sortItem.score += 0x40'0000;  // impt:
+        } else if (isCopyConstructor(terms)) {
+            sortItem.score += 0x50'0000;  // impt:
+        } else if (isDestructor(terms)) {
+            sortItem.score += 0x60'0000;  // impt:
+        } else if (isOtherConstructor(terms)) {
+            sortItem.score += 0x70'0000;  // impt:
+        } else if (isDefaultConstructor(terms)) {
+            sortItem.score += 0x80'0000;  // impt:
+        } else if (sortItem.isNonFriendOperator) {
+            sortItem.score += 0x10'0000;  // impt:
         }
     }
 }
@@ -516,7 +596,7 @@ Patterns CPlusPlusReorganizeItems::getSearchPatternsForAnalysis() {
 }
 
 CPlusPlusReorganizeItems::SortItem CPlusPlusReorganizeItems::createSortItem(int const index) {
-    return SortItem{0, 0, 0, false, false, false, ItemType::Unknown, ItemSubType::Unknown, index, {}, {}};
+    return SortItem{0, 0, 0, false, false, false, false, ItemType::Unknown, ItemSubType::Unknown, index, {}, {}};
 }
 
 string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& terms, int const parenthesisIndex) {
@@ -592,9 +672,7 @@ void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& ter
     }
 }
 
-void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
-    SortItem& sortItem, string const& functionSignature) {
-    Terms terms(getTermsFromString(functionSignature));
+void CPlusPlusReorganizeItems::saveDetailsBasedFromReturnType(SortItem& sortItem, Terms const& terms) {
     Patterns const searchPatterns{{M_OR(M(TermType::PrimitiveType), M(TermType::Identifier), M(TermType::Keyword))}};
     Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
     if (!hitIndexes.empty()) {

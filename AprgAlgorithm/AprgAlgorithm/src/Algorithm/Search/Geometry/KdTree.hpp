@@ -142,6 +142,7 @@ protected:
         ++depth;
         if (nodePointer) {
             Key const& currentKey(nodePointer->key);
+            // NOLINTBEGIN(bugprone-branch-clone)
             if (isLessThanWithDepth(key, currentKey, depth)) {
                 putStartingOnThisNode(nodePointer->left, key);
                 this->updateTreeNodeDetails(*nodePointer);
@@ -153,6 +154,7 @@ protected:
                 putStartingOnThisNode(nodePointer->left, key);
                 this->updateTreeNodeDetails(*nodePointer);
             }
+            // NOLINTEND(bugprone-branch-clone)
         } else {
             nodePointer = NodeUniquePointer(new Node{key, nullptr, nullptr, 1});
         }

@@ -220,6 +220,7 @@ void combineTermsByCheckingCommonFactor(Terms& termsToCombine, OperatorLevel con
 }
 
 void retrieveTargetOperations(OperatorLevel& targetOuter, OperatorLevel& targetInner) {
+    // NOLINTBEGIN(bugprone-branch-clone)
     if (SimplificationOfExpression::shouldSimplifyWithOuterOrAndInnerAnd()) {
         targetOuter = OperatorLevel::Or;
         targetInner = OperatorLevel::And;
@@ -230,6 +231,7 @@ void retrieveTargetOperations(OperatorLevel& targetOuter, OperatorLevel& targetI
         targetOuter = OperatorLevel::Or;
         targetInner = OperatorLevel::And;
     }
+    // NOLINTEND(bugprone-branch-clone)
 }
 
 Term combineTwoTermsByCheckingCommonFactorIfPossible(

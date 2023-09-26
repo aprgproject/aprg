@@ -18,17 +18,17 @@ using namespace std;
 
 namespace alba::algebra {
 
+TermRaiseToTerms::TermRaiseToTerms()
+    : m_shouldSimplifyToFactors(false),
+      m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(false),
+      m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(false) {}
+
 TermRaiseToTerms::TermRaiseToTerms(TermsWithDetails const& termsInRaiseToPowerExpression)
     : m_shouldSimplifyToFactors(false),
       m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(false),
       m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(false) {
     initializeUsingTermsInRaiseToPowerExpression(termsInRaiseToPowerExpression);
 }
-
-TermRaiseToTerms::TermRaiseToTerms()
-    : m_shouldSimplifyToFactors(false),
-      m_shouldSimplifyByCheckingPolynomialRaiseToAnUnsignedInt(false),
-      m_shouldSimplifyWithEvenExponentsCancellationAndPutAbsoluteValueAtBase(false) {}
 
 TermRaiseToTerms::TermRaiseToTerms(Term const& base, Terms const& exponents)
     : m_base(base),

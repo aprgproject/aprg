@@ -38,7 +38,7 @@ TEST(CPlusPlusReorganizerTest, DISABLED_ActualAprgDirectoryTest) {
 }
 
 TEST(CPlusPlusReorganizerTest, DISABLED_ActualDirectoryTest) {
-    processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgCommon\AprgCommon)");
+    processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgAlgebra\AprgAlgebra)");
 }
 
 TEST(CPlusPlusReorganizerTest, ReorganizeAlbaConfigurationHolderWorks) {

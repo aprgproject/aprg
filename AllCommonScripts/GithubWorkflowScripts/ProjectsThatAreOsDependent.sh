@@ -3,8 +3,8 @@
 projectsThatAreWindowsOnly='
 "AprgLocalScreenMonitoring/AprgLocalScreenMonitoring",
 "AprgLocalUserAutomation/AprgLocalUserAutomation",
-"ChessPeek/ChessPeek",
-"ChessUtilities/ChessUtilities",
+"Chess/ChessPeek/ChessPeek",
+"Chess/ChessUtilities/ChessUtilities",
 "ZZZ_OldProjects/FesterRobot/FesterRobot"
 '
 

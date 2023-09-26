@@ -96,11 +96,11 @@ template <
         checkArithmeticType<ArithmeticType>();
     }
 
+// no need to be explicit in the constructors (allow implicit conversions)
+constexpr AlbaNumber() : m_type(Type::Integer) {}
 // rule of zero
 // remove character to integer conversion (delete any functions is a C++11 feature)
 AlbaNumber(char const character) = delete;
-// no need to be explicit in the constructors (allow implicit conversions)
-constexpr AlbaNumber() : m_type(Type::Integer) {}
 constexpr AlbaNumber(FractionData const& fractionData) : m_type(Type::Fraction), m_data(fractionData) {}
 
 constexpr AlbaNumber(ComplexNumberData const& complexNumberData)

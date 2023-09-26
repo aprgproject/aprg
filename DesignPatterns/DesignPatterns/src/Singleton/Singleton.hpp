@@ -8,7 +8,7 @@ namespace Singleton {
 // and method which gives us a way to instantiate the class
 class Singleton {
 public:
-    void tellSomething() {
+    void tellSomething() const {
         std::cout << "This is Singleton. And the data is: [" << m_data << "]\n";
         // ...
     }
