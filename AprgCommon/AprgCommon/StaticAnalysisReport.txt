@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-25T23:23:01
+StaticAnalysisJobIdentifier: [41]
+2023-09-26T19:03:02
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Bit/AlbaBitManipulation_unit.cpp:21:1: warning: function 'TestBody' has cognitive complexity of 32 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Bit/AlbaBitManipulation_unit.cpp:22:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Bit/AlbaBitManipulation_unit.cpp:22:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -845,9 +845,9 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaConfigurationHolder_unit.cpp:41:97: warning: 48564U is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaConfigurationHolder_unit.cpp:50:97: warning: 48564U is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaConfigurationHolder_unit.cpp:62:80: warning: 1255U is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaFakeCopyable_unit.cpp:13:16: warning: variable 'numberOfConstructorExecutions' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaFakeCopyable_unit.cpp:17:26: warning: variable 'numberOfConstructorExecutions' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaOptional.hpp:173:41: warning: variable 'm_empty' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaFakeCopyable_unit.cpp:14:16: warning: variable 'numberOfConstructorExecutions' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaFakeCopyable_unit.cpp:18:26: warning: variable 'numberOfConstructorExecutions' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Container/AlbaOptional.hpp:174:41: warning: variable 'm_empty' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaOptional_unit.cpp:59:40: warning: 1111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaOptional_unit.cpp:72:40: warning: 1111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaOptional_unit.cpp:89:40: warning: 1111 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
