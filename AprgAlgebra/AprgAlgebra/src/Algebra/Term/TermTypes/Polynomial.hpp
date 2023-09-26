@@ -10,9 +10,9 @@ namespace alba::algebra {
 
 class Polynomial : public BaseTermData {
 public:
+    Polynomial() = default;
     explicit Polynomial(Monomials const& monomials);
     explicit Polynomial(Monomials&& monomials);
-    Polynomial() = default;
     Polynomial(std::initializer_list<Monomial> const& monomials);
     // rule of zero
     bool operator==(Polynomial const& second) const;

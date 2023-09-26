@@ -14,13 +14,13 @@ public:
     using Key = KeyTemplateType;
     using Node = NodeTemplateType;
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
+    BaseRedBlackBinarySearchTree() = default;
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseRedBlackBinarySearchTree() override = default;
-    BaseRedBlackBinarySearchTree() = default;
     BaseRedBlackBinarySearchTree(BaseRedBlackBinarySearchTree const&) = default;
-    BaseRedBlackBinarySearchTree(BaseRedBlackBinarySearchTree&&) = default;
+    BaseRedBlackBinarySearchTree(BaseRedBlackBinarySearchTree&&) noexcept = default;
     BaseRedBlackBinarySearchTree& operator=(BaseRedBlackBinarySearchTree const&) = default;
-    BaseRedBlackBinarySearchTree& operator=(BaseRedBlackBinarySearchTree&&) = default;
+    BaseRedBlackBinarySearchTree& operator=(BaseRedBlackBinarySearchTree&&) noexcept = default;
 
 protected:
     [[nodiscard]] inline bool isRed(NodeUniquePointer const& nodePointer) const {

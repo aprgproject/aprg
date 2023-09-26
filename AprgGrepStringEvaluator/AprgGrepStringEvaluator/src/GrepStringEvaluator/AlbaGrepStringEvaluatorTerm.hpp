@@ -8,10 +8,10 @@ enum class AlbaGrepStringEvaluatorTermType { Unknown, BooleanResult, StringToFin
 
 class AlbaGrepStringEvaluatorTerm {
 public:
+    AlbaGrepStringEvaluatorTerm();
     explicit AlbaGrepStringEvaluatorTerm(std::string const& stringToFind);
     explicit AlbaGrepStringEvaluatorTerm(std::string&& stringToFind);
     explicit AlbaGrepStringEvaluatorTerm(bool const result);
-    AlbaGrepStringEvaluatorTerm();
     [[nodiscard]] bool getResult() const;
     static void setMainString(std::string const& mainString);
 

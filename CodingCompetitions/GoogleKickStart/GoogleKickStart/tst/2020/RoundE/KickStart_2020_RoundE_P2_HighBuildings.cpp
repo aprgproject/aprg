@@ -4,28 +4,39 @@
 #include "KickStart_2020_RoundE_P2_HighBuildings.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <cassert>
 #include <cstdint>
 #include <iostream>
 #include <vector>
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <cassert>
 
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2020_RoundE_P2_HighBuildings {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2020_RoundE_P2_HighBuildings {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
+
+    runAllTestCases();
+
+    return 0;
+}
 
 void runTestCase(int const testCaseNumber) {
     int N = 0;
@@ -56,20 +67,20 @@ void runTestCase(int const testCaseNumber) {
     } else {
         vector<int> res;
         res.reserve(N);
-        for (int i = 0; i < A - C; i++) {
+        for (int i = 0; i < A - C; ++i) {
             res.push_back(2);
         }
-        for (int i = 0; i < C; i++) {
+        for (int i = 0; i < C; ++i) {
             res.push_back(3);
         }
-        for (int i = 0; i < B - C; i++) {
+        for (int i = 0; i < B - C; ++i) {
             res.push_back(2);
         }
         int extra = N - (A + B - C);
         if (extra > 0) {
             res.insert(res.begin() + 1, extra, 1);
         }
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N; ++i) {
             my_cout << res[i] << " \n"[i + 1 == N];
         }
     }
@@ -78,21 +89,15 @@ void runTestCase(int const testCaseNumber) {
 void runAllTestCases() {
     int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
         runTestCase(testCaseNumber);
     }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
-
-    runAllTestCases();
-
-    return 0;
-}
-
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2020_RoundE_P2_HighBuildings
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

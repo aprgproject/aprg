@@ -4,11 +4,7 @@
 #include "KickStart_2019_RoundB_P3_DiverseSubarray.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <cmath>
 #include <cstdint>
 #include <deque>
 #include <functional>
@@ -16,19 +12,26 @@
 #include <optional>
 #include <vector>
 
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <cmath>
+
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2019_RoundB_P3_DiverseSubarray {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2019_RoundB_P3_DiverseSubarray {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
+constexpr int MAX_NUMBER_TYPES = 100001;
 
 struct TypeDetail {
     optional<int> negativeDeltaIndexOptional;
@@ -37,7 +40,6 @@ struct TypeDetail {
 
 int numberOfTrinkets, allowableCountForAType;
 vector<int> typeToCountMap;
-constexpr int MAX_NUMBER_TYPES = 100001;
 
 template <typename Index>
 class SegmentTreeUtilities {
@@ -46,21 +48,11 @@ public:
     SegmentTreeUtilities() = delete;
     ~SegmentTreeUtilities() = delete;
     SegmentTreeUtilities(SegmentTreeUtilities const&) = delete;
+    SegmentTreeUtilities(SegmentTreeUtilities&&) noexcept = delete;
     SegmentTreeUtilities& operator=(SegmentTreeUtilities const&) = delete;
-    SegmentTreeUtilities(SegmentTreeUtilities&&) = delete;
-    SegmentTreeUtilities& operator=(SegmentTreeUtilities&&) = delete;
-
-    static constexpr Index ROOT_PARENT_INDEX = 0;   // the first parent
-    static constexpr Index NUMBER_OF_CHILDREN = 2;  // only 2 children
-
-    static inline bool isALeftChild(Index const treeIndex) { return treeIndex % 2 == 1; }
-
-    static inline bool isARightChild(Index const treeIndex) { return treeIndex % 2 == 0; }
-
+    SegmentTreeUtilities& operator=(SegmentTreeUtilities&&) noexcept = delete;
     static inline Index getParent(Index const treeIndex) { return ((treeIndex + 1) / NUMBER_OF_CHILDREN) - 1; }
-
     static inline Index getLeftChild(Index const parent) { return (parent * NUMBER_OF_CHILDREN) + 1; }
-
     static inline Index getRightChild(Index const parent) { return (parent * NUMBER_OF_CHILDREN) + 2; }
 
     static inline Index getMinimumNumberOfParents(Index const numberOfValues) {
@@ -70,6 +62,11 @@ public:
         }
         return result;
     }
+
+    static inline bool isALeftChild(Index const treeIndex) { return treeIndex % 2 == 1; }
+    static inline bool isARightChild(Index const treeIndex) { return treeIndex % 2 == 0; }
+    static constexpr Index ROOT_PARENT_INDEX = 0;   // the first parent
+    static constexpr Index NUMBER_OF_CHILDREN = 2;  // only 2 children
 };
 
 template <typename Values>
@@ -79,7 +76,6 @@ public:
     using Value = typename Values::value_type;
     using Function = std::function<Value(Value const&, Value const&)>;
     using Utilities = SegmentTreeUtilities<Index>;
-
     RangeQueryWithStaticSegmentTree() = default;
 
     RangeQueryWithStaticSegmentTree(Values const& valuesToCheck, Function const& functionObject)
@@ -94,13 +90,13 @@ public:
 
     [[nodiscard]] Index getStartOfChildren() const { return m_startOfChildren; }
 
-    [[nodiscard]] Values const& getTreeValues() const { return m_treeValues; }
-
-    [[nodiscard]] Value getValueOnInterval(Index const start, Index const end) const  // bottom to top approach
-    {
+    [[nodiscard]] Value getValueOnInterval(Index const start, Index const end) const {
+        // bottom to top approach
         // This has log(N) running time
         return getValueOnIntervalFromBottomToTop(start, end);
     }
+
+    [[nodiscard]] Values const& getTreeValues() const { return m_treeValues; }
 
     void changeValueAtIndex(Index const index, Value const& newValue) {
         // This has log(N) running time
@@ -140,23 +136,23 @@ public:
         }
 
         Value maxSum(m_treeValues[maxSumParent]);
-        maxSumLeftMostChild--;
+        --maxSumLeftMostChild;
         while (maxSumLeftMostChild >= m_startOfChildren) {
             Value additionalValue = m_treeValues[maxSumLeftMostChild];
             if (additionalValue >= 0) {
                 maxSum += additionalValue;
-                maxSumLeftMostChild--;
+                --maxSumLeftMostChild;
             } else {
                 break;
             }
         }
-        maxSumRightMostChild++;
+        ++maxSumRightMostChild;
         while (maxSumRightMostChild >= m_startOfChildren &&
                maxSumRightMostChild < static_cast<int>(m_treeValues.size())) {
             Value additionalValue = m_treeValues[maxSumRightMostChild];
             if (additionalValue >= 0) {
                 maxSum += additionalValue;
-                maxSumRightMostChild++;
+                ++maxSumRightMostChild;
             } else {
                 break;
             }
@@ -165,39 +161,6 @@ public:
     }
 
 protected:
-    void initialize(Values const& valuesToCheck) {
-        if (!valuesToCheck.empty()) {
-            m_startOfChildren = Utilities::getMinimumNumberOfParents(valuesToCheck.size());
-            Index totalSize = m_startOfChildren + valuesToCheck.size();
-
-            m_treeValues.resize(totalSize);
-            m_treeValues.shrink_to_fit();
-            std::copy(
-                valuesToCheck.cbegin(), valuesToCheck.cend(),
-                m_treeValues.begin() + m_startOfChildren);  // copy children
-
-            Index treeBaseLeft(m_startOfChildren);
-            Index treeBaseRight(totalSize - 1);
-            while (treeBaseLeft < treeBaseRight)  // fill up parent values
-            {
-                Index treeBaseRightComplete = treeBaseRight;
-                if (Utilities::isALeftChild(treeBaseRight))  // incomplete pair
-                {
-                    m_treeValues[Utilities::getParent(treeBaseRight)] = m_treeValues[treeBaseRight];
-                    treeBaseRightComplete--;
-                }
-                for (Index treeIndex = treeBaseLeft; treeIndex < treeBaseRightComplete;
-                     treeIndex += Utilities::NUMBER_OF_CHILDREN)  // complete pairs
-                {
-                    m_treeValues[Utilities::getParent(treeIndex)] =
-                        m_function(m_treeValues[treeIndex], m_treeValues[treeIndex + 1]);
-                }
-                treeBaseLeft = Utilities::getParent(treeBaseLeft);
-                treeBaseRight = Utilities::getParent(treeBaseRight);
-            }
-        }
-    }
-
     [[nodiscard]] Value getValueOnIntervalFromBottomToTop(Index const start, Index const end) const {
         // This has log(N) running time
         Value result{};
@@ -217,12 +180,45 @@ protected:
                 first = Utilities::getParent(first);
                 last = Utilities::getParent(last);
             }
-            if (first == last)  // add value if it ends on the same place
-            {
+            if (first == last) {
+                // add value if it ends on the same place
                 result = m_function(result, m_treeValues[first]);
             }
         }
         return result;
+    }
+
+    void initialize(Values const& valuesToCheck) {
+        if (!valuesToCheck.empty()) {
+            m_startOfChildren = Utilities::getMinimumNumberOfParents(valuesToCheck.size());
+            Index totalSize = m_startOfChildren + valuesToCheck.size();
+
+            m_treeValues.resize(totalSize);
+            m_treeValues.shrink_to_fit();
+            std::copy(
+                valuesToCheck.cbegin(), valuesToCheck.cend(),
+                m_treeValues.begin() + m_startOfChildren);  // copy children
+
+            Index treeBaseLeft(m_startOfChildren);
+            Index treeBaseRight(totalSize - 1);
+            while (treeBaseLeft < treeBaseRight) {
+                // fill up parent values
+                Index treeBaseRightComplete = treeBaseRight;
+                if (Utilities::isALeftChild(treeBaseRight)) {
+                    // incomplete pair
+                    m_treeValues[Utilities::getParent(treeBaseRight)] = m_treeValues[treeBaseRight];
+                    --treeBaseRightComplete;
+                }
+                for (Index treeIndex = treeBaseLeft; treeIndex < treeBaseRightComplete;
+                     treeIndex += Utilities::NUMBER_OF_CHILDREN) {
+                    // complete pairs
+                    m_treeValues[Utilities::getParent(treeIndex)] =
+                        m_function(m_treeValues[treeIndex], m_treeValues[treeIndex + 1]);
+                }
+                treeBaseLeft = Utilities::getParent(treeBaseLeft);
+                treeBaseRight = Utilities::getParent(treeBaseRight);
+            }
+        }
     }
 
     void changeValueAtIndexFromBottomToTop(Index const index, Value const& newValue) {
@@ -257,18 +253,13 @@ protected:
     Function m_function;
 };
 
-int getDeltaByAddingType(int const type) {
-    int delta = 0;
-    int& count(typeToCountMap[type]);
-    if (count > allowableCountForAType) {
-        // do nothing
-    } else if (count == allowableCountForAType) {
-        delta = -allowableCountForAType;
-    } else {
-        delta = 1;
-    }
-    count++;
-    return delta;
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
+
+    runAllTestCases();
+
+    return 0;
 }
 
 void runTestCase(int const testCaseNumber) {
@@ -393,25 +384,32 @@ void runTestCase(int const)
     }
     my_cout << "Case #" << testCaseNumber << ": " << maxAllowableCount << '\n';
 }*/
-
 void runAllTestCases() {
     int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
         runTestCase(testCaseNumber);
     }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
-
-    runAllTestCases();
-
-    return 0;
+int getDeltaByAddingType(int const type) {
+    int delta = 0;
+    int& count(typeToCountMap[type]);
+    if (count > allowableCountForAType) {
+        // do nothing
+    } else if (count == allowableCountForAType) {
+        delta = -allowableCountForAType;
+    } else {
+        delta = 1;
+    }
+    ++count;
+    return delta;
 }
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2019_RoundB_P3_DiverseSubarray
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

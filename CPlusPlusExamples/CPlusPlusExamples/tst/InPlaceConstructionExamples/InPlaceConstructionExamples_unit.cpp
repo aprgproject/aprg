@@ -84,7 +84,7 @@ TEST(InPlaceConstructionExamplesTest, RvoWorks) {
 
 namespace NoRvoBecauseNoOpportunity {
 
-string sadFunction(string s) {
+string sadFunction(string const s) {
     s += "No RVO for you!";
     return s;
 }
@@ -154,10 +154,10 @@ namespace MultipleExamplesOfRvo {
 struct MoveOnlyConstExprObject {
     constexpr MoveOnlyConstExprObject() = default;
     constexpr ~MoveOnlyConstExprObject() = default;
-    constexpr MoveOnlyConstExprObject &operator=(MoveOnlyConstExprObject &&) = default;
     constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject const &) = delete;
-    constexpr MoveOnlyConstExprObject &operator=(MoveOnlyConstExprObject const &) = delete;
     constexpr MoveOnlyConstExprObject(MoveOnlyConstExprObject &&) noexcept : x{1} {}
+    constexpr MoveOnlyConstExprObject &operator=(MoveOnlyConstExprObject const &) = delete;
+    constexpr MoveOnlyConstExprObject &operator=(MoveOnlyConstExprObject &&) noexcept = default;
     int x{0};
 };
 
@@ -188,7 +188,7 @@ string willThisRvo02(bool const condition) {
     // This will RVO even in debug builds
 }
 
-string willThisRvo03(bool const condition, string prohibitingRvo) {
+string willThisRvo03(bool const condition, string const prohibitingRvo) {
     if (condition) {
         prohibitingRvo = "I won't RVO";
     }
@@ -305,7 +305,7 @@ TEST(InPlaceConstructionExamplesTest, VectorPushBackVsEmplaceBack) {
     // No difference, except emplace_back returns a reference on the created object by definition
     auto carray = "Content2";
     // NOLINTNEXTLINE(hicpp-use-emplace,modernize-use-emplace)
-    v.push_back(carray);  // may copy/move from constructed string from carray
+    v.push_back(carray);     // may copy/move from constructed string from carray
     v.emplace_back(carray);  // assured in-place construction based from carray
     // -> Some people: "Just always use emplace_back because its certain more powerful that push back"
     // ---> "I don't like that view, I don't login to my computer as root."

@@ -12,12 +12,12 @@ class ConcreteAggregate;
 // client from the implementation of your collection of objects
 class Aggregate {
 public:
-    virtual ~Aggregate() = default;
     Aggregate() = default;
+    virtual ~Aggregate() = default;
     Aggregate(Aggregate const &) = default;
-    Aggregate(Aggregate &&) = default;
+    Aggregate(Aggregate &&) noexcept = default;
     Aggregate &operator=(Aggregate const &) = default;
-    Aggregate &operator=(Aggregate &&) = default;
+    Aggregate &operator=(Aggregate &&) noexcept = default;
     virtual std::unique_ptr<Iterator> createIterator() = 0;
     // ...
 };
@@ -44,12 +44,12 @@ private:
 // a set of methods for traversing over elements
 class Iterator {
 public:
-    virtual ~Iterator() = default;
     Iterator() = default;
+    virtual ~Iterator() = default;
     Iterator(Iterator const &) = default;
-    Iterator(Iterator &&) = default;
+    Iterator(Iterator &&) noexcept = default;
     Iterator &operator=(Iterator const &) = default;
-    Iterator &operator=(Iterator &&) = default;
+    Iterator &operator=(Iterator &&) noexcept = default;
     [[nodiscard]] virtual int getCurrentItem() const = 0;
     [[nodiscard]] virtual bool isDone() const = 0;
     virtual void gotoFirst() = 0;

@@ -9,12 +9,12 @@ namespace Composite {
 // both the composite and the leaf nodes
 class Component {
 public:
-    virtual ~Component() = default;
     Component() = default;
+    virtual ~Component() = default;
     Component(Component const &) = default;
-    Component(Component &&) = default;
+    Component(Component &&) noexcept = default;
     Component &operator=(Component const &) = default;
-    Component &operator=(Component &&) = default;
+    Component &operator=(Component &&) noexcept = default;
 
     [[nodiscard]] virtual Component const *getChildPointerAt(int const) const {
         // method/function makes sense.)

@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2020_RoundC_P3_PerfectSubarray {
 
-TEST(KickStart_2020_RoundC_P3_PerfectSubarrayTest, DISABLED_Test1) {
+TEST(KickStart2020RoundCP3PerfectSubarrayTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

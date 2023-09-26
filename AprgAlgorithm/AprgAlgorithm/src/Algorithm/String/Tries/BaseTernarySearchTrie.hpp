@@ -14,13 +14,13 @@ public:
     using Strings = typename BaseClass::Strings;
     using Node = NodeTemplateType;
     using NodeUniquePointer = std::unique_ptr<Node>;
+    BaseTernarySearchTrie() : m_root(nullptr) {}
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseTernarySearchTrie() override = default;
     BaseTernarySearchTrie(BaseTernarySearchTrie const&) = default;
-    BaseTernarySearchTrie(BaseTernarySearchTrie&&) = default;
+    BaseTernarySearchTrie(BaseTernarySearchTrie&&) noexcept = default;
     BaseTernarySearchTrie& operator=(BaseTernarySearchTrie const&) = default;
-    BaseTernarySearchTrie& operator=(BaseTernarySearchTrie&&) = default;
-    BaseTernarySearchTrie() : m_root(nullptr) {}
+    BaseTernarySearchTrie& operator=(BaseTernarySearchTrie&&) noexcept = default;
 
     [[nodiscard]] Key getLongestPrefixOf(Key const& keyToCheck) const override {
         int const longestPrefixLength(getLengthOfLongestPrefixStartingOnThisNode(m_root, keyToCheck, 0));

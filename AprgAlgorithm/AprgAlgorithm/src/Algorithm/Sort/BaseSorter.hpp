@@ -5,13 +5,13 @@ namespace alba::algorithm {
 template <typename Values>
 class BaseSorter {
 public:
+    BaseSorter() = default;
     // virtual destructor because of virtual functions (vtable exists)
     virtual ~BaseSorter() = default;
-    BaseSorter() = default;
     BaseSorter(BaseSorter const &) = default;
-    BaseSorter(BaseSorter &&) = default;
+    BaseSorter(BaseSorter &&) noexcept = default;
     BaseSorter &operator=(BaseSorter const &) = default;
-    BaseSorter &operator=(BaseSorter &&) = default;
+    BaseSorter &operator=(BaseSorter &&) noexcept = default;
     virtual void sort(Values &valuesToSort) const = 0;
 };
 

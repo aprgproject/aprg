@@ -7,12 +7,12 @@ namespace Strategy {
 // declares an interface common to all supported algorithms
 class Strategy {
 public:
-    virtual ~Strategy() = default;  // polymorphic destruction
     Strategy() = default;
+    virtual ~Strategy() = default;  // polymorphic destruction
     Strategy(Strategy const &) = default;
-    Strategy(Strategy &&) = default;
+    Strategy(Strategy &&) noexcept = default;
     Strategy &operator=(Strategy const &) = default;
-    Strategy &operator=(Strategy &&) = default;
+    Strategy &operator=(Strategy &&) noexcept = default;
     virtual void algorithmInterface() = 0;
     // ...
 };

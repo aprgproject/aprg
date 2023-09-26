@@ -7,12 +7,12 @@ namespace alba::algorithm {
 template <typename Vertex>
 class BaseReachabilityInDigraph {
 public:
-    virtual ~BaseReachabilityInDigraph() = default;  // virtual destructor because of virtual functions (vtable exists)
     BaseReachabilityInDigraph() = default;
+    virtual ~BaseReachabilityInDigraph() = default;  // virtual destructor because of virtual functions (vtable exists)
     BaseReachabilityInDigraph(BaseReachabilityInDigraph const &) = default;
-    BaseReachabilityInDigraph(BaseReachabilityInDigraph &&) = default;
+    BaseReachabilityInDigraph(BaseReachabilityInDigraph &&) noexcept = default;
     BaseReachabilityInDigraph &operator=(BaseReachabilityInDigraph const &) = default;
-    BaseReachabilityInDigraph &operator=(BaseReachabilityInDigraph &&) = default;
+    BaseReachabilityInDigraph &operator=(BaseReachabilityInDigraph &&) noexcept = default;
     [[nodiscard]] virtual bool isReachable(Vertex const &destinationVertex) const = 0;
 };
 

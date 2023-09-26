@@ -19,12 +19,12 @@ public:
     using Entry = EntryTemplateType;
     using Keys = std::vector<Key>;
     using HashTable = std::array<UnorderedLinkedList, HASH_TABLE_SIZE>;
-    ~BaseSeparateChainingHash() override = default;  // no need for virtual destructor because base destructor is
     BaseSeparateChainingHash() = default;
+    ~BaseSeparateChainingHash() override = default;  // no need for virtual destructor because base destructor is
     BaseSeparateChainingHash(BaseSeparateChainingHash const&) = default;
-    BaseSeparateChainingHash(BaseSeparateChainingHash&&) = default;
+    BaseSeparateChainingHash(BaseSeparateChainingHash&&) noexcept = default;
     BaseSeparateChainingHash& operator=(BaseSeparateChainingHash const&) = default;
-    BaseSeparateChainingHash& operator=(BaseSeparateChainingHash&&) = default;
+    BaseSeparateChainingHash& operator=(BaseSeparateChainingHash&&) noexcept = default;
 
     [[nodiscard]] Key getMinimum() const override {
         Key result{};

@@ -7,12 +7,12 @@ namespace Bridge {
 // defines the interface for implementation classes
 class Implementor {
 public:
-    virtual ~Implementor() = default;
     Implementor() = default;
+    virtual ~Implementor() = default;
     Implementor(Implementor const &) = default;
-    Implementor(Implementor &&) = default;
+    Implementor(Implementor &&) noexcept = default;
     Implementor &operator=(Implementor const &) = default;
-    Implementor &operator=(Implementor &&) = default;
+    Implementor &operator=(Implementor &&) noexcept = default;
     virtual void action() = 0;
     // ...
 };
@@ -35,12 +35,12 @@ public:
 // defines the abstraction's interface
 class Abstraction {
 public:
-    virtual ~Abstraction() = default;
     Abstraction() = default;
+    virtual ~Abstraction() = default;
     Abstraction(Abstraction const &) = default;
-    Abstraction(Abstraction &&) = default;
+    Abstraction(Abstraction &&) noexcept = default;
     Abstraction &operator=(Abstraction const &) = default;
-    Abstraction &operator=(Abstraction &&) = default;
+    Abstraction &operator=(Abstraction &&) noexcept = default;
     virtual void operation() = 0;
     // ...
 };

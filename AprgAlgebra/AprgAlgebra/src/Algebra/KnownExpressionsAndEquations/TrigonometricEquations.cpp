@@ -33,7 +33,9 @@ Equation getTangentEquationOfRightTriangle(
 Equation getLawOfSineEquation(
     Term const& side1, Term const& oppositeAngleOfSide1, Term const& side2, Term const& oppositeAngleOfSide2) {
     // x/sin(angleOppositeOfX) = y/sin(angleOppositeOfY) = z/sin(angleOppositeOfZ)
-    return {createExpressionIfPossible({side1, "/", sin(oppositeAngleOfSide1)}), "=", createExpressionIfPossible({side2, "/", sin(oppositeAngleOfSide2)})};
+    return {
+        createExpressionIfPossible({side1, "/", sin(oppositeAngleOfSide1)}), "=",
+        createExpressionIfPossible({side2, "/", sin(oppositeAngleOfSide2)})};
 }
 
 Equation getLawOfCosineEquation(
@@ -42,7 +44,9 @@ Equation getLawOfCosineEquation(
     Term const side2Squared(createExpressionIfPossible({side2, "^", 2}));
     Term const side3Squared(createExpressionIfPossible({side3, "^", 2}));
     Term const cosinePart(createExpressionIfPossible({2, "*", side2, "*", side3, "*", cos(oppositeAngleOfSide1)}));
-    return {createExpressionIfPossible({side1, "^", 2}), "=", createExpressionIfPossible({side2Squared, "+", side3Squared, "-", cosinePart})};
+    return {
+        createExpressionIfPossible({side1, "^", 2}), "=",
+        createExpressionIfPossible({side2Squared, "+", side3Squared, "-", cosinePart})};
 }
 
 Term getSineSquared(Term const& term) {

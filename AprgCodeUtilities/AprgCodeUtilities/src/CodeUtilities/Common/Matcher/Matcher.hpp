@@ -9,12 +9,13 @@ namespace alba::CodeUtilities {
 class Matcher {
 public:
     enum class Type { Single, Group };
+
     Matcher(Type const type, BaseMatcher::BaseMatcherPtr&& baseMatcher);
     ~Matcher() = default;
-    Matcher(Matcher&&) = default;
-    Matcher& operator=(Matcher&&) = default;
     Matcher(Matcher const& matcher);
+    Matcher(Matcher&&) noexcept = default;
     Matcher& operator=(Matcher const&);
+    Matcher& operator=(Matcher&&) noexcept = default;
     [[nodiscard]] bool isAMatch(Term const& term) const;
     friend std::ostream& operator<<(std::ostream& out, Matcher const& matcher);
     friend bool operator==(Matcher const& matcher, Term const& term);

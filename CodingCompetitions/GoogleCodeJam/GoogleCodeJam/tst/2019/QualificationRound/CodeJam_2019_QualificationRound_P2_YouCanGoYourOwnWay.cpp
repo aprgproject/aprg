@@ -1,41 +1,31 @@
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-//#define FOR_SUBMISSION
+// #define FOR_SUBMISSION
 #ifndef FOR_SUBMISSION
 #include "CodeJam_2019_QualificationRound_P2_YouCanGoYourOwnWay.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <cstdint>
 #include <iostream>
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <cstdint>
 
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace CodeJam_2019_QualificationRound_P2_YouCanGoYourOwnWay {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace CodeJam_2019_QualificationRound_P2_YouCanGoYourOwnWay {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
-
-void runTestCase(int const) {
-    // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
-}
-
-void runAllTestCases() {
-    int numberOfTestCases = 0;
-    my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
-        runTestCase(testCaseNumber);
-    }
-}
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -46,7 +36,22 @@ int main() {
     return 0;
 }
 
+void runTestCase(int const) {
+    // my_cout << "Case #" << testCaseNumber << ": " << answer << '\n';
+}
+
+void runAllTestCases() {
+    int numberOfTestCases = 0;
+    my_cin >> numberOfTestCases;
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
+        runTestCase(testCaseNumber);
+    }
+}
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace CodeJam_2019_QualificationRound_P2_YouCanGoYourOwnWay
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

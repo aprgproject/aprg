@@ -167,7 +167,7 @@ uint32_t getLabelColor(SetOfPieces const& setOfPieces) {
 
 }  // namespace
 
-TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValue_ForChessDotComVersus) {
+TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValueForChessDotComVersus) {
     AlbaLocalPathHandler const inputFile(
         APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComVersus\ChessDotComVersus.bmp)");
 
@@ -181,7 +181,7 @@ TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValue_ForChessDotComVer
     printChessBitValuesWithBlackUpWhiteDown(retriever);
 }
 
-TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValue_ForChessDotComPuzzle) {
+TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValueForChessDotComPuzzle) {
     AlbaLocalPathHandler const inputFile(
         APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComPuzzle\ChessDotComPuzzle.bmp)");
 
@@ -195,7 +195,7 @@ TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValue_ForChessDotComPuz
     printChessBitValuesWithBlackUpWhiteDown(retriever);
 }
 
-TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValue_ForLichessVersus) {
+TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValueForLichessVersus) {
     AlbaLocalPathHandler const inputFile(APRG_DIR
                                          R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessVersus\LichessVersus.bmp)");
 
@@ -209,7 +209,7 @@ TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValue_ForLichessVersus)
     printChessBitValuesWithBlackUpWhiteDown(retriever);
 }
 
-TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValue_LichessStream) {
+TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValueLichessStream) {
     AlbaLocalPathHandler const inputFile(APRG_DIR
                                          R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessStream\LichessStream.bmp)");
 
@@ -223,7 +223,7 @@ TEST(BoardObserverPreparationTest, DISABLED_CheckChessBitValue_LichessStream) {
     printChessBitValuesWithBlackUpWhiteDown(retriever);
 }
 
-TEST(BoardObserverPreparationTest, DISABLED_FindImportantPoints_ForChessDotComVersus) {
+TEST(BoardObserverPreparationTest, DISABLED_FindImportantPointsForChessDotComVersus) {
     AlbaLocalPathHandler const inputFile(
         APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComVersus\ChessDotComVersus.bmp)");
     AlbaLocalPathHandler const outputFileForWhite(
@@ -268,7 +268,7 @@ TEST(BoardObserverPreparationTest, DISABLED_FindImportantPoints_ForChessDotComVe
     outputBitmapForBlack.setSnippetWriteToFile(outputSnippetForBlack);
 }
 
-TEST(BoardObserverPreparationTest, DISABLED_FindImportantPoints_ForChessDotComPuzzle) {
+TEST(BoardObserverPreparationTest, DISABLED_FindImportantPointsForChessDotComPuzzle) {
     AlbaLocalPathHandler const inputFile(
         APRG_DIR R"(\Chess\ChessPeek\Files\RetrieverBasis\ChessDotComPuzzle\ChessDotComPuzzle.bmp)");
     AlbaLocalPathHandler const outputFileForWhite(
@@ -313,7 +313,7 @@ TEST(BoardObserverPreparationTest, DISABLED_FindImportantPoints_ForChessDotComPu
     outputBitmapForBlack.setSnippetWriteToFile(outputSnippetForBlack);
 }
 
-TEST(BoardObserverPreparationTest, DISABLED_FindImportantPoints_ForLichessVersus) {
+TEST(BoardObserverPreparationTest, DISABLED_FindImportantPointsForLichessVersus) {
     AlbaLocalPathHandler const inputFile(APRG_DIR
                                          R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessVersus\LichessVersus.bmp)");
     AlbaLocalPathHandler const outputFileForWhite(APRG_DIR
@@ -358,7 +358,7 @@ TEST(BoardObserverPreparationTest, DISABLED_FindImportantPoints_ForLichessVersus
     outputBitmapForBlack.setSnippetWriteToFile(outputSnippetForBlack);
 }
 
-TEST(BoardObserverPreparationTest, DISABLED_FindImportantPoints_ForLichessStream) {
+TEST(BoardObserverPreparationTest, DISABLED_FindImportantPointsForLichessStream) {
     AlbaLocalPathHandler const inputFile(APRG_DIR
                                          R"(\Chess\ChessPeek\Files\RetrieverBasis\LichessStream\LichessStream.bmp)");
     AlbaLocalPathHandler const outputFileForWhite(APRG_DIR

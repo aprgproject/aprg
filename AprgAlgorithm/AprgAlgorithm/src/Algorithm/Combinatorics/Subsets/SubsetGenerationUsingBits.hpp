@@ -17,9 +17,9 @@ public:
     SubsetGenerationUsingBits() = delete;
     ~SubsetGenerationUsingBits() = delete;
     SubsetGenerationUsingBits(SubsetGenerationUsingBits const &) = delete;
-    SubsetGenerationUsingBits(SubsetGenerationUsingBits &&) = delete;
+    SubsetGenerationUsingBits(SubsetGenerationUsingBits &&) noexcept = delete;
     SubsetGenerationUsingBits &operator=(SubsetGenerationUsingBits const &) = delete;
-    SubsetGenerationUsingBits &operator=(SubsetGenerationUsingBits &&) = delete;
+    SubsetGenerationUsingBits &operator=(SubsetGenerationUsingBits &&) noexcept = delete;
 
     static Subsets generateSubsetsUsingBits(Objects const &objects) {
         // Another way to generate subsets is based on the bit representation of integers.

@@ -9,13 +9,13 @@ namespace alba::algebra {
 
 class SeriesBasedOnFormula {
 public:
-    virtual ~SeriesBasedOnFormula() = default;  // virtual destructor because of virtual functions (vtable exists)
-    SeriesBasedOnFormula(SeriesBasedOnFormula const &series) = default;
-    SeriesBasedOnFormula(SeriesBasedOnFormula &&series) = default;
-    SeriesBasedOnFormula &operator=(SeriesBasedOnFormula const &series) = default;
-    SeriesBasedOnFormula &operator=(SeriesBasedOnFormula &&series) = default;
     SeriesBasedOnFormula(Term const &formulaForSeries, std::string const &variableName);
     SeriesBasedOnFormula(Term &&formulaForSeries, std::string &&variableName);
+    virtual ~SeriesBasedOnFormula() = default;  // virtual destructor because of virtual functions (vtable exists)
+    SeriesBasedOnFormula(SeriesBasedOnFormula const &series) = default;
+    SeriesBasedOnFormula(SeriesBasedOnFormula &&series) noexcept = default;
+    SeriesBasedOnFormula &operator=(SeriesBasedOnFormula const &series) = default;
+    SeriesBasedOnFormula &operator=(SeriesBasedOnFormula &&series) noexcept = default;
     [[nodiscard]] virtual AlbaNumberOptional getGreatestLowerBound() const;
     [[nodiscard]] virtual AlbaNumberOptional getLeastUpperBound() const;
     [[nodiscard]] virtual Term getFormulaForSeries() const;

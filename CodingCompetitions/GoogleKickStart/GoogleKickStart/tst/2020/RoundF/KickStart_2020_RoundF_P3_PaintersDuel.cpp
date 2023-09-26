@@ -4,48 +4,47 @@
 #include "KickStart_2020_RoundF_P3_PaintersDuel.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <cstdint>
 #include <iostream>
 #include <map>
 #include <vector>
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <cstdint>
 
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2020_RoundF_P3_PaintersDuel {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2020_RoundF_P3_PaintersDuel {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
-
 using ll = long long;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
+
+    runAllTestCases();
+
+    return 0;
+}
 
 vector<int> g[36];
 map<ll, int> ok[10][36][36][2];
 int id[20][20];
 
-// NOLINTBEGIN(readability-use-anyofallof)
-bool can_move(ll ban, int a) {
-    for (int x : g[a]) {
-        if (((ban >> x) & 1) != 0) {
-            continue;
-        }
-        return true;
-    }
-    return false;
-}
 // NOLINTEND(readability-use-anyofallof)
-
-void dfs(int v, ll &mask, ll ban) {
+void dfs(int const v, ll &mask, ll const ban) {
     if (((mask >> v) & 1) != 0) {
         return;
     }
@@ -58,11 +57,68 @@ void dfs(int v, ll &mask, ll ban) {
     }
 }
 
-int calc(int s, ll ban, int a, int b, int who) {
+void runTestCase(int const testCaseNumber) {
+    int s = 0;
+    int ra = 0;
+    int pa = 0;
+    int rb = 0;
+    int pb = 0;
+    int c = 0;
+    my_cin >> s >> ra >> pa >> rb >> pb >> c;
+    --ra, pa--, rb--, --pb;
+    for (int i = 0; i < s * s; ++i) {
+        g[i].clear();
+    }
+    int ptr = 0;
+    for (int i = 0; i < s; ++i) {
+        for (int j = 0; j < 2 * i + 1; ++j) {
+            id[i][j] = ptr++;
+        }
+    }
+    auto add_edge = [&](int const ra, int const pa, int const rb, int const pb) {
+        int u = id[ra][pa];
+        int v = id[rb][pb];
+        g[u].push_back(v);
+        g[v].push_back(u);
+    };
+    for (int i = 0; i < s; ++i) {
+        for (int j = 1; j < 2 * i + 1; ++j) {
+            add_edge(i, j, i, j - 1);
+        }
+        for (int j = 0; j < 2 * i + 1; ++j) {
+            if (i + 1 < s && j % 2 == 0) {
+                add_edge(i, j, i + 1, j + 1);
+            }
+        }
+    }
+    ll ban = 0;
+    for (int i = 0; i < c; ++i) {
+        int r = 0;
+        int p = 0;
+        my_cin >> r >> p;
+        --r, --p;
+        ban |= (1LL << id[r][p]);
+    }
+    int a = id[ra][pa];
+    int b = id[rb][pb];
+    ban |= (1LL << a);
+    ban |= (1LL << b);
+    my_cout << "Case #" << testCaseNumber << ": " << calc(s, ban, a, b, 0) << "\n";
+}
+
+void runAllTestCases() {
+    int numberOfTestCases = 0;
+    my_cin >> numberOfTestCases;
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
+        runTestCase(testCaseNumber);
+    }
+}
+
+int calc(int const s, ll const ban, int const a, int const b, int const who) {
     ll msk = 0LL;
     dfs(a, msk, ban);
     dfs(b, msk, ban);
-    for (int i = 0; i < s * s; i++) {
+    for (int i = 0; i < s * s; ++i) {
         if (((msk >> i) & 1) != 0) {
             continue;
         }
@@ -103,73 +159,21 @@ int calc(int s, ll ban, int a, int b, int who) {
     return ok[s][a][b][who][ban] = calc(s, ban, a, b, 0);
 }
 
-void runTestCase(int const testCaseNumber) {
-    int s = 0;
-    int ra = 0;
-    int pa = 0;
-    int rb = 0;
-    int pb = 0;
-    int c = 0;
-    my_cin >> s >> ra >> pa >> rb >> pb >> c;
-    ra--, pa--, rb--, pb--;
-    for (int i = 0; i < s * s; i++) {
-        g[i].clear();
-    }
-    int ptr = 0;
-    for (int i = 0; i < s; i++) {
-        for (int j = 0; j < 2 * i + 1; j++) {
-            id[i][j] = ptr++;
+// NOLINTBEGIN(readability-use-anyofallof)
+bool can_move(ll const ban, int const a) {
+    for (int x : g[a]) {
+        if (((ban >> x) & 1) != 0) {
+            continue;
         }
+        return true;
     }
-    auto add_edge = [&](int ra, int pa, int rb, int pb) {
-        int u = id[ra][pa];
-        int v = id[rb][pb];
-        g[u].push_back(v);
-        g[v].push_back(u);
-    };
-    for (int i = 0; i < s; i++) {
-        for (int j = 1; j < 2 * i + 1; j++) {
-            add_edge(i, j, i, j - 1);
-        }
-        for (int j = 0; j < 2 * i + 1; j++) {
-            if (i + 1 < s && j % 2 == 0) {
-                add_edge(i, j, i + 1, j + 1);
-            }
-        }
-    }
-    ll ban = 0;
-    for (int i = 0; i < c; i++) {
-        int r = 0;
-        int p = 0;
-        my_cin >> r >> p;
-        r--, p--;
-        ban |= (1LL << id[r][p]);
-    }
-    int a = id[ra][pa];
-    int b = id[rb][pb];
-    ban |= (1LL << a);
-    ban |= (1LL << b);
-    my_cout << "Case #" << testCaseNumber << ": " << calc(s, ban, a, b, 0) << "\n";
-}
-
-void runAllTestCases() {
-    int numberOfTestCases = 0;
-    my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
-        runTestCase(testCaseNumber);
-    }
-}
-
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
-
-    runAllTestCases();
-
-    return 0;
+    return false;
 }
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2020_RoundF_P3_PaintersDuel
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

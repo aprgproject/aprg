@@ -14,9 +14,9 @@ public:
     SubsetGenerationUsingRecursion() = delete;
     ~SubsetGenerationUsingRecursion() = delete;
     SubsetGenerationUsingRecursion(SubsetGenerationUsingRecursion const&) = delete;
-    SubsetGenerationUsingRecursion(SubsetGenerationUsingRecursion&&) = delete;
+    SubsetGenerationUsingRecursion(SubsetGenerationUsingRecursion&&) noexcept = delete;
     SubsetGenerationUsingRecursion& operator=(SubsetGenerationUsingRecursion const&) = delete;
-    SubsetGenerationUsingRecursion& operator=(SubsetGenerationUsingRecursion&&) = delete;
+    SubsetGenerationUsingRecursion& operator=(SubsetGenerationUsingRecursion&&) noexcept = delete;
 
     static Subsets generateOrderedSubsetsUsingDfs(Objects const& objects) {
         Subsets result;

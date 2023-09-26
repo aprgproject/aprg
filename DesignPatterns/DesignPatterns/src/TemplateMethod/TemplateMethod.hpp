@@ -6,12 +6,12 @@ namespace TemplateMethod {
 // implements a template method defining the skeleton of an algorithm
 class AbstractClass {
 public:
-    virtual ~AbstractClass() = default;
     AbstractClass() = default;
+    virtual ~AbstractClass() = default;
     AbstractClass(AbstractClass const &) = default;
-    AbstractClass(AbstractClass &&) = default;
+    AbstractClass(AbstractClass &&) noexcept = default;
     AbstractClass &operator=(AbstractClass const &) = default;
-    AbstractClass &operator=(AbstractClass &&) = default;
+    AbstractClass &operator=(AbstractClass &&) noexcept = default;
 
     void templateMethod() {
         // should NOT be "virtual" or should be marked as "final"

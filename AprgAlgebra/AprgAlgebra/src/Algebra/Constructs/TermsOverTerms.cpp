@@ -27,6 +27,9 @@ using namespace std;
 
 namespace alba::algebra {
 
+TermsOverTerms::TermsOverTerms()
+    : m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails()) {}
+
 TermsOverTerms::TermsOverTerms(TermsWithDetails const& termsInMultiplicationAndDivision)
     : m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails()) {
     TermsWithDetails numeratorsWithDetails;
@@ -36,9 +39,6 @@ TermsOverTerms::TermsOverTerms(TermsWithDetails const& termsInMultiplicationAndD
     retrieveTermsFromTermsWithDetails(m_numerators, numeratorsWithDetails);
     retrieveTermsFromTermsWithDetails(m_denominators, denominatorsWithDetails);
 }
-
-TermsOverTerms::TermsOverTerms()
-    : m_factorizationConfiguration(Factorization::Configuration::getInstance().getConfigurationDetails()) {}
 
 TermsOverTerms::TermsOverTerms(Terms const& numerators, Terms const& denominators)
     : m_numerators(numerators),

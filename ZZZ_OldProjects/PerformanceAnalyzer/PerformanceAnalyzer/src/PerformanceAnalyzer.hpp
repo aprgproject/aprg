@@ -11,8 +11,8 @@ namespace alba {
 class PerformanceAnalyzer {
 private:
     struct UniqueUserId {
-        explicit UniqueUserId(std::string const& lineInLogs);
         UniqueUserId();
+        explicit UniqueUserId(std::string const& lineInLogs);
         bool operator<(UniqueUserId const& uniqueUserId) const;
         void saveNbccId(std::string const& lineInLogs);
         void saveCrnccId(std::string const& lineInLogs);

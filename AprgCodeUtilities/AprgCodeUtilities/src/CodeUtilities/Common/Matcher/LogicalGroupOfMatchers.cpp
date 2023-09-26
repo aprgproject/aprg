@@ -12,22 +12,8 @@ LogicalGroupOfMatchers::LogicalGroupOfMatchers(OperationType const operationType
 LogicalGroupOfMatchers::LogicalGroupOfMatchers(OperationType const operationType, Matchers&& matchers)
     : m_operationType(operationType), m_matchers(matchers) {}
 
-LogicalGroupOfMatchers::BaseMatcherPtr LogicalGroupOfMatchers::createClone() const {
-    return make_unique<LogicalGroupOfMatchers>(*this);
-}
-
-bool LogicalGroupOfMatchers::isAMatch(Term const& term) const {
-    switch (m_operationType) {
-        case OperationType::And:
-            return isAndConditionSatisfied(term);
-        case OperationType::Or:
-            return isOrConditionSatisfied(term);
-    }
-    return false;
-}
-
-LogicalGroupOfMatchers::OperationType LogicalGroupOfMatchers::getOperationType() const { return m_operationType; }
 LogicalGroupOfMatchers::Matchers const& LogicalGroupOfMatchers::getMatchers() const { return m_matchers; }
+LogicalGroupOfMatchers::OperationType LogicalGroupOfMatchers::getOperationType() const { return m_operationType; }
 
 ostream& operator<<(ostream& out, LogicalGroupOfMatchers const& groupOfMatchers) {
     string delimeter(groupOfMatchers.getOperationString());
@@ -43,6 +29,16 @@ ostream& operator<<(ostream& out, LogicalGroupOfMatchers const& groupOfMatchers)
     }
     out << " }";
     return out;
+}
+
+string LogicalGroupOfMatchers::getOperationString() const {
+    switch (m_operationType) {
+        case OperationType::And:
+            return "&&";
+        case OperationType::Or:
+            return "||";
+    }
+    return "";
 }
 
 bool LogicalGroupOfMatchers::isAndConditionSatisfied(Term const& term) const {
@@ -67,14 +63,18 @@ bool LogicalGroupOfMatchers::isOrConditionSatisfied(Term const& term) const {
     return result;
 }
 
-string LogicalGroupOfMatchers::getOperationString() const {
+LogicalGroupOfMatchers::BaseMatcherPtr LogicalGroupOfMatchers::createClone() const {
+    return make_unique<LogicalGroupOfMatchers>(*this);
+}
+
+bool LogicalGroupOfMatchers::isAMatch(Term const& term) const {
     switch (m_operationType) {
         case OperationType::And:
-            return "&&";
+            return isAndConditionSatisfied(term);
         case OperationType::Or:
-            return "||";
+            return isOrConditionSatisfied(term);
     }
-    return "";
+    return false;
 }
 
 }  // namespace alba::CodeUtilities

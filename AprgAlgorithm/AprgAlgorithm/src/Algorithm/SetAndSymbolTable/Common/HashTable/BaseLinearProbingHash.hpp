@@ -19,13 +19,13 @@ public:
     using Keys = std::vector<Key>;
     using EntryUniquePointer = std::unique_ptr<Entry>;
     using EntryPointers = std::unique_ptr<EntryUniquePointer[]>;
+    BaseLinearProbingHash() : m_entryPointers(nullptr) { initialize(INITIAL_HASH_TABLE_SIZE); }
     // virtual destructor because of virtual functions (vtable exists)
     ~BaseLinearProbingHash() override = default;
     BaseLinearProbingHash(BaseLinearProbingHash const&) = default;
-    BaseLinearProbingHash(BaseLinearProbingHash&&) = default;
+    BaseLinearProbingHash(BaseLinearProbingHash&&) noexcept = default;
     BaseLinearProbingHash& operator=(BaseLinearProbingHash const&) = default;
-    BaseLinearProbingHash& operator=(BaseLinearProbingHash&&) = default;
-    BaseLinearProbingHash() : m_entryPointers(nullptr) { initialize(INITIAL_HASH_TABLE_SIZE); }
+    BaseLinearProbingHash& operator=(BaseLinearProbingHash&&) noexcept = default;
 
     [[nodiscard]] Key getMinimum() const override {
         Key result{};

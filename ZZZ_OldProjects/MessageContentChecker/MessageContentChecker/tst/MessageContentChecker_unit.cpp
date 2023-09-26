@@ -558,4 +558,5 @@ TEST(SampleTest, SampleTest2) {
 }
 
 }  // namespace alba
+
 // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)

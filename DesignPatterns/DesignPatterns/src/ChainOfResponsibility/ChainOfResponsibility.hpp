@@ -8,12 +8,12 @@ namespace ChainOfResponsibility {
 // optionally implements the successor link
 class Handler {
 public:
-    virtual ~Handler() = default;
     Handler() = default;
-    Handler(Handler &&) = default;
+    virtual ~Handler() = default;
     Handler(Handler const &) = delete;
-    Handler &operator=(Handler &&) = default;
+    Handler(Handler &&) noexcept = default;
     Handler &operator=(Handler const &) = delete;
+    Handler &operator=(Handler &&) noexcept = default;
 
     virtual void setHandler(std::unique_ptr<Handler> successorPointer) {
         m_successorPointer = std::move(successorPointer);

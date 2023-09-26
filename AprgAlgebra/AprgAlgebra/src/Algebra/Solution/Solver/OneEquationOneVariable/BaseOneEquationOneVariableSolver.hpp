@@ -9,13 +9,13 @@ namespace alba::algebra {
 
 class BaseOneEquationOneVariableSolver : public BaseSolver {
 public:
+    BaseOneEquationOneVariableSolver() = default;
     // virtual destructor because of virtual functions (vtable exists)
     virtual ~BaseOneEquationOneVariableSolver() = default;
-    BaseOneEquationOneVariableSolver() = default;
     BaseOneEquationOneVariableSolver(BaseOneEquationOneVariableSolver const&) = default;
-    BaseOneEquationOneVariableSolver(BaseOneEquationOneVariableSolver&&) = default;
+    BaseOneEquationOneVariableSolver(BaseOneEquationOneVariableSolver&&) noexcept = default;
     BaseOneEquationOneVariableSolver& operator=(BaseOneEquationOneVariableSolver const&) = default;
-    BaseOneEquationOneVariableSolver& operator=(BaseOneEquationOneVariableSolver&&) = default;
+    BaseOneEquationOneVariableSolver& operator=(BaseOneEquationOneVariableSolver&&) noexcept = default;
     SolutionSet calculateSolutionAndReturnSolutionSet(Equation const& equation);
 
 protected:

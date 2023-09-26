@@ -4,11 +4,11 @@ namespace alba::algebra {
 
 class BaseSolver {
 public:
-    BaseSolver(BaseSolver const &) = default;
-    BaseSolver(BaseSolver &&) = default;
-    BaseSolver &operator=(BaseSolver const &) = default;
-    BaseSolver &operator=(BaseSolver &&) = default;
     BaseSolver();
+    BaseSolver(BaseSolver const &) = default;
+    BaseSolver(BaseSolver &&) noexcept = default;
+    BaseSolver &operator=(BaseSolver const &) = default;
+    BaseSolver &operator=(BaseSolver &&) noexcept = default;
     [[nodiscard]] bool isSolved() const;
     [[nodiscard]] bool isACompleteSolution() const;
 

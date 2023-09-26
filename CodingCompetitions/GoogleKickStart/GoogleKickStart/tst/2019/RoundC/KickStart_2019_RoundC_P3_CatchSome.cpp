@@ -7,34 +7,47 @@
 
 // #include <Common/Math/Matrix/AlbaMatrix.hpp>
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <algorithm>
 #include <climits>
 #include <cstdint>
 #include <iostream>
 #include <set>
 #include <vector>
 
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <algorithm>
+
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2019_RoundC_P3_CatchSome {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2019_RoundC_P3_CatchSome {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
-
 using Distances = vector<int>;
+
 struct ColorDetail {
     Distances distances;
 };
+
 using ColorDetails = vector<ColorDetail>;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
+
+    runAllTestCases();
+
+    return 0;
+}
 
 void runTestCase(int const testCaseNumber) {
     int numberOfDogs = 0;
@@ -43,17 +56,17 @@ void runTestCase(int const testCaseNumber) {
     vector<int> positionsOfDogs(numberOfDogs);
     vector<int> colorsOfDogs(numberOfDogs);
 
-    for (int i = 0; i < numberOfDogs; i++) {
+    for (int i = 0; i < numberOfDogs; ++i) {
         my_cin >> positionsOfDogs[i];
     }
-    for (int i = 0; i < numberOfDogs; i++) {
+    for (int i = 0; i < numberOfDogs; ++i) {
         my_cin >> colorsOfDogs[i];
     }
 
     vector<int> colorToIndex(1001, -1);
     ColorDetails colorDetails;
     int numberOfColors = 0;
-    for (int i = 0; i < numberOfDogs; i++) {
+    for (int i = 0; i < numberOfDogs; ++i) {
         int& colorDetailsIndex(colorToIndex[colorsOfDogs[i]]);
         if (colorDetailsIndex == -1) {
             colorDetailsIndex = numberOfColors++;
@@ -61,7 +74,7 @@ void runTestCase(int const testCaseNumber) {
         }
         colorDetails[colorDetailsIndex].distances.emplace_back(positionsOfDogs[i]);
     }
-    for (int i = 0; i < numberOfColors; i++) {
+    for (int i = 0; i < numberOfColors; ++i) {
         Distances& distances(colorDetails[i].distances);
         sort(distances.begin(), distances.end());
     }
@@ -73,14 +86,14 @@ void runTestCase(int const testCaseNumber) {
         return numberOfObserves + (targetNumberOfObserves + 1) * colorIndex;
     };
 
-    for (int colorIndex = 0; colorIndex < numberOfColors; colorIndex++) {
+    for (int colorIndex = 0; colorIndex < numberOfColors; ++colorIndex) {
         savedTimesWithLast[getIndex(0, colorIndex)] = 0;
         savedTimesWithoutLast[getIndex(0, colorIndex)] = 0;
     }
 
     for (int currentNumberOfObserves = 1; currentNumberOfObserves <= targetNumberOfObserves;
-         currentNumberOfObserves++) {
-        for (int colorIndex = 0; colorIndex < numberOfColors; colorIndex++) {
+         ++currentNumberOfObserves) {
+        for (int colorIndex = 0; colorIndex < numberOfColors; ++colorIndex) {
             Distances const& distances(colorDetails[colorIndex].distances);
             if (colorIndex == 0) {
                 if (currentNumberOfObserves <= static_cast<int>(distances.size())) {
@@ -92,7 +105,7 @@ void runTestCase(int const testCaseNumber) {
                 }
             } else {
                 int distanceIndexLimit = min(currentNumberOfObserves, static_cast<int>(distances.size()));
-                for (int distanceIndex = 0; distanceIndex < distanceIndexLimit; distanceIndex++) {
+                for (int distanceIndex = 0; distanceIndex < distanceIndexLimit; ++distanceIndex) {
                     int distance(distances[distanceIndex]);
                     int possibleNumberOfObserves = distanceIndex + 1;
                     int& savedTimeWithLast(savedTimesWithLast[getIndex(currentNumberOfObserves, colorIndex)]);
@@ -121,21 +134,15 @@ void runTestCase(int const testCaseNumber) {
 void runAllTestCases() {
     int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
         runTestCase(testCaseNumber);
     }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
-
-    runAllTestCases();
-
-    return 0;
-}
-
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2019_RoundC_P3_CatchSome
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

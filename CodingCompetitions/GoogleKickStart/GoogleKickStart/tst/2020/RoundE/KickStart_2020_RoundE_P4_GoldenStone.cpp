@@ -4,35 +4,46 @@
 #include "KickStart_2020_RoundE_P4_GoldenStone.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <cstdint>
 #include <iostream>
 #include <queue>
 #include <vector>
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <cstdint>
 
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2020_RoundE_P4_GoldenStone {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2020_RoundE_P4_GoldenStone {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
-
 using ll = long long;
-#define F0R(i, a) for (int i = 0; i < (a); i++)
+#define F0R(i, a) for (int i = 0; i < (a); ++i)
 #define trav(a, x) for (auto& a : x)
+
 template <class T>
-bool ckmin(T& a, const T& b) {
+bool ckmin(T& a, T const& b) {
     return b < a ? a = b, 1 : 0;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
+
+    runAllTestCases();
+
+    return 0;
 }
 
 void runTestCase(int const) {
@@ -132,21 +143,15 @@ void runTestCase(int const) {
 void runAllTestCases() {
     int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
         runTestCase(testCaseNumber);
     }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
-
-    runAllTestCases();
-
-    return 0;
-}
-
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2020_RoundE_P4_GoldenStone
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

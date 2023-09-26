@@ -19,7 +19,6 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Path = typename GraphTypes<Vertex>::Path;
     using VertexToAdjacencyVerticesMap = std::map<Vertex, Vertices>;
-
     explicit HierholzerAlgorithmForDirectedGraph(BaseDirectedGraphWithVertex const& graph) : BaseClass(graph) {}
 
 private:

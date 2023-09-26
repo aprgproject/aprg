@@ -10,13 +10,13 @@ public:
     using NodeUniquePointer = typename BaseTree::NodeUniquePointer;
     using Keys = typename BaseTree::Keys;
     using TraverseFunction = typename BaseTree::TraverseFunction;
+    BaseSymbolTableWithBaseTree() : b_root(BaseTree::m_root) {}
     // virtual destructor because of virtual functions (vtable exists)
     ~BaseSymbolTableWithBaseTree() override = default;
     BaseSymbolTableWithBaseTree(BaseSymbolTableWithBaseTree const&) = default;
-    BaseSymbolTableWithBaseTree(BaseSymbolTableWithBaseTree&&) = default;
+    BaseSymbolTableWithBaseTree(BaseSymbolTableWithBaseTree&&) noexcept = default;
     BaseSymbolTableWithBaseTree& operator=(BaseSymbolTableWithBaseTree const&) = default;
-    BaseSymbolTableWithBaseTree& operator=(BaseSymbolTableWithBaseTree&&) = default;
-    BaseSymbolTableWithBaseTree() : b_root(BaseTree::m_root) {}
+    BaseSymbolTableWithBaseTree& operator=(BaseSymbolTableWithBaseTree&&) noexcept = default;
 
     [[nodiscard]] Value get(Key const& key) const override {  // overrides in BaseSymbolTable
         return getStartingOnThisNode(b_root, key);

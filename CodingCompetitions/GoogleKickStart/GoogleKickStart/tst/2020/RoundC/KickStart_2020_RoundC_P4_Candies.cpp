@@ -4,51 +4,66 @@
 #include "KickStart_2020_RoundC_P4_Candies.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <cstdint>
 #include <iostream>
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <cstdint>
 
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2020_RoundC_P4_Candies {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2020_RoundC_P4_Candies {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
-
 #define ll long long
 #define ar array
-
 const int mxN = 2e5;
-int n, q;
-ll a[mxN];
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
+
+    runAllTestCases();
+
+    return 0;
+}
 
 struct ft {
-    ll a[mxN + 1];
-    void upd(int i, ll x) {
+    void upd(int const i, ll const x) {
         for (++i; i <= n; i += i & -i) {
             a[i] += x;
         }
     }
-    ll qry(int i) {
+
+    ll qry(int const i) {
         ll r = 0;
         for (; i != 0; i -= i & -i) {
             r += a[i];
         }
         return r;
     }
-} f0[2], f1[2];
 
-void app(int i, ll x) {
+    ll a[mxN + 1];
+
+}
+
+int n,
+    q;
+ll a[mxN];
+f0[2], f1[2];
+
+void app(int const i, ll const x) {
     f0[i & 1].upd(i, x - a[i]);
     f1[i & 1].upd(i, i * (x - a[i]));
     f0[(i & 1) ^ 1].upd(i, -(x - a[i]));
@@ -90,21 +105,15 @@ void runTestCase(int const testCaseNumber) {
 void runAllTestCases() {
     int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
         runTestCase(testCaseNumber);
     }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
-
-    runAllTestCases();
-
-    return 0;
-}
-
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2020_RoundC_P4_Candies
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

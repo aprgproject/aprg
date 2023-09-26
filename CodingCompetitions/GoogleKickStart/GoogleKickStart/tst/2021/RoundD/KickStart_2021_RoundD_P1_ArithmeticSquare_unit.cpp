@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2021_RoundD_P1_ArithmeticSquare {
 
-TEST(KickStart_2021_RoundD_P1_ArithmeticSquareTest, DISABLED_Test1) {
+TEST(KickStart2021RoundDP1ArithmeticSquareTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

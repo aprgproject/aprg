@@ -11,8 +11,8 @@ namespace alba::algebra {
 
 class TermsOverTerms {
 public:
-    explicit TermsOverTerms(TermsWithDetails const& termsInMultiplicationAndDivision);
     TermsOverTerms();
+    explicit TermsOverTerms(TermsWithDetails const& termsInMultiplicationAndDivision);
     TermsOverTerms(Terms const& numerators, Terms const& denominators);
     TermsOverTerms(Terms&& numerators, Terms&& denominators);
     [[nodiscard]] Term getCombinedTerm() const;

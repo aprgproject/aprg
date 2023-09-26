@@ -4,8 +4,8 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
-Constant::Constant(bool const boolValue) : m_booleanValue(boolValue) {}
 Constant::Constant() : m_booleanValue(false) {}
+Constant::Constant(bool const boolValue) : m_booleanValue(boolValue) {}
 
 Constant Constant::operator~() const {
     Constant result(*this);

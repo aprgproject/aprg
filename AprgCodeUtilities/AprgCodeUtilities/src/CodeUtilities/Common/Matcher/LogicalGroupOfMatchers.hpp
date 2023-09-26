@@ -9,13 +9,14 @@ namespace alba::CodeUtilities {
 class LogicalGroupOfMatchers : public BaseMatcher {
 public:
     enum class OperationType { And, Or };
+
     using Matchers = std::vector<Matcher>;
     LogicalGroupOfMatchers(OperationType const operationType, Matchers const& matchers);
     LogicalGroupOfMatchers(OperationType const operationType, Matchers&& matchers);
     [[nodiscard]] BaseMatcherPtr createClone() const override;
     [[nodiscard]] bool isAMatch(Term const& term) const override;
-    [[nodiscard]] OperationType getOperationType() const;
     [[nodiscard]] Matchers const& getMatchers() const;
+    [[nodiscard]] OperationType getOperationType() const;
     friend std::ostream& operator<<(std::ostream& out, LogicalGroupOfMatchers const& groupOfMatchers);
 
 private:

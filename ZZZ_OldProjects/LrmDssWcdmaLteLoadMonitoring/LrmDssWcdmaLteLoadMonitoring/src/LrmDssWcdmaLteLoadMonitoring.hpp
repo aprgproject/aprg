@@ -3,7 +3,7 @@
 namespace alba {
 
 // DssWcdmaLteLoadStateChangeFilteringCounts
-constexpr unsigned int DSS_WCDMA_LTE_LOAD_STATE_CHANGE_FILTERING_COUNT = 5;
+inline constexpr unsigned int DSS_WCDMA_LTE_LOAD_STATE_CHANGE_FILTERING_COUNT = 5;
 
 using EDssWcdmaFilterBandwidth = enum EDssWcdmaFilterBandwidth {
     EDssWcdmaFilterBandwidth_0_KHz = 0,

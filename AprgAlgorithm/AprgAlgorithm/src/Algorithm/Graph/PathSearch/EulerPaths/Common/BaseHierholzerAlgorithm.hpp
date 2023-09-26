@@ -11,13 +11,13 @@ public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Path = typename GraphTypes<Vertex>::Path;
     using VertexToAdjacencyVerticesMap = std::map<Vertex, Vertices>;
+    explicit BaseHierholzerAlgorithm(BaseGraphType const &graph) : BaseClass(graph), b_graph(BaseClass::m_graph) {}
     ~BaseHierholzerAlgorithm() override = default;
     // virtual destructor because of virtual functions (vtable exists)
     BaseHierholzerAlgorithm(BaseHierholzerAlgorithm const &) = default;
-    BaseHierholzerAlgorithm(BaseHierholzerAlgorithm &&) = default;
+    BaseHierholzerAlgorithm(BaseHierholzerAlgorithm &&) noexcept = default;
     BaseHierholzerAlgorithm &operator=(BaseHierholzerAlgorithm const &) = default;
-    BaseHierholzerAlgorithm &operator=(BaseHierholzerAlgorithm &&) = default;
-    explicit BaseHierholzerAlgorithm(BaseGraphType const &graph) : BaseClass(graph), b_graph(BaseClass::m_graph) {}
+    BaseHierholzerAlgorithm &operator=(BaseHierholzerAlgorithm &&) noexcept = default;
 
     [[nodiscard]] Path getEulerCycle() const override {
         Path result;

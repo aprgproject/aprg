@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2020_Round_P3_Workout {
 
-TEST(KickStart_2020_Round_P3_WorkoutTest, DISABLED_Test1) {
+TEST(KickStart2020RoundP3WorkoutTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();
@@ -29,7 +29,7 @@ TEST(KickStart_2020_Round_P3_WorkoutTest, DISABLED_Test1) {
         outputStringStream.str());
 }
 
-TEST(KickStart_2020_Round_P3_WorkoutTest, DISABLED_Test2) {
+TEST(KickStart2020RoundP3WorkoutTest, DISABLED_Test2) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

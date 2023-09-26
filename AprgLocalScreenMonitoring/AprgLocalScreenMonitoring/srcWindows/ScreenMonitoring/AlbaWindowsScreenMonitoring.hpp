@@ -11,12 +11,12 @@ namespace alba {
 
 class AlbaWindowsScreenMonitoring {
 public:
-    AlbaWindowsScreenMonitoring(AlbaWindowsScreenMonitoring const &) = default;
-    AlbaWindowsScreenMonitoring(AlbaWindowsScreenMonitoring &&) = default;
-    AlbaWindowsScreenMonitoring &operator=(AlbaWindowsScreenMonitoring const &) = default;
-    AlbaWindowsScreenMonitoring &operator=(AlbaWindowsScreenMonitoring &&) = default;
     AlbaWindowsScreenMonitoring();
     ~AlbaWindowsScreenMonitoring();
+    AlbaWindowsScreenMonitoring(AlbaWindowsScreenMonitoring const &) = default;
+    AlbaWindowsScreenMonitoring(AlbaWindowsScreenMonitoring &&) noexcept = default;
+    AlbaWindowsScreenMonitoring &operator=(AlbaWindowsScreenMonitoring const &) = default;
+    AlbaWindowsScreenMonitoring &operator=(AlbaWindowsScreenMonitoring &&) noexcept = default;
     [[nodiscard]] uint32_t getColorAt(int const x, int const y) const;
     void capturePixelsFromScreen();
 
@@ -35,4 +35,5 @@ private:
 };
 
 }  // namespace alba
+
 // NOLINTEND(misc-misplaced-const)

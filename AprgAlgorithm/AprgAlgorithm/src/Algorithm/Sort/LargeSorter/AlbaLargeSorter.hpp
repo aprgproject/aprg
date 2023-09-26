@@ -20,11 +20,6 @@ class AlbaLargeSorter {
     using BlockCacheContainer = AlbaLargeSorterBlockCacheContainer<BlockIterator>;
 
 public:
-    AlbaLargeSorter(AlbaLargeSorter const&) = default;
-    AlbaLargeSorter(AlbaLargeSorter&&) = default;
-    AlbaLargeSorter& operator=(AlbaLargeSorter const&) = default;
-    AlbaLargeSorter& operator=(AlbaLargeSorter&&) = default;
-
     explicit AlbaLargeSorter(AlbaLargeSorterConfiguration const& configuration)
         : m_configuration(configuration),
           m_memoryCache(),
@@ -42,6 +37,10 @@ public:
     }
 
     ~AlbaLargeSorter() { deleteTempFilesAndDirectories(); }
+    AlbaLargeSorter(AlbaLargeSorter const&) = default;
+    AlbaLargeSorter(AlbaLargeSorter&&) noexcept = default;
+    AlbaLargeSorter& operator=(AlbaLargeSorter const&) = default;
+    AlbaLargeSorter& operator=(AlbaLargeSorter&&) noexcept = default;
     [[nodiscard]] AlbaLargeSorterConfiguration getConfiguration() const { return m_configuration; }
     [[nodiscard]] bool isEmpty() const { return 0 == m_size; }
 

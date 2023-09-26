@@ -15,9 +15,9 @@ public:
     CountSpanningTreesUsingKirchhoffTheorem() = delete;
     ~CountSpanningTreesUsingKirchhoffTheorem() = delete;
     CountSpanningTreesUsingKirchhoffTheorem(CountSpanningTreesUsingKirchhoffTheorem const&) = delete;
-    CountSpanningTreesUsingKirchhoffTheorem(CountSpanningTreesUsingKirchhoffTheorem&&) = delete;
+    CountSpanningTreesUsingKirchhoffTheorem(CountSpanningTreesUsingKirchhoffTheorem&&) noexcept = delete;
     CountSpanningTreesUsingKirchhoffTheorem& operator=(CountSpanningTreesUsingKirchhoffTheorem const&) = delete;
-    CountSpanningTreesUsingKirchhoffTheorem& operator=(CountSpanningTreesUsingKirchhoffTheorem&&) = delete;
+    CountSpanningTreesUsingKirchhoffTheorem& operator=(CountSpanningTreesUsingKirchhoffTheorem&&) noexcept = delete;
 
     template <int MAX_VERTEX_VALUE>
     static int getCount(BaseGraph<Vertex> const& graph) {

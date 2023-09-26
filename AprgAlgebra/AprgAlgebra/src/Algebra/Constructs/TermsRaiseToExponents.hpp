@@ -11,9 +11,9 @@ class TermsRaiseToExponents {
 public:
     using BaseToExponentMap = std::map<Term, ExponentType>;
     using BaseExponentPair = std::pair<Term, ExponentType>;
+    TermsRaiseToExponents();
     explicit TermsRaiseToExponents(BaseToExponentMap const& baseToExponentMap);
     explicit TermsRaiseToExponents(BaseToExponentMap&& baseToExponentMap);
-    TermsRaiseToExponents();
     [[nodiscard]] BaseToExponentMap const& getBaseToExponentMap() const;
     [[nodiscard]] ExponentType getExponentOfBase(Term const& base) const;
     [[nodiscard]] Term getCombinedTerm() const;

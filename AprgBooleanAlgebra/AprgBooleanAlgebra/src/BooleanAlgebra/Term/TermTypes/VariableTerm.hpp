@@ -9,8 +9,8 @@ namespace alba::booleanAlgebra {
 
 class VariableTerm : public BaseTermData {
 public:
-    explicit VariableTerm(std::string const& variableName);
     VariableTerm();
+    explicit VariableTerm(std::string const& variableName);
     VariableTerm operator~() const;
     bool operator==(VariableTerm const& second) const;
     bool operator!=(VariableTerm const& second) const;

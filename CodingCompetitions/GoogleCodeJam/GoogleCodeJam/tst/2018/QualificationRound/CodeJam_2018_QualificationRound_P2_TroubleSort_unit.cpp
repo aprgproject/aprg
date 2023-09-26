@@ -8,7 +8,7 @@ using namespace std;
 
 namespace CodeJam_2018_QualificationRound_P2_TroubleSort {
 
-TEST(CodeJam_2018_QualificationRound_P2_TroubleSortTest, DISABLED_Test1) {
+TEST(CodeJam2018QualificationRoundP2TroubleSortTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

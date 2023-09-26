@@ -6,8 +6,8 @@
 namespace alba {
 
 struct UserIdentifiers {
-    explicit UserIdentifiers(std::string const& lineInLogs);
     UserIdentifiers();
+    explicit UserIdentifiers(std::string const& lineInLogs);
     bool operator<(UserIdentifiers const& userIdentifiers) const;
     [[nodiscard]] unsigned int getNbccId() const;
     [[nodiscard]] unsigned int getCrnccId() const;

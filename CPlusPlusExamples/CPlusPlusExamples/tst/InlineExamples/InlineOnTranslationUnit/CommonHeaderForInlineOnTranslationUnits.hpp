@@ -4,7 +4,7 @@
 
 namespace alba::InlineOnTranslationUnits {
 
-constexpr int constInteger = 100;  // implicity inline (external linkage)
+inline constexpr int constInteger = 100;  // implicity inline (external linkage)
 
 // -> Note: Don't do this in production code.
 // ---> Its better to have the definition in the header as well.
@@ -15,10 +15,10 @@ struct SampleClassWithInline {
     SampleClassWithInline() = default;
     ~SampleClassWithInline() = default;
     SampleClassWithInline(SampleClassWithInline const &) = delete;
-    SampleClassWithInline(SampleClassWithInline &&) = delete;
+    SampleClassWithInline(SampleClassWithInline &&) noexcept = delete;
     // implicitly inline (can appear in more than one translation unit)
     SampleClassWithInline &operator=(SampleClassWithInline const &) = delete;
-    SampleClassWithInline &operator=(SampleClassWithInline &&) = delete;
+    SampleClassWithInline &operator=(SampleClassWithInline &&) noexcept = delete;
     static constexpr int constIntegerInClass = 1000;  // implicity inline (external linkage)
 };
 
@@ -42,7 +42,7 @@ extern inline int externInlineInteger;         // extern so declaration only (in
 inline std::string inlineString{"600"};        // explicitly inline (external linkage)
 
 // same goes for functions (but there are no free const functions)
-constexpr int freeFunction() {
+inline constexpr int freeFunction() {
     // implicity inline (external linkage)
     return 1;
 }

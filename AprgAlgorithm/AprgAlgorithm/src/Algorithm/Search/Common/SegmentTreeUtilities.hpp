@@ -13,9 +13,9 @@ public:
     SegmentTreeUtilities() = delete;
     ~SegmentTreeUtilities() = delete;
     SegmentTreeUtilities(SegmentTreeUtilities const &) = delete;
-    SegmentTreeUtilities(SegmentTreeUtilities &&) = delete;
+    SegmentTreeUtilities(SegmentTreeUtilities &&) noexcept = delete;
     SegmentTreeUtilities &operator=(SegmentTreeUtilities const &) = delete;
-    SegmentTreeUtilities &operator=(SegmentTreeUtilities &&) = delete;
+    SegmentTreeUtilities &operator=(SegmentTreeUtilities &&) noexcept = delete;
     static inline Index getParent(Index const treeIndex) { return ((treeIndex + 1) / NUMBER_OF_CHILDREN) - 1; }
     static inline Index getLeftChild(Index const parent) { return (parent * NUMBER_OF_CHILDREN) + 1; }
     static inline Index getRightChild(Index const parent) { return (parent * NUMBER_OF_CHILDREN) + 2; }

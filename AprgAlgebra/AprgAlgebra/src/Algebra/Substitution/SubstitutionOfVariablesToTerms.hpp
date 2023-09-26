@@ -12,8 +12,8 @@ using VariableTermPair = std::pair<std::string, Term>;
 
 class SubstitutionOfVariablesToTerms {
 public:
-    explicit SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms);
     SubstitutionOfVariablesToTerms();
+    explicit SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms);
     SubstitutionOfVariablesToTerms(std::initializer_list<VariableTermPair> const& variablesWithTerms);
     [[nodiscard]] Equation performSubstitutionTo(Equation const& equation) const;
     [[nodiscard]] Expression performSubstitutionForMonomial(Monomial const& monomial) const;

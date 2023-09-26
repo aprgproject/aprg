@@ -39,8 +39,8 @@ struct WireSharkDelay {
 
 class BtsLogAnalyzer {
 public:
-    explicit BtsLogAnalyzer(std::string const& pathOfOutputFile);
     BtsLogAnalyzer();
+    explicit BtsLogAnalyzer(std::string const& pathOfOutputFile);
     [[nodiscard]] double getComputedAverageDelay() const;
     void processDirectoryForWireSharkDelay(std::string const& directoryPath);
     void processFileForWireSharkDelay(std::string const& filePath);

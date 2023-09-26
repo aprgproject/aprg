@@ -8,12 +8,12 @@ namespace Prototype {
 // declares an interface for cloning itself
 class Prototype {
 public:
-    virtual ~Prototype() = default;
     Prototype() = default;
+    virtual ~Prototype() = default;
     Prototype(Prototype const &) = default;
-    Prototype(Prototype &&) = default;
+    Prototype(Prototype &&) noexcept = default;
     Prototype &operator=(Prototype const &) = default;
-    Prototype &operator=(Prototype &&) = default;
+    Prototype &operator=(Prototype &&) noexcept = default;
     [[nodiscard]] virtual std::string getType() const = 0;
     virtual std::unique_ptr<Prototype> clone() = 0;
     // ...

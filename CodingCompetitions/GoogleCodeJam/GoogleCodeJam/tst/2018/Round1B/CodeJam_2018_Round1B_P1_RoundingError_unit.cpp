@@ -8,7 +8,7 @@ using namespace std;
 
 namespace CodeJam_2018_Round1B_P1_RoundingError {
 
-TEST(CodeJam_2018_Round1B_P1_RoundingErrorTest, DISABLED_Test1) {
+TEST(CodeJam2018Round1BP1RoundingErrorTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

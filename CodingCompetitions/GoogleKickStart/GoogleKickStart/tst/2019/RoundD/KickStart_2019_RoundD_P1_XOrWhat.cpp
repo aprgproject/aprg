@@ -4,26 +4,28 @@
 #include "KickStart_2019_RoundD_P1_XOrWhat.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <cmath>
 #include <cstdint>
 #include <functional>
 #include <iostream>
 #include <numeric>
 #include <vector>
 
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <cmath>
+
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2019_RoundD_P1_XOrWhat {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2019_RoundD_P1_XOrWhat {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
@@ -33,24 +35,22 @@ template <typename Values, typename BlockValues>
 class RangeQueryWithBlocks {
 public:
     // This supports "selector", "accumulator" and "count" type queries.
-
     // Assuming there are k blocks:
     // The preprocessing of partial sum can be constructed in O(n) time.
     // The range query can be done in max(O(k), O(n/k)) time.
     // The updating of a value can be done in O(n/k) time.
-
     // Note that having sqrt(n) of blocks is special.
     // The idea is to divide the array into blocks of size sqrt(n) so that each block contains the sum of elements
     // inside the block. Since the number of single elements is O(sqrt(n)) and the number of blocks is also O(sqrt(n)),
     // the sum query takes O(sqrt(n)) time. The purpose of the block size sqrt(n) is that it balances two things:
     // -> the array is divided into sqrt(n) blocks, each of which contains sqrt(n) elements.
     // So all operations take O(sqrt(n)) time.
-
     using Index = int;
     using Value = typename Values::value_type;
     using BlockValue = typename BlockValues::value_type;
     using Output = BlockValue;
     using ValuesFunction = std::function<BlockValue(typename Values::const_iterator, typename Values::const_iterator)>;
+
     using BlockValuesFunction =
         std::function<BlockValue(typename BlockValues::const_iterator, typename BlockValues::const_iterator)>;
 
@@ -65,9 +65,8 @@ public:
         initialize(valuesToCheck, suggestedNumberOfBlocks);
     }
 
-    [[nodiscard]] Index getBlockSize() const { return m_blockSize; }
-
     [[nodiscard]] BlockValues const& getBlocks() const { return m_blocks; }
+    [[nodiscard]] Index getBlockSize() const { return m_blockSize; }
 
     [[nodiscard]] Output getResultOnInterval(Index const start, Index const end) const {
         // This is max(O(k), O(n/k)) time.
@@ -115,19 +114,6 @@ public:
     }
 
 protected:
-    void initialize(Values const& valuesToCheck, Index const suggestedNumberOfBlocks) {
-        if (!valuesToCheck.empty()) {
-            m_blockSize = std::max(static_cast<int>(valuesToCheck.size() / suggestedNumberOfBlocks), 1);
-            Index numberOfBlocks = getMultipleThatIsGreaterOrEqual(static_cast<int>(valuesToCheck.size()), m_blockSize);
-            m_blocks.reserve(numberOfBlocks);
-            for (Index start = 0; start < m_values.size(); start += m_blockSize) {
-                Index end = std::min(start + m_blockSize, static_cast<int>(m_values.size()));
-                m_blocks.emplace_back(m_valuesFunction(m_values.cbegin() + start, m_values.cbegin() + end));
-            }
-            m_blocks.shrink_to_fit();
-        }
-    }
-
     [[nodiscard]] Index getMultipleThatIsGreaterOrEqual(Index const multiple, Index const number) const {
         Index result(0);
         if (multiple > 0 && number > 0) {
@@ -144,6 +130,19 @@ protected:
         return result;
     }
 
+    void initialize(Values const& valuesToCheck, Index const suggestedNumberOfBlocks) {
+        if (!valuesToCheck.empty()) {
+            m_blockSize = std::max(static_cast<int>(valuesToCheck.size() / suggestedNumberOfBlocks), 1);
+            Index numberOfBlocks = getMultipleThatIsGreaterOrEqual(static_cast<int>(valuesToCheck.size()), m_blockSize);
+            m_blocks.reserve(numberOfBlocks);
+            for (Index start = 0; start < m_values.size(); start += m_blockSize) {
+                Index end = std::min(start + m_blockSize, static_cast<int>(m_values.size()));
+                m_blocks.emplace_back(m_valuesFunction(m_values.cbegin() + start, m_values.cbegin() + end));
+            }
+            m_blocks.shrink_to_fit();
+        }
+    }
+
     Values m_values;
     Index m_blockSize{0};
     BlockValues m_blocks;
@@ -157,10 +156,14 @@ using Modification = pair<int, Value>;
 using Modifications = vector<Modification>;
 using RangeQuery = RangeQueryWithBlocks<Values, Values>;
 
-RangeQuery::ValuesFunction xorARangeOfValues = [](Values::const_iterator itStart, Values::const_iterator itEnd) {
-    return accumulate(
-        itStart + 1, itEnd, *itStart, [](Value const value1, Value const value2) { return value1 ^ value2; });
-};
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
+
+    runAllTestCases();
+
+    return 0;
+}
 
 void runTestCase(int const) {
     /* int numberOfValues, numberOfModifications;
@@ -198,21 +201,21 @@ void runTestCase(int const) {
 void runAllTestCases() {
     int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
         runTestCase(testCaseNumber);
     }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
-
-    runAllTestCases();
-
-    return 0;
-}
+RangeQuery::ValuesFunction xorARangeOfValues = [](Values::const_iterator const itStart,
+                                                  Values::const_iterator const itEnd) {
+    return accumulate(
+        itStart + 1, itEnd, *itStart, [](Value const value1, Value const value2) { return value1 ^ value2; });
+};
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2019_RoundD_P1_XOrWhat
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

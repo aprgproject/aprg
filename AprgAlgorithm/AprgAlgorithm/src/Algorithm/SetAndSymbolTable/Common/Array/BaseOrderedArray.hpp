@@ -11,12 +11,12 @@ template <typename Key, typename BaseDataStructure>
 class BaseOrderedArray : public BaseDataStructure {
 public:
     using Keys = std::vector<Key>;
-    ~BaseOrderedArray() override = default;  // no need for virtual destructor because base destructor is virtual
     BaseOrderedArray() = default;
+    ~BaseOrderedArray() override = default;  // no need for virtual destructor because base destructor is virtual
     BaseOrderedArray(BaseOrderedArray const&) = default;
-    BaseOrderedArray(BaseOrderedArray&&) = default;
+    BaseOrderedArray(BaseOrderedArray&&) noexcept = default;
     BaseOrderedArray& operator=(BaseOrderedArray const&) = default;
-    BaseOrderedArray& operator=(BaseOrderedArray&&) = default;
+    BaseOrderedArray& operator=(BaseOrderedArray&&) noexcept = default;
 
     [[nodiscard]] Key getMinimum() const override {
         Key result{};

@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2021_RoundC_P2_AlienGenerator {
 
-TEST(KickStart_2021_RoundC_P2_AlienGeneratorTest, DISABLED_Test1) {
+TEST(KickStart2021RoundCP2AlienGeneratorTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

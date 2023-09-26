@@ -19,7 +19,10 @@ public:
     // Windows.h.
     static constexpr int MAX_NUMBER_OF_MOVES = (std::numeric_limits<int>::max)();
     static constexpr int CHESS_SIDE_SIZE = 8;
-    using PieceGrid = std::array<Piece, static_cast<std::size_t>(CHESS_SIDE_SIZE) * static_cast<std::size_t>(CHESS_SIDE_SIZE)>;
+
+    using PieceGrid =
+        std::array<Piece, static_cast<std::size_t>(CHESS_SIDE_SIZE) * static_cast<std::size_t>(CHESS_SIDE_SIZE)>;
+
     using CoordinateCondition = std::function<bool(Coordinate const&)>;
 
     enum class CastleType { NotACastle, KingSideCastle, QueenSideCastle };
@@ -40,8 +43,8 @@ public:
     };
 
     using AttackDefendCounts = std::vector<AttackDefendCount>;
-    explicit Board(BoardOrientation const& orientation);
     Board();
+    explicit Board(BoardOrientation const& orientation);
     Board(BoardOrientation const& orientation, PieceGrid const& pieceGrid);
     bool operator==(Board const& other) const;
     bool operator!=(Board const& other) const;

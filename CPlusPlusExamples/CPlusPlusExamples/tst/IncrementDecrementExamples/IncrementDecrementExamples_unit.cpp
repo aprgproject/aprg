@@ -16,5 +16,4 @@ namespace alba {
 //     cout << c++ * c++ << endl;  // 1*2 = 2
 //     // int x=(a++)++; // Error: lvalue required as increment operand
 // }
-
 }  // namespace alba

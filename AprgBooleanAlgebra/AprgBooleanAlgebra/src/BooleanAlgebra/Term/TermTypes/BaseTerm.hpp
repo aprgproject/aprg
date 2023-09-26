@@ -6,12 +6,12 @@ namespace alba::booleanAlgebra {
 
 class BaseTerm {
 public:
-    virtual ~BaseTerm() = default;  // virtual destructor because of virtual functions (vtable exists)
     BaseTerm() = default;
+    virtual ~BaseTerm() = default;  // virtual destructor because of virtual functions (vtable exists)
     BaseTerm(BaseTerm const &) = default;
-    BaseTerm(BaseTerm &&) = default;
+    BaseTerm(BaseTerm &&) noexcept = default;
     BaseTerm &operator=(BaseTerm const &) = default;
-    BaseTerm &operator=(BaseTerm &&) = default;
+    BaseTerm &operator=(BaseTerm &&) noexcept = default;
 
 private:
 };

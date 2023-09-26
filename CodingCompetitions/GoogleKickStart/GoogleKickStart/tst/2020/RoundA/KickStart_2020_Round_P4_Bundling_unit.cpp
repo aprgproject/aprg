@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2020_Round_P4_Bundling {
 
-TEST(KickStart_2020_Round_P4_BundlingTest, DISABLED_Test1) {
+TEST(KickStart2020RoundP4BundlingTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();
@@ -51,7 +51,7 @@ TEST(KickStart_2020_Round_P4_BundlingTest, DISABLED_Test1) {
         outputStringStream.str());
 }
 
-TEST(KickStart_2020_Round_P4_BundlingTest, DISABLED_Test2) {
+TEST(KickStart2020RoundP4BundlingTest, DISABLED_Test2) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

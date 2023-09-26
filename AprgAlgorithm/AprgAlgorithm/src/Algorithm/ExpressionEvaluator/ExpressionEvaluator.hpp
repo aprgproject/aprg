@@ -237,9 +237,9 @@ public:
     ExpressionEvaluatorConverter() = delete;
     ~ExpressionEvaluatorConverter() = delete;
     ExpressionEvaluatorConverter(ExpressionEvaluatorConverter const&) = delete;
-    ExpressionEvaluatorConverter(ExpressionEvaluatorConverter&&) = delete;
+    ExpressionEvaluatorConverter(ExpressionEvaluatorConverter&&) noexcept = delete;
     ExpressionEvaluatorConverter& operator=(ExpressionEvaluatorConverter const&) = delete;
-    ExpressionEvaluatorConverter& operator=(ExpressionEvaluatorConverter&&) = delete;
+    ExpressionEvaluatorConverter& operator=(ExpressionEvaluatorConverter&&) noexcept = delete;
 
     static InfixEvaluator convertPostfixToInfix(PostfixEvaluator const& postfixEvaluator) {
         InfixEvaluator infixEvaluator;

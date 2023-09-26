@@ -82,9 +82,8 @@ Term performOperation(Operator const& operatorTerm, Term const& term1, Term cons
     }                                                                                                        \
     return newTerm;
 
-Term performNot(Term const& term){TERM_UNARY_OPERATION_MACRO(~)}
-
-Term performAnd(Term const& term1, Term const& term2){TERM_BINARY_OPERATION_MACRO(&)}
+Term performNot(Term const& term){TERM_UNARY_OPERATION_MACRO(~)} Term
+    performAnd(Term const& term1, Term const& term2){TERM_BINARY_OPERATION_MACRO(&)}
 
 Term performOr(Term const& term1, Term const& term2) {
     TERM_BINARY_OPERATION_MACRO(|)

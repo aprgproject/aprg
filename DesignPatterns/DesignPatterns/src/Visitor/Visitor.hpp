@@ -11,12 +11,12 @@ class ConcreteElementB;
 // in the object structure
 class Visitor {
 public:
-    virtual ~Visitor() = default;
     Visitor() = default;
+    virtual ~Visitor() = default;
     Visitor(Visitor const &) = default;
-    Visitor(Visitor &&) = default;
+    Visitor(Visitor &&) noexcept = default;
     Visitor &operator=(Visitor const &) = default;
-    Visitor &operator=(Visitor &&) = default;
+    Visitor &operator=(Visitor &&) noexcept = default;
     virtual void visitElementA(ConcreteElementA *const) = 0;
     virtual void visitElementB(ConcreteElementB *const) = 0;
     // ...
@@ -44,12 +44,12 @@ public:
 // defines an accept operation that takes a visitor as an argument
 class Element {
 public:
-    virtual ~Element() = default;
     Element() = default;
+    virtual ~Element() = default;
     Element(Element const &) = default;
-    Element(Element &&) = default;
+    Element(Element &&) noexcept = default;
     Element &operator=(Element const &) = default;
-    Element &operator=(Element &&) = default;
+    Element &operator=(Element &&) noexcept = default;
     virtual void accept(Visitor &visitor) = 0;
     // ...
 };

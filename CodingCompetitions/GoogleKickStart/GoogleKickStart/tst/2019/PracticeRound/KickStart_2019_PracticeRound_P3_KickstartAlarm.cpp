@@ -4,43 +4,41 @@
 #include "KickStart_2019_PracticeRound_P3_KickstartAlarm.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <cstdint>
 #include <iostream>
 #include <vector>
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <cstdint>
 
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2019_PracticeRound_P3_KickstartAlarm {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2019_PracticeRound_P3_KickstartAlarm {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
-
 const long long MAX_MODULO = 1000000007;
-long long N, K, x1, y1, C, D, E1, E2, F;
 
-long long raiseToPower(long long a, long long p) {
-    long long result = 1;
-    long long cp = a;
-    while (p != 0) {
-        if ((p & 1) != 0) {
-            result = (result * cp) % MAX_MODULO;  // is even
-        }
-        p >>= 1;  // divide by two
-        cp = (cp * cp) % MAX_MODULO;
-    }
-    return result;
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
+
+    runAllTestCases();
+
+    return 0;
 }
+
+long long N, K, x1, y1, C, D, E1, E2, F;
 
 void buildA(vector<long long>& A) {
     A[0] = (x1 + y1) % F;
@@ -49,23 +47,6 @@ void buildA(vector<long long>& A) {
     for (long long i = 1; i < static_cast<decltype(i)>(A.size()); ++i) {
         A[i] = (CD * A[i - 1] + E) % F;
     }
-}
-
-long long getGeometricTerm(long long i, long long k) {
-    // There is some math here that I cannot understand.
-    if (i == 1) {
-        return k % MAX_MODULO;
-    }  // Geometric term is (p^(K+1)-1)/(p-1)
-    // Using inverse modulo:
-    // inverseModulo ≅ 1/(p-1)
-    // (1/(p-1) * inverseModulo) mod m = 1
-    // Using fermats little theorem:
-    // -> Fermat's little theorem states that if p is a prime number, then for any integer a, the number a^p − a is
-    // an integer multiple of p.
-    // -> a^(m-1) ≅ 1 (mod m)
-    // -> a^(-1) ≅ a^(m-2) (mod m)
-    // Thus 1/(p-1) = (p-1)^(-1) = (p-1)^(m-2)
-    return ((i * (raiseToPower(i, k) - 1) % MAX_MODULO) * raiseToPower(i - 1, MAX_MODULO - 2)) % MAX_MODULO;
 }
 
 void runTestCase(int const testCaseNumber) {
@@ -91,21 +72,45 @@ void runTestCase(int const testCaseNumber) {
 void runAllTestCases() {
     int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
         runTestCase(testCaseNumber);
     }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
+long long raiseToPower(long long const a, long long const p) {
+    long long result = 1;
+    long long cp = a;
+    while (p != 0) {
+        if ((p & 1) != 0) {
+            result = (result * cp) % MAX_MODULO;  // is even
+        }
+        p >>= 1;  // divide by two
+        cp = (cp * cp) % MAX_MODULO;
+    }
+    return result;
+}
 
-    runAllTestCases();
-
-    return 0;
+long long getGeometricTerm(long long const i, long long const k) {
+    // There is some math here that I cannot understand.
+    if (i == 1) {
+        return k % MAX_MODULO;
+    }  // Geometric term is (p^(K+1)-1)/(p-1)
+    // Using inverse modulo:
+    // inverseModulo ≅ 1/(p-1)
+    // (1/(p-1) * inverseModulo) mod m = 1
+    // Using fermats little theorem:
+    // -> Fermat's little theorem states that if p is a prime number, then for any integer a, the number a^p − a is
+    // an integer multiple of p.
+    // -> a^(m-1) ≅ 1 (mod m)
+    // -> a^(-1) ≅ a^(m-2) (mod m)
+    // Thus 1/(p-1) = (p-1)^(-1) = (p-1)^(m-2)
+    return ((i * (raiseToPower(i, k) - 1) % MAX_MODULO) * raiseToPower(i - 1, MAX_MODULO - 2)) % MAX_MODULO;
 }
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2019_PracticeRound_P3_KickstartAlarm
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

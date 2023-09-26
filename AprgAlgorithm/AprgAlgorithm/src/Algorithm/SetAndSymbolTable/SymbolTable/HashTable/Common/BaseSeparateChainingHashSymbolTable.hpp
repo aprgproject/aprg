@@ -17,13 +17,13 @@ class BaseSeparateChainingHashSymbolTable
                      OrderedArraySymbolTable<Key, Value>, UnorderedLinkedListSymbolTable<Key, Value>,
                      BaseSymbolTable<Key, Value>>> {
 public:
+    BaseSeparateChainingHashSymbolTable() = default;
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseSeparateChainingHashSymbolTable() override = default;
-    BaseSeparateChainingHashSymbolTable() = default;
     BaseSeparateChainingHashSymbolTable(BaseSeparateChainingHashSymbolTable const &) = default;
-    BaseSeparateChainingHashSymbolTable(BaseSeparateChainingHashSymbolTable &&) = default;
+    BaseSeparateChainingHashSymbolTable(BaseSeparateChainingHashSymbolTable &&) noexcept = default;
     BaseSeparateChainingHashSymbolTable &operator=(BaseSeparateChainingHashSymbolTable const &) = default;
-    BaseSeparateChainingHashSymbolTable &operator=(BaseSeparateChainingHashSymbolTable &&) = default;
+    BaseSeparateChainingHashSymbolTable &operator=(BaseSeparateChainingHashSymbolTable &&) noexcept = default;
 };
 
 }  // namespace alba::algorithm

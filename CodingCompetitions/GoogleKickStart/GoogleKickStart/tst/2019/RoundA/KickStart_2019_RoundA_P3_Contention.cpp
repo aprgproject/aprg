@@ -4,77 +4,42 @@
 #include "KickStart_2019_RoundA_P3_Contention.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <algorithm>
 #include <climits>
 #include <cstdint>
 #include <iostream>
 #include <set>
 #include <vector>
 
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <algorithm>
+
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2019_RoundA_P3_Contention {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2019_RoundA_P3_Contention {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
-
 using Interval = pair<int, int>;
 using Intervals = vector<Interval>;
 
-int getMinimumSeats(Intervals const& bookings) {
-    int minimumNewSeats = 0;
-    Interval accumulatedInterval;
-    bool isFirst(true);
-    for (Interval const& booking : bookings) {
-        if (isFirst) {
-            accumulatedInterval = booking;
-            minimumNewSeats = booking.second - booking.first + 1;
-            isFirst = false;
-        } else {
-            int newSeats = 0;
-            if (booking.first < accumulatedInterval.first) {
-                newSeats += min(booking.second + 1, accumulatedInterval.first) - booking.first;
-                accumulatedInterval.first = booking.first;
-            }
-            if (accumulatedInterval.second < booking.second) {
-                newSeats += booking.second - max(booking.first - 1, accumulatedInterval.second);
-                accumulatedInterval.second = booking.second;
-            }
-            minimumNewSeats = min(minimumNewSeats, newSeats);
-        }
-    }
-    return minimumNewSeats;
-}
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
 
-int getMinimumSeatsFromLeftToRight(Intervals& bookings) {
-    sort(bookings.begin(), bookings.end(), [](Interval const& interval1, Interval const& interval2) {
-        if (interval1.first == interval2.first) {
-            return interval1.second < interval2.second;
-        }
-        return interval1.first > interval2.first;
-    });
-    return getMinimumSeats(bookings);
-}
+    runAllTestCases();
 
-int getMinimumSeatsFromRightToLeft(Intervals& bookings) {
-    sort(bookings.begin(), bookings.end(), [](Interval const& interval1, Interval const& interval2) {
-        if (interval1.second == interval2.second) {
-            return interval1.first > interval2.first;
-        }
-        return interval1.second < interval2.second;
-    });
-    return getMinimumSeats(bookings);
+    return 0;
 }
 
 void runTestCase(int const testCaseNumber) {
@@ -93,7 +58,6 @@ void runTestCase(int const testCaseNumber) {
     // Why maximumOfMinimumSeats?
     // What is the largest integer k where there exists an order that you can enter the bookings into the system,
     // such that each booking is assigned at least k seats?
-
     my_cout << "Case #" << testCaseNumber << ": " << maximumOfMinimumSeats << '\n';
 }
 
@@ -212,25 +176,63 @@ void runTestCase(int const)
     my_cout << "Case #" << testCaseNumber << ": " << hi << '\n';
 }
 */
-
 void runAllTestCases() {
     int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
         runTestCase(testCaseNumber);
     }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
+int getMinimumSeats(Intervals const& bookings) {
+    int minimumNewSeats = 0;
+    Interval accumulatedInterval;
+    bool isFirst(true);
+    for (Interval const& booking : bookings) {
+        if (isFirst) {
+            accumulatedInterval = booking;
+            minimumNewSeats = booking.second - booking.first + 1;
+            isFirst = false;
+        } else {
+            int newSeats = 0;
+            if (booking.first < accumulatedInterval.first) {
+                newSeats += min(booking.second + 1, accumulatedInterval.first) - booking.first;
+                accumulatedInterval.first = booking.first;
+            }
+            if (accumulatedInterval.second < booking.second) {
+                newSeats += booking.second - max(booking.first - 1, accumulatedInterval.second);
+                accumulatedInterval.second = booking.second;
+            }
+            minimumNewSeats = min(minimumNewSeats, newSeats);
+        }
+    }
+    return minimumNewSeats;
+}
 
-    runAllTestCases();
+int getMinimumSeatsFromLeftToRight(Intervals& bookings) {
+    sort(bookings.begin(), bookings.end(), [](Interval const& interval1, Interval const& interval2) {
+        if (interval1.first == interval2.first) {
+            return interval1.second < interval2.second;
+        }
+        return interval1.first > interval2.first;
+    });
+    return getMinimumSeats(bookings);
+}
 
-    return 0;
+int getMinimumSeatsFromRightToLeft(Intervals& bookings) {
+    sort(bookings.begin(), bookings.end(), [](Interval const& interval1, Interval const& interval2) {
+        if (interval1.second == interval2.second) {
+            return interval1.first > interval2.first;
+        }
+        return interval1.second < interval2.second;
+    });
+    return getMinimumSeats(bookings);
 }
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2019_RoundA_P3_Contention
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

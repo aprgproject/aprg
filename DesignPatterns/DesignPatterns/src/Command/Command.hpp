@@ -22,9 +22,9 @@ class Command {
 public:
     virtual ~Command() = default;
     Command(Command const &) = default;
-    Command(Command &&) = default;
+    Command(Command &&) noexcept = default;
     Command &operator=(Command const &) = default;
-    Command &operator=(Command &&) = default;
+    Command &operator=(Command &&) noexcept = default;
     virtual void execute() = 0;
     virtual void undo() = 0;
 

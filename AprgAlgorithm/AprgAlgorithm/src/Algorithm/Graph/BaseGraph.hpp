@@ -11,8 +11,8 @@ class BaseGraph {
 public:
     using Vertices = typename GraphTypes<Vertex>::Vertices;
     using Edges = typename GraphTypes<Vertex>::Edges;
-    virtual ~BaseGraph() = default;  // virtual destructor because of virtual functions (vtable exists)
     BaseGraph() = default;
+    virtual ~BaseGraph() = default;  // virtual destructor because of virtual functions (vtable exists)
     BaseGraph(BaseGraph const& graph) = default;
     BaseGraph(BaseGraph&& graph) noexcept = default;
     BaseGraph& operator=(BaseGraph const& graph) = default;

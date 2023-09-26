@@ -8,12 +8,12 @@ namespace Decorator {
 // added to them dynamically
 class Component {
 public:
-    virtual ~Component() = default;
     Component() = default;
+    virtual ~Component() = default;
     Component(Component const &) = default;
-    Component(Component &&) = default;
+    Component(Component &&) noexcept = default;
     Component &operator=(Component const &) = default;
-    Component &operator=(Component &&) = default;
+    Component &operator=(Component &&) noexcept = default;
     virtual void operation() = 0;
     // ...
 };

@@ -303,7 +303,7 @@ int CoinProblem::getNumberOfCoinPermutationsMemoizationDPInternal(
         result = 0;
         for (Value const availableCoin : m_availableCoins) {
             if (total >= availableCoin) {
-                // cppcheck-suppress useStlAlgorithm 
+                // cppcheck-suppress useStlAlgorithm
                 result += getNumberOfCoinPermutationsMemoizationDPInternal(countPerValue, total - availableCoin);
             }
         }

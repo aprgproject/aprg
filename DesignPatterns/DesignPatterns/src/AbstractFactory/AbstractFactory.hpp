@@ -8,12 +8,12 @@ namespace AbstractFactory {
 // to the interface not the concrete product
 class ProductA {
 public:
-    virtual ~ProductA() = default;
     ProductA() = default;
+    virtual ~ProductA() = default;
     ProductA(ProductA const &) = default;
-    ProductA(ProductA &&) = default;
+    ProductA(ProductA &&) noexcept = default;
     ProductA &operator=(ProductA const &) = default;
-    ProductA &operator=(ProductA &&) = default;
+    ProductA &operator=(ProductA &&) noexcept = default;
     [[nodiscard]] virtual std::string getName() const = 0;
     // ...
 };
@@ -37,12 +37,12 @@ public:
 // where each can produce an entire set of products
 class ProductB {
 public:
-    virtual ~ProductB() = default;
     ProductB() = default;
+    virtual ~ProductB() = default;
     ProductB(ProductB const &) = default;
-    ProductB(ProductB &&) = default;
+    ProductB(ProductB &&) noexcept = default;
     ProductB &operator=(ProductB const &) = default;
-    ProductB &operator=(ProductB &&) = default;
+    ProductB &operator=(ProductB &&) noexcept = default;
     [[nodiscard]] virtual std::string getName() const = 0;
     // ...
 };
@@ -65,12 +65,12 @@ public:
 // provides an abstract interface for creating a family of products
 class AbstractFactory {
 public:
-    virtual ~AbstractFactory() = default;
     AbstractFactory() = default;
+    virtual ~AbstractFactory() = default;
     AbstractFactory(AbstractFactory const &) = default;
-    AbstractFactory(AbstractFactory &&) = default;
+    AbstractFactory(AbstractFactory &&) noexcept = default;
     AbstractFactory &operator=(AbstractFactory const &) = default;
-    AbstractFactory &operator=(AbstractFactory &&) = default;
+    AbstractFactory &operator=(AbstractFactory &&) noexcept = default;
     [[nodiscard]] virtual std::unique_ptr<ProductA> createProductA() const = 0;
     [[nodiscard]] virtual std::unique_ptr<ProductB> createProductB() const = 0;
 };

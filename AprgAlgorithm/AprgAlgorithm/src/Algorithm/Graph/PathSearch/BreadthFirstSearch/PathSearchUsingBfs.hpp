@@ -19,12 +19,6 @@ public:
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
     using InitializeDataFunction = std::function<void(Vertices const&)>;
     using UpdateDataFunction = std::function<void(Vertex const&, Vertex const&)>;
-    // No need for virtual destructor because this class is not destroyed polymorphically.
-    PathSearchUsingBfs(PathSearchUsingBfs const&) = default;
-    PathSearchUsingBfs(PathSearchUsingBfs&&) = default;
-    ~PathSearchUsingBfs() = default;
-    PathSearchUsingBfs& operator=(PathSearchUsingBfs const&) = default;
-    PathSearchUsingBfs& operator=(PathSearchUsingBfs&&) = default;
 
     PathSearchUsingBfs(BaseGraphWithVertex const& graph, Vertex const& startVertex)
         : BaseClass(graph),
@@ -70,6 +64,12 @@ public:
         reinitializeStartingFrom(startVertices);
     }
 
+    ~PathSearchUsingBfs() = default;
+    // No need for virtual destructor because this class is not destroyed polymorphically.
+    PathSearchUsingBfs(PathSearchUsingBfs const&) = default;
+    PathSearchUsingBfs(PathSearchUsingBfs&&) noexcept = default;
+    PathSearchUsingBfs& operator=(PathSearchUsingBfs const&) = default;
+    PathSearchUsingBfs& operator=(PathSearchUsingBfs&&) noexcept = default;
     [[nodiscard]] Path getShortestPathTo(Vertex const& endVertex) const { return this->getPathTo(endVertex); }
 
     void reinitializeStartingFrom(Vertices const& startVertices) {

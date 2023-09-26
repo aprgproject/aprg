@@ -8,12 +8,12 @@ namespace FactoryMethod {
 // to the interface not the concrete product
 class Product {
 public:
-    virtual ~Product() = default;
     Product() = default;
+    virtual ~Product() = default;
     Product(Product const &) = default;
-    Product(Product &&) = default;
+    Product(Product &&) noexcept = default;
     Product &operator=(Product const &) = default;
-    Product &operator=(Product &&) = default;
+    Product &operator=(Product &&) noexcept = default;
     [[nodiscard]] virtual std::string getName() const = 0;
     // ...
 };
@@ -39,12 +39,12 @@ public:
 // to manipulate products except for the factory method
 class Creator {
 public:
-    virtual ~Creator() = default;
     Creator() = default;
+    virtual ~Creator() = default;
     Creator(Creator const &) = default;
-    Creator(Creator &&) = default;
+    Creator(Creator &&) noexcept = default;
     Creator &operator=(Creator const &) = default;
-    Creator &operator=(Creator &&) = default;
+    Creator &operator=(Creator &&) noexcept = default;
     [[nodiscard]] virtual std::unique_ptr<Product> createProduct() const = 0;
     // ...
 };

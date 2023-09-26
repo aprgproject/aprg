@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2019_RoundH_P3_Elevanagram {
 
-TEST(KickStart_2019_RoundH_P3_ElevanagramTest, DISABLED_Test1) {
+TEST(KickStart2019RoundHP3ElevanagramTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

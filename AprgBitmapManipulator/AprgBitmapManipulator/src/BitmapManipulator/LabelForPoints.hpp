@@ -6,8 +6,8 @@
 
 namespace alba::AprgBitmap {
 
-constexpr int INITIAL_LABEL_VALUE = 0;
-constexpr int INVALID_LABEL_VALUE = 0x1FFFFFFF;
+inline constexpr int INITIAL_LABEL_VALUE = 0;
+inline constexpr int INVALID_LABEL_VALUE = 0x1FFFFFFF;
 
 class LabelForPoints {
 public:

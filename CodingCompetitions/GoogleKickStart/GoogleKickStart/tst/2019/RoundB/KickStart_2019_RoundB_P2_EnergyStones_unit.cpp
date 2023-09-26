@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2019_RoundB_P2_EnergyStones {
 
-TEST(KickStart_2019_RoundB_P2_EnergyStonesTest, DISABLED_Test1) {
+TEST(KickStart2019RoundBP2EnergyStonesTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

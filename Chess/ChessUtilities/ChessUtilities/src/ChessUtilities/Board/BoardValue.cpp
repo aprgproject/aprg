@@ -40,9 +40,9 @@ constexpr Cs coordinates = {C{2, 3}, {3, 3}, {4, 3}, {5, 3}, {2, 4}, {3, 4}, {4,
 
 }  // namespace
 
+BoardValue::BoardValue() : m_data{} {}
 BoardValue::BoardValue(Board const& board) : m_data{} { saveBoardToData(board); }
 BoardValue::BoardValue(Data const& data) : m_data(data) {}
-BoardValue::BoardValue() : m_data{} {}
 BoardValue::Data const& BoardValue::getData() const { return m_data; }
 bool BoardValue::isZero() const { return m_data == Data{}; }
 

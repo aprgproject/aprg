@@ -4,39 +4,48 @@
 #include "KickStart_2020_RoundD_P4_LockedDoors.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <algorithm>
 #include <cassert>
 #include <cstdint>
 #include <iostream>
 #include <numeric>
 #include <vector>
 
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <algorithm>
+
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2020_RoundD_P4_LockedDoors {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2020_RoundD_P4_LockedDoors {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
 
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
+
+    runAllTestCases();
+
+    return 0;
+}
+
 struct UnionFind {
-    long long num{};
-    vector<long long> rs, ps;
     UnionFind() = default;
-    explicit UnionFind(long long n) : num(n), rs(n, 1), ps(n, 0) { iota(ps.begin(), ps.end(), 0); }
-    long long find(long long x) { return (x == ps[x] ? x : ps[x] = find(ps[x])); }
-    bool same(long long x, long long y) { return find(x) == find(y); }
-    void unite(long long x, long long y) {
+    explicit UnionFind(long long const n) : num(n), rs(n, 1), ps(n, 0) { iota(ps.begin(), ps.end(), 0); }
+    [[nodiscard]] long long count() const { return num; }
+
+    void unite(long long const x, long long const y) {
         x = find(x);
         y = find(y);
         if (x == y) {
@@ -47,10 +56,14 @@ struct UnionFind {
         }
         rs[x] += rs[y];
         ps[y] = x;
-        num--;
+        --num;
     }
-    long long size(long long x) { return rs[find(x)]; }
-    [[nodiscard]] long long count() const { return num; }
+
+    long long find(long long const x) { return (x == ps[x] ? x : ps[x] = find(ps[x])); }
+    long long size(long long const x) { return rs[find(x)]; }
+    bool same(long long const x, long long const y) { return find(x) == find(y); }
+    long long num{};
+    vector<long long> rs, ps;
 };
 
 void runTestCase(int const testCaseNumber) {
@@ -58,25 +71,25 @@ void runTestCase(int const testCaseNumber) {
     long long q = 0;
     my_cin >> n >> q;
     vector<long long> ds(n - 1);
-    for (long long i = 0; i < n - 1; i++) {
+    for (long long i = 0; i < n - 1; ++i) {
         my_cin >> ds[i];
     }
 
     vector<long long> ss(q);
     vector<long long> ks(q);
-    for (long long i = 0; i < q; i++) {
+    for (long long i = 0; i < q; ++i) {
         my_cin >> ss[i] >> ks[i], ss[i]--;
     }
 
     using P = pair<long long, long long>;
     vector<P> vp;
-    for (long long i = 0; i < n - 1; i++) {
+    for (long long i = 0; i < n - 1; ++i) {
         vp.emplace_back(ds[i], i);
     }
     sort(vp.begin(), vp.end());
 
     vector<long long> ord(n - 1);
-    for (long long i = 0; i < n - 1; i++) {
+    for (long long i = 0; i < n - 1; ++i) {
         ord[i] = vp[i].second;
     }
 
@@ -87,7 +100,7 @@ void runTestCase(int const testCaseNumber) {
     while (true) {
         long long flg = 0;
         vector<vector<long long>> G(n);
-        for (long long i = 0; i < q; i++) {
+        for (long long i = 0; i < q; ++i) {
             if (ls[i] + 1 < rs[i]) {
                 long long mid = (ls[i] + rs[i]) >> 1;
                 G[mid].emplace_back(i);
@@ -98,7 +111,7 @@ void runTestCase(int const testCaseNumber) {
             break;
         }
         UnionFind uf(n);
-        for (long long i = 0; i < n - 1; i++) {
+        for (long long i = 0; i < n - 1; ++i) {
             uf.unite(ord[i], ord[i] + 1);
             for (long long k : G[i]) {
                 if (uf.size(ss[k]) >= ks[k]) {
@@ -112,7 +125,7 @@ void runTestCase(int const testCaseNumber) {
 
     vector<long long> ans(q);
     vector<vector<long long>> G(n + 1);
-    for (long long i = 0; i < q; i++) {
+    for (long long i = 0; i < q; ++i) {
         assert(rs[i] < n - 1);
         if (ks[i] == 1) {
             ans[i] = ss[i];
@@ -122,7 +135,7 @@ void runTestCase(int const testCaseNumber) {
     }
 
     UnionFind uf(n);
-    for (long long i = 0; i < n - 1; i++) {
+    for (long long i = 0; i < n - 1; ++i) {
         // [xL, xR] [yL, yR]
         long long xR = ord[i];
         long long xL = xR - (uf.size(xR) - 1);
@@ -144,7 +157,7 @@ void runTestCase(int const testCaseNumber) {
     }
 
     my_cout << "Case #" << testCaseNumber << ":";
-    for (long long i = 0; i < q; i++) {
+    for (long long i = 0; i < q; ++i) {
         my_cout << ' ' << ans[i] + 1;
     }
     my_cout << '\n';
@@ -153,21 +166,15 @@ void runTestCase(int const testCaseNumber) {
 void runAllTestCases() {
     int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
         runTestCase(testCaseNumber);
     }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
-
-    runAllTestCases();
-
-    return 0;
-}
-
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2020_RoundD_P4_LockedDoors
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

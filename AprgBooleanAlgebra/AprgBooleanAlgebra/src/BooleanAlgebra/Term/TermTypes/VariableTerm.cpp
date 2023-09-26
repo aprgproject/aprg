@@ -10,12 +10,12 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
+VariableTerm::VariableTerm() : m_isNegated(false) {}
+
 VariableTerm::VariableTerm(string const& variableName)
     : m_variableName(getStringWithoutStartingAndTrailingWhiteSpace(variableName)), m_isNegated(false) {
     initializeIfNotEmpty();
 }
-
-VariableTerm::VariableTerm() : m_isNegated(false) {}
 
 VariableTerm VariableTerm::operator~() const {
     VariableTerm result(*this);

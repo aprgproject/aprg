@@ -9,12 +9,12 @@ namespace Flyweight {
 // and act on extrinsic state
 class Flyweight {
 public:
-    virtual ~Flyweight() = default;
     Flyweight() = default;
+    virtual ~Flyweight() = default;
     Flyweight(Flyweight const &) = default;
-    Flyweight(Flyweight &&) = default;
+    Flyweight(Flyweight &&) noexcept = default;
     Flyweight &operator=(Flyweight const &) = default;
-    Flyweight &operator=(Flyweight &&) = default;
+    Flyweight &operator=(Flyweight &&) noexcept = default;
     virtual void operation(int const extrinsicState) = 0;
     // ...
 };

@@ -8,12 +8,12 @@ namespace Proxy {
 // so that a Proxy can be used anywhere a RealSubject is expected
 class Subject {
 public:
-    virtual ~Subject() = default;
     Subject() = default;
+    virtual ~Subject() = default;
     Subject(Subject const &) = default;
-    Subject(Subject &&) = default;
+    Subject(Subject &&) noexcept = default;
     Subject &operator=(Subject const &) = default;
-    Subject &operator=(Subject &&) = default;
+    Subject &operator=(Subject &&) noexcept = default;
     virtual void request() = 0;
     // ...
 };

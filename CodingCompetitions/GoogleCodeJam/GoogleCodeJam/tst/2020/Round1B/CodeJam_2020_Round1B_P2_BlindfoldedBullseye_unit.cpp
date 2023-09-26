@@ -8,7 +8,7 @@ using namespace std;
 
 namespace CodeJam_2020_Round1B_P2_BlindfoldedBullseye {
 
-TEST(CodeJam_2020_Round1B_P2_BlindfoldedBullseyeTest, DISABLED_Test1) {
+TEST(CodeJam2020Round1BP2BlindfoldedBullseyeTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

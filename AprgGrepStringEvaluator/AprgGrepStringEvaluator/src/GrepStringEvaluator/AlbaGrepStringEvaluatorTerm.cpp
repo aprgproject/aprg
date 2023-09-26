@@ -6,6 +6,9 @@ using namespace std;
 
 namespace alba {
 
+AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm()
+    : m_type(AlbaGrepStringEvaluatorTermType::Unknown), m_savedResult(false) {}
+
 AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm(string const& stringToFind)
     : m_type(AlbaGrepStringEvaluatorTermType::StringToFind), m_savedResult(false), m_stringToFind(stringToFind) {}
 
@@ -14,9 +17,6 @@ AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm(string&& stringToFind)
 
 AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm(bool const result)
     : m_type(AlbaGrepStringEvaluatorTermType::BooleanResult), m_savedResult(result) {}
-
-AlbaGrepStringEvaluatorTerm::AlbaGrepStringEvaluatorTerm()
-    : m_type(AlbaGrepStringEvaluatorTermType::Unknown), m_savedResult(false) {}
 
 bool AlbaGrepStringEvaluatorTerm::getResult() const {
     bool result(false);

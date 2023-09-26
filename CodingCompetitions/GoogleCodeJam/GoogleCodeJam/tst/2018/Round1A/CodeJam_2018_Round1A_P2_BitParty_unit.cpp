@@ -8,7 +8,7 @@ using namespace std;
 
 namespace CodeJam_2018_Round1A_P2_BitParty {
 
-TEST(CodeJam_2018_Round1A_P2_BitPartyTest, DISABLED_Test1) {
+TEST(CodeJam2018Round1AP2BitPartyTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

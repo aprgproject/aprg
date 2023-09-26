@@ -4,32 +4,42 @@
 #include "KickStart_2019_RoundC_P1_WiggleWalk.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <algorithm>
 #include <cstdint>
 #include <deque>
 #include <iostream>
 #include <set>
 #include <vector>
 
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <algorithm>
+
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2019_RoundC_P1_WiggleWalk {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2019_RoundC_P1_WiggleWalk {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
-
 using Coordinate = pair<int, int>;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
+
+    runAllTestCases();
+
+    return 0;
+}
 
 enum class Direction { Unknown, North, South, West, East };
 
@@ -38,7 +48,6 @@ public:
     using Interval = pair<int, int>;
     using Intervals = deque<Interval>;
     using CollectionOfIntervals = vector<Intervals>;
-
     History(int const columns, int const rows) : m_columnsIntervals(columns), m_rowsIntervals(rows) {}
 
     Coordinate addSourceAndGetNext(Coordinate const source, Direction const direction) {
@@ -124,24 +133,10 @@ private:
         }
         return changedInterval;
     }
+
     CollectionOfIntervals m_columnsIntervals;
     CollectionOfIntervals m_rowsIntervals;
 };
-
-Direction getDirection(char const directionChar) {
-    switch (directionChar) {
-        case 'N':
-            return Direction::North;
-        case 'S':
-            return Direction::South;
-        case 'W':
-            return Direction::West;
-        case 'E':
-            return Direction::East;
-        default:
-            return Direction::Unknown;
-    }
-}
 
 void runTestCase(int const testCaseNumber) {
     int numberOfRows = 0;
@@ -165,21 +160,30 @@ void runTestCase(int const testCaseNumber) {
 void runAllTestCases() {
     int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
         runTestCase(testCaseNumber);
     }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
-
-    runAllTestCases();
-
-    return 0;
+Direction getDirection(char const directionChar) {
+    switch (directionChar) {
+        case 'N':
+            return Direction::North;
+        case 'S':
+            return Direction::South;
+        case 'W':
+            return Direction::West;
+        case 'E':
+            return Direction::East;
+        default:
+            return Direction::Unknown;
+    }
 }
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2019_RoundC_P1_WiggleWalk
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

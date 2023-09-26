@@ -14,14 +14,14 @@ class BaseSeparateChainingHashSet : public BaseSetWithBaseSeparateChainingHash<B
                                         Key, HashTableEntry<Key>, HashFunction, HASH_TABLE_SIZE, OrderedArraySet<Key>,
                                         UnorderedLinkedListSet<Key>, BaseSet<Key>>> {
 public:
+    BaseSeparateChainingHashSet() = default;
     // no need for virtual destructor because base destructor is
     // virtual (similar to other virtual functions)
     ~BaseSeparateChainingHashSet() override = default;
-    BaseSeparateChainingHashSet() = default;
     BaseSeparateChainingHashSet(BaseSeparateChainingHashSet const &) = default;
-    BaseSeparateChainingHashSet(BaseSeparateChainingHashSet &&) = default;
+    BaseSeparateChainingHashSet(BaseSeparateChainingHashSet &&) noexcept = default;
     BaseSeparateChainingHashSet &operator=(BaseSeparateChainingHashSet const &) = default;
-    BaseSeparateChainingHashSet &operator=(BaseSeparateChainingHashSet &&) = default;
+    BaseSeparateChainingHashSet &operator=(BaseSeparateChainingHashSet &&) noexcept = default;
 };
 
 }  // namespace alba::algorithm

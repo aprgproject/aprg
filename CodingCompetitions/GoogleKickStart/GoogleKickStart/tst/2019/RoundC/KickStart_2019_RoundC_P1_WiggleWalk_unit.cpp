@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2019_RoundC_P1_WiggleWalk {
 
-TEST(KickStart_2019_RoundC_P1_WiggleWalkTest, DISABLED_Test1) {
+TEST(KickStart2019RoundCP1WiggleWalkTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();
@@ -41,7 +41,7 @@ TEST(KickStart_2019_RoundC_P1_WiggleWalkTest, DISABLED_Test1) {
         outputStringStream.str());
 }
 
-TEST(KickStart_2019_RoundC_P1_WiggleWalkTest, DISABLED_Test2) {
+TEST(KickStart2019RoundCP1WiggleWalkTest, DISABLED_Test2) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

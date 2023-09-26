@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2021_RoundC_P4_BinaryOperator {
 
-TEST(KickStart_2021_RoundC_P4_BinaryOperatorTest, DISABLED_Test1) {
+TEST(KickStart2021RoundCP4BinaryOperatorTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

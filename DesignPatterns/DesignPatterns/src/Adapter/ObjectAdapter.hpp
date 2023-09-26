@@ -6,12 +6,12 @@ namespace ObjectAdapter {
 // defines specific interface that Client uses
 class Target {
 public:
-    virtual ~Target() = default;
     Target() = default;
+    virtual ~Target() = default;
     Target(Target const &) = default;
-    Target(Target &&) = default;
+    Target(Target &&) noexcept = default;
     Target &operator=(Target const &) = default;
-    Target &operator=(Target &&) = default;
+    Target &operator=(Target &&) noexcept = default;
     virtual void request() = 0;
     // ...
 };

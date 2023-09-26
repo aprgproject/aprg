@@ -9,15 +9,16 @@ public:
     using Entry = typename BaseLinearProbingHash::Entry;
     using EntryUniquePointer = typename BaseLinearProbingHash::EntryUniquePointer;
     using EntryPointers = typename BaseLinearProbingHash::EntryPointers;
-    // no need for virtual destructor because base destructor
-    ~BaseSetWithBaseLinearProbingHash() override = default;
-    BaseSetWithBaseLinearProbingHash(BaseSetWithBaseLinearProbingHash const&) = default;
-    BaseSetWithBaseLinearProbingHash(BaseSetWithBaseLinearProbingHash&&) = default;
-    BaseSetWithBaseLinearProbingHash& operator=(BaseSetWithBaseLinearProbingHash const&) = default;
-    BaseSetWithBaseLinearProbingHash& operator=(BaseSetWithBaseLinearProbingHash&&) = default;
 
     BaseSetWithBaseLinearProbingHash()
         : b_size(BaseLinearProbingHash::m_size), b_entryPointers(BaseLinearProbingHash::m_entryPointers) {}
+
+    // no need for virtual destructor because base destructor
+    ~BaseSetWithBaseLinearProbingHash() override = default;
+    BaseSetWithBaseLinearProbingHash(BaseSetWithBaseLinearProbingHash const&) = default;
+    BaseSetWithBaseLinearProbingHash(BaseSetWithBaseLinearProbingHash&&) noexcept = default;
+    BaseSetWithBaseLinearProbingHash& operator=(BaseSetWithBaseLinearProbingHash const&) = default;
+    BaseSetWithBaseLinearProbingHash& operator=(BaseSetWithBaseLinearProbingHash&&) noexcept = default;
 
     // is virtual (similar to other virtual functions)
     void put(Key const& key) override {

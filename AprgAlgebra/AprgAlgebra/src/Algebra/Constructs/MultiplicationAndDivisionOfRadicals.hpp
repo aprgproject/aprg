@@ -14,9 +14,9 @@ public:
     };
 
     using RadicalDetails = std::vector<RadicalDetail>;
+    MultiplicationAndDivisionOfRadicals();
     explicit MultiplicationAndDivisionOfRadicals(TermsWithDetails const& termsWithDetails);
     explicit MultiplicationAndDivisionOfRadicals(TermsWithDetails&& termsWithDetails);
-    MultiplicationAndDivisionOfRadicals();
     [[nodiscard]] Term getCombinedTerm() const;
     [[nodiscard]] TermsWithDetails const& getTermsWithDetails() const;
     void simplify();

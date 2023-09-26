@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2020_RoundE_P2_HighBuildings {
 
-TEST(KickStart_2020_RoundE_P2_HighBuildingsTest, DISABLED_Test1) {
+TEST(KickStart2020RoundEP2HighBuildingsTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();
@@ -36,6 +36,7 @@ TEST(KickStart_2020_RoundE_P2_HighBuildingsTest, DISABLED_Test1) {
 }
 
 }  // namespace KickStart_2020_RoundE_P2_HighBuildings
+
 /*
 Problem
 

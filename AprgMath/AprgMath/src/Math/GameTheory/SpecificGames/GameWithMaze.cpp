@@ -56,7 +56,7 @@ GameWithMaze::Coordinate GameWithMaze::getNextCoordinateWithGrundyNumber(
     Coordinate const& coordinate, UnsignedInteger const& targetGrundyNumber) {
     Coordinate result{};
     for (Coordinate const& nextCoordinate : getNextCoordinates(coordinate)) {
-            // cppcheck-suppress useStlAlgorithm
+        // cppcheck-suppress useStlAlgorithm
         if (targetGrundyNumber == getGrundyNumberAt(nextCoordinate)) {
             result = nextCoordinate;
             break;

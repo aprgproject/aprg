@@ -1,26 +1,35 @@
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-#include "KickStart_2020_RoundH_P4_Friends.hpp"
-
 #include <Fake/FakeNames.hpp>
 
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <algorithm>
 #include <cstdint>
 #include <iostream>
 #include <vector>
 
-using namespace std;
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <algorithm>
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+#include "KickStart_2020_RoundH_P4_Friends.hpp"
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 using namespace alba;
-namespace KickStart_2020_RoundH_P4_Friends {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+using namespace std;
 
+namespace KickStart_2020_RoundH_P4_Friends {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
+
+    runAllTestCases();
+
+    return 0;
+}
 
 void runTestCase(int const) {
     /* int N, Q;
@@ -77,20 +86,13 @@ void runTestCase(int const) {
 void runAllTestCases() {
     int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
         runTestCase(testCaseNumber);
     }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
-
-    runAllTestCases();
-
-    return 0;
-}
-
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2020_RoundH_P4_Friends
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

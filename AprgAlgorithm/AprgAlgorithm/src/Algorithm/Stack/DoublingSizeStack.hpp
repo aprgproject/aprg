@@ -11,12 +11,12 @@ namespace alba::algorithm {
 template <typename Object>
 class DoublingSizeStack : public BaseStack<Object> {
 public:
+    DoublingSizeStack() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
     ~DoublingSizeStack() override = default;
     DoublingSizeStack(DoublingSizeStack const &) = default;
-    DoublingSizeStack(DoublingSizeStack &&) = default;
+    DoublingSizeStack(DoublingSizeStack &&) noexcept = default;
     DoublingSizeStack &operator=(DoublingSizeStack const &) = default;
-    DoublingSizeStack &operator=(DoublingSizeStack &&) = default;
-    DoublingSizeStack() : m_objects(nullptr) { initialize(MINUMUM_CONTAINER_SIZE); }
+    DoublingSizeStack &operator=(DoublingSizeStack &&) noexcept = default;
     [[nodiscard]] int getSize() const override { return m_stackSize; }
     [[nodiscard]] bool isEmpty() const override { return m_stackSize == 0; }
 

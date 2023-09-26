@@ -8,12 +8,12 @@ template <typename Vertex>
 class BaseDirectedGraph : public BaseGraph<Vertex> {
 public:
     using Edges = typename GraphTypes<Vertex>::Edges;
-    ~BaseDirectedGraph() override = default;  // no need for virtual destructor because base destructor is virtual
     BaseDirectedGraph() = default;
+    ~BaseDirectedGraph() override = default;  // no need for virtual destructor because base destructor is virtual
     BaseDirectedGraph(BaseDirectedGraph const &) = default;
-    BaseDirectedGraph(BaseDirectedGraph &&) = default;
+    BaseDirectedGraph(BaseDirectedGraph &&) noexcept = default;
     BaseDirectedGraph &operator=(BaseDirectedGraph const &) = default;
-    BaseDirectedGraph &operator=(BaseDirectedGraph &&) = default;
+    BaseDirectedGraph &operator=(BaseDirectedGraph &&) noexcept = default;
     // (similar to other virtual functions)
     [[nodiscard]] GraphDirectionType getGraphDirectionType() const override { return DIRECTION_TYPE; }
 

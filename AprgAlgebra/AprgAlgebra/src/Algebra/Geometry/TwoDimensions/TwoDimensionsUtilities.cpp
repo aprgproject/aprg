@@ -48,9 +48,7 @@ Equation getLimaconEquation(LimaconTrigonometricFunctionType const type) {
     return {createExpressionIfPossible({a, "+", b, "*", trigPart}), "=", r};
 }
 
-Equation getLineEquation() {
-    return {createExpressionIfPossible({a, "*", x, "+", b, "*", y, "+", c}), "=", 0};
-}
+Equation getLineEquation() { return {createExpressionIfPossible({a, "*", x, "+", b, "*", y, "+", c}), "=", 0}; }
 
 Equation getParabolaEquation(ParabolaOrientation const parabolaOrientation) {
     Equation result;

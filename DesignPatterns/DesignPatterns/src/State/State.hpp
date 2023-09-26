@@ -8,12 +8,12 @@ namespace State {
 // with a particular state of the Context
 class State {
 public:
-    virtual ~State() = default;
     State() = default;
+    virtual ~State() = default;
     State(State const &) = default;
-    State(State &&) = default;
+    State(State &&) noexcept = default;
     State &operator=(State const &) = default;
-    State &operator=(State &&) = default;
+    State &operator=(State &&) noexcept = default;
     virtual void handle() = 0;
     // ...
 };

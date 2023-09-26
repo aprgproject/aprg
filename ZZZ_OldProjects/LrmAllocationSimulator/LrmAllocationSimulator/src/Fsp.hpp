@@ -19,9 +19,9 @@ struct FspDetails {
 
 class Fsp {
 public:
+    Fsp();
     explicit Fsp(FspDetails const& fspDetails);
     explicit Fsp(FspDetails&& fspDetails);
-    Fsp();
     [[nodiscard]] DspAddresses const& getDspAddresses() const;
     [[nodiscard]] SmType getSmType() const;
     [[nodiscard]] unsigned int getAddress() const;

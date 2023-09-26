@@ -45,8 +45,8 @@ void setForegroundWindowWithWindowHandle(HWND const windowHandle) {
         cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
     }
 }
-// NOLINTEND(misc-misplaced-const)
 
+// NOLINTEND(misc-misplaced-const)
 void doOperation(InputFunction const& inputFunction) {
     INPUT input;
     memset(&input, 0, sizeof(INPUT));
@@ -302,7 +302,9 @@ void saveBitmapFromClipboard(string_view const& filePath) {
         CloseClipboard();
     }
 }
+
 // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
 
 }  // namespace alba::AlbaWindowsUserAutomation
+
 // NOLINTEND(cppcoreguidelines-pro-type-union-access)

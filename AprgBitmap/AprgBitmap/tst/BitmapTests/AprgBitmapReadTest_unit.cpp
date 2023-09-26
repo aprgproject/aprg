@@ -379,4 +379,5 @@ TEST(BitmapReadTest, DISABLED_ExperimentTest) {
 }
 
 }  // namespace alba::AprgBitmap
+
 // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)

@@ -10,12 +10,12 @@ class Subject;
 // of changes in a subject
 class Observer {
 public:
-    virtual ~Observer() = default;
     Observer() = default;
+    virtual ~Observer() = default;
     Observer(Observer const&) = default;
-    Observer(Observer&&) = default;
+    Observer(Observer&&) noexcept = default;
     Observer& operator=(Observer const&) = default;
-    Observer& operator=(Observer&&) = default;
+    Observer& operator=(Observer&&) noexcept = default;
     [[nodiscard]] virtual int getState() const = 0;
     virtual void update(Subject const* const subject) = 0;
     // ...
@@ -41,12 +41,12 @@ private:
 // and detaching observers
 class Subject {
 public:
-    virtual ~Subject() = default;
     Subject() = default;
+    virtual ~Subject() = default;
     Subject(Subject const&) = default;
-    Subject(Subject&&) = default;
+    Subject(Subject&&) noexcept = default;
     Subject& operator=(Subject const&) = default;
-    Subject& operator=(Subject&&) = default;
+    Subject& operator=(Subject&&) noexcept = default;
     [[nodiscard]] virtual int getState() const = 0;
     virtual void setState(const int s) = 0;
     void attach(Observer* observer) { m_observerPointers.emplace_back(observer); }

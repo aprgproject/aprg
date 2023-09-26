@@ -8,13 +8,13 @@ template <typename Key>
 class BaseSet {
 public:
     using Keys = std::vector<Key>;
+    BaseSet() = default;
     // virtual destructor because of virtual functions (vtable exists)
     virtual ~BaseSet() = default;
-    BaseSet() = default;
     BaseSet(BaseSet const&) = default;
-    BaseSet(BaseSet&&) = default;
+    BaseSet(BaseSet&&) noexcept = default;
     BaseSet& operator=(BaseSet const&) = default;
-    BaseSet& operator=(BaseSet&&) = default;
+    BaseSet& operator=(BaseSet&&) noexcept = default;
     [[nodiscard]] virtual Key getMinimum() const = 0;                // get smallest key
     [[nodiscard]] virtual Key getMaximum() const = 0;                // get largest key
     [[nodiscard]] virtual Key selectAt(int const rank) const = 0;    // get key at rank

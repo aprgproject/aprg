@@ -12,9 +12,9 @@ public:
     ZAlgorithm() = delete;
     ~ZAlgorithm() = delete;
     ZAlgorithm(ZAlgorithm const &) = delete;
-    ZAlgorithm(ZAlgorithm &&) = delete;
+    ZAlgorithm(ZAlgorithm &&) noexcept = delete;
     ZAlgorithm &operator=(ZAlgorithm const &) = delete;
-    ZAlgorithm &operator=(ZAlgorithm &&) = delete;
+    ZAlgorithm &operator=(ZAlgorithm &&) noexcept = delete;
 
     // The Z-array z of a string s of length n contains for each k = 0,1,...,n-1
     // the length of the longest substring of s that begins at position k and is a prefix of s.

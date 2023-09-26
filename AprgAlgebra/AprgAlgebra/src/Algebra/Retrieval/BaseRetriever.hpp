@@ -8,12 +8,12 @@ namespace alba::algebra {
 
 class BaseRetriever {
 public:
-    virtual ~BaseRetriever() = default;  // virtual destructor because of virtual functions (vtable exists)
     BaseRetriever() = default;
+    virtual ~BaseRetriever() = default;  // virtual destructor because of virtual functions (vtable exists)
     BaseRetriever(BaseRetriever const&) = default;
-    BaseRetriever(BaseRetriever&&) = default;
+    BaseRetriever(BaseRetriever&&) noexcept = default;
     BaseRetriever& operator=(BaseRetriever const&) = default;
-    BaseRetriever& operator=(BaseRetriever&&) = default;
+    BaseRetriever& operator=(BaseRetriever&&) noexcept = default;
 
     virtual void retrieveFromEquations(Equations const& equations) {
         for (Equation const& equation : equations) {

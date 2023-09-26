@@ -8,19 +8,21 @@ public:
     using Key = typename BaseSeparateChainingHash::Key;
     using Entry = typename BaseSeparateChainingHash::Entry;
     using HashTable = typename BaseSeparateChainingHash::HashTable;
-    // no need for virtual destructor because base destructor is virtual (similar to other virtual
-    ~BaseSymbolTableWithBaseSeparateChainingHash() override = default;
-    BaseSymbolTableWithBaseSeparateChainingHash(BaseSymbolTableWithBaseSeparateChainingHash const&) = default;
-    BaseSymbolTableWithBaseSeparateChainingHash(BaseSymbolTableWithBaseSeparateChainingHash&&) = default;
-
-    BaseSymbolTableWithBaseSeparateChainingHash& operator=(BaseSymbolTableWithBaseSeparateChainingHash const&) =
-        default;
-
-    BaseSymbolTableWithBaseSeparateChainingHash& operator=(BaseSymbolTableWithBaseSeparateChainingHash&&) = default;
 
     BaseSymbolTableWithBaseSeparateChainingHash()
         : b_size(BaseSeparateChainingHash::m_size),
           b_smallerSymbolTables(BaseSeparateChainingHash::m_smallerSymbolTables) {}
+
+    // no need for virtual destructor because base destructor is virtual (similar to other virtual
+    ~BaseSymbolTableWithBaseSeparateChainingHash() override = default;
+    BaseSymbolTableWithBaseSeparateChainingHash(BaseSymbolTableWithBaseSeparateChainingHash const&) = default;
+    BaseSymbolTableWithBaseSeparateChainingHash(BaseSymbolTableWithBaseSeparateChainingHash&&) noexcept = default;
+
+    BaseSymbolTableWithBaseSeparateChainingHash& operator=(BaseSymbolTableWithBaseSeparateChainingHash const&) =
+        default;
+
+    BaseSymbolTableWithBaseSeparateChainingHash& operator=(BaseSymbolTableWithBaseSeparateChainingHash&&) noexcept =
+        default;
 
     // functions)
     [[nodiscard]] Value get(Key const& key) const override {

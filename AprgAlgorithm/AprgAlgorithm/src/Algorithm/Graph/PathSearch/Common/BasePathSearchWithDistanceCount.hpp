@@ -11,9 +11,9 @@ public:
     using VertexToIntMap = typename GraphTypes<Vertex>::VertexToIntMap;
     BasePathSearchWithDistanceCount() = default;
     BasePathSearchWithDistanceCount(BasePathSearchWithDistanceCount const&) = default;
-    BasePathSearchWithDistanceCount(BasePathSearchWithDistanceCount&&) = default;
+    BasePathSearchWithDistanceCount(BasePathSearchWithDistanceCount&&) noexcept = default;
     BasePathSearchWithDistanceCount& operator=(BasePathSearchWithDistanceCount const&) = default;
-    BasePathSearchWithDistanceCount& operator=(BasePathSearchWithDistanceCount&&) = default;
+    BasePathSearchWithDistanceCount& operator=(BasePathSearchWithDistanceCount&&) noexcept = default;
     [[nodiscard]] VertexToIntMap const& getEndVertexToDistanceCountMap() const { return m_endVertexToDistanceCountMap; }
 
     [[nodiscard]] int getDistanceTo(Vertex const& endVertex) const {

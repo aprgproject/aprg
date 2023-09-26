@@ -16,13 +16,14 @@ public:
         int scopeEnd;
         ScopeType scopeType;
     };
+
     CPlusPlusFixer() = default;
     void processDirectory(std::filesystem::path const& directory);
     void processFile(std::filesystem::path const& file);
 
 private:
+    [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
     [[nodiscard]] stringHelper::strings getPrintItems(int& printfEnd, int const printStringIndex) const;
-    [[nodiscard]] static std::string getCorrectedGTestName(std::string const& testName);
     void fixTerms();
     void fixRegardlessWithScopes();
     void fixBasedOnScopes();
@@ -45,6 +46,7 @@ private:
     void fixCStyleStaticCast(Matcher const& typeMatcher);
     void findTermsAndSwapAt(Patterns const& searchPatterns, int const index1, int const index2);
     void findTermsAndCheckForLoopAndSwapAt(Patterns const& searchPatterns, int const index1, int const index2);
+
     void findTermsAndConvertToConstexpr(
         Patterns const& searchPatterns, int const typeIndex, int const constIndex, int const openingParenthesisIndex,
         int const closingParenthesisIndex);
@@ -58,8 +60,7 @@ private:
     void exitScope();
     void fixOnScopeLoop(int const startIndex, int const endIndex);
     void fixConstexprToInlineConstExpr(int const startIndex, int const endIndex);
-    [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
-
+    [[nodiscard]] static std::string getCorrectedGTestName(std::string const& testName);
     static Terms getNewPrintTerms(std::string const& printString, stringHelper::strings const& printItems);
     std::filesystem::path m_currentFile;
     Terms m_terms;

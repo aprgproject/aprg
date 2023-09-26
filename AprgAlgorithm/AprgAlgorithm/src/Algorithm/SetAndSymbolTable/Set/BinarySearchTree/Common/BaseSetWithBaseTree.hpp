@@ -9,13 +9,13 @@ public:
     using Node = typename BaseTree::Node;
     using NodeUniquePointer = typename BaseTree::NodeUniquePointer;
     using TraverseFunction = typename BaseTree::TraverseFunction;
+    BaseSetWithBaseTree() : b_root(BaseTree::m_root) {}
     // virtual destructor because of virtual functions (vtable exists)
     ~BaseSetWithBaseTree() override = default;
     BaseSetWithBaseTree(BaseSetWithBaseTree const&) = default;
-    BaseSetWithBaseTree(BaseSetWithBaseTree&&) = default;
+    BaseSetWithBaseTree(BaseSetWithBaseTree&&) noexcept = default;
     BaseSetWithBaseTree& operator=(BaseSetWithBaseTree const&) = default;
-    BaseSetWithBaseTree& operator=(BaseSetWithBaseTree&&) = default;
-    BaseSetWithBaseTree() : b_root(BaseTree::m_root) {}
+    BaseSetWithBaseTree& operator=(BaseSetWithBaseTree&&) noexcept = default;
     // overrides in BaseSet
     void put(Key const& key) override { putStartingOnThisNode(b_root, key); }
 

@@ -23,8 +23,8 @@ private:
 // and uses the memento to restore its internal state
 class Originator {
 public:
-    explicit Originator(int const state) : m_state(state) {}
     Originator() : m_state(INVALID_STATE) {}
+    explicit Originator(int const state) : m_state(state) {}
 
     [[nodiscard]] std::unique_ptr<Memento> createMemento() const {
         std::cout << "In Originator, createMemento() with " << m_state << ".\n";

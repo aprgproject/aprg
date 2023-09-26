@@ -27,10 +27,10 @@ double totalSizeReadForCombine;
 int writeProgressForCombine;
 }  // namespace ProgressCounters
 
+PerformanceAnalyzer::UniqueUserId::UniqueUserId() : nbccId(0), crnccId(0), transactionId(0) {}
+
 PerformanceAnalyzer::UniqueUserId::UniqueUserId(std::string const& lineInLogs)
     : nbccId(getNbccId(lineInLogs)), crnccId(getCrnccId(lineInLogs)), transactionId(getTransactionId(lineInLogs)) {}
-
-PerformanceAnalyzer::UniqueUserId::UniqueUserId() : nbccId(0), crnccId(0), transactionId(0) {}
 
 bool PerformanceAnalyzer::UniqueUserId::operator<(UniqueUserId const& uniqueUserId) const {
     if (nbccId != uniqueUserId.nbccId) {
@@ -931,7 +931,8 @@ void PerformanceAnalyzer::processFileForTopLogs(string const& filePath) {
             maxTotalCpuFromTop = std::max(maxTotalCpuFromTop, totalCpuFromTop);
         }
         if (state == 2 && isNotNpos(commmandIndexInLine) && isNotNpos(cpuIndexInLine) &&
-            commmandIndexInLine < static_cast<int>(lineInLogs.length()) && cpuIndexInLine + 5 < static_cast<int>(lineInLogs.length())) {
+            commmandIndexInLine < static_cast<int>(lineInLogs.length()) &&
+            cpuIndexInLine + 5 < static_cast<int>(lineInLogs.length())) {
             string const processName(
                 getStringWithoutStartingAndTrailingWhiteSpace(lineInLogs.substr(commmandIndexInLine)));
             auto cpuLoad = convertStringToNumber<double>(lineInLogs.substr(cpuIndexInLine, 5));
@@ -1022,7 +1023,8 @@ void PerformanceAnalyzer::processFileForTopLogsMem(string const& filePath) {
             masterStringStream << totalMem << ", " << ss.str() << "\n";
         }
         if (state == 2 && isNotNpos(commmandIndexInLine) && isNotNpos(memIndexInLine) &&
-            commmandIndexInLine < static_cast<int>(lineInLogs.length()) && memIndexInLine + 5 < static_cast<int>(lineInLogs.length())) {
+            commmandIndexInLine < static_cast<int>(lineInLogs.length()) &&
+            memIndexInLine + 5 < static_cast<int>(lineInLogs.length())) {
             string const processName(
                 getStringWithoutStartingAndTrailingWhiteSpace(lineInLogs.substr(commmandIndexInLine)));
             auto memLoad = convertStringToNumber<double>(lineInLogs.substr(memIndexInLine - 1, 4));
@@ -1090,7 +1092,8 @@ void PerformanceAnalyzer::processFileForRlSetupPerSecond(string const& filePath)
         // int hourOffsetForDay = 0;
         // cout<<"hourOffsetForDay"<<hourOffsetForDay<<"D1:"<<firstLogTime.getDays()<<"D1:"<<logTime.getDays()<<"\n";
         if (!logTime.isStartup()) {
-            if ((hour == static_cast<int>(logTime.getHours())) && (min == static_cast<int>(logTime.getMinutes())) && (sec == static_cast<int>(logTime.getSeconds()))) {
+            if ((hour == static_cast<int>(logTime.getHours())) && (min == static_cast<int>(logTime.getMinutes())) &&
+                (sec == static_cast<int>(logTime.getSeconds()))) {
                 ++instances;
             } else {
                 stringstream ss;

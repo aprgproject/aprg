@@ -70,7 +70,6 @@ private:
     [[nodiscard]] static bool hasEndBrace(std::string const& content);
     static void makeIsolatedCommentsStickWithNextLine(Terms& terms);
     static void removeStartingAndTrailingWhiteSpace(Terms& terms);
-
     CppFileType m_fileType{CppFileType::Unknown};
     Purpose m_purpose{Purpose::Unknown};
     std::vector<ScopeDetail> m_scopeDetails;

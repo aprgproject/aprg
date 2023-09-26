@@ -37,11 +37,7 @@ int IsWinNT() {
 
 }  // namespace
 
-ChessEngineHandler::ChessEngineHandler(string const& enginePath)
-    : m_enginePath(enginePath){
-    initializeEngine();
-}
-
+ChessEngineHandler::ChessEngineHandler(string const& enginePath) : m_enginePath(enginePath) { initializeEngine(); }
 ChessEngineHandler::~ChessEngineHandler() { shutdownEngine(); }
 
 void ChessEngineHandler::reset() {

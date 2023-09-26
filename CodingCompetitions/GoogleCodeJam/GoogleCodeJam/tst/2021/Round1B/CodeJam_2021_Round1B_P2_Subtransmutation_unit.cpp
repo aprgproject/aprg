@@ -8,7 +8,7 @@ using namespace std;
 
 namespace CodeJam_2021_Round1B_P2_Subtransmutation {
 
-TEST(CodeJam_2021_Round1B_P2_SubtransmutationTest, DISABLED_Test1) {
+TEST(CodeJam2021Round1BP2SubtransmutationTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

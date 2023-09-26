@@ -12,8 +12,8 @@ namespace alba {
 namespace {
 
 struct OperationPrinter {
-    explicit OperationPrinter(int) { cout << "Value constructor\n"; }
     OperationPrinter() { cout << "Default constructor\n"; }
+    explicit OperationPrinter(int) { cout << "Value constructor\n"; }
     ~OperationPrinter() { cout << "Destructor\n"; }
     OperationPrinter(OperationPrinter const&) { cout << "Copy constructor\n"; }
     OperationPrinter(OperationPrinter&&) noexcept { cout << "Move constructor\n"; }

@@ -6,7 +6,7 @@
 
 namespace alba {
 
-constexpr int NUMBER_OF_MONSTERS = 6;
+inline constexpr int NUMBER_OF_MONSTERS = 6;
 
 struct RaceConfiguration {
     std::array<int, NUMBER_OF_MONSTERS> luck;

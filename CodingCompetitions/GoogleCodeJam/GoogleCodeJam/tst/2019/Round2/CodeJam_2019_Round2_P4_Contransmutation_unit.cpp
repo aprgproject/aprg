@@ -8,7 +8,7 @@ using namespace std;
 
 namespace CodeJam_2019_Round2_P4_Contransmutation {
 
-TEST(CodeJam_2019_Round2_P4_ContransmutationTest, DISABLED_Test1) {
+TEST(CodeJam2019Round2P4ContransmutationTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

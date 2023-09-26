@@ -10,8 +10,8 @@ using TermTermPair = std::pair<Term, Term>;
 
 class SubstitutionOfTermsToTerms {
 public:
-    explicit SubstitutionOfTermsToTerms(TermToTermMap const& variablesWithValues);
     SubstitutionOfTermsToTerms();
+    explicit SubstitutionOfTermsToTerms(TermToTermMap const& variablesWithValues);
     SubstitutionOfTermsToTerms(std::initializer_list<TermTermPair> const& variablesWithValues);
     [[nodiscard]] Equation performSubstitutionTo(Equation const& equation) const;
     [[nodiscard]] Expression performSubstitutionForExpression(Expression const& expression) const;

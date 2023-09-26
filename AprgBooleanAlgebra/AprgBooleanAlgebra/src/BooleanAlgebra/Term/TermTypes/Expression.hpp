@@ -11,9 +11,9 @@ namespace alba::booleanAlgebra {
 
 class Expression : public BaseTermData {
 public:
+    Expression();
     explicit Expression(BaseTerm const& baseTerm);
     explicit Expression(BaseTerm&& baseTerm);
-    Expression();
     Expression(OperatorLevel const operatorLevel, WrappedTerms const& wrappedTerms);
     Expression(OperatorLevel const operatorLevel, WrappedTerms&& wrappedTerms);
     Expression operator~() const;

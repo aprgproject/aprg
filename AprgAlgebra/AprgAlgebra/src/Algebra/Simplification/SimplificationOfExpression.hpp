@@ -29,9 +29,9 @@ public:
 
     class Configuration : public AlbaConfigurationHolder<ConfigurationDetails> {};
     class ScopeObject : public AlbaConfigurationScopeObject<ConfigurationDetails> {};
+    SimplificationOfExpression();
     explicit SimplificationOfExpression(Expression const& expression);
     explicit SimplificationOfExpression(Expression&& expression);
-    SimplificationOfExpression();
     [[nodiscard]] Expression getExpression() const;
     void simplify();
     static bool shouldSimplifyToACommonDenominator();

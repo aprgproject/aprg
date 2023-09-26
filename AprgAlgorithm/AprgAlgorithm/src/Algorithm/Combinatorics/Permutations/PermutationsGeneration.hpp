@@ -32,9 +32,9 @@ public:
     PermutationsGeneration() = delete;
     ~PermutationsGeneration() = delete;
     PermutationsGeneration(PermutationsGeneration const&) = delete;
-    PermutationsGeneration(PermutationsGeneration&&) = delete;
+    PermutationsGeneration(PermutationsGeneration&&) noexcept = delete;
     PermutationsGeneration& operator=(PermutationsGeneration const&) = delete;
-    PermutationsGeneration& operator=(PermutationsGeneration&&) = delete;
+    PermutationsGeneration& operator=(PermutationsGeneration&&) noexcept = delete;
 
     static Permutations generatePermutationsUsingCppFunctions(Objects const& objects) {
         // Another method for generating permutations is to begin with the permutation {0,1,...,n-1}

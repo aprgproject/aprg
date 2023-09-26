@@ -16,7 +16,7 @@ using namespace std;
 
 namespace {
 constexpr int POLLING_DELAY_TO_WAIT_FOR_START = 1000;
-} // namespace
+}  // namespace
 
 namespace alba {
 

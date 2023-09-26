@@ -10,9 +10,9 @@ public:
     LongestRepeatedSubstring() = delete;
     ~LongestRepeatedSubstring() = delete;
     LongestRepeatedSubstring(LongestRepeatedSubstring const &) = delete;
-    LongestRepeatedSubstring(LongestRepeatedSubstring &&) = delete;
+    LongestRepeatedSubstring(LongestRepeatedSubstring &&) noexcept = delete;
     LongestRepeatedSubstring &operator=(LongestRepeatedSubstring const &) = delete;
-    LongestRepeatedSubstring &operator=(LongestRepeatedSubstring &&) = delete;
+    LongestRepeatedSubstring &operator=(LongestRepeatedSubstring &&) noexcept = delete;
 
     static std::string getLongestRepeatedSubstring(std::string const &stringToCheck) {
         SuffixArray<Index> const suffixArray(stringToCheck);

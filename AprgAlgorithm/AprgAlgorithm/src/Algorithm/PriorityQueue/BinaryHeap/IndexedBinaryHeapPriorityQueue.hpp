@@ -7,8 +7,8 @@
 namespace alba::algorithm {
 
 namespace IndexedBinaryHeapPriorityQueueConstants {
-constexpr int INDEX_OF_TOP_TREE = 1;
-constexpr int VALUE_FOR_UNUSED_INDEX = std::numeric_limits<int>::max();
+inline constexpr int INDEX_OF_TOP_TREE = 1;
+inline constexpr int VALUE_FOR_UNUSED_INDEX = std::numeric_limits<int>::max();
 }  // namespace IndexedBinaryHeapPriorityQueueConstants
 
 template <typename Object, template <class> class ComparatorTemplateType, int NUMBER_OF_CHILDREN>

@@ -4,37 +4,48 @@
 #include "KickStart_2020_RoundE_P3_Toys.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <algorithm>
 #include <cstdint>
 #include <iostream>
 #include <numeric>
 #include <queue>
 #include <vector>
 
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <algorithm>
+
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2020_RoundE_P3_Toys {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2020_RoundE_P3_Toys {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    my_cin.tie(nullptr);
+
+    runAllTestCases();
+
+    return 0;
+}
 
 void runTestCase(int const testCaseNumber) {
     int N = 0;
     my_cin >> N;
     vector<int64_t> E(N);
     vector<pair<int64_t, int>> R(N);
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N; ++i) {
         my_cin >> E[i] >> R[i].first;
         R[i].first += E[i];
         R[i].second = i;
@@ -45,7 +56,7 @@ void runTestCase(int const testCaseNumber) {
 
     // compute prefix sums of alive toys
     vector<int64_t> bit(N);
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N; ++i) {
         for (int a = i; a < N; a |= a + 1) {
             bit[a] += E[i];
         }
@@ -53,10 +64,10 @@ void runTestCase(int const testCaseNumber) {
 
     priority_queue<int, vector<int>, greater<>> is_bad;
 
-    const int64_t INF = 8e18;
+    constexpr int64_t INF = 8e18;
     int64_t ans = -1;
     int best_remove = -1;
-    for (int z = 0; z < N; z++) {
+    for (int z = 0; z < N; ++z) {
         while (!R.empty() && C < R.back().first) {
             is_bad.push(R.back().second);
             R.pop_back();
@@ -97,21 +108,15 @@ void runTestCase(int const testCaseNumber) {
 void runAllTestCases() {
     int numberOfTestCases = 0;
     my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
         runTestCase(testCaseNumber);
     }
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    my_cin.tie(nullptr);
-
-    runAllTestCases();
-
-    return 0;
-}
-
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
 }  // namespace KickStart_2020_RoundE_P3_Toys
+
 #undef FOR_SUBMISSION
+
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~

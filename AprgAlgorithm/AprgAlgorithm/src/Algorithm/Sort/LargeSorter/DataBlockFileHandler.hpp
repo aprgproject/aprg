@@ -14,16 +14,17 @@ template <typename ObjectToSort>
 class DataBlockFileHandler {
 public:
     DataBlockFileHandler() = default;
-    DataBlockFileHandler(DataBlockFileHandler const &) = default;
-    DataBlockFileHandler(DataBlockFileHandler &&) = default;
-    DataBlockFileHandler &operator=(DataBlockFileHandler const &) = default;
-    DataBlockFileHandler &operator=(DataBlockFileHandler &&) = default;
 
     ~DataBlockFileHandler() {
         releaseFileStream();
         AlbaLocalPathHandler filePathHandler(m_path);
         filePathHandler.deleteFileAndIsSuccessful();
     }
+
+    DataBlockFileHandler(DataBlockFileHandler const &) = default;
+    DataBlockFileHandler(DataBlockFileHandler &&) noexcept = default;
+    DataBlockFileHandler &operator=(DataBlockFileHandler const &) = default;
+    DataBlockFileHandler &operator=(DataBlockFileHandler &&) noexcept = default;
 
     void openFileIfNeeded(std::filesystem::path const &path) {
         if (!m_fileOptional) {

@@ -8,10 +8,8 @@ using namespace std;
 
 namespace KickStart_2019_PracticeRound_P1_NumberGuessing {
 
-TEST(
-    KickStart_2019_PracticeRound_P1_NumberGuessingTest,
-    DISABLED_Test1)  // Interactive problem so it cant be tested here.
-{
+TEST(KickStart2019PracticeRoundP1NumberGuessingTest, DISABLED_Test1) {
+    // Interactive problem so it cant be tested here.
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

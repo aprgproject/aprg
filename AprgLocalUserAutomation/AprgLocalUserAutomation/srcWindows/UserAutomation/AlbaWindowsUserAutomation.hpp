@@ -11,7 +11,7 @@
 namespace alba::AlbaWindowsUserAutomation {
 using MousePosition = AlbaXY<int>;
 using InputFunction = std::function<void(INPUT&)>;
-constexpr int REALISTIC_DELAY_IN_MILLISECONDS = 100;
+inline constexpr int REALISTIC_DELAY_IN_MILLISECONDS = 100;
 [[nodiscard]] MousePosition getMousePosition();
 [[nodiscard]] std::string getClassNameOfForegroundWindow();
 [[nodiscard]] std::string getStringFromClipboard();

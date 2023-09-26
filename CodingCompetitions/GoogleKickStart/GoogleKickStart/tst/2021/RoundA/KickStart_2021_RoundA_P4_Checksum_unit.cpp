@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2021_RoundA_P4_Checksum {
 
-TEST(KickStart_2021_RoundA_P4_ChecksumTest, DISABLED_Test1) {
+TEST(KickStart2021RoundAP4ChecksumTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

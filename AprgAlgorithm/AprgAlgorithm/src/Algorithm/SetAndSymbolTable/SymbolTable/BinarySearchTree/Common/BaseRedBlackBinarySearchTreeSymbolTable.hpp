@@ -12,13 +12,13 @@ template <typename Key, typename Value, typename Node>
 class BaseRedBlackBinarySearchTreeSymbolTable
     : public BaseSymbolTableWithBaseTree<Value, BaseRedBlackBinarySearchTree<Key, Node, BaseSymbolTable<Key, Value>>> {
 public:
+    BaseRedBlackBinarySearchTreeSymbolTable() = default;
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseRedBlackBinarySearchTreeSymbolTable() override = default;
-    BaseRedBlackBinarySearchTreeSymbolTable() = default;
     BaseRedBlackBinarySearchTreeSymbolTable(BaseRedBlackBinarySearchTreeSymbolTable const &) = default;
-    BaseRedBlackBinarySearchTreeSymbolTable(BaseRedBlackBinarySearchTreeSymbolTable &&) = default;
+    BaseRedBlackBinarySearchTreeSymbolTable(BaseRedBlackBinarySearchTreeSymbolTable &&) noexcept = default;
     BaseRedBlackBinarySearchTreeSymbolTable &operator=(BaseRedBlackBinarySearchTreeSymbolTable const &) = default;
-    BaseRedBlackBinarySearchTreeSymbolTable &operator=(BaseRedBlackBinarySearchTreeSymbolTable &&) = default;
+    BaseRedBlackBinarySearchTreeSymbolTable &operator=(BaseRedBlackBinarySearchTreeSymbolTable &&) noexcept = default;
 };
 
 }  // namespace alba::algorithm

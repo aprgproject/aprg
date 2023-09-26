@@ -5,9 +5,9 @@
 // Inspired by: https://medium.com/pranayaggarwal25/unnamed-namespaces-static-f1498741c527
 namespace alba::StaticOnTranslationUnits {
 
+constexpr int externConstInteger = 510;  // definition (complete type)
 // explicitly extern (external linkage)
 extern const int externConstInteger;  // only a declaration (incomplete type)
-const int externConstInteger = 510;   // definition (complete type)
 // constexpr int constInteger = 110;  // Error: redefinition of 'constInteger'
 // static int staticInteger = 210;    // Error: redefinition of 'staticInteger'
 int integer = 310;  // extern (external linkage) by default

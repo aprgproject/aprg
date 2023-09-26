@@ -20,13 +20,13 @@ public:
     using VertexToFlowEdgeMap = std::map<Vertex, FlowEdge>;
     using CheckableVerticesWithVertex = CheckableVertices<Vertex>;
     using TraverseFunction = std::function<void(Vertex)>;
-    virtual ~BaseFordFulkerson() = default;  // virtual destructor because of virtual functions (vtable exists)
-    BaseFordFulkerson(BaseFordFulkerson const&) = default;
-    BaseFordFulkerson(BaseFordFulkerson&&) = default;
-    BaseFordFulkerson& operator=(BaseFordFulkerson const&) = default;
-    BaseFordFulkerson& operator=(BaseFordFulkerson&&) = default;
     explicit BaseFordFulkerson(SinkSourceFlowNetworkType const& flowNetwork) : m_flowNetwork(flowNetwork) {}
     explicit BaseFordFulkerson(SinkSourceFlowNetworkType&& flowNetwork) : m_flowNetwork(flowNetwork) {}
+    virtual ~BaseFordFulkerson() = default;  // virtual destructor because of virtual functions (vtable exists)
+    BaseFordFulkerson(BaseFordFulkerson const&) = default;
+    BaseFordFulkerson(BaseFordFulkerson&&) noexcept = default;
+    BaseFordFulkerson& operator=(BaseFordFulkerson const&) = default;
+    BaseFordFulkerson& operator=(BaseFordFulkerson&&) noexcept = default;
 
     [[nodiscard]] Edges getMinCutEdges() const {
         // Let A be the set of nodes that can be reached from the source using positive-weight edges.

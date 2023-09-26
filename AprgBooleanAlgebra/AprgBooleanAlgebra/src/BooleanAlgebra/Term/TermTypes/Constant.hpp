@@ -8,8 +8,8 @@ namespace alba::booleanAlgebra {
 
 class Constant : public BaseTermData {
 public:
-    explicit Constant(bool const boolValue);
     Constant();
+    explicit Constant(bool const boolValue);
     Constant operator~() const;
     bool operator==(Constant const& second) const;
     bool operator!=(Constant const& second) const;

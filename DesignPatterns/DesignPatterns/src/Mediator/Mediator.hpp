@@ -11,12 +11,12 @@ class Mediator;
 // it would have otherwise communicated with another colleague
 class Colleague {
 public:
+    Colleague(Mediator& mediator, const int id) : m_mediator(mediator), m_id(id) {}
     virtual ~Colleague() = default;
     Colleague(Colleague const&) = default;
-    Colleague(Colleague&&) = default;
+    Colleague(Colleague&&) noexcept = default;
     Colleague& operator=(Colleague const&) = delete;
-    Colleague& operator=(Colleague&&) = delete;
-    Colleague(Mediator& mediator, const int id) : m_mediator(mediator), m_id(id) {}
+    Colleague& operator=(Colleague&&) noexcept = delete;
     virtual void send(std::string const&) = 0;
     virtual void receive(std::string const&) = 0;
     [[nodiscard]] int getID() const { return m_id; }
@@ -39,9 +39,9 @@ class Mediator {
 public:
     virtual ~Mediator() = default;
     Mediator(Mediator const&) = default;
-    Mediator(Mediator&&) = default;
+    Mediator(Mediator&&) noexcept = default;
     Mediator& operator=(Mediator const&) = default;
-    Mediator& operator=(Mediator&&) = default;
+    Mediator& operator=(Mediator&&) noexcept = default;
     virtual void add(Colleague& colleague) = 0;
     virtual void distribute(Colleague const& sender, std::string const& message) = 0;
 

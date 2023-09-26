@@ -8,12 +8,12 @@ namespace NullObject {
 // implements default behavior for the interface common to all classes
 class AbstractObject {
 public:
-    virtual ~AbstractObject() = default;
     AbstractObject() = default;
+    virtual ~AbstractObject() = default;
     AbstractObject(AbstractObject const &) = default;
-    AbstractObject(AbstractObject &&) = default;
+    AbstractObject(AbstractObject &&) noexcept = default;
     AbstractObject &operator=(AbstractObject const &) = default;
-    AbstractObject &operator=(AbstractObject &&) = default;
+    AbstractObject &operator=(AbstractObject &&) noexcept = default;
     virtual void doSomething() = 0;
     // ...
 };

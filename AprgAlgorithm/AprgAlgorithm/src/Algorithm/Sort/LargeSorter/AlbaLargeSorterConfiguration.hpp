@@ -20,7 +20,8 @@ struct AlbaLargeSorterConfiguration {
           m_maximumNumberOfObjectsInMemory(maximumNumberOfObjectsInMemory),
           m_maximumFileStreams(maximumFileStreams) {}
 
-    [[nodiscard]] AlbaLargeSorterConfiguration getConfigurationWithDifferentDirectory(std::string const& directoryForBlocks) const {
+    [[nodiscard]] AlbaLargeSorterConfiguration getConfigurationWithDifferentDirectory(
+        std::string const& directoryForBlocks) const {
         AlbaLargeSorterConfiguration copiedConfiguration(*this);
         copiedConfiguration.m_directoryForBlocks = directoryForBlocks;
         return copiedConfiguration;

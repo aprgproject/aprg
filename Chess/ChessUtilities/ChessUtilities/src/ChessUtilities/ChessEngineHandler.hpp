@@ -15,12 +15,12 @@ public:
     enum class LogType { FromEngine, ToEngine, HandlerStatus };
 
     using ProcessAStringFunction = std::function<void(std::string const&)>;
-    ChessEngineHandler(ChessEngineHandler const&) = default;
-    ChessEngineHandler(ChessEngineHandler&&) = default;
-    ChessEngineHandler& operator=(ChessEngineHandler const&) = default;
-    ChessEngineHandler& operator=(ChessEngineHandler&&) = default;
     explicit ChessEngineHandler(std::string const& enginePath);
     ~ChessEngineHandler();
+    ChessEngineHandler(ChessEngineHandler const&) = default;
+    ChessEngineHandler(ChessEngineHandler&&) noexcept = default;
+    ChessEngineHandler& operator=(ChessEngineHandler const&) = default;
+    ChessEngineHandler& operator=(ChessEngineHandler&&) noexcept = default;
     void reset();
     void sendStringToEngine(std::string const& stringToEngine);
     void processStringFromEngine(std::string const& stringFromEngine);

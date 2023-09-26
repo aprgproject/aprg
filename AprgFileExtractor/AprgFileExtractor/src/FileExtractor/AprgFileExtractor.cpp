@@ -33,14 +33,14 @@ extern int numberOfFilesToBeAnalyzedForExtraction;
 extern int numberOfFilesAnalyzedForExtraction;
 }  // namespace ProgressCounters
 
-AprgFileExtractor::AprgFileExtractor(string const& condition)
-    : m_grepEvaluator(condition),
+AprgFileExtractor::AprgFileExtractor()
+    : m_grepEvaluator(""),
       m_pathOf7zExecutable(AlbaLocalPathHandler(PATH_OF_7Z_EXECUTABLE).getPath()),
       m_pathOf7zTempFile(AlbaLocalPathHandler(PATH_OF_7Z_TEMP_FILE).getPath()),
       m_nullDevice(NULL_DEVICE) {}
 
-AprgFileExtractor::AprgFileExtractor()
-    : m_grepEvaluator(""),
+AprgFileExtractor::AprgFileExtractor(string const& condition)
+    : m_grepEvaluator(condition),
       m_pathOf7zExecutable(AlbaLocalPathHandler(PATH_OF_7Z_EXECUTABLE).getPath()),
       m_pathOf7zTempFile(AlbaLocalPathHandler(PATH_OF_7Z_TEMP_FILE).getPath()),
       m_nullDevice(NULL_DEVICE) {}

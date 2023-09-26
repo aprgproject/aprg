@@ -4,50 +4,29 @@
 #include "KickStart_2020_RoundB_P1_BikeTour.hpp"
 
 #include <Fake/FakeNames.hpp>
-
 #endif
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
-
-#include <cstdint>
 #include <iostream>
 #include <vector>
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+#include <cstdint>
 
 using namespace std;
 
 // ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
 #ifndef FOR_SUBMISSION
-using namespace alba;
-#endif
-namespace KickStart_2020_RoundB_P1_BikeTour {
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 
+using namespace alba;
+
+#endif
+
+namespace KickStart_2020_RoundB_P1_BikeTour {
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 #ifndef my_cout
 #define my_cout cout
 #define my_cin cin
 #endif
-
-void runTestCase(int const testCaseNumber) {
-    int N = 0;
-    my_cin >> N;
-    vector<int> H(N);
-    for (int& a : H) {
-        my_cin >> a;
-    }
-    int ans = 0;
-    for (int i = 1; i + 1 < N; i++) {
-        ans += static_cast<int>((H[i] > H[i - 1]) && H[i] > H[i + 1]);
-    }
-
-    my_cout << "Case #" << testCaseNumber << ": " << ans << '\n';
-}
-
-void runAllTestCases() {
-    int numberOfTestCases = 0;
-    my_cin >> numberOfTestCases;
-    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; testCaseNumber++) {
-        runTestCase(testCaseNumber);
-    }
-}
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -58,11 +37,36 @@ int main() {
     return 0;
 }
 
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
-}  // namespace KickStart_2020_RoundB_P1_BikeTour
-#undef FOR_SUBMISSION
-// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
+void runTestCase(int const testCaseNumber) {
+    int N = 0;
+    my_cin >> N;
+    vector<int> H(N);
+    for (int& a : H) {
+        my_cin >> a;
+    }
+    int ans = 0;
+    for (int i = 1; i + 1 < N; ++i) {
+        ans += static_cast<int>((H[i] > H[i - 1]) && H[i] > H[i + 1]);
+    }
 
+    my_cout << "Case #" << testCaseNumber << ": " << ans << '\n';
+}
+
+void runAllTestCases() {
+    int numberOfTestCases = 0;
+    my_cin >> numberOfTestCases;
+    for (int testCaseNumber = 1; testCaseNumber <= numberOfTestCases; ++testCaseNumber) {
+        runTestCase(testCaseNumber);
+    }
+}
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING START ~~~~~~~~~
+
+}  // namespace KickStart_2020_RoundB_P1_BikeTour
+
+#undef FOR_SUBMISSION
+
+// ~~~~~~~~~ DELETE THIS WHEN SUBMITTING END   ~~~~~~~~~
 /*
 Problem
 

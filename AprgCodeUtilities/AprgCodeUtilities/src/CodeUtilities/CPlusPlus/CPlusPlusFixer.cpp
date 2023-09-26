@@ -34,6 +34,57 @@ void CPlusPlusFixer::processFile(path const& file) {
     writeAllTerms(file, m_terms);
 }
 
+CPlusPlusFixer::ScopeDetail CPlusPlusFixer::constructScopeDetails(
+    int const scopeHeaderStart, int const openingBraceIndex) const {
+    Terms scopeHeaderTerms(extractTermsInRange(scopeHeaderStart, openingBraceIndex, m_terms));
+    ScopeDetail scopeDetail{scopeHeaderStart, openingBraceIndex, 0, ScopeType::Unknown};
+    Patterns const searchPatterns{
+        {M("template"), M("<")},
+        {M("namespace"), M(TermType::Identifier)},
+        {M("namespace"), M("{")},
+        {M("enum"), M("class"), M(TermType::Identifier)},
+        {M("class"), M(TermType::Identifier)},
+        {M("struct"), M(TermType::Identifier)},
+        {M("union"), M(TermType::Identifier)}};
+    int nextIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForwardsForPatterns(nextIndex, scopeHeaderTerms, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int const firstHitIndex = hitIndexes.front();
+            int const lastHitIndex = hitIndexes.back();
+            Term const& firstTerm(scopeHeaderTerms[firstHitIndex]);
+            Term const& lastTerm(scopeHeaderTerms[lastHitIndex]);
+            if (firstTerm.getContent() == "namespace" && lastTerm.getTermType() == TermType::Identifier) {
+                scopeDetail.scopeType = ScopeType::NamedNamespace;
+                break;
+            }
+            if (firstTerm.getContent() == "namespace" && lastTerm.getContent() == "{") {
+                scopeDetail.scopeType = ScopeType::AnonymousNamespace;
+                break;
+            }
+            if (firstTerm.getContent() == "enum" && scopeHeaderTerms[hitIndexes[1]].getContent() == "class" &&
+                lastTerm.getTermType() == TermType::Identifier) {
+                scopeDetail.scopeType = ScopeType::EnumClass;
+                break;
+            }
+            if ((firstTerm.getContent() == "class" || firstTerm.getContent() == "struct" ||
+                 firstTerm.getContent() == "union") &&
+                lastTerm.getTermType() == TermType::Identifier) {
+                scopeDetail.scopeType = ScopeType::ClassDeclaration;
+                break;
+            }
+            if (firstTerm.getContent() == "template" && lastTerm.getContent() == "<") {
+                nextIndex = getIndexAtClosingString(scopeHeaderTerms, lastHitIndex, "<", ">");
+            } else {
+                nextIndex = lastHitIndex + 1;
+            }
+        }
+    }
+    return scopeDetail;
+}
+
 strings CPlusPlusFixer::getPrintItems(int& printfEnd, int const printStringIndex) const {
     strings printItems;
     int parenthesisLevel = 1;
@@ -60,20 +111,6 @@ strings CPlusPlusFixer::getPrintItems(int& printfEnd, int const printStringIndex
         printItems.emplace_back(getCombinedContents(printItemStart, printItemEnd, m_terms));
     }
     return printItems;
-}
-
-string CPlusPlusFixer::getCorrectedGTestName(string const& testName) {
-    if (testName.find_first_of('_') != std::string::npos) {
-        if (testName.substr(0, std::min(static_cast<int>(testName.length()), 9)) == "DISABLED_") {
-            string withoutUnderscore = testName.substr(9);
-            replaceAllAndReturnIfFound(withoutUnderscore, "_", "");
-            return string("DISABLED_") + withoutUnderscore;
-        }
-        string withoutUnderscore = testName;
-        replaceAllAndReturnIfFound(withoutUnderscore, "_", "");
-        return withoutUnderscore;
-    }
-    return testName;
 }
 
 void CPlusPlusFixer::fixTerms() {
@@ -431,7 +468,6 @@ void CPlusPlusFixer::processClosingBrace(int& nextIndex, int const closingBraceI
 }
 
 void CPlusPlusFixer::enterAndSetTopLevelScope() { m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel}}; }
-
 void CPlusPlusFixer::exitTopLevelScope() { m_scopeDetails.pop_back(); }
 
 void CPlusPlusFixer::enterScope(int const scopeHeaderStart, int const openingBraceIndex) {
@@ -464,55 +500,18 @@ void CPlusPlusFixer::fixConstexprToInlineConstExpr(int const startIndex, int con
     }
 }
 
-CPlusPlusFixer::ScopeDetail CPlusPlusFixer::constructScopeDetails(
-    int const scopeHeaderStart, int const openingBraceIndex) const {
-    Terms scopeHeaderTerms(extractTermsInRange(scopeHeaderStart, openingBraceIndex, m_terms));
-    ScopeDetail scopeDetail{scopeHeaderStart, openingBraceIndex, 0, ScopeType::Unknown};
-    Patterns const searchPatterns{
-        {M("template"), M("<")},
-        {M("namespace"), M(TermType::Identifier)},
-        {M("namespace"), M("{")},
-        {M("enum"), M("class"), M(TermType::Identifier)},
-        {M("class"), M(TermType::Identifier)},
-        {M("struct"), M(TermType::Identifier)},
-        {M("union"), M(TermType::Identifier)}};
-    int nextIndex = 0;
-    bool isFound(true);
-    while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(nextIndex, scopeHeaderTerms, searchPatterns);
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            int const firstHitIndex = hitIndexes.front();
-            int const lastHitIndex = hitIndexes.back();
-            Term const& firstTerm(scopeHeaderTerms[firstHitIndex]);
-            Term const& lastTerm(scopeHeaderTerms[lastHitIndex]);
-            if (firstTerm.getContent() == "namespace" && lastTerm.getTermType() == TermType::Identifier) {
-                scopeDetail.scopeType = ScopeType::NamedNamespace;
-                break;
-            }
-            if (firstTerm.getContent() == "namespace" && lastTerm.getContent() == "{") {
-                scopeDetail.scopeType = ScopeType::AnonymousNamespace;
-                break;
-            }
-            if (firstTerm.getContent() == "enum" && scopeHeaderTerms[hitIndexes[1]].getContent() == "class" &&
-                lastTerm.getTermType() == TermType::Identifier) {
-                scopeDetail.scopeType = ScopeType::EnumClass;
-                break;
-            }
-            if ((firstTerm.getContent() == "class" || firstTerm.getContent() == "struct" ||
-                 firstTerm.getContent() == "union") &&
-                lastTerm.getTermType() == TermType::Identifier) {
-                scopeDetail.scopeType = ScopeType::ClassDeclaration;
-                break;
-            }
-            if (firstTerm.getContent() == "template" && lastTerm.getContent() == "<") {
-                nextIndex = getIndexAtClosingString(scopeHeaderTerms, lastHitIndex, "<", ">");
-            } else {
-                nextIndex = lastHitIndex + 1;
-            }
+string CPlusPlusFixer::getCorrectedGTestName(string const& testName) {
+    if (testName.find_first_of('_') != std::string::npos) {
+        if (testName.substr(0, std::min(static_cast<int>(testName.length()), 9)) == "DISABLED_") {
+            string withoutUnderscore = testName.substr(9);
+            replaceAllAndReturnIfFound(withoutUnderscore, "_", "");
+            return string("DISABLED_") + withoutUnderscore;
         }
+        string withoutUnderscore = testName;
+        replaceAllAndReturnIfFound(withoutUnderscore, "_", "");
+        return withoutUnderscore;
     }
-    return scopeDetail;
+    return testName;
 }
 
 Terms CPlusPlusFixer::getNewPrintTerms(string const& printString, strings const& printItems) {

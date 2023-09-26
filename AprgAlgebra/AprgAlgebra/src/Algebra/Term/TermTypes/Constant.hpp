@@ -9,8 +9,8 @@ namespace alba::algebra {
 
 class Constant : public BaseTermData {
 public:
-    explicit Constant(AlbaNumber const& constantValue);
     Constant();
+    explicit Constant(AlbaNumber const& constantValue);
 
     template <
         typename ArithmeticType,

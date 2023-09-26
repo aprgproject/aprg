@@ -24,12 +24,12 @@ private:
 // abstract interface for creating products
 class Builder {
 public:
-    virtual ~Builder() = default;
     Builder() = default;
+    virtual ~Builder() = default;
     Builder(Builder const &) = default;
-    Builder(Builder &&) = default;
+    Builder(Builder &&) noexcept = default;
     Builder &operator=(Builder const &) = default;
-    Builder &operator=(Builder &&) = default;
+    Builder &operator=(Builder &&) noexcept = default;
     virtual void buildPartA() = 0;
     virtual void buildPartB() = 0;
     virtual void buildPartC() = 0;

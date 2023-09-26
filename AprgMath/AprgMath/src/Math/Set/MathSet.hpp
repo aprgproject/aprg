@@ -29,9 +29,9 @@ public:
     using RosterLists = std::vector<RosterList>;
     using VoidElementFunction = std::function<void(ElementType const&)>;
     using GenerateFunction = std::function<void(VoidElementFunction const& generateElementFunction)>;
+    MathSet() : m_description("Null set"), m_ruleToBeInTheSet([](ElementType const&) -> bool { return false; }) {}
     explicit MathSet(RosterList const& rosterList) { constructSetBasedOnRosterList(rosterList); }
     explicit MathSet(RosterList&& rosterList) { constructSetBasedOnRosterList(rosterList); }
-    MathSet() : m_description("Null set"), m_ruleToBeInTheSet([](ElementType const&) -> bool { return false; }) {}
     MathSet(std::string const& description, Rule const& rule) : m_description(description), m_ruleToBeInTheSet(rule) {}
     MathSet(std::string&& description, Rule&& rule) : m_description(description), m_ruleToBeInTheSet(rule) {}
 

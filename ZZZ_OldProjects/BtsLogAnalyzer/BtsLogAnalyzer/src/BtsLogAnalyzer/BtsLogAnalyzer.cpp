@@ -14,6 +14,8 @@ using namespace wcdmaToolsBackend;
 
 namespace alba {
 
+BtsLogAnalyzer::BtsLogAnalyzer() : m_totalDelay(0), m_count(0) {}
+
 BtsLogAnalyzer::BtsLogAnalyzer(string const& pathOfOutputFile)
     : m_outputStream(pathOfOutputFile), m_totalDelay(0), m_count(0) {
     if (m_outputStream.is_open()) {
@@ -21,8 +23,6 @@ BtsLogAnalyzer::BtsLogAnalyzer(string const& pathOfOutputFile)
              << "\n";
     }
 }
-
-BtsLogAnalyzer::BtsLogAnalyzer() : m_totalDelay(0), m_count(0) {}
 
 double BtsLogAnalyzer::getComputedAverageDelay() const {
     cout << "totalDelay: " << m_totalDelay << " count: " << m_count << "\n";

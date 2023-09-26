@@ -11,9 +11,9 @@ class BoardValue {
 public:
     static constexpr int SIZE_OF_DATA = 4;
     using Data = std::array<uint64_t, SIZE_OF_DATA>;
+    BoardValue();
     explicit BoardValue(Board const& board);
     explicit BoardValue(Data const& data);
-    BoardValue();
     [[nodiscard]] Data const& getData() const;
     [[nodiscard]] bool isZero() const;
     friend std::istream& operator>>(std::istream& in, BoardValue& boardValue);

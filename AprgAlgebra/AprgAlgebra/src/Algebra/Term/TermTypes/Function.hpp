@@ -13,15 +13,15 @@ namespace alba::algebra {
 class Function : public BaseTermData {
 public:
     using EvaluationFunction = std::function<AlbaNumber(AlbaNumber const&)>;
-    // rule of five of six
-    ~Function() override = default;
-    Function(Function&& functionObject) = default;
-    Function& operator=(Function&& functionObject) = default;
     Function();
     Function(std::string const& functionName, BaseTerm const& baseTerm, EvaluationFunction const& evaluationFunction);
     Function(std::string&& functionName, BaseTerm&& baseTerm, EvaluationFunction&& evaluationFunction);
+    // rule of five of six
+    ~Function() override = default;
     Function(Function const& functionObject);
+    Function(Function&& functionObject) noexcept = default;
     Function& operator=(Function const& functionObject);
+    Function& operator=(Function&& functionObject) noexcept = default;
     bool operator==(Function const& second) const;
     bool operator!=(Function const& second) const;
     bool operator<(Function const& second) const;

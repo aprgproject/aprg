@@ -8,7 +8,7 @@ using namespace std;
 
 namespace KickStart_2019_RoundB_P3_DiverseSubarray {
 
-TEST(KickStart_2019_RoundB_P3_DiverseSubarrayTest, DISABLED_Test1) {
+TEST(KickStart2019RoundBP3DiverseSubarrayTest, DISABLED_Test1) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();
@@ -47,7 +47,7 @@ TEST(KickStart_2019_RoundB_P3_DiverseSubarrayTest, DISABLED_Test1) {
         outputStringStream.str());
 }
 
-TEST(KickStart_2019_RoundB_P3_DiverseSubarrayTest, DISABLED_Test2) {
+TEST(KickStart2019RoundBP3DiverseSubarrayTest, DISABLED_Test2) {
     stringstream& inputStringStream(FakeObjects::getInstance().inputStringStream);
     stringstream& outputStringStream(FakeObjects::getInstance().outputStringStream);
     inputStringStream = stringstream();

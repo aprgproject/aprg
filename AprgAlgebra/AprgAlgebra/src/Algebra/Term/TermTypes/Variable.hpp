@@ -8,9 +8,9 @@ namespace alba::algebra {
 
 class Variable : public BaseTermData {
 public:
+    Variable();
     explicit Variable(std::string const& variableName);
     explicit Variable(std::string&& variableName);
-    Variable();
     // rule of zero
     bool operator==(Variable const& second) const;
     bool operator!=(Variable const& second) const;

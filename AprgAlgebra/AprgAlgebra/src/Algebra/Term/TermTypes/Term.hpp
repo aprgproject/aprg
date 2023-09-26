@@ -29,10 +29,6 @@ public:
     template <typename ArithmeticType, typename = std::enable_if_t<typeHelper::isArithmeticType<ArithmeticType>()>>
     Term(ArithmeticType const value) : Term(AlbaNumber(value)) {}
 
-    // rule of five or six
-    ~Term() override = default;
-    Term(Term&& term) = default;
-    Term& operator=(Term&& term) = default;
     Term(AlbaNumber const& number);
     Term(char const* const characterString);
     Term(std::string const& stringAsParameter);
@@ -43,8 +39,12 @@ public:
     Term(Polynomial const& polynomial);
     Term(Expression const& expression);
     Term(Function const& function);
+    // rule of five or six
+    ~Term() override = default;
     Term(Term const& term);
+    Term(Term&& term) noexcept = default;
     Term& operator=(Term const& term);
+    Term& operator=(Term&& term) noexcept = default;
     // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     bool operator==(Term const& second) const;
     bool operator!=(Term const& second) const;

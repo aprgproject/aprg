@@ -33,8 +33,8 @@ struct DspDetails {
 
 class Dsp {
 public:
-    explicit Dsp(DspDetails const& dspDetails);
     Dsp();
+    explicit Dsp(DspDetails const& dspDetails);
     [[nodiscard]] DspMode getMode() const;
     [[nodiscard]] NyquistType getNyquistType() const;
     [[nodiscard]] std::string getModeString() const;

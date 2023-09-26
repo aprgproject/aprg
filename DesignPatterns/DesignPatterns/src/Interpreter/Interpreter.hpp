@@ -22,12 +22,12 @@ private:
 // in the abstract syntax tree
 class AbstractExpression {
 public:
-    virtual ~AbstractExpression() = default;
     AbstractExpression() = default;
+    virtual ~AbstractExpression() = default;
     AbstractExpression(AbstractExpression const&) = default;
-    AbstractExpression(AbstractExpression&&) = default;
+    AbstractExpression(AbstractExpression&&) noexcept = default;
     AbstractExpression& operator=(AbstractExpression const&) = default;
-    AbstractExpression& operator=(AbstractExpression&&) = default;
+    AbstractExpression& operator=(AbstractExpression&&) noexcept = default;
     virtual int interpret(Context const&) = 0;
     // ...
 };

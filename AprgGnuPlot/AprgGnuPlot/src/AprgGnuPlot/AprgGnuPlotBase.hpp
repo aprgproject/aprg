@@ -10,12 +10,12 @@ namespace alba {
 class AprgGnuPlotBase {
 public:
     using GraphingSteps = std::function<void(void)>;
-    virtual ~AprgGnuPlotBase() = default;  // virtual destructor because of virtual functions (vtable exists)
     AprgGnuPlotBase() = default;
+    virtual ~AprgGnuPlotBase() = default;  // virtual destructor because of virtual functions (vtable exists)
     AprgGnuPlotBase(AprgGnuPlotBase const& plot) = delete;
-    AprgGnuPlotBase(AprgGnuPlotBase&& plot) = delete;
+    AprgGnuPlotBase(AprgGnuPlotBase&& plot) noexcept = delete;
     AprgGnuPlotBase& operator=(AprgGnuPlotBase const& plot) = delete;
-    AprgGnuPlotBase& operator=(AprgGnuPlotBase&& plot) = delete;
+    AprgGnuPlotBase& operator=(AprgGnuPlotBase&& plot) noexcept = delete;
     void setTitle(std::string const& title, std::string const& configurationString);
     void setXAxis(std::string const& xAxisName, std::string const& configurationString);
     void setYAxis(std::string const& yAxisName, std::string const& configurationString);

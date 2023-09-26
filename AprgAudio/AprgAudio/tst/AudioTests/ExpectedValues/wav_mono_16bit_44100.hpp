@@ -2,10 +2,10 @@
 
 namespace wav_mono_16bit_44100 {
 
-constexpr int numberOfSamplesPerChannel = 352800;
-constexpr int bitDepth = 16;
-constexpr int sampleRate = 44100;
-constexpr int numberOfChannels = 1;
+inline constexpr int numberOfSamplesPerChannel = 352800;
+inline constexpr int bitDepth = 16;
+inline constexpr int sampleRate = 44100;
+inline constexpr int numberOfChannels = 1;
 
 std::vector<double> testBuffer = {
     -3.0517578125e-05, -0.0001220703125,  -0.00125122070312, -0.00265502929688,  -0.00308227539062, 0.00384521484375,

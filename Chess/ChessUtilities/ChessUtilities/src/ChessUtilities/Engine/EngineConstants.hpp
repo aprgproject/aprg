@@ -5,8 +5,8 @@ namespace alba {
 namespace chess {
 
 namespace EngineConstants {
-constexpr int NUMBER_OF_THREADS = 4;  // Desktop computer at home has four threads
-constexpr int NUMBER_OF_VARIATIONS = 20;
+inline constexpr int NUMBER_OF_THREADS = 4;  // Desktop computer at home has four threads
+inline constexpr int NUMBER_OF_VARIATIONS = 20;
 }  // namespace EngineConstants
 
 // Basis: https://github.com/official-stockfish/Stockfish

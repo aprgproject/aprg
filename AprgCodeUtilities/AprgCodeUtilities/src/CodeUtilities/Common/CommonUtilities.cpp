@@ -46,15 +46,6 @@ void changeTerm(Term& term, TermType const newTermType, string const& content) {
     term.setContent(content);
 }
 
-Terms extractTermsInRange(int const startIndex, int const endIndex, Terms const& terms) {
-    Terms extractedTerms;
-    if (startIndex <= endIndex) {
-        extractedTerms.reserve(endIndex + 1 - startIndex);
-        copy(terms.begin() + startIndex, terms.cbegin() + endIndex + 1, back_inserter(extractedTerms));
-    }
-    return extractedTerms;
-}
-
 Indexes searchForwardsForPatterns(Terms const& terms, Patterns const& searchPatterns) {
     return searchForwardsForPatterns(0, static_cast<int>(terms.size()) - 1, terms, searchPatterns);
 }
@@ -128,6 +119,15 @@ Indexes searchBackwardsWithMatcher(int const termIndex, Terms const& terms, Matc
         }
     }
     return hitIndexes;
+}
+
+Terms extractTermsInRange(int const startIndex, int const endIndex, Terms const& terms) {
+    Terms extractedTerms;
+    if (startIndex <= endIndex) {
+        extractedTerms.reserve(endIndex + 1 - startIndex);
+        copy(terms.begin() + startIndex, terms.cbegin() + endIndex + 1, back_inserter(extractedTerms));
+    }
+    return extractedTerms;
 }
 
 string getCombinedContents(Terms const& terms) {

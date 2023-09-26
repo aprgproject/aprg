@@ -12,9 +12,9 @@ namespace alba::algebra {
 
 class Expression : public BaseTermData {
 public:
+    Expression() = default;
     explicit Expression(BaseTerm const& baseTerm);
     explicit Expression(BaseTerm&& baseTerm);
-    Expression() = default;
     Expression(OperatorLevel const operatorLevel, TermsWithDetails const& termsWithDetails);
     Expression(OperatorLevel const operatorLevel, TermsWithDetails&& termsWithDetails);
     // rule of zero

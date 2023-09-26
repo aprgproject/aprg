@@ -12,14 +12,14 @@ class BaseAvlBinarySearchTreeSymbolTable
     : public BaseSymbolTableWithBaseTree<
           Value, BaseAvlBinarySearchTree<Key, AvlTreeNodeWithValue<Key, Value>, BaseSymbolTable<Key, Value>>> {
 public:
+    BaseAvlBinarySearchTreeSymbolTable() = default;
     // no need for virtual destructor because base destructor
     // is virtual (similar to other virtual functions)
     ~BaseAvlBinarySearchTreeSymbolTable() override = default;
-    BaseAvlBinarySearchTreeSymbolTable() = default;
     BaseAvlBinarySearchTreeSymbolTable(BaseAvlBinarySearchTreeSymbolTable const &) = default;
-    BaseAvlBinarySearchTreeSymbolTable(BaseAvlBinarySearchTreeSymbolTable &&) = default;
+    BaseAvlBinarySearchTreeSymbolTable(BaseAvlBinarySearchTreeSymbolTable &&) noexcept = default;
     BaseAvlBinarySearchTreeSymbolTable &operator=(BaseAvlBinarySearchTreeSymbolTable const &) = default;
-    BaseAvlBinarySearchTreeSymbolTable &operator=(BaseAvlBinarySearchTreeSymbolTable &&) = default;
+    BaseAvlBinarySearchTreeSymbolTable &operator=(BaseAvlBinarySearchTreeSymbolTable &&) noexcept = default;
 };
 
 }  // namespace alba::algorithm

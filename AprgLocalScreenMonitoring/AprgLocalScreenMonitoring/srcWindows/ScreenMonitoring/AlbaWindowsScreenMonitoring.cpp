@@ -34,6 +34,24 @@ void AlbaWindowsScreenMonitoring::capturePixelsFromScreen() {
     DeleteObject(bitmapHandler);
 }
 
+HBITMAP AlbaWindowsScreenMonitoring::createBitmapHandlerFromScreen(HDC const screenHandler) const {
+    // Create compatible DC, create a compatible bitmap and copy the screen using BitBlt()
+    HDC memoryHandler = CreateCompatibleDC(screenHandler);
+    HBITMAP bitmapHandler = CreateCompatibleBitmap(screenHandler, m_screenWidth, m_screenHeight);
+    HGDIOBJ oldHandler = SelectObject(memoryHandler, bitmapHandler);
+    BOOL const isOkay =
+        BitBlt(memoryHandler, 0, 0, m_screenWidth, m_screenHeight, screenHandler, 0, 0, SRCCOPY | CAPTUREBLT);
+
+    if (isOkay == 0) {
+        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
+        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
+    }
+
+    SelectObject(memoryHandler, oldHandler);  // always select the previously selected object once done
+    DeleteDC(memoryHandler);
+    return bitmapHandler;
+}
+
 void AlbaWindowsScreenMonitoring::initialize() {
     initializeScreenParameters();
 
@@ -81,23 +99,6 @@ void AlbaWindowsScreenMonitoring::savePixelsFromBitmapScreen(
     }
 }
 
-HBITMAP AlbaWindowsScreenMonitoring::createBitmapHandlerFromScreen(HDC const screenHandler) const {
-    // Create compatible DC, create a compatible bitmap and copy the screen using BitBlt()
-    HDC memoryHandler = CreateCompatibleDC(screenHandler);
-    HBITMAP bitmapHandler = CreateCompatibleBitmap(screenHandler, m_screenWidth, m_screenHeight);
-    HGDIOBJ oldHandler = SelectObject(memoryHandler, bitmapHandler);
-    BOOL const isOkay =
-        BitBlt(memoryHandler, 0, 0, m_screenWidth, m_screenHeight, screenHandler, 0, 0, SRCCOPY | CAPTUREBLT);
-
-    if (isOkay == 0) {
-        cout << "Error in " << ALBA_MACROS_GET_PRETTY_FUNCTION << "\n";
-        cout << AlbaWindowsHelper::getLastFormattedErrorMessage() << "\n";
-    }
-
-    SelectObject(memoryHandler, oldHandler);  // always select the previously selected object once done
-    DeleteDC(memoryHandler);
-    return bitmapHandler;
-}
-
 }  // namespace alba
+
 // NOLINTEND(misc-misplaced-const)

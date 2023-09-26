@@ -14,13 +14,13 @@ public:
     using Key = KeyTemplateType;
     using Node = NodeTemplateType;
     using NodeUniquePointer = typename BaseClass::NodeUniquePointer;
+    BaseAvlBinarySearchTree() = default;
     // no need for virtual destructor because base destructor is virtual (similar to other virtual functions)
     ~BaseAvlBinarySearchTree() override = default;
-    BaseAvlBinarySearchTree() = default;
     BaseAvlBinarySearchTree(BaseAvlBinarySearchTree const&) = default;
-    BaseAvlBinarySearchTree(BaseAvlBinarySearchTree&&) = default;
+    BaseAvlBinarySearchTree(BaseAvlBinarySearchTree&&) noexcept = default;
     BaseAvlBinarySearchTree& operator=(BaseAvlBinarySearchTree const&) = default;
-    BaseAvlBinarySearchTree& operator=(BaseAvlBinarySearchTree&&) = default;
+    BaseAvlBinarySearchTree& operator=(BaseAvlBinarySearchTree&&) noexcept = default;
 
 protected:
     void updateTreeNodeDetails(Node& node) const override {

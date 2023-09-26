@@ -11,12 +11,12 @@ namespace alba::algorithm {
 template <typename Object>
 class DoublingSizeCircularQueue : public BaseQueue<Object> {
 public:
+    DoublingSizeCircularQueue() { initialize(MINUMUM_CONTAINER_SIZE); }
     ~DoublingSizeCircularQueue() override = default;
     DoublingSizeCircularQueue(DoublingSizeCircularQueue const &) = default;
-    DoublingSizeCircularQueue(DoublingSizeCircularQueue &&) = default;
+    DoublingSizeCircularQueue(DoublingSizeCircularQueue &&) noexcept = default;
     DoublingSizeCircularQueue &operator=(DoublingSizeCircularQueue const &) = default;
-    DoublingSizeCircularQueue &operator=(DoublingSizeCircularQueue &&) = default;
-    DoublingSizeCircularQueue() { initialize(MINUMUM_CONTAINER_SIZE); }
+    DoublingSizeCircularQueue &operator=(DoublingSizeCircularQueue &&) noexcept = default;
 
     [[nodiscard]] int getSize() const override {
         if (m_firstIndex <= m_afterLastIndex) {

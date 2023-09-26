@@ -16,13 +16,13 @@ using namespace std;
 
 namespace alba::booleanAlgebra {
 
+Expression::Expression() : m_commonOperatorLevel(OperatorLevel::Unknown), m_isSimplified(false) {}
+
 Expression::Expression(BaseTerm const& baseTerm)
     : m_commonOperatorLevel(OperatorLevel::Unknown), m_wrappedTerms({baseTerm}), m_isSimplified(false) {}
 
 Expression::Expression(BaseTerm&& baseTerm)
     : m_commonOperatorLevel(OperatorLevel::Unknown), m_wrappedTerms({std::move(baseTerm)}), m_isSimplified(false) {}
-
-Expression::Expression() : m_commonOperatorLevel(OperatorLevel::Unknown), m_isSimplified(false) {}
 
 Expression::Expression(OperatorLevel const operatorLevel, WrappedTerms const& wrappedTerms)
     : m_commonOperatorLevel(wrappedTerms.empty() ? OperatorLevel::Unknown : operatorLevel),

@@ -9,8 +9,8 @@ using TermsRaiseToNumbersBase = TermsRaiseToExponents<AlbaNumber, TermRaiseToANu
 
 class TermsRaiseToNumbers : public TermsRaiseToNumbersBase {
 public:
-    explicit TermsRaiseToNumbers(BaseToExponentMap const& baseToExponentMap);
     TermsRaiseToNumbers();
+    explicit TermsRaiseToNumbers(BaseToExponentMap const& baseToExponentMap);
 };
 
 }  // namespace alba::algebra

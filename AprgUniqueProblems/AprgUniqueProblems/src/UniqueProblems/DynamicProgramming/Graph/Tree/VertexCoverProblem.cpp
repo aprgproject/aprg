@@ -71,7 +71,7 @@ VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingMemoizationDP(
             Count const childrenCount = getMinimumCountUsingMemoizationDP(vertexToCountMap, child);
             Count grandChildrenCount = 1;
             for (Vertex const grandChild : m_childrenInTree.getChildren(child)) {
-               // cppcheck-suppress useStlAlgorithm
+                // cppcheck-suppress useStlAlgorithm
                 grandChildrenCount += getMinimumCountUsingMemoizationDP(vertexToCountMap, grandChild);
             }
             countIfVertexIsIncluded += childrenCount;

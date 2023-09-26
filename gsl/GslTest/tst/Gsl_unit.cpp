@@ -66,7 +66,6 @@ using namespace alba::mathHelper;
 using namespace alba::matrix;
 using namespace std;
 
-
 // NOLINTBEGIN(cppcoreguidelines-pro-type-const-cast)
 namespace alba {
 

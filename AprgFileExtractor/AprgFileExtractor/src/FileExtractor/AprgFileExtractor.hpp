@@ -11,8 +11,8 @@ namespace alba {
 class AprgFileExtractor {
 public:
     using SetOfPaths = std::set<std::filesystem::path>;
-    explicit AprgFileExtractor(std::string const& condition);
     AprgFileExtractor();
+    explicit AprgFileExtractor(std::string const& condition);
 
     AprgFileExtractor(
         std::string const& condition, std::filesystem::path const& pathOf7zExecutable,
