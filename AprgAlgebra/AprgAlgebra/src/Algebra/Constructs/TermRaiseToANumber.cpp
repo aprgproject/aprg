@@ -30,6 +30,5 @@ bool TermRaiseToANumber::isRadical() const { return m_exponent.isDoubleType() ||
 void TermRaiseToANumber::setBase(Term const& base) { m_base = base; }
 void TermRaiseToANumber::setExponent(AlbaNumber const& exponent) { m_exponent = exponent; }
 Term& TermRaiseToANumber::getBaseReference() { return m_base; }
-TermRaiseToANumber::TermRaiseToANumber() = default;
 
 }  // namespace alba::algebra

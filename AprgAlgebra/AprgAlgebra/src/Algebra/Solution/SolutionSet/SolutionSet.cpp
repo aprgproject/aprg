@@ -137,6 +137,4 @@ ostream& operator<<(ostream& out, SolutionSet const& solutionSet) {
     return out;
 }
 
-SolutionSet::SolutionSet() = default;
-
 }  // namespace alba::algebra

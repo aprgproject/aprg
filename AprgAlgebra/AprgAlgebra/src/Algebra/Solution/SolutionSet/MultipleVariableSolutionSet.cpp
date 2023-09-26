@@ -52,6 +52,4 @@ ostream& operator<<(ostream& out, MultipleVariableSolutionSet const& solutionSet
     return out;
 }
 
-MultipleVariableSolutionSet::MultipleVariableSolutionSet() = default;
-
 }  // namespace alba::algebra

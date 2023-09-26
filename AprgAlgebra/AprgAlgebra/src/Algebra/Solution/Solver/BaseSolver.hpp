@@ -4,7 +4,7 @@ namespace alba::algebra {
 
 class BaseSolver {
 public:
-    BaseSolver();
+    BaseSolver() = default;
     BaseSolver(BaseSolver const &) = default;
     BaseSolver(BaseSolver &&) noexcept = default;
     BaseSolver &operator=(BaseSolver const &) = default;

@@ -192,6 +192,4 @@ bool AdditionAndSubtractionOfExpressions::canBeMerged(
     return commonPart1 == commonPart2 && canBeMergedInAMonomialByAdditionOrSubtraction(mergePart1, mergePart2);
 }
 
-AdditionAndSubtractionOfExpressions::AdditionAndSubtractionOfExpressions() = default;
-
 }  // namespace alba::algebra

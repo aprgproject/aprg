@@ -82,8 +82,6 @@ void SingleVariableNameRetriever::putVariableIfPossible(string const& variableNa
     }
 }
 
-SingleVariableNameRetriever::SingleVariableNameRetriever() = default;
-
 void SingleVariableNameRetriever::retrieveFromTerm(Term const& term) {
     if (!m_hasMultipleVariables) {
         BaseRetriever::retrieveFromTerm(term);

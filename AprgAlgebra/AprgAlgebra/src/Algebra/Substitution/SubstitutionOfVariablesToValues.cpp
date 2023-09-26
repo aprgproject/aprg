@@ -150,6 +150,4 @@ void SubstitutionOfVariablesToValues::performSubstitutionForTermsWithAssociation
     }
 }
 
-SubstitutionOfVariablesToValues::SubstitutionOfVariablesToValues() = default;
-
 }  // namespace alba::algebra

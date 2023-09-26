@@ -9,7 +9,7 @@ namespace alba::algebra {
 
 class Constant : public BaseTermData {
 public:
-    Constant();
+    Constant() = default;
     explicit Constant(AlbaNumber const& constantValue);
 
     template <

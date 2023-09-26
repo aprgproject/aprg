@@ -21,7 +21,7 @@ using IntegrationPurposes = std::vector<IntegrationPurpose>;
 
 class IntegrationHistory {
 public:
-    IntegrationHistory();
+    IntegrationHistory() = default;
     [[nodiscard]] IntegrationPurpose getLastIntegrationPurpose() const;
     [[nodiscard]] int getDepth() const;
     [[nodiscard]] bool didThisIntegrationPurposeAlreadyHappened(IntegrationPurpose const purpose) const;

@@ -12,7 +12,7 @@ public:
         Term otherTerm;
     };
 
-    RationalizeTermOverTerm();
+    RationalizeTermOverTerm() = default;
     RationalizeTermOverTerm(Term const& numerator, Term const& denominator);
     RationalizeTermOverTerm(Term&& numerator, Term&& denominator);
     [[nodiscard]] Term const& getNumerator() const;

@@ -4,7 +4,6 @@ namespace alba::algebra {
 
 bool BaseSolver::isSolved() const { return m_isSolved; }
 bool BaseSolver::isACompleteSolution() const { return m_isACompleteSolution; }
-BaseSolver::BaseSolver() = default;
 
 void BaseSolver::setAsCompleteSolution() {
     m_isSolved = true;

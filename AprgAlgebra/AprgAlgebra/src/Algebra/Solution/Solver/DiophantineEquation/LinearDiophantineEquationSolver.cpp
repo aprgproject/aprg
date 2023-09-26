@@ -66,6 +66,4 @@ void LinearDiophantineEquationSolver::retrieveDetailsFromPolynomial(
     }
 }
 
-LinearDiophantineEquationSolver::LinearDiophantineEquationSolver() = default;
-
 }  // namespace alba::algebra

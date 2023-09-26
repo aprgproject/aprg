@@ -7,7 +7,7 @@ namespace alba::algebra {
 
 class SubTermsRetriever final : public BaseRetriever {
 public:
-    SubTermsRetriever();
+    SubTermsRetriever() = default;
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;
     void retrieveFromMonomial(Monomial const& monomial) override;

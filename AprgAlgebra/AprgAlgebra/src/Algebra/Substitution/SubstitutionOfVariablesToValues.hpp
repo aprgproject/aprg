@@ -10,7 +10,7 @@ using VariableValuePair = std::pair<std::string, AlbaNumber>;
 
 class SubstitutionOfVariablesToValues {
 public:
-    SubstitutionOfVariablesToValues();
+    SubstitutionOfVariablesToValues() = default;
     explicit SubstitutionOfVariablesToValues(VariablesToValuesMap const& variablesWithValues);
     SubstitutionOfVariablesToValues(std::initializer_list<VariableValuePair> const& variablesWithValues);
     [[nodiscard]] AlbaNumber getValueForVariable(std::string const& variable) const;

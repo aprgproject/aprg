@@ -99,8 +99,6 @@ Term SimplificationOfFunctionToTerm::getLogarithmicOfTermBasedFromName(Term cons
     return result;
 }
 
-SimplificationOfFunctionToTerm::SimplificationOfFunctionToTerm() = default;
-
 }  // namespace algebra::Simplification
 
 template <>

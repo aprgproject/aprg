@@ -121,8 +121,6 @@ bool SolverUsingSubstitution::isSolutionCorrect(
     return result;
 }
 
-SolverUsingSubstitution::SolverUsingSubstitution() = default;
-
 void SolverUsingSubstitution::calculateASolutionForAllVariables(
     MultipleVariableSolutionSet& solutionSet, Equations const& equations) {
     int previousNumberOfVariables(0);

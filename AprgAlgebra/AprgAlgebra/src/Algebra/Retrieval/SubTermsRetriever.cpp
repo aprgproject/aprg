@@ -18,6 +18,5 @@ void SubTermsRetriever::retrieveFromFunction(Function const& functionObject) {
 }
 
 TermSet const& SubTermsRetriever::getSubTerms() const { return m_subTerms; }
-SubTermsRetriever::SubTermsRetriever() = default;
 
 }  // namespace alba::algebra

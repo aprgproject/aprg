@@ -349,8 +349,6 @@ bool SimplificationOfExpression::shouldDistributeExponentConstantToEachBase() {
            !shouldSimplifyByCombiningRadicalsInMultiplicationAndDivision();
 }
 
-SimplificationOfExpression::SimplificationOfExpression() = default;
-
 }  // namespace algebra::Simplification
 
 template <>

@@ -111,6 +111,4 @@ void SubstitutionOfTermsToTerms::performSubstitutionForTermsWithAssociation(
     }
 }
 
-SubstitutionOfTermsToTerms::SubstitutionOfTermsToTerms() = default;
-
 }  // namespace alba::algebra

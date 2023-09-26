@@ -6,7 +6,7 @@ namespace alba::algebra {
 
 class AdditionAndSubtractionOfExpressions {
 public:
-    AdditionAndSubtractionOfExpressions();
+    AdditionAndSubtractionOfExpressions() = default;
     explicit AdditionAndSubtractionOfExpressions(TermsWithDetails const& termsWithDetails);
     [[nodiscard]] Expressions const& getExpressions() const;
     [[nodiscard]] TermAssociationTypes const& getAssociations() const;
