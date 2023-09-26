@@ -52,7 +52,8 @@ Terms getTermsFromString(string const& code) {
 
 string getFunctionSignature(string const& functionText) {
     Terms terms(getTermsFromString(functionText));
-    Patterns const terminatingPatterns{{M(TermType::Macro)}, {M(";")}, {M("{")}, {M(":")}};
+    auto const terminatingMatcher = M_OR(M(TermType::Macro), M(";"), M("{"), M(":"));
+    Patterns const terminatingPatterns{{terminatingMatcher}};
     Indexes terminatingIndexes = searchForwardsForPatterns(terms, 0, terminatingPatterns);
     if (!terminatingIndexes.empty()) {
         terms.erase(terms.cbegin() + terminatingIndexes.front(), terms.cend());

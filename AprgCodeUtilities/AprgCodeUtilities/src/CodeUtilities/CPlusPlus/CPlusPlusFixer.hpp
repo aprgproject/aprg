@@ -18,14 +18,11 @@ private:
     void fixTerms();
     void combinePrimitiveTypes();
     void fixPostFixIncrementDecrement();
-    void fixPostFixIncrementDecrement(std::string const& crementOperator);
-    void fixPostFixIncrementDecrementInLine(std::string const& crementOperator);
-    void fixPostFixIncrementDecrementInForLoop(std::string const& crementOperator);
+    void fixPostFixIncrementDecrementInLine();
+    void fixPostFixIncrementDecrementInForLoop();
     void fixConstReferenceOrder();
-    void fixConstReferenceOrder(Matcher const& typeMatcher);
     void fixConstToConstexpr();
     void fixNoConstPassByValue();
-    void fixNoConstPassByValue(Matcher const& typeMatcher);
     void fixNoConstPassByValue(Patterns const& searchPatterns);
     void fixCStylePrintf();
     void fixCStylePrintf(Patterns const& searchPatterns);
