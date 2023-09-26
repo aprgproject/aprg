@@ -99,7 +99,7 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
     int nextIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(scopeHeaderTerms, nextIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(nextIndex, scopeHeaderTerms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
@@ -171,7 +171,7 @@ int CPlusPlusReorganizer::getIndexAtSameLineComment(int const index) const {
     int endIndex = index;
     Patterns const searchPatterns{
         {M(TermType::WhiteSpace), M(SpecialMatcherType::Comment)}, {M(SpecialMatcherType::Comment)}};
-    Indexes hitIndexes = searchPatternsAt(m_terms, index + 1, searchPatterns);
+    Indexes hitIndexes = searchPatternsAt(index + 1, m_terms, searchPatterns);
     if (!hitIndexes.empty()) {
         int const firstHitIndex = hitIndexes.front();
         int const lastHitIndex = hitIndexes.back();
@@ -241,7 +241,7 @@ void CPlusPlusReorganizer::processTerms() {
     int searchIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(m_terms, searchIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(searchIndex, m_terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
@@ -285,7 +285,7 @@ void CPlusPlusReorganizer::processMacro(int& nextIndex, int const macroStartInde
         {M(SpecialMatcherType::WhiteSpaceWithNewLine)}, {M("\\"), M(SpecialMatcherType::WhiteSpaceWithNewLine)}};
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(m_terms, searchIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(searchIndex, m_terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
@@ -313,7 +313,7 @@ void CPlusPlusReorganizer::processOpeningAndClosingBrace(
     Terms const scopeHeaderTerms(extractTermsInRange(nextIndex, openingBraceIndex - 1));
     strings& currentItems(m_scopeDetails.back().items);
     if (!currentItems.empty() && hasEndBrace(currentItems.back()) && shouldConnectToPreviousItem(scopeHeaderTerms)) {
-        currentItems.back() += getCombinedContents(m_terms, nextIndex, endIndex);
+        currentItems.back() += getCombinedContents(nextIndex, endIndex, m_terms);
     } else {
         addItemIfNeeded(nextIndex, endIndex);
     }
@@ -433,14 +433,14 @@ bool CPlusPlusReorganizer::shouldConnectToPreviousItem(Terms const& scopeHeaderT
                 term.getContent() == "namespace" || term.getContent() == "struct" || term.getContent() == "switch" ||
                 term.getContent() == "while" || term.getContent() == "union");
     });
-    bool const hasCommaAtTheStart = !searchPatternsAt(scopeHeaderTerms, 0, Patterns{{M(",")}}).empty();
+    bool const hasCommaAtTheStart = !searchPatternsAt(scopeHeaderTerms, Patterns{{M(",")}}).empty();
     return isOnlyWhiteSpaceOrComment || (!hasInvalidKeyword && hasCommaAtTheStart);
 }
 
 bool CPlusPlusReorganizer::hasEndBrace(string const& content) {
     Terms const termsToCheck(getTermsFromString(content));
     Indexes const hitIndexes =
-        searchBackwardsWithMatcher(termsToCheck, static_cast<int>(termsToCheck.size()) - 1, M("}"));
+        searchBackwardsWithMatcher(static_cast<int>(termsToCheck.size()) - 1, termsToCheck, M("}"));
     return !hitIndexes.empty();
 }
 
@@ -450,7 +450,7 @@ void CPlusPlusReorganizer::makeIsolatedCommentsStickWithNextLine(Terms& terms) {
         Patterns const searchPatterns{{M(SpecialMatcherType::Comment), M(SpecialMatcherType::WhiteSpaceWithNewLine)}};
         bool isFound(true);
         while (isFound) {
-            Indexes hitIndexes = searchForwardsForPatterns(terms, searchIndex, searchPatterns);
+            Indexes hitIndexes = searchForwardsForPatterns(searchIndex, terms, searchPatterns);
             isFound = !hitIndexes.empty();
             if (isFound) {
                 int const firstHitIndex = hitIndexes.front();
@@ -494,7 +494,7 @@ int CPlusPlusReorganizer::getIndexAtClosingString(
     int numberOfOpenings = 1;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(terms, endIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(endIndex, terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
