@@ -37,12 +37,12 @@ void CPlusPlusFinder::findTerms(Patterns const& searchPatterns) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(m_currentTerms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_currentTerms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
             cout << "Found file: [" << m_currentFile << "]\n";
-            cout << "Found pattern found at: [" << getLocatorString(m_currentTerms, hitIndexes.front()) << "]\n";
+            cout << "Found pattern found at: [" << getLocatorString(hitIndexes.front(), m_currentTerms) << "]\n";
         }
     }
 }

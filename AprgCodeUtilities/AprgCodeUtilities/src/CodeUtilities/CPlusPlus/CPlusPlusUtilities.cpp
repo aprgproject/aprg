@@ -54,7 +54,7 @@ string getFunctionSignature(string const& functionText) {
     Terms terms(getTermsFromString(functionText));
     auto const terminatingMatcher = M_OR(M(TermType::Macro), M(";"), M("{"), M(":"));
     Patterns const terminatingPatterns{{terminatingMatcher}};
-    Indexes terminatingIndexes = searchForwardsForPatterns(terms, 0, terminatingPatterns);
+    Indexes terminatingIndexes = searchForwardsForPatterns(terms, terminatingPatterns);
     if (!terminatingIndexes.empty()) {
         terms.erase(terms.cbegin() + terminatingIndexes.front(), terms.cend());
     }
@@ -70,10 +70,10 @@ string getFunctionSignature(string const& functionText) {
         {M(TermType::Attribute)},
         {M("friend")},
         {M(TermType::Identifier), M("::")}};
-    replaceAllForwards(terms, 0, removePatterns, {});
+    replaceAllForwards(terms, removePatterns, {});
 
     replaceAllForwards(
-        terms, 0, Patterns{{M(TermType::WhiteSpace), M(TermType::WhiteSpace)}, {M(TermType::WhiteSpace)}},
+        terms, Patterns{{M(TermType::WhiteSpace), M(TermType::WhiteSpace)}, {M(TermType::WhiteSpace)}},
         {Term(TermType::WhiteSpace, " ")});
 
     return getStringWithoutStartingAndTrailingWhiteSpace(getCombinedContents(terms));
@@ -82,7 +82,7 @@ string getFunctionSignature(string const& functionText) {
 string getFunctionName(string const& functionSignature) {
     Terms terms(getTermsFromString(functionSignature));
     Patterns const searchPatterns{{M(TermType::Identifier), M("(")}};
-    Indexes hitIndexes = searchForwardsForPatterns(terms, 0, searchPatterns);
+    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
     if (!hitIndexes.empty()) {
         return terms[hitIndexes.front()].getContent();
     }
@@ -92,7 +92,7 @@ string getFunctionName(string const& functionSignature) {
 string getTextWithoutCommentsWithNewLine(Terms const& terms) {
     Terms revisedTerms(terms);
     Patterns const removePatterns{{M(SpecialMatcherType::Comment), M(SpecialMatcherType::WhiteSpaceWithNewLine)}};
-    replaceAllForwards(revisedTerms, 0, removePatterns, {});
+    replaceAllForwards(revisedTerms, removePatterns, {});
     return getCombinedContents(revisedTerms);
 }
 

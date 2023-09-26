@@ -243,7 +243,7 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
     bool isAFriend(false);
     sortItem.numberOfLines = stringHelper::getNumberOfNewLines(getTextWithoutCommentsWithNewLine(terms)) + 1;
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
@@ -522,7 +522,7 @@ CPlusPlusReorganizeItems::SortItem CPlusPlusReorganizeItems::createSortItem(int 
 string CPlusPlusReorganizeItems::getIdentifierBeforeParenthesis(Terms const& terms, int const parenthesisIndex) {
     int const beforeParenthesis = parenthesisIndex - 1;
     Patterns const searchPatterns{{M(TermType::Identifier)}};
-    Indexes hitIndexes = searchPatternsAt(terms, beforeParenthesis, searchPatterns);
+    Indexes hitIndexes = searchPatternsAt(beforeParenthesis, terms, searchPatterns);
     if (!hitIndexes.empty()) {
         return terms[hitIndexes.front()].getContent();
     }
@@ -572,7 +572,7 @@ void CPlusPlusReorganizeItems::moveToEndParenthesis(Terms const& terms, int& ter
     bool isFound(true);
     bool isCloseParenthesisFound(false);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
@@ -596,7 +596,7 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
     SortItem& sortItem, string const& functionSignature) {
     Terms terms(getTermsFromString(functionSignature));
     Patterns const searchPatterns{{M_OR(M(TermType::PrimitiveType), M(TermType::Identifier), M(TermType::Keyword))}};
-    Indexes hitIndexes = searchForwardsForPatterns(terms, 0, searchPatterns);
+    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
     if (!hitIndexes.empty()) {
         int const firstHitIndex = hitIndexes.front();
         Term const& firstTerm(terms[firstHitIndex]);

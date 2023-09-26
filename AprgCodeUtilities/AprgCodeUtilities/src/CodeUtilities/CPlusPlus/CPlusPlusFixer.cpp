@@ -48,14 +48,14 @@ strings CPlusPlusFixer::getPrintItems(int& printfEnd, int const printStringIndex
         } else if (parenthesisLevel == 1 && "," == m_terms[termIndex].getContent()) {
             int printItemEnd = termIndex - 1;
             if (printItemStart < printItemEnd) {
-                printItems.emplace_back(getCombinedContents(m_terms, printItemStart, printItemEnd));
+                printItems.emplace_back(getCombinedContents(printItemStart, printItemEnd, m_terms));
             }
             printItemStart = termIndex + 1;
         }
     }
     int printItemEnd = printfEnd - 1;
     if (printItemStart < printItemEnd) {
-        printItems.emplace_back(getCombinedContents(m_terms, printItemStart, printItemEnd));
+        printItems.emplace_back(getCombinedContents(printItemStart, printItemEnd, m_terms));
     }
     return printItems;
 }
@@ -76,7 +76,7 @@ void CPlusPlusFixer::combinePrimitiveTypes() {
     bool isFound(true);
     Patterns const primitiveTypesPatterns{{M(TermType::PrimitiveType), M(TermType::PrimitiveType)}};
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(m_terms, termIndex, primitiveTypesPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_terms, primitiveTypesPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.front();
@@ -142,13 +142,13 @@ void CPlusPlusFixer::fixNoConstPassByValue(Patterns const& searchPatterns) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(m_terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
             m_terms.insert(m_terms.begin() + hitIndexes[2], Term(TermType::Identifier, "const "));
             cout << "Fixed file: [" << m_currentFile << "]\n";
-            cout << "Added const at: [" << getLocatorString(m_terms, hitIndexes[2]) << "]\n";
+            cout << "Added const at: [" << getLocatorString(hitIndexes[2], m_terms) << "]\n";
         }
     }
 }
@@ -159,7 +159,7 @@ void CPlusPlusFixer::fixCStylePrintf(Patterns const& searchPatterns) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(m_terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             fixCStylePrintf(hitIndexes.front(), hitIndexes.back());
@@ -177,7 +177,7 @@ void CPlusPlusFixer::fixCStylePrintf(int const printfStart, int const printStrin
     m_terms.erase(m_terms.begin() + printfStart, m_terms.begin() + printfEnd + 1);
     m_terms.insert(m_terms.cbegin() + printfStart, newPrintTerms.cbegin(), newPrintTerms.cend());
     cout << "Fixed file: [" << m_currentFile << "]\n";
-    cout << "Converted printf to C++ print at: [" << getLocatorString(m_terms, printfStart) << "]\n";
+    cout << "Converted printf to C++ print at: [" << getLocatorString(printfStart, m_terms) << "]\n";
 }
 
 void CPlusPlusFixer::fixCommentsPositionOfBraces() {
@@ -185,7 +185,7 @@ void CPlusPlusFixer::fixCommentsPositionOfBraces() {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(m_terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
@@ -195,7 +195,7 @@ void CPlusPlusFixer::fixCommentsPositionOfBraces() {
                 m_terms.insert(m_terms.begin() + hitIndexes[1] + 1, Term(TermType::WhiteSpace, "\n"));
             }
             cout << "Fixed file: [" << m_currentFile << "]\n";
-            cout << "Fixed comment position at: [" << getLocatorString(m_terms, hitIndexes[1]) << "]\n";
+            cout << "Fixed comment position at: [" << getLocatorString(hitIndexes[1], m_terms) << "]\n";
         }
     }
 }
@@ -207,7 +207,7 @@ void CPlusPlusFixer::fixCStyleStaticCast(Matcher const& typeMatcher) {
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(m_terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
@@ -215,7 +215,7 @@ void CPlusPlusFixer::fixCStyleStaticCast(Matcher const& typeMatcher) {
                 changeTerm(m_terms[hitIndexes[1]], TermType::Aggregate, "static_cast<");
                 changeTerm(m_terms[hitIndexes[3]], TermType::Aggregate, ">(");
                 cout << "Fixed file: [" << m_currentFile << "]\n";
-                cout << "Converted to static_cast at: [" << getLocatorString(m_terms, hitIndexes[1]) << "]\n";
+                cout << "Converted to static_cast at: [" << getLocatorString(hitIndexes[1], m_terms) << "]\n";
             }
         }
     }
@@ -225,13 +225,13 @@ void CPlusPlusFixer::findTermsAndSwapAt(Patterns const& searchPatterns, int cons
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(m_terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
             swap(m_terms[hitIndexes[index1]], m_terms[hitIndexes[index2]]);
             cout << "Fixed file: [" << m_currentFile << "]\n";
-            cout << "Swapped at: [" << getLocatorString(m_terms, hitIndexes[index1]) << "]\n";
+            cout << "Swapped at: [" << getLocatorString(hitIndexes[index1], m_terms) << "]\n";
         }
     }
 }
@@ -241,18 +241,18 @@ void CPlusPlusFixer::findTermsAndCheckForLoopAndSwapAt(
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(m_terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
             Patterns const forLoopPatterns{
                 {M("for"), M("(")}, {M(";"), M(SpecialMatcherType::WhiteSpaceWithNewLine)}, {M("{")}, {M("}")}};
-            Indexes forLoopHitIndexes = searchBackwardsForPatterns(m_terms, hitIndexes.front(), forLoopPatterns);
+            Indexes forLoopHitIndexes = searchBackwardsForPatterns(hitIndexes.front(), m_terms, forLoopPatterns);
             if (forLoopHitIndexes.size() == 2 && m_terms[forLoopHitIndexes[0]].getContent() == "for" &&
                 m_terms[forLoopHitIndexes[1]].getContent() == "(") {
                 swap(m_terms[hitIndexes[index1]], m_terms[hitIndexes[index2]]);
                 cout << "Fixed file: [" << m_currentFile << "]\n";
-                cout << "Swapped at: [" << getLocatorString(m_terms, hitIndexes[index1]) << "]\n";
+                cout << "Swapped at: [" << getLocatorString(hitIndexes[index1], m_terms) << "]\n";
             }
         }
     }
@@ -264,7 +264,7 @@ void CPlusPlusFixer::findTermsAndConvertToConstexpr(
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(m_terms, termIndex, searchPatterns);
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
             termIndex = hitIndexes.back();
@@ -276,7 +276,7 @@ void CPlusPlusFixer::findTermsAndConvertToConstexpr(
                 m_terms[hitIndexes[closingParenthesisIndex]].clear();
             }
             cout << "Fixed file: [" << m_currentFile << "]\n";
-            cout << "Swapped at: [" << getLocatorString(m_terms, hitIndexes[typeIndex]) << "]\n";
+            cout << "Swapped at: [" << getLocatorString(hitIndexes[typeIndex], m_terms) << "]\n";
         }
     }
 }
