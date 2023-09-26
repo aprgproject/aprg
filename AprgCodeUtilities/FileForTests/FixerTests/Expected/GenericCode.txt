@@ -36,6 +36,12 @@ SomeClass &operator=(SomeClass &&) noexcept  = default;
 SomeClass &operator=(SomeClass const &) noexcept = default;
 SomeClass &operator=(SomeClass &&) noexcept = default;
 
+//fixGTestNames
+TEST(TestSuiteName, TestName) {}
+TEST(TestSuiteName, DISABLED_TestName) {}
+TEST(TestSuiteName, TestName) {}
+TEST(TestSuiteName, DISABLED_TestName) {}
+
 // fixCStylePrintf
 cout<<"variable1: ["<< variable1<<"] variable2: ["<< variable2<<"] variable3: ["<< variable3<<"]";
 cout<<"";

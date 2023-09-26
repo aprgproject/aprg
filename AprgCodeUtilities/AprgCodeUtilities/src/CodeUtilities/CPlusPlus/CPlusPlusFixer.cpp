@@ -5,6 +5,7 @@
 #include <Common/Debug/AlbaDebug.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
+#include <algorithm>
 #include <iostream>
 
 using namespace alba::CodeUtilities::CPlusPlusUtilities;
@@ -61,6 +62,21 @@ strings CPlusPlusFixer::getPrintItems(int& printfEnd, int const printStringIndex
     return printItems;
 }
 
+string CPlusPlusFixer::getCorrectedGTestName(string const& testName) const {
+    if (testName.find_first_of("_") != std::string::npos) {
+        if (testName.substr(0, std::min(testName.length(), 9ULL)) == "DISABLED_") {
+            string withoutUnderscore = testName.substr(9);
+            replaceAllAndReturnIfFound(withoutUnderscore, "_", "");
+            return string("DISABLED_") + withoutUnderscore;
+        } else {
+            string withoutUnderscore = testName;
+            replaceAllAndReturnIfFound(withoutUnderscore, "_", "");
+            return withoutUnderscore;
+        }
+    }
+    return testName;
+}
+
 void CPlusPlusFixer::fixTerms() {
     combinePrimitiveTypes();
     fixRegardlessWithScopes();
@@ -74,6 +90,7 @@ void CPlusPlusFixer::fixRegardlessWithScopes() {
     fixNoConstPassByValue();
     fixNoExceptOnMoveConstructor();
     fixNoExceptOnMoveAssignment();
+    fixGTestNames();
     fixCStylePrintf();
     fixCommentsPositionOfBraces();
     fixCStyleStaticCast();
@@ -202,6 +219,24 @@ void CPlusPlusFixer::fixNoExceptOnMoveAssignment() {
                     cout << "Fixed noexcept at: [" << getLocatorString(hitIndexes[7], m_terms) << "]\n";
                 }
             }
+            termIndex = hitIndexes.back();
+        }
+    }
+}
+
+void CPlusPlusFixer::fixGTestNames() {
+    Patterns const searchPatterns{
+        {M_OR(M("TEST"), M("TEST_F")), M("("), M(TermType::Identifier), M(","), M(TermType::Identifier), M(")")}};
+    int termIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_terms, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            string testSuiteName(getCorrectedGTestName(m_terms[hitIndexes[2]].getContent()));
+            string testName(getCorrectedGTestName(m_terms[hitIndexes[4]].getContent()));
+            m_terms[hitIndexes[2]].setContent(testSuiteName);
+            m_terms[hitIndexes[4]].setContent(testName);
             termIndex = hitIndexes.back();
         }
     }

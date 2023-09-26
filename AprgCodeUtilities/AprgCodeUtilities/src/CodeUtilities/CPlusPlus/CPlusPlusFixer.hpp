@@ -22,6 +22,7 @@ public:
 
 private:
     stringHelper::strings getPrintItems(int& printfEnd, int const printStringIndex) const;
+    std::string getCorrectedGTestName(std::string const& testName) const;
     void fixTerms();
     void fixRegardlessWithScopes();
     void fixBasedOnScopes();
@@ -35,6 +36,7 @@ private:
     void fixNoConstPassByValue(Patterns const& searchPatterns);
     void fixNoExceptOnMoveConstructor();
     void fixNoExceptOnMoveAssignment();
+    void fixGTestNames();
     void fixCStylePrintf();
     void fixCStylePrintf(Patterns const& searchPatterns);
     void fixCStylePrintf(int const printfStart, int const printStringIndex);
