@@ -384,15 +384,19 @@ void CPlusPlusFixer::fixByCheckingScopes() {
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
             Term const& firstTerm(m_terms[firstHitIndex]);
+            int fixStartIndex = nextIndex > 0 ? nextIndex - 1 : nextIndex;
             if (firstTerm.getContent() == "{") {
+                fixOnScopeLoop(fixStartIndex, firstHitIndex);
                 processOpeningBrace(nextIndex, firstHitIndex);
                 searchIndex = nextIndex;
             } else if (firstTerm.getContent() == "}") {
+                fixOnScopeLoop(fixStartIndex, firstHitIndex);
                 processClosingBrace(nextIndex, firstHitIndex);
                 searchIndex = nextIndex;
             }
         }
     }
+    fixOnScopeLoop(nextIndex, static_cast<int>(m_terms.size()) - 1);
 
     exitTopLevelScope();
 }
@@ -403,7 +407,7 @@ void CPlusPlusFixer::processOpeningBrace(int& nextIndex, int const openingBraceI
 }
 
 void CPlusPlusFixer::processClosingBrace(int& nextIndex, int const closingBraceIndex) {
-    exitScope(closingBraceIndex);
+    exitScope();
     nextIndex = closingBraceIndex + 1;
 }
 
@@ -415,28 +419,28 @@ void CPlusPlusFixer::enterScope(int const scopeHeaderStart, int const openingBra
     m_scopeDetails.emplace_back(constructScopeDetails(scopeHeaderStart, openingBraceIndex));
 }
 
-void CPlusPlusFixer::exitScope(int const closingBraceIndex) {
-    ScopeDetail const& scopeToExit(m_scopeDetails.back());
-    if (ScopeType::NamedNamespace == scopeToExit.scopeType &&
-        isHeaderFileExtension(getStringWithoutCharAtTheStart(m_currentFile.extension().string(), '.'))) {
-        fixConstexprToInlineConstExpr(scopeToExit.openingBraceIndex, closingBraceIndex);
-    }
-    m_scopeDetails.pop_back();
+void CPlusPlusFixer::exitScope() { m_scopeDetails.pop_back(); }
+
+void CPlusPlusFixer::fixOnScopeLoop(int const startIndex, int const endIndex) {
+    fixConstexprToInlineConstExpr(startIndex, endIndex);
 }
 
 void CPlusPlusFixer::fixConstexprToInlineConstExpr(int const startIndex, int const endIndex) {
-    auto const startDivider = M_OR(M("{"), M("}"), M(";"));
-    Patterns const searchPatterns{{startDivider, M("constexpr")}};
-    int nextIndex = startIndex;
-    bool isFound(true);
-    while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(nextIndex, endIndex, m_terms, searchPatterns);
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            int const lastHitIndex = hitIndexes.back();
-            changeTerm(m_terms[lastHitIndex], TermType::Aggregate, "inline constexpr");
-            cout << "Fixed file: [" << m_currentFile << "]\n";
-            cout << "Fixed inline constexpr at: [" << getLocatorString(lastHitIndex, m_terms) << "]\n";
+    if (ScopeType::NamedNamespace == m_scopeDetails.back().scopeType &&
+        isHeaderFileExtension(getStringWithoutCharAtTheStart(m_currentFile.extension().string(), '.'))) {
+        auto const startDivider = M_OR(M("{"), M("}"), M(";"));
+        Patterns const searchPatterns{{startDivider, M("constexpr")}};
+        int nextIndex = startIndex;
+        bool isFound(true);
+        while (isFound) {
+            Indexes hitIndexes = searchForwardsForPatterns(nextIndex, endIndex, m_terms, searchPatterns);
+            isFound = !hitIndexes.empty();
+            if (isFound) {
+                int const lastHitIndex = hitIndexes.back();
+                changeTerm(m_terms[lastHitIndex], TermType::Aggregate, "inline constexpr");
+                cout << "Fixed file: [" << m_currentFile << "]\n";
+                cout << "Fixed inline constexpr at: [" << getLocatorString(lastHitIndex, m_terms) << "]\n";
+            }
         }
     }
 }
