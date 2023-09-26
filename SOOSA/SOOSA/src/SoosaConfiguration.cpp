@@ -132,6 +132,4 @@ void SoosaConfiguration::readNamesAndValuesFromFile(string const& filePath) {
     }
 }
 
-SoosaConfiguration::SoosaConfiguration() = default;
-
 }  // namespace alba::soosa
