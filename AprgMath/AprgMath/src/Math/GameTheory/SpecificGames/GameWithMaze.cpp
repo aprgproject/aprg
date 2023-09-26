@@ -41,6 +41,7 @@ GameWithMaze::Coordinate GameWithMaze::getOptimalNextCoordinateAt(Coordinate con
         }
     } else if (GameState::Winning == gameState) {
         for (Coordinate const& nextCoordinate : getNextCoordinates(coordinate)) {
+            // cppcheck-suppress useStlAlgorithm
             if (0U == getGrundyNumberAt(nextCoordinate)) {
                 // force your opponent to losing state
                 result = nextCoordinate;
@@ -55,6 +56,7 @@ GameWithMaze::Coordinate GameWithMaze::getNextCoordinateWithGrundyNumber(
     Coordinate const& coordinate, UnsignedInteger const& targetGrundyNumber) {
     Coordinate result{};
     for (Coordinate const& nextCoordinate : getNextCoordinates(coordinate)) {
+            // cppcheck-suppress useStlAlgorithm
         if (targetGrundyNumber == getGrundyNumberAt(nextCoordinate)) {
             result = nextCoordinate;
             break;

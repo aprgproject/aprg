@@ -42,6 +42,7 @@ GameWithGraph::Vertex GameWithGraph::getOptimalNextVertexAt(Vertex const vertex)
         }
     } else if (GameState::Winning == gameState) {
         for (Vertex const nextVertex : m_graph.getAdjacentVerticesAt(vertex)) {
+            // cppcheck-suppress useStlAlgorithm
             if (0U == getGrundyNumberAt(nextVertex)) {
                 // force your opponent to losing state
                 result = nextVertex;

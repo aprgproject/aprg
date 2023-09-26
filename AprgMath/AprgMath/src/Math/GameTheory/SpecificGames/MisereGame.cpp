@@ -28,6 +28,7 @@ NimState MisereGame::getOptimalNextState(NimState const& inputNimState) {
     GameState const gameState(getGameState(inputNimState));
     if (GameState::Losing == gameState) {
         for (NimHeapSize& nimHeapSize : result) {
+            // cppcheck-suppress useStlAlgorithm
             if (nimHeapSize > 0) {
                 // just take one to prolong the game
                 --nimHeapSize;

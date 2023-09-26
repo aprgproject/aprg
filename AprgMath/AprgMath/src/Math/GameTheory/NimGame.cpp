@@ -34,6 +34,7 @@ NimState NimGame::getOptimalNextState(NimState const& nimState) {
         // In other losing states, any move leads to a winning state, because when a single value xk changes,
         // the nim sum also changes, so the nim sum is different from 0 after the move.
         for (NimHeapSize& nimHeapSize : result) {
+            // cppcheck-suppress useStlAlgorithm
             if (nimHeapSize > 0) {
                 // just take one to prolong the game
                 --nimHeapSize;

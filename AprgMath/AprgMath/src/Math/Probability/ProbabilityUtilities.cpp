@@ -185,6 +185,7 @@ AlbaNumber getNumberOfPeopleForTheBirthdayParadoxUsingQuadraticFormula(AlbaNumbe
         getQuadraticRoots(RootType::RealRootsOnly, 1, -1, propbabilityThatMustBeMet * -2 * DAYS_IN_YEAR);
     for (AlbaNumber const& root : roots) {
         if (root > 0 && result > root) {
+            // cppcheck-suppress useStlAlgorithm
             result = getIntegerAfterCeilingOfDoubleValue<AlbaNumber::IntDataType>(root.getDouble());
         }
     }

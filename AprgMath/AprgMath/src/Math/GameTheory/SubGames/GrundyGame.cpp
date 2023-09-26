@@ -66,6 +66,7 @@ GrundyGame::HeapIndexAndFirstPileAndSecondPile GrundyGame::getOptimalWayToSplit(
 UnsignedInteger GrundyGame::getOverallGrundyNumber() {
     UnsignedInteger result(0U);
     for (UnsignedInteger const& stickHeap : m_stickHeaps) {
+        // cppcheck-suppress useStlAlgorithm
         result = getCombinedGrundyNumber(result, getGrundyNumberWithNumberOfSticks(stickHeap));
     }
     return result;
