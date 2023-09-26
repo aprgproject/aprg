@@ -87,9 +87,9 @@ std::string getStringWithoutStartingAndTrailingWhiteSpace(std::string_view const
 std::string getStringWithoutWhiteSpace(std::string_view const str);
 std::string getStringWithoutRedundantWhiteSpace(std::string_view const str);
 std::string getStringWithoutQuotations(std::string_view const str);
-std::string getStringWithoutCharAtTheStartAndEnd(std::string_view const str, char const char1);
-std::string getStringWithoutCharAtTheStart(std::string_view const str, char const char1);
-std::string getStringWithoutCharAtTheEnd(std::string_view const str, char const char1);
+std::string getStringWithoutCharAtTheStartAndEnd(std::string_view const str, char const character);
+std::string getStringWithoutCharAtTheStart(std::string_view const str, char const character);
+std::string getStringWithoutCharAtTheEnd(std::string_view const str, char const character);
 
 std::string getStringWithoutOpeningClosingOperators(
     std::string_view const str, char const openingOperator, char const closingOperator);
