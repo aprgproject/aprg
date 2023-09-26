@@ -1180,6 +1180,7 @@ void Lrm::copyAllFspPairs(FspPairsDetails& fspPairsDetails) const {
     fspPairsDetails.reserve(m_addressToFspMap.size() * m_addressToFspMap.size());
     for (auto const& addressToFsp1 : m_addressToFspMap) {
         for (auto const& addressToFsp2 : m_addressToFspMap) {
+            // cppcheck-suppress useStlAlgorithm
             fspPairsDetails.emplace_back(addressToFsp1.first, addressToFsp2.first, 0);
         }
     }

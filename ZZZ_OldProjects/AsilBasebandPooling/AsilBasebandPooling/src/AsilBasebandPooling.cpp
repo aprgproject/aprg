@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iterator>
+#include <numeric>
 
 using namespace std;
 
@@ -60,11 +61,11 @@ unsigned int AsilBasebandPooling::getNumberBasebandCardsWithMultipleLcgs() const
 }
 
 unsigned int AsilBasebandPooling::getMaxNumberOfLcgsInAllBasebandCards() const {
-    unsigned int result(0);
-    for (BasebandCard const& basebandCard : m_basebandCards) {
-        result += getMaxNumberOfLcgsInBasebandCard(basebandCard);
-    }
-    return result;
+    return accumulate(
+        m_basebandCards.cbegin(), m_basebandCards.cend(), 0U,
+        [](unsigned int const partialResult, BasebandCard const& basebandCard) {
+            return partialResult + getMaxNumberOfLcgsInBasebandCard(basebandCard);
+        });
 }
 
 bool AsilBasebandPooling::areLcgAndBasebandCardsValid() const {
