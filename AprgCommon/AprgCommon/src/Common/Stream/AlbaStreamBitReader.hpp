@@ -14,12 +14,12 @@ namespace alba {
 
 class AlbaStreamBitReader {
 public:
+    explicit AlbaStreamBitReader(std::istream &stream);
     ~AlbaStreamBitReader() = default;
     AlbaStreamBitReader(AlbaStreamBitReader const &bitReader) = delete;
-    AlbaStreamBitReader(AlbaStreamBitReader &&bitReader) = delete;
+    AlbaStreamBitReader(AlbaStreamBitReader &&bitReader) noexcept = delete;
     AlbaStreamBitReader &operator=(AlbaStreamBitReader const &bitReader) = delete;
-    AlbaStreamBitReader &operator=(AlbaStreamBitReader &&bitReader) = delete;
-    explicit AlbaStreamBitReader(std::istream &stream);
+    AlbaStreamBitReader &operator=(AlbaStreamBitReader &&bitReader) noexcept = delete;
     [[nodiscard]] bool noRemainingBitsInBuffer() const;
     std::string readStringData(size_t const numberOfCharacters);
     std::string readWholeStreamAsStringData();

@@ -12,9 +12,9 @@ class AlbaOptional {
     // This requires copy constructor and default constructor on ContentType
 public:
     AlbaOptional() = default;
-    ~AlbaOptional() = default;
     explicit AlbaOptional(ContentType const content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
     explicit AlbaOptional(ContentType& content) : m_contentPointer(std::make_unique<ContentType>(content)) {}
+    ~AlbaOptional() = default;
 
     AlbaOptional(AlbaOptional const& optional) {
         if (optional.m_contentPointer) {
@@ -98,16 +98,16 @@ template <typename ContentType>
 // lets remove [[deprecated]] to avoid unnecessary warnings
 class AlbaOptional<ContentType&> {
 public:
-    ~AlbaOptional() = default;
-    AlbaOptional(AlbaOptional&& optional) = delete;
-    AlbaOptional& operator=(AlbaOptional&& optional) = delete;
-    // std::addressof should be used because & might be overloaded
-    explicit AlbaOptional(ContentType& content) : m_hasContent(true), m_contentPointer(std::addressof(content)) {}
     // #warning Please make sure that object still exists in the life time of an optional reference object
     AlbaOptional() : m_hasContent(false), m_contentPointer(nullptr) {}
+    // std::addressof should be used because & might be overloaded
+    explicit AlbaOptional(ContentType& content) : m_hasContent(true), m_contentPointer(std::addressof(content)) {}
+    ~AlbaOptional() = default;
 
     AlbaOptional(AlbaOptional const& optional)
         : m_hasContent(optional.m_hasContent), m_contentPointer(optional.m_contentPointer) {}
+
+    AlbaOptional(AlbaOptional&& optional) noexcept = delete;
 
     AlbaOptional& operator=(AlbaOptional const& optional) {
         if (this != &optional) {
@@ -117,6 +117,7 @@ public:
         return *this;
     }
 
+    AlbaOptional& operator=(AlbaOptional&& optional) noexcept = delete;
     explicit operator bool() const { return m_hasContent; }
 
     explicit operator ContentType&() const {

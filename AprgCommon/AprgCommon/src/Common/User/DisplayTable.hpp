@@ -14,8 +14,8 @@ enum class VerticalAlignment { Justify, Center, Top, Bottom };
 
 class DisplayTableCell {
 public:
-    explicit DisplayTableCell(std::string_view const displayText);
     DisplayTableCell();
+    explicit DisplayTableCell(std::string_view const displayText);
     DisplayTableCell(std::string_view const displayText, HorizontalAlignment const horizontalAlignment);
 
     DisplayTableCell(

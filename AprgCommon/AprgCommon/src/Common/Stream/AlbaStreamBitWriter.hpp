@@ -14,12 +14,12 @@ namespace alba {
 
 class AlbaStreamBitWriter {
 public:
-    AlbaStreamBitWriter(AlbaStreamBitWriter const& bitWriter) = delete;
-    AlbaStreamBitWriter(AlbaStreamBitWriter&& bitWriter) = delete;
-    AlbaStreamBitWriter& operator=(AlbaStreamBitWriter const& bitWriter) = delete;
-    AlbaStreamBitWriter& operator=(AlbaStreamBitWriter&& bitWriter) = delete;
     explicit AlbaStreamBitWriter(std::ostream& stream);
     ~AlbaStreamBitWriter();
+    AlbaStreamBitWriter(AlbaStreamBitWriter const& bitWriter) = delete;
+    AlbaStreamBitWriter(AlbaStreamBitWriter&& bitWriter) noexcept = delete;
+    AlbaStreamBitWriter& operator=(AlbaStreamBitWriter const& bitWriter) = delete;
+    AlbaStreamBitWriter& operator=(AlbaStreamBitWriter&& bitWriter) noexcept = delete;
     // rule of zero
     void writeBoolData(bool const data);
     void writeCharData(char const data);

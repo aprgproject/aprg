@@ -249,4 +249,5 @@ TEST(AlbaMemoryBufferTest, SaveObjectWorksOnStandardLayoutTypes) {
 }
 
 }  // namespace alba
+
 // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)

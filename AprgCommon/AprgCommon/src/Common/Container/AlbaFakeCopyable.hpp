@@ -9,15 +9,15 @@ class AlbaFakeCopyable {
 public:
     // rule of five or six
     AlbaFakeCopyable() = default;
-    AlbaFakeCopyable(AlbaFakeCopyable&&) noexcept = default;
-    ~AlbaFakeCopyable() = default;
-    AlbaFakeCopyable& operator=(AlbaFakeCopyable&&) noexcept = default;
     explicit AlbaFakeCopyable(ObjectType const& object) : m_object(object) {}
+    ~AlbaFakeCopyable() = default;
     // copy constructor calls default constructor
     AlbaFakeCopyable(AlbaFakeCopyable const&) : m_object() {}
+    AlbaFakeCopyable(AlbaFakeCopyable&&) noexcept = default;
     // copy assignment calls default constructor
     // NOLINTNEXTLINE(cert-oop54-cpp)
     AlbaFakeCopyable& operator=(AlbaFakeCopyable const&) { return *this; }
+    AlbaFakeCopyable& operator=(AlbaFakeCopyable&&) noexcept = default;
     [[nodiscard]] ObjectType const& getObject() const { return m_object; }
     ObjectType& getObjectReference() { return m_object; }
 

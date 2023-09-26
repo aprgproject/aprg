@@ -7,12 +7,12 @@ namespace alba {
 template <typename State, typename Input>
 class AlbaBaseStateMachine {
 public:
+    explicit AlbaBaseStateMachine(State const initialState) : m_state(initialState) {}
     virtual ~AlbaBaseStateMachine() = default;  // virtual destructor because of virtual functions (vtable exists)
     AlbaBaseStateMachine(AlbaBaseStateMachine const &stateMachine) = default;
     AlbaBaseStateMachine(AlbaBaseStateMachine &&stateMachine) noexcept = default;
     AlbaBaseStateMachine &operator=(AlbaBaseStateMachine const &stateMachine) = default;
     AlbaBaseStateMachine &operator=(AlbaBaseStateMachine &&stateMachine) noexcept = default;
-    explicit AlbaBaseStateMachine(State const initialState) : m_state(initialState) {}
     virtual void processInput(Input const &) = 0;
     [[nodiscard]] State getState() const { return m_state; }
 

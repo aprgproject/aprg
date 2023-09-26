@@ -10,11 +10,11 @@ namespace alba {
 class DestructorClass : public BaseVariantDataType {
 public:
     DestructorClass() = default;
-    DestructorClass(DestructorClass const&) = delete;
-    DestructorClass(DestructorClass&&) = delete;
-    DestructorClass& operator=(DestructorClass const&) = delete;
-    DestructorClass& operator=(DestructorClass&&) = delete;
     ~DestructorClass() override { s_destructorInvoked = true; }
+    DestructorClass(DestructorClass const&) = delete;
+    DestructorClass(DestructorClass&&) noexcept = delete;
+    DestructorClass& operator=(DestructorClass const&) = delete;
+    DestructorClass& operator=(DestructorClass&&) noexcept = delete;
     static bool s_destructorInvoked;
 };
 
@@ -71,23 +71,23 @@ TEST(AlbaUniqueVariantTest, PolymorphismIsSupportedByUniqueVariant) {
         int m_value;
 
     public:
+        explicit Base(int const value) : m_value(value) {}
         ~Base() override = default;  // 'virtual' is redundant since the function is already declared 'override'
         Base(Base const&) = delete;
-        Base(Base&&) = delete;
+        Base(Base&&) noexcept = delete;
         Base& operator=(Base const&) = delete;
-        Base& operator=(Base&&) = delete;
-        explicit Base(int const value) : m_value(value) {}
+        Base& operator=(Base&&) noexcept = delete;
         [[nodiscard]] virtual int getValue() const { return m_value; }
     };
 
     class Derived : public Base {
     public:
+        Derived() : Base(0) {}
         ~Derived() override = default;
         Derived(Derived const&) = delete;
-        Derived(Derived&&) = delete;
+        Derived(Derived&&) noexcept = delete;
         Derived& operator=(Derived const&) = delete;
-        Derived& operator=(Derived&&) = delete;
-        Derived() : Base(0) {}
+        Derived& operator=(Derived&&) noexcept = delete;
         [[nodiscard]] int getValue() const override { return valueFromTest; }
     };
 

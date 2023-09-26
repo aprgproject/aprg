@@ -8,13 +8,13 @@ namespace alba {
 
 class AlbaPathHandler {
 public:
-    virtual ~AlbaPathHandler() = default;  // virtual destructor because of virtual functions (vtable exists)
-    AlbaPathHandler(AlbaPathHandler const &pathHandler) = default;
-    AlbaPathHandler(AlbaPathHandler &&pathHandler) = default;
-    AlbaPathHandler &operator=(AlbaPathHandler const &pathHandler) = default;
-    AlbaPathHandler &operator=(AlbaPathHandler &&pathHandler) = default;
     explicit AlbaPathHandler(std::string_view const slashCharacterString);
     explicit AlbaPathHandler(std::string_view const path, std::string_view const slashCharacterString);
+    virtual ~AlbaPathHandler() = default;  // virtual destructor because of virtual functions (vtable exists)
+    AlbaPathHandler(AlbaPathHandler const &pathHandler) = default;
+    AlbaPathHandler(AlbaPathHandler &&pathHandler) noexcept = default;
+    AlbaPathHandler &operator=(AlbaPathHandler const &pathHandler) = default;
+    AlbaPathHandler &operator=(AlbaPathHandler &&pathHandler) noexcept = default;
     [[nodiscard]] virtual std::string getPath() const;
     [[nodiscard]] virtual std::string getDirectory() const;
     virtual void clear();

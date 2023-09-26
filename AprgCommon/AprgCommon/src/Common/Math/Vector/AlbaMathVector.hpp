@@ -19,8 +19,8 @@ class AlbaMathVector {
 public:
     using AlbaMathVectorType = AlbaMathVector<DataType, SIZE>;
     using ValuesInArray = std::array<DataType, SIZE>;
-    explicit AlbaMathVector(ValuesInArray const& values) : m_values(values) {}
     AlbaMathVector() : m_values{} {}
+    explicit AlbaMathVector(ValuesInArray const& values) : m_values(values) {}
 
     AlbaMathVector(std::initializer_list<DataType> const& values) : m_values{} {
         size_t const limit = std::min(SIZE, static_cast<size_t>(values.size()));

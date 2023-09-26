@@ -17,9 +17,9 @@ public:
     // disallow allocation on stack, only on heap(but no constructor so not possible as well)
     ~AlbaBitValueUtilities() = delete;
     AlbaBitValueUtilities(AlbaBitValueUtilities const &) = delete;
-    AlbaBitValueUtilities(AlbaBitValueUtilities &&) = delete;
+    AlbaBitValueUtilities(AlbaBitValueUtilities &&) noexcept = delete;
     AlbaBitValueUtilities &operator=(AlbaBitValueUtilities const &) = delete;
-    AlbaBitValueUtilities &operator=(AlbaBitValueUtilities &&) = delete;
+    AlbaBitValueUtilities &operator=(AlbaBitValueUtilities &&) noexcept = delete;
 
     static constexpr inline void swap(DataType &value1, DataType &value2) {
         value1 ^= value2;
@@ -110,9 +110,10 @@ public:
     }
 
     static constexpr inline DataType getOnesComplement(DataType const value) { return ~value; }
-    static constexpr inline DataType getTwosComplement(DataType const value) { 
+
+    static constexpr inline DataType getTwosComplement(DataType const value) {
         // cppcheck-suppress signConversion
-        return value * -1; 
+        return value * -1;
     }
 
     static constexpr inline DataType getGreatestPowerOf2Factor(DataType const value) {

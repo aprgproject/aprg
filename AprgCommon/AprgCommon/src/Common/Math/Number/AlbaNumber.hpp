@@ -216,11 +216,11 @@ private:
 // Source: https://en.cppreference.com/w/cpp/language/user_literal
 // NOTE: The string needs to have a underscore '_' prefix because all letters as prefix are reserved.
 // NOLINTNEXTLINE(google-runtime-int)
-constexpr AlbaNumber operator"" _AS_ALBA_NUMBER(unsigned long long int const value) {
+inline constexpr AlbaNumber operator"" _AS_ALBA_NUMBER(unsigned long long int const value) {
     return {static_cast<AlbaNumber::IntDataType>(value)};
 }
 
-constexpr AlbaNumber operator"" _AS_ALBA_NUMBER(long double const value) { return {static_cast<double>(value)}; }
+inline constexpr AlbaNumber operator"" _AS_ALBA_NUMBER(long double const value) { return {static_cast<double>(value)}; }
 static_assert(sizeof(AlbaNumber) == 16, "The size of AlbaNumber should be 16 bytes/128 bits.");
 
 // AlbaNumber operator "" _AS_ALBA_NUMBER(char const value) = delete;

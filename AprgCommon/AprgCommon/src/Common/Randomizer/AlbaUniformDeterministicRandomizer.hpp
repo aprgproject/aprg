@@ -18,12 +18,12 @@ public:
         typeHelper::isIntegralType<ValueType>(), std::uniform_int_distribution<ValueType>,
         std::uniform_real_distribution<ValueType>>;
 
+    // NOLINTNEXTLINE(cert-msc32-c,cert-msc51-cpp)
+    AlbaUniformDeterministicRandomizer() : m_randomEngine(), m_randomNumberDistribution() {}
+
     explicit AlbaUniformDeterministicRandomizer(
         ValueType const minimum, ValueType const maximum, ValueType const customSeed)
         : m_randomEngine(customSeed), m_randomNumberDistribution(minimum, maximum) {}
-
-    // NOLINTNEXTLINE(cert-msc32-c,cert-msc51-cpp)
-    AlbaUniformDeterministicRandomizer() : m_randomEngine(), m_randomNumberDistribution() {}
 
     void setMinimumAndMaximum(ValueType const minimum, ValueType const maximum) {
         m_randomNumberDistribution = Distribution(minimum, maximum);

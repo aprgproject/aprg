@@ -14,9 +14,9 @@ public:
     ~AlbaBitManipulation() = delete;
     // disallow allocation on stack, only on heap(but no constructor so not possible as well)
     AlbaBitManipulation(AlbaBitManipulation const &) = delete;
-    AlbaBitManipulation(AlbaBitManipulation &&) = delete;
+    AlbaBitManipulation(AlbaBitManipulation &&) noexcept = delete;
     AlbaBitManipulation &operator=(AlbaBitManipulation const &) = delete;
-    AlbaBitManipulation &operator=(AlbaBitManipulation &&) = delete;
+    AlbaBitManipulation &operator=(AlbaBitManipulation &&) noexcept = delete;
     static_assert(typeHelper::isIntegralType<DataType>(), "DataType must be an integer");
 
     template <typename ArgumentType, typename... Arguments>

@@ -35,6 +35,7 @@ string getLastFormattedErrorMessage() {
     }
     return lastErrorStream.str();
 }
+
 // NOLINTEND(cppcoreguidelines-pro-type-reinterpret-cast)
 
 }  // namespace alba::AlbaWindowsHelper

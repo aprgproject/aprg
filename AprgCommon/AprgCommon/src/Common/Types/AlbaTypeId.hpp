@@ -8,7 +8,7 @@
 namespace alba {
 
 using TypeId = uintptr_t;
-constexpr TypeId EMPTY_TYPE_ID = 0;
+inline constexpr TypeId EMPTY_TYPE_ID = 0;
 
 namespace detail {
 

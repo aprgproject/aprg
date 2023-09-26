@@ -8,13 +8,13 @@ using namespace std;
 
 namespace alba {
 
+DisplayTableCell::DisplayTableCell()
+    : m_horizontalAlignment(HorizontalAlignment::Center), m_verticalAlignment(VerticalAlignment::Center) {}
+
 DisplayTableCell::DisplayTableCell(string_view const displayText)
     : m_displayText(displayText),
       m_horizontalAlignment(HorizontalAlignment::Center),
       m_verticalAlignment(VerticalAlignment::Center) {}
-
-DisplayTableCell::DisplayTableCell()
-    : m_horizontalAlignment(HorizontalAlignment::Center), m_verticalAlignment(VerticalAlignment::Center) {}
 
 DisplayTableCell::DisplayTableCell(string_view const displayText, HorizontalAlignment const horizontalAlignment)
     : m_displayText(displayText),

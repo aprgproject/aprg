@@ -16,7 +16,7 @@ using strings = std::vector<std::string>;
 using StringViews = std::vector<std::string_view>;
 using StringPair = std::pair<std::string, std::string>;
 using StringPairs = std::vector<StringPair>;
-constexpr auto WHITESPACE_STRING = " \t\n\r";
+inline constexpr auto WHITESPACE_STRING = " \t\n\r";
 
 // Split and combine
 enum class SplitStringType { WithDelimeters, WithoutDelimeters };
