@@ -204,6 +204,4 @@ void BitmapSnippet::setPixelAtForMultipleBytePixels(uint8_t* writer, int const i
     }
 }
 
-BitmapSnippet::BitmapSnippet() = default;
-
 }  // namespace alba::AprgBitmap

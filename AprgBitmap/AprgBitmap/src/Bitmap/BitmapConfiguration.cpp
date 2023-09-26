@@ -272,8 +272,4 @@ bool areBitmapConfigurationsCompatibleForChangingPixelData(
            configuration1.getBitmapWidth() == configuration2.getBitmapWidth();
 }
 
-BitmapConfiguration::BitmapConfiguration()
-
-    = default;
-
 }  // namespace alba::AprgBitmap

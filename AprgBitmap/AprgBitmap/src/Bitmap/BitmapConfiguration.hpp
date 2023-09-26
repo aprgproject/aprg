@@ -25,7 +25,7 @@ enum class CompressedMethodType {
 
 class BitmapConfiguration {
 public:
-    BitmapConfiguration();
+    BitmapConfiguration() = default;
     [[nodiscard]] BitmapXY getPointWithinTheBitmap(int const xCoordinate, int const yCoordinate) const;
     [[nodiscard]] BitmapXY getDownRightCornerPoint() const;
     [[nodiscard]] Colors getColorTable() const;
