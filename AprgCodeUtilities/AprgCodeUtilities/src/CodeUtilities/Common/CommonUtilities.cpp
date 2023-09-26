@@ -66,7 +66,7 @@ Indexes searchForwardsForPatterns(int const startIndex, Terms const& terms, Patt
 Indexes searchForwardsForPatterns(
     int const startIndex, int const endIndex, Terms const& terms, Patterns const& searchPatterns) {
     for (int termIndex = startIndex; termIndex <= endIndex; ++termIndex) {
-        Indexes hitIndexes = searchPatternsAt(termIndex, terms, searchPatterns);
+        Indexes hitIndexes = searchPatternsAt(termIndex, endIndex, terms, searchPatterns);
         if (!hitIndexes.empty()) {
             return hitIndexes;
         }

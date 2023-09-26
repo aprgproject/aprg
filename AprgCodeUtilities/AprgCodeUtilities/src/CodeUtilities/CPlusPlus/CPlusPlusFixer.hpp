@@ -55,7 +55,8 @@ private:
     void enterAndSetTopLevelScope();
     void exitTopLevelScope();
     void enterScope(int const scopeHeaderStart, int const openingBraceIndex);
-    void exitScope(int const closingBraceIndex);
+    void exitScope();
+    void fixOnScopeLoop(int const startIndex, int const endIndex);
     void fixConstexprToInlineConstExpr(int const startIndex, int const endIndex);
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
 
