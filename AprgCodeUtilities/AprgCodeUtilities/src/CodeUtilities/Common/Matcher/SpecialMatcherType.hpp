@@ -9,6 +9,7 @@ enum class SpecialMatcherType {
     IdentifierWithSnakeCase,
     IdentifierAndNotAScreamingSnakeCase,
     Literal,
+    NotACommentNorWhiteSpace,
     WhiteSpaceWithNewLine
 };
 

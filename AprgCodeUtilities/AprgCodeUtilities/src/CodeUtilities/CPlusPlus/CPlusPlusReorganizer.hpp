@@ -44,7 +44,6 @@ public:
 
 private:
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
-    [[nodiscard]] Terms extractTermsInRange(int const start, int const end) const;
     [[nodiscard]] std::string getFormattedContent(int const start, int const end) const;
     [[nodiscard]] stringHelper::strings getScopeNames() const;
     [[nodiscard]] stringHelper::strings getSavedSignatures() const;
@@ -71,9 +70,6 @@ private:
     [[nodiscard]] static bool hasEndBrace(std::string const& content);
     static void makeIsolatedCommentsStickWithNextLine(Terms& terms);
     static void removeStartingAndTrailingWhiteSpace(Terms& terms);
-
-    static int getIndexAtClosingString(
-        Terms const& terms, int const openingIndex, std::string const& openingString, std::string const& closingString);
 
     CppFileType m_fileType{CppFileType::Unknown};
     Purpose m_purpose{Purpose::Unknown};

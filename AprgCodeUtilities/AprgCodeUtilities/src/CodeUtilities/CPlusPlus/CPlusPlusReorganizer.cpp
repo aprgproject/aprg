@@ -86,7 +86,7 @@ void CPlusPlusReorganizer::processImplementationFile(path const& headerFile, pat
 
 CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
     int const scopeHeaderStart, int const openingBraceIndex) const {
-    Terms scopeHeaderTerms(extractTermsInRange(scopeHeaderStart, openingBraceIndex));
+    Terms scopeHeaderTerms(extractTermsInRange(scopeHeaderStart, openingBraceIndex, m_terms));
     ScopeDetail scopeDetail{scopeHeaderStart, openingBraceIndex, 0, ScopeType::Unknown, {}, {}};
     Patterns const searchPatterns{
         {M("template"), M("<")},
@@ -139,17 +139,8 @@ CPlusPlusReorganizer::ScopeDetail CPlusPlusReorganizer::constructScopeDetails(
     return scopeDetail;
 }
 
-Terms CPlusPlusReorganizer::extractTermsInRange(int const start, int const end) const {
-    Terms extractedTerms;
-    if (start <= end) {
-        extractedTerms.reserve(end + 1 - start);
-        copy(m_terms.begin() + start, m_terms.cbegin() + end + 1, back_inserter(extractedTerms));
-    }
-    return extractedTerms;
-}
-
 string CPlusPlusReorganizer::getFormattedContent(int const start, int const end) const {
-    Terms formattedTerms(extractTermsInRange(start, end));
+    Terms formattedTerms(extractTermsInRange(start, end, m_terms));
     removeStartingAndTrailingWhiteSpace(formattedTerms);
     makeIsolatedCommentsStickWithNextLine(formattedTerms);
     return getCombinedContents(formattedTerms);
@@ -310,7 +301,7 @@ void CPlusPlusReorganizer::processSemiColon(int& nextIndex, int const semiColonI
 void CPlusPlusReorganizer::processOpeningAndClosingBrace(
     int& nextIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex) {
     int const endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
-    Terms const scopeHeaderTerms(extractTermsInRange(nextIndex, openingBraceIndex - 1));
+    Terms const scopeHeaderTerms(extractTermsInRange(nextIndex, openingBraceIndex - 1, m_terms));
     strings& currentItems(m_scopeDetails.back().items);
     if (!currentItems.empty() && hasEndBrace(currentItems.back()) && shouldConnectToPreviousItem(scopeHeaderTerms)) {
         currentItems.back() += getCombinedContents(nextIndex, endIndex, m_terms);
@@ -323,7 +314,7 @@ void CPlusPlusReorganizer::processOpeningAndClosingBrace(
 void CPlusPlusReorganizer::processOpeningBrace(int& nextIndex, int const openingBraceIndex) {
     if (!m_scopeDetails.empty()) {
         strings& currentItems(m_scopeDetails.back().items);
-        Terms const scopeHeaderTerms(extractTermsInRange(nextIndex, openingBraceIndex - 1));
+        Terms const scopeHeaderTerms(extractTermsInRange(nextIndex, openingBraceIndex - 1, m_terms));
         if (!currentItems.empty() && hasEndBrace(currentItems.back()) &&
             shouldConnectToPreviousItem(scopeHeaderTerms)) {
             Terms const lastItemTerms = getTermsFromString(currentItems.back());
@@ -485,34 +476,6 @@ void CPlusPlusReorganizer::removeStartingAndTrailingWhiteSpace(Terms& terms) {
         }
         terms.erase(terms.begin() + 1 + nonWhiteSpace, terms.end());
     }
-}
-
-int CPlusPlusReorganizer::getIndexAtClosingString(
-    Terms const& terms, int const openingIndex, string const& openingString, string const& closingString) {
-    Patterns const searchPatterns{{M(openingString)}, {M(closingString)}};
-    int endIndex = openingIndex + 1;
-    int numberOfOpenings = 1;
-    bool isFound(true);
-    while (isFound) {
-        Indexes hitIndexes = searchForwardsForPatterns(endIndex, terms, searchPatterns);
-        isFound = !hitIndexes.empty();
-        if (isFound) {
-            int const firstHitIndex = hitIndexes.front();
-            Term const& firstTerm(terms[firstHitIndex]);
-            if (firstTerm.getContent() == openingString) {
-                endIndex = firstHitIndex + 1;
-                ++numberOfOpenings;
-            } else if (firstTerm.getContent() == closingString) {
-                endIndex = firstHitIndex + 1;
-                if (--numberOfOpenings == 0) {
-                    break;
-                }
-            } else {
-                break;
-            }
-        }
-    }
-    return endIndex;
 }
 
 }  // namespace alba::CodeUtilities

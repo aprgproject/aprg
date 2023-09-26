@@ -42,11 +42,23 @@ TEST(CPlusPlusFixerTest, DISABLED_ActualDirectoryTest) {
     fixer.processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\gsl\GslTest)");
 }
 
-TEST(CPlusPlusFixerTest, FixerWorksForCombineCodes) {
+TEST(CPlusPlusFixerTest, FixerWorksForGenericCode) {
     CPlusPlusFixer fixer;
-    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/FixerTests/Before/CombineCode.txt)");
-    string const afterHeaderFilePath(TEST_DIRECTORY R"(/FixerTests/After/CombineCode.txt)");
-    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/FixerTests/Expected/CombineCode.txt)");
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/FixerTests/Before/GenericCode.txt)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/FixerTests/After/GenericCode.txt)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/FixerTests/Expected/GenericCode.txt)");
+    copyFile(beforeHeaderFilePath, afterHeaderFilePath);
+
+    fixer.processFile(afterHeaderFilePath);
+
+    verifyFile(expectedHeaderFilePath, afterHeaderFilePath);
+}
+
+TEST(CPlusPlusFixerTest, FixerWorksForHeaderCode) {
+    CPlusPlusFixer fixer;
+    string const beforeHeaderFilePath(TEST_DIRECTORY R"(/FixerTests/Before/HeaderCode.hpp)");
+    string const afterHeaderFilePath(TEST_DIRECTORY R"(/FixerTests/After/HeaderCode.hpp)");
+    string const expectedHeaderFilePath(TEST_DIRECTORY R"(/FixerTests/Expected/HeaderCode.hpp)");
     copyFile(beforeHeaderFilePath, afterHeaderFilePath);
 
     fixer.processFile(afterHeaderFilePath);

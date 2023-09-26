@@ -2,6 +2,7 @@
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/CommonUtilities.hpp>
+#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <iostream>
@@ -62,14 +63,23 @@ strings CPlusPlusFixer::getPrintItems(int& printfEnd, int const printStringIndex
 
 void CPlusPlusFixer::fixTerms() {
     combinePrimitiveTypes();
+    fixRegardlessWithScopes();
+    fixBasedOnScopes();
+}
+
+void CPlusPlusFixer::fixRegardlessWithScopes() {
     fixPostFixIncrementDecrement();
     fixConstReferenceOrder();
     fixConstToConstexpr();
     fixNoConstPassByValue();
+    fixNoExceptOnMoveConstructor();
+    fixNoExceptOnMoveAssignment();
     fixCStylePrintf();
     fixCommentsPositionOfBraces();
     fixCStyleStaticCast();
 }
+
+void CPlusPlusFixer::fixBasedOnScopes() { fixByCheckingScopes(); }
 
 void CPlusPlusFixer::combinePrimitiveTypes() {
     int termIndex = 0;
@@ -153,6 +163,50 @@ void CPlusPlusFixer::fixNoConstPassByValue(Patterns const& searchPatterns) {
     }
 }
 
+void CPlusPlusFixer::fixNoExceptOnMoveConstructor() {
+    Patterns const searchPatterns{
+        {M(TermType::Identifier), M("("), M(TermType::Identifier), M("&&"), M(")"),
+         M(SpecialMatcherType::NotACommentNorWhiteSpace)}};
+    int termIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_terms, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            if (m_terms[hitIndexes[0]] == m_terms[hitIndexes[2]]) {
+                if (m_terms[hitIndexes[5]].getContent() != "noexcept") {
+                    changeTerm(m_terms[hitIndexes[4]], TermType::Aggregate, ") noexcept ");
+                    cout << "Fixed file: [" << m_currentFile << "]\n";
+                    cout << "Fixed noexcept at: [" << getLocatorString(hitIndexes[4], m_terms) << "]\n";
+                }
+            }
+            termIndex = hitIndexes.back();
+        }
+    }
+}
+
+void CPlusPlusFixer::fixNoExceptOnMoveAssignment() {
+    Patterns const searchPatterns{
+        {M(TermType::Identifier), M("&"), M("operator"), M("="), M("("), M(TermType::Identifier), M("&&"), M(")"),
+         M(SpecialMatcherType::NotACommentNorWhiteSpace)}};
+    int termIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_terms, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            if (m_terms[hitIndexes[0]] == m_terms[hitIndexes[5]]) {
+                if (m_terms[hitIndexes[8]].getContent() != "noexcept") {
+                    changeTerm(m_terms[hitIndexes[7]], TermType::Aggregate, ") noexcept ");
+                    cout << "Fixed file: [" << m_currentFile << "]\n";
+                    cout << "Fixed noexcept at: [" << getLocatorString(hitIndexes[7], m_terms) << "]\n";
+                }
+            }
+            termIndex = hitIndexes.back();
+        }
+    }
+}
+
 void CPlusPlusFixer::fixCStylePrintf() { fixCStylePrintf({{M("printf"), M("("), M(TermType::StringLiteral)}}); }
 
 void CPlusPlusFixer::fixCStylePrintf(Patterns const& searchPatterns) {
@@ -203,7 +257,8 @@ void CPlusPlusFixer::fixCommentsPositionOfBraces() {
 void CPlusPlusFixer::fixCStyleStaticCast() { fixCStyleStaticCast(M(TermType::PrimitiveType)); }
 
 void CPlusPlusFixer::fixCStyleStaticCast(Matcher const& typeMatcher) {
-    Patterns const searchPatterns{{M(TermType::Operator), M("("), typeMatcher, M(")"), M_NOT(TermType::WhiteSpace)}};
+    Patterns const searchPatterns{
+        {M(TermType::Operator), M("("), typeMatcher, M(")"), M(SpecialMatcherType::NotACommentNorWhiteSpace)}};
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
@@ -279,6 +334,127 @@ void CPlusPlusFixer::findTermsAndConvertToConstexpr(
             cout << "Swapped at: [" << getLocatorString(hitIndexes[typeIndex], m_terms) << "]\n";
         }
     }
+}
+
+void CPlusPlusFixer::fixByCheckingScopes() {
+    enterAndSetTopLevelScope();
+
+    Patterns const searchPatterns{{M("{")}, {M("}")}};
+    int nextIndex = 0;
+    int searchIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForwardsForPatterns(searchIndex, m_terms, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int const firstHitIndex = hitIndexes.front();
+            Term const& firstTerm(m_terms[firstHitIndex]);
+            if (firstTerm.getContent() == "{") {
+                processOpeningBrace(nextIndex, firstHitIndex);
+                searchIndex = nextIndex;
+            } else if (firstTerm.getContent() == "}") {
+                processClosingBrace(nextIndex, firstHitIndex);
+                searchIndex = nextIndex;
+            }
+        }
+    }
+
+    exitTopLevelScope();
+}
+
+void CPlusPlusFixer::processOpeningBrace(int& nextIndex, int const openingBraceIndex) {
+    enterScope(nextIndex, openingBraceIndex);
+    nextIndex = openingBraceIndex + 1;
+}
+
+void CPlusPlusFixer::processClosingBrace(int& nextIndex, int const closingBraceIndex) {
+    exitScope(closingBraceIndex);
+    nextIndex = closingBraceIndex + 1;
+}
+
+void CPlusPlusFixer::enterAndSetTopLevelScope() { m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel}}; }
+
+void CPlusPlusFixer::exitTopLevelScope() { m_scopeDetails.pop_back(); }
+
+void CPlusPlusFixer::enterScope(int const scopeHeaderStart, int const openingBraceIndex) {
+    m_scopeDetails.emplace_back(constructScopeDetails(scopeHeaderStart, openingBraceIndex));
+}
+
+void CPlusPlusFixer::exitScope(int const closingBraceIndex) {
+    ScopeDetail const& scopeToExit(m_scopeDetails.back());
+    if (ScopeType::NamedNamespace == scopeToExit.scopeType &&
+        isHeaderFileExtension(getStringWithoutCharAtTheStart(m_currentFile.extension().string(), '.'))) {
+        fixConstexprToInlineConstExpr(scopeToExit.openingBraceIndex, closingBraceIndex);
+    }
+    m_scopeDetails.pop_back();
+}
+
+void CPlusPlusFixer::fixConstexprToInlineConstExpr(int const startIndex, int const endIndex) {
+    auto const startDivider = M_OR(M("{"), M("}"), M(";"));
+    Patterns const searchPatterns{{startDivider, M("constexpr")}};
+    int nextIndex = startIndex;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForwardsForPatterns(nextIndex, endIndex, m_terms, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int const lastHitIndex = hitIndexes.back();
+            changeTerm(m_terms[lastHitIndex], TermType::Aggregate, "inline constexpr");
+            cout << "Fixed file: [" << m_currentFile << "]\n";
+            cout << "Fixed inline constexpr at: [" << getLocatorString(lastHitIndex, m_terms) << "]\n";
+        }
+    }
+}
+
+CPlusPlusFixer::ScopeDetail CPlusPlusFixer::constructScopeDetails(
+    int const scopeHeaderStart, int const openingBraceIndex) const {
+    Terms scopeHeaderTerms(extractTermsInRange(scopeHeaderStart, openingBraceIndex, m_terms));
+    ScopeDetail scopeDetail{scopeHeaderStart, openingBraceIndex, 0, ScopeType::Unknown};
+    Patterns const searchPatterns{
+        {M("template"), M("<")},
+        {M("namespace"), M(TermType::Identifier)},
+        {M("namespace"), M("{")},
+        {M("enum"), M("class"), M(TermType::Identifier)},
+        {M("class"), M(TermType::Identifier)},
+        {M("struct"), M(TermType::Identifier)},
+        {M("union"), M(TermType::Identifier)}};
+    int nextIndex = 0;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForwardsForPatterns(nextIndex, scopeHeaderTerms, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int const firstHitIndex = hitIndexes.front();
+            int const lastHitIndex = hitIndexes.back();
+            Term const& firstTerm(scopeHeaderTerms[firstHitIndex]);
+            Term const& lastTerm(scopeHeaderTerms[lastHitIndex]);
+            if (firstTerm.getContent() == "namespace" && lastTerm.getTermType() == TermType::Identifier) {
+                scopeDetail.scopeType = ScopeType::NamedNamespace;
+                break;
+            }
+            if (firstTerm.getContent() == "namespace" && lastTerm.getContent() == "{") {
+                scopeDetail.scopeType = ScopeType::AnonymousNamespace;
+                break;
+            }
+            if (firstTerm.getContent() == "enum" && scopeHeaderTerms[hitIndexes[1]].getContent() == "class" &&
+                lastTerm.getTermType() == TermType::Identifier) {
+                scopeDetail.scopeType = ScopeType::EnumClass;
+                break;
+            }
+            if ((firstTerm.getContent() == "class" || firstTerm.getContent() == "struct" ||
+                 firstTerm.getContent() == "union") &&
+                lastTerm.getTermType() == TermType::Identifier) {
+                scopeDetail.scopeType = ScopeType::ClassDeclaration;
+                break;
+            }
+            if (firstTerm.getContent() == "template" && lastTerm.getContent() == "<") {
+                nextIndex = getIndexAtClosingString(scopeHeaderTerms, lastHitIndex, "<", ">");
+            } else {
+                nextIndex = lastHitIndex + 1;
+            }
+        }
+    }
+    return scopeDetail;
 }
 
 Terms CPlusPlusFixer::getNewPrintTerms(string const& printString, strings const& printItems) {
