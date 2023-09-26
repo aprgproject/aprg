@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [45]
-2023-09-25T18:30:27
+StaticAnalysisJobIdentifier: [40]
+2023-09-26T07:38:36
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/Bitmap.cpp:88:26: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:68:18: warning: variable name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapConfiguration.cpp:69:18: warning: variable name 'b' is too short, expected at least 3 characters [readability-identifier-length]
@@ -896,9 +896,9 @@ StaticAnalysisJobIdentifier: [45]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Simplification/SimplificationOfEquation.cpp:137:17: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Simplification/SimplificationOfEquation.cpp:144:13: note: +3, including nesting penalty of 2, nesting level increased to 3
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Simplification/SimplificationOfEquation.cpp:147:21: note: nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/SolutionSet/MultipleVariableSolutionSet.cpp:12:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/DomainAndRange/DomainAndRange.cpp:43:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/DomainAndRange/DomainAndRange.cpp:65:14: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/SolutionSet/MultipleVariableSolutionSet.cpp:12:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/DiophantineEquation/LinearDiophantineEquationCoefficientSolver.cpp:11:23: warning: parameter name 'a' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/DiophantineEquation/LinearDiophantineEquationCoefficientSolver.cpp:11:44: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Solution/Solver/DiophantineEquation/LinearDiophantineEquationCoefficientSolver.cpp:11:65: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
