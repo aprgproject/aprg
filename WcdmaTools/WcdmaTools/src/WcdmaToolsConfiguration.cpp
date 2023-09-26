@@ -268,7 +268,7 @@ void WcdmaToolsConfiguration::determineVariousLocationsBasedOnCurrentLocation() 
 
     AlbaLocalPathHandler temporaryFilePathHandler(
         currentLocalPathHandler.getDirectory().string() + R"(\temporaryFiles\)");
-    temporaryFilePathHandler.input(temporaryFilePathHandler.getRoot().string() + R"(:\Temp\)");
+    temporaryFilePathHandler.input(temporaryFilePathHandler.getRoot().string() + R"(\Temp\)");
     btsLogSorterConfiguration.m_pathOfTempFiles = temporaryFilePathHandler.getPath().string();
     temporaryFilePathHandler.createDirectoriesAndIsSuccessful();
 
