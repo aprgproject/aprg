@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [45]
-2023-09-25T13:01:57
+StaticAnalysisJobIdentifier: [40]
+2023-09-26T02:17:51
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/Combinatorics/CombinationUtilities.cpp:11:97: warning: parameter name 'k' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/Combinatorics/CombinationUtilities.hpp:6:97: warning: parameter name 'k' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgMath/AprgMath/src/Math/GameTheory/NimGame.cpp:37:34: style: Consider using std::find_if algorithm instead of a raw loop. [useStlAlgorithm]
