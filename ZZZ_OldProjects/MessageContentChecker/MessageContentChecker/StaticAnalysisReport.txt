@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [45]
-2023-09-25T18:11:56
+StaticAnalysisJobIdentifier: [40]
+2023-09-26T07:22:28
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:35:5: warning: do not declare C-style arrays, use std::array<> instead [cppcoreguidelines-avoid-c-arrays,hicpp-avoid-c-arrays,modernize-avoid-c-arrays]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:35:23: warning: 10000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/MessageContentChecker/MessageContentChecker/tst/MessageContentChecker_unit.cpp:37:75: warning: 0xD5 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
