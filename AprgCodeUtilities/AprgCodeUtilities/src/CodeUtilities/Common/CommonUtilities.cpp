@@ -46,6 +46,15 @@ void changeTerm(Term& term, TermType const newTermType, string const& content) {
     term.setContent(content);
 }
 
+Terms extractTermsInRange(int const startIndex, int const endIndex, Terms const& terms) {
+    Terms extractedTerms;
+    if (startIndex <= endIndex) {
+        extractedTerms.reserve(endIndex + 1 - startIndex);
+        copy(terms.begin() + startIndex, terms.cbegin() + endIndex + 1, back_inserter(extractedTerms));
+    }
+    return extractedTerms;
+}
+
 Indexes searchForwardsForPatterns(Terms const& terms, Patterns const& searchPatterns) {
     return searchForwardsForPatterns(0, static_cast<int>(terms.size()) - 1, terms, searchPatterns);
 }
@@ -181,6 +190,7 @@ string convertToString(SpecialMatcherType const type) {
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::IdentifierWithSnakeCase)
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::IdentifierAndNotAScreamingSnakeCase)
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::Literal)
+        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::NotACommentNorWhiteSpace)
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::WhiteSpaceWithNewLine)
     }
     return {};
@@ -222,6 +232,34 @@ int getPatternIndexOfAMatchAt(int const termIndex, Terms const& terms, Patterns 
     return patternIndex < static_cast<int>(searchPatterns.size()) ? patternIndex : -1;
 }
 
+int getIndexAtClosingString(
+    Terms const& terms, int const openingIndex, string const& openingString, string const& closingString) {
+    Patterns const searchPatterns{{M(openingString)}, {M(closingString)}};
+    int endIndex = openingIndex + 1;
+    int numberOfOpenings = 1;
+    bool isFound(true);
+    while (isFound) {
+        Indexes hitIndexes = searchForwardsForPatterns(endIndex, terms, searchPatterns);
+        isFound = !hitIndexes.empty();
+        if (isFound) {
+            int const firstHitIndex = hitIndexes.front();
+            Term const& firstTerm(terms[firstHitIndex]);
+            if (firstTerm.getContent() == openingString) {
+                endIndex = firstHitIndex + 1;
+                ++numberOfOpenings;
+            } else if (firstTerm.getContent() == closingString) {
+                endIndex = firstHitIndex + 1;
+                if (--numberOfOpenings == 0) {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+    return endIndex;
+}
+
 bool isAllWhiteSpaceOrComment(Terms const& terms) {
     return all_of(terms.cbegin(), terms.cend(), [](Term const& term) { return isCommentOrWhiteSpace(term); });
 }
@@ -241,6 +279,8 @@ bool isAMatch(SpecialMatcherType const matcherType, Term const& term) {
         case SpecialMatcherType::Literal:
             return TermType::Boolean == term.getTermType() || TermType::CharacterLiteral == term.getTermType() ||
                    TermType::Number == term.getTermType() || TermType::StringLiteral == term.getTermType();
+        case SpecialMatcherType::NotACommentNorWhiteSpace:
+            return !isCommentOrWhiteSpace(term);
         case SpecialMatcherType::WhiteSpaceWithNewLine:
             return isWhiteSpaceWithNewLine(term);
     }

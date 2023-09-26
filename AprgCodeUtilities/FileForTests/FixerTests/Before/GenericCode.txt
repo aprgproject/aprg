@@ -23,17 +23,26 @@ const auto variable(nonLiteralValue);
 function(unsigned int variable1, unsigned int variable2, unsigned int variable3){}
 function(Type variable1, Type variable2, Type variable3){}
 
-//fixConstToConstexpr
+// fixConstToConstexpr
 unsigned int const variable = 0;
 unsigned int const variable(0);
 
-//fixCStylePrintf
+// fixNoExceptOnMoveConstructor
+// fixNoExceptOnMoveAssignment
+SomeClass(SomeClass const &) = default;
+SomeClass(SomeClass &&) = default;
+SomeClass &operator=(SomeClass const &) = default;
+SomeClass &operator=(SomeClass &&) = default;
+SomeClass &operator=(SomeClass const &) noexcept = default;
+SomeClass &operator=(SomeClass &&) noexcept = default;
+
+// fixCStylePrintf
 printf("variable1: [%d] variable2: [%0.0f] variable3: [%.*s]", variable1, variable2, variable3);
 printf("");
 printf("%zu %f %f %f %f\n", i, gsl_vector_get(x, i), gsl_vector_get(xmean, i), gsl_vector_get(xmin, i), gsl_vector_get(xmax, i));
 printf("%f %f %f %f\n", ti, xi, medi, rmedi);
 
-//fixCommentsPositionOfBraces
+// fixCommentsPositionOfBraces
 if //Comment
 {
 }
