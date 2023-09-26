@@ -18,6 +18,7 @@ public:
     using BaseTermDataPointer = std::unique_ptr<BaseTermData>;
     Term();
     Term(TermType const type, bool const isSimplified, BaseTermDataPointer&& m_baseTermDataPointer);  // for move
+    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
     Term(bool const boolValue);
     Term(char const* const characterString);
     Term(std::string const& stringAsParameter);
@@ -25,14 +26,13 @@ public:
     Term(VariableTerm const& variableTerm);
     Term(Operator const& operatorTerm);
     Term(Expression const& expression);
+    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     // rule of five or six
-    // NOLINTBEGIN(google-explicit-constructor,hicpp-explicit-conversions)
     ~Term() override = default;
     Term(Term const& term);
     Term(Term&& term) noexcept = default;
     Term& operator=(Term const& term);
     Term& operator=(Term&& term) noexcept = default;
-    // NOLINTEND(google-explicit-constructor,hicpp-explicit-conversions)
     Term operator~() const;
     bool operator==(Term const& second) const;
     bool operator!=(Term const& second) const;

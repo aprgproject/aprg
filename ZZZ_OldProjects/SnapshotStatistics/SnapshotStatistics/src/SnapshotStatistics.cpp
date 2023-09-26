@@ -19,12 +19,13 @@ int numberOfFilesAnalyzedForExtraction;
 SnapshotStatistics::SnapshotStatistics() : m_fileExtractor("[.]") { initializeFileGroups(); }
 
 string SnapshotStatistics::getWildcardNameIfFileGroupsIsFound(string const& fileName) const {
-    for (FileGroup const& fileGroup : m_fileGroups) {
-        if (fileGroup.isInFileGroup(fileName)) {
-            return fileGroup.getWildcardName();
-        }
+    auto it = find_if(m_fileGroups.cbegin(), m_fileGroups.cend(), [&](FileGroup const& fileGroup) {
+        return fileGroup.isInFileGroup(fileName);
+    });
+    if (it != m_fileGroups.cend()) {
+        return it->getWildcardName();
     }
-    return "";
+    return {};
 }
 
 void SnapshotStatistics::addFileSizeForSnapshot(

@@ -1,4 +1,4 @@
-StaticAnalysisJobIdentifier: [41]
+StaticAnalysisJobIdentifier: [0]
 2023-09-26T15:08:35
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Constructs/AdditionAndSubtractionOfExpressions.cpp:20:44: warning: initialization of 'isCommonPart' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /home/runner/work/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/BaseTermHelpers.hpp:15:13: note: possibly throwing function declared here
