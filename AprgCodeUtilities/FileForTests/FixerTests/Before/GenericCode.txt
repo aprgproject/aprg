@@ -36,6 +36,12 @@ SomeClass &operator=(SomeClass &&) = default;
 SomeClass &operator=(SomeClass const &) noexcept = default;
 SomeClass &operator=(SomeClass &&) noexcept = default;
 
+//fixGTestNames
+TEST(TestSuiteName, TestName) {}
+TEST(TestSuiteName, DISABLED_TestName) {}
+TEST(__Test___Suite____Name_____, ___Test__Name_) {}
+TEST(__Test___Suite____Name_____, DISABLED____Test__Name_) {}
+
 // fixCStylePrintf
 printf("variable1: [%d] variable2: [%0.0f] variable3: [%.*s]", variable1, variable2, variable3);
 printf("");
