@@ -2,7 +2,7 @@
 
 namespace alba::StaticOnTranslationUnits {
 
-inline constexpr int constInteger = 100;  // static (internal linkage) by default
+constexpr int constInteger = 100;  // static (internal linkage) by default
 
 // Utilities for tests
 struct TranslationUnitValues {

@@ -84,7 +84,7 @@ TEST(InPlaceConstructionExamplesTest, RvoWorks) {
 
 namespace NoRvoBecauseNoOpportunity {
 
-string sadFunction(string const s) {
+string sadFunction(string s) {
     s += "No RVO for you!";
     return s;
 }
@@ -188,7 +188,7 @@ string willThisRvo02(bool const condition) {
     // This will RVO even in debug builds
 }
 
-string willThisRvo03(bool const condition, string const prohibitingRvo) {
+string willThisRvo03(bool const condition, string prohibitingRvo) {
     if (condition) {
         prohibitingRvo = "I won't RVO";
     }
