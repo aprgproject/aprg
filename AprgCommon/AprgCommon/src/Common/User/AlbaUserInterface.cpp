@@ -26,8 +26,6 @@ string AlbaUserInterface::getFilePathInput() {
     }
 }
 
-AlbaUserInterface::AlbaUserInterface() = default;
-
 template <typename NumberType>
 NumberType AlbaUserInterface::displayQuestionAndChoicesAndGetNumberAnswer(
     string_view const question, Choices<NumberType> const& choices) {

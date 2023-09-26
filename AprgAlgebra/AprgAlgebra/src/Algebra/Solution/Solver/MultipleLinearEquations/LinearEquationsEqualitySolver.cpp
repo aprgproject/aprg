@@ -99,6 +99,4 @@ bool LinearEquationsEqualitySolver::areExponentsEqualToOneAndZero(AlbaNumbersSet
     });
 }
 
-LinearEquationsEqualitySolver::LinearEquationsEqualitySolver() = default;
-
 }  // namespace alba::algebra

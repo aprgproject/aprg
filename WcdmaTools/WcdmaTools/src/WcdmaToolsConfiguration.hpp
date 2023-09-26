@@ -3,6 +3,7 @@
 #include <Algorithm/Sort/LargeSorter/AlbaLargeSorterConfiguration.hpp>
 #include <WcdmaToolsBackend/BtsLogSorterConfiguration.hpp>
 
+#include <filesystem>
 #include <string>
 #include <unordered_map>
 
@@ -85,9 +86,9 @@ struct WcdmaToolsConfiguration {
     std::string prioritizedLogCondition;
     double cropSize;
     wcdmaToolsBackend::BtsLogSorterConfiguration btsLogSorterConfiguration;
-    std::string configurationFileLocation;
-    std::string defaultConfigurationFileLocation;
-    std::string locationOf7zExecutable;
+    std::filesystem::path configurationFileLocation;
+    std::filesystem::path defaultConfigurationFileLocation;
+    std::filesystem::path locationOf7zExecutable;
 };
 
 }  // namespace wcdmaToolsGui

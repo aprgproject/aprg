@@ -11,7 +11,7 @@ namespace alba::algebra {
 class SolutionSet {
 public:
     using FunctionForCheckingValues = std::function<bool(AlbaNumber const&)>;
-    SolutionSet();
+    SolutionSet() = default;
     [[nodiscard]] AlbaNumberIntervals const& getAcceptedIntervals() const;
     [[nodiscard]] AlbaNumbers const& getAcceptedValues() const;
     [[nodiscard]] AlbaNumbers const& getRejectedValues() const;

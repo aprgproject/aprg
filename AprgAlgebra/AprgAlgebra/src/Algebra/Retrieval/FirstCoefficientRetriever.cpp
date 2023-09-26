@@ -53,7 +53,6 @@ void FirstCoefficientRetriever::retrieveFromPolynomials(Polynomials const& polyn
 }
 
 AlbaNumber const& FirstCoefficientRetriever::getFirstCoefficient() const { return m_firstCoefficient; }
-FirstCoefficientRetriever::FirstCoefficientRetriever() = default;
 
 void FirstCoefficientRetriever::retrieveFromTerm(Term const& term) {
     if (!m_isValueSet) {

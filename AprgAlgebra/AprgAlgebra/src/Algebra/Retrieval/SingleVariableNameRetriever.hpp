@@ -9,7 +9,7 @@ namespace alba::algebra {
 
 class SingleVariableNameRetriever final : public BaseRetriever {
 public:
-    SingleVariableNameRetriever();
+    SingleVariableNameRetriever() = default;
     void retrieveFromEquations(Equations const& equations) override;
     void retrieveFromEquation(Equation const& equation) override;
     void retrieveFromTerm(Term const& term) override;

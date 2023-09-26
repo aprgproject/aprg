@@ -145,6 +145,4 @@ bool MultiplicationAndDivisionOfRadicals::isNotANegativeTermWithExponentDenomina
     return result;
 }
 
-MultiplicationAndDivisionOfRadicals::MultiplicationAndDivisionOfRadicals() = default;
-
 }  // namespace alba::algebra

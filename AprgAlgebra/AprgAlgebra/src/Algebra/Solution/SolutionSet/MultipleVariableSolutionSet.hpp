@@ -12,7 +12,7 @@ class MultipleVariableSolutionSet {
 public:
     using VariableNameToSolutionSetMap = std::map<std::string, SolutionSet>;
     using VariableNameToSolutionSetPair = std::pair<std::string, SolutionSet>;
-    MultipleVariableSolutionSet();
+    MultipleVariableSolutionSet() = default;
     [[nodiscard]] SolutionSet getSolutionSetForVariable(std::string const& variableName) const;
     [[nodiscard]] VariableNameToSolutionSetMap const& getVariableNameToSolutionSetMap() const;
     [[nodiscard]] VariableNamesSet getVariableNames() const;

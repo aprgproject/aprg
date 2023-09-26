@@ -14,6 +14,4 @@ ostream& operator<<(ostream& out, Rectangle const& rectangle) {
     return out;
 }
 
-Rectangle::Rectangle() = default;
-
 }  // namespace alba::TwoDimensions

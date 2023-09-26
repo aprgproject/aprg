@@ -10,7 +10,7 @@ namespace alba::algebra {
 class LinearDiophantineEquationSolver : public BaseSolver {
 public:
     // A Linear Diophantine Equation is an equation of the form ax+by = c
-    LinearDiophantineEquationSolver();
+    LinearDiophantineEquationSolver() = default;
     MultipleVariableSolutionSet calculateSolutionAndReturnSolutionSet(Equation const& equation);
 
 protected:

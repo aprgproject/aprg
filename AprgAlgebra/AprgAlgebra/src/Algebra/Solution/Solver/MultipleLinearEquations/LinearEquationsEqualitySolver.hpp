@@ -9,7 +9,7 @@ namespace alba::algebra {
 
 class LinearEquationsEqualitySolver : public BaseSolver {
 public:
-    LinearEquationsEqualitySolver();
+    LinearEquationsEqualitySolver() = default;
     MultipleVariableSolutionSet calculateSolutionAndReturnSolutionSet(Equations const& equations);
     MultipleVariableSolutionSet calculateSolutionAndReturnSolutionSet(Polynomials const& polynomials);
 

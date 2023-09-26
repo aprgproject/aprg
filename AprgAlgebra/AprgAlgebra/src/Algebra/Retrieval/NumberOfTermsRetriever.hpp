@@ -6,7 +6,7 @@ namespace alba::algebra {
 
 class NumberOfTermsRetriever final : public BaseRetriever {
 public:
-    NumberOfTermsRetriever();
+    NumberOfTermsRetriever() = default;
     void retrieveFromConstant(Constant const& constant) override;
     void retrieveFromVariable(Variable const& variable) override;
     void retrieveFromMonomial(Monomial const& monomial) override;

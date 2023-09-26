@@ -100,6 +100,7 @@ uintmax_t AlbaLocalPathHandler::getFileSize() const {
     return {};
 }
 
+bool AlbaLocalPathHandler::isEmpty() const { return m_path.empty(); }
 bool AlbaLocalPathHandler::doesExist() const { return exists(m_path); }
 bool AlbaLocalPathHandler::isExistingDirectory() const { return is_directory(m_path); }
 bool AlbaLocalPathHandler::isExistingFile() const { return is_regular_file(m_path); }

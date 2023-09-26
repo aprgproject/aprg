@@ -6,7 +6,7 @@ namespace alba::algebra {
 
 class TermRaiseToANumber {
 public:
-    TermRaiseToANumber();
+    TermRaiseToANumber() = default;
     TermRaiseToANumber(Term const& base, AlbaNumber const& exponent);
     TermRaiseToANumber(Term&& base, AlbaNumber&& exponent);
     [[nodiscard]] AlbaNumber const& getExponent() const;

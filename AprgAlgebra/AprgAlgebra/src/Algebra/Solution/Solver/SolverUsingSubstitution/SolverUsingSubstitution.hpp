@@ -9,7 +9,7 @@ namespace alba::algebra {
 
 class SolverUsingSubstitution : public BaseSolver {
 public:
-    SolverUsingSubstitution();
+    SolverUsingSubstitution() = default;
     MultipleVariableSolutionSets calculateSolutionAndReturnSolutionSet(Equations const& equations);
 
 private:

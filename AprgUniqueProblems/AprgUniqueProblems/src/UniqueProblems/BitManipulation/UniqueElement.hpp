@@ -10,7 +10,7 @@ public:
     using Value = uint64_t;
     using ValuePairs = std::pair<Value, Value>;
     using Values = std::vector<Value>;
-    UniqueElement();
+    UniqueElement() = default;
     [[nodiscard]] static Value getAUniqueElementOnTwoDuplicatedValues(Values const& values);
     [[nodiscard]] static Value getAnElementOccuringOddNumberOfTimes(Values const& values);
     [[nodiscard]] static ValuePairs getTwoUniqueElementsOnTwoDuplicatedValues(Values const& values);

@@ -121,6 +121,4 @@ NewtonMethod::Function OneEquationOneVariableEqualitySolver::getFunctionToIterat
     return result;
 }
 
-OneEquationOneVariableEqualitySolver::OneEquationOneVariableEqualitySolver() = default;
-
 }  // namespace alba::algebra

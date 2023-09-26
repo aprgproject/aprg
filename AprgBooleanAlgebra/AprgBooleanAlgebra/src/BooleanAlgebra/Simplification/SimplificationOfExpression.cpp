@@ -111,8 +111,6 @@ bool SimplificationOfExpression::isChangeDetected(Expression const& expression1,
     return expression1 != expression2;
 }
 
-SimplificationOfExpression::SimplificationOfExpression() = default;
-
 }  // namespace booleanAlgebra::Simplification
 
 template <>

@@ -7,7 +7,7 @@ namespace alba::algebra {
 
 class FirstCoefficientRetriever final : public BaseRetriever {
 public:
-    FirstCoefficientRetriever();
+    FirstCoefficientRetriever() = default;
     void retrieveFromEquations(Equations const& equations) override;
     void retrieveFromEquation(Equation const& equation) override;
     void retrieveFromTerm(Term const& term) override;

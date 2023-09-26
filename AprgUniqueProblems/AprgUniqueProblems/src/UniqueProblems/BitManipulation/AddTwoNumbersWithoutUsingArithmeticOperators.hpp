@@ -7,7 +7,7 @@ namespace alba {
 class AddTwoNumbersWithoutUsingArithmeticOperators {
 public:
     using Value = uint64_t;
-    AddTwoNumbersWithoutUsingArithmeticOperators();
+    AddTwoNumbersWithoutUsingArithmeticOperators() = default;
     static Value getSum(Value const value1, Value const value2);
 };
 

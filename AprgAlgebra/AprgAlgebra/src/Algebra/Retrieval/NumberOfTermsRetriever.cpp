@@ -13,7 +13,6 @@ void NumberOfTermsRetriever::retrieveFromFunction(Function const& functionObject
 }
 
 int NumberOfTermsRetriever::getNumberOfTerms() const { return m_numberOfTerms; }
-NumberOfTermsRetriever::NumberOfTermsRetriever() = default;
 void NumberOfTermsRetriever::retrieveFromConstant(Constant const&) { ++m_numberOfTerms; }
 void NumberOfTermsRetriever::retrieveFromVariable(Variable const&) { ++m_numberOfTerms; }
 void NumberOfTermsRetriever::retrieveFromMonomial(Monomial const&) { ++m_numberOfTerms; }

@@ -204,6 +204,4 @@ void RationalizeTermOverTerm::retrieveTermsForRationalizationForExpressionWhenEx
     rationalizedTerm = createTermWithAdditionAndSubtractionTermsWithDetails(rationalizedTermsWithDetails);
 }
 
-RationalizeTermOverTerm::RationalizeTermOverTerm() = default;
-
 }  // namespace alba::algebra

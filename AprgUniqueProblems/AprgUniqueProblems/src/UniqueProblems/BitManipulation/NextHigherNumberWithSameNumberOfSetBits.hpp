@@ -7,7 +7,7 @@ namespace alba {
 class NextHigherNumberWithSameNumberOfSetBits {
 public:
     using Value = uint64_t;
-    NextHigherNumberWithSameNumberOfSetBits();
+    NextHigherNumberWithSameNumberOfSetBits() = default;
     static Value getNextHigherNumber(Value const value);
 };
 

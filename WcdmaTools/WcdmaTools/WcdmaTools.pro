@@ -30,11 +30,10 @@ src/WcdmaToolsConfiguration.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Container/AlbaContainerHelper.cpp\
 ../../AprgCommon/AprgCommon/src/Common/File/AlbaFileReader.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Math/Helpers/ComplexNumberHelpers.cpp\
-../../AprgCommon/AprgCommon/src/Common/Math/Helpers/FractionHelpers.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Math/Number/AlbaComplexNumber.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Math/Number/AlbaNumber.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Memory/AlbaMemoryBuffer.cpp\
-../../AprgCommon/AprgCommon/src/Common/PathHandler/AlbaPathHandler.cpp\
+../../AprgCommon/AprgCommon/src/Common/PathHandler/AlbaLocalPathHandler.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaCombinedEntropySource.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaEntropySourceBasedOnTime.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Stream/AlbaStreamParameterReader.cpp\
@@ -43,7 +42,6 @@ src/WcdmaToolsConfiguration.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTime.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTimeHelper.cpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.cpp\
-../../AprgCommon/AprgCommon/srcWindows/Common/PathHandler/AlbaWindowsPathHandler.cpp\
 ../../AprgCommon/AprgCommon/srcWindows/Common/Time/AlbaWindowsTimeHelper.cpp\
 ../../AprgCommon/AprgCommon/srcWindows/Common/Windows/AlbaWindowsHelper.cpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.cpp\
@@ -69,11 +67,9 @@ src/WcdmaToolsConfiguration.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Container/AlbaContainerHelper.hpp\
 ../../AprgCommon/AprgCommon/src/Common/File/AlbaFileReader.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Math/Helpers/ComplexNumberHelpers.hpp\
-../../AprgCommon/AprgCommon/src/Common/Math/Helpers/FractionHelpers.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Math/Number/AlbaComplexNumber.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Math/Number/AlbaNumber.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Memory/AlbaMemoryBuffer.hpp\
-../../AprgCommon/AprgCommon/src/Common/PathHandler/AlbaPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/Common/PathHandler/AlbaLocalPathHandler.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Randomizer/AlbaUniformNonDeterministicRandomizer.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Randomizer/EntropySources/AlbaCombinedEntropySource.hpp\
@@ -85,7 +81,6 @@ src/WcdmaToolsConfiguration.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTimeHelper.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaDateTimeConstants.hpp\
 ../../AprgCommon/AprgCommon/src/Common/Time/AlbaLocalTimeHelper.hpp\
-../../AprgCommon/AprgCommon/srcWindows/Common/PathHandler/AlbaWindowsPathHandler.hpp\
 ../../AprgCommon/AprgCommon/srcWindows/Common/Time/AlbaWindowsTimeHelper.hpp\
 ../../AprgCommon/AprgCommon/srcWindows/Common/Windows/AlbaWindowsHelper.hpp\
 ../../AprgFileExtractor/AprgFileExtractor/src/FileExtractor/AprgFileExtractor.hpp\
@@ -124,7 +119,7 @@ DEFINES += OS_WINDOWS=\\\"WIN32\\\"
 DEFINES += STATIC
 DEFINES += APRG_CODE_VERSION="\\\"$(shell git -C \""$$_PRO_FILE_PWD_"\" describe)\\\""
 
-CONFIG += c++11 console
+CONFIG += c++20 console
 
 RESOURCES += \
     resources.qrc

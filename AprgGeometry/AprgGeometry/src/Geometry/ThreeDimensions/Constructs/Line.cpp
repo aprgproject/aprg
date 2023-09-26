@@ -136,6 +136,4 @@ ostream& operator<<(ostream& out, Line const& line) {
     return out;
 }
 
-Line::Line() = default;
-
 }  // namespace alba::ThreeDimensions

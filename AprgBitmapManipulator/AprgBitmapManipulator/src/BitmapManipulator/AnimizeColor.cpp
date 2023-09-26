@@ -120,6 +120,4 @@ void gatherAndSaveDataInAnimizeColor(path const& filePath) {
     statistics.saveColorData(colorDataPathHandler.getPath());
 }
 
-AnimizeColor::AnimizeColor() = default;
-
 }  // namespace alba::AprgBitmap

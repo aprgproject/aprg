@@ -27,6 +27,4 @@ bool SmallestOfThreeIntegersWithoutComparisonOperators::isLessThan(
     return static_cast<bool>(value2) && ((value1 / value2) == 0U);  // if value2 is zero, immediately return false
 }
 
-SmallestOfThreeIntegersWithoutComparisonOperators::SmallestOfThreeIntegersWithoutComparisonOperators() = default;
-
 }  // namespace alba

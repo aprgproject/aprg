@@ -60,6 +60,4 @@ void OneEquationOneVariableNonEqualitySolver::addIntervalsToSolutionSetIfNeeded(
     }
 }
 
-OneEquationOneVariableNonEqualitySolver::OneEquationOneVariableNonEqualitySolver() = default;
-
 }  // namespace alba::algebra

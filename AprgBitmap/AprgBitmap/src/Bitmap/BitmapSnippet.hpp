@@ -11,7 +11,7 @@ class BitmapSnippet {
 public:
     using TraverseFunction = std::function<void(BitmapXY const&, uint32_t const)>;
     using TraverseAndUpdateFunction = std::function<void(BitmapXY const&, uint32_t&)>;
-    BitmapSnippet();
+    BitmapSnippet() = default;
 
     BitmapSnippet(
         BitmapXY const topLeftCornerPosition, BitmapXY const bottomRightCornerPosition,

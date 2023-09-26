@@ -8,7 +8,7 @@ namespace alba::soosa {
 class SoosaConfiguration {
 public:
     using BufferMap = std::map<std::string, std::string>;
-    SoosaConfiguration();
+    SoosaConfiguration() = default;
     [[nodiscard]] double getRemovalRatioForLineModel() const;
     // Line and bar parameters
     [[nodiscard]] double getBitmapWidthToBarWidthMultiplier() const;

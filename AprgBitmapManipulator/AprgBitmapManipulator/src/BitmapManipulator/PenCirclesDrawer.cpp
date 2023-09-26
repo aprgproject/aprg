@@ -219,6 +219,4 @@ bool PenCirclesDrawer::isToBeConnected(
                (pair1.second.radius + pair2.second.radius);
 }
 
-PenCirclesDrawer::ColorDetails::ColorDetails() = default;
-
 }  // namespace alba::AprgBitmap

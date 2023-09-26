@@ -8,7 +8,7 @@ namespace alba::algebra {
 
 class OneEquationOneVariableNonEqualitySolver : public BaseOneEquationOneVariableSolver {
 public:
-    OneEquationOneVariableNonEqualitySolver();
+    OneEquationOneVariableNonEqualitySolver() = default;
 
 private:
     void calculateSolution(SolutionSet& solutionSet, Equation const& equation) override;

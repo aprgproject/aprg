@@ -19,6 +19,4 @@ ostream& operator<<(ostream& out, Variable const& variable) {
     return out;
 }
 
-Variable::Variable() = default;
-
 }  // namespace alba::algebra

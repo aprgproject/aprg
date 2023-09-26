@@ -6,7 +6,7 @@ namespace alba::algebra {
 
 class AdditionAndSubtractionOfTermsOverTerms {
 public:
-    AdditionAndSubtractionOfTermsOverTerms();
+    AdditionAndSubtractionOfTermsOverTerms() = default;
     [[nodiscard]] Expression getCombinedExpression() const;
     [[nodiscard]] TermAssociationTypes const& getAssociations() const;
     [[nodiscard]] Terms getLcmOfDenominatorTerms() const;

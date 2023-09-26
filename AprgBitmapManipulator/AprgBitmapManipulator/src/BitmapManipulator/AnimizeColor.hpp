@@ -13,7 +13,7 @@ public:
         double newValue;
     };
 
-    AnimizeColor();
+    AnimizeColor() = default;
     using ColorDataMap = std::map<double, ColorDetails>;
     using ValueAndColorDataPair = std::pair<double, ColorDetails>;
     [[nodiscard]] double getNewLightness(double const originalValue) const;

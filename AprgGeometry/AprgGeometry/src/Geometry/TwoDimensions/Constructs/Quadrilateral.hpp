@@ -20,7 +20,7 @@ public:
     using TraverseOperation = std::function<void(Point const&)>;
     using GroupOfPoints = std::vector<Points>;
     using ListOfStartEndOfXAndY = std::vector<StartEndOfXAndY>;
-    Quadrilateral();
+    Quadrilateral() = default;
     Quadrilateral(Point const& first, Point const& second, Point const& third, Point const& fourth);
     void traverseArea(double const interval, TraverseOperation const& traverseOperation) const;
 

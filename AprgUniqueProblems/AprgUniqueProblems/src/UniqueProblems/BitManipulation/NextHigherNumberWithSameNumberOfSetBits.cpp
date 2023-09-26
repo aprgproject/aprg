@@ -18,6 +18,4 @@ NextHigherNumberWithSameNumberOfSetBits::Value NextHigherNumberWithSameNumberOfS
     return result;
 }
 
-NextHigherNumberWithSameNumberOfSetBits::NextHigherNumberWithSameNumberOfSetBits() = default;
-
 }  // namespace alba

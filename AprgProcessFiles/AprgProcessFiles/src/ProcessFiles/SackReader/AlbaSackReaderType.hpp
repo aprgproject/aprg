@@ -12,7 +12,7 @@ class AlbaSackReaderType {
 public:
     using Parameters = std::vector<AlbaSackReaderParameter>;
     using TypeNames = std::set<std::string>;
-    AlbaSackReaderType();
+    AlbaSackReaderType() = default;
     [[nodiscard]] Parameters getParameters() const;
     [[nodiscard]] TypeNames getOtherTypes() const;
     [[nodiscard]] bool isUnion() const;

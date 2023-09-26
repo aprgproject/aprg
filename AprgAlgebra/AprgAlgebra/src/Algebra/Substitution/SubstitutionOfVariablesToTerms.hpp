@@ -12,7 +12,7 @@ using VariableTermPair = std::pair<std::string, Term>;
 
 class SubstitutionOfVariablesToTerms {
 public:
-    SubstitutionOfVariablesToTerms();
+    SubstitutionOfVariablesToTerms() = default;
     explicit SubstitutionOfVariablesToTerms(VariablesToTermsMap const& variablesWithTerms);
     SubstitutionOfVariablesToTerms(std::initializer_list<VariableTermPair> const& variablesWithTerms);
     [[nodiscard]] Equation performSubstitutionTo(Equation const& equation) const;

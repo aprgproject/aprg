@@ -9,7 +9,7 @@ using TermsRaiseToTermsBase = TermsRaiseToExponents<Term, TermRaiseToTerms>;
 
 class TermsRaiseToTerms : public TermsRaiseToTermsBase {
 public:
-    TermsRaiseToTerms();
+    TermsRaiseToTerms() = default;
     explicit TermsRaiseToTerms(BaseToExponentMap const& baseToExponentMap);
 };
 

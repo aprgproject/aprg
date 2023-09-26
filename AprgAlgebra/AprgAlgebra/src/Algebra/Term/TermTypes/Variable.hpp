@@ -8,7 +8,7 @@ namespace alba::algebra {
 
 class Variable : public BaseTermData {
 public:
-    Variable();
+    Variable() = default;
     explicit Variable(std::string const& variableName);
     explicit Variable(std::string&& variableName);
     // rule of zero

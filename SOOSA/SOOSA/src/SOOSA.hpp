@@ -40,7 +40,7 @@ public:
     };
 
     class Status {
-        Status();
+        Status() = default;
 
     public:
         [[nodiscard]] std::string getStatusString() const;

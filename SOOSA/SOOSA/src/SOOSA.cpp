@@ -1168,8 +1168,6 @@ string SOOSA::getPrintableStringForPercentage(double const numerator, double con
     return errorStream.str();
 }
 
-SOOSA::Status::Status() = default;
-
 BitmapXY SOOSA::convertToBitmapXY(Sample const& sample) {
     return {
         static_cast<int>(round(clampLowerBound(sample.getValueAt(0), static_cast<double>(0)))),

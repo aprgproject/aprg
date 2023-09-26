@@ -9,7 +9,7 @@ namespace alba::AprgAudio {
 class NewSamplesBuilder {
 public:
     struct SampleMergingDetails {
-        SampleMergingDetails();
+        SampleMergingDetails() = default;
         bool isChanged{false};
         double totalValue{0};
         double weight{0};

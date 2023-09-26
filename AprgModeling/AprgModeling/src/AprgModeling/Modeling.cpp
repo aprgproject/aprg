@@ -272,6 +272,4 @@ unsigned int Modeling::getIndex(unsigned int const i, unsigned int const j, unsi
     return (j * numberOfColumns) + i;
 }
 
-Modeling::Modeling() = default;
-
 }  // namespace alba

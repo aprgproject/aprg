@@ -9,7 +9,7 @@ using TermsRaiseToNumbersBase = TermsRaiseToExponents<AlbaNumber, TermRaiseToANu
 
 class TermsRaiseToNumbers : public TermsRaiseToNumbersBase {
 public:
-    TermsRaiseToNumbers();
+    TermsRaiseToNumbers() = default;
     explicit TermsRaiseToNumbers(BaseToExponentMap const& baseToExponentMap);
 };
 

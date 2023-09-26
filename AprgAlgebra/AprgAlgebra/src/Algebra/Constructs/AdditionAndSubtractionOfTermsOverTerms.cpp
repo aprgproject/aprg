@@ -187,6 +187,4 @@ TermsOverTerms AdditionAndSubtractionOfTermsOverTerms::getSimplifiedTermsOverTer
     return termsOverTermsSimplified;
 }
 
-AdditionAndSubtractionOfTermsOverTerms::AdditionAndSubtractionOfTermsOverTerms() = default;
-
 }  // namespace alba::algebra

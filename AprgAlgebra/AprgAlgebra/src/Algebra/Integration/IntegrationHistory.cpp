@@ -58,8 +58,6 @@ void IntegrationHistory::addIntegrationPurpose(IntegrationPurpose const purpose)
     }
 }
 
-IntegrationHistory::IntegrationHistory() = default;
-
 void IntegrationHistory::logBefore(
     Term const&,  // input,
     IntegrationPurpose const) {

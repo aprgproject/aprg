@@ -18,6 +18,4 @@ ostream& operator<<(ostream& out, Constant const& constant) {
     return out;
 }
 
-Constant::Constant() = default;
-
 }  // namespace alba::algebra
