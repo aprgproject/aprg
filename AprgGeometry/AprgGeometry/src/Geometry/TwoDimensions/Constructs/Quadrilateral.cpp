@@ -262,6 +262,4 @@ ostream& operator<<(ostream& out, Quadrilateral const& quadrilateral) {
     return out;
 }
 
-Quadrilateral::Quadrilateral() = default;
-
 }  // namespace alba::TwoDimensions

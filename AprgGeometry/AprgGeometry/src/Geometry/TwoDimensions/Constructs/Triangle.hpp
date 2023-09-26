@@ -8,7 +8,7 @@ using TrianglePolygonParent = Polygon<3>;
 
 class Triangle : public TrianglePolygonParent {
 public:
-    Triangle();
+    Triangle() = default;
     Triangle(Point const& first, Point const& second, Point const& third);
     [[nodiscard]] bool isIsoceles() const;
     [[nodiscard]] bool isRightTriangle() const;

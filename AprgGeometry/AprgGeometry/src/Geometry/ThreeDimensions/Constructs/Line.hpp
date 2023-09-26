@@ -9,7 +9,7 @@ namespace alba::ThreeDimensions {
 
 class Line {
 public:
-    Line();
+    Line() = default;
     Line(Point const& first, Point const& second);
 
     Line(

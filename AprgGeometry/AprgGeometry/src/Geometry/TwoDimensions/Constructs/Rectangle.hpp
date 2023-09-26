@@ -6,7 +6,7 @@ namespace alba::TwoDimensions {
 
 class Rectangle : public Quadrilateral {
 public:
-    Rectangle();
+    Rectangle() = default;
     Rectangle(Point const& topLeft, Point const& bottomRight);
 
 private:
