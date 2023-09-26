@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [45]
-2023-09-25T15:41:22
+StaticAnalysisJobIdentifier: [40]
+2023-09-26T04:35:14
 /home/runner/work/aprg/aprg/gsl/GslTest/tst/Gsl_unit.cpp:80:1: warning: function 'TestBody' has cognitive complexity of 40 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/gsl/GslTest/tst/Gsl_unit.cpp:92:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/gsl/GslTest/tst/Gsl_unit.cpp:92:5: note: +2, including nesting penalty of 1, nesting level increased to 2
