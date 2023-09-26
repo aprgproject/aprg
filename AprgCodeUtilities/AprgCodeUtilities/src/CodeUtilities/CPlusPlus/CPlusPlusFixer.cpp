@@ -203,8 +203,7 @@ void CPlusPlusFixer::fixCommentsPositionOfBraces() {
 void CPlusPlusFixer::fixCStyleStaticCast() { fixCStyleStaticCast(M(TermType::PrimitiveType)); }
 
 void CPlusPlusFixer::fixCStyleStaticCast(Matcher const& typeMatcher) {
-    Patterns const searchPatterns{
-        {M(TermType::Operator), M("("), typeMatcher, M(")"), M(SpecialMatcherType::NotAWhiteSpace)}};
+    Patterns const searchPatterns{{M(TermType::Operator), M("("), typeMatcher, M(")"), M_NOT(TermType::WhiteSpace)}};
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {

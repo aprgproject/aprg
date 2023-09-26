@@ -166,7 +166,6 @@ string convertToString(SpecialMatcherType const type) {
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::IdentifierWithSnakeCase)
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::IdentifierAndNotAScreamingSnakeCase)
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::Literal)
-        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::NotAWhiteSpace)
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::WhiteSpaceWithNewLine)
     }
     return {};
@@ -227,8 +226,6 @@ bool isAMatch(SpecialMatcherType const matcherType, Term const& term) {
         case SpecialMatcherType::Literal:
             return TermType::Boolean == term.getTermType() || TermType::CharacterLiteral == term.getTermType() ||
                    TermType::Number == term.getTermType() || TermType::StringLiteral == term.getTermType();
-        case SpecialMatcherType::NotAWhiteSpace:
-            return !isWhiteSpace(term);
         case SpecialMatcherType::WhiteSpaceWithNewLine:
             return isWhiteSpaceWithNewLine(term);
     }
