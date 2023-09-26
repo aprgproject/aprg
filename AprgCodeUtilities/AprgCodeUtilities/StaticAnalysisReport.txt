@@ -1,90 +1,109 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-25T23:11:48
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:187:97: warning: 0.20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:236:32: warning: function 'saveDetailsBasedFromItemTerms' has cognitive complexity of 124 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:245:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:248:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:253:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:253:80: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:256:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:260:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:261:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:264:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:266:19: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:273:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:278:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:279:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:282:19: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:289:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:294:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:294:93: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:300:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:306:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:312:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:317:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:330:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:331:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:331:48: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:338:15: note: +1, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:339:17: note: +4, including nesting penalty of 3, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:341:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:341:61: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:344:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:347:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:350:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:353:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:356:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:356:58: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:358:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:358:58: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:360:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:360:79: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:362:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:362:39: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:364:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:367:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:369:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:371:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:373:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:375:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:377:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:379:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:381:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:383:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:385:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:386:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+StaticAnalysisJobIdentifier: [41]
+2023-09-26T18:53:11
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Debug/AlbaDebug.hpp:13:2: warning: #warning is a language extension [-Wpedantic]
+/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Debug/AlbaDebug.hpp:13:2: warning: ("The class AlbaDebug is used. Please remove after your done debugging.") // GCC extension [-W#warnings]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:189:97: warning: 0.20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:290:32: warning: function 'saveDetailsBasedFromItemTerms' has cognitive complexity of 119 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:299:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:302:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:307:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:307:80: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:310:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:314:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:315:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:318:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:320:19: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:327:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:332:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:333:17: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:336:19: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:343:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:348:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:348:93: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:354:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:360:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:366:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:371:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:384:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:388:15: note: +1, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:389:17: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:391:24: note: +1, nesting level increased to 4
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:398:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:399:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:399:33: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:401:11: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:405:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:407:37: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:407:56: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:408:12: note: +1, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:409:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:409:63: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:410:39: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:411:44: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:412:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:412:57: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:413:64: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:416:13: note: +3, including nesting penalty of 2, nesting level increased to 3
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:416:60: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:419:16: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:307:35: warning: 0x30'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:333:39: warning: 0x3'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:345:39: warning: 0x700'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:348:39: warning: 0x600'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:351:39: warning: 0x500'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:370:39: warning: 0x600 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:372:39: warning: 0x500 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:378:39: warning: 0x50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:382:39: warning: 0x30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:407:66: warning: 0x300 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:410:41: warning: 0x900'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:410:54: warning: 0x300'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:422:31: warning: 0xFFFF'FF00U is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:391:61: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:394:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:397:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:400:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:403:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:406:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:406:58: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:408:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:408:58: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:410:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:410:79: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:412:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:412:39: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:415:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:418:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:420:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:422:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:424:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:426:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:428:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:430:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:432:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:434:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:436:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:437:21: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:442:24: note: +1, nesting level increased to 4
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:449:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:450:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:450:33: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:452:11: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:456:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:458:37: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:458:56: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:459:12: note: +1, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:460:9: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:460:63: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:461:39: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:462:44: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:463:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:463:57: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:464:64: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:467:13: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:467:60: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:470:16: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:361:35: warning: 0x3'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:395:39: warning: 0x700'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:398:39: warning: 0x600'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:401:39: warning: 0x500'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:413:39: warning: 0x3000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:421:39: warning: 0x600 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:423:39: warning: 0x500 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:429:39: warning: 0x50 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:433:39: warning: 0x30 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:458:66: warning: 0x300 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:461:41: warning: 0x900'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:461:54: warning: 0x300'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:473:31: warning: 0xFFFF'FF00U is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:490:31: warning: 0x30'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:494:31: warning: 0x50'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:496:31: warning: 0x60'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:498:31: warning: 0x70'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:16:23: warning: initialization of 'recognizedKeywords' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:17:23: warning: initialization of 'recognizedPrimitiveTypes' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:18:23: warning: initialization of 'recognizedThreeCharOperators' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:19:23: warning: initialization of 'recognizedTwoCharOperators' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:20:23: warning: initialization of 'recognizedOneCharOperators' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:16:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:17:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:18:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:19:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:20:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp:20:28: warning: function 'processDirectory' has cognitive complexity of 27 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp:24:9: note: nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp:25:9: note: nesting level increased to 1
@@ -106,21 +125,6 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp:65:53: note: +1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp:68:9: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp:68:43: note: +1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:16:23: warning: initialization of 'recognizedKeywords' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:17:23: warning: initialization of 'recognizedPrimitiveTypes' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:18:23: warning: initialization of 'recognizedThreeCharOperators' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:19:23: warning: initialization of 'recognizedTwoCharOperators' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:20:23: warning: initialization of 'recognizedOneCharOperators' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:16:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:17:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:18:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:19:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:20:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusTokenizer_unit.cpp:9:1: warning: function 'TestBody' has cognitive complexity of 168 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusTokenizer_unit.cpp:18:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusTokenizer_unit.cpp:18:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -885,87 +889,16 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusTokenizer_unit.cpp:430:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusTokenizer_unit.cpp:430:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusTokenizer_unit.cpp:430:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:114:1: warning: function 'TestBody' has cognitive complexity of 52 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:115:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:115:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:115:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:116:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:116:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:116:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:117:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:117:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:117:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:118:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:118:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:118:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:119:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:119:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:119:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:120:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:120:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:120:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:121:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:121:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:121:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:122:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:122:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:122:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:123:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:123:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:123:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:124:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:124:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:124:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:125:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:125:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:125:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:126:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:126:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:126:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:127:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:127:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:127:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:130:1: warning: function 'TestBody' has cognitive complexity of 52 (threshold 25) [readability-function-cognitive-complexity]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:131:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:131:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:131:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:132:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:132:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:132:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:133:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:133:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:133:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:134:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:134:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:134:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:135:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:135:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:135:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:136:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:136:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:136:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:137:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:137:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:137:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:138:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:138:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:138:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:139:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:139:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:139:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:140:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:140:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:140:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:141:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:141:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:141:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:142:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:142:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:142:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:143:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:143:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:143:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:146:1: warning: function 'TestBody' has cognitive complexity of 52 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:143:1: warning: function 'TestBody' has cognitive complexity of 52 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:144:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:144:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:144:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:145:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:145:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:145:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:146:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:146:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:146:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:147:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:147:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:147:5: note: +1, nesting level increased to 2
@@ -996,16 +929,16 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:156:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:156:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:156:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:157:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:157:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:157:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:158:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:158:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:158:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:159:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:159:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:159:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:162:1: warning: function 'TestBody' has cognitive complexity of 52 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:159:1: warning: function 'TestBody' has cognitive complexity of 52 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:160:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:160:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:160:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:161:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:161:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:161:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:162:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:162:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:162:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:163:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:163:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:163:5: note: +1, nesting level increased to 2
@@ -1036,15 +969,86 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:172:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:172:5: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:172:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:173:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:173:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:173:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:174:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:174:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:174:5: note: +1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:175:5: note: +1, including nesting penalty of 0, nesting level increased to 1
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:175:5: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:175:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:175:1: warning: function 'TestBody' has cognitive complexity of 52 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:176:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:176:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:176:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:177:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:177:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:177:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:178:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:178:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:178:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:179:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:179:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:179:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:180:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:180:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:180:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:181:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:181:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:181:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:182:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:182:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:182:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:183:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:183:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:183:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:184:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:184:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:184:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:185:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:185:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:185:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:186:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:186:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:186:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:187:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:187:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:187:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:188:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:188:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:188:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:191:1: warning: function 'TestBody' has cognitive complexity of 52 (threshold 25) [readability-function-cognitive-complexity]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:192:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:192:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:192:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:193:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:193:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:193:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:194:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:194:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:194:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:195:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:195:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:195:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:196:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:196:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:196:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:197:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:197:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:197:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:198:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:198:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:198:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:199:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:199:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:199:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:200:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:200:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:200:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:201:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:201:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:201:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:202:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:202:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:202:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:203:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:203:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:203:5: note: +1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:204:5: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:204:5: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/Common/CommonUtilities_unit.cpp:204:5: note: +1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:28:6: warning: function 'verifyFile' has cognitive complexity of 49 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:39:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/TestUtilities/TestUtilities.cpp:39:47: note: +1
