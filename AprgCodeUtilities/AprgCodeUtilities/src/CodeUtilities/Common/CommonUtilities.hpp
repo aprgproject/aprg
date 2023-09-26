@@ -1,6 +1,7 @@
 #pragma once
 
 #include <CodeUtilities/Common/CommonTypes.hpp>
+#include <CodeUtilities/Common/Matcher/SpecialMatcherType.hpp>
 
 namespace alba::CodeUtilities {
 
@@ -17,11 +18,11 @@ std::string getCombinedContents(Terms const& terms);
 std::string getCombinedContents(Terms const& terms, int const startIndex, int const endIndex);
 std::string getLocatorString(Terms const& terms, int const index);
 std::string convertToString(TermType const termType);
-std::string convertToString(MatcherType const type);
+std::string convertToString(SpecialMatcherType const type);
 int getPatternIndexOfAMatchBySearchingForward(int& termIndex, Terms const& terms, Patterns const& searchPatterns);
 int getPatternIndexOfAMatchAt(Terms const& terms, int const termIndex, Patterns const& searchPatterns);
 bool isAllWhiteSpaceOrComment(Terms const& terms);
-bool isAMatch(MatcherType const matcherType, Term const& term);
+bool isAMatch(SpecialMatcherType const matcherType, Term const& term);
 bool isComment(Term const& term);
 bool isWhiteSpace(Term const& term);
 bool isCommentOrWhiteSpace(Term const& term);

@@ -475,7 +475,7 @@ CPlusPlusReorganizeItems::GroupType CPlusPlusReorganizeItems::getGroupType(ItemT
 
 Patterns CPlusPlusReorganizeItems::getSearchPatternsForAnalysis() {
     return Patterns{
-        {M(MatcherType::Comment)},
+        {M(SpecialMatcherType::Comment)},
         {M("(")},
         {M(";")},
         {M("{")},

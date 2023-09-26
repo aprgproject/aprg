@@ -158,16 +158,16 @@ string convertToString(TermType const type) {
     return {};
 }
 
-string convertToString(MatcherType const type) {
+string convertToString(SpecialMatcherType const type) {
     switch (type) {
-        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::Comment)
-        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::HasNewLine)
-        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierWithPascalCase)
-        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierWithSnakeCase)
-        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::IdentifierAndNotAScreamingSnakeCase)
-        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::Literal)
-        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::NotAWhiteSpace)
-        ALBA_MACROS_CASE_ENUM_STRING(MatcherType::WhiteSpaceWithNewLine)
+        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::Comment)
+        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::HasNewLine)
+        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::IdentifierWithPascalCase)
+        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::IdentifierWithSnakeCase)
+        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::IdentifierAndNotAScreamingSnakeCase)
+        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::Literal)
+        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::NotAWhiteSpace)
+        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::WhiteSpaceWithNewLine)
     }
     return {};
 }
@@ -212,24 +212,24 @@ bool isAllWhiteSpaceOrComment(Terms const& terms) {
     return all_of(terms.cbegin(), terms.cend(), [](Term const& term) { return isCommentOrWhiteSpace(term); });
 }
 
-bool isAMatch(MatcherType const matcherType, Term const& term) {
+bool isAMatch(SpecialMatcherType const matcherType, Term const& term) {
     switch (matcherType) {
-        case MatcherType::Comment:
+        case SpecialMatcherType::Comment:
             return isComment(term);
-        case MatcherType::HasNewLine:
+        case SpecialMatcherType::HasNewLine:
             return hasNewLine(term);
-        case MatcherType::IdentifierWithPascalCase:
+        case SpecialMatcherType::IdentifierWithPascalCase:
             return TermType::Identifier == term.getTermType() && isPascalCase(term.getContent());
-        case MatcherType::IdentifierWithSnakeCase:
+        case SpecialMatcherType::IdentifierWithSnakeCase:
             return TermType::Identifier == term.getTermType() && isSnakeCase(term.getContent());
-        case MatcherType::IdentifierAndNotAScreamingSnakeCase:
+        case SpecialMatcherType::IdentifierAndNotAScreamingSnakeCase:
             return TermType::Identifier == term.getTermType() && !isScreamingSnakeCase(term.getContent());
-        case MatcherType::Literal:
+        case SpecialMatcherType::Literal:
             return TermType::Boolean == term.getTermType() || TermType::CharacterLiteral == term.getTermType() ||
                    TermType::Number == term.getTermType() || TermType::StringLiteral == term.getTermType();
-        case MatcherType::NotAWhiteSpace:
+        case SpecialMatcherType::NotAWhiteSpace:
             return !isWhiteSpace(term);
-        case MatcherType::WhiteSpaceWithNewLine:
+        case SpecialMatcherType::WhiteSpaceWithNewLine:
             return isWhiteSpaceWithNewLine(term);
     }
     return false;

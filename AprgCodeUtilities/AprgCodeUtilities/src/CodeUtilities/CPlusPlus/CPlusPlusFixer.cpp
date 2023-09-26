@@ -135,45 +135,45 @@ void CPlusPlusFixer::fixConstReferenceOrder(Matcher const& typeMatcher) {
 
 void CPlusPlusFixer::fixConstToConstexpr() {
     findTermsAndConvertToConstexpr(
-        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(MatcherType::Literal),
+        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(SpecialMatcherType::Literal),
           M(";")}},
         1, 2, 0, 0);
     findTermsAndConvertToConstexpr(
-        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(MatcherType::Literal),
+        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(SpecialMatcherType::Literal),
           M(";")}},
         1, 2, 0, 0);
     findTermsAndConvertToConstexpr(
-        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(MatcherType::Literal),
+        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("="), M(SpecialMatcherType::Literal),
           M(";")}},
         1, 2, 0, 0);
     findTermsAndConvertToConstexpr(
-        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(MatcherType::Literal),
+        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(SpecialMatcherType::Literal),
           M(")"), M(";")}},
         1, 2, 4, 6);
     findTermsAndConvertToConstexpr(
-        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(MatcherType::Literal),
+        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(SpecialMatcherType::Literal),
           M(")"), M(";")}},
         1, 2, 4, 6);
     findTermsAndConvertToConstexpr(
-        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(MatcherType::Literal),
+        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("("), M(SpecialMatcherType::Literal),
           M(")"), M(";")}},
         1, 2, 4, 6);
     findTermsAndConvertToConstexpr(
-        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"), M(MatcherType::Literal),
+        {{M("{"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"), M(SpecialMatcherType::Literal),
           M("}"), M(";")}},
         1, 2, 4, 6);
     findTermsAndConvertToConstexpr(
-        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"), M(MatcherType::Literal),
+        {{M("}"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"), M(SpecialMatcherType::Literal),
           M("}"), M(";")}},
         1, 2, 4, 6);
     findTermsAndConvertToConstexpr(
-        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"), M(MatcherType::Literal),
+        {{M(";"), M(TermType::PrimitiveType), M("const"), M(TermType::Identifier), M("{"), M(SpecialMatcherType::Literal),
           M("}"), M(";")}},
         1, 2, 4, 6);
 }
 
 void CPlusPlusFixer::fixNoConstPassByValue() {
-    fixNoConstPassByValue(M(MatcherType::IdentifierAndNotAScreamingSnakeCase));
+    fixNoConstPassByValue(M(SpecialMatcherType::IdentifierAndNotAScreamingSnakeCase));
     fixNoConstPassByValue(M(TermType::PrimitiveType));
 }
 
@@ -229,7 +229,7 @@ void CPlusPlusFixer::fixCStylePrintf(int const printfStart, int const printStrin
 }
 
 void CPlusPlusFixer::fixCommentsPositionOfBraces() {
-    Patterns const searchPatterns{{M(MatcherType::Comment), M("{")}};
+    Patterns const searchPatterns{{M(SpecialMatcherType::Comment), M("{")}};
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
@@ -251,7 +251,7 @@ void CPlusPlusFixer::fixCommentsPositionOfBraces() {
 void CPlusPlusFixer::fixCStyleStaticCast() { fixCStyleStaticCast(M(TermType::PrimitiveType)); }
 
 void CPlusPlusFixer::fixCStyleStaticCast(Matcher const& typeMatcher) {
-    Patterns const searchPatterns{{M(TermType::Operator), M("("), typeMatcher, M(")"), M(MatcherType::NotAWhiteSpace)}};
+    Patterns const searchPatterns{{M(TermType::Operator), M("("), typeMatcher, M(")"), M(SpecialMatcherType::NotAWhiteSpace)}};
     int termIndex = 0;
     bool isFound(true);
     while (isFound) {
@@ -294,7 +294,7 @@ void CPlusPlusFixer::findTermsAndCheckForLoopAndSwapAt(
         if (isFound) {
             termIndex = hitIndexes.back();
             Patterns const forLoopPatterns{
-                {M("for"), M("(")}, {M(";"), M(MatcherType::WhiteSpaceWithNewLine)}, {M("{")}, {M("}")}};
+                {M("for"), M("(")}, {M(";"), M(SpecialMatcherType::WhiteSpaceWithNewLine)}, {M("{")}, {M("}")}};
             Indexes forLoopHitIndexes = searchBackwardsForPatterns(m_terms, hitIndexes.front(), forLoopPatterns);
             if (forLoopHitIndexes.size() == 2 && m_terms[forLoopHitIndexes[0]].getContent() == "for" &&
                 m_terms[forLoopHitIndexes[1]].getContent() == "(") {
