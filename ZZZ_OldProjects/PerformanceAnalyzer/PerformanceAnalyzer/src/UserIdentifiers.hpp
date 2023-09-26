@@ -6,7 +6,7 @@
 namespace alba {
 
 struct UserIdentifiers {
-    UserIdentifiers();
+    UserIdentifiers() = default;
     explicit UserIdentifiers(std::string const& lineInLogs);
     bool operator<(UserIdentifiers const& userIdentifiers) const;
     [[nodiscard]] unsigned int getNbccId() const;

@@ -15,8 +15,6 @@ using namespace std;
 
 namespace DesignDocumentCreator {
 
-UmlLogger::UmlLogger() = default;
-
 void UmlLogger::logMessage(string const& senderName, string const& receiverName, string const& messageName) {
     m_umlLogBuffer << senderName << " " << UmlArrow::getArrowBaseFromMessageName(messageName) << " " << receiverName
                    << " : " << messageName << "\n";
@@ -59,7 +57,7 @@ void UmlLogger::logNote(string const& note) {
 
 void UmlLogger::saveUmlLogsToFile(string const& filePath) {
     AlbaLocalPathHandler pathHandler(filePath);
-    pathHandler.createDirectoriesForNonExisitingDirectories();
+    pathHandler.createDirectoriesAndIsSuccessful();
     ofstream outputFile(pathHandler.getPath());
     cout << "Uml logs saved to file: " << pathHandler.getPath() << "\n";
     if (outputFile.is_open()) {

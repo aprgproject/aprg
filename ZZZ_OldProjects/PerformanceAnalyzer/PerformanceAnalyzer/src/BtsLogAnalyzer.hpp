@@ -18,7 +18,7 @@ public:
     enum class LogType { RlSetup, RlDeletion };
 
     struct PrintsAvailable {
-        PrintsAvailable();
+        PrintsAvailable() = default;
         bool hasBB_2_RL_SETUP_REQ_MSG{false};
         bool hasBB_2_RL_SETUP_ACK_MSG{false};
         bool hasTC_TRANSPORT_BEARER_REGISTER_MSG{false};
@@ -26,9 +26,7 @@ public:
     };
 
     struct DspData {
-        DspData()
-
-            = default;
+        DspData() = default;
 
         unsigned int boardId{0};
         unsigned int cpuId{0};

@@ -1078,6 +1078,4 @@ ostream& operator<<(ostream& out, ItemNameToShopItemDetailMap const& itemNameToS
     return out;
 }
 
-RagnarokOnline::RagnarokOnline() = default;
-
 }  // namespace alba

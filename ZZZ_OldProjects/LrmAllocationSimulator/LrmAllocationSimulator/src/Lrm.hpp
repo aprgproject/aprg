@@ -15,7 +15,7 @@ struct NyquistAndTurboNyquistCount {
 };
 
 struct SelectionDspResult {
-    SelectionDspResult();
+    SelectionDspResult() = default;
     bool isSelectionSuccessful{false};
     bool isNbicAllocated{false};
     unsigned int address{0};
@@ -23,7 +23,7 @@ struct SelectionDspResult {
 };
 
 struct SelectionDspResultForCcdAndMcd {
-    SelectionDspResultForCcdAndMcd();
+    SelectionDspResultForCcdAndMcd() = default;
     bool isSelectionSuccessful{false};
     bool isNbicAllocated{false};
     unsigned int ccdAddress{0};

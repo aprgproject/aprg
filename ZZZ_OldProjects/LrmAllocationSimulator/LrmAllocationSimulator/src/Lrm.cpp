@@ -1437,7 +1437,4 @@ unsigned int Lrm::getLeastConflictingDliPoolForThisDli(unsigned int const dliPoo
     return leastConflictPool;
 }
 
-SelectionDspResult::SelectionDspResult() = default;
-SelectionDspResultForCcdAndMcd::SelectionDspResultForCcdAndMcd() = default;
-
 }  // namespace alba

@@ -20,7 +20,7 @@ using MapsAnalyzerData = std::vector<MapAnalyzerData>;
 
 class MapAnalyzer {
 public:
-    MapAnalyzer();
+    MapAnalyzer() = default;
     [[nodiscard]] double getPotentialZenyFromMonster(Monster const& monster) const;
     void printResult() const;
     void printPotentialZenyFromMonster(std::string const& monsterName) const;

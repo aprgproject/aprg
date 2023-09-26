@@ -82,6 +82,4 @@ int BtsTraceDecoder::getAddressFromLineInFile(string const& lineInFile, SymbolTa
     return address;
 }
 
-BtsTraceDecoder::BtsTraceDecoder() = default;
-
 }  // namespace alba

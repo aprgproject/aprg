@@ -7,10 +7,6 @@ using namespace std;
 
 namespace alba::SackFileReaderStateMachineNamespace {
 
-InnerStates::InnerStates()
-
-    = default;
-
 void InnerStates::reset() {
     stateForConstant = StateForConstant::BeforeName;
     stateForStruct = StateForStruct::BeforeName;
@@ -28,10 +24,11 @@ void InnerStates::reset() {
 SackFileReaderStateMachine::SackFileReaderStateMachine(Database& database, string const& fullPath)
     : BaseSackFileReaderStateMachine(State::Idle),
       m_filePathHandler(fullPath),
-      m_isMessageIdFile(isStringFoundNotCaseSensitive(m_filePathHandler.getFilenameOnly(), "MessageId_")),
+      m_isMessageIdFile(isStringFoundNotCaseSensitive(m_filePathHandler.getFilenameOnly().string(), "MessageId_")),
 
       m_pathFromIInterface(getCorrectPathWithReplacedSlashCharacters<'/'>(
-          string(R"(\I_Interface\)") + getStringAfterThisString(m_filePathHandler.getPath(), R"(\I_Interface\)"))),
+          string(R"(\I_Interface\)") +
+          getStringAfterThisString(m_filePathHandler.getPath().string(), R"(\I_Interface\)"))),
       m_database(database) {}
 
 bool SackFileReaderStateMachine::isNextLineNeeded() const { return m_isNextLineNeeded; }
@@ -270,7 +267,7 @@ void SackFileReaderStateMachine::processStateUnionKeyword(InputToken const& inpu
     if (isNotWhiteSpaceAndNotInComment(inputToken) && token != "/") {
         if (StateForUnion::BeforeName == m_innerStates.stateForUnion) {
             if ("{" == token) {
-                m_unionDetails.name = m_filePathHandler.getFilenameOnly();
+                m_unionDetails.name = m_filePathHandler.getFilenameOnly().string();
                 m_innerStates.stateForUnion = StateForUnion::AfterOpeningBraces;
                 m_innerStates.stateForUnionAfterOpeningBraces = StateForUnionAfterOpeningBraces::BeforeParameterType;
             } else {

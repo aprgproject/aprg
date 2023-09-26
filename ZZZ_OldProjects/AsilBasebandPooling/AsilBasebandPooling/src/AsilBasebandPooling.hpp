@@ -22,7 +22,7 @@ struct BasebandPoolingResult {
 
 class AsilBasebandPooling {
 public:
-    AsilBasebandPooling();
+    AsilBasebandPooling() = default;
     AsilBasebandPooling(LcgInitializerList const& lcgs, BasebandCardInitializerList const& basebandCards);
 
     [[nodiscard]] BasebandCardsSplitBasedOnNumberOfLcgs getBasebandCardsSplitBetweenOneLcgAndMultipleLcgs(

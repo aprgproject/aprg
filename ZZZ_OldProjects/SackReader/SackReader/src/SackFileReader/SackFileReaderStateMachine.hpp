@@ -147,7 +147,7 @@ struct InputToken {
 };
 
 struct InnerStates {
-    InnerStates();
+    InnerStates() = default;
     void reset();
     StateForConstant stateForConstant{StateForConstant::BeforeName};
     StateForStruct stateForStruct{StateForStruct::BeforeName};

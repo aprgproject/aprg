@@ -15,7 +15,7 @@ using EDssWcdmaLoad = enum EDssWcdmaLoad { EDssWcdmaLoad_Low = 0, EDssWcdmaLoad_
 
 class LrmDssWcdmaLteLoadMonitoring {
 public:
-    LrmDssWcdmaLteLoadMonitoring();
+    LrmDssWcdmaLteLoadMonitoring() = default;
     [[nodiscard]] EDssWcdmaLoad getLoadStateFromCellLoad(unsigned int const cellLoad) const;
     [[nodiscard]] unsigned int getConsecutiveLowerLoadStateCount() const;
     [[nodiscard]] unsigned int getDchLoadFactor() const;
