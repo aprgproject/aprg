@@ -44,8 +44,6 @@ void NewSamplesBuilder::retrieveSampleMergingDetails(
     }
 }
 
-NewSamplesBuilder::SampleMergingDetails::SampleMergingDetails() = default;
-
 void NewSamplesBuilder::putSamplesBasedOnSearchResultAndSamples(
     Samples& samplesToChange, SearchResultsDetails const& searchResultDetails, Samples const& searchSamples,
     bool const alwaysPutNewValue) {
