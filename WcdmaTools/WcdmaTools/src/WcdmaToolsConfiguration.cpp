@@ -76,11 +76,11 @@ WcdmaToolsConfiguration::WcdmaToolsConfiguration()
       prioritizedLogCondition(),
       cropSize(0) {
     determineVariousLocationsBasedOnCurrentLocation();
-    loadConfigurationFromFile(configurationFileLocation);
+    loadConfigurationFromFile(configurationFileLocation.string());
 }
 
 void WcdmaToolsConfiguration::loadDefaultConfigurationFile() {
-    loadConfigurationFromFile(defaultConfigurationFileLocation);
+    loadConfigurationFromFile(defaultConfigurationFileLocation.string());
 }
 
 void WcdmaToolsConfiguration::saveToConfigurationFile() const {
@@ -251,25 +251,26 @@ string WcdmaToolsConfiguration::getCropFileName() const {
 
 void WcdmaToolsConfiguration::determineVariousLocationsBasedOnCurrentLocation() {
     AlbaLocalPathHandler currentLocalPathHandler(AlbaLocalPathHandler::createPathHandlerForDetectedPath());
-    currentLocalPathHandler.goUp();
+    currentLocalPathHandler.moveUpADirectory();
 
-    AlbaLocalPathHandler sevenZipPathHandler(currentLocalPathHandler.getDirectory() + R"(\7z32\7z.exe)");
+    AlbaLocalPathHandler sevenZipPathHandler(currentLocalPathHandler.getDirectory().string() + R"(\7z32\7z.exe)");
     locationOf7zExecutable = sevenZipPathHandler.getPath();
 
     AlbaLocalPathHandler configurationFilePathHandler(
-        currentLocalPathHandler.getDirectory() + R"(\configuration\configuration.txt)");
-    configurationFilePathHandler.createDirectoriesForNonExisitingDirectories();
+        currentLocalPathHandler.getDirectory().string() + R"(\configuration\configuration.txt)");
+    configurationFilePathHandler.createDirectoriesAndIsSuccessful();
     configurationFileLocation = configurationFilePathHandler.getPath();
 
     AlbaLocalPathHandler defaultConfigurationFilePathHandler(
-        currentLocalPathHandler.getDirectory() + R"(\configuration\defaultConfiguration.txt)");
-    defaultConfigurationFilePathHandler.createDirectoriesForNonExisitingDirectories();
+        currentLocalPathHandler.getDirectory().string() + R"(\configuration\defaultConfiguration.txt)");
+    defaultConfigurationFilePathHandler.createDirectoriesAndIsSuccessful();
     defaultConfigurationFileLocation = defaultConfigurationFilePathHandler.getPath();
 
-    AlbaLocalPathHandler temporaryFilePathHandler(currentLocalPathHandler.getDirectory() + R"(\temporaryFiles\)");
-    temporaryFilePathHandler.input(temporaryFilePathHandler.getDriveOrRoot() + R"(:\Temp\)");
-    btsLogSorterConfiguration.m_pathOfTempFiles = temporaryFilePathHandler.getPath();
-    temporaryFilePathHandler.createDirectoriesForNonExisitingDirectories();
+    AlbaLocalPathHandler temporaryFilePathHandler(
+        currentLocalPathHandler.getDirectory().string() + R"(\temporaryFiles\)");
+    temporaryFilePathHandler.input(temporaryFilePathHandler.getRoot().string() + R"(:\Temp\)");
+    btsLogSorterConfiguration.m_pathOfTempFiles = temporaryFilePathHandler.getPath().string();
+    temporaryFilePathHandler.createDirectoriesAndIsSuccessful();
 
     cout << "locationOf7zExecutable: [" << locationOf7zExecutable << "]\n";
     cout << "configurationFileLocation: [" << configurationFileLocation << "]\n";
