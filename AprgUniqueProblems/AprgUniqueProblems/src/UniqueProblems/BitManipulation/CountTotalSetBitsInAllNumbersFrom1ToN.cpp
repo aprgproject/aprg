@@ -73,6 +73,4 @@ CountTotalSetBitsInAllNumbersFrom1ToN::Value CountTotalSetBitsInAllNumbersFrom1T
     return result;
 }
 
-CountTotalSetBitsInAllNumbersFrom1ToN::CountTotalSetBitsInAllNumbersFrom1ToN() = default;
-
 }  // namespace alba

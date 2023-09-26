@@ -19,6 +19,4 @@ AddTwoNumbersWithoutUsingArithmeticOperators::Value AddTwoNumbersWithoutUsingAri
     return sum;
 }
 
-AddTwoNumbersWithoutUsingArithmeticOperators::AddTwoNumbersWithoutUsingArithmeticOperators() = default;
-
 }  // namespace alba

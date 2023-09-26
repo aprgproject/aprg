@@ -67,6 +67,4 @@ UniqueElement::Value UniqueElement::getXorResult(Values const& values) {
     });
 }
 
-UniqueElement::UniqueElement() = default;
-
 }  // namespace alba
