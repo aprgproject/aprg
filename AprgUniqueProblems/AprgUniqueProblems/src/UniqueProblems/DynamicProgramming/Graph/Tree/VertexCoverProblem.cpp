@@ -52,6 +52,7 @@ VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingNaiveRecursion
         Count const childrenCount = getMinimumCountUsingNaiveRecursion(child);
         Count grandChildrenCount = 1;
         for (Vertex const grandChild : m_childrenInTree.getChildren(child)) {
+            // cppcheck-suppress useStlAlgorithm
             grandChildrenCount += getMinimumCountUsingNaiveRecursion(grandChild);
         }
         countIfVertexIsIncluded += childrenCount;
@@ -70,6 +71,7 @@ VertexCoverProblem::Count VertexCoverProblem::getMinimumCountUsingMemoizationDP(
             Count const childrenCount = getMinimumCountUsingMemoizationDP(vertexToCountMap, child);
             Count grandChildrenCount = 1;
             for (Vertex const grandChild : m_childrenInTree.getChildren(child)) {
+               // cppcheck-suppress useStlAlgorithm
                 grandChildrenCount += getMinimumCountUsingMemoizationDP(vertexToCountMap, grandChild);
             }
             countIfVertexIsIncluded += childrenCount;

@@ -128,6 +128,7 @@ WordWrapProblemWithLineWidth::Cost WordWrapProblemWithLineWidth::getTotalCostOfA
     Indices const& lineLengths) const {
     Cost result(0);
     for (Index const lineLength : lineLengths) {
+        // cppcheck-suppress useStlAlgorithm
         result += getCostFromExtraSpaces(m_maxLineLength - lineLength);
     }
     return result;

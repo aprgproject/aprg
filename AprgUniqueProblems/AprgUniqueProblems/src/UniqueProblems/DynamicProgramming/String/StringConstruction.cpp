@@ -62,6 +62,7 @@ void StringConstruction::saveHashOfAllSubstrings() {
     HornerHashFunctionForWholeString<HashValue> const hashFunction(RADIX, A_LARGE_PRIME);
     m_subStringHash.reserve(m_subStrings.size());
     for (string const& subString : m_subStrings) {
+        // cppcheck-suppress useStlAlgorithm
         m_subStringHash.emplace_back(hashFunction.getHashCode(subString));
     }
 }

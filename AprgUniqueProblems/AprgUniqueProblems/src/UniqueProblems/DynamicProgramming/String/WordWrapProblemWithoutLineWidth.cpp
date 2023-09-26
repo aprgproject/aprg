@@ -99,6 +99,7 @@ WordWrapProblemWithoutLineWidth::Cost WordWrapProblemWithoutLineWidth::getCost(
         result = getCostFromExtraSpaces(lengths.front());
     } else {
         for (Index const length : lengths) {
+            // cppcheck-suppress useStlAlgorithm
             result += getCostFromExtraSpaces(maxLength - length);
         }
     }

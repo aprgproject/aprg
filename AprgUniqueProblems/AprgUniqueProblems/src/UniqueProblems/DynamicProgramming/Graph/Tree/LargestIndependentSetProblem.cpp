@@ -52,6 +52,7 @@ LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCoun
     for (Vertex const child : m_childrenInTree.getChildren(vertex)) {
         countIfVertexIsNotIncluded += getMaximumCountUsingNaiveRecursion(child);
         for (Vertex const grandChild : m_childrenInTree.getChildren(child)) {
+            // cppcheck-suppress useStlAlgorithm
             countIfVertexIsIncluded += getMaximumCountUsingNaiveRecursion(grandChild);
         }
     }
@@ -67,6 +68,7 @@ LargestIndependentSetProblem::Count LargestIndependentSetProblem::getMaximumCoun
         for (Vertex const child : m_childrenInTree.getChildren(vertex)) {
             countIfVertexIsNotIncluded += getMaximumCountUsingMemoizationDP(vertexToCountMap, child);
             for (Vertex const grandChild : m_childrenInTree.getChildren(child)) {
+                // cppcheck-suppress useStlAlgorithm
                 countIfVertexIsIncluded += getMaximumCountUsingMemoizationDP(vertexToCountMap, grandChild);
             }
         }

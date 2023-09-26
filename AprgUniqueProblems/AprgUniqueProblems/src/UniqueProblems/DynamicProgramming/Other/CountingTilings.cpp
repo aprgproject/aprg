@@ -40,6 +40,7 @@ void CountingTilings::searchNextRow(Count const rowIndex, Row const& currentRow)
         Row const emptyRow(getEmptyRow(static_cast<Count>(currentRow.length())));
         for (Row const& nextRow : getNextRows(currentRow)) {
             if (emptyRow == nextRow) {
+                // cppcheck-suppress useStlAlgorithm
                 ++m_numberOfSolutions;
             }
         }
