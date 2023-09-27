@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-26T04:42:29
+StaticAnalysisJobIdentifier: [41]
+2023-09-27T03:46:39
 /home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:64:25: warning: 3.141 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:76:43: warning: 42 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/jsonLibrary/JsonLibraryTest/tst/JsonLibrary_unit.cpp:82:61: warning: 42.99 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
