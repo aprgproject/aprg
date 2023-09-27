@@ -6,6 +6,16 @@ using namespace std;
 
 namespace alba::CodeUtilities {
 
+ostream& operator<<(ostream& out, ScopeType const enumValue) {
+    out << getString(enumValue);
+    return out;
+}
+
+ostream& operator<<(ostream& out, CppFileType const enumValue) {
+    out << getString(enumValue);
+    return out;
+}
+
 string getString(ScopeType const enumValue) {
     switch (enumValue) {
         ALBA_MACROS_CASE_ENUM_STRING(ScopeType::AnonymousNamespace)
@@ -27,16 +37,6 @@ string getString(CppFileType const enumValue) {
         default:
             return "default";
     }
-}
-
-ostream& operator<<(ostream& out, ScopeType const enumValue) {
-    out << getString(enumValue);
-    return out;
-}
-
-ostream& operator<<(ostream& out, CppFileType const enumValue) {
-    out << getString(enumValue);
-    return out;
 }
 
 }  // namespace alba::CodeUtilities

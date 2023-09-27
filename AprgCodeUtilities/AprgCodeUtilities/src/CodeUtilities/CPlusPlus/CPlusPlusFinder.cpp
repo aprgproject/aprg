@@ -165,8 +165,6 @@ void CPlusPlusFinder::enterScope(int const scopeHeaderStart, int const openingBr
 
 void CPlusPlusFinder::exitScope() { m_scopeDetails.pop_back(); }
 
-CPlusPlusFinder::ScopeDetail& CPlusPlusFinder::getCurrentScope() { return m_scopeDetails.back(); }
-
 void CPlusPlusFinder::findOnScopeLoop(int const startIndex, int const endIndex) {
     // findItemsToCtadFix(startIndex, endIndex);
 }
@@ -188,5 +186,7 @@ void CPlusPlusFinder::findItemsToCtadFix(int const startIndex, int const endInde
         }
     }
 }
+
+CPlusPlusFinder::ScopeDetail& CPlusPlusFinder::getCurrentScope() { return m_scopeDetails.back(); }
 
 }  // namespace alba::CodeUtilities

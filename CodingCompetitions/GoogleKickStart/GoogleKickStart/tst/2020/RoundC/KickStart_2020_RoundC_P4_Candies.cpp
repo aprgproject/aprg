@@ -60,6 +60,7 @@ struct ft {
 
 int n,
     q;
+
 ll a[mxN];
 f0[2], f1[2];
 

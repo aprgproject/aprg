@@ -382,8 +382,6 @@ void CPlusPlusReorganizer::exitScope(int& nextIndex, int const closingBraceIndex
     }
 }
 
-CPlusPlusReorganizer::ScopeDetail& CPlusPlusReorganizer::getCurrentScope() { return m_scopeDetails.back(); }
-
 void CPlusPlusReorganizer::addItemIfNeeded(int const startIndex, int const endIndex) {
     if (shouldReorganizeInThisScope(getCurrentScope())) {
         string const content = getFormattedContent(startIndex, endIndex);
@@ -411,6 +409,8 @@ void CPlusPlusReorganizer::addItemIfNeeded(int const startIndex, int const endIn
         }
     }
 }
+
+CPlusPlusReorganizer::ScopeDetail& CPlusPlusReorganizer::getCurrentScope() { return m_scopeDetails.back(); }
 
 bool CPlusPlusReorganizer::shouldReorganizeInThisScope(ScopeDetail const& scope) {
     return scope.scopeType == ScopeType::TopLevel || scope.scopeType == ScopeType::NamedNamespace ||

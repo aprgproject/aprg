@@ -59,9 +59,9 @@ private:
     void exitTopLevelScope();
     void enterScope(int const scopeHeaderStart, int const openingBraceIndex);
     void exitScope();
-    ScopeDetail& getCurrentScope();
     void fixOnScopeLoop(int const startIndex, int const endIndex);
     void fixConstexprToInlineConstExpr(int const startIndex, int const endIndex);
+    ScopeDetail& getCurrentScope();
     [[nodiscard]] static std::string getCorrectedGTestName(std::string const& testName);
     static Terms getNewPrintTerms(std::string const& printString, stringHelper::strings const& printItems);
     std::filesystem::path m_currentFile;

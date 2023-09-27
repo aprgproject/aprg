@@ -9,9 +9,9 @@ enum class ScopeType { AnonymousNamespace, ClassDeclaration, EnumClass, NamedNam
 
 enum class CppFileType { CppFile, HeaderFile, Unknown };
 
-std::string getString(ScopeType const enumValue);
-std::string getString(CppFileType const enumValue);
 std::ostream& operator<<(std::ostream& out, ScopeType const enumValue);
 std::ostream& operator<<(std::ostream& out, CppFileType const enumValue);
+std::string getString(ScopeType const enumValue);
+std::string getString(CppFileType const enumValue);
 
 }  // namespace alba::CodeUtilities

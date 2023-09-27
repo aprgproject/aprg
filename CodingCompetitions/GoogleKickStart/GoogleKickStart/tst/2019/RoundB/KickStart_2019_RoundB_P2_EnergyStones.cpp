@@ -36,8 +36,8 @@ struct Stone {
     int rateOfLoss;
 
     /*friend ALBA_DEBUG_CLASS_OUTPUT_OPERATOR_DEFINITION(
-                Stone const& stone,
-                "{" << stone.timeToConsume << " " << stone.energy << " " << stone.rateOfLoss << "}");*/
+                    Stone const& stone,
+                    "{" << stone.timeToConsume << " " << stone.energy << " " << stone.rateOfLoss << "}");*/
 };
 
 using Stones = vector<Stone>;

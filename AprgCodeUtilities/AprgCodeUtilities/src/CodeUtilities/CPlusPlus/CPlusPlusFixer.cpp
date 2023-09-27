@@ -481,8 +481,6 @@ void CPlusPlusFixer::enterScope(int const scopeHeaderStart, int const openingBra
 
 void CPlusPlusFixer::exitScope() { m_scopeDetails.pop_back(); }
 
-CPlusPlusFixer::ScopeDetail& CPlusPlusFixer::getCurrentScope() { return m_scopeDetails.back(); }
-
 void CPlusPlusFixer::fixOnScopeLoop(int const startIndex, int const endIndex) {
     fixConstexprToInlineConstExpr(startIndex, endIndex);
 }
@@ -506,6 +504,8 @@ void CPlusPlusFixer::fixConstexprToInlineConstExpr(int const startIndex, int con
         }
     }
 }
+
+CPlusPlusFixer::ScopeDetail& CPlusPlusFixer::getCurrentScope() { return m_scopeDetails.back(); }
 
 string CPlusPlusFixer::getCorrectedGTestName(string const& testName) {
     if (testName.find_first_of('_') != std::string::npos) {
