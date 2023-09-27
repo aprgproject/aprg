@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-26T05:00:19
+StaticAnalysisJobIdentifier: [41]
+2023-09-27T04:00:32
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Ellipsoid.cpp:25:52: warning: parameter name 'y' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Ellipsoid.cpp:25:68: warning: parameter name 'z' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/ThreeDimensions/Constructs/Ellipsoid.cpp:31:52: warning: parameter name 'x' is too short, expected at least 3 characters [readability-identifier-length]
@@ -152,20 +152,14 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:350:84: warning: parameter name 'b' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:350:100: warning: parameter name 'c' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:374:18: warning: variable name 's' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:441:63: warning: repeated branch in conditional chain [bugprone-branch-clone]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:443:6: note: end of the original
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:443:119: note: clone 1 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:445:120: note: clone 2 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:447:119: note: clone 3 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:449:120: note: clone 4 starts here
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:5: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:5: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:17: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:586:43: warning: loop induction expression should not have floating-point type [cert-flp30-c]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:13: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:590:99: warning: loop induction expression should not have floating-point type [cert-flp30-c]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:588:5: warning: Variable 'y' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:588:5: note: Variable 'y' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:588:17: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:588:43: warning: loop induction expression should not have floating-point type [cert-flp30-c]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:592:13: warning: Variable 'x' with floating point type 'double' should not be used as a loop counter [clang-analyzer-security.FloatLoopCounter]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:592:13: note: Variable 'x' with floating point type 'double' should not be used as a loop counter
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:592:25: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/AprgGeometry/AprgGeometry/src/Geometry/TwoDimensions/Utilities/TwoDimensionsUtilities.cpp:592:99: warning: loop induction expression should not have floating-point type [cert-flp30-c]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:65:14: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:66:18: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/AprgBitmap/AprgBitmap/src/Bitmap/BitmapSnippet.cpp:90:22: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
