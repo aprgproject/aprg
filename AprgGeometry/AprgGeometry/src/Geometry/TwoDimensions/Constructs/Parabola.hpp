@@ -110,7 +110,7 @@ public:
         return mathHelper::getAbsoluteValue<double>(4 * getP());
     }
 
-    friend std::ostream& operator<<(std::ostream& out, Parabola<parabolaOrientation> const& parabola) {
+    friend std::ostream& operator<<(std::ostream& out, Parabola const& parabola) {
         if (ParabolaOrientation::PolynomialX == parabola.parabolaOrientation) {
             out << parabola.getA() << "*[x^2] + " << parabola.getB() << "*x + " << parabola.getC() << " = 0";
         } else if (ParabolaOrientation::PolynomialY == parabola.parabolaOrientation) {
@@ -118,8 +118,6 @@ public:
         }
         return out;
     }
-
-private:
 };
 
 }  // namespace alba::TwoDimensions
