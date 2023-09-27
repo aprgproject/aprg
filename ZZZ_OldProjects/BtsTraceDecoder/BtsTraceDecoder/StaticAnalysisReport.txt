@@ -1,4 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-26T06:06:55
+StaticAnalysisJobIdentifier: [41]
+2023-09-27T05:05:07
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/BtsTraceDecoder/BtsTraceDecoder/tst/BtsTraceDecoder_unit.cpp:18:48: warning: 0x08a0c623 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
 DONE!
