@@ -9,8 +9,8 @@
 				"source",
 				"~/.bash_profile",
 				";",
-				"rustc",
-				"${relativeFile}"
+				"cargo",
+				"build"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"
@@ -28,9 +28,9 @@
 		{
 			"label": "Build Locally",
 			"type": "shell",
-			"command": "rustc",
+			"command": "cargo",
 			"args": [
-				"${relativeFile}"
+				"build"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"

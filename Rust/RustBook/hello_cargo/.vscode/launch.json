@@ -6,8 +6,13 @@
             "type": "node",
             "request": "launch",
             "preLaunchTask": "Build Rust In WSL",
-            "program": "./${fileBasenameNoExtension}.exe",
-            "args": [],
+            "program": "source",
+            "args": [
+                "~/.bash_profile",
+                ";",
+                "cargo",
+                "run"
+            ],
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
@@ -25,8 +30,13 @@
             "type": "cppvsdbg",
             "request": "launch",
             "preLaunchTask": "Build Locally",
-            "program": "${workspaceFolder}/${fileBasenameNoExtension}.exe",
-            "args": [],
+            "program": "source",
+            "args": [
+                "~/.bash_profile",
+                ";",
+                "cargo",
+                "run"
+            ],
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
