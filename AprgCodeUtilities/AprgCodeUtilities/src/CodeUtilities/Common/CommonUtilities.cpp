@@ -186,9 +186,10 @@ string convertToString(SpecialMatcherType const type) {
     switch (type) {
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::Comment)
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::HasNewLine)
+        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::IdentifierAndNotAScreamingSnakeCase)
+        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::IdentifierStartsWithLetterUnderscore)
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::IdentifierWithPascalCase)
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::IdentifierWithSnakeCase)
-        ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::IdentifierAndNotAScreamingSnakeCase)
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::Literal)
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::NotACommentNorWhiteSpace)
         ALBA_MACROS_CASE_ENUM_STRING(SpecialMatcherType::WhiteSpaceWithNewLine)
@@ -270,12 +271,14 @@ bool isAMatch(SpecialMatcherType const matcherType, Term const& term) {
             return isComment(term);
         case SpecialMatcherType::HasNewLine:
             return hasNewLine(term);
+        case SpecialMatcherType::IdentifierAndNotAScreamingSnakeCase:
+            return TermType::Identifier == term.getTermType() && !isScreamingSnakeCase(term.getContent());
+        case SpecialMatcherType::IdentifierStartsWithLetterUnderscore:
+            return TermType::Identifier == term.getTermType() && startsWithLetterUnderscore(term.getContent());
         case SpecialMatcherType::IdentifierWithPascalCase:
             return TermType::Identifier == term.getTermType() && isPascalCase(term.getContent());
         case SpecialMatcherType::IdentifierWithSnakeCase:
             return TermType::Identifier == term.getTermType() && isSnakeCase(term.getContent());
-        case SpecialMatcherType::IdentifierAndNotAScreamingSnakeCase:
-            return TermType::Identifier == term.getTermType() && !isScreamingSnakeCase(term.getContent());
         case SpecialMatcherType::Literal:
             return TermType::Boolean == term.getTermType() || TermType::CharacterLiteral == term.getTermType() ||
                    TermType::Number == term.getTermType() || TermType::StringLiteral == term.getTermType();
@@ -299,5 +302,12 @@ bool isWhiteSpaceWithNewLine(Term const& term) {
 }
 
 bool hasNewLine(Term const& term) { return stringHelper::hasNewLine(term.getContent()); }
+
+bool startsWithLetterUnderscore(string const& content) {
+    if (content.length() >= 2) {
+        return isLowerCaseLetter(content[0]) && '_' == content[1];
+    }
+    return false;
+}
 
 }  // namespace alba::CodeUtilities

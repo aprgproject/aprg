@@ -36,6 +36,14 @@ TEST(CPlusPlusUtilitiesTest, GetFunctionSignatureWorks) {
     EXPECT_EQ("AlbaOptional(AlbaOptional<ContentType&> const& optional)", functionSignature);
 }
 
+TEST(CPlusPlusUtilitiesTest, GetFunctionSignatureWorksWithEqualsDefault) {
+    string const wholeFunction = "AlbaOptional(AlbaOptional<ContentType&> const& optional) =   default;";
+
+    string const functionSignature(getFunctionSignature(wholeFunction));
+
+    EXPECT_EQ("AlbaOptional(AlbaOptional<ContentType&> const& optional)", functionSignature);
+}
+
 TEST(CPlusPlusUtilitiesTest, GetFunctionNameWorks) {
     string const functionSignature = "AlbaOptional(AlbaOptional<ContentType&> const& optional)";
 

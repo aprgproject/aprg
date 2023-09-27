@@ -303,7 +303,7 @@ void CPlusPlusReorganizer::processOpeningAndClosingBrace(
     int& nextIndex, int const openingBraceIndex, int const closingBraceSemiColonIndex) {
     int const endIndex = getIndexAtSameLineComment(closingBraceSemiColonIndex);
     Terms const scopeHeaderTerms(extractTermsInRange(nextIndex, openingBraceIndex - 1, m_terms));
-    strings& currentItems(m_scopeDetails.back().items);
+    strings& currentItems(getCurrentScope().items);
     if (!currentItems.empty() && hasEndBrace(currentItems.back()) && shouldConnectToPreviousItem(scopeHeaderTerms)) {
         currentItems.back() += getCombinedContents(nextIndex, endIndex, m_terms);
     } else {
@@ -314,7 +314,7 @@ void CPlusPlusReorganizer::processOpeningAndClosingBrace(
 
 void CPlusPlusReorganizer::processOpeningBrace(int& nextIndex, int const openingBraceIndex) {
     if (!m_scopeDetails.empty()) {
-        strings& currentItems(m_scopeDetails.back().items);
+        strings& currentItems(getCurrentScope().items);
         Terms const scopeHeaderTerms(extractTermsInRange(nextIndex, openingBraceIndex - 1, m_terms));
         if (!currentItems.empty() && hasEndBrace(currentItems.back()) &&
             shouldConnectToPreviousItem(scopeHeaderTerms)) {
@@ -344,7 +344,7 @@ void CPlusPlusReorganizer::enterAndSetTopLevelScope() {
 }
 
 void CPlusPlusReorganizer::exitTopLevelScope() {
-    ScopeDetail const& scopeToExit(m_scopeDetails.back());
+    ScopeDetail const& scopeToExit(getCurrentScope());
 
     CPlusPlusReorganizeItems const sorter(
         {m_fileType, scopeToExit.scopeType, scopeToExit.name, scopeToExit.items, m_headerInformation.functionSignatures,
@@ -360,7 +360,7 @@ void CPlusPlusReorganizer::enterScope(int const scopeHeaderStart, int const open
 }
 
 void CPlusPlusReorganizer::exitScope(int& nextIndex, int const closingBraceIndex, int const endIndex) {
-    ScopeDetail const& scopeToExit(m_scopeDetails.back());
+    ScopeDetail const& scopeToExit(getCurrentScope());
     if (shouldReorganizeInThisScope(scopeToExit)) {
         m_terms.erase(m_terms.cbegin() + scopeToExit.openingBraceIndex + 1, m_terms.cbegin() + closingBraceIndex);
 
@@ -382,13 +382,15 @@ void CPlusPlusReorganizer::exitScope(int& nextIndex, int const closingBraceIndex
     }
 }
 
+CPlusPlusReorganizer::ScopeDetail& CPlusPlusReorganizer::getCurrentScope() { return m_scopeDetails.back(); }
+
 void CPlusPlusReorganizer::addItemIfNeeded(int const startIndex, int const endIndex) {
-    if (shouldReorganizeInThisScope(m_scopeDetails.back())) {
+    if (shouldReorganizeInThisScope(getCurrentScope())) {
         string const content = getFormattedContent(startIndex, endIndex);
         if (!content.empty()) {
             switch (m_purpose) {
                 case Purpose::Reorganize: {
-                    m_scopeDetails.back().items.emplace_back(content);
+                    getCurrentScope().items.emplace_back(content);
                     break;
                 }
                 case Purpose::GatherInformation: {

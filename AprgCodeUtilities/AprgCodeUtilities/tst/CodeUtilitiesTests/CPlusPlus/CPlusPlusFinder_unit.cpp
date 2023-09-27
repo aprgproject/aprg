@@ -25,12 +25,18 @@ void processAprgDirectory(string const& aprgPath) {
 }  // namespace
 
 TEST(CPlusPlusFinderTest, DISABLED_ActualAprgDirectoryTest) {
-    processAprgDirectory(R"(F:\Branches\aprg_project\aprg\aprg)");
+    processAprgDirectory(R"(F:\Branches\aprg_project\aprg_semi_clean\aprg)");
 }
 
 TEST(CPlusPlusFinderTest, DISABLED_ActualDirectoryTest) {
     CPlusPlusFinder finder;
-    finder.processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgAlgebra\AprgAlgebra\)");
+    finder.processDirectory(R"(F:\Branches\aprg_project\aprg\aprg\AprgCommon\AprgCommon\)");
+}
+
+TEST(CPlusPlusFinderTest, DISABLED_ActualFileTest) {
+    CPlusPlusFinder finder;
+    finder.processFile(
+        R"(F:\Branches\aprg_project\aprg\aprg\AprgCommon\AprgCommon\src\Common\Debug\AlbaTypeDisplayerInCompilation.hpp)");
 }
 
 }  // namespace alba::CodeUtilities

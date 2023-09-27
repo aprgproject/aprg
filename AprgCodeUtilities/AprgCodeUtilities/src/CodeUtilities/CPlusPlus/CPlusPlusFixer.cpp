@@ -2,7 +2,6 @@
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/CommonUtilities.hpp>
-#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <algorithm>
@@ -37,7 +36,7 @@ void CPlusPlusFixer::processFile(path const& file) {
 CPlusPlusFixer::ScopeDetail CPlusPlusFixer::constructScopeDetails(
     int const scopeHeaderStart, int const openingBraceIndex) const {
     Terms scopeHeaderTerms(extractTermsInRange(scopeHeaderStart, openingBraceIndex, m_terms));
-    ScopeDetail scopeDetail{scopeHeaderStart, openingBraceIndex, 0, ScopeType::Unknown};
+    ScopeDetail scopeDetail{scopeHeaderStart, openingBraceIndex, 0, ScopeType::Unknown, {}};
     Patterns const searchPatterns{
         {M("template"), M("<")},
         {M("namespace"), M(TermType::Identifier)},
@@ -58,21 +57,25 @@ CPlusPlusFixer::ScopeDetail CPlusPlusFixer::constructScopeDetails(
             Term const& lastTerm(scopeHeaderTerms[lastHitIndex]);
             if (firstTerm.getContent() == "namespace" && lastTerm.getTermType() == TermType::Identifier) {
                 scopeDetail.scopeType = ScopeType::NamedNamespace;
+                scopeDetail.name = lastTerm.getContent();
                 break;
             }
             if (firstTerm.getContent() == "namespace" && lastTerm.getContent() == "{") {
                 scopeDetail.scopeType = ScopeType::AnonymousNamespace;
+                scopeDetail.name.clear();
                 break;
             }
             if (firstTerm.getContent() == "enum" && scopeHeaderTerms[hitIndexes[1]].getContent() == "class" &&
                 lastTerm.getTermType() == TermType::Identifier) {
                 scopeDetail.scopeType = ScopeType::EnumClass;
+                scopeDetail.name = lastTerm.getContent();
                 break;
             }
             if ((firstTerm.getContent() == "class" || firstTerm.getContent() == "struct" ||
                  firstTerm.getContent() == "union") &&
                 lastTerm.getTermType() == TermType::Identifier) {
                 scopeDetail.scopeType = ScopeType::ClassDeclaration;
+                scopeDetail.name = lastTerm.getContent();
                 break;
             }
             if (firstTerm.getContent() == "template" && lastTerm.getContent() == "<") {
@@ -115,11 +118,11 @@ strings CPlusPlusFixer::getPrintItems(int& printfEnd, int const printStringIndex
 
 void CPlusPlusFixer::fixTerms() {
     combinePrimitiveTypes();
-    fixRegardlessWithScopes();
+    fixRegardlessOfScope();
     fixBasedOnScopes();
 }
 
-void CPlusPlusFixer::fixRegardlessWithScopes() {
+void CPlusPlusFixer::fixRegardlessOfScope() {
     fixPostFixIncrementDecrement();
     fixConstReferenceOrder();
     fixConstToConstexpr();
@@ -430,7 +433,7 @@ void CPlusPlusFixer::findTermsAndConvertToConstexpr(
 void CPlusPlusFixer::fixByCheckingScopes() {
     enterAndSetTopLevelScope();
 
-    Patterns const searchPatterns{{M("{")}, {M("}")}};
+    Patterns const searchPatterns{{M("{")}, {M("}")}, {M(";")}};
     int nextIndex = 0;
     int searchIndex = 0;
     bool isFound(true);
@@ -441,13 +444,15 @@ void CPlusPlusFixer::fixByCheckingScopes() {
             int const firstHitIndex = hitIndexes.front();
             Term const& firstTerm(m_terms[firstHitIndex]);
             int fixStartIndex = nextIndex > 0 ? nextIndex - 1 : nextIndex;
+            fixOnScopeLoop(fixStartIndex, firstHitIndex);
             if (firstTerm.getContent() == "{") {
-                fixOnScopeLoop(fixStartIndex, firstHitIndex);
                 processOpeningBrace(nextIndex, firstHitIndex);
                 searchIndex = nextIndex;
             } else if (firstTerm.getContent() == "}") {
-                fixOnScopeLoop(fixStartIndex, firstHitIndex);
                 processClosingBrace(nextIndex, firstHitIndex);
+                searchIndex = nextIndex;
+            } else {
+                ++nextIndex;
                 searchIndex = nextIndex;
             }
         }
@@ -467,7 +472,7 @@ void CPlusPlusFixer::processClosingBrace(int& nextIndex, int const closingBraceI
     nextIndex = closingBraceIndex + 1;
 }
 
-void CPlusPlusFixer::enterAndSetTopLevelScope() { m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel}}; }
+void CPlusPlusFixer::enterAndSetTopLevelScope() { m_scopeDetails = {ScopeDetail{0, 0, 0, ScopeType::TopLevel, {}}}; }
 void CPlusPlusFixer::exitTopLevelScope() { m_scopeDetails.pop_back(); }
 
 void CPlusPlusFixer::enterScope(int const scopeHeaderStart, int const openingBraceIndex) {
@@ -476,12 +481,14 @@ void CPlusPlusFixer::enterScope(int const scopeHeaderStart, int const openingBra
 
 void CPlusPlusFixer::exitScope() { m_scopeDetails.pop_back(); }
 
+CPlusPlusFixer::ScopeDetail& CPlusPlusFixer::getCurrentScope() { return m_scopeDetails.back(); }
+
 void CPlusPlusFixer::fixOnScopeLoop(int const startIndex, int const endIndex) {
     fixConstexprToInlineConstExpr(startIndex, endIndex);
 }
 
 void CPlusPlusFixer::fixConstexprToInlineConstExpr(int const startIndex, int const endIndex) {
-    if (ScopeType::NamedNamespace == m_scopeDetails.back().scopeType &&
+    if (ScopeType::NamedNamespace == getCurrentScope().scopeType &&
         isHeaderFileExtension(getStringWithoutCharAtTheStart(m_currentFile.extension().string(), '.'))) {
         auto const startDivider = M_OR(M("{"), M("}"), M(";"));
         Patterns const searchPatterns{{startDivider, M("constexpr")}};
