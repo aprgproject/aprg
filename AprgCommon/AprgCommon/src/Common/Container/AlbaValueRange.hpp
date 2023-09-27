@@ -15,7 +15,7 @@ class AlbaValueRange {
 public:
     using TerminationCondition = std::function<bool(DataType, DataType)>;
     using TraverseOperation = std::function<void(DataType)>;
-    AlbaValueRange() : m_startValue(0), m_endValue(0), m_intervalMagnitude(0) {}
+    AlbaValueRange() = default;
 
     AlbaValueRange(DataType const startValue, DataType const endValue, DataType const intervalMagnitude)
         : m_startValue(startValue),
@@ -89,8 +89,8 @@ public:
 
     void clear() {
         m_startValue = 0;
-        m_endValue == 0;
-        m_intervalMagnitude == 0;
+        m_endValue = 0;
+        m_intervalMagnitude = 0;
     }
 
 private:
@@ -147,9 +147,9 @@ private:
         return out;
     }
 
-    DataType m_startValue;
-    DataType m_endValue;
-    DataType m_intervalMagnitude;
+    DataType m_startValue{};
+    DataType m_endValue{};
+    DataType m_intervalMagnitude{};
 };
 
 }  // namespace alba

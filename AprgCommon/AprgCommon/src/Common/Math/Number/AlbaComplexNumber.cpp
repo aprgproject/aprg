@@ -15,12 +15,6 @@ using namespace std;
 namespace alba {
 
 template <typename DataType>
-AlbaComplexNumber<DataType>::AlbaComplexNumber() : m_realPart(0), m_imaginaryPart(0) {}
-
-template AlbaComplexNumber<float>::AlbaComplexNumber();
-template AlbaComplexNumber<double>::AlbaComplexNumber();
-
-template <typename DataType>
 AlbaComplexNumber<DataType>::AlbaComplexNumber(DataType const realPart, DataType const imaginaryPart)
     : m_realPart(realPart), m_imaginaryPart(imaginaryPart) {}
 

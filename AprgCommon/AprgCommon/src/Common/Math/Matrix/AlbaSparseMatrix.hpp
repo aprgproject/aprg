@@ -22,7 +22,7 @@ public:
     using UniqueIndexes = std::set<size_t>;
     using UnaryFunction = std::function<DataType(DataType const&)>;
     using BinaryFunction = std::function<DataType(DataType const&, DataType const&)>;
-    AlbaSparseMatrix() : m_numberOfColumns(0), m_numberOfRows(0) {}
+    AlbaSparseMatrix() = default;
 
     AlbaSparseMatrix(size_t const numberOfColumns, size_t const numberOfRows)
         : m_numberOfColumns(numberOfColumns), m_numberOfRows(numberOfRows), m_matrixData() {}
@@ -117,7 +117,8 @@ public:
     }
 
     void negate() {
-        for (auto& [index, value] : m_matrixData) {
+        // cppcheck-suppress unusedVariable
+        for (auto& [_, value] : m_matrixData) {
             value *= -1;
         }
     }
@@ -204,8 +205,8 @@ private:
         return out;
     }
 
-    size_t m_numberOfColumns;
-    size_t m_numberOfRows;
+    size_t m_numberOfColumns{};
+    size_t m_numberOfRows{};
     MatrixData m_matrixData;
 };
 
