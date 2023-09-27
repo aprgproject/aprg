@@ -36,7 +36,7 @@ TEST(CPlusPlusFinderTest, DISABLED_ActualDirectoryTest) {
 TEST(CPlusPlusFinderTest, DISABLED_ActualFileTest) {
     CPlusPlusFinder finder;
     finder.processFile(
-        R"(F:\Branches\aprg_project\aprg\aprg\AprgCommon\AprgCommon\src\Common\Debug\AlbaTypeDisplayerInCompilation.hpp)");
+        R"(F:\Branches\aprg_project\aprg\aprg\AprgStatistics\AprgStatistics\src\Statistics\DataSample.hpp)");
 }
 
 }  // namespace alba::CodeUtilities

@@ -2,6 +2,7 @@
 
 #include <CodeUtilities/CPlusPlus/CPlusPlusUtilities.hpp>
 #include <CodeUtilities/Common/CommonUtilities.hpp>
+#include <Common/Debug/AlbaDebug.hpp>
 #include <Common/PathHandler/AlbaLocalPathHandler.hpp>
 
 #include <iostream>
@@ -168,7 +169,7 @@ void CPlusPlusFinder::exitScope() { m_scopeDetails.pop_back(); }
 CPlusPlusFinder::ScopeDetail& CPlusPlusFinder::getCurrentScope() { return m_scopeDetails.back(); }
 
 void CPlusPlusFinder::findOnScopeLoop(int const startIndex, int const endIndex) {
-    findItemsToCtadFix(startIndex, endIndex);
+    // findItemsToCtadFix(startIndex, endIndex);
 }
 
 void CPlusPlusFinder::findItemsToCtadFix(int const startIndex, int const endIndex) {
