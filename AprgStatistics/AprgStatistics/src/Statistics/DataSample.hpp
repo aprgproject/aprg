@@ -29,6 +29,7 @@ public:
     DataSample operator+(DataSample const& value) const {
         return performDataTypeAndDataTypeFunction(value, std::plus<>());
     }
+
     DataSample operator-(DataSample const& value) const {
         return performDataTypeAndDataTypeFunction(value, std::minus<>());
     }
@@ -40,6 +41,7 @@ public:
     DataSample operator/(DataSample const& value) const {
         return performDataTypeAndDataTypeFunction(value, std::divides<>());
     }
+
     DataSample operator+(double const value) const { return performDataTypeAndConstantFunction(value, std::plus<>()); }
     DataSample operator-(double const value) const { return performDataTypeAndConstantFunction(value, std::minus<>()); }
 

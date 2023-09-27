@@ -79,7 +79,7 @@ TEST(ConstExamplesTest, ConstCanBeAddedOnTopUsingReferences) {
 TEST(ConstExamplesTest, MutationWithConstInPrimitiveTypesInStructsDoesNotWork) {
     struct Foo {
         int a = 0;
-        int const b = 1;    
+        int const b = 1;
     };
 
     Foo f{};

@@ -574,7 +574,7 @@ TEST(TemplateExamplesTest, TemplateIsOnlyInstantiatedWhenNeeded) {
                                                      // NOLINTNEXTLINE(clang-diagnostic-unused-variable)
     InstantiationClass<int> const variable3;         // No compiler error.
                                               // InstantiationClass<int>::noInstantiationStaticFunction(); // Compiler
-                                              // error (static_assert failure)
+    // error (static_assert failure)
     // variable3.noInstantiationFunction();  // Compiler error (static_assert failure)
 }
 

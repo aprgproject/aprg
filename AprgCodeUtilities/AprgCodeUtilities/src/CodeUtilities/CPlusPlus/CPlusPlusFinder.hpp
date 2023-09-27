@@ -16,6 +16,7 @@ public:
         ScopeType scopeType;
         std::string name;
     };
+
     CPlusPlusFinder() = default;
     void processDirectory(std::filesystem::path const& directory);
     void processFile(std::filesystem::path const& file);
@@ -33,10 +34,10 @@ private:
     void exitTopLevelScope();
     void enterScope(int const scopeHeaderStart, int const openingBraceIndex);
     void exitScope();
-    ScopeDetail& getCurrentScope();
     void findOnScopeLoop(int const startIndex, int const endIndex);
     void findItemsToCtadFix(int const startIndex, int const endIndex);
     void findTerms(Patterns const& searchPatterns);
+    ScopeDetail& getCurrentScope();
     std::filesystem::path m_currentFile;
     Terms m_terms;
     std::vector<ScopeDetail> m_scopeDetails;
