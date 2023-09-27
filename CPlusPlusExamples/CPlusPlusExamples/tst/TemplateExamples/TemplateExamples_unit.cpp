@@ -43,7 +43,7 @@ namespace ClassTemplatesWork {
 template <typename T>
 struct mylist {
     T data;
-    mylist<T>* next;
+    mylist* next;
 };
 
 // -> Class templates are not classes
@@ -572,7 +572,7 @@ TEST(TemplateExamplesTest, TemplateIsOnlyInstantiatedWhenNeeded) {
     // NOLINTNEXTLINE(clang-diagnostic-unused-variable)
     NoInstantiationClass<int>* variable2 = nullptr;  // No compiler error.
                                                      // NOLINTNEXTLINE(clang-diagnostic-unused-variable)
-    InstantiationClass<int> const variable3;  // No compiler error.
+    InstantiationClass<int> const variable3;         // No compiler error.
                                               // InstantiationClass<int>::noInstantiationStaticFunction(); // Compiler
                                               // error (static_assert failure)
     // variable3.noInstantiationFunction();  // Compiler error (static_assert failure)

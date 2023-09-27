@@ -163,7 +163,7 @@ private:
             [](Minterm const& minterm1, Minterm const& minterm2) { return minterm1 | minterm2; });
     }
 
-    friend std::ostream& operator<<(std::ostream& out, ImplicantTemplate<Minterm> const& implicant) {
+    friend std::ostream& operator<<(std::ostream& out, ImplicantTemplate const& implicant) {
         Minterms const& minterms(implicant.m_minterms);
         out << "'" << implicant.getEquivalentString() << " (";
         if (minterms.size() == 1) {

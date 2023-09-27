@@ -9,7 +9,7 @@ enum class AngleUnitType { Radians, Degrees };
 
 class AlbaAngle {
 public:
-    AlbaAngle();
+    AlbaAngle() = default;
     AlbaAngle(AngleUnitType const angleUnitType, double const angleValue);
     AlbaAngle operator+(AlbaAngle const& secondAngle) const;
     AlbaAngle operator-(AlbaAngle const& secondAngle) const;
@@ -28,7 +28,7 @@ public:
 private:
     static double calculateAngleValueInDegrees(AngleUnitType const angleInputType, double const angleValue);
     friend std::ostream& operator<<(std::ostream& out, AlbaAngle const& angle);
-    double m_angleValueInDegrees;
+    double m_angleValueInDegrees{};
 };
 
 using AlbaAngles = std::vector<AlbaAngle>;

@@ -9,7 +9,7 @@ namespace alba {
 template <typename DataType>
 class AlbaComplexNumber {
 public:
-    AlbaComplexNumber();
+    AlbaComplexNumber() = default;
     AlbaComplexNumber(DataType const realPart, DataType const imaginaryPart);
     AlbaComplexNumber operator+(AlbaComplexNumber const& second) const;
     AlbaComplexNumber operator-(AlbaComplexNumber const& second) const;
@@ -57,8 +57,8 @@ private:
         return out;
     }
 
-    DataType m_realPart;
-    DataType m_imaginaryPart;
+    DataType m_realPart{};
+    DataType m_imaginaryPart{};
 };
 
 }  // namespace alba

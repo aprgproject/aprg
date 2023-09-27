@@ -41,7 +41,7 @@ public:
     using MatrixIndexRange = AlbaValueRange<size_t>;
     // Do we have to make rows and columns as template parameter?
     // No, its better to have this on runtime because matrix can have different dimensions on applications.
-    AlbaMatrix() : m_numberOfColumns(0), m_numberOfRows(0) {}
+    AlbaMatrix() = default;
 
     AlbaMatrix(size_t const numberOfColumns, size_t const numberOfRows)
         : m_numberOfColumns(numberOfColumns),
@@ -325,8 +325,8 @@ private:
         return out;
     }
 
-    size_t m_numberOfColumns;
-    size_t m_numberOfRows;
+    size_t m_numberOfColumns{};
+    size_t m_numberOfRows{};
     MatrixData m_matrixData;
 };
 

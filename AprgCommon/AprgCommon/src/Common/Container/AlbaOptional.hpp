@@ -99,7 +99,7 @@ template <typename ContentType>
 class AlbaOptional<ContentType&> {
 public:
     // #warning Please make sure that object still exists in the life time of an optional reference object
-    AlbaOptional() : m_hasContent(false), m_contentPointer(nullptr) {}
+    AlbaOptional() = default;
     // std::addressof should be used because & might be overloaded
     explicit AlbaOptional(ContentType& content) : m_hasContent(true), m_contentPointer(std::addressof(content)) {}
     ~AlbaOptional() = default;
@@ -163,8 +163,8 @@ private:
         return out;
     }
 
-    bool m_hasContent;
-    ContentType* m_contentPointer;
+    bool m_hasContent{false};
+    ContentType* m_contentPointer{nullptr};
     // NOLINTNEXTLINE(cppcoreguidelines-avoid-non-const-global-variables)
     static ContentType m_empty;  // think of how to remove this
 };
