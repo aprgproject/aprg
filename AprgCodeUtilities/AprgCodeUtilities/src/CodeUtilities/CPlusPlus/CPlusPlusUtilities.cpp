@@ -69,7 +69,9 @@ string getFunctionSignature(string const& functionText) {
         {M("volatile")},
         {M(TermType::Attribute)},
         {M("friend")},
-        {M(TermType::Identifier), M("::")}};
+        {M(TermType::Identifier), M("::")},
+        {M("="), M("default")},
+        {M("="), M("delete")}};
     replaceAllForwards(terms, removePatterns, {});
 
     replaceAllForwards(

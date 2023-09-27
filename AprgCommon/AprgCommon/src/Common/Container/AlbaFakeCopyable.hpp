@@ -22,7 +22,7 @@ public:
     ObjectType& getObjectReference() { return m_object; }
 
 private:
-    friend std::ostream& operator<<(std::ostream& out, AlbaFakeCopyable<ObjectType> const& object) {
+    friend std::ostream& operator<<(std::ostream& out, AlbaFakeCopyable const& object) {
         out << object.m_object;
         return out;
     }

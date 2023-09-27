@@ -38,5 +38,6 @@ bool isWhiteSpace(Term const& term);
 bool isCommentOrWhiteSpace(Term const& term);
 bool isWhiteSpaceWithNewLine(Term const& term);
 bool hasNewLine(Term const& term);
+bool startsWithLetterUnderscore(std::string const& content);
 
 }  // namespace alba::CodeUtilities

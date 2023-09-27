@@ -11,21 +11,21 @@ class AlbaComplexNumber {
 public:
     AlbaComplexNumber();
     AlbaComplexNumber(DataType const realPart, DataType const imaginaryPart);
-    AlbaComplexNumber<DataType> operator+(AlbaComplexNumber<DataType> const& second) const;
-    AlbaComplexNumber<DataType> operator-(AlbaComplexNumber<DataType> const& second) const;
-    AlbaComplexNumber<DataType> operator+() const;
-    AlbaComplexNumber<DataType> operator-() const;
-    AlbaComplexNumber<DataType> operator*(AlbaComplexNumber<DataType> const& second) const;
-    AlbaComplexNumber<DataType> operator/(AlbaComplexNumber<DataType> const& second) const;
-    AlbaComplexNumber<DataType> operator^(DataType const exponent) const;
+    AlbaComplexNumber operator+(AlbaComplexNumber const& second) const;
+    AlbaComplexNumber operator-(AlbaComplexNumber const& second) const;
+    AlbaComplexNumber operator+() const;
+    AlbaComplexNumber operator-() const;
+    AlbaComplexNumber operator*(AlbaComplexNumber const& second) const;
+    AlbaComplexNumber operator/(AlbaComplexNumber const& second) const;
+    AlbaComplexNumber operator^(DataType const exponent) const;
     // rule of zero
     bool operator==(AlbaComplexNumber const& second) const;
-    AlbaComplexNumber<DataType>& operator+=(AlbaComplexNumber<DataType> const& second);
-    AlbaComplexNumber<DataType>& operator-=(AlbaComplexNumber<DataType> const& second);
-    AlbaComplexNumber<DataType>& operator*=(AlbaComplexNumber<DataType> const& second);
-    AlbaComplexNumber<DataType>& operator/=(AlbaComplexNumber<DataType> const& second);
-    [[nodiscard]] AlbaComplexNumber<DataType> getConjugate() const;
-    [[nodiscard]] AlbaComplexNumber<DataType> getNthRoot(size_t const rootIndex, size_t const rootDegree) const;
+    AlbaComplexNumber& operator+=(AlbaComplexNumber const& second);
+    AlbaComplexNumber& operator-=(AlbaComplexNumber const& second);
+    AlbaComplexNumber& operator*=(AlbaComplexNumber const& second);
+    AlbaComplexNumber& operator/=(AlbaComplexNumber const& second);
+    [[nodiscard]] AlbaComplexNumber getConjugate() const;
+    [[nodiscard]] AlbaComplexNumber getNthRoot(size_t const rootIndex, size_t const rootDegree) const;
     [[nodiscard]] DataType getRealPart() const;
     [[nodiscard]] DataType getImaginaryPart() const;
     [[nodiscard]] DataType getModulus() const;
@@ -52,7 +52,7 @@ private:
         DataType const firstRealPart, DataType const firstImaginaryPart, DataType const secondRealPart,
         DataType const secondImaginaryPart) const;
 
-    friend std::ostream& operator<<(std::ostream& out, AlbaComplexNumber<DataType> const& complexNumber) {
+    friend std::ostream& operator<<(std::ostream& out, AlbaComplexNumber const& complexNumber) {
         out << "(" << complexNumber.m_realPart << " + " << complexNumber.m_imaginaryPart << "i)";
         return out;
     }

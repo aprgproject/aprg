@@ -89,7 +89,7 @@ public:
     }
 
 private:
-    friend std::ostream& operator<<(std::ostream& out, AlbaXY<CoordinateType> const& xyValues) {
+    friend std::ostream& operator<<(std::ostream& out, AlbaXY const& xyValues) {
         out << "(" << xyValues.m_x << "," << xyValues.m_y << ")";
         return out;
     }

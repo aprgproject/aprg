@@ -17,7 +17,6 @@ namespace alba {
 template <typename DataType, size_t SIZE>
 class AlbaMathVector {
 public:
-    using AlbaMathVectorType = AlbaMathVector<DataType, SIZE>;
     using ValuesInArray = std::array<DataType, SIZE>;
     AlbaMathVector() : m_values{} {}
     explicit AlbaMathVector(ValuesInArray const& values) : m_values(values) {}
@@ -27,8 +26,8 @@ public:
         std::copy(begin(values), begin(values) + limit, begin(m_values));
     }
 
-    AlbaMathVectorType operator+(AlbaMathVectorType const& second) const {
-        AlbaMathVectorType result;
+    AlbaMathVector operator+(AlbaMathVector const& second) const {
+        AlbaMathVector result;
         ValuesInArray const& firstValues(m_values);
         ValuesInArray const& secondValues(second.m_values);
         ValuesInArray& resultValues(result.m_values);
@@ -37,8 +36,8 @@ public:
         return result;
     }
 
-    AlbaMathVectorType operator-(AlbaMathVectorType const& second) const {
-        AlbaMathVectorType result;
+    AlbaMathVector operator-(AlbaMathVector const& second) const {
+        AlbaMathVector result;
         ValuesInArray const& firstValues(m_values);
         ValuesInArray const& secondValues(second.m_values);
         ValuesInArray& resultValues(result.m_values);
@@ -47,17 +46,17 @@ public:
         return result;
     }
 
-    AlbaMathVectorType operator+() const { return *this; }
+    AlbaMathVector operator+() const { return *this; }
 
-    AlbaMathVectorType operator-() const {
-        AlbaMathVectorType result;
+    AlbaMathVector operator-() const {
+        AlbaMathVector result;
         ValuesInArray& resultValues(result.m_values);
         std::transform(begin(m_values), end(m_values), begin(resultValues), std::negate<DataType>());
         return result;
     }
 
-    AlbaMathVectorType operator*(DataType const& scalarValue) const {
-        AlbaMathVectorType result;
+    AlbaMathVector operator*(DataType const& scalarValue) const {
+        AlbaMathVector result;
         ValuesInArray& resultValues(result.m_values);
         std::transform(begin(m_values), end(m_values), begin(resultValues), [&](DataType const value) {
             return value * scalarValue;
@@ -65,8 +64,8 @@ public:
         return result;
     }
 
-    AlbaMathVectorType operator/(DataType const& scalarValue) const {
-        AlbaMathVectorType result;
+    AlbaMathVector operator/(DataType const& scalarValue) const {
+        AlbaMathVector result;
         ValuesInArray& resultValues(result.m_values);
         std::transform(begin(m_values), end(m_values), begin(resultValues), [&](DataType const value) {
             return value / scalarValue;
@@ -75,18 +74,18 @@ public:
     }
 
     // rule of zero
-    bool operator==(AlbaMathVectorType const& second) const {
+    bool operator==(AlbaMathVector const& second) const {
         return std::equal(
             m_values.cbegin(), m_values.cend(), second.m_values.cbegin(),
             [](DataType const first, DataType const second) { return isEqualForMathVectorDataType(first, second); });
     }
 
-    bool operator!=(AlbaMathVectorType const& second) const {
-        AlbaMathVectorType const& first(*this);
+    bool operator!=(AlbaMathVector const& second) const {
+        AlbaMathVector const& first(*this);
         return !(first == second);
     }
 
-    bool operator<(AlbaMathVectorType const& second) const {
+    bool operator<(AlbaMathVector const& second) const {
         // this is added so it can be used in map
         bool result(false);
         auto [firstMismatchIt, secondMismatchIt] =
@@ -97,25 +96,25 @@ public:
         return result;
     }
 
-    AlbaMathVectorType& operator+=(AlbaMathVectorType const& second) {
+    AlbaMathVector& operator+=(AlbaMathVector const& second) {
         ValuesInArray const& secondValues(second.m_values);
         std::transform(begin(m_values), end(m_values), begin(secondValues), begin(m_values), std::plus<DataType>());
         return *this;
     }
 
-    AlbaMathVectorType& operator-=(AlbaMathVectorType const& second) {
+    AlbaMathVector& operator-=(AlbaMathVector const& second) {
         ValuesInArray const& secondValues(second.m_values);
         std::transform(begin(m_values), end(m_values), begin(secondValues), begin(m_values), std::minus<DataType>());
         return *this;
     }
 
-    AlbaMathVectorType& operator*=(DataType const& scalarValue) {
+    AlbaMathVector& operator*=(DataType const& scalarValue) {
         std::transform(
             begin(m_values), end(m_values), begin(m_values), [&](DataType const value) { return value * scalarValue; });
         return *this;
     }
 
-    AlbaMathVectorType& operator/=(DataType const& scalarValue) {
+    AlbaMathVector& operator/=(DataType const& scalarValue) {
         std::transform(
             begin(m_values), end(m_values), begin(m_values), [&](DataType const value) { return value / scalarValue; });
         return *this;
@@ -149,7 +148,7 @@ public:
     ValuesInArray& getValuesReference() { return m_values; }
 
 private:
-    friend std::ostream& operator<<(std::ostream& out, AlbaMathVector<DataType, SIZE> const& mathVector) {
+    friend std::ostream& operator<<(std::ostream& out, AlbaMathVector const& mathVector) {
         ValuesInArray const& values(mathVector.m_values);
         if (!values.empty()) {
             out << "{" << values.front();

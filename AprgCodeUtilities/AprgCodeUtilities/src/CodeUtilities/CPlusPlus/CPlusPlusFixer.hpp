@@ -15,6 +15,7 @@ public:
         int openingBraceIndex;
         int scopeEnd;
         ScopeType scopeType;
+        std::string name;
     };
 
     CPlusPlusFixer() = default;
@@ -25,7 +26,7 @@ private:
     [[nodiscard]] ScopeDetail constructScopeDetails(int const scopeHeaderStart, int const openingBraceIndex) const;
     [[nodiscard]] stringHelper::strings getPrintItems(int& printfEnd, int const printStringIndex) const;
     void fixTerms();
-    void fixRegardlessWithScopes();
+    void fixRegardlessOfScope();
     void fixBasedOnScopes();
     void combinePrimitiveTypes();
     void fixPostFixIncrementDecrement();
@@ -58,6 +59,7 @@ private:
     void exitTopLevelScope();
     void enterScope(int const scopeHeaderStart, int const openingBraceIndex);
     void exitScope();
+    ScopeDetail& getCurrentScope();
     void fixOnScopeLoop(int const startIndex, int const endIndex);
     void fixConstexprToInlineConstExpr(int const startIndex, int const endIndex);
     [[nodiscard]] static std::string getCorrectedGTestName(std::string const& testName);

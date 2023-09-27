@@ -64,6 +64,7 @@ private:
     void exitTopLevelScope();
     void enterScope(int const scopeHeaderStart, int const openingBraceIndex);
     void exitScope(int& nextIndex, int const closingBraceIndex, int const endIndex);
+    ScopeDetail& getCurrentScope();
     void addItemIfNeeded(int const startIndex, int const endIndex);
     [[nodiscard]] static bool shouldReorganizeInThisScope(ScopeDetail const& scope);
     [[nodiscard]] static bool shouldConnectToPreviousItem(Terms const& scopeHeaderTerms);
