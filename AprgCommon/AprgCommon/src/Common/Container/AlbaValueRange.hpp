@@ -141,7 +141,7 @@ private:
         return terminationCondition;
     }
 
-    friend std::ostream& operator<<(std::ostream& out, AlbaValueRange<DataType> const& valueRange) {
+    friend std::ostream& operator<<(std::ostream& out, AlbaValueRange const& valueRange) {
         out << "[" << valueRange.m_startValue << " <- " << valueRange.getInterval() << " -> " << valueRange.m_endValue
             << "]";
         return out;

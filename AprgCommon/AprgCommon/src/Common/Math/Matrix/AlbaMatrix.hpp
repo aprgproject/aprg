@@ -310,7 +310,7 @@ private:
         }
     }
 
-    friend std::ostream& operator<<(std::ostream& out, AlbaMatrix<DataType> const& matrix) {
+    friend std::ostream& operator<<(std::ostream& out, AlbaMatrix const& matrix) {
         DisplayTable table;
         table.setBorders("-", "|");
         for (size_t yPosition = 0; yPosition < matrix.m_numberOfRows; ++yPosition) {

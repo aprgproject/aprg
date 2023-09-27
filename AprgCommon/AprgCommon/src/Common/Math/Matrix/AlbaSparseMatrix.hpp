@@ -190,7 +190,7 @@ private:
         return getMatrixIndex(index / m_numberOfColumns, index % m_numberOfColumns, m_numberOfRows);
     }
 
-    friend std::ostream& operator<<(std::ostream& out, AlbaSparseMatrix<DataType> const& matrix) {
+    friend std::ostream& operator<<(std::ostream& out, AlbaSparseMatrix const& matrix) {
         DisplayTable table;
         table.setBorders("-", "|");
         for (size_t yPosition = 0; yPosition < matrix.m_numberOfRows; ++yPosition) {
