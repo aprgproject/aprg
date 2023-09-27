@@ -27,7 +27,7 @@
             }
         },
         {
-            "name": "Run locally",
+            "name": "Run Locally",
             "type": "python",
             "request": "launch",
             "program": "${file}",

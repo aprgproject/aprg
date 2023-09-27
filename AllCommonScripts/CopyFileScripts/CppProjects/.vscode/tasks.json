@@ -162,7 +162,7 @@
 			"dependsOn": "Install In WSL"
 		},
 		{
-			"label": "Run locally",
+			"label": "Run Locally",
 			"type": "shell",
 			"command": "${command:cmake.launchTargetPath}",
 			"args": [],

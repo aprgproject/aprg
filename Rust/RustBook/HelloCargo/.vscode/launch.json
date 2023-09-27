@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Rust In WSL",
+            "type": "node",
+            "request": "launch",
+            "preLaunchTask": "Build Rust In WSL",
+            "program": "./${fileBasenameNoExtension}.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "runtimeExecutable": "wsl",
+            "runtimeArgs": [],
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bready to accept connections\\b",
+                "uriFormat": "http://localhost:8080"
+            },
+            "env": {}
+        },
+        {
+            "name": "Run Locally",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "preLaunchTask": "Build Locally",
+            "program": "${workspaceFolder}/${fileBasenameNoExtension}.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bready to accept connections\\b",
+                "uriFormat": "http://localhost:8080"
+            }
+        }
+    ]
+}

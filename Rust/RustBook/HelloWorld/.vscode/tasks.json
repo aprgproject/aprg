@@ -1,0 +1,49 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Rust In WSL",
+			"type": "shell",
+			"command": "wsl",
+			"args": [
+				"source",
+				"~/.bash_profile",
+				";",
+				"rustc",
+				"${relativeFile}"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": "$rustc-watch",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "Build Locally",
+			"type": "shell",
+			"command": "rustc",
+			"args": [
+				"${relativeFile}"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": "$rustc-watch",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		}
+	]
+}
