@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-26T06:30:34
+StaticAnalysisJobIdentifier: [41]
+2023-09-27T05:29:51
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Stream\AlbaStreamBitWriter.cpp:13:22: warning: an exception may be thrown in function '~AlbaStreamBitWriter' which should not throw exceptions [bugprone-exception-escape]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Stream\AlbaStreamBitWriter.cpp:68:27: warning: an exception may be thrown in function 'transferAllToStream' which should not throw exceptions [bugprone-exception-escape]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:40:40: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
@@ -52,8 +52,6 @@ D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAu
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:288:108: warning: use of a signed integer operand with a unary bitwise operator [hicpp-signed-bitwise]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:288:108: warning: 31 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:296:17: warning: consider replacing 'unsigned long long' with 'uint64' [google-runtime-int]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:19:1: warning: anonymous namespace not terminated with a closing comment [llvm-namespace-comment]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:17:11: note: anonymous namespace starts here
 D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:33:41: warning: 63 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:99:15: warning: 2000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:119:26: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
@@ -70,5 +68,4 @@ D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:132:3
 D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:134:26: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:134:26: warning: 0x32 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:135:36: warning: 1800 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-D:\a\aprg\aprg\ZZZ_OldProjects\FesterRobot\FesterRobot\src\FesterRobot.cpp:162:9: warning: function is not thread safe [concurrency-mt-unsafe]
 DONE!

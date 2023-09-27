@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-26T07:00:42
+StaticAnalysisJobIdentifier: [41]
+2023-09-27T05:55:26
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Dsp.cpp:38:50: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Dsp.cpp:38:73: warning: 0xFF00 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/HardwareConfiguration.cpp:31:12: warning: 0x1200 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
@@ -190,7 +190,6 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1022:17: note: +4, including nesting penalty of 3, nesting level increased to 4
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1028:15: note: +1, nesting level increased to 3
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1032:9: note: +2, including nesting penalty of 1, nesting level increased to 2
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Lrm.cpp:1183:29: style: Consider using std::transform algorithm instead of a raw loop. [useStlAlgorithm]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/HardwareConfiguration_unit.cpp:9:1: warning: function 'TestBody' has cognitive complexity of 36 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/HardwareConfiguration_unit.cpp:18:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/HardwareConfiguration_unit.cpp:18:5: note: +2, including nesting penalty of 1, nesting level increased to 2
@@ -384,6 +383,8 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/HardwareConfiguration_unit.cpp:103:45: warning: 0x1380 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/HardwareConfiguration_unit.cpp:104:45: warning: 0x1200 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/HardwareConfiguration_unit.cpp:105:45: warning: 0x1300 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/LrmAllocationSimulator_unit.cpp:8:78: warning: unused variable 'entity' [clang-diagnostic-unused-variable]
+/home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/LrmAllocationSimulator_unit.cpp:8:78: warning: unused variable 'entity' [-Wunused-variable]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/LrmMarkAlgorithmWithoutHibernationTest.cpp:31:24: warning: 0x1230 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/LrmMarkAlgorithmWithoutHibernationTest.cpp:32:24: warning: 0x1250 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/tst/LrmMarkAlgorithmWithoutHibernationTest.cpp:33:24: warning: 0x1270 is a magic number; consider replacing it with a named constant [readability-magic-numbers]

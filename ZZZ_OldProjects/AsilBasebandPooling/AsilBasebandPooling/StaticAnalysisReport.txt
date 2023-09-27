@@ -1,6 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-26T05:52:03
-/home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/src/AsilBasebandPooling.cpp:65:16: style: Consider using std::accumulate algorithm instead of a raw loop. [useStlAlgorithm]
+StaticAnalysisJobIdentifier: [41]
+2023-09-27T04:50:40
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:24:14: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:24:28: warning: 0xFF00 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/AsilBasebandPooling/AsilBasebandPooling/tst/AsilBasebandPooling_unit.cpp:24:40: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
