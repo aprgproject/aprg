@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-26T04:25:55
+StaticAnalysisJobIdentifier: [41]
+2023-09-27T03:28:13
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ClassAdapter_unit.cpp:10:29: warning: variable name 't' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Adapter/ObjectAdapter_unit.cpp:10:29: warning: variable name 't' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Composite/Composite.hpp:64:29: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
@@ -16,7 +16,7 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:78:46: warning: function 'createIterator' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Iterator/Iterator.hpp:78:46: note: make as 'inline'
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/tst/Iterator/Iterator_unit.cpp:13:10: warning: variable name 'it' is too short, expected at least 3 characters [readability-identifier-length]
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:19:45: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
+/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:14:45: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:31:53: warning: parameter name 'id' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:71:25: warning: function 'send' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Mediator/Mediator.hpp:71:25: note: make as 'inline'
@@ -25,7 +25,6 @@ StaticAnalysisJobIdentifier: [40]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:51:37: warning: parameter name 's' is too short, expected at least 3 characters [readability-identifier-length]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:80:24: warning: function 'update' defined in a header file; function definitions in header files can lead to ODR violations [misc-definitions-in-headers]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Observer/Observer.hpp:80:24: note: make as 'inline'
-/home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:11:10: warning: method 'tellSomething' can be made const [readability-make-member-function-const]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:36:39: warning: variable 'm_instancePointer' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:41:39: warning: variable 'm_instancePointer' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/DesignPatterns/DesignPatterns/src/Singleton/Singleton.hpp:41:39: warning: variable 'm_instancePointer' defined in a header file; variable definitions in header files can lead to ODR violations [misc-definitions-in-headers]
