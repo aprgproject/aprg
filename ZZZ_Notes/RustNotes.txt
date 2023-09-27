@@ -2,3 +2,600 @@
 -> Installation:
 $ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
+
+-> Hello, World!
+-> Anatomy of a Rust program:
+---> The main function is special: it is always the first code that runs in every executable Rust program.
+---> The body of the main function holds the code that you want to run.
+---> Rust style is to indent with four spaces, not a tab.
+---> println! calls a Rust macro to print text to the screen.
+---> Most lines of Rust code end with a semicolon (;).
+
+-> Compiling and running are separate steps:
+---> You must compile a Rust program before you can run it.
+---> To compile a Rust program, you use the rustc command.
+---> To run a Rust program, you run the executable file that was created by the rustc command.
+
+-> Rust is an ahead-of-time compiled language:
+---> This means that you can compile a Rust program and give the executable to someone else, and they can run it even without having Rust installed.
+---> Other languages, such as Ruby, Python, and JavaScript, are interpreted languages. This means that you do not need to compile these languages before you can run them. 
+---> However, you need to have a Ruby, Python, or JavaScript interpreter installed on your computer in order to run these languages.
+
+
+
+-> Hello, Cargo!
+
+-> New project in cargo:
+Cargo is Rust's build system and package manager. It handles a lot of tasks for you, such as building your code, downloading the libraries your code depends on, and building those libraries.
+To create a new project with Cargo, run the following command:
+---> cargo new project_name
+
+-> Building in cargo:
+This will create a new directory called project_name with a Cargo.toml file and a src directory. 
+The Cargo.toml file contains configuration information for Cargo, such as the name of your project, the version, and the list of dependencies. 
+The src directory contains your source code files.
+To build your project with Cargo, run the following command:
+---> cargo build
+
+-> Running in cargo:
+This will compile your code and create an executable file in the target/debug directory.
+To run your project, run the following command:
+---> cargo run
+
+-> Other  in cargo:
+This will compile your code and run the executable file.
+Cargo also provides a number of other commands, such as cargo check, cargo test, and cargo publish. For more information, please see the Cargo documentation.
+
+-> Advantages of using Cargo:
+---> Cargo handles a lot of tasks for you, such as building your code, downloading dependencies, and building dependencies.
+---> Cargo is the standard build system and package manager for Rust, so using it will make your project easier to collaborate on with other Rust developers.
+---> Cargo is portable, so the same commands work on all operating systems.
+
+-> When to use Cargo:
+You should use Cargo for all of your Rust projects, even simple ones. Cargo will make your life easier as your projects become more complex and you start to add dependencies.
+
+
+
+-> Guessing game:
+This provided code involves creating a simple guessing game program in Rust. Here's a summarized breakdown of the code and its functionality:
+
+use std::io;
+fn main() {
+    println!("Guess the number!");
+
+    println!("Please input your guess.");
+
+    let mut guess = String::new();
+
+    io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to read line");
+
+    println!("You guessed: {guess}");
+}
+
+-> Importing Libraries
+---> use std::io; - Imports the input/output library from the standard library (std).
+-> Main Function
+---> fn main() - Declares the main function, the entry point of the program.
+-> Printing Messages
+---> println! - Prints messages to the console, prompting the user to guess a number.
+-> Storing User Input
+---> let mut guess = String::new(); - Creates a mutable variable guess to store user input.
+-> Reading User Input
+---> io::stdin().read_line(&mut guess) - Reads user input from the console and stores it in the guess variable.
+-> Handling Potential Failure
+---> .expect("Failed to read line"); - Handles potential errors in reading input and displays a message in case of failure.
+-> Displaying the Guess
+---> println!("You guessed: {guess}"); - Displays the user's guess.
+-> Running the Program
+---> cargo run - Compiles and runs the program, prompting the user to input a guess.
+
+The program reads a user's guess from the console, displays it, and is ready to proceed with further functionality related to the guessing game.
+To test the program, run it using cargo run and provide a guess when prompted.
+
+
+
+-> Generating a Secret Number
+To generate a secret number to guess, we need to use the rand crate. We can do this by adding the following line to our Cargo.toml file:
+
+---> [dependencies]
+---> rand = "0.8.5"
+
+Then, we need to add the following code to our src/main.rs file:
+---> use std::io;
+---> use rand::Rng;
+---> 
+---> fn main() {
+---> println!("Guess the number!");
+---> 
+---> let secret_number = rand::thread_rng().gen_range(1..=100);
+---> 
+---> // println!("The secret number is: {secret_number}"); // This line is useful for testing, but we'll delete it from the final version.
+---> 
+---> println!("Please input your guess.");
+---> 
+---> let mut guess = String::new();
+---> 
+---> io::stdin()
+-----> .read_line(&mut guess)
+-----> .expect("Failed to read line");
+---> 
+---> println!("You guessed: {guess}");
+---> 
+---> }
+
+The rand::thread_rng() function gives us a random number generator that is local to the current thread of execution and is seeded by the operating system. 
+The gen_range() method on the random number generator generates a random number in the specified range. 
+In this case, we're specifying a range of 1 to 100, inclusive.
+
+We can test the code by running the following command:
+cargo run
+This will compile and run the program. The program will print a random number between 1 and 100 to the console.
+We can then enter a guess, and the program will tell us if our guess is too high or too low.
+
+
+-> Comparing the Guess to the Secret Number
+
+use rand::Rng;
+use std::cmp::Ordering;
+use std::io;
+
+fn main() {
+    println!("Guess the number!");
+
+    let secret_number = rand::thread_rng().gen_range(1..=100);
+
+    // println!("The secret number is: {secret_number}"); // This line is useful for testing, but we'll delete it from the final version.
+
+    println!("Please input your guess.");
+
+    let mut guess = String::new();
+
+    io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to read line");
+
+    let guess: u32 = guess.trim().parse().expect("Please type a number!");
+
+    println!("You guessed: {guess}");
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
+}
+
+In this section, we learn how to compare the user's guess to the secret number and give feedback to the user. We do this by adding a match expression to the end of the main function. 
+The match expression checks the value of the guess variable and prints a different message depending on whether the guess is too low, too high, or equal to the secret number.
+
+However, the code won't compile yet because the guess variable is a String type and the secret_number variable is a number type. 
+To fix this, we use the parse method to convert the guess variable to a number type. We also need to tell Rust the exact number type we want by using the let guess: u32 syntax.
+This tells Rust to create a new guess variable of type u32 and bind it to the expression guess.trim().parse(). 
+The trim method removes any whitespace from the beginning and end of the guess string, and the parse method converts the string to a u32 number.
+
+Since the parse method can fail, we use the expect method to handle the result. 
+If the parse method fails, the expect method will crash the program and print the message we give it. 
+Otherwise, the expect method will return the number from the Ok value of the Result type.
+
+Once we have converted the guess variable to a number type, we can compare it to the secret_number variable in the match expression. 
+If the guess is too low, the program will print "Too small!". If the guess is too high, the program will print "Too big!".
+ If the guess is equal to the secret number, the program will print "You win!".
+
+We can test the code by running the following command:
+cargo run
+The program will prompt us to guess a number. 
+If we guess the number correctly, the program will print "You win!". 
+Otherwise, the program will tell us if our guess is too low or too high.
+
+In the next step, we will add a loop to the program so that the user can make multiple guesses. 
+This will allow the user to try to guess the secret number until they either guess correctly or run out of guesses.
+
+
+
+-> Allowing Multiple Guesses with Looping
+
+use rand::Rng;
+use std::cmp::Ordering;
+use std::io;
+
+fn main() {
+    println!("Guess the number!");
+
+    let secret_number = rand::thread_rng().gen_range(1..=100);
+
+    loop {
+        println!("Please input your guess.");
+
+        let mut guess = String::new();
+
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to read line");
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        println!("You guessed: {guess}");
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
+        }
+    }
+}
+
+We add a loop to the program so that the user can make multiple guesses until they either guess correctly or run out of guesses. 
+We do this by adding the loop keyword to the beginning of the guess input prompt and moving everything from the guess input prompt onward into the loop.
+
+However, this introduces a new problem: the user cannot quit. 
+To fix this, we add a break statement after the println!("You win!"); statement in the match expression. 
+This will cause the program to exit the loop and terminate when the user guesses the secret number correctly.
+
+We also want to modify the program so that it does not crash if the user enters a non-number guess. 
+To do this, we change the line where we convert the guess variable from a String to a u32 to use a match expression instead of an expect call.
+
+If parse is able to successfully turn the string into a number, it will return an Ok value that contains the resultant number. 
+The program will then match the Ok value and assign the number to the guess variable.
+
+If parse is not able to turn the string into a number, it will return an Err value that contains more information about the error. 
+The program will then match the Err value and execute the second arm of the match expression, which is to continue to the next iteration of the loop and ask for another guess.
+
+With these changes, the program is now complete and ready to play!
+
+
+
+
+-> Common Programming Concepts
+The next chapter covers common programming concepts that are used in almost every programming language, including Rust. 
+These concepts are the foundation of all Rust programs, and learning them early will give you a strong start.
+
+The specific concepts covered in this chapter are:
+---> Variables: Variables are used to store data in memory.
+---> Basic types: Rust has a number of basic types, such as integers, floats, and strings.
+---> Functions: Functions are used to group code together and perform specific tasks.
+---> Comments: Comments are used to add notes and explanations to code.
+---> Control flow: Control flow statements allow you to control the order in which code is executed.
+
+Once you have learned these concepts, you will be well on your way to writing Rust programs.
+
+
+
+-> Variables and Mutability:
+Variables, Constants, and Shadowing in Rust
+
+---> Variables in Rust are immutable by default, promoting safe and concurrent programming.
+---> Mutable variables can be defined using let mut.
+---> Immutability prevents unintended changes to values, enhancing code reliability and maintainability.
+
+-> Variables
+Variables are used to store data in memory. 
+They can be declared using the let keyword, and their values can be changed at any time. 
+By default, variables are immutable, which means that their values cannot be changed once they are initialized.
+To make a variable mutable, you can use the mut keyword before the variable name.
+
+-> Benefits of immutability
+Immutability offers a number of benefits, including:
+---> Safety: Immutable variables cannot be accidentally changed, which can help to prevent bugs.
+---> Concurrency: Immutable variables are easier to share between multiple threads, making them ideal for concurrent programming.
+---> Reasonability: Immutable variables make code easier to reason about, as you can be sure that their values will not change unexpectedly.
+
+-> When to use mutable variables
+There are a few cases where it is necessary to use mutable variables, such as:
+---> When you need to update the value of a variable multiple times.
+---> When you need to pass a variable to a function that expects a mutable reference.
+---> When you need to write to a mutable data structure, such as a vector or hash table.
+
+-> Constants
+---> Constants are always immutable and declared using the const keyword.
+---> They require type annotations and can be defined in any scope.
+---> Constants are useful for conveying meaningful values throughout the program.
+Constants are values that are bound to a name and cannot be changed. 
+They are declared using the const keyword instead of the let keyword. 
+Constants must be initialized with a constant expression, which is a value that can be evaluated at compile time.
+
+-> Benefits of using constants
+Using constants offers a number of benefits, including:
+---> Readability: Constants make code more readable and easier to understand.
+---> Maintainability: Constants can help to make code more maintainable, as they can be used to centralize the definition of important values.
+---> Performance: In some cases, the compiler can optimize code that uses constants.
+
+-> When to use constants
+Constants should be used for any value that is unlikely to change, such as the maximum number of players in a game or the speed of light.
+
+-> Shadowing
+---> Shadowing allows reusing a variable name while changing its type or value.
+---> Shadowed variables are effectively new variables that overshadow the previous ones.
+---> It is different from mutability and aids in maintaining code clarity.
+Shadowing is when you declare a new variable with the same name as an existing variable. 
+The new variable will shadow the old variable, meaning that it will be the one that is used when the variable name is referenced. 
+Shadowing can be useful for temporarily changing the value of a variable.
+
+-> Benefits of using shadowing
+Shadowing can be useful in a number of cases, such as:
+---> To temporarily change the value of a variable without affecting other parts of your code.
+---> To avoid name collisions when using the same variable name in multiple scopes.
+---> To make code more concise and readable.
+
+-> When to use shadowing
+---> Shadowing should be used carefully, as it can make code more difficult to read and understand. 
+---> It should only be used when necessary, and the reason for shadowing the variable should be clear.
+
+Examples
+Here are some examples of variables, constants, and shadowing in Rust:
+Rust
+
+// Variable
+let x = 5;
+
+// Constant
+const PI: f32 = 3.14159;
+
+// Shadowing
+fn main() {
+    let x = 10;
+
+    // Shadow the variable x.
+    let x = x + 1;
+
+    println!("The value of x is: {}", x);
+}
+
+Output:
+
+The value of x is: 11
+
+In this example, the variable x is first initialized to the value 10. 
+Then, it is shadowed by the new variable x, which is initialized to the value 10 + 1, or 11. 
+When the println!() statement is executed, it prints the value of the shadowed variable x, which is 11.
+
+Conclusion
+Variables, constants, and shadowing are all important concepts in Rust. 
+Variables can be used to store data in memory, constants can be used to define values that cannot be changed, and shadowing can be used to temporarily change the value of a variable. 
+It is important to understand how to use these concepts correctly in order to write safe, maintainable, and efficient Rust code.
+
+
+
+
+-> Data Types
+
+Every value in Rust has a data type, which tells Rust what kind of data is being specified so it knows how to work with that data. 
+Rust is a statically typed language, which means that the types of all variables must be known at compile time. 
+This helps Rust to prevent errors and make code more efficient.
+
+Rust has two main categories of data types: scalar and compound. 
+Scalar types represent a single value, such as an integer, floating-point number, Boolean value, or character. 
+Compound types represent multiple values, such as arrays, vectors, and structs.
+
+-> Scalar Types
+
+Rust has four primary scalar types:
+
+---> Integers: Integers are numbers without a fractional component. 
+Rust has a variety of integer types, such as i8, u16, i32, and u64. The size of an integer type determines how large of a range of numbers it can represent. 
+For example, the i8 type can represent integers from -128 to 127, inclusive.
+
+Length	Signed	Unsigned
+8-bit	i8	u8
+16-bit	i16	u16
+32-bit	i32	u32
+64-bit	i64	u64
+128-bit	i128	u128
+arch	isize	usize
+
+Number literals	Example
+Decimal	98_222
+Hex	0xff
+Octal	0o77
+Binary	0b1111_0000
+Byte (u8 only)	b'A'
+
+---> Floating-point numbers: Floating-point numbers are numbers with decimal points. 
+Rust has two floating-point types: f32 and f64. The f32 type is a single-precision float, and f64 has double precision. 
+Single-precision floats are less accurate than double-precision floats, but they are also faster.
+
+fn main() {
+    let x = 2.0; // f64
+    let y: f32 = 3.0; // f32
+}
+
+---> Booleans: Booleans can have two values: true or false. 
+Boolean values are used in conditionals, such as if statements and loops.
+
+---> Characters: Characters represent a single Unicode Scalar Value, which is a code point in the Unicode standard. 
+Unicode Scalar Values range from U+0000 to U+D7FF and U+E000 to U+10FFFF inclusive. 
+This means that Rust can represent a wide range of characters, including letters, numbers, symbols, and emoji.
+
+-> Integer Overflow
+
+Integer overflow occurs when an integer operation results in a value that is outside of the range of values that the integer type can represent. 
+This can cause the program to panic or produce unexpected results.
+
+To avoid integer overflow, it is important to choose the correct integer type for your needs. 
+For example, if you need to store a large number, you should use a 64-bit integer type, such as u64.
+
+You can also use the standard library's checked_* methods to check for integer overflow and handle it gracefully. 
+For example, the checked_add() method returns None if the addition operation results in overflow.
+
+-> Floating-Point Operations
+
+Rust supports the basic mathematical operations for floating-point numbers: addition, subtraction, multiplication, division, and remainder. 
+However, it is important to note that floating-point operations are not always precise. 
+This is because floating-point numbers are represented in a binary format, and there is a limited number of bits that can be used to represent them.
+
+To avoid unexpected results, it is important to be aware of the limitations of floating-point operations. 
+For example, you should avoid comparing floating-point numbers for equality using the == operator. 
+Instead, you should use a tolerance value to account for the possibility of rounding errors.
+
+fn main() {
+    // addition
+    let sum = 5 + 10;
+
+    // subtraction
+    let difference = 95.5 - 4.3;
+
+    // multiplication
+    let product = 4 * 30;
+
+    // division
+    let quotient = 56.7 / 32.2;
+    let truncated = -5 / 3; // Results in -1
+
+    // remainder
+    let remainder = 43 % 5;
+}
+
+-> The Boolean Type
+
+Boolean values are used in conditionals, such as if statements and loops.
+fn main() {
+    let t = true;
+    let f: bool = false; // with explicit type annotation
+}
+
+The loop will continue to execute until the value of i is equal to 10.
+
+-> The Character Type
+
+Character values are represented using the char type. 
+Character literals are specified with single quotes, as opposed to string literals, which use double quotes.
+fn main() {
+    let c = 'z';
+    let z: char = 'ℤ'; // with explicit type annotation
+    let heart_eyed_cat = '😻';
+}
+
+You can also use character values in strings. 
+For example, the following code creates a string that contains the letter a:
+let s = "a";
+
+
+
+->  Compound Types in Rust
+
+Compound types can group multiple values into one type. 
+Rust has two primitive compound types: tuples and arrays.
+
+
+
+-> Tuples
+
+The Tuple Type
+A tuple is a general way of grouping together a number of values with a variety of types into one compound type. 
+Tuples have a fixed length: once declared, they cannot grow or shrink in size.
+We create a tuple by writing a comma-separated list of values inside parentheses. 
+Each position in the tuple has a type, and the types of the different values in the tuple don’t have to be the same. 
+
+Tuples are a simple way to group together values of different types. 
+Tuples are created by writing a comma-separated list of values enclosed in parentheses. 
+For example, the following code creates a tuple containing two values, an integer and a floating-point number:
+let tup = (500, 6.4);
+
+You can access the individual values in a tuple using pattern matching or by indexing. 
+For example, the following code prints the values in the tuple tup:
+
+let tup = (500, 6.4);
+
+println!("The first value in the tuple is: {}", tup.0);
+println!("The second value in the tuple is: {}", tup.1);
+
+
+Tuples can also be used to represent more complex data structures. 
+For example, the following code creates a tuple to represent a point in 2D space:
+
+let point = (10.0, 20.0);
+You can use the individual values in the tuple to access the x-coordinate and y-coordinate of the point.
+
+The variable tup binds to the entire tuple because a tuple is considered a single compound element. 
+To get the individual values out of a tuple, we can use pattern matching to destructure a tuple value, like this:
+
+fn main() {
+    let tup = (500, 6.4, 1);
+    let (x, y, z) = tup;
+    println!("The value of y is: {y}");
+}
+
+
+
+->  Arrays
+
+The Array Type
+Another way to have a collection of multiple values is with an array. 
+Unlike a tuple, every element of an array must have the same type. 
+Unlike arrays in some other languages, arrays in Rust have a fixed length.
+
+Arrays are another way to group together values. 
+Arrays are different from tuples in two ways:
+---> All of the values in an array must be of the same type.
+---> Arrays have a fixed length, which must be specified when the array is created.
+
+For example, the following code creates an array of five integers:
+let arr = [1, 2, 3, 4, 5];
+
+You can access the individual elements in an array using indexing. 
+For example, the following code prints the first element in the array arr:
+
+let arr = [1, 2, 3, 4, 5];
+println!("The first element in the array is: {}", arr[0]);
+
+Arrays can also be used to represent more complex data structures. 
+For example, the following code creates an array to represent a list of students:
+let students = [
+    ("Alice", 20),
+    ("Bob", 21),
+    ("Carol", 22),
+];
+You can use the individual elements in the array to access the information for each student.
+
+You write an array’s type using square brackets with the type of each element, a semicolon, and then the number of elements in the array, like so:
+let a: [i32; 5] = [1, 2, 3, 4, 5];
+
+You can also initialize an array to contain the same value for each element by specifying the initial value, followed by a semicolon, and then the length of the array in square brackets, as shown here:
+let a = [3; 5];
+The array named a will contain 5 elements that will all be set to the value 3 initially. 
+This is the same as writing let a = [3, 3, 3, 3, 3]; but in a more concise way.
+
+Arrays are useful when you want your data allocated on the stack rather than the heap (we will discuss the stack and the heap more in Chapter 4) 
+or when you want to ensure you always have a fixed number of elements. An array isn’t as flexible as the vector type, though. 
+A vector is a similar collection type provided by the standard library that is allowed to grow or shrink in size. 
+If you’re unsure whether to use an array or a vector, chances are you should use a vector.
+
+
+
+-> Slices
+
+Slices are a type of reference to an array. 
+Slices allow you to access a subset of an array without having to copy the entire array. 
+Slices are created using the &[] syntax. 
+For example, the following code creates a slice to represent the first three elements in the array arr:
+
+let arr = [1, 2, 3, 4, 5];
+
+let slice = &arr[0..3];
+
+
+You can access the individual elements in a slice using the same syntax as arrays. 
+For example, the following code prints the first element in the slice slice:
+Rust
+let arr = [1, 2, 3, 4, 5];
+let slice = &arr[0..3];
+
+println!("The first element in the slice is: {}", slice[0]);
+
+
+Slices are a powerful tool for working with arrays. 
+They allow you to pass a subset of an array to a function without having to copy the entire array. 
+Slices also make it easier to write generic code that can work with arrays of any length.
+
+
+
+
+
+
