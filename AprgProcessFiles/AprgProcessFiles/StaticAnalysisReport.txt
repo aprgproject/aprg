@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [40]
-2023-09-26T02:38:55
+StaticAnalysisJobIdentifier: [41]
+2023-09-27T00:32:31
 /home/runner/work/aprg/aprg/AprgGrepStringEvaluator/AprgGrepStringEvaluator/src/GrepStringEvaluator/AlbaGrepStringEvaluatorTerm.cpp:35:37: warning: variable 's_mainString' is non-const and globally accessible, consider making it const [cppcoreguidelines-avoid-non-const-global-variables]
 /home/runner/work/aprg/aprg/AprgProcessFiles/AprgProcessFiles/src/ProcessFiles/CPlusPlusFileFixer/CPlusPlusFileFixer.cpp:21:19: warning: initialization of 'listOfCPlusPlusHeaders' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_set.h:243:7: note: possibly throwing constructor declared here
