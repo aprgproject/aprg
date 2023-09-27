@@ -20,6 +20,7 @@ public:
     DataSample() : m_data{} {}
     explicit DataSample(BufferType const& dataSampleValues) : m_data(dataSampleValues) {}
     explicit DataSample(BufferType&& dataSampleValues) : m_data(dataSampleValues) {}
+
     DataSample(std::initializer_list<double> const& dataSampleValues) {
         int const limit = std::min(DIMENSIONS, static_cast<int>(dataSampleValues.size()));
         std::copy(dataSampleValues.begin(), dataSampleValues.begin() + limit, m_data.begin());
@@ -119,7 +120,7 @@ public:
         }
     }
 
-    friend std::ostream& operator<<(std::ostream& out, DataSample<DIMENSIONS> const& sample) {
+    friend std::ostream& operator<<(std::ostream& out, DataSample const& sample) {
         containerHelper::saveContentsToStream(out, sample.m_data, containerHelper::StreamFormat::String);
         return out;
     }
