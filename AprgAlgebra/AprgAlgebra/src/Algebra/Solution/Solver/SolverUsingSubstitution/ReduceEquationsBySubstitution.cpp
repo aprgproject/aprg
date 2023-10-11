@@ -44,7 +44,7 @@ void selectVariableNameAndEquationNumber(
             return isolation.canBeIsolated(variableName) &&
                    isolation.getIdenticalExponentForVariableIfPossible(variableName) == 1;
         });
-        bool canBePutOnOneSide = it != variableNamesToCheck.cend();
+        bool const canBePutOnOneSide = it != variableNamesToCheck.cend();
         if (canBePutOnOneSide) {
             areVariableAndEquationSelected = true;
             selectedVariableName = *it;
