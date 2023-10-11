@@ -531,7 +531,7 @@ bool Audio<DataType>::saveToAiffFile(path const& filePath) {
 
     // The file size in bytes is the header chunk size (4, not counting FORM and AIFF) + the COMM
     // chunk size (26) + the metadata part of the SSND chunk plus the actual data chunk size
-    int32_t fileSizeInBytes = 4 + 26 + 16 + totalNumAudioSampleBytes;
+    int32_t const fileSizeInBytes = 4 + 26 + 16 + totalNumAudioSampleBytes;
     addInt32ToFileData(dataBuffer, fileSizeInBytes, Endianness::BigEndian);
 
     addStringToFileData(dataBuffer, "AIFF");
