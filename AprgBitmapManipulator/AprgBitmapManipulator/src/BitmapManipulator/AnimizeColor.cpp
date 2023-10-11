@@ -83,7 +83,7 @@ bool AnimizeColor::isValueIncluded(double const value) const {
 }
 
 void AnimizeColor::calculateNewValues(ColorDataMap& colorDataMap) const {
-    int totalCount = accumulate(
+    int const totalCount = accumulate(
         colorDataMap.cbegin(), colorDataMap.cend(), 0,
         [](int const partialResult, auto const& colorDataPair) { return partialResult + colorDataPair.second.count; });
     int partialCount = 0;
