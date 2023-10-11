@@ -151,7 +151,7 @@ private:
     }
 
     void createTempDirectories() {
-        AlbaLocalPathHandler blockDirectoryPathHandler(m_configuration.m_directoryForBlocks);
+        AlbaLocalPathHandler const blockDirectoryPathHandler(m_configuration.m_directoryForBlocks);
         blockDirectoryPathHandler.createDirectoriesAndIsSuccessful();
     }
 

@@ -164,7 +164,7 @@ protected:
     }
 
     void resize(int const newHashTableSize) {
-        EntryPointers oldEntryPointers = std::move(m_entryPointers);
+        EntryPointers const oldEntryPointers = std::move(m_entryPointers);
         int const oldHashTableSize = m_hashTableSize;
         m_size = 0;
         m_entryPointers = std::make_unique<EntryUniquePointer[]>(newHashTableSize);

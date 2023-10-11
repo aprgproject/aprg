@@ -17,7 +17,7 @@ public:
 
     ~DataBlockFileHandler() {
         releaseFileStream();
-        AlbaLocalPathHandler filePathHandler(m_path);
+        AlbaLocalPathHandler const filePathHandler(m_path);
         filePathHandler.deleteFileAndIsSuccessful();
     }
 
