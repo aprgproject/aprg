@@ -50,7 +50,7 @@ public:
             for (auto reverseIt = implicantsMap.rbegin(); reverseIt != implicantsMap.rend(); ++reverseIt) {
                 Implicants const& implicantsFromTable(reverseIt->second);
                 for (Implicant const& implicantFromTable : implicantsFromTable) {
-                    bool isAlreadyCovered =
+                    bool const isAlreadyCovered =
                         any_of(result.cbegin(), result.cend(), [&](Implicant const& existingImplicant) {
                             return implicantFromTable.isASubsetOf(existingImplicant);
                         });
