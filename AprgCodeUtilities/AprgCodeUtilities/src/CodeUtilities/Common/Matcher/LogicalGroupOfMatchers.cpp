@@ -16,7 +16,7 @@ LogicalGroupOfMatchers::Matchers const& LogicalGroupOfMatchers::getMatchers() co
 LogicalGroupOfMatchers::OperationType LogicalGroupOfMatchers::getOperationType() const { return m_operationType; }
 
 ostream& operator<<(ostream& out, LogicalGroupOfMatchers const& groupOfMatchers) {
-    string delimeter(groupOfMatchers.getOperationString());
+    string const delimeter(groupOfMatchers.getOperationString());
     out << "{ ";
     bool isFirst(true);
     for (Matcher const& matcher : groupOfMatchers.m_matchers) {

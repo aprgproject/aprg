@@ -102,14 +102,14 @@ strings CPlusPlusFixer::getPrintItems(int& printfEnd, int const printStringIndex
                 break;
             }
         } else if (parenthesisLevel == 1 && "," == m_terms[termIndex].getContent()) {
-            int printItemEnd = termIndex - 1;
+            int const printItemEnd = termIndex - 1;
             if (printItemStart < printItemEnd) {
                 printItems.emplace_back(getCombinedContents(printItemStart, printItemEnd, m_terms));
             }
             printItemStart = termIndex + 1;
         }
     }
-    int printItemEnd = printfEnd - 1;
+    int const printItemEnd = printfEnd - 1;
     if (printItemStart < printItemEnd) {
         printItems.emplace_back(getCombinedContents(printItemStart, printItemEnd, m_terms));
     }
@@ -292,8 +292,8 @@ void CPlusPlusFixer::fixGTestNames() {
         Indexes hitIndexes = searchForwardsForPatterns(termIndex, m_terms, searchPatterns);
         isFound = !hitIndexes.empty();
         if (isFound) {
-            string testSuiteName(getCorrectedGTestName(m_terms[hitIndexes[2]].getContent()));
-            string testName(getCorrectedGTestName(m_terms[hitIndexes[4]].getContent()));
+            string const testSuiteName(getCorrectedGTestName(m_terms[hitIndexes[2]].getContent()));
+            string const testName(getCorrectedGTestName(m_terms[hitIndexes[4]].getContent()));
             m_terms[hitIndexes[2]].setContent(testSuiteName);
             m_terms[hitIndexes[4]].setContent(testName);
             termIndex = hitIndexes.back();
@@ -317,10 +317,10 @@ void CPlusPlusFixer::fixCStylePrintf(Patterns const& searchPatterns) {
 }
 
 void CPlusPlusFixer::fixCStylePrintf(int const printfStart, int const printStringIndex) {
-    string printString = m_terms[printStringIndex].getContent();
+    string const printString = m_terms[printStringIndex].getContent();
     int printfEnd{};
-    strings printItems(getPrintItems(printfEnd, printStringIndex));
-    Terms newPrintTerms(getNewPrintTerms(printString, printItems));
+    strings const printItems(getPrintItems(printfEnd, printStringIndex));
+    Terms const newPrintTerms(getNewPrintTerms(printString, printItems));
 
     m_terms.erase(m_terms.begin() + printfStart, m_terms.begin() + printfEnd + 1);
     m_terms.insert(m_terms.cbegin() + printfStart, newPrintTerms.cbegin(), newPrintTerms.cend());
@@ -443,7 +443,7 @@ void CPlusPlusFixer::fixByCheckingScopes() {
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
             Term const& firstTerm(m_terms[firstHitIndex]);
-            int fixStartIndex = nextIndex > 0 ? nextIndex - 1 : nextIndex;
+            int const fixStartIndex = nextIndex > 0 ? nextIndex - 1 : nextIndex;
             fixOnScopeLoop(fixStartIndex, firstHitIndex);
             if (firstTerm.getContent() == "{") {
                 processOpeningBrace(nextIndex, firstHitIndex);
@@ -490,7 +490,7 @@ void CPlusPlusFixer::fixConstexprToInlineConstExpr(int const startIndex, int con
         isHeaderFileExtension(getStringWithoutCharAtTheStart(m_currentFile.extension().string(), '.'))) {
         auto const startDivider = M_OR(M("{"), M("}"), M(";"));
         Patterns const searchPatterns{{startDivider, M("constexpr")}};
-        int nextIndex = startIndex;
+        int const nextIndex = startIndex;
         bool isFound(true);
         while (isFound) {
             Indexes hitIndexes = searchForwardsForPatterns(nextIndex, endIndex, m_terms, searchPatterns);

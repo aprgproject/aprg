@@ -1,13 +1,47 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-19T02:31:54
-D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:250:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:58:5: warning: variable 'sourcePathHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusReorganizer_unit.cpp:58:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\Common\TermUtilities_unit.cpp:108:66: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+StaticAnalysisJobIdentifier: [100]
+2023-10-11T23:03:47
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFinder.cpp:130:13: warning: variable 'findStartIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFinder.cpp:130:17: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFinder.cpp:168:49: warning: unused parameter 'startIndex' [clang-diagnostic-unused-parameter]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFinder.cpp:168:71: warning: unused parameter 'endIndex' [clang-diagnostic-unused-parameter]
+D:/a/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusFinder.cpp:168:49: warning: unused parameter 'startIndex' [-Wunused-parameter]
+D:/a/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusFinder.cpp:168:71: warning: unused parameter 'endIndex' [-Wunused-parameter]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:105:13: warning: variable 'printItemEnd' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:105:17: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:112:5: warning: variable 'printItemEnd' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:112:9: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:295:13: warning: variable 'testSuiteName' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:295:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:296:13: warning: variable 'testName' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:296:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:320:5: warning: variable 'printString' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:320:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:322:5: warning: variable 'printItems' of type 'strings' (aka 'vector<basic_string<char, char_traits<char>, allocator<char>>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:322:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:323:5: warning: variable 'newPrintTerms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:323:11: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:446:13: warning: variable 'fixStartIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:446:17: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:493:9: warning: variable 'nextIndex' of type 'int' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusFixer.cpp:493:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:199:5: warning: variable 'hitIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:199:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:205:5: warning: variable 'hitIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:205:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:211:5: warning: variable 'hitIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:211:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:219:5: warning: variable 'hitIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:219:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:227:5: warning: variable 'hitIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:227:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:236:5: warning: variable 'hitIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:236:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:245:5: warning: variable 'hitIndexes' of type 'Indexes' (aka 'vector<int>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:245:13: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:480:5: warning: variable 'functionSignatureTerms' of type 'Terms' (aka 'vector<Term>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\CPlusPlus\CPlusPlusReorganizeItems.cpp:480:11: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\Matcher\LogicalGroupOfMatchers.cpp:19:5: warning: variable 'delimeter' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\src\CodeUtilities\Common\Matcher\LogicalGroupOfMatchers.cpp:19:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusFixer_unit.cpp:22:5: warning: variable 'fixer' of type 'CPlusPlusFixer' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgCodeUtilities\AprgCodeUtilities\tst\CodeUtilitiesTests\CPlusPlus\CPlusPlusFixer_unit.cpp:22:20: note: FIX-IT applied suggested code changes
 DONE!

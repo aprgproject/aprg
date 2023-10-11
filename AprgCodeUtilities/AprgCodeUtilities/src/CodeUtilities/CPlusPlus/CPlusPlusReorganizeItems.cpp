@@ -196,19 +196,19 @@ int CPlusPlusReorganizeItems::getBestHeaderIndex(string const& item) const {
 
 bool CPlusPlusReorganizeItems::isDefaultConstructor(Terms const& terms) const {
     Patterns const searchPatterns{{M(m_data.scopeName), M("("), M(")")}};
-    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    Indexes const hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
     return !hitIndexes.empty();
 }
 
 bool CPlusPlusReorganizeItems::isOtherConstructor(Terms const& terms) const {
     Patterns const searchPatterns{{M(m_data.scopeName), M("("), M_NOT(")")}};
-    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    Indexes const hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
     return !hitIndexes.empty();
 }
 
 bool CPlusPlusReorganizeItems::isDestructor(Terms const& terms) const {
     Patterns const searchPatterns{{M("~"), M(m_data.scopeName), M("("), M(")")}};
-    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    Indexes const hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
     return !hitIndexes.empty();
 }
 
@@ -216,7 +216,7 @@ bool CPlusPlusReorganizeItems::isCopyConstructor(Terms const& terms) const {
     Patterns const searchPatterns{
         {M(m_data.scopeName), M("("), M(m_data.scopeName), M("const"), M("&"), M(")")},
         {M(m_data.scopeName), M("("), M(m_data.scopeName), M("const"), M("&"), M(TermType::Identifier), M(")")}};
-    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    Indexes const hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
     return !hitIndexes.empty();
 }
 
@@ -224,7 +224,7 @@ bool CPlusPlusReorganizeItems::isMoveConstructor(Terms const& terms) const {
     Patterns const searchPatterns{
         {M(m_data.scopeName), M("("), M(m_data.scopeName), M("&&"), M(")")},
         {M(m_data.scopeName), M("("), M(m_data.scopeName), M("&&"), M(TermType::Identifier), M(")")}};
-    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    Indexes const hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
     return !hitIndexes.empty();
 }
 
@@ -233,7 +233,7 @@ bool CPlusPlusReorganizeItems::isCopyAssignment(Terms const& terms) const {
         {M(m_data.scopeName), M("&"), M("operator"), M("="), M("("), M(m_data.scopeName), M("const"), M("&"), M(")")},
         {M(m_data.scopeName), M("&"), M("operator"), M("="), M("("), M(m_data.scopeName), M("const"), M("&"),
          M(TermType::Identifier), M(")")}};
-    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    Indexes const hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
     return !hitIndexes.empty();
 }
 
@@ -242,7 +242,7 @@ bool CPlusPlusReorganizeItems::isMoveAssignment(Terms const& terms) const {
         {M(m_data.scopeName), M("&"), M("operator"), M("="), M("("), M(m_data.scopeName), M("&&"), M(")")},
         {M(m_data.scopeName), M("&"), M("operator"), M("="), M("("), M(m_data.scopeName), M("&&"),
          M(TermType::Identifier), M(")")}};
-    Indexes hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
+    Indexes const hitIndexes = searchForwardsForPatterns(terms, searchPatterns);
     return !hitIndexes.empty();
 }
 
@@ -477,7 +477,7 @@ void CPlusPlusReorganizeItems::saveDetailsBasedFromItemTerms(
 
 void CPlusPlusReorganizeItems::saveDetailsBasedFromFunctionSignature(
     SortItem& sortItem, string const& functionSignature) const {
-    Terms functionSignatureTerms(getTermsFromString(functionSignature));
+    Terms const functionSignatureTerms(getTermsFromString(functionSignature));
     saveDetailsBasedFromReturnType(sortItem, functionSignatureTerms);
     saveDetailsForSpecialFunctions(sortItem, functionSignatureTerms);
 }

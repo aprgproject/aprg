@@ -19,7 +19,7 @@ void processDirectory(path const& directoryPath) {
 }
 
 void processAprgDirectory(string const& aprgPath) {
-    CPlusPlusFixer fixer;
+    CPlusPlusFixer const fixer;
     AlbaLocalPathHandler const aprgPathHandler(aprgPath);
     aprgPathHandler.findFilesAndDirectoriesUnlimitedDepth(
         [](AlbaLocalPathHandler::LocalPath const&) {},

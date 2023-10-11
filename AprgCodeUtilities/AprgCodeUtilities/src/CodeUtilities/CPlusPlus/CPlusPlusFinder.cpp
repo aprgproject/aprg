@@ -127,7 +127,7 @@ void CPlusPlusFinder::findByCheckingScopes() {
         if (isFound) {
             int const firstHitIndex = hitIndexes.front();
             Term const& firstTerm(m_terms[firstHitIndex]);
-            int findStartIndex = nextIndex > 0 ? nextIndex - 1 : nextIndex;
+            int const findStartIndex = nextIndex > 0 ? nextIndex - 1 : nextIndex;
             findOnScopeLoop(findStartIndex, firstHitIndex);
             if (firstTerm.getContent() == "{") {
                 processOpeningBrace(nextIndex, firstHitIndex);
