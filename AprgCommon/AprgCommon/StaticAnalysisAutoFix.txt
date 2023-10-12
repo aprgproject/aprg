@@ -1,32 +1,10 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-19T03:00:15
-D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:250:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+StaticAnalysisJobIdentifier: [100]
+2023-10-11T23:34:27
 D:/a/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Container/AlbaOptional_unit.cpp:63:22: warning: explicitly assigning value of variable of type 'AlbaOptional<int>' to itself [-Wself-assign-overloaded]
 D:/a/aprg/aprg/AprgCommon/AprgCommon/src\Common/Debug/AlbaDebug.hpp:13:2: warning: ("The class AlbaDebug is used. Please remove after your done debugging.") // GCC extension [clang-diagnostic-#warnings]
 D:/a/aprg/aprg/AprgCommon/AprgCommon/src\Common/Debug/AlbaDebug.hpp:13:2: warning: #warning is a C++2b extension [clang-diagnostic-pedantic]
 D:/a/aprg/aprg/AprgCommon/AprgCommon/src\Common/Debug/AlbaDebug.hpp:13:2: warning: #warning is a C++2b extension [-Wpedantic]
 D:/a/aprg/aprg/AprgCommon/AprgCommon/src\Common/Debug/AlbaDebug.hpp:13:2: warning: ("The class AlbaDebug is used. Please remove after your done debugging.") // GCC extension [-W#warnings]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Debug\AlbaExit_unit.cpp:12:5: warning: variable 'gtest_dt_ptr' of type 'std::unique_ptr< ::testing::internal::DeathTest>' can be declared 'const' [misc-const-correctness]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest-death-test.h:179:3: note: expanded from macro 'EXPECT_EXIT'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-death-test-internal.h:233:7: note: expanded from macro 'GTEST_DEATH_TEST_'
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Debug\AlbaExit_unit.cpp:15:5: warning: variable 'gtest_dt_ptr' of type 'std::unique_ptr< ::testing::internal::DeathTest>' can be declared 'const' [misc-const-correctness]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest-death-test.h:190:3: note: expanded from macro 'EXPECT_DEATH'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest-death-test.h:179:3: note: expanded from macro 'EXPECT_EXIT'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-death-test-internal.h:233:7: note: expanded from macro 'GTEST_DEATH_TEST_'
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Debug\AlbaExit_unit.cpp:20:5: warning: variable 'gtest_dt_ptr' of type 'std::unique_ptr< ::testing::internal::DeathTest>' can be declared 'const' [misc-const-correctness]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest-death-test.h:190:3: note: expanded from macro 'EXPECT_DEATH'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest-death-test.h:179:3: note: expanded from macro 'EXPECT_EXIT'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-death-test-internal.h:233:7: note: expanded from macro 'GTEST_DEATH_TEST_'
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Debug\AlbaExit_unit.cpp:23:5: warning: variable 'gtest_dt_ptr' of type 'std::unique_ptr< ::testing::internal::DeathTest>' can be declared 'const' [misc-const-correctness]
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest-death-test.h:190:3: note: expanded from macro 'EXPECT_DEATH'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/gtest-death-test.h:179:3: note: expanded from macro 'EXPECT_EXIT'
-D:/a/aprg/aprg/gtest/gtest/googletest/include\gtest/internal/gtest-death-test-internal.h:233:7: note: expanded from macro 'GTEST_DEATH_TEST_'
 D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Macros\AlbaMacros_unit.cpp:40:9: warning: ALBA_MACROS_TEST_SAMPLE_MACRO1=10000 [clang-diagnostic-#pragma-messages]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Macros\AlbaMacros_unit.cpp:100:5: warning: variable 'VariablePrefix4' of type 'int' can be declared 'const' [misc-const-correctness]
 D:/a/aprg/aprg/AprgCommon/AprgCommon/tst/CommonTests/Macros/AlbaMacros_unit.cpp:40:9: warning: ALBA_MACROS_TEST_SAMPLE_MACRO1=10000 [-W#pragma-messages]
@@ -39,57 +17,4 @@ D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Macros\AlbaXMacros_unit.cpp
 D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Macros\AlbaXMacros_unit.cpp:15:5: warning: variable 'parameter3InList' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
 D:/a/aprg/aprg/AprgCommon/AprgCommon/src\Common/Macros/AlbaXMacros.hpp:5:5: note: expanded from macro 'ALBA_XMACROS_SAMPLE_LIST_WITH_ONE_PARAMETER'
 D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Macros\AlbaXMacros_unit.cpp:14:68: note: expanded from macro 'ALBA_XMACROS_SAMPLE_FUNCTION_WITH_ONE_PARAMETER'
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:28:5: warning: variable 'aprgPath' of type 'string' (aka 'basic_string<char, char_traits<char>, allocator<char>>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:28:12: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:47:5: warning: variable 'lastModifiedTime' of type 'AlbaDateTime' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:47:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:49:5: warning: variable 'currentTime' of type 'AlbaDateTime' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:49:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:50:5: warning: variable 'difference' of type 'AlbaDateTime' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:50:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:51:5: warning: variable 'allowableDifference' of type 'AlbaDateTime' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:51:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:71:5: warning: variable 'pathHandler' of type 'PathHandler' (aka 'alba::AlbaLocalPathHandler') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:71:17: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:83:5: warning: variable 'pathHandlerOfCopiedFile' of type 'PathHandler' (aka 'alba::AlbaLocalPathHandler') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:83:17: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:129:5: warning: variable 'pathHandler' of type 'PathHandler' (aka 'alba::AlbaLocalPathHandler') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:129:17: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:280:5: warning: variable 'pathHandler' of type 'PathHandler' (aka 'alba::AlbaLocalPathHandler') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:280:17: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:372:5: warning: variable 'pathHandler' of type 'PathHandler' (aka 'alba::AlbaLocalPathHandler') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:372:17: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:380:5: warning: variable 'pathHandler' of type 'PathHandler' (aka 'alba::AlbaLocalPathHandler') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:380:17: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:525:5: warning: variable 'pathHandler' of type 'PathHandler' (aka 'alba::AlbaLocalPathHandler') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:525:17: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:535:5: warning: variable 'pathHandler' of type 'PathHandler' (aka 'alba::AlbaLocalPathHandler') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:535:17: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:547:5: warning: variable 'pathHandler' of type 'PathHandler' (aka 'alba::AlbaLocalPathHandler') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:547:17: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:557:5: warning: variable 'pathHandler' of type 'PathHandler' (aka 'alba::AlbaLocalPathHandler') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\PathHandler\AlbaLocalPathHandler_unit.cpp:557:17: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:21:1: warning: anonymous namespace not terminated with a closing comment [llvm-namespace-comment]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:21:2: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:19:11: note: anonymous namespace starts here
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:50:5: warning: variable 'difference' of type 'AlbaDateTime' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:50:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:64:5: warning: variable 'systemTime' of type 'LibrarySystemTime' (aka 'time_point<std::chrono::system_clock>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:64:23: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:74:5: warning: variable 'lastModifiedTime' of type 'AlbaDateTime' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:74:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:76:5: warning: variable 'currentTime' of type 'AlbaDateTime' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:76:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:77:5: warning: variable 'difference' of type 'AlbaDateTime' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:77:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:78:5: warning: variable 'allowableDifference' of type 'AlbaDateTime' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:78:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:88:5: warning: variable 'difference' of type 'AlbaDateTime' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:88:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:100:5: warning: variable 'difference' of type 'AlbaDateTime' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:100:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:112:5: warning: variable 'difference' of type 'AlbaDateTime' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:112:18: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:127:5: warning: variable 'systemTime' of type 'LibrarySystemTime' (aka 'time_point<std::chrono::system_clock>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\tst\CommonTests\Time\AlbaLocalTimeHelper_unit.cpp:127:23: note: FIX-IT applied suggested code changes
 DONE!
