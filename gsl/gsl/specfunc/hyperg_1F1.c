@@ -783,7 +783,7 @@ hyperg_1F1_small_a_bgt0(const double a, const double b, const double x, gsl_sf_r
       return hyperg_1F1_large2bm4a(a, b, x, result);
    
   }
-  else {
+  
     /* x < 0 and b not large compared to |x|
      */
     if(ax < 10.0 && b < 10.0) {
@@ -795,7 +795,7 @@ hyperg_1F1_small_a_bgt0(const double a, const double b, const double x, gsl_sf_r
     
       return hyperg_1F1_luke(a, b, x, result);
    
-  }
+ 
 }
 
 
@@ -990,15 +990,15 @@ hyperg_1F1_ab_posint(const int a, const int b, const double x, gsl_sf_result * r
      * recurse backward to a=0 for normalization.
      * This will work for either sign of x.
      */
-    double rap;
+    double rap = NAN;
     int stat_CF1 = hyperg_1F1_CF1_p_ser(a, b, x, &rap);
     double ra = 1.0 + x/a * rap;
     double Ma   = GSL_SQRT_DBL_MIN;
     double Map1 = ra * Ma;
     double Mnp1 = Map1;
     double Mn   = Ma;
-    double Mnm1;
-    int n;
+    double Mnm1 = NAN;
+    int n = 0;
     for(n=a; n>0; n--) {
       Mnm1 = (n * Mnp1 - (2*n-b+x) * Mn) / (b-n);
       Mnp1 = Mn;
@@ -1008,7 +1008,7 @@ hyperg_1F1_ab_posint(const int a, const int b, const double x, gsl_sf_result * r
     result->err = 2.0 * GSL_DBL_EPSILON * (fabs(a) + 1.0) * fabs(Ma/Mn);
     return stat_CF1;
   }
-  else if(b > a && b < 2*a + x && b > x) {
+  if(b > a && b < 2*a + x && b > x) {
     /* Use the Gautschi series representation of
      * the continued fraction. Then recurse forward
      * to the a=b line for normalization. This will
@@ -1569,12 +1569,12 @@ hyperg_1F1_ab_pos(const double a, const double b,
       int stat_1 = hyperg_1F1_small_a_bgt0(eps+1.0, b, x, &r_Mn);
       double Mnm1 = r_Mnm1.val;
       double Mn   = r_Mn.val;
-      double Mnp1;
+      double Mnp1 = NAN;
 
-      double n;
+      double n = NAN;
       double start_pair = fabs(Mn) + fabs(Mnm1);
       double minim_pair = GSL_DBL_MAX;
-      double pair_ratio;
+      double pair_ratio = NAN;
       double rat_0 = fabs(r_Mnm1.err/r_Mnm1.val);
       double rat_1 = fabs(r_Mn.err/r_Mn.val);
       for(n=eps+1.0; n<a-0.1; n++) {
@@ -1591,7 +1591,7 @@ hyperg_1F1_ab_pos(const double a, const double b,
       return GSL_ERROR_SELECT_2(stat_0, stat_1);
    
   }
-  else {
+  
     /* x < 0
      * b < a
      */
@@ -1703,7 +1703,7 @@ hyperg_1F1_ab_pos(const double a, const double b,
       result->err = (err_rat + GSL_DBL_EPSILON) * (fabs(b-a)+1.0) * fabs(Mn);
       return stat_a0;
    
-  }
+ 
 }
 
 

@@ -1421,7 +1421,7 @@ int gsl_sf_fermi_dirac_int_e(const int j, const double x, gsl_sf_result * result
   if(x < 1.5) {
     return fd_series_int(j, x, result);
   }
-  else {
+  
     gsl_sf_result fasymp;
     int stat_asymp = fd_asymp(j, x, &fasymp);
 
@@ -1434,7 +1434,7 @@ int gsl_sf_fermi_dirac_int_e(const int j, const double x, gsl_sf_result * result
     else {
       return fd_UMseries_int(j, x, result);
     }
-  }
+ 
 }
 
 

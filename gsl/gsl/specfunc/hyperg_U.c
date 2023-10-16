@@ -976,15 +976,15 @@ hyperg_U_int_bge1(const int a, const int b, const double x,
        */
       const double scale_factor = GSL_SQRT_DBL_MAX;
       int scale_count = 0;
-      int stat_CF1;
-      double ru;
-      int CF1_count;
-      int a_target;
-      double lnU_target;
-      double Ua;
-      double Uap1;
-      double Uam1;
-      int ap;
+      int stat_CF1 = 0;
+      double ru = NAN;
+      int CF1_count = 0;
+      int a_target = 0;
+      double lnU_target = NAN;
+      double Ua = NAN;
+      double Uap1 = NAN;
+      double Uam1 = NAN;
+      int ap = 0;
 
       if(b < a + 1) {
         a_target = b-1;
@@ -1035,24 +1035,24 @@ hyperg_U_int_bge1(const int a, const int b, const double x,
       int scale_count_bck = 0;
       int a0 = 1;
       int a1 = a0 + ceil(0.5*(b-x) - a0);
-      double Ua1_bck_val;
-      double Ua1_bck_err;
-      double Ua1_for_val;
-      double Ua1_for_err;
-      int stat_for;
-      int stat_bck;
+      double Ua1_bck_val = NAN;
+      double Ua1_bck_err = NAN;
+      double Ua1_for_val = NAN;
+      double Ua1_for_err = NAN;
+      int stat_for = 0;
+      int stat_bck = 0;
       gsl_sf_result lm_for;
 
       {
         /* Recurse back to determine U(a1,b), sans normalization.
          */
-        double ru;
-        int CF1_count;
+        double ru = NAN;
+        int CF1_count = 0;
         int stat_CF1 = hyperg_U_CF1(a, b, 0, x, &ru, &CF1_count);
         double Ua   = 1.0;
         double Uap1 = ru/a * Ua;
-        double Uam1;
-        int ap;
+        double Uam1 = NAN;
+        int ap = 0;
         for(ap=a; ap>a1; ap--) {
           Uam1 = -((b-2.0*ap-x)*Ua + ap*(1.0+ap-b)*Uap1);
           Uap1 = Ua;
@@ -1079,8 +1079,10 @@ hyperg_U_int_bge1(const int a, const int b, const double x,
          * Use
          *   U(a,2a-1) = (x U(a,2a) - U(a-1,2(a-1))) / (2a - 2)
          */
-        gsl_sf_result lnU00, lnU12;
-        gsl_sf_result U00, U12;
+        gsl_sf_result lnU00;
+        gsl_sf_result lnU12;
+        gsl_sf_result U00;
+        gsl_sf_result U12;
         hyperg_lnU_beq2a(a1-1.0, x, &lnU00);
         hyperg_lnU_beq2a(a1,     x, &lnU12);
         if(lnU00.val > lnU12.val) {
@@ -1108,10 +1110,10 @@ hyperg_U_int_bge1(const int a, const int b, const double x,
          */
         gsl_sf_result r_Ua;
         double Uam1 = 1.0;  /* U(a0-1,b,x) = U(0,b,x) */
-        double Ua;
-        double Uap1;
-        int ap;
-        double lm_for_local;
+        double Ua = NAN;
+        double Uap1 = NAN;
+        int ap = 0;
+        double lm_for_local = NAN;
         stat_for = hyperg_U_small_a_bgt0(a0, b, x, &r_Ua, &lm_for_local); /* U(1,b,x) */
         Ua = r_Ua.val;
         Uam1 *= exp(-lm_for_local);
