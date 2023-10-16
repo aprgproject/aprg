@@ -1,37 +1,45 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-19T09:28:12
-D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:250:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:16:26: warning: unnecessary temporary object created while calling emplace_back [hicpp-use-emplace,modernize-use-emplace]
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:16:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:16:42: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:17:26: warning: unnecessary temporary object created while calling emplace_back [hicpp-use-emplace,modernize-use-emplace]
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:17:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:17:41: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:18:26: warning: unnecessary temporary object created while calling emplace_back [hicpp-use-emplace,modernize-use-emplace]
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:18:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:18:40: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:19:26: warning: unnecessary temporary object created while calling emplace_back [hicpp-use-emplace,modernize-use-emplace]
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:19:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:19:39: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:20:26: warning: unnecessary temporary object created while calling emplace_back [hicpp-use-emplace,modernize-use-emplace]
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:20:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:20:40: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:21:26: warning: unnecessary temporary object created while calling emplace_back [hicpp-use-emplace,modernize-use-emplace]
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:21:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:21:41: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:22:5: warning: variable 'minMax' of type 'OneDimensionsStatistics::PairOfDoubles' (aka 'pair<double, double>') can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OneDimensionsStatistics_unit.cpp:22:44: note: FIX-IT applied suggested code changes
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\xmemory:717:9: error: no matching function for call to 'construct_at'
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\yvals_core.h:1853:20: note: expanded from macro '_STD'
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vector:800:27: note: in instantiation of function template specialization 'std::_Default_allocator_traits<std::allocator<alba::DataSample<1>>>::construct<alba::DataSample<1>, int>' requested here
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vector:782:20: note: in instantiation of function template specialization 'std::vector<alba::DataSample<1>>::_Emplace_back_with_unused_capacity<int>' requested here
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vector:864:24: note: in instantiation of function template specialization 'std::vector<alba::DataSample<1>>::_Emplace_one_at_back<int>' requested here
-D:/a/aprg/aprg/AprgStatistics/AprgStatistics/tst/StatisticsTests/OneDimensionsStatistics_unit.cpp:16:13: note: in instantiation of function template specialization 'std::vector<alba::DataSample<1>>::emplace_back<int>' requested here
-C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\xutility:239:16: note: candidate template ignored: substitution failure [with _Ty = alba::DataSample<1>, _Types = <int>]: no matching constructor for initialization of 'alba::DataSample<1>'
+StaticAnalysisJobIdentifier: [100]
+2023-10-16T21:32:43
+D:/a/aprg/aprg/AprgStatistics/AprgStatistics/src\Statistics/OutlierStatistics.hpp:24:9: warning: variable 'acceptableDeviation' of type 'double' can be declared 'const' [misc-const-correctness]
+D:/a/aprg/aprg/AprgStatistics/AprgStatistics/src\Statistics/OutlierStatistics.hpp:24:16: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/AprgStatistics/AprgStatistics/src\Statistics/OutlierStatistics.hpp:26:9: warning: variable 'deviation' of type 'Sample' (aka 'DataSample<1>') can be declared 'const' [misc-const-correctness]
+D:/a/aprg/aprg/AprgStatistics/AprgStatistics/src\Statistics/OutlierStatistics.hpp:26:16: note: FIX-IT applied suggested code changes
+D:/a/aprg/aprg/AprgStatistics/AprgStatistics/src\Statistics/OutlierStatistics.hpp:27:9: warning: variable 'deviationOverStandardDeviation' of type 'Sample' (aka 'DataSample<1>') can be declared 'const' [misc-const-correctness]
+D:/a/aprg/aprg/AprgStatistics/AprgStatistics/src\Statistics/OutlierStatistics.hpp:27:16: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OutlierStatistics_unit.cpp:15:5: warning: variable 'samples' of type 'LocalSamples' (aka 'vector<DataSample<1>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OutlierStatistics_unit.cpp:15:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OutlierStatistics_unit.cpp:30:5: warning: variable 'samples' of type 'LocalSamples' (aka 'vector<DataSample<3>>') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\OutlierStatistics_unit.cpp:30:18: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:24:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:24:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:39:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:39:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:54:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:54:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:69:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:69:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:84:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:84:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:99:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:99:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:114:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:114:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:138:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:138:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:152:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:152:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:173:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:173:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:195:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:195:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:227:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:227:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:251:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:251:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:258:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:258:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:264:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:264:20: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:270:5: warning: variable 'lineModel' of type 'LocalLineModel' (aka 'alba::TwoDimensionsStatistics::LineModel') can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\AprgStatistics\AprgStatistics\tst\StatisticsTests\TwoDimensionsStatistics_unit.cpp:270:20: note: FIX-IT applied suggested code changes
 DONE!

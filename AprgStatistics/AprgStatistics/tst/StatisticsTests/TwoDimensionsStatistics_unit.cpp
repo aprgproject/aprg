@@ -21,7 +21,7 @@ TEST(TwoDimensionsStatisticsTest, SameValuesOfXAndYForLineModeling) {
     samples.emplace_back(DataSampleInitializerList{5, 3});
     samples.emplace_back(DataSampleInitializerList{5, 3});
     samples.emplace_back(DataSampleInitializerList{5, 3});
-    LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
+    LocalLineModel const lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
 
     EXPECT_DOUBLE_EQ(0, lineModel.aCoefficient);
     EXPECT_DOUBLE_EQ(0, lineModel.bCoefficient);
@@ -36,7 +36,7 @@ TEST(TwoDimensionsStatisticsTest, SameValuesOfXForLineModeling) {
     samples.emplace_back(DataSampleInitializerList{5, 3});
     samples.emplace_back(DataSampleInitializerList{5, 4});
     samples.emplace_back(DataSampleInitializerList{5, 5});
-    LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
+    LocalLineModel const lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
 
     EXPECT_DOUBLE_EQ(1, lineModel.aCoefficient);
     EXPECT_DOUBLE_EQ(0, lineModel.bCoefficient);
@@ -51,7 +51,7 @@ TEST(TwoDimensionsStatisticsTest, SameValuesOfYForLineModeling) {
     samples.emplace_back(DataSampleInitializerList{3, 5});
     samples.emplace_back(DataSampleInitializerList{4, 5});
     samples.emplace_back(DataSampleInitializerList{5, 5});
-    LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
+    LocalLineModel const lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
 
     EXPECT_DOUBLE_EQ(0, lineModel.aCoefficient);
     EXPECT_DOUBLE_EQ(1, lineModel.bCoefficient);
@@ -66,7 +66,7 @@ TEST(TwoDimensionsStatisticsTest, LineModelingWithPositiveSlope) {
     samples.emplace_back(DataSampleInitializerList{3, 3});
     samples.emplace_back(DataSampleInitializerList{4, 4});
     samples.emplace_back(DataSampleInitializerList{5, 5});
-    LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
+    LocalLineModel const lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
 
     EXPECT_DOUBLE_EQ(-1, lineModel.aCoefficient);
     EXPECT_DOUBLE_EQ(1, lineModel.bCoefficient);
@@ -81,7 +81,7 @@ TEST(TwoDimensionsStatisticsTest, LineModelingWithNegativeSlope) {
     samples.emplace_back(DataSampleInitializerList{3, -3});
     samples.emplace_back(DataSampleInitializerList{4, -4});
     samples.emplace_back(DataSampleInitializerList{5, -5});
-    LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
+    LocalLineModel const lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
 
     EXPECT_DOUBLE_EQ(1, lineModel.aCoefficient);
     EXPECT_DOUBLE_EQ(1, lineModel.bCoefficient);
@@ -96,7 +96,7 @@ TEST(TwoDimensionsStatisticsTest, LineModelingWithPositiveYIntercept) {
     samples.emplace_back(DataSampleInitializerList{3, 4});
     samples.emplace_back(DataSampleInitializerList{4, 5});
     samples.emplace_back(DataSampleInitializerList{5, 6});
-    LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
+    LocalLineModel const lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
 
     EXPECT_DOUBLE_EQ(-1, lineModel.aCoefficient);
     EXPECT_DOUBLE_EQ(1, lineModel.bCoefficient);
@@ -111,7 +111,7 @@ TEST(TwoDimensionsStatisticsTest, LineModelingWithPositiveXIntercept) {
     samples.emplace_back(DataSampleInitializerList{4, 3});
     samples.emplace_back(DataSampleInitializerList{5, 4});
     samples.emplace_back(DataSampleInitializerList{6, 5});
-    LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
+    LocalLineModel const lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
 
     EXPECT_DOUBLE_EQ(-1, lineModel.aCoefficient);
     EXPECT_DOUBLE_EQ(1, lineModel.bCoefficient);
@@ -135,7 +135,7 @@ TEST(TwoDimensionsStatisticsTest, LineModelingWithScatteredValue) {
     samples.emplace_back(DataSampleInitializerList{1.78, 69.92});
     samples.emplace_back(DataSampleInitializerList{1.80, 72.19});
     samples.emplace_back(DataSampleInitializerList{1.83, 74.46});
-    LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
+    LocalLineModel const lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
 
     EXPECT_DOUBLE_EQ(1, lineModel.aCoefficient);
     EXPECT_DOUBLE_EQ(-0.016144305895888833025, lineModel.bCoefficient);
@@ -149,7 +149,7 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
     samples.emplace_back(DataSampleInitializerList{5, 3});
     samples.emplace_back(DataSampleInitializerList{5, 3});
     samples.emplace_back(DataSampleInitializerList{5, 3});
-    LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
+    LocalLineModel const lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
     LocalValueToSampleMultimap squareErrorToSampleMultimap(
         TwoDimensionsStatistics::getSquareErrorToSampleMultimap(samples, lineModel));
 
@@ -170,7 +170,7 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
     samples.emplace_back(DataSampleInitializerList{5, 3});
     samples.emplace_back(DataSampleInitializerList{5, 4});
     samples.emplace_back(DataSampleInitializerList{5, 5});
-    LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
+    LocalLineModel const lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
     LocalValueToSampleMultimap squareErrorToSampleMultimap(
         TwoDimensionsStatistics::getSquareErrorToSampleMultimap(samples, lineModel));
 
@@ -192,7 +192,7 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
     samples.emplace_back(DataSampleInitializerList{3, 5});
     samples.emplace_back(DataSampleInitializerList{4, 5});
     samples.emplace_back(DataSampleInitializerList{5, 5});
-    LocalLineModel lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
+    LocalLineModel const lineModel(TwoDimensionsStatistics::calculateLineModelUsingLeastSquares(samples));
     LocalValueToSampleMultimap squareErrorToSampleMultimap(
         TwoDimensionsStatistics::getSquareErrorToSampleMultimap(samples, lineModel));
 
@@ -224,7 +224,7 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
     samples.emplace_back(DataSampleInitializerList{1.80, 72.19});
     samples.emplace_back(DataSampleInitializerList{1.83, 74.46});
 
-    LocalLineModel lineModel(-61.27218654211062443, 1, 39.061955918843921154);
+    LocalLineModel const lineModel(-61.27218654211062443, 1, 39.061955918843921154);
     LocalValueToSampleMultimap squareErrorToSampleMultimap(
         TwoDimensionsStatistics::getSquareErrorToSampleMultimap(samples, lineModel));
 
@@ -248,26 +248,26 @@ TEST(TwoDimensionsStatisticsTest, SamplesCanBeSortedBySquareErrorFromLineModelFo
 }
 
 TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForInvalidLine) {
-    LocalLineModel lineModel(0, 0, 0);
+    LocalLineModel const lineModel(0, 0, 0);
 
     EXPECT_EQ(0, TwoDimensionsStatistics::calculateSquareError(DataSampleInitializerList{5, 3}, lineModel));
     EXPECT_EQ(0, TwoDimensionsStatistics::calculateSquareError(DataSampleInitializerList{7, 5}, lineModel));
 }
 
 TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForVerticalLine) {
-    LocalLineModel lineModel(-1, 0, 5);
+    LocalLineModel const lineModel(-1, 0, 5);
 
     EXPECT_EQ(25, TwoDimensionsStatistics::calculateSquareError(DataSampleInitializerList{10, 10}, lineModel));
 }
 
 TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForHorizontalLine) {
-    LocalLineModel lineModel(0, -1, 5);
+    LocalLineModel const lineModel(0, -1, 5);
 
     EXPECT_EQ(25, TwoDimensionsStatistics::calculateSquareError(DataSampleInitializerList{10, 10}, lineModel));
 }
 
 TEST(TwoDimensionsStatisticsTest, SquareErrorFromLineModelCanBeCalculatedForScatteredPoints) {
-    LocalLineModel lineModel(-61.27218654211062443, 1, 39.061955918843921154);
+    LocalLineModel const lineModel(-61.27218654211062443, 1, 39.061955918843921154);
 
     EXPECT_EQ(
         1.4444234765251897645,

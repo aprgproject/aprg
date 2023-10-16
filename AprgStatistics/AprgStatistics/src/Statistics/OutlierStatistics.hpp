@@ -21,10 +21,10 @@ public:
     bool isAnOutlierBasedOnChauvenetCriterion(Sample const& sample) {
         LocalStatistics::calculateMeanIfNeeded();
         LocalStatistics::calculateSampleStandardDeviationIfNeeded();
-        double acceptableDeviation(
+        double const acceptableDeviation(
             calculateAcceptableDeviationBasedOnChauvenetCriterion(LocalStatistics::m_samples.size()));
-        Sample deviation(static_cast<Sample>(sample - LocalStatistics::m_mean.value()).calculateAbsoluteValue());
-        Sample deviationOverStandardDeviation(deviation / LocalStatistics::m_sampleStandardDeviation.value());
+        Sample const deviation(static_cast<Sample>(sample - LocalStatistics::m_mean.value()).calculateAbsoluteValue());
+        Sample const deviationOverStandardDeviation(deviation / LocalStatistics::m_sampleStandardDeviation.value());
         bool isAnOutlier(false);
         for (int i = 0; i < deviationOverStandardDeviation.getSize(); ++i) {
             if (deviationOverStandardDeviation.getValueAt(i) > acceptableDeviation) {
