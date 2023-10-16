@@ -1,9 +1,5 @@
 StaticAnalysisJobIdentifier: [100]
-2023-10-11T13:55:00
-D:\a\aprg\aprg\AprgAlgebra\AprgAlgebra\src\Algebra\Simplification\SimplificationOfEquation.cpp:145:17: warning: variable 'combinedTerm' of type 'Term' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgAlgebra\AprgAlgebra\src\Algebra\Simplification\SimplificationOfEquation.cpp:145:22: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\AprgAlgebra\AprgAlgebra\src\Algebra\Solution\Solver\SolverUsingSubstitution\ReduceEquationsBySubstitution.cpp:47:9: warning: variable 'canBePutOnOneSide' of type 'bool' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\AprgAlgebra\AprgAlgebra\src\Algebra\Solution\Solver\SolverUsingSubstitution\ReduceEquationsBySubstitution.cpp:47:14: note: FIX-IT applied suggested code changes
+2023-10-16T15:39:23
 D:\a\aprg\aprg\AprgAlgebra\AprgAlgebra\src\Algebra\Term\Utilities\ConvertHelpers.cpp:89:42: warning: unused variable 'simplification' [clang-diagnostic-unused-variable]
 D:/a/aprg/aprg/AprgAlgebra/AprgAlgebra/src/Algebra/Term/Utilities/ConvertHelpers.cpp:89:42: warning: unused variable 'simplification' [-Wunused-variable]
 D:\a\aprg\aprg\AprgAlgebra\AprgAlgebra\tst\AlgebraTests\Simplification\SimplificationOfFunctionToTerm_unit.cpp:13:42: warning: unused variable 'simplification' [clang-diagnostic-unused-variable]
