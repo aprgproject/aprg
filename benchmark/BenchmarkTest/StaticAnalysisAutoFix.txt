@@ -1,153 +1,69 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-19T11:24:06
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark.cc:406:24: warning: 'CSVReporter' is deprecated: The CSV Reporter will be removed in a future release [clang-diagnostic-deprecated-declarations]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:1608:7: note: 'CSVReporter' has been explicitly marked deprecated here
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:243:54: note: expanded from macro 'BENCHMARK_DEPRECATED_MSG'
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/benchmark.cc:406:24: warning: 'CSVReporter' is deprecated: The CSV Reporter will be removed in a future release [-Wdeprecated-declarations]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:1608:7: note: 'CSVReporter' has been explicitly marked deprecated here
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:243:54: note: expanded from macro 'BENCHMARK_DEPRECATED_MSG'
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_api_internal.cc:92:2: warning: namespace 'benchmark::internal' ends with a comment that refers to a wrong namespace 'benchmark' [google-readability-namespace-comments,llvm-namespace-comment]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_api_internal.cc:7:11: note: namespace 'benchmark::internal' starts here
+StaticAnalysisJobIdentifier: [100]
+2023-10-16T23:21:47
 note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:103:35: warning: narrowing conversion from 'IterationCount' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:348:2: warning: namespace 'benchmark::internal' ends with a comment that refers to a wrong namespace 'benchmark' [google-readability-namespace-comments,llvm-namespace-comment]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\benchmark_runner.cc:56:11: note: namespace 'benchmark::internal' starts here
 note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\commandlineflags.cc:127:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\commandlineflags.cc:133:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\commandlineflags.cc:145:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\commandlineflags.cc:157:29: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\commandlineflags.cc:164:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:127:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:133:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:145:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:157:29: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/commandlineflags.cc:164:33: warning: 'getenv' is deprecated: This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\stdlib.h:1183:20: note: 'getenv' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:44:25: warning: narrowing conversion from 'IterationCount' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:111:36: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:112:27: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:174:53: warning: narrowing conversion from 'IterationCount' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\complexity.cc:175:51: warning: narrowing conversion from 'IterationCount' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\counter.cc:29:10: warning: narrowing conversion from 'IterationCount' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\counter.cc:32:10: warning: narrowing conversion from 'IterationCount' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\counter.cc:79:2: warning: namespace 'benchmark::internal' ends with a comment that refers to a wrong namespace 'benchmark' [google-readability-namespace-comments,llvm-namespace-comment]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\counter.cc:17:11: note: namespace 'benchmark::internal' starts here
 note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\perf_counters.cc:130:2: warning: namespace 'benchmark::internal' ends with a comment that refers to a wrong namespace 'benchmark' [google-readability-namespace-comments,llvm-namespace-comment]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\perf_counters.cc:25:11: note: namespace 'benchmark::internal' starts here
 note: cannot apply fix-it because an alias checker has suggested a different fix-it; please remove one of the checkers ('google-readability-namespace-comments', 'llvm-namespace-comment') or ensure they are both configured the same
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\statistics.cc:35:36: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\statistics.cc:43:32: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'difference_type' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\statistics.cc:52:33: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'difference_type' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\statistics.cc:79:53: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\statistics.cc:80:15: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\statistics.cc:80:27: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to 'double' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:59:21: warning: narrowing conversion from 'size_t' (aka 'unsigned long long') to signed type 'int64_t' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:104:10: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:152:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:161:3: warning: Value stored to 'ret' is never read [clang-analyzer-deadcode.DeadStores]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:161:3: note: Value stored to 'ret' is never read
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\string_util.cc:162:10: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\shlwapi.h:2128:9: warning: 'OS_WINDOWS' macro redefined [clang-diagnostic-macro-redefined]
 note: previous definition is here
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:361:18: warning: narrowing conversion from 'DWORD' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:440:16: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\sysinfo.cc:488:12: warning: narrowing conversion from 'DWORD' (aka 'unsigned long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\shlwapi.h:2128:9: warning: 'OS_WINDOWS' macro redefined [clang-diagnostic-macro-redefined]
 note: previous definition is here
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\timers.cc:209:27: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\timers.cc:238:20: warning: 'gmtime' is deprecated: This function or variable may be unsafe. Consider using gmtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:517:24: note: 'gmtime' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\timers.cc:243:5: warning: 'strncpy' is deprecated: This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\string.h:334:1: note: 'strncpy' has been explicitly marked deprecated here
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt.h:1935:17: note: expanded from macro '__DEFINE_CPP_OVERLOAD_STANDARD_NFUNC_0_2_EX'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\timers.cc:252:8: warning: 'strncat' is deprecated: This function or variable may be unsafe. Consider using strncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [clang-diagnostic-deprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\string.h:262:1: note: 'strncat' has been explicitly marked deprecated here
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt.h:1935:17: note: expanded from macro '__DEFINE_CPP_OVERLOAD_STANDARD_NFUNC_0_2_EX'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:\a\aprg\aprg\benchmark\benchmarkLibrary\src\timers.cc:253:10: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:209:27: warning: 'localtime' is deprecated: This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:524:9: note: 'localtime' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:238:20: warning: 'gmtime' is deprecated: This function or variable may be unsafe. Consider using gmtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\time.h:517:24: note: 'gmtime' has been explicitly marked deprecated here
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:243:5: warning: 'strncpy' is deprecated: This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\string.h:334:1: note: 'strncpy' has been explicitly marked deprecated here
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt.h:1935:17: note: expanded from macro '__DEFINE_CPP_OVERLOAD_STANDARD_NFUNC_0_2_EX'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/src/timers.cc:252:8: warning: 'strncat' is deprecated: This function or variable may be unsafe. Consider using strncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [-Wdeprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\string.h:262:1: note: 'strncat' has been explicitly marked deprecated here
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt.h:1935:17: note: expanded from macro '__DEFINE_CPP_OVERLOAD_STANDARD_NFUNC_0_2_EX'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:355:55: note: expanded from macro '_CRT_INSECURE_DEPRECATE'
 C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\vcruntime.h:345:47: note: expanded from macro '_CRT_DEPRECATE_TEXT'
-D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:250:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:/a/aprg/aprg/benchmark/benchmarkLibrary/include\benchmark/benchmark.h:408:5: warning: enumerator value is not representable in the underlying type 'int' [-Wmicrosoft-enum-value]
 DONE!
