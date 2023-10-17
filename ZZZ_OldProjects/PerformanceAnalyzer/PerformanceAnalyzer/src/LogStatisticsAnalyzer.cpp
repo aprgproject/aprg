@@ -86,7 +86,7 @@ void LogStatisticsAnalyzer::analyzeLog(std::string const& lineInLogs) {
     for (LogDetails& logDetails : m_logDetailsToCheck) {
         bool areLogStringFound = false;
         strings const& logStrings(logDetails.logStrings);
-        bool areLogStringFoundInAllLogDetails =
+        bool const areLogStringFoundInAllLogDetails =
             all_of(logStrings.cbegin(), logStrings.cend(), [&](string const& logString) {
                 return stringHelper::isStringFoundNotCaseSensitive(lineInLogs, logString);
             });
