@@ -1015,18 +1015,18 @@ hyperg_1F1_ab_posint(const int a, const int b, const double x, gsl_sf_result * r
      * work for either sign of x, although we do need
      * to check for b > x, for when x is positive.
      */
-    double rap;
+    double rap = NAN;
     int stat_CF1 = hyperg_1F1_CF1_p_ser(a, b, x, &rap);
     double ra = 1.0 + x/a * rap;
     gsl_sf_result ex;
-    int stat_ex;
+    int stat_ex = 0;
 
     double Ma   = GSL_SQRT_DBL_MIN;
     double Map1 = ra * Ma;
     double Mnm1 = Ma;
     double Mn   = Map1;
-    double Mnp1;
-    int n;
+    double Mnp1 = NAN;
+    int n = 0;
     for(n=a+1; n<b; n++) {
       Mnp1 = ((b-n)*Mnm1 + (2*n-b+x)*Mn)/n;
       Mnm1 = Mn;
@@ -1039,7 +1039,7 @@ hyperg_1F1_ab_posint(const int a, const int b, const double x, gsl_sf_result * r
     result->err += 4.0 * GSL_DBL_EPSILON * (fabs(b-a)+1.0) * fabs(result->val);
     return GSL_ERROR_SELECT_2(stat_ex, stat_CF1);
   }
-  else if(x >= 0.0) {
+  if(x >= 0.0) {
 
     if(b < a) {
       /* The point b,b is below the b=2a+x line.
@@ -1645,15 +1645,15 @@ hyperg_1F1_ab_pos(const double a, const double b,
       double a0   = floor(0.5*(b-x)) + epsa;
       double N    = floor(a0 - b);
       double epsb = 1.0 + N - a0 + b;
-      double Ma0b;
-      double Ma0bp1;
-      double Ma0p1b;
-      int stat_a0;
-      double Mnm1;
-      double Mn;
-      double Mnp1;
-      double n;
-      double err_rat;
+      double Ma0b = NAN;
+      double Ma0bp1 = NAN;
+      double Ma0p1b = NAN;
+      int stat_a0 = 0;
+      double Mnm1 = NAN;
+      double Mn = NAN;
+      double Mnp1 = NAN;
+      double n = NAN;
+      double err_rat = NAN;
       {
         gsl_sf_result r_Ma0np1;
         gsl_sf_result r_Ma0n;
@@ -1661,7 +1661,7 @@ hyperg_1F1_ab_pos(const double a, const double b,
         int stat_1 = hyperg_1F1_beps_bgt0(1.0-epsb, a0+epsb-1.0, x, &r_Ma0n);
         double Ma0np1 = r_Ma0np1.val;
         double Ma0n   = r_Ma0n.val;
-        double Ma0nm1;
+        double Ma0nm1 = NAN;
 
         err_rat = fabs(r_Ma0np1.err/r_Ma0np1.val) + fabs(r_Ma0n.err/r_Ma0n.val);
 

@@ -1431,9 +1431,9 @@ int gsl_sf_fermi_dirac_int_e(const int j, const double x, gsl_sf_result * result
       result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
       return stat_asymp;
     }
-    else {
+    
       return fd_UMseries_int(j, x, result);
-    }
+   
  
 }
 
