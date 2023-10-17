@@ -1,32 +1,40 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-19T12:18:04
-D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:250:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\AprgBitmap\AprgBitmap\src\Bitmap\Bitmap.cpp:96:38: warning: narrowing conversion from 'uint64_t' (aka 'unsigned long long') to signed type 'off_type' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgBitmap\AprgBitmap\src\Bitmap\Bitmap.cpp:114:45: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgBitmap\AprgBitmap\src\Bitmap\Bitmap.cpp:124:53: warning: narrowing conversion from 'uint32_t' (aka 'unsigned int') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgBitmap\AprgBitmap\src\Bitmap\BitmapConfiguration.cpp:67:12: warning: narrowing conversion from 'std::size_t' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgBitmap\AprgBitmap\src\Bitmap\BitmapConfiguration.cpp:72:12: warning: narrowing conversion from 'std::size_t' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgBitmap\AprgBitmap\src\Bitmap\BitmapSnippet.cpp:45:54: warning: narrowing conversion from 'size_t' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:60:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:67:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:129:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:129:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:130:22: warning: narrowing conversion from 'int' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:130:52: warning: narrowing conversion from 'long' to 'float' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgLocalUserAutomation\AprgLocalUserAutomation\srcWindows\UserAutomation\AlbaWindowsUserAutomation.cpp:294:66: warning: narrowing conversion from 'unsigned long long' to signed type 'streamsize' (aka 'long long') is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessUtilities\ChessUtilities\src\ChessUtilities\Board\Board.cpp:45:33: warning: narrowing conversion from 'int' to signed type 'char' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessUtilities\ChessUtilities\src\ChessUtilities\Board\Board.cpp:738:19: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessUtilities\ChessUtilities\src\ChessUtilities\Board\BoardUtilities.cpp:116:50: warning: narrowing conversion from 'int' to signed type 'char' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessUtilities\ChessUtilities\src\ChessUtilities\Board\BoardUtilities.cpp:116:68: warning: narrowing conversion from 'int' to signed type 'char' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessUtilities\ChessUtilities\src\ChessUtilities\ChessEngineHandler.cpp:66:28: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'long' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessUtilities\ChessUtilities\src\ChessUtilities\ChessEngineHandler.cpp:72:31: warning: narrowing conversion from 'DWORD' (aka 'unsigned long') to signed type 'long' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessUtilities\ChessUtilities\src\ChessUtilities\ChessEngineHandler.cpp:107:42: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+StaticAnalysisJobIdentifier: [100]
+2023-10-17T00:16:06
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:20:5: warning: explicitly defaulted copy constructor is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:37:16: note: copy constructor of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted copy constructor
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:137:5: note: 'mutex' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:20:53: note: replace 'default' with 'delete'
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:21:5: warning: explicitly defaulted move constructor is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:37:16: note: move constructor of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted move constructor
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:137:5: note: 'mutex' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:21:57: note: replace 'default' with 'delete'
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:22:25: warning: explicitly defaulted copy assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:37:16: note: copy assignment operator of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted copy assignment operator
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:138:12: note: 'operator=' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:22:64: note: replace 'default' with 'delete'
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:23:25: warning: explicitly defaulted move assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:37:16: note: move assignment operator of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted move assignment operator
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:138:12: note: 'operator=' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:23:68: note: replace 'default' with 'delete'
+D:\a\aprg\aprg\Chess\ChessUtilities\ChessUtilities\src\ChessUtilities\ChessEngineHandler.cpp:53:28: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'long' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\Chess\ChessUtilities\ChessUtilities\src\ChessUtilities\ChessEngineHandler.cpp:60:31: warning: narrowing conversion from 'DWORD' (aka 'unsigned long') to signed type 'long' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\Chess\ChessUtilities\ChessUtilities\src\ChessUtilities\ChessEngineHandler.cpp:96:42: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:20:5: warning: explicitly defaulted copy constructor is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:37:16: note: copy constructor of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted copy constructor
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:137:5: note: 'mutex' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:20:53: note: replace 'default' with 'delete'
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:21:5: warning: explicitly defaulted move constructor is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:37:16: note: move constructor of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted move constructor
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:137:5: note: 'mutex' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:21:57: note: replace 'default' with 'delete'
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:22:25: warning: explicitly defaulted copy assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:37:16: note: copy assignment operator of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted copy assignment operator
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:138:12: note: 'operator=' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:22:64: note: replace 'default' with 'delete'
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:23:25: warning: explicitly defaulted move assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:37:16: note: move assignment operator of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted move assignment operator
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:138:12: note: 'operator=' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.hpp:23:68: note: replace 'default' with 'delete'
 D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src/ChessUtilities/ChessEngineHandler.cpp:34:5: warning: 'GetVersionExA' is deprecated [-Wdeprecated-declarations]
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\sysinfoapi.h:411:23: note: expanded from macro 'GetVersionEx'
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\sysinfoapi.h:390:1: note: 'GetVersionExA' has been explicitly marked deprecated here
@@ -37,33 +45,57 @@ D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\BoardObserver.cpp:32:36: 
 note: this fix will not be applied because it overlaps with another fix
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\BoardObserver.cpp:43:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
 D:/a/aprg/aprg/Chess/ChessPeek/ChessPeek/src\ChessPeek/BoardObserver.hpp:23:12: warning: constructor does not initialize these fields: condition [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:20:5: warning: explicitly defaulted copy constructor is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:37:16: note: copy constructor of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted copy constructor
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:137:5: note: 'mutex' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:20:53: note: replace 'default' with 'delete'
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:21:5: warning: explicitly defaulted move constructor is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:37:16: note: move constructor of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted move constructor
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:137:5: note: 'mutex' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:21:57: note: replace 'default' with 'delete'
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:22:25: warning: explicitly defaulted copy assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:37:16: note: copy assignment operator of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted copy assignment operator
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:138:12: note: 'operator=' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:22:64: note: replace 'default' with 'delete'
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:23:25: warning: explicitly defaulted move assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:37:16: note: move assignment operator of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted move assignment operator
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:138:12: note: 'operator=' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:23:68: note: replace 'default' with 'delete'
 D:/a/aprg/aprg/Chess/ChessPeek/ChessPeek/src\ChessPeek/BoardObserver.hpp:23:12: warning: constructor does not initialize these fields: condition [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:67:22: warning: narrowing conversion from 'HumanScoreGenerator::Score' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:85:7: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:85:7: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:116:7: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:116:7: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:201:24: warning: method 'getNextMovesString' can be made static [readability-convert-member-functions-to-static]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:201:93: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek/ResultPrinter.hpp:71:19: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek/ResultPrinter.hpp:71:110: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:215:48: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:269:44: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:274:48: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:429:42: warning: narrowing conversion from 'int' to signed type 'char' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:88:7: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:88:7: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:88:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:120:7: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:120:7: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:120:12: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:202:48: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:256:44: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:261:48: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:416:9: warning: variable 'moveNumberCharacter' of type 'char' can be declared 'const' [misc-const-correctness]
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:416:14: note: FIX-IT applied suggested code changes
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:416:36: warning: narrowing conversion from 'int' to signed type 'char' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:/a/aprg/aprg/Chess/ChessPeek/ChessPeek/src\ChessPeek/BoardObserver.hpp:23:12: warning: constructor does not initialize these fields: condition [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
 D:/a/aprg/aprg/Chess/ChessPeek/ChessPeek/src\ChessPeek/BoardObserver.hpp:23:12: warning: constructor does not initialize these fields: condition [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:20:5: warning: explicitly defaulted copy constructor is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:37:16: note: copy constructor of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted copy constructor
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:137:5: note: 'mutex' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:20:53: note: replace 'default' with 'delete'
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:21:5: warning: explicitly defaulted move constructor is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:37:16: note: move constructor of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted move constructor
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:137:5: note: 'mutex' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:21:57: note: replace 'default' with 'delete'
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:22:25: warning: explicitly defaulted copy assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:37:16: note: copy assignment operator of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted copy assignment operator
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:138:12: note: 'operator=' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:22:64: note: replace 'default' with 'delete'
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:23:25: warning: explicitly defaulted move assignment operator is implicitly deleted [-Wdefaulted-function-deleted]
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:37:16: note: move assignment operator of 'ChessEngineHandler' is implicitly deleted because field 'm_readMutex' has a deleted move assignment operator
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.37.32822\include\mutex:138:12: note: 'operator=' has been explicitly marked deleted here
+D:/a/aprg/aprg/Chess/ChessUtilities/ChessUtilities/src\ChessUtilities/ChessEngineHandler.hpp:23:68: note: replace 'default' with 'delete'
 D:/a/aprg/aprg/Chess/ChessPeek/ChessPeek/src\ChessPeek/BoardObserver.hpp:23:12: warning: constructor does not initialize these fields: condition [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\BoardObserverPreparationTests.cpp:153:19: warning: narrowing conversion from 'unsigned int' to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\BoardObserverPreparationTests.cpp:159:24: warning: narrowing conversion from 'size_t' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\BoardObserverPreparationTests.cpp:233:5: warning: variable 'blankFile' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\BoardObserverPreparationTests.cpp:233:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\BoardObserverPreparationTests.cpp:278:5: warning: variable 'blankFile' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\BoardObserverPreparationTests.cpp:278:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\BoardObserverPreparationTests.cpp:323:5: warning: variable 'blankFile' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\BoardObserverPreparationTests.cpp:323:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\BoardObserverPreparationTests.cpp:368:5: warning: variable 'blankFile' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\BoardObserverPreparationTests.cpp:368:26: note: FIX-IT applied suggested code changes
 D:/a/aprg/aprg/Chess/ChessPeek/ChessPeek/src\ChessPeek/BoardObserver.hpp:23:12: warning: constructor does not initialize these fields: condition [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\DownloadMovesFromChessDotComTests.cpp:74:35: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\DownloadMovesFromChessDotComTests.cpp:80:46: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
@@ -78,9 +110,5 @@ D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\DownloadMovesFromC
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\DownloadMovesFromChessDotComTests.cpp:163:30: warning: narrowing conversion from 'double' to 'int' [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\DownloadMovesFromChessDotComTests.cpp:208:21: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\DownloadMovesFromChessDotComTests.cpp:276:22: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\DownloadMovesFromChessDotComTests.cpp:328:5: warning: variable 'htmlFileHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\DownloadMovesFromChessDotComTests.cpp:328:26: note: FIX-IT applied suggested code changes
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\DownloadMovesFromChessDotComTests.cpp:355:5: warning: variable 'htmlFileHandler' of type 'AlbaLocalPathHandler' can be declared 'const' [misc-const-correctness]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\tst\PreparationTests\DownloadMovesFromChessDotComTests.cpp:355:26: note: FIX-IT applied suggested code changes
 D:/a/aprg/aprg/Chess/ChessPeek/ChessPeek/src\ChessPeek/BoardObserver.hpp:23:12: warning: constructor does not initialize these fields: condition [cppcoreguidelines-pro-type-member-init,hicpp-member-init]
 DONE!

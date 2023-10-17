@@ -85,9 +85,8 @@ HumanScoreGenerator::Score HumanScoreGenerator::getMoveTypePart(Move const& move
     }
     if (isCheck(pieceAtEnd)) {
         return 2;  // prioritize checks to be human
-    } else {
-        return 1;
     }
+    return 1;
 }
 
 HumanScoreGenerator::Score HumanScoreGenerator::getDistanceToKingPart(Move const& move) const {
@@ -117,9 +116,8 @@ int HumanScoreGenerator::getScoreLevelDistance() const {
     }
     if (m_bestScore > LOWER_LIMIT_FOR_SLIGHTLY_WORSE) {
         return SCORE_LEVEL_DISTANCE_WHEN_SLIGHTLY_WORSE;
-    } else {
-        return SCORE_LEVEL_DISTANCE_WHEN_LOSING;
     }
+    return SCORE_LEVEL_DISTANCE_WHEN_LOSING;
 }
 
 bool HumanScoreGenerator::isDevelopingMove(Piece const pieceAtStart, Move const& move) const {
