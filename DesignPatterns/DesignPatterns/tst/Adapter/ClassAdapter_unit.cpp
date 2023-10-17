@@ -7,7 +7,7 @@ using namespace std;
 namespace ClassAdapter {
 
 TEST(ClassAdapterTest, Test1) {
-    std::unique_ptr<Target> t = std::make_unique<Adapter>();
+    std::unique_ptr<Target> const t = std::make_unique<Adapter>();
 
     t->request();
 }
