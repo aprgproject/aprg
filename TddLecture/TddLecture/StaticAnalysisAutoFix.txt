@@ -1,16 +1,5 @@
-StaticAnalysisJobIdentifier: [30]
-2023-09-19T16:24:00
-D:/a/aprg/aprg/gtest/gtest/googletest\src/gtest.cc:2604:3: warning: extension used [-Wlanguage-extension-token]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:155:67: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\User\DisplayTable.cpp:158:12: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:28:24: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:30:45: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:250:23: warning: narrowing conversion from 'size_type' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
-D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\Time\AlbaWindowsTimeHelper.cpp:6:12: warning: avoid repeating the return type from the declaration; use a braced initializer list instead [modernize-return-braced-init-list]
+StaticAnalysisJobIdentifier: [100]
+2023-10-17T04:22:18
 D:/a/aprg/aprg/TddLecture/TddLecture/src/TddLecture.hpp:20:9: warning: private field 'm_sample' is not used [clang-diagnostic-unused-private-field]
 D:/a/aprg/aprg/TddLecture/TddLecture/src/TddLecture.hpp:20:9: warning: private field 'm_sample' is not used [-Wunused-private-field]
-D:\a\aprg\aprg\TddLecture\TddLecture\tst\TddLecture_unit.cpp:9:59: warning: unused variable 'entity' [clang-diagnostic-unused-variable]
-D:\a\aprg\aprg\TddLecture\TddLecture\tst\TddLecture_unit.cpp:12:22: warning: unused variable 'entity' [clang-diagnostic-unused-variable]
-D:/a/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:9:59: warning: unused variable 'entity' [-Wunused-variable]
-D:/a/aprg/aprg/TddLecture/TddLecture/tst/TddLecture_unit.cpp:12:22: warning: unused variable 'entity' [-Wunused-variable]
 DONE!
