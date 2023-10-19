@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [41]
-2023-09-27T02:15:58
+StaticAnalysisJobIdentifier: [100]
+2023-10-19T18:15:44
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Stream\AlbaStreamBitWriter.cpp:13:22: warning: an exception may be thrown in function '~AlbaStreamBitWriter' which should not throw exceptions [bugprone-exception-escape]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\src\Common\Stream\AlbaStreamBitWriter.cpp:68:27: warning: an exception may be thrown in function 'transferAllToStream' which should not throw exceptions [bugprone-exception-escape]
 D:\a\aprg\aprg\AprgCommon\AprgCommon\srcWindows\Common\PathHandler\AlbaWindowsPathHandler.cpp:40:40: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
@@ -698,11 +698,9 @@ D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:5
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:52:78: warning: 0xFFF is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:67:22: warning: narrowing conversion from 'HumanScoreGenerator::Score' (aka 'unsigned long long') to signed type 'int' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:70:79: warning: 0xFFF is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:88:7: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:96:71: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:100:99: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:100:99: warning: 0xF is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:120:7: warning: do not use 'else' after 'return' [llvm-else-after-return,readability-else-after-return]
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:95:71: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:99:99: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\HumanScoreGenerator.cpp:99:99: warning: 0xF is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 D:/a/aprg/aprg/Chess/ChessPeek/ChessPeek/src\ChessPeek/HumanScoreGenerator.hpp:62:29: warning: member 'm_boardWithContext' of type 'const BoardWithContext &' is a reference [cppcoreguidelines-avoid-const-or-ref-data-members]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek/ResultPrinter.hpp:89:46: warning: function 'alba::chess::ChessPeek::ResultPrinter::getFirstCharOfABoardCell' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:534:31: note: the definition seen here
@@ -716,7 +714,7 @@ D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:261:48:
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:381:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:388:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:399:18: warning: variable name 'ss' is too short, expected at least 3 characters [readability-identifier-length]
-D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:416:36: warning: narrowing conversion from 'int' to signed type 'char' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
+D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:416:42: warning: narrowing conversion from 'int' to signed type 'char' is implementation-defined [bugprone-narrowing-conversions,cppcoreguidelines-narrowing-conversions]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:481:25: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay,hicpp-no-array-decay]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:497:29: warning: loop variable name 'y' is too short, expected at least 2 characters [readability-identifier-length]
 D:\a\aprg\aprg\Chess\ChessPeek\ChessPeek\src\ChessPeek\ResultPrinter.cpp:498:33: warning: loop variable name 'x' is too short, expected at least 2 characters [readability-identifier-length]
