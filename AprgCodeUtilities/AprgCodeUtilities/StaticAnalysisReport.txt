@@ -1,7 +1,9 @@
-StaticAnalysisJobIdentifier: [41]
-2023-09-26T18:53:11
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Debug/AlbaDebug.hpp:13:2: warning: #warning is a language extension [-Wpedantic]
-/home/runner/work/aprg/aprg/AprgCommon/AprgCommon/src/Common/Debug/AlbaDebug.hpp:13:2: warning: ("The class AlbaDebug is used. Please remove after your done debugging.") // GCC extension [-W#warnings]
+StaticAnalysisJobIdentifier: [100]
+2023-10-19T12:55:00
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusFinder.cpp:168:49: warning: unused parameter 'startIndex' [clang-diagnostic-unused-parameter]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusFinder.cpp:168:71: warning: unused parameter 'endIndex' [clang-diagnostic-unused-parameter]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusFinder.cpp:168:49: warning: unused parameter 'startIndex' [-Wunused-parameter]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusFinder.cpp:168:71: warning: unused parameter 'endIndex' [-Wunused-parameter]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:189:97: warning: 0.20 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:290:32: warning: function 'saveDetailsBasedFromItemTerms' has cognitive complexity of 119 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:299:5: note: +1, including nesting penalty of 0, nesting level increased to 1
@@ -89,21 +91,6 @@ StaticAnalysisJobIdentifier: [41]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:494:31: warning: 0x50'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:496:31: warning: 0x60'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizeItems.cpp:498:31: warning: 0x70'0000 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:16:23: warning: initialization of 'recognizedKeywords' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:17:23: warning: initialization of 'recognizedPrimitiveTypes' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:18:23: warning: initialization of 'recognizedThreeCharOperators' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:19:23: warning: initialization of 'recognizedTwoCharOperators' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:20:23: warning: initialization of 'recognizedOneCharOperators' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
-/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:16:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:17:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:18:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:19:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
-/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:20:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp:20:28: warning: function 'processDirectory' has cognitive complexity of 27 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp:24:9: note: nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp:25:9: note: nesting level increased to 1
@@ -125,6 +112,21 @@ StaticAnalysisJobIdentifier: [41]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp:65:53: note: +1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp:68:9: note: +2, including nesting penalty of 1, nesting level increased to 2
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusReorganizer.cpp:68:43: note: +1
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:16:23: warning: initialization of 'recognizedKeywords' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:17:23: warning: initialization of 'recognizedPrimitiveTypes' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:18:23: warning: initialization of 'recognizedThreeCharOperators' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:19:23: warning: initialization of 'recognizedTwoCharOperators' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:20:23: warning: initialization of 'recognizedOneCharOperators' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
+/usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/stl_vector.h:673:7: note: possibly throwing constructor declared here
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:16:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:17:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:18:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:19:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
+/home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/src/CodeUtilities/CPlusPlus/CPlusPlusTokenizer.cpp:20:1: warning: non-POD static (vector) [-Wclazy-non-pod-global-static]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusTokenizer_unit.cpp:9:1: warning: function 'TestBody' has cognitive complexity of 168 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusTokenizer_unit.cpp:18:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/AprgCodeUtilities/AprgCodeUtilities/tst/CodeUtilitiesTests/CPlusPlus/CPlusPlusTokenizer_unit.cpp:18:5: note: +2, including nesting penalty of 1, nesting level increased to 2
