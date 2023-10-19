@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [41]
-2023-09-27T05:55:26
+StaticAnalysisJobIdentifier: [100]
+2023-10-19T22:08:56
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Dsp.cpp:38:50: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/Dsp.cpp:38:73: warning: 0xFF00 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmAllocationSimulator/LrmAllocationSimulator/src/HardwareConfiguration.cpp:31:12: warning: 0x1200 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
