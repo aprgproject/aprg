@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [41]
-2023-09-27T05:44:02
+StaticAnalysisJobIdentifier: [100]
+2023-10-19T21:59:08
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:103:19: warning: function 'selectMaps' has cognitive complexity of 52 (threshold 25) [readability-function-cognitive-complexity]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:105:5: note: +1, including nesting penalty of 0, nesting level increased to 1
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/Games/RagnarokOnline/RagnarokOnline/src/MapAnalyzer.cpp:108:16: note: nesting level increased to 2
