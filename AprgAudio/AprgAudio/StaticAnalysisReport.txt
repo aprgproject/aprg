@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [41]
-2023-09-26T17:50:59
+StaticAnalysisJobIdentifier: [100]
+2023-10-19T11:59:02
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:16:43: warning: initialization of 'aiffSampleRateTable' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/unordered_map.h:227:7: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:199:23: warning: function 'decodeWaveFile' has cognitive complexity of 26 (threshold 25) [readability-function-cognitive-complexity]
@@ -77,7 +77,6 @@ StaticAnalysisJobIdentifier: [41]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:498:38: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:498:59: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:499:38: warning: use of a signed integer operand with a binary bitwise operator [hicpp-signed-bitwise]
-/home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:534:35: warning: 26 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:542:36: warning: 18 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:564:36: warning: 24 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/AprgAudio/AprgAudio/src/Audio/Audio.cpp:565:106: warning: 8388608. is a magic number; consider replacing it with a named constant [readability-magic-numbers]
