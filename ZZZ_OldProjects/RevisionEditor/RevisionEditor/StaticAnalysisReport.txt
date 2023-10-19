@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [41]
-2023-09-27T07:01:32
+StaticAnalysisJobIdentifier: [100]
+2023-10-19T23:24:44
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.cpp:21:19: warning: initialization of 'START_ENTRY_PATTERN' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
 /usr/lib/gcc/x86_64-linux-gnu/12/../../../../include/c++/12/bits/basic_string.h:642:7: note: possibly throwing constructor declared here
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/RevisionEditor/RevisionEditor/src/RevisionEditor/RevisionEditor.cpp:22:19: warning: initialization of 'END_ENTRY_PATTERN' with static storage duration may throw an exception that cannot be caught [cert-err58-cpp]
