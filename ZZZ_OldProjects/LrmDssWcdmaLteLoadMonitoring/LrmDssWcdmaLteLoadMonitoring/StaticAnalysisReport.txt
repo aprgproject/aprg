@@ -1,5 +1,5 @@
-StaticAnalysisJobIdentifier: [41]
-2023-09-27T06:08:14
+StaticAnalysisJobIdentifier: [100]
+2023-10-19T22:18:52
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmDssWcdmaLteLoadMonitoring/LrmDssWcdmaLteLoadMonitoring/tst/LrmDssWcdmaLteLoadMonitoring_unit.cpp:107:53: warning: 60 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmDssWcdmaLteLoadMonitoring/LrmDssWcdmaLteLoadMonitoring/tst/LrmDssWcdmaLteLoadMonitoring_unit.cpp:107:57: warning: 70 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
 /home/runner/work/aprg/aprg/ZZZ_OldProjects/LrmDssWcdmaLteLoadMonitoring/LrmDssWcdmaLteLoadMonitoring/tst/LrmDssWcdmaLteLoadMonitoring_unit.cpp:149:53: warning: 34 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
